@@ -6,10 +6,12 @@ on:
     paths:
       - 'tools/build_klose_vocabulary.py'
       - 'tools/apply_klose_learner_overrides.py'
+      - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_persistent_state.py'
       - 'anki/klose/config/**'
       - 'anki/klose/learner/grade4_*overrides.csv'
+      - 'anki/klose/learner/presentation_review_registry.csv'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/release_registry.csv'
@@ -45,6 +47,9 @@ jobs:
 
       - name: Apply Grade-4 learner presentation
         run: python tools/apply_klose_learner_overrides.py
+
+      - name: Sync learner review registry
+        run: python tools/sync_klose_learner_review_registry.py
 
       - name: Reject explicitly later vocabulary in Grade-4 examples
         run: python tools/check_klose_learner.py
