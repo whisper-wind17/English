@@ -1,27 +1,25 @@
 # Klose Vocabulary System
 
-> 本文定义本仓库面向 Klose 的长期英语词汇学习系统。目标不是制作一次性 Anki 牌组，而是建立一个可持续多年扩展、可追溯、可升级、不会破坏既有记忆历史的 Vocabulary Knowledge Base；Anki 只承担 SRS/FSRS 执行与学习状态管理。
+> 本文定义 Klose 的长期英语词汇学习系统。目标不是制作一次性 Anki 牌组，而是维护一个可持续多年扩展、可追溯、可升级且不破坏既有记忆历史的 Vocabulary Knowledge Base；Anki 负责 SRS/FSRS 与学习状态。
 
 ## 1. 两条长期演进轴
 
-### 1.1 Vocabulary Expansion
+### Vocabulary Expansion
 
-随着学习推进不断接入新来源：
+不断接入新来源：
 
 ```text
 人教版一年级起点
-    + 北京版
-    + 沪教版
-    + 新概念
-    + 分级阅读
-    + 其他材料
++ 北京版
++ 沪教版
++ 新概念
++ 分级阅读
++ 其他材料
 ```
 
-规则：已有 learning unit 只扩展 provenance；真正的新 learning unit 才获得新的 NoteID。
+已有 learning unit 只扩展 provenance；真正的新 learning unit 才获得新的 NoteID。
 
-### 1.2 Learner Presentation Evolution
-
-随着 Klose 能力提升：
+### Learner Presentation Evolution
 
 ```text
 Grade 4 presentation
@@ -31,22 +29,21 @@ Grade 5 presentation
 Grade 6 presentation
 ```
 
-升级的是例句、解释方式、必要时的提示，不是 Vocabulary Identity，也不是 Anki Review History。
+升级的是例句、解释方式和学习提示，不是 Vocabulary Identity，也不是 Anki Review History。
 
 ---
 
 ## 2. GitHub 与 Anki 的职责边界
 
-### GitHub Repository：内容与身份真源
+### GitHub：内容与身份真源
 
 负责：
 
-- learning unit 的长期 NoteID；
-- 标准词形、目标义项、音标和核心释义；
-- 来源教材、册次、年级、Unit、原始行号等 provenance；
-- 当前 LearnerLevel 的例句与译文；
-- review queue 与质量检查；
-- 可重复生成的 Anki 发布 CSV。
+- Stable NoteID；
+- 标准词形、target sense、音标和核心释义；
+- Source / Book / Grade / Unit / 原始行号等 provenance；
+- 当前 LearnerLevel 的学习呈现；
+- review queue、质量检查和发布 CSV。
 
 ### Anki：学习状态真源
 
@@ -58,42 +55,38 @@ Grade 6 presentation
 - New / Learning / Review / Suspended；
 - Card-level scheduling。
 
-GitHub 不重建 Anki scheduling；Anki 也不作为词汇事实数据的唯一真源。
+repo 不重建 Anki scheduling；Anki 也不是词汇事实数据的内容真源。
 
 ---
 
-## 3. 核心数据模型：四层分离
+## 3. 四层数据模型
 
-## 3.1 Identity Registry
+### 3.1 Identity Registry
 
-这是系统最重要的持久化状态。
-
-推荐字段：
+长期持久化状态：
 
 ```text
 NoteID
 CanonicalWord
 MatchKey
 SenseLabel
-PrimaryOrigin
+PrimaryOriginKey
+CreatedSource
+CreatedSourceBook
 Status
 ```
 
-含义：
+- `NoteID`：永久业务主键；一旦发布不重编号、不复用。
+- `CanonicalWord`：规范词形。
+- `MatchKey`：只用于发现候选重复，例如 Unicode/空格/apostrophe 规范化后 casefold。
+- `SenseLabel`：target sense 的可读锚点。
+- `PrimaryOriginKey`：建立该 identity 时的来源锚点。
 
-- `NoteID`：永久业务主键，一旦发布原则上永不修改、永不复用。
-- `CanonicalWord`：规范显示词形。
-- `MatchKey`：用于发现候选重复的规范化索引，例如 Unicode/空格/apostrophe 规范化后再 casefold。
-- `SenseLabel`：target sense 的可读锚点，不作为唯一键。
-- `PrimaryOrigin`：最早建立该 identity 的来源记录。
+Registry 不是普通生成物。新增词只能追加 ID，禁止根据 Master 当前排序重新 enumerate。
 
-关键规则：
+### 3.2 Source Occurrence / Provenance
 
-> Registry 不是普通生成物。不能根据 Master 排序重新生成 `KV000001...`；新增词只能追加新 ID。
-
-## 3.2 Source Occurrence / Provenance Layer
-
-每个来源中的每次出现都独立记录，例如：
+每次来源出现独立记录：
 
 ```text
 NoteID
@@ -107,22 +100,18 @@ SourceFile
 SourceRow
 ```
 
-示例：
+例如同一个 `apple` 可以同时有：
 
 ```text
-KV000001 | rj_start1 | 1年级上 | 1 | 上 | ... | apple
-KV000001 | beijing   | 2年级上 | 2 | 上 | ... | apple
+KV000001 | rj_start1 | 1年级上 | 1 | 上 | ...
+KV000001 | beijing   | 2年级上 | 2 | 上 | ...
 ```
 
-这样新增来源不会覆盖旧 provenance。
+新增来源不会覆盖历史来源事实。
 
-`FirstSource` / `FirstGrade` 可以作为 Master 的便利汇总字段，但不能替代 occurrence 数据。
+### 3.3 Vocabulary Fact / Master
 
-## 3.3 Vocabulary Fact / Master Layer
-
-这是跨来源汇总后的事实层。
-
-推荐字段：
+跨来源汇总：
 
 ```text
 NoteID
@@ -138,9 +127,9 @@ Sources
 SourceBooks
 ```
 
-注意：`MeaningPrimary` 当前表示这个 learning unit 的核心学习义项。若未来同一个 surface word 出现明显不同义项，应优先考虑建立另一个 NoteID，而不是把所有义项塞进同一张卡。
+`MeaningPrimary` 是该 learning unit 的核心学习义项。若同一 surface word 出现明显不同 target sense，应优先建立另一个 NoteID，而不是把所有义项塞进一张卡。
 
-## 3.4 Learner Presentation Layer
+### 3.4 Learner Presentation
 
 ```text
 LearnerProfile
@@ -149,51 +138,40 @@ NoteID
 ExampleSentence
 ExampleTranslation
 PresentationStatus
+PresentationSource
 ```
 
-关键原则：
+核心原则：
 
 > `FirstGrade` 描述“教材什么时候教”；`LearnerLevel` 描述“Klose 今天怎么学”。
 
-例如：
-
-```text
-NoteID: KV000001
-Word: apple
-FirstGrade: 1
-LearnerLevel: 4
-ExampleSentence: I usually eat an apple after lunch.
-```
-
-到了五年级，可以更新例句，但 NoteID 和 Anki scheduling 不变。
+例如一年级首次出现的 `apple`，四年级仍可以使用四年级水平的例句；升五年级只更新 presentation，不修改 NoteID 和 Anki scheduling。
 
 ---
 
-## 4. “同一个词”必须定义为 learning unit，而不是字符串
+## 4. Identity：learning unit，不是字符串
 
-不能使用“字符串相同 = 同一个 Note”的规则。
+不能使用“字符串一样 = 同一个 Note”的规则。
 
 默认策略：
 
-1. `MatchKey` 只用于产生 candidate。
-2. 固定短语（`look at`、`go fishing`、`ice cream`）是独立 learning unit。
-3. 相同词形 + 相同 target sense 通常可合并来源。
-4. 相同词形但词性/核心义项不同，可以拥有不同 NoteID。
-5. 大小写可能携带语义，例如 `May` 与 `may`，不得因 casefold 后相同就自动合并。
-6. 歧义项进入 review queue；自动流程不得静默 merge。
-
-因此：
+1. `MatchKey` 只产生 candidate；
+2. 固定短语（如 `look at`、`go fishing`）是独立 learning unit；
+3. 相同词形 + 相同 target sense 通常可合并来源；
+4. 相同词形但词性/核心义项不同，可以拥有不同 NoteID；
+5. 大小写可能携带语义，例如 `May` 与 `may`，不得因 casefold 后相同就自动合并；
+6. 歧义进入 review queue，禁止静默 merge。
 
 ```text
 CanonicalWord / MatchKey = 匹配索引
-NoteID                  = 业务身份
+NoteID                  = 长期业务身份
 ```
 
 ---
 
-## 5. Stable NoteID 的分配规则
+## 5. Stable NoteID 分配
 
-推荐格式：
+格式：
 
 ```text
 KV000001
@@ -201,37 +179,29 @@ KV000002
 ...
 ```
 
-但编号必须来自 committed Registry：
+分配方式：
 
 ```text
-已有 Registry
-    ↓
-发现真正新 learning unit
-    ↓
-next_id = max(existing) + 1
-    ↓
-append registry row
+读取 committed Registry
+→ 确认真正新 learning unit
+→ next_id = max(existing) + 1
+→ append registry row
 ```
 
 禁止：
 
 ```text
-每次把 Master 排序
-    ↓
-重新 enumerate
-    ↓
-KV000001...
+Master 排序
+→ 每次重新 enumerate
 ```
 
-后者会随着新教材插入、排序变化而破坏所有已有 Anki identity。
+否则新增教材或排序变化会破坏 Anki identity。
 
 ---
 
-## 6. Source-scoped Grade，而不是全局 Grade
+## 6. Source-scoped Level
 
-多教材以后，“三年级词”不是一个全局事实。
-
-例如：
+多教材以后，“几年级词”不是一个全局事实。
 
 ```text
 apple
@@ -239,85 +209,73 @@ apple
 北京版：2年级出现
 ```
 
-因此 provenance / tags 应保留来源作用域：
+因此 provenance / Tags 必须保留来源作用域：
 
 ```text
 source::rj_start1
 source::rj_start1::grade::1
 source::rj_start1::grade::1::上
-
-source::beijing
 source::beijing::grade::2
-```
-
-`FirstGrade` 只是便利字段；当前学习范围必须按 `SourceID + SourceGrade/Level` 判断。
-
-这也适用于非年级制材料：
-
-```text
 source::newconcept::book::1
-source::graded_reader::level::3
 ```
+
+`FirstGrade` 只是便利汇总字段；当前学习资格必须按 `SourceID + SourceGrade/Level` 判断。
 
 ---
 
-## 7. Learner Scope 与“库存”分离
+## 7. Inventory 与 Released Set 分离
 
-### 7.1 all.csv：完整库存
+### `all.csv`：完整库存
 
 ```text
 anki/klose/publish/all.csv
 ```
 
-包含已经进入 Master 的全部 Note，用于审计、备份、完整同步。
+包含进入 Master 的所有 Notes，用于审计、备份和完整视图。
 
-### 7.2 study.csv：默认 Anki 发布入口
+### `study.csv`：默认 Anki 发布入口
 
 ```text
 anki/klose/publish/study.csv
 ```
 
-只包含已经释放给 Klose 学习、需要持续在 Anki 中维护的 Notes。
+只包含已经释放给 Klose 学习、且需要持续获得内容更新的 Notes。
 
-当前四年级示例：
+当前 Grade 4：
 
 ```text
-Master inventory:
-人教版 1–6 年级全部词
-
-Released / study:
-人教版 1–4 年级
+Inventory：人教版 1–6 年级全部词
+Released：人教版 1–4 年级
 ```
 
-这样下周即使把北京版加入 Master，只要北京版没有被 release，新北京版独有词不会因为导入 `all.csv` 而突然成为普通 New Cards。
+以后加入北京版但暂不 release 时，北京版独有新词可以先进入 `all.csv`，不会因为日常导入 `study.csv` 而突然进入 New Cards。
 
-### 7.3 Released set 应视为长期增长集合
+### Release 是持久化状态
 
-Note 一旦进入 Anki 并开始学习，原则上继续保留在 `study.csv`，这样后续释义/例句升级仍能更新它。
-
-如果确需撤回已经释放的 Note，必须作为显式学习策略变更处理，而不是简单从 scope 删除。
+`release_registry.csv` 记录已释放 Note。Note 一旦进入 Anki，原则上继续保留在 `study.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
 
 ---
 
-## 8. Anki 长期组织方式
+## 8. Anki 组织方式
 
-推荐一个主 Deck：
+推荐：
 
 ```text
 Klose-English
 └── Vocabulary
 ```
 
-教材、年级、来源主要通过 Tags 表达。
+一个主 Deck + Tags；不按教材长期复制 Deck 体系。
 
-用途分工：
+- 长期日常学习：Main Deck + FSRS；
+- 暂时不想出现的已存在 Card：Suspend；
+- 临时专项复习：Filtered Deck / Browser Search；
+- 教材/年级/来源：Tags 与 Source Occurrences 表达。
 
-- 正常长期学习：Main Deck + FSRS。
-- 当前/历史学习库存：由 `study.csv` 控制。
-- 已在 Anki 中但暂时不想出现：Suspend。
-- 临时专项复习：Filtered Deck / Browser Search。
+Anki 参考：
 
-Anki Browser 与 Filtered Deck 都可以按 tags/search 条件筛选。官方文档说明 Filtered Deck 会临时抽取匹配 Cards，并在学习完成后返回 Home Deck。citeturn343402search1turn343402search5
+- [Searching](https://docs.ankiweb.net/searching.html)
+- [Filtered Decks](https://docs.ankiweb.net/filtered-decks.html)
 
 ---
 
@@ -329,7 +287,7 @@ Anki Browser 与 Filtered Deck 都可以按 tags/search 条件筛选。官方文
 Klose Vocabulary
 ```
 
-推荐字段顺序：
+推荐字段：
 
 ```text
 NoteID
@@ -346,68 +304,47 @@ SourceBooks
 UserMemo          # Anki-local，可选，不从 CSV 更新
 ```
 
-Tags 使用 Anki 自带 Tags，不需要建立名为 `Tags` 的普通字段。
+Tags 使用 Anki 自带 Tags，不需要建立普通 `Tags` 字段。
 
-### 关键导入规则
+正式发布 CSV 第一字段固定为 `NoteID`；重新导入时保持同一 Note Type，并使用 Update Existing Notes / Note Type 范围匹配。这样已有 Note 原地更新，学习调度历史保留。
 
-Anki 官方文档说明，文本导入默认使用**第一字段 + 同一 Note Type**判断已有 Note；选择更新时会原地更新已有 Note，并保留其 scheduling information。官方同时建议，如果长期要更新正文内容，应让第一字段是稳定 ID。citeturn343402search0turn612654search5
+官方参考：
 
-因此长期要求：
+- [Importing Text Files](https://docs.ankiweb.net/importing/text-files.html)
+- [Editing / Note Types](https://docs.ankiweb.net/editing.html)
 
-```text
-第一字段 = NoteID
-Match scope = Note Type
-Import mode = Update Existing Notes
-```
-
-不要使用“Note Type + Deck”作为长期 identity 范围。
-
-### System-managed Tags
-
-repo 生成的来源/年级 Tags 视为 system-managed。Anki 文本导入可以把某列映射为 Tags；更新时可能替换既有 tags，因此不要把需要永久保留的个人标签混入 system-managed tags。个人备注建议使用不参与 CSV mapping 的 `UserMemo`，或使用 Card Flag。citeturn343402search0turn199332search0
+repo 生成的来源/年级 Tags 视为 system-managed。需要永久保留的个人备注不要混入这组 Tags，使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
 
 ---
 
-## 10. 旧版 Word-first → NoteID-first 的一次性迁移
+## 10. Word-first → NoteID-first 一次性迁移
 
-这是当前第一批数据必须考虑的兼容问题。
+旧版人教版 CSV 第一字段是 `Word`。如果这些 Notes 已经进入 Anki，直接导入新版 NoteID-first CSV 会产生重复 Note。
 
-现有旧 CSV 第一字段是 `Word`。如果已经导入 Anki，直接把新版 `NoteID` 放第一列重新导入，会被当成不同 Note，从而产生重复卡片。
-
-正确的一次性迁移：
+安全迁移：
 
 ```text
-旧 Note Type：Word 是第一字段
-        ↓
-先在原 Note Type 中增加 NoteID 等新字段
-        ↓
-导入 migration/word-first-*.csv
-第一列仍为 Word → Update Existing Notes
-        ↓
-原 Notes 被补上 NoteID，Review History 保留
-        ↓
-Manage Note Types → Fields
-把 NoteID reposition 到第 1 位
-        ↓
-以后永久使用 NoteID-first study.csv
+旧 Note Type：Word 第一字段
+→ 在原 Note Type 增加 NoteID 等字段
+→ 导入 migration/word-first-*.csv（仍以 Word 为第一列）
+→ Update Existing Notes，给旧 Note 补 NoteID
+→ 抽样确认 Review History / Due / Interval 未丢失
+→ Manage Note Types → Fields → 把 NoteID reposition 到第 1 位
+→ 以后永久使用 NoteID-first study.csv
 ```
 
-Anki 官方支持对 Note Type 字段进行 reposition，因此无需重建 Note。citeturn612654search0
-
-详细步骤见：`docs/ANKI_MIGRATION.md`。
+详细步骤：`docs/ANKI_MIGRATION.md`。
 
 ---
 
 ## 11. Publish 文件布局
 
-长期：
-
 ```text
 anki/klose/publish/
-├── study.csv                         # 默认导入
+├── study.csv                         # 默认长期导入
 ├── all.csv                           # 完整库存
 ├── migration/
-│   ├── word-first-study.csv          # 一次性兼容迁移
+│   ├── word-first-study.csv          # 一次性旧库迁移
 │   └── word-first-all.csv
 └── by-source/
     └── rj_start1/
@@ -417,27 +354,25 @@ anki/klose/publish/
         └── grade6.csv
 ```
 
-`by-source` 文件是便利视图，不是长期独立真源，不应各自形成独立牌组体系。
+`by-source` 文件把上下册合并成年级视图，仅用于检查/分析/特殊操作，不形成另一套数据真源或长期 Deck。
 
 ---
 
-## 12. 例句与 LearnerLevel
+## 12. LearnerLevel 与例句
 
 例句属于 Learner Presentation，不是教材事实。
 
 规则：
 
-1. 难度以当前 `LearnerLevel` 为基准，而不是 `FirstGrade`。
-2. 句子应明显低于阅读理解上限，Anki 卡片不能变成阅读理解题。
-3. 目标词必须承担清晰、自然的目标义项。
-4. 优先使用已掌握/当前阶段常见词和语法。
-5. 简单句不是自动失败；如果它对目标词最自然、最高效，可以保留。
-6. 不为了“看起来像高年级”机械堆复杂从句。
-7. 非教材原句必须标记为 learner-generated/curated，不声称是教材原句。
+1. 难度以当前 `LearnerLevel` 为基准，不是 `FirstGrade`；
+2. 明显低于阅读理解上限，避免卡片变成阅读理解题；
+3. target word/sense 在句中清晰、自然；
+4. 优先使用已掌握或当前阶段常见词和语法；
+5. 简单句并非自动不合格；自然和有效优先于机械复杂化；
+6. 不为“像高年级”而堆复杂从句；
+7. 非教材原句明确视为 generated/curated learner content。
 
-### 升级策略
-
-升到 Grade 5 时：
+升 Grade 5 时：
 
 ```text
 Identity Registry      不变
@@ -455,10 +390,10 @@ Anki FSRS History      不变
 ### Identity
 
 - NoteID 唯一；
-- Registry 不因重建而重排；
-- MatchKey collision / case collision；
-- 同形不同义候选进入 review；
-- publish 中 NoteID 唯一。
+- Registry 不因重建重排；
+- MatchKey/case/homograph candidate 检查；
+- 歧义进入 review；
+- publish NoteID 唯一。
 
 ### Provenance
 
@@ -468,11 +403,10 @@ Anki FSRS History      不变
 
 ### Learner
 
-- LearnerProfile / LearnerLevel 完整；
-- Meaning / Example / Translation 完整；
-- target sense 清晰；
-- 当前 released Notes 必须有 learner presentation；
-- 自动结构检查通过不能宣称“语义全部人工确认”。
+- LearnerProfile / LearnerLevel / Meaning / Example / Translation 完整；
+- released Notes 必须有 learner presentation；
+- Grade-4 例句不得无意使用同来源明确到后续年级才首次列出的词；
+- 自动结构检查通过不能宣称“语义全部由教师人工确认”。
 
 ### Publish
 
@@ -480,70 +414,99 @@ Anki FSRS History      不变
 - `by-source/*` 只是 Master 视图；
 - deterministic build；
 - 不静默 fallback 到成人词典首义；
-- migration CSV 第一列必须保持 `Word`，正式 publish 第一列必须是 `NoteID`。
+- migration CSV 第一列必须是 `Word`，正式 publish 第一列必须是 `NoteID`。
 
 ---
 
 ## 14. 变更类型
 
-### A. Source Expansion
-
-新增北京版/沪教版/新概念：
+### Source Expansion
 
 ```text
 Raw source
 → normalize occurrences
-→ identity candidate matching
+→ sense-aware identity candidate matching
 → merge provenance / append NoteID
 → learner presentation
 → release decision
 → rebuild
 ```
 
-### B. Fact Correction
+### Fact Correction
 
-音标、拼写、核心义项错误：修改事实层；涉及 identity 时进入 migration review。
+修正拼写、音标或核心义项；涉及 identity 时进入 migration review。
 
-### C. Learner Upgrade
+### Learner Upgrade
 
-升年级：更新 Learner Layer，不改 NoteID / source facts。
+升年级只更新 Learner Layer，不改 NoteID / source facts。
 
-### D. Identity Merge/Split
+### Identity Merge/Split
 
-高风险变更。必须单独设计 Anki history migration，不允许作为普通清洗直接执行。
+高风险变更，必须单独设计 Anki history migration，不作为普通清洗直接执行。
 
-### E. Anki Presentation
+### Anki Presentation
 
-Card Template/CSS/显示顺序变化，不改变 Vocabulary Identity。
+Card Template / CSS / 显示顺序变化不改变 Vocabulary Identity。
 
 ---
 
-## 15. 当前第一批基础数据
+## 15. 第一批稳定基线：rj_start1
 
-首批来源：
+截至 2026-09-04，第一批基础数据已经完成正式迁移：
 
 ```text
 SourceID = rj_start1
 人教版一年级起点 1–6 年级
+LearnerProfile = klose
+LearnerLevel = 4
 ```
 
-已知规模：
+当前基线：
 
 - 12 册；
 - 908 次 source occurrences；
-- 802 个当前唯一 learning units；
-- 当前目标 LearnerProfile：Klose；
-- 当前 LearnerLevel：Grade 4；
-- 当前 release scope：人教版一年级起点 1–4 年级。
+- 802 个 Inventory Notes；
+- Stable Registry：`KV000001`–`KV000802`；
+- 当前 Released Notes：518（人教版 1–4 年级范围）；
+- `study.csv`：默认 Anki 发布入口；
+- `all.csv`：完整 802 Notes 库存；
+- 6 个按年级合并的 source convenience views；
+- Word-first → NoteID-first migration CSV 已生成；
+- Grade-4 learner layer 已建立；
+- identity review / learner review / future-vocabulary review 当前均为 0；
+- Global CI 已通过，并验证第二次构建 Registry/Release Registry 不发生漂移。
 
-第一批正式迁移需要完成：
+关键持久化文件：
 
-1. Bootstrap committed NoteID Registry；
-2. 生成 global source occurrences / Master；
-3. 建立 `LearnerLevel=4` presentation layer；
-4. 生成 `all.csv` 与 `study.csv`；
-5. 生成人教版 1–6 年级便利视图（上下册合并）；
-6. 生成 Word-first → NoteID-first 一次性 migration CSV；
-7. 对 identity collision、learner presentation、publish invariants 做 CI 检查。
+```text
+anki/klose/master/note_registry.csv
+anki/klose/master/release_registry.csv
+```
 
-完成后，人教版数据即成为未来北京版、沪教版、新概念等来源接入时的第一批稳定 Vocabulary Base。
+这两个文件不是普通生成缓存。未来接入北京版、沪教版、新概念等来源时，应在这套基线上扩展，而不是重新建立另一套 NoteID/Deck 体系。
+
+---
+
+## 16. 当前实现入口
+
+```text
+tools/build_klose_vocabulary.py
+tools/apply_klose_learner_overrides.py
+tools/check_klose_learner.py
+.github/workflows/build-klose-vocabulary.yml
+```
+
+Source Adapter：
+
+```text
+anki/人教版一年级起点/
+tools/build_anki_rj_start1.py
+```
+
+Global Data Area：
+
+```text
+anki/klose/
+```
+
+详细执行规则以根目录 `AGENTS.md` 为准。
