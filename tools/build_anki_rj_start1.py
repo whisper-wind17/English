@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Build Anki CSVs for 人教版一年级起点 (Grades 1-6).
+"""Build curated Anki CSVs for 人教版一年级起点 (Grades 1-6).
 
-The raw XLSX files provide spelling, pronunciation, source glosses and book
-occurrences. Final card meanings and examples MUST come from the manually
-reviewed per-book CSV files in anki/人教版一年级起点/curation/.
+Raw XLSX files provide source spelling, pronunciation, dictionary glosses and
+book occurrences. Card meanings/examples come only from the explicit curation
+CSVs. Known source spelling defects are corrected for the canonical Anki Word
+while WordRaw remains available in master/audit data.
 """
 from __future__ import annotations
 
@@ -37,6 +38,16 @@ BOOKS = [
     ("人教版一年级起点六年级下.xlsx", 6, "下"),
 ]
 
+# Confirmed source-data spelling defects. The XLSX itself is left untouched so
+# the fork remains traceable to upstream; generated Anki data uses the canonical
+# form. The original source spelling is preserved in WordRaw.
+WORD_CORRECTIONS = {
+    "neat breakfast": "eat breakfast",
+    "neat lunch": "eat lunch",
+    "neat dinner": "eat dinner",
+    "neat seafood": "eat seafood",
+}
+
 EXPECTED_HEADERS = {"单词", "英音", "美音", "释义"}
 CURATION_FIELDS = {"Word", "MeaningPrimary", "ExampleSentence", "ExampleTranslation"}
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
@@ -44,6 +55,15 @@ POS_NAMES = "abbr|aux|pron|prep|conj|adj|adv|num|int|art|det|modal|phrase|phr|vt
 POS_RESIDUE_RE = re.compile(rf"(?:^|\s)(?:{POS_NAMES})\.\s*", re.I)
 CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
 ENGLISH_RE = re.compile(r"[A-Za-z]")
+
+
+def normalize_word(value: str) -> str:
+    return re.sub(r"\s+", " ", value.strip()).casefold()
+
+
+def canonical_word(value: str) -> str:
+    raw = re.sub(r"\s+", " ", value.strip())
+    return WORD_CORRECTIONS.get(normalize_word(raw), raw)
 
 
 def col_index(ref: str) -> int:
@@ -66,11 +86,11 @@ def read_shared_strings(zf: zipfile.ZipFile) -> list[str]:
 def read_first_sheet(path: Path) -> list[list[str]]:
     with zipfile.ZipFile(path) as zf:
         shared = read_shared_strings(zf)
-        name = "xl/worksheets/sheet1.xml"
-        if name not in zf.namelist():
+        sheet = "xl/worksheets/sheet1.xml"
+        if sheet not in zf.namelist():
             raise RuntimeError(f"Missing first worksheet: {path}")
-        root = ET.fromstring(zf.read(name))
-        result = []
+        root = ET.fromstring(zf.read(sheet))
+        result: list[list[str]] = []
         for row in root.iter(f"{NS}row"):
             cells: dict[int, str] = {}
             max_col = -1
@@ -89,13 +109,10 @@ def read_first_sheet(path: Path) -> list[list[str]]:
         return result
 
 
-def normalize_word(value: str) -> str:
-    return re.sub(r"\s+", " ", value.strip()).casefold()
-
-
 def parse_book(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
     rows = read_first_sheet(path)
-    header_idx, header_map = None, {}
+    header_idx = None
+    header_map: dict[str, int] = {}
     for i, row in enumerate(rows[:10]):
         candidate = {v.strip(): j for j, v in enumerate(row) if v.strip()}
         if EXPECTED_HEADERS.issubset(candidate):
@@ -104,17 +121,19 @@ def parse_book(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
     if header_idx is None:
         raise RuntimeError(f"Expected headers not found in {path.name}")
 
-    book, output = f"{grade}年级{semester}", []
-    for source_row, row in enumerate(rows[header_idx + 1:], start=header_idx + 2):
+    book = f"{grade}年级{semester}"
+    output: list[dict[str, str]] = []
+    for source_row, row in enumerate(rows[header_idx + 1 :], start=header_idx + 2):
         def get(name: str) -> str:
             idx = header_map[name]
             return row[idx].strip() if idx < len(row) else ""
 
-        word = get("单词")
-        if not word:
+        word_raw = get("单词")
+        if not word_raw:
             continue
         output.append({
-            "Word": word,
+            "Word": canonical_word(word_raw),
+            "WordRaw": word_raw,
             "British": get("英音"),
             "American": get("美音"),
             "MeaningRaw": get("释义"),
@@ -143,7 +162,8 @@ def load_curation() -> dict[str, dict[str, str]]:
                 problems.append(f"bad curation headers: {path.relative_to(ROOT)}")
                 continue
             for line_no, row in enumerate(reader, start=2):
-                word = (row.get("Word") or "").strip()
+                curation_word_raw = (row.get("Word") or "").strip()
+                word = canonical_word(curation_word_raw)
                 key = normalize_word(word)
                 if not key:
                     problems.append(f"empty Word: {path.name}:{line_no}")
@@ -158,6 +178,7 @@ def load_curation() -> dict[str, dict[str, str]]:
                     problems.append(f"incomplete curation: {word} ({path.name}:{line_no})")
                 curated[key] = {
                     "Word": word,
+                    "CurationWordRaw": curation_word_raw,
                     "MeaningPrimary": primary,
                     "ExampleSentence": example,
                     "ExampleTranslation": translation,
@@ -176,7 +197,7 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         writer.writerows(rows)
 
 
-def example_review_reason(row: dict[str, str]) -> str:
+def review_reason(row: dict[str, str]) -> str:
     reasons: list[str] = []
     primary = row["MeaningPrimary"]
     example = row["ExampleSentence"]
@@ -203,10 +224,8 @@ def main() -> None:
         raise SystemExit("Missing source files:\n- " + "\n- ".join(missing))
 
     curated = load_curation()
-
-    if OUT_DIR.exists():
-        shutil.rmtree(MASTER_DIR, ignore_errors=True)
-        shutil.rmtree(IMPORT_DIR, ignore_errors=True)
+    shutil.rmtree(MASTER_DIR, ignore_errors=True)
+    shutil.rmtree(IMPORT_DIR, ignore_errors=True)
 
     occurrences: list[dict[str, str]] = []
     occurrence_counts: dict[str, int] = {}
@@ -225,26 +244,29 @@ def main() -> None:
                 "FirstBook": item["Book"],
                 "BooksList": [item["Book"]],
                 "SourceFilesList": [item["SourceFile"]],
+                "WordRawList": [item["WordRaw"]],
             }
             continue
         target = unique[key]
         books = target["BooksList"]
         files = target["SourceFilesList"]
-        assert isinstance(books, list) and isinstance(files, list)
+        raw_words = target["WordRawList"]
+        assert isinstance(books, list) and isinstance(files, list) and isinstance(raw_words, list)
         if item["Book"] not in books:
             books.append(item["Book"])
         if item["SourceFile"] not in files:
             files.append(item["SourceFile"])
+        if item["WordRaw"] not in raw_words:
+            raw_words.append(item["WordRaw"])
         for field in ("British", "American", "MeaningRaw"):
             if not target.get(field) and item.get(field):
                 target[field] = item[field]
 
-    source_keys = set(unique)
-    curated_keys = set(curated)
+    source_keys, curated_keys = set(unique), set(curated)
     missing_curated = sorted(source_keys - curated_keys)
     extra_curated = sorted(curated_keys - source_keys)
     if missing_curated or extra_curated:
-        lines = []
+        lines: list[str] = []
         if missing_curated:
             lines.append("Missing curated words: " + ", ".join(str(unique[k]["Word"]) for k in missing_curated))
         if extra_curated:
@@ -261,12 +283,13 @@ def main() -> None:
                 f"Curation book mismatch for {obj['Word']}: source={first_book}, curated={c['CuratedBook']}"
             )
         books = list(obj["BooksList"])
-        grade = str(obj["Grade"])
-        semester = str(obj["Semester"])
+        raw_words = list(obj["WordRawList"])
+        grade, semester = str(obj["Grade"]), str(obj["Semester"])
         tags = ["rj_start1", f"grade::{grade}", f"semester::{semester}"]
         tags += ["appears::" + str(b) for b in books]
         row = {
             "Word": str(obj["Word"]),
+            "WordRaw": "|".join(str(x) for x in raw_words),
             "British": str(obj["British"]),
             "American": str(obj["American"]),
             "MeaningPrimary": c["MeaningPrimary"],
@@ -282,7 +305,7 @@ def main() -> None:
             "Tags": " ".join(tags),
         }
         master_rows.append(row)
-        reason = example_review_reason(row)
+        reason = review_reason(row)
         if reason:
             review_rows.append({
                 "Word": row["Word"],
@@ -294,21 +317,20 @@ def main() -> None:
             })
 
     master_fields = [
-        "Word", "British", "American", "MeaningPrimary", "ExampleSentence",
-        "ExampleTranslation", "MeaningRaw", "MeaningStatus", "FirstBook",
-        "Grade", "Semester", "Books", "SourceFiles", "Tags",
+        "Word", "WordRaw", "British", "American", "MeaningPrimary", "ExampleSentence",
+        "ExampleTranslation", "MeaningRaw", "MeaningStatus", "FirstBook", "Grade",
+        "Semester", "Books", "SourceFiles", "Tags",
     ]
     write_csv(MASTER_DIR / "vocabulary_master.csv", master_fields, master_rows)
 
     occurrence_fields = [
-        "Word", "British", "American", "MeaningRaw", "Book", "Grade",
+        "Word", "WordRaw", "British", "American", "MeaningRaw", "Book", "Grade",
         "Semester", "SourceFile", "SourceRow",
     ]
     write_csv(MASTER_DIR / "vocabulary_occurrences.csv", occurrence_fields, occurrences)
 
     review_fields = [
-        "Word", "MeaningPrimary", "ExampleSentence", "ExampleTranslation",
-        "Reason", "FirstBook",
+        "Word", "MeaningPrimary", "ExampleSentence", "ExampleTranslation", "Reason", "FirstBook",
     ]
     write_csv(MASTER_DIR / "curation_review.csv", review_fields, review_rows)
 
@@ -324,6 +346,7 @@ def main() -> None:
         write_csv(IMPORT_DIR / f"{book}.csv", import_fields, rows)
 
     repeated = sum(1 for r in master_rows if "|" in r["Books"])
+    corrected_occurrences = sum(1 for r in occurrences if r["Word"] != r["WordRaw"])
     stats = [
         ("source_files", len(BOOKS)),
         ("source_occurrences", len(occurrences)),
@@ -331,17 +354,21 @@ def main() -> None:
         ("repeated_words", repeated),
         ("curated_notes", len(curated)),
         ("curation_review_items", len(review_rows)),
+        ("source_word_corrections", corrected_occurrences),
     ]
-    stats += [(f"source_occurrences_{b}", occurrence_counts[b]) for _, g, s in BOOKS for b in [f"{g}年级{s}"]]
-    stats += [(f"new_notes_{b}", new_counts[b]) for _, g, s in BOOKS for b in [f"{g}年级{s}"]]
+    stats += [(f"source_occurrences_{g}年级{s}", occurrence_counts[f"{g}年级{s}"]) for _, g, s in BOOKS]
+    stats += [(f"new_notes_{g}年级{s}", new_counts[f"{g}年级{s}"]) for _, g, s in BOOKS]
     write_csv(
         MASTER_DIR / "build_stats.csv",
         ["Metric", "Value"],
-        [{"Metric": k, "Value": str(v)} for k, v in stats],
+        [{"Metric": key, "Value": str(value)} for key, value in stats],
     )
 
-    print(f"Built {len(master_rows)} curated unique notes from {len(occurrences)} source occurrences.")
-    print(f"Repeated across books: {repeated}; curation review queue: {len(review_rows)}")
+    print(f"Built {len(master_rows)} curated notes from {len(occurrences)} source occurrences.")
+    print(
+        f"Repeated words: {repeated}; structural review: {len(review_rows)}; "
+        f"source spelling corrections: {corrected_occurrences}"
+    )
 
 
 if __name__ == "__main__":
