@@ -1,0 +1,47 @@
+name: Harden Klose Architecture v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/harden_klose_architecture_v2.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply architecture hardening
+        run: python tools/harden_klose_architecture_v2.py
+
+      - name: Validate persistent state
+        run: python tools/check_klose_persistent_state.py
+
+      - name: Rebuild baseline
+        run: |
+          python tools/build_klose_vocabulary.py
+          python tools/apply_klose_learner_overrides.py
+          python tools/check_klose_learner.py
+
+      - name: Commit hardened architecture and rebuilt data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add AGENTS.md docs/KLOSE_VOCABULARY_SYSTEM.md anki/klose tools/build_klose_vocabulary.py tools/check_klose_persistent_state.py .github/workflows/build-klose-vocabulary.yml
+          if git diff --cached --quiet; then
+            echo 'No changes.'
+            exit 0
+          fi
+          git commit -m 'refactor: harden Klose persistent vocabulary state'
+          git push
