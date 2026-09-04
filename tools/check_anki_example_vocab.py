@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Check examples for vocabulary explicitly introduced in a later textbook.
+"""Fail if an example uses vocabulary explicitly introduced in a later book.
 
-The source XLSX vocabulary lists are not exhaustive: ordinary words such as
-"yesterday" or "month" may appear in textbook sentences without being listed as
-new vocabulary. Therefore this checker does NOT call every unlisted token
-"out-of-grade". It flags only a stronger, auditable condition: an example uses a
-content word whose first explicit vocabulary-list occurrence is in a later book.
+The source XLSX vocabulary lists are not exhaustive, so ordinary unlisted words
+are not called out-of-grade. We enforce only the stronger auditable condition:
+a content word explicitly listed for first introduction in a later textbook.
 """
 from __future__ import annotations
 
@@ -97,8 +95,6 @@ def main() -> None:
     with MASTER.open("r", encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
 
-    # Map every normalized lexical form found in a listed vocabulary item to
-    # the earliest book in which that vocabulary item is explicitly introduced.
     first_index: dict[str, int] = {}
     first_book: dict[str, str] = {}
     for row in rows:
@@ -115,22 +111,13 @@ def main() -> None:
         for token in tokens(row["ExampleSentence"]):
             if token in FUNCTION_WORDS:
                 continue
-            matches = [
-                lemma for lemma in candidate_lemmas(token)
-                if lemma in first_index
-            ]
+            matches = [lemma for lemma in candidate_lemmas(token) if lemma in first_index]
             if not matches:
-                # The vocabulary spreadsheets are not exhaustive, so there is
-                # no evidence that an unlisted ordinary word is a future word.
                 continue
             earliest = min(first_index[lemma] for lemma in matches)
             if earliest > current_idx:
-                lemma = min(
-                    (x for x in matches if first_index[x] == earliest),
-                    key=len,
-                )
+                lemma = min((x for x in matches if first_index[x] == earliest), key=len)
                 future[token] = first_book[lemma]
-
         if future:
             review.append({
                 "Word": row["Word"],
@@ -151,6 +138,13 @@ def main() -> None:
         writer.writerows(review)
 
     print(f"Future-vocabulary example review items: {len(review)}")
+    if review:
+        for item in review:
+            print(
+                f"- {item['Word']} [{item['FirstBook']}]: "
+                f"{item['FutureVocabulary']} | {item['ExampleSentence']}"
+            )
+        raise SystemExit("Examples contain vocabulary explicitly introduced in later books.")
 
 
 if __name__ == "__main__":
