@@ -29,14 +29,12 @@ jobs:
 
       - name: Commit generated data
         run: |
-          if git diff --quiet -- anki/人教版一年级起点/master anki/人教版一年级起点/import; then
-            echo 'No generated changes.'
-            exit 0
-          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add anki/人教版一年级起点/master anki/人教版一年级起点/import
+          if git diff --cached --quiet; then
+            echo 'No generated changes.'
+            exit 0
+          fi
           git commit -m 'data: rebuild Anki CSV for 人教版一年级起点'
           git push
-
-# Touch this file to trigger a rebuild after workflow creation.
