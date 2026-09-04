@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Check whether Anki examples introduce content words beyond the current book.
+"""Check examples for vocabulary explicitly introduced in a later textbook.
 
-This is an approximate guardrail, not a grammar parser. Function words and a
-small set of proper names are ignored; content words are checked against all
-vocabulary introduced up to the note's FirstBook. Basic inflections are folded
-back to known lemmas.
+The source XLSX vocabulary lists are not exhaustive: ordinary words such as
+"yesterday" or "month" may appear in textbook sentences without being listed as
+new vocabulary. Therefore this checker does NOT call every unlisted token
+"out-of-grade". It flags only a stronger, auditable condition: an example uses a
+content word whose first explicit vocabulary-list occurrence is in a later book.
 """
 from __future__ import annotations
 
@@ -24,8 +25,6 @@ BOOK_ORDER = [
 ]
 BOOK_INDEX = {book: i for i, book in enumerate(BOOK_ORDER)}
 
-# Grammar words are not exhaustively represented in the source vocabulary
-# spreadsheets, so they are excluded from the content-vocabulary check.
 FUNCTION_WORDS = {
     "a", "an", "the", "i", "you", "he", "she", "it", "we", "they",
     "me", "him", "her", "us", "them", "my", "your", "his", "our", "their",
@@ -39,14 +38,7 @@ FUNCTION_WORDS = {
     "here", "there", "very", "too", "also", "only", "just", "more", "most", "less",
     "some", "any", "many", "much", "all", "every", "each", "one", "two", "three",
     "four", "five", "six", "seven", "eight", "nine", "ten", "first", "second", "third",
-    "please", "yes", "no", "let", "lets", "let's", "don’t", "don't",
-}
-
-# Proper names/place names used only to make natural examples; they do not add
-# a general lexical learning burden.
-PROPER_WORDS = {
-    "tom", "amy", "mum", "mom", "dad", "grandma", "beijing", "lhasa", "xi'an", "xian",
-    "tibet", "sichuan", "shanghai", "guangzhou", "spring", "festival",
+    "please", "yes", "no", "let", "lets", "let's", "don't", "doesn't", "didn't",
 }
 
 TOKEN_RE = re.compile(r"[A-Za-z]+(?:['’][A-Za-z]+)?")
@@ -76,7 +68,7 @@ def candidate_lemmas(token: str) -> set[str]:
         out.add(stem + "e")
         if len(stem) > 2 and stem[-1] == stem[-2]:
             out.add(stem[:-1])
-    if len(token) > 4 and token.endswith("es"):
+    if len(token) >= 4 and token.endswith("es"):
         out.add(token[:-2])
         out.add(token[:-1])
     if len(token) > 3 and token.endswith("s"):
@@ -87,57 +79,78 @@ def candidate_lemmas(token: str) -> set[str]:
         "drunk": "drink", "swam": "swim", "swum": "swim", "wrote": "write", "written": "write",
         "made": "make", "came": "come", "got": "get", "gave": "give", "given": "give",
         "read": "read", "ran": "run", "won": "win", "felt": "feel", "left": "leave",
+        "met": "meet", "spent": "spend", "began": "begin", "became": "become",
     }
     if token in irregular:
         out.add(irregular[token])
     return out
 
 
+def lexical_forms(text: str) -> set[str]:
+    forms: set[str] = set()
+    for token in tokens(text):
+        forms.update(candidate_lemmas(token))
+    return forms
+
+
 def main() -> None:
     with MASTER.open("r", encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
 
-    words_by_book: dict[str, set[str]] = {b: set() for b in BOOK_ORDER}
+    # Map every normalized lexical form found in a listed vocabulary item to
+    # the earliest book in which that vocabulary item is explicitly introduced.
+    first_index: dict[str, int] = {}
+    first_book: dict[str, str] = {}
     for row in rows:
-        book = row["FirstBook"]
-        words_by_book[book].update(tokens(row["Word"]))
-
-    cumulative: dict[str, set[str]] = {}
-    seen: set[str] = set()
-    for book in BOOK_ORDER:
-        seen = seen | words_by_book[book]
-        cumulative[book] = set(seen)
+        idx = BOOK_INDEX[row["FirstBook"]]
+        for form in lexical_forms(row["Word"]):
+            if form not in first_index or idx < first_index[form]:
+                first_index[form] = idx
+                first_book[form] = row["FirstBook"]
 
     review = []
     for row in rows:
-        book = row["FirstBook"]
-        allowed = cumulative[book]
-        unknown = []
+        current_idx = BOOK_INDEX[row["FirstBook"]]
+        future: dict[str, str] = {}
         for token in tokens(row["ExampleSentence"]):
-            if token in FUNCTION_WORDS or token in PROPER_WORDS:
+            if token in FUNCTION_WORDS:
                 continue
-            if any(lemma in allowed for lemma in candidate_lemmas(token)):
+            matches = [
+                lemma for lemma in candidate_lemmas(token)
+                if lemma in first_index
+            ]
+            if not matches:
+                # The vocabulary spreadsheets are not exhaustive, so there is
+                # no evidence that an unlisted ordinary word is a future word.
                 continue
-            unknown.append(token)
-        unknown = sorted(set(unknown))
-        if unknown:
+            earliest = min(first_index[lemma] for lemma in matches)
+            if earliest > current_idx:
+                lemma = min(
+                    (x for x in matches if first_index[x] == earliest),
+                    key=len,
+                )
+                future[token] = first_book[lemma]
+
+        if future:
             review.append({
                 "Word": row["Word"],
-                "FirstBook": book,
+                "FirstBook": row["FirstBook"],
                 "ExampleSentence": row["ExampleSentence"],
-                "UnknownContentWords": " ".join(unknown),
+                "FutureVocabulary": " ".join(
+                    f"{token}->{book}" for token, book in sorted(future.items())
+                ),
             })
 
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     with REPORT.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(
             f,
-            fieldnames=["Word", "FirstBook", "ExampleSentence", "UnknownContentWords"],
+            fieldnames=["Word", "FirstBook", "ExampleSentence", "FutureVocabulary"],
         )
         writer.writeheader()
         writer.writerows(review)
 
-    print(f"Example vocabulary review items: {len(review)}")
+    print(f"Future-vocabulary example review items: {len(review)}")
 
 
 if __name__ == "__main__":
