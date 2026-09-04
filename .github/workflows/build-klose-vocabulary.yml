@@ -8,7 +8,7 @@ on:
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/check_klose_learner.py'
       - 'anki/klose/config/**'
-      - 'anki/klose/learner/grade4_overrides.csv'
+      - 'anki/klose/learner/grade4_*overrides.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
