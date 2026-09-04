@@ -51,7 +51,7 @@ jobs:
       - name: Commit registry and generated data
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
           if git diff --cached --quiet; then
             echo 'No generated changes.'
