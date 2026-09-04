@@ -7,6 +7,7 @@
 先读：
 
 - `docs/KLOSE_VOCABULARY_SYSTEM.md`：完整架构与长期机制；
+- `docs/LEARNER_REVIEW_REGISTRY.md`：LearnerLevel 级别的学习呈现审校状态；
 - `docs/ANKI_MIGRATION.md`：旧 Word-first Anki 数据的一次性迁移。
 
 ---
@@ -20,11 +21,12 @@
 5. 同一已学 learning unit 不创建第二套 FSRS 记忆状态；新增来源优先扩展 provenance。
 6. **FirstGrade 与 LearnerLevel 分离。** 前者是来源事实，后者决定今天怎么学。
 7. 学习范围必须按 **source-scoped occurrence** 判断，不得用全局 FirstGrade 推导。
-8. 原始 Source 不覆盖；生成文件不作为长期手工维护入口。
-9. identity merge/split 是高风险迁移，必须先评估现有 Anki history。
-10. 任何架构优化优先保护已有 Anki Review History / FSRS state。
-11. 自动结构检查、模型审校、人工确认、教材原文核对必须明确区分，不能互相冒充。
-12. 对需求假设保持质疑；发现 Anki 行为、数据或学习机制前提不成立时先验证。
+8. **Learner Review 也必须按 LearnerLevel 分离。** Grade 4 的审核状态不能自动继承为 Grade 5；唯一键为 `LearnerProfile + LearnerLevel + NoteID`。
+9. 原始 Source 不覆盖；生成文件不作为长期手工维护入口。
+10. identity merge/split 是高风险迁移，必须先评估现有 Anki history。
+11. 任何架构优化优先保护已有 Anki Review History / FSRS state。
+12. 自动结构检查、模型审校、人工确认、教材原文核对必须明确区分，不能互相冒充；`review queue = 0` 不等于全部内容已显式审校。
+13. 对需求假设保持质疑；发现 Anki 行为、数据或学习机制前提不成立时先验证。
 
 ---
 
@@ -35,9 +37,9 @@
 ```text
 Raw Source
 → Source Adapter / Curation
-→ Identity Registry + Source Occurrences
+→ Identity Registry + Source Identity Map + Source Occurrences
 → Vocabulary Master
-→ Learner Layer
+→ Learner Layer + Learner Review Registry
 → Publish
 ```
 
@@ -48,8 +50,8 @@ Raw Source
 ```text
 anki/klose/
 ├── config/                    # learner/scope config
-├── master/                    # NoteID registry / source identity map / release registry / master / occurrences
-├── learner/                   # current learner layer + explicit overrides
+├── master/                    # NoteID/source identity/release registries + master + occurrences
+├── learner/                   # current learner layer / explicit overrides / presentation review registry
 ├── publish/                   # study.csv / all.csv / migration / views
 └── review/                    # identity / semantic / learner queues
 ```
@@ -74,6 +76,8 @@ MatchKey        # 候选匹配 key
 SenseLabel      # target sense 锚点
 ```
 
+`SourceItemKey` 是 source adapter 内部的持久 item key；当前 `rj_start1` 基线可以使用规范化词形，但**不得把这一实现泛化成“所有未来来源都按 surface word 自动 merge”**。未来来源存在同形异义、词性或短语边界歧义时必须使用更细粒度的 source-native/sense-aware key 并进入 identity review。
+
 Provenance 必须保留来源作用域，例如：
 
 ```text
@@ -94,6 +98,18 @@ PresentationStatus
 
 例句按 LearnerLevel 判断：自然、目标义项清晰、明显低于阅读上限；不要机械追求复杂，也不要机械跟随 FirstGrade。
 
+Learner Review Registry：
+
+```text
+LearnerProfile
+LearnerLevel
+NoteID
+ReviewStatus       # pending / model-reviewed / human-reviewed
+ReviewedAt
+ReviewerType
+ReviewNote
+```
+
 ---
 
 ## 5. Anki 发布契约
@@ -109,7 +125,7 @@ anki/klose/publish/study.csv   # 已释放 Notes，日常推荐导入
 anki/klose/publish/all.csv     # 完整库存，不是默认日常入口
 ```
 
-`release_registry.csv` 是长期增长状态：Note 一旦进入 Anki，原则上持续留在 `study.csv` 以接受后续内容升级。
+`release_registry.csv` 是长期增长状态：Note 一旦进入 Anki，原则上持续留在 `study.csv` 以接受后续内容升级。每次新增 release scope 必须显式记录 `released_at`，不能复用项目初始日期。
 
 repo 生成的来源/年级 Tags 属于 system-managed；个人长期备注使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
 
@@ -131,6 +147,7 @@ Global Klose Vocabulary：
 tools/check_klose_persistent_state.py
 tools/build_klose_vocabulary.py
 tools/apply_klose_learner_overrides.py
+tools/sync_klose_learner_review_registry.py
 tools/check_klose_learner.py
 ```
 
@@ -140,6 +157,7 @@ tools/check_klose_learner.py
 python tools/check_klose_persistent_state.py
 python tools/build_klose_vocabulary.py
 python tools/apply_klose_learner_overrides.py
+python tools/sync_klose_learner_review_registry.py
 python tools/check_klose_learner.py
 ```
 
@@ -154,6 +172,8 @@ CI：
 
 ```text
 anki/klose/master/build_stats.csv
+anki/klose/master/source_identity_map.csv
+anki/klose/learner/presentation_review_registry.csv
 anki/klose/review/identity_review.csv
 anki/klose/review/learner_review.csv
 anki/klose/review/future_vocab_review.csv
@@ -166,19 +186,20 @@ anki/klose/review/future_vocab_review.csv
 ### 新增教材/词书
 
 1. 保留 Raw Source；
-2. 解析为 source-scoped occurrences；
+2. 解析为 source-scoped occurrences，并定义稳定的 source-native `SourceItemKey`；
 3. 与 Registry 做 sense-aware candidate matching；
 4. 将确认后的 `SourceItemKey → NoteID` 决策写入 committed `source_identity_map.csv`；
 5. 明确已有 unit → 原 NoteID + 扩展 provenance；
 6. 明确新 unit → 追加新 NoteID，旧 ID 不重排；
-7. 模糊项 → review；
+7. 模糊项 → review，禁止仅凭相同 surface word 静默 merge；
 8. 生成当前 Learner Layer；
-9. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 `study.csv`；
-10. 重建并跑 CI。
+9. 为当前 LearnerLevel 建立/补齐 Learner Review Registry；
+10. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 `study.csv`；
+11. 重建并跑 CI。
 
 ### 升 Learner Level
 
-只升级 Learner Presentation；NoteID / identity / source facts 不变。重新导入 `study.csv` 更新已有 Notes，不重建 Card。
+只升级 Learner Presentation；NoteID / identity / source facts 不变。为新 LearnerLevel 新建 review 状态，默认不能继承旧 Level 的审核结论。重新导入 `study.csv` 更新已有 Notes，不重建 Card。
 
 ### 修正 identity
 
@@ -196,6 +217,8 @@ merge/split 必须单独设计 migration，禁止当作普通清洗直接执行�
 - 每条 Master 有可追溯 source occurrence；
 - source-scoped grade/level 不被全局字段覆盖；
 - released Notes 的 LearnerLevel / Meaning / Example / Translation 完整；
+- 每个 released Note 都有当前 `LearnerProfile + LearnerLevel` 的 Learner Review Registry 记录；
+- 必须显式报告 `model-reviewed / human-reviewed / pending` 数量；pending 可以存在，但不得将数据描述为“该 LearnerLevel 已全部审校完成”；
 - Grade-4 learner examples 不无意使用同来源明确到后续年级才首次列出的词；
 - `study.csv ⊆ all.csv`，publish NoteID 唯一；
 - by-source/by-grade 文件只是视图；
