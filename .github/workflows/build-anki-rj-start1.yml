@@ -38,3 +38,5 @@ jobs:
           git add anki/人教版一年级起点/master anki/人教版一年级起点/import
           git commit -m 'data: rebuild Anki CSV for 人教版一年级起点'
           git push
+
+# Touch this file to trigger a rebuild after workflow creation.
