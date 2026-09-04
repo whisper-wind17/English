@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
-"""Build Anki-ready CSV files from 人教版一年级起点 XLSX sources.
+"""Build Anki-ready CSV files for 人教版一年级起点 (Grade 1-6).
 
-Uses only Python standard library to parse the first worksheet of each XLSX.
-The source XLSX files remain untouched.
+The source XLSX files remain untouched.  This script uses only the Python
+standard library and parses the first worksheet directly from OOXML.
+
+Data model:
+- one normalized English word = one Anki note;
+- the note belongs to the first book in which the word appears;
+- later appearances are preserved in Books/Tags metadata;
+- MeaningRaw preserves the source dictionary text;
+- MeaningPrimary is a conservative elementary-school display gloss.
 """
 
 from __future__ import annotations
@@ -36,9 +43,9 @@ BOOKS = [
     ("人教版一年级起点六年级下.xlsx", 6, "下"),
 ]
 
-# Common function words for which a generic dictionary's first sense is often
-# unsuitable for elementary-school flashcards. Everything else is extracted
-# conservatively from the first Chinese gloss in MeaningRaw.
+# Generic dictionary entries are often too broad for a child-facing card.
+# These overrides cover high-frequency function words/numerals where simply
+# choosing the first dictionary gloss is especially error-prone.
 MEANING_OVERRIDES = {
     "i": "我",
     "a": "一个；一",
@@ -95,18 +102,48 @@ MEANING_OVERRIDES = {
     "of": "……的",
     "for": "为了；给",
     "with": "和；跟；用",
+    "zero": "零；0",
+    "one": "一；一个",
+    "two": "二；两个",
+    "three": "三；三个",
+    "four": "四；四个",
+    "five": "五；五个",
+    "six": "六；六个",
+    "seven": "七；七个",
+    "eight": "八；八个",
+    "nine": "九；九个",
+    "ten": "十；十个",
+    "eleven": "十一；十一个",
+    "twelve": "十二；十二个",
+    "thirteen": "十三；十三个",
+    "fourteen": "十四；十四个",
+    "fifteen": "十五；十五个",
+    "sixteen": "十六；十六个",
+    "seventeen": "十七；十七个",
+    "eighteen": "十八；十八个",
+    "nineteen": "十九；十九个",
+    "twenty": "二十；二十个",
 }
 
 EXPECTED_HEADERS = {"单词", "英音", "美音", "释义"}
 NS_MAIN = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 
+# Longest tokens first: otherwise "num." can be partially consumed as "n".
+POS_NAMES = (
+    "abbr|aux|pron|prep|conj|adj|adv|num|int|art|det|modal|"
+    "phrase|phr|vt|vi|n|v"
+)
+POS_PREFIX_RE = re.compile(rf"^(?:{POS_NAMES})\.?(?:\s+|$)", re.IGNORECASE)
+POS_RESIDUE_RE = re.compile(rf"\b(?:{POS_NAMES})\.", re.IGNORECASE)
+CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
+
 
 def col_index(cell_ref: str) -> int:
-    letters = re.match(r"[A-Z]+", cell_ref or "")
-    if not letters:
+    match = re.match(r"[A-Z]+", cell_ref or "")
+    if not match:
         return 0
     value = 0
-    for ch in letters.group(0):
+    for ch in match.group(0):
         value = value * 26 + ord(ch) - ord("A") + 1
     return value - 1
 
@@ -116,7 +153,7 @@ def read_shared_strings(zf: zipfile.ZipFile) -> list[str]:
     if name not in zf.namelist():
         return []
     root = ET.fromstring(zf.read(name))
-    values = []
+    values: list[str] = []
     for si in root.findall(f"{NS_MAIN}si"):
         values.append("".join(t.text or "" for t in si.iter(f"{NS_MAIN}t")))
     return values
@@ -156,28 +193,56 @@ def normalize_word(value: str) -> str:
     return re.sub(r"\s+", " ", value.strip()).casefold()
 
 
+def clean_gloss_line(line: str) -> str:
+    """Remove only a leading POS marker; never globally delete POS-like text."""
+    line = line.strip()
+    # Some entries start with more than one marker, e.g. "aux. vt. ...".
+    for _ in range(3):
+        cleaned = POS_PREFIX_RE.sub("", line, count=1).strip()
+        if cleaned == line:
+            break
+        line = cleaned
+    return line
+
+
 def primary_meaning(word: str, raw: str) -> tuple[str, str]:
     override = MEANING_OVERRIDES.get(normalize_word(word))
     if override:
         return override, "override"
 
-    text = re.sub(r"\[[^\]]*\]", "", raw or "")
-    # Remove common POS abbreviations while retaining the Chinese gloss.
-    text = re.sub(
-        r"(?i)(?:^|\s)(?:n|v|vt|vi|adj|adv|prep|pron|conj|aux|art|num|int)\.?\s*",
-        "",
-        text,
-    )
-    text = re.sub(r"(?i)(?:n|v|vt|vi|adj|adv|prep|pron|conj|aux|art|num|int)\.\s*", "", text)
-    parts = [p.strip(" ，,。.；;:") for p in re.split(r"[；;]", text) if p.strip(" ，,。.；;:")]
-    if not parts:
-        return raw.strip(), "raw"
+    text = re.sub(r"\[[^\]]*\]", "", raw or "").strip()
+    if not text:
+        return "", "raw"
 
-    first = parts[0]
-    # A malformed dictionary entry can still contain an English POS marker in
-    # the middle (e.g. "已经vt. 有"). Prefer the Chinese tail after it.
-    first = re.sub(r"(?i)^.*?(?:n|v|vt|vi|adj|adv|prep|pron|conj|aux|art|num|int)\.\s*", "", first).strip()
-    return first or raw.strip(), "auto"
+    # Dictionary exports often store each part of speech / sense on a new line.
+    # For elementary cards, take the first non-empty cleaned line and its first
+    # semicolon-delimited sense.  MeaningRaw remains available for inspection.
+    for raw_line in text.splitlines():
+        line = clean_gloss_line(raw_line)
+        if not line:
+            continue
+        first = re.split(r"[；;]", line, maxsplit=1)[0].strip(" ，,。.；;:")
+        if first:
+            return first, "auto"
+
+    return raw.strip(), "raw"
+
+
+def review_reason(primary: str, raw: str, status: str) -> str:
+    reasons: list[str] = []
+    if not primary:
+        reasons.append("empty")
+    if "\n" in primary or "\r" in primary:
+        reasons.append("multiline")
+    if POS_RESIDUE_RE.search(primary):
+        reasons.append("pos-residue")
+    if status == "raw":
+        reasons.append("fallback-raw")
+    if primary and not CHINESE_RE.search(primary) and re.search(r"[A-Za-z]", primary):
+        reasons.append("no-chinese-gloss")
+    if len(primary) > 36:
+        reasons.append("too-long")
+    return ";".join(reasons)
 
 
 def parse_book(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
@@ -197,7 +262,7 @@ def parse_book(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
         raise RuntimeError(f"Expected headers not found in {path.name}")
 
     book = f"{grade}年级{semester}"
-    result = []
+    result: list[dict[str, str]] = []
     for source_row, row in enumerate(rows[header_idx + 1 :], start=header_idx + 2):
         def get(name: str) -> str:
             idx = header_map[name]
@@ -228,6 +293,8 @@ def parse_book(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    # utf-8-sig keeps Chinese readable when opened directly in Excel and is
+    # accepted by Anki's text importer.
     with path.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
@@ -240,7 +307,7 @@ def main() -> None:
         raise SystemExit("Missing source files:\n- " + "\n- ".join(missing))
 
     if OUT_DIR.exists():
-        # Keep README (maintained manually); rebuild only generated data dirs.
+        # README is maintained manually; only generated directories are rebuilt.
         shutil.rmtree(MASTER_DIR, ignore_errors=True)
         shutil.rmtree(IMPORT_DIR, ignore_errors=True)
 
@@ -258,42 +325,59 @@ def main() -> None:
                 "BooksList": [item["Book"]],
                 "SourceFilesList": [item["SourceFile"]],
             }
-        else:
-            target = unique[key]
-            if item["Book"] not in target["BooksList"]:
-                target["BooksList"].append(item["Book"])
-            if item["SourceFile"] not in target["SourceFilesList"]:
-                target["SourceFilesList"].append(item["SourceFile"])
-            for field in ("British", "American", "MeaningRaw"):
-                if not target.get(field) and item.get(field):
-                    target[field] = item[field]
-            if not target.get("MeaningPrimary") and item.get("MeaningPrimary"):
-                target["MeaningPrimary"] = item["MeaningPrimary"]
-                target["MeaningStatus"] = item["MeaningStatus"]
+            continue
+
+        target = unique[key]
+        books_list = target["BooksList"]
+        source_files_list = target["SourceFilesList"]
+        assert isinstance(books_list, list)
+        assert isinstance(source_files_list, list)
+        if item["Book"] not in books_list:
+            books_list.append(item["Book"])
+        if item["SourceFile"] not in source_files_list:
+            source_files_list.append(item["SourceFile"])
+        for field in ("British", "American", "MeaningRaw"):
+            if not target.get(field) and item.get(field):
+                target[field] = item[field]
+        if not target.get("MeaningPrimary") and item.get("MeaningPrimary"):
+            target["MeaningPrimary"] = item["MeaningPrimary"]
+            target["MeaningStatus"] = item["MeaningStatus"]
 
     master_rows: list[dict[str, str]] = []
+    review_rows: list[dict[str, str]] = []
     for obj in unique.values():
         books = list(obj["BooksList"])
         grade = str(obj["Grade"])
         semester = str(obj["Semester"])
         tags = ["rj_start1", f"grade::{grade}", f"semester::{semester}"]
-        tags.extend("appears::" + b for b in books)
-        master_rows.append(
-            {
-                "Word": str(obj["Word"]),
-                "British": str(obj["British"]),
-                "American": str(obj["American"]),
-                "MeaningPrimary": str(obj["MeaningPrimary"]),
-                "MeaningRaw": str(obj["MeaningRaw"]),
-                "MeaningStatus": str(obj["MeaningStatus"]),
-                "FirstBook": str(obj["FirstBook"]),
-                "Grade": grade,
-                "Semester": semester,
-                "Books": "|".join(books),
-                "SourceFiles": "|".join(obj["SourceFilesList"]),
-                "Tags": " ".join(tags),
-            }
-        )
+        tags.extend("appears::" + str(book) for book in books)
+        row = {
+            "Word": str(obj["Word"]),
+            "British": str(obj["British"]),
+            "American": str(obj["American"]),
+            "MeaningPrimary": str(obj["MeaningPrimary"]),
+            "MeaningRaw": str(obj["MeaningRaw"]),
+            "MeaningStatus": str(obj["MeaningStatus"]),
+            "FirstBook": str(obj["FirstBook"]),
+            "Grade": grade,
+            "Semester": semester,
+            "Books": "|".join(str(book) for book in books),
+            "SourceFiles": "|".join(str(x) for x in obj["SourceFilesList"]),
+            "Tags": " ".join(tags),
+        }
+        master_rows.append(row)
+
+        reason = review_reason(row["MeaningPrimary"], row["MeaningRaw"], row["MeaningStatus"])
+        if reason:
+            review_rows.append(
+                {
+                    "Word": row["Word"],
+                    "MeaningPrimary": row["MeaningPrimary"],
+                    "MeaningRaw": row["MeaningRaw"],
+                    "Reason": reason,
+                    "FirstBook": row["FirstBook"],
+                }
+            )
 
     master_fields = [
         "Word",
@@ -325,6 +409,11 @@ def main() -> None:
         "SourceRow",
     ]
     write_csv(MASTER_DIR / "vocabulary_occurrences.csv", occurrence_fields, occurrences)
+    write_csv(
+        MASTER_DIR / "meaning_review.csv",
+        ["Word", "MeaningPrimary", "MeaningRaw", "Reason", "FirstBook"],
+        review_rows,
+    )
 
     import_fields = [
         "Word",
@@ -348,12 +437,18 @@ def main() -> None:
         ("source_occurrences", len(occurrences)),
         ("unique_notes", len(master_rows)),
         ("repeated_words", repeated),
+        ("meaning_review_items", len(review_rows)),
     ]
     stats.extend((f"new_notes_{book}", count) for book, count in per_book_counts.items())
-    write_csv(MASTER_DIR / "build_stats.csv", ["Metric", "Value"], [{"Metric": k, "Value": str(v)} for k, v in stats])
+    write_csv(
+        MASTER_DIR / "build_stats.csv",
+        ["Metric", "Value"],
+        [{"Metric": key, "Value": str(value)} for key, value in stats],
+    )
 
     print(f"Built {len(master_rows)} unique notes from {len(occurrences)} source occurrences.")
     print(f"Repeated across books: {repeated}")
+    print(f"Meaning review queue: {len(review_rows)}")
 
 
 if __name__ == "__main__":
