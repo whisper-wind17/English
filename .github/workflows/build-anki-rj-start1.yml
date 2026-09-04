@@ -7,6 +7,7 @@ on:
       - 'tools/build_anki_rj_start1.py'
       - 'tools/export_anki_review_input.py'
       - 'tools/check_anki_example_vocab.py'
+      - 'tools/migrate_anki_examples_no_future_vocab.py'
       - 'anki/人教版一年级起点/curation/*.csv'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - '.github/workflows/build-anki-rj-start1.yml'
@@ -31,6 +32,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Apply curated example migration
+        run: python tools/migrate_anki_examples_no_future_vocab.py
+
       - name: Build Anki CSV
         run: python tools/build_anki_rj_start1.py
 
@@ -40,14 +44,14 @@ jobs:
       - name: Export review queues
         run: python tools/export_anki_review_input.py
 
-      - name: Commit generated data
+      - name: Commit curated and generated data
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add anki/人教版一年级起点/master anki/人教版一年级起点/import anki/人教版一年级起点/review_input
+          git add anki/人教版一年级起点/curation anki/人教版一年级起点/master anki/人教版一年级起点/import anki/人教版一年级起点/review_input
           if git diff --cached --quiet; then
             echo 'No generated changes.'
             exit 0
           fi
-          git commit -m 'data: rebuild Anki CSV for 人教版一年级起点'
+          git commit -m 'data: remove future vocabulary from Anki examples'
           git push
