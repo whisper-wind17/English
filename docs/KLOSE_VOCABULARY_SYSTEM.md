@@ -84,7 +84,21 @@ Status
 
 Registry 不是普通生成物。新增词只能追加 ID，禁止根据 Master 当前排序重新 enumerate。
 
-### 3.2 Source Occurrence / Provenance
+### 3.2 Source Identity Map（持久化）
+
+跨来源接入时，candidate matching 的确认结果必须持久化：
+
+```text
+SourceID
+SourceItemKey
+NoteID
+Decision
+Status
+```
+
+`source_identity_map.csv` 与 `note_registry.csv` 一样属于长期状态，不是每次构建重新推导的缓存。新教材接入时可以重新计算候选，但一旦确认某个 source learning unit 对应某个 NoteID，后续构建必须复用该映射；若语义发生冲突，进入 identity migration/review，而不是静默改映射。
+
+### 3.3 Source Occurrence / Provenance
 
 每次来源出现独立记录：
 
@@ -109,7 +123,7 @@ KV000001 | beijing   | 2年级上 | 2 | 上 | ...
 
 新增来源不会覆盖历史来源事实。
 
-### 3.3 Vocabulary Fact / Master
+### 3.4 Vocabulary Fact / Master
 
 跨来源汇总：
 
@@ -129,7 +143,7 @@ SourceBooks
 
 `MeaningPrimary` 是该 learning unit 的核心学习义项。若同一 surface word 出现明显不同 target sense，应优先建立另一个 NoteID，而不是把所有义项塞进一张卡。
 
-### 3.4 Learner Presentation
+### 3.5 Learner Presentation
 
 ```text
 LearnerProfile
@@ -252,7 +266,7 @@ Released：人教版 1–4 年级
 
 ### Release 是持久化状态
 
-`release_registry.csv` 记录已释放 Note。Note 一旦进入 Anki，原则上继续保留在 `study.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
+`release_registry.csv` 记录已释放 Note；每个 release scope 必须显式带 `released_at`，因此 Grade 5/新来源在未来释放时不会被错误记成初始基线日期。Note 一旦进入 Anki，原则上继续保留在 `study.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
 
 ---
 

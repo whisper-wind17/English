@@ -32,7 +32,8 @@ anki/klose/
 │   └── profile.json
 ├── master/
 │   ├── note_registry.csv          # 永久身份 Registry
-│   ├── release_registry.csv       # 已释放学习集合
+│   ├── source_identity_map.csv    # SourceItem → NoteID 持久映射
+│   ├── release_registry.csv       # 已释放学习集合及实际释放日期
 │   ├── vocabulary_master.csv
 │   ├── source_occurrences.csv
 │   └── build_stats.csv
@@ -65,10 +66,11 @@ publish/study.csv
 
 ## 持久化状态
 
-以下两个文件不能视为普通缓存：
+以下三个文件不能视为普通缓存：
 
 ```text
 master/note_registry.csv
+master/source_identity_map.csv
 master/release_registry.csv
 ```
 
@@ -92,6 +94,7 @@ anki/人教版一年级起点/
 完整本地验证顺序：
 
 ```bash
+python tools/check_klose_persistent_state.py
 python tools/build_klose_vocabulary.py
 python tools/apply_klose_learner_overrides.py
 python tools/check_klose_learner.py

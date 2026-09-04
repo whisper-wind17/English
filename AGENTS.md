@@ -14,7 +14,7 @@
 ## 2. 不可破坏的规则
 
 1. **Stable NoteID 最高优先级。** 已分配 ID 不得因排序、重建、教材增加或内容修改而重编号、复用或漂移。
-2. **NoteID 来自 committed Registry。** 不得从 Master 每次重新 enumerate；Registry/Release Registry 缺失时必须失败，不能静默重建。
+2. **NoteID 来自 committed Registry。** 不得从 Master 每次重新 enumerate；Registry/Source Identity Map/Release Registry 缺失时必须失败，不能静默重建。
 3. **一个 Note = 一个明确 learning unit / target sense，不等于一个字符串。** 同形异义允许多个 NoteID。
 4. `CanonicalWord` / `MatchKey` 只用于候选匹配，不是业务主键；词性/义项/大小写/短语边界有歧义时进入 review，禁止静默 merge。
 5. 同一已学 learning unit 不创建第二套 FSRS 记忆状态；新增来源优先扩展 provenance。
@@ -48,7 +48,7 @@ Raw Source
 ```text
 anki/klose/
 ├── config/                    # learner/scope config
-├── master/                    # NoteID registry / release registry / master / occurrences
+├── master/                    # NoteID registry / source identity map / release registry / master / occurrences
 ├── learner/                   # current learner layer + explicit overrides
 ├── publish/                   # study.csv / all.csv / migration / views
 └── review/                    # identity / semantic / learner queues
@@ -168,12 +168,13 @@ anki/klose/review/future_vocab_review.csv
 1. 保留 Raw Source；
 2. 解析为 source-scoped occurrences；
 3. 与 Registry 做 sense-aware candidate matching；
-4. 明确已有 unit → 原 NoteID + 扩展 provenance；
-5. 明确新 unit → 追加新 NoteID，旧 ID 不重排；
-6. 模糊项 → review；
-7. 生成当前 Learner Layer；
-8. 根据 release config 决定新 Note 是否进入 `study.csv`；
-9. 重建并跑 CI。
+4. 将确认后的 `SourceItemKey → NoteID` 决策写入 committed `source_identity_map.csv`；
+5. 明确已有 unit → 原 NoteID + 扩展 provenance；
+6. 明确新 unit → 追加新 NoteID，旧 ID 不重排；
+7. 模糊项 → review；
+8. 生成当前 Learner Layer；
+9. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 `study.csv`；
+10. 重建并跑 CI。
 
 ### 升 Learner Level
 
@@ -189,7 +190,7 @@ merge/split 必须单独设计 migration，禁止当作普通清洗直接执行�
 
 必须检查：
 
-- Persistent Registry / Release Registry 存在且内部一致；
+- Persistent Registry / Source Identity Map / Release Registry 存在且内部一致；
 - Registry 中 NoteID 唯一且长期稳定；
 - canonical/case/homograph 候选冲突；
 - 每条 Master 有可追溯 source occurrence；

@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose" / "master"
 REGISTRY = BASE / "note_registry.csv"
 RELEASES = BASE / "release_registry.csv"
+SOURCE_MAP = BASE / "source_identity_map.csv"
 NOTE_RE = re.compile(r"KV(\d{6})$")
 
 
@@ -25,7 +26,7 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def main() -> None:
-    missing = [p for p in (REGISTRY, RELEASES) if not p.exists()]
+    missing = [p for p in (REGISTRY, RELEASES, SOURCE_MAP) if not p.exists()]
     if missing:
         raise SystemExit(
             "Persistent Klose state is missing; refusing to rebuild:\n- "
@@ -60,6 +61,27 @@ def main() -> None:
         raise SystemExit("Registry contains repeated NoteID numbers")
 
     registry_ids = set(ids)
+
+    source_map = read_csv(SOURCE_MAP)
+    map_keys: set[tuple[str, str]] = set()
+    mapped_ids: set[str] = set()
+    for row in source_map:
+        source_id = row.get("SourceID", "").strip()
+        item_key = row.get("SourceItemKey", "").strip()
+        nid = row.get("NoteID", "").strip()
+        status = row.get("Status", "").strip()
+        key = (source_id, item_key)
+        if not source_id or not item_key or key in map_keys:
+            raise SystemExit(f"Invalid/duplicate SourceIdentity key: {key}")
+        if nid not in registry_ids:
+            raise SystemExit(f"Source identity references unknown NoteID: {nid}")
+        if status != "confirmed":
+            raise SystemExit(f"Unconfirmed persistent SourceIdentity row: {key}")
+        map_keys.add(key)
+        mapped_ids.add(nid)
+    if not source_map:
+        raise SystemExit("source_identity_map.csv is empty")
+
     release_ids: set[str] = set()
     for row in releases:
         nid = row.get("NoteID", "").strip()
@@ -69,7 +91,7 @@ def main() -> None:
             raise SystemExit(f"Release references unknown NoteID: {nid}")
         release_ids.add(nid)
 
-    print(f"Persistent state OK: registry={len(registry_ids)}, released={len(release_ids)}")
+    print(f"Persistent state OK: registry={len(registry_ids)}, source_map={len(source_map)}, released={len(release_ids)}")
 
 
 if __name__ == "__main__":

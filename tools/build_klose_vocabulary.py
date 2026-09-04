@@ -33,6 +33,7 @@ SOURCE_OCCURRENCES = SOURCE_BASE / "vocabulary_occurrences.csv"
 
 REGISTRY = MASTER_DIR / "note_registry.csv"
 RELEASE_REGISTRY = MASTER_DIR / "release_registry.csv"
+SOURCE_IDENTITY_MAP = MASTER_DIR / "source_identity_map.csv"
 GLOBAL_MASTER = MASTER_DIR / "vocabulary_master.csv"
 GLOBAL_OCCURRENCES = MASTER_DIR / "source_occurrences.csv"
 LEARNER_CURRENT = LEARNER_DIR / "current.csv"
@@ -95,28 +96,13 @@ def load_config() -> dict[str, object]:
         return json.load(f)
 
 
-def load_or_bootstrap_registry(source_rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], bool]:
-    created = False
-    if REGISTRY.exists():
-        registry = read_csv(REGISTRY)
-    else:
-        created = True
-        registry = []
-        for idx, row in enumerate(source_rows, start=1):
-            word = normalize_display(row["Word"])
-            registry.append({
-                "NoteID": f"KV{idx:06d}",
-                "CanonicalWord": word,
-                "MatchKey": match_key(word),
-                "SenseLabel": row["MeaningPrimary"].strip(),
-                "PrimaryOriginKey": origin_key(word),
-                "CreatedSource": SOURCE_ID,
-                "CreatedSourceBook": row["FirstBook"].strip(),
-                "Status": "active",
-            })
-
-    # Registry is append-only. Current source rows must map to an existing origin,
-    # or receive a new ID appended after the current maximum.
+def load_registry() -> list[dict[str, str]]:
+    """Load committed identity state. Never bootstrap it from current Master."""
+    if not REGISTRY.exists():
+        raise SystemExit("Persistent note_registry.csv is missing; refusing to rebuild identity history")
+    registry = read_csv(REGISTRY)
+    if not registry:
+        raise SystemExit("note_registry.csv is empty")
     seen_ids: set[str] = set()
     seen_origins: set[str] = set()
     for row in registry:
@@ -124,39 +110,52 @@ def load_or_bootstrap_registry(source_rows: list[dict[str, str]]) -> tuple[list[
         org = row["PrimaryOriginKey"].strip()
         if nid in seen_ids:
             raise SystemExit(f"Duplicate NoteID in registry: {nid}")
-        if org in seen_origins:
-            raise SystemExit(f"Duplicate PrimaryOriginKey in registry: {org}")
+        if not org or org in seen_origins:
+            raise SystemExit(f"Invalid/duplicate PrimaryOriginKey in registry: {org}")
         note_num(nid)
         seen_ids.add(nid)
         seen_origins.add(org)
-
-    by_origin = {r["PrimaryOriginKey"]: r for r in registry}
-    next_id = max((note_num(r["NoteID"]) for r in registry), default=0) + 1
-    changed = created
-    for row in source_rows:
-        word = normalize_display(row["Word"])
-        org = origin_key(word)
-        if org in by_origin:
-            continue
-        new = {
-            "NoteID": f"KV{next_id:06d}",
-            "CanonicalWord": word,
-            "MatchKey": match_key(word),
-            "SenseLabel": row["MeaningPrimary"].strip(),
-            "PrimaryOriginKey": org,
-            "CreatedSource": SOURCE_ID,
-            "CreatedSourceBook": row["FirstBook"].strip(),
-            "Status": "active",
-        }
-        registry.append(new)
-        by_origin[org] = new
-        next_id += 1
-        changed = True
-
     registry.sort(key=lambda r: note_num(r["NoteID"]))
-    if changed:
-        write_csv(REGISTRY, REGISTRY_FIELDS, registry)
-    return registry, changed
+    return registry
+
+
+def source_item_key(word: str) -> str:
+    """Stable source-adapter item key for the current rj_start1 baseline."""
+    return match_key(word)
+
+
+def load_source_identity_map(
+    source_rows: list[dict[str, str]], registry: list[dict[str, str]]
+) -> tuple[list[dict[str, str]], dict[str, dict[str, str]]]:
+    """Load committed SourceItem -> NoteID decisions; never re-resolve silently."""
+    if not SOURCE_IDENTITY_MAP.exists():
+        raise SystemExit("Persistent source_identity_map.csv is missing")
+    rows = read_csv(SOURCE_IDENTITY_MAP)
+    registry_ids = {r["NoteID"].strip() for r in registry}
+    current: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if row.get("Status", "").strip() != "confirmed":
+            continue
+        nid = row.get("NoteID", "").strip()
+        if nid not in registry_ids:
+            raise SystemExit(f"Source identity map references unknown NoteID: {nid}")
+        if row.get("SourceID", "").strip() != SOURCE_ID:
+            continue
+        key = row.get("SourceItemKey", "").strip()
+        if not key or key in current:
+            raise SystemExit(f"Invalid/duplicate {SOURCE_ID} SourceItemKey: {key!r}")
+        current[key] = row
+
+    expected = {source_item_key(r["Word"]) for r in source_rows}
+    actual = set(current)
+    if expected != actual:
+        missing = sorted(expected - actual)
+        extra = sorted(actual - expected)
+        raise SystemExit(
+            "Source identity coverage mismatch; explicit identity resolution required. "
+            f"missing={missing[:20]} extra={extra[:20]}"
+        )
+    return rows, current
 
 
 def source_grade_membership(source_rows: list[dict[str, str]]) -> dict[str, set[int]]:
@@ -167,39 +166,45 @@ def source_grade_membership(source_rows: list[dict[str, str]]) -> dict[str, set[
             grade, _ = parse_book(book)
             if grade is not None:
                 grades.add(grade)
-        result[origin_key(row["Word"])] = grades
+        result[source_item_key(row["Word"])] = grades
     return result
 
 
 def load_or_extend_releases(
     config: dict[str, object],
-    registry: list[dict[str, str]],
+    identity_by_key: dict[str, dict[str, str]],
     source_rows: list[dict[str, str]],
 ) -> tuple[list[dict[str, str]], bool]:
-    releases = read_csv(RELEASE_REGISTRY) if RELEASE_REGISTRY.exists() else []
+    if not RELEASE_REGISTRY.exists():
+        raise SystemExit("Persistent release_registry.csv is missing")
+    releases = read_csv(RELEASE_REGISTRY)
     released = {r["NoteID"] for r in releases}
 
-    scopes = config.get("released_scopes", [])
-    allowed_grades: set[int] = set()
-    for scope in scopes if isinstance(scopes, list) else []:
+    scopes_raw = config.get("released_scopes", [])
+    scopes: list[tuple[set[int], str, str]] = []
+    for scope in scopes_raw if isinstance(scopes_raw, list) else []:
         if not isinstance(scope, dict) or scope.get("source_id") != SOURCE_ID:
             continue
-        grades = scope.get("grades", [])
-        if isinstance(grades, list):
-            allowed_grades.update(int(x) for x in grades)
+        grades_raw = scope.get("grades", [])
+        if not isinstance(grades_raw, list):
+            raise SystemExit("release scope grades must be a list")
+        grades = {int(x) for x in grades_raw}
+        released_at = str(scope.get("released_at", "")).strip()
+        reason = str(scope.get("reason", "")).strip() or f"scope:{SOURCE_ID}:grades={','.join(map(str, sorted(grades)))}"
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", released_at):
+            raise SystemExit(f"release scope requires ISO released_at: {scope}")
+        scopes.append((grades, released_at, reason))
 
     grade_membership = source_grade_membership(source_rows)
-    by_origin = {r["PrimaryOriginKey"]: r for r in registry}
-    release_date = str(config.get("initial_release_date", ""))
-    reason = f"scope:{SOURCE_ID}:grades={','.join(str(x) for x in sorted(allowed_grades))}"
-    changed = not RELEASE_REGISTRY.exists()
-
-    for org, grades in grade_membership.items():
-        if not (grades & allowed_grades):
+    changed = False
+    for item_key, grades in grade_membership.items():
+        matches = [(date, reason) for allowed, date, reason in scopes if grades & allowed]
+        if not matches:
             continue
-        nid = by_origin[org]["NoteID"]
+        nid = identity_by_key[item_key]["NoteID"].strip()
         if nid in released:
             continue
+        release_date, reason = min(matches, key=lambda x: x[0])
         releases.append({"NoteID": nid, "ReleasedAt": release_date, "ReleaseReason": reason})
         released.add(nid)
         changed = True
@@ -228,7 +233,7 @@ def trivial_grade4_reason(example: str, first_grade: int) -> str:
 
 
 def main() -> None:
-    for required in (CONFIG, SOURCE_MASTER, SOURCE_OCCURRENCES):
+    for required in (CONFIG, SOURCE_MASTER, SOURCE_OCCURRENCES, REGISTRY, RELEASE_REGISTRY, SOURCE_IDENTITY_MAP):
         if not required.exists():
             raise SystemExit(f"Missing input: {required.relative_to(ROOT)}")
 
@@ -246,9 +251,10 @@ def main() -> None:
             raise SystemExit(f"Duplicate source master origin: {org}")
         source_by_origin[org] = row
 
-    registry, registry_changed = load_or_bootstrap_registry(source_rows)
-    registry_by_origin = {r["PrimaryOriginKey"]: r for r in registry}
-    releases, releases_changed = load_or_extend_releases(config, registry, source_rows)
+    registry = load_registry()
+    registry_by_id = {r["NoteID"]: r for r in registry}
+    identity_map_rows, identity_by_key = load_source_identity_map(source_rows, registry)
+    releases, releases_changed = load_or_extend_releases(config, identity_by_key, source_rows)
     released_ids = {r["NoteID"] for r in releases}
 
     # Identity review: case/display collisions in raw occurrences after match-key folding.
@@ -270,9 +276,9 @@ def main() -> None:
     learner_review_rows: list[dict[str, object]] = []
 
     for src in source_rows:
-        org = origin_key(src["Word"])
-        reg = registry_by_origin[org]
-        nid = reg["NoteID"]
+        item_key = source_item_key(src["Word"])
+        nid = identity_by_key[item_key]["NoteID"].strip()
+        reg = registry_by_id[nid]
         books = [b for b in src["Books"].split("|") if b]
         source_books = [f"{SOURCE_ID}::{b}" for b in books]
         first_grade = int(src["Grade"]) if src["Grade"].isdigit() else 0
@@ -338,10 +344,10 @@ def main() -> None:
     # Full source occurrence audit, now attached to stable NoteID.
     occurrence_rows: list[dict[str, object]] = []
     for occ in source_occ:
-        org = origin_key(occ["Word"])
-        if org not in registry_by_origin:
-            raise SystemExit(f"Occurrence without registry identity: {occ['Word']}")
-        nid = registry_by_origin[org]["NoteID"]
+        item_key = source_item_key(occ["Word"])
+        if item_key not in identity_by_key:
+            raise SystemExit(f"Occurrence without committed source identity: {occ['Word']}")
+        nid = identity_by_key[item_key]["NoteID"].strip()
         occurrence_rows.append({
             "NoteID": nid,
             "SourceID": SOURCE_ID,
@@ -420,7 +426,8 @@ def main() -> None:
         {"Metric": "identity_review_items", "Value": len(identity_review_rows)},
         {"Metric": "learner_review_suggestions", "Value": len(learner_review_rows)},
         {"Metric": "registry_rows", "Value": len(registry)},
-        {"Metric": "registry_changed", "Value": str(registry_changed).lower()},
+        {"Metric": "source_identity_map_rows", "Value": len(identity_map_rows)},
+        {"Metric": "registry_changed", "Value": "false"},
         {"Metric": "release_registry_changed", "Value": str(releases_changed).lower()},
     ]
     for grade in range(1, 7):
