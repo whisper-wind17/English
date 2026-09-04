@@ -1,0 +1,46 @@
+name: Build Klose Vocabulary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/build_klose_vocabulary.py'
+      - 'anki/klose/config/**'
+      - 'anki/人教版一年级起点/master/vocabulary_master.csv'
+      - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
+      - '.github/workflows/build-klose-vocabulary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            tools
+            anki/klose
+            anki/人教版一年级起点/master
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build global vocabulary
+        run: python tools/build_klose_vocabulary.py
+
+      - name: Commit registry and generated data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
+          if git diff --cached --quiet; then
+            echo 'No generated changes.'
+            exit 0
+          fi
+          git commit -m 'data: rebuild Klose vocabulary base'
+          git push
