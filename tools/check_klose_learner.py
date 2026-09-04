@@ -88,7 +88,6 @@ def main() -> None:
     learner = read_csv(LEARNER)
     learner_by_id = {r["NoteID"]: r for r in learner}
 
-    # NoteID -> earliest explicit grade in rj_start1.
     first_grade_by_id: dict[str, int] = {}
     for row in occ:
         if row["SourceID"] != SOURCE_ID or not row["Grade"].isdigit():
@@ -96,8 +95,6 @@ def main() -> None:
         grade = int(row["Grade"])
         first_grade_by_id[row["NoteID"]] = min(grade, first_grade_by_id.get(row["NoteID"], grade))
 
-    # Lexical forms -> earliest explicit grade. Multiword items contribute their tokens;
-    # this is deliberately conservative and only creates review candidates.
     earliest: dict[str, int] = {}
     for row in master:
         grade = first_grade_by_id.get(row["NoteID"])
@@ -131,6 +128,8 @@ def main() -> None:
 
     write_csv(REPORT, ["NoteID", "Word", "LearnerLevel", "ExampleSentence", "FutureVocabulary"], review)
     print(f"Klose future-vocabulary review items: {len(review)}")
+    for row in review:
+        print(f"{row['NoteID']} | {row['Word']} | {row['FutureVocabulary']} | {row['ExampleSentence']}")
     if review:
         raise SystemExit("Learner examples contain vocabulary explicitly introduced after the learner level")
 
