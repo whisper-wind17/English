@@ -1,63 +1,123 @@
-# 人教版一年级起点 → Anki
+# 人教版一年级起点：Source Adapter / Curation
 
-本目录面向“人教版一年级起点”小学英语教材，将原始 XLSX 词表整理为适合 Anki 长期复习的 CSV 数据。
+本目录负责把“人教版一年级起点”1–6 年级原始 XLSX 整理成可追溯、可审校的 **source-specific 数据层**。它现在是 Klose Vocabulary System 的第一个 Source Adapter，而不再是长期 Anki 牌组的最终发布入口。
 
-## 当前数据
+长期机制见：
 
-本次构建处理 1–6 年级上下册共 12 个源文件：
+```text
+docs/KLOSE_VOCABULARY_SYSTEM.md
+```
 
-- 教材词条出现次数：908
-- 去重后唯一 Note：802
-- 在多册教材中重复出现的单词：96
-- 已逐词显式审校 `MeaningPrimary`：802 / 802
-- 已补充年级适配例句与中文翻译：802 / 802
-- 结构质检待复核项：0
-- 例句中“明确属于后续教材才首次列出的词”：0
+真正给 Klose 长期导入 Anki 的默认文件是：
 
-详细统计见 `master/build_stats.csv`；例句进度检查见 `master/example_vocab_review.csv`。
+```text
+anki/klose/publish/study.csv
+```
 
-这里的“逐词审校”是本项目构建过程中对 802 个词逐项重新判断和写入 `curation/` 的结果，不代表出版社或英语教师对内容进行了人工认证。原始 XLSX 也没有 Unit、课文原句等完整教材上下文，因此例句是按首次出现年级和已学基础词汇生成的学习例句，并非教材原句。
+如果已经导入过旧版 Word-first CSV，先执行：
+
+```text
+docs/ANKI_MIGRATION.md
+```
+
+---
+
+## 当前来源数据
+
+人教版一年级起点共处理：
+
+- 12 册：1–6 年级，上/下册；
+- 908 次教材词条出现；
+- 当前 source-specific 去重后 802 个 learning units；
+- 96 个词/短语跨册重复出现；
+- 802/802 已有显式 `MeaningPrimary`、学习例句和中文翻译；
+- 原始 XLSX 不修改，继续作为 provenance 来源。
+
+注意：这里的“审校”是项目内逐项审校/模型辅助结果，不代表出版社或英语教师认证。原始 XLSX 也缺少完整 Unit/课文上下文，因此不能把自动质检通过等同于“教材语义完全人工确认”。
+
+---
+
+## 本目录在长期架构中的职责
+
+```text
+Raw XLSX
+   ↓
+anki/人教版一年级起点/
+   ├── curation/          # source-specific 释义/例句维护
+   ├── master/            # source master + occurrences
+   ├── review_input/      # 紧凑审校视图
+   └── import/            # 旧版/兼容 source views
+          ↓
+anki/klose/               # 跨来源统一 Vocabulary System
+   ├── master/
+   ├── learner/
+   ├── publish/
+   └── review/
+```
+
+本目录负责“人教版这个来源说了什么”；`anki/klose/` 负责“这个 learning unit 在整个 Klose 词汇系统中的身份是什么、现在怎样学习、怎样发布到 Anki”。
+
+---
 
 ## 数据原则
 
-- 仅处理 `1.全国各大教材版本中小学同步/人教版/` 下 1–6 年级、上下册共 12 个“人教版一年级起点”文件。
-- 原始 XLSX 保持不变，作为拼写、音标、原始词典释义与出现位置的来源。
-- 同一个英文单词只保留一个主 Note，避免 FSRS 对同一词维护多份独立记忆状态。
-- 单词第一次出现在哪一册，就进入该册的导入 CSV；后续重复出现只记录在 `Books` 和 `Tags` 中。
-- `MeaningRaw` 完整保留原词典释义，仅用于审计，不建议在儿童卡片上默认显示。
-- `MeaningPrimary`、`ExampleSentence`、`ExampleTranslation` 来自 `curation/` 下的逐词显式审校数据。
-- 构建时要求 802 个唯一词全部存在审校记录；缺一条、多一条、重复一条或缺少例句都会直接构建失败，不允许静默退回词典第一义项。
-- 例句会额外检查是否提前使用了“在后续教材册才首次明确列入词表”的词；发现此类情况 CI 直接失败。
+- 仅处理 `1.全国各大教材版本中小学同步/人教版/` 中的 12 个“人教版一年级起点”文件。
+- 原始 XLSX 保持不变。
+- `MeaningRaw` 保留原词典释义，用于审计；儿童卡片不默认展示。
+- `MeaningPrimary` / `ExampleSentence` / `ExampleTranslation` 在 `curation/` 中维护。
+- source-specific 构建要求 802 个当前唯一项都有审校记录；缺失、重复、空例句或结构异常会失败。
+- source-specific 例句检查仍可用于发现明显的“提前使用后续教材词汇”问题，但长期 learner 难度以 `anki/klose/` 的 `LearnerLevel` 为准。
+- 本目录当前按 surface form 去重，是首批来源的 adapter 行为；跨教材后的最终 identity 由 `anki/klose/master/note_registry.csv` 决定，不得把 surface form 当作永久业务主键。
+
+---
 
 ## 目录
 
 ```text
 anki/人教版一年级起点/
-├── README.md
-├── curation/                       # 显式审校数据层
+├── curation/
 │   ├── 1年级上.csv
 │   ├── 1年级下.csv
 │   ├── ...
 │   └── 6年级下.csv
 ├── master/
-│   ├── vocabulary_master.csv       # 802 个最终唯一 Note
-│   ├── vocabulary_occurrences.csv  # 908 条原始教材出现记录
-│   ├── curation_review.csv         # 结构质检待复核项
-│   ├── example_vocab_review.csv    # 例句提前使用后续词汇的检查结果
-│   └── build_stats.csv             # 构建与分册统计
-├── review_input/                    # 从 Master 导出的紧凑审校视图
-└── import/                          # 真正导入 Anki 的文件
+│   ├── vocabulary_master.csv
+│   ├── vocabulary_occurrences.csv
+│   ├── curation_review.csv
+│   ├── example_vocab_review.csv
+│   └── build_stats.csv
+├── review_input/
+└── import/
     ├── 1年级上.csv
-    ├── 1年级下.csv
     ├── ...
     └── 6年级下.csv
 ```
 
-`curation/` 是显式审校维护层；`master/` 和 `import/` 都由脚本生成，不应直接手工修改。
+`curation/` 是 source-specific 显式维护层；`master/`、`review_input/` 和 `import/` 由脚本重建。
 
-## 各册导入 Note 数
+### 关于 `import/*.csv`
 
-| 教材册 | 原始出现词条 | 首次出现、需要导入的 Note |
+这些 12 个 CSV 是早期按“首次出现教材册”生成的兼容产物。它们仍可用于 source 数据检查，但**不再推荐作为 Klose 长期 Anki 导入入口**，也不再推荐按 12 个子 Deck 维护。
+
+长期统一使用：
+
+```text
+Klose-English::Vocabulary
+```
+
+以及：
+
+```text
+anki/klose/publish/study.csv
+```
+
+年级/来源通过 Tags、release scope、Suspend/Filtered Deck 管理。
+
+---
+
+## source-specific 各册统计
+
+| 教材册 | 原始出现词条 | 首次出现 Note |
 |---|---:|---:|
 | 1年级上 | 53 | 53 |
 | 1年级下 | 45 | 45 |
@@ -72,94 +132,13 @@ anki/人教版一年级起点/
 | 6年级上 | 102 | 90 |
 | 6年级下 | 41 | 39 |
 
-例如 3 年级上原始有 104 条词条，其中 30 个此前已经出现，因此只新增 74 个 Note。这样同一个词不会在不同 Deck 中产生两套独立 FSRS 记忆状态。
+这些数字用于理解来源分布，不再决定 Anki Deck 结构。
 
-## 推荐 Anki 牌组结构
+---
 
-```text
-Klose-English
-└── 人教版一年级起点
-    ├── 1年级上
-    ├── 1年级下
-    ├── 2年级上
-    ├── 2年级下
-    ├── ...
-    └── 6年级下
-```
+## 维护与重建
 
-导入某一册 CSV 时，将目标 Deck 选择为对应子牌组。例如：
-
-```text
-4年级上.csv
-→ Klose-English::人教版一年级起点::4年级上
-```
-
-一个单词如果首次出现在二年级上、又在四年级上出现，它只存在于二年级上牌组，但 `Books` 会记录两个出现位置。
-
-建立完整小学词库时，应按 1 年级上 → 6 年级下依次导入 12 个 `import/*.csv`，不要再额外导入 `master/vocabulary_master.csv`。
-
-## CSV 字段与 Anki 映射
-
-| CSV 字段 | Anki 字段 | 用途 |
-|---|---|---|
-| `Word` | Word | 单词或教材短语 |
-| `British` | British | 英式音标；源数据为空则保持为空 |
-| `American` | American | 美式音标；源数据为空则保持为空 |
-| `MeaningPrimary` | MeaningPrimary | 经审校的小学阶段核心释义 |
-| `ExampleSentence` | ExampleSentence | 与首次出现年级匹配的学习例句 |
-| `ExampleTranslation` | ExampleTranslation | 例句中文翻译 |
-| `MeaningRaw` | MeaningRaw | 原始完整词典释义；建议隐藏 |
-| `Books` | Books | 该词出现过的教材册 |
-| `Tags` | Tags | 年级、学期和出现位置标签 |
-
-建议建立自定义 Note Type：`Klose Vocabulary`。
-
-### Card 1：英文 → 中文
-
-正面：
-
-```html
-<div class="word">{{Word}}</div>
-<div class="phonetic">{{British}}</div>
-```
-
-背面：
-
-```html
-{{FrontSide}}
-<hr id="answer">
-<div class="meaning">{{MeaningPrimary}}</div>
-<div class="example">{{ExampleSentence}}</div>
-<div class="example-cn">{{ExampleTranslation}}</div>
-<div class="phonetic">英 {{British}} · 美 {{American}}</div>
-```
-
-不建议默认显示 `MeaningRaw`。它包含成人词典中的多词性、多义项，主要用于后续核对。
-
-### Card 2：中文 → 英文
-
-需要训练主动拼写时再增加反向 Card。刚开始不建议同时大量引入正反两张新卡，否则每天实际新卡量会翻倍。
-
-## Klose 推荐学习设置
-
-- FSRS：开启
-- Desired Retention：`0.93`
-- Learning Steps：`10m`
-- Relearning Steps：`10m`
-- 先从约 5 个新单词/天开始；如果每个 Note 只生成一张 Card，则 `New cards/day ≈ 5`
-- Reviews first
-- Bury new/review siblings：开启（启用正反卡时）
-- 评分先简化为：记得 → `Good`；忘记/答错 → `Again`
-
-## 维护与重新生成
-
-如果发现某个释义或例句需要调整，修改对应的：
-
-```text
-anki/人教版一年级起点/curation/<教材册>.csv
-```
-
-然后在仓库根目录执行：
+修改人教版 source-specific 内容后：
 
 ```bash
 python tools/build_anki_rj_start1.py
@@ -167,10 +146,19 @@ python tools/check_anki_example_vocab.py
 python tools/export_anki_review_input.py
 ```
 
-脚本仅使用 Python 标准库。GitHub Actions 会在源 XLSX、构建脚本或 `curation/*.csv` 变化后自动重建并提交 `master/`、`import/` 和 `review_input/`。如果审校覆盖不完整、结构异常，或例句提前使用了后续教材明确列出的词，CI 会失败。
+随后全局 Klose Vocabulary 会通过对应 workflow 重新构建；本地完整验证可执行：
 
-## 释义与例句质量边界
+```bash
+python tools/build_klose_vocabulary.py
+python tools/apply_klose_learner_overrides.py
+python tools/check_klose_learner.py
+```
 
-原 XLSX 的“释义”来自通用词典，存在大量不适合小学语境的首义，例如 `running→运转`、`present→现在`、`May→可以`、`safe→保险箱`、`doctor→修理`、`hot pot→英式炖肉`。这些错误已经在 `curation/` 层按小学教材语境重新确定。
+CI：
 
-例句遵循“短、直接、体现目标义项、难度不高于首次出现年级”的原则，优先复用此前或当前册已出现的词。当前自动检查可以可靠识别“某个词明确在后续教材词表才首次出现”的情况；但因为源 XLSX 不是完整课文语料，它无法证明所有未列入词表的普通词一定已经学过。若以后补充教材 Unit 和课文文本，可以进一步升级为严格的词汇可见性与语法进度校验。
+```text
+.github/workflows/build-anki-rj-start1.yml
+.github/workflows/build-klose-vocabulary.yml
+```
+
+长期维护时，source-specific 数据只负责来源事实；Stable NoteID、release 状态和 Anki 发布契约以 `anki/klose/` 为准。
