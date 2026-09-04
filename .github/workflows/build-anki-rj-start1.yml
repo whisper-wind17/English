@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/build_anki_rj_start1.py'
       - 'tools/export_anki_review_input.py'
+      - 'anki/人教版一年级起点/curation/*.csv'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - '.github/workflows/build-anki-rj-start1.yml'
   workflow_dispatch:
