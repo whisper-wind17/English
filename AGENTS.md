@@ -14,7 +14,7 @@
 ## 2. 不可破坏的规则
 
 1. **Stable NoteID 最高优先级。** 已分配 ID 不得因排序、重建、教材增加或内容修改而重编号、复用或漂移。
-2. **NoteID 来自 committed Registry。** 不得从 Master 每次重新 enumerate。
+2. **NoteID 来自 committed Registry。** 不得从 Master 每次重新 enumerate；Registry/Release Registry 缺失时必须失败，不能静默重建。
 3. **一个 Note = 一个明确 learning unit / target sense，不等于一个字符串。** 同形异义允许多个 NoteID。
 4. `CanonicalWord` / `MatchKey` 只用于候选匹配，不是业务主键；词性/义项/大小写/短语边界有歧义时进入 review，禁止静默 merge。
 5. 同一已学 learning unit 不创建第二套 FSRS 记忆状态；新增来源优先扩展 provenance。
@@ -128,9 +128,19 @@ tools/export_anki_review_input.py
 Global Klose Vocabulary：
 
 ```text
+tools/check_klose_persistent_state.py
 tools/build_klose_vocabulary.py
 tools/apply_klose_learner_overrides.py
 tools/check_klose_learner.py
+```
+
+本地完整顺序：
+
+```bash
+python tools/check_klose_persistent_state.py
+python tools/build_klose_vocabulary.py
+python tools/apply_klose_learner_overrides.py
+python tools/check_klose_learner.py
 ```
 
 CI：
@@ -179,6 +189,7 @@ merge/split 必须单独设计 migration，禁止当作普通清洗直接执行�
 
 必须检查：
 
+- Persistent Registry / Release Registry 存在且内部一致；
 - Registry 中 NoteID 唯一且长期稳定；
 - canonical/case/homograph 候选冲突；
 - 每条 Master 有可追溯 source occurrence；
