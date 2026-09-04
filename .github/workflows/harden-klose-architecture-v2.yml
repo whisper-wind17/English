@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/harden_klose_architecture_v2.py'
+      - 'tools/harden-klose-architecture-v2.trigger'
       - '.github/workflows/harden-klose-architecture-v2.yml'
   workflow_dispatch:
 
