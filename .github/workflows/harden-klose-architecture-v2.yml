@@ -40,6 +40,19 @@ jobs:
       - name: Apply architecture hardening
         run: python tools/harden_klose_architecture_v2.py
 
+      - name: Align release membership with SourceItemKey
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/build_klose_vocabulary.py')
+          text = p.read_text(encoding='utf-8')
+          old = '        result[origin_key(row["Word"])] = grades'
+          new = '        result[source_item_key(row["Word"])] = grades'
+          if old not in text:
+              raise SystemExit('source_grade_membership patch anchor not found')
+          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
       - name: Validate persistent state
         run: python tools/check_klose_persistent_state.py
 
