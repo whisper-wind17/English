@@ -24,6 +24,19 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Fix one-time patcher replacement semantics
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/harden_klose_architecture_v2.py')
+          text = p.read_text(encoding='utf-8')
+          old = 'new_text, count = re.subn(pattern, replacement.rstrip() + "\\n\\n", text, count=1, flags=re.S)'
+          new = 'new_text, count = re.subn(pattern, lambda _: replacement.rstrip() + "\\n\\n", text, count=1, flags=re.S)'
+          if old not in text:
+              raise SystemExit('one-time patcher anchor not found')
+          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
       - name: Apply architecture hardening
         run: python tools/harden_klose_architecture_v2.py
 
