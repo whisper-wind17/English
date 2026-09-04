@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/build_klose_vocabulary.py'
       - 'tools/apply_klose_learner_overrides.py'
+      - 'tools/check_klose_learner.py'
       - 'anki/klose/config/**'
       - 'anki/klose/learner/grade4_overrides.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
@@ -37,6 +38,9 @@ jobs:
 
       - name: Apply Grade-4 learner presentation
         run: python tools/apply_klose_learner_overrides.py
+
+      - name: Reject explicitly later vocabulary in Grade-4 examples
+        run: python tools/check_klose_learner.py
 
       - name: Commit registry and generated data
         run: |
