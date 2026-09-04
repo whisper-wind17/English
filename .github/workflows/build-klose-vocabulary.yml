@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'tools/build_klose_vocabulary.py'
+      - 'tools/apply_klose_learner_overrides.py'
       - 'anki/klose/config/**'
+      - 'anki/klose/learner/grade4_overrides.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -32,6 +34,9 @@ jobs:
 
       - name: Build global vocabulary
         run: python tools/build_klose_vocabulary.py
+
+      - name: Apply Grade-4 learner presentation
+        run: python tools/apply_klose_learner_overrides.py
 
       - name: Commit registry and generated data
         run: |
