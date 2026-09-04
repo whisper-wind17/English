@@ -16,7 +16,10 @@ MASTER = BASE / "master" / "vocabulary_master.csv"
 OCCURRENCES = BASE / "master" / "source_occurrences.csv"
 STATS = BASE / "master" / "build_stats.csv"
 LEARNER = BASE / "learner" / "current.csv"
-OVERRIDES = BASE / "learner" / "grade4_overrides.csv"
+OVERRIDE_FILES = [
+    BASE / "learner" / "grade4_overrides.csv",
+    BASE / "learner" / "grade4_guardrail_overrides.csv",
+]
 REVIEW = BASE / "review" / "learner_review.csv"
 PUBLISH = BASE / "publish"
 SOURCE_ID = "rj_start1"
@@ -40,7 +43,7 @@ def note_num(note_id: str) -> int:
 
 
 def main() -> None:
-    for path in (MASTER, OCCURRENCES, LEARNER, OVERRIDES, REVIEW):
+    for path in (MASTER, OCCURRENCES, LEARNER, REVIEW, *OVERRIDE_FILES):
         if not path.exists():
             raise SystemExit(f"Missing input: {path.relative_to(ROOT)}")
 
@@ -48,25 +51,32 @@ def main() -> None:
     learner_rows = read_csv(LEARNER)
     occurrence_rows = read_csv(OCCURRENCES)
     review_rows = read_csv(REVIEW)
-    override_rows = read_csv(OVERRIDES)
 
     learner_by_id = {r["NoteID"]: r for r in learner_rows}
     master_ids = {r["NoteID"] for r in master_rows}
-    seen: set[str] = set()
-    for row in override_rows:
-        nid = row["NoteID"].strip()
-        if nid in seen:
-            raise SystemExit(f"Duplicate learner override: {nid}")
-        seen.add(nid)
-        if nid not in master_ids:
-            raise SystemExit(f"Unknown learner override NoteID: {nid}")
-        if not row["ExampleSentence"].strip() or not row["ExampleTranslation"].strip():
-            raise SystemExit(f"Incomplete learner override: {nid}")
-        target = learner_by_id[nid]
-        target["ExampleSentence"] = row["ExampleSentence"].strip()
-        target["ExampleTranslation"] = row["ExampleTranslation"].strip()
-        target["PresentationStatus"] = "grade4-reviewed"
-        target["PresentationSource"] = "klose:grade4_overrides"
+    resolved_ids: set[str] = set()
+    applied_rows = 0
+
+    # Explicit ordered layers: the guardrail file is intentionally allowed to
+    # override a base Grade-4 example for the same NoteID.
+    for override_path in OVERRIDE_FILES:
+        local_seen: set[str] = set()
+        for row in read_csv(override_path):
+            nid = row["NoteID"].strip()
+            if nid in local_seen:
+                raise SystemExit(f"Duplicate learner override in {override_path.name}: {nid}")
+            local_seen.add(nid)
+            if nid not in master_ids:
+                raise SystemExit(f"Unknown learner override NoteID: {nid}")
+            if not row["ExampleSentence"].strip() or not row["ExampleTranslation"].strip():
+                raise SystemExit(f"Incomplete learner override: {nid}")
+            target = learner_by_id[nid]
+            target["ExampleSentence"] = row["ExampleSentence"].strip()
+            target["ExampleTranslation"] = row["ExampleTranslation"].strip()
+            target["PresentationStatus"] = "grade4-reviewed"
+            target["PresentationSource"] = f"klose:{override_path.stem}"
+            resolved_ids.add(nid)
+            applied_rows += 1
 
     learner_rows.sort(key=lambda r: note_num(r["NoteID"]))
     learner_fields = [
@@ -76,7 +86,7 @@ def main() -> None:
     write_csv(LEARNER, learner_fields, learner_rows)
 
     # Remove resolved heuristic suggestions. Remaining rows stay explicit.
-    review_rows = [r for r in review_rows if r["NoteID"] not in seen]
+    review_rows = [r for r in review_rows if r["NoteID"] not in resolved_ids]
     write_csv(REVIEW, ["NoteID", "Word", "FirstGrade", "ExampleSentence", "Reason"], review_rows)
 
     publish_fields = [
@@ -105,14 +115,14 @@ def main() -> None:
         rows = [r for r in publish_rows if grade in grades_by_id[r["NoteID"]]]
         write_csv(PUBLISH / "by-source" / SOURCE_ID / f"grade{grade}.csv", publish_fields, rows)
 
-    # Keep build stats aligned with the final learner layer.
     stats = read_csv(STATS)
     for row in stats:
         if row["Metric"] == "learner_review_suggestions":
             row["Value"] = str(len(review_rows))
     write_csv(STATS, ["Metric", "Value"], stats)
 
-    print(f"Applied Grade-4 overrides: {len(override_rows)}")
+    print(f"Applied Grade-4 override rows: {applied_rows} across {len(OVERRIDE_FILES)} layers")
+    print(f"Unique Grade-4 reviewed notes: {len(resolved_ids)}")
     print(f"Remaining learner review suggestions: {len(review_rows)}")
 
 
