@@ -6,11 +6,23 @@
 docs/KLOSE_VOCABULARY_SYSTEM.md
 ```
 
-Anki 从旧版 Word-first 迁移到 NoteID-first 的一次性步骤见：
+旧 Word-first Anki 数据迁移见：
 
 ```text
 docs/ANKI_MIGRATION.md
 ```
+
+## 当前基线
+
+```text
+LearnerProfile = klose
+LearnerLevel   = 4
+SourceID       = rj_start1
+Inventory      = 802 Notes
+Released       = 518 Notes（人教版 1–4 年级）
+```
+
+人教版 1–6 年级共有 908 次 source occurrences。Stable NoteID Registry 已建立为 `KV000001`–`KV000802`。
 
 ## 目录
 
@@ -19,88 +31,99 @@ anki/klose/
 ├── config/
 │   └── profile.json
 ├── master/
-│   ├── note_registry.csv
-│   ├── release_registry.csv
+│   ├── note_registry.csv          # 永久身份 Registry
+│   ├── release_registry.csv       # 已释放学习集合
 │   ├── vocabulary_master.csv
 │   ├── source_occurrences.csv
 │   └── build_stats.csv
 ├── learner/
-│   └── current.csv
+│   ├── current.csv                # 当前 Grade-4 presentation
+│   ├── grade4_overrides.csv
+│   └── grade4_guardrail_overrides.csv
 ├── publish/
-│   ├── study.csv
-│   ├── all.csv
+│   ├── study.csv                  # 默认长期 Anki 导入
+│   ├── all.csv                    # 完整库存
 │   ├── migration/
 │   └── by-source/
 └── review/
     ├── identity_review.csv
-    └── learner_review.csv
+    ├── learner_review.csv
+    └── future_vocab_review.csv
 ```
 
 ## 哪个文件导入 Anki
 
-长期默认只使用：
+默认：
 
 ```text
 publish/study.csv
 ```
 
-`study.csv` 包含已经释放给 Klose 学习并需要持续更新的 Notes。
+`study.csv` 是已经释放给 Klose 学习、且以后需要持续获得内容更新的 Notes。`all.csv` 是完整 Master inventory，不是默认日常导入入口。
 
-`publish/all.csv` 是完整 Master inventory，不是默认日常导入入口。
+如果已经导入过早期 `anki/人教版一年级起点/import/*.csv`，不要直接导入 NoteID-first `study.csv`，先按 `docs/ANKI_MIGRATION.md` 完成一次性迁移。
 
-当前 profile：
+## 持久化状态
 
-```text
-LearnerProfile = klose
-LearnerLevel   = 4
-Released       = rj_start1 1–4 年级
-```
-
-## 哪些文件不能随便重建
-
-`master/note_registry.csv` 是长期身份 Registry。它虽然由第一次 bootstrap 建立，但此后属于持久化状态：
-
-- 旧 NoteID 不得重排；
-- 旧 NoteID 不得复用；
-- 新 learning unit 只能追加新 NoteID。
-
-`master/release_registry.csv` 记录已经释放给 Klose 的 Notes。release 默认是长期增长集合，不能因为当前关注范围改变就静默删除。
-
-## 当前首批来源
+以下两个文件不能视为普通缓存：
 
 ```text
-SourceID = rj_start1
-人教版一年级起点 1–6 年级
+master/note_registry.csv
+master/release_registry.csv
 ```
 
-source-specific 清洗/审校仍位于：
+规则：
+
+- 旧 NoteID 不重排、不复用；
+- 新 learning unit 只追加新 NoteID；
+- 已 release Note 原则上持续留在 `study.csv`；
+- identity merge/split 必须单独设计迁移。
+
+## 当前首批 Source Adapter
 
 ```text
 anki/人教版一年级起点/
 ```
 
-这个目录是当前来源的数据 adapter / curation 层；`anki/klose/` 才是未来多来源统一层。
+它负责 source-specific 清洗、释义审校和原始 occurrence；`anki/klose/` 负责 Stable Identity、跨来源 Master、Learner Layer 和 Anki 发布。
 
 ## 构建
 
-仓库根目录：
+完整本地验证顺序：
 
 ```bash
 python tools/build_klose_vocabulary.py
+python tools/apply_klose_learner_overrides.py
+python tools/check_klose_learner.py
 ```
 
-对应 CI：
+CI：
 
 ```text
 .github/workflows/build-klose-vocabulary.yml
 ```
 
-构建完成后必须检查：
+构建后必须检查：
 
 ```text
 master/build_stats.csv
 review/identity_review.csv
 review/learner_review.csv
+review/future_vocab_review.csv
 ```
 
-`identity_review.csv` 中的歧义不能通过自动规则静默合并。`learner_review.csv` 是语义/难度建议队列，不应把“0 条结构问题”表述成“所有内容已由老师人工确认”。
+当前三个 review queue 均为空。这里的 `0` 只表示对应自动/显式检查没有遗留项，不代表全部内容已经由出版社或英语教师人工认证。
+
+## Grade-4 Learner Layer
+
+当前四年级呈现层与教材首次出现年级解耦。低年级词可以使用适合四年级当前理解水平的自然例句。
+
+同时保留一条严格 guardrail：已 release 的 Grade-4 例句不能无意使用人教版词表中明确到五/六年级才首次列出的内容词。该规则由：
+
+```text
+tools/check_klose_learner.py
+```
+
+在 CI 中强制执行。
+
+未来升 Grade 5 时，升级 Learner Layer 即可；`NoteID`、source occurrences 和 Anki FSRS/Review History 不变。
