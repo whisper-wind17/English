@@ -7,8 +7,11 @@ on:
       - 'tools/build_klose_vocabulary.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/check_klose_learner.py'
+      - 'tools/check_klose_persistent_state.py'
       - 'anki/klose/config/**'
       - 'anki/klose/learner/grade4_*overrides.csv'
+      - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/release_registry.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -33,6 +36,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Protect persistent NoteID and release state
+        run: python tools/check_klose_persistent_state.py
+
       - name: Build global vocabulary
         run: python tools/build_klose_vocabulary.py
 
@@ -45,7 +51,7 @@ jobs:
       - name: Commit registry and generated data
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
           if git diff --cached --quiet; then
             echo 'No generated changes.'
