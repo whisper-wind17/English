@@ -9,13 +9,14 @@
 - 教材词条出现次数：908
 - 去重后唯一 Note：802
 - 在多册教材中重复出现的单词：96
-- 已显式人工审校 `MeaningPrimary`：802 / 802
+- 已逐词显式审校 `MeaningPrimary`：802 / 802
 - 已补充年级适配例句与中文翻译：802 / 802
-- 当前自动结构质检待复核项：0
+- 结构质检待复核项：0
+- 例句中“明确属于后续教材才首次列出的词”：0
 
-详细统计见 `master/build_stats.csv`。`curation_review_items=0` 表示没有发现空释义、词性残留、空例句、异常长字段等结构性问题。
+详细统计见 `master/build_stats.csv`；例句进度检查见 `master/example_vocab_review.csv`。
 
-需要区分两种质量概念：当前 802 个词已经逐词检查并重新确定小学阶段主释义，但原始 XLSX 没有 Unit、课文原句等完整教材上下文，因此例句是按首次出现年级和已学基础词汇生成的学习例句，并非教材原句。
+这里的“逐词审校”是本项目构建过程中对 802 个词逐项重新判断和写入 `curation/` 的结果，不代表出版社或英语教师对内容进行了人工认证。原始 XLSX 也没有 Unit、课文原句等完整教材上下文，因此例句是按首次出现年级和已学基础词汇生成的学习例句，并非教材原句。
 
 ## 数据原则
 
@@ -24,15 +25,16 @@
 - 同一个英文单词只保留一个主 Note，避免 FSRS 对同一词维护多份独立记忆状态。
 - 单词第一次出现在哪一册，就进入该册的导入 CSV；后续重复出现只记录在 `Books` 和 `Tags` 中。
 - `MeaningRaw` 完整保留原词典释义，仅用于审计，不建议在儿童卡片上默认显示。
-- `MeaningPrimary`、`ExampleSentence`、`ExampleTranslation` 来自 `curation/` 下的逐词审校数据。
+- `MeaningPrimary`、`ExampleSentence`、`ExampleTranslation` 来自 `curation/` 下的逐词显式审校数据。
 - 构建时要求 802 个唯一词全部存在审校记录；缺一条、多一条、重复一条或缺少例句都会直接构建失败，不允许静默退回词典第一义项。
+- 例句会额外检查是否提前使用了“在后续教材册才首次明确列入词表”的词；发现此类情况 CI 直接失败。
 
 ## 目录
 
 ```text
 anki/人教版一年级起点/
 ├── README.md
-├── curation/                       # 人工维护的数据层
+├── curation/                       # 显式审校数据层
 │   ├── 1年级上.csv
 │   ├── 1年级下.csv
 │   ├── ...
@@ -40,7 +42,8 @@ anki/人教版一年级起点/
 ├── master/
 │   ├── vocabulary_master.csv       # 802 个最终唯一 Note
 │   ├── vocabulary_occurrences.csv  # 908 条原始教材出现记录
-│   ├── curation_review.csv         # 自动结构质检待复核项
+│   ├── curation_review.csv         # 结构质检待复核项
+│   ├── example_vocab_review.csv    # 例句提前使用后续词汇的检查结果
 │   └── build_stats.csv             # 构建与分册统计
 ├── review_input/                    # 从 Master 导出的紧凑审校视图
 └── import/                          # 真正导入 Anki 的文件
@@ -50,7 +53,7 @@ anki/人教版一年级起点/
     └── 6年级下.csv
 ```
 
-`curation/` 是人工维护层；`master/` 和 `import/` 都由脚本生成，不应直接手工修改。
+`curation/` 是显式审校维护层；`master/` 和 `import/` 都由脚本生成，不应直接手工修改。
 
 ## 各册导入 Note 数
 
@@ -160,13 +163,14 @@ anki/人教版一年级起点/curation/<教材册>.csv
 
 ```bash
 python tools/build_anki_rj_start1.py
+python tools/check_anki_example_vocab.py
 python tools/export_anki_review_input.py
 ```
 
-脚本仅使用 Python 标准库。GitHub Actions 会在源 XLSX、构建脚本或 `curation/*.csv` 变化后自动重建并提交 `master/`、`import/` 和 `review_input/`。
+脚本仅使用 Python 标准库。GitHub Actions 会在源 XLSX、构建脚本或 `curation/*.csv` 变化后自动重建并提交 `master/`、`import/` 和 `review_input/`。如果审校覆盖不完整、结构异常，或例句提前使用了后续教材明确列出的词，CI 会失败。
 
 ## 释义与例句质量边界
 
 原 XLSX 的“释义”来自通用词典，存在大量不适合小学语境的首义，例如 `running→运转`、`present→现在`、`May→可以`、`safe→保险箱`、`doctor→修理`、`hot pot→英式炖肉`。这些错误已经在 `curation/` 层按小学教材语境重新确定。
 
-例句遵循“短、直接、体现目标义项、难度不高于首次出现年级”的原则，通常优先复用已学或同阶段基础词汇。由于源数据缺少完整教材正文，例句不声称与课文逐句一致；若以后补充教材 Unit/课文文本，可以进一步做严格的词汇可见性和语法进度校验。
+例句遵循“短、直接、体现目标义项、难度不高于首次出现年级”的原则，优先复用此前或当前册已出现的词。当前自动检查可以可靠识别“某个词明确在后续教材词表才首次出现”的情况；但因为源 XLSX 不是完整课文语料，它无法证明所有未列入词表的普通词一定已经学过。若以后补充教材 Unit 和课文文本，可以进一步升级为严格的词汇可见性与语法进度校验。
