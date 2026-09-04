@@ -11,6 +11,7 @@ on:
       - 'anki/klose/config/**'
       - 'anki/klose/learner/grade4_*overrides.csv'
       - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/release_registry.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
@@ -36,7 +37,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Protect persistent NoteID and release state
+      - name: Protect persistent identity and release state
         run: python tools/check_klose_persistent_state.py
 
       - name: Build global vocabulary
@@ -48,7 +49,7 @@ jobs:
       - name: Reject explicitly later vocabulary in Grade-4 examples
         run: python tools/check_klose_learner.py
 
-      - name: Commit registry and generated data
+      - name: Commit persistent and generated data
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
