@@ -8,6 +8,7 @@ on:
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
+      - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
       - 'anki/klose/config/**'
       - 'anki/klose/learner/grade4_*overrides.csv'
@@ -62,7 +63,10 @@ jobs:
           git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
           if git diff --cached --quiet; then
             echo 'No generated changes.'
-            exit 0
+          else
+            git commit -m 'data: rebuild Klose vocabulary base'
+            git push
           fi
-          git commit -m 'data: rebuild Klose vocabulary base'
-          git push
+
+      - name: Verify Anki release readiness
+        run: python tools/check_klose_release_ready.py
