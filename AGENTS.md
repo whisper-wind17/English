@@ -27,7 +27,7 @@
 8. **GitHub 管内容与发布；Anki 管记忆状态。** GitHub 是 Source / Identity / Learner Presentation / Review / Release 真源；Anki 是 FSRS / Review History / Due / Interval / Card State 真源。
 9. **禁止手工编辑 generated publish 文件。** `publish/study.csv`、`publish/anki-import.csv` 必须由上游状态确定性生成。
 10. **正式 Anki 同步只使用 `publish/anki-import.csv`，并在同一 Note Type 原地 Update Existing Notes。**
-11. **Review approval 必须绑定当前发布可见内容。** Word、Sense、IPA、Meaning、Example、Translation、LearnerLevel 等变化后旧 approval 必须失效；缺失 fingerprint 默认 `pending`。
+11. **Review approval 必须绑定当前发布可见内容。** Word、Sense、IPA、Meaning、Example、Translation、LearnerLevel、非空 PromptHint 等变化后旧 approval 必须失效；缺失 fingerprint 默认 `pending`。
 12. **自动检查、模型审校、人工确认、教材原文核对必须区分。** `queue=0` 不等于人工确认。
 13. **Release Gate 必须消费结构化状态。** Markdown 中的 blocker 不能只停留在说明层；Source Reconciliation、Identity、Review、Publish derivation 等必须进入可执行 gate。
 14. **能写成脚本/CI 的约束，不只写在 Prompt。**
@@ -70,13 +70,13 @@ anki/klose/
 ```text
 Stable NoteID / NoteID-first Anki update      implemented
 LearnerLevel independent from FirstGrade     implemented in model; legacy staging fallback remains
-Learner review fingerprint / invalidation    implemented (release-visible v2)
+Learner review fingerprint / invalidation    implemented (release-visible v2 + optional PromptHint)
 Structured source reconciliation gate        implemented
 Git-baseline identity stability check        implemented
 Source Edition physical schema               partial
 Sense-aware source identity for duplicate word partial; extension registry introduced
-Explicit learning admission                  partial; registry introduced, current baseline still fallback
-Homograph front-side disambiguation          planned Note Type migration
+Explicit learning admission                  implemented for current Grade-4 set; legacy fallback retained
+Homograph front-side disambiguation          implemented via optional PromptHint
 Multiple source adapters                     planned
 Expressions release system                   source/pattern layer only
 ```
@@ -116,6 +116,7 @@ Learning Admitted  # 当前真实学习批次已显式核对，可让 Klose 开�
 tools/check_klose_persistent_state.py
 tools/build_klose_vocabulary.py
 tools/apply_klose_learner_overrides.py
+tools/apply_klose_prompt_hints.py
 tools/sync_klose_learner_review_registry.py
 tools/check_klose_learner.py
 tools/check_klose_release_ready.py
@@ -142,4 +143,5 @@ docs/LEARNER_REVIEW_REGISTRY.md
 docs/ANKI_SYNC_WORKFLOW.md
 docs/ANKI_FIRST_IMPORT.md
 docs/ANKI_MIGRATION.md
+docs/ANKI_PROMPTHINT_MIGRATION.md
 ```
