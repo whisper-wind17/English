@@ -35,7 +35,7 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 def read_anki_import(path: Path) -> tuple[dict[str, str], list[dict[str, str]]]:
     headers: dict[str, str] = {}
     data_lines: list[str] = []
-    with path.open("r", encoding="utf-8-sig", newline="") as f:
+    with path.open("r", encoding="utf-8", newline="") as f:
         for raw in f:
             line = raw.rstrip("\r\n")
             if line.startswith("#"):
@@ -73,6 +73,9 @@ def main() -> None:
     for path in (PROFILE, MASTER, LEARNER, REGISTRY, STUDY, ANKI_IMPORT, *REPORTS):
         if not path.exists():
             raise SystemExit(f"Missing release input: {path.relative_to(ROOT)}")
+
+    if ANKI_IMPORT.read_bytes().startswith(b"\xef\xbb\xbf"):
+        raise SystemExit("Release blocked: anki-import.csv must be UTF-8 without BOM so #file headers start at byte 0")
 
     with PROFILE.open("r", encoding="utf-8") as f:
         profile = json.load(f)
