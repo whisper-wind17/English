@@ -100,9 +100,29 @@ jobs:
 
       - name: Report non-releasable development state
         if: steps.release.outcome != 'success'
-        run: echo 'Build Valid; Content Releasable = false. Generated release will not be committed.'
+        run: echo 'Build Valid; Content Releasable = false. Persisting reviewable upstream state only; publish remains blocked.'
 
-      - name: Commit persistent and generated data
+      - name: Persist build-valid upstream state
+        if: github.event_name == 'push' && steps.release.outcome != 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add \
+            anki/klose/master/vocabulary_master.csv \
+            anki/klose/master/source_occurrences.csv \
+            anki/klose/master/build_stats.csv \
+            anki/klose/learner/current.csv \
+            anki/klose/learner/learning_admission.csv \
+            anki/klose/learner/presentation_review_registry.csv \
+            anki/klose/review
+          if git diff --cached --quiet; then
+            echo 'No upstream review-state changes.'
+          else
+            git commit -m 'data: persist Klose build-valid review state'
+            git push
+          fi
+
+      - name: Commit releasable generated data
         if: github.event_name == 'push' && steps.release.outcome == 'success'
         run: |
           git config user.name 'github-actions[bot]'
