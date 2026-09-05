@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Maintain persistent learner-presentation review state across learner levels.
 
-Review truth is keyed by (LearnerProfile, LearnerLevel, NoteID) and bound to the
-current learner content by ContentFingerprint. If meaning/example content changes,
-the old approval is invalidated to pending instead of silently carrying forward.
+Review truth is keyed by (LearnerProfile, LearnerLevel, NoteID) and bound to all
+release-visible fact/presentation content. Any change invalidates prior approval.
+Missing fingerprints are treated as unreviewed; schema migrations must be explicit
+and must not silently preserve approval state.
 """
 from __future__ import annotations
 
@@ -40,7 +41,12 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
 
 def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
     payload = "\x1f".join([
-        "klose-presentation-v1",
+        "klose-presentation-v2",
+        master.get("CanonicalWord", "").strip(),
+        master.get("SenseLabel", "").strip(),
+        master.get("Word", "").strip(),
+        master.get("British", "").strip(),
+        master.get("American", "").strip(),
         master.get("MeaningPrimary", "").strip(),
         learner.get("ExampleSentence", "").strip(),
         learner.get("ExampleTranslation", "").strip(),
@@ -79,7 +85,7 @@ def main() -> None:
 
     added = 0
     invalidated = 0
-    fingerprint_migrated = 0
+    missing_fingerprint_invalidated = 0
     for nid in sorted(released):
         cur = learner_by_id[nid]
         profile = cur["LearnerProfile"]
@@ -105,16 +111,18 @@ def main() -> None:
         row = by_key[key]
         old_fp = row.get("ContentFingerprint", "").strip()
         if not old_fp:
-            # One-time schema migration: preserve the already recorded review
-            # decision, but bind it to exactly the content that exists now.
             row["ContentFingerprint"] = current_fp
-            fingerprint_migrated += 1
+            row["ReviewStatus"] = "pending"
+            row["ReviewedAt"] = ""
+            row["ReviewerType"] = ""
+            row["ReviewNote"] = "missing fingerprint is unreviewed; explicit approval required"
+            missing_fingerprint_invalidated += 1
         elif old_fp != current_fp:
             row["ContentFingerprint"] = current_fp
             row["ReviewStatus"] = "pending"
             row["ReviewedAt"] = ""
             row["ReviewerType"] = ""
-            row["ReviewNote"] = "content changed after previous review; explicit re-review required"
+            row["ReviewNote"] = "release-visible content changed after previous review; explicit re-review required"
             invalidated += 1
 
     existing.sort(key=lambda r: (r["LearnerProfile"], int(r["LearnerLevel"]), r["NoteID"]))
@@ -139,7 +147,7 @@ def main() -> None:
         "Learner review registry: "
         f"current={len(current_rows)}, model={model_reviewed}, human={human_reviewed}, "
         f"pending={pending}, added={added}, invalidated={invalidated}, "
-        f"fingerprint_migrated={fingerprint_migrated}"
+        f"missing_fingerprint_invalidated={missing_fingerprint_invalidated}"
     )
 
 
