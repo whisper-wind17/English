@@ -1,6 +1,6 @@
 # Klose Expressions System
 
-本文定义 Klose 从小学延续到高中、大学的长期 Expressions 学习系统。目标不是保存教材句子，而是把已经理解和接触过的高价值英语表达，稳定转化为可主动调用的语言能力。
+本文定义 Klose 从小学延续到高中、大学的长期 Expressions 学习系统。目标不是保存教材句子，而是把高价值英语表达稳定转化为可主动调用的语言能力。
 
 动态状态和当前 pilot 以根目录 `NEXT.md` 为准。
 
@@ -22,20 +22,35 @@ communicative intent / situation
 → actively produce appropriate English
 ```
 
-因此 Anki Expressions 属于 **consolidation / retrieval layer**，不承担首次 acquisition。
+Anki Expressions 可以同时承担两种作用：
 
-理想学习链：
+```text
+已有输入后的 retrieval / consolidation
++ 简单新表达的 lightweight acquisition
+```
+
+Meaningful Input / Interaction 仍是主要 acquisition 路径，但不作为 Learning Admission 的硬前置条件。若一个新表达能够通过卡片背面的简短 micro-lesson 清楚解释其含义、结构和用法，也可以直接进入学习。
+
+典型路径可以是：
 
 ```text
 Meaningful Input / Interaction
-→ understand meaning and usage
-→ notice useful expression / pattern
-→ guided production
+→ understand / notice expression
 → Anki retrieval + spacing
 → real speaking / writing reuse
 ```
 
-只有已经通过教材、听力、阅读、对话或其他真实输入理解过的表达，才适合进入正式 Learning Admission。
+也可以是：
+
+```text
+first encounter in Anki
+→ Back micro-lesson: Target + Pattern + concise explanation + examples
+→ Again / subsequent repetitions
+→ active retrieval + spacing
+→ real speaking / writing reuse
+```
+
+不为“首次见过”单独建立状态，也不区分第一次 Again 与遗忘后的 Again。`Again` 统一表示：当前还不能稳定主动产出该 Expression。
 
 ---
 
@@ -263,10 +278,17 @@ Source Grade、LearnerLevel、Learning Admission 必须继续分离。
 communicative function clear
 high transfer value
 appropriate for current LearnerLevel
-already understood through meaningful input
 worth active production practice
 presentation reviewed
 ```
+
+对于 Klose 尚未接触过的新表达，还需要满足：
+
+```text
+meaning / usage can be taught clearly by a compact card-back micro-lesson
+```
+
+复杂语法、高度依赖上下文、无法靠短解释理解的表达，不适合用 Anki 作为第一次 acquisition，应先通过教材、阅读、听力、对话或单独讲解建立理解。
 
 低迁移、强上下文依赖、一次性叙述句应保留为 Source Fact，但可以永久 held。
 
@@ -305,7 +327,7 @@ Klose 主动说：
 What's your mother's job?
 ```
 
-Back：
+Back 至少应能同时支持首次理解与后续复习：
 
 ```text
 What's your mother's job?
@@ -313,8 +335,17 @@ What's your mother's job?
 Pattern:
 What's [person]'s job?
 
+Meaning / Usage:
+询问某人是做什么工作的。
+
+Examples:
+What's your father's job?
+What's your uncle's job?
+
 TTS
 ```
+
+解释保持短小，只承担 micro-lesson，不把卡片做成完整语法课。
 
 正面优先使用场景 / intent / slot cue，避免长期形成机械的“完整中文句子 → 英文翻译”通路。
 
@@ -398,6 +429,8 @@ transfer to unseen situations
 real speaking / writing reuse
 actual daily review load
 ```
+
+`Again` 不做 acquisition history 细分；无论是第一次见还是以前学过，当前阶段都只表示“这次还不能稳定主动产出”。
 
 尤其要区分：
 
