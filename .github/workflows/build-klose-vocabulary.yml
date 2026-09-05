@@ -10,6 +10,7 @@ on:
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
+      - 'tools/check_klose_actual_grade4_identity.py'
       - 'tools/approve_klose_learner_review.py'
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
@@ -20,6 +21,7 @@ on:
       - 'anki/klose/learner/presentation_review_registry.csv'
       - 'anki/klose/learner/review_approvals/**'
       - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/note_registry_extensions.csv'
       - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/source_identity_extensions.csv'
       - 'anki/klose/master/source_reconciliation_registry.csv'
@@ -60,6 +62,9 @@ jobs:
 
       - name: Protect persistent identity and release state
         run: python tools/check_klose_persistent_state.py
+
+      - name: Validate actual Grade-4 identity coverage
+        run: python tools/check_klose_actual_grade4_identity.py
 
       - name: Build global vocabulary
         run: python tools/build_klose_vocabulary.py
