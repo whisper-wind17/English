@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/build_klose_vocabulary.py'
       - 'tools/apply_klose_actual_grade4.py'
+      - 'tools/apply_klose_actual_grade4_reuse_facts.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/audit_klose_actual_grade4_reuse.py'
@@ -21,12 +22,14 @@ on:
       - 'anki/klose/learner/grade4_*overrides.csv'
       - 'anki/klose/learner/grade4_full_review_*.csv'
       - 'anki/klose/learner/actual_grade4_overrides.csv'
+      - 'anki/klose/learner/actual_grade4_reuse_overrides.csv'
       - 'anki/klose/learner/learning_admission.csv'
       - 'anki/klose/learner/presentation_review_registry.csv'
       - 'anki/klose/learner/review_approvals/**'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
       - 'anki/klose/master/actual_grade4_fact_overrides.csv'
+      - 'anki/klose/master/actual_grade4_reuse_fact_overrides.csv'
       - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/source_identity_extensions.csv'
       - 'anki/klose/master/source_reconciliation_registry.csv'
@@ -80,6 +83,9 @@ jobs:
 
       - name: Overlay actual Klose Grade-4 source
         run: python tools/apply_klose_actual_grade4.py
+
+      - name: Apply actual Grade-4 forms to reused identities
+        run: python tools/apply_klose_actual_grade4_reuse_facts.py
 
       - name: Build explicit allowed/held learning admission
         run: python tools/build_klose_learning_admission.py
