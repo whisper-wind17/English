@@ -83,14 +83,20 @@ jobs:
       - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
 
-      - name: Verify content release readiness
+      - id: release
+        name: Verify content release readiness
+        continue-on-error: true
         run: python tools/check_klose_release_ready.py
 
+      - name: Report non-releasable development state
+        if: steps.release.outcome != 'success'
+        run: echo 'Build Valid; Content Releasable = false. Generated release will not be committed.'
+
       - name: Commit persistent and generated data
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && steps.release.outcome == 'success'
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
           if git diff --cached --quiet; then
             echo 'No generated changes.'
