@@ -2,51 +2,56 @@
   font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 22px;
   text-align: center;
-  color: #222;
-  background: #fff;
+  color: #2F3437;
+  background: #F7F4EE;
   padding: 18px;
 }
 
 .word {
   font-size: 34px;
   font-weight: 700;
+  color: #243B53;
   margin-bottom: 10px;
 }
 
 .prompt-hint {
   font-size: 17px;
   font-weight: 500;
-  color: #666;
+  color: #5B6B7A;
   margin-top: -4px;
   margin-bottom: 10px;
 }
 
 .phonetic {
   font-size: 17px;
-  color: #666;
+  color: #466B7A;
   margin: 2px 0;
 }
 
 #answer {
-  margin: 18px 0;
+  border: 0;
+  border-top: 1px solid #D8D3CA;
+  margin: 20px 0;
 }
 
 .meaning {
   font-size: 26px;
   font-weight: 600;
+  color: #334155;
   margin-bottom: 16px;
 }
 
 .example {
   font-size: 22px;
   line-height: 1.45;
+  color: #3F4650;
   margin-top: 12px;
 }
 
 .translation {
   font-size: 18px;
   line-height: 1.45;
-  color: #666;
+  color: #5E6670;
   margin-top: 8px;
 }
 
@@ -86,4 +91,38 @@
   font-size: 26px;
   line-height: 1.5;
   margin-top: 12px;
+}
+
+/* Night Mode: avoid pure black/white while retaining strong text contrast. */
+.card.nightMode {
+  color: #E5E1D8;
+  background: #1F2328;
+}
+
+.nightMode .word {
+  color: #D6E4F0;
+}
+
+.nightMode .prompt-hint {
+  color: #AAB7C4;
+}
+
+.nightMode .phonetic {
+  color: #A7C1CB;
+}
+
+.nightMode #answer {
+  border-top-color: #3C434A;
+}
+
+.nightMode .meaning {
+  color: #D3DCE6;
+}
+
+.nightMode .example {
+  color: #D6D9DD;
+}
+
+.nightMode .translation {
+  color: #B7BDC4;
 }

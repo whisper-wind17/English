@@ -158,7 +158,43 @@ ExampleSentence  30px
 Translation      26px
 ```
 
-该变更只影响显示层，不改变 NoteID、Card identity、LearningOrder、内容 fingerprint、FSRS 或 Review History；无需重新导入 CSV。正式修改路径仍是 repo `styling.css` → Desktop Card Styling → Sync → iPad，不在 iPad 本地单独维护模板分叉。
+### Visual comfort palette
+
+卡片显示不使用纯白背景、纯黑正文或高饱和装饰色。目标不是宣称某种配色能够“保护视力”，而是在保持充分可读性的前提下，降低大面积高亮度纯白和强烈色彩造成的视觉刺激。
+
+日间模式：
+
+```text
+Background       #F7F4EE  warm off-white
+Base text        #2F3437  charcoal
+Word             #243B53  deep blue-gray
+PromptHint       #5B6B7A  muted blue-gray
+Phonetic         #466B7A  muted teal-gray
+MeaningPrimary   #334155  deep slate
+ExampleSentence  #3F4650  charcoal-slate
+Translation      #5E6670  secondary gray
+Divider          #D8D3CA  light warm gray
+```
+
+夜间模式使用 Anki `nightMode` class：
+
+```text
+Background       #1F2328
+Base text        #E5E1D8
+Word             #D6E4F0
+PromptHint       #AAB7C4
+Phonetic         #A7C1CB
+MeaningPrimary   #D3DCE6
+ExampleSentence  #D6D9DD
+Translation      #B7BDC4
+Divider          #3C434A
+```
+
+视觉层级必须服务学习目标：Word 最醒目；Meaning / Example 保持高可读性；PromptHint、音标和 Translation 降一级但不能因“柔和”而变得难读。避免红/绿答案提示、大面积彩色块、渐变、阴影和装饰性图形，以免制造无关 cue 或分散注意力。
+
+实际视觉舒适度仍取决于环境光、iPad 屏幕亮度、观看距离和连续使用时长；Card Styling 只负责提供稳定、低刺激且清晰的阅读界面。
+
+上述显示层变更不改变 NoteID、Card identity、LearningOrder、内容 fingerprint、FSRS 或 Review History；无需重新导入 CSV。正式修改路径仍是 repo `styling.css` → Desktop Card Styling → Sync → iPad，不在 iPad 本地单独维护模板分叉。
 
 ## Deck
 
