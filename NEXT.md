@@ -16,9 +16,9 @@ AGENTS.md
 
 Grade-4 Vocabulary 的 Source / Identity / Learner Presentation / Learning Admission / Review / Release 已完成；Desktop 也已完成 PromptHint、638 Notes 原地导入与 `221 active / 417 held` 的准入切换。
 
-本轮新发现并修复了一个 sequencing 缺口：**Learning Admission 过去只定义“学哪 221 个”，没有定义“按什么顺序学”。**
+本轮修复了 sequencing 缺口，并在真正迁移到 Anki 前进一步冻结长期序列化契约：**LearningOrder 固定使用 6 位十进制零填充字符串，不随词库规模改变位宽。**
 
-Repo 现在已经加入 deterministic `LearningOrder`；当前唯一未完成的是把它 materialize 到 Anki 的 New Card Position。
+Repo 已完成 deterministic `LearningOrder`；当前唯一未完成的是把它 materialize 到 Anki 的 New Card Position。
 
 ```text
 Build Valid                 = yes
@@ -43,7 +43,7 @@ held library           = 417
 model-reviewed         = 638
 review pending         = 0
 PromptHint nonempty    = 4
-LearningOrder          = 001..221
+LearningOrder          = 000001..000221
 held LearningOrder     = blank
 Release Gate           = PASS
 held IPA debt          = 99
@@ -52,7 +52,7 @@ held IPA debt          = 99
 正式 generated release commit：
 
 ```text
-cb48847  data: rebuild Klose vocabulary base
+ccfd1709  data: rebuild Klose vocabulary base
 ```
 
 正式 Anki artifact：
@@ -84,6 +84,16 @@ New Card Position / New # / Due
 = Anki 中的物理学习状态
 ```
 
+正式序列化契约：
+
+```text
+LearningOrder = fixed-width 6-digit decimal text
+valid         = 000001..999999
+held          = blank
+```
+
+固定 6 位避免未来扩展到数千/数万学习单元后再做 3 位 → 4 位 → 5 位迁移，并保证 Anki 文本排序与数值排序一致。
+
 当前 Grade-4 order 从真实教材 + confirmed source identity 自动推导：
 
 ```text
@@ -95,7 +105,7 @@ New Card Position / New # / Due
 allowed 221 Notes：
 
 ```text
-LearningOrder = 001..221
+LearningOrder = 000001..000221
 ```
 
 held 417 Notes：
@@ -104,22 +114,22 @@ held 417 Notes：
 LearningOrder = blank
 ```
 
-Release Gate 会重新从 `source_identity_extensions.csv` 计算教材顺序并校验 exact NoteID → LearningOrder 映射；不是只检查 1..221 是否连续。
+Release Gate 会重新从 `source_identity_extensions.csv` 计算教材顺序并校验 exact NoteID → LearningOrder 映射，同时校验固定 6 位格式。
 
 前 8 个已在 CI / source identity 中确认：
 
 ```text
-001  PE              KV000285
-002  job             KV000433
-003  doctor          KV000425
-004  farmer          KV000429
-005  nurse           KV000423
-006  office worker   KV000803
-007  factory worker  KV000804
-008  busy            KV000466
+000001  PE              KV000285
+000002  job             KV000433
+000003  doctor          KV000425
+000004  farmer          KV000429
+000005  nurse           KV000423
+000006  office worker   KV000803
+000007  factory worker  KV000804
+000008  busy            KV000466
 ```
 
-`LearningOrder` 是 admission metadata，不进入 learner content fingerprint。本次：
+`LearningOrder` 是 admission metadata，不进入 learner content fingerprint。本次六位化：
 
 ```text
 review invalidated = 0
@@ -242,14 +252,14 @@ tag:learning::klose::grade4 -is:suspended is:new
 显示 `LearningOrder` 列并升序排序，前 8 个必须是：
 
 ```text
-PE
-job
-doctor
-farmer
-nurse
-office worker
-factory worker
-busy
+000001 PE
+000002 job
+000003 doctor
+000004 farmer
+000005 nurse
+000006 office worker
+000007 factory worker
+000008 busy
 ```
 
 全选这 221 张：
@@ -282,6 +292,7 @@ Suspended    = 417
 
 - Meaning / IPA / Example / PromptHint 改动 → fingerprint invalidation + explicit content review；
 - LearningOrder 改动 → Admission / Release Gate 校验，不触发内容 review；
+- LearningOrder 固定 6 位 `000001..999999`，不得因词库扩大改变位宽；
 - 仅对尚未学习的 `is:new` Cards 可以按 LearningOrder 调整 New Card Position；
 - 已进入真实 Learning / Review 的 Card，其 FSRS / Due / Interval / Review History 永远以 Anki 为真源，不由 repo 重排。
 
