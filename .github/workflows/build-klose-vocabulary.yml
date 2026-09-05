@@ -12,6 +12,7 @@ on:
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
       - 'tools/audit_klose_actual_grade4_reuse.py'
       - 'tools/sync_klose_learner_review_registry.py'
+      - 'tools/revalidate_klose_baseline_v2.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
@@ -100,6 +101,9 @@ jobs:
       - name: Sync learner review registry
         run: python tools/sync_klose_learner_review_registry.py
 
+      - name: Explicitly revalidate unchanged baseline under fingerprint v2
+        run: python tools/revalidate_klose_baseline_v2.py
+
       - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
 
@@ -124,6 +128,7 @@ jobs:
             anki/klose/learner/current.csv \
             anki/klose/learner/learning_admission.csv \
             anki/klose/learner/presentation_review_registry.csv \
+            anki/klose/learner/review_approvals/grade4-baseline-v2-revalidated.csv \
             anki/klose/review
           if git diff --cached --quiet; then
             echo 'No upstream review-state changes.'
