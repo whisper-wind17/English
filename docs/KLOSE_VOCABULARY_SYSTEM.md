@@ -2,6 +2,8 @@
 
 > 本文定义 Klose 的长期英语词汇学习系统。目标不是制作一次性 Anki 牌组，而是维护一个可持续多年扩展、可追溯、可升级且不破坏既有记忆历史的 Vocabulary Knowledge Base；Anki 负责 SRS/FSRS 与学习状态。
 
+长期重复同步 SOP 见：`docs/ANKI_SYNC_WORKFLOW.md`。
+
 ## 1. 两条长期演进轴
 
 ### Vocabulary Expansion
@@ -44,7 +46,8 @@ Grade 6 presentation
 - Source / Book / Grade / Unit / 原始行号等 provenance；
 - 当前 LearnerLevel 的学习呈现；
 - Learner Review Registry 与 approval manifest；
-- review queue、质量检查和发布文件。
+- Release Registry；
+- review queue、质量检查和发布文件生成。
 
 ### Anki：学习状态真源
 
@@ -284,15 +287,17 @@ anki/klose/publish/all.csv
 
 包含进入 Master 的所有 Notes，用于审计、备份和完整视图。
 
-### `study.csv`：Released Set 的内部数据真源
+### `study.csv`：Released Set 的内部标准快照
 
 ```text
 anki/klose/publish/study.csv
 ```
 
-只包含已经释放给 Klose 学习、且需要持续获得内容更新的 Notes。它保留普通 CSV 表头，用于 repo 构建、审计和 release 对账，**不直接导入 Anki**。
+只包含已经释放给 Klose 学习、且需要持续获得内容更新的 Notes。它保留普通 CSV 表头，用于 repo 构建、审计、diff 和 release 对账，**不直接导入 Anki**。
 
-### `anki-import.csv`：唯一正式 Anki 导入文件
+它不是手工维护入口，而是由上游事实、Learner Layer 和 Release Registry 生成的 released snapshot。
+
+### `anki-import.csv`：唯一正式 Anki 发布产物
 
 ```text
 anki/klose/publish/anki-import.csv
@@ -309,7 +314,38 @@ anki/klose/publish/anki-import.csv
 #columns:...
 ```
 
-因此没有普通 CSV 数据表头行，不会把 `NoteID / Word / ...` 当成一张 Note。
+因此没有普通 CSV 数据表头行，不会把 `NoteID / Word / ...` 当成一张 Note；文件使用 UTF-8 无 BOM。
+
+### Publish Layer 不接受手工修补
+
+`study.csv` 与 `anki-import.csv` 都是 generated output。长期规则：
+
+```text
+禁止直接改 study.csv
+禁止直接改 anki-import.csv
+```
+
+如果发现词义、例句、来源、学习范围或 Tag 有问题，应修改对应上游层：
+
+```text
+Source / Curation
+Identity / Fact
+Learner Presentation
+Learner Review
+Release Registry
+```
+
+然后重新构建。
+
+固定发布链：
+
+```text
+上游变化
+→ rebuild study.csv
+→ generate anki-import.csv
+→ release gate
+→ 导入 Anki
+```
 
 当前 Grade 4：
 
@@ -322,7 +358,7 @@ Released：人教版 1–4 年级
 
 ### Release 是持久化状态
 
-`release_registry.csv` 记录已释放 Note；每个 release scope 必须显式带 `released_at`，因此 Grade 5/新来源在未来释放时不会被错误记成初始基线日期。Note 一旦进入 Anki，原则上继续保留在 `study.csv` / `anki-import.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
+`release_registry.csv` 记录已释放 Note；每个 release scope 必须显式带 `released_at`，因此 Grade 5/新来源在未来释放时不会被错误记成初始基线日期。Note 一旦进入 Anki，原则上继续留在 `study.csv` / `anki-import.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
 
 ---
 
@@ -338,7 +374,8 @@ Klose-English
 **一个主 Deck + Tags**；不按教材、年级或导入批次长期复制 Deck 体系。
 
 - 长期日常学习：Main Deck + FSRS；
-- 暂时不想出现的已存在 Card：Suspend；
+- 尚未开始学习、暂时不想进入队列的 New Card：Suspend；
+- 已进入 Learning/Review 的旧 Card：保持正常，由 FSRS 持续调度；
 - 临时专项复习：Filtered Deck / Browser Search；
 - 教材/年级/来源/学习阶段：Tags 与 Source Occurrences 表达。
 
@@ -446,10 +483,10 @@ repo 生成的来源/年级/stage Tags 视为 system-managed。长期重新导�
 
 ```text
 anki/klose/publish/
-├── study.csv                         # released-set 内部数据真源/审计 CSV
-├── anki-import.csv                   # 唯一正式 Anki 导入文件
-├── all.csv                           # 完整库存
-├── onboarding/                       # 同一 study 集合的学习阶段便利视图
+├── study.csv                         # generated：released-set 内部标准快照/审计 CSV
+├── anki-import.csv                   # generated：唯一正式 Anki 导入文件
+├── all.csv                           # generated：完整库存
+├── onboarding/                       # generated：同一 study 集合的学习阶段便利视图
 │   ├── grade4-new.csv
 │   ├── grade4-review.csv
 │   └── lower-grade-backfill.csv
@@ -531,9 +568,10 @@ Anki FSRS History      不变
 
 - `study.csv` 与 Released Set 一致；
 - `anki-import.csv` 数据与 `study.csv` 完全一致；
-- `anki-import.csv` 使用正确的 Anki file headers，没有普通数据表头；
+- `anki-import.csv` 使用 UTF-8 无 BOM和正确的 Anki file headers，没有普通数据表头；
 - 每个 released Note 恰好一个 `stage::` Tag；
 - `by-source/*` / `onboarding/*` 只是视图；
+- generated publish files 不允许作为人工修正入口；
 - deterministic build；
 - 不静默 fallback 到成人词典首义；
 - migration CSV 第一列必须是 `Word`，正式 Anki import 第一数据字段必须是 `NoteID`。
@@ -553,6 +591,7 @@ ContentFingerprint stale                  = 0
 study.csv == Released Set
 anki-import.csv data == study.csv
 Anki file headers                          = valid
+UTF-8 BOM                                  = absent
 stage partition                            = valid
 ```
 
@@ -575,7 +614,8 @@ Raw source
 → learner presentation
 → learner review
 → release decision
-→ rebuild / release gate
+→ rebuild study.csv / anki-import.csv
+→ release gate
 ```
 
 ### Fact Correction
@@ -584,7 +624,7 @@ Raw source
 
 ### Learner Upgrade
 
-升年级只更新 Learner Layer，不改 NoteID / source facts；新 level 必须重新审校和 approval。
+升年级只更新 Learner Layer，不改 NoteID / source facts；新 level 必须重新审校和 approval。通过构建重新生成 `study.csv` 和 `anki-import.csv`，再同步 Anki。
 
 ### Identity Merge/Split
 
@@ -620,8 +660,8 @@ Released scope = 人教版 1–4 年级
 - approval manifest：`learner/review_approvals/grade4-baseline-v1.csv`；
 - identity / learner / future-vocabulary review 均为 0；
 - onboarding：175 个 `grade4-new`、26 个 `grade4-review`、317 个 `lower-grade-backfill`；
-- `study.csv`：released-set 内部数据真源；
-- `anki-import.csv`：唯一正式 Anki 导入文件；
+- `study.csv`：generated released-set 内部标准快照；
+- `anki-import.csv`：generated 唯一正式 Anki 导入文件；
 - `all.csv`：完整 802 Notes 库存；
 - Note/Card contract：一个 `Recognition` Card，`1 Note = 1 Card`；
 - Word-first → NoteID-first migration CSV 已生成。
@@ -674,4 +714,4 @@ Global Data Area：
 anki/klose/
 ```
 
-详细执行规则以根目录 `AGENTS.md` 为准；首次正式导入见 `docs/ANKI_FIRST_IMPORT.md`。
+详细执行规则以根目录 `AGENTS.md` 为准；第一次正式导入见 `docs/ANKI_FIRST_IMPORT.md`；后续长期同步见 `docs/ANKI_SYNC_WORKFLOW.md`。
