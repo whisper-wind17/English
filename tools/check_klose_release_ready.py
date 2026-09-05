@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Verify that the current released Klose vocabulary is safe to import into Anki."""
+"""Verify that the current released Klose vocabulary is safe to import into Anki.
+
+This is a content-release gate, not merely a build-consistency check.
+A source scope that is structurally blocked for reconciliation must fail here even
+when generated CSVs and review queues are otherwise internally consistent.
+"""
 from __future__ import annotations
 
 import csv
@@ -14,6 +19,7 @@ PROFILE = BASE / "config" / "profile.json"
 MASTER = BASE / "master" / "vocabulary_master.csv"
 LEARNER = BASE / "learner" / "current.csv"
 REGISTRY = BASE / "learner" / "presentation_review_registry.csv"
+RECONCILIATION = BASE / "master" / "source_reconciliation_registry.csv"
 STUDY = BASE / "publish" / "study.csv"
 ANKI_IMPORT = BASE / "publish" / "anki-import.csv"
 REPORTS = [
@@ -24,6 +30,10 @@ REPORTS = [
 PUBLISH_FIELDS = [
     "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
     "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
+]
+DERIVED_FIELDS = [
+    "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
+    "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks",
 ]
 
 
@@ -58,8 +68,14 @@ def read_anki_import(path: Path) -> tuple[dict[str, str], list[dict[str, str]]]:
 
 
 def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
+    """Bind approval to all release-visible facts plus learner presentation."""
     payload = "\x1f".join([
-        "klose-presentation-v1",
+        "klose-presentation-v2",
+        master.get("CanonicalWord", "").strip(),
+        master.get("SenseLabel", "").strip(),
+        master.get("Word", "").strip(),
+        master.get("British", "").strip(),
+        master.get("American", "").strip(),
         master.get("MeaningPrimary", "").strip(),
         learner.get("ExampleSentence", "").strip(),
         learner.get("ExampleTranslation", "").strip(),
@@ -69,10 +85,32 @@ def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def assert_reconciliation_ready() -> None:
+    rows = read_csv(RECONCILIATION)
+    blocked = [
+        r for r in rows
+        if r.get("ReconciliationStatus", "").strip() != "reconciled"
+        or r.get("IdentityStatus", "").strip() != "confirmed"
+        or r.get("LearningAdmission", "").strip() != "allowed"
+    ]
+    if blocked:
+        examples = [
+            f"{r.get('SourceID')}:{r.get('SourceEdition')}:{r.get('SourceBook')}"
+            f"[{r.get('ReconciliationStatus')}/{r.get('IdentityStatus')}/{r.get('LearningAdmission')}]"
+            for r in blocked[:10]
+        ]
+        raise SystemExit(
+            "Release blocked by source reconciliation state: "
+            f"blocked={len(blocked)} examples={examples}"
+        )
+
+
 def main() -> None:
-    for path in (PROFILE, MASTER, LEARNER, REGISTRY, STUDY, ANKI_IMPORT, *REPORTS):
+    for path in (PROFILE, MASTER, LEARNER, REGISTRY, RECONCILIATION, STUDY, ANKI_IMPORT, *REPORTS):
         if not path.exists():
             raise SystemExit(f"Missing release input: {path.relative_to(ROOT)}")
+
+    assert_reconciliation_ready()
 
     if ANKI_IMPORT.read_bytes().startswith(b"\xef\xbb\xbf"):
         raise SystemExit("Release blocked: anki-import.csv must be UTF-8 without BOM so #file headers start at byte 0")
@@ -134,6 +172,25 @@ def main() -> None:
             f"study={len(study_ids)} released={len(released_ids)}"
         )
 
+    # Generated release rows must be derivable from current upstream state. This
+    # catches synchronized tampering with study.csv and anki-import.csv.
+    drift: list[str] = []
+    for row in study_rows:
+        nid = row["NoteID"]
+        master = master_by_id.get(nid)
+        learner = learner_by_id.get(nid)
+        if master is None or learner is None:
+            drift.append(nid)
+            continue
+        expected = {**master, **learner}
+        if any(row.get(field, "") != expected.get(field, "") for field in DERIVED_FIELDS):
+            drift.append(nid)
+    if drift:
+        raise SystemExit(
+            "Release blocked: published content is not derivable from current upstream state; "
+            f"count={len(drift)} examples={drift[:10]}"
+        )
+
     missing_required: list[str] = []
     bad_stage: list[str] = []
     for row in study_rows:
@@ -179,9 +236,9 @@ def main() -> None:
         )
 
     print(
-        f"Klose release ready: profile={learner_profile}, level={learner_level}, "
+        f"Klose content release ready: profile={learner_profile}, level={learner_level}, "
         f"released={len(released_ids)}, study={len(study_ids)}, anki_import={len(anki_rows)}, "
-        f"unresolved_reports=0, pending_reviews=0"
+        f"source_reconciliation=ready, unresolved_reports=0, pending_reviews=0"
     )
 
 
