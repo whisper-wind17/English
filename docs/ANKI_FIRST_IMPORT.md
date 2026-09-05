@@ -55,12 +55,13 @@ MeaningPrimary
 ExampleSentence
 ExampleTranslation
 LearnerLevel
+LearningOrder
 Sources
 SourceBooks
 UserMemo
 ```
 
-`NoteID` 必须是第一字段。`PromptHint` 是可选 Learner Presentation，普通 Notes 留空；`UserMemo` 是 Anki-local 字段，不从正式 CSV 更新。
+`NoteID` 必须是第一字段。`PromptHint` 是可选 Learner Presentation，普通 Notes 留空；`LearningOrder` 是 curriculum/admission metadata；`UserMemo` 是 Anki-local 字段，不从正式 CSV 更新。
 
 ## 3. Card Template
 
@@ -73,7 +74,7 @@ Front：
 {{/PromptHint}}
 ```
 
-普通词仍只显示 Word；同形异义 active Note 可显示最小消歧提示。
+普通词仍只显示 Word；同形异义 active Note 可显示最小消歧提示。`LearningOrder` 不展示在卡片正反面。
 
 Back：
 
@@ -150,6 +151,7 @@ MeaningPrimary      -> MeaningPrimary
 ExampleSentence     -> ExampleSentence
 ExampleTranslation  -> ExampleTranslation
 LearnerLevel        -> LearnerLevel
+LearningOrder       -> LearningOrder
 Sources             -> Sources
 SourceBooks         -> SourceBooks
 UserMemo            -> (Nothing)
@@ -158,13 +160,21 @@ Tags                -> Anki Tags
 
 重新导入同一 NoteID 时应原地更新 Note，不创建第二套 FSRS history。
 
-## 6. Learning Admission 与 Suspend
+## 6. Learning Admission、Suspend 与 New Card 顺序
 
 当前学习集合由 explicit Learning Admission 和 `learning::*` tag 表达，不由 Source Grade 自动决定。
 
 初次建库时，可对尚未开始真实学习的 New Cards 根据当前 release 状态做 Suspend / Unsuspend。进入真实 Learning/Review 后，不因普通 source/stage 调整重建 Card 或清空 FSRS。
 
-具体当前应开放哪些 Notes，必须读 `NEXT.md`，不能照抄历史 baseline。
+若当前 admission 定义了 `LearningOrder`，对仍为 `is:new` 的目标 Cards 按：
+
+```text
+docs/ANKI_LEARNING_ORDER_MIGRATION.md
+```
+
+将 curriculum order 一次性 materialize 为 Anki New Card Position。
+
+具体当前应开放哪些 Notes、是否需要 Reposition，必须读 `NEXT.md`，不能照抄历史 baseline。
 
 ## 7. Deck Options 基线
 
@@ -213,8 +223,10 @@ Desktop -> Sync -> Upload to AnkiWeb
 - Note Type / Deck / Card Type 正确；
 - `NoteID` 第一字段；
 - `PromptHint` 字段存在，普通 Note 可为空；
+- current allowed Notes 的 `LearningOrder` 与 curriculum contract 一致；held 为 blank；
 - Tags 正确；
 - Suspend 数量符合当前 Learning Admission；
+- 尚未学习的新卡在需要时已按 LearningOrder Reposition；
 - Preview 正面显示 Word + optional PromptHint；
 - Back 可播放 Word TTS；
 - IPA / Meaning / Example / Translation 正常；
