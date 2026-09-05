@@ -147,7 +147,7 @@ AnkiMobile 的 TTS 使用设备可用的系统语音；repo 不保存对应音�
 
 ### iPad typography override
 
-`styling.css` 保留 Desktop 原字号，并通过 AnkiMobile 的 `.ipad` 平台类单独放大 iPad 学习视图。当前目标字号：
+`styling.css` 使用系统字体栈，不强制 `-webkit-font-smoothing`，并通过 AnkiMobile 的 `.ipad` 平台类单独放大 iPad 学习视图。当前目标字号：
 
 ```text
 Word             52px
@@ -158,39 +158,41 @@ ExampleSentence  30px
 Translation      26px
 ```
 
-### Visual comfort palette
+Word 使用轻微 `letter-spacing: 0.015em`；不额外放大到明显宽字距。当前不引入圆角、阴影或装饰性容器，以避免为了视觉效果修改 Card HTML 结构和制造无关 cue。
 
-卡片显示不使用纯白背景、纯黑正文或高饱和装饰色。目标不是宣称某种配色能够“保护视力”，而是在保持充分可读性的前提下，降低大面积高亮度纯白和强烈色彩造成的视觉刺激。
+### Visual comfort palette — Warm Learning / Soft Night
+
+卡片显示不使用纯白背景、纯黑正文或高饱和装饰色。目标不是宣称某种配色能够“保护视力”，而是在保持充分可读性的前提下，提供稳定、微暖、低刺激且有清楚视觉层级的学习界面。
 
 日间模式：
 
 ```text
-Background       #F7F4EE  warm off-white
-Base text        #2F3437  charcoal
-Word             #243B53  deep blue-gray
-PromptHint       #5B6B7A  muted blue-gray
-Phonetic         #466B7A  muted teal-gray
-MeaningPrimary   #334155  deep slate
-ExampleSentence  #3F4650  charcoal-slate
-Translation      #5E6670  secondary gray
-Divider          #D8D3CA  light warm gray
+Background       #F3F0EA  warm neutral off-white
+Base text        #4C4F69  deep neutral gray-purple
+Word             #245E9C  muted learning blue
+PromptHint       #5C6170  secondary gray
+Phonetic         #3F7078  muted teal-gray
+MeaningPrimary   #3F4354  deep neutral
+ExampleSentence  #494C59  body text
+Translation      #54576B  darker secondary text
+Divider          #D3CEC6  light warm gray
 ```
 
-夜间模式使用 Anki `nightMode` class：
+夜间模式使用 Anki `nightMode` class，并采用独立的 warm-neutral dark palette，而不是简单反相：
 
 ```text
-Background       #1F2328
-Base text        #E5E1D8
-Word             #D6E4F0
-PromptHint       #AAB7C4
-Phonetic         #A7C1CB
-MeaningPrimary   #D3DCE6
-ExampleSentence  #D6D9DD
-Translation      #B7BDC4
-Divider          #3C434A
+Background       #26292F
+Base text        #D9D6D0
+Word             #9DBCE0
+PromptHint       #B6B8C2
+Phonetic         #9FC5C3
+MeaningPrimary   #E0DDD7
+ExampleSentence  #D5D2CC
+Translation      #BEC0C8
+Divider          #4A4D54
 ```
 
-视觉层级必须服务学习目标：Word 最醒目；Meaning / Example 保持高可读性；PromptHint、音标和 Translation 降一级但不能因“柔和”而变得难读。避免红/绿答案提示、大面积彩色块、渐变、阴影和装饰性图形，以免制造无关 cue 或分散注意力。
+视觉层级必须服务学习目标：Word 最醒目；Meaning / Example 保持高可读性；PromptHint、音标和 Translation 降一级但不能因“柔和”而变得难读。避免红/绿答案提示、大面积彩色块、渐变、动画、阴影和装饰性图形，以免制造无关 cue 或分散注意力。
 
 实际视觉舒适度仍取决于环境光、iPad 屏幕亮度、观看距离和连续使用时长；Card Styling 只负责提供稳定、低刺激且清晰的阅读界面。
 
