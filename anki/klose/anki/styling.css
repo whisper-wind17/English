@@ -49,3 +49,41 @@
   color: #666;
   margin-top: 8px;
 }
+
+/* iPad learning view: preserve Desktop sizing while increasing readability on AnkiMobile. */
+.ipad.card {
+  font-size: 30px;
+  padding: 28px;
+}
+
+.ipad .word {
+  font-size: 52px;
+  margin-bottom: 16px;
+}
+
+.ipad .prompt-hint {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.ipad .phonetic {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.ipad .meaning {
+  font-size: 34px;
+  margin-bottom: 22px;
+}
+
+.ipad .example {
+  font-size: 30px;
+  line-height: 1.5;
+  margin-top: 18px;
+}
+
+.ipad .translation {
+  font-size: 26px;
+  line-height: 1.5;
+  margin-top: 12px;
+}
