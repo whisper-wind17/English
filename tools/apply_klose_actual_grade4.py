@@ -5,9 +5,8 @@ The legacy rj_start1 adapter remains historical inventory. This script adds the
 confirmed `klose-current` Grade-4 provenance, appends genuinely new NoteIDs, and
 extends the long-lived released set without rewriting the legacy registries.
 
-It intentionally does not fabricate learner examples for new notes. New learning
-units enter learner_review.csv and remain release-blocked until presentation
-content is curated and approved.
+New identities obtain release-visible facts from a committed fact-override file;
+learner examples remain a separate presentation layer.
 """
 from __future__ import annotations
 
@@ -27,6 +26,7 @@ ACTUAL = BASE / "source_reference" / "rj_start1-grade4-klose-actual.csv"
 REGISTRY_EXTENSIONS = MASTER_DIR / "note_registry_extensions.csv"
 SOURCE_IDENTITY_EXTENSIONS = MASTER_DIR / "source_identity_extensions.csv"
 RELEASE_EXTENSIONS = MASTER_DIR / "release_registry_extensions.csv"
+FACT_OVERRIDES = MASTER_DIR / "actual_grade4_fact_overrides.csv"
 MASTER = MASTER_DIR / "vocabulary_master.csv"
 OCCURRENCES = MASTER_DIR / "source_occurrences.csv"
 LEARNER = LEARNER_DIR / "current.csv"
@@ -100,7 +100,8 @@ def upsert_metric(rows: list[dict[str, str]], metric: str, value: int | str) -> 
 def main() -> None:
     required = (
         ACTUAL, REGISTRY_EXTENSIONS, SOURCE_IDENTITY_EXTENSIONS,
-        RELEASE_EXTENSIONS, MASTER, OCCURRENCES, LEARNER, LEARNER_REVIEW, STATS,
+        RELEASE_EXTENSIONS, FACT_OVERRIDES, MASTER, OCCURRENCES, LEARNER,
+        LEARNER_REVIEW, STATS,
     )
     for path in required:
         if not path.exists():
@@ -168,6 +169,33 @@ def main() -> None:
             f"missing_registry={missing[:10]} extra_registry={extra[:10]}"
         )
 
+    fact_rows = read_csv(FACT_OVERRIDES)
+    fact_by_id: dict[str, dict[str, str]] = {}
+    for row in fact_rows:
+        nid = row.get("NoteID", "").strip()
+        if not nid or nid in fact_by_id:
+            raise SystemExit(f"Invalid/duplicate actual Grade-4 fact override: {nid!r}")
+        if any(not row.get(field, "").strip() for field in (
+            "Word", "British", "American", "MeaningPrimary", "FactStatus", "FactSource"
+        )):
+            raise SystemExit(f"Incomplete actual Grade-4 fact override: {nid}")
+        fact_by_id[nid] = row
+    if set(fact_by_id) != set(new_notes):
+        missing = sorted(set(new_notes) - set(fact_by_id))
+        extra = sorted(set(fact_by_id) - set(new_notes))
+        raise SystemExit(
+            "Actual Grade-4 fact override coverage mismatch: "
+            f"missing={missing[:10]} extra={extra[:10]}"
+        )
+    for nid in new_notes:
+        reg = registry_ext_by_id[nid]
+        fact = fact_by_id[nid]
+        if normalize(fact["Word"]) != normalize(reg["CanonicalWord"]):
+            raise SystemExit(
+                f"Actual Grade-4 fact Word does not match identity: {nid} "
+                f"fact={fact['Word']!r} identity={reg['CanonicalWord']!r}"
+            )
+
     # Add actual-textbook provenance to reused Notes and mark release extensions.
     for nid, sources in note_sources.items():
         if nid not in master_by_id:
@@ -188,10 +216,11 @@ def main() -> None:
             master["Released"] = "yes"
             master["Tags"] = add_tags(master.get("Tags", ""), "learner::klose::released")
 
-    # Append genuinely new identity/fact rows. IPA and learner examples are left
-    # blank deliberately; review gates must keep them from being considered ready.
+    # Append genuinely new identities using committed fact curation. Textbook
+    # meaning remains preserved separately as MeaningRaw/source occurrence fact.
     for nid in new_notes:
         reg = registry_ext_by_id[nid]
+        fact = fact_by_id[nid]
         _, source = note_sources[nid][0]
         semester = source["Semester"].strip()
         source_book = f"{SOURCE_ID}::{SOURCE_EDITION}::4年级{semester}"
@@ -209,10 +238,10 @@ def main() -> None:
             "CanonicalWord": reg["CanonicalWord"].strip(),
             "MatchKey": reg["MatchKey"].strip(),
             "SenseLabel": reg["SenseLabel"].strip(),
-            "Word": source["Entry"].strip(),
-            "British": "",
-            "American": "",
-            "MeaningPrimary": source["Meaning"].strip(),
+            "Word": fact["Word"].strip(),
+            "British": fact["British"].strip(),
+            "American": fact["American"].strip(),
+            "MeaningPrimary": fact["MeaningPrimary"].strip(),
             "MeaningRaw": source["Meaning"].strip(),
             "FirstSource": SOURCE_ID,
             "FirstSourceBook": f"{SOURCE_EDITION}::4年级{semester}",
@@ -260,8 +289,8 @@ def main() -> None:
             "Page": source["Page"].strip(),
         })
 
-    # New Notes require learner content before release readiness. Keep this queue
-    # explicit rather than inventing generic examples during source reconciliation.
+    # New Notes require learner content before release readiness. This queue is
+    # resolved only by the separate learner override layer.
     review_by_id = {r.get("NoteID", "").strip(): r for r in review_rows}
     for nid in new_notes:
         if nid in review_by_id:
@@ -301,6 +330,7 @@ def main() -> None:
     upsert_metric(stats, "actual_grade4_occurrences", len(actual))
     upsert_metric(stats, "actual_grade4_notes", len(actual_note_ids))
     upsert_metric(stats, "actual_grade4_new_notes", len(new_notes))
+    upsert_metric(stats, "actual_grade4_fact_overrides", len(fact_by_id))
     upsert_metric(stats, "actual_grade4_release_extensions", len(release_ext_ids))
     upsert_metric(stats, "master_notes", len(master_rows))
     upsert_metric(stats, "inventory_notes", len(master_rows))
@@ -311,9 +341,9 @@ def main() -> None:
     print(
         "Applied actual Grade-4 overlay: "
         f"occurrences={len(actual)}, learning_units={len(actual_note_ids)}, "
-        f"new_notes={len(new_notes)}, release_extensions={len(release_ext_ids)}, "
-        f"inventory={len(master_rows)}, released={len(released_after)}, "
-        f"new_content_pending={len(new_notes)}"
+        f"new_notes={len(new_notes)}, fact_overrides={len(fact_by_id)}, "
+        f"release_extensions={len(release_ext_ids)}, inventory={len(master_rows)}, "
+        f"released={len(released_after)}"
     )
 
 
