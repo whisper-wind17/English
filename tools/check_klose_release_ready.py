@@ -16,6 +16,7 @@ import json
 import re
 from pathlib import Path
 
+from klose_learning_order import format_learning_order, is_valid_learning_order
 from klose_review_fingerprint import fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -162,8 +163,10 @@ def load_and_validate_admission(
                 raise SystemExit(
                     f"Release blocked: current learning Note has wrong stage/tag: {nid} stage={stage!r} tag={tag!r}"
                 )
-            if not learning_order.isdigit() or int(learning_order) <= 0:
-                raise SystemExit(f"Release blocked: allowed Note has invalid LearningOrder: {nid}={learning_order!r}")
+            if not is_valid_learning_order(learning_order):
+                raise SystemExit(
+                    f"Release blocked: allowed Note has invalid six-digit LearningOrder: {nid}={learning_order!r}"
+                )
         else:
             if stage != HELD_STAGE or tag:
                 raise SystemExit(
@@ -193,7 +196,13 @@ def load_and_validate_admission(
             f"missing={missing[:10]} extra={extra[:10]}"
         )
 
-    expected_order = {nid: f"{index:03d}" for index, nid in enumerate(expected_ordered, start=1)}
+    try:
+        expected_order = {
+            nid: format_learning_order(index)
+            for index, nid in enumerate(expected_ordered, start=1)
+        }
+    except ValueError as exc:
+        raise SystemExit(f"Release blocked: {exc}") from exc
     bad_order = [
         f"{nid}:{by_id[nid].get('LearningOrder', '')}->{expected}"
         for nid, expected in expected_order.items()
@@ -374,7 +383,8 @@ def main() -> None:
         f"Klose content release ready: profile={learner_profile}, level={learner_level}, "
         f"released={len(released_ids)}, current_learning={allowed_count}, held={held_count}, "
         f"study={len(study_ids)}, anki_import={len(anki_rows)}, prompt_hints={prompt_hint_count}, "
-        f"learning_order=001..{allowed_count:03d}, held_ipa_debt={held_ipa_debt}, "
+        f"learning_order={format_learning_order(1)}..{format_learning_order(allowed_count)}, "
+        f"held_ipa_debt={held_ipa_debt}, "
         f"source_reconciliation=ready, unresolved_reports=0, pending_reviews=0"
     )
 
