@@ -13,6 +13,7 @@ on:
       - 'tools/audit_klose_actual_grade4_reuse.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/revalidate_klose_baseline_v2.py'
+      - 'tools/diagnose_klose_release_completeness.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
@@ -121,6 +122,9 @@ jobs:
 
       - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
+
+      - name: Diagnose current vs held release completeness
+        run: python tools/diagnose_klose_release_completeness.py
 
       - id: release
         name: Verify content release readiness
