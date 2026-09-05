@@ -1,0 +1,37 @@
+Unit,SourceExpression,Pattern,CommunicativeFunction,Slots,Priority,ReleaseStatus,Notes
+1,What's your mother's job?,What's [person]'s job?,询问职业,person,high,candidate,高频可迁移句型
+1,She's a doctor.,[Person] is a/an [job].,说明职业,person|job,high,candidate,与职业主题直接配套
+1,What can we do for them?,What can we do for [person]?,询问可以为某人做什么,person,medium,candidate,保留 can + do for 结构
+1,We can do some chores.,We can [verb phrase].,表达能力/可行行动,verb phrase,high,candidate,高频基础结构
+2,What's your friend's name?,What's [person]'s name?,询问姓名,person,high,candidate,高频可迁移句型
+2,His name is Zhang Peng.,His/Her name is [name].,介绍姓名,name,high,candidate,与上一句成对
+2,He's tall and strong.,[Person] is [adjective] and [adjective].,描述人物特征,person|adjective1|adjective2,high,candidate,适合人物描述
+2,He's also kind.,[Person] is also [adjective].,补充人物特征,person|adjective,medium,candidate,also 的典型位置
+2,Who's your best friend?,Who's your best friend?,询问最好的朋友,,high,candidate,固定高频问句
+2,She often makes me smile.,[Person] often makes [person] [verb].,表达某人使他人产生行为/感受,person1|person2|verb,medium,candidate,结构价值高但语法负荷略高
+3,There is a playground.,There is a/an [singular noun].,表达某处有单数事物,noun,high,candidate,There be 核心结构
+3,There are many people.,There are [plural noun].,表达某处有复数事物,plural noun,high,candidate,与 There is 配套
+3,Great! Let's do some sports.,Let's [verb phrase].,提出共同活动建议,verb phrase,high,candidate,高频口语结构
+3,My favourite place is the museum.,My favourite [category] is [item].,表达偏好,category|item,high,candidate,可迁移到 food/season/sport 等
+4,Our neighbour is a firefighter.,[Person] is a/an [job].,说明职业,person|job,high,candidate,与 Unit 1 同一 pattern 不应重复发布为不同卡
+4,He takes us to school every day.,[Person] takes [person] to [place].,表达带/送某人去某地,person1|person2|place,medium,candidate,实用搭配
+4,Chen Jie is making the bed.,[Person] is [verb-ing].,描述正在发生的动作,person|verb-ing,high,candidate,现在进行时核心结构
+4,"In the kindergarten, John and Class One are singing songs together.",In [place], [people] are [verb-ing] together.,描述某地多人共同正在做某事,place|people|verb-ing,medium,candidate,句型较长，适合作为扩展而非首批核心
+5,Hello! Mark speaking.,[Name] speaking.,电话中自报身份,name,high,candidate,典型电话表达
+5,This is John.,This is [name].,电话中自报身份,name,high,candidate,需在电话语境下理解
+5,What's the weather like in Sydney?,What's the weather like in [place]?,询问某地天气,place,high,candidate,天气主题核心句型
+5,It's sunny today.,It's [weather adjective] today.,描述今日天气,weather adjective,high,candidate,高频天气输出
+5,It's only two degrees in Beijing.,It's [number] degrees in [place].,描述某地气温,number|place,medium,candidate,适合作为天气扩展句型
+5,It's raining now.,It's [weather verb-ing] now.,描述当前天气现象,weather verb-ing,high,candidate,与 raining/snowing 配套
+5,We can't play basketball in the park.,We can't [verb phrase].,表达不能做某事,verb phrase,high,candidate,can 的否定核心结构
+5,We can go to the library.,We can [verb phrase].,表达可以做某事,verb phrase,high,candidate,与 Unit 1 pattern 合并
+5,"It's hot and sunny here.",It's [adjective] and [adjective] here.,描述当前位置天气/状态,adjective1|adjective2,medium,candidate,可作为组合描述扩展
+6,"Whose sweater is this, Mum?",Whose [noun] is this?,询问所属,noun,high,candidate,Unit 6 核心问句
+6,It's your dad's.,It's [person]'s.,回答所属,person,high,candidate,与 Whose 问句配套
+6,Can I wear this new shirt today?,Can I [verb phrase]?,请求许可,verb phrase,high,candidate,高频交际句型
+6,Which season do you like?,Which [category] do you like?,询问类别偏好,category,high,candidate,可迁移到 sport/food 等
+6,It snows a lot.,It [weather verb] a lot.,描述频繁天气现象,weather verb,medium,candidate,天气与季节结合
+6,I like winter too.,I like [item] too.,表达相同偏好,item,medium,candidate,too 的典型位置
+6,There are many festivals.,There are many [plural noun].,表达存在多个事物,plural noun,high,candidate,应与 Unit 3 There are 合并
+6,It's full of life.,It's full of [noun].,表达充满某物,noun,medium,candidate,语块价值高但优先级低于核心问答
+6,Then spring comes again.,Then [event] comes again.,表达事件再次发生,event,low,candidate,上下文依赖较强，不建议首批发布
