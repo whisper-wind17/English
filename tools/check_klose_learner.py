@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Flag Grade-4 learner examples that use vocabulary explicitly introduced later.
+"""Flag learner examples that use explicitly later auxiliary vocabulary.
 
-The textbook vocabulary lists are not exhaustive. This checker only flags a
-strong condition: a content token in an example maps to a listed vocabulary
-item whose earliest explicit rj_start1 occurrence is after the learner level.
+Source Grade is only a difficulty signal; it is not LearnerLevel. The target Note's
+own lexical item is excluded from the auxiliary-vocabulary check so a Grade-5/6
+source word can still be learned with LearnerLevel=4 presentation.
 """
 from __future__ import annotations
 
@@ -110,11 +110,18 @@ def main() -> None:
             continue
         lr = learner_by_id[row["NoteID"]]
         level = int(lr["LearnerLevel"])
+        target_lemmas: set[str] = set()
+        for token in tokens(row.get("CanonicalWord", "")) + tokens(row.get("Word", "")):
+            target_lemmas.update(lemmas(token))
+
         future: dict[str, int] = {}
         for token in tokens(lr["ExampleSentence"]):
             if token in FUNCTION_WORDS:
                 continue
-            matched = [earliest[x] for x in lemmas(token) if x in earliest]
+            token_lemmas = lemmas(token)
+            if token_lemmas & target_lemmas:
+                continue
+            matched = [earliest[x] for x in token_lemmas if x in earliest]
             if matched and min(matched) > level:
                 future[token] = min(matched)
         if future:
@@ -127,11 +134,11 @@ def main() -> None:
             })
 
     write_csv(REPORT, ["NoteID", "Word", "LearnerLevel", "ExampleSentence", "FutureVocabulary"], review)
-    print(f"Klose future-vocabulary review items: {len(review)}")
+    print(f"Klose auxiliary-vocabulary review items: {len(review)}")
     for row in review:
         print(f"{row['NoteID']} | {row['Word']} | {row['FutureVocabulary']} | {row['ExampleSentence']}")
     if review:
-        raise SystemExit("Learner examples contain vocabulary explicitly introduced after the learner level")
+        raise SystemExit("Learner examples contain explicitly later auxiliary vocabulary")
 
 
 if __name__ == "__main__":
