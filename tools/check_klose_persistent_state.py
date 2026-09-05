@@ -5,9 +5,9 @@ Checks current snapshot consistency and Git-baseline stability. Existing NoteIDs
 be appended to, but cannot disappear or silently change identity-defining fields.
 Any intentional identity mutation requires an explicit approved migration record.
 
-The legacy registry remains immutable baseline state. New actual-textbook learning
-units are appended in note_registry_extensions.csv so schema evolution does not
-rewrite the existing 802 identities.
+Legacy registries remain immutable baseline state. Actual-textbook additions are
+kept in extension registries so new learning units can be appended without
+rewriting the old identity/release history.
 
 CI should set KLOSE_BASE_COMMIT to the commit that existed before the current
 change set (PR base SHA or push event.before). HEAD^ is only a local fallback.
@@ -26,6 +26,7 @@ BASE = ROOT / "anki" / "klose" / "master"
 REGISTRY = BASE / "note_registry.csv"
 REGISTRY_EXTENSIONS = BASE / "note_registry_extensions.csv"
 RELEASES = BASE / "release_registry.csv"
+RELEASE_EXTENSIONS = BASE / "release_registry_extensions.csv"
 SOURCE_MAP = BASE / "source_identity_map.csv"
 SOURCE_EXTENSIONS = BASE / "source_identity_extensions.csv"
 MIGRATIONS = BASE / "identity_migrations.csv"
@@ -59,7 +60,6 @@ def git_csv_at(ref: str, path: Path, *, required: bool) -> list[dict[str, str]] 
         return read_csv_text(proc.stdout)
     if required:
         return None
-    # An extension file may legitimately not exist in an older baseline.
     return []
 
 
@@ -106,8 +106,8 @@ def check_git_stability(registry: list[dict[str, str]]) -> None:
 
 def main() -> None:
     required = (
-        REGISTRY, REGISTRY_EXTENSIONS, RELEASES, SOURCE_MAP,
-        SOURCE_EXTENSIONS, MIGRATIONS,
+        REGISTRY, REGISTRY_EXTENSIONS, RELEASES, RELEASE_EXTENSIONS,
+        SOURCE_MAP, SOURCE_EXTENSIONS, MIGRATIONS,
     )
     missing = [p for p in required if not p.exists()]
     if missing:
@@ -119,7 +119,9 @@ def main() -> None:
     legacy_registry = read_csv(REGISTRY)
     extension_registry = read_csv(REGISTRY_EXTENSIONS)
     registry = legacy_registry + extension_registry
-    releases = read_csv(RELEASES)
+    legacy_releases = read_csv(RELEASES)
+    extension_releases = read_csv(RELEASE_EXTENSIONS)
+    releases = legacy_releases + extension_releases
     if not legacy_registry:
         raise SystemExit("note_registry.csv is empty")
 
@@ -191,16 +193,18 @@ def main() -> None:
     for row in releases:
         nid = row.get("NoteID", "").strip()
         if nid in release_ids:
-            raise SystemExit(f"Duplicate release NoteID: {nid}")
+            raise SystemExit(f"Duplicate release NoteID across registries: {nid}")
         if nid not in registry_ids:
             raise SystemExit(f"Release references unknown NoteID: {nid}")
         release_ids.add(nid)
 
     print(
         "Persistent state OK: "
-        f"legacy_registry={len(legacy_registry)}, extensions={len(extension_registry)}, "
+        f"legacy_registry={len(legacy_registry)}, identity_extensions={len(extension_registry)}, "
         f"total_registry={len(registry_ids)}, legacy_source_map={len(source_map)}, "
-        f"source_identity_extensions={len(extension_keys)}, released={len(release_ids)}"
+        f"source_identity_extensions={len(extension_keys)}, "
+        f"legacy_released={len(legacy_releases)}, release_extensions={len(extension_releases)}, "
+        f"total_released={len(release_ids)}"
     )
 
 
