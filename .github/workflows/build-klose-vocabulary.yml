@@ -104,6 +104,21 @@ jobs:
       - name: Explicitly revalidate unchanged baseline under fingerprint v2
         run: python tools/revalidate_klose_baseline_v2.py
 
+      - name: Record final Grade-4 v2 model approval
+        run: |
+          if [ -f anki/klose/learner/review_approvals/grade4-current-v2-model-reviewed.csv ]; then
+            echo 'Final Grade-4 v2 model approval already exists.'
+          else
+            python tools/approve_klose_learner_review.py \
+              --batch-id grade4-current-v2-model-reviewed \
+              --profile klose \
+              --level 4 \
+              --expected-count 638 \
+              --reviewer-type model \
+              --review-note '511 baseline fingerprints revalidated from prior model review; remaining 127 current fingerprints explicitly model-reviewed, with 7 content corrections applied before approval.' \
+              --confirm-all-current
+          fi
+
       - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
 
@@ -129,6 +144,7 @@ jobs:
             anki/klose/learner/learning_admission.csv \
             anki/klose/learner/presentation_review_registry.csv \
             anki/klose/learner/review_approvals/grade4-baseline-v2-revalidated.csv \
+            anki/klose/learner/review_approvals/grade4-current-v2-model-reviewed.csv \
             anki/klose/review
           if git diff --cached --quiet; then
             echo 'No upstream review-state changes.'
