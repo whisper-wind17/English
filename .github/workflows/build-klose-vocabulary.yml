@@ -11,7 +11,6 @@ on:
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
       - 'tools/audit_klose_actual_grade4_reuse.py'
-      - 'tools/migrate_klose_actual_grade4_speak_sense.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
@@ -71,9 +70,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Apply one-time actual Grade-4 speak sense migration
-        run: python tools/migrate_klose_actual_grade4_speak_sense.py
-
       - name: Protect persistent identity and release state
         run: python tools/check_klose_persistent_state.py
 
@@ -122,12 +118,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add \
-            anki/klose/master/note_registry_extensions.csv \
-            anki/klose/master/source_identity_extensions.csv \
-            anki/klose/master/release_registry_extensions.csv \
-            anki/klose/master/identity_migrations.csv \
-            anki/klose/master/actual_grade4_fact_overrides.csv \
-            anki/klose/learner/actual_grade4_overrides.csv \
             anki/klose/master/vocabulary_master.csv \
             anki/klose/master/source_occurrences.csv \
             anki/klose/master/build_stats.csv \
