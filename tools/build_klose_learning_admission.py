@@ -16,6 +16,8 @@ import csv
 import re
 from pathlib import Path
 
+from klose_learning_order import format_learning_order
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
 MASTER = BASE / "master"
@@ -36,7 +38,6 @@ HELD_STAGE = "stage::library"
 CURRENT_TAG = "learning::klose::grade4"
 SOURCE_ID = "rj_start1"
 SOURCE_EDITION = "klose-current"
-LEARNING_ORDER_WIDTH = 3
 GRADE4_KEY_RE = re.compile(r"^grade4-(upper|lower)-u(\d+)-o(\d+)\|")
 SEMESTER_RANK = {"upper": 0, "lower": 1}
 
@@ -122,10 +123,13 @@ def main() -> None:
         missing = sorted(current - released, key=note_num)
         raise SystemExit(f"Current Grade-4 Notes are not released: {missing[:10]}")
 
-    order_by_id = {
-        nid: str(index).zfill(LEARNING_ORDER_WIDTH)
-        for index, nid in enumerate(ordered_current, start=1)
-    }
+    try:
+        order_by_id = {
+            nid: format_learning_order(index)
+            for index, nid in enumerate(ordered_current, start=1)
+        }
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
 
     rows: list[dict[str, str]] = []
     for nid in sorted(released, key=note_num):
@@ -145,7 +149,8 @@ def main() -> None:
     held = len(released) - len(current)
     print(
         f"Learning admission built: released={len(released)}, allowed={len(current)}, "
-        f"held={held}, tag={CURRENT_TAG}, learning_order=001..{len(current):03d}, "
+        f"held={held}, tag={CURRENT_TAG}, "
+        f"learning_order={format_learning_order(1)}..{format_learning_order(len(current))}, "
         f"first8={ordered_current[:8]}"
     )
 
