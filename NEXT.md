@@ -135,7 +135,16 @@ Source Evidence / Learner Need
 → Real-learning Feedback
 ```
 
-Anki 只负责 consolidation / retrieval，不负责第一次教会新表达。只有 Klose 已经通过教材、听力、阅读、对话等 meaningful input 理解过的表达，才允许进入 Learning Admission。
+Anki Expressions 可以同时承担：
+
+```text
+已有输入后的 retrieval / consolidation
++ 简单新表达的 lightweight acquisition
+```
+
+Meaningful input / interaction 仍是主要学习来源，但不是 Learning Admission 的硬前置条件。若一个新表达能通过卡片背面的简短 micro-lesson 清楚解释其含义、结构和用法，可以直接进入学习。
+
+不为“是否第一次见”建立额外状态，也不区分第一次 Again 与遗忘后的 Again。`Again` 统一表示：当前还不能稳定主动产出该 Expression。
 
 ### Pilot implementation order
 
@@ -185,15 +194,24 @@ person: your mother
 → What's your mother's job?
 ```
 
-Back 展示 Target + Canonical Pattern + TTS。
+Back 至少包含：
+
+```text
+Target
+Canonical Pattern
+简短 Meaning / Usage
+1–2 个替换例子
+TTS
+```
+
+这样既能支持第一次见到简单表达时的 micro-lesson，也能支持后续 retrieval / spacing。
 
 ### One-month evaluation
 
-Pilot 期间重点记录：
+Pilot 期间重点观察：
 
 ```text
 Again ratio
-response latency
 slot substitution success
 transfer to unseen situations
 whether recall depends on Chinese translation
@@ -202,6 +220,8 @@ pronunciation / fluency issues
 actual daily review load
 real speaking / writing reuse when observable
 ```
+
+不对 Again 做 acquisition-history 细分，也不额外分析“第一次 Again”。
 
 核心评估问题：
 
@@ -261,7 +281,8 @@ Expressions pilot 上线后，需同时观察两个 Deck 的总复习负担，�
 - Vocabulary 与 Expressions 使用独立 Identity / Review / Release / Note Type；
 - Expression Occurrence 与 Expression Identity 分离，允许 many-to-many；
 - Expression 的核心训练方向是 communicative intent → active English production；
-- Anki Expressions 是 consolidation layer，不替代 meaningful input / interaction；
+- Anki Expressions 可承担简单新表达的轻量首次学习和后续 consolidation，但不替代主要的 meaningful input / interaction；
+- 不为首次见过/首次 Again 建额外状态，Again 只表示当前未能稳定主动产出；
 - 内容 fingerprint 变化后旧 approval 失效；LearningOrder 不进入内容 fingerprint；
 - 只有仍为 `is:new` 的 Cards 才允许由 repo materialize New #；
 - generated publish 文件禁止手工修改；
