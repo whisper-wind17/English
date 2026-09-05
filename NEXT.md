@@ -7,177 +7,93 @@ Last updated: 2026-09-05
 ```text
 AGENTS.md
 → NEXT.md
-→ docs/ANKI_PROMPTHINT_MIGRATION.md
 → docs/ANKI_SYNC_WORKFLOW.md
+→ docs/ANKI_PROMPTHINT_MIGRATION.md
 → anki/klose/anki/README.md
 ```
 
-## Current objective
+## Current status
 
-repo 侧 Grade-4 Vocabulary 已全部完成。当前唯一主任务是 **在现有 Anki Desktop collection 中原地完成 Note Type / release / active-set 迁移**：
+**Grade-4 Vocabulary 已完成从真实教材到 Anki 的正式闭环，并已在现有 Desktop collection 中启用。**
 
 ```text
-add PromptHint to existing Klose Vocabulary Note Type
-→ update Recognition template/styling
-→ import latest anki-import.csv by NoteID
-→ total 638 Cards
-→ Suspend all
-→ Unsuspend only learning::klose::grade4 (221)
-→ Klose starts formal study
+Source / Identity / Learner Presentation / Learning Admission
+→ Content Review / Release Gate
+→ PromptHint Note Type migration
+→ NoteID-first in-place import
+→ active-set reset
+→ Desktop validation
 ```
 
-不要创建第二套 Note Type / Card Type，不删除现有 Notes，不改变 Stable NoteID，不重建 FSRS state。
+当前四个执行状态：
+
+```text
+Build Valid        = yes
+Content Releasable = yes
+Anki Updated       = yes
+Learning Admitted  = yes
+```
+
+Klose 当前 `LearnerLevel=4`。继续保持：
+
+```text
+Source Grade ≠ LearnerLevel ≠ Learning Admission
+```
 
 ---
 
-## 1. Repo release — completed
+## 1. Current operational baseline
 
-当前正式状态：
+Repo：
 
 ```text
 inventory Notes           = 901
 released / study          = 638
 actual Grade-4 allowed    = 221
 held library              = 417
-LearnerLevel              = 4
-review model-reviewed     = 638
+model-reviewed            = 638
 review pending            = 0
 unresolved review queues  = 0
 Release Gate              = PASS
 ```
 
-真实 Grade-4：
+Anki Desktop 已实测：
 
 ```text
-221 textbook occurrences
-219 unique surface strings
-221 Stable NoteIDs
+Deck              = Klose-English::Vocabulary
+Note Type         = Klose Vocabulary
+Card Type         = Recognition
+Total Notes/Cards = 638
+Unsuspended       = 221
+Suspended         = 417
+FSRS              = ON
+Desired retention = 90%
+New/day           = 8
 ```
 
-当前 learning tag：
+正式导入结果：
+
+```text
+638 notes found in file
+120 new notes imported
+518 existing notes updated in place
+```
+
+因此原 518 Notes 没有复制成第二套 Cards；Stable NoteID / existing Card identity 得以保留。
+
+当前 active set 唯一由：
 
 ```text
 learning::klose::grade4
 ```
 
-221 allowed Notes 必须带：
-
-```text
-stage::grade4-current
-learning::klose::grade4
-```
-
-417 held Notes：
-
-```text
-stage::library
-no learning::* tag
-```
-
-正式 Anki artifact：
-
-```text
-anki/klose/publish/anki-import.csv
-```
-
-当前 header：
-
-```text
-NoteID,CanonicalWord,Word,PromptHint,British,American,MeaningPrimary,
-ExampleSentence,ExampleTranslation,LearnerLevel,Sources,SourceBooks,Tags
-```
-
-不要直接导入 `study.csv`。
+控制。
 
 ---
 
-## 2. PromptHint migration — completed in repo
+## 2. Actual Grade-4 source / identity — completed
 
-PromptHint 是 Learner Presentation，不属于 Source / Identity。
-
-只有 4 个 active homograph Notes 非空：
-
-```text
-KV000424  cook  -> n.
-KV000805  cook  -> v.
-KV000816  over  -> 位置
-KV000863  over  -> 结束
-```
-
-其他 Notes：
-
-```text
-PromptHint = blank
-```
-
-实现：
-
-```text
-anki/klose/learner/prompt_hint_overrides.csv
-tools/apply_klose_prompt_hints.py
-tools/klose_review_fingerprint.py
-anki/klose/anki/card_front.html
-anki/klose/anki/styling.css
-```
-
-Review compatibility：
-
-```text
-blank PromptHint    -> old fingerprint-v2 hash unchanged
-non-empty PromptHint -> fingerprint extended, requires re-review
-```
-
-本次实测：
-
-```text
-PromptHint nonempty = 4
-review invalidated  = 4
-explicitly reviewed = 4 changed Notes
-final pending       = 0
-```
-
-最终 immutable approval：
-
-```text
-anki/klose/learner/review_approvals/grade4-prompthint-v1.csv
-```
-
-PR #3 已合并：
-
-```text
-2372d4f  Klose: add PromptHint homograph migration
-```
-
-正式 PromptHint release：
-
-```text
-6e6041e  data: rebuild Klose vocabulary base
-```
-
-一次性 auto-approval 已从日常 CI 删除：
-
-```text
-f4cff202  ci: remove one-time PromptHint approval
-```
-
-清理后的正常 CI run 77 独立验证：
-
-```text
-review registry = 638 model / 0 pending
-prompt_hints    = 4
-study           = 638
-anki_import     = 638
-Release Gate    = PASS
-no generated changes
-```
-
-因此后续任何 PromptHint / content 变化都会重新 pending，不会被 CI 自动批准。
-
----
-
-## 3. Stable identity / source state — completed
-
-权威 Grade-4 source：
+权威 source：
 
 ```text
 anki/klose/source_reference/rj_start1-grade4-klose-actual.csv
@@ -185,19 +101,36 @@ SourceID      = rj_start1
 SourceEdition = klose-current
 ```
 
-221 occurrence → NoteID mappings：
+规模：
+
+```text
+221 textbook occurrences
+219 unique surface strings
+221 target learning units / Stable NoteIDs
+```
+
+教材 occurrence → NoteID：
 
 ```text
 anki/klose/master/source_identity_extensions.csv
-status = confirmed
+221 confirmed mappings
 ```
 
-Identity：
+Identity summary：
 
 ```text
 reuse existing = 122
 new NoteID      = 99
 unresolved      = 0
+```
+
+关键同词异义：
+
+```text
+KV000424  cook  厨师
+KV000805  cook  烹饪；煮
+KV000816  over  在……远端/对面
+KV000863  over  结束（的）
 ```
 
 Source reconciliation 上/下册均：
@@ -208,84 +141,76 @@ reconciled / confirmed / confirmed / allowed
 
 ---
 
-## 4. Next action — Anki Desktop
+## 3. PromptHint migration — completed and validated
 
-严格按：
+`PromptHint` 已成为 `Klose Vocabulary` Note Type 的长期可选字段，位置在 `Word` 后。
 
-```text
-docs/ANKI_PROMPTHINT_MIGRATION.md
-```
-
-### A. Existing Note Type schema
-
-在现有 `Klose Vocabulary` 中增加 `PromptHint`，放在 Word 后：
+只有 4 个当前 active homograph Notes 非空：
 
 ```text
-1  NoteID
-2  CanonicalWord
-3  Word
-4  PromptHint
-5  British
-6  American
-7  MeaningPrimary
-8  ExampleSentence
-9  ExampleTranslation
-10 LearnerLevel
-11 Sources
-12 SourceBooks
-13 UserMemo
+KV000424  cook  -> n.
+KV000805  cook  -> v.
+KV000816  over  -> 位置
+KV000863  over  -> 结束
 ```
 
-Card Type 仍只有：
+Desktop Preview 已实测：
 
 ```text
-Recognition
+cook / n.       correct
+cook / v.       correct
+over / 位置      correct
+over / 结束      correct
 ```
 
-更新 Front / Styling 使用：
+Recognition front：
 
 ```text
-anki/klose/anki/card_front.html
-anki/klose/anki/styling.css
+Word + optional PromptHint
 ```
 
-Back 不新增 Card Type。
-
-### B. Import latest release
+Back：
 
 ```text
-Import file     = anki/klose/publish/anki-import.csv
-Note Type       = Klose Vocabulary
-Existing Notes  = Update
-Identity        = NoteID
-Expected total  = 638 Notes / 638 Cards
+FrontSide
++ Word TTS
++ British / American IPA
++ Meaning
++ Example
++ Translation
 ```
 
-原 518 Notes 应原地更新；120 个新 released NoteID 新增。
+Back Preview 的 Word TTS 已实测正常。
 
-### C. Verify PromptHint
+PromptHint 属于 Learner Presentation，不改变 Source / Identity / Stable NoteID / Card identity / FSRS。
+
+正式 PromptHint approval：
 
 ```text
-KV000424 = n.
-KV000805 = v.
-KV000816 = 位置
-KV000863 = 结束
+anki/klose/learner/review_approvals/grade4-prompthint-v1.csv
 ```
 
-普通 Note 的 PromptHint 应为空。
+日常 CI 已移除一次性 auto-approval；后续任何 PromptHint / content 改动都会重新进入 `pending`。
 
-### D. Reset active set
+---
 
-Klose 尚未产生真实 Review History，因此本次可以做一次初始化 reset：
+## 4. Learning Admission — live in Anki
+
+Repo 定义：
+
+```text
+allowed = 221 -> stage::grade4-current + learning::klose::grade4
+held    = 417 -> stage::library, no learning::* tag
+```
+
+Desktop 已完成一次初始化 reset：
 
 ```text
 Suspend all 638
-→ search tag:learning::klose::grade4
-→ result MUST = 221
-→ Unsuspend these 221
+→ Unsuspend tag:learning::klose::grade4
 ```
 
-验收：
+最终实测：
 
 ```text
 Total        = 638
@@ -293,31 +218,67 @@ Unsuspended  = 221
 Suspended    = 417
 ```
 
-如果 tag 搜索不是 221，停止学习并排查 import / Tags，不要手工凑数量。
+从现在起 Klose 进入真实 Review History 后，**不要因为 Source Grade / 教材 scope 的变化批量重新 Suspend 已经进入 Learning/Review 的 Cards**。FSRS / Due / Interval / Review History 由 Anki 持续维护。
 
 ---
 
-## 5. Current physical Anki state — still old
+## 5. Long-term sync contract
 
-设备尚未执行上述操作，目前仍是：
+以后内容更新统一按：
 
 ```text
-Deck              = Klose-English::Vocabulary
-Note Type         = Klose Vocabulary
-Card Type         = Recognition
-Cards             = 518
-Suspended         = 343
-Unsuspended       = 175
-New/day           = 8
-FSRS              = ON
-Desired retention = 90%
+upstream source / identity / learner / admission changes
+→ review fingerprint invalidation
+→ explicit review / approval
+→ Release Gate PASS
+→ regenerate anki/klose/publish/anki-import.csv
+→ import into same Klose Vocabulary Note Type
+→ Existing Notes = Update by NoteID
 ```
 
-repo 完成 ≠ Anki Updated。完成 Desktop migration + import + `221 / 417` 校验后，才允许 Klose 正式开始学习。
+正式 Anki artifact 永远是：
+
+```text
+anki/klose/publish/anki-import.csv
+```
+
+不要直接导入：
+
+```text
+publish/study.csv
+publish/all.csv
+```
+
+也不要新建第二套长期 Vocabulary Note Type / Deck 来承载后续教材。
 
 ---
 
-## Deferred
+## 6. Next decision point
 
-- 四下 Useful Expressions：Vocabulary Grade-4 正式启用后再处理。
-- 99 个 held legacy Notes 缺 British/American IPA：未来 admission 前补齐并重新 review。
+Grade-4 Vocabulary 数据工程与 Anki 启用阶段已经结束。下一阶段不要立即扩 schema，优先从真实学习反馈驱动。
+
+建议顺序：
+
+```text
+1. Klose 开始真实 Grade-4 Vocabulary 学习
+2. 观察首批真实 Review History / 易错词 / 例句理解情况
+3. 再决定 learner presentation 是否需要微调
+4. Vocabulary 稳定后继续四下 Useful Expressions
+```
+
+如果下一任务直接进入四下 Expressions，启动时读取：
+
+```text
+docs/EXPRESSIONS_SYSTEM.md
+anki/klose/source_reference/rj_start1-grade4-lower-klose-expressions.csv
+```
+
+如果下一任务是复盘 Klose 的学习状态，以 **Anki 实际 FSRS / Review History** 为真源，不从 GitHub 推测学习表现。
+
+---
+
+## Deferred / technical debt
+
+- 四下 Useful Expressions：Vocabulary Grade-4 已正式启用后可开始处理。
+- 99 个 held legacy Notes 缺 British/American IPA：未来对应 Note 被 admission 前补齐并重新 review；当前 417 held 不阻塞学习。
+- AnkiWeb / iPad 同步属于 Anki 设备状态；若尚未完成，在 Desktop 当前正确 collection 上执行同步后再让其他设备拉取，不通过 repo 重建学习状态。
