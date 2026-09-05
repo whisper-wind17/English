@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 """Verify that the current released Klose vocabulary is safe to import into Anki.
 
-Current learning Notes (`allowed`) must have every release-visible field complete.
-Held library Notes remain structurally valid and reviewed, but legacy British /
-American IPA gaps are allowed until those Notes are admitted for learning.
+Current learning Notes (`allowed`) must have every required release-visible field
+complete. PromptHint is optional, but when present it is learner presentation and
+must be derivable from upstream state and bound to review approval. Held library
+Notes remain structurally valid and reviewed, while legacy British/American IPA
+gaps are allowed until those Notes are admitted for learning.
 """
 from __future__ import annotations
 
 import csv
-import hashlib
 import io
 import json
 from pathlib import Path
+
+from klose_review_fingerprint import fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
@@ -30,16 +33,17 @@ REPORTS = [
     BASE / "review" / "future_vocab_review.csv",
 ]
 PUBLISH_FIELDS = [
-    "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
+    "NoteID", "CanonicalWord", "Word", "PromptHint", "British", "American", "MeaningPrimary",
     "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
 ]
 DERIVED_FIELDS = [
-    "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
+    "NoteID", "CanonicalWord", "Word", "PromptHint", "British", "American", "MeaningPrimary",
     "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks",
 ]
-ALLOWED_REQUIRED_FIELDS = tuple(PUBLISH_FIELDS)
+REQUIRED_FIELDS = tuple(field for field in PUBLISH_FIELDS if field != "PromptHint")
+ALLOWED_REQUIRED_FIELDS = REQUIRED_FIELDS
 HELD_REQUIRED_FIELDS = tuple(
-    field for field in PUBLISH_FIELDS if field not in {"British", "American"}
+    field for field in REQUIRED_FIELDS if field not in {"British", "American"}
 )
 CURRENT_LEARNING_TAG = "learning::klose::grade4"
 CURRENT_STAGE = "stage::grade4-current"
@@ -74,23 +78,6 @@ def read_anki_import(path: Path) -> tuple[dict[str, str], list[dict[str, str]]]:
             )
         rows.append(dict(zip(PUBLISH_FIELDS, values)))
     return headers, rows
-
-
-def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
-    payload = "\x1f".join([
-        "klose-presentation-v2",
-        master.get("CanonicalWord", "").strip(),
-        master.get("SenseLabel", "").strip(),
-        master.get("Word", "").strip(),
-        master.get("British", "").strip(),
-        master.get("American", "").strip(),
-        master.get("MeaningPrimary", "").strip(),
-        learner.get("ExampleSentence", "").strip(),
-        learner.get("ExampleTranslation", "").strip(),
-        learner.get("LearnerProfile", "").strip(),
-        learner.get("LearnerLevel", "").strip(),
-    ])
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def assert_reconciliation_ready() -> None:
@@ -350,11 +337,13 @@ def main() -> None:
         if admission_by_id[row["NoteID"]]["Status"].strip() == "held"
         and (not row.get("British", "").strip() or not row.get("American", "").strip())
     )
+    prompt_hint_count = sum(1 for row in study_rows if row.get("PromptHint", "").strip())
     print(
         f"Klose content release ready: profile={learner_profile}, level={learner_level}, "
         f"released={len(released_ids)}, current_learning={allowed_count}, held={held_count}, "
-        f"study={len(study_ids)}, anki_import={len(anki_rows)}, held_ipa_debt={held_ipa_debt}, "
-        f"source_reconciliation=ready, unresolved_reports=0, pending_reviews=0"
+        f"study={len(study_ids)}, anki_import={len(anki_rows)}, prompt_hints={prompt_hint_count}, "
+        f"held_ipa_debt={held_ipa_debt}, source_reconciliation=ready, "
+        f"unresolved_reports=0, pending_reviews=0"
     )
 
 
