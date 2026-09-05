@@ -14,7 +14,7 @@ docs/ANKI_SYNC_WORKFLOW.md
 
 如果设备里已有旧 Word-first 数据，先按 `docs/ANKI_MIGRATION.md` 迁移。
 
-> 重要：本文不是当前 release-readiness 状态页。当前是否允许 Klose 开始学习、是否存在 Source blocker，必须先读根目录 `NEXT.md`。历史上曾成功导入的 baseline，不代表后续发现 Source Fact 问题后仍然可以继续学习。
+> 当前是否允许 Klose 开始学习，以根目录 `NEXT.md` 和 Release Gate 为准；历史上曾成功导入的 baseline 不代表后续 source/release 状态永远有效。
 
 ## 1. 唯一主 Deck
 
@@ -22,7 +22,7 @@ docs/ANKI_SYNC_WORKFLOW.md
 Klose-English::Vocabulary
 ```
 
-教材、年级、阶段通过 Tags / Source Occurrences / Suspend 控制，不拆成多套长期 Vocabulary Deck。
+教材、年级、学习范围通过 Source / Tags / Learning Admission / Suspend 控制，不拆成多套长期 Vocabulary Deck。
 
 ## 2. Note Type
 
@@ -48,6 +48,7 @@ Recognition
 NoteID
 CanonicalWord
 Word
+PromptHint
 British
 American
 MeaningPrimary
@@ -59,7 +60,7 @@ SourceBooks
 UserMemo
 ```
 
-`NoteID` 必须是第一字段。`UserMemo` 是 Anki-local 字段，不从正式 CSV 更新。
+`NoteID` 必须是第一字段。`PromptHint` 是可选 Learner Presentation，普通 Notes 留空；`UserMemo` 是 Anki-local 字段，不从正式 CSV 更新。
 
 ## 3. Card Template
 
@@ -67,7 +68,12 @@ Front：
 
 ```html
 <div class="word">{{Word}}</div>
+{{#PromptHint}}
+<div class="prompt-hint">{{PromptHint}}</div>
+{{/PromptHint}}
 ```
+
+普通词仍只显示 Word；同形异义 active Note 可显示最小消歧提示。
 
 Back：
 
@@ -120,78 +126,66 @@ publish/onboarding/*
 publish/by-source/*
 ```
 
-其中：
-
-- `study.csv`：generated Released Set 内部审计快照；
-- `anki-import.csv`：generated 唯一正式 Anki artifact；
-- 两者都禁止手工修改。
+`study.csv` 是 generated Released Set 内部审计快照；`anki-import.csv` 是 generated 唯一正式 Anki artifact。二者都禁止手工修改。
 
 ## 5. Import 设置
 
-正式导入时：
-
 ```text
-Note Type      = Klose Vocabulary
-Deck           = Klose-English::Vocabulary
-Existing notes = Update
-Match scope    = Note Type
+Note Type       = Klose Vocabulary
+Deck            = Klose-English::Vocabulary
+Existing notes  = Update
+Match scope     = Note Type
 ```
 
 字段映射：
 
 ```text
-NoteID             -> NoteID
-CanonicalWord      -> CanonicalWord
-Word               -> Word
-British            -> British
-American           -> American
-MeaningPrimary     -> MeaningPrimary
-ExampleSentence    -> ExampleSentence
-ExampleTranslation -> ExampleTranslation
-LearnerLevel       -> LearnerLevel
-Sources            -> Sources
-SourceBooks        -> SourceBooks
-UserMemo           -> (Nothing)
-Tags               -> Anki Tags
+NoteID              -> NoteID
+CanonicalWord       -> CanonicalWord
+Word                -> Word
+PromptHint          -> PromptHint
+British             -> British
+American            -> American
+MeaningPrimary      -> MeaningPrimary
+ExampleSentence     -> ExampleSentence
+ExampleTranslation  -> ExampleTranslation
+LearnerLevel        -> LearnerLevel
+Sources             -> Sources
+SourceBooks         -> SourceBooks
+UserMemo            -> (Nothing)
+Tags                -> Anki Tags
 ```
 
 重新导入同一 NoteID 时应原地更新 Note，不创建第二套 FSRS history。
 
-## 6. 学习阶段与 Suspend
+## 6. Learning Admission 与 Suspend
 
-Stage Tags 是 release 时生成的系统状态，不是固定教材分类。第一次导入后只对当前计划学习的 **New Cards** 开放，其余 New Cards 可以 Suspend。
+当前学习集合由 explicit Learning Admission 和 `learning::*` tag 表达，不由 Source Grade 自动决定。
 
-原则：
+初次建库时，可对尚未开始真实学习的 New Cards 根据当前 release 状态做 Suspend / Unsuspend。进入真实 Learning/Review 后，不因普通 source/stage 调整重建 Card 或清空 FSRS。
 
-```text
-尚未学习的 New Card -> 可 Suspend / Unsuspend 控制准入
-已经 Learning/Review -> 不因 source/stage 调整重新 Suspend
-```
-
-具体当前应开放哪些 stage，必须读 `NEXT.md` 和最新 release 数据，不能照抄历史 baseline。
+具体当前应开放哪些 Notes，必须读 `NEXT.md`，不能照抄历史 baseline。
 
 ## 7. Deck Options 基线
 
-首次配置曾验证以下值适合当前 Klose Vocabulary 使用：
-
 ```text
-New cards/day             = 8
-Maximum reviews/day       = 9999
-Learning steps            = 10m
-Relearning steps          = 10m
-Leech action              = Tag Only
-New card gather order     = Ascending position
-New card sort order       = Order gathered
-New/review order          = Show after reviews
-Interday learning/review  = Mix with reviews
-Review sort order         = Due date, then random
-FSRS                      = ON
-Desired retention         = 90%
-FSRS parameters           = default initially
+New cards/day              = 8
+Maximum reviews/day        = 9999
+Learning steps             = 10m
+Relearning steps           = 10m
+Leech action               = Tag Only
+New card gather order      = Ascending position
+New card sort order        = Order gathered
+New/review order           = Show after reviews
+Interday learning/review   = Mix with reviews
+Review sort order          = Due date, then random
+FSRS                       = ON
+Desired retention          = 90%
+FSRS parameters            = default initially
 Reschedule cards on change = OFF
 ```
 
-这些是调度配置，不决定 source correctness。Source/release blocker 优先于“参数已经配置好”。
+这些是调度配置，不决定 source correctness。
 
 ## 8. 第一次同步
 
@@ -213,20 +207,21 @@ Desktop -> Sync -> Upload to AnkiWeb
 
 ## 9. 验收
 
-第一次导入后至少验证：
+至少验证：
 
 - Note 数 = Card 数；
 - Note Type / Deck / Card Type 正确；
 - `NoteID` 第一字段；
+- `PromptHint` 字段存在，普通 Note 可为空；
 - Tags 正确；
-- Suspend 数量符合当前 staging；
-- Preview 正面只显示 Word；
+- Suspend 数量符合当前 Learning Admission；
+- Preview 正面显示 Word + optional PromptHint；
 - Back 可播放 Word TTS；
 - IPA / Meaning / Example / Translation 正常；
 - FSRS 配置正确；
 - AnkiWeb 同步完成。
 
-但最终“可以开始正式学习”的判定还必须满足：
+最终“可以开始正式学习”还必须满足：
 
 ```text
 repo current source/release ready
@@ -236,10 +231,10 @@ repo current source/release ready
 
 ## 10. 历史首次导入
 
-2026-09-05 曾完成第一轮 Desktop 导入与 AnkiWeb Upload。详细过程、当时的 `518 / 343 / 175` 等结果保存在：
+2026-09-05 曾完成第一轮 Desktop 导入与 AnkiWeb Upload。详细过程和当时 `518 / 343 / 175` 的历史结果保存在：
 
 ```text
 docs/ANKI_FIRST_IMPORT_GUIDE.md
 ```
 
-这些数字是历史实操记录，不再作为永远有效的“当前正式基线”。若后续 Source Reconciliation 改变 released/staging 集合，应使用纠正后的 `anki-import.csv` 原地更新同一 Note Type。
+这些数字不是永久基线。后续 Source Reconciliation / Learning Admission 变化后，应使用最新 `anki-import.csv` 原地更新同一 Note Type。

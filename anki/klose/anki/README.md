@@ -14,6 +14,7 @@ Klose Vocabulary
 NoteID
 CanonicalWord
 Word
+PromptHint
 British
 American
 MeaningPrimary
@@ -26,6 +27,19 @@ UserMemo
 ```
 
 `NoteID` 必须保持第一字段；`UserMemo` 只在 Anki 本地维护，不从 repo CSV 更新。
+
+`PromptHint` 属于 Learner Presentation，只用于正面存在真实 target-sense 歧义时做最小消歧。普通 Note 必须留空，不把释义提前泄露到问题面。
+
+当前 Grade-4 active set 使用：
+
+```text
+KV000424  cook  -> n.
+KV000805  cook  -> v.
+KV000816  over  -> 位置
+KV000863  over  -> 结束
+```
+
+`PromptHint` 不改变 Stable NoteID / Card identity / FSRS history；非空值属于 release-visible presentation，变更后必须重新 review。
 
 ## Card Type
 
@@ -41,12 +55,6 @@ Recognition
 1 Note = 1 Card
 ```
 
-因此 Grade-4 Baseline v1：
-
-```text
-518 Notes = 518 Cards
-```
-
 Card Template：
 
 ```text
@@ -57,23 +65,27 @@ styling.css
 
 ## Recognition 交互契约
 
-正面只显示：
+正面显示：
 
 ```text
 Word
+PromptHint（仅非空时）
 ```
 
-不在正面显示音标、TTS 或释义。目标是在揭示答案前主动回忆：
+不在正面显示音标、TTS 或核心释义。目标是在揭示答案前主动回忆：
 
 ```text
-Word → pronunciation
-Word → core meaning
+Word + minimal disambiguation cue
+→ pronunciation
+→ target core meaning
 ```
+
+普通词没有 `PromptHint`，体验仍然等同于只看到 `Word`。
 
 答案面显示：
 
 ```text
-Word
+Word + optional PromptHint（通过 FrontSide）
 标准单词 TTS（en_US）
 UK / US phonetics
 MeaningPrimary
@@ -100,8 +112,8 @@ ExampleTranslation
 Klose 日常主要使用 iPad AnkiMobile。默认交互不依赖键盘：
 
 ```text
-看到 Word
-→ 先口头回忆读音和意思
+看到 Word（必要时附最小 PromptHint）
+→ 先口头回忆读音和目标意思
 → 轻点卡片显示答案
 → 自动听 Word 标准 TTS
 → 核对音标、释义
