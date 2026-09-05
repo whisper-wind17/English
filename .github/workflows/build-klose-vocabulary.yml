@@ -11,6 +11,7 @@ on:
       - 'tools/check_klose_persistent_state.py'
       - 'anki/klose/config/**'
       - 'anki/klose/learner/grade4_*overrides.csv'
+      - 'anki/klose/learner/grade4_full_review_*.csv'
       - 'anki/klose/learner/presentation_review_registry.csv'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/source_identity_map.csv'
