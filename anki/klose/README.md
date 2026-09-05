@@ -58,7 +58,7 @@ stage::grade4-review           26
 stage::lower-grade-backfill   317
 ```
 
-第一次使用时建议完整导入 `publish/study.csv`，然后只保持 `stage::grade4-new` 为 Unsuspended；另外两组先 Suspend。
+第一次使用时完整导入 `publish/anki-import.csv`，然后只保持 `stage::grade4-new` 为 Unsuspended；另外两组先 Suspend。
 
 这三组不是三个 Deck。长期主 Deck 始终是：
 
@@ -84,8 +84,14 @@ anki/klose/
 │   ├── grade4_*                   # Grade-4 显式 learner review/override 层
 │   ├── presentation_review_registry.csv
 │   └── review_approvals/          # 不可覆盖的显式审批批次
+├── anki/
+│   ├── card_front.html            # 唯一 Recognition Card 正面
+│   ├── card_back.html             # 唯一 Recognition Card 背面
+│   ├── styling.css
+│   └── README.md                  # 1 Note = 1 Card 契约
 ├── publish/
-│   ├── study.csv                  # 唯一推荐长期 Anki 同步入口
+│   ├── study.csv                  # released Notes 内部数据真源/审计 CSV
+│   ├── anki-import.csv            # 唯一正式 Anki 导入文件
 │   ├── all.csv                    # 完整库存
 │   ├── onboarding/                # 学习阶段便利视图，不是独立 Deck
 │   ├── migration/
@@ -101,12 +107,14 @@ anki/klose/
 第一次以及以后长期更新都使用：
 
 ```text
-publish/study.csv
+publish/anki-import.csv
 ```
+
+`study.csv` 不直接导入 Anki。它有普通 CSV 表头，用于 repo 内部构建、审计和与 Released Set 对账。`anki-import.csv` 使用 Anki 官方 `#...` file headers，并由 release gate 验证其数据与 `study.csv` 完全一致。
 
 不要同时额外导入 `onboarding/*.csv` 或 `by-source/*.csv`。这些只是同一批 Master Notes 的视图。
 
-如果已经导入过早期 `anki/人教版一年级起点/import/*.csv`，不要直接导入 NoteID-first `study.csv`，先按 `docs/ANKI_MIGRATION.md` 完成一次性迁移。
+如果已经导入过早期 `anki/人教版一年级起点/import/*.csv`，不要直接导入 NoteID-first 新发布文件，先按 `docs/ANKI_MIGRATION.md` 完成一次性迁移。
 
 ## 持久化状态
 
@@ -124,7 +132,7 @@ learner/review_approvals/*.csv
 
 - 旧 NoteID 不重排、不复用；
 - 新 learning unit 只追加新 NoteID；
-- 已 release Note 原则上持续留在 `study.csv`；
+- 已 release Note 原则上持续留在 `study.csv` / `anki-import.csv`；
 - review 状态绑定 ContentFingerprint；Meaning/Example/Translation 变化会使旧 approval 失效；
 - identity merge/split 必须单独设计迁移。
 
@@ -163,7 +171,7 @@ CI：
 .github/workflows/build-klose-vocabulary.yml
 ```
 
-当前正式 CI 已通过 `Verify Anki release readiness`。
+Release gate 必须在 generated data commit/push 之前通过，避免“先发布错误数据、后报 CI 失败”。
 
 ## Grade-4 Learner Layer
 
