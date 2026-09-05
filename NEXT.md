@@ -7,57 +7,130 @@ Last updated: 2026-09-05
 ```text
 AGENTS.md
 → NEXT.md
+→ docs/ANKI_LEARNING_ORDER_MIGRATION.md
 → docs/ANKI_SYNC_WORKFLOW.md
-→ docs/ANKI_PROMPTHINT_MIGRATION.md
 → anki/klose/anki/README.md
 ```
 
 ## Current status
 
-**Grade-4 Vocabulary 已完成从真实教材到 Anki 的正式闭环，并已在现有 Desktop collection 中启用。**
+Grade-4 Vocabulary 的 Source / Identity / Learner Presentation / Learning Admission / Review / Release 已完成；Desktop 也已完成 PromptHint、638 Notes 原地导入与 `221 active / 417 held` 的准入切换。
+
+本轮新发现并修复了一个 sequencing 缺口：**Learning Admission 过去只定义“学哪 221 个”，没有定义“按什么顺序学”。**
+
+Repo 现在已经加入 deterministic `LearningOrder`；当前唯一未完成的是把它 materialize 到 Anki 的 New Card Position。
 
 ```text
-Source / Identity / Learner Presentation / Learning Admission
-→ Content Review / Release Gate
-→ PromptHint Note Type migration
-→ NoteID-first in-place import
-→ active-set reset
-→ Desktop validation
+Build Valid                 = yes
+Content Releasable          = yes
+Anki content updated        = yes
+Learning Admitted           = yes
+LearningOrder in repo       = yes
+LearningOrder in Anki New # = pending one-time reposition
 ```
 
-当前四个执行状态：
+Klose 尚未正式开始本批次学习，因此当前仍是安全的 New Card 排序窗口。
+
+---
+
+## 1. Current repo baseline
 
 ```text
-Build Valid        = yes
-Content Releasable = yes
-Anki Updated       = yes
-Learning Admitted  = yes
+inventory Notes        = 901
+released / study       = 638
+Grade-4 allowed        = 221
+held library           = 417
+model-reviewed         = 638
+review pending         = 0
+PromptHint nonempty    = 4
+LearningOrder          = 001..221
+held LearningOrder     = blank
+Release Gate           = PASS
+held IPA debt          = 99
 ```
 
-Klose 当前 `LearnerLevel=4`。继续保持：
+正式 generated release commit：
 
 ```text
-Source Grade ≠ LearnerLevel ≠ Learning Admission
+cb48847  data: rebuild Klose vocabulary base
+```
+
+正式 Anki artifact：
+
+```text
+anki/klose/publish/anki-import.csv
+```
+
+当前列：
+
+```text
+NoteID,CanonicalWord,Word,PromptHint,British,American,MeaningPrimary,
+ExampleSentence,ExampleTranslation,LearnerLevel,LearningOrder,Sources,SourceBooks,Tags
+```
+
+禁止手工编辑 `study.csv` / `anki-import.csv`。
+
+---
+
+## 2. LearningOrder contract — implemented
+
+必须区分：
+
+```text
+LearningOrder
+= GitHub 中的 curriculum / admission 真源
+
+New Card Position / New # / Due
+= Anki 中的物理学习状态
+```
+
+当前 Grade-4 order 从真实教材 + confirmed source identity 自动推导：
+
+```text
+四年级上 Unit 1 → Unit 6
+→ 四年级下 Unit 1 → Unit 6
+→ 每个 Unit 内按教材 Order
+```
+
+allowed 221 Notes：
+
+```text
+LearningOrder = 001..221
+```
+
+held 417 Notes：
+
+```text
+LearningOrder = blank
+```
+
+Release Gate 会重新从 `source_identity_extensions.csv` 计算教材顺序并校验 exact NoteID → LearningOrder 映射；不是只检查 1..221 是否连续。
+
+前 8 个已在 CI / source identity 中确认：
+
+```text
+001  PE              KV000285
+002  job             KV000433
+003  doctor          KV000425
+004  farmer          KV000429
+005  nurse           KV000423
+006  office worker   KV000803
+007  factory worker  KV000804
+008  busy            KV000466
+```
+
+`LearningOrder` 是 admission metadata，不进入 learner content fingerprint。本次：
+
+```text
+review invalidated = 0
+review pending     = 0
 ```
 
 ---
 
-## 1. Current operational baseline
+## 3. Current physical Anki state
 
-Repo：
-
-```text
-inventory Notes           = 901
-released / study          = 638
-actual Grade-4 allowed    = 221
-held library              = 417
-model-reviewed            = 638
-review pending            = 0
-unresolved review queues  = 0
-Release Gate              = PASS
-```
-
-Anki Desktop 已实测：
+Desktop 已完成此前正式导入与 PromptHint 验收：
 
 ```text
 Deck              = Klose-English::Vocabulary
@@ -66,151 +139,132 @@ Card Type         = Recognition
 Total Notes/Cards = 638
 Unsuspended       = 221
 Suspended         = 417
+New/day           = 8
 FSRS              = ON
 Desired retention = 90%
-New/day           = 8
 ```
 
-正式导入结果：
-
-```text
-638 notes found in file
-120 new notes imported
-518 existing notes updated in place
-```
-
-因此原 518 Notes 没有复制成第二套 Cards；Stable NoteID / existing Card identity 得以保留。
-
-当前 active set 唯一由：
-
-```text
-learning::klose::grade4
-```
-
-控制。
-
----
-
-## 2. Actual Grade-4 source / identity — completed
-
-权威 source：
-
-```text
-anki/klose/source_reference/rj_start1-grade4-klose-actual.csv
-SourceID      = rj_start1
-SourceEdition = klose-current
-```
-
-规模：
-
-```text
-221 textbook occurrences
-219 unique surface strings
-221 target learning units / Stable NoteIDs
-```
-
-教材 occurrence → NoteID：
-
-```text
-anki/klose/master/source_identity_extensions.csv
-221 confirmed mappings
-```
-
-Identity summary：
-
-```text
-reuse existing = 122
-new NoteID      = 99
-unresolved      = 0
-```
-
-关键同词异义：
-
-```text
-KV000424  cook  厨师
-KV000805  cook  烹饪；煮
-KV000816  over  在……远端/对面
-KV000863  over  结束（的）
-```
-
-Source reconciliation 上/下册均：
-
-```text
-reconciled / confirmed / confirmed / allowed
-```
-
----
-
-## 3. PromptHint migration — completed and validated
-
-`PromptHint` 已成为 `Klose Vocabulary` Note Type 的长期可选字段，位置在 `Word` 后。
-
-只有 4 个当前 active homograph Notes 非空：
-
-```text
-KV000424  cook  -> n.
-KV000805  cook  -> v.
-KV000816  over  -> 位置
-KV000863  over  -> 结束
-```
-
-Desktop Preview 已实测：
+PromptHint 已实测：
 
 ```text
 cook / n.       correct
 cook / v.       correct
 over / 位置      correct
 over / 结束      correct
+Back TTS         correct
 ```
 
-Recognition front：
-
-```text
-Word + optional PromptHint
-```
-
-Back：
-
-```text
-FrontSide
-+ Word TTS
-+ British / American IPA
-+ Meaning
-+ Example
-+ Translation
-```
-
-Back Preview 的 Word TTS 已实测正常。
-
-PromptHint 属于 Learner Presentation，不改变 Source / Identity / Stable NoteID / Card identity / FSRS。
-
-正式 PromptHint approval：
-
-```text
-anki/klose/learner/review_approvals/grade4-prompthint-v1.csv
-```
-
-日常 CI 已移除一次性 auto-approval；后续任何 PromptHint / content 改动都会重新进入 `pending`。
+但当前 Anki `New #` 仍继承旧历史创建顺序；实测最前面是 `there / chair / ...`，尚未 materialize 最新 LearningOrder。
 
 ---
 
-## 4. Learning Admission — live in Anki
+## 4. Immediate next action — Anki LearningOrder migration
 
-Repo 定义：
-
-```text
-allowed = 221 -> stage::grade4-current + learning::klose::grade4
-held    = 417 -> stage::library, no learning::* tag
-```
-
-Desktop 已完成一次初始化 reset：
+严格按：
 
 ```text
-Suspend all 638
-→ Unsuspend tag:learning::klose::grade4
+docs/ANKI_LEARNING_ORDER_MIGRATION.md
 ```
 
-最终实测：
+### A. Update local repo
+
+```text
+git pull origin main
+```
+
+### B. Extend existing Note Type
+
+在现有 `Klose Vocabulary` 中增加：
+
+```text
+LearningOrder
+```
+
+放在 `LearnerLevel` 后、`Sources` 前。
+
+最终字段顺序：
+
+```text
+1  NoteID
+2  CanonicalWord
+3  Word
+4  PromptHint
+5  British
+6  American
+7  MeaningPrimary
+8  ExampleSentence
+9  ExampleTranslation
+10 LearnerLevel
+11 LearningOrder
+12 Sources
+13 SourceBooks
+14 UserMemo
+```
+
+不修改 Card Template，不创建第二套 Note Type / Card Type。
+
+### C. Import latest release in place
+
+```text
+Import file      = anki/klose/publish/anki-import.csv
+Note Type        = Klose Vocabulary
+Existing Notes   = Update
+Match scope      = Note Type
+Identity         = NoteID
+LearningOrder    -> LearningOrder
+UserMemo         -> Nothing
+```
+
+预期总数仍为：
+
+```text
+638 Notes / 638 Cards
+```
+
+### D. Verify all target Cards are still New
+
+搜索：
+
+```text
+tag:learning::klose::grade4 -is:suspended is:new
+```
+
+必须：
+
+```text
+221 Cards
+```
+
+如果不是 221，停止，不要 Reposition 已经进入真实 Learning/Review 的 Cards。
+
+### E. Materialize LearningOrder → New #
+
+显示 `LearningOrder` 列并升序排序，前 8 个必须是：
+
+```text
+PE
+job
+doctor
+farmer
+nurse
+office worker
+factory worker
+busy
+```
+
+全选这 221 张：
+
+```text
+Cards → Reposition
+Start position = 1
+Step           = 1
+Randomize      = OFF
+Shift existing = ON
+```
+
+执行后按 `Due / New #` 升序，前 8 张必须仍是上述 8 个词，并对应 New #1..8。
+
+最终数量仍必须：
 
 ```text
 Total        = 638
@@ -218,67 +272,22 @@ Unsuspended  = 221
 Suspended    = 417
 ```
 
-从现在起 Klose 进入真实 Review History 后，**不要因为 Source Grade / 教材 scope 的变化批量重新 Suspend 已经进入 Learning/Review 的 Cards**。FSRS / Due / Interval / Review History 由 Anki 持续维护。
+完成后再 Sync 到 AnkiWeb / iPad。
 
 ---
 
-## 5. Long-term sync contract
+## 5. Long-term rule
 
-以后内容更新统一按：
+以后：
 
-```text
-upstream source / identity / learner / admission changes
-→ review fingerprint invalidation
-→ explicit review / approval
-→ Release Gate PASS
-→ regenerate anki/klose/publish/anki-import.csv
-→ import into same Klose Vocabulary Note Type
-→ Existing Notes = Update by NoteID
-```
-
-正式 Anki artifact 永远是：
-
-```text
-anki/klose/publish/anki-import.csv
-```
-
-不要直接导入：
-
-```text
-publish/study.csv
-publish/all.csv
-```
-
-也不要新建第二套长期 Vocabulary Note Type / Deck 来承载后续教材。
+- Meaning / IPA / Example / PromptHint 改动 → fingerprint invalidation + explicit content review；
+- LearningOrder 改动 → Admission / Release Gate 校验，不触发内容 review；
+- 仅对尚未学习的 `is:new` Cards 可以按 LearningOrder 调整 New Card Position；
+- 已进入真实 Learning / Review 的 Card，其 FSRS / Due / Interval / Review History 永远以 Anki 为真源，不由 repo 重排。
 
 ---
 
-## 6. Next decision point
+## Deferred
 
-Grade-4 Vocabulary 数据工程与 Anki 启用阶段已经结束。下一阶段不要立即扩 schema，优先从真实学习反馈驱动。
-
-建议顺序：
-
-```text
-1. Klose 开始真实 Grade-4 Vocabulary 学习
-2. 观察首批真实 Review History / 易错词 / 例句理解情况
-3. 再决定 learner presentation 是否需要微调
-4. Vocabulary 稳定后继续四下 Useful Expressions
-```
-
-如果下一任务直接进入四下 Expressions，启动时读取：
-
-```text
-docs/EXPRESSIONS_SYSTEM.md
-anki/klose/source_reference/rj_start1-grade4-lower-klose-expressions.csv
-```
-
-如果下一任务是复盘 Klose 的学习状态，以 **Anki 实际 FSRS / Review History** 为真源，不从 GitHub 推测学习表现。
-
----
-
-## Deferred / technical debt
-
-- 四下 Useful Expressions：Vocabulary Grade-4 已正式启用后可开始处理。
-- 99 个 held legacy Notes 缺 British/American IPA：未来对应 Note 被 admission 前补齐并重新 review；当前 417 held 不阻塞学习。
-- AnkiWeb / iPad 同步属于 Anki 设备状态；若尚未完成，在 Desktop 当前正确 collection 上执行同步后再让其他设备拉取，不通过 repo 重建学习状态。
+- 四下 Useful Expressions：LearningOrder migration 完成、Klose 正式开始 Vocabulary 后再处理。
+- 99 个 held legacy Notes 缺 British/American IPA：未来对应 Note admission 前补齐并 re-review。
