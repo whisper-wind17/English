@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Verify that the current released Klose vocabulary is safe to import into Anki.
 
-This is a content-release gate, not merely a build-consistency check.
-It verifies source reconciliation, explicit allowed/held learning state, publish
-derivation, complete release-visible content, and current review approval.
+Current learning Notes (`allowed`) must have every release-visible field complete.
+Held library Notes remain structurally valid and reviewed, but legacy British /
+American IPA gaps are allowed until those Notes are admitted for learning.
 """
 from __future__ import annotations
 
@@ -37,6 +37,10 @@ DERIVED_FIELDS = [
     "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
     "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks",
 ]
+ALLOWED_REQUIRED_FIELDS = tuple(PUBLISH_FIELDS)
+HELD_REQUIRED_FIELDS = tuple(
+    field for field in PUBLISH_FIELDS if field not in {"British", "American"}
+)
 CURRENT_LEARNING_TAG = "learning::klose::grade4"
 CURRENT_STAGE = "stage::grade4-current"
 HELD_STAGE = "stage::library"
@@ -73,7 +77,6 @@ def read_anki_import(path: Path) -> tuple[dict[str, str], list[dict[str, str]]]:
 
 
 def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
-    """Bind approval to all release-visible facts plus learner presentation."""
     payload = "\x1f".join([
         "klose-presentation-v2",
         master.get("CanonicalWord", "").strip(),
@@ -256,8 +259,6 @@ def main() -> None:
             f"study={len(study_ids)} released={len(released_ids)}"
         )
 
-    # Generated release rows must be derivable from current upstream state. This
-    # catches synchronized tampering with study.csv and anki-import.csv.
     drift: list[str] = []
     for row in study_rows:
         nid = row["NoteID"]
@@ -275,17 +276,22 @@ def main() -> None:
             f"count={len(drift)} examples={drift[:10]}"
         )
 
-    missing_required: list[str] = []
+    missing_allowed: list[str] = []
+    missing_held: list[str] = []
     bad_learning_state: list[str] = []
     for row in study_rows:
-        if any(not row.get(field, "").strip() for field in (
-            "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
-            "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
-        )):
-            missing_required.append(row["NoteID"])
-
         nid = row["NoteID"]
         admission = admission_by_id[nid]
+        status = admission["Status"].strip()
+        required_fields = ALLOWED_REQUIRED_FIELDS if status == "allowed" else HELD_REQUIRED_FIELDS
+        missing_fields = [field for field in required_fields if not row.get(field, "").strip()]
+        if missing_fields:
+            item = f"{nid}:{','.join(missing_fields)}"
+            if status == "allowed":
+                missing_allowed.append(item)
+            else:
+                missing_held.append(item)
+
         tags = row["Tags"].split()
         stage_tags = [tag for tag in tags if tag.startswith("stage::")]
         learning_tags = [tag for tag in tags if tag.startswith("learning::")]
@@ -299,10 +305,15 @@ def main() -> None:
         elif learning_tags:
             bad_learning_state.append(nid)
 
-    if missing_required:
+    if missing_allowed:
         raise SystemExit(
-            f"Release blocked: {len(missing_required)} study rows have missing required fields; "
-            f"examples={missing_required[:10]}"
+            f"Release blocked: {len(missing_allowed)} current-learning rows have missing required fields; "
+            f"examples={missing_allowed[:10]}"
+        )
+    if missing_held:
+        raise SystemExit(
+            f"Release blocked: {len(missing_held)} held-library rows have missing structural fields; "
+            f"examples={missing_held[:10]}"
         )
     if bad_learning_state:
         raise SystemExit(
@@ -334,10 +345,15 @@ def main() -> None:
 
     allowed_count = sum(1 for r in admission_by_id.values() if r.get("Status") == "allowed")
     held_count = sum(1 for r in admission_by_id.values() if r.get("Status") == "held")
+    held_ipa_debt = sum(
+        1 for row in study_rows
+        if admission_by_id[row["NoteID"]]["Status"].strip() == "held"
+        and (not row.get("British", "").strip() or not row.get("American", "").strip())
+    )
     print(
         f"Klose content release ready: profile={learner_profile}, level={learner_level}, "
         f"released={len(released_ids)}, current_learning={allowed_count}, held={held_count}, "
-        f"study={len(study_ids)}, anki_import={len(anki_rows)}, "
+        f"study={len(study_ids)}, anki_import={len(anki_rows)}, held_ipa_debt={held_ipa_debt}, "
         f"source_reconciliation=ready, unresolved_reports=0, pending_reviews=0"
     )
 
