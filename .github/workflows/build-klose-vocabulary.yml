@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/build_klose_vocabulary.py'
+      - 'tools/apply_klose_actual_grade4.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
@@ -27,6 +28,7 @@ on:
       - 'anki/klose/master/source_reconciliation_registry.csv'
       - 'anki/klose/master/identity_migrations.csv'
       - 'anki/klose/master/release_registry.csv'
+      - 'anki/klose/master/release_registry_extensions.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -66,8 +68,11 @@ jobs:
       - name: Validate actual Grade-4 identity coverage
         run: python tools/check_klose_actual_grade4_identity.py
 
-      - name: Build global vocabulary
+      - name: Build legacy vocabulary inventory
         run: python tools/build_klose_vocabulary.py
+
+      - name: Overlay actual Klose Grade-4 source
+        run: python tools/apply_klose_actual_grade4.py
 
       - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
