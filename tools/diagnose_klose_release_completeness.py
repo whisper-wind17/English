@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
 STUDY = BASE / "publish" / "study.csv"
 ADMISSION = BASE / "learner" / "learning_admission.csv"
-REQUIRED = (
+COMMON_REQUIRED = (
     "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
     "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
 )
@@ -36,7 +36,10 @@ def main() -> None:
     for row in study:
         nid = row["NoteID"].strip()
         status = admission.get(nid, "missing")
-        missing = [f for f in REQUIRED if not row.get(f, "").strip()]
+        required = list(COMMON_REQUIRED)
+        if status == "allowed":
+            required.append("LearningOrder")
+        missing = [f for f in required if not row.get(f, "").strip()]
         if not missing:
             continue
         by_status[status] += 1
