@@ -44,7 +44,7 @@ Grade 6 presentation
 - Source / Book / Grade / Unit / 原始行号等 provenance；
 - 当前 LearnerLevel 的学习呈现；
 - Learner Review Registry 与 approval manifest；
-- review queue、质量检查和发布 CSV。
+- review queue、质量检查和发布文件。
 
 ### Anki：学习状态真源
 
@@ -274,7 +274,7 @@ source::newconcept::book::1
 
 ---
 
-## 7. Inventory 与 Released Set 分离
+## 7. Inventory、Released Set 与 Anki Import 分离
 
 ### `all.csv`：完整库存
 
@@ -284,13 +284,32 @@ anki/klose/publish/all.csv
 
 包含进入 Master 的所有 Notes，用于审计、备份和完整视图。
 
-### `study.csv`：唯一推荐长期 Anki 同步入口
+### `study.csv`：Released Set 的内部数据真源
 
 ```text
 anki/klose/publish/study.csv
 ```
 
-只包含已经释放给 Klose 学习、且需要持续获得内容更新的 Notes。
+只包含已经释放给 Klose 学习、且需要持续获得内容更新的 Notes。它保留普通 CSV 表头，用于 repo 构建、审计和 release 对账，**不直接导入 Anki**。
+
+### `anki-import.csv`：唯一正式 Anki 导入文件
+
+```text
+anki/klose/publish/anki-import.csv
+```
+
+它的数据必须与 `study.csv` 完全一致，但使用 Anki 官方 file headers：
+
+```text
+#separator:Comma
+#html:false
+#notetype:Klose Vocabulary
+#deck:Klose-English::Vocabulary
+#tags column:12
+#columns:...
+```
+
+因此没有普通 CSV 数据表头行，不会把 `NoteID / Word / ...` 当成一张 Note。
 
 当前 Grade 4：
 
@@ -299,11 +318,11 @@ Inventory：人教版 1–6 年级全部词
 Released：人教版 1–4 年级
 ```
 
-以后加入北京版但暂不 release 时，北京版独有新词可以先进入 `all.csv`，不会因为日常导入 `study.csv` 而突然进入 New Cards。
+以后加入北京版但暂不 release 时，北京版独有新词可以先进入 `all.csv`，不会因为日常导入 `anki-import.csv` 而突然进入 New Cards。
 
 ### Release 是持久化状态
 
-`release_registry.csv` 记录已释放 Note；每个 release scope 必须显式带 `released_at`，因此 Grade 5/新来源在未来释放时不会被错误记成初始基线日期。Note 一旦进入 Anki，原则上继续保留在 `study.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
+`release_registry.csv` 记录已释放 Note；每个 release scope 必须显式带 `released_at`，因此 Grade 5/新来源在未来释放时不会被错误记成初始基线日期。Note 一旦进入 Anki，原则上继续保留在 `study.csv` / `anki-import.csv`，以便后续释义/例句升级仍能更新它。撤回已释放 Note 必须是显式学习策略变更。
 
 ---
 
@@ -340,7 +359,7 @@ Anki 参考：
 
 ---
 
-## 9. Anki Note Type Contract
+## 9. Anki Note / Card Contract
 
 长期固定 Note Type：
 
@@ -348,7 +367,7 @@ Anki 参考：
 Klose Vocabulary
 ```
 
-推荐字段：
+字段：
 
 ```text
 NoteID
@@ -367,20 +386,45 @@ UserMemo          # Anki-local，可选，不从 CSV 更新
 
 Tags 使用 Anki 自带 Tags，不需要建立普通 `Tags` 字段。
 
-正式发布 CSV 第一字段固定为 `NoteID`；重新导入时保持同一 Note Type，并使用 Update Existing Notes / Note Type 范围匹配。这样已有 Note 原地更新，学习调度历史保留。
+长期只保留一个 Card Type：
+
+```text
+Recognition
+```
+
+因此：
+
+```text
+1 Note = 1 Card
+```
+
+不要使用 `Basic (and reversed card)`。Card Template / CSS 冻结在：
+
+```text
+anki/klose/anki/
+```
+
+正式导入第一数据字段固定为 `NoteID`；重新导入时保持同一 Note Type，并使用：
+
+```text
+Existing notes = Update
+Match scope    = Note Type
+```
+
+这样已有 Note 原地更新，学习调度历史保留。
 
 官方参考：
 
 - [Importing Text Files](https://docs.ankiweb.net/importing/text-files.html)
 - [Editing / Note Types](https://docs.ankiweb.net/editing.html)
 
-repo 生成的来源/年级/stage Tags 视为 system-managed。需要永久保留的个人备注不要混入这组 Tags，使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
+repo 生成的来源/年级/stage Tags 视为 system-managed。长期重新导入可能更新这些 Tags。需要永久保留的个人备注不要混入这组 Tags，使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
 
 ---
 
 ## 10. Word-first → NoteID-first 一次性迁移
 
-旧版人教版 CSV 第一字段是 `Word`。如果这些 Notes 已经进入 Anki，直接导入新版 NoteID-first CSV 会产生重复 Note。
+旧版人教版 CSV 第一字段是 `Word`。如果这些 Notes 已经进入 Anki，直接导入新版 NoteID-first 发布文件会产生重复 Note。
 
 安全迁移：
 
@@ -391,7 +435,7 @@ repo 生成的来源/年级/stage Tags 视为 system-managed。需要永久保�
 → Update Existing Notes，给旧 Note 补 NoteID
 → 抽样确认 Review History / Due / Interval 未丢失
 → Manage Note Types → Fields → 把 NoteID reposition 到第 1 位
-→ 以后永久使用 NoteID-first study.csv
+→ 以后永久使用 NoteID-first anki-import.csv
 ```
 
 详细步骤：`docs/ANKI_MIGRATION.md`。
@@ -402,7 +446,8 @@ repo 生成的来源/年级/stage Tags 视为 system-managed。需要永久保�
 
 ```text
 anki/klose/publish/
-├── study.csv                         # 唯一推荐长期 Anki 同步入口
+├── study.csv                         # released-set 内部数据真源/审计 CSV
+├── anki-import.csv                   # 唯一正式 Anki 导入文件
 ├── all.csv                           # 完整库存
 ├── onboarding/                       # 同一 study 集合的学习阶段便利视图
 │   ├── grade4-new.csv
@@ -419,7 +464,7 @@ anki/klose/publish/
         └── grade6.csv
 ```
 
-`by-source` 与 `onboarding` 都只是 Master/Study 的便利视图，不形成另一套数据真源或长期 Deck；不要在已经导入 `study.csv` 后再把这些视图重复导入。
+`by-source` 与 `onboarding` 都只是 Master/Study 的便利视图，不形成另一套数据真源或长期 Deck；不要在已经导入 `anki-import.csv` 后再把这些视图重复导入。
 
 ---
 
@@ -485,10 +530,13 @@ Anki FSRS History      不变
 ### Publish
 
 - `study.csv` 与 Released Set 一致；
+- `anki-import.csv` 数据与 `study.csv` 完全一致；
+- `anki-import.csv` 使用正确的 Anki file headers，没有普通数据表头；
+- 每个 released Note 恰好一个 `stage::` Tag；
 - `by-source/*` / `onboarding/*` 只是视图；
 - deterministic build；
 - 不静默 fallback 到成人词典首义；
-- migration CSV 第一列必须是 `Word`，正式 publish 第一列必须是 `NoteID`。
+- migration CSV 第一列必须是 `Word`，正式 Anki import 第一数据字段必须是 `NoteID`。
 
 ### 正式导入门槛
 
@@ -503,9 +551,14 @@ identity / learner / future-vocabulary reports = 0
 review pending                             = 0
 ContentFingerprint stale                  = 0
 study.csv == Released Set
+anki-import.csv data == study.csv
+Anki file headers                          = valid
+stage partition                            = valid
 ```
 
-才能把当前 `study.csv` 描述为“可以正式导入 Anki”。
+才能把当前 `anki-import.csv` 描述为“可以正式导入 Anki”。
+
+CI 必须在 commit/push generated release **之前**通过该 Gate，禁止先发布错误数据再报失败。
 
 ---
 
@@ -545,7 +598,7 @@ Card Template / CSS / 显示顺序变化不改变 Vocabulary Identity。
 
 ## 15. 第一批正式基线：rj_start1 Grade-4 Baseline v1
 
-截至 2026-09-05，第一批正式基础数据已经完成：
+截至 2026-09-05，第一批正式基础数据：
 
 ```text
 SourceID = rj_start1
@@ -567,10 +620,11 @@ Released scope = 人教版 1–4 年级
 - approval manifest：`learner/review_approvals/grade4-baseline-v1.csv`；
 - identity / learner / future-vocabulary review 均为 0；
 - onboarding：175 个 `grade4-new`、26 个 `grade4-review`、317 个 `lower-grade-backfill`；
-- `study.csv`：唯一推荐长期 Anki 同步入口；
+- `study.csv`：released-set 内部数据真源；
+- `anki-import.csv`：唯一正式 Anki 导入文件；
 - `all.csv`：完整 802 Notes 库存；
-- Word-first → NoteID-first migration CSV 已生成；
-- Global CI 已通过 `Verify Anki release readiness`。
+- Note/Card contract：一个 `Recognition` Card，`1 Note = 1 Card`；
+- Word-first → NoteID-first migration CSV 已生成。
 
 关键长期状态：
 
@@ -606,6 +660,12 @@ Source Adapter：
 ```text
 anki/人教版一年级起点/
 tools/build_anki_rj_start1.py
+```
+
+Anki Contract：
+
+```text
+anki/klose/anki/
 ```
 
 Global Data Area：
