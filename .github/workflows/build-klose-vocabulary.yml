@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/build_klose_vocabulary.py'
       - 'tools/apply_klose_actual_grade4.py'
+      - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
@@ -75,6 +76,9 @@ jobs:
 
       - name: Overlay actual Klose Grade-4 source
         run: python tools/apply_klose_actual_grade4.py
+
+      - name: Build explicit allowed/held learning admission
+        run: python tools/build_klose_learning_admission.py
 
       - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
