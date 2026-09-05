@@ -1,0 +1,65 @@
+CandidateKey,CanonicalPattern,CommunicativeFunction,ExpressionType,SourceGrades,ExampleSource,Tier,PilotCandidate,Status,Notes
+EC0001,What's your name?,询问姓名,fixed,3,What's your name?,core,yes,candidate,三下明确出现
+EC0002,My name is [name].,介绍自己的姓名,slot_frame,3,My name's Amy Green.,core,no,candidate,与三上 My name is Wu Binbin 归并
+EC0003,Where are you from?,询问来自哪里,fixed,3,Where are you from?,core,yes,candidate,高频自我介绍
+EC0004,I'm from [place].,说明来自哪里,slot_frame,3,I'm from the UK.,core,no,candidate,与上一问句配套
+EC0005,Nice to meet you.,初次见面问候,fixed,3,Nice to meet you.,core,no,candidate,Nice to meet you too 作为回应变体
+EC0006,This is my [person].,介绍人物或家庭成员,slot_frame,3,This is my grandma.,core,no,candidate,可迁移到 family/friend
+EC0007,Do you have [thing]?,询问是否拥有某物,slot_frame,3,Do you have a pet?,core,yes,candidate,三上三下重复出现
+EC0008,Let's [verb phrase].,提出一起做某事,slot_frame,3|4,Let's go to the zoo!,core,yes,candidate,跨年级高频重复
+EC0009,What's this? / What's that?,询问近处或远处事物,fixed,3,What's this?,core,yes,candidate,三上 this/that 成对出现
+EC0010,Do you like [thing]?,询问喜好,slot_frame,3,Do you like apples?,core,yes,candidate,三上多次出现
+EC0011,What colour is [thing]?,询问颜色,slot_frame,3,What colour is it?,core,yes,candidate,基础高频表达
+EC0012,How old are you?,询问年龄,fixed,3,How old are you?,core,no,candidate,基础社交表达
+EC0013,Here you are.,递给对方某物,fixed,3,Here you are.,core,no,candidate,三上三下均出现
+EC0014,Can I [verb phrase], please?,请求许可,slot_frame,3|4,Can I use your eraser please?,core,yes,candidate,合并四上 Can I wear... 与四下 Can I buy...
+EC0015,Would you like [thing]?,询问对方是否想要某物,slot_frame,3|4,Would you like some rice and meat?,core,yes,candidate,三下与四下重复
+EC0016,I'd like [thing], please.,礼貌表达想要某物,slot_frame,3,I'd like some bread and eggs please.,core,yes,candidate,点餐购物高迁移
+EC0017,What are these?,询问复数事物,fixed,3|4,What are these?,core,no,candidate,三下与四下完全重复
+EC0018,Where is [thing]?,询问物品位置,slot_frame,3,Where is my animal book?,core,yes,candidate,位置表达核心问句
+EC0019,How many [plural noun] do [subject] [verb]?,询问数量,slot_frame,3,How many books do we have?,core,yes,candidate,覆盖 have/need 等动作
+EC0020,How much is [thing]?,询问价格,slot_frame,3,How much is this bag?,core,yes,candidate,购物核心表达
+EC0021,What's [person]'s job?,询问职业,slot_frame,4,What's your mother's job?,core,yes,candidate,四上核心表达
+EC0022,[Person] is a/an [job].,说明职业,slot_frame,4,She's a doctor.,core,no,candidate,合并 firefighter/driver 等来源
+EC0023,What's [person]'s name?,询问他人姓名,slot_frame,4,What's your friend's name?,core,no,candidate,与三年级 What's your name 区分
+EC0024,His/Her name is [name].,介绍他人姓名,slot_frame,4,His name is Zhang Peng.,core,no,candidate,与上一问句配套
+EC0025,There is a/an [singular noun].,表达存在单数事物,slot_frame,4,There is a playground.,core,yes,candidate,四上多条 source occurrence 归并
+EC0026,There are [plural noun].,表达存在复数事物,slot_frame,4,There are many people.,core,no,candidate,与 There is 配套
+EC0027,My favourite [category] is [item].,表达最喜欢的事物,slot_frame,4,My favourite place is the museum.,core,no,candidate,可迁移 food/sport/season/place
+EC0028,[Person] is [verb-ing].,描述正在发生的动作,slot_frame,4,Chen Jie is making the bed.,core,no,candidate,现在进行时主动表达
+EC0029,What's the weather like in [place]?,询问某地天气,slot_frame,4,What's the weather like in Sydney?,core,yes,candidate,天气主题核心句型
+EC0030,It's [weather adjective] [time/place].,描述天气状态,slot_frame,4,It's sunny today.,core,no,candidate,覆盖 sunny/hot/cold/windy 等
+EC0031,Whose [noun] is this?,询问所属,slot_frame,4,Whose sweater is this?,core,yes,candidate,四上核心问句
+EC0032,It's [person]'s.,回答所属,slot_frame,4,It's your dad's.,core,no,candidate,与 Whose 问句配套
+EC0033,What time is it?,询问时间,fixed,4,What time is it?,core,yes,candidate,四下核心表达
+EC0034,It's [time] o'clock.,说明整点时间,slot_frame,3|4,It's 5 o'clock.,core,no,candidate,三上七点与四下五点归并
+EC0035,It's time for [noun]. / It's time to [verb].,表达该做某事了,slot_frame,4,It's time for dinner.,core,no,candidate,四下 for/to 两种常用构式归为同一功能候选
+EC0036,Can you please [verb phrase]?,礼貌请求对方做某事,slot_frame,4,Can you please pass me the vegetables?,core,yes,candidate,比 Can I 更偏请求他人行动
+EC0037,Don't [verb phrase], please.,礼貌要求不要做某事,slot_frame,4,Don't waste food please.,core,no,candidate,与一般祈使否定区分
+EC0038,Can I help you?,主动提供帮助,fixed,4,Can I help you?,core,no,candidate,服务和日常场景高频
+EC0039,Is that your [person]?,确认人物身份,slot_frame,3,Is that your brother?,secondary,no,candidate,有迁移价值但优先级低于自我介绍
+EC0040,It's a/an [noun].,说明单数事物是什么,slot_frame,3,It's a fox.,secondary,no,candidate,与 What's this/that 配套
+EC0041,I like [thing].,表达喜好,slot_frame,3|4,I like the fresh air.,secondary,no,candidate,过于基础但可作为问答配套
+EC0042,I'm [number] years old.,回答年龄,slot_frame,3,I'm five years old.,secondary,no,candidate,与 How old are you 配套
+EC0043,They're [plural noun].,说明复数事物是什么,slot_frame,3|4,They're grapes.,secondary,no,candidate,与 What are these 配套
+EC0044,It's [preposition phrase].,说明物品位置,slot_frame,3,It's in the box.,secondary,no,candidate,与 Where is 问句配套
+EC0045,[Subject] [verb] [number] [plural noun].,回答数量,slot_frame,3,We have fifteen books.,secondary,no,candidate,用于 have/need 等数量回答
+EC0046,It's [price].,说明价格,slot_frame,3,It's twenty yuan.,secondary,no,candidate,与 How much 问句配套
+EC0047,What about [thing]?,询问或补充另一个对象,fixed,3,What about this?,secondary,no,candidate,语义依赖上下文
+EC0048,How about [proposal]?,提出替代方案或还价,slot_frame,3,How about three for sixteen yuan?,secondary,no,candidate,高迁移但需要上下文
+EC0049,Who's your [relationship]?,询问某种关系中的人物,slot_frame,4,Who's your best friend?,secondary,no,candidate,当前教材只出现 best friend
+EC0050,[Person] is [adjective] and [adjective].,描述人物两个特征,slot_frame,4,He's tall and strong.,secondary,no,candidate,描述人物可迁移
+EC0051,What can we do for [person]?,询问可以为某人做什么,slot_frame,4,What can we do for them?,secondary,no,candidate,结构清楚但场景较窄
+EC0052,We can [verb phrase].,表达可以采取的行动,slot_frame,3|4,We can do some chores.,secondary,no,candidate,过于通用不列首批
+EC0053,[Name] speaking.,电话中自报身份,slot_frame,4,Mark speaking.,secondary,no,candidate,电话场景固定表达
+EC0054,This is [name].,电话中自报身份,slot_frame,4,This is John.,secondary,no,candidate,必须保留电话语境才能避免与一般 this is 混淆
+EC0055,Which [category] do you like?,询问某类别中的偏好,slot_frame,4,Which season do you like?,secondary,no,candidate,与 Do you like 功能相关但提问范围不同
+EC0056,You have to [verb phrase] first.,表达必须先做某事,slot_frame,4,You have to do your homework first.,secondary,no,candidate,规则和顺序表达
+EC0057,Have a nice day!,祝愿对方一天愉快,fixed,4,Have a nice day!,secondary,no,candidate,固定高频社交表达
+EC0058,Excuse me.,引起注意或表示劳驾,fixed,3|4,Excuse me.,secondary,no,candidate,四下 Excuse me? 的功能需在 presentation 中区分
+EC0059,You're welcome.,回应感谢,fixed,3,You're welcome.,secondary,no,candidate,固定社交表达
+EC0060,No problem.,表示没问题或不用客气,fixed,3,No problem.,secondary,no,candidate,固定社交表达
+EC0061,Be careful!,提醒小心,fixed,3|4,Be careful!,secondary,no,candidate,三上和四下均出现
+EC0062,Hurry up!,催促对方快一点,fixed,4,Hurry up!,secondary,no,candidate,高频但不需要 slot
+EC0063,After you!,礼让对方先行,fixed,3,After you!,secondary,no,candidate,固定礼貌表达
+EC0064,Me too.,表达自己也一样,fixed,3,Me too.,secondary,no,candidate,固定回应表达
