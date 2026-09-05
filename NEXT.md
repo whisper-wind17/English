@@ -1,30 +1,31 @@
-# NEXT — Klose Vocabulary System
+# NEXT — Klose Learning
 
 Last updated: 2026-09-05
 
-This file is the handoff entry for the next conversation. Read `AGENTS.md` first, then this file, then the referenced reconciliation document before changing any Klose vocabulary data.
+新对话启动顺序：
+
+```text
+AGENTS.md
+→ NEXT.md
+→ docs/SOURCE_RECONCILIATION.md
+→ anki/klose/source_reference/rj_start1-grade4-upper-reconciliation.md
+```
 
 ## Current objective
 
-Fix the discovered textbook-version mismatch before Klose starts formal Anki study, then continue with Klose's actual Grade 4 lower textbook and later Grade 5/6 expansion.
+先修复 **Klose 实际四年级上教材与当前第三方 `rj_start1::4年级上` 的版本冲突**，再接收四年级下实际教材，之后才继续 Grade 5/6 扩展。
 
-The key design remains unchanged:
+核心不变量：
 
-- `Source Grade` = where an item appears in a textbook.
-- `LearnerLevel` = how Klose should learn it now.
-- Klose remains `LearnerLevel = 4` even when later learning Grade 5/6 source vocabulary.
-- One Vocabulary Note = one stable learning unit / target sense.
-- GitHub is content/identity/release truth; Anki is FSRS/review-state truth.
+```text
+Source Grade ≠ LearnerLevel
+```
 
-## Critical blocker discovered
+Klose 当前仍使用 `LearnerLevel=4`；未来学习 Grade 5/6 来源词汇也不自动提升 LearnerLevel。
 
-Klose's actual 人教版一年级起点《四年级上》 textbook does **not** match the repo's existing third-party `rj_start1::4年级上` source dataset.
+## Critical blocker
 
-Existing repo Grade 4 upper starts with topics/items such as:
-
-`running / basketball / roller skating / jumping rope / ...`
-
-Klose's actual Grade 4 upper has six units centered on:
+当前 repo 第三方四上 source 从 `running / basketball / roller skating / ...` 开始，主题包含运动、交通、文具、安全等；Klose 手中实际四上 6 Units 则为：
 
 1. jobs / chores
 2. personal traits
@@ -33,148 +34,137 @@ Klose's actual Grade 4 upper has six units centered on:
 5. weather
 6. clothes / seasons
 
-This is a source-version mismatch, not a small omission.
+这是 **Source Edition / Revision mismatch**，不是少量漏词。
 
-Full diagnosis and acceptance criteria:
+当前专项诊断：
 
-`anki/klose/source_reference/rj_start1-grade4-upper-reconciliation.md`
+```text
+anki/klose/source_reference/rj_start1-grade4-upper-reconciliation.md
+```
 
-Status there is **BLOCKED FOR SOURCE RECONCILIATION**.
+状态：**BLOCKED FOR SOURCE RECONCILIATION**。
 
-## Actual Grade 4 upper material already captured
+## 已采集的 Klose 实际四上资料
 
-From Klose's physical textbook screenshots:
+Core Vocabulary：
 
-- Core vocabulary:
-  `anki/klose/source_reference/rj_start1-grade4-upper-klose-actual.csv`
-  - 6 Units
-  - 110 occurrence rows
-  - 109 unique surface entries
-  - `cook` appears twice with different target senses
+```text
+anki/klose/source_reference/rj_start1-grade4-upper-klose-actual.csv
+6 Units
+110 occurrence rows
+109 unique surface entries
+```
 
-- Useful Expressions:
-  `anki/klose/source_reference/rj_start1-grade4-upper-klose-expressions.csv`
-  - 41 raw textbook expression rows
-  - preserve as Source Facts
+Useful Expressions：
 
-- Pattern candidates:
-  `anki/klose/source_reference/rj_start1-grade4-upper-pattern-candidates.csv`
-  - extracted reusable patterns
-  - candidate only; do not release as Anki cards yet
+```text
+anki/klose/source_reference/rj_start1-grade4-upper-klose-expressions.csv
+41 raw textbook expression rows
+```
 
-- Source-reference rules:
-  `anki/klose/source_reference/README.md`
+Pattern Candidates：
 
-Important expression design decision:
+```text
+anki/klose/source_reference/rj_start1-grade4-upper-pattern-candidates.csv
+```
 
-- Vocabulary and Expressions are different learning-object types.
-- Do not stuff full textbook expressions into `Klose Vocabulary` Notes.
-- Raw expressions are preserved 100%; only reusable communicative patterns may later become a separate Expression learning system / Note Type.
+规则：Vocabulary 与 Expressions 分离。Useful Expressions 原文是 Source Fact，但不机械做到“一句 = 一张卡”。详细见 `docs/EXPRESSIONS_SYSTEM.md`。
 
-## Identity issue already confirmed
+## Identity blocker: cook
 
-`cook` is a real sense-split blocker:
+Klose 实际教材：
 
-- Unit 1: `cook` = 烹饪；煮 (verb)
-- Unit 4: `cook` = 厨师 (noun)
+```text
+Unit 1 cook = 烹饪；煮  # verb
+Unit 4 cook = 厨师      # noun
+```
 
-Current released `KV000424` incorrectly combines the two senses (`厨师；做饭`) while its example is noun-sense.
+当前 released `KV000424` 把两个 sense 合并为 `厨师；做饭`，违反一个 Note = 一个 target sense。
 
-Expected migration direction:
+预期 migration：
 
-- keep `KV000424` for `cook` noun / 厨师
-- append a new NoteID for `cook` verb / 烹饪；煮
+```text
+保留 KV000424 -> cook noun / 厨师
+append 新 NoteID -> cook verb / 烹饪；煮
+```
 
-Do not renumber an existing NoteID and do not silently merge target senses.
+不得重编号旧 NoteID。
 
 ## Current Anki state
 
-First Desktop import and AnkiWeb upload have been completed.
+第一次 Desktop 导入与 AnkiWeb Upload 已完成，历史结果：
 
-Current baseline:
+```text
+Deck              = Klose-English::Vocabulary
+Note Type         = Klose Vocabulary
+Card Type         = Recognition
+Cards             = 518
+Suspended         = 343
+Unsuspended       = 175
+New/day           = 8
+FSRS              = ON
+Desired retention = 90%
+```
 
-- Deck: `Klose-English::Vocabulary`
-- Note Type: `Klose Vocabulary`
-- 1 Note = 1 Recognition Card
-- 518 Cards imported
-- 343 Suspended
-- 175 Unsuspended
-- New cards/day = 8
-- Maximum reviews/day = 9999
-- Learning step = `10m`
-- Relearning step = `10m`
-- New cards: ascending position / order gathered
-- Reviews before new cards
-- FSRS = ON
-- Desired retention = 90%
-- FSRS parameters = default; do not optimize yet
-- `Reschedule cards on change` = OFF
-
-Card contract:
-
-- Front: `Word` only
-- Back: `Word` via `FrontSide`, word TTS `{{tts en_US:Word}}`, UK/US IPA, `MeaningPrimary`, example, translation
-- Example sentence is not auto-read yet
-
-AnkiWeb was empty before first sync; Desktop data was uploaded to AnkiWeb successfully.
+Card contract：Front 只显示 Word；Back 含 `{{tts en_US:Word}}`、UK/US IPA、Meaning、Example、Translation；例句暂不自动 TTS。
 
 ### Temporary safety rule
 
-**Do not let Klose start formal study yet.**
+**不要让 Klose 开始正式学习。**
 
-The 175 active `stage::grade4-new` cards were staged from the mismatched Grade 4 source. Klose currently has no real Review History, so this is the lowest-risk point to fix source/identity/staging before FSRS history is created.
+当前 175 active cards 的 staging 基于版本不匹配的旧四上 source。Klose 尚未产生真实 Review History，现在是修复 Source / Identity / staging 成本最低的窗口。
 
-Do not delete/renumber existing NoteIDs and do not hand-edit generated `study.csv` / `anki-import.csv`.
+禁止：
 
-## Next conversation — work order
+```text
+删除/重编号已有 NoteID
+手工修改 study.csv / anki-import.csv
+让错误 staging 先形成 FSRS history
+```
 
-1. Read:
-   - `AGENTS.md`
-   - this `NEXT.md`
-   - `anki/klose/source_reference/rj_start1-grade4-upper-reconciliation.md`
-   - `anki/klose/source_reference/README.md`
+## Next work order
 
-2. Complete Grade 4 upper reconciliation first:
-   - classify all 110 actual Core Vocabulary occurrences against current Master/Identity
-   - reuse existing NoteIDs when the same learning unit/sense already exists
-   - add Klose-actual textbook provenance where source placement was wrong/missing
-   - separately review phrase/morphology candidates such as `office worker` vs `worker`, `football` vs `play football`, `sock` vs `socks`, etc.
-   - append NoteIDs only for genuinely new learning units
-   - perform explicit `cook` noun/verb split migration
-   - keep `LearnerLevel = 4`
-   - re-review changed/new MeaningPrimary / ExampleSentence / ExampleTranslation
-   - rebuild staging from upstream truth
-   - run release/readiness gates
-   - regenerate `study.csv` and the only formal Anki artifact `anki-import.csv`
+1. 按 `docs/SOURCE_RECONCILIATION.md` 完成四上三方核对：actual textbook vs source occurrences vs Master/Identity。
+2. 110 条 Core Vocabulary occurrence 全部得到明确 identity decision：
+   - 同一 sense -> 复用 NoteID + 补 actual-textbook provenance；
+   - 其他年级已有 -> 复用 NoteID + 新增四上 occurrence；
+   - phrase/morphology candidate -> sense-aware review；
+   - 新 learning unit -> append NoteID；
+   - same surface/different sense -> split migration。
+3. 明确当前第三方数据是否属于另一 Edition；不能直接覆盖原 XLSX。
+4. 完成 `cook` noun/verb migration。
+5. 保持 `LearnerLevel=4`，重新审校新增/变化的 Meaning / Example / Translation。
+6. rebuild staging、review registry、approval、release gate，生成纠正后的 `anki-import.csv`。
+7. 用同一 Note Type 原地更新 Anki，保护 NoteID 和未来 FSRS history。
+8. 四上稳定后，接收用户提供的四年级下 Core Vocabulary + Useful Expressions，沿用 `source_reference` 结构。
+9. 四上下实际 Edition 建立完成后，再处理 Grade 5/6；仍按当前 LearnerLevel=4 准备。
 
-3. Only after Grade 4 upper is understood, accept the user's Grade 4 lower textbook screenshots (core vocabulary + Useful Expressions) and capture them in the same source-reference structure.
+## Grade 4 upper Definition of Done
 
-4. Once Grade 4 upper/lower actual edition is established, decide whether the existing third-party files represent another edition and model editions explicitly instead of overwriting provenance.
+- [ ] 110 条实际 Core Vocabulary occurrence 均有明确 identity decision
+- [ ] existing same-sense Notes 复用稳定 NoteID并补正确 provenance
+- [ ] phrase/morphology candidates 均做 sense-aware decision
+- [ ] genuine new learning units append NoteID
+- [ ] `cook` noun/verb split 完成
+- [ ] Source Edition / Revision 不再混淆
+- [ ] LearnerLevel 保持 4
+- [ ] changed/new learner content review + fingerprint current
+- [ ] corrected staging 重建完成
+- [ ] release readiness gate 通过
+- [ ] corrected `anki-import.csv` 生成并可安全原地更新 Anki
+- [ ] blocker 解除后 Klose 才开始正式学习
 
-5. Only after Grade 4 source correction is stable, continue Grade 5/6 vocabulary expansion. Grade 5/6 source words must still be prepared for current `LearnerLevel = 4`; source grade must never be used as learner level.
+## Relevant docs
 
-## Definition of done for Grade 4 upper
+```text
+docs/KLOSE_VOCABULARY_SYSTEM.md
+docs/SOURCE_RECONCILIATION.md
+docs/EXPRESSIONS_SYSTEM.md
+docs/LEARNER_REVIEW_REGISTRY.md
+docs/ANKI_FIRST_IMPORT.md
+docs/ANKI_FIRST_IMPORT_GUIDE.md
+docs/ANKI_SYNC_WORKFLOW.md
+anki/klose/source_reference/README.md
+```
 
-Do not mark Grade 4 upper complete until all are true:
-
-- [ ] all 110 core-vocabulary occurrences have explicit identity decisions
-- [ ] exact existing Notes reuse stable NoteIDs and gain correct actual-textbook provenance
-- [ ] phrase/morphology candidates are resolved sense-aware, not by substring matching
-- [ ] genuinely new learning units receive appended NoteIDs
-- [ ] `cook` noun/verb split migration is complete
-- [ ] `LearnerLevel` remains 4
-- [ ] all changed/new learner presentations are reviewed/current-fingerprint valid
-- [ ] active-card staging is rebuilt from corrected source truth
-- [ ] release readiness gate passes
-- [ ] corrected `anki-import.csv` is generated for re-import/update
-- [ ] only then may Klose begin formal study
-
-## Relevant operating docs
-
-- `docs/KLOSE_VOCABULARY_SYSTEM.md`
-- `docs/ANKI_FIRST_IMPORT.md`
-- `docs/ANKI_FIRST_IMPORT_GUIDE.md`
-- `docs/ANKI_SYNC_WORKFLOW.md`
-- `anki/klose/README.md`
-
-First-import flow is already complete; the next conversation should not repeat setup unless troubleshooting. The priority is **source reconciliation and safe correction before study begins**.
+第一次 Anki setup 已完成，新对话不要重复配置；当前优先级是 **source reconciliation before study**。
