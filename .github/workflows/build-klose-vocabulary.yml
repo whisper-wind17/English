@@ -10,15 +10,30 @@ on:
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
+      - 'tools/approve_klose_learner_review.py'
       - 'anki/klose/config/**'
+      - 'anki/klose/source_reference/**'
+      - 'anki/klose/anki/**'
       - 'anki/klose/learner/grade4_*overrides.csv'
       - 'anki/klose/learner/grade4_full_review_*.csv'
+      - 'anki/klose/learner/learning_admission.csv'
       - 'anki/klose/learner/presentation_review_registry.csv'
+      - 'anki/klose/learner/review_approvals/**'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/source_identity_map.csv'
+      - 'anki/klose/master/source_identity_extensions.csv'
+      - 'anki/klose/master/source_reconciliation_registry.csv'
+      - 'anki/klose/master/identity_migrations.csv'
       - 'anki/klose/master/release_registry.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
+      - '.github/workflows/build-klose-vocabulary.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/**klose**.py'
+      - 'anki/klose/**'
+      - 'anki/人教版一年级起点/master/**'
       - '.github/workflows/build-klose-vocabulary.yml'
   workflow_dispatch:
 
@@ -31,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 2
           sparse-checkout: |
             tools
             anki/klose
@@ -47,19 +62,20 @@ jobs:
       - name: Build global vocabulary
         run: python tools/build_klose_vocabulary.py
 
-      - name: Apply Grade-4 learner presentation
+      - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
 
       - name: Sync learner review registry
         run: python tools/sync_klose_learner_review_registry.py
 
-      - name: Reject explicitly later vocabulary in Grade-4 examples
+      - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
 
-      - name: Verify Anki release readiness
+      - name: Verify content release readiness
         run: python tools/check_klose_release_ready.py
 
       - name: Commit persistent and generated data
+        if: github.event_name == 'push'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
