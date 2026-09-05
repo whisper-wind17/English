@@ -1,6 +1,6 @@
 # Anki Note / Card Contract
 
-本目录冻结 Klose Vocabulary 在 Anki 中的长期显示契约。
+本目录冻结 Klose Vocabulary 在 Anki 中的长期显示与管理契约。
 
 ## Note Type
 
@@ -21,12 +21,23 @@ MeaningPrimary
 ExampleSentence
 ExampleTranslation
 LearnerLevel
+LearningOrder
 Sources
 SourceBooks
 UserMemo
 ```
 
 `NoteID` 必须保持第一字段；`UserMemo` 只在 Anki 本地维护，不从 repo CSV 更新。
+
+`LearningOrder` 属于 Learning Admission / curriculum metadata，不属于 Vocabulary Identity，也不是 FSRS state。当前 Grade-4 allowed Notes 使用零填充的：
+
+```text
+001 .. 221
+```
+
+417 个 held Notes 的 `LearningOrder` 必须为空。它用于在 Anki 中把尚未学习的 New Cards 按真实教材顺序一次性 Reposition；实际 `New # / Due / Review History` 仍由 Anki 管理。
+
+`LearningOrder` 不展示给 Klose，也不进入 learner content fingerprint；调整学习顺序不需要重新审校释义/例句，但必须通过 Learning Admission / Release Gate 校验。
 
 `PromptHint` 属于 Learner Presentation，只用于正面存在真实 target-sense 歧义时做最小消歧。普通 Note 必须留空，不把释义提前泄露到问题面。
 
@@ -72,7 +83,7 @@ Word
 PromptHint（仅非空时）
 ```
 
-不在正面显示音标、TTS 或核心释义。目标是在揭示答案前主动回忆：
+不在正面显示音标、TTS、LearningOrder 或核心释义。目标是在揭示答案前主动回忆：
 
 ```text
 Word + minimal disambiguation cue
@@ -105,7 +116,7 @@ ExampleTranslation
 
 这保留了检索练习的 recall boundary，同时仍维持 `1 Note = 1 Card`，不额外建立 pronunciation/reverse cards，也不需要维护逐词 mp3 字段。
 
-`NoteID`、Sources、SourceBooks、LearnerLevel 等管理字段不展示给 Klose。
+`NoteID`、Sources、SourceBooks、LearnerLevel、LearningOrder 等管理字段不展示给 Klose。
 
 ## iPad / AnkiMobile 作为主要学习端
 
