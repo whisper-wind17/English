@@ -1,0 +1,36 @@
+name: Reconcile Klose Grade 4 Actual
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/reconcile_klose_grade4_actual.py'
+      - 'anki/klose/source_reference/rj_start1-grade4-klose-actual.csv'
+      - 'anki/klose/master/note_registry.csv'
+      - '.github/workflows/reconcile-klose-grade4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Batch reconcile actual Grade 4 against NoteID registry
+        run: python tools/reconcile_klose_grade4_actual.py
+      - name: Commit deterministic candidate report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anki/klose/source_reference/rj_start1-grade4-identity-candidates.csv
+          if git diff --cached --quiet; then
+            echo 'No candidate report changes.'
+          else
+            git commit -m 'data: refresh Klose Grade 4 identity candidates [skip ci]'
+            git push
+          fi
