@@ -13,19 +13,93 @@ AGENTS.md
 
 ## Current objective
 
-以 Klose 实际四年级上 + 下教材作为当前 Grade 4 权威学习范围：
+以 Klose 实际四年级上 + 下教材作为当前 Grade 4 权威学习范围，并在不破坏现有 Anki NoteID / FSRS 状态的前提下完成正式发布：
 
 ```text
 Actual Grade 4 source
 → Stable NoteID
 → long-lived study
+→ explicit Learning Admission
 → learning::klose::grade4
 → Anki only unsuspends this learning set
 ```
 
 `Source Grade ≠ LearnerLevel ≠ Learning Admission`。Klose 当前仍为 `LearnerLevel=4`。
 
-## Actual Grade 4 source — confirmed
+---
+
+## 1. Current numbers — do not confuse these scopes
+
+当前 Anki 设备中实际已经导入：
+
+```text
+518 Cards / Notes
+```
+
+仓库中合并真实四年级之后，下一版长期 study 目标为：
+
+```text
+638 Notes
+```
+
+`638` 不是“真实四年级单词数”，而是长期 Vocabulary study library：
+
+```text
+518  existing released baseline
++120 actual-Grade4 release additions
+=638 long-lived study Notes
+```
+
+真实四年级当前学习范围本身是：
+
+```text
+221 textbook occurrences
+219 unique surface strings
+221 target learning units / Stable NoteIDs
+```
+
+之所以 `219 surface strings -> 221 learning units`，是因为：
+
+```text
+cook  有 noun / verb 两个 target sense
+over  有 location / finished 两个 target sense
+```
+
+221 个真实四年级 NoteID 与当前 518 baseline 的关系：
+
+```text
+101  already included in the existing 518 released baseline
+120  need to be added to the released study set
+---
+221  actual Grade-4 current learning set
+```
+
+这 120 个新增到 study 的 Note 包括：
+
+```text
+99  genuinely new Stable NoteIDs
+21  existing Master identities that were not previously released
+---
+120 release additions
+```
+
+因此下一次正式 Anki 原地导入之后，预期是：
+
+```text
+Anki total Cards / Notes = 638
+Current Grade-4 learning = 221  -> Unsuspend
+Held library             = 417  -> Suspend
+```
+
+当前学习 Tag 固定：
+
+```text
+learning::klose::grade4
+```
+
+---
+
+## 2. Actual Grade 4 source — confirmed
 
 权威合并表：
 
@@ -39,7 +113,9 @@ SourceEdition = klose-current
 
 用户已确认该文件内容。
 
-## Grade 4 identity — completed
+---
+
+## 3. Grade 4 identity — completed
 
 221 条教材 occurrence 已全部得到 confirmed Stable NoteID：
 
@@ -47,25 +123,33 @@ SourceEdition = klose-current
 221 occurrences
 221 target learning units / NoteIDs
 
-reuse existing identity        = 124
-new NoteID                     = 97
-  new learning unit            = 90
-  distinct sense               = 7
+reuse existing identity = 122
+new NoteID              = 99
+  new learning unit     = 90
+  distinct sense        = 9
 ```
 
-两个教材内重复 surface 已按义项拆分：
+已明确拆分的同词异义包括：
 
 ```text
 cook
-  noun 厨师     -> KV000424
-  verb 烹饪；煮 -> KV000805
+  noun 厨师       -> KV000424
+  verb 烹饪；煮   -> KV000805
 
 over
-  在……远端/对面 -> KV000816
-  结束（的）    -> KV000863
+  在……远端/对面   -> KV000816
+  结束（的）      -> KV000863
+
+fan
+  legacy hand-fan sense 保留旧 identity
+  风扇             -> KV000900
+
+speak
+  legacy language sense 保留旧 identity
+  说话；发言        -> KV000901
 ```
 
-其他明确 distinct-sense 新 identity：
+其他 distinct-sense actual Grade-4 identity 包括：
 
 ```text
 kind = 友好的       -> KV000810
@@ -74,11 +158,22 @@ can  = 金属罐       -> KV000885
 milk = 挤奶         -> KV000890
 ```
 
-为保护已有 identity，不重写旧 `note_registry.csv`：
+单复数 / 词形差异不制造额外 identity：
+
+```text
+child / children
+sock / socks
+glove / gloves
+shoe / shoes
+chopstick / chopsticks
+```
+
+这些复用同一 Stable NoteID，但 Klose 当前 learner presentation 按真实教材词形呈现。
+
+为保护已有 identity，不重写 legacy `note_registry.csv`；新增身份保存在：
 
 ```text
 anki/klose/master/note_registry_extensions.csv
-KV000803 ... KV000899   # 97 appended NoteIDs
 ```
 
 教材 occurrence → NoteID 真源：
@@ -88,23 +183,24 @@ anki/klose/master/source_identity_extensions.csv
 221 confirmed mappings
 ```
 
-CI 检查：
+CI identity / reuse checks：
 
 ```text
 tools/check_klose_actual_grade4_identity.py
+tools/audit_klose_actual_grade4_reuse.py
 ```
 
-会验证真实 Grade 4 每个 occurrence 恰好有一个 confirmed NoteID，且 NoteID 存在。
+---
 
-## Long-lived study merge — structure completed, content pending
+## 4. Long-lived study + Learning Admission — structure completed
 
 旧 released baseline 保留 518 Notes，不删除、不重编号。
 
-真实 Grade 4 需要额外 release：
+真实 Grade 4 增加：
 
 ```text
-23  existing Master Notes not previously released
-97  new NoteIDs
+21  existing Master Notes not previously released
+99  new Stable NoteIDs
 ---
 120 release extensions
 ```
@@ -115,76 +211,152 @@ tools/check_klose_actual_grade4_identity.py
 anki/klose/master/release_registry_extensions.csv
 ```
 
-因此构建完成后的目标长期 study 为：
+当前 build state：
 
 ```text
-518 old released Notes
-+120 actual-Grade4 extensions
-=638 study Notes
+inventory_notes             = 901
+released_notes              = 638
+actual_grade4_notes         = 221
+actual_grade4_new_notes     = 99
+actual_grade4_release_ext   = 120
+
+learning_admission_mode     = explicit
+learning_admission_allowed  = 221
+learning_admission_held     = 417
+stage::grade4-current       = 221
+stage::library              = 417
 ```
 
-实际 Grade 4 当前学习集合仍只有 221 Notes；`study != current learning set`。
+因此：
+
+```text
+study.csv = 638 long-lived Notes
+current learning set = 221 Notes
+```
+
+`study != current learning set`。
 
 真实教材通过薄 overlay 叠加，不重写第三方 adapter：
 
 ```text
-tools/build_klose_vocabulary.py        # legacy inventory
-→ tools/apply_klose_actual_grade4.py   # klose-current overlay
+tools/build_klose_vocabulary.py
+→ tools/apply_klose_actual_grade4.py
+→ reused fact / learner presentation overlays
+→ tools/build_klose_learning_admission.py
+→ tools/apply_klose_learner_overrides.py
 ```
 
-该 overlay 会：
+---
 
-- 为 reused Notes 增加实际教材 Edition / Book / Unit provenance；
-- append 97 个新 Note 到 generated Master / Learner；
-- 将 120 个 release extension 并入 released set；
-- 将 221 条真实教材 occurrence 写入 source occurrences；
-- 对 97 个新 Note 保持 learner content pending，不伪造模板例句。
+## 5. Current blocker — fingerprint-v2 explicit review
 
-## Current blocker: learner content
+Source / Evidence / Identity 已完成；per-Note Learning Admission 也已经显式建立为 `221 allowed / 417 held`。
 
-当前 Source / Identity reconciliation 已完成：
+当前真正 blocker 是 Review Registry：
+
+```text
+learner_review_registry_current = 638
+learner_model_reviewed_current  = 0
+learner_human_reviewed_current  = 0
+learner_review_pending_current  = 638
+```
+
+当前普通 review queues 已为空：
+
+```text
+identity_review_items       = 0
+learner_review_suggestions  = 0
+```
+
+638 pending 的原因不是“638 个词都需要重新生成”，而是 fingerprint v2 绑定了当前 release-visible Word / Sense / IPA / Meaning / Example / Translation / LearnerLevel；旧 baseline approval 不能静默继承。
+
+Source-level reconciliation registry 当前仍保持最终 release switch：
 
 ```text
 ReconciliationStatus = reconciled
-EvidenceStatus       = confirmed
-IdentityStatus       = confirmed
-LearningAdmission    = blocked
+EvidenceStatus        = confirmed
+IdentityStatus        = confirmed
+LearningAdmission     = blocked
 ```
 
-现在 blocker 已从“教材/identity 不确定”缩小为：
+在 fingerprint-v2 review 完成前，不把该 source-level switch 改为 `allowed`。
+
+---
+
+## 6. Next work order
+
+1. 对 638 released Notes 做 fingerprint-v2 分层审校，而不是重新生成全部内容：
 
 ```text
-97 new Notes:
-- IPA / pronunciation fact 尚未补齐
-- LearnerLevel=4 Meaning / Example / Translation 尚未正式生成与审校
+High-risk review:
+- 99 actual Grade-4 new NoteIDs
+- actual Grade-4 reused presentation overrides
+- cook / over / fan / speak 等 sense-sensitive items
 
-reused Notes:
-- 需要检查实际教材 target meaning 与当前 learner presentation 是否一致
+Baseline re-validation:
+- 原 518 baseline 中未发生内容变化的 Notes
+- 检查新增 fingerprint 字段后重新确认，不无意义重写稳定内容
 ```
 
-在这些内容审校完成前，不解除 LearningAdmission，不让 Klose 正式学习。
-
-## Next work order
-
-1. 为 97 个新 Note 补齐可靠的 Word / IPA / Meaning facts。
-2. 为 97 个新 Note 生成 LearnerLevel=4 的 Example / Translation。
-3. 检查 124 个 reused Notes：实际教材 target meaning 与当前呈现不一致时，仅修 Learner Presentation，不改 Stable NoteID。
-4. fingerprint v2 sync；完成真实 model/human review，直到 current pending=0。
-5. 建立实际 Grade 4 的显式 Learning Admission：221 Notes。
-6. 当前学习 Tag 固定为：
+2. 目标 review state：
 
 ```text
-learning::klose::grade4
+learner_review_registry_current = 638
+learner_model_reviewed_current  = 638
+learner_review_pending_current  = 0
 ```
 
-7. 非 Grade-4-current 的 released Notes 保留在 study，但不 admission；Anki 中保持 Suspend。
-8. 将 `source_reconciliation_registry.csv` 的 `LearningAdmission` 改为 `allowed`。
-9. release gate 通过后生成最终 `anki-import.csv`。
-10. Anki 原地导入：全部 baseline Suspend，只 Unsuspend `tag:learning::klose::grade4`。
+3. 使用显式审批工具生成新的不可覆盖 approval manifest：
 
-## Current Anki state
+```text
+tools/approve_klose_learner_review.py
+```
 
-历史状态：
+不得手工把 pending 改成 model-reviewed。
+
+4. Review 全部 current 后，将：
+
+```text
+anki/klose/master/source_reconciliation_registry.csv
+LearningAdmission = allowed
+```
+
+5. 跑完整 release gate，要求至少满足：
+
+```text
+inventory             = 901
+study                  = 638
+actual Grade-4 allowed = 221
+held                   = 417
+pending review         = 0
+release gate           = PASS
+```
+
+6. 单独完成 homograph PromptHint Note Type migration，再正式让 Klose 开始学习：
+
+```text
+cook [n.] / cook [v.]
+over [位置] / over [结束]
+```
+
+该 migration 不改变 Stable NoteID / Card / FSRS history。
+
+7. Anki 正式原地导入：
+
+```text
+Import publish/anki-import.csv
+Update Existing Notes using NoteID
+Total expected cards = 638
+Suspend all baseline/library cards
+Unsuspend only tag:learning::klose::grade4
+Expected unsuspended current learning set = 221
+```
+
+---
+
+## 7. Current Anki state
+
+当前设备上仍然是旧 baseline，尚未导入 120 个 Grade-4 release additions：
 
 ```text
 Deck              = Klose-English::Vocabulary
@@ -198,10 +370,10 @@ FSRS              = ON
 Desired retention = 90%
 ```
 
-Klose 尚未产生真实 Review History，因此当前仍是修正学习集合的低风险窗口。
+Klose 尚未产生真实 Review History，因此当前仍是调整 learning set 的低风险窗口。
+
+---
 
 ## Deferred
 
-同形异义正面消歧（如 `cook n.` / `cook v.`）仍需单独 Note Type migration，引入 `PromptHint`；不要在本轮偷偷改变现有 Anki Note Type。
-
-四下 Useful Expressions 暂不处理，先完成 Vocabulary Grade-4 learning set。
+四下 Useful Expressions 暂不处理，先完成 Vocabulary Grade-4 learning set 的 review / release / Anki migration。
