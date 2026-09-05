@@ -1,6 +1,8 @@
 # Klose Vocabulary：第一次正式导入 Anki
 
-本文描述 **NoteID-first 新系统的第一次正式导入**。如果设备里已经导入过旧版 Word-first 人教版 CSV，先按 `docs/ANKI_MIGRATION.md` 做迁移，不要直接重复导入。
+本文只描述 **NoteID-first 新系统的第一次正式导入**。第一次导入完成后的长期重复同步，统一按 `docs/ANKI_SYNC_WORKFLOW.md` 执行。
+
+如果设备里已经导入过旧版 Word-first 人教版 CSV，先按 `docs/ANKI_MIGRATION.md` 做迁移，不要直接重复导入。
 
 ## 1. 当前正式基线
 
@@ -23,7 +25,7 @@ stage::grade4-review         = 26
 stage::lower-grade-backfill  = 317
 ```
 
-内部数据真源：
+内部 released snapshot：
 
 ```text
 anki/klose/publish/study.csv
@@ -36,6 +38,8 @@ anki/klose/publish/anki-import.csv
 ```
 
 不要直接导入 `study.csv`。`study.csv` 保留普通 CSV 表头，供 repo 构建/审计；`anki-import.csv` 使用 Anki 官方 `#...` file headers，没有普通数据表头行，并使用 UTF-8 **无 BOM**，避免把表头误导入或影响 file headers 识别。
+
+`study.csv` 和 `anki-import.csv` 都是 generated output，均不得手工修改。内容问题应修上游数据并重新构建。
 
 ---
 
@@ -306,35 +310,27 @@ Learning / Review
 
 ---
 
-## 10. 后续学习与扩展
+## 10. 第一次导入以后
 
-四年级新词稳定后，可以 Unsuspend：
-
-```text
-stage::grade4-review
-```
-
-再按需要开放：
+第一次初始化完成后，不再把本文件当作每次同步 SOP。以后新增 Grade 5、北京版、新概念、升级例句等，都遵循：
 
 ```text
-stage::lower-grade-backfill
+修改上游数据
+→ rebuild study.csv
+→ generate anki-import.csv
+→ release gate
+→ 重新导入最新版 anki-import.csv
 ```
 
-以后加入 Grade 5、北京版、新概念时，repo 重新生成最新版 `anki-import.csv`，仍然导入：
+详细规则见：
 
 ```text
-Note Type = Klose Vocabulary
-Deck      = Klose-English::Vocabulary
+docs/ANKI_SYNC_WORKFLOW.md
 ```
 
-结果：
+已有 NoteID 使用 Update Existing，原 Card / FSRS / Review History 保留；新 NoteID 在同一个主 Deck 中创建 New Card。
 
-```text
-已有 NoteID → Update Existing → Card / FSRS / Review History 保留
-新 NoteID   → Create New      → 同一主 Deck 中从 New 开始
-```
-
-注意：CSV 更新 Note 内容和 system-managed Tags，但不会替你决定所有已有 Card 的 Suspend/Unsuspend 状态。需要“开放某个新阶段”时，应在 Browser 中明确 Unsuspend 对应的 **New Cards**；已经学过的 Card 保持正常 Review。
+CSV 更新 Note 内容和 system-managed Tags，但不会替你决定所有已有 Card 的 Suspend/Unsuspend 状态。需要开放某个新阶段时，只对对应的 **New Cards** 做 Unsuspend；已经学过的 Card 保持正常 Review。
 
 ---
 
