@@ -1,5 +1,7 @@
 # Klose Vocabulary：第一次正式导入 Anki
 
+逐步实操、实际参数、验收结果与截图索引见：`docs/ANKI_FIRST_IMPORT_GUIDE.md`。
+
 本文只描述 **NoteID-first 新系统的第一次正式导入**。第一次导入完成后的长期重复同步，统一按 `docs/ANKI_SYNC_WORKFLOW.md` 执行。
 
 如果设备里已经导入过旧版 Word-first 人教版 CSV，先按 `docs/ANKI_MIGRATION.md` 做迁移，不要直接重复导入。
