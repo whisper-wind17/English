@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Apply Klose Grade-4 learner presentation overrides and rebuild publish views.
+"""Apply learner presentation overrides and rebuild publish views.
 
-This runs after build_klose_vocabulary.py. Identity/source facts remain untouched;
-only learner presentation and derived publish files are changed.
+Identity/source facts remain untouched. Learning admission is explicit when
+learning_admission.csv contains current-profile rows. The old Grade-4 staging
+logic remains only as a compatibility fallback until current textbook
+reconciliation is completed.
 """
 from __future__ import annotations
 
@@ -18,6 +20,7 @@ MASTER = BASE / "master" / "vocabulary_master.csv"
 OCCURRENCES = BASE / "master" / "source_occurrences.csv"
 STATS = BASE / "master" / "build_stats.csv"
 LEARNER = BASE / "learner" / "current.csv"
+ADMISSION = BASE / "learner" / "learning_admission.csv"
 OVERRIDE_FILES = [
     BASE / "learner" / "grade4_overrides.csv",
     BASE / "learner" / "grade4_guardrail_overrides.csv",
@@ -29,10 +32,14 @@ REVIEW = BASE / "review" / "learner_review.csv"
 PUBLISH = BASE / "publish"
 SOURCE_ID = "rj_start1"
 
-STAGE_GRADE4_NEW = "stage::grade4-new"
-STAGE_GRADE4_REVIEW = "stage::grade4-review"
-STAGE_LOWER_BACKFILL = "stage::lower-grade-backfill"
-STAGE_TAGS = {STAGE_GRADE4_NEW, STAGE_GRADE4_REVIEW, STAGE_LOWER_BACKFILL}
+LEGACY_STAGE_GRADE4_NEW = "stage::grade4-new"
+LEGACY_STAGE_GRADE4_REVIEW = "stage::grade4-review"
+LEGACY_STAGE_LOWER_BACKFILL = "stage::lower-grade-backfill"
+LEGACY_STAGE_TAGS = {
+    LEGACY_STAGE_GRADE4_NEW,
+    LEGACY_STAGE_GRADE4_REVIEW,
+    LEGACY_STAGE_LOWER_BACKFILL,
+}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -55,7 +62,6 @@ def write_anki_import(
     note_type: str,
     deck: str,
 ) -> None:
-    """Write an Anki-native text import file with comment headers, no BOM/data header row."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
         f.write("#separator:Comma\n")
@@ -85,21 +91,42 @@ def source_grades(occurrence_rows: list[dict[str, str]]) -> dict[str, set[int]]:
     return grades_by_id
 
 
-def onboarding_stage(grades: set[int]) -> str:
+def legacy_onboarding_stage(grades: set[int]) -> str:
     if not grades:
         return ""
     first_grade = min(grades)
     if first_grade == 4:
-        return STAGE_GRADE4_NEW
+        return LEGACY_STAGE_GRADE4_NEW
     if 4 in grades and first_grade < 4:
-        return STAGE_GRADE4_REVIEW
+        return LEGACY_STAGE_GRADE4_REVIEW
     if first_grade < 4:
-        return STAGE_LOWER_BACKFILL
+        return LEGACY_STAGE_LOWER_BACKFILL
     return ""
 
 
+def load_explicit_admission(profile: str, level: str, valid_ids: set[str]) -> dict[str, str]:
+    if not ADMISSION.exists():
+        return {}
+    result: dict[str, str] = {}
+    for row in read_csv(ADMISSION):
+        if row.get("LearnerProfile", "").strip() != profile or row.get("LearnerLevel", "").strip() != level:
+            continue
+        if row.get("Status", "").strip() != "allowed":
+            continue
+        nid = row.get("NoteID", "").strip()
+        stage = row.get("Stage", "").strip()
+        if nid not in valid_ids:
+            raise SystemExit(f"Learning admission references unknown NoteID: {nid}")
+        if not stage.startswith("stage::"):
+            raise SystemExit(f"Learning admission has invalid Stage for {nid}: {stage!r}")
+        if nid in result:
+            raise SystemExit(f"Duplicate learning admission for {nid}")
+        result[nid] = stage
+    return result
+
+
 def with_stage(tags: str, stage: str) -> str:
-    parts = [x for x in tags.split() if x not in STAGE_TAGS]
+    parts = [x for x in tags.split() if not x.startswith("stage::")]
     if stage:
         parts.append(stage)
     return " ".join(sorted(set(parts)))
@@ -114,7 +141,7 @@ def upsert_metric(stats: list[dict[str, str]], metric: str, value: int | str) ->
 
 
 def main() -> None:
-    for path in (PROFILE, MASTER, OCCURRENCES, LEARNER, REVIEW, *OVERRIDE_FILES):
+    for path in (PROFILE, MASTER, OCCURRENCES, LEARNER, REVIEW, ADMISSION, *OVERRIDE_FILES):
         if not path.exists():
             raise SystemExit(f"Missing input: {path.relative_to(ROOT)}")
 
@@ -122,6 +149,8 @@ def main() -> None:
         profile = json.load(f)
     note_type = str(profile["note_type"])
     main_deck = str(profile["main_deck"])
+    learner_profile = str(profile["learner_profile"])
+    learner_level = str(profile["learner_level"])
 
     master_rows = read_csv(MASTER)
     learner_rows = read_csv(LEARNER)
@@ -130,10 +159,10 @@ def main() -> None:
 
     learner_by_id = {r["NoteID"]: r for r in learner_rows}
     master_ids = {r["NoteID"] for r in master_rows}
+    explicit_admission = load_explicit_admission(learner_profile, learner_level, master_ids)
     resolved_ids: set[str] = set()
     applied_rows = 0
 
-    # Ordered explicit layers. Later files intentionally override earlier rows.
     for override_path in OVERRIDE_FILES:
         local_seen: set[str] = set()
         for row in read_csv(override_path):
@@ -160,7 +189,6 @@ def main() -> None:
     ]
     write_csv(LEARNER, learner_fields, learner_rows)
 
-    # Remove resolved heuristic suggestions. Remaining rows stay explicit.
     review_rows = [r for r in review_rows if r["NoteID"] not in resolved_ids]
     write_csv(REVIEW, ["NoteID", "Word", "FirstGrade", "ExampleSentence", "Reason"], review_rows)
 
@@ -170,11 +198,26 @@ def main() -> None:
         "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
     ]
     publish_rows: list[dict[str, str]] = []
+    released_ids = {r["NoteID"] for r in master_rows if r["Released"] == "yes"}
+
+    if explicit_admission:
+        missing = sorted(released_ids - set(explicit_admission))
+        extra = sorted(set(explicit_admission) - released_ids)
+        if missing or extra:
+            raise SystemExit(
+                "Explicit learning admission must cover exactly the current released set; "
+                f"missing={missing[:10]} extra={extra[:10]}"
+            )
+
     for master in master_rows:
         learner = learner_by_id[master["NoteID"]]
         row = {**master, **learner}
         if master["Released"] == "yes":
-            row["Tags"] = with_stage(row.get("Tags", ""), onboarding_stage(grades_by_id.get(master["NoteID"], set())))
+            if explicit_admission:
+                stage = explicit_admission[master["NoteID"]]
+            else:
+                stage = legacy_onboarding_stage(grades_by_id.get(master["NoteID"], set()))
+            row["Tags"] = with_stage(row.get("Tags", ""), stage)
         publish_rows.append(row)
     publish_rows.sort(key=lambda r: note_num(r["NoteID"]))
 
@@ -197,36 +240,29 @@ def main() -> None:
         rows = [r for r in publish_rows if grade in grades_by_id.get(r["NoteID"], set())]
         write_csv(PUBLISH / "by-source" / SOURCE_ID / f"grade{grade}.csv", publish_fields, rows)
 
-    # Convenience views only. They all belong to the same Anki main deck.
-    stage_rows = {
-        STAGE_GRADE4_NEW: [r for r in study_rows if STAGE_GRADE4_NEW in r["Tags"].split()],
-        STAGE_GRADE4_REVIEW: [r for r in study_rows if STAGE_GRADE4_REVIEW in r["Tags"].split()],
-        STAGE_LOWER_BACKFILL: [r for r in study_rows if STAGE_LOWER_BACKFILL in r["Tags"].split()],
-    }
-    write_csv(PUBLISH / "onboarding" / "grade4-new.csv", publish_fields, stage_rows[STAGE_GRADE4_NEW])
-    write_csv(PUBLISH / "onboarding" / "grade4-review.csv", publish_fields, stage_rows[STAGE_GRADE4_REVIEW])
-    write_csv(PUBLISH / "onboarding" / "lower-grade-backfill.csv", publish_fields, stage_rows[STAGE_LOWER_BACKFILL])
+    stage_rows: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in study_rows:
+        stages = [tag for tag in row["Tags"].split() if tag.startswith("stage::")]
+        if len(stages) != 1:
+            raise SystemExit(f"Released note must have exactly one stage: {row['NoteID']}")
+        stage_rows[stages[0]].append(row)
 
-    staged_ids = [r["NoteID"] for rows in stage_rows.values() for r in rows]
-    if len(staged_ids) != len(set(staged_ids)) or set(staged_ids) != {r["NoteID"] for r in study_rows}:
-        raise SystemExit("Each released Grade-4 baseline note must belong to exactly one onboarding stage")
+    # Keep legacy convenience files while the initial Grade-4 migration remains active.
+    write_csv(PUBLISH / "onboarding" / "grade4-new.csv", publish_fields, stage_rows[LEGACY_STAGE_GRADE4_NEW])
+    write_csv(PUBLISH / "onboarding" / "grade4-review.csv", publish_fields, stage_rows[LEGACY_STAGE_GRADE4_REVIEW])
+    write_csv(PUBLISH / "onboarding" / "lower-grade-backfill.csv", publish_fields, stage_rows[LEGACY_STAGE_LOWER_BACKFILL])
 
     stats = read_csv(STATS)
     upsert_metric(stats, "learner_review_suggestions", len(review_rows))
-    upsert_metric(stats, "stage_grade4_new", len(stage_rows[STAGE_GRADE4_NEW]))
-    upsert_metric(stats, "stage_grade4_review", len(stage_rows[STAGE_GRADE4_REVIEW]))
-    upsert_metric(stats, "stage_lower_grade_backfill", len(stage_rows[STAGE_LOWER_BACKFILL]))
+    upsert_metric(stats, "learning_admission_mode", "explicit" if explicit_admission else "legacy-grade4-fallback")
+    for stage, rows in sorted(stage_rows.items()):
+        upsert_metric(stats, f"stage_{stage.removeprefix('stage::').replace('-', '_')}", len(rows))
     write_csv(STATS, ["Metric", "Value"], stats)
 
-    print(f"Applied Grade-4 override rows: {applied_rows} across {len(OVERRIDE_FILES)} layers")
-    print(f"Unique Grade-4 overridden notes: {len(resolved_ids)}")
+    print(f"Applied learner override rows: {applied_rows} across {len(OVERRIDE_FILES)} layers")
+    print(f"Unique overridden notes: {len(resolved_ids)}")
     print(f"Remaining learner review suggestions: {len(review_rows)}")
-    print(
-        "Onboarding stages: "
-        f"grade4-new={len(stage_rows[STAGE_GRADE4_NEW])}, "
-        f"grade4-review={len(stage_rows[STAGE_GRADE4_REVIEW])}, "
-        f"lower-grade-backfill={len(stage_rows[STAGE_LOWER_BACKFILL])}"
-    )
+    print(f"Learning admission mode: {'explicit' if explicit_admission else 'legacy-grade4-fallback'}")
 
 
 if __name__ == "__main__":
