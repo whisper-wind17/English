@@ -12,6 +12,12 @@ docs/KLOSE_VOCABULARY_SYSTEM.md
 docs/ANKI_FIRST_IMPORT.md
 ```
 
+后续长期重复同步：
+
+```text
+docs/ANKI_SYNC_WORKFLOW.md
+```
+
 旧 Word-first Anki 数据迁移：
 
 ```text
@@ -90,10 +96,10 @@ anki/klose/
 │   ├── styling.css
 │   └── README.md                  # 1 Note = 1 Card 契约
 ├── publish/
-│   ├── study.csv                  # released Notes 内部数据真源/审计 CSV
-│   ├── anki-import.csv            # 唯一正式 Anki 导入文件
-│   ├── all.csv                    # 完整库存
-│   ├── onboarding/                # 学习阶段便利视图，不是独立 Deck
+│   ├── study.csv                  # generated：released Notes 内部标准快照/审计 CSV
+│   ├── anki-import.csv            # generated：唯一正式 Anki 导入文件
+│   ├── all.csv                    # generated：完整库存
+│   ├── onboarding/                # generated：学习阶段便利视图，不是独立 Deck
 │   ├── migration/
 │   └── by-source/
 └── review/
@@ -110,7 +116,26 @@ anki/klose/
 publish/anki-import.csv
 ```
 
-`study.csv` 不直接导入 Anki。它有普通 CSV 表头，用于 repo 内部构建、审计和与 Released Set 对账。`anki-import.csv` 使用 Anki 官方 `#...` file headers，并由 release gate 验证其数据与 `study.csv` 完全一致。
+`study.csv` 不直接导入 Anki。它有普通 CSV 表头，用于 repo 内部构建、审计、diff 和与 Released Set 对账。`anki-import.csv` 使用 Anki 官方 `#...` file headers，并由 release gate 验证其数据与 `study.csv` 完全一致。
+
+二者都不是人工维护入口：
+
+```text
+不要手工修改 publish/study.csv
+不要手工修改 publish/anki-import.csv
+```
+
+发现内容问题时，修改上游 Source / Fact / Learner / Release 数据，再通过构建重新生成。
+
+长期更新固定流程：
+
+```text
+修改上游
+→ rebuild study.csv
+→ generate anki-import.csv
+→ release gate
+→ 导入最新版 anki-import.csv
+```
 
 不要同时额外导入 `onboarding/*.csv` 或 `by-source/*.csv`。这些只是同一批 Master Notes 的视图。
 
@@ -179,4 +204,4 @@ Release gate 必须在 generated data commit/push 之前通过，避免“先发
 
 严格 guardrail：已 release 的 Grade-4 例句不能无意使用人教版词表中明确到五/六年级才首次列出的内容词。
 
-未来升 Grade 5 时，只升级 Learner Layer 并建立新的 Level-5 review/approval；`NoteID`、source occurrences 和 Anki FSRS/Review History 不变。
+未来升 Grade 5 时，只升级 Learner Layer并建立新的 Level-5 review/approval；`NoteID`、source occurrences 和 Anki FSRS/Review History 不变。发布层仍然由构建重新生成，用户侧继续导入同一个 `publish/anki-import.csv`。
