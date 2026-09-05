@@ -29,7 +29,9 @@
 12. 任何架构优化优先保护已有 Anki Review History / FSRS state。
 13. 自动结构检查、模型审校、人工确认、教材原文核对必须明确区分，不能互相冒充；`review queue = 0` 不等于全部内容已显式审校。
 14. `approve_klose_learner_review.py` 只能在完成真实逐条审校后显式执行；approval manifest 是审计记录，不得覆盖旧批次。
-15. 对需求假设保持质疑；发现 Anki 行为、数据或学习机制前提不成立时先验证。
+15. **Anki 正式导入只使用 `publish/anki-import.csv`。** `study.csv` 是 repo 内部有表头的 released-data 真源/审计文件，不直接作为 Anki 导入包。
+16. **1 Note = 1 Card。** 当前 Note Type 只保留一个 `Recognition` Card Type；不得误用 reversed card 使学习量翻倍。
+17. 对需求假设保持质疑；发现 Anki 行为、数据或学习机制前提不成立时先验证。
 
 ---
 
@@ -43,7 +45,8 @@ Raw Source
 → Identity Registry + Source Identity Map + Source Occurrences
 → Vocabulary Master
 → Learner Layer + Learner Review Registry
-→ Publish
+→ study.csv
+→ anki-import.csv
 ```
 
 学习侧：Anki 是 `Review History / FSRS state / Due / Interval / Suspended` 的唯一真源；repo 不重建这些状态。
@@ -55,7 +58,8 @@ anki/klose/
 ├── config/                    # learner/scope config
 ├── master/                    # NoteID/source identity/release registries + master + occurrences
 ├── learner/                   # current presentation / overrides / review registry / approval manifests
-├── publish/                   # study.csv / all.csv / onboarding / migration / views
+├── anki/                      # frozen Note/Card template contract
+├── publish/                   # study.csv / anki-import.csv / all.csv / onboarding / migration / views
 └── review/                    # identity / semantic / learner queues
 ```
 
@@ -120,14 +124,30 @@ ReviewNote
 
 长期 Note Type：`Klose Vocabulary`；**始终一个主 Deck**：`Klose-English::Vocabulary`。
 
-正式发布字段第一列必须是 `NoteID`。长期重新导入使用同一 Note Type、Update Existing Notes、Match scope = Note Type。
+正式 Note Type 字段第一列必须是 `NoteID`。长期重新导入使用同一 Note Type、`Existing notes = Update`、`Match scope = Note Type`。
 
-默认入口：
+发布文件职责：
 
 ```text
-anki/klose/publish/study.csv   # 已释放 Notes，唯一推荐长期同步入口
-anki/klose/publish/all.csv     # 完整库存，不是默认导入入口
+anki/klose/publish/study.csv       # released Notes 的内部数据真源/审计 CSV，不直接导入 Anki
+anki/klose/publish/anki-import.csv # 唯一正式 Anki 导入文件，带官方 #file headers
+anki/klose/publish/all.csv         # 完整库存，不是默认导入入口
 ```
+
+`anki-import.csv` 必须：
+
+- 数据与 `study.csv` 完全一致；
+- 没有普通 CSV 数据表头行；
+- 使用 `#separator / #notetype / #deck / #tags column / #columns`；
+- 第一数据字段始终为 `NoteID`。
+
+Note/Card contract：
+
+```text
+anki/klose/anki/
+```
+
+只保留一个 Card Type：`Recognition`，因此 `1 Note = 1 Card`。
 
 CSV/教材/年级不是 Deck。学习阶段通过 system-managed Tags + Suspend/Unsuspend 控制；Klose 日常不切换牌组。
 
@@ -139,11 +159,11 @@ stage::grade4-review          # 四年级再次出现的低年级旧词
 stage::lower-grade-backfill   # 1–3 年级其余查漏词
 ```
 
-三个 onboarding CSV 只是便利视图，不是三个牌组，也不是新的数据真源。
+三个 onboarding CSV 只是便利视图，不是三个牌组，也不是正式导入包。
 
-`release_registry.csv` 是长期增长状态：Note 一旦进入 Anki，原则上持续留在 `study.csv` 以接受后续内容升级。每次新增 release scope 必须显式记录 `released_at`，不能复用项目初始日期。
+`release_registry.csv` 是长期增长状态：Note 一旦进入 Anki，原则上持续留在 `study.csv`/`anki-import.csv` 以接受后续内容升级。每次新增 release scope 必须显式记录 `released_at`，不能复用项目初始日期。
 
-repo 生成的来源/年级/stage Tags 属于 system-managed；个人长期备注使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
+repo 生成的来源/年级/stage Tags 属于 system-managed；长期重新导入可能更新这些 Tags。个人长期备注使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
 
 ---
 
@@ -192,6 +212,8 @@ CI：
 .github/workflows/build-klose-vocabulary.yml
 ```
 
+**Release readiness 必须先通过，之后 CI 才能 commit/push generated release。** 禁止先发布再校验。
+
 任何相关修改完成前，都要确认对应 CI 成功，并检查：
 
 ```text
@@ -202,6 +224,7 @@ anki/klose/learner/review_approvals/
 anki/klose/review/identity_review.csv
 anki/klose/review/learner_review.csv
 anki/klose/review/future_vocab_review.csv
+anki/klose/publish/anki-import.csv
 ```
 
 ---
@@ -220,12 +243,13 @@ anki/klose/review/future_vocab_review.csv
 8. 生成当前 Learner Layer；
 9. 为当前 LearnerLevel 建立/补齐 Learner Review Registry；
 10. 逐条审校后才允许显式 approval；
-11. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 `study.csv`；
-12. 重建、检查 release readiness 并跑 CI。
+11. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 released set；
+12. 重建 `study.csv` 与 `anki-import.csv`；
+13. release readiness 通过后才允许 commit/push generated release。
 
 ### 升 Learner Level
 
-只升级 Learner Presentation；NoteID / identity / source facts 不变。新 LearnerLevel 的 review 默认 `pending`，不能继承旧 Level 结论。完成逐条审校和 approval 后，重新导入同一个 `study.csv` 更新已有 Notes，不重建 Card。
+只升级 Learner Presentation；NoteID / identity / source facts 不变。新 LearnerLevel 的 review 默认 `pending`，不能继承旧 Level 结论。完成逐条审校和 approval 后，重新导入同一个 `anki-import.csv` 更新已有 Notes，不重建 Card。
 
 ### 修正 learner content
 
@@ -249,10 +273,12 @@ merge/split 必须单独设计 migration，禁止当作普通清洗直接执行�
 - released Notes 的 LearnerLevel / Meaning / Example / Translation 完整；
 - 每个 released Note 都有当前 `LearnerProfile + LearnerLevel` 的 Learner Review Registry 记录；
 - 必须显式报告 `model-reviewed / human-reviewed / pending` 数量；
-- **只有 `pending=0` 且 ContentFingerprint 全部匹配，才能把 `study.csv` 描述为“可正式导入”。**
+- **只有 `pending=0` 且 ContentFingerprint 全部匹配，才能描述为“可正式导入”。**
 - Grade-4 learner examples 不无意使用同来源明确到后续年级才首次列出的词；
 - `study.csv` 必须与 Released Set 一致，NoteID 唯一；
-- 每个当前 released Note 必须恰好属于一个 onboarding stage；
+- `anki-import.csv` 必须与 `study.csv` 数据完全一致且 Anki file headers 正确；
+- 每个当前 released Note 必须恰好属于一个 `stage::`；
+- 当前 Note Type 必须只有一个 Card Type，首次基线应满足 `518 Notes = 518 Cards`；
 - by-source/by-grade/onboarding 文件只是视图；
 - deterministic build；
 - 不静默 fallback 到未经审校的成人词典首义。
