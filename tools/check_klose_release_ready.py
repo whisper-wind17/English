@@ -2,8 +2,8 @@
 """Verify that the current released Klose vocabulary is safe to import into Anki.
 
 This is a content-release gate, not merely a build-consistency check.
-A source scope that is structurally blocked for reconciliation must fail here even
-when generated CSVs and review queues are otherwise internally consistent.
+It verifies source reconciliation, explicit allowed/held learning state, publish
+derivation, complete release-visible content, and current review approval.
 """
 from __future__ import annotations
 
@@ -19,7 +19,9 @@ PROFILE = BASE / "config" / "profile.json"
 MASTER = BASE / "master" / "vocabulary_master.csv"
 LEARNER = BASE / "learner" / "current.csv"
 REGISTRY = BASE / "learner" / "presentation_review_registry.csv"
+ADMISSION = BASE / "learner" / "learning_admission.csv"
 RECONCILIATION = BASE / "master" / "source_reconciliation_registry.csv"
+SOURCE_IDENTITY_EXTENSIONS = BASE / "master" / "source_identity_extensions.csv"
 STUDY = BASE / "publish" / "study.csv"
 ANKI_IMPORT = BASE / "publish" / "anki-import.csv"
 REPORTS = [
@@ -35,6 +37,9 @@ DERIVED_FIELDS = [
     "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
     "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks",
 ]
+CURRENT_LEARNING_TAG = "learning::klose::grade4"
+CURRENT_STAGE = "stage::grade4-current"
+HELD_STAGE = "stage::library"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -105,8 +110,85 @@ def assert_reconciliation_ready() -> None:
         )
 
 
+def actual_grade4_note_ids() -> set[str]:
+    ids: set[str] = set()
+    for row in read_csv(SOURCE_IDENTITY_EXTENSIONS):
+        if (
+            row.get("SourceID", "").strip() == "rj_start1"
+            and row.get("SourceEdition", "").strip() == "klose-current"
+            and row.get("Status", "").strip() == "confirmed"
+            and row.get("SourceItemKey", "").strip().startswith("grade4-")
+        ):
+            nid = row.get("NoteID", "").strip()
+            if nid:
+                ids.add(nid)
+    return ids
+
+
+def load_and_validate_admission(
+    learner_profile: str,
+    learner_level: str,
+    released_ids: set[str],
+) -> dict[str, dict[str, str]]:
+    rows = [
+        r for r in read_csv(ADMISSION)
+        if r.get("LearnerProfile", "").strip() == learner_profile
+        and r.get("LearnerLevel", "").strip() == learner_level
+    ]
+    if not rows:
+        raise SystemExit("Release blocked: explicit learning admission is empty")
+
+    by_id: dict[str, dict[str, str]] = {}
+    for row in rows:
+        nid = row.get("NoteID", "").strip()
+        status = row.get("Status", "").strip()
+        stage = row.get("Stage", "").strip()
+        tag = row.get("LearningTag", "").strip()
+        if not nid or nid in by_id:
+            raise SystemExit(f"Release blocked: invalid/duplicate learning admission NoteID: {nid!r}")
+        if status not in {"allowed", "held"}:
+            raise SystemExit(f"Release blocked: invalid learning admission status: {nid}={status!r}")
+        if status == "allowed":
+            if stage != CURRENT_STAGE or tag != CURRENT_LEARNING_TAG:
+                raise SystemExit(
+                    f"Release blocked: current learning Note has wrong stage/tag: {nid} "
+                    f"stage={stage!r} tag={tag!r}"
+                )
+        else:
+            if stage != HELD_STAGE or tag:
+                raise SystemExit(
+                    f"Release blocked: held Note has wrong stage/tag: {nid} "
+                    f"stage={stage!r} tag={tag!r}"
+                )
+        by_id[nid] = row
+
+    ids = set(by_id)
+    missing = sorted(released_ids - ids)
+    extra = sorted(ids - released_ids)
+    if missing or extra:
+        raise SystemExit(
+            "Release blocked: explicit learning admission must cover exactly released study; "
+            f"missing={missing[:10]} extra={extra[:10]}"
+        )
+
+    expected_allowed = actual_grade4_note_ids()
+    allowed = {nid for nid, row in by_id.items() if row.get("Status", "").strip() == "allowed"}
+    if allowed != expected_allowed:
+        missing = sorted(expected_allowed - allowed)
+        extra = sorted(allowed - expected_allowed)
+        raise SystemExit(
+            "Release blocked: allowed learning set does not equal confirmed actual Grade-4 identity set; "
+            f"missing={missing[:10]} extra={extra[:10]}"
+        )
+    return by_id
+
+
 def main() -> None:
-    for path in (PROFILE, MASTER, LEARNER, REGISTRY, RECONCILIATION, STUDY, ANKI_IMPORT, *REPORTS):
+    required = (
+        PROFILE, MASTER, LEARNER, REGISTRY, ADMISSION, RECONCILIATION,
+        SOURCE_IDENTITY_EXTENSIONS, STUDY, ANKI_IMPORT, *REPORTS,
+    )
+    for path in required:
         if not path.exists():
             raise SystemExit(f"Missing release input: {path.relative_to(ROOT)}")
 
@@ -163,6 +245,8 @@ def main() -> None:
         and learner_by_id[r["NoteID"]].get("LearnerProfile") == learner_profile
         and learner_by_id[r["NoteID"]].get("LearnerLevel") == learner_level
     }
+    admission_by_id = load_and_validate_admission(learner_profile, learner_level, released_ids)
+
     study_ids = [r["NoteID"] for r in study_rows]
     if len(study_ids) != len(set(study_ids)):
         raise SystemExit("Release blocked: duplicate NoteID in study.csv")
@@ -192,25 +276,38 @@ def main() -> None:
         )
 
     missing_required: list[str] = []
-    bad_stage: list[str] = []
+    bad_learning_state: list[str] = []
     for row in study_rows:
         if any(not row.get(field, "").strip() for field in (
-            "NoteID", "CanonicalWord", "Word", "MeaningPrimary",
+            "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
             "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
         )):
             missing_required.append(row["NoteID"])
-        stage_tags = [tag for tag in row["Tags"].split() if tag.startswith("stage::")]
-        if len(stage_tags) != 1:
-            bad_stage.append(row["NoteID"])
+
+        nid = row["NoteID"]
+        admission = admission_by_id[nid]
+        tags = row["Tags"].split()
+        stage_tags = [tag for tag in tags if tag.startswith("stage::")]
+        learning_tags = [tag for tag in tags if tag.startswith("learning::")]
+        expected_stage = admission["Stage"].strip()
+        expected_tag = admission.get("LearningTag", "").strip()
+        if stage_tags != [expected_stage]:
+            bad_learning_state.append(nid)
+        elif expected_tag:
+            if learning_tags != [expected_tag]:
+                bad_learning_state.append(nid)
+        elif learning_tags:
+            bad_learning_state.append(nid)
+
     if missing_required:
         raise SystemExit(
             f"Release blocked: {len(missing_required)} study rows have missing required fields; "
             f"examples={missing_required[:10]}"
         )
-    if bad_stage:
+    if bad_learning_state:
         raise SystemExit(
-            f"Release blocked: {len(bad_stage)} study rows do not have exactly one stage tag; "
-            f"examples={bad_stage[:10]}"
+            f"Release blocked: {len(bad_learning_state)} study rows have invalid stage/learning tags; "
+            f"examples={bad_learning_state[:10]}"
         )
 
     pending: list[str] = []
@@ -235,9 +332,12 @@ def main() -> None:
             f"examples={(missing + pending + stale)[:10]}"
         )
 
+    allowed_count = sum(1 for r in admission_by_id.values() if r.get("Status") == "allowed")
+    held_count = sum(1 for r in admission_by_id.values() if r.get("Status") == "held")
     print(
         f"Klose content release ready: profile={learner_profile}, level={learner_level}, "
-        f"released={len(released_ids)}, study={len(study_ids)}, anki_import={len(anki_rows)}, "
+        f"released={len(released_ids)}, current_learning={allowed_count}, held={held_count}, "
+        f"study={len(study_ids)}, anki_import={len(anki_rows)}, "
         f"source_reconciliation=ready, unresolved_reports=0, pending_reviews=0"
     )
 
