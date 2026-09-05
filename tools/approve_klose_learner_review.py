@@ -2,9 +2,9 @@
 """Explicitly approve the current learner presentation after real review.
 
 This tool is deliberately NOT part of normal CI. It records an immutable approval
-batch and updates presentation_review_registry.csv only when the current content
-fingerprints and quality reports are clean. Content changes later are invalidated
-by sync_klose_learner_review_registry.py.
+batch and updates presentation_review_registry.csv only when the current release-
+visible fingerprints and quality reports are clean. Content changes later are
+invalidated by sync_klose_learner_review_registry.py.
 """
 from __future__ import annotations
 
@@ -51,7 +51,12 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
 
 def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
     payload = "\x1f".join([
-        "klose-presentation-v1",
+        "klose-presentation-v2",
+        master.get("CanonicalWord", "").strip(),
+        master.get("SenseLabel", "").strip(),
+        master.get("Word", "").strip(),
+        master.get("British", "").strip(),
+        master.get("American", "").strip(),
         master.get("MeaningPrimary", "").strip(),
         learner.get("ExampleSentence", "").strip(),
         learner.get("ExampleTranslation", "").strip(),
