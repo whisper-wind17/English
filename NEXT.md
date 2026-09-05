@@ -2,204 +2,98 @@
 
 Last updated: 2026-09-05
 
-新对话启动顺序：
+启动顺序：
 
 ```text
 AGENTS.md
 → NEXT.md
-→ docs/SOURCE_RECONCILIATION.md
-→ anki/klose/source_reference/rj_start1-grade4-upper-reconciliation.md
+→ anki/klose/source_reference/README.md
+→ anki/klose/source_reference/rj_start1-grade4-klose-actual.csv
 ```
 
 ## Current objective
 
-先完成 **Klose 实际四年级上教材与当前第三方 `rj_start1::4年级上` 的 Source Edition / Identity reconciliation**，再重新建立正式 learning admission，之后才让 Klose 开始学习。
+采用简化路径：**以 Klose 实际四年级上 + 下教材作为 Grade 4 权威学习范围，合并进入长期 Vocabulary study，再通过显式 Learning Admission / Tag 让 Klose 只学习真实 Grade 4 词汇。**
+
+不再把第三方 XLSX 中的“4年级”范围作为 Klose 当前学习范围依据。
 
 核心不变量：
 
 ```text
-Source Grade ≠ LearnerLevel
+Source Grade ≠ LearnerLevel ≠ Learning Admission
 ```
 
-Klose 当前仍使用 `LearnerLevel=4`；未来学习 Grade 5/6 来源词汇也不自动提升 LearnerLevel。
+Klose 当前仍使用 `LearnerLevel=4`。
 
-## Architecture hardening completed
+## Actual Grade 4 source completed
 
-2026-09-05 已完成一轮“规则 → 可执行约束”的架构加固：
-
-### Release gate
-
-新增结构化状态：
+四上：
 
 ```text
-anki/klose/master/source_reconciliation_registry.csv
+anki/klose/source_reference/rj_start1-grade4-upper-klose-actual.csv
+110 occurrence rows
+109 unique surface strings
 ```
 
-当前四上状态明确为：
+四下：
 
 ```text
-ReconciliationStatus = blocked
-IdentityStatus       = pending
-LearningAdmission    = blocked
+anki/klose/source_reference/rj_start1-grade4-lower-klose-actual.csv
+111 occurrence rows
+111 unique surface strings
 ```
 
-`check_klose_release_ready.py` 现在会直接消费该状态，因此当前内容必须失败，不能再出现“文档 BLOCKED、程序却 Klose release ready”。
-
-同时新增 upstream derivation 校验：`study.csv` 与 `anki-import.csv` 即使被同步篡改，也必须逐字段与当前 Master + Learner 上游一致，否则 gate 失败。
-
-### Review fingerprint v2
-
-当前 approval fingerprint 已覆盖：
+四上 + 四下权威合并表：
 
 ```text
-CanonicalWord
-SenseLabel
-Word
-British
-American
-MeaningPrimary
-ExampleSentence
-ExampleTranslation
-LearnerProfile
-LearnerLevel
+anki/klose/source_reference/rj_start1-grade4-klose-actual.csv
+SourceID      = rj_start1
+SourceEdition = klose-current
+Grade         = 4
+221 occurrence rows
+219 unique surface strings
 ```
 
-缺失 ContentFingerprint 不再自动继承旧审批，默认转 `pending`。旧 v1 approval 在下一次 sync 时会失效，需要在教材 reconciliation 后重新真实审校。
-
-### Stable NoteID historical check
-
-新增：
+重复 surface 只有两个，且义项不同：
 
 ```text
-anki/klose/master/identity_migrations.csv
+cook
+  上 U1 = 烹饪；煮
+  上 U4 = 厨师
+
+over
+  上 U3 = 在……的远端（或对面）
+  下 U3 = 结束（的）
 ```
 
-`check_klose_persistent_state.py` 会比较 Git 父版本；旧 NoteID 不能消失，也不能静默改变：
+因此这两项必须按不同 target sense 处理，不能按 Word 去重。
+
+## Simplified target workflow
 
 ```text
-CanonicalWord
-MatchKey
-SenseLabel
-PrimaryOriginKey
+Actual Grade 4 merged source
+→ sense-aware match against current Vocabulary Identity / study
+→ exact same-sense: reuse NoteID
+→ genuine new learning unit: append NoteID
+→ same word / different sense: separate NoteID
+→ merge all resulting Notes into long-lived study
+→ explicit Learning Admission / Tag = current Grade 4
+→ Anki: suspend old baseline, unsuspend current Grade 4 learning set
 ```
 
-真正 identity split/merge 必须留下 approved migration 记录。
+`study.csv` 的角色固定为长期已纳入 Klose 系统的 released vocabulary，不再等同于“当前正在学习的词”。
 
-### Sense-aware identity extension
+当前学习范围由 Learning Admission / Tag 决定。
 
-保留现有 legacy：
+计划 Tag：
 
 ```text
-source_identity_map.csv
+learning::klose::grade4
 ```
-
-新增：
-
-```text
-source_identity_extensions.csv
-```
-
-schema：
-
-```text
-SourceID
-SourceEdition
-SourceItemKey
-NoteID
-Decision
-Status
-```
-
-目的：允许新 Edition / 同词多义拥有独立稳定 source item identity，同时避免一次性重写现有 518 条 baseline mapping。
-
-### Learning admission
-
-新增：
-
-```text
-anki/klose/learner/learning_admission.csv
-```
-
-以后正式 staging 应由：
-
-```text
-LearnerProfile + LearnerLevel + NoteID → Stage
-```
-
-显式决定，而不是由 Source Grade 推导。
-
-当前文件尚为空，因此构建器保留 legacy Grade-4 staging fallback 仅用于迁移兼容；由于 Source Reconciliation gate 当前为 blocked，这个 fallback 不代表正式学习准入。
-
-### Learner example checker
-
-`check_klose_learner.py` 已区分：
-
-```text
-target vocabulary
-vs
-auxiliary vocabulary used to explain it
-```
-
-目标词自身不再因为 Source Grade > LearnerLevel 被判违规；这允许 `LearnerLevel=4` 学习 Grade 5/6 来源词汇。
-
-### CI
-
-CI 已扩展覆盖：
-
-```text
-source_reference/**
-anki/klose/anki/**
-source reconciliation / identity extension / migration registries
-learning_admission.csv
-approval manifests
-```
-
-并增加 PR 检查、`fetch-depth: 2`，用于 Git-baseline identity stability。
-
-## Critical blocker
-
-当前 repo 第三方四上 source 与 Klose 实际教材存在完整 Edition / Revision mismatch。
-
-Klose 实际四上：
-
-1. jobs / chores
-2. personal traits
-3. places / community
-4. jobs
-5. weather
-6. clothes / seasons
-
-当前专项诊断：
-
-```text
-anki/klose/source_reference/rj_start1-grade4-upper-reconciliation.md
-```
-
-状态：**BLOCKED FOR SOURCE RECONCILIATION**，且现在已经由程序 gate 同步表达。
-
-## Identity blocker: cook
-
-Klose 实际教材：
-
-```text
-Unit 1 cook = 烹饪；煮  # verb
-Unit 4 cook = 厨师      # noun
-```
-
-当前 released `KV000424` 合并了两个 sense。
-
-目标 migration：
-
-```text
-保留 KV000424 -> cook noun / 厨师
-append 新 NoteID -> cook verb / 烹饪；煮
-```
-
-新 `cook verb` 应通过 `source_identity_extensions.csv` 建立带 Edition + sense-aware SourceItemKey 的 mapping；不得重编号旧 NoteID。
 
 ## Current Anki state
 
-第一次 Desktop 导入与 AnkiWeb Upload 已完成，历史结果：
+历史结果：
 
 ```text
 Deck              = Klose-English::Vocabulary
@@ -215,67 +109,47 @@ Desired retention = 90%
 
 Klose 尚未产生真实 Review History。
 
-### Safety rule
+当前操作原则：
 
-**不要让 Klose 开始正式学习。**
+```text
+保留全部已有 NoteID / Cards
+不删除历史 study Notes
+下一次正式同步后：现有 baseline 全部 Suspend
+只 Unsuspend tag:learning::klose::grade4
+```
 
-当前 175 active cards 的 staging 来自错误 Edition 的 legacy baseline。必须先完成 reconciliation 和 learning admission。
+注意：CSV 导入只负责 Note 内容更新；Suspend / Unsuspend 在 Anki 中按 Tag 执行。
 
 ## Next work order
 
-1. 完成 110 条实际四上 Core Vocabulary occurrence 的 identity decision。
-2. 明确第三方四上数据属于哪个 Edition / Revision，并为 Klose 当前实际教材定义 `SourceEdition`。
-3. 将实际教材 occurrence 物理落地为带 Edition / Unit / Page / stable source item identity 的记录。
-4. 完成 `cook` noun/verb split migration：保留 KV000424，新增 verb NoteID。
-5. 对 exact same-sense Notes 复用 NoteID + 增加实际教材 provenance；phrase/morphology 仅作为 candidate。
-6. reconciliation 完成后，将 `source_reconciliation_registry.csv` 更新为 `reconciled / confirmed / allowed`。
-7. 建立当前 released set 的显式 `learning_admission.csv`，停止依赖 legacy Grade-4 staging fallback。
-8. 重新生成 learner presentation；review fingerprint v2 会使变化项/旧 v1 approval 转 pending。
-9. 完成真实 review / approval，直到 pending=0。
-10. rebuild + release gate，通过后重新生成 `anki-import.csv`。
-11. 用同一 Note Type 原地更新 Anki，保护 NoteID 与未来 FSRS history。
-12. 四上稳定后再接收四下；Grade 5/6 仍保持 `LearnerLevel=4` 准备。
+1. 用 `rj_start1-grade4-klose-actual.csv` 的 221 条 occurrence 与当前 Vocabulary Master / study 做匹配。
+2. 优先自动处理 `exact word + same target sense`，复用已有 NoteID。
+3. 只把以下情况进入小型 review queue：
+   - same word / different sense；
+   - phrase vs single word；
+   - morphology / plural；
+   - Meaning 与当前 Note 核心义项明显不一致。
+4. `cook` 和 `over` 明确拆成独立 target sense；保留已有合适 NoteID，新增必要 NoteID。
+5. genuine new learning unit append NoteID。
+6. 将全部真实 Grade 4 learning units 纳入 long-lived study，并打 `learning::klose::grade4`。
+7. 建立对应 `learning_admission.csv`；不再依赖 legacy Grade-4 staging fallback。
+8. 保持 `LearnerLevel=4`，生成/修正 learner presentation。
+9. fingerprint v2 review / approval，直到 pending=0。
+10. release gate 通过后生成新的 `anki-import.csv`。
+11. Anki 原地导入；全部旧 baseline Suspend，再 Unsuspend `tag:learning::klose::grade4`。
 
-## Deferred explicit migration
+## Source reconciliation state
 
-Homograph front-side disambiguation（如 `cook n.` / `cook v.`）方向已确认，但当前 Note Type 没有 `PromptHint` 字段。
-
-不要直接向 `anki-import.csv` 偷加字段。后续单独设计一次 Note Type migration：
-
-```text
-add PromptHint field
-→ update card front contract
-→ ordinary words PromptHint=""
-→ ambiguous homographs use minimal non-answer cue
-→ preserve same NoteID / Card / FSRS history
-```
-
-## Grade 4 upper Definition of Done
-
-- [ ] 110 条实际 Core Vocabulary occurrence 均有明确 identity decision
-- [ ] SourceEdition / Revision 已显式建模
-- [ ] same-sense Notes 复用稳定 NoteID并补 provenance
-- [ ] phrase/morphology candidates 均做 sense-aware decision
-- [ ] genuine new learning units append NoteID
-- [ ] `cook` noun/verb split 完成
-- [ ] source reconciliation registry = reconciled / confirmed / allowed
-- [ ] LearnerLevel 保持 4
-- [ ] explicit learning admission 覆盖全部 current released Notes
-- [ ] release-visible v2 fingerprint current，pending=0
-- [ ] corrected staging 重建完成
-- [ ] content release gate 通过
-- [ ] corrected `anki-import.csv` 可安全原地更新 Anki
-- [ ] blocker 解除后 Klose 才开始正式学习
-
-## Relevant docs
+结构化状态仍保持 blocked，直到 identity merge 和 learning admission 完成：
 
 ```text
-docs/KLOSE_VOCABULARY_SYSTEM.md
-docs/SOURCE_RECONCILIATION.md
-docs/EXPRESSIONS_SYSTEM.md
-docs/LEARNER_REVIEW_REGISTRY.md
-docs/ANKI_FIRST_IMPORT.md
-docs/ANKI_FIRST_IMPORT_GUIDE.md
-docs/ANKI_SYNC_WORKFLOW.md
-anki/klose/source_reference/README.md
+anki/klose/master/source_reconciliation_registry.csv
 ```
+
+四上、四下都已完成教材 evidence capture；当前 blocker 已从“缺教材”转为“尚未完成 identity merge / learning admission”。
+
+## Deferred
+
+Homograph front-side disambiguation（例如 `cook n.` / `cook v.`）仍需单独 Note Type migration，引入 `PromptHint` 字段；不要为了本轮 Grade 4 merge 临时破坏现有 Anki Note Type。
+
+四下 Useful Expressions 暂不处理，当前先完成 Vocabulary learning set。
