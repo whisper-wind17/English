@@ -63,7 +63,7 @@ styling.css
 Word
 ```
 
-不在正面显示音标或释义。目标是让学习者在揭示答案前主动回忆：
+不在正面显示音标、TTS 或释义。目标是在揭示答案前主动回忆：
 
 ```text
 Word → pronunciation
@@ -74,13 +74,24 @@ Word → core meaning
 
 ```text
 Word
+标准单词 TTS（en_US）
 UK / US phonetics
 MeaningPrimary
 ExampleSentence
 ExampleTranslation
 ```
 
-这保留了检索练习的 recall boundary，同时仍维持 `1 Note = 1 Card`，不额外建立 pronunciation/reverse cards。
+`card_back.html` 使用：
+
+```html
+{{tts en_US:Word}}
+```
+
+因此揭示答案后自动播放单词标准发音，用于核对学习者刚才的主动发音回忆。TTS 放在答案面而不是问题面，避免提前泄露 pronunciation cue。
+
+当前**不自动朗读 ExampleSentence**。例句首先由 Klose 自己朗读，用于语境理解与完整句子阅读训练；若以后需要例句朗读，优先设计按需播放，而不是答案揭示后自动连续朗读。
+
+这保留了检索练习的 recall boundary，同时仍维持 `1 Note = 1 Card`，不额外建立 pronunciation/reverse cards，也不需要维护逐词 mp3 字段。
 
 `NoteID`、Sources、SourceBooks、LearnerLevel 等管理字段不展示给 Klose。
 
@@ -91,19 +102,23 @@ Klose 日常主要使用 iPad AnkiMobile。默认交互不依赖键盘：
 ```text
 看到 Word
 → 先口头回忆读音和意思
-→ 轻点卡片任意位置 Show Answer
-→ 核对音标、释义和例句
+→ 轻点卡片显示答案
+→ 自动听 Word 标准 TTS
+→ 核对音标、释义
+→ 自己朗读 ExampleSentence
 → Again / Good 为主要反馈
 ```
 
-AnkiMobile 默认在问题面点击卡片任意区域即可显示答案；答案面可以直接点击底部评分按钮。初期不要求 Klose 熟练使用 Hard / Easy，优先形成一致的自评规则：
+AnkiMobile 的 TTS 使用设备可用的系统语音；repo 不保存对应音频媒体文件。
+
+初期不要求 Klose 熟练使用 Hard / Easy，优先形成一致的自评规则：
 
 ```text
 忘记 / 读错 / 核心意思错 → Again
 能较顺畅回忆             → Good
 ```
 
-桌面版负责首次建库、Note Type / Template 管理和批量导入；同步到 AnkiWeb 后，iPad 继续使用同一 Note Type、Card Template、Deck 与 FSRS 学习历史。
+桌面版负责首次建库、Note Type / Template 管理和批量导入；同步到 AnkiWeb 后，iPad 使用同一 Note Type、Card Template、Deck 与 FSRS 学习历史。
 
 ## Deck
 
