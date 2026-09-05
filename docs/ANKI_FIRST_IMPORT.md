@@ -1,73 +1,48 @@
 # Klose Vocabulary：第一次正式导入 Anki
 
-逐步实操、实际参数、验收结果与截图索引见：`docs/ANKI_FIRST_IMPORT_GUIDE.md`。
-
-本文只描述 **NoteID-first 新系统的第一次正式导入**。第一次导入完成后的长期重复同步，统一按 `docs/ANKI_SYNC_WORKFLOW.md` 执行。
-
-如果设备里已经导入过旧版 Word-first 人教版 CSV，先按 `docs/ANKI_MIGRATION.md` 做迁移，不要直接重复导入。
-
-## 1. 当前正式基线
-
-Grade-4 Baseline v1：
+本文定义 **NoteID-first 新系统第一次导入的操作契约**。逐步实操记录见：
 
 ```text
-Released Notes            = 518
-model-reviewed            = 518
-pending                    = 0
-identity review            = 0
-learner review             = 0
-future-vocabulary review   = 0
+docs/ANKI_FIRST_IMPORT_GUIDE.md
 ```
 
-当前学习阶段：
+第一次导入完成后的长期同步统一按：
 
 ```text
-stage::grade4-new            = 175
-stage::grade4-review         = 26
-stage::lower-grade-backfill  = 317
+docs/ANKI_SYNC_WORKFLOW.md
 ```
 
-内部 released snapshot：
+如果设备里已有旧 Word-first 数据，先按 `docs/ANKI_MIGRATION.md` 迁移。
 
-```text
-anki/klose/publish/study.csv
-```
+> 重要：本文不是当前 release-readiness 状态页。当前是否允许 Klose 开始学习、是否存在 Source blocker，必须先读根目录 `NEXT.md`。历史上曾成功导入的 baseline，不代表后续发现 Source Fact 问题后仍然可以继续学习。
 
-真正给 Anki 导入的发布文件：
-
-```text
-anki/klose/publish/anki-import.csv
-```
-
-不要直接导入 `study.csv`。`study.csv` 用于 repo 构建、审计、diff 和 release 对账；`anki-import.csv` 使用 Anki `#...` file headers、UTF-8 无 BOM，没有普通数据表头行。
-
-`study.csv` 和 `anki-import.csv` 都是 generated output，均不得手工修改。
-
----
-
-## 2. 创建唯一主 Deck
-
-长期主 Deck：
+## 1. 唯一主 Deck
 
 ```text
 Klose-English::Vocabulary
 ```
 
-不要按教材、年级或学习阶段拆长期 Deck。Klose 日常只进入这一个学习入口。
+教材、年级、阶段通过 Tags / Source Occurrences / Suspend 控制，不拆成多套长期 Vocabulary Deck。
 
----
-
-## 3. 创建唯一 Note Type
-
-Note Type：
+## 2. Note Type
 
 ```text
 Klose Vocabulary
 ```
 
-从 `Basic` 创建/复制，不要使用 `Basic (and reversed card)`。
+只创建一个 Card Type：
 
-字段顺序固定：
+```text
+Recognition
+```
+
+即：
+
+```text
+1 Note = 1 Card
+```
+
+字段顺序：
 
 ```text
 NoteID
@@ -84,67 +59,76 @@ SourceBooks
 UserMemo
 ```
 
-规则：
+`NoteID` 必须是第一字段。`UserMemo` 是 Anki-local 字段，不从正式 CSV 更新。
 
-- `NoteID` 永久保持第一字段；
-- `UserMemo` 只在 Anki 本地维护，不映射 CSV；
-- CSV 的 `Tags` 映射到 Anki 自带 Tags；
-- 只保留一个 Card Type：`Recognition`；
-- `1 Note = 1 Card`，因此首次导入后必须满足 `518 Notes = 518 Cards`。
+## 3. Card Template
 
-Card Template 使用：
+Front：
 
-```text
-anki/klose/anki/card_front.html
-anki/klose/anki/card_back.html
-anki/klose/anki/styling.css
+```html
+<div class="word">{{Word}}</div>
 ```
 
-### Recognition 学习交互
+Back：
 
-正面只显示：
+```html
+{{FrontSide}}
 
-```text
-Word
+{{tts en_US:Word}}
+
+{{#British}}
+<div class="phonetic">UK {{British}}</div>
+{{/British}}
+
+{{#American}}
+<div class="phonetic">US {{American}}</div>
+{{/American}}
+
+<hr id="answer">
+
+<div class="meaning">{{MeaningPrimary}}</div>
+
+{{#ExampleSentence}}
+<div class="example">{{ExampleSentence}}</div>
+{{/ExampleSentence}}
+
+{{#ExampleTranslation}}
+<div class="translation">{{ExampleTranslation}}</div>
+{{/ExampleTranslation}}
 ```
 
-Klose 在揭示答案前先主动回忆读音和核心意思。
-
-答案面显示并执行：
+正式模板以：
 
 ```text
-Word
-→ 自动播放 {{tts en_US:Word}}
-→ UK / US phonetics
-→ MeaningPrimary
-→ ExampleSentence
-→ ExampleTranslation
+anki/klose/anki/
 ```
 
-TTS 只在答案面播放，避免正面提前泄露 pronunciation cue。当前不自动朗读 `ExampleSentence`，例句优先由 Klose 自己朗读；后续若需要，优先增加按需播放，而不是自动连续朗读。
+为准。当前只自动朗读单词，例句不自动朗读。
 
----
-
-## 4. 导入正式发布文件
-
-导入：
+## 4. 唯一正式导入文件
 
 ```text
 anki/klose/publish/anki-import.csv
 ```
 
-文件自带：
+不要直接导入：
 
 ```text
-#separator:Comma
-#html:false
-#notetype:Klose Vocabulary
-#deck:Klose-English::Vocabulary
-#tags column:12
-#columns:...
+publish/study.csv
+publish/all.csv
+publish/onboarding/*
+publish/by-source/*
 ```
 
-Import Preview 必须核对：
+其中：
+
+- `study.csv`：generated Released Set 内部审计快照；
+- `anki-import.csv`：generated 唯一正式 Anki artifact；
+- 两者都禁止手工修改。
+
+## 5. Import 设置
+
+正式导入时：
 
 ```text
 Note Type      = Klose Vocabulary
@@ -153,294 +137,109 @@ Existing notes = Update
 Match scope    = Note Type
 ```
 
-字段：
+字段映射：
 
 ```text
-NoteID              → NoteID
-CanonicalWord       → CanonicalWord
-Word                → Word
-British             → British
-American            → American
-MeaningPrimary      → MeaningPrimary
-ExampleSentence     → ExampleSentence
-ExampleTranslation  → ExampleTranslation
-LearnerLevel        → LearnerLevel
-Sources             → Sources
-SourceBooks         → SourceBooks
-UserMemo            → (Nothing)
-Tags                → Anki Tags
+NoteID             -> NoteID
+CanonicalWord      -> CanonicalWord
+Word               -> Word
+British            -> British
+American           -> American
+MeaningPrimary     -> MeaningPrimary
+ExampleSentence    -> ExampleSentence
+ExampleTranslation -> ExampleTranslation
+LearnerLevel       -> LearnerLevel
+Sources            -> Sources
+SourceBooks        -> SourceBooks
+UserMemo           -> (Nothing)
+Tags               -> Anki Tags
 ```
 
-第一条真实数据应从：
+重新导入同一 NoteID 时应原地更新 Note，不创建第二套 FSRS history。
+
+## 6. 学习阶段与 Suspend
+
+Stage Tags 是 release 时生成的系统状态，不是固定教材分类。第一次导入后只对当前计划学习的 **New Cards** 开放，其余 New Cards 可以 Suspend。
+
+原则：
 
 ```text
-KV000001 | book | book
+尚未学习的 New Card -> 可 Suspend / Unsuspend 控制准入
+已经 Learning/Review -> 不因 source/stage 调整重新 Suspend
 ```
 
-开始。如果预览把 `NoteID / Word / ...` 本身当成第一条数据，立即停止导入。
+具体当前应开放哪些 stage，必须读 `NEXT.md` 和最新 release 数据，不能照抄历史 baseline。
 
-首次导入成功结果：
+## 7. Deck Options 基线
+
+首次配置曾验证以下值适合当前 Klose Vocabulary 使用：
 
 ```text
-518 notes found in file
-518 new notes imported
+New cards/day             = 8
+Maximum reviews/day       = 9999
+Learning steps            = 10m
+Relearning steps          = 10m
+Leech action              = Tag Only
+New card gather order     = Ascending position
+New card sort order       = Order gathered
+New/review order          = Show after reviews
+Interday learning/review  = Mix with reviews
+Review sort order         = Due date, then random
+FSRS                      = ON
+Desired retention         = 90%
+FSRS parameters           = default initially
+Reschedule cards on change = OFF
 ```
 
----
+这些是调度配置，不决定 source correctness。Source/release blocker 优先于“参数已经配置好”。
 
-## 5. 第一次只开放四年级新词
+## 8. 第一次同步
 
-导入完成后先不要开始 Study。
-
-保持正常：
+若 Desktop 是唯一有完整 collection 的端、AnkiWeb 为空：
 
 ```text
-tag:stage::grade4-new
+Desktop -> Sync -> Upload to AnkiWeb
 ```
 
-175 Cards。
-
-Suspend：
+随后空的 iPad AnkiMobile：
 
 ```text
-tag:stage::grade4-review
+登录同一 AnkiWeb
+-> Sync
+-> Download from AnkiWeb
 ```
 
-26 Cards。
+若 AnkiWeb / iPad 已有其他 collection 数据，不要盲目单向覆盖，先确认同步方向。
 
-再 Suspend：
+## 9. 验收
+
+第一次导入后至少验证：
+
+- Note 数 = Card 数；
+- Note Type / Deck / Card Type 正确；
+- `NoteID` 第一字段；
+- Tags 正确；
+- Suspend 数量符合当前 staging；
+- Preview 正面只显示 Word；
+- Back 可播放 Word TTS；
+- IPA / Meaning / Example / Translation 正常；
+- FSRS 配置正确；
+- AnkiWeb 同步完成。
+
+但最终“可以开始正式学习”的判定还必须满足：
 
 ```text
-tag:stage::lower-grade-backfill
+repo current source/release ready
++ release gate pass
++ NEXT.md 无 blocker
 ```
 
-317 Cards。
+## 10. 历史首次导入
 
-最终验收：
+2026-09-05 曾完成第一轮 Desktop 导入与 AnkiWeb Upload。详细过程、当时的 `518 / 343 / 175` 等结果保存在：
 
 ```text
-deck:"Klose-English::Vocabulary"                     = 518
-deck:"Klose-English::Vocabulary" is:suspended        = 343
-deck:"Klose-English::Vocabulary" -is:suspended       = 175
+docs/ANKI_FIRST_IMPORT_GUIDE.md
 ```
 
-只有 `518 / 343 / 175` 全部正确后才继续。
-
-Suspend 只用于尚未学习的 New Cards。已经进入 Learning/Review 的旧卡，以后不得因为切换教材、年级或 active scope 而重新 Suspend，避免中断 FSRS 复习链。
-
----
-
-## 6. 独立 Deck Preset
-
-不要直接修改共享的系统默认 Preset。为：
-
-```text
-Klose-English::Vocabulary
-```
-
-Clone 独立 Preset：
-
-```text
-Klose Vocabulary
-```
-
-并确认类似：
-
-```text
-Klose Vocabulary (used by 1 deck)
-```
-
----
-
-## 7. 当前正式调度基线
-
-当前第一次上线配置：
-
-```text
-Daily Limits
-New cards/day                = 8
-Maximum reviews/day          = 9999
-New cards ignore review limit = OFF
-Limits start from top          = OFF
-
-New Cards
-Learning steps               = 10m
-Insertion order              = Sequential (oldest cards first)
-
-Lapses
-Relearning steps             = 10m
-Minimum interval             = 1
-Leech threshold              = 8
-Leech action                 = Tag Only
-
-Display Order
-New card gather order        = Ascending position
-New card sort order          = Order gathered
-New/review order             = Show after reviews
-Interday learning/review     = Mix with reviews
-Review sort order            = Due date, then random
-```
-
-`Graduating interval / Easy interval` 属于旧调度器参数；启用 FSRS 后不作为当前长期调度基线维护。
-
-8 个新词/天是当前起点，不是永久常量。运行约 7–10 天后根据真实负担调整：学习时间稳定、无积压可升至 10/day；若日常负担明显过高可降到 5–6/day。不要通过压低 `Maximum reviews/day` 来隐藏到期复习。
-
----
-
-## 8. FSRS
-
-当前正式基线：
-
-```text
-FSRS                        = ON
-Desired retention           = 90%
-FSRS parameters             = Default
-Reschedule cards on change  = OFF
-Check health when optimizing = ON
-```
-
-首次没有 Klose 自己的 Review History，因此暂时不要执行：
-
-```text
-Optimize Current Preset
-Optimize All Presets
-```
-
-积累真实学习历史后再评估是否优化参数或提高 Desired Retention。
-
----
-
-## 9. Desktop 无污染 Preview
-
-第一次正式学习前可以在 Browser 中：
-
-```text
-tag:stage::grade4-new
-```
-
-任选一张 `Preview`，只检查显示，不在正常 Study 中点击 Again/Good。
-
-预期：
-
-```text
-Front
-→ only Word
-
-Back
-→ Word
-→ 自动 Word TTS
-→ UK / US phonetics
-→ MeaningPrimary
-→ ExampleSentence
-→ ExampleTranslation
-```
-
-Preview 工具栏里的 Replay Audio / Back Side Only / 左右箭头属于 Desktop Preview UI，不是 Card Template 内容。
-
----
-
-## 10. 同步到 AnkiWeb 与 iPad
-
-Desktop 基线完成后先同步到 AnkiWeb。
-
-如果 AnkiWeb 账号为空，首次同步选择：
-
-```text
-Upload to AnkiWeb
-```
-
-然后在 iPad 安装当前版 AnkiMobile，登录同一 AnkiWeb 账号，执行首次 Sync。
-
-iPad 端验收：
-
-```text
-Deck = Klose-English::Vocabulary
-Cards = 518
-Suspended = 343
-Unsuspended = 175
-Preset / FSRS settings 同步正常
-Recognition 模板正常
-答案面 Word TTS 可播放
-```
-
-Klose 日常主要使用 iPad。建议交互：
-
-```text
-看到 Word
-→ 先口头说出读音和核心意思
-→ 轻点显示答案
-→ 听标准 Word TTS
-→ 核对 IPA / Meaning
-→ 自己朗读 ExampleSentence
-→ 忘记/读错/意思错：Again
-→ 顺畅回忆：Good
-```
-
-初期不要求熟练使用 Hard / Easy。
-
----
-
-## 11. Tags 的所有权
-
-repo 导入的：
-
-```text
-source::...
-stage::...
-learner::...
-```
-
-统一视为 system-managed Tags。长期重新导入可能更新这些 Tags，不要把永久个人信息混入其中。
-
-个人信息使用：
-
-```text
-UserMemo
-```
-
-或 Card Flag。
-
----
-
-## 12. 第一次导入以后
-
-以后新增 Grade 5、北京版、新概念、升级例句等，统一执行：
-
-```text
-修改上游数据
-→ rebuild study.csv
-→ generate anki-import.csv
-→ release gate
-→ 重新导入最新版 anki-import.csv
-```
-
-详细 SOP：
-
-```text
-docs/ANKI_SYNC_WORKFLOW.md
-```
-
-已有 NoteID 使用 Update Existing，原 Card / FSRS / Review History 保留；新 NoteID 在同一个主 Deck 中创建 New Card。
-
----
-
-## 13. Release Gate
-
-正式同步 Anki 前：
-
-```bash
-python tools/check_klose_release_ready.py
-```
-
-必须通过。它验证：
-
-- `study.csv` 与 Released Set 一致；
-- `anki-import.csv` 为 UTF-8 无 BOM；
-- `anki-import.csv` headers 正确，数据与 `study.csv` 完全一致；
-- 每个 released Note 恰好一个 `stage::` Tag；
-- 必填字段完整；
-- identity / learner / future-vocabulary review 均为空；
-- released Notes 全部 model-reviewed 或 human-reviewed；
-- ContentFingerprint 与当前 Meaning / Example / Translation 一致。
-
-CI 必须先通过该 Gate，之后才允许提交 generated release。
+这些数字是历史实操记录，不再作为永远有效的“当前正式基线”。若后续 Source Reconciliation 改变 released/staging 集合，应使用纠正后的 `anki-import.csv` 原地更新同一 Note Type。
