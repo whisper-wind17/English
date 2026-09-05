@@ -35,7 +35,7 @@ anki/klose/publish/study.csv
 anki/klose/publish/anki-import.csv
 ```
 
-不要直接导入 `study.csv`。`study.csv` 保留普通 CSV 表头，供 repo 构建/审计；`anki-import.csv` 使用 Anki 官方 `#...` file headers，没有普通数据表头行，因此不会把 `NoteID, Word ...` 误导入成一张卡。
+不要直接导入 `study.csv`。`study.csv` 保留普通 CSV 表头，供 repo 构建/审计；`anki-import.csv` 使用 Anki 官方 `#...` file headers，没有普通数据表头行，并使用 UTF-8 **无 BOM**，避免把表头误导入或影响 file headers 识别。
 
 ---
 
@@ -169,13 +169,13 @@ NoteID = NoteID
 Word   = Word
 ```
 
-立即停止导入。这表示使用了错误文件或 Anki 没有正确识别 file headers。
+立即停止导入。这表示使用了错误文件或 Anki 没有正确识别 file headers。若当前 Anki 仍启用了 Legacy import/export handling，也应关闭 Legacy importer 或升级到当前版本后再导入。
 
 ---
 
 ## 5. 第一次只开放四年级新词
 
-518 Notes 全部导入同一个 Deck 后，在 Browser 中操作。
+518 Notes 全部导入同一个 Deck 后，**先不要点击 Study Now**，先完成下面的 Suspend 操作。
 
 保持正常：
 
@@ -219,6 +219,8 @@ deck:"Klose-English::Vocabulary"                     → 518
 deck:"Klose-English::Vocabulary" is:suspended        → 343
 deck:"Klose-English::Vocabulary" -is:suspended       → 175
 ```
+
+只有这三个数字正确后才开始第一次学习。
 
 ---
 
@@ -275,7 +277,36 @@ UserMemo
 
 ---
 
-## 9. 后续学习与扩展
+## 9. Suspend 的长期规则
+
+Suspend 是“尚未开始学习的新卡的准入控制”，不是长期遗忘机制。
+
+当前第一次导入时：
+
+```text
+grade4-review + lower-grade-backfill
+```
+
+都还没有 Review History，因此可以安全 Suspend。
+
+一旦某张卡已经进入：
+
+```text
+Learning / Review
+```
+
+以后即使切换教材、年级或 active source，也**不要因为 scope 变化重新 Suspend 它**。否则会中断旧词按照 FSRS 持续复习，违背本系统的核心目标。
+
+因此未来的原则是：
+
+```text
+未学 New Card    → 可以按阶段 Suspend / Unsuspend
+已学 Card        → 保持正常，由 FSRS 决定复习时间
+```
+
+---
+
+## 10. 后续学习与扩展
 
 四年级新词稳定后，可以 Unsuspend：
 
@@ -303,9 +334,11 @@ Deck      = Klose-English::Vocabulary
 新 NoteID   → Create New      → 同一主 Deck 中从 New 开始
 ```
 
+注意：CSV 更新 Note 内容和 system-managed Tags，但不会替你决定所有已有 Card 的 Suspend/Unsuspend 状态。需要“开放某个新阶段”时，应在 Browser 中明确 Unsuspend 对应的 **New Cards**；已经学过的 Card 保持正常 Review。
+
 ---
 
-## 10. Release Gate
+## 11. Release Gate
 
 任何正式同步 Anki 之前：
 
@@ -318,6 +351,7 @@ python tools/check_klose_release_ready.py
 它验证：
 
 - `study.csv` 与 Released Set 一致；
+- `anki-import.csv` 为 UTF-8 无 BOM；
 - `anki-import.csv` headers 正确，且数据与 `study.csv` 完全一致；
 - 每个 released Note 恰好一个 `stage::` Tag；
 - 必填学习字段完整；
