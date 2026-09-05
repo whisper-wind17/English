@@ -10,9 +10,10 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 from datetime import date
 from pathlib import Path
+
+from klose_review_fingerprint import fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
@@ -47,23 +48,6 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
-
-
-def fingerprint(master: dict[str, str], learner: dict[str, str]) -> str:
-    payload = "\x1f".join([
-        "klose-presentation-v2",
-        master.get("CanonicalWord", "").strip(),
-        master.get("SenseLabel", "").strip(),
-        master.get("Word", "").strip(),
-        master.get("British", "").strip(),
-        master.get("American", "").strip(),
-        master.get("MeaningPrimary", "").strip(),
-        learner.get("ExampleSentence", "").strip(),
-        learner.get("ExampleTranslation", "").strip(),
-        learner.get("LearnerProfile", "").strip(),
-        learner.get("LearnerLevel", "").strip(),
-    ])
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def upsert_metric(stats: list[dict[str, str]], metric: str, value: int | str) -> None:
