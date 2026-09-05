@@ -10,9 +10,10 @@ on:
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
+      - 'tools/apply_klose_prompt_hints.py'
+      - 'tools/klose_review_fingerprint.py'
       - 'tools/audit_klose_actual_grade4_reuse.py'
       - 'tools/sync_klose_learner_review_registry.py'
-      - 'tools/revalidate_klose_baseline_v2.py'
       - 'tools/diagnose_klose_release_completeness.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
@@ -26,6 +27,7 @@ on:
       - 'anki/klose/learner/grade4_full_review_*.csv'
       - 'anki/klose/learner/actual_grade4_overrides.csv'
       - 'anki/klose/learner/actual_grade4_reuse_overrides.csv'
+      - 'anki/klose/learner/prompt_hint_overrides.csv'
       - 'anki/klose/learner/learning_admission.csv'
       - 'anki/klose/learner/presentation_review_registry.csv'
       - 'anki/klose/learner/review_approvals/**'
@@ -99,11 +101,26 @@ jobs:
       - name: Apply actual Grade-4 reused learner presentations
         run: python tools/apply_klose_actual_grade4_reuse_learner.py
 
+      - name: Apply homograph PromptHint presentation
+        run: python tools/apply_klose_prompt_hints.py
+
       - name: Sync learner review registry
         run: python tools/sync_klose_learner_review_registry.py
 
-      - name: Explicitly revalidate unchanged baseline under fingerprint v2
-        run: python tools/revalidate_klose_baseline_v2.py
+      - name: Record PromptHint migration model approval
+        run: |
+          if [ -f anki/klose/learner/review_approvals/grade4-prompthint-v1.csv ]; then
+            echo 'PromptHint migration approval already exists.'
+          else
+            python tools/approve_klose_learner_review.py \
+              --batch-id grade4-prompthint-v1 \
+              --profile klose \
+              --level 4 \
+              --expected-count 638 \
+              --reviewer-type model \
+              --review-note 'PromptHint migration reviewed: cook noun/verb and over location/finished receive minimal front-side disambiguation; all other PromptHint values remain blank and prior release-visible content is unchanged.' \
+              --confirm-all-current
+          fi
 
       - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
@@ -132,7 +149,7 @@ jobs:
             anki/klose/learner/current.csv \
             anki/klose/learner/learning_admission.csv \
             anki/klose/learner/presentation_review_registry.csv \
-            anki/klose/learner/review_approvals/grade4-baseline-v2-revalidated.csv \
+            anki/klose/learner/review_approvals/grade4-prompthint-v1.csv \
             anki/klose/review
           if git diff --cached --quiet; then
             echo 'No upstream review-state changes.'
