@@ -55,9 +55,9 @@ def write_anki_import(
     note_type: str,
     deck: str,
 ) -> None:
-    """Write an Anki-native text import file with comment headers, not a data header row."""
+    """Write an Anki-native text import file with comment headers, no BOM/data header row."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8-sig", newline="") as f:
+    with path.open("w", encoding="utf-8", newline="") as f:
         f.write("#separator:Comma\n")
         f.write("#html:false\n")
         f.write(f"#notetype:{note_type}\n")
