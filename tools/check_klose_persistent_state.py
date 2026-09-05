@@ -4,11 +4,15 @@
 Checks current snapshot consistency and Git-baseline stability. Existing NoteIDs may
 be appended to, but cannot disappear or silently change identity-defining fields.
 Any intentional identity mutation requires an explicit approved migration record.
+
+CI should set KLOSE_BASE_COMMIT to the commit that existed before the current
+change set (PR base SHA or push event.before). HEAD^ is only a local fallback.
 """
 from __future__ import annotations
 
 import csv
 import io
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -33,10 +37,11 @@ def read_csv_text(text: str) -> list[dict[str, str]]:
     return list(csv.DictReader(io.StringIO(text.lstrip("\ufeff"))))
 
 
-def git_parent_registry() -> list[dict[str, str]] | None:
+def git_baseline_registry() -> tuple[str, list[dict[str, str]]] | None:
     rel = REGISTRY.relative_to(ROOT).as_posix()
+    base = os.environ.get("KLOSE_BASE_COMMIT", "").strip() or "HEAD^"
     proc = subprocess.run(
-        ["git", "show", f"HEAD^:{rel}"],
+        ["git", "show", f"{base}:{rel}"],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -44,7 +49,7 @@ def git_parent_registry() -> list[dict[str, str]] | None:
     )
     if proc.returncode != 0:
         return None
-    return read_csv_text(proc.stdout)
+    return base, read_csv_text(proc.stdout)
 
 
 def approved_migration_ids() -> set[str]:
@@ -58,10 +63,11 @@ def approved_migration_ids() -> set[str]:
 
 
 def check_git_stability(registry: list[dict[str, str]]) -> None:
-    baseline = git_parent_registry()
-    if baseline is None:
-        print("Persistent-state warning: Git parent baseline unavailable; historical identity check skipped")
+    baseline_result = git_baseline_registry()
+    if baseline_result is None:
+        print("Persistent-state warning: Git baseline unavailable; historical identity check skipped")
         return
+    baseline_ref, baseline = baseline_result
     current = {r["NoteID"].strip(): r for r in registry}
     allowed = approved_migration_ids()
     removed: list[str] = []
@@ -79,8 +85,9 @@ def check_git_stability(registry: list[dict[str, str]]) -> None:
                 changed.append(nid)
     if removed or changed:
         raise SystemExit(
-            "Historical NoteID stability violation: "
-            f"removed={removed[:10]} changed_without_approved_migration={changed[:10]}"
+            "Historical NoteID stability violation against "
+            f"{baseline_ref}: removed={removed[:10]} "
+            f"changed_without_approved_migration={changed[:10]}"
         )
 
 
