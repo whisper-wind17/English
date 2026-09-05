@@ -9,6 +9,7 @@ on:
       - 'tools/apply_klose_actual_grade4_reuse_facts.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
+      - 'tools/apply_klose_actual_grade4_reuse_learner.py'
       - 'tools/audit_klose_actual_grade4_reuse.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
@@ -92,6 +93,9 @@ jobs:
 
       - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
+
+      - name: Apply actual Grade-4 reused learner presentations
+        run: python tools/apply_klose_actual_grade4_reuse_learner.py
 
       - name: Sync learner review registry
         run: python tools/sync_klose_learner_review_registry.py
