@@ -145,6 +145,21 @@ AnkiMobile 的 TTS 使用设备可用的系统语音；repo 不保存对应音�
 
 桌面版负责首次建库、Note Type / Template 管理和批量导入；同步到 AnkiWeb 后，iPad 使用同一 Note Type、Card Template、Deck 与 FSRS 学习历史。
 
+### iPad typography override
+
+`styling.css` 保留 Desktop 原字号，并通过 AnkiMobile 的 `.ipad` 平台类单独放大 iPad 学习视图。当前目标字号：
+
+```text
+Word             52px
+PromptHint       24px
+Phonetic         24px
+MeaningPrimary   34px
+ExampleSentence  30px
+Translation      26px
+```
+
+该变更只影响显示层，不改变 NoteID、Card identity、LearningOrder、内容 fingerprint、FSRS 或 Review History；无需重新导入 CSV。正式修改路径仍是 repo `styling.css` → Desktop Card Styling → Sync → iPad，不在 iPad 本地单独维护模板分叉。
+
 ## Deck
 
 长期主 Deck：
