@@ -18,6 +18,8 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
+from klose_learning_order import format_learning_order, is_valid_learning_order
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
 PROFILE = BASE / "config" / "profile.json"
@@ -131,8 +133,10 @@ def load_explicit_admission(
         if status == "allowed":
             if not learning_tag.startswith("learning::"):
                 raise SystemExit(f"Allowed learning admission requires LearningTag for {nid}")
-            if not learning_order.isdigit() or int(learning_order) <= 0:
-                raise SystemExit(f"Allowed learning admission requires positive LearningOrder for {nid}")
+            if not is_valid_learning_order(learning_order):
+                raise SystemExit(
+                    f"Allowed learning admission requires six-digit LearningOrder for {nid}: {learning_order!r}"
+                )
             allowed_orders.append(int(learning_order))
         else:
             if learning_tag:
@@ -318,7 +322,10 @@ def main() -> None:
     if explicit_admission:
         allowed = sum(1 for row in explicit_admission.values() if row["Status"] == "allowed")
         held = sum(1 for row in explicit_admission.values() if row["Status"] == "held")
-        print(f"Learning admission mode: explicit; allowed={allowed}; held={held}; learning_order=001..{allowed:03d}")
+        print(
+            f"Learning admission mode: explicit; allowed={allowed}; held={held}; "
+            f"learning_order={format_learning_order(1)}..{format_learning_order(allowed)}"
+        )
     else:
         print("Learning admission mode: legacy-grade4-fallback")
 

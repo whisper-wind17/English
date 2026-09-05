@@ -16,11 +16,19 @@ New Card Position / New #
 = Anki state
 ```
 
+`LearningOrder` 的正式序列化固定为 6 位十进制零填充字符串：
+
+```text
+000001 .. 999999
+```
+
+这样未来扩展到数千/数万学习单元时不需要再做 3 位 → 4 位 → 5 位迁移，并保证 Anki 文本排序与数值排序一致。
+
 当前 Grade-4：
 
 ```text
 allowed Notes  = 221
-LearningOrder  = 001..221
+LearningOrder  = 000001..000221
 held Notes     = 417
 LearningOrder  = blank
 ```
@@ -36,14 +44,14 @@ LearningOrder  = blank
 前 8 个应为：
 
 ```text
-001 PE
-002 job
-003 doctor
-004 farmer
-005 nurse
-006 office worker
-007 factory worker
-008 busy
+000001 PE
+000002 job
+000003 doctor
+000004 farmer
+000005 nurse
+000006 office worker
+000007 factory worker
+000008 busy
 ```
 
 ## 2. 为什么不能只保留当前 New #
@@ -118,7 +126,7 @@ LearningOrder -> LearningOrder
 
 ```text
 Total Cards = 638
-221 active Notes have LearningOrder 001..221
+221 active Notes have LearningOrder 000001..000221
 417 held Notes have blank LearningOrder
 ```
 
@@ -146,10 +154,10 @@ tag:learning::klose::grade4 -is:suspended is:new
 
 在 Browser 中显示 `LearningOrder` 列，并按升序排序。
 
-因为值是零填充的：
+因为值固定 6 位零填充：
 
 ```text
-001, 002, ... 009, 010, ... 221
+000001, 000002, ... 000009, 000010, ... 000221
 ```
 
 文本排序与数值排序都会得到同一顺序。
@@ -189,10 +197,10 @@ Shift existing = ON
 执行后，这 221 张 current Grade-4 New Cards 应对应：
 
 ```text
-LearningOrder 001 -> New #1
-LearningOrder 002 -> New #2
+LearningOrder 000001 -> New #1
+LearningOrder 000002 -> New #2
 ...
-LearningOrder 221 -> New #221
+LearningOrder 000221 -> New #221
 ```
 
 未选中的 held New Cards 会被移到后续位置；它们本身处于 Suspended，不影响当前学习。
@@ -234,5 +242,6 @@ Suspended   = 417
 
 - 修改词义 / IPA / Example / PromptHint -> 需要内容 re-review；
 - 修改 LearningOrder -> 不需要重新审校内容，但必须通过 Admission / Release Gate；
+- LearningOrder 的正式存储格式固定为 6 位 `000001..999999`，不得随词库规模改变位宽；
 - 已经进入真实 Learning / Review 的 Card，不因为后续 curriculum order 变化而重排其 FSRS / Due；
 - LearningOrder 主要用于尚未学习的新卡准入和初始化 sequencing。

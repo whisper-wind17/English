@@ -64,7 +64,7 @@ LearningOrder     = GitHub 中的 curriculum / admission 真源
 New Card Position = Anki 中尚未学习新卡的物理排序状态
 ```
 
-当前 Grade-4 `LearningOrder` 为 `001..221`，只用于把尚未开始学习的新卡初始化到教材顺序；一旦 Card 进入真实 Learning / Review，不用 LearningOrder 重写其 FSRS / Due。
+`LearningOrder` 的正式序列化固定为 6 位十进制零填充字符串 `000001..999999`。当前 Grade-4 为 `000001..000221`；固定宽度用于保证未来扩展到数千/数万学习单元时不需要再次迁移，并保证文本排序稳定。一旦 Card 进入真实 Learning / Review，不用 LearningOrder 重写其 FSRS / Due。
 
 ## 3. 什么变化会触发 review / sync
 
@@ -151,7 +151,7 @@ review pending == 0
 ContentFingerprint stale == 0
 review queues == 0
 Learning Admission valid
-allowed LearningOrder == exact textbook order
+allowed LearningOrder == exact textbook order + fixed six-digit format
 held LearningOrder == blank
 Anki headers / columns valid
 UTF-8 without BOM
@@ -253,7 +253,7 @@ docs/ANKI_LEARNING_ORDER_MIGRATION.md
 ```text
 tag:learning::klose::grade4 -is:suspended is:new
 → 必须 = 221
-→ 按 LearningOrder 001..221 升序
+→ 按 LearningOrder 000001..000221 升序
 → Reposition: Start=1, Step=1, Randomize=OFF, Shift existing=ON
 ```
 
@@ -311,7 +311,7 @@ NoteID / content 不变
 
 ```text
 Vocabulary Identity   → Stable NoteID
-Curriculum sequencing → LearningOrder in GitHub
+Curriculum sequencing → LearningOrder in GitHub, fixed six-digit serialization
 Anki memory state      → FSRS / Due / New # in Anki
 Anki 学习入口          → 一个主 Deck
 Anki Note Type         → 同一个 Klose Vocabulary 原地演进

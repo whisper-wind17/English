@@ -31,7 +31,7 @@
 12. **自动检查、模型审校、人工确认、教材原文核对必须区分。** `queue=0` 不等于人工确认。
 13. **Release Gate 必须消费结构化状态。** Markdown 中的 blocker 不能只停留在说明层；Source Reconciliation、Identity、Review、Publish derivation 等必须进入可执行 gate。
 14. **能写成脚本/CI 的约束，不只写在 Prompt。**
-15. **LearningOrder 与 Anki New # 分离。** LearningOrder 是 GitHub 中的 curriculum/admission 真源；New Card Position / Due 是 Anki 状态。对尚未学习的新卡可以按 LearningOrder materialize New #，但不得用 repo 重建已经进入 FSRS 的调度状态。
+15. **LearningOrder 与 Anki New # 分离。** LearningOrder 是 GitHub 中的 curriculum/admission 真源，并固定序列化为 6 位零填充 `000001..999999`；New Card Position / Due 是 Anki 状态。对尚未学习的新卡可以按 LearningOrder materialize New #，但不得用 repo 重建已经进入 FSRS 的调度状态。
 
 ---
 
@@ -107,7 +107,7 @@ Learning Admitted  # 当前真实学习批次已显式核对，可让 Klose 开�
 - Source Edition / reconciliation 无 blocker；
 - released identity 无未决歧义；
 - learner review fingerprint current，`pending=0`；
-- allowed LearningOrder 与当前教材顺序一致且唯一连续；held LearningOrder 为空；
+- allowed LearningOrder 与当前教材顺序一致、唯一连续且满足固定 6 位格式；held LearningOrder 为空；
 - `study.csv` 内容可逐字段由当前 Master + Learner + Admission 上游推导；
 - `anki-import.csv` 与 `study.csv` 完全一致，headers / encoding 正确；
 - 每个 released Note 恰好一个 stage；

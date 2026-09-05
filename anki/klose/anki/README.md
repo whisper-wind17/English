@@ -29,13 +29,15 @@ UserMemo
 
 `NoteID` 必须保持第一字段；`UserMemo` 只在 Anki 本地维护，不从 repo CSV 更新。
 
-`LearningOrder` 属于 Learning Admission / curriculum metadata，不属于 Vocabulary Identity，也不是 FSRS state。当前 Grade-4 allowed Notes 使用零填充的：
+`LearningOrder` 属于 Learning Admission / curriculum metadata，不属于 Vocabulary Identity，也不是 FSRS state。正式序列化固定为 **6 位十进制零填充字符串**：
 
 ```text
-001 .. 221
+000001 .. 999999
 ```
 
-417 个 held Notes 的 `LearningOrder` 必须为空。它用于在 Anki 中把尚未学习的 New Cards 按真实教材顺序一次性 Reposition；实际 `New # / Due / Review History` 仍由 Anki 管理。
+当前 Grade-4 allowed Notes 使用 `000001..000221`；417 个 held Notes 的 `LearningOrder` 必须为空。固定 6 位是长期存储/发布契约，避免词库扩大后从 3 位迁移到 4/5 位；同时保证 Anki 按文本排序与数值排序得到相同次序。
+
+它用于在 Anki 中把尚未学习的 New Cards 按真实教材顺序一次性 Reposition；实际 `New # / Due / Review History` 仍由 Anki 管理。
 
 `LearningOrder` 不展示给 Klose，也不进入 learner content fingerprint；调整学习顺序不需要重新审校释义/例句，但必须通过 Learning Admission / Release Gate 校验。
 
