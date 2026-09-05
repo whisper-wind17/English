@@ -8,6 +8,7 @@ on:
       - 'tools/apply_klose_actual_grade4.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
+      - 'tools/audit_klose_actual_grade4_reuse.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
@@ -70,6 +71,9 @@ jobs:
 
       - name: Validate actual Grade-4 identity coverage
         run: python tools/check_klose_actual_grade4_identity.py
+
+      - name: Audit reused Grade-4 identities
+        run: python tools/audit_klose_actual_grade4_reuse.py
 
       - name: Build legacy vocabulary inventory
         run: python tools/build_klose_vocabulary.py
