@@ -1,0 +1,62 @@
+name: Approve Grade-4 Baseline Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/approve-grade4-baseline-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            tools
+            anki/klose
+            anki/人教版一年级起点/master
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Protect persistent state
+        run: python tools/check_klose_persistent_state.py
+
+      - name: Rebuild exact current presentation
+        run: |
+          python tools/build_klose_vocabulary.py
+          python tools/apply_klose_learner_overrides.py
+          python tools/sync_klose_learner_review_registry.py
+          python tools/check_klose_learner.py
+
+      - name: Approve fully reviewed Grade-4 baseline
+        run: >-
+          python tools/approve_klose_learner_review.py
+          --batch-id grade4-baseline-v1
+          --profile klose
+          --level 4
+          --expected-count 518
+          --reviewer-type model
+          --review-note "Grade-4 baseline v1: 518 released notes explicitly model-reviewed after full content pass"
+          --confirm-all-current
+
+      - name: Verify approval survives fingerprint sync
+        run: python tools/sync_klose_learner_review_registry.py
+
+      - name: Commit approval registry and manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anki/klose/master/build_stats.csv anki/klose/learner/presentation_review_registry.csv anki/klose/learner/review_approvals
+          if git diff --cached --quiet; then
+            echo 'No approval changes.'
+            exit 1
+          fi
+          git commit -m 'review: approve Grade-4 baseline v1'
+          git push
