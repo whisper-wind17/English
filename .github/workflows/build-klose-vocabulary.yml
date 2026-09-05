@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - 'tools/build_klose_vocabulary.py'
+      - 'tools/apply_klose_actual_grade4.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/sync_klose_learner_review_registry.py'
       - 'tools/check_klose_learner.py'
       - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
+      - 'tools/check_klose_actual_grade4_identity.py'
       - 'tools/approve_klose_learner_review.py'
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
@@ -20,11 +22,13 @@ on:
       - 'anki/klose/learner/presentation_review_registry.csv'
       - 'anki/klose/learner/review_approvals/**'
       - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/note_registry_extensions.csv'
       - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/source_identity_extensions.csv'
       - 'anki/klose/master/source_reconciliation_registry.csv'
       - 'anki/klose/master/identity_migrations.csv'
       - 'anki/klose/master/release_registry.csv'
+      - 'anki/klose/master/release_registry_extensions.csv'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -61,8 +65,14 @@ jobs:
       - name: Protect persistent identity and release state
         run: python tools/check_klose_persistent_state.py
 
-      - name: Build global vocabulary
+      - name: Validate actual Grade-4 identity coverage
+        run: python tools/check_klose_actual_grade4_identity.py
+
+      - name: Build legacy vocabulary inventory
         run: python tools/build_klose_vocabulary.py
+
+      - name: Overlay actual Klose Grade-4 source
+        run: python tools/apply_klose_actual_grade4.py
 
       - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
@@ -73,14 +83,20 @@ jobs:
       - name: Reject explicitly later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
 
-      - name: Verify content release readiness
+      - id: release
+        name: Verify content release readiness
+        continue-on-error: true
         run: python tools/check_klose_release_ready.py
 
+      - name: Report non-releasable development state
+        if: steps.release.outcome != 'success'
+        run: echo 'Build Valid; Content Releasable = false. Generated release will not be committed.'
+
       - name: Commit persistent and generated data
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && steps.release.outcome == 'success'
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
           if git diff --cached --quiet; then
             echo 'No generated changes.'
