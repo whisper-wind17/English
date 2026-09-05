@@ -7,11 +7,13 @@ only learner presentation and derived publish files are changed.
 from __future__ import annotations
 
 import csv
+import json
 from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
+PROFILE = BASE / "config" / "profile.json"
 MASTER = BASE / "master" / "vocabulary_master.csv"
 OCCURRENCES = BASE / "master" / "source_occurrences.csv"
 STATS = BASE / "master" / "build_stats.csv"
@@ -43,6 +45,31 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
     with path.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
+        writer.writerows(rows)
+
+
+def write_anki_import(
+    path: Path,
+    fields: list[str],
+    rows: list[dict[str, str]],
+    note_type: str,
+    deck: str,
+) -> None:
+    """Write an Anki-native text import file with comment headers, not a data header row."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        f.write("#separator:Comma\n")
+        f.write("#html:false\n")
+        f.write(f"#notetype:{note_type}\n")
+        f.write(f"#deck:{deck}\n")
+        f.write(f"#tags column:{fields.index('Tags') + 1}\n")
+        f.write("#columns:" + ",".join(fields) + "\n")
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fields,
+            extrasaction="ignore",
+            lineterminator="\n",
+        )
         writer.writerows(rows)
 
 
@@ -87,9 +114,14 @@ def upsert_metric(stats: list[dict[str, str]], metric: str, value: int | str) ->
 
 
 def main() -> None:
-    for path in (MASTER, OCCURRENCES, LEARNER, REVIEW, *OVERRIDE_FILES):
+    for path in (PROFILE, MASTER, OCCURRENCES, LEARNER, REVIEW, *OVERRIDE_FILES):
         if not path.exists():
             raise SystemExit(f"Missing input: {path.relative_to(ROOT)}")
+
+    with PROFILE.open("r", encoding="utf-8") as f:
+        profile = json.load(f)
+    note_type = str(profile["note_type"])
+    main_deck = str(profile["main_deck"])
 
     master_rows = read_csv(MASTER)
     learner_rows = read_csv(LEARNER)
@@ -149,6 +181,13 @@ def main() -> None:
     write_csv(PUBLISH / "all.csv", publish_fields, publish_rows)
     study_rows = [r for r in publish_rows if r["Released"] == "yes"]
     write_csv(PUBLISH / "study.csv", publish_fields, study_rows)
+    write_anki_import(
+        PUBLISH / "anki-import.csv",
+        publish_fields,
+        study_rows,
+        note_type=note_type,
+        deck=main_deck,
+    )
 
     migration_fields = ["Word"] + [f for f in publish_fields if f != "Word"]
     write_csv(PUBLISH / "migration" / "word-first-all.csv", migration_fields, publish_rows)
