@@ -8,6 +8,7 @@
 
 - `docs/KLOSE_VOCABULARY_SYSTEM.md`：完整架构与长期机制；
 - `docs/LEARNER_REVIEW_REGISTRY.md`：LearnerLevel 级别的学习呈现审校状态；
+- `docs/ANKI_FIRST_IMPORT.md`：首次正式导入与一个主 Deck 的操作规则；
 - `docs/ANKI_MIGRATION.md`：旧 Word-first Anki 数据的一次性迁移。
 
 ---
@@ -21,12 +22,14 @@
 5. 同一已学 learning unit 不创建第二套 FSRS 记忆状态；新增来源优先扩展 provenance。
 6. **FirstGrade 与 LearnerLevel 分离。** 前者是来源事实，后者决定今天怎么学。
 7. 学习范围必须按 **source-scoped occurrence** 判断，不得用全局 FirstGrade 推导。
-8. **Learner Review 也必须按 LearnerLevel 分离。** Grade 4 的审核状态不能自动继承为 Grade 5；唯一键为 `LearnerProfile + LearnerLevel + NoteID`。
-9. 原始 Source 不覆盖；生成文件不作为长期手工维护入口。
-10. identity merge/split 是高风险迁移，必须先评估现有 Anki history。
-11. 任何架构优化优先保护已有 Anki Review History / FSRS state。
-12. 自动结构检查、模型审校、人工确认、教材原文核对必须明确区分，不能互相冒充；`review queue = 0` 不等于全部内容已显式审校。
-13. 对需求假设保持质疑；发现 Anki 行为、数据或学习机制前提不成立时先验证。
+8. **Learner Review 必须按 LearnerLevel 分离。** Grade 4 的审核状态不能自动继承为 Grade 5；唯一键为 `LearnerProfile + LearnerLevel + NoteID`。
+9. **Review 必须绑定 ContentFingerprint。** `MeaningPrimary / ExampleSentence / ExampleTranslation / LearnerLevel` 等受审内容变化后，旧 approval 必须失效为 `pending`，禁止沿用 reviewed 状态。
+10. 原始 Source 不覆盖；生成文件不作为长期手工维护入口。
+11. identity merge/split 是高风险迁移，必须先评估现有 Anki history。
+12. 任何架构优化优先保护已有 Anki Review History / FSRS state。
+13. 自动结构检查、模型审校、人工确认、教材原文核对必须明确区分，不能互相冒充；`review queue = 0` 不等于全部内容已显式审校。
+14. `approve_klose_learner_review.py` 只能在完成真实逐条审校后显式执行；approval manifest 是审计记录，不得覆盖旧批次。
+15. 对需求假设保持质疑；发现 Anki 行为、数据或学习机制前提不成立时先验证。
 
 ---
 
@@ -51,8 +54,8 @@ Raw Source
 anki/klose/
 ├── config/                    # learner/scope config
 ├── master/                    # NoteID/source identity/release registries + master + occurrences
-├── learner/                   # current learner layer / explicit overrides / presentation review registry
-├── publish/                   # study.csv / all.csv / migration / views
+├── learner/                   # current presentation / overrides / review registry / approval manifests
+├── publish/                   # study.csv / all.csv / onboarding / migration / views
 └── review/                    # identity / semantic / learner queues
 ```
 
@@ -104,6 +107,7 @@ Learner Review Registry：
 LearnerProfile
 LearnerLevel
 NoteID
+ContentFingerprint
 ReviewStatus       # pending / model-reviewed / human-reviewed
 ReviewedAt
 ReviewerType
@@ -114,20 +118,32 @@ ReviewNote
 
 ## 5. Anki 发布契约
 
-长期 Note Type：`Klose Vocabulary`；一个主 Deck：`Klose-English::Vocabulary`。
+长期 Note Type：`Klose Vocabulary`；**始终一个主 Deck**：`Klose-English::Vocabulary`。
 
 正式发布字段第一列必须是 `NoteID`。长期重新导入使用同一 Note Type、Update Existing Notes、Match scope = Note Type。
 
 默认入口：
 
 ```text
-anki/klose/publish/study.csv   # 已释放 Notes，日常推荐导入
-anki/klose/publish/all.csv     # 完整库存，不是默认日常入口
+anki/klose/publish/study.csv   # 已释放 Notes，唯一推荐长期同步入口
+anki/klose/publish/all.csv     # 完整库存，不是默认导入入口
 ```
+
+CSV/教材/年级不是 Deck。学习阶段通过 system-managed Tags + Suspend/Unsuspend 控制；Klose 日常不切换牌组。
+
+当前 Grade-4 onboarding Tags：
+
+```text
+stage::grade4-new             # 四年级首次出现，当前优先学习
+stage::grade4-review          # 四年级再次出现的低年级旧词
+stage::lower-grade-backfill   # 1–3 年级其余查漏词
+```
+
+三个 onboarding CSV 只是便利视图，不是三个牌组，也不是新的数据真源。
 
 `release_registry.csv` 是长期增长状态：Note 一旦进入 Anki，原则上持续留在 `study.csv` 以接受后续内容升级。每次新增 release scope 必须显式记录 `released_at`，不能复用项目初始日期。
 
-repo 生成的来源/年级 Tags 属于 system-managed；个人长期备注使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
+repo 生成的来源/年级/stage Tags 属于 system-managed；个人长期备注使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
 
 ---
 
@@ -149,9 +165,16 @@ tools/build_klose_vocabulary.py
 tools/apply_klose_learner_overrides.py
 tools/sync_klose_learner_review_registry.py
 tools/check_klose_learner.py
+tools/check_klose_release_ready.py
 ```
 
-本地完整顺序：
+显式审批工具（**不属于日常 CI**）：
+
+```text
+tools/approve_klose_learner_review.py
+```
+
+本地完整验证顺序：
 
 ```bash
 python tools/check_klose_persistent_state.py
@@ -159,6 +182,7 @@ python tools/build_klose_vocabulary.py
 python tools/apply_klose_learner_overrides.py
 python tools/sync_klose_learner_review_registry.py
 python tools/check_klose_learner.py
+python tools/check_klose_release_ready.py
 ```
 
 CI：
@@ -174,6 +198,7 @@ CI：
 anki/klose/master/build_stats.csv
 anki/klose/master/source_identity_map.csv
 anki/klose/learner/presentation_review_registry.csv
+anki/klose/learner/review_approvals/
 anki/klose/review/identity_review.csv
 anki/klose/review/learner_review.csv
 anki/klose/review/future_vocab_review.csv
@@ -194,12 +219,17 @@ anki/klose/review/future_vocab_review.csv
 7. 模糊项 → review，禁止仅凭相同 surface word 静默 merge；
 8. 生成当前 Learner Layer；
 9. 为当前 LearnerLevel 建立/补齐 Learner Review Registry；
-10. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 `study.csv`；
-11. 重建并跑 CI。
+10. 逐条审校后才允许显式 approval；
+11. 根据带 `released_at` 的 release scope 决定新 Note 是否进入 `study.csv`；
+12. 重建、检查 release readiness 并跑 CI。
 
 ### 升 Learner Level
 
-只升级 Learner Presentation；NoteID / identity / source facts 不变。为新 LearnerLevel 新建 review 状态，默认不能继承旧 Level 的审核结论。重新导入 `study.csv` 更新已有 Notes，不重建 Card。
+只升级 Learner Presentation；NoteID / identity / source facts 不变。新 LearnerLevel 的 review 默认 `pending`，不能继承旧 Level 结论。完成逐条审校和 approval 后，重新导入同一个 `study.csv` 更新已有 Notes，不重建 Card。
+
+### 修正 learner content
+
+任何已 reviewed Note 的 Meaning/Example/Translation 变化都必须导致 fingerprint 变化；`sync_klose_learner_review_registry.py` 应把它重新置为 `pending`，待再次审校。
 
 ### 修正 identity
 
@@ -218,22 +248,24 @@ merge/split 必须单独设计 migration，禁止当作普通清洗直接执行�
 - source-scoped grade/level 不被全局字段覆盖；
 - released Notes 的 LearnerLevel / Meaning / Example / Translation 完整；
 - 每个 released Note 都有当前 `LearnerProfile + LearnerLevel` 的 Learner Review Registry 记录；
-- 必须显式报告 `model-reviewed / human-reviewed / pending` 数量；pending 可以存在，但不得将数据描述为“该 LearnerLevel 已全部审校完成”；
+- 必须显式报告 `model-reviewed / human-reviewed / pending` 数量；
+- **只有 `pending=0` 且 ContentFingerprint 全部匹配，才能把 `study.csv` 描述为“可正式导入”。**
 - Grade-4 learner examples 不无意使用同来源明确到后续年级才首次列出的词；
-- `study.csv ⊆ all.csv`，publish NoteID 唯一；
-- by-source/by-grade 文件只是视图；
+- `study.csv` 必须与 Released Set 一致，NoteID 唯一；
+- 每个当前 released Note 必须恰好属于一个 onboarding stage；
+- by-source/by-grade/onboarding 文件只是视图；
 - deterministic build；
 - 不静默 fallback 到未经审校的成人词典首义。
 
-`0 issues` 只代表对应自动规则未发现问题，不等于全部语义已经教师人工确认。
+`0 issues` 只代表对应自动规则未发现问题；`model-reviewed` 也不等于出版社或英语教师认证。
 
 ---
 
 ## 9. Working Style
 
 - 开始任务先读本文件和相关 docs，再检查 repo 当前状态；
-- 先判断变更属于 Source / Identity / Fact / Learner / Publish / Anki Migration 哪一层；
+- 先判断变更属于 Source / Identity / Fact / Learner / Review / Publish / Anki Migration 哪一层；
 - 批量处理前先验证样本和边界案例；
-- 修改后 re-check 代表性词、全量统计、review queue、CI；
+- 修改后 re-check 代表性词、全量统计、review queue、fingerprint、release readiness 和 CI；
 - 能写成脚本/CI 的约束，不只写在 Prompt/文档；
 - `AGENTS.md` 只维护项目规则和能力地图，详细机制放 `docs/`。
