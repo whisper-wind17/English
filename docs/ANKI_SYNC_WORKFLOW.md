@@ -30,7 +30,7 @@ Raw Source / Curation
 → Identity + Source Occurrences
 → Vocabulary Master
 → Learner Presentation
-→ Learning Admission
+→ Learning Admission + LearningOrder
 → Learner Review / Approval
 → Release Registry
 → study.csv
@@ -39,16 +39,32 @@ Raw Source / Curation
 → Anki
 ```
 
-GitHub 负责 Source / Identity / Learner Presentation / Review / Release；Anki 负责：
+GitHub 负责：
+
+```text
+Source / Identity / Learner Presentation / Learning Admission / LearningOrder / Review / Release
+```
+
+Anki 负责：
 
 ```text
 Review History
 FSRS memory state
 Due / Interval
+New Card Position
 Card State
 ```
 
 这些 Anki 状态不得由 repo 重建。
+
+特别区分：
+
+```text
+LearningOrder     = GitHub 中的 curriculum / admission 真源
+New Card Position = Anki 中尚未学习新卡的物理排序状态
+```
+
+当前 Grade-4 `LearningOrder` 为 `001..221`，只用于把尚未开始学习的新卡初始化到教材顺序；一旦 Card 进入真实 Learning / Review，不用 LearningOrder 重写其 FSRS / Due。
 
 ## 3. 什么变化会触发 review / sync
 
@@ -60,10 +76,12 @@ Card State
 - Word / IPA / Meaning 修正；
 - LearnerLevel、ExampleSentence、ExampleTranslation 变化；
 - 非空 `PromptHint` 新增/修改；
-- Learning Admission / system-managed Tags 变化；
+- Learning Admission / LearningOrder / system-managed Tags 变化；
 - release scope 变化。
 
 `PromptHint` 属于 Learner Presentation，不属于 Source 或 Identity。普通 Notes 留空；只有正面存在真实 target-sense 歧义时使用最小提示。
+
+`LearningOrder` 属于 Learning Admission metadata，不进入 learner content fingerprint。调整学习顺序不要求重新审校 Meaning / Example，但必须通过 Admission / Release Gate。
 
 ## 4. 固定同步 SOP
 
@@ -76,7 +94,7 @@ Raw Source / Source Adapter
 Identity Registry / Source Identity Map
 Vocabulary facts
 Learner presentation / overrides / PromptHint
-Learning Admission
+Learning Admission / LearningOrder
 Release Registry
 ```
 
@@ -97,6 +115,8 @@ sync review registry
 
 空 `PromptHint` 不改变历史 v2 hash；非空 PromptHint 会使对应 Note 重新 pending。
 
+`LearningOrder` 不属于内容 fingerprint；只改变它不会使 learner review pending。
+
 ### Step 3：重新构建
 
 正常 CI 顺序包括：
@@ -105,7 +125,7 @@ sync review registry
 check persistent state
 → build vocabulary
 → actual-source overlays
-→ build learning admission
+→ build learning admission + LearningOrder
 → learner presentation overlays
 → PromptHint overlay
 → sync review registry
@@ -131,6 +151,8 @@ review pending == 0
 ContentFingerprint stale == 0
 review queues == 0
 Learning Admission valid
+allowed LearningOrder == exact textbook order
+held LearningOrder == blank
 Anki headers / columns valid
 UTF-8 without BOM
 ```
@@ -158,6 +180,7 @@ MeaningPrimary
 ExampleSentence
 ExampleTranslation
 LearnerLevel
+LearningOrder
 Sources
 SourceBooks
 UserMemo
@@ -165,12 +188,13 @@ UserMemo
 
 `UserMemo` 只在 Anki 本地维护，不映射 repo CSV。
 
-如果 repo 的 Note Type contract 新增字段，例如首次引入 `PromptHint`，必须先在 **现有同一个 Note Type** 中增加字段并更新 Card Template；不要创建第二套 Note Type，也不要删除/重建 Cards。
+`PromptHint` 与 `LearningOrder` 都通过现有 Note Type 原地增加字段，不创建第二套 Note Type、不删除/重建 Cards。
 
-PromptHint 一次性迁移 SOP：
+一次性 schema migration SOP：
 
 ```text
 docs/ANKI_PROMPTHINT_MIGRATION.md
+docs/ANKI_LEARNING_ORDER_MIGRATION.md
 ```
 
 ### Step 6：导入 Anki
@@ -214,6 +238,27 @@ Held suspended = 417
 
 进入真实学习后，长期原则是：不要仅因来源/教材 scope 改变而批量 Suspend 已经处于 Learning/Review 的旧卡；FSRS 状态由 Anki 持续维护。
 
+### Step 8：尚未学习的新卡按 LearningOrder 初始化 New #
+
+仅在目标 Cards 仍为 `is:new` 时执行。
+
+当前 Grade-4 一次性操作见：
+
+```text
+docs/ANKI_LEARNING_ORDER_MIGRATION.md
+```
+
+核心逻辑：
+
+```text
+tag:learning::klose::grade4 -is:suspended is:new
+→ 必须 = 221
+→ 按 LearningOrder 001..221 升序
+→ Reposition: Start=1, Step=1, Randomize=OFF, Shift existing=ON
+```
+
+这只 materialize 尚未学习新卡的初始顺序，不把 GitHub 变成 FSRS / Due 真源。
+
 ## 5. 典型场景
 
 ### 新增教材版本
@@ -223,7 +268,7 @@ new source evidence
 → source identity matching
 → same sense reuse Stable NoteID
 → new sense/new unit append NoteID
-→ learner presentation / admission / review
+→ learner presentation / admission / order / review
 → rebuild
 → import same Note Type
 ```
@@ -232,11 +277,12 @@ new source evidence
 
 ```text
 Grade-5 actual source / admission
+→ define current LearningOrder for newly admitted New Cards
 → learner presentation at appropriate LearnerLevel
 → review
 → rebuild
 → import
-→ only newly admitted New Cards are unsuspended
+→ only newly admitted New Cards are unsuspended / sequenced
 ```
 
 ### 升级旧 Note 的 learner presentation
@@ -250,15 +296,28 @@ NoteID 不变
 → original Card + FSRS history continue
 ```
 
+### 调整尚未学习的新词顺序
+
+```text
+NoteID / content 不变
+→ LearningOrder 变化
+→ no content re-review
+→ Release Gate validates order
+→ import same Note Type
+→ only affected is:new Cards may be Repositioned
+```
+
 ## 6. 长期不变量
 
 ```text
-Vocabulary Identity  → Stable NoteID
-Anki 学习入口         → 一个主 Deck
-Anki Note Type        → 同一个 Klose Vocabulary 原地演进
-Anki 同步入口         → anki-import.csv
+Vocabulary Identity   → Stable NoteID
+Curriculum sequencing → LearningOrder in GitHub
+Anki memory state      → FSRS / Due / New # in Anki
+Anki 学习入口          → 一个主 Deck
+Anki Note Type         → 同一个 Klose Vocabulary 原地演进
+Anki 同步入口          → anki-import.csv
 ```
 
 核心原则：
 
-> 修改发生在上游；publish 是确定性生成物；Anki 保留长期记忆状态；Note Type schema migration 只做原地扩展，不重建 identity/card history。
+> 修改发生在上游；publish 是确定性生成物；GitHub 保存教学意图，Anki 保存真实记忆状态；Note Type schema migration 只做原地扩展，不重建 identity/card history。

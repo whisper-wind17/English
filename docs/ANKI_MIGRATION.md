@@ -2,10 +2,11 @@
 
 本文只处理旧版人教版 CSV 已经导入 Anki 时的兼容问题。迁移完成后的长期同步统一使用 `anki/klose/publish/anki-import.csv`；详细 SOP 见 `docs/ANKI_SYNC_WORKFLOW.md`。
 
-如果设备已经完成 NoteID-first 迁移、当前只需要给现有 `Klose Vocabulary` 增加 `PromptHint`，不要重跑本文，直接使用：
+如果设备已经完成 NoteID-first 迁移、当前只需要扩展字段，不要重跑本文：
 
 ```text
 docs/ANKI_PROMPTHINT_MIGRATION.md
+docs/ANKI_LEARNING_ORDER_MIGRATION.md
 ```
 
 ## 为什么必须迁移
@@ -59,6 +60,7 @@ NoteID
 CanonicalWord
 PromptHint
 LearnerLevel
+LearningOrder
 Sources
 SourceBooks
 ```
@@ -69,7 +71,7 @@ SourceBooks
 UserMemo
 ```
 
-`PromptHint` 是可选 Learner Presentation，普通 Note 可为空；`UserMemo` 只在 Anki 本地维护，不从 repo CSV 更新。
+`PromptHint` 是可选 Learner Presentation；`LearningOrder` 是 curriculum/admission metadata；`UserMemo` 只在 Anki 本地维护，不从 repo CSV 更新。
 
 ### Step 2：导入兼容迁移文件
 
@@ -96,6 +98,7 @@ Match scope     = Note Type
 Word            -> Word
 NoteID          -> NoteID
 PromptHint      -> PromptHint
+LearningOrder   -> LearningOrder
 Tags            -> Anki Tags
 ```
 
@@ -140,6 +143,7 @@ MeaningPrimary
 ExampleSentence
 ExampleTranslation
 LearnerLevel
+LearningOrder
 Sources
 SourceBooks
 UserMemo
@@ -163,6 +167,8 @@ Existing Notes = Update
 ```
 
 `study.csv` 只用于 repo 内 Released Set 审计，不直接导入 Anki。不要再把旧 `anki/人教版一年级起点/import/*.csv` 当长期入口。
+
+若当前 learning admission 有 `LearningOrder`，对仍为 `is:new` 的 admitted Cards 按 `docs/ANKI_LEARNING_ORDER_MIGRATION.md` 初始化 New Card Position；不要对已进入真实 FSRS 的 Cards 重排 Due。
 
 ## Tags / local state 边界
 
@@ -188,4 +194,5 @@ anki-import.csv = generated 唯一正式 Anki 发布包
 - NoteID 已成为第一字段；
 - Note Type 字段契约与 `anki/klose/anki/README.md` 一致；
 - 最新 `anki-import.csv` 重新导入只更新已有 Notes + 增加真正新 Note；
+- 尚未学习的新卡可按明确 LearningOrder 初始化顺序；
 - 后续新增教材不会为已有 learning unit 创建第二套 FSRS 记忆状态。

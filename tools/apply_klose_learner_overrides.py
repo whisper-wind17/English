@@ -5,7 +5,8 @@ Identity/source facts remain untouched. Once learning_admission.csv contains
 current-profile rows, every released Note must have an explicit learning state:
 `allowed` means it belongs to the current learning set; `held` means it remains
 in long-lived study but is not currently learned. Both states keep exactly one
-stage tag. Only allowed Notes receive a `learning::...` tag for Anki unsuspend.
+stage tag. Only allowed Notes receive a `learning::...` tag and a deterministic
+LearningOrder for curriculum sequencing in Anki.
 
 The old Grade-4 staging logic remains only as a compatibility fallback while the
 explicit admission registry is empty.
@@ -112,6 +113,7 @@ def load_explicit_admission(
     if not ADMISSION.exists():
         return {}
     result: dict[str, dict[str, str]] = {}
+    allowed_orders: list[int] = []
     for row in read_csv(ADMISSION):
         if row.get("LearnerProfile", "").strip() != profile or row.get("LearnerLevel", "").strip() != level:
             continue
@@ -119,6 +121,7 @@ def load_explicit_admission(
         status = row.get("Status", "").strip()
         stage = row.get("Stage", "").strip()
         learning_tag = row.get("LearningTag", "").strip()
+        learning_order = row.get("LearningOrder", "").strip()
         if nid not in valid_ids:
             raise SystemExit(f"Learning admission references unknown NoteID: {nid}")
         if status not in {"allowed", "held"}:
@@ -128,16 +131,25 @@ def load_explicit_admission(
         if status == "allowed":
             if not learning_tag.startswith("learning::"):
                 raise SystemExit(f"Allowed learning admission requires LearningTag for {nid}")
-        elif learning_tag:
-            raise SystemExit(f"Held learning admission must not have LearningTag for {nid}: {learning_tag!r}")
+            if not learning_order.isdigit() or int(learning_order) <= 0:
+                raise SystemExit(f"Allowed learning admission requires positive LearningOrder for {nid}")
+            allowed_orders.append(int(learning_order))
+        else:
+            if learning_tag:
+                raise SystemExit(f"Held learning admission must not have LearningTag for {nid}: {learning_tag!r}")
+            if learning_order:
+                raise SystemExit(f"Held learning admission must not have LearningOrder for {nid}: {learning_order!r}")
         if nid in result:
             raise SystemExit(f"Duplicate learning admission for {nid}")
         result[nid] = {
             "Status": status,
             "Stage": stage,
             "LearningTag": learning_tag,
+            "LearningOrder": learning_order,
             "Reason": row.get("Reason", "").strip(),
         }
+    if allowed_orders and sorted(allowed_orders) != list(range(1, len(allowed_orders) + 1)):
+        raise SystemExit("Allowed LearningOrder values must be unique and contiguous from 1")
     return result
 
 
@@ -220,7 +232,8 @@ def main() -> None:
     grades_by_id = source_grades(occurrence_rows)
     publish_fields = [
         "NoteID", "CanonicalWord", "Word", "British", "American", "MeaningPrimary",
-        "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
+        "ExampleSentence", "ExampleTranslation", "LearnerLevel", "LearningOrder",
+        "Sources", "SourceBooks", "Tags",
     ]
     publish_rows: list[dict[str, str]] = []
     released_ids = {r["NoteID"] for r in master_rows if r["Released"] == "yes"}
@@ -237,11 +250,13 @@ def main() -> None:
     for master in master_rows:
         learner = learner_by_id[master["NoteID"]]
         row = {**master, **learner}
+        row["LearningOrder"] = ""
         if master["Released"] == "yes":
             if explicit_admission:
                 admission = explicit_admission[master["NoteID"]]
                 row["Tags"] = with_stage(row.get("Tags", ""), admission["Stage"])
                 row["Tags"] = with_learning_tag(row["Tags"], admission["LearningTag"])
+                row["LearningOrder"] = admission["LearningOrder"]
             else:
                 stage = legacy_onboarding_stage(grades_by_id.get(master["NoteID"], set()))
                 row["Tags"] = with_stage(row.get("Tags", ""), stage)
@@ -291,6 +306,8 @@ def main() -> None:
         held = sum(1 for row in explicit_admission.values() if row["Status"] == "held")
         upsert_metric(stats, "learning_admission_allowed", allowed)
         upsert_metric(stats, "learning_admission_held", held)
+        upsert_metric(stats, "learning_order_count", allowed)
+        upsert_metric(stats, "learning_order_max", allowed)
     for stage, rows in sorted(stage_rows.items()):
         upsert_metric(stats, f"stage_{stage.removeprefix('stage::').replace('-', '_')}", len(rows))
     write_csv(STATS, ["Metric", "Value"], stats)
@@ -301,7 +318,7 @@ def main() -> None:
     if explicit_admission:
         allowed = sum(1 for row in explicit_admission.values() if row["Status"] == "allowed")
         held = sum(1 for row in explicit_admission.values() if row["Status"] == "held")
-        print(f"Learning admission mode: explicit; allowed={allowed}; held={held}")
+        print(f"Learning admission mode: explicit; allowed={allowed}; held={held}; learning_order=001..{allowed:03d}")
     else:
         print("Learning admission mode: legacy-grade4-fallback")
 

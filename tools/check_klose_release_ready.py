@@ -3,15 +3,17 @@
 
 Current learning Notes (`allowed`) must have every required release-visible field
 complete. PromptHint is optional, but when present it is learner presentation and
-must be derivable from upstream state and bound to review approval. Held library
-Notes remain structurally valid and reviewed, while legacy British/American IPA
-gaps are allowed until those Notes are admitted for learning.
+must be derivable from upstream state and bound to review approval. LearningOrder
+is admission metadata: allowed Notes must match exact textbook order, while held
+Notes keep it blank. Held library Notes remain structurally valid and reviewed,
+while legacy British/American IPA gaps are allowed until admission.
 """
 from __future__ import annotations
 
 import csv
 import io
 import json
+import re
 from pathlib import Path
 
 from klose_review_fingerprint import fingerprint
@@ -34,7 +36,7 @@ REPORTS = [
 ]
 PUBLISH_FIELDS = [
     "NoteID", "CanonicalWord", "Word", "PromptHint", "British", "American", "MeaningPrimary",
-    "ExampleSentence", "ExampleTranslation", "LearnerLevel", "Sources", "SourceBooks", "Tags",
+    "ExampleSentence", "ExampleTranslation", "LearnerLevel", "LearningOrder", "Sources", "SourceBooks", "Tags",
 ]
 DERIVED_FIELDS = [
     "NoteID", "CanonicalWord", "Word", "PromptHint", "British", "American", "MeaningPrimary",
@@ -43,11 +45,13 @@ DERIVED_FIELDS = [
 REQUIRED_FIELDS = tuple(field for field in PUBLISH_FIELDS if field != "PromptHint")
 ALLOWED_REQUIRED_FIELDS = REQUIRED_FIELDS
 HELD_REQUIRED_FIELDS = tuple(
-    field for field in REQUIRED_FIELDS if field not in {"British", "American"}
+    field for field in REQUIRED_FIELDS if field not in {"British", "American", "LearningOrder"}
 )
 CURRENT_LEARNING_TAG = "learning::klose::grade4"
 CURRENT_STAGE = "stage::grade4-current"
 HELD_STAGE = "stage::library"
+GRADE4_KEY_RE = re.compile(r"^grade4-(upper|lower)-u(\d+)-o(\d+)\|")
+SEMESTER_RANK = {"upper": 0, "lower": 1}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -73,8 +77,7 @@ def read_anki_import(path: Path) -> tuple[dict[str, str], list[dict[str, str]]]:
     for index, values in enumerate(reader, start=1):
         if len(values) != len(PUBLISH_FIELDS):
             raise SystemExit(
-                f"Release blocked: Anki import row {index} has {len(values)} columns; "
-                f"expected {len(PUBLISH_FIELDS)}"
+                f"Release blocked: Anki import row {index} has {len(values)} columns; expected {len(PUBLISH_FIELDS)}"
             )
         rows.append(dict(zip(PUBLISH_FIELDS, values)))
     return headers, rows
@@ -100,19 +103,34 @@ def assert_reconciliation_ready() -> None:
         )
 
 
-def actual_grade4_note_ids() -> set[str]:
-    ids: set[str] = set()
+def actual_grade4_ordered_note_ids() -> list[str]:
+    items: list[tuple[tuple[int, int, int], str]] = []
+    seen_coordinates: set[tuple[int, int, int]] = set()
+    seen_note_ids: set[str] = set()
     for row in read_csv(SOURCE_IDENTITY_EXTENSIONS):
-        if (
+        if not (
             row.get("SourceID", "").strip() == "rj_start1"
             and row.get("SourceEdition", "").strip() == "klose-current"
             and row.get("Status", "").strip() == "confirmed"
             and row.get("SourceItemKey", "").strip().startswith("grade4-")
         ):
-            nid = row.get("NoteID", "").strip()
-            if nid:
-                ids.add(nid)
-    return ids
+            continue
+        key = row.get("SourceItemKey", "").strip()
+        match = GRADE4_KEY_RE.match(key)
+        if match is None:
+            raise SystemExit(f"Release blocked: invalid Grade-4 SourceItemKey for LearningOrder: {key!r}")
+        semester, unit_text, order_text = match.groups()
+        coordinate = (SEMESTER_RANK[semester], int(unit_text), int(order_text))
+        if coordinate in seen_coordinates:
+            raise SystemExit(f"Release blocked: duplicate Grade-4 curriculum coordinate: {coordinate}")
+        seen_coordinates.add(coordinate)
+        nid = row.get("NoteID", "").strip()
+        if not nid or nid in seen_note_ids:
+            raise SystemExit(f"Release blocked: invalid/duplicate active Grade-4 NoteID for ordering: {nid!r}")
+        seen_note_ids.add(nid)
+        items.append((coordinate, nid))
+    items.sort(key=lambda item: item[0])
+    return [nid for _, nid in items]
 
 
 def load_and_validate_admission(
@@ -134,6 +152,7 @@ def load_and_validate_admission(
         status = row.get("Status", "").strip()
         stage = row.get("Stage", "").strip()
         tag = row.get("LearningTag", "").strip()
+        learning_order = row.get("LearningOrder", "").strip()
         if not nid or nid in by_id:
             raise SystemExit(f"Release blocked: invalid/duplicate learning admission NoteID: {nid!r}")
         if status not in {"allowed", "held"}:
@@ -141,15 +160,17 @@ def load_and_validate_admission(
         if status == "allowed":
             if stage != CURRENT_STAGE or tag != CURRENT_LEARNING_TAG:
                 raise SystemExit(
-                    f"Release blocked: current learning Note has wrong stage/tag: {nid} "
-                    f"stage={stage!r} tag={tag!r}"
+                    f"Release blocked: current learning Note has wrong stage/tag: {nid} stage={stage!r} tag={tag!r}"
                 )
+            if not learning_order.isdigit() or int(learning_order) <= 0:
+                raise SystemExit(f"Release blocked: allowed Note has invalid LearningOrder: {nid}={learning_order!r}")
         else:
             if stage != HELD_STAGE or tag:
                 raise SystemExit(
-                    f"Release blocked: held Note has wrong stage/tag: {nid} "
-                    f"stage={stage!r} tag={tag!r}"
+                    f"Release blocked: held Note has wrong stage/tag: {nid} stage={stage!r} tag={tag!r}"
                 )
+            if learning_order:
+                raise SystemExit(f"Release blocked: held Note must have blank LearningOrder: {nid}={learning_order!r}")
         by_id[nid] = row
 
     ids = set(by_id)
@@ -161,7 +182,8 @@ def load_and_validate_admission(
             f"missing={missing[:10]} extra={extra[:10]}"
         )
 
-    expected_allowed = actual_grade4_note_ids()
+    expected_ordered = actual_grade4_ordered_note_ids()
+    expected_allowed = set(expected_ordered)
     allowed = {nid for nid, row in by_id.items() if row.get("Status", "").strip() == "allowed"}
     if allowed != expected_allowed:
         missing = sorted(expected_allowed - allowed)
@@ -169,6 +191,18 @@ def load_and_validate_admission(
         raise SystemExit(
             "Release blocked: allowed learning set does not equal confirmed actual Grade-4 identity set; "
             f"missing={missing[:10]} extra={extra[:10]}"
+        )
+
+    expected_order = {nid: f"{index:03d}" for index, nid in enumerate(expected_ordered, start=1)}
+    bad_order = [
+        f"{nid}:{by_id[nid].get('LearningOrder', '')}->{expected}"
+        for nid, expected in expected_order.items()
+        if by_id[nid].get("LearningOrder", "").strip() != expected
+    ]
+    if bad_order:
+        raise SystemExit(
+            "Release blocked: LearningOrder does not match actual textbook order; "
+            f"count={len(bad_order)} examples={bad_order[:10]}"
         )
     return by_id
 
@@ -242,8 +276,7 @@ def main() -> None:
         raise SystemExit("Release blocked: duplicate NoteID in study.csv")
     if set(study_ids) != released_ids:
         raise SystemExit(
-            f"Release blocked: study.csv mismatch released inventory; "
-            f"study={len(study_ids)} released={len(released_ids)}"
+            f"Release blocked: study.csv mismatch released inventory; study={len(study_ids)} released={len(released_ids)}"
         )
 
     drift: list[str] = []
@@ -256,6 +289,9 @@ def main() -> None:
             continue
         expected = {**master, **learner}
         if any(row.get(field, "") != expected.get(field, "") for field in DERIVED_FIELDS):
+            drift.append(nid)
+            continue
+        if row.get("LearningOrder", "") != admission_by_id[nid].get("LearningOrder", ""):
             drift.append(nid)
     if drift:
         raise SystemExit(
@@ -294,18 +330,15 @@ def main() -> None:
 
     if missing_allowed:
         raise SystemExit(
-            f"Release blocked: {len(missing_allowed)} current-learning rows have missing required fields; "
-            f"examples={missing_allowed[:10]}"
+            f"Release blocked: {len(missing_allowed)} current-learning rows have missing required fields; examples={missing_allowed[:10]}"
         )
     if missing_held:
         raise SystemExit(
-            f"Release blocked: {len(missing_held)} held-library rows have missing structural fields; "
-            f"examples={missing_held[:10]}"
+            f"Release blocked: {len(missing_held)} held-library rows have missing structural fields; examples={missing_held[:10]}"
         )
     if bad_learning_state:
         raise SystemExit(
-            f"Release blocked: {len(bad_learning_state)} study rows have invalid stage/learning tags; "
-            f"examples={bad_learning_state[:10]}"
+            f"Release blocked: {len(bad_learning_state)} study rows have invalid stage/learning tags; examples={bad_learning_state[:10]}"
         )
 
     pending: list[str] = []
@@ -326,8 +359,7 @@ def main() -> None:
     if missing or pending or stale:
         raise SystemExit(
             "Release blocked by learner review state: "
-            f"missing={len(missing)} pending={len(pending)} stale={len(stale)}; "
-            f"examples={(missing + pending + stale)[:10]}"
+            f"missing={len(missing)} pending={len(pending)} stale={len(stale)}; examples={(missing + pending + stale)[:10]}"
         )
 
     allowed_count = sum(1 for r in admission_by_id.values() if r.get("Status") == "allowed")
@@ -342,8 +374,8 @@ def main() -> None:
         f"Klose content release ready: profile={learner_profile}, level={learner_level}, "
         f"released={len(released_ids)}, current_learning={allowed_count}, held={held_count}, "
         f"study={len(study_ids)}, anki_import={len(anki_rows)}, prompt_hints={prompt_hint_count}, "
-        f"held_ipa_debt={held_ipa_debt}, source_reconciliation=ready, "
-        f"unresolved_reports=0, pending_reviews=0"
+        f"learning_order=001..{allowed_count:03d}, held_ipa_debt={held_ipa_debt}, "
+        f"source_reconciliation=ready, unresolved_reports=0, pending_reviews=0"
     )
 
 
