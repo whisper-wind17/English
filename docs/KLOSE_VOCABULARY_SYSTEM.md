@@ -35,7 +35,7 @@ Grade 6 presentation
 
 ## 2. GitHub 与 Anki 的职责边界
 
-### GitHub：内容与身份真源
+### GitHub：内容、身份与发布真源
 
 负责：
 
@@ -43,6 +43,7 @@ Grade 6 presentation
 - 标准词形、target sense、音标和核心释义；
 - Source / Book / Grade / Unit / 原始行号等 provenance；
 - 当前 LearnerLevel 的学习呈现；
+- Learner Review Registry 与 approval manifest；
 - review queue、质量检查和发布 CSV。
 
 ### Anki：学习状态真源
@@ -59,7 +60,7 @@ repo 不重建 Anki scheduling；Anki 也不是词汇事实数据的内容真源
 
 ---
 
-## 3. 四层数据模型
+## 3. 六层数据模型
 
 ### 3.1 Identity Registry
 
@@ -161,6 +162,42 @@ PresentationSource
 
 例如一年级首次出现的 `apple`，四年级仍可以使用四年级水平的例句；升五年级只更新 presentation，不修改 NoteID 和 Anki scheduling。
 
+### 3.6 Learner Review Registry
+
+Review truth 不能只依赖“自动检查没报错”，也不能只挂在 NoteID 上。长期键：
+
+```text
+LearnerProfile + LearnerLevel + NoteID
+```
+
+状态：
+
+```text
+ContentFingerprint
+ReviewStatus       # pending / model-reviewed / human-reviewed
+ReviewedAt
+ReviewerType
+ReviewNote
+```
+
+`ContentFingerprint` 绑定：
+
+```text
+MeaningPrimary
+ExampleSentence
+ExampleTranslation
+LearnerProfile
+LearnerLevel
+```
+
+任何受审内容变化都会使旧 approval 失效为 `pending`。显式审批产生不可覆盖的：
+
+```text
+learner/review_approvals/<batch-id>.csv
+```
+
+详细机制见 `docs/LEARNER_REVIEW_REGISTRY.md`。
+
 ---
 
 ## 4. Identity：learning unit，不是字符串
@@ -247,7 +284,7 @@ anki/klose/publish/all.csv
 
 包含进入 Master 的所有 Notes，用于审计、备份和完整视图。
 
-### `study.csv`：默认 Anki 发布入口
+### `study.csv`：唯一推荐长期 Anki 同步入口
 
 ```text
 anki/klose/publish/study.csv
@@ -279,12 +316,22 @@ Klose-English
 └── Vocabulary
 ```
 
-一个主 Deck + Tags；不按教材长期复制 Deck 体系。
+**一个主 Deck + Tags**；不按教材、年级或导入批次长期复制 Deck 体系。
 
 - 长期日常学习：Main Deck + FSRS；
 - 暂时不想出现的已存在 Card：Suspend；
 - 临时专项复习：Filtered Deck / Browser Search；
-- 教材/年级/来源：Tags 与 Source Occurrences 表达。
+- 教材/年级/来源/学习阶段：Tags 与 Source Occurrences 表达。
+
+当前 Grade-4 onboarding：
+
+```text
+stage::grade4-new             # 四年级首次出现
+stage::grade4-review          # 四年级再次出现的低年级词
+stage::lower-grade-backfill   # 1–3 年级其余查漏词
+```
+
+第一次导入时三个 stage 全部位于同一个 Deck；只开放 `grade4-new`，另外两组先 Suspend。详见 `docs/ANKI_FIRST_IMPORT.md`。
 
 Anki 参考：
 
@@ -327,7 +374,7 @@ Tags 使用 Anki 自带 Tags，不需要建立普通 `Tags` 字段。
 - [Importing Text Files](https://docs.ankiweb.net/importing/text-files.html)
 - [Editing / Note Types](https://docs.ankiweb.net/editing.html)
 
-repo 生成的来源/年级 Tags 视为 system-managed。需要永久保留的个人备注不要混入这组 Tags，使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
+repo 生成的来源/年级/stage Tags 视为 system-managed。需要永久保留的个人备注不要混入这组 Tags，使用不参与 CSV mapping 的 `UserMemo` 或 Card Flag。
 
 ---
 
@@ -355,8 +402,12 @@ repo 生成的来源/年级 Tags 视为 system-managed。需要永久保留的�
 
 ```text
 anki/klose/publish/
-├── study.csv                         # 默认长期导入
+├── study.csv                         # 唯一推荐长期 Anki 同步入口
 ├── all.csv                           # 完整库存
+├── onboarding/                       # 同一 study 集合的学习阶段便利视图
+│   ├── grade4-new.csv
+│   ├── grade4-review.csv
+│   └── lower-grade-backfill.csv
 ├── migration/
 │   ├── word-first-study.csv          # 一次性旧库迁移
 │   └── word-first-all.csv
@@ -368,7 +419,7 @@ anki/klose/publish/
         └── grade6.csv
 ```
 
-`by-source` 文件把上下册合并成年级视图，仅用于检查/分析/特殊操作，不形成另一套数据真源或长期 Deck。
+`by-source` 与 `onboarding` 都只是 Master/Study 的便利视图，不形成另一套数据真源或长期 Deck；不要在已经导入 `study.csv` 后再把这些视图重复导入。
 
 ---
 
@@ -394,12 +445,13 @@ Source Occurrences     不变
 Vocabulary Facts       原则上不变
 LearnerLevel           4 → 5
 Example                可批量升级
+Grade-5 Review         新建，默认 pending
 Anki FSRS History      不变
 ```
 
 ---
 
-## 13. 自动质量门槛
+## 13. 自动质量门槛与 Release Gate
 
 ### Identity
 
@@ -422,13 +474,38 @@ Anki FSRS History      不变
 - Grade-4 例句不得无意使用同来源明确到后续年级才首次列出的词；
 - 自动结构检查通过不能宣称“语义全部由教师人工确认”。
 
+### Review
+
+- 每个 released Note 有当前 `LearnerProfile + LearnerLevel` review row；
+- review status 必须绑定当前 ContentFingerprint；
+- 内容变化后旧 approval 必须失效；
+- `model-reviewed` 与 `human-reviewed` 明确区分；
+- 只有真实完成逐条审校后才能运行显式 approval 工具。
+
 ### Publish
 
-- `study.csv ⊆ all.csv`；
-- `by-source/*` 只是 Master 视图；
+- `study.csv` 与 Released Set 一致；
+- `by-source/*` / `onboarding/*` 只是视图；
 - deterministic build；
 - 不静默 fallback 到成人词典首义；
 - migration CSV 第一列必须是 `Word`，正式 publish 第一列必须是 `NoteID`。
+
+### 正式导入门槛
+
+```bash
+python tools/check_klose_release_ready.py
+```
+
+只有当：
+
+```text
+identity / learner / future-vocabulary reports = 0
+review pending                             = 0
+ContentFingerprint stale                  = 0
+study.csv == Released Set
+```
+
+才能把当前 `study.csv` 描述为“可以正式导入 Anki”。
 
 ---
 
@@ -440,19 +517,21 @@ Anki FSRS History      不变
 Raw source
 → normalize occurrences
 → sense-aware identity candidate matching
+→ persist SourceItemKey → NoteID decision
 → merge provenance / append NoteID
 → learner presentation
+→ learner review
 → release decision
-→ rebuild
+→ rebuild / release gate
 ```
 
 ### Fact Correction
 
-修正拼写、音标或核心义项；涉及 identity 时进入 migration review。
+修正拼写、音标或核心义项；涉及 identity 时进入 migration review。若 `MeaningPrimary` 改变，相关 learner review fingerprint 必须失效。
 
 ### Learner Upgrade
 
-升年级只更新 Learner Layer，不改 NoteID / source facts。
+升年级只更新 Learner Layer，不改 NoteID / source facts；新 level 必须重新审校和 approval。
 
 ### Identity Merge/Split
 
@@ -464,15 +543,16 @@ Card Template / CSS / 显示顺序变化不改变 Vocabulary Identity。
 
 ---
 
-## 15. 第一批稳定基线：rj_start1
+## 15. 第一批正式基线：rj_start1 Grade-4 Baseline v1
 
-截至 2026-09-04，第一批基础数据已经完成正式迁移：
+截至 2026-09-05，第一批正式基础数据已经完成：
 
 ```text
 SourceID = rj_start1
-人教版一年级起点 1–6 年级
+人教版一年级起点 1–6 年级 inventory
 LearnerProfile = klose
 LearnerLevel = 4
+Released scope = 人教版 1–4 年级
 ```
 
 当前基线：
@@ -481,32 +561,43 @@ LearnerLevel = 4
 - 908 次 source occurrences；
 - 802 个 Inventory Notes；
 - Stable Registry：`KV000001`–`KV000802`；
-- 当前 Released Notes：518（人教版 1–4 年级范围）；
-- `study.csv`：默认 Anki 发布入口；
+- Source Identity Map：802；
+- 当前 Released Notes：518；
+- Grade-4 `model-reviewed = 518 / pending = 0`；
+- approval manifest：`learner/review_approvals/grade4-baseline-v1.csv`；
+- identity / learner / future-vocabulary review 均为 0；
+- onboarding：175 个 `grade4-new`、26 个 `grade4-review`、317 个 `lower-grade-backfill`；
+- `study.csv`：唯一推荐长期 Anki 同步入口；
 - `all.csv`：完整 802 Notes 库存；
-- 6 个按年级合并的 source convenience views；
 - Word-first → NoteID-first migration CSV 已生成；
-- Grade-4 learner layer 已建立；
-- identity review / learner review / future-vocabulary review 当前均为 0；
-- Global CI 已通过，并验证第二次构建 Registry/Release Registry 不发生漂移。
+- Global CI 已通过 `Verify Anki release readiness`。
 
-关键持久化文件：
+关键长期状态：
 
 ```text
 anki/klose/master/note_registry.csv
+anki/klose/master/source_identity_map.csv
 anki/klose/master/release_registry.csv
+anki/klose/learner/presentation_review_registry.csv
+anki/klose/learner/review_approvals/*.csv
 ```
 
-这两个文件不是普通生成缓存。未来接入北京版、沪教版、新概念等来源时，应在这套基线上扩展，而不是重新建立另一套 NoteID/Deck 体系。
+未来接入北京版、沪教版、新概念等来源时，应在这套基线上扩展，而不是重新建立另一套 NoteID/Deck 体系。
 
 ---
 
 ## 16. 当前实现入口
 
+Global：
+
 ```text
+tools/check_klose_persistent_state.py
 tools/build_klose_vocabulary.py
 tools/apply_klose_learner_overrides.py
+tools/sync_klose_learner_review_registry.py
 tools/check_klose_learner.py
+tools/check_klose_release_ready.py
+tools/approve_klose_learner_review.py    # 显式操作，不属于日常 CI
 .github/workflows/build-klose-vocabulary.yml
 ```
 
@@ -523,4 +614,4 @@ Global Data Area：
 anki/klose/
 ```
 
-详细执行规则以根目录 `AGENTS.md` 为准。
+详细执行规则以根目录 `AGENTS.md` 为准；首次正式导入见 `docs/ANKI_FIRST_IMPORT.md`。
