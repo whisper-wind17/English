@@ -1,0 +1,43 @@
+.card {
+  font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 22px;
+  text-align: center;
+  color: #222;
+  background: #fff;
+  padding: 18px;
+}
+
+.word {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.phonetic {
+  font-size: 17px;
+  color: #666;
+  margin: 2px 0;
+}
+
+#answer {
+  margin: 18px 0;
+}
+
+.meaning {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.example {
+  font-size: 22px;
+  line-height: 1.45;
+  margin-top: 12px;
+}
+
+.translation {
+  font-size: 18px;
+  line-height: 1.45;
+  color: #666;
+  margin-top: 8px;
+}
