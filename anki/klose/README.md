@@ -6,13 +6,19 @@
 docs/KLOSE_VOCABULARY_SYSTEM.md
 ```
 
-旧 Word-first Anki 数据迁移见：
+第一次正式导入 Anki：
+
+```text
+docs/ANKI_FIRST_IMPORT.md
+```
+
+旧 Word-first Anki 数据迁移：
 
 ```text
 docs/ANKI_MIGRATION.md
 ```
 
-## 当前基线
+## 当前正式基线
 
 ```text
 LearnerProfile = klose
@@ -23,6 +29,42 @@ Released       = 518 Notes（人教版 1–4 年级）
 ```
 
 人教版 1–6 年级共有 908 次 source occurrences。Stable NoteID Registry 已建立为 `KV000001`–`KV000802`。
+
+Grade-4 Baseline v1 已完成逐条模型审校并通过 release gate：
+
+```text
+review registry      = 518
+model-reviewed       = 518
+human-reviewed       = 0
+pending              = 0
+identity review      = 0
+learner review       = 0
+future vocab review  = 0
+```
+
+审批批次：
+
+```text
+learner/review_approvals/grade4-baseline-v1.csv
+```
+
+## 当前学习阶段
+
+518 个 released Notes 全部进入同一个 Anki 主 Deck，但学习阶段通过 Tags 控制：
+
+```text
+stage::grade4-new             175
+stage::grade4-review           26
+stage::lower-grade-backfill   317
+```
+
+第一次使用时建议完整导入 `publish/study.csv`，然后只保持 `stage::grade4-new` 为 Unsuspended；另外两组先 Suspend。
+
+这三组不是三个 Deck。长期主 Deck 始终是：
+
+```text
+Klose-English::Vocabulary
+```
 
 ## 目录
 
@@ -38,12 +80,14 @@ anki/klose/
 │   ├── source_occurrences.csv
 │   └── build_stats.csv
 ├── learner/
-│   ├── current.csv                # 当前 Grade-4 presentation
-│   ├── grade4_overrides.csv
-│   └── grade4_guardrail_overrides.csv
+│   ├── current.csv
+│   ├── grade4_*                   # Grade-4 显式 learner review/override 层
+│   ├── presentation_review_registry.csv
+│   └── review_approvals/          # 不可覆盖的显式审批批次
 ├── publish/
-│   ├── study.csv                  # 默认长期 Anki 导入
+│   ├── study.csv                  # 唯一推荐长期 Anki 同步入口
 │   ├── all.csv                    # 完整库存
+│   ├── onboarding/                # 学习阶段便利视图，不是独立 Deck
 │   ├── migration/
 │   └── by-source/
 └── review/
@@ -54,24 +98,26 @@ anki/klose/
 
 ## 哪个文件导入 Anki
 
-默认：
+第一次以及以后长期更新都使用：
 
 ```text
 publish/study.csv
 ```
 
-`study.csv` 是已经释放给 Klose 学习、且以后需要持续获得内容更新的 Notes。`all.csv` 是完整 Master inventory，不是默认日常导入入口。
+不要同时额外导入 `onboarding/*.csv` 或 `by-source/*.csv`。这些只是同一批 Master Notes 的视图。
 
 如果已经导入过早期 `anki/人教版一年级起点/import/*.csv`，不要直接导入 NoteID-first `study.csv`，先按 `docs/ANKI_MIGRATION.md` 完成一次性迁移。
 
 ## 持久化状态
 
-以下三个文件不能视为普通缓存：
+以下文件不是普通缓存：
 
 ```text
 master/note_registry.csv
 master/source_identity_map.csv
 master/release_registry.csv
+learner/presentation_review_registry.csv
+learner/review_approvals/*.csv
 ```
 
 规则：
@@ -79,6 +125,7 @@ master/release_registry.csv
 - 旧 NoteID 不重排、不复用；
 - 新 learning unit 只追加新 NoteID；
 - 已 release Note 原则上持续留在 `study.csv`；
+- review 状态绑定 ContentFingerprint；Meaning/Example/Translation 变化会使旧 approval 失效；
 - identity merge/split 必须单独设计迁移。
 
 ## 当前首批 Source Adapter
@@ -89,16 +136,26 @@ anki/人教版一年级起点/
 
 它负责 source-specific 清洗、释义审校和原始 occurrence；`anki/klose/` 负责 Stable Identity、跨来源 Master、Learner Layer 和 Anki 发布。
 
-## 构建
+## 构建与发布检查
 
-完整本地验证顺序：
+完整验证顺序：
 
 ```bash
 python tools/check_klose_persistent_state.py
 python tools/build_klose_vocabulary.py
 python tools/apply_klose_learner_overrides.py
+python tools/sync_klose_learner_review_registry.py
 python tools/check_klose_learner.py
+python tools/check_klose_release_ready.py
 ```
+
+显式 Learner Review 审批工具：
+
+```text
+tools/approve_klose_learner_review.py
+```
+
+它不进入日常 CI，只能在完成真实逐条审校后使用，并会生成 fingerprint-bound approval manifest。
 
 CI：
 
@@ -106,27 +163,12 @@ CI：
 .github/workflows/build-klose-vocabulary.yml
 ```
 
-构建后必须检查：
-
-```text
-master/build_stats.csv
-review/identity_review.csv
-review/learner_review.csv
-review/future_vocab_review.csv
-```
-
-当前三个 review queue 均为空。这里的 `0` 只表示对应自动/显式检查没有遗留项，不代表全部内容已经由出版社或英语教师人工认证。
+当前正式 CI 已通过 `Verify Anki release readiness`。
 
 ## Grade-4 Learner Layer
 
-当前四年级呈现层与教材首次出现年级解耦。低年级词可以使用适合四年级当前理解水平的自然例句。
+当前四年级呈现层与教材首次出现年级解耦。低年级词使用适合 Klose 当前四年级理解水平的自然例句，同时不机械增加句子复杂度。
 
-同时保留一条严格 guardrail：已 release 的 Grade-4 例句不能无意使用人教版词表中明确到五/六年级才首次列出的内容词。该规则由：
+严格 guardrail：已 release 的 Grade-4 例句不能无意使用人教版词表中明确到五/六年级才首次列出的内容词。
 
-```text
-tools/check_klose_learner.py
-```
-
-在 CI 中强制执行。
-
-未来升 Grade 5 时，升级 Learner Layer 即可；`NoteID`、source occurrences 和 Anki FSRS/Review History 不变。
+未来升 Grade 5 时，只升级 Learner Layer 并建立新的 Level-5 review/approval；`NoteID`、source occurrences 和 Anki FSRS/Review History 不变。
