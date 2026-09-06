@@ -155,9 +155,20 @@ def main() -> None:
     for key in ("slept", "swam", "were", "won"):
         require(by_key.get(key, {}).get("Action") == "held", f"Irregular-form blocker lost: {key}")
 
-    # Recheck the migration correction: unreviewed Beijing seed multiword items are not auto-Vocabulary identities.
-    for key in ("a few", "get well", "make use of", "take part in"):
-        require(by_key.get(key, {}).get("Action") == "pending", f"Unrouted Beijing multiword leaked as identity: {key}")
+    # Migration correction: Beijing seed multiword items may never be accepted
+    # merely because they came from the seed. They can leave pending only after an
+    # explicit later review with a different DecisionBasis.
+    for key in (
+        "a few", "get well", "how many", "ice cream", "make use of", "pencil case",
+        "sweet potato", "take part in", "the u.k.", "the u.s.a.", "the united states of america",
+    ):
+        row = by_key.get(key, {})
+        require(row, f"Missing Beijing multiword migration guard: {key}")
+        require(row.get("DecisionBasis") != "beijing-seed-carried-forward",
+                f"Beijing multiword bypassed explicit object review: {key}")
+        if row.get("DecisionBasis") == "beijing-seed-object-review-required":
+            require(row.get("Action") == "pending" and row.get("Status") == "pending",
+                    f"Unreviewed Beijing multiword must stay pending: {key}")
 
     preview_keys = {r["CanonicalMatchKey"] for r in preview}
     require(len(preview_keys) == len(preview), "Preview canonical key is not unique")
@@ -186,7 +197,7 @@ def main() -> None:
     print("Source occurrence closure = yes")
     print("Known semantic blockers preserved = yes")
     print("Known morphology decisions preserved = yes")
-    print("Unreviewed Beijing multiword carry-forward blocked = yes")
+    print("Beijing multiword requires explicit review = yes")
     print("Stable ThirdPartyID minted = no")
     print("Final Klose diff executed = no")
 
