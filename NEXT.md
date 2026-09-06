@@ -407,16 +407,48 @@ Cross-source context reviews   = 392
 Semantic-risk queue            = 287
 ```
 
+Cross-source exact-overlap 第一轮 Identity Resolution：
+
+```text
+rule-reviewed reuse             = 105
+model-reviewed rows             = 21
+pending semantic review         = 266
+
+reuse-learning-unit             = 106
+partial-overlap-split-required  = 7
+do-not-merge                    = 3
+held / policy-context blocker   = 10
+
+morphology resolved             = 5
+morphology held                 = 1
+```
+
+当前已显式保护的 semantic collision 包括：
+
+```text
+May(月份) vs may(情态动词)
+like=喜欢 vs weather ... like ...
+square=正方形 vs square=广场
+left=左边 vs left=leave过去式
+cook=烹饪/煮 vs cook=厨师
+cold=寒冷 vs cold=感冒
+study=学习 vs study=书房
+```
+
 当前工程状态：
 
 ```text
 Renjiao Stage A Valid          = yes
 Combined Stage A build         = yes
 Cross-source context audit     = yes
+First-pass Identity Resolution = yes
+Completion Recheck             = pass
 Stable ThirdPartyID minted     = no
 Final Klose diff executed      = no
 Klose Master/Release/Publish/Anki changed = no
 ```
+
+这里的 `rule-reviewed`、`model-reviewed`、`pending` 必须保持区分；第一轮 Resolution 不等于全部 392 个 overlap 已经 source-confirmed。只有明确无风险信号或已有显式语义判断的行才向前推进，其余继续 pending。
 
 重要约束继续有效：
 
@@ -434,11 +466,11 @@ Klose Master/Release/Publish/Anki changed = no
 当前下一步：
 
 ```text
-1. 对 392 个北京/人教 exact-surface overlap 做 context-aware sense review；
-2. 处理 6 个 morphology candidates；
-3. 对人教 403 个 new-surface candidates 做 within-source homograph / sense split 检查；
-4. 只有 Identity Resolution 足够稳定后，才开始 mint stable ThirdPartyID；
-5. 然后再接入下一个教材 adapter，仍只执行 Stage A。
+1. 继续处理剩余 266 个 cross-source semantic-risk pending rows；
+2. 对人教 403 个 new-surface candidates 做 within-source homograph / sense-split audit；
+3. 复核两类 blocker 后，再判断是否已经足够稳定到可以 mint 第一版 Stable ThirdPartyID；
+4. 在此之前不执行 Klose Stage-B final diff；
+5. 每个阶段完成后必须执行独立 Completion Recheck。
 ```
 ---
 
