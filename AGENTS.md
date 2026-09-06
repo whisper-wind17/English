@@ -80,7 +80,7 @@ Explicit learning admission                  implemented for current Grade-4 set
 Deterministic curriculum LearningOrder       implemented for current Grade-4 set
 Homograph front-side disambiguation          implemented via optional PromptHint
 Multiple source adapters                     planned
-Expressions stable identity / learner presentation / card contract first formal card implemented; deterministic publish / release gate pending
+Expressions stable identity / learner presentation / deterministic publish / release gate implemented for pilot; Anki import pending
 ```
 
 当前物理兼容策略：既有 `source_identity_map.csv` 作为 legacy baseline 保持不动；新 Edition / 同词多义 identity 使用 `source_identity_extensions.csv`，避免为了升级 schema 重写已有 518 条 identity。
@@ -125,6 +125,10 @@ tools/sync_klose_learner_review_registry.py
 tools/check_klose_learner.py
 tools/check_klose_release_ready.py
 tools/approve_klose_learner_review.py  # explicit only
+
+tools/build_klose_expressions.py
+tools/check_klose_expressions_release_ready.py
+tools/klose_expression_review_fingerprint.py
 ```
 
 ---
