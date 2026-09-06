@@ -1,0 +1,39 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:monday,monday,*,keep-identity,,vocabulary,星期一,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the weekday name.
+surface:money,money,*,keep-identity,,vocabulary,钱；货币,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary money noun.
+surface:monkey,monkey,*,keep-identity,,vocabulary,猴子,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the animal noun.
+surface:monster,monster,*,keep-identity,,vocabulary,怪物,reviewed,high,hujiao-new-learning-unit,The Hujiao source provides one clear creature noun learning unit.
+surface:month,month,*,keep-identity,,vocabulary,月；一个月,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the time-unit noun.
+surface:moon,moon,*,keep-identity,,vocabulary,月亮；月球,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence confirms the lunar noun concept.
+surface:mooncake,mooncake,*,keep-identity,,vocabulary,月饼,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the food noun.
+surface:more,more,*,held,,vocabulary,,held,high,irregular-comparison-form-policy-held,More is an irregular comparative/quantifier form with several grammatical roles; preserve the form/presentation policy blocker rather than auto-canonicalizing.
+surface:morning,morning,*,keep-identity,,vocabulary,早晨；上午,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the time-of-day noun.
+surface:most,most,*,held,,vocabulary,,held,high,irregular-comparison-form-policy-held,Most is an irregular superlative/quantifier form with several grammatical roles; preserve the form/presentation policy blocker.
+surface:mother,mother,*,keep-identity,,vocabulary,母亲；妈妈,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the family noun.
+surface:mountain,mountain,*,keep-identity,,vocabulary,山；山脉,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the geographic noun.
+surface:mouse,mouse,*,split-required,,vocabulary,,held,high,hujiao-semantic-split-required,Elementary sources can teach mouse=老鼠 and mouse=电脑鼠标 as distinct learning units; morphology relation to mice does not resolve the sense split.
+surface:mouth,mouth,*,keep-identity,,vocabulary,嘴；口,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the body-part noun.
+surface:move,move,*,keep-identity,,vocabulary,移动；搬动；搬家,reviewed,medium,hujiao-evidence-revalidation,Elementary uses remain within the core movement/change-location concept.
+surface:mr,mr,*,keep-identity,,vocabulary,先生,reviewed,high,hujiao-title-distinction,Mr is an independent title and must not be merged with Mrs despite morphology-like string similarity.
+surface:mrs,mrs,*,keep-identity,,vocabulary,太太；夫人,reviewed,high,hujiao-title-distinction,Mrs is an independent married-woman title and must not be merged with Mr.
+surface:ms,ms,*,keep-identity,,vocabulary,女士,reviewed,high,hujiao-title-distinction,Elementary source use clearly targets the female title Ms; technical abbreviation dictionary senses are irrelevant.
+surface:mum,mum,*,keep-identity,,vocabulary,妈妈,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the informal family noun.
+surface:museum,museum,*,keep-identity,,vocabulary,博物馆,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the place noun.
+surface:music,music,*,keep-identity,,vocabulary,音乐,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the subject/art noun.
+surface:must,must,*,keep-identity,,vocabulary,必须；一定要,reviewed,high,hujiao-evidence-revalidation,Elementary sources clearly target the modal obligation meaning; unrelated noun sense is dictionary noise.
+surface:my,my,*,keep-identity,,vocabulary,我的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the possessive determiner.
+surface:myself,myself,*,keep-identity,,vocabulary,我自己；我本人,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the reflexive pronoun.
+surface:nail,nail,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Nail may mean 指甲 or 钉子, both plausible elementary learning units; the single source occurrence lacks context to choose safely.
+surface:name,name,*,keep-identity,,vocabulary,名字；姓名；命名,reviewed,medium,hujiao-evidence-revalidation,Noun/verb uses stay within the same naming concept in elementary materials.
+surface:near,near,*,keep-identity,,vocabulary,在……附近；近的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the basic spatial-nearness concept.
+surface:neck,neck,*,keep-identity,,vocabulary,脖子；颈部,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the body-part noun.
+surface:need,need,*,keep-identity,,vocabulary,需要,reviewed,high,hujiao-evidence-revalidation,Noun/verb uses remain within the same need/necessity concept.
+surface:neighbour,neighbour,*,keep-identity,,vocabulary,邻居,reviewed,high,hujiao-new-learning-unit,The source provides one clear person-relation noun.
+surface:never,never,*,keep-identity,,vocabulary,从不；从未,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the frequency adverb.
+surface:new,new,*,keep-identity,,vocabulary,新的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary adjective.
+surface:newspaper,newspaper,*,keep-identity,,vocabulary,报纸,reviewed,high,hujiao-new-learning-unit,The source clearly targets the printed-news noun.
+surface:next,next,*,keep-identity,,vocabulary,下一个；接下来,reviewed,medium,hujiao-evidence-revalidation,Adjective/adverb uses remain within the same sequential-next concept.
+surface:next time,next time,*,keep-identity,,vocabulary,下一次；下次,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable time phrase.
+surface:nice,nice,*,keep-identity,,vocabulary,好的；友善的；令人愉快的,reviewed,medium,hujiao-evidence-revalidation,Elementary source uses remain within the ordinary positive-evaluation adjective concept.
+surface:night,night,*,keep-identity,,vocabulary,夜晚；晚上,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the time-of-day noun.
+surface:nine,nine,*,keep-identity,,vocabulary,九,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the cardinal number.
