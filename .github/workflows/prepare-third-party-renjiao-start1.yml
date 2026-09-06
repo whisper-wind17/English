@@ -1,4 +1,4 @@
-name: Prepare Third-party Renjiao Start1 Vocabulary
+name: Prepare Third-party Vocabulary Stage A
 
 on:
   push:
@@ -6,25 +6,14 @@ on:
     paths:
       - 'tools/prepare_third_party_renjiao_start1.py'
       - 'tools/check_third_party_renjiao_start1.py'
-      - 'tools/build_third_party_vocabulary_stage_a.py'
-      - 'tools/audit_third_party_cross_source_semantics.py'
-      - 'tools/build_third_party_cross_source_resolution.py'
-      - 'tools/apply_third_party_cross_source_second_pass.py'
-      - 'tools/apply_third_party_cross_source_final_review.py'
-      - 'tools/recheck_third_party_beijing_renjiao_stage_a.py'
-      - 'tools/audit_third_party_renjiao_new_surfaces.py'
-      - 'tools/recheck_third_party_renjiao_new_surface_types.py'
-      - 'tools/resolve_third_party_renjiao_new_surface_routing.py'
-      - 'tools/recheck_third_party_renjiao_new_surface_routing.py'
-      - 'tools/apply_third_party_renjiao_single_token_sense_review.py'
-      - 'tools/recheck_third_party_renjiao_single_token_sense_review.py'
-      - 'tools/audit_third_party_renjiao_single_token_forms.py'
-      - 'tools/recheck_third_party_renjiao_single_token_forms.py'
-      - 'tools/sync_third_party_status_to_next.py'
+      - 'tools/build_third_party_corpus.py'
+      - 'tools/check_third_party_corpus.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
       - 'anki/klose/source_reference/beijing_start1_staging/semantic_resolution_review.csv'
-      - 'anki/klose/third_party_vocabulary/review/renjiao_start1_morphology_resolution.csv'
+      - 'anki/klose/source_reference/beijing_start1_staging/identity_resolution_review.csv'
+      - 'anki/klose/source_reference/beijing_start1_staging/source_variant_resolution_review.csv'
+      - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
 
@@ -41,56 +30,17 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Build Renjiao start1 Stage A staging
+      - name: Parse Renjiao start1 source adapter
         run: python tools/prepare_third_party_renjiao_start1.py
 
-      - name: Validate Renjiao Stage A staging
+      - name: Validate Renjiao source adapter
         run: python tools/check_third_party_renjiao_start1.py
 
-      - name: Build combined third-party Stage A workspace
-        run: python tools/build_third_party_vocabulary_stage_a.py
+      - name: Build simplified third-party corpus workspace
+        run: python tools/build_third_party_corpus.py
 
-      - name: Build context-rich cross-source semantic review queues
-        run: python tools/audit_third_party_cross_source_semantics.py
-
-      - name: Build first-pass cross-source Identity Resolution
-        run: python tools/build_third_party_cross_source_resolution.py
-
-      - name: Apply second-pass semantic review
-        run: python tools/apply_third_party_cross_source_second_pass.py
-
-      - name: Resolve final cross-source pending set
-        run: python tools/apply_third_party_cross_source_final_review.py
-
-      - name: Independent cross-source Completion Recheck
-        run: python tools/recheck_third_party_beijing_renjiao_stage_a.py
-
-      - name: Audit Renjiao new-surface object types
-        run: python tools/audit_third_party_renjiao_new_surfaces.py
-
-      - name: Independent new-surface type Completion Recheck
-        run: python tools/recheck_third_party_renjiao_new_surface_types.py
-
-      - name: Resolve Renjiao new-surface object routing
-        run: python tools/resolve_third_party_renjiao_new_surface_routing.py
-
-      - name: Independent new-surface routing Completion Recheck
-        run: python tools/recheck_third_party_renjiao_new_surface_routing.py
-
-      - name: Apply Renjiao single-token semantic review
-        run: python tools/apply_third_party_renjiao_single_token_sense_review.py
-
-      - name: Independent single-token semantic Completion Recheck
-        run: python tools/recheck_third_party_renjiao_single_token_sense_review.py
-
-      - name: Audit Renjiao single-token morphology and form relations
-        run: python tools/audit_third_party_renjiao_single_token_forms.py
-
-      - name: Independent single-token form Completion Recheck
-        run: python tools/recheck_third_party_renjiao_single_token_forms.py
-
-      - name: Sync third-party progress to NEXT
-        run: python tools/sync_third_party_status_to_next.py
+      - name: Independent third-party Completion Recheck
+        run: python tools/check_third_party_corpus.py
 
       - name: Assert Klose publishing state is untouched
         run: |
@@ -100,17 +50,21 @@ jobs:
             anki/klose/publish \
             anki/klose/anki
 
-      - name: Persist third-party staging outputs and status only
+      - name: Persist third-party Stage A data only
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add \
             anki/klose/source_reference/renjiao_start1_staging \
-            anki/klose/third_party_vocabulary/staging \
-            NEXT.md
+            anki/klose/third_party_vocabulary/review/identity_decisions.csv \
+            anki/klose/third_party_vocabulary/staging/README.md \
+            anki/klose/third_party_vocabulary/staging/occurrences.csv \
+            anki/klose/third_party_vocabulary/staging/surface_candidates.csv \
+            anki/klose/third_party_vocabulary/staging/review_queue.csv \
+            anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
           if git diff --cached --quiet; then
-            echo 'No third-party staging/status changes.'
+            echo 'No simplified Stage A changes.'
           else
-            git commit -m 'data: refresh Beijing + Renjiao third-party Stage A staging'
+            git commit -m 'data: refresh simplified third-party Stage A workspace'
             git push
           fi
