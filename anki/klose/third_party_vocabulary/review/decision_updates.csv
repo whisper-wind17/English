@@ -1,0 +1,45 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:gold,gold,*,keep-identity,,vocabulary,金；黄金；金色,reviewed,medium,hujiao-evidence-revalidation,Elementary sources stay within the gold material/color concept; unrelated monetary extensions are not introduced.
+surface:good,good,*,keep-identity,,vocabulary,好的；不错的,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence confirms the common evaluative adjective.
+surface:good at,good at,*,route-expression,,expression,擅长……,reviewed,high,hujiao-object-routing,This complement-taking pattern requires a following activity/object and is better represented as an Expression.
+surface:goodbye,goodbye,*,keep-identity,,vocabulary,再见,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the farewell interjection.
+surface:grade,grade,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Grade may mean 年级 or 成绩/等级 in elementary materials; current source facts do not safely bind one target sense.
+surface:grandfather,grandfather,*,keep-identity,,vocabulary,祖父；外祖父,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the family-relation noun.
+surface:grandma,grandma,*,keep-identity,,vocabulary,奶奶；外婆,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the informal family-relation noun.
+surface:grandmother,grandmother,*,keep-identity,,vocabulary,祖母；外祖母,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the family-relation noun.
+surface:grandpa,grandpa,*,keep-identity,,vocabulary,爷爷；外公,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the informal family-relation noun.
+surface:grandparent,grandparent,*,keep-identity,,vocabulary,祖父母；外祖父母,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the family-category noun.
+surface:grape,grape,*,keep-identity,,vocabulary,葡萄,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the fruit noun; grapes is only a candidate morphology signal.
+surface:grass,grass,*,keep-identity,,vocabulary,草；草地,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence confirms the common nature noun.
+surface:great,great,*,keep-identity,,vocabulary,很好的；很棒的；伟大的,reviewed,medium,hujiao-evidence-revalidation,Elementary source use remains within the positive/evaluative adjective concept.
+surface:green,green,*,keep-identity,,vocabulary,绿色；绿色的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the color learning unit.
+surface:ground,ground,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Ground may denote 地面/土地 or other basic meanings; current word-list occurrences do not provide enough context to bind one learner-facing sense.
+surface:grow,grow,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Grow can mean 生长 or 种植 in elementary materials; current single occurrence is insufficient to determine whether one or multiple learning units are intended.
+surface:grow crops,grow crops,*,keep-identity,,vocabulary,种庄稼；种植农作物,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable activity phrase.
+surface:grow up,grow up,*,keep-identity,,vocabulary,长大；成长,reviewed,high,hujiao-new-learning-unit,The source explicitly lists the stable phrasal verb learning unit.
+surface:guitar,guitar,*,keep-identity,,vocabulary,吉他,reviewed,high,hujiao-new-learning-unit,The source clearly targets the musical-instrument noun.
+surface:hair,hair,*,keep-identity,,vocabulary,头发；毛发,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the body/hair noun.
+surface:half,half,*,keep-identity,,vocabulary,一半；半,reviewed,high,hujiao-evidence-revalidation,Expanded evidence consistently supports the fraction concept.
+surface:half past ...,half past ...,*,route-expression,,expression,…点半,reviewed,high,hujiao-object-routing,This time-telling slot pattern requires a clock-hour value and belongs in Expressions.
+surface:hall,hall,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Hall may refer to 大厅/礼堂/走廊 or related school-building spaces; current source facts do not safely bind one target sense.
+surface:hamburger,hamburger,*,keep-identity,,vocabulary,汉堡包,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the food noun.
+surface:hand,hand,*,keep-identity,,vocabulary,手,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence targets the body-part noun.
+surface:handsome,handsome,*,keep-identity,,vocabulary,英俊的；帅气的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the appearance adjective.
+surface:happily,happily,*,keep-identity,,vocabulary,快乐地；高兴地,reviewed,high,hujiao-new-learning-unit,The source provides one clear manner adverb learning unit.
+surface:happy,happy,*,keep-identity,,vocabulary,高兴的；快乐的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the emotion adjective.
+surface:hard,hard,*,held,,vocabulary,,held,high,hujiao-semantic-boundary-held,Hard can mean 困难的/努力地/硬的 in elementary materials; combined word-list evidence does not safely define one learning unit.
+surface:hat,hat,*,keep-identity,,vocabulary,帽子,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the clothing noun.
+surface:hate,hate,*,keep-identity,,vocabulary,讨厌；憎恨,reviewed,high,hujiao-new-learning-unit,The source clearly targets the ordinary dislike verb.
+surface:have,have,*,held,,vocabulary,,held,high,hujiao-function-word-boundary-held,Have functions as a lexical verb and auxiliary and participates in many elementary constructions; word-list evidence alone is insufficient for one standalone learning unit.
+surface:have a cold,have a cold,*,keep-identity,,vocabulary,感冒；患感冒,reviewed,high,hujiao-new-learning-unit,This is a stable lexical health collocation with a clear elementary meaning.
+surface:have a fever,have a fever,*,keep-identity,,vocabulary,发烧,reviewed,high,hujiao-new-learning-unit,This stable health collocation has one clear meaning.
+surface:have a good time,have a good time,*,keep-identity,,vocabulary,玩得开心；过得愉快,reviewed,high,hujiao-new-learning-unit,This fixed lexical phrase is stable and does not require an open grammatical slot.
+surface:have a headache,have a headache,*,keep-identity,,vocabulary,头痛；头疼,reviewed,high,hujiao-new-learning-unit,This stable health collocation has one clear elementary meaning.
+surface:have a look,have a look,*,keep-identity,,vocabulary,看一看,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the fixed lexical phrase.
+surface:have a meeting,have a meeting,*,keep-identity,,vocabulary,开会,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable event collocation.
+surface:have a party,have a party,*,keep-identity,,vocabulary,举行聚会；开派对,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable event collocation.
+surface:have a picnic,have a picnic,*,keep-identity,,vocabulary,去野餐；举行野餐,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the stable activity phrase.
+surface:have a rest,have a rest,*,keep-identity,,vocabulary,休息一下,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable collocation.
+surface:have a toothache,have a toothache,*,keep-identity,,vocabulary,牙痛；牙疼,reviewed,high,hujiao-new-learning-unit,This stable health collocation has one clear meaning.
+surface:have breakfast,have breakfast,*,keep-identity,,vocabulary,吃早餐；吃早饭,reviewed,high,hujiao-new-learning-unit,This stable meal collocation has one clear elementary meaning.
+surface:have dinner,have dinner,*,keep-identity,,vocabulary,吃晚饭；吃正餐,reviewed,high,hujiao-new-learning-unit,This stable meal collocation has one clear elementary meaning.
