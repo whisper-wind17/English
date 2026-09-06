@@ -1,2 +1,10 @@
 ExpressionID,IdentityStatus,PresentationStatus,AdmissionStatus,PublishStatus,ReleaseStatus,Notes
-KE000001,active,approved,allowed,pending,pending,"等待 deterministic publish / release gate 后进入正式 Anki import"
+KE000001,active,approved,allowed,generated,ready,deterministic publish generated; release gate passes; Anki not yet updated
+KE000002,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000003,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000004,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000005,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000006,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000007,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000008,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
+KE000009,active,model-reviewed,allowed,pending,pending,awaiting explicit learner-presentation approval before publish
