@@ -117,10 +117,10 @@ Source Adapter occurrences
 职责：
 
 ```text
-Source Adapter            = 只解析 Source Fact
-CandidateSignals          = 只提供匹配证据
-identity_decisions.csv    = 唯一内容决策真源
-review_queue.csv           = 纯派生 unresolved/blocker view
+Source Adapter             = 只解析 Source Fact
+CandidateSignals           = 只提供匹配证据
+identity_decisions.csv     = 唯一内容决策真源
+review_queue.csv            = 纯派生 unresolved/blocker view
 unified_vocabulary_preview = reviewed Vocabulary preview
 ```
 
@@ -155,7 +155,7 @@ review/decision_updates.csv
 
 新增教材可能给已 reviewed 的同一 surface 带来新义项，因此 decision 不能只按 MatchKey 永久复用。
 
-`OccurrenceKeys` 现在持久化为审校时实际覆盖的 SourceOccurrenceKey **JSON array**：
+`OccurrenceKeys` 持久化为审校时实际覆盖的 SourceOccurrenceKey **JSON array**：
 
 ```text
 current occurrence set == reviewed occurrence set
@@ -195,10 +195,10 @@ renjiao_start3
 
 `renjiao_start3` = 人教版三年级起点 3–6 年级上下册，共 8 册；作为独立 adapter，不与 `renjiao_start1` 混合。
 
-每个 Renjiao adapter 的物理职责都只有：
+每个 adapter 只负责：
 
 ```text
-Raw XLSX
+Raw source
 → source_reference/<adapter>_staging/README.md
 → source_reference/<adapter>_staging/occurrences.csv
 ```
@@ -207,9 +207,9 @@ Adapter 不比较其他教材，不生成 edition-specific exact/morph/semantic 
 
 ---
 
-## 7. Current Stage-A baseline — 3 adapters
+## 7. Current Stage-A baseline — 3 adapters CLOSED
 
-`renjiao_start3` 接入完成并通过独立 Completion Recheck。接入时：
+`renjiao_start3` 接入时产生：
 
 ```text
 299 completely new surfaces
@@ -217,62 +217,66 @@ Adapter 不比较其他教材，不生成 edition-specific exact/morph/semantic 
 = 818 pending
 ```
 
-随后已完成 7 批统一 review，累计处理 356 个 pending surface。
-
-当前生成视图：
+随后累计完成 14 批统一 review，并逐批通过 independent Completion Recheck。现在所有普通 pending 和 evidence-changed 项均已闭合：
 
 ```text
 Enabled adapters          = 3
 Source occurrences        = 2567
 Normalized surfaces       = 1443
-Durable decisions         = 1271
-Vocabulary preview        = 857
-Review/blocker surfaces   = 526
-Evidence-changed surfaces = 290
+Durable decisions         = 1443
+Vocabulary preview        = 1223
+Review/blocker surfaces   = 125
+Evidence-changed surfaces = 0
 
-keep-identity     = 839
-reuse-identity    = 35
-held              = 62
-pending           = 462
-split-required    = 2
-route-expression  = 16
-source-only       = 27
+keep-identity     = 1212
+reuse-identity    = 52
+held              = 115
+pending           = 0
+split-required    = 10
+route-expression  = 21
+source-only       = 33
 ```
 
-当前 pending 可解释为：
+完整收敛变化：
 
 ```text
-new-surface pending      = 172
-evidence-changed pending = 290
-Total pending            = 462
+pending            818 → 0
+review/blocker     848 → 125
+evidence-changed   519 → 0
+Vocabulary preview 553 → 1223
 ```
 
-本轮收敛变化：
+最终批次：
 
 ```text
-pending            818 → 462
-review/blocker     848 → 526
-evidence-changed   519 → 290
-Vocabulary preview 553 → 857
-```
-
-最新第 7 批：
-
-```text
-Decision updates       = 86
-replaced               = 53
-appended               = 33
-GitHub Actions run     = 34064380748
+Decision updates       = 46
+replaced               = 28
+appended               = 18
+GitHub Actions run     = 34065794743
 Completion Recheck     = PASS
-Generated data commit  = 5f63e11
+Generated data commit  = da96f8a
 ```
 
-持续保护的代表性边界：
+当前 125 条 `review_queue.csv` **全部是真实 blocker**：
+
+```text
+held           = 115
+split-required = 10
+pending        = 0
+```
+
+不要为了 queue=0 强行猜测。典型 blocker 包括：
 
 ```text
 May(月份) / may(情态动词)
 like=喜欢 / similarity construction
 square=正方形 / square=广场
+chicken=鸡 / chicken=鸡肉
+do=实义动词 / do=助动词
+dress=连衣裙 / dress=穿衣
+fish=鱼 / fish=钓鱼
+plant=植物 / plant=种植
+play=玩 / 参加运动 / 演奏
 left=左边 / left=leave过去式
 cook=动词 / cook=名词
 cold=寒冷 / cold=感冒
@@ -281,16 +285,7 @@ orange=水果 / orange=颜色
 kind=种类 / kind=友好的
 live=居住 / live=活着
 mouse=动物 / mouse=电脑鼠标
-
-glasses=眼镜 独立，不并到 glass
-our / ours 保留不同语法 learning unit
-Mrs / Mr 不因字符串 morphology 信号合并
-laughed → laugh
-licked → lick
-longer → long
-older → old
-noodles → noodle
-parents → parent
+best/better、ate/bought/drank/fell/felt/gave/had/lost/rode/saw/slept/swam/took/went/woke/won 等 irregular/form policy
 ```
 
 当前仍然：
@@ -306,27 +301,25 @@ Anki modified              = no
 
 ---
 
-## 8. NEXT TASK — continue the single unified review queue
+## 8. NEXT TASK — add the next Source Adapter
 
-唯一内容入口：
+当前三个 adapter 已没有普通 pending；剩余 125 项需要真实上下文、更多来源证据或 identity/form policy，不应阻塞扩大第三方 corpus。
 
-```text
-anki/klose/third_party_vocabulary/staging/review_queue.csv
-```
-
-继续处理当前 462 个 pending：
+下一步：
 
 ```text
-1. 高置信、同义新增 evidence → 直接 revalidate；
-2. 清晰新 lexical learning unit → keep-identity；
-3. canonical form / alias → reuse-identity；
-4. 完整交际话语/指令 → route-expression；
-5. 仅为事件/屈折 source chunk → source-only；
-6. 同形异义、POS 边界、irregular/gerund policy 不足 → held / split-required；
-7. 每批写回 identity_decisions.csv 后 rebuild + independent Completion Recheck。
+1. 检查并接入 repo 内下一个独立第三方 Source Adapter；
+2. 优先处理沪教版；
+3. adapter 只输出 standardized Source Occurrences；
+4. 在 source_adapters.csv 中 Enabled=yes；
+5. generic builder 自动把全新 surface 和 evidence-changed surface 放入统一 review_queue；
+6. 只审新增/受影响 decisions；
+7. rebuild + independent Completion Recheck；
+8. 不 mint Stable ThirdPartyID；
+9. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
 ```
 
-不要为了 `pending=0` 猜测。当前 start3 普通 pending 收敛后，再接入下一个独立第三方 Source Adapter；所有计划第三方来源完成前不 mint Stable ThirdPartyID、不执行 Stage-B Klose diff。
+新增来源本身也可能给当前 125 个 blocker 带来可用证据；如果 occurrence set 变化，evidence-aware gate 会自动重新排队。
 
 ---
 
@@ -352,7 +345,7 @@ Klose Master/Learner/Publish/Anki untouched
 ## 10. Deferred
 
 ```text
-真实 held/split 第三方 blocker：等更多教材上下文、actual textbook 或 form policy 后收敛
+当前 125 个 held/split 第三方 blocker：等更多教材上下文、actual textbook 或 form policy 后收敛
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（对应 admission 前）
