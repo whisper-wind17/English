@@ -184,3 +184,32 @@ Target：
 ```text
 What's your mother's job?
 ```
+
+## First full import operational baseline
+
+2026-09-06 用户已在 Anki Desktop 完成首次正式导入、排序、Deck Options 配置与同步。
+
+已确认：
+
+```text
+Notes / Cards         = 66 / 66
+LearningOrder         = 000001..000066
+New #                 = 1..66, materialized only while cards were is:new
+Preset                = Klose Expressions
+New cards/day         = 2
+Maximum reviews/day   = 9999
+Learning steps        = 1m 10m
+New card gather order = Ascending position
+New card sort order   = Order gathered
+New/review order      = Show after reviews
+FSRS                  = ON
+Desired retention     = 90%
+FSRS parameters       = Default parameters
+FSRS search scope     = deck:"Klose-English::Expressions" -is:suspended
+Reschedule on change  = OFF
+Sync                  = completed
+```
+
+这部分只记录首次运行时用户确认的 operational baseline。FSRS memory state / Due / Interval / Review History / Card State 仍以 Anki 为唯一真源；repo 不回写或重建这些状态。
+
+后续只有尚未进入真实 Learning / Review 的 `is:new` Cards 才允许按 LearningOrder 初始化或调整 New #。一旦进入真实复习，不使用 repo 顺序重建其调度状态。
