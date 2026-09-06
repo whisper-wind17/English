@@ -316,9 +316,26 @@ def main() -> None:
     write_csv(OUT / "occurrences.csv", OCC_FIELDS, occurrences)
     write_csv(OUT / "identity_candidates.csv", CAND_FIELDS, candidates)
     write_csv(OUT / "surface_inventory.csv", SURFACE_FIELDS, surfaces)
+    write_csv(
+        OUT / "reuse_candidates.csv",
+        SURFACE_FIELDS,
+        [r for r in surfaces if r["AutoDecision"] == "reuse-candidate"],
+    )
+    write_csv(
+        OUT / "identity_review_queue.csv",
+        SURFACE_FIELDS,
+        [r for r in surfaces if r["AutoDecision"] == "identity-review"],
+    )
+    write_csv(
+        OUT / "new_identity_candidates.csv",
+        SURFACE_FIELDS,
+        [r for r in surfaces if r["AutoDecision"] == "new-identity-candidate"],
+    )
 
     class_counts = Counter(r["CandidateClass"] for r in candidates)
     decision_counts = Counter(r["AutoDecision"] for r in candidates)
+    surface_class_counts = Counter(r["CandidateClass"] for r in surfaces)
+    surface_decision_counts = Counter(r["AutoDecision"] for r in surfaces)
     summary = [
         "# Beijing Edition Grade 1–6 Vocabulary — Pre-merge Staging",
         "",
@@ -347,7 +364,7 @@ def main() -> None:
         summary.append(f"| {book} | {per_book[book]} |")
     summary += [
         "",
-        "## Candidate classification",
+        "## Candidate classification — occurrence level",
         "",
         "| Class | Occurrences | Meaning |",
         "|---|---:|---|",
@@ -356,11 +373,20 @@ def main() -> None:
         f"| morphology-or-phrase | {class_counts['morphology-or-phrase']} | only morphology/phrase-related candidates; never auto-merge |",
         f"| no-existing-match | {class_counts['no-existing-match']} | possible genuinely new learning unit |",
         "",
-        "## Pre-merge decision buckets",
+        "## Candidate classification — deduplicated surface level",
         "",
-        f"- reuse-candidate: {decision_counts['reuse-candidate']}",
-        f"- identity-review: {decision_counts['identity-review']}",
-        f"- new-identity-candidate: {decision_counts['new-identity-candidate']}",
+        "| Class | Distinct MatchKeys |",
+        "|---|---:|",
+        f"| exact-single | {surface_class_counts['exact-single']} |",
+        f"| exact-multiple | {surface_class_counts['exact-multiple']} |",
+        f"| morphology-or-phrase | {surface_class_counts['morphology-or-phrase']} |",
+        f"| no-existing-match | {surface_class_counts['no-existing-match']} |",
+        "",
+        "## Pre-merge decision buckets — deduplicated surface level",
+        "",
+        f"- reuse-candidate: {surface_decision_counts['reuse-candidate']}",
+        f"- identity-review: {surface_decision_counts['identity-review']}",
+        f"- new-identity-candidate: {surface_decision_counts['new-identity-candidate']}",
         "",
         "## Merge boundary",
         "",
@@ -371,6 +397,9 @@ def main() -> None:
         "- `occurrences.csv`: full Beijing source occurrences, preserving book and source row",
         "- `identity_candidates.csv`: occurrence-level comparison against current stable Klose identities",
         "- `surface_inventory.csv`: cross-book surface index for review; not an identity table",
+        "- `reuse_candidates.csv`: exact-single provisional reuse candidates; target sense still not confirmed",
+        "- `identity_review_queue.csv`: exact-multiple and morphology/phrase cases requiring explicit identity resolution",
+        "- `new_identity_candidates.csv`: unmatched surfaces that may become new identities after review",
         "",
     ]
     (OUT / "README.md").write_text("\n".join(summary), encoding="utf-8")
