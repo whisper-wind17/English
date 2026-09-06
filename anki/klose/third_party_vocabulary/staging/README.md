@@ -17,10 +17,13 @@ config/source_adapters.csv
 Enabled adapters          = 2
 Source occurrences        = 1716
 Normalized surfaces       = 1144
-Vocabulary preview        = 0
-Review/blocker surfaces   = 63
+Vocabulary preview        = 1028
+Review/blocker surfaces   = 64
+Evidence-changed surfaces = 0
 ```
 
-Candidate signals are evidence only. `identity_decisions.csv` is the single
-content-decision truth. Stable ThirdPartyID is not minted and Stage-B Klose diff
-is not executed here.
+Each durable decision is bound to the exact Source Occurrences it reviewed via an
+unambiguous JSON array in `OccurrenceKeys`. Additional source evidence automatically
+re-queues that MatchKey. Candidate signals are evidence only. `identity_decisions.csv`
+remains the single content-decision truth. Stable ThirdPartyID is not minted and
+Stage-B Klose diff is not executed here.
