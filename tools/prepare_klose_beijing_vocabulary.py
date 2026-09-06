@@ -74,6 +74,18 @@ def match_key(value: str) -> str:
     return norm_display(value).casefold()
 
 
+def format_alias_key(value: str) -> str:
+    """Normalize presentation-only punctuation/ellipsis for candidate matching.
+
+    This is deliberately narrower than MatchKey: it only removes ellipsis and
+    terminal punctuation. It must never collapse lexical words or phrase parts.
+    """
+    value = match_key(value)
+    value = re.sub(r"(?:\.{2,}|…)+", " ", value)
+    value = re.sub(r"[?!,;:]+$", "", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
 def shared_strings(zf: zipfile.ZipFile) -> list[str]:
     name = "xl/sharedStrings.xml"
     if name not in zf.namelist():
@@ -195,18 +207,26 @@ IRREGULAR = {
     "children": "child", "men": "man", "women": "woman", "feet": "foot",
     "teeth": "tooth", "mice": "mouse", "geese": "goose",
 }
+NON_PLURAL_S_FORMS = {
+    "its", "his", "this", "is", "was", "has", "does", "yes", "news",
+}
 
 
 def morphology_keys(key: str) -> list[str]:
+    # Phrase morphology is not inferred here. A phrase containing a known word
+    # is not evidence that both belong to one Vocabulary Identity.
+    if " " in key:
+        return []
     out: list[str] = []
     if key in IRREGULAR:
         out.append(IRREGULAR[key])
-    if key.endswith("ies") and len(key) > 4:
-        out.append(key[:-3] + "y")
-    if key.endswith("es") and len(key) > 3:
-        out.append(key[:-2])
-    if key.endswith("s") and len(key) > 2 and not key.endswith("ss"):
-        out.append(key[:-1])
+    if key not in NON_PLURAL_S_FORMS:
+        if key.endswith("ies") and len(key) > 4:
+            out.append(key[:-3] + "y")
+        if key.endswith("es") and len(key) > 3:
+            out.append(key[:-2])
+        if key.endswith("s") and len(key) > 2 and not key.endswith("ss"):
+            out.append(key[:-1])
     return list(dict.fromkeys(x for x in out if x and x != key))
 
 
@@ -226,26 +246,30 @@ def classify(occ: dict[str, str], by_key: dict[str, list[dict[str, str]]]) -> di
         review = "yes"
         reason = "Multiple existing identities share this MatchKey; select target sense explicitly."
     else:
-        morph: list[dict[str, str]] = []
-        for mk in morphology_keys(key):
-            morph.extend(by_key.get(mk, []))
-        if not morph and " " in key:
-            for existing_key, rows in by_key.items():
-                if existing_key and (existing_key in key or key in existing_key):
-                    if existing_key != key:
-                        morph.extend(rows)
-        unique = {r.get("NoteID", ""): r for r in morph if r.get("NoteID")}
-        cands = list(unique.values())
-        if cands:
-            cls = "morphology-or-phrase"
+        alias = format_alias_key(occ["Word"])
+        alias_rows = by_key.get(alias, []) if alias and alias != key else []
+        if alias_rows:
+            cands = alias_rows
+            cls = "format-alias"
             decision = "identity-review"
             review = "yes"
-            reason = "Only morphology/phrase-related candidates found; never auto-merge."
+            reason = "Presentation-only punctuation/ellipsis differs; confirm same learning unit."
         else:
-            cls = "no-existing-match"
-            decision = "new-identity-candidate"
-            review = "yes"
-            reason = "No existing MatchKey candidate; confirm this is a genuine new learning unit."
+            morph: list[dict[str, str]] = []
+            for mk in morphology_keys(key):
+                morph.extend(by_key.get(mk, []))
+            unique = {r.get("NoteID", ""): r for r in morph if r.get("NoteID")}
+            cands = list(unique.values())
+            if cands:
+                cls = "morphology"
+                decision = "identity-review"
+                review = "yes"
+                reason = "Inflection-related candidate found; confirm same learning unit before merge."
+            else:
+                cls = "no-existing-match"
+                decision = "new-identity-candidate"
+                review = "yes"
+                reason = "No existing MatchKey candidate; confirm this is a genuine new learning unit."
 
     return {
         "CandidateClass": cls,
@@ -370,7 +394,8 @@ def main() -> None:
         "|---|---:|---|",
         f"| exact-single | {class_counts['exact-single']} | one exact MatchKey candidate; still requires target-sense confirmation |",
         f"| exact-multiple | {class_counts['exact-multiple']} | multiple stable identities share MatchKey |",
-        f"| morphology-or-phrase | {class_counts['morphology-or-phrase']} | only morphology/phrase-related candidates; never auto-merge |",
+        f"| format-alias | {class_counts['format-alias']} | punctuation/ellipsis-only alias candidate |",
+        f"| morphology | {class_counts['morphology']} | inflection-related candidates; never auto-merge |",
         f"| no-existing-match | {class_counts['no-existing-match']} | possible genuinely new learning unit |",
         "",
         "## Candidate classification — deduplicated surface level",
@@ -379,7 +404,8 @@ def main() -> None:
         "|---|---:|",
         f"| exact-single | {surface_class_counts['exact-single']} |",
         f"| exact-multiple | {surface_class_counts['exact-multiple']} |",
-        f"| morphology-or-phrase | {surface_class_counts['morphology-or-phrase']} |",
+        f"| format-alias | {surface_class_counts['format-alias']} |",
+        f"| morphology | {surface_class_counts['morphology']} |",
         f"| no-existing-match | {surface_class_counts['no-existing-match']} |",
         "",
         "## Pre-merge decision buckets — deduplicated surface level",
@@ -398,7 +424,7 @@ def main() -> None:
         "- `identity_candidates.csv`: occurrence-level comparison against current stable Klose identities",
         "- `surface_inventory.csv`: cross-book surface index for review; not an identity table",
         "- `reuse_candidates.csv`: exact-single provisional reuse candidates; target sense still not confirmed",
-        "- `identity_review_queue.csv`: exact-multiple and morphology/phrase cases requiring explicit identity resolution",
+        "- `identity_review_queue.csv`: exact-multiple, format-alias, and morphology cases requiring explicit identity resolution",
         "- `new_identity_candidates.csv`: unmatched surfaces that may become new identities after review",
         "",
     ]
@@ -408,7 +434,7 @@ def main() -> None:
     print(f"Occurrences: {len(occurrences)}")
     print(f"Distinct MatchKeys: {len(surfaces)}")
     print(f"Existing identities: {len(identities)}")
-    for key in ("exact-single", "exact-multiple", "morphology-or-phrase", "no-existing-match"):
+    for key in ("exact-single", "exact-multiple", "format-alias", "morphology", "no-existing-match"):
         print(f"{key}: {class_counts[key]}")
 
 
