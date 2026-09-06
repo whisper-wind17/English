@@ -1,11 +1,18 @@
 ﻿ProvisionalIdentityKey,CanonicalMatchKey,DisplayWord,TargetSense,SourceMatchKeys,SourceOccurrenceCount,DecisionStatus
 candidate:a,a,a,,a,2,reviewed
+candidate:a box of crayons,a box of crayons,a box of crayons,,a box of crayons,1,reviewed
+candidate:a few,a few,a few,,a few,1,reviewed
+candidate:a lot,a lot,a lot,,a lot,1,reviewed
+candidate:a lot of,a lot of,a lot of,,a lot of,1,reviewed
+candidate:a pair of scissors,a pair of scissors,a pair of scissors,,a pair of scissors,1,reviewed
 candidate:about,about,about,,about,1,reviewed
+candidate:across from,across from,across from,,across from,1,reviewed
 candidate:active,active,active,积极的；活跃的,active,1,reviewed
 candidate:advice,advice,advice,,advice,1,reviewed
 candidate:afraid,afraid,afraid,,afraid,1,reviewed
 candidate:africa,africa,Africa,,africa,1,reviewed
 candidate:after,after,after,,after,1,reviewed
+candidate:after school,after school,after school,,after school,1,reviewed
 candidate:afternoon,afternoon,afternoon,,afternoon,2,reviewed
 candidate:again,again,again,,again,1,reviewed
 candidate:age,age,age,年龄,age,1,reviewed
@@ -29,11 +36,13 @@ candidate:arm,arm,arm,,arm,2,reviewed
 candidate:around,around,around,,around,2,reviewed
 candidate:arrive,arrive,arrive,,arrive,1,reviewed
 candidate:art,art,art,,art,2,reviewed
+candidate:art gallery,art gallery,art gallery,,art gallery,1,reviewed
 candidate:artist,artist,artist,,artist,1,reviewed
 candidate:as,as,as,,as,1,reviewed
 candidate:asia,asia,Asia,,asia,1,reviewed
 candidate:ask,ask,ask,,ask,1,reviewed
 candidate:at,at,at,,at,2,reviewed
+candidate:at least,at least,at least,,at least,1,reviewed
 candidate:august,august,August,,august,2,reviewed
 candidate:aunt,aunt,aunt,,aunt,2,reviewed
 candidate:australia,australia,Australia,,australia,1,reviewed
@@ -51,6 +60,9 @@ candidate:baseball,baseball,baseball,,baseball,1,reviewed
 candidate:basketball,basketball,basketball,,basketball,2,reviewed
 candidate:bathroom,bathroom,bathroom,,bathroom,2,reviewed
 candidate:be,be,be,,be,1,reviewed
+candidate:be afraid of,be afraid of,be afraid of,,be afraid of,1,reviewed
+candidate:be back,be back,be back,,be back,1,reviewed
+candidate:be good at,be good at,be good at,,be good at,1,reviewed
 candidate:beach,beach,beach,,beach,1,reviewed
 candidate:bear,bear,bear,,bear,2,reviewed
 candidate:beautiful,beautiful,beautiful,,beautiful,2,reviewed
@@ -68,6 +80,7 @@ candidate:beside,beside,beside,,beside,1,reviewed
 candidate:best,best,best,,best,1,reviewed
 candidate:between,between,between,,between,2,reviewed
 candidate:big,big,big,,big,4,reviewed
+candidate:big ben,big ben,Big Ben,大本钟,big ben,1,reviewed
 candidate:bike,bike,bike,,bike,2,reviewed
 candidate:bird,bird,bird,,bird,5,reviewed
 candidate:birthday,birthday,birthday,,birthday,3,reviewed
@@ -101,11 +114,23 @@ candidate:brown,brown,brown,,brown,1,reviewed
 candidate:build,build,build,,build,1,reviewed
 candidate:building,building,building,,building,1,reviewed
 candidate:bus,bus,bus,,bus,1,reviewed
+candidate:bus driver,bus driver,bus driver,,bus driver,1,reviewed
 candidate:busy,busy,busy,,busy,2,reviewed
 candidate:but,but,but,,but,2,reviewed
 candidate:butterfly,butterfly,butterfly,,butterfly,1,reviewed
 candidate:buy,buy,buy,,buy,2,reviewed
+candidate:buy toys,buy toys,buy toys,,buy toys,1,reviewed
 candidate:by,by,by,,by,1,reviewed
+candidate:by bike,by bike,by bike,,by bike,1,reviewed
+candidate:by boat,by boat,by boat,,by boat,1,reviewed
+candidate:by bus,by bus,by bus,,by bus,1,reviewed
+candidate:by car,by car,by car,,by car,1,reviewed
+candidate:by plane,by plane,by plane,,by plane,1,reviewed
+candidate:by school bus,by school bus,by school bus,,by school bus,1,reviewed
+candidate:by ship,by ship,by ship,,by ship,1,reviewed
+candidate:by subway,by subway,by subway,,by subway,1,reviewed
+candidate:by taxi,by taxi,by taxi,,by taxi,1,reviewed
+candidate:by train,by train,by train,,by train,1,reviewed
 candidate:cake,cake,cake,,cake,3,reviewed
 candidate:camera,camera,camera,,camera,1,reviewed
 candidate:campfire,campfire,campfire,,campfire,1,reviewed
@@ -126,6 +151,7 @@ candidate:chair,chair,chair,,chair,3,reviewed
 candidate:change,change,change,,change,1,reviewed
 candidate:chess,chess,chess,,chess,1,reviewed
 candidate:children,children,children,,children,2,reviewed
+candidate:children's day,children's day,Children's Day,,children's day,1,reviewed
 candidate:china,china,China,,china,2,reviewed
 candidate:chinese,chinese,Chinese,,chinese,2,reviewed
 candidate:chocolate,chocolate,chocolate,,chocolate,1,reviewed
@@ -133,6 +159,8 @@ candidate:choose,choose,choose,,choose,1,reviewed
 candidate:chopsticks,chopsticks,chopsticks,,chopsticks,1,reviewed
 candidate:chore,chore,chore,,chore,1,reviewed
 candidate:christmas,christmas,Christmas,,christmas,2,reviewed
+candidate:christmas day,christmas day,Christmas Day,,christmas day,1,reviewed
+candidate:christmas tree,christmas tree,Christmas tree,,christmas tree,1,reviewed
 candidate:cinema,cinema,cinema,,cinema,1,reviewed
 candidate:circle,circle,circle,,circle,1,reviewed
 candidate:city,city,city,,city,2,reviewed
@@ -140,9 +168,12 @@ candidate:class,class,class,,class,2,reviewed
 candidate:classmate,classmate,classmate,,classmate,1,reviewed
 candidate:classroom,classroom,classroom,,classroom,2,reviewed
 candidate:clean,clean,clean,,clean,1,reviewed
+candidate:clean the room,clean the room,clean the room,,clean the room,1,reviewed
 candidate:clear,clear,clear,,clear,1,reviewed
 candidate:clever,clever,clever,,clever,2,reviewed
 candidate:climb,climb,climb,,climb,1,reviewed
+candidate:climb a hill,climb a hill,climb a hill,,climb a hill,1,reviewed
+candidate:climb on the window ledge,climb on the window ledge,climb on the window ledge,,climb on the window ledge,1,reviewed
 candidate:clock,clock,clock,,clock,2,reviewed
 candidate:close,close,close,,close,1,reviewed
 candidate:clothes,clothes,clothes,,clothes,1,reviewed
@@ -155,6 +186,7 @@ candidate:colour,colour,colour,,colour,2,reviewed
 candidate:come,come,come,,come,2,reviewed
 candidate:competition,competition,competition,,competition,1,reviewed
 candidate:computer,computer,computer,,computer,1,reviewed
+candidate:computer class,computer class,computer class,,computer class,1,reviewed
 candidate:corn,corn,corn,,corn,1,reviewed
 candidate:country,country,country,,country,2,reviewed
 candidate:countryside,countryside,countryside,,countryside,1,reviewed
@@ -181,11 +213,14 @@ candidate:delicious,delicious,delicious,美味的；可口的,delicious,2,review
 candidate:desk,desk,desk,,desk,4,reviewed
 candidate:different,different,different,,different,2,reviewed
 candidate:difficult,difficult,difficult,,difficult,1,reviewed
+candidate:dining room,dining room,dining room,,dining room,1,reviewed
 candidate:dinner,dinner,dinner,,dinner,1,reviewed
 candidate:dirty,dirty,dirty,,dirty,3,reviewed
 candidate:dish,dish,dish,,dish,1,reviewed
 candidate:disneyland,disneyland,Disneyland,,disneyland,1,reviewed
 candidate:do,do,do,,do|does,3,reviewed
+candidate:do jigsaw puzzles,do jigsaw puzzles,do jigsaw puzzles,,doing jigsaw puzzles,1,reviewed
+candidate:do the housework,do the housework,do the housework,,do the housework,1,reviewed
 candidate:doctor,doctor,doctor,,doctor,2,reviewed
 candidate:dog,dog,dog,,dog,4,reviewed
 candidate:doll,doll,doll,洋娃娃；玩偶,doll,1,reviewed
@@ -193,7 +228,9 @@ candidate:door,door,door,,door,3,reviewed
 candidate:down,down,down,,down,1,reviewed
 candidate:downtown,downtown,downtown,市中心；在市中心,downtown,1,reviewed
 candidate:draw,draw,draw,,draw,1,reviewed
+candidate:draw pictures,draw pictures,draw pictures,,draw pictures,1,reviewed
 candidate:drink,drink,drink,,drink,3,reviewed
+candidate:drink cold drinks,drink cold drinks,drink cold drinks,,drank cold drinks,1,reviewed
 candidate:drive,drive,drive,,drive,1,reviewed
 candidate:driver,driver,driver,,driver,1,reviewed
 candidate:drop,drop,drop,,drop,1,reviewed
@@ -204,6 +241,10 @@ candidate:early,early,early,,early,2,reviewed
 candidate:east,east,east,,east,2,reviewed
 candidate:easy,easy,easy,,easy,1,reviewed
 candidate:eat,eat,eat,,eat,1,reviewed
+candidate:eat breakfast,eat breakfast,eat breakfast,,eat breakfast,1,reviewed
+candidate:eat dinner,eat dinner,eat dinner,,eat dinner,1,reviewed
+candidate:eat lunch,eat lunch,eat lunch,,eat lunch,1,reviewed
+candidate:eat seafood,eat seafood,eat seafood,,eat seafood,1,reviewed
 candidate:egg,egg,egg,,egg,4,reviewed
 candidate:eight,eight,eight,,eight,2,reviewed
 candidate:eighteen,eighteen,eighteen,,eighteen,1,reviewed
@@ -217,17 +258,20 @@ candidate:else,else,else,,else,1,reviewed
 candidate:email,email,email,,email,1,reviewed
 candidate:engineer,engineer,engineer,,engineer,1,reviewed
 candidate:english,english,English,,english,2,reviewed
+candidate:english-chinese dictionary,english-chinese dictionary,English-Chinese dictionary,,english-chinese dictionary,1,reviewed
 candidate:enjoy,enjoy,enjoy,,enjoy,2,reviewed
 candidate:enough,enough,enough,,enough,1,reviewed
 candidate:eraser,eraser,eraser,,eraser,2,reviewed
 candidate:evening,evening,evening,,evening,2,reviewed
 candidate:every,every,every,,every,1,reviewed
+candidate:every day,every day,every day,,every day,1,reviewed
 candidate:everyone,everyone,everyone,每个人；人人,everyone,1,reviewed
 candidate:everywhere,everywhere,everywhere,到处；处处,everywhere,1,reviewed
 candidate:example,example,example,,example,1,reviewed
 candidate:excited,excited,excited,,excited,2,reviewed
 candidate:exciting,exciting,exciting,,exciting,1,reviewed
 candidate:excuse,excuse,excuse,,excuse,1,reviewed
+candidate:exercise book,exercise book,exercise book,,exercise book,1,reviewed
 candidate:eye,eye,eye,,eye,4,reviewed
 candidate:face,face,face,,face,3,reviewed
 candidate:family,family,family,,family,2,reviewed
@@ -238,9 +282,12 @@ candidate:farm,farm,farm,农场,farm,2,reviewed
 candidate:farmer,farmer,farmer,,farmer,2,reviewed
 candidate:fast,fast,fast,快的；快地,fast,2,reviewed
 candidate:father,father,father,,father,4,reviewed
+candidate:father christmas,father christmas,Father Christmas,,father christmas,1,reviewed
+candidate:father's day,father's day,Father's Day,,father's day,1,reviewed
 candidate:favourite,favourite,favourite,,favourite,2,reviewed
 candidate:february,february,February,,february,2,reviewed
 candidate:feed,feed,feed,,feed,1,reviewed
+candidate:feed the fish,feed the fish,feed the fish,,feeding the fish,1,reviewed
 candidate:fever,fever,fever,,fever,1,reviewed
 candidate:fifteen,fifteen,fifteen,十五,fifteen,1,reviewed
 candidate:fifteenth,fifteenth,fifteenth,,15th|fifteenth,3,reviewed
@@ -256,14 +303,17 @@ candidate:fix,fix,fix,,fix,1,reviewed
 candidate:flag,flag,flag,,flag,2,reviewed
 candidate:floor,floor,floor,,floor,2,reviewed
 candidate:flower,flower,flower,,flower,2,reviewed
+candidate:flower show,flower show,flower show,,flower show,1,reviewed
 candidate:flu,flu,flu,,flu,1,reviewed
 candidate:fly,fly,fly,,fly,1,reviewed
+candidate:fly a kite,fly a kite,fly a kite,,fly a kite,2,reviewed
 candidate:foggy,foggy,foggy,,foggy,1,reviewed
 candidate:follow,follow,follow,,follow,1,reviewed
 candidate:food,food,food,,food,1,reviewed
 candidate:foot,foot,foot,,foot,2,reviewed
 candidate:football,football,football,,football,2,reviewed
 candidate:for,for,for,,for,3,reviewed
+candidate:for rent,for rent,for rent,,for rent,1,reviewed
 candidate:forest,forest,forest,,forest,2,reviewed
 candidate:forget,forget,forget,,forget,2,reviewed
 candidate:forty,forty,forty,,forty,2,reviewed
@@ -273,6 +323,7 @@ candidate:fourteenth,fourteenth,fourteenth,,fourteenth,1,reviewed
 candidate:fourth,fourth,fourth,,fourth,1,reviewed
 candidate:fox,fox,fox,,fox,1,reviewed
 candidate:free,free,free,空闲的；有空的,free,1,reviewed
+candidate:french fries,french fries,French fries,,french fries,1,reviewed
 candidate:friday,friday,Friday,,friday,3,reviewed
 candidate:fridge,fridge,fridge,,fridge,1,reviewed
 candidate:friend,friend,friend,,friend,3,reviewed
@@ -284,13 +335,19 @@ candidate:fruit,fruit,fruit,,fruit,2,reviewed
 candidate:fun,fun,fun,,fun,2,reviewed
 candidate:garden,garden,garden,,garden,3,reviewed
 candidate:gate,gate,gate,,gate,2,reviewed
+candidate:get up,get up,get up,,get up,2,reviewed
+candidate:get well,get well,get well,,get well,1,reviewed
 candidate:gift,gift,gift,,gift,2,reviewed
 candidate:girl,girl,girl,,girl,3,reviewed
 candidate:glad,glad,glad,,glad,1,reviewed
 candidate:glass,glass,glass,,glass,1,reviewed
 candidate:glasses,glasses,glasses,,glasses,1,reviewed
 candidate:glove,glove,glove,,gloves,1,reviewed
+candidate:glue stick,glue stick,glue stick,,glue stick,1,reviewed
 candidate:go,go,go,,go,2,reviewed
+candidate:go boating,go boating,go boating,,go boating,1,reviewed
+candidate:go camping,go camping,go camping,,go camping,1,reviewed
+candidate:go fishing,go fishing,go fishing,,go fishing,1,reviewed
 candidate:gold,gold,gold,,gold,1,reviewed
 candidate:golf,golf,golf,,golf,1,reviewed
 candidate:good,good,good,,good,1,reviewed
