@@ -13,7 +13,10 @@ TP = BASE / "third_party_vocabulary"
 CONFIG = TP / "config" / "source_adapters.csv"
 DECISIONS = TP / "review" / "identity_decisions.csv"
 OUT = TP / "staging"
-RENJIAO_ADAPTER = BASE / "source_reference" / "renjiao_start1_staging"
+RENJIAO_ADAPTERS = {
+    "renjiao_start1": BASE / "source_reference" / "renjiao_start1_staging",
+    "renjiao_start3": BASE / "source_reference" / "renjiao_start3_staging",
+}
 
 EXPECTED_STAGING_FILES = {
     "README.md",
@@ -23,7 +26,7 @@ EXPECTED_STAGING_FILES = {
     "unified_vocabulary_preview.csv",
 }
 EXPECTED_REVIEW_FILES = {"identity_decisions.csv"}
-EXPECTED_RENJIAO_ADAPTER_FILES = {"README.md", "occurrences.csv"}
+EXPECTED_NARROW_ADAPTER_FILES = {"README.md", "occurrences.csv"}
 
 LEGACY_MULTI_PASS_TOOLS = {
     "build_third_party_vocabulary_stage_a.py",
@@ -79,10 +82,12 @@ def main() -> None:
         {p.name for p in (TP / "review").iterdir()} == EXPECTED_REVIEW_FILES,
         f"Third-party review directory must contain only identity_decisions.csv: {sorted(p.name for p in (TP / 'review').iterdir())}",
     )
-    require(
-        {p.name for p in RENJIAO_ADAPTER.iterdir()} == EXPECTED_RENJIAO_ADAPTER_FILES,
-        f"Renjiao Source Adapter must contain only source facts: {sorted(p.name for p in RENJIAO_ADAPTER.iterdir())}",
-    )
+    for source_id, adapter_dir in RENJIAO_ADAPTERS.items():
+        require(adapter_dir.exists(), f"Missing narrow Source Adapter directory: {source_id}")
+        require(
+            {p.name for p in adapter_dir.iterdir()} == EXPECTED_NARROW_ADAPTER_FILES,
+            f"{source_id} Source Adapter must contain only source facts: {sorted(p.name for p in adapter_dir.iterdir())}",
+        )
     present_legacy_tools = sorted(name for name in LEGACY_MULTI_PASS_TOOLS if (ROOT / "tools" / name).exists())
     require(not present_legacy_tools, f"Legacy multi-pass tools returned to active repo: {present_legacy_tools}")
 
@@ -198,14 +203,24 @@ def main() -> None:
     require(len(preview_keys) == len(preview), "Preview canonical key is not unique")
     require(not (preview_keys & {"may", "like", "square", "left", "cook", "cold", "study"}),
             "Known semantic blocker leaked into preview")
-    for key in stale_surfaces:
-        require(key not in preview_keys, f"Evidence-stale identity leaked into preview: {key}")
+
+    # A stale surface may share its canonical identity with another unaffected,
+    # fully reviewed source surface (e.g. shoes -> shoe). Therefore the invariant
+    # is that the stale SourceMatchKey itself is absent from preview provenance,
+    # not that its canonical spelling can never appear as a preview identity.
+    preview_source_matchkeys: set[str] = set()
+    for row in preview:
+        preview_source_matchkeys.update(x for x in row.get("SourceMatchKeys", "").split("|") if x)
+    leaked_stale = sorted(stale_surfaces & preview_source_matchkeys)
+    require(not leaked_stale, f"Evidence-stale source surfaces leaked into preview: {leaked_stale[:10]}")
 
     source_counts = Counter(r["SourceID"] for r in occ)
     if "beijing_start1" in configured_ids:
         require(source_counts["beijing_start1"] == 808, "Beijing occurrence baseline drift")
     if "renjiao_start1" in configured_ids:
-        require(source_counts["renjiao_start1"] == 908, "Renjiao occurrence baseline drift")
+        require(source_counts["renjiao_start1"] == 908, "Renjiao start1 occurrence baseline drift")
+    if "renjiao_start3" in configured_ids:
+        require(source_counts["renjiao_start3"] == 851, "Renjiao start3 occurrence baseline drift")
 
     actions = Counter(r["Action"] for r in decisions)
     print("Third-party Simplified Completion Recheck = pass")
@@ -221,6 +236,7 @@ def main() -> None:
     print("Explicit reviewed OccurrenceKeys = yes")
     print("OccurrenceKeys serialization = JSON array")
     print("Changed source evidence requeues decision = yes")
+    print("Stale source surface excluded from preview provenance = yes")
     print("Simplified physical layout = yes")
     print("Legacy multi-pass tools absent = yes")
     print("Source occurrence closure = yes")
