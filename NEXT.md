@@ -119,11 +119,11 @@ Grade 4 upper / Unit 1 / Order 1
 What's your mother's job?
 ```
 
-Learner Presentation：
+当前 Learner Presentation：
 
 ```text
 FunctionLabel = 询问职业
-Prompt        = 你刚认识一个同学，想了解他妈妈的职业。
+Prompt        = 想知道同学妈妈的职业
 PromptHint    = person: your mother
 Target        = What's your mother's job?
 Pattern       = What's [person]'s job?
@@ -142,21 +142,9 @@ Publish       = pending
 Release       = pending
 ```
 
-Presentation approval 已绑定 `expression-presentation-v1` fingerprint；本轮用户确认的卡片设计作为 approval basis。
+Presentation approval 已刷新到新的 `expression-presentation-v1` fingerprint；当前短中文场景设计已经由用户确认。
 
-已建立首个 Expression bounded-context 文件：
-
-```text
-anki/klose/expressions/master/expression_registry.csv
-anki/klose/expressions/master/expression_occurrences.csv
-anki/klose/expressions/master/source_expression_map.csv
-anki/klose/expressions/master/release_registry.csv
-anki/klose/expressions/learner/current.csv
-anki/klose/expressions/learner/learning_admission.csv
-anki/klose/expressions/learner/presentation_review_registry.csv
-```
-
-Anki Contract 已建立：
+Anki Contract：
 
 ```text
 Deck      = Klose-English::Expressions
@@ -164,16 +152,7 @@ Note Type = Klose Expression
 Card Type = Production
 ```
 
-模板：
-
-```text
-anki/klose/expressions/anki/README.md
-anki/klose/expressions/anki/card_front.html
-anki/klose/expressions/anki/card_back.html
-anki/klose/expressions/anki/styling.css
-```
-
-训练方向：
+训练方向固定为：
 
 ```text
 Function / Situation + minimal cue
@@ -193,14 +172,58 @@ Meaning / Usage
 
 ---
 
-## 4. NEXT TASK — expand Grade-4 pilot + build publish chain
+## 4. Front language evolution — frozen design
+
+当前 Klose 的 Front 使用：
+
+```text
+Stage A
+中文短场景 / 交际意图
++ English minimal slot cue
+→ English production
+```
+
+核心原则：中文只负责建立 communicative intent，不直接给出可逐词翻译的完整中文目标句。
+
+例如：
+
+```text
+推荐：想知道同学妈妈的职业
+不推荐：你妈妈做什么工作？
+```
+
+长期演进已经冻结为：
+
+```text
+Stage A — 中文短场景 / intent + English cue
+→ Stage B — concise English intent + English cue
+→ Stage C — English-only situation / context
+```
+
+迁移不按固定年级或年龄自动发生，而依据真实学习表现：当英文 Front 不再显著增加无关阅读理解负担时再升级。
+
+这一变化只属于 Learner Presentation：
+
+```text
+Stable ExpressionID 不变
+CanonicalForm 不变
+FSRS / Review History 不重建
+Prompt / PromptHint 可更新
+Presentation fingerprint 变化后重新 review / approve
+```
+
+不要增加 `ChinesePrompt` 字段，也不要为了记录阶段额外引入 acquisition-history 状态；现有语言中性的 `Prompt / PromptHint` 足够。
+
+---
+
+## 5. NEXT TASK — expand Grade-4 pilot + build publish chain
 
 下一步继续处理 Grade-4 priority 的 pilot candidates：
 
 ```text
 identity review
 → freeze KE IDs
-→ learner presentations
+→ learner presentations using current Stage-A front policy
 → presentation review / approval
 → LearningOrder 000002...
 ```
@@ -215,13 +238,13 @@ upstream registries
 → first Anki import
 ```
 
-在 release gate 完成前，不手工创建 publish artifact，也不声称第一张卡已经进入 Anki。
+在 release gate 完成前，不手工创建 publish artifact，也不声称卡片已经进入 Anki。
 
 Pilot `New/day` 暂不冻结；首批正式 batch 与卡片复杂度确定后，再结合 Vocabulary `New/day=8` 和总复习负担设置。
 
 ---
 
-## 5. One-month evaluation
+## 6. One-month evaluation
 
 只观察有决策价值的指标：
 
@@ -236,9 +259,11 @@ actual daily review load
 
 核心问题：Klose 是记住了一条原句，还是获得了可迁移、可主动调用的 Expression。
 
+Front 语言是否可以从 Stage A 向 Stage B / C 演进，也依据真实表现判断，不为了形式上的“全英文”提前增加负担。
+
 ---
 
-## 6. Deferred work
+## 7. Deferred work
 
 - Grade 1–3 Vocabulary actual-source reconciliation：Expressions pilot 建立后继续；
 - Grade 5/6 actual source reconciliation：后续处理；
@@ -246,7 +271,7 @@ actual daily review load
 
 ---
 
-## 7. Frozen long-term rules
+## 8. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Expression Identity 分离；
@@ -256,6 +281,8 @@ actual daily review load
 - 简单新 Expression 可以通过 Back micro-lesson 首次学习；
 - 不为首次见过 / 首次 Again 建额外状态；
 - Grade-4-related Expressions 当前优先于 Grade-3-only Expressions；
+- Front 当前用中文短场景 + English cue，并长期演进到 English-only situation；
+- Front 语言演进只修改 Learner Presentation，不改变 Stable ExpressionID 或 Anki 学习历史；
 - LearningOrder 不进入内容 fingerprint；
 - generated publish 文件禁止手工修改；
 - Anki 保存真实 FSRS / Review History，GitHub 不重建学习历史。
