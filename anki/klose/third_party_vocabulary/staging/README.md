@@ -17,8 +17,8 @@ config/source_adapters.csv
 Enabled adapters          = 2
 Source occurrences        = 1716
 Normalized surfaces       = 1144
-Vocabulary preview        = 1028
-Review/blocker surfaces   = 64
+Vocabulary preview        = 0
+Review/blocker surfaces   = 63
 ```
 
 Candidate signals are evidence only. `identity_decisions.csv` is the single
