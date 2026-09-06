@@ -17,8 +17,8 @@ Current facts:
 ```text
 Source occurrences       = 1716
 Normalized surfaces      = 1144
-Reviewed identity preview = 862
-Review/blocker surfaces  = 243
+Reviewed identity preview = 851
+Review/blocker surfaces  = 254
 ```
 
 Candidate signals (exact / morphology / format / multiword / punctuation) are
