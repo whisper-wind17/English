@@ -11,7 +11,7 @@ AGENTS.md
 → NEXT.md
 ```
 
-当前任务继续读取：
+当前 Expressions 任务继续读取：
 
 ```text
 docs/EXPRESSIONS_SYSTEM.md
@@ -19,9 +19,11 @@ docs/EXPRESSIONS_SYSTEM.md
 → anki/klose/source_reference/rj_start1-grade4-klose-expressions.csv
 → anki/klose/expressions/review/grade3-grade4-baseline.md
 → anki/klose/expressions/review/candidate_registry.csv
+→ anki/klose/expressions/review/grade4-pilot-review.md
 → anki/klose/expressions/master/expression_registry.csv
 → anki/klose/expressions/learner/current.csv
 → anki/klose/expressions/learner/learning_admission.csv
+→ anki/klose/expressions/learner/presentation_review_registry.csv
 → anki/klose/expressions/anki/README.md
 ```
 
@@ -29,9 +31,9 @@ docs/EXPRESSIONS_SYSTEM.md
 
 ---
 
-## 1. Grade-4 Vocabulary status
+## 1. Vocabulary status
 
-Grade-4 Vocabulary 闭环已经完成并正常学习：
+Grade-4 Vocabulary 已闭环并正常学习：
 
 ```text
 Deck              = Klose-English::Vocabulary
@@ -48,28 +50,17 @@ FSRS / Due / Interval / Review History / Card State 继续以 Anki 为唯一真�
 
 ---
 
-## 2. Current Phase B — Expressions one-month pilot
+## 2. Expressions source baseline
 
-长期定位：
-
-```text
-Vocabulary  = recognition of word / phrase / target sense
-Expressions = communicative intent / situation → active English production
-```
-
-Anki Expressions 可以承担已有输入后的 retrieval / consolidation，也可以承担简单新表达的 lightweight acquisition。`Again` 不区分首次遇见还是遗忘，统一表示“当前还不能稳定主动产出”。
-
-### Current source scope
+当前只纳入 Klose 已学过的三、四年级实际教材 Expressions；一年级、二年级过于简单，暂不进入复习范围。
 
 ```text
-Grade 3 upper + lower = 94 Source Occurrences
-Grade 4 upper + lower = 72 Source Occurrences
-Total                 = 166
+Grade 3 Source Occurrences = 94
+Grade 4 Source Occurrences = 72
+Total                      = 166
 ```
 
-一年级、二年级 Expressions 当前不纳入复习范围。
-
-166 条 Source Occurrences 已整理为：
+166 条 Source Fact 已整理为：
 
 ```text
 Curated Pattern Candidates = 64
@@ -78,173 +69,184 @@ secondary                  = 26
 pilot_candidate            = 19
 ```
 
-学习优先级：
+学习优先级冻结为：
 
 ```text
 Grade-4 priority block = 36  # SourceGrades=4 或 3|4
 Grade-3-only block      = 28
-Total                   = 64
-```
 
-凡同一 Pattern 同时在三、四年级出现，只学习一次，并归入 Grade-4 priority block。正式顺序固定为：
-
-```text
 Grade 4 related first
 → Grade 3 only second
 ```
 
-理论最多 64 张卡；Identity Review 允许进一步 merge / reject，因此最终数量可以更少。
+跨年级相同 Pattern 只学习一次，并归到 Grade-4 priority block。
 
 ---
 
-## 3. First formal Expression completed
+## 3. Current Grade-4 pilot — 9 formal identities
 
-第一张正式卡已经从 Candidate 进入 Identity / Learner / Admission 层：
+Grade-4 priority 的 pilot candidates 已完成第一轮 Identity Resolution，共 9 个 Stable Expressions：
 
 ```text
-ExpressionID   = KE000001
-Candidate      = EC0021
-FunctionKey    = ask_job
-CanonicalForm  = What's [person]'s job?
-ExpressionType = slot_frame
-SlotSchema     = person
-LearnerLevel   = 4
-LearningOrder  = 000001
+KE000001  What's [person]'s job?
+KE000002  There is a/an [singular noun].
+KE000003  Let's [verb phrase].
+KE000004  What's the weather like in [place]?
+KE000005  Whose [noun] is this?
+KE000006  Can I [verb phrase]?
+KE000007  What time is it?
+KE000008  Can you please [verb phrase]?
+KE000009  Would you like [thing]?
 ```
 
-Source：
+LearningOrder：
 
 ```text
-Grade 4 upper / Unit 1 / Order 1
-What's your mother's job?
+000001..000009
 ```
 
-当前 Learner Presentation：
+当前全部属于 Grade-4 priority pilot；三年级独有 Expressions 尚未进入正式 Identity。
+
+`EC0014` 在 Identity Review 中做了显式修正：Candidate 草案 `Can I [verb phrase], please?` 冻结为更通用的 `Can I [verb phrase]?`；`please` 作为可选礼貌成分进入 Usage，不作为 Identity 的强制组成部分。
+
+Source Occurrence / mapping 已覆盖当前 9 个 Identity，包括跨三、四年级重复来源；Source Fact 与 Stable Identity 仍分离。
+
+---
+
+## 4. Learner Presentation / review state
+
+Front 当前统一采用 Stage A：
 
 ```text
-FunctionLabel = 询问职业
-Prompt        = 想知道同学妈妈的职业
-PromptHint    = person: your mother
-Target        = What's your mother's job?
-Pattern       = What's [person]'s job?
-MeaningUsage  = 询问某人是做什么工作的。
-Examples      = What's your father's job? | What's your uncle's job?
-```
-
-当前正式状态：
-
-```text
-Identity      = active
-Presentation  = approved
-Admission     = allowed
-LearningOrder = 000001
-Publish       = pending
-Release       = pending
-```
-
-Presentation approval 已刷新到新的 `expression-presentation-v1` fingerprint；当前短中文场景设计已经由用户确认。
-
-Anki Contract：
-
-```text
-Deck      = Klose-English::Expressions
-Note Type = Klose Expression
-Card Type = Production
-```
-
-训练方向固定为：
-
-```text
-Function / Situation + minimal cue
+中文短场景 / communicative intent
++ English minimal slot cue
 → active English production
 ```
 
-Back：
+中文只建立意图，不写成完整中译英目标句。
+
+长期演进保持：
 
 ```text
-Target + TTS
-Pattern
-Meaning / Usage
-1–2 Examples
-```
-
-当前没有手工生成 `study.csv / anki-import.csv`，符合 generated publish 禁止手工编辑的长期规则。
-
----
-
-## 4. Front language evolution — frozen design
-
-当前 Klose 的 Front 使用：
-
-```text
-Stage A
-中文短场景 / 交际意图
-+ English minimal slot cue
-→ English production
-```
-
-核心原则：中文只负责建立 communicative intent，不直接给出可逐词翻译的完整中文目标句。
-
-例如：
-
-```text
-推荐：想知道同学妈妈的职业
-不推荐：你妈妈做什么工作？
-```
-
-长期演进已经冻结为：
-
-```text
-Stage A — 中文短场景 / intent + English cue
+Stage A — 中文短场景 + English cue
 → Stage B — concise English intent + English cue
 → Stage C — English-only situation / context
 ```
 
-迁移不按固定年级或年龄自动发生，而依据真实学习表现：当英文 Front 不再显著增加无关阅读理解负担时再升级。
+语言升级只修改 Learner Presentation；Stable ExpressionID、CanonicalForm 和 Anki FSRS / Review History 不变。Presentation 变化后 fingerprint 必须重新 review。
 
-这一变化只属于 Learner Presentation：
+当前 review state：
 
 ```text
-Stable ExpressionID 不变
-CanonicalForm 不变
-FSRS / Review History 不重建
-Prompt / PromptHint 可更新
-Presentation fingerprint 变化后重新 review / approve
+approved       = 1  # KE000001，用户已确认
+model-reviewed = 8  # KE000002..KE000009，尚未视为人工确认
 ```
 
-不要增加 `ChinesePrompt` 字段，也不要为了记录阶段额外引入 acquisition-history 状态；现有语言中性的 `Prompt / PromptHint` 足够。
+`model-reviewed != approved`。模型生成并审校的卡片不得因为模板已获认可就自动冒充用户逐条确认。
+
+人工 review 入口：
+
+```text
+anki/klose/expressions/review/grade4-pilot-review.md
+```
 
 ---
 
-## 5. NEXT TASK — expand Grade-4 pilot + build publish chain
+## 5. Deterministic publish / release gate implemented
 
-下一步继续处理 Grade-4 priority 的 pilot candidates：
-
-```text
-identity review
-→ freeze KE IDs
-→ learner presentations using current Stage-A front policy
-→ presentation review / approval
-→ LearningOrder 000002...
-```
-
-随后实现 Expressions 独立生成链：
+Expressions 独立发布链已经建立：
 
 ```text
 upstream registries
-→ deterministic study.csv
-→ deterministic anki-import.csv
-→ Expression Release Gate
-→ first Anki import
+→ tools/build_klose_expressions.py
+→ publish/study.csv
+→ publish/anki-import.csv
+→ tools/check_klose_expressions_release_ready.py
 ```
 
-在 release gate 完成前，不手工创建 publish artifact，也不声称卡片已经进入 Anki。
+共享 fingerprint：
 
-Pilot `New/day` 暂不冻结；首批正式 batch 与卡片复杂度确定后，再结合 Vocabulary `New/day=8` 和总复习负担设置。
+```text
+tools/klose_expression_review_fingerprint.py
+```
+
+关键门禁：
+
+- Stable `KE000001...` Identity 唯一且 active；
+- Candidate / CreatedFromOccurrence / confirmed source mapping 可追溯；
+- 当前 pilot 只允许 Grade-4 priority identities；
+- LearningOrder 六位、唯一、连续；
+- current learner fingerprint 必须与 review registry 一致；
+- 只有 `ReviewStatus=approved` 的 Presentation 能进入 publish；
+- `model-reviewed` drafts 必须保持 `PublishStatus=pending / ReleaseStatus=pending`；
+- `study.csv` 必须完全可由上游推导；
+- `anki-import.csv` 数据必须与 `study.csv` 完全一致，且 Anki headers 固定。
+
+本轮用当前上游状态执行同一生成/检查逻辑，结果：
+
+```text
+Built Klose Expressions:
+approved = 1
+drafts   = 8
+
+Expression Release Gate PASS:
+publishable            = 1
+model_reviewed_drafts   = 8
+admitted                = 9
+```
+
+当前 generated artifact 因此只包含已明确批准的 `KE000001`：
+
+```text
+anki/klose/expressions/publish/study.csv
+anki/klose/expressions/publish/anki-import.csv
+```
+
+这不是缺失，而是门禁按设计阻止 8 张仅 model-reviewed 的 draft 泄漏到 Anki。
+
+Anki 尚未更新。
 
 ---
 
-## 6. One-month evaluation
+## 6. NEXT TASK — approve Grade-4 pilot batch, then rebuild
+
+下一步优先 review `KE000002..KE000009` 的 Stage-A Presentation：
+
+```text
+Front intent / cue
+Target
+Pattern
+Meaning / Usage
+Examples
+```
+
+确认后：
+
+```text
+ReviewStatus → approved
+release PresentationStatus → approved
+PublishStatus / ReleaseStatus 按生成与 gate 结果推进
+→ rerun tools/build_klose_expressions.py
+→ rerun tools/check_klose_expressions_release_ready.py
+```
+
+预期正式 publish 从 1 张扩展为 9 张。
+
+随后才进入：
+
+```text
+Desktop 创建/确认 Klose Expression Note Type
+→ import publish/anki-import.csv
+→ LearningOrder materialize New #（仅 is:new）
+→ Sync
+→ iPad 实学一个月
+```
+
+Pilot `New/day` 仍不提前冻结；等 9 张正式 batch 与实际卡片复杂度确定后，再结合 Vocabulary `New/day=8` 和总复习负担设定。
+
+---
+
+## 7. One-month evaluation
 
 只观察有决策价值的指标：
 
@@ -259,11 +261,11 @@ actual daily review load
 
 核心问题：Klose 是记住了一条原句，还是获得了可迁移、可主动调用的 Expression。
 
-Front 语言是否可以从 Stage A 向 Stage B / C 演进，也依据真实表现判断，不为了形式上的“全英文”提前增加负担。
+不记录首次见过 / 首次 Again 等细粒度 acquisition history。
 
 ---
 
-## 7. Deferred work
+## 8. Deferred work
 
 - Grade 1–3 Vocabulary actual-source reconciliation：Expressions pilot 建立后继续；
 - Grade 5/6 actual source reconciliation：后续处理；
@@ -271,7 +273,7 @@ Front 语言是否可以从 Stage A 向 Stage B / C 演进，也依据真实表�
 
 ---
 
-## 8. Frozen long-term rules
+## 9. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Expression Identity 分离；
@@ -279,10 +281,9 @@ Front 语言是否可以从 Stage A 向 Stage B / C 演进，也依据真实表�
 - Vocabulary 与 Expressions 使用独立 Identity / Review / Release / Note Type；
 - Expression 训练方向固定为 communicative intent → active production；
 - 简单新 Expression 可以通过 Back micro-lesson 首次学习；
-- 不为首次见过 / 首次 Again 建额外状态；
 - Grade-4-related Expressions 当前优先于 Grade-3-only Expressions；
-- Front 当前用中文短场景 + English cue，并长期演进到 English-only situation；
-- Front 语言演进只修改 Learner Presentation，不改变 Stable ExpressionID 或 Anki 学习历史；
+- Front 语言从中文支撑逐步演进到 English-only，但只修改 Presentation；
+- `model-reviewed` 不等于人工 `approved`；
 - LearningOrder 不进入内容 fingerprint；
-- generated publish 文件禁止手工修改；
+- generated publish 文件禁止手工维护，只能由确定性生成链得到；
 - Anki 保存真实 FSRS / Review History，GitHub 不重建学习历史。
