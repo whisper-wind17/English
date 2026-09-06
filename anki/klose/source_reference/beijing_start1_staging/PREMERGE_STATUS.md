@@ -12,12 +12,17 @@ Last updated: 2026-09-06
 docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 ```
 
-后续人教版、沪教版及其他第三方教材词表都会进入同一个 sense-aware 去重流程，最终形成：
+后续人教版、沪教版及其他第三方教材词表都会进入同一个 sense-aware 去重流程。
+
+当前长期流程已经冻结为两阶段：
 
 ```text
-Third-party Unified Vocabulary
-- Klose existing Stable Vocabulary Identity
-= Third-party New Vocabulary Pool
+阶段 A：所有第三方教材内部统一、sense-aware 去重
+→ Third-party Unified Vocabulary
+
+阶段 B：全部第三方来源处理完成后
+→ 与 Klose Full Stable Identity Registry 做最终 sense-aware diff
+→ Third-party New Vocabulary Pool
 ```
 
 这个 New Vocabulary Pool 的业务含义是：**Klose 当前实际教材之外、后续计划全部学习的新 Vocabulary learning units**。
@@ -29,7 +34,7 @@ Third-party Unified Vocabulary
 ```text
 Source Extracted       = yes
 Cross-book Surface Dedup = yes
-Compared to Stable Identity Registry = yes
+Compared to Stable Identity Registry = yes   # historical diagnostic / candidate comparison
 High-risk Identity Review = yes
 Inflection Variant Review = yes
 Occurrence Semantic Risk Review = partial / blocker-aware
@@ -61,11 +66,13 @@ The 734 MatchKeys are a surface index, not the final Vocabulary Identity count.
 
 These counts are audit/build facts for this seed only. They are not intended to become learning priority or curriculum statistics.
 
+The previous comparison against 901 Klose Stable Identities is retained as useful staging evidence, but under the two-stage design it is **not** the final Klose dedup. Final `existing-in-klose` / `third-party-new` classification happens only after the complete third-party corpus is built.
+
 ## Completed pre-merge work
 
 1. All 12 XLSX books are parsed deterministically from the repository without inventing Unit metadata.
 2. Every source row is preserved in `occurrences.csv` with grade, semester, source row, word, UK/US IPA, definition and source file.
-3. Every occurrence is compared against both committed stable identity registries:
+3. Every occurrence was compared against both committed stable identity registries as an early diagnostic/candidate analysis:
    - `note_registry.csv`
    - `note_registry_extensions.csv`
 4. Candidate matching is deliberately conservative:
@@ -124,11 +131,11 @@ Held for source context / identity policy:
 
 Regular singular/plural pairs `noodle/noodles`, `shoe/shoes`, `sock/socks` are high-confidence reuse candidates. `glass/glasses` must not be merged merely by morphology because the target senses may be glass/material vs eyeglasses.
 
-## Remaining blocker before any merge
+## Remaining blocker before any Klose merge
 
 The current repository Beijing XLSX data lacks Unit/sentence context and uses dictionary-style glosses. Therefore it is not sufficient to source-confirm every ambiguous target sense.
 
-Before merge, remaining held cases must be resolved from one of:
+Before any ambiguous third-party Identity is eventually merged into Klose, remaining held cases must be resolved from one of:
 
 ```text
 Klose actual textbook evidence
@@ -136,18 +143,22 @@ Klose actual textbook evidence
 > otherwise explicit model/human decision marked as non-source-confirmed
 ```
 
-This blocker does **not** prevent keeping the Beijing corpus staged or using it as the first seed of the unified third-party corpus. It only prevents treating every MatchKey candidate as a safe identity merge.
+This blocker does **not** prevent keeping Beijing as Source Adapter #1 or continuing to add other third-party versions into the unified corpus. It only prevents treating every MatchKey candidate as a safe identity merge.
 
 ## Merge boundary
 
-Until the user explicitly starts the merge phase:
+During stage A — third-party corpus construction:
 
-- do not write Beijing provenance into `master/source_occurrences.csv`;
-- do not append Beijing-driven identities to `note_registry_extensions.csv`;
-- do not change release/admission/learner/publish state;
+- do not write Beijing provenance into Klose `master/source_occurrences.csv`;
+- do not append Beijing-driven identities to Klose `note_registry_extensions.csv`;
+- do not delete a third-party learning unit merely because an early Klose comparison appears to match it;
+- do not classify the current Beijing-only result as the final `Third-party New Vocabulary Pool`;
+- do not change Klose release/admission/learner/publish state;
 - do not generate or import new Anki cards from this staging directory;
-- keep every review row `MergeAuthorized=no`.
+- keep every Klose merge review row `MergeAuthorized=no`.
 
-When the unified third-party corpus implementation starts, first convert this Beijing staging into Source Adapter #1, then add other third-party versions into the same third-party Identity Registry. Only after the unified corpus is sense-aware deduplicated should it be diffed against the complete Klose Stable Identity Registry to produce `Third-party New Vocabulary Pool`.
+When the unified third-party corpus implementation starts, first convert this Beijing staging into Source Adapter #1, then add other third-party versions into the same Third-party Identity Registry. Each additional version is deduplicated only against the Third-party Unified Vocabulary at this stage.
+
+Only after all planned third-party sources are incorporated should stage B run once against the complete Klose Stable Identity Registry. That final sense-aware diff produces `existing-in-klose` and `third-party-new`.
 
 When Klose merge is eventually approved, apply only resolved `third-party-new` learning units to the normal Klose Identity / Learner / Admission / Review / Release chain. Existing NoteIDs remain stable and new NoteIDs are append-only.
