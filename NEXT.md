@@ -19,6 +19,10 @@ docs/EXPRESSIONS_SYSTEM.md
 → anki/klose/source_reference/rj_start1-grade4-klose-expressions.csv
 → anki/klose/expressions/review/grade3-grade4-baseline.md
 → anki/klose/expressions/review/candidate_registry.csv
+→ anki/klose/expressions/master/expression_registry.csv
+→ anki/klose/expressions/learner/current.csv
+→ anki/klose/expressions/learner/learning_admission.csv
+→ anki/klose/expressions/anki/README.md
 ```
 
 不要仅凭聊天历史推测当前状态。
@@ -27,18 +31,7 @@ docs/EXPRESSIONS_SYSTEM.md
 
 ## 1. Grade-4 Vocabulary status
 
-Grade-4 Vocabulary 闭环已经完成：
-
-```text
-Build Valid                 = yes
-Content Releasable          = yes
-Anki content updated        = yes
-Learning Admitted           = yes
-LearningOrder in repo       = yes
-LearningOrder in Anki New # = yes
-```
-
-当前 Anki：
+Grade-4 Vocabulary 闭环已经完成并正常学习：
 
 ```text
 Deck              = Klose-English::Vocabulary
@@ -64,18 +57,9 @@ Vocabulary  = recognition of word / phrase / target sense
 Expressions = communicative intent / situation → active English production
 ```
 
-Anki Expressions 可以承担：
-
-```text
-已有输入后的 retrieval / consolidation
-+ 简单新表达的 lightweight acquisition
-```
-
-`Again` 不区分首次遇见还是遗忘，统一表示“当前还不能稳定主动产出”。
+Anki Expressions 可以承担已有输入后的 retrieval / consolidation，也可以承担简单新表达的 lightweight acquisition。`Again` 不区分首次遇见还是遗忘，统一表示“当前还不能稳定主动产出”。
 
 ### Current source scope
-
-本次 pilot 只使用 Klose 已学过的三、四年级实际教材 Expressions：
 
 ```text
 Grade 3 upper + lower = 94 Source Occurrences
@@ -83,18 +67,9 @@ Grade 4 upper + lower = 72 Source Occurrences
 Total                 = 166
 ```
 
-一年级、二年级 Expressions 当前不纳入复习范围，因为对 Klose 已过于简单。这是当前 Learning Scope 决策，不改变长期系统可接收更低年级 Source Evidence 的能力。
+一年级、二年级 Expressions 当前不纳入复习范围。
 
-年级合并 Source：
-
-```text
-anki/klose/source_reference/rj_start1-grade3-klose-expressions.csv
-anki/klose/source_reference/rj_start1-grade4-klose-expressions.csv
-```
-
-### Candidate baseline complete
-
-166 条教材原始表达已完成第一次统一 Pattern curation / 跨年级去重：
+166 条 Source Occurrences 已整理为：
 
 ```text
 Curated Pattern Candidates = 64
@@ -103,95 +78,150 @@ secondary                  = 26
 pilot_candidate            = 19
 ```
 
-按学习优先级进一步分为：
+学习优先级：
 
 ```text
 Grade-4 priority block = 36  # SourceGrades=4 或 3|4
-Grade-3-only block      = 28  # SourceGrades=3
+Grade-3-only block      = 28
 Total                   = 64
 ```
 
-凡一个 Pattern 同时在三、四年级出现，只学习一次，并归到 Grade-4 priority block。
-
-正式学习顺序已经冻结为：
+凡同一 Pattern 同时在三、四年级出现，只学习一次，并归入 Grade-4 priority block。正式顺序固定为：
 
 ```text
 Grade 4 related first
 → Grade 3 only second
 ```
 
-因此未来正式 LearningOrder 必须先覆盖 36 个 Grade-4 priority Expressions，再进入 28 个 Grade-3-only Expressions。Candidate Registry 当前行序不等于正式 LearningOrder。
+理论最多 64 张卡；Identity Review 允许进一步 merge / reject，因此最终数量可以更少。
 
-当前 64 个 Candidate 对应理论最多 64 张卡；Identity Review 如果进一步 merge / reject，最终数量可以少于 64。不得为了保留年级来源而重复创建同一个 Pattern 的卡。
+---
 
-结构化结果：
+## 3. First formal Expression completed
 
-```text
-anki/klose/expressions/review/candidate_registry.csv
-anki/klose/expressions/review/grade3-grade4-baseline.md
-```
-
-当前 `ECxxxx` 只是 candidate review 临时编号，不是 Stable ExpressionID。
-
-### NEXT TASK — pilot identity resolution
-
-下一步处理 `PilotCandidate=yes`，并首先处理 Grade-4 priority candidates：
+第一张正式卡已经从 Candidate 进入 Identity / Learner / Admission 层：
 
 ```text
-review communicative function
-→ review CanonicalForm
-→ review ExpressionType / SlotSchema
-→ resolve overlaps / answer-pair boundaries
-→ freeze first Expression identities
-→ assign stable KE000001...
+ExpressionID   = KE000001
+Candidate      = EC0021
+FunctionKey    = ask_job
+CanonicalForm  = What's [person]'s job?
+ExpressionType = slot_frame
+SlotSchema     = person
+LearnerLevel   = 4
+LearningOrder  = 000001
 ```
 
-Stable KE IDs 不承担学习顺序语义；实际先后由 LearningOrder 表达。
-
-identity review 完成后再进入：
+Source：
 
 ```text
-Learner Presentation
-→ card-back micro-lesson
-→ Review / Approval
-→ Learning Admission + LearningOrder
-→ deterministic publish
-→ Expression Release Gate
-→ Anki schema / first import
+Grade 4 upper / Unit 1 / Order 1
+What's your mother's job?
 ```
 
-当前不要直接从 candidate_registry.csv 生成 Anki 卡。
+Learner Presentation：
 
-### Pilot Anki direction
+```text
+FunctionLabel = 询问职业
+Prompt        = 你刚认识一个同学，想了解他妈妈的职业。
+PromptHint    = person: your mother
+Target        = What's your mother's job?
+Pattern       = What's [person]'s job?
+MeaningUsage  = 询问某人是做什么工作的。
+Examples      = What's your father's job? | What's your uncle's job?
+```
+
+当前正式状态：
+
+```text
+Identity      = active
+Presentation  = approved
+Admission     = allowed
+LearningOrder = 000001
+Publish       = pending
+Release       = pending
+```
+
+Presentation approval 已绑定 `expression-presentation-v1` fingerprint；本轮用户确认的卡片设计作为 approval basis。
+
+已建立首个 Expression bounded-context 文件：
+
+```text
+anki/klose/expressions/master/expression_registry.csv
+anki/klose/expressions/master/expression_occurrences.csv
+anki/klose/expressions/master/source_expression_map.csv
+anki/klose/expressions/master/release_registry.csv
+anki/klose/expressions/learner/current.csv
+anki/klose/expressions/learner/learning_admission.csv
+anki/klose/expressions/learner/presentation_review_registry.csv
+```
+
+Anki Contract 已建立：
 
 ```text
 Deck      = Klose-English::Expressions
 Note Type = Klose Expression
-Card      = Intent / Situation → English Production
+Card Type = Production
 ```
 
-Front 优先采用：
+模板：
 
 ```text
-communicative intent / situation
-+ minimal slot cue
+anki/klose/expressions/anki/README.md
+anki/klose/expressions/anki/card_front.html
+anki/klose/expressions/anki/card_back.html
+anki/klose/expressions/anki/styling.css
 ```
 
-Back 至少包含：
+训练方向：
 
 ```text
-Target
-Canonical Pattern
-简短 Meaning / Usage
-1–2 个替换例子
-TTS
+Function / Situation + minimal cue
+→ active English production
 ```
 
-Pilot `New/day` 仍未冻结；等正式 batch 与卡片复杂度确定后，再结合 Vocabulary `New/day=8` 和总复习负担设置。
+Back：
+
+```text
+Target + TTS
+Pattern
+Meaning / Usage
+1–2 Examples
+```
+
+当前没有手工生成 `study.csv / anki-import.csv`，符合 generated publish 禁止手工编辑的长期规则。
 
 ---
 
-## 3. One-month evaluation
+## 4. NEXT TASK — expand Grade-4 pilot + build publish chain
+
+下一步继续处理 Grade-4 priority 的 pilot candidates：
+
+```text
+identity review
+→ freeze KE IDs
+→ learner presentations
+→ presentation review / approval
+→ LearningOrder 000002...
+```
+
+随后实现 Expressions 独立生成链：
+
+```text
+upstream registries
+→ deterministic study.csv
+→ deterministic anki-import.csv
+→ Expression Release Gate
+→ first Anki import
+```
+
+在 release gate 完成前，不手工创建 publish artifact，也不声称第一张卡已经进入 Anki。
+
+Pilot `New/day` 暂不冻结；首批正式 batch 与卡片复杂度确定后，再结合 Vocabulary `New/day=8` 和总复习负担设置。
+
+---
+
+## 5. One-month evaluation
 
 只观察有决策价值的指标：
 
@@ -204,13 +234,11 @@ pronunciation / fluency issues
 actual daily review load
 ```
 
-核心问题：Klose 是记住了一条卡片原句，还是获得了可迁移、可主动调用的 Expression。
-
-不额外分析“第一次 Again”。
+核心问题：Klose 是记住了一条原句，还是获得了可迁移、可主动调用的 Expression。
 
 ---
 
-## 4. Deferred work
+## 6. Deferred work
 
 - Grade 1–3 Vocabulary actual-source reconciliation：Expressions pilot 建立后继续；
 - Grade 5/6 actual source reconciliation：后续处理；
@@ -218,7 +246,7 @@ actual daily review load
 
 ---
 
-## 5. Frozen long-term rules
+## 7. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Expression Identity 分离；
