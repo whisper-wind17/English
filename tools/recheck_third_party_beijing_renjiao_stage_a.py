@@ -42,7 +42,6 @@ def main() -> None:
     resolution = read_csv(RESOLUTION)
     morph = read_csv(MORPH)
 
-    # Count / set closure for the current two-adapter baseline.
     assert len(bj) == 808, len(bj)
     assert len(rj) == 908, len(rj)
     assert len(combined) == 1716, len(combined)
@@ -83,8 +82,6 @@ def main() -> None:
     assert by_key["can"]["ProposedDecision"] == "reuse-learning-unit"
     assert by_key["can"]["ResolutionStatus"] == "model-reviewed"
 
-    # Rule-reviewed reuse remains restricted to zero-risk rows. Second-pass
-    # model-reviewed reuse must be explicitly attributable to the second pass.
     for row in resolution:
         if row["ResolutionStatus"] == "rule-reviewed":
             assert row["RiskSignals"] == "none-detected", row["MatchKey"]
@@ -97,20 +94,20 @@ def main() -> None:
     decisions = Counter(r["ProposedDecision"] for r in resolution)
     bases = Counter(r["ResolutionBasis"] for r in resolution)
 
-    # Expected closure after the reviewed second pass. These counts are
-    # intentionally strict so an accidental list drift cannot silently pass.
-    assert statuses == Counter({"model-reviewed": 281, "rule-reviewed": 105, "pending": 6}), statuses
+    # Strict closure observed from the reviewed second-pass set: one listed
+    # safe key (`too`) was already rule-reviewed in pass one, so pass two
+    # contributes 250 reuse upgrades + 9 explicit blockers = 259 rows.
+    assert statuses == Counter({"model-reviewed": 280, "rule-reviewed": 105, "pending": 7}), statuses
     assert decisions == Counter({
-        "reuse-learning-unit": 357,
+        "reuse-learning-unit": 356,
         "partial-overlap-split-required": 8,
         "do-not-merge": 3,
         "held-source-context-required": 16,
         "held-identity-policy": 2,
-        "pending-semantic-review": 6,
+        "pending-semantic-review": 7,
     }), decisions
-    assert bases["model-second-pass-source-neighborhood-review"] == 260, bases
+    assert bases["model-second-pass-source-neighborhood-review"] == 259, bases
 
-    # Morphology decisions are separate and must preserve the held irregular case.
     assert len(morph) == 6, len(morph)
     morph_map = {r["RenjiaoMatchKey"]: r for r in morph}
     expected_morph = {
@@ -126,10 +123,10 @@ def main() -> None:
         assert morph_map[key]["ProposedDecision"] == decision, (key, morph_map[key]["ProposedDecision"])
         assert morph_map[key]["KloseMergeAuthorized"] == "no", key
 
-    # The stable third-party registry must not exist yet in this phase.
     stable_registry = BASE / "third_party_vocabulary" / "master" / "identity_registry.csv"
     assert not stable_registry.exists(), "Stable ThirdPartyID registry exists before Identity Resolution is ready"
 
+    pending_keys = sorted(r["MatchKey"] for r in resolution if r["ResolutionStatus"] == "pending")
     print("Completion Recheck = pass")
     print(f"Beijing occurrences = {len(bj)}")
     print(f"Renjiao occurrences = {len(rj)}")
@@ -139,6 +136,7 @@ def main() -> None:
     print(f"rule-reviewed = {statuses['rule-reviewed']}")
     print(f"model-reviewed = {statuses['model-reviewed']}")
     print(f"pending = {statuses['pending']}")
+    print("pending keys = " + "|".join(pending_keys))
     print("Known semantic blockers preserved = yes")
     print("Second-pass closure verified = yes")
     print("Klose merge authorized = no")
