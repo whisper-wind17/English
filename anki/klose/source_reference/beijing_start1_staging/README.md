@@ -38,8 +38,9 @@ It intentionally does not modify stable Vocabulary identities, source occurrence
 |---|---:|---|
 | exact-single | 488 | one exact MatchKey candidate; still requires target-sense confirmation |
 | exact-multiple | 8 | multiple stable identities share MatchKey |
-| morphology-or-phrase | 16 | only morphology/phrase-related candidates; never auto-merge |
-| no-existing-match | 296 | possible genuinely new learning unit |
+| format-alias | 1 | punctuation/ellipsis-only alias candidate |
+| morphology | 2 | inflection-related candidates; never auto-merge |
+| no-existing-match | 309 | possible genuinely new learning unit |
 
 ## Candidate classification — deduplicated surface level
 
@@ -47,14 +48,15 @@ It intentionally does not modify stable Vocabulary identities, source occurrence
 |---|---:|
 | exact-single | 433 |
 | exact-multiple | 7 |
-| morphology-or-phrase | 15 |
-| no-existing-match | 279 |
+| format-alias | 1 |
+| morphology | 2 |
+| no-existing-match | 291 |
 
 ## Pre-merge decision buckets — deduplicated surface level
 
 - reuse-candidate: 433
-- identity-review: 22
-- new-identity-candidate: 279
+- identity-review: 10
+- new-identity-candidate: 291
 
 ## Merge boundary
 
@@ -66,5 +68,5 @@ Generated files:
 - `identity_candidates.csv`: occurrence-level comparison against current stable Klose identities
 - `surface_inventory.csv`: cross-book surface index for review; not an identity table
 - `reuse_candidates.csv`: exact-single provisional reuse candidates; target sense still not confirmed
-- `identity_review_queue.csv`: exact-multiple and morphology/phrase cases requiring explicit identity resolution
+- `identity_review_queue.csv`: exact-multiple, format-alias, and morphology cases requiring explicit identity resolution
 - `new_identity_candidates.csv`: unmatched surfaces that may become new identities after review
