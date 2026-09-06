@@ -12,6 +12,38 @@ TP = BASE / "third_party_vocabulary"
 CONFIG = TP / "config" / "source_adapters.csv"
 DECISIONS = TP / "review" / "identity_decisions.csv"
 OUT = TP / "staging"
+RENJIAO_ADAPTER = BASE / "source_reference" / "renjiao_start1_staging"
+
+EXPECTED_STAGING_FILES = {
+    "README.md",
+    "occurrences.csv",
+    "surface_candidates.csv",
+    "review_queue.csv",
+    "unified_vocabulary_preview.csv",
+}
+EXPECTED_REVIEW_FILES = {"identity_decisions.csv"}
+EXPECTED_RENJIAO_ADAPTER_FILES = {"README.md", "occurrences.csv"}
+
+# These source-specific multi-pass tools were migration scaffolding. Their
+# reviewed content now lives in identity_decisions.csv and they must not return
+# to the active architecture.
+LEGACY_MULTI_PASS_TOOLS = {
+    "build_third_party_vocabulary_stage_a.py",
+    "audit_third_party_cross_source_semantics.py",
+    "build_third_party_cross_source_resolution.py",
+    "apply_third_party_cross_source_second_pass.py",
+    "apply_third_party_cross_source_final_review.py",
+    "recheck_third_party_beijing_renjiao_stage_a.py",
+    "audit_third_party_renjiao_new_surfaces.py",
+    "recheck_third_party_renjiao_new_surface_types.py",
+    "resolve_third_party_renjiao_new_surface_routing.py",
+    "recheck_third_party_renjiao_new_surface_routing.py",
+    "apply_third_party_renjiao_single_token_sense_review.py",
+    "recheck_third_party_renjiao_single_token_sense_review.py",
+    "audit_third_party_renjiao_single_token_forms.py",
+    "recheck_third_party_renjiao_single_token_forms.py",
+    "sync_third_party_status_to_next.py",
+}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -27,6 +59,23 @@ def require(cond: bool, message: str) -> None:
 
 
 def main() -> None:
+    # Physical architecture recheck: the cleanup is part of the long-term
+    # contract, not merely a one-time repository tidy-up.
+    require(
+        {p.name for p in OUT.iterdir()} == EXPECTED_STAGING_FILES,
+        f"Third-party staging contains unexpected/legacy files: {sorted(p.name for p in OUT.iterdir())}",
+    )
+    require(
+        {p.name for p in (TP / "review").iterdir()} == EXPECTED_REVIEW_FILES,
+        f"Third-party review directory must contain only identity_decisions.csv: {sorted(p.name for p in (TP / 'review').iterdir())}",
+    )
+    require(
+        {p.name for p in RENJIAO_ADAPTER.iterdir()} == EXPECTED_RENJIAO_ADAPTER_FILES,
+        f"Renjiao Source Adapter must contain only source facts: {sorted(p.name for p in RENJIAO_ADAPTER.iterdir())}",
+    )
+    present_legacy_tools = sorted(name for name in LEGACY_MULTI_PASS_TOOLS if (ROOT / "tools" / name).exists())
+    require(not present_legacy_tools, f"Legacy multi-pass tools returned to active repo: {present_legacy_tools}")
+
     config = [r for r in read_csv(CONFIG) if r.get("Enabled", "").lower() == "yes"]
     occ = read_csv(OUT / "occurrences.csv")
     surfaces = read_csv(OUT / "surface_candidates.csv")
@@ -132,6 +181,8 @@ def main() -> None:
     print(f"unified vocabulary preview = {len(preview)}")
     for action in sorted(actions):
         print(f"decision {action} = {actions[action]}")
+    print("Simplified physical layout = yes")
+    print("Legacy multi-pass tools absent = yes")
     print("Source occurrence closure = yes")
     print("Known semantic blockers preserved = yes")
     print("Known morphology decisions preserved = yes")
