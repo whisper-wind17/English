@@ -13,6 +13,8 @@ EXPECTED_FIELDS = [
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition", "SourceFile",
 ]
 SOURCE_FILE_RE = re.compile(r"人教版三年级起点[三四五六]年级[上下]\.xlsx$")
+EXPECTED_OCCURRENCES = 851
+EXPECTED_MATCHKEYS = 818
 
 
 def main() -> None:
@@ -24,8 +26,8 @@ def main() -> None:
             raise SystemExit(f"Unexpected occurrence schema: {reader.fieldnames}")
         rows = list(reader)
 
-    if not rows:
-        raise SystemExit("Renjiao start3 adapter produced no source occurrences")
+    if len(rows) != EXPECTED_OCCURRENCES:
+        raise SystemExit(f"Expected {EXPECTED_OCCURRENCES} Renjiao start3 occurrences, found {len(rows)}")
     if any(r.get("SourceID") != "renjiao_start3" for r in rows):
         raise SystemExit("SourceID drift in Renjiao start3 adapter")
 
@@ -43,8 +45,8 @@ def main() -> None:
         raise SystemExit(f"Expected 8 grade/semester books, got {sorted(books)}")
 
     distinct = len({r["MatchKey"] for r in rows})
-    if distinct <= 0 or distinct > len(rows):
-        raise SystemExit(f"Invalid normalized MatchKey count: {distinct}")
+    if distinct != EXPECTED_MATCHKEYS:
+        raise SystemExit(f"Expected {EXPECTED_MATCHKEYS} normalized MatchKeys, found {distinct}")
 
     forbidden = {"CandidateNoteIDs", "ProposedNoteID", "StageAClass", "existing-in-klose", "third-party-new"}
     if forbidden & set(EXPECTED_FIELDS):
