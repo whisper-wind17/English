@@ -5,7 +5,11 @@ Inputs:
 - config/source_adapters.csv: enabled standardized Source Occurrence adapters
 - review/identity_decisions.csv: the single durable content-decision truth
 
-Outputs are generated views only. Candidate signals never equal Identity truth.
+A durable surface decision is valid only for the exact SourceOccurrenceKey set
+recorded in its `OccurrenceKeys`. If a new/changed adapter adds evidence for the
+same MatchKey, that decision becomes stale in generated views and the surface is
+re-queued for review. Candidate signals never equal Identity truth.
+
 Stage A never performs the final Klose diff and never mints stable ThirdPartyID.
 """
 from __future__ import annotations
@@ -197,7 +201,7 @@ def build_surfaces(occurrences: list[dict[str, str]]) -> list[dict[str, str]]:
     return surfaces
 
 
-def load_decisions(surface_keys: set[str]) -> dict[str, list[dict[str, str]]]:
+def load_decisions(surface_keys: set[str], occurrence_keys: set[str]) -> dict[str, list[dict[str, str]]]:
     groups: dict[str, list[dict[str, str]]] = defaultdict(list)
     seen_decision_keys: set[str] = set()
     for row in read_csv(DECISIONS):
@@ -213,9 +217,22 @@ def load_decisions(surface_keys: set[str]) -> dict[str, list[dict[str, str]]]:
             raise SystemExit(f"Invalid Status for {dkey}: {row.get('Status')}")
         if row.get("Action") == "reuse-identity" and not row.get("CanonicalMatchKey"):
             raise SystemExit(f"reuse-identity lacks CanonicalMatchKey: {dkey}")
+        reviewed = row.get("OccurrenceKeys", "")
+        if not reviewed or reviewed == "*":
+            raise SystemExit(f"Durable decision must bind explicit OccurrenceKeys: {dkey}")
+        keys = reviewed.split("|")
+        if len(keys) != len(set(keys)) or not set(keys) <= occurrence_keys:
+            raise SystemExit(f"Invalid reviewed OccurrenceKeys for {dkey}")
         seen_decision_keys.add(dkey)
         groups[key].append(row)
     return groups
+
+
+def covered_keys(ds: list[dict[str, str]]) -> set[str]:
+    result: set[str] = set()
+    for d in ds:
+        result.update(x for x in d.get("OccurrenceKeys", "").split("|") if x)
+    return result
 
 
 def main() -> None:
@@ -223,16 +240,27 @@ def main() -> None:
     occurrences = build_occurrences(adapters)
     surfaces = build_surfaces(occurrences)
     surface_keys = {r["MatchKey"] for r in surfaces}
-    decisions = load_decisions(surface_keys)
+    all_occurrence_keys = {r["SourceOccurrenceKey"] for r in occurrences}
+    current_by_match: dict[str, set[str]] = defaultdict(set)
+    for row in occurrences:
+        current_by_match[row["MatchKey"]].add(row["SourceOccurrenceKey"])
+    decisions = load_decisions(surface_keys, all_occurrence_keys)
 
     candidate_rows: list[dict[str, str]] = []
     review_rows: list[dict[str, str]] = []
     for surface in surfaces:
         key = surface["MatchKey"]
         ds = decisions.get(key, [])
+        evidence_current = current_by_match[key]
+        evidence_reviewed = covered_keys(ds)
+        evidence_stale = bool(ds) and evidence_reviewed != evidence_current
+
         if not ds:
             action, status, canonical, sense = "pending", "pending", "", ""
-        elif len(ds) == 1 and ds[0].get("OccurrenceKeys", "") == "*":
+        elif evidence_stale:
+            action, status, canonical, sense = "pending", "pending", "", ""
+            surface["CandidateSignals"] = unique_join([surface["CandidateSignals"], "decision-evidence-changed"])
+        elif len(ds) == 1:
             d = ds[0]
             action, status = d["Action"], d["Status"]
             canonical, sense = d.get("CanonicalMatchKey", ""), d.get("TargetSense", "")
@@ -253,12 +281,13 @@ def main() -> None:
         if action in {"pending", "held", "split-required"} or status in {"pending", "held"}:
             review_rows.append(row)
 
-    # Preview reviewed Vocabulary identities only. It remains provisional: no IDs.
+    # Preview reviewed Vocabulary identities only, and only when the decision's
+    # reviewed evidence exactly matches the current Source Occurrence set.
     groups: dict[str, dict[str, object]] = {}
     for surface in candidate_rows:
         key = surface["MatchKey"]
         ds = decisions.get(key, [])
-        if len(ds) != 1 or ds[0].get("OccurrenceKeys", "") != "*":
+        if len(ds) != 1 or covered_keys(ds) != current_by_match[key]:
             continue
         d = ds[0]
         if d.get("Status") != "reviewed" or d.get("Action") not in {"keep-identity", "reuse-identity"}:
@@ -290,6 +319,7 @@ def main() -> None:
 
     action_counts = Counter(r["DecisionAction"] for r in candidate_rows)
     source_counts = Counter(r["SourceID"] for r in occurrences)
+    stale_count = sum("decision-evidence-changed" in r.get("CandidateSignals", "") for r in candidate_rows)
     readme = f"""# Third-party Vocabulary — Simplified Stage A
 
 Active data flow:
@@ -311,11 +341,14 @@ Source occurrences        = {len(occurrences)}
 Normalized surfaces       = {len(surfaces)}
 Vocabulary preview        = {len(preview_rows)}
 Review/blocker surfaces   = {len(review_rows)}
+Evidence-changed surfaces = {stale_count}
 ```
 
-Candidate signals are evidence only. `identity_decisions.csv` is the single
-content-decision truth. Stable ThirdPartyID is not minted and Stage-B Klose diff
-is not executed here.
+Each durable decision is bound to the exact Source Occurrences it reviewed.
+Additional source evidence automatically re-queues that MatchKey. Candidate
+signals are evidence only. `identity_decisions.csv` remains the single content-
+decision truth. Stable ThirdPartyID is not minted and Stage-B Klose diff is not
+executed here.
 """
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "README.md").write_text(readme, encoding="utf-8")
@@ -327,6 +360,7 @@ is not executed here.
     print(f"third-party surfaces = {len(surfaces)}")
     print(f"unified vocabulary preview = {len(preview_rows)}")
     print(f"review/blocker surfaces = {len(review_rows)}")
+    print(f"evidence-changed surfaces = {stale_count}")
     for action in sorted(action_counts):
         print(f"action {action} = {action_counts[action]}")
     print("Stable ThirdPartyID minted = no")
