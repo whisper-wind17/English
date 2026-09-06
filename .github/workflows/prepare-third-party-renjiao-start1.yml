@@ -6,12 +6,14 @@ on:
     paths:
       - 'tools/prepare_third_party_renjiao_start1.py'
       - 'tools/check_third_party_renjiao_start1.py'
+      - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/check_third_party_corpus.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
+      - 'anki/klose/third_party_vocabulary/review/decision_updates.csv'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
 
@@ -34,6 +36,9 @@ jobs:
       - name: Validate Renjiao source adapter
         run: python tools/check_third_party_renjiao_start1.py
 
+      - name: Apply transient reviewed identity decisions
+        run: python tools/apply_third_party_identity_decision_updates.py
+
       - name: Build simplified third-party corpus workspace
         run: python tools/build_third_party_corpus.py
 
@@ -52,7 +57,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
-          git add \
+          git add -A \
+            anki/klose/third_party_vocabulary/review \
             anki/klose/source_reference/renjiao_start1_staging/README.md \
             anki/klose/source_reference/renjiao_start1_staging/occurrences.csv \
             anki/klose/third_party_vocabulary/staging/README.md \
