@@ -41,6 +41,7 @@ IRREGULAR_FORMS = {
 # candidate relation rather than silently collapsed.
 REGULAR_FORMS = {
     "danced": "dance",
+    "does": "do",
 }
 
 # Participial/derived forms whose source context supports a lexical adjective
@@ -150,7 +151,6 @@ def main() -> None:
                 "The source teaches this -ing form in an activity/hobby slot. It may be a lexical activity noun rather than a mere inflection; keep held until the corpus form/learning-unit policy decides the boundary."
             )
         elif explicit_base and explicit_base != key:
-            # Catch future explicit morphology not covered by the reviewed map.
             form_class = "explicit-form-relation-unreviewed"
             base = explicit_base
             decision = "pending-form-review"
