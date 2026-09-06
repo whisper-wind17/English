@@ -265,28 +265,27 @@ renjiao_start3
   MatchKeys   = 818
 ```
 
-联合 Stage A：
+联合 Stage A 已完成当前三个 adapter 的普通 pending 审校：
 
 ```text
 Enabled adapters          = 3
 Source occurrences        = 2567
 Normalized surfaces       = 1443
-Durable decisions         = 1271
-Vocabulary preview        = 857
-Review/blocker surfaces   = 526
-Evidence-changed surfaces = 290
+Durable decisions         = 1443
+Vocabulary preview        = 1223
+Review/blocker surfaces   = 125
+Evidence-changed surfaces = 0
 
-Generated current surface state:
-keep-identity     = 839
-reuse-identity    = 35
-held              = 62
-pending           = 462
-split-required    = 2
-route-expression  = 16
-source-only       = 27
+keep-identity     = 1212
+reuse-identity    = 52
+held              = 115
+pending           = 0
+split-required    = 10
+route-expression  = 21
+source-only       = 33
 ```
 
-`renjiao_start3` 刚接入时：
+`renjiao_start3` 接入时产生：
 
 ```text
 299 completely new surfaces
@@ -294,23 +293,46 @@ source-only       = 27
 = 818 pending
 ```
 
-已经完成 7 批统一审校：
+累计 14 批统一审校后全部普通 pending 闭合：
 
 ```text
-resolved/reclassified pending surfaces = 356
-pending                            818 → 462
-new-surface pending                299 → 172
-evidence-changed pending           519 → 290
-Vocabulary preview                 553 → 857
-review/blocker                     848 → 526
+pending            818 → 0
+review/blocker     848 → 125
+evidence-changed   519 → 0
+Vocabulary preview 553 → 1223
 ```
 
-代表性安全边界继续保留：
+最终一批：
+
+```text
+Decision updates       = 46
+replaced               = 28
+appended               = 18
+GitHub Actions run     = 34065794743
+Completion Recheck     = PASS
+Generated data commit  = da96f8a
+```
+
+当前 `review_queue.csv` 的 125 行不再是未完成普通审校，而是真实 blocker：
+
+```text
+held           = 115
+split-required = 10
+pending        = 0
+```
+
+代表性 blocker：
 
 ```text
 May(月份) / may(情态动词)
 like=喜欢 / similarity construction
 square=正方形 / square=广场
+chicken=鸡 / chicken=鸡肉
+do=实义动词 / do=助动词
+dress=连衣裙 / dress=穿衣
+fish=鱼 / fish=钓鱼
+plant=植物 / plant=种植
+play=玩 / 参加运动 / 演奏
 left=左边 / left=leave过去式
 cook=动词 / cook=名词
 cold=寒冷 / cold=感冒
@@ -320,16 +342,11 @@ kind=种类 / kind=友好的
 live=居住 / live=活着
 mouse=动物 / mouse=电脑鼠标
 
-glasses=眼镜 保留独立 lexical identity，不因 glass morphology 合并
-our / ours 保留不同语法 learning unit
-Mrs / Mr 不因字符串 morphology 信号合并
-laughed → laugh
-licked → lick
-longer → long
-older → old
-noodles → noodle
-parents → parent
+以及 irregular/gerund/form policy：
+ate / best / better / bought / drank / fell / felt / gave / had / lost / rode / saw / slept / swam / took / went / woke / won 等
 ```
+
+新增 source 后，只要这些 surface 的 occurrence evidence 发生变化，evidence-aware gate 会自动重新 pending，因此无需现在强行猜测。
 
 当前仍然：
 
@@ -339,4 +356,4 @@ Final Klose diff executed  = no
 Klose Master / Learner / Publish / Anki modified = no
 ```
 
-下一步继续只处理统一 `review_queue.csv`；对真实 held/split blocker 不为了清零而猜测。
+下一步不是继续清空 125 个 blocker，而是接入下一个 Source Adapter；优先检查 repo 内沪教版。所有计划第三方来源完成前仍不执行 Stage B。
