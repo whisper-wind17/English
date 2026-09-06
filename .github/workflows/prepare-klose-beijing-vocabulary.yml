@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/prepare_klose_beijing_vocabulary.py'
       - 'tools/audit_klose_beijing_source_variants.py'
+      - 'tools/build_klose_beijing_premerge_map.py'
       - 'tools/check_klose_beijing_premerge.py'
       - '1.全国各大教材版本中小学同步/北京版/**'
       - 'anki/klose/master/note_registry.csv'
@@ -34,6 +35,9 @@ jobs:
 
       - name: Audit source and existing-identity inflection variants
         run: python tools/audit_klose_beijing_source_variants.py
+
+      - name: Consolidate occurrence-level pre-merge decisions
+        run: python tools/build_klose_beijing_premerge_map.py
 
       - name: Validate pre-merge review coverage and merge lock
         run: python tools/check_klose_beijing_premerge.py
