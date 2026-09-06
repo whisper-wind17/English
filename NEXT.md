@@ -1,6 +1,6 @@
 # NEXT — Klose Learning
 
-Last updated: 2026-09-06
+Last updated: 2026-09-07
 
 ## 启动顺序
 
@@ -58,7 +58,7 @@ note_registry.csv + note_registry_extensions.csv
 = 901 identities
 ```
 
-GitHub 管 Source / Identity / Learner / Release；Anki 继续是 FSRS / Review History / Due / Interval / Card State 真源。
+GitHub 管 Source / Identity / Learner / Release；Anki 是 FSRS / Review History / Due / Interval / Card State 真源。
 
 ---
 
@@ -88,13 +88,13 @@ Desired retention = 90%
 AnkiWeb Sync       = completed
 ```
 
-当前处于 real-learning pilot。一个月后主要观察 Again ratio、slot substitution、unseen-situation transfer、over-generalization、pronunciation/fluency 和 daily review load。不要因 repo 重建改变已经进入 Learning / Review 的 Card 调度状态。
+当前处于 real-learning pilot。不要因 repo 重建改变已经进入 Learning / Review 的 Card 调度状态。
 
 ---
 
 ## 3. Current repo task — Third-party Multi-Edition Vocabulary Corpus
 
-用户已冻结长期目标：
+长期目标已冻结：
 
 > 把北京版、人教版、沪教版及其他第三方小学教材词汇汇总成一个统一、sense-aware 去重的第三方词源。教材来源、最早年级、覆盖教材数、出现次数、年级分布不参与学习决策。所有第三方来源处理完成后，再与 Klose Full Stable Identity Registry 做一次最终去重，剩余 learning units 全部作为 Klose 当前教材之外的新词学习。
 
@@ -116,24 +116,23 @@ Stage A 不因 Klose 当前已有某词而删除第三方 learning unit。
 
 ---
 
-## 4. Simplified Stage-A architecture — CURRENT
+## 4. Simplified Stage-A architecture — FROZEN
 
-2026-09-06 已完成一次工程复杂度复核。结论：业务规则正确，但原来的多层 `audit → apply → recheck` 专项流水线过度复杂，因此已经收敛为最简长期架构。
-
-唯一 active 数据流：
+原多层 `audit → apply → recheck` edition-specific 流水线已完成收敛。长期 active model 只有：
 
 ```text
 Source Adapter occurrences
 + config/source_adapters.csv
 + review/identity_decisions.csv
 → tools/build_third_party_corpus.py
+→ staging/occurrences.csv
 → staging/surface_candidates.csv
 → staging/review_queue.csv
 → staging/unified_vocabulary_preview.csv
 → tools/check_third_party_corpus.py
 ```
 
-核心边界：
+职责：
 
 ```text
 Source Adapter = 只解析 Source Fact
@@ -143,9 +142,7 @@ review_queue.csv = 纯派生 unresolved/blocker view
 unified_vocabulary_preview.csv = reviewed Vocabulary preview
 ```
 
-不再为 exact / morphology / multiword / semantic / expression routing 分别创建长期 pipeline。
-
-当前 `identity_decisions.csv` Action：
+`identity_decisions.csv` Action：
 
 ```text
 keep-identity
@@ -157,11 +154,11 @@ source-only
 pending
 ```
 
-Content decision 是 data；通用 Python 只负责生成和校验。
+Content decision 是 data；Python 只负责通用生成和校验。不要恢复旧的 exact / morphology / semantic / multiword / routing 专项 pipeline。
 
 ---
 
-## 5. Enabled third-party Source Adapters
+## 5. Enabled Source Adapters
 
 配置真源：
 
@@ -183,26 +180,26 @@ renjiao_start1
   MatchKeys          = 802
 ```
 
-人教版目录另有“三年级起点”，未来必须作为独立 adapter，不能静默混入 `renjiao_start1`。
-
-Renjiao Source Adapter 当前物理职责已收敛为：
+Renjiao adapter 物理职责已经收敛为：
 
 ```text
 Raw 12 XLSX
+→ source_reference/renjiao_start1_staging/README.md
 → source_reference/renjiao_start1_staging/occurrences.csv
 ```
 
-它不再自己比较北京版，也不再生成 exact/morph/new 等 identity 队列。
+它不再比较北京版，不再生成 exact/morph/new/semantic 队列。
 
-北京版现有 staging 中历史的 Klose comparison / semantic audit 仍可作为来源审计证据，但不代表 Stage-B 最终 Klose diff。
+人教版“三年级起点”未来作为独立 adapter，不能混入 `renjiao_start1`。
 
 ---
 
-## 6. Current unified Stage-A baseline
+## 6. Current Stage-A baseline
 
-当前北京 + 人教一年级起点：
+北京 + 人教一年级起点：
 
 ```text
+Enabled adapters        = 2
 Source occurrences      = 1716
 Normalized surfaces     = 1144
 Durable decisions       = 1144
@@ -218,8 +215,6 @@ route-expression  = 3
 source-only       = 25
 ```
 
-`403 Renjiao new surfaces = 403 new words` 已明确否定。原始第三方“单词”列可能包含 lexical word、multiword lexical unit、format alias、inflected form、Expression、event/source chunk；最终对象类型由统一 Identity Resolution 决定。
-
 当前仍然：
 
 ```text
@@ -233,25 +228,44 @@ Anki modified              = no
 
 ---
 
-## 7. Completion Recheck protections
+## 7. Simplification Completion Recheck — PASS
 
-每次阶段完成后必须执行独立 Completion Recheck；CI success 不能单独等同“做对了”。
+2026-09-07 已完成清理后的最终独立 Completion Recheck，GitHub Actions run `34044221086` 全部成功。
 
-当前通用 checker 至少验证：
+除数据闭合外，checker 现在还把“最简物理架构”本身作为 executable invariant：
 
 ```text
-enabled adapter occurrence union 完整闭合
-SourceOccurrenceKey 唯一
-surface set 与 occurrences 闭合
-DecisionKey 唯一且只引用 enabled surfaces
-new undecided surface 自动进入 pending
-review_queue 是纯派生 blocker/pending view
-reuse-identity 必须有 CanonicalMatchKey
-Vocabulary / Expression / source-only 对象边界一致
-Klose Master / Learner / Publish / Anki 无改动
+third_party_vocabulary/staging/
+  README.md
+  occurrences.csv
+  surface_candidates.csv
+  review_queue.csv
+  unified_vocabulary_preview.csv
+
+third_party_vocabulary/review/
+  identity_decisions.csv
+
+source_reference/renjiao_start1_staging/
+  README.md
+  occurrences.csv
 ```
 
-代表性语义边界持续锁定：
+同时显式检查旧 multi-pass third-party 工具不得重新出现。
+
+本次 Recheck 结果：
+
+```text
+Simplified physical layout                    = yes
+Legacy multi-pass tools absent                = yes
+Source occurrence closure                     = yes
+Known semantic blockers preserved             = yes
+Known morphology decisions preserved          = yes
+Unreviewed Beijing multiword carry-forward blocked = yes
+Klose publishing state untouched              = yes
+Generated Stage-A data drift                  = no
+```
+
+持续保护的代表性边界：
 
 ```text
 May(月份) / may(情态动词)
@@ -261,65 +275,62 @@ left=左边 / left=leave过去式
 cook=动词 / cook=名词
 cold=寒冷 / cold=感冒
 study=学习 / study=书房
+
+danced → dance
+gloves → glove
+cartoons → cartoon
+scissors / crossroads 保留 lexicalized learning unit
+slept / swam / were / won 保持 irregular-form blocker
 ```
 
-代表性 morphology/form 边界：
-
-```text
-danced → dance          reuse candidate
-cartoons → cartoon      reuse candidate
-gloves → glove          reuse candidate
-scissors                 keep lexicalized learning unit
-crossroads               keep lexicalized learning unit
-slept / swam / were / won held irregular-form policy
-```
-
-工程简化后的 Completion Recheck 还发现并修正过一次迁移偏差：北京 seed 的 `a few / get well / how many / ice cream / make use of / pencil case / sweet potato / take part in / the U.K. / the U.S.A. / the United States of America` 未经过 Vocabulary/Expression/object routing，不能因 seed 身份自动当 Vocabulary Identity；现已回到统一 review queue。
+此前迁移误差也已锁定：`a few / get well / how many / ice cream / make use of / pencil case / sweet potato / take part in / the U.K. / the U.S.A. / the United States of America` 未经过 object routing，不得因北京 seed 身份自动进入 Vocabulary Identity。
 
 ---
 
-## 8. NEXT TASK
+## 8. NEXT TASK — resolve the single unified review queue
 
-不要恢复旧 multi-pass 专项流水线。
-
-下一步只操作统一入口：
+唯一内容工作入口：
 
 ```text
 anki/klose/third_party_vocabulary/staging/review_queue.csv
 ```
 
-处理原则：
+当前 254 个 surface 只按最终 learning-unit 决策处理，不再按旧 pipeline 分类执行。
+
+每条只能写回：
 
 ```text
-1. 只审核真正 unresolved / held / split-required 的 learning-unit 问题；
-2. 结果只写入 review/identity_decisions.csv；
-3. rebuild；
-4. independent Completion Recheck；
-5. 不为了 pending=0 强行猜测缺乏 source context 的义项；
-6. 在 corpus 足够稳定前不 mint Stable ThirdPartyID；
+anki/klose/third_party_vocabulary/review/identity_decisions.csv
+```
+
+目标 Action：
+
+```text
+keep-identity       # 独立 Vocabulary learning unit
+reuse-identity      # canonicalize / form / alias reuse
+route-expression    # Expression 对象
+source-only         # 仅保留 Source Fact
+split-required      # 真实同形异义，需要 occurrence-level split
+held                # 证据或 identity policy 仍不足
+```
+
+工作规则：
+
+```text
+1. 能从当前 source evidence 高置信 resolve 的直接 resolve；
+2. 缺真实教材上下文的义项继续 held，不为了 pending=0 猜测；
+3. 所有内容判断只落 identity_decisions.csv；
+4. rebuild；
+5. independent Completion Recheck；
+6. corpus 足够稳定前不 mint Stable ThirdPartyID；
 7. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
 ```
 
-当前优先事项是把 254 个统一 blocker/review surface 进一步区分：
-
-```text
-可直接 resolve 的 Vocabulary learning unit
-可 canonicalize/reuse 的 form/alias
-Expression
-source-only chunk
-真实 semantic split
-必须继续 held 的 source-context / identity-policy blocker
-```
-
-不再按“138 phrase + 42 routing + 其他 form pass”分别维护工作流。
-
-完成当前两 adapter 的统一 queue 后，再接入下一个第三方 Source Adapter；新增 adapter 只增加标准 occurrences + `source_adapters.csv` 配置，不复制 builder/checker。
+完成当前两 adapter 的统一 queue 后，再接入下一个第三方 Source Adapter。
 
 ---
 
 ## 9. Deferred
-
-仍保留但不是当前任务：
 
 ```text
 Grade 1–3 Klose actual-source Vocabulary reconciliation
