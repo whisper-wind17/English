@@ -10,6 +10,7 @@ on:
       - 'tools/check_third_party_corpus.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
+      - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
