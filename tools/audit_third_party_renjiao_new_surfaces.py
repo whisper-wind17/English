@@ -48,6 +48,13 @@ GERUND_START = {
     "cleaning", "collecting", "cooking", "drawing", "making", "playing",
     "reading", "riding", "running", "shopping", "singing", "swimming", "writing",
 }
+# Some -ing-headed forms are lexical compounds rather than event/gerund chunks.
+# They must stay eligible for Vocabulary phrase identity review.
+LEXICAL_GERUND_COMPOUNDS = {
+    "shopping centre",
+    "shopping list",
+    "shopping mall",
+}
 FUNCTION_PHRASE_START = {
     "a", "an", "at", "across", "after", "be", "by", "for", "from", "how",
     "in", "look", "next", "on", "out", "the", "to", "what", "where", "with",
@@ -139,6 +146,11 @@ def classify(row: dict[str, str]) -> tuple[str, str, str, str, list[str]]:
         return (
             "expression-or-chunk-review", "expression-routing-review", related,
             "Past/participle-led multiword chunk is not presumed to be a Vocabulary identity.", signals,
+        )
+    if key in LEXICAL_GERUND_COMPOUNDS:
+        return (
+            "multiword-lexical-review", "vocabulary-vs-expression-review", related,
+            "Known -ing-headed lexical compound; keep it in Vocabulary phrase identity review rather than treating it as an event chunk.", signals,
         )
     if first in GERUND_START:
         signals.append("gerund-chunk")
