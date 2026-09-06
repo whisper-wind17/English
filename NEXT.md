@@ -156,7 +156,7 @@ release-ready  = 66
 
 ---
 
-## 4. Deterministic publish / Anki status
+## 4. Deterministic publish / Anki operational status
 
 Expressions 生成链：
 
@@ -174,12 +174,35 @@ upstream registries
 anki/klose/expressions/publish/anki-import.csv
 ```
 
-2026-09-06 用户已在 Anki Desktop 完成首次正式导入并确认结果；随后仅对当前 66 张 `is:new` Cards 按 LearningOrder 升序执行 Reposition：
+2026-09-06 用户已完成首次正式 Anki Desktop 导入并确认：
 
 ```text
-KE000001 / 000001 → New #1
-...
-KE000066 / 000066 → New #66
+Deck              = Klose-English::Expressions
+Note Type         = Klose Expression
+Card Type         = Production
+Notes / Cards     = 66 / 66
+LearningOrder     = 000001..000066
+New #             = 1..66
+AnkiWeb Sync       = completed
+```
+
+New # 只在全部 66 张仍为 `is:new` 时按 LearningOrder materialize；后续一旦进入真实 Learning / Review，不再用 repo 重建调度状态。
+
+当前独立 Deck Options preset：
+
+```text
+Preset                = Klose Expressions
+New cards/day         = 2
+Maximum reviews/day   = 9999
+Learning steps        = 1m 10m
+New card gather order = Ascending position
+New card sort order   = Order gathered
+New/review order      = Show after reviews
+FSRS                  = ON
+Desired retention     = 90%
+FSRS parameters       = Default parameters
+FSRS search scope     = deck:"Klose-English::Expressions" -is:suspended
+Reschedule on change  = OFF
 ```
 
 当前状态：
@@ -189,32 +212,38 @@ Build Valid        = yes
 Content Releasable = yes
 Anki Updated       = yes
 Learning Admitted  = yes
-Notes              = 66
-Cards              = 66
-New # sequenced    = yes
+Pilot Ready        = yes
 ```
 
-Anki 是 FSRS / Review History / Due / Interval / Card State 真源；repo 不重建这些状态。
+Anki 是 FSRS / Review History / Due / Interval / Card State 真源；repo 这里只记录用户确认过的 operational baseline，不回写真实记忆状态。
 
 ---
 
-## 5. NEXT TASK — Expressions deck options / sync / start learning
+## 5. NEXT TASK — real-learning pilot
 
-当前下一步：
+Expressions 内容侧和首次 Anki 部署已经结束。下一步不是继续扩卡，而是让 Klose 按当前设置真实学习。
+
+首月保持：
 
 ```text
-1. 为 Klose-English::Expressions 使用独立 Deck Options preset，避免修改 Vocabulary preset
-2. FSRS = ON
-3. Desired retention = 90%
-4. New card gather order = Ascending position
-5. New card sort order = Order gathered
-6. 决定 Expressions New cards/day
-7. Sync 到 AnkiWeb / iPad
-8. iPad 实机检查 Front/Back/TTS/字号
-9. 开始真实学习
+New/day = 2
+四年级优先 → 三年级
+不因为 repo 顺序变化重排已进入 Learning / Review 的 Cards
 ```
 
-Expressions `New/day` 尚未冻结。当前 Vocabulary 已为 `New/day=8`；Expressions 属于主动产出任务，首次运行应采用更低引入速率，并根据第一周 Again ratio 与实际 review load 调整，不要一次性引入全部 66 张。
+第一周先观察实际负担，再决定是否需要调整 `New/day`；不要为了更快清完 66 张而提前提高。
+
+建议第一周检查一次：
+
+```text
+Again ratio
+actual daily review load
+明显卡住的 Expression
+是否只能背原句、不能替换 slot
+Target TTS / 发音是否有问题
+```
+
+一个月后再做完整 pilot review。
 
 ---
 
@@ -233,11 +262,20 @@ actual daily review load
 
 核心问题：Klose 是记住了一条原句，还是获得了可迁移、可主动调用的 Expression。
 
+Front 是否从 Stage A 向 Stage B 演进，也只根据真实学习表现决定。
+
 ---
 
-## 7. Deferred work
+## 7. Next repo engineering work / deferred
 
-- Grade 1–3 Vocabulary actual-source reconciliation：Expressions 首次正式导入后继续；
+Expressions pilot 可以在 Anki 中独立运行；仓库侧下一项可恢复：
+
+```text
+Grade 1–3 Vocabulary actual-source reconciliation
+```
+
+仍 deferred：
+
 - Grade 5/6 actual source reconciliation：后续处理；
 - 99 个 held legacy Vocabulary Notes 缺 British/American IPA：对应 Note admission 前再补齐并 re-review。
 
