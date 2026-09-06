@@ -6,15 +6,16 @@ Inputs:
 - review/identity_decisions.csv: the single durable content-decision truth
 
 A durable surface decision is valid only for the exact SourceOccurrenceKey set
-recorded in its `OccurrenceKeys`. If a new/changed adapter adds evidence for the
-same MatchKey, that decision becomes stale in generated views and the surface is
-re-queued for review. Candidate signals never equal Identity truth.
+recorded in its `OccurrenceKeys` JSON array. If a new/changed adapter adds evidence
+for the same MatchKey, that decision becomes stale in generated views and the
+surface is re-queued for review. Candidate signals never equal Identity truth.
 
 Stage A never performs the final Klose diff and never mints stable ThirdPartyID.
 """
 from __future__ import annotations
 
 import csv
+import json
 import re
 import unicodedata
 from collections import Counter, defaultdict
@@ -103,6 +104,18 @@ def morphology_keys(key: str) -> list[str]:
 
 def unique_join(values: list[str]) -> str:
     return "|".join(dict.fromkeys(v for v in values if v))
+
+
+def decode_occurrence_keys(raw: str, decision_key: str) -> list[str]:
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"Invalid OccurrenceKeys JSON for {decision_key}: {exc}") from exc
+    if not isinstance(value, list) or not value or not all(isinstance(x, str) and x for x in value):
+        raise SystemExit(f"Invalid OccurrenceKeys JSON array for {decision_key}")
+    if len(value) != len(set(value)):
+        raise SystemExit(f"Duplicate reviewed OccurrenceKeys for {decision_key}")
+    return value
 
 
 def enabled_adapters() -> list[tuple[str, Path]]:
@@ -220,8 +233,8 @@ def load_decisions(surface_keys: set[str], occurrence_keys: set[str]) -> dict[st
         reviewed = row.get("OccurrenceKeys", "")
         if not reviewed or reviewed == "*":
             raise SystemExit(f"Durable decision must bind explicit OccurrenceKeys: {dkey}")
-        keys = reviewed.split("|")
-        if len(keys) != len(set(keys)) or not set(keys) <= occurrence_keys:
+        keys = decode_occurrence_keys(reviewed, dkey)
+        if not set(keys) <= occurrence_keys:
             raise SystemExit(f"Invalid reviewed OccurrenceKeys for {dkey}")
         seen_decision_keys.add(dkey)
         groups[key].append(row)
@@ -231,7 +244,7 @@ def load_decisions(surface_keys: set[str], occurrence_keys: set[str]) -> dict[st
 def covered_keys(ds: list[dict[str, str]]) -> set[str]:
     result: set[str] = set()
     for d in ds:
-        result.update(x for x in d.get("OccurrenceKeys", "").split("|") if x)
+        result.update(decode_occurrence_keys(d.get("OccurrenceKeys", ""), d.get("DecisionKey", "")))
     return result
 
 
@@ -281,8 +294,6 @@ def main() -> None:
         if action in {"pending", "held", "split-required"} or status in {"pending", "held"}:
             review_rows.append(row)
 
-    # Preview reviewed Vocabulary identities only, and only when the decision's
-    # reviewed evidence exactly matches the current Source Occurrence set.
     groups: dict[str, dict[str, object]] = {}
     for surface in candidate_rows:
         key = surface["MatchKey"]
@@ -344,11 +355,11 @@ Review/blocker surfaces   = {len(review_rows)}
 Evidence-changed surfaces = {stale_count}
 ```
 
-Each durable decision is bound to the exact Source Occurrences it reviewed.
-Additional source evidence automatically re-queues that MatchKey. Candidate
-signals are evidence only. `identity_decisions.csv` remains the single content-
-decision truth. Stable ThirdPartyID is not minted and Stage-B Klose diff is not
-executed here.
+Each durable decision is bound to the exact Source Occurrences it reviewed via an
+unambiguous JSON array in `OccurrenceKeys`. Additional source evidence automatically
+re-queues that MatchKey. Candidate signals are evidence only. `identity_decisions.csv`
+remains the single content-decision truth. Stable ThirdPartyID is not minted and
+Stage-B Klose diff is not executed here.
 """
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "README.md").write_text(readme, encoding="utf-8")
