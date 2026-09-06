@@ -1,9 +1,10 @@
 # Third-party Vocabulary — Simplified Stage A
 
-Active pipeline:
+Active data flow:
 
 ```text
-standardized source occurrences
+config/source_adapters.csv
++ standardized adapter occurrences
 + review/identity_decisions.csv
 → tools/build_third_party_corpus.py
 → surface_candidates.csv
@@ -12,21 +13,14 @@ standardized source occurrences
 → tools/check_third_party_corpus.py
 ```
 
-Current facts:
-
 ```text
-Source occurrences       = 1716
-Normalized surfaces      = 1144
-Reviewed identity preview = 851
-Review/blocker surfaces  = 254
+Enabled adapters          = 2
+Source occurrences        = 1716
+Normalized surfaces       = 1144
+Vocabulary preview        = 851
+Review/blocker surfaces   = 254
 ```
 
-Candidate signals (exact / morphology / format / multiword / punctuation) are
-only evidence. They do not create extra processing stages and never equal
-Identity truth.
-
-`identity_decisions.csv` is the single durable content-decision truth for this
-third-party corpus. Legacy audit/resolution CSVs remain only as migration/audit
-history and are no longer part of the active long-term pipeline.
-
-Stable ThirdPartyID is not minted yet. Final Klose diff is not executed in Stage A.
+Candidate signals are evidence only. `identity_decisions.csv` is the single
+content-decision truth. Stable ThirdPartyID is not minted and Stage-B Klose diff
+is not executed here.
