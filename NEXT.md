@@ -20,19 +20,7 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → anki/klose/third_party_vocabulary/staging/review_queue.csv
 ```
 
-涉及 Klose 实际教材 reconciliation 时再读取：
-
-```text
-docs/SOURCE_RECONCILIATION.md
-```
-
-Expressions 任务读取：
-
-```text
-docs/EXPRESSIONS_SYSTEM.md
-```
-
-不要仅凭聊天历史推测当前状态。
+涉及 Klose 实际教材 reconciliation 时再读取 `docs/SOURCE_RECONCILIATION.md`；Expressions 任务读取 `docs/EXPRESSIONS_SYSTEM.md`。不要仅凭聊天历史推测当前状态。
 
 ---
 
@@ -64,16 +52,14 @@ GitHub 管 Source / Identity / Learner / Release；Anki 是 FSRS / Review Histor
 
 ## 2. Expressions operational baseline
 
-三、四年级 Expressions 已完成首次正式闭环：
+三、四年级 Expressions 首次正式闭环：
 
 ```text
 Stable Expressions = 66
 Grade-4 priority    = 37
 Grade-3-only        = 29
 LearningOrder       = 000001..000066
-approved            = 66
-admitted            = 66
-release-ready       = 66
+approved/admitted/release-ready = 66
 ```
 
 Anki：
@@ -88,7 +74,7 @@ Desired retention = 90%
 AnkiWeb Sync       = completed
 ```
 
-当前处于 real-learning pilot。不要因 repo 重建改变已经进入 Learning / Review 的 Card 调度状态。
+当前处于 real-learning pilot。不要因 repo 重建改变已进入 Learning / Review 的 Card 调度状态。
 
 ---
 
@@ -96,9 +82,7 @@ AnkiWeb Sync       = completed
 
 长期目标已冻结：
 
-> 把北京版、人教版、沪教版及其他第三方小学教材词汇汇总成一个统一、sense-aware 去重的第三方词源。教材来源、最早年级、覆盖教材数、出现次数、年级分布不参与学习决策。所有第三方来源处理完成后，再与 Klose Full Stable Identity Registry 做一次最终去重，剩余 learning units 全部作为 Klose 当前教材之外的新词学习。
-
-两阶段流程：
+> 把北京版、人教版、沪教版及其他第三方小学教材词汇汇总成一个统一、sense-aware 去重的第三方词源。教材来源、最早年级、覆盖教材数、出现次数、年级分布不参与学习决策。所有计划第三方来源完成后，再与 Klose Full Stable Identity Registry 做最终去重，剩余 learning units 全部作为 Klose 当前教材之外的新词学习。
 
 ```text
 Stage A
@@ -106,7 +90,7 @@ Stage A
 → 第三方内部 sense-aware Identity Resolution
 → Third-party Unified Vocabulary
 
-Stage B（所有计划第三方来源完成后才执行）
+Stage B（所有计划第三方来源完成后）
 Third-party Unified Vocabulary
 → vs Klose Full Stable Identity Registry
 → Third-party New Vocabulary Pool
@@ -117,8 +101,6 @@ Stage A 不因 Klose 当前已有某词而删除第三方 learning unit。
 ---
 
 ## 4. Simplified Stage-A architecture — FROZEN
-
-长期 active model：
 
 ```text
 Source Adapter occurrences
@@ -135,14 +117,14 @@ Source Adapter occurrences
 职责：
 
 ```text
-Source Adapter = 只解析 Source Fact
-CandidateSignals = 只提供匹配证据
-identity_decisions.csv = 唯一内容决策真源
-review_queue.csv = 纯派生 unresolved/blocker view
-unified_vocabulary_preview.csv = reviewed Vocabulary preview
+Source Adapter            = 只解析 Source Fact
+CandidateSignals          = 只提供匹配证据
+identity_decisions.csv    = 唯一内容决策真源
+review_queue.csv           = 纯派生 unresolved/blocker view
+unified_vocabulary_preview = reviewed Vocabulary preview
 ```
 
-`identity_decisions.csv` Action：
+Action：
 
 ```text
 keep-identity
@@ -154,44 +136,66 @@ source-only
 pending
 ```
 
-Content decision 是 data；Python 只负责通用生成和校验。不要恢复旧的 exact / morphology / semantic / multiword / routing 专项 pipeline。
+Content decision 是 data；Python 只负责通用生成和校验。不要恢复旧 exact / morphology / semantic / multiword / routing 专项 pipeline。
 
-内容审校使用通用 transient inbox：
+内容审校使用 transient inbox：
 
 ```text
 review/decision_updates.csv
-→ tools/apply_third_party_identity_decision_updates.py
-→ merge 到 identity_decisions.csv
+→ apply_third_party_identity_decision_updates.py
+→ identity_decisions.csv
 → inbox 删除
 ```
 
-`decision_updates.csv` 不是第二套状态真源；成功 workflow 结束后 `review/` 必须重新只剩 `identity_decisions.csv`。
+成功 workflow 结束后 `review/` 必须重新只剩 `identity_decisions.csv`。
 
 ---
 
-## 5. Enabled Source Adapters
+## 5. Evidence-aware decision binding — FROZEN
 
-配置真源：
+新增教材可能给已 reviewed 的同一 surface 带来新义项，因此 decision 不能只按 MatchKey 永久复用。
+
+`OccurrenceKeys` 现在持久化为审校时实际覆盖的 SourceOccurrenceKey **JSON array**：
 
 ```text
-anki/klose/third_party_vocabulary/config/source_adapters.csv
+current occurrence set == reviewed occurrence set
+→ 原 decision 有效
+
+current occurrence set != reviewed occurrence set
+→ pending
+→ CandidateSignals += decision-evidence-changed
+→ 回到统一 review_queue
+→ stale SourceMatchKey 不得进入 preview provenance
 ```
 
-当前：
+历史 `*` / 歧义 pipe serialization 已在 GitHub Actions run `34063545296` 完成一次性迁移。当前 durable decision 禁止长期 wildcard OccurrenceKeys。
+
+---
+
+## 6. Enabled Source Adapters
+
+配置真源：`anki/klose/third_party_vocabulary/config/source_adapters.csv`
 
 ```text
 beijing_start1
-  Source books       = 12
-  Source occurrences = 808
-  MatchKeys          = 734
+  books       = 12
+  occurrences = 808
+  MatchKeys   = 734
 
 renjiao_start1
-  Source books       = 12
-  Source occurrences = 908
-  MatchKeys          = 802
+  books       = 12
+  occurrences = 908
+  MatchKeys   = 802
+
+renjiao_start3
+  books       = 8
+  occurrences = 851
+  MatchKeys   = 818
 ```
 
-Renjiao adapter 物理职责：
+`renjiao_start3` = 人教版三年级起点 3–6 年级上下册，共 8 册；作为独立 adapter，不与 `renjiao_start1` 混合。
+
+每个 Renjiao adapter 的物理职责都只有：
 
 ```text
 Raw XLSX
@@ -199,84 +203,94 @@ Raw XLSX
 → source_reference/<adapter>_staging/occurrences.csv
 ```
 
-它不比较其他教材，不生成 exact/morph/new/semantic 队列。
-
-人教版“三年级起点”应作为独立 adapter，不能混入 `renjiao_start1`。
+Adapter 不比较其他教材，不生成 edition-specific exact/morph/semantic 队列。
 
 ---
 
-## 6. Current Stage-A baseline — Beijing + Renjiao start1
+## 7. Current Stage-A baseline — 3 adapters
 
-2026-09-07 已完成当前两个 adapter 的全部 `pending` surface 审校，并逐批执行独立 Completion Recheck。
-
-最终：
+`renjiao_start3` 接入完成并通过独立 Completion Recheck。接入时：
 
 ```text
-Enabled adapters        = 2
-Source occurrences      = 1716
-Normalized surfaces     = 1144
-Durable decisions       = 1144
-Vocabulary preview      = 1028
-Review/blocker surfaces = 64
-
-keep-identity     = 1017
-reuse-identity    = 32
-held              = 52
-pending           = 0
-split-required    = 12
-route-expression  = 5
-source-only       = 26
+299 completely new surfaces
+519 previously reviewed surfaces with changed evidence
+= 818 pending
 ```
 
-最后一批 72 条 workflow：
+随后已完成 7 批统一 review，累计处理 356 个 pending surface。
+
+当前生成视图：
 
 ```text
-GitHub Actions run = 34045105706
-Completion Recheck = pass
-Klose publishing state untouched = yes
+Enabled adapters          = 3
+Source occurrences        = 2567
+Normalized surfaces       = 1443
+Durable decisions         = 1271
+Vocabulary preview        = 857
+Review/blocker surfaces   = 526
+Evidence-changed surfaces = 290
+
+keep-identity     = 839
+reuse-identity    = 35
+held              = 62
+pending           = 462
+split-required    = 2
+route-expression  = 16
+source-only       = 27
 ```
 
-当前 64 条 review queue **全部是真实 blocker**：
+当前 pending 可解释为：
 
 ```text
-held           = 52
-split-required = 12
-pending        = 0
+new-surface pending      = 172
+evidence-changed pending = 290
+Total pending            = 462
 ```
 
-不要为了 queue=0 强行猜测。典型 blocker：
+本轮收敛变化：
+
+```text
+pending            818 → 462
+review/blocker     848 → 526
+evidence-changed   519 → 290
+Vocabulary preview 553 → 857
+```
+
+最新第 7 批：
+
+```text
+Decision updates       = 86
+replaced               = 53
+appended               = 33
+GitHub Actions run     = 34064380748
+Completion Recheck     = PASS
+Generated data commit  = 5f63e11
+```
+
+持续保护的代表性边界：
 
 ```text
 May(月份) / may(情态动词)
-like=喜欢 / weather-like construction
+like=喜欢 / similarity construction
 square=正方形 / square=广场
 left=左边 / left=leave过去式
 cook=动词 / cook=名词
 cold=寒冷 / cold=感冒
-study=学习 / study=书房
-child / children
-feet / foot
-slept / swam / were / won
-```
+hot=温度 / hot=辣或食物语义
+orange=水果 / orange=颜色
+kind=种类 / kind=友好的
+live=居住 / live=活着
+mouse=动物 / mouse=电脑鼠标
 
-这批统一审校还明确完成：
-
-```text
-rowed a boat → row a boat
-jumped/jumping rope → jump rope
-listened/listening to music → listen to music
-watched/watching TV → watch TV
-washed clothes → wash clothes
-walking the dog → walk the dog
-watering the plants → water the plants
-
-the U.K. → the UK
-the U.S.A. → the USA
-the United States of America → the USA
-
-the matter → route-expression
-excuse me → route-expression
-saw flowers → source-only
+glasses=眼镜 独立，不并到 glass
+our / ours 保留不同语法 learning unit
+Mrs / Mr 不因字符串 morphology 信号合并
+laughed → laugh
+licked → lick
+longer → long
+older → old
+noodles → noodle
+parents → parent
 ```
 
 当前仍然：
@@ -292,51 +306,53 @@ Anki modified              = no
 
 ---
 
-## 7. Completion Recheck contract
+## 8. NEXT TASK — continue the single unified review queue
 
-当前 checker 同时验证：
+唯一内容入口：
+
+```text
+anki/klose/third_party_vocabulary/staging/review_queue.csv
+```
+
+继续处理当前 462 个 pending：
+
+```text
+1. 高置信、同义新增 evidence → 直接 revalidate；
+2. 清晰新 lexical learning unit → keep-identity；
+3. canonical form / alias → reuse-identity；
+4. 完整交际话语/指令 → route-expression；
+5. 仅为事件/屈折 source chunk → source-only；
+6. 同形异义、POS 边界、irregular/gerund policy 不足 → held / split-required；
+7. 每批写回 identity_decisions.csv 后 rebuild + independent Completion Recheck。
+```
+
+不要为了 `pending=0` 猜测。当前 start3 普通 pending 收敛后，再接入下一个独立第三方 Source Adapter；所有计划第三方来源完成前不 mint Stable ThirdPartyID、不执行 Stage-B Klose diff。
+
+---
+
+## 9. Completion Recheck contract
+
+每个 adapter 接入或每批 decision update 后必须验证：
 
 ```text
 Source adapter occurrence closure
 Decision schema / canonical reuse correctness
+Explicit reviewed OccurrenceKeys JSON arrays
+Changed source evidence automatically requeues
+Stale SourceMatchKey excluded from preview provenance
 review_queue 纯派生
-known semantic blockers preserved
-known morphology blockers preserved
-Beijing multiword 必须经过显式 review
+known semantic/morphology blockers preserved
 simplified physical layout
 legacy multi-pass tools absent
 Klose Master/Learner/Publish/Anki untouched
 ```
 
-每个 adapter 接入或每批 decision update 后都必须重新通过。
-
 ---
 
-## 8. NEXT TASK — add the next Source Adapter
-
-当前两个 adapter 已没有普通 pending；剩余 64 项需要真实上下文或 identity policy，不应阻塞继续扩大第三方 corpus。
-
-下一步：
+## 10. Deferred
 
 ```text
-1. 接入下一个独立第三方 Source Adapter；
-2. adapter 只输出 standardized Source Occurrences；
-3. 在 source_adapters.csv 中启用；
-4. 通用 builder 自动把新增 surface 变成 pending / candidate signals；
-5. 只审新增/受影响的 unresolved decisions；
-6. rebuild + independent Completion Recheck；
-7. 不 mint Stable ThirdPartyID；
-8. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
-```
-
-优先候选：repo 内人教版“三年级起点”，作为 `renjiao_start3` 独立 adapter。
-
----
-
-## 9. Deferred
-
-```text
-当前 64 个 held/split 第三方 blocker：等更多教材上下文、actual textbook 或 form policy 提供证据后再收敛
+真实 held/split 第三方 blocker：等更多教材上下文、actual textbook 或 form policy 后收敛
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（对应 admission 前）
@@ -345,7 +361,7 @@ Expressions one-month real-learning evaluation
 
 ---
 
-## 10. Frozen long-term rules
+## 11. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
