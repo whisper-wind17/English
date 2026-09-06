@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the narrow Hujiao start-from-grade-3 primary source-adapter contract.
-
-The first CI run intentionally discovers the exact occurrence/MatchKey counts from
-the real XLSX checkout. Those counts are frozen into this checker immediately
-after bootstrap so later source drift becomes a hard failure.
-"""
+"""Validate the narrow Hujiao start-from-grade-3 primary source-adapter contract."""
 from __future__ import annotations
 
 import csv
@@ -18,9 +13,8 @@ EXPECTED_FIELDS = [
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition", "SourceFile",
 ]
 SOURCE_FILE_RE = re.compile(r"沪教版三年级起点[三四五六]年级[上下]\.xlsx$")
-# Bootstrap only. Freeze exact values after the first successful parser run.
-EXPECTED_OCCURRENCES: int | None = None
-EXPECTED_MATCHKEYS: int | None = None
+EXPECTED_OCCURRENCES = 1111
+EXPECTED_MATCHKEYS = 1067
 
 
 def main() -> None:
@@ -32,9 +26,7 @@ def main() -> None:
             raise SystemExit(f"Unexpected occurrence schema: {reader.fieldnames}")
         rows = list(reader)
 
-    if not rows:
-        raise SystemExit("Hujiao start3 adapter produced zero occurrences")
-    if EXPECTED_OCCURRENCES is not None and len(rows) != EXPECTED_OCCURRENCES:
+    if len(rows) != EXPECTED_OCCURRENCES:
         raise SystemExit(f"Expected {EXPECTED_OCCURRENCES} Hujiao start3 occurrences, found {len(rows)}")
     if any(r.get("SourceID") != "hujiao_start3" for r in rows):
         raise SystemExit("SourceID drift in Hujiao start3 adapter")
@@ -53,7 +45,7 @@ def main() -> None:
         raise SystemExit(f"Expected 8 grade/semester books, got {sorted(books)}")
 
     distinct = len({r["MatchKey"] for r in rows})
-    if EXPECTED_MATCHKEYS is not None and distinct != EXPECTED_MATCHKEYS:
+    if distinct != EXPECTED_MATCHKEYS:
         raise SystemExit(f"Expected {EXPECTED_MATCHKEYS} normalized MatchKeys, found {distinct}")
 
     forbidden = {"CandidateNoteIDs", "ProposedNoteID", "StageAClass", "existing-in-klose", "third-party-new"}
@@ -64,7 +56,7 @@ def main() -> None:
     print(f"source occurrences = {len(rows)}")
     print(f"distinct MatchKeys = {distinct}")
     print("source books = 8")
-    print(f"exact source baseline frozen = {'yes' if EXPECTED_OCCURRENCES is not None and EXPECTED_MATCHKEYS is not None else 'bootstrap-pending'}")
+    print("exact source baseline frozen = yes")
     print("identity/matching state in adapter = no")
     print("Final Klose diff executed = no")
 
