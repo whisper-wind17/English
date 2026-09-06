@@ -68,6 +68,12 @@ def main() -> None:
         assert by_key[key]["ProposedObjectDecision"] == "pending-vocabulary-sense-review", key
         assert by_key[key]["ResolutionStatus"] == "pending", key
 
+    # These are lexical compounds even though they begin with "shopping".
+    # They must remain eligible for Vocabulary phrase identity review.
+    for key in {"shopping centre", "shopping list", "shopping mall"}:
+        assert by_key[key]["ProposedObjectDecision"] == "pending-vocabulary-phrase-sense-review", key
+        assert by_key[key]["ResolutionStatus"] == "pending", key
+
     for key in {"art gallery", "big ben", "living room"}:
         assert by_key[key]["ProposedObjectDecision"] == "pending-vocabulary-phrase-sense-review", key
         assert by_key[key]["ResolutionStatus"] == "pending", key
@@ -85,9 +91,6 @@ def main() -> None:
     assert len(queue_keys) == len(queue), "Duplicate MatchKey in identity/object review queue"
     assert queue_keys == expected_queue_keys
 
-    # The type audit found exactly 99 single-token lexical rows with no risk
-    # signal (403 total - 304 risk/routing queue). These are the only rows that
-    # may become rule-reviewed new lexical candidates in this routing pass.
     lexical_safe = [
         r for r in audit
         if r["CandidateType"] == "single-token-lexical-review"
@@ -110,6 +113,7 @@ def main() -> None:
     for key in sorted(decisions):
         print(f"decision {key} = {decisions[key]}")
     print(f"identity/object review queue = {len(queue)}")
+    print("Lexical shopping compounds preserved for Vocabulary review = yes")
     print("No source occurrence deleted = yes")
     print("ThirdPartyID minted = no")
     print("Klose merge authorized = no")
