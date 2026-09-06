@@ -32,7 +32,7 @@ It intentionally does not modify stable Vocabulary identities, source occurrence
 | 6年级上 | 68 |
 | 6年级下 | 70 |
 
-## Candidate classification
+## Candidate classification — occurrence level
 
 | Class | Occurrences | Meaning |
 |---|---:|---|
@@ -41,11 +41,20 @@ It intentionally does not modify stable Vocabulary identities, source occurrence
 | morphology-or-phrase | 16 | only morphology/phrase-related candidates; never auto-merge |
 | no-existing-match | 296 | possible genuinely new learning unit |
 
-## Pre-merge decision buckets
+## Candidate classification — deduplicated surface level
 
-- reuse-candidate: 488
-- identity-review: 24
-- new-identity-candidate: 296
+| Class | Distinct MatchKeys |
+|---|---:|
+| exact-single | 433 |
+| exact-multiple | 7 |
+| morphology-or-phrase | 15 |
+| no-existing-match | 279 |
+
+## Pre-merge decision buckets — deduplicated surface level
+
+- reuse-candidate: 433
+- identity-review: 22
+- new-identity-candidate: 279
 
 ## Merge boundary
 
@@ -56,3 +65,6 @@ Generated files:
 - `occurrences.csv`: full Beijing source occurrences, preserving book and source row
 - `identity_candidates.csv`: occurrence-level comparison against current stable Klose identities
 - `surface_inventory.csv`: cross-book surface index for review; not an identity table
+- `reuse_candidates.csv`: exact-single provisional reuse candidates; target sense still not confirmed
+- `identity_review_queue.csv`: exact-multiple and morphology/phrase cases requiring explicit identity resolution
+- `new_identity_candidates.csv`: unmatched surfaces that may become new identities after review
