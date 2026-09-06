@@ -144,8 +144,6 @@ Stage A — 中文短场景 + English cue
 user-authorized-batch-approval-without-individual-review
 ```
 
-而不是伪装成逐张人工审核。
-
 当前：
 
 ```text
@@ -156,11 +154,9 @@ publishable    = 66
 release-ready  = 66
 ```
 
-`presentation_review_registry.csv` 是 approval 状态真源；`full-baseline-review.md` 主要作为内容 review sheet，不以其中历史统计替代当前 registry/NEXT 状态。
-
 ---
 
-## 4. Deterministic publish / release status
+## 4. Deterministic publish / Anki status
 
 Expressions 生成链：
 
@@ -172,20 +168,18 @@ upstream registries
 → tools/check_klose_expressions_release_ready.py
 ```
 
-当前 full baseline 已按同一 deterministic derivation 重建；结构校验通过：
-
-```text
-publishable     = 66
-grade4_priority = 37
-grade3_only     = 29
-drafts          = 0
-LearningOrder   = 000001..000066
-```
-
 正式唯一导入文件：
 
 ```text
 anki/klose/expressions/publish/anki-import.csv
+```
+
+2026-09-06 用户已在 Anki Desktop 完成首次正式导入并确认结果；随后仅对当前 66 张 `is:new` Cards 按 LearningOrder 升序执行 Reposition：
+
+```text
+KE000001 / 000001 → New #1
+...
+KE000066 / 000066 → New #66
 ```
 
 当前状态：
@@ -193,33 +187,34 @@ anki/klose/expressions/publish/anki-import.csv
 ```text
 Build Valid        = yes
 Content Releasable = yes
-Anki Updated       = no
+Anki Updated       = yes
 Learning Admitted  = yes
-```
-
-不要手工修改 generated `study.csv` / `anki-import.csv`。后续 Presentation / Admission 变化仍必须从上游确定性重建。
-
----
-
-## 5. NEXT TASK — first full Anki import
-
-现在内容侧已经完成，下一步等待用户有条件操作 Anki Desktop：
-
-```text
-1. 创建/确认 Deck: Klose-English::Expressions
-2. 创建/确认 Note Type: Klose Expression
-3. 按 anki/klose/expressions/anki/README.md 配置 12 fields / Production template / styling
-4. 导入 anki/klose/expressions/publish/anki-import.csv
-5. 验证 Notes = Cards = 66
-6. 仅对 is:new Cards 按 LearningOrder materialize New #
-7. 设置 Expressions Deck Options / New cards per day
-8. Sync 到 AnkiWeb / iPad
-9. 开始真实学习
+Notes              = 66
+Cards              = 66
+New # sequenced    = yes
 ```
 
 Anki 是 FSRS / Review History / Due / Interval / Card State 真源；repo 不重建这些状态。
 
-Expressions `New/day` 尚未冻结。首次导入时结合 Vocabulary `New/day=8` 和实际总负担设置；不要一次性引入全部 66 张。
+---
+
+## 5. NEXT TASK — Expressions deck options / sync / start learning
+
+当前下一步：
+
+```text
+1. 为 Klose-English::Expressions 使用独立 Deck Options preset，避免修改 Vocabulary preset
+2. FSRS = ON
+3. Desired retention = 90%
+4. New card gather order = Ascending position
+5. New card sort order = Order gathered
+6. 决定 Expressions New cards/day
+7. Sync 到 AnkiWeb / iPad
+8. iPad 实机检查 Front/Back/TTS/字号
+9. 开始真实学习
+```
+
+Expressions `New/day` 尚未冻结。当前 Vocabulary 已为 `New/day=8`；Expressions 属于主动产出任务，首次运行应采用更低引入速率，并根据第一周 Again ratio 与实际 review load 调整，不要一次性引入全部 66 张。
 
 ---
 
