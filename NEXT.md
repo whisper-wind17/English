@@ -411,13 +411,13 @@ Cross-source exact-overlap 第一轮 Identity Resolution：
 
 ```text
 rule-reviewed reuse             = 105
-model-reviewed rows             = 21
-pending semantic review         = 266
+model-reviewed rows             = 280
+pending semantic review         = 7
 
-reuse-learning-unit             = 106
-partial-overlap-split-required  = 7
+reuse-learning-unit             = 356
+partial-overlap-split-required  = 8
 do-not-merge                    = 3
-held / policy-context blocker   = 10
+held / policy-context blocker   = 18
 
 morphology resolved             = 5
 morphology held                 = 1
@@ -466,7 +466,7 @@ Klose Master/Release/Publish/Anki changed = no
 当前下一步：
 
 ```text
-1. 继续处理剩余 266 个 cross-source semantic-risk pending rows；
+1. 继续处理剩余 7 个 cross-source semantic-risk pending rows；
 2. 对人教 403 个 new-surface candidates 做 within-source homograph / sense-split audit；
 3. 复核两类 blocker 后，再判断是否已经足够稳定到可以 mint 第一版 Stable ThirdPartyID；
 4. 在此之前不执行 Klose Stage-B final diff；
