@@ -15,6 +15,7 @@ STAGING = ROOT / "anki" / "klose" / "source_reference" / "beijing_start1_staging
 
 REQUIRED_FILES = [
     "README.md",
+    "PREMERGE_STATUS.md",
     "occurrences.csv",
     "identity_candidates.csv",
     "surface_inventory.csv",
@@ -26,6 +27,7 @@ REQUIRED_FILES = [
     "source_variant_resolution_review.csv",
     "source_variant_audit.md",
     "semantic_resolution_review.csv",
+    "proposed_occurrence_identity_map.csv",
 ]
 
 
@@ -57,11 +59,23 @@ def main() -> None:
     high_review = rows("identity_resolution_review.csv")
     variant_q = rows("source_variant_review_queue.csv")
     variant_review = rows("source_variant_resolution_review.csv")
+    proposed = rows("proposed_occurrence_identity_map.csv")
 
     if len(occurrences) != 808:
         raise SystemExit(f"Expected 808 Beijing occurrences, got {len(occurrences)}")
     if len(surfaces) != 734:
         raise SystemExit(f"Expected 734 Beijing distinct MatchKeys, got {len(surfaces)}")
+    if len(proposed) != len(occurrences):
+        raise SystemExit(
+            f"Proposed occurrence map must cover every occurrence: {len(proposed)} != {len(occurrences)}"
+        )
+
+    occ_keys = [r.get("SourceOccurrenceKey", "") for r in occurrences]
+    proposed_keys = [r.get("SourceOccurrenceKey", "") for r in proposed]
+    if len(set(occ_keys)) != len(occ_keys):
+        raise SystemExit("Duplicate SourceOccurrenceKey in Beijing occurrences")
+    if set(occ_keys) != set(proposed_keys):
+        raise SystemExit("Proposed occurrence identity map key coverage mismatch")
 
     books = {(r.get("Grade"), r.get("Semester")) for r in occurrences}
     expected = {(str(g), s) for g in range(1, 7) for s in ("上", "下")}
@@ -88,6 +102,7 @@ def main() -> None:
         "identity_resolution_review.csv",
         "source_variant_resolution_review.csv",
         "semantic_resolution_review.csv",
+        "proposed_occurrence_identity_map.csv",
     ):
         assert_no_merge_authorized(name)
 
@@ -95,6 +110,7 @@ def main() -> None:
     print("Merge Authorized = no")
     print(f"Source occurrences = {len(occurrences)}")
     print(f"Distinct MatchKeys = {len(surfaces)}")
+    print(f"Proposed occurrence identity rows = {len(proposed)}")
     print(f"High-risk identity reviews covered = {len(q_keys)}")
     print(f"Source-variant reviews covered = {len(vq_keys)}")
 
