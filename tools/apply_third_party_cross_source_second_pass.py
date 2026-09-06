@@ -99,8 +99,6 @@ def main() -> None:
     for key in sorted(SAFE_REUSE):
         row = by_key[key]
         if row["ResolutionStatus"] == "rule-reviewed" and row["ProposedDecision"] == "reuse-learning-unit":
-            # This row was already resolved by the stricter zero-risk rule in
-            # pass one. Keep its stronger first-pass provenance intact.
             already_rule_reviewed.append(key)
             continue
         if row["ResolutionStatus"] != "pending" or row["ProposedDecision"] != "pending-semantic-review":
@@ -147,12 +145,14 @@ def main() -> None:
     write_csv(rows)
     statuses = Counter(r["ResolutionStatus"] for r in rows)
     decisions = Counter(r["ProposedDecision"] for r in rows)
+    pending_keys = sorted(r["MatchKey"] for r in rows if r["ResolutionStatus"] == "pending")
     print(f"Second-pass SAFE_REUSE candidates = {len(SAFE_REUSE)}")
     print(f"Second-pass upgraded pending reuse = {upgraded}")
     print(f"Second-pass already rule-reviewed = {len(already_rule_reviewed)}")
     if already_rule_reviewed:
         print("already rule-reviewed keys = " + "|".join(already_rule_reviewed))
     print(f"Second-pass explicit blockers = {len(EXPLICIT)}")
+    print("remaining pending keys = " + "|".join(pending_keys))
     for key in sorted(statuses):
         print(f"status {key} = {statuses[key]}")
     for key in sorted(decisions):
