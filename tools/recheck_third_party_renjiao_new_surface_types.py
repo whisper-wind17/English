@@ -66,7 +66,6 @@ def main() -> None:
         assert int(row["TokenCount"]) >= 1, row["MatchKey"]
         assert row["Contexts"].strip(), row["MatchKey"]
 
-    # Known ordinal/form aliases must not be minted as new lexical identities.
     for key, related in {
         "5th": "fifth",
         "10th": "tenth",
@@ -79,8 +78,6 @@ def main() -> None:
         assert row["CandidateRoute"] == "identity-alias-review", key
         assert row["RelatedMatchKeys"] == related, (key, row["RelatedMatchKeys"])
 
-    # Representative multiword cases must be routed away from automatic
-    # single-token Vocabulary identity creation.
     for key in {"a lot of", "by bike", "across from"}:
         assert by_key[key]["CandidateType"] == "multiword-routing-review", key
         assert by_key[key]["CandidateRoute"] == "vocabulary-vs-expression-review", key
@@ -89,8 +86,13 @@ def main() -> None:
         assert by_key[key]["CandidateType"] == "expression-or-chunk-review", key
         assert by_key[key]["CandidateRoute"] == "expression-routing-review", key
 
-    # Legitimate multiword lexical/proper-name candidates remain reviewable as
-    # Vocabulary rather than being silently routed to Expressions.
+    # Known -ing-headed lexical compounds must never be swallowed by the
+    # generic gerund/event-chunk heuristic.
+    for key in {"shopping centre", "shopping list", "shopping mall"}:
+        assert by_key[key]["CandidateType"] == "multiword-lexical-review", key
+        assert by_key[key]["CandidateRoute"] == "vocabulary-vs-expression-review", key
+        assert "gerund-chunk" not in by_key[key]["RiskSignals"], key
+
     for key in {"art gallery", "big ben", "bus driver"}:
         assert by_key[key]["CandidateType"] == "multiword-lexical-review", key
         assert by_key[key]["CandidateRoute"] == "vocabulary-vs-expression-review", key
@@ -99,7 +101,6 @@ def main() -> None:
         assert by_key[key]["CandidateType"] == "single-token-lexical-review", key
         assert by_key[key]["CandidateRoute"] == "vocabulary-identity-review", key
 
-    # Risk queue must be an exact filtered subset of the audit output.
     expected_risk_keys = {
         r["MatchKey"]
         for r in audit
@@ -110,7 +111,6 @@ def main() -> None:
     assert len(risk_keys) == len(risk), "Duplicate MatchKey in new-surface risk queue"
     assert risk_keys == expected_risk_keys
 
-    # No stable third-party identity registry may appear during this stage.
     stable_registry = BASE / "third_party_vocabulary" / "master" / "identity_registry.csv"
     assert not stable_registry.exists(), "Stable ThirdPartyID registry exists before new-surface resolution"
 
@@ -123,6 +123,7 @@ def main() -> None:
     for key in sorted(type_counts):
         print(f"type {key} = {type_counts[key]}")
     print(f"risk/routing queue = {len(risk)}")
+    print("Lexical shopping compounds protected from gerund routing = yes")
     print("403 surfaces are not assumed to equal 403 Vocabulary identities = yes")
     print("ThirdPartyID minted = no")
     print("Klose merge authorized = no")
