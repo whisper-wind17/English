@@ -8,6 +8,7 @@ on:
       - 'tools/check_third_party_renjiao_start1.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/check_third_party_corpus.py'
+      - 'tools/normalize_third_party_identity_decisions.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
       - 'anki/klose/source_reference/beijing_start1_staging/semantic_resolution_review.csv'
@@ -37,6 +38,12 @@ jobs:
         run: python tools/check_third_party_renjiao_start1.py
 
       - name: Build simplified third-party corpus workspace
+        run: python tools/build_third_party_corpus.py
+
+      - name: Normalize migrated Beijing multiword decisions
+        run: python tools/normalize_third_party_identity_decisions.py
+
+      - name: Rebuild workspace after migration normalization
         run: python tools/build_third_party_corpus.py
 
       - name: Independent third-party Completion Recheck
