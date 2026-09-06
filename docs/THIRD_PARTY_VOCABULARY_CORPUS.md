@@ -1,109 +1,42 @@
 # Third-party Multi-Edition Vocabulary Corpus
 
-本文定义 Klose Vocabulary 的统一第三方教材词源。目标不是研究不同教材版本本身，而是把多个第三方小学英语教材词表合并成一个 **sense-aware、去重、可继续增量扩展的统一 Vocabulary corpus**；只有在所有第三方来源处理完成后，才与 Klose Stable Vocabulary Identity 做最终差集，得到真正的新词学习池。
+本文定义 Klose 的统一第三方教材 Vocabulary corpus。目标很简单：把多个第三方小学英语教材词表汇总、按 **learning unit / target sense** 去重，形成一个独立的统一第三方词源；等计划中的第三方来源全部处理完成后，再与 Klose Full Stable Vocabulary Identity 做一次最终差集。
 
-## 1. 目标与两阶段去重
-
-长期流程固定为两阶段：
+## 1. 两阶段流程
 
 ```text
-阶段 A：第三方 corpus 内部去重
+Stage A — 第三方内部
 
-北京版
-人教版
-沪教版
-其他版本
-    ↓
-各版本 Source Adapter
-    ↓
-统一解析 / normalize
-    ↓
-sense-aware Identity Resolution
-    ↓
-Third-party Unified Vocabulary
+多个第三方教材 Raw Vocabulary
+→ 各 Source Adapter 只解析 Source Occurrence
+→ 通用 candidate matching
+→ sense-aware Identity Resolution
+→ Third-party Unified Vocabulary
 
-阶段 B：全部第三方来源完成后，才与 Klose 做最终去重
+Stage B — 所有第三方来源完成后
 
 Third-party Unified Vocabulary
-    ↓
-vs Klose Full Stable Vocabulary Identity Registry
-    ↓
-Third-party New Vocabulary Pool
+→ vs Klose Full Stable Identity Registry
+→ Third-party New Vocabulary Pool
+→ 后续全部作为 Klose 当前教材之外的新词学习
 ```
 
-核心公式：
+Stage A 不因为 Klose 当前已有某词而删除第三方 learning unit；Stage B 只执行一次最终 Klose diff。
+
+## 2. 产品上真正重要的内容
+
+统一第三方词源只关心 learning unit 本身：
 
 ```text
-Third-party New Vocabulary Pool
-= 完整 Third-party Unified Vocabulary
-  - Klose 已存在的同一 learning unit / target sense
-```
-
-这些剩余 learning units 的产品定义是：**Klose 当前实际教材之外、后续计划学习的新词**。
-
-## 2. 为什么必须分成两阶段
-
-构建第三方 corpus 时，不因为 Klose 当前是否已有某个词而删除第三方 Identity。
-
-例如第二个教材加入时，只回答：
-
-```text
-它与当前 Third-party Unified Vocabulary
-是否是同一 learning unit / target sense？
-```
-
-而不是同时回答：
-
-```text
-Klose 现在是否已经学过它？
-```
-
-这样可以避免：
-
-- 第三方来源的加入顺序影响最终 corpus；
-- 某个 surface 因为与 Klose 暂时匹配而过早被过滤，后续才发现其实是不同 target sense；
-- Klose 当前 Stable Registry 的演进反向污染第三方 corpus；
-- 每加入一个教材版本都重复执行一遍 Klose reconciliation。
-
-因此在所有第三方教材完成前，与 Klose 的匹配只能作为 diagnostic / candidate 信息存在，**不能据此从第三方 corpus 删除 Identity，也不能生成最终 New Vocabulary Pool**。
-
-## 3. 北京版的角色
-
-北京版 1–6 年级当前 staging 是这个统一词源的第一个 seed，不具有长期语义优先级。
-
-后续加入人教版、沪教版或其他版本时，不再维护“北京版主表 + 其他版本附加”的概念，而是统一进入同一个第三方 corpus：
-
-```text
-Beijing = Source Adapter / Seed #1
-Renjiao = Source Adapter #2
-Shanghai = Source Adapter #3
-...
-```
-
-任何一个第三方版本都不能因为先加入而覆盖其他版本的不同 target sense。
-
-## 4. 什么重要，什么不重要
-
-### 核心业务字段
-
-统一第三方 Vocabulary Identity 只需要围绕 learning unit 本身建模：
-
-```text
-ThirdPartyID          # 第三方 corpus 内稳定身份；正式 schema 落地时再确定编号格式
 CanonicalWord
-MatchKey
-SenseLabel
+TargetSense
 BritishIPA
 AmericanIPA
-MeaningPrimary
+Meaning
 IdentityStatus
 ```
 
-`MatchKey` 只用于 candidate matching，不等于 Identity。
-
-### 不作为学习决策字段
-
-以下统计不进入学习排序、LearnerLevel、Anki Presentation 或是否学习的决策：
+以下信息不参与学习排序、LearnerLevel、Anki Presentation 或是否学习：
 
 ```text
 来自哪个教材版本
@@ -113,36 +46,20 @@ IdentityStatus
 主要分布年级
 ```
 
-这些指标当前没有产品价值，不构建 Coverage / Frequency / GradeSpan 排序体系。
+SourceID / Book / Grade / Row 等来源信息仍保留在 Source Occurrence 层，仅用于追溯、重建和 source reconciliation。
 
-### provenance 仍保留，但仅用于回溯
+## 3. Identity 原则
 
-第三方原始数据的来源信息仍保存在 Source Occurrence / Raw staging 层，用于：
+去重单位不是字符串，而是一个明确 learning unit / target sense。
 
-- 数据错误追溯；
-- 义项冲突调查；
-- Edition / Revision reconciliation；
-- 重建统一 corpus。
-
-它们不进入 Klose 正常学习界面，也不决定是否学习。
-
-## 5. 去重单位：learning unit / target sense
-
-禁止按字符串简单去重。
-
-### 同一 surface + 同一 target sense
-
-合并为一个第三方 Identity：
+同 surface、同义项：
 
 ```text
 apple = 苹果
+→ 一个 Identity
 ```
 
-无论来自多少教材，统一 corpus 只保留一个 learning unit。
-
-### 同一 surface + 不同 target sense
-
-必须保留多个 Identity：
+同 surface、不同义项：
 
 ```text
 bank = 银行
@@ -155,119 +72,185 @@ cook = 烹饪；煮
 cook = 厨师
 ```
 
-### morphology / phrase / punctuation
+必须保留多个 Identity。
 
-只产生 candidate，不自动 merge：
-
-```text
-sock vs socks
-child vs children
-fly vs fly a kite
-How old ...? vs how old
-```
-
-必须按当前 Vocabulary Identity 规则做 sense-aware review。
-
-## 6. 阶段 A：增量构建完整第三方 corpus
-
-每加入一个新教材版本，只执行第三方内部 Identity Resolution：
+Morphology、format alias、multiword、punctuation、substring 等都只能产生 candidate signal，不能自动等同 Identity：
 
 ```text
-1. parse raw vocabulary occurrences
-2. normalize presentation form
-3. 与 Third-party Unified Vocabulary 做 candidate matching
-4. same sense → reuse third-party identity
-5. same surface / different sense → split identity
-6. morphology / phrase ambiguity → review
-7. genuinely new → append third-party identity
-8. rebuild Third-party Unified Vocabulary
+sock / socks
+child / children
+How old ...? / how old
+fly / fly a kite
 ```
 
-阶段 A 明确禁止：
+Vocabulary / Expression / source-only chunk 也必须分开，不能因为原始 XLSX 把它们都放在“单词”列里就全部 mint Vocabulary Identity。
+
+## 4. 最简长期实现
+
+不要为每一种风险建立一条独立处理流水线。长期 active model 只有四个核心数据对象：
 
 ```text
-- 因 Klose 已存在而删除第三方 Identity
-- 把 Klose NoteID 当第三方 corpus 的 Identity
-- 每加入一个版本就生成最终 Third-party New Vocabulary Pool
-- 把 staging 自动写入 Klose learner / release / publish / Anki
+1. Source Adapter occurrences
+2. config/source_adapters.csv
+3. review/identity_decisions.csv
+4. generated Stage-A views
 ```
 
-新增教材不重新编号已有第三方 Identity。
+物理路径：
 
-## 7. 阶段 B：全部第三方完成后，与 Klose 做最终差集
+```text
+anki/klose/third_party_vocabulary/
+├── config/
+│   └── source_adapters.csv
+├── review/
+│   └── identity_decisions.csv
+└── staging/
+    ├── occurrences.csv
+    ├── surface_candidates.csv
+    ├── review_queue.csv
+    └── unified_vocabulary_preview.csv
+```
 
-只有当计划纳入的第三方教材版本都已经完成解析和内部 sense-aware 去重后，才执行一次最终 reconciliation：
+核心工具：
+
+```text
+tools/build_third_party_corpus.py
+→ 通用生成器
+
+tools/check_third_party_corpus.py
+→ 独立 Completion Recheck
+```
+
+每个 Source Adapter 只负责：
+
+```text
+Raw source
+→ standardized occurrences.csv
+```
+
+它不负责跨教材比较，不负责 morphology/sense 决策，也不负责 Klose diff。
+
+## 5. `identity_decisions.csv` 是唯一内容决策真源
+
+候选信号可以很多，但内容决策只有一套。
+
+核心字段：
+
+```text
+DecisionKey
+MatchKey
+OccurrenceKeys
+Action
+CanonicalMatchKey
+ObjectType
+TargetSense
+Status
+Confidence
+DecisionBasis
+Rationale
+```
+
+`Action` 当前统一为：
+
+```text
+keep-identity       # 保留为独立 Vocabulary learning unit
+reuse-identity      # 归到 canonical learning unit
+split-required      # 同 surface 需要拆义项/按 occurrence 拆分
+held                # 当前证据或 identity policy 不足
+route-expression    # 进入 Expression 路由，不生成 Vocabulary Identity
+source-only         # 只保留 Source Fact
+pending             # 尚未审校
+```
+
+例如：
+
+```text
+danced
+→ reuse-identity
+→ CanonicalMatchKey=dance
+
+scissors
+→ keep-identity
+
+won
+→ held
+→ irregular-form policy
+
+French
+→ split-required
+```
+
+新的教材接入后，如果出现没有 decision 的新 surface，builder 自动把它放入 `review_queue.csv`；不需要为新教材再创建一套 `audit_xxx.py → apply_xxx.py → recheck_xxx.py`。
+
+## 6. Generated views
+
+`surface_candidates.csv`：
+
+- 每个 normalized surface 一行；
+- 展示来源聚合、CandidateSignals、候选 MatchKey 和当前 Decision；
+- candidate signal 只是证据。
+
+`review_queue.csv`：
+
+- 纯派生 view；
+- 只包含 `pending / held / split-required` 等需要继续处理的 surface；
+- 不作为第二套决策真源。
+
+`unified_vocabulary_preview.csv`：
+
+- 只包含当前已经 reviewed 的 `keep-identity / reuse-identity` Vocabulary candidate；
+- 目前仍是 preview；
+- 还没有 mint Stable ThirdPartyID。
+
+## 7. 新教材的标准接入方式
+
+以后增加沪教版、人教三年级起点或其他版本，只做：
+
+```text
+1. 新增 Source Adapter，输出标准 occurrences.csv
+2. 在 config/source_adapters.csv 增加一行并 Enabled=yes
+3. 运行 build_third_party_corpus.py
+4. 新 surface / 新冲突自动进入统一 review_queue.csv
+5. 只修改 identity_decisions.csv 完成审校
+6. rebuild
+7. check_third_party_corpus.py 做独立 Completion Recheck
+```
+
+不复制现有 builder/checker，不建立 edition-specific semantic pipeline。
+
+## 8. Stage B：最终 Klose diff
+
+只有当计划中的第三方教材都完成 Stage A 后才执行：
 
 ```text
 Third-party Unified Vocabulary
 vs
-Klose Full Stable Identity Registry
+note_registry.csv + note_registry_extensions.csv
 ```
 
-Klose 比较范围必须是完整 Stable Identity Registry：
+规则仍然是 sense-aware：
 
 ```text
-note_registry.csv
-+ note_registry_extensions.csv
-```
-
-不能只与当前 Released / Unsuspended / Anki active cards 比较。
-
-判定规则：
-
-```text
-同一 learning unit / target sense 已存在于 Klose
+同一 learning unit 已在 Klose
 → existing-in-klose
-→ 不进入 Third-party New Vocabulary Pool
 
-Klose 没有该 learning unit / target sense
+Klose 没有该 target sense
 → third-party-new
-→ 进入 Third-party New Vocabulary Pool
 ```
 
-例：
+`third-party-new` 的产品含义是：**Klose 当前实际教材之外、后续计划学习的新 Vocabulary**。
+
+Stage B 之前禁止：
 
 ```text
-Third-party Unified Vocabulary:
-bank = 银行
-bank = 河岸
-
-Klose Stable Vocabulary:
-bank = 银行
-
-最终：
-bank = 银行 → existing-in-klose
-bank = 河岸 → third-party-new
+- 因 Klose 已存在而删除第三方 Identity
+- 把 Klose NoteID 当第三方 corpus Identity
+- 把 Stage-A staging 自动写入 Klose Master / Learner / Release / Publish / Anki
 ```
-
-这一步也是 sense-aware reconciliation，不是 `MatchKey` 字符串差集。
-
-## 8. 学习语义
-
-`third-party-new` 的含义不是“可有可无的参考词”，而是：
-
-> 当前教材之外，计划让 Klose 后续学习的新 Vocabulary learning unit。
-
-因此长期目标是把所有已经完成 Identity Resolution 的 `third-party-new` 纳入学习。
-
-但为了保护现有 Stable NoteID、Learner Presentation、Review / Release / Anki 历史，仍保持系统层分离：
-
-```text
-Third-party New Vocabulary Pool
-→ Klose Identity append / reuse decision
-→ Learner Presentation
-→ explicit Learning Admission
-→ Review / Release
-→ Anki
-```
-
-“全部计划学习”不等于 corpus 构建阶段自动写入当前 Master / Release / Anki。
 
 ## 9. Source Truth 边界
 
-统一第三方 corpus 即使已经充分清洗，仍然是第三方数据，不升级为 Klose 实际教材真源。
-
-优先级继续保持：
+第三方统一 corpus 即使充分清洗，仍是第三方数据：
 
 ```text
 Klose 手中实际教材
@@ -275,22 +258,60 @@ Klose 手中实际教材
 > Third-party Multi-Edition Vocabulary Corpus
 ```
 
-如果第三方 corpus 与 Klose 实际教材发生冲突，按 `docs/SOURCE_RECONCILIATION.md` 处理，不能反向覆盖实际教材 Source Fact。
+与 Klose 实际教材发生冲突时，继续按 `docs/SOURCE_RECONCILIATION.md` 处理。
 
-## 10. 当前实现状态
+## 10. 当前基线
 
-当前第一个 seed：
-
-```text
-anki/klose/source_reference/beijing_start1_staging/
-```
-
-北京版已完成 12 册解析、surface inventory、主要高风险 review，并曾与 Klose Stable Identity 做 candidate matching。该匹配结果保留为北京版 staging 的审计/诊断信息，但根据本设计，**不再把它视为第三方 corpus 构建阶段的最终去重结果**。
-
-当前仍保持：
+已启用：
 
 ```text
-MergeAuthorized = no
+beijing_start1   808 occurrences
+renjiao_start1   908 occurrences
 ```
 
-下一阶段应把北京版 staging 演进为统一第三方 corpus 的 Source Adapter #1，然后继续加入其他教材版本。等计划中的第三方教材都完成内部 sense-aware 去重后，再执行阶段 B 的最终 Klose diff。
+联合 Stage A：
+
+```text
+Source occurrences      = 1716
+Normalized surfaces     = 1144
+Durable decisions       = 1144
+Vocabulary preview      = 851
+Review/blocker surfaces = 254
+
+keep-identity    = 849
+reuse-identity   = 13
+held             = 50
+pending          = 192
+split-required   = 12
+route-expression = 3
+source-only      = 25
+```
+
+已在 Completion Recheck 中持续保护的代表性边界：
+
+```text
+May(月份) / may(情态动词)
+like=喜欢 / weather-like construction
+square=正方形 / square=广场
+left=左边 / left=leave过去式
+cook=动词 / cook=名词
+cold=寒冷 / cold=感冒
+study=学习 / study=书房
+
+danced → dance
+cartoons → cartoon
+gloves → glove
+scissors 保留独立 learning unit
+crossroads 保留独立 learning unit
+slept / swam / were / won 保持 irregular-form blocker
+```
+
+当前仍然：
+
+```text
+Stable ThirdPartyID minted = no
+Final Klose diff executed  = no
+Klose Master / Learner / Publish / Anki modified = no
+```
+
+下一步内容工作只针对统一 `review_queue.csv`，不再恢复旧 multi-pass 专项流水线。
