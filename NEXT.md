@@ -281,7 +281,63 @@ Grade 1–3 Vocabulary actual-source reconciliation
 
 ---
 
-## 8. Frozen long-term rules
+## 8. Beijing Edition Grade 1–6 Vocabulary pre-merge staging
+
+2026-09-06 用户要求先整理 repo 内北京版一年级起点 1–6 年级上下册，并与当前 Klose Vocabulary 做 sense-aware 去重，但**暂时不得加入当前词表**。
+
+当前 staging 入口：
+
+```text
+anki/klose/source_reference/beijing_start1_staging/PREMERGE_STATUS.md
+```
+
+当前基线：
+
+```text
+Source books                    = 12
+Source occurrences              = 808
+Distinct normalized MatchKeys   = 734
+Existing stable identities compared = 901
+
+surface exact-single            = 433
+surface exact-multiple          = 7
+surface format-alias            = 1
+surface morphology              = 2
+surface no-existing-match       = 291
+
+Beijing Premerge Valid          = yes
+Merge Authorized                = no
+Klose Master / Release / Publish / Anki changed = no
+```
+
+已完成：
+
+- 12 册 XLSX deterministic parsing；
+- occurrence-level source row 保留；
+- 与 `note_registry.csv + note_registry_extensions.csv` 全量比较；
+- exact / multiple / format alias / morphology / new candidate 分桶；
+- 10 个高风险 identity candidate 显式 review；
+- 6 个真实 inflection candidate 显式 review，并清除 `hi -> his`、`Mr -> Mrs` 等误报；
+- occurrence-level semantic collision review；
+- 独立 CI + `tools/check_klose_beijing_premerge.py` gate；
+- 所有 review 保持 `MergeAuthorized=no`。
+
+已确认 surface-only 去重会产生错误。例如：
+
+```text
+May(月份) vs may(情态动词)
+like=喜欢 vs weather ... like ...
+square=广场 vs square=正方形
+left=leave过去式 vs left=左边
+```
+
+北京版 XLSX 的 `释义` 是 dictionary-style broad gloss，不可直接当教材 target sense 真源；缺少 Unit / sentence context 的 held 项在未来 merge 前仍需 actual textbook / same-edition context 或明确标注为非 source-confirmed 的人工/模型决策。
+
+当前用户要求是 staging only，因此不要把北京版 provenance 写入 `master/source_occurrences.csv`，不要 append 北京版 NoteID，不改 learner/release/publish/Anki。
+
+---
+
+## 9. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Expression Identity 分离；
