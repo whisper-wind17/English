@@ -1,0 +1,43 @@
+.card {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  text-align: left;
+  background: #F3F0EA;
+  color: #4C4F69;
+  padding: 28px;
+  line-height: 1.45;
+}
+
+.expression-card { max-width: 760px; margin: 0 auto; }
+.function-label { font-size: 24px; font-weight: 600; color: #245E9C; margin-bottom: 22px; }
+.prompt { font-size: 31px; color: #3F4354; margin-bottom: 18px; }
+.prompt-hint { font-size: 23px; color: #5C6170; }
+#answer { border: 0; border-top: 1px solid #D3CEC6; margin: 30px 0; }
+.target { font-size: 36px; font-weight: 600; color: #245E9C; margin-bottom: 8px; }
+.tts { margin-bottom: 28px; }
+.section { margin-top: 24px; }
+.section-label { font-size: 18px; color: #5C6170; margin-bottom: 6px; }
+.pattern { font-size: 28px; color: #3F7078; }
+.meaning-usage { font-size: 25px; color: #3F4354; }
+.examples { font-size: 25px; color: #494C59; line-height: 1.6; }
+
+.nightMode.card {
+  background: #26292F;
+  color: #D9D6D0;
+}
+.nightMode .function-label,
+.nightMode .target { color: #9DBCE0; }
+.nightMode .prompt,
+.nightMode .meaning-usage { color: #E0DDD7; }
+.nightMode .prompt-hint,
+.nightMode .section-label { color: #B6B8C2; }
+.nightMode .pattern { color: #9FC5C3; }
+.nightMode .examples { color: #D5D2CC; }
+.nightMode #answer { border-top-color: #4A4D54; }
+
+.ipad .function-label { font-size: 27px; }
+.ipad .prompt { font-size: 36px; }
+.ipad .prompt-hint { font-size: 26px; }
+.ipad .target { font-size: 42px; }
+.ipad .pattern { font-size: 31px; }
+.ipad .meaning-usage,
+.ipad .examples { font-size: 28px; }
