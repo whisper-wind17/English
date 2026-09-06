@@ -1,2 +1,10 @@
 ExpressionID,CanonicalForm,FunctionKey,ExpressionType,SlotSchema,Status,CreatedFromCandidate,CreatedFromOccurrence
-KE000001,"What's [person]'s job?",ask_job,slot_frame,person,active,EC0021,EO000001
+KE000001,What's [person]'s job?,ask_job,slot_frame,person,active,EC0021,EO000001
+KE000002,There is a/an [singular noun].,state_existence_singular,slot_frame,singular_noun,active,EC0025,EO000002
+KE000003,Let's [verb phrase].,suggest_shared_action,slot_frame,verb_phrase,active,EC0008,EO000005
+KE000004,What's the weather like in [place]?,ask_weather,slot_frame,place,active,EC0029,EO000014
+KE000005,Whose [noun] is this?,ask_ownership,slot_frame,noun,active,EC0031,EO000015
+KE000006,Can I [verb phrase]?,request_permission,slot_frame,verb_phrase,active,EC0014,EO000016
+KE000007,What time is it?,ask_time,fixed,,active,EC0033,EO000020
+KE000008,Can you please [verb phrase]?,polite_request_action,slot_frame,verb_phrase,active,EC0036,EO000021
+KE000009,Would you like [thing]?,offer_or_ask_want,slot_frame,thing,active,EC0015,EO000022
