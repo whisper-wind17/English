@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/prepare_klose_beijing_vocabulary.py'
+      - 'tools/audit_klose_beijing_source_variants.py'
       - '1.全国各大教材版本中小学同步/北京版/**'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
@@ -26,6 +27,9 @@ jobs:
 
       - name: Build non-publishing Beijing staging data
         run: python tools/prepare_klose_beijing_vocabulary.py
+
+      - name: Audit source and existing-identity inflection variants
+        run: python tools/audit_klose_beijing_source_variants.py
 
       - name: Assert Klose publishing state is untouched
         run: |
