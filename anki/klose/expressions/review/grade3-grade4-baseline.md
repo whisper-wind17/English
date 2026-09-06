@@ -11,9 +11,9 @@ anki/klose/source_reference/rj_start1-grade4-klose-expressions.csv  # 72 occurre
 
 Total Source Occurrences: **166**
 
-本文件记录从 Source Fact 到 Pattern Candidate 的第一次统一整理。它不是正式 Expression Registry，也没有分配 Stable ExpressionID。
+本文件记录从 Source Fact 到 Pattern Candidate 的第一次统一整理，以及后续 Identity Review 的最终结果。
 
-## Result
+## Candidate baseline
 
 ```text
 Source Occurrences         = 166
@@ -23,103 +23,126 @@ secondary                  = 26
 pilot_candidate            = 19
 ```
 
-按当前学习顺序规则，64 个 Candidate 分成：
+Candidate 阶段按来源分为：
 
 ```text
-Grade-4 priority block = 36  # SourceGrades=4 或 3|4
-Grade-3-only block      = 28  # SourceGrades=3
-Total                   = 64
+Grade-4-related Candidates = 36  # SourceGrades=4 或 3|4
+Grade-3-only Candidates     = 28
+Total                       = 64
 ```
 
-凡一个 Pattern 同时在三、四年级出现，归入 Grade-4 priority block，不在三年级再次重复学习。
+Candidate Registry：
 
-因此未来正式 LearningOrder 固定采用：
+```text
+anki/klose/expressions/review/candidate_registry.csv
+```
+
+`ECxxxx` 只是 candidate review 编号，不是 Stable ExpressionID。
+
+## Identity Review complete
+
+64 个 Candidate 已全部完成 Identity Resolution，正式结果：
+
+```text
+Stable Expressions = 66
+Grade-4 priority   = 37
+Grade-3-only       = 29
+LearningOrder      = 000001..000066
+```
+
+之所以从 64 Candidate 得到 66 Stable Expressions，是因为有两个 Candidate 在正式 Identity 层必须 split：
+
+```text
+EC0035
+→ KE000020  It's time for [noun].
+→ KE000021  It's time to [verb].
+
+EC0058
+→ KE000035  Excuse me?   # Grade 4: 没听清时请求重复
+→ KE000062  Excuse me.   # Grade 3: 礼貌引起注意
+```
+
+这不是重复制卡，而是遵守：
+
+```text
+Expression Identity = CanonicalForm + CommunicativeFunction
+```
+
+另外有三处显式 identity adjustment：
+
+```text
+EC0009  What's this? / What's that?
+→ What's [demonstrative]?
+
+EC0014  Can I [verb phrase], please?
+→ Can I [verb phrase]?   # please 为可选礼貌成分
+
+EC0030  It's [weather adjective] [time/place].
+→ It's [weather description] [time/place].
+```
+
+以及：
+
+```text
+EC0047 Candidate Type = fixed
+→ formal ExpressionType = slot_frame
+```
+
+完整决策：
+
+```text
+anki/klose/expressions/review/identity_resolution.csv
+```
+
+## Learning order
+
+正式学习顺序已冻结为：
 
 ```text
 Grade 4 related first
 → Grade 3 only second
 ```
 
-Candidate Registry 当前文件行序只是 review 顺序，不等于正式 LearningOrder；LearningOrder 只在 Identity / Admission 冻结后写入正式 learner state。
-
-详细结构化结果：
+具体为：
 
 ```text
-anki/klose/expressions/review/candidate_registry.csv
+KE000001..KE000037  LearningOrder 000001..000037  Grade-4 priority
+KE000038..KE000066  LearningOrder 000038..000066  Grade-3 only
 ```
+
+凡同一 Pattern 同时在三、四年级出现，只学习一次，并放入 Grade-4 priority block。
 
 ## Curation rules
 
-本轮只保留值得主动产出的 communicative production units：
+- 多个教材原句若表达同一 communicative function + canonical pattern，可合并为一个 Identity；
+- 同一 surface form 若 communicative function 不同，必须 split；
+- 同一 communicative function 若存在两个需要独立主动掌握的构式，可以 split；
+- 问句和答句承担不同 production function 时保留为不同 Identity；
+- 一次性叙述、纯课文事实、迁移价值低的完整句保留在 Source Reference，不机械制卡；
+- 固定社交表达如 `Here you are.`、`You're welcome.` 可以成为 Expression，因为目标是主动调用；
+- Source Occurrence 与 Stable Expression Identity 始终分离。
 
-- 多个教材原句如果表达同一 communicative function + canonical pattern，合并为一个 Candidate；
-- 问句和答句承担不同 production function 时保留为不同 Candidate；
-- 一次性叙述、纯课文事实、迁移价值低的完整句保留在 Source Reference，不机械抽成卡；
-- `Can I ...?`、`Let's ...`、`What are these?`、`Would you like ...?` 等跨册或跨年级重复表达已合并；
-- 固定社交表达如 `Here you are.`、`You're welcome.` 仍可成为 Expression，因为目标是主动调用，而不是必须具有 slot；
-- 当前 CandidateKey `ECxxxx` 只是 review 阶段临时编号，不具备 Stable ExpressionID 语义。
+## Current presentation state
 
-## Examples of cross-source merge
-
-```text
-Can I use your eraser, please?       # Grade 3 lower
-Can I wear this new shirt today?     # Grade 4 upper
-Can I buy a new pair?                # Grade 4 lower
-
-→ Can I [verb phrase], please?
-→ Grade-4 priority block
-```
+全部 66 个 Stable Expressions 已生成 Stage-A Learner Presentation：
 
 ```text
-Let's go to the zoo!                 # Grade 3 upper
-Let's draw some ... birds.           # Grade 3 upper
-Let's do some sports.                # Grade 4 upper
-Let's buy trousers.                  # Grade 4 lower
-Let's feed the chickens.             # Grade 4 lower
-
-→ Let's [verb phrase].
-→ Grade-4 priority block
+中文短场景 / communicative intent
++ English minimal cue
+→ active English production
 ```
+
+当前 review state：
 
 ```text
-What are these?                      # Grade 3 lower
-What are these?                      # Grade 4 lower
-
-→ one Candidate
-→ Grade-4 priority block
+approved       = 9   # KE000001..KE000009
+model-reviewed = 57  # KE000010..KE000066
 ```
 
-## Pilot candidate selection
-
-当前标记 19 个 `PilotCandidate=yes`，覆盖三类能力：
+完整卡片总览：
 
 ```text
-basic social / personal information
-request / preference / shopping
-Grade-4 productive structures: job / existence / weather / ownership / time
+anki/klose/expressions/review/full-baseline-review.md
 ```
 
-Pilot 实际 LearningOrder 也必须遵循 Grade 4 related → Grade 3 only。
-
-Pilot 标记只是下一步 identity resolution 的输入，不表示已经 release，也不表示已经允许进入 Anki。
-
-## Expected card count
-
-当前 candidate baseline 对应的理论上限是 **64 张 Expression Cards**，前提是 Identity Review 后没有进一步 merge / reject。
-
-正式卡片数量只有在 Identity Review 完成后才能冻结；若某些 Candidate 被判定重叠、迁移价值不足或不适合独立 active-production card，最终数量可以小于 64，但不会因为同一 Pattern 在三、四年级重复出现而创建重复卡。
-
-## Explicitly not done yet
-
-本阶段没有：
-
-```text
-分配 KE000001...
-冻结 Expression Identity
-生成 Learner Presentation
-生成 LearningOrder
-生成 Anki Card
-修改 Anki
-```
-
-下一步应先对 pilot candidates 做 identity review，冻结 CanonicalForm / FunctionKey / ExpressionType / SlotSchema，再分配首批 Stable ExpressionID；分配后的 LearningOrder 必须把 Grade-4 priority block 放在最前面。
+`model-reviewed` 不等于用户 `approved`。在最终 batch approval 前，后 57 张不会进入 full Anki import artifact。
