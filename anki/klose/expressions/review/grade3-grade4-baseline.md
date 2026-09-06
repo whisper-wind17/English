@@ -23,6 +23,25 @@ secondary                  = 26
 pilot_candidate            = 19
 ```
 
+按当前学习顺序规则，64 个 Candidate 分成：
+
+```text
+Grade-4 priority block = 36  # SourceGrades=4 或 3|4
+Grade-3-only block      = 28  # SourceGrades=3
+Total                   = 64
+```
+
+凡一个 Pattern 同时在三、四年级出现，归入 Grade-4 priority block，不在三年级再次重复学习。
+
+因此未来正式 LearningOrder 固定采用：
+
+```text
+Grade 4 related first
+→ Grade 3 only second
+```
+
+Candidate Registry 当前文件行序只是 review 顺序，不等于正式 LearningOrder；LearningOrder 只在 Identity / Admission 冻结后写入正式 learner state。
+
 详细结构化结果：
 
 ```text
@@ -48,6 +67,7 @@ Can I wear this new shirt today?     # Grade 4 upper
 Can I buy a new pair?                # Grade 4 lower
 
 → Can I [verb phrase], please?
+→ Grade-4 priority block
 ```
 
 ```text
@@ -58,6 +78,7 @@ Let's buy trousers.                  # Grade 4 lower
 Let's feed the chickens.             # Grade 4 lower
 
 → Let's [verb phrase].
+→ Grade-4 priority block
 ```
 
 ```text
@@ -65,6 +86,7 @@ What are these?                      # Grade 3 lower
 What are these?                      # Grade 4 lower
 
 → one Candidate
+→ Grade-4 priority block
 ```
 
 ## Pilot candidate selection
@@ -77,7 +99,15 @@ request / preference / shopping
 Grade-4 productive structures: job / existence / weather / ownership / time
 ```
 
+Pilot 实际 LearningOrder 也必须遵循 Grade 4 related → Grade 3 only。
+
 Pilot 标记只是下一步 identity resolution 的输入，不表示已经 release，也不表示已经允许进入 Anki。
+
+## Expected card count
+
+当前 candidate baseline 对应的理论上限是 **64 张 Expression Cards**，前提是 Identity Review 后没有进一步 merge / reject。
+
+正式卡片数量只有在 Identity Review 完成后才能冻结；若某些 Candidate 被判定重叠、迁移价值不足或不适合独立 active-production card，最终数量可以小于 64，但不会因为同一 Pattern 在三、四年级重复出现而创建重复卡。
 
 ## Explicitly not done yet
 
@@ -92,4 +122,4 @@ Pilot 标记只是下一步 identity resolution 的输入，不表示已经 rele
 修改 Anki
 ```
 
-下一步应先对 19 个 pilot candidates 做 identity review，冻结 CanonicalForm / FunctionKey / ExpressionType / SlotSchema，再分配首批 Stable ExpressionID。
+下一步应先对 pilot candidates 做 identity review，冻结 CanonicalForm / FunctionKey / ExpressionType / SlotSchema，再分配首批 Stable ExpressionID；分配后的 LearningOrder 必须把 Grade-4 priority block 放在最前面。
