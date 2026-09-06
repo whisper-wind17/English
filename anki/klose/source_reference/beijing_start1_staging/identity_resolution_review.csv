@@ -1,0 +1,11 @@
+MatchKey,ProposedDecision,ProposedNoteID,ReviewStatus,Confidence,ReviewBasis,Evidence,MergeAuthorized
+can,reuse,KV000074,model-reviewed,high,source-sequence+existing-sense,"3年级上 source rows 54-66 form a weather block; can is between rainy and windy. Modal can is coherent; metal can is not.",no
+cook,reuse,KV000805,model-reviewed,high,source-sequence+existing-sense,"4年级上 source rows 44-49 are eat/healthy/sour/cook/duck/soup; verb cook=烹饪；煮 fits the food-action context better than noun cook=厨师.",no
+fan,held,,held-source-context-required,low,insufficient-source-context,"6年级下 row 61 is near begin/large/invite/heavy/gym/classroom/club. The XLSX dictionary definition includes fan=迷/风扇/爱好者, while existing identities cover 扇子 and 风扇 only. Target sense cannot be established safely.",no
+how old ...?,reuse,KV000210,model-reviewed,high,format-alias+source-sequence,"3年级上 How old ...? is presentation-equivalent to existing how old=几岁；多大; punctuation/ellipsis only.",no
+kind,held,,held-source-context-required,low,insufficient-source-context,"4年级上 has two occurrences and the XLSX definition includes both 种类 and 和蔼的. Existing identities KV000718=种类；类型 and KV000810=友好的 are both plausible; row sequence is insufficient to select safely.",no
+men,reuse,KV000112,model-reviewed,high,explicit-inflection,"4年级下 men is explicitly defined as man 的复数 and immediately follows man in the same source list.",no
+milk,reuse,KV000088,model-reviewed,high,source-sequence+existing-sense,"2年级下 row 18 is in bread/milk/egg/fish/rice/noodle food block; noun milk=牛奶 is unambiguous in context, not verb 挤奶.",no
+over,reuse,KV000863,provisional-model-review,medium,source-sequence+existing-sense,"3年级上 row 64 lies inside weather vocabulary (rainy/can/windy/cloudy/over/snowy/rain). over=结束（的） is more plausible than location/opposite, but the XLSX contains no sentence/unit context, so keep provisional.",no
+speak,held,,held-source-context-required,low,insufficient-source-context,"4年级上 row 11 has two existing senses: KV000705=说/讲某种语言 and KV000901=说话/发言. Nearby source words do not establish which target sense is intended.",no
+women,reuse,KV000110,model-reviewed,high,explicit-inflection,"3年级下 women is explicitly defined as woman 的复数 and immediately follows woman in the same source list.",no
