@@ -15,6 +15,9 @@ RESOLUTION = STAGING / "cross_source_identity_resolution.csv"
 MORPH = BASE / "third_party_vocabulary" / "review" / "renjiao_start1_morphology_resolution.csv"
 NEW_SURFACE = BASE / "source_reference" / "renjiao_start1_staging" / "new_surface_candidates.csv"
 RISK = STAGING / "cross_source_semantic_risk_queue.csv"
+TYPE_AUDIT = STAGING / "renjiao_new_surface_type_audit.csv"
+ROUTE_RESOLUTION = STAGING / "renjiao_new_surface_route_resolution.csv"
+ROUTE_QUEUE = STAGING / "renjiao_new_surface_identity_review_queue.csv"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -27,11 +30,17 @@ def main() -> None:
     morph = read_csv(MORPH)
     new_surface = read_csv(NEW_SURFACE)
     risk = read_csv(RISK)
+    type_audit = read_csv(TYPE_AUDIT)
+    route_resolution = read_csv(ROUTE_RESOLUTION)
+    route_queue = read_csv(ROUTE_QUEUE)
 
     statuses = Counter(r["ResolutionStatus"] for r in resolution)
     decisions = Counter(r["ProposedDecision"] for r in resolution)
     morph_held = sum(r["ProposedDecision"].startswith("held-") for r in morph)
     morph_resolved = len(morph) - morph_held
+    type_counts = Counter(r["CandidateType"] for r in type_audit)
+    route_statuses = Counter(r["ResolutionStatus"] for r in route_resolution)
+    route_decisions = Counter(r["ProposedObjectDecision"] for r in route_resolution)
 
     section = f'''## 9. Third-party Multi-Edition Vocabulary Corpus — two-stage design + current progress
 
@@ -92,7 +101,7 @@ Cross-source context reviews   = {len(resolution)}
 Semantic-risk queue            = {len(risk)}
 ```
 
-Cross-source exact-overlap 第一轮 Identity Resolution：
+Cross-source exact-overlap Identity Resolution：
 
 ```text
 rule-reviewed reuse             = {statuses.get('rule-reviewed', 0)}
@@ -108,7 +117,7 @@ morphology resolved             = {morph_resolved}
 morphology held                 = {morph_held}
 ```
 
-当前已显式保护的 semantic collision 包括：
+当前已显式保护的 cross-source semantic collision 包括：
 
 ```text
 May(月份) vs may(情态动词)
@@ -120,20 +129,56 @@ cold=寒冷 vs cold=感冒
 study=学习 vs study=书房
 ```
 
+人教版 403 个原始 `new surface` 已完成对象类型审计；**403 surface 不等于 403 Vocabulary Identity**：
+
+```text
+single-token lexical             = {type_counts.get('single-token-lexical-review', 0)}
+multiword lexical                = {type_counts.get('multiword-lexical-review', 0)}
+multiword routing                = {type_counts.get('multiword-routing-review', 0)}
+expression / event chunk         = {type_counts.get('expression-or-chunk-review', 0)}
+ordinal format alias             = {type_counts.get('ordinal-format-alias-review', 0)}
+single-token form                = {type_counts.get('single-token-form-review', 0)}
+```
+
+其中 `shopping centre / shopping list / shopping mall` 已显式保护为 lexical compounds，不能因为首词为 `shopping` 就被 gerund heuristic 错误路由成 event chunk。
+
+当前 Renjiao new-surface Object / Sense Resolution：
+
+```text
+rule-reviewed rows                       = {route_statuses.get('rule-reviewed', 0)}
+model-reviewed rows                      = {route_statuses.get('model-reviewed', 0)}
+pending rows                             = {route_statuses.get('pending', 0)}
+
+new Vocabulary learning-unit candidates = {route_decisions.get('new-vocabulary-learning-unit-candidate', 0)}
+single-token sense pending               = {route_decisions.get('pending-vocabulary-sense-review', 0)}
+multiword phrase sense pending           = {route_decisions.get('pending-vocabulary-phrase-sense-review', 0)}
+Vocabulary-vs-Expression pending         = {route_decisions.get('pending-vocabulary-vs-expression-review', 0)}
+ordinal aliases                          = {route_decisions.get('canonical-form-alias-candidate', 0)}
+Expression candidates                    = {route_decisions.get('route-expression-candidate', 0)}
+source chunks / no Vocabulary identity   = {route_decisions.get('route-source-chunk-no-vocabulary-identity', 0)}
+held source-context blockers             = {route_decisions.get('held-source-context-required', 0)}
+held form-policy blockers                = {route_decisions.get('held-identity-form-policy', 0)}
+within-source split-required             = {route_decisions.get('within-source-split-required', 0)}
+identity/object review queue             = {len(route_queue)}
+```
+
+Single-token semantic-risk review 已完成独立闭合：原 90 条中，73 条明确为新 Vocabulary learning-unit candidate，16 条因 source context 不足保持 held，`French` 因同时出现“法语”和国籍/形容词用法标记为 within-source split-required。
+
 当前工程状态：
 
 ```text
-Renjiao Stage A Valid          = yes
-Combined Stage A build         = yes
-Cross-source context audit     = yes
-First-pass Identity Resolution = yes
-Completion Recheck             = pass
-Stable ThirdPartyID minted     = no
-Final Klose diff executed      = no
+Renjiao Stage A Valid                    = yes
+Combined Stage A build                   = yes
+Cross-source context audit               = yes
+Cross-source Identity Resolution         = complete / pending 0
+New-surface type audit                   = complete
+New-surface object routing               = complete
+Single-token sense review                = complete / pending 0
+Independent Completion Rechecks          = pass
+Stable ThirdPartyID minted               = no
+Final Klose diff executed                = no
 Klose Master/Release/Publish/Anki changed = no
 ```
-
-这里的 `rule-reviewed`、`model-reviewed`、`pending` 必须保持区分；第一轮 Resolution 不等于全部 392 个 overlap 已经 source-confirmed。只有明确无风险信号或已有显式语义判断的行才向前推进，其余继续 pending。
 
 重要约束继续有效：
 
@@ -144,6 +189,7 @@ Klose Master/Release/Publish/Anki changed = no
 - 去重单位是 `learning unit / target sense`，不是字符串；
 - 同 surface 不同义项必须允许多个第三方 Identity；
 - morphology / phrase / punctuation 只产生 candidate，不自动 merge；
+- Vocabulary 与 Expressions 是不同学习对象；不能因为第三方词表里出现一个短语/句块就自动 mint Vocabulary Identity；
 - 教材版本、最早年级、覆盖教材数、出现次数、年级分布都不作为学习决策维度；
 - provenance 只在 raw / Source Occurrence 层保留用于回溯，不进入正常学习界面；
 - 第三方统一 corpus 永远低于 Klose 实际教材 Source Truth 优先级。
@@ -151,11 +197,12 @@ Klose Master/Release/Publish/Anki changed = no
 当前下一步：
 
 ```text
-1. 继续处理剩余 {statuses.get('pending', 0)} 个 cross-source semantic-risk pending rows；
-2. 对人教 {len(new_surface)} 个 new-surface candidates 做 within-source homograph / sense-split audit；
-3. 复核两类 blocker 后，再判断是否已经足够稳定到可以 mint 第一版 Stable ThirdPartyID；
-4. 在此之前不执行 Klose Stage-B final diff；
-5. 每个阶段完成后必须执行独立 Completion Recheck。
+1. 处理 {route_decisions.get('pending-vocabulary-phrase-sense-review', 0)} 个 multiword lexical phrase sense reviews；
+2. 处理 {route_decisions.get('pending-vocabulary-vs-expression-review', 0)} 个 Vocabulary-vs-Expression routing reviews；
+3. 复核 held / form-policy blockers 与 within-source split，再判断是否足够稳定到 mint 第一版 Stable ThirdPartyID；
+4. Stable ThirdPartyID 建立后继续接入后续第三方 adapter；
+5. 所有计划第三方来源完成前，不执行 Klose Stage-B final diff；
+6. 每个阶段完成后必须执行独立 Completion Recheck。
 ```
 '''
 
