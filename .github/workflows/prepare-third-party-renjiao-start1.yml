@@ -8,6 +8,7 @@ on:
       - 'tools/check_third_party_renjiao_start1.py'
       - 'tools/build_third_party_vocabulary_stage_a.py'
       - 'tools/audit_third_party_cross_source_semantics.py'
+      - 'tools/sync_third_party_status_to_next.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
       - 'anki/klose/source_reference/beijing_start1_staging/semantic_resolution_review.csv'
@@ -39,6 +40,9 @@ jobs:
       - name: Build context-rich cross-source semantic review queues
         run: python tools/audit_third_party_cross_source_semantics.py
 
+      - name: Sync third-party progress to NEXT
+        run: python tools/sync_third_party_status_to_next.py
+
       - name: Assert Klose publishing state is untouched
         run: |
           git diff --exit-code -- \
@@ -47,15 +51,16 @@ jobs:
             anki/klose/publish \
             anki/klose/anki
 
-      - name: Persist third-party staging outputs only
+      - name: Persist third-party staging outputs and status only
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add \
             anki/klose/source_reference/renjiao_start1_staging \
-            anki/klose/third_party_vocabulary/staging
+            anki/klose/third_party_vocabulary/staging \
+            NEXT.md
           if git diff --cached --quiet; then
-            echo 'No third-party staging changes.'
+            echo 'No third-party staging/status changes.'
           else
             git commit -m 'data: refresh Beijing + Renjiao third-party Stage A staging'
             git push
