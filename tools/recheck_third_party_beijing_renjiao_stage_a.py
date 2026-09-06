@@ -3,8 +3,8 @@
 
 This is intentionally separate from the generation/review scripts. It checks
 count closure, cross-source resolution coverage, known semantic edge cases,
-morphology decisions, second-pass status closure, and the current no-merge
-boundary.
+morphology decisions, full exact-overlap status closure, and the current
+no-merge boundary.
 """
 from __future__ import annotations
 
@@ -73,20 +73,30 @@ def main() -> None:
 
     expected_held = {
         "fan", "kind", "light", "speak", "sound", "star", "plant", "live", "tongue", "fish",
-        "call", "dear", "earth", "exercise", "get", "stop", "there", "welcome",
+        "call", "dear", "earth", "exercise", "get", "stop", "there", "welcome", "stay",
     }
     for key in expected_held:
         assert by_key[key]["ProposedDecision"].startswith("held-"), (key, by_key[key]["ProposedDecision"])
         assert by_key[key]["ResolutionStatus"] == "model-reviewed"
 
+    expected_final_reuse = {"farm", "fast", "hear", "supermarket", "yellow", "yes"}
+    for key in expected_final_reuse:
+        assert by_key[key]["ProposedDecision"] == "reuse-learning-unit", key
+        assert by_key[key]["ResolutionStatus"] == "model-reviewed", key
+        assert by_key[key]["ResolutionBasis"] == "model-final-pass-source-neighborhood-review", key
+
     assert by_key["can"]["ProposedDecision"] == "reuse-learning-unit"
     assert by_key["can"]["ResolutionStatus"] == "model-reviewed"
 
     for row in resolution:
+        assert row["ResolutionStatus"] != "pending", row["MatchKey"]
         if row["ResolutionStatus"] == "rule-reviewed":
             assert row["RiskSignals"] == "none-detected", row["MatchKey"]
             assert row["ProposedDecision"] == "reuse-learning-unit", row["MatchKey"]
-        if row["ResolutionBasis"] == "model-second-pass-source-neighborhood-review":
+        if row["ResolutionBasis"] in {
+            "model-second-pass-source-neighborhood-review",
+            "model-final-pass-source-neighborhood-review",
+        }:
             assert row["ResolutionStatus"] == "model-reviewed", row["MatchKey"]
         assert row["KloseMergeAuthorized"] == "no", row["MatchKey"]
 
@@ -94,19 +104,16 @@ def main() -> None:
     decisions = Counter(r["ProposedDecision"] for r in resolution)
     bases = Counter(r["ResolutionBasis"] for r in resolution)
 
-    # Strict closure observed from the reviewed second-pass set: one listed
-    # safe key (`too`) was already rule-reviewed in pass one, so pass two
-    # contributes 250 reuse upgrades + 9 explicit blockers = 259 rows.
-    assert statuses == Counter({"model-reviewed": 280, "rule-reviewed": 105, "pending": 7}), statuses
+    assert statuses == Counter({"model-reviewed": 287, "rule-reviewed": 105}), statuses
     assert decisions == Counter({
-        "reuse-learning-unit": 356,
+        "reuse-learning-unit": 362,
         "partial-overlap-split-required": 8,
         "do-not-merge": 3,
-        "held-source-context-required": 16,
+        "held-source-context-required": 17,
         "held-identity-policy": 2,
-        "pending-semantic-review": 7,
     }), decisions
     assert bases["model-second-pass-source-neighborhood-review"] == 259, bases
+    assert bases["model-final-pass-source-neighborhood-review"] == 7, bases
 
     assert len(morph) == 6, len(morph)
     morph_map = {r["RenjiaoMatchKey"]: r for r in morph}
@@ -126,7 +133,6 @@ def main() -> None:
     stable_registry = BASE / "third_party_vocabulary" / "master" / "identity_registry.csv"
     assert not stable_registry.exists(), "Stable ThirdPartyID registry exists before Identity Resolution is ready"
 
-    pending_keys = sorted(r["MatchKey"] for r in resolution if r["ResolutionStatus"] == "pending")
     print("Completion Recheck = pass")
     print(f"Beijing occurrences = {len(bj)}")
     print(f"Renjiao occurrences = {len(rj)}")
@@ -135,10 +141,9 @@ def main() -> None:
     print(f"Cross-source resolution rows = {len(resolution)}")
     print(f"rule-reviewed = {statuses['rule-reviewed']}")
     print(f"model-reviewed = {statuses['model-reviewed']}")
-    print(f"pending = {statuses['pending']}")
-    print("pending keys = " + "|".join(pending_keys))
+    print("pending = 0")
     print("Known semantic blockers preserved = yes")
-    print("Second-pass closure verified = yes")
+    print("Full exact-overlap closure verified = yes")
     print("Klose merge authorized = no")
 
 
