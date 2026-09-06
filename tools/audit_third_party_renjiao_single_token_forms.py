@@ -28,8 +28,6 @@ FIELDS = [
     "Confidence", "Rationale", "KloseMergeAuthorized",
 ]
 
-# Explicit high-value forms observed in this source. Irregular morphology is
-# pedagogically salient and therefore held, consistent with feet/foot policy.
 IRREGULAR_FORMS = {
     "slept": "sleep",
     "swam": "swim",
@@ -37,22 +35,25 @@ IRREGULAR_FORMS = {
     "won": "win",
 }
 
-# Regular inflection: same lexical sense, but still represented as an explicit
-# candidate relation rather than silently collapsed.
 REGULAR_FORMS = {
     "danced": "dance",
     "does": "do",
+    "cartoons": "cartoon",
+    "gloves": "glove",
 }
 
-# Participial/derived forms whose source context supports a lexical adjective
-# or other independent target use. Morphology alone must not collapse them.
 LEXICALIZED_DERIVED = {
     "broken": ("break", "adjective/participle lexical target ('broken' = damaged/broken) is plausible in the source neighborhood"),
     "amazing": ("amaze", "adjective target ('amazing' =令人惊异的) is lexicalized for elementary learning"),
+    "boring": ("bore", "adjective target ('boring' =无聊的/令人厌烦的) is explicit in the source neighborhood"),
+    "scared": ("scare", "adjective target ('scared' =害怕的) is explicit in the emotions/adjectives neighborhood"),
 }
 
-# -ing forms used as activity/hobby nouns in this source. They are not treated
-# as simple presentation aliases of the base verb without an explicit policy.
+LEXICALIZED_FORM_SURFACES = {
+    "crossroads": ("crossroad", "The directions/location context teaches lexical crossroads='十字路口'; treat the surface as a stable learning item rather than mechanically singularizing it."),
+    "scissors": ("scissor", "Scissors is a pluralia-tantum lexical noun for the classroom object; do not collapse it to verb/noun 'scissor'."),
+}
+
 ACTIVITY_ING_FORMS = {
     "dancing": "dance",
     "reading": "read",
@@ -109,12 +110,7 @@ def main() -> None:
     for row in candidates:
         key = row["MatchKey"]
         explicit_base = explicit_base_from_definition(row["Definitions"])
-        form_class = ""
-        base = ""
-        decision = ""
-        status = ""
-        confidence = ""
-        rationale = ""
+        form_class = base = decision = status = confidence = rationale = ""
 
         if key in IRREGULAR_FORMS:
             form_class = "irregular-inflection"
@@ -122,18 +118,14 @@ def main() -> None:
             decision = "held-irregular-form-policy"
             status = "model-reviewed"
             confidence = "high"
-            rationale = (
-                "Irregular inflected form is pedagogically salient. Keep it linked to its base candidate but do not collapse identity until the third-party form policy is frozen."
-            )
+            rationale = "Irregular inflected form is pedagogically salient; link to its base but do not collapse identity until the third-party form policy is frozen."
         elif key in REGULAR_FORMS:
             form_class = "regular-inflection"
             base = REGULAR_FORMS[key]
             decision = "reuse-base-learning-unit-candidate"
             status = "model-reviewed"
             confidence = "high"
-            rationale = (
-                "Regular inflection carries the same target lexical sense as the base; preserve the source form as provenance/presentation evidence rather than minting a second lexical identity."
-            )
+            rationale = "Regular inflection carries the same lexical target as the base; preserve the source form as provenance/presentation evidence instead of minting a second lexical identity."
         elif key in LEXICALIZED_DERIVED:
             base, why = LEXICALIZED_DERIVED[key]
             form_class = "derived-or-participial-lexical-target"
@@ -141,24 +133,26 @@ def main() -> None:
             status = "model-reviewed"
             confidence = "high"
             rationale = why + "; morphology relation alone must not collapse the target learning unit."
+        elif key in LEXICALIZED_FORM_SURFACES:
+            base, why = LEXICALIZED_FORM_SURFACES[key]
+            form_class = "lexicalized-form-surface"
+            decision = "keep-distinct-learning-unit-candidate"
+            status = "model-reviewed"
+            confidence = "high"
+            rationale = why
         elif key in ACTIVITY_ING_FORMS:
             form_class = "activity-gerund-or-noun"
             base = ACTIVITY_ING_FORMS[key]
             decision = "held-derived-form-identity-policy"
             status = "model-reviewed"
             confidence = "medium"
-            rationale = (
-                "The source teaches this -ing form in an activity/hobby slot. It may be a lexical activity noun rather than a mere inflection; keep held until the corpus form/learning-unit policy decides the boundary."
-            )
+            rationale = "The source teaches this -ing form in an activity/hobby slot. It may be a lexical activity noun rather than a mere inflection; keep held until the form/learning-unit policy decides the boundary."
         elif explicit_base and explicit_base != key:
             form_class = "explicit-form-relation-unreviewed"
             base = explicit_base
             decision = "pending-form-review"
             status = "pending"
-            confidence = ""
-            rationale = (
-                "Dictionary gloss explicitly states a morphology relation to another base form. This candidate must not mint a stable identity until reviewed."
-            )
+            rationale = "Dictionary gloss explicitly states a morphology relation to another base form. This candidate must not mint a stable identity until reviewed."
         else:
             continue
 
