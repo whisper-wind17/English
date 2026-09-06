@@ -4,3 +4,11 @@
 #deck:Klose-English::Expressions
 #columns:ExpressionID,FunctionLabel,Prompt,PromptHint,Target,Pattern,MeaningUsage,Examples,LearnerLevel,LearningOrder,Sources,SourceBooks
 KE000001,询问职业,想知道同学妈妈的职业,person: your mother,What's your mother's job?,What's [person]'s job?,询问某人是做什么工作的。,What's your father's job? | What's your uncle's job?,4,000001,rj_start1,rj_start1::grade4-upper
+KE000002,介绍某处有什么,介绍一个地方有什么,thing: a playground,There is a playground.,There is a/an [singular noun].,表示某处有一个人或事物。,There is a gym. | There is a library.,4,000002,rj_start1,rj_start1::grade4-upper
+KE000003,提议一起做某事,提议和朋友一起做运动,action: do some sports,Let's do some sports.,Let's [verb phrase].,提议和别人一起做某事。,Let's go to the library. | Let's feed the chickens.,4,000003,rj_start1,rj_start1::grade3-upper|rj_start1::grade4-lower|rj_start1::grade4-upper
+KE000004,询问天气,想知道悉尼的天气,place: Sydney,What's the weather like in Sydney?,What's the weather like in [place]?,询问某个地方的天气情况。,What's the weather like in Beijing? | What's the weather like in London?,4,000004,rj_start1,rj_start1::grade4-upper
+KE000005,询问物品是谁的,看到一件毛衣，想知道是谁的,thing: sweater,Whose sweater is this?,Whose [noun] is this?,询问某件物品属于谁。,Whose coat is this? | Whose book is this?,4,000005,rj_start1,rj_start1::grade4-upper
+KE000006,请求许可,今天想穿新衬衫，先征求妈妈同意,action: wear this new shirt today,Can I wear this new shirt today?,Can I [verb phrase]?,询问自己是否可以做某事；需要时可加 please 使语气更礼貌。,Can I watch TV? | Can I buy a new pair?,4,000006,rj_start1,rj_start1::grade3-lower|rj_start1::grade4-lower|rj_start1::grade4-upper
+KE000007,询问时间,想知道现在几点了,,What time is it?,What time is it?,询问现在的时间。,"What time is it now? | Excuse me, what time is it?",4,000007,rj_start1,rj_start1::grade4-lower
+KE000008,礼貌请求别人做事,吃饭时，想请别人把蔬菜递给你,action: pass me the vegetables,Can you please pass me the vegetables?,Can you please [verb phrase]?,礼貌地请求别人帮你做某事。,Can you please open the door? | Can you please help me?,4,000008,rj_start1,rj_start1::grade4-lower
+KE000009,询问对方是否想要,吃饭时，问对方要不要刀叉,thing: a knife and fork,Would you like a knife and fork?,Would you like [thing]?,礼貌地询问对方是否想要某物。,Would you like some rice? | Would you like some milk?,4,000009,rj_start1,rj_start1::grade3-lower|rj_start1::grade4-lower
