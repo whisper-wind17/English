@@ -348,6 +348,14 @@ candidate:go,go,go,,go,2,reviewed
 candidate:go boating,go boating,go boating,,go boating,1,reviewed
 candidate:go camping,go camping,go camping,,go camping,1,reviewed
 candidate:go fishing,go fishing,go fishing,,go fishing,1,reviewed
+candidate:go for a picnic,go for a picnic,go for a picnic,,go for a picnic,1,reviewed
+candidate:go home,go home,go home,,go home,1,reviewed
+candidate:go skating,go skating,go skating,,go skating,1,reviewed
+candidate:go straight,go straight,go straight,,go straight,1,reviewed
+candidate:go to a drawing club,go to a drawing club,go to a drawing club,,go to a drawing club,1,reviewed
+candidate:go to bed,go to bed,go to bed,,go to bed,2,reviewed
+candidate:go to school,go to school,go to school,,go to school,1,reviewed
+candidate:go to the cinema,go to the cinema,go to the cinema,,go to the cinema,1,reviewed
 candidate:gold,gold,gold,,gold,1,reviewed
 candidate:golf,golf,golf,,golf,1,reviewed
 candidate:good,good,good,,good,1,reviewed
@@ -378,6 +386,7 @@ candidate:happy,happy,happy,高兴的；开心的,happy,2,reviewed
 candidate:hard,hard,hard,,hard,1,reviewed
 candidate:has,has,has,,has,2,reviewed
 candidate:have,have,have,,have,2,reviewed
+candidate:have a picnic,have a picnic,have a picnic,,have a picnic,1,reviewed
 candidate:he,he,he,,he,2,reviewed
 candidate:head,head,head,,head,3,reviewed
 candidate:headache,headache,headache,,headache,2,reviewed
@@ -404,23 +413,29 @@ candidate:homework,homework,homework,,homework,1,reviewed
 candidate:horse,horse,horse,,horse,2,reviewed
 candidate:hospital,hospital,hospital,,hospital,3,reviewed
 candidate:hot,hot,hot,,hot,2,reviewed
+candidate:hot pot,hot pot,hot pot,火锅,hot pot,1,reviewed
 candidate:hotel,hotel,hotel,,hotel,2,reviewed
 candidate:hour,hour,hour,,hour,1,reviewed
 candidate:house,house,house,,house,3,reviewed
 candidate:housework,housework,housework,,housework,1,reviewed
 candidate:how,how,how,,how,2,reviewed
+candidate:how many,how many,how many,多少（询问可数数量）,how many,1,reviewed
 candidate:how much,how much,how much,,how much,2,reviewed
-candidate:how old ...?,how old ...?,How old ...?,,how old ...?,1,reviewed
+candidate:how old ...?,how old ...?,how old ...?,,how old|how old ...?,2,reviewed
 candidate:hundred,hundred,hundred,,hundred,1,reviewed
 candidate:hungry,hungry,hungry,,hungry,2,reviewed
 candidate:hurt,hurt,hurt,,hurt,3,reviewed
 candidate:hut,hut,hut,,hut,1,reviewed
 candidate:i,i,I,,i,2,reviewed
 candidate:ice,ice,ice,,ice,2,reviewed
-candidate:ice-cream,ice-cream,ice-cream,,ice-cream,1,reviewed
+candidate:ice lantern,ice lantern,ice lantern,冰灯,ice lantern,1,reviewed
+candidate:ice-cream,ice-cream,ice-cream,冰淇淋,ice cream|ice-cream,3,reviewed
 candidate:idea,idea,idea,,idea,2,reviewed
 candidate:ill,ill,ill,,ill,2,reviewed
 candidate:in,in,in,,in,2,reviewed
+candidate:in one hour,in one hour,in one hour,,in one hour,1,reviewed
+candidate:in the future,in the future,in the future,,in the future,1,reviewed
+candidate:information centre,information centre,Information Centre,,information centre,1,reviewed
 candidate:insect,insect,insect,,insect,1,reviewed
 candidate:interesting,interesting,interesting,,interesting,2,reviewed
 candidate:into,into,into,,into,1,reviewed
@@ -439,6 +454,7 @@ candidate:join,join,join,,join,1,reviewed
 candidate:juice,juice,juice,,juice,3,reviewed
 candidate:july,july,July,,july,2,reviewed
 candidate:jump,jump,jump,,jump,1,reviewed
+candidate:jump rope,jump rope,jump rope,,jumped rope|jumping rope,2,reviewed
 candidate:june,june,June,,june,2,reviewed
 candidate:kangaroo,kangaroo,kangaroo,,kangaroo,1,reviewed
 candidate:keep,keep,keep,,keep,1,reviewed
@@ -455,6 +471,7 @@ candidate:know,know,know,,know,2,reviewed
 candidate:koala,koala,koala,,koala,1,reviewed
 candidate:labour,labour,labour,,labour,1,reviewed
 candidate:lake,lake,lake,,lake,3,reviewed
+candidate:lake ontario,lake ontario,Lake Ontario,安大略湖,lake ontario,1,reviewed
 candidate:large,large,large,,large,1,reviewed
 candidate:late,late,late,,late,2,reviewed
 candidate:leaf,leaf,leaf,,leaf,2,reviewed
@@ -466,23 +483,36 @@ candidate:let,let,let,,let,1,reviewed
 candidate:library,library,library,,library,2,reviewed
 candidate:lion,lion,lion,,lion,1,reviewed
 candidate:listen,listen,listen,,listen,1,reviewed
+candidate:listen to music,listen to music,listen to music,,listened to music|listening to music,2,reviewed
 candidate:litter,litter,litter,,litter,1,reviewed
 candidate:little,little,little,,little,1,reviewed
+candidate:living room,living room,living room,客厅；起居室,living room,1,reviewed
 candidate:london,london,London,,london,1,reviewed
 candidate:long,long,long,,long,2,reviewed
 candidate:look,look,look,,look,3,reviewed
 candidate:look for,look for,look for,,look for,2,reviewed
+candidate:look forward to,look forward to,look forward to,期待；盼望,look forward to,2,reviewed
 candidate:lose,lose,lose,,lose,1,reviewed
 candidate:lost,lost,lost,,lost,2,reviewed
 candidate:love,love,love,,love,2,reviewed
 candidate:lovely,lovely,lovely,,lovely,2,reviewed
 candidate:lucky,lucky,lucky,,lucky,1,reviewed
 candidate:lunch,lunch,lunch,,lunch,1,reviewed
+candidate:mail a present,mail a present,mail a present,,mail a present,1,reviewed
 candidate:make,make,make,,make,1,reviewed
+candidate:make a card,make a card,make a card,,make a card,1,reviewed
+candidate:make a model plane,make a model plane,make a model plane,,make a model plane,2,reviewed
+candidate:make a phone call,make a phone call,make a phone call,,make a phone call,1,reviewed
+candidate:make a poster,make a poster,make a poster,,make a poster,1,reviewed
+candidate:make a snowman,make a snowman,make a snowman,,make a snowman,2,reviewed
+candidate:make a video call,make a video call,make a video call,,make a video call,1,reviewed
+candidate:make the bed,make the bed,make the bed,整理床铺,make the bed,1,reviewed
+candidate:make use of,make use of,make use of,利用；使用,make use of,1,reviewed
 candidate:mammal,mammal,mammal,,mammal,1,reviewed
 candidate:man,man,man,,man,2,reviewed
 candidate:many,many,many,,many,2,reviewed
 candidate:map,map,map,,map,3,reviewed
+candidate:maple leaves,maple leaves,maple leaves,枫叶,maple leaves,1,reviewed
 candidate:march,march,March,,march,2,reviewed
 candidate:mark,mark,mark,分数；成绩,mark,1,reviewed
 candidate:marker,marker,marker,,marker,1,reviewed
@@ -491,6 +521,7 @@ candidate:maths,maths,maths,,maths,2,reviewed
 candidate:me,me,me,,me,1,reviewed
 candidate:meat,meat,meat,,meat,2,reviewed
 candidate:meet,meet,meet,,meet,2,reviewed
+candidate:meeting place,meeting place,meeting place,集合地点；会面地点,meeting place,1,reviewed
 candidate:men,men,men,,men,1,reviewed
 candidate:merry,merry,merry,愉快的；快乐的,merry,1,reviewed
 candidate:metre,metre,metre,,metre,1,reviewed
@@ -507,8 +538,10 @@ candidate:moon,moon,moon,,moon,1,reviewed
 candidate:moose,moose,moose,,moose,1,reviewed
 candidate:more,more,more,更多；更多的,more,1,reviewed
 candidate:morning,morning,morning,,morning,2,reviewed
+candidate:morning tea,morning tea,morning tea,,morning tea,1,reviewed
 candidate:most,most,most,,most,1,reviewed
 candidate:mother,mother,mother,,mother,3,reviewed
+candidate:mother's day,mother's day,Mother's Day,母亲节,mother's day,1,reviewed
 candidate:mountain,mountain,mountain,,mountain,1,reviewed
 candidate:mouse,mouse,mouse,,mouse,1,reviewed
 candidate:mouth,mouth,mouth,,mouth,3,reviewed
@@ -523,6 +556,8 @@ candidate:must,must,must,,must,1,reviewed
 candidate:my,my,my,,my,3,reviewed
 candidate:myself,myself,myself,,myself,2,reviewed
 candidate:name,name,name,,name,3,reviewed
+candidate:national day,national day,National Day,国庆节,national day,1,reviewed
+candidate:nature shows,nature shows,nature shows,自然类节目,nature shows,1,reviewed
 candidate:near,near,near,,near,3,reviewed
 candidate:nearby,nearby,nearby,,nearby,1,reviewed
 candidate:neck,neck,neck,,neck,1,reviewed
@@ -532,7 +567,11 @@ candidate:nervous,nervous,nervous,,nervous,1,reviewed
 candidate:net,net,net,,net,1,reviewed
 candidate:never,never,never,,never,2,reviewed
 candidate:new,new,new,,new,3,reviewed
+candidate:new year,new year,New Year,新年,new year,1,reviewed
+candidate:new year's day,new year's day,New Year's Day,元旦；新年第一天,new year's day,1,reviewed
+candidate:news shows,news shows,news shows,新闻节目,news shows,1,reviewed
 candidate:next,next,next,,next,1,reviewed
+candidate:next to,next to,next to,紧挨着；在……旁边,next to,1,reviewed
 candidate:nice,nice,nice,,nice,2,reviewed
 candidate:niece,niece,niece,,niece,1,reviewed
 candidate:night,night,night,,night,2,reviewed
@@ -561,6 +600,9 @@ candidate:oil,oil,oil,,oil,1,reviewed
 candidate:ok,ok,OK,,ok,2,reviewed
 candidate:old,old,old,,old,2,reviewed
 candidate:on,on,on,,on,2,reviewed
+candidate:on foot,on foot,on foot,步行,on foot,1,reviewed
+candidate:on the weekend,on the weekend,on the weekend,在周末,on the weekend,1,reviewed
+candidate:once a week,once a week,once a week,每周一次,once a week,1,reviewed
 candidate:one,one,one,,one,2,reviewed
 candidate:only,only,only,,only,2,reviewed
 candidate:open,open,open,,open,1,reviewed
@@ -569,6 +611,7 @@ candidate:orange,orange,orange,,orange,3,reviewed
 candidate:order,order,order,,order,1,reviewed
 candidate:our,our,our,,our,2,reviewed
 candidate:out,out,out,,out,1,reviewed
+candidate:out of,out of,out of,,out of,1,reviewed
 candidate:over,over,over,,over,1,reviewed
 candidate:ox,ox,ox,,ox,2,reviewed
 candidate:paint,paint,paint,画；涂；上色,paint,2,reviewed
@@ -584,12 +627,17 @@ candidate:peach,peach,peach,,peach,1,reviewed
 candidate:peanut,peanut,peanut,,peanut,1,reviewed
 candidate:pear,pear,pear,,pear,1,reviewed
 candidate:pen,pen,pen,,pen,3,reviewed
+candidate:pen pal,pen pal,pen pal,笔友,pen pal,1,reviewed
 candidate:pencil,pencil,pencil,,pencil,3,reviewed
+candidate:pencil box,pencil box,pencil box,铅笔盒,pencil box,1,reviewed
+candidate:pencil case,pencil case,pencil case,铅笔盒；笔袋,pencil case,1,reviewed
+candidate:pencil sharpener,pencil sharpener,pencil sharpener,卷笔刀；削笔器,pencil sharpener,1,reviewed
 candidate:penguin,penguin,penguin,,penguin,1,reviewed
 candidate:people,people,people,,people,2,reviewed
 candidate:pet,pet,pet,宠物,pet,1,reviewed
 candidate:phone,phone,phone,,phone,2,reviewed
 candidate:photo,photo,photo,,photo,1,reviewed
+candidate:pick fruit,pick fruit,pick fruit,摘水果,pick fruit,1,reviewed
 candidate:picture,picture,picture,,picture,1,reviewed
 candidate:pie,pie,pie,,pie,1,reviewed
 candidate:pig,pig,pig,,pig,2,reviewed
@@ -601,12 +649,20 @@ candidate:pity,pity,pity,遗憾；可惜,pity,1,reviewed
 candidate:place,place,place,地方；地点,place,1,reviewed
 candidate:plane,plane,plane,,plane,2,reviewed
 candidate:play,play,play,,play,1,reviewed
+candidate:play chess,play chess,play chess,下棋,play chess,1,reviewed
+candidate:play computer games,play computer games,play computer games,玩电脑游戏,play computer games,1,reviewed
+candidate:play football,play football,play football,踢足球,play football,3,reviewed
+candidate:play sports,play sports,play sports,做运动；参加体育运动,play sports,1,reviewed
+candidate:play the violin,play the violin,play the violin,拉小提琴,play the violin,1,reviewed
+candidate:play with,play with,play with,和……玩；玩弄,play with,1,reviewed
+candidate:play with fire,play with fire,play with fire,玩火,play with fire,1,reviewed
 candidate:playground,playground,playground,,playground,2,reviewed
 candidate:playtime,playtime,playtime,,playtime,1,reviewed
 candidate:please,please,please,,please,3,reviewed
 candidate:poem,poem,poem,,poem,1,reviewed
 candidate:poet,poet,poet,,poet,1,reviewed
 candidate:police,police,police,,police,1,reviewed
+candidate:police officer,police officer,police officer,警察,police officer,1,reviewed
 candidate:polite,polite,polite,,polite,1,reviewed
 candidate:poor,poor,poor,,poor,1,reviewed
 candidate:pop,pop,pop,,pop,1,reviewed
