@@ -1,0 +1,51 @@
+name: Prepare Third-party Renjiao Start1 Vocabulary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/prepare_third_party_renjiao_start1.py'
+      - 'tools/check_third_party_renjiao_start1.py'
+      - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
+      - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
+      - '.github/workflows/prepare-third-party-renjiao-start1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build Renjiao start1 Stage A staging
+        run: python tools/prepare_third_party_renjiao_start1.py
+
+      - name: Validate Stage A staging
+        run: python tools/check_third_party_renjiao_start1.py
+
+      - name: Assert Klose publishing state is untouched
+        run: |
+          git diff --exit-code -- \
+            anki/klose/master \
+            anki/klose/learner \
+            anki/klose/publish \
+            anki/klose/anki
+
+      - name: Persist Renjiao staging outputs only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add anki/klose/source_reference/renjiao_start1_staging
+          if git diff --cached --quiet; then
+            echo 'No Renjiao staging changes.'
+          else
+            git commit -m 'data: refresh Renjiao start1 third-party staging'
+            git push
+          fi
