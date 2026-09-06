@@ -2,15 +2,20 @@
 """Merge reviewed decision updates into the durable third-party identity truth.
 
 `review/decision_updates.csv` is a transient inbox, never a second state store.
-`OccurrenceKeys` is also the review-evidence boundary: a surface decision records
-exactly which Source Occurrences were covered when it was reviewed. An inbox row
-may use `*`; before persistence this tool expands it to the current occurrence set
-for that MatchKey. Durable `*` values from the pre-evidence migration are likewise
-stamped once against the currently enabled adapters.
+`OccurrenceKeys` is the review-evidence boundary: a surface decision records the
+exact SourceOccurrenceKeys covered when it was reviewed.
+
+Durable decisions created before evidence binding used either `*` or a legacy
+pipe-concatenated serialization. Because SourceOccurrenceKey itself contains `|`,
+that legacy representation is ambiguous. This tool performs a one-time migration
+by stamping such durable rows to the currently enabled occurrence set for their
+MatchKey. New inbox rows may use `*`, which is expanded before persistence, or an
+explicit JSON array of occurrence keys.
 """
 from __future__ import annotations
 
 import csv
+import json
 from collections import defaultdict
 from pathlib import Path
 
@@ -59,6 +64,22 @@ def current_occurrence_keys() -> dict[str, list[str]]:
     return {k: sorted(v) for k, v in by_match.items()}
 
 
+def encode_occurrence_keys(keys: list[str]) -> str:
+    return json.dumps(sorted(keys), ensure_ascii=False, separators=(",", ":"))
+
+
+def decode_occurrence_keys(raw: str, *, source: str, decision_key: str) -> list[str]:
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"{source}: OccurrenceKeys must be '*' or a JSON array for {decision_key}: {exc}") from exc
+    if not isinstance(value, list) or not value or not all(isinstance(x, str) and x for x in value):
+        raise SystemExit(f"{source}: invalid OccurrenceKeys JSON array for {decision_key}")
+    if len(value) != len(set(value)):
+        raise SystemExit(f"{source}: duplicate OccurrenceKeys for {decision_key}")
+    return value
+
+
 def validate(row: dict[str, str], *, source: str) -> None:
     missing = [f for f in FIELDS if f not in row]
     if missing:
@@ -79,22 +100,42 @@ def validate(row: dict[str, str], *, source: str) -> None:
         raise SystemExit(f"{source}: source-only requires ObjectType=source-only for {row['DecisionKey']}")
 
 
-def stamp(row: dict[str, str], occurrence_map: dict[str, list[str]], *, source: str) -> dict[str, str]:
+def stamp(
+    row: dict[str, str],
+    occurrence_map: dict[str, list[str]],
+    *,
+    source: str,
+    allow_legacy_serialization: bool,
+) -> tuple[dict[str, str], bool]:
     normalized = {f: row.get(f, "") for f in FIELDS}
     validate(normalized, source=source)
     key = normalized["MatchKey"]
     current = occurrence_map.get(key, [])
     if not current:
         raise SystemExit(f"{source}: decision references missing current surface {key}")
-    if normalized["OccurrenceKeys"] == "*":
-        normalized["OccurrenceKeys"] = "|".join(current)
+
+    raw = normalized["OccurrenceKeys"]
+    migrated_legacy = False
+    if raw == "*":
+        reviewed = current
+        migrated_legacy = allow_legacy_serialization
+    elif raw.lstrip().startswith("["):
+        reviewed = decode_occurrence_keys(raw, source=source, decision_key=normalized["DecisionKey"])
+    elif allow_legacy_serialization:
+        # Historical rows were pipe-concatenated, but SourceOccurrenceKey itself
+        # contains pipes. They cannot be parsed safely; stamp them once to the
+        # current evidence set before any new adapter is enabled.
+        reviewed = current
+        migrated_legacy = True
     else:
-        reviewed = normalized["OccurrenceKeys"].split("|")
-        if len(reviewed) != len(set(reviewed)):
-            raise SystemExit(f"{source}: duplicate OccurrenceKeys for {normalized['DecisionKey']}")
-        if not set(reviewed) <= set(current):
-            raise SystemExit(f"{source}: OccurrenceKeys reference missing current evidence for {normalized['DecisionKey']}")
-    return normalized
+        raise SystemExit(
+            f"{source}: OccurrenceKeys must be '*' or JSON for {normalized['DecisionKey']}"
+        )
+
+    if not set(reviewed) <= set(current):
+        raise SystemExit(f"{source}: OccurrenceKeys reference missing current evidence for {normalized['DecisionKey']}")
+    normalized["OccurrenceKeys"] = encode_occurrence_keys(reviewed)
+    return normalized, migrated_legacy
 
 
 def main() -> None:
@@ -107,22 +148,31 @@ def main() -> None:
 
     by_key: dict[str, dict[str, str]] = {}
     order: list[str] = []
-    stamped_legacy = 0
+    migrated_legacy = 0
     for raw in current:
-        had_star = raw.get("OccurrenceKeys") == "*"
-        row = stamp(raw, occurrence_map, source="identity_decisions")
+        row, migrated = stamp(
+            raw,
+            occurrence_map,
+            source="identity_decisions",
+            allow_legacy_serialization=True,
+        )
         key = row["DecisionKey"]
         if key in by_key:
             raise SystemExit(f"Duplicate durable DecisionKey: {key}")
         by_key[key] = row
         order.append(key)
-        stamped_legacy += int(had_star)
+        migrated_legacy += int(migrated)
 
     seen_updates: set[str] = set()
     replaced = 0
     appended = 0
     for raw in updates:
-        row = stamp(raw, occurrence_map, source="decision_updates")
+        row, _ = stamp(
+            raw,
+            occurrence_map,
+            source="decision_updates",
+            allow_legacy_serialization=False,
+        )
         key = row["DecisionKey"]
         if key in seen_updates:
             raise SystemExit(f"Duplicate update DecisionKey: {key}")
@@ -137,7 +187,7 @@ def main() -> None:
             order.append(key)
             appended += 1
 
-    changed = bool(stamped_legacy or updates)
+    changed = bool(migrated_legacy or updates)
     if changed:
         with DECISIONS.open("w", encoding="utf-8-sig", newline="") as f:
             w = csv.DictWriter(f, fieldnames=FIELDS)
@@ -148,12 +198,13 @@ def main() -> None:
     if UPDATES.exists():
         UPDATES.unlink()
 
-    print(f"legacy wildcard decisions stamped = {stamped_legacy}")
+    print(f"legacy decision evidence migrated = {migrated_legacy}")
     print(f"decision updates applied = {len(updates)}")
     print(f"replaced = {replaced}")
     print(f"appended = {appended}")
     print(f"durable decisions = {len(by_key)}")
-    print("durable wildcard OccurrenceKeys = no")
+    print("OccurrenceKeys serialization = JSON array")
+    print("durable wildcard/legacy OccurrenceKeys = no")
     print("transient decision inbox removed = yes")
 
 
