@@ -25,6 +25,7 @@ CURRENT = LEARNER / "current.csv"
 ADMISSION = LEARNER / "learning_admission.csv"
 REVIEWS = LEARNER / "presentation_review_registry.csv"
 CANDIDATES = REVIEW / "candidate_registry.csv"
+IDENTITY_RESOLUTION = REVIEW / "identity_resolution.csv"
 STUDY = PUBLISH / "study.csv"
 ANKI_IMPORT = PUBLISH / "anki-import.csv"
 
@@ -36,6 +37,12 @@ NOTE_TYPE = "Klose Expression"
 DECK = "Klose-English::Expressions"
 ID_RE = re.compile(r"^KE\d{6}$")
 ORDER_RE = re.compile(r"^\d{6}$")
+GRADE4_STAGE = "stage::grade4-expression"
+GRADE3_STAGE = "stage::grade3-expression"
+STAGE_TAG = {
+    GRADE4_STAGE: "expression::grade4",
+    GRADE3_STAGE: "expression::grade3",
+}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -78,14 +85,23 @@ def read_anki_import(path: Path) -> tuple[dict[str, str], list[dict[str, str]]]:
     return headers, rows
 
 
+def source_rows(
+    eid: str,
+    occurrence_by_id: dict[str, dict[str, str]],
+    mapped_occurrences: dict[str, list[str]],
+) -> list[dict[str, str]]:
+    rows = [occurrence_by_id[oid] for oid in mapped_occurrences.get(eid, [])]
+    if not rows:
+        raise SystemExit(f"Release blocked: Expression has no confirmed source mapping: {eid}")
+    return rows
+
+
 def source_metadata(
     eid: str,
     occurrence_by_id: dict[str, dict[str, str]],
     mapped_occurrences: dict[str, list[str]],
 ) -> tuple[str, str]:
-    rows = [occurrence_by_id[oid] for oid in mapped_occurrences.get(eid, [])]
-    if not rows:
-        raise SystemExit(f"Release blocked: Expression has no confirmed source mapping: {eid}")
+    rows = source_rows(eid, occurrence_by_id, mapped_occurrences)
     sources = sorted({row["SourceID"].strip() for row in rows})
     books = sorted({
         f"{row['SourceID'].strip()}::grade{row['SourceGrade'].strip()}-{row['Semester'].strip()}"
@@ -97,7 +113,7 @@ def source_metadata(
 def main() -> None:
     required = (
         REGISTRY, OCCURRENCES, SOURCE_MAP, RELEASE, CURRENT, ADMISSION,
-        REVIEWS, CANDIDATES, STUDY, ANKI_IMPORT,
+        REVIEWS, CANDIDATES, IDENTITY_RESOLUTION, STUDY, ANKI_IMPORT,
     )
     for path in required:
         if not path.exists():
@@ -117,6 +133,29 @@ def main() -> None:
     if set(release) != ids or set(current) != ids or set(admission) != ids or set(reviews) != ids:
         raise SystemExit("Release blocked: Registry/Release/Learner/Admission/Review identity coverage mismatch")
 
+    resolution_rows = read_csv(IDENTITY_RESOLUTION)
+    resolution_pairs: set[tuple[str, str]] = set()
+    resolved_candidates: set[str] = set()
+    for row in resolution_rows:
+        candidate_key = row.get("CandidateKey", "").strip()
+        eid = row.get("ExpressionID", "").strip()
+        decision = row.get("Decision", "").strip()
+        if candidate_key not in candidates or eid not in registry or not decision:
+            raise SystemExit(
+                f"Release blocked: invalid identity resolution row: {candidate_key}->{eid} decision={decision!r}"
+            )
+        pair = (candidate_key, eid)
+        if pair in resolution_pairs:
+            raise SystemExit(f"Release blocked: duplicate identity resolution pair: {pair}")
+        resolution_pairs.add(pair)
+        resolved_candidates.add(candidate_key)
+    if resolved_candidates != set(candidates):
+        missing = sorted(set(candidates) - resolved_candidates)
+        extra = sorted(resolved_candidates - set(candidates))
+        raise SystemExit(
+            f"Release blocked: candidate identity resolution coverage mismatch; missing={missing} extra={extra}"
+        )
+
     mapped: dict[str, list[str]] = defaultdict(list)
     for row in read_csv(SOURCE_MAP):
         if row.get("MappingStatus", "").strip() != "confirmed":
@@ -128,8 +167,12 @@ def main() -> None:
         mapped[eid].append(oid)
 
     allowed_orders: list[str] = []
+    ordered_stages: list[tuple[str, str]] = []
     expected_publish: list[dict[str, str]] = []
     draft_count = 0
+    grade4_count = 0
+    grade3_count = 0
+
     for eid in sorted(ids):
         identity = registry[eid]
         rel = release[eid]
@@ -138,27 +181,44 @@ def main() -> None:
         rev = reviews[eid]
 
         if identity.get("Status", "").strip() != "active":
-            raise SystemExit(f"Release blocked: non-active pilot identity: {eid}")
+            raise SystemExit(f"Release blocked: non-active baseline identity: {eid}")
         if rel.get("IdentityStatus", "").strip() != "active":
             raise SystemExit(f"Release blocked: release identity status drift: {eid}")
 
         candidate_key = identity.get("CreatedFromCandidate", "").strip()
-        candidate = candidates.get(candidate_key)
-        if candidate is None:
+        if candidate_key not in candidates:
             raise SystemExit(f"Release blocked: identity references unknown CandidateKey: {eid}->{candidate_key}")
-        if "4" not in candidate.get("SourceGrades", "").split("|"):
-            raise SystemExit(f"Release blocked: current pilot contains non-Grade-4-priority identity: {eid}")
+        if (candidate_key, eid) not in resolution_pairs:
+            raise SystemExit(f"Release blocked: identity missing explicit resolution decision: {candidate_key}->{eid}")
 
         if identity.get("CreatedFromOccurrence", "").strip() not in mapped.get(eid, []):
             raise SystemExit(f"Release blocked: CreatedFromOccurrence is not confirmed-mapped: {eid}")
-        source_metadata(eid, occurrences, mapped)
+        rows = source_rows(eid, occurrences, mapped)
 
         if adm.get("Status", "").strip() != "allowed":
-            raise SystemExit(f"Release blocked: current pilot Expression not allowed: {eid}")
+            raise SystemExit(f"Release blocked: baseline Expression not allowed: {eid}")
+        stage = adm.get("Stage", "").strip()
+        tag = adm.get("LearningTag", "").strip()
+        if stage not in STAGE_TAG or tag != STAGE_TAG[stage]:
+            raise SystemExit(f"Release blocked: invalid stage/tag: {eid} stage={stage!r} tag={tag!r}")
+
+        source_grades = {row.get("SourceGrade", "").strip() for row in rows}
+        if stage == GRADE4_STAGE:
+            grade4_count += 1
+            if "4" not in source_grades:
+                raise SystemExit(f"Release blocked: Grade-4 priority Expression has no Grade-4 source: {eid}")
+        else:
+            grade3_count += 1
+            if source_grades != {"3"}:
+                raise SystemExit(
+                    f"Release blocked: Grade-3-only Expression maps outside Grade 3: {eid} grades={sorted(source_grades)}"
+                )
+
         order = adm.get("LearningOrder", "").strip()
         if not ORDER_RE.fullmatch(order):
             raise SystemExit(f"Release blocked: invalid LearningOrder: {eid}={order!r}")
         allowed_orders.append(order)
+        ordered_stages.append((order, stage))
 
         if rev.get("FingerprintVersion", "").strip() != VERSION:
             raise SystemExit(f"Release blocked: unsupported fingerprint version: {eid}")
@@ -203,8 +263,17 @@ def main() -> None:
     expected_orders = [f"{i:06d}" for i in range(1, len(allowed_orders) + 1)]
     if sorted(allowed_orders) != expected_orders:
         raise SystemExit(
-            f"Release blocked: pilot LearningOrder must be continuous; actual={sorted(allowed_orders)} expected={expected_orders}"
+            f"Release blocked: LearningOrder must be continuous; actual={sorted(allowed_orders)} expected={expected_orders}"
         )
+
+    seen_grade3 = False
+    for order, stage in sorted(ordered_stages):
+        if stage == GRADE3_STAGE:
+            seen_grade3 = True
+        elif seen_grade3:
+            raise SystemExit(
+                f"Release blocked: Grade-4 priority appears after Grade-3 block at LearningOrder={order}"
+            )
 
     expected_publish.sort(key=lambda row: row["LearningOrder"])
     study_rows = read_csv(STUDY)
@@ -226,7 +295,8 @@ def main() -> None:
 
     print(
         f"Expression Release Gate PASS: publishable={len(study_rows)} "
-        f"model_reviewed_drafts={draft_count} admitted={len(allowed_orders)}"
+        f"model_reviewed_drafts={draft_count} admitted={len(allowed_orders)} "
+        f"grade4_priority={grade4_count} grade3_only={grade3_count}"
     )
 
 
