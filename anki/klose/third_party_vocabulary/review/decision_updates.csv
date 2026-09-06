@@ -1,0 +1,74 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:clean,clean,*,held,,vocabulary,,held,medium,start3-pos-boundary-held,The combined evidence can target adjective clean and verb clean; current source-list context does not safely define one learning unit.
+surface:crossing,crossing,*,held,,vocabulary,,held,medium,start3-form-sense-boundary-held,Crossing may be a lexical noun such as crossing/intersection or an -ing form of cross; keep held without stronger context.
+surface:cute,cute,*,keep-identity,,vocabulary,可爱的；漂亮的,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary adjective learning unit.
+surface:cycling,cycling,*,held,,vocabulary,,held,medium,start3-gerund-form-policy,Cycling is an activity noun or -ing form; keep held consistently with unresolved gerund/form identity policy.
+surface:dad,dad,*,keep-identity,,vocabulary,爸爸,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary family noun learning unit.
+surface:dance,dance,*,keep-identity,,vocabulary,跳舞；舞蹈,reviewed,high,start3-evidence-revalidation,Expanded evidence supports the elementary dance concept.
+surface:dancing,dancing,*,held,,vocabulary,,held,medium,start3-gerund-form-policy,The -ing form may be an activity noun or verb presentation; keep held until the form policy is frozen.
+surface:day,day,*,keep-identity,,vocabulary,天；一天；白天,reviewed,high,start3-evidence-revalidation,Expanded evidence remains within the elementary day/time concept.
+surface:dear,dear,*,held,,vocabulary,,held,medium,start3-semantic-boundary-held,Dear may be a letter salutation or adjective meaning beloved/expensive; mixed display forms and broad gloss require source-level context.
+surface:december,december,*,keep-identity,,vocabulary,十二月,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same month-name learning unit.
+surface:deep,deep,*,keep-identity,,vocabulary,深的；深处的,reviewed,medium,start3-new-learning-unit,The elementary source use supports the depth adjective concept; unrelated figurative senses are not imported.
+surface:degree,degree,*,keep-identity,,vocabulary,度；度数,reviewed,high,start3-new-learning-unit,The elementary source context supports the measurement-unit sense degree.
+surface:delicious,delicious,*,keep-identity,,vocabulary,美味的；可口的,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary adjective learning unit.
+surface:desk,desk,*,keep-identity,,vocabulary,书桌；课桌,reviewed,high,start3-evidence-revalidation,Multiple elementary sources consistently target the school/home desk noun.
+surface:diary,diary,*,keep-identity,,vocabulary,日记；日记本,reviewed,high,start3-new-learning-unit,The source provides one clear elementary noun learning unit.
+surface:dictionary,dictionary,*,keep-identity,,vocabulary,词典；字典,reviewed,high,start3-new-learning-unit,The source provides one clear elementary study-material noun learning unit.
+surface:different,different,*,keep-identity,,vocabulary,不同的,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary adjective learning unit.
+surface:dining hall,dining hall,*,keep-identity,,vocabulary,餐厅；饭厅,reviewed,high,start3-new-learning-unit,The source explicitly lists this stable place noun phrase.
+surface:dinner,dinner,*,keep-identity,,vocabulary,晚餐；正餐,reviewed,high,start3-evidence-revalidation,Expanded evidence supports the elementary meal noun learning unit.
+surface:dinosaur,dinosaur,*,keep-identity,,vocabulary,恐龙,reviewed,high,start3-new-learning-unit,The source provides one clear elementary animal noun learning unit.
+surface:dirty,dirty,*,keep-identity,,vocabulary,脏的；肮脏的,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the elementary cleanliness adjective sense.
+surface:do,do,*,split-required,,vocabulary,,held,high,start3-semantic-split-required,Elementary sources can target lexical do/做 and auxiliary do used in questions or negatives; occurrence-level sense separation is required.
+surface:do homework,do homework,*,keep-identity,,vocabulary,做作业,reviewed,high,start3-new-learning-unit,The source explicitly lists this stable elementary collocation.
+surface:do kung fu,do kung fu,*,keep-identity,,vocabulary,练功夫；做中国功夫,reviewed,high,start3-new-learning-unit,The source explicitly lists this stable activity collocation.
+surface:do morning exercises,do morning exercises,*,keep-identity,,vocabulary,做早操；晨练,reviewed,high,start3-new-learning-unit,The source explicitly lists this stable daily-routine collocation.
+surface:doctor,doctor,*,keep-identity,,vocabulary,医生,reviewed,high,start3-evidence-revalidation,Expanded elementary evidence consistently targets the occupation noun doctor.
+surface:dog,dog,*,keep-identity,,vocabulary,狗,reviewed,high,start3-evidence-revalidation,Multiple elementary sources consistently target the animal noun dog.
+surface:doing morning exercises,doing morning exercises,*,reuse-identity,do morning exercises,vocabulary,做早操；晨练,reviewed,high,start3-progressive-canonicalization,The progressive activity presentation maps to the stable base collocation do morning exercises.
+surface:dollar,dollar,*,keep-identity,,vocabulary,美元,reviewed,high,start3-new-learning-unit,The source provides one clear elementary currency noun learning unit.
+surface:door,door,*,keep-identity,,vocabulary,门,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary household/classroom noun learning unit.
+surface:down,down,*,keep-identity,,vocabulary,向下；在下面,reviewed,medium,start3-evidence-revalidation,The elementary source uses align on the directional/spatial down concept despite broader dictionary categories.
+surface:drank,drank,*,held,,vocabulary,,held,high,start3-irregular-form-policy,Drank is the irregular past form of drink; keep held until the form-versus-learning-unit policy is finalized.
+surface:draw,draw,*,keep-identity,,vocabulary,画；绘画,reviewed,high,start3-evidence-revalidation,Expanded source evidence supports the elementary drawing verb sense.
+surface:draw cartoons,draw cartoons,*,keep-identity,,vocabulary,画卡通；画漫画,reviewed,high,start3-new-learning-unit,The source explicitly lists this stable activity collocation.
+surface:dream,dream,*,held,,vocabulary,,held,medium,start3-pos-boundary-held,Dream may be noun '梦/梦想' or verb '做梦/梦想'; the current source list does not safely establish one standalone target sense.
+surface:dress,dress,*,split-required,,vocabulary,,held,high,start3-semantic-split-required,The combined sources plausibly cover noun dress/连衣裙 and verb dress/穿衣; occurrence-level sense separation is required.
+surface:farm,farm,*,keep-identity,,vocabulary,农场,reviewed,high,start3-evidence-revalidation,Expanded elementary evidence consistently targets the place noun farm.
+surface:farmer,farmer,*,keep-identity,,vocabulary,农民；农夫,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same occupation noun learning unit.
+surface:fast,fast,*,keep-identity,,vocabulary,快的；快速地,reviewed,high,start3-evidence-revalidation,Expanded elementary evidence supports the speed concept across adjective/adverb presentation.
+surface:faster,faster,*,reuse-identity,fast,vocabulary,更快的；更快地,reviewed,high,start3-comparative-canonicalization,The regular comparative presentation maps to the base fast learning unit.
+surface:fat,fat,*,keep-identity,,vocabulary,胖的,reviewed,high,start3-new-learning-unit,The Grade-3 elementary source context supports the body-description adjective sense.
+surface:father,father,*,keep-identity,,vocabulary,父亲；爸爸,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the elementary family noun learning unit.
+surface:favourite,favourite,*,keep-identity,,vocabulary,最喜欢的；最喜爱的,reviewed,high,start3-evidence-revalidation,Expanded elementary source evidence supports the favourite/preferred concept.
+surface:feature,feature,*,keep-identity,,vocabulary,特点；特征,reviewed,medium,start3-new-learning-unit,The Grade-6 source context supports the noun feature/特征 learning unit; other dictionary senses are not imported.
+surface:february,february,*,keep-identity,,vocabulary,二月,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same month-name learning unit.
+surface:feel,feel,*,keep-identity,,vocabulary,感觉；觉得,reviewed,medium,start3-new-learning-unit,The elementary source use supports the perception/state verb feel; broader noun senses are not needed here.
+surface:fell,fell,*,held,,vocabulary,,held,high,start3-irregular-form-policy,Fell is the irregular past form of fall and also has unrelated lexical senses; keep held under the form policy.
+surface:felt,felt,*,held,,vocabulary,,held,high,start3-irregular-form-policy,Felt is the irregular past form of feel and also an independent noun; keep held under the form policy.
+surface:ferry,ferry,*,keep-identity,,vocabulary,渡船,reviewed,high,start3-new-learning-unit,The source provides one clear elementary transport noun learning unit.
+surface:few,few,*,keep-identity,,vocabulary,少数；很少,reviewed,high,start3-new-learning-unit,The source provides the common elementary quantifier learning unit.
+surface:fifteen,fifteen,*,keep-identity,,vocabulary,十五,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same number learning unit.
+surface:fifth,fifth,*,keep-identity,,vocabulary,第五,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same ordinal learning unit.
+surface:film,film,*,keep-identity,,vocabulary,电影；影片,reviewed,high,start3-evidence-revalidation,Expanded elementary evidence consistently targets the movie sense film.
+surface:find,find,*,keep-identity,,vocabulary,找到；发现,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the common elementary verb learning unit.
+surface:finish,finish,*,keep-identity,,vocabulary,完成；结束,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary verb learning unit.
+surface:first,first,*,keep-identity,,vocabulary,第一；首先,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the elementary ordinal/ordering concept.
+surface:first floor,first floor,*,keep-identity,,vocabulary,一楼；第一层,reviewed,medium,start3-new-learning-unit,The source explicitly lists the building-floor phrase; locale-specific numbering remains a presentation concern rather than a reason to discard the lexical unit.
+surface:fish,fish,*,split-required,,vocabulary,,held,high,start3-semantic-split-required,The combined elementary sources plausibly cover noun fish/鱼 and verb fish/钓鱼; occurrence-level sense separation is required.
+surface:fisherman,fisherman,*,keep-identity,,vocabulary,渔夫；渔民,reviewed,high,start3-new-learning-unit,The source provides one clear elementary occupation noun learning unit.
+surface:five,five,*,keep-identity,,vocabulary,五,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same number learning unit.
+surface:fixed,fixed,*,held,,vocabulary,,held,high,start3-form-sense-boundary-held,Fixed may be a lexical adjective or the regular past/past-participle of fix; current source context does not safely select one identity treatment.
+surface:floor,floor,*,held,,vocabulary,,held,medium,start3-semantic-boundary-held,The combined sources may target floor as ground surface or building storey; keep held until occurrence-level source context separates these senses.
+surface:flower,flower,*,keep-identity,,vocabulary,花；花朵,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the elementary plant noun learning unit.
+surface:fly,fly,*,held,,vocabulary,,held,high,start3-semantic-boundary-held,Fly can be the verb '飞' or noun '苍蝇'; the combined source evidence requires occurrence-level context before choosing or splitting identities.
+surface:follow,follow,*,keep-identity,,vocabulary,跟随；遵循,reviewed,medium,start3-evidence-revalidation,The elementary source uses remain within the follow/遵循 action concept.
+surface:food,food,*,keep-identity,,vocabulary,食物；食品,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same elementary noun learning unit.
+surface:fool,fool,*,keep-identity,,vocabulary,傻瓜；笨蛋,reviewed,medium,start3-new-learning-unit,The Grade-5 source context supports the person noun fool rather than unrelated verb/adjective senses.
+surface:foot,foot,*,keep-identity,,vocabulary,脚；足,reviewed,high,start3-evidence-revalidation,Expanded source evidence confirms the singular body-part noun; existing feet remains separately held under the irregular-form policy.
+surface:football player,football player,*,keep-identity,,vocabulary,足球运动员,reviewed,high,start3-new-learning-unit,The source explicitly lists this stable occupation/person noun phrase.
+surface:forest,forest,*,keep-identity,,vocabulary,森林,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the elementary place/nature noun learning unit.
+surface:fork,fork,*,keep-identity,,vocabulary,叉子；餐叉,reviewed,high,start3-new-learning-unit,The source provides one clear elementary tableware noun learning unit.
+surface:forty,forty,*,keep-identity,,vocabulary,四十,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same number learning unit.
+surface:four,four,*,keep-identity,,vocabulary,四,reviewed,high,start3-evidence-revalidation,Expanded evidence confirms the same number learning unit.
