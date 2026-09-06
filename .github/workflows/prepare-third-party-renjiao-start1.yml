@@ -8,10 +8,13 @@ on:
       - 'tools/check_third_party_renjiao_start1.py'
       - 'tools/build_third_party_vocabulary_stage_a.py'
       - 'tools/audit_third_party_cross_source_semantics.py'
+      - 'tools/build_third_party_cross_source_resolution.py'
+      - 'tools/recheck_third_party_beijing_renjiao_stage_a.py'
       - 'tools/sync_third_party_status_to_next.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
       - 'anki/klose/source_reference/beijing_start1_staging/semantic_resolution_review.csv'
+      - 'anki/klose/third_party_vocabulary/review/renjiao_start1_morphology_resolution.csv'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
 
@@ -39,6 +42,12 @@ jobs:
 
       - name: Build context-rich cross-source semantic review queues
         run: python tools/audit_third_party_cross_source_semantics.py
+
+      - name: Build first-pass cross-source Identity Resolution
+        run: python tools/build_third_party_cross_source_resolution.py
+
+      - name: Independent Completion Recheck
+        run: python tools/recheck_third_party_beijing_renjiao_stage_a.py
 
       - name: Sync third-party progress to NEXT
         run: python tools/sync_third_party_status_to_next.py
