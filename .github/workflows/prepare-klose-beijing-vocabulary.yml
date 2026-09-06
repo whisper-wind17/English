@@ -6,9 +6,13 @@ on:
     paths:
       - 'tools/prepare_klose_beijing_vocabulary.py'
       - 'tools/audit_klose_beijing_source_variants.py'
+      - 'tools/check_klose_beijing_premerge.py'
       - '1.全国各大教材版本中小学同步/北京版/**'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
+      - 'anki/klose/source_reference/beijing_start1_staging/identity_resolution_review.csv'
+      - 'anki/klose/source_reference/beijing_start1_staging/source_variant_resolution_review.csv'
+      - 'anki/klose/source_reference/beijing_start1_staging/semantic_resolution_review.csv'
       - '.github/workflows/prepare-klose-beijing-vocabulary.yml'
   workflow_dispatch:
 
@@ -30,6 +34,9 @@ jobs:
 
       - name: Audit source and existing-identity inflection variants
         run: python tools/audit_klose_beijing_source_variants.py
+
+      - name: Validate pre-merge review coverage and merge lock
+        run: python tools/check_klose_beijing_premerge.py
 
       - name: Assert Klose publishing state is untouched
         run: |
