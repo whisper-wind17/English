@@ -33,8 +33,13 @@ IRREGULAR_SINGULAR_TO_PLURAL = {
     "tooth": "teeth", "mouse": "mice", "goose": "geese",
 }
 IRREGULAR_PLURAL_TO_SINGULAR = {v: k for k, v in IRREGULAR_SINGULAR_TO_PLURAL.items()}
-NON_PLURAL_S_FORMS = {
-    "its", "his", "this", "is", "was", "has", "does", "yes", "news",
+
+# These are function words, greetings, titles/abbreviations, or lexical forms
+# where mechanically adding/removing final "s" is not a useful noun-inflection
+# candidate. Keeping this explicit is safer than broad morphology heuristics.
+NON_INFLECTION_FORMS = {
+    "hi", "mr", "mrs", "ms", "miss",
+    "its", "his", "this", "is", "was", "has", "does", "yes", "news", "us",
 }
 
 
@@ -54,9 +59,10 @@ def variant_keys(key: str) -> set[str]:
     """Return conservative noun-like singular/plural neighbors.
 
     These are candidate links only, never automatic identity decisions.
-    Multi-word phrases and verb conjugations are intentionally excluded.
+    Multi-word phrases, verb conjugations, and known non-inflection forms are
+    intentionally excluded.
     """
-    if not key or " " in key:
+    if not key or " " in key or key in NON_INFLECTION_FORMS:
         return set()
     out: set[str] = set()
 
@@ -65,23 +71,24 @@ def variant_keys(key: str) -> set[str]:
     if key in IRREGULAR_PLURAL_TO_SINGULAR:
         out.add(IRREGULAR_PLURAL_TO_SINGULAR[key])
 
-    if key not in NON_PLURAL_S_FORMS:
-        # plural -> likely singular
-        if key.endswith("ies") and len(key) > 4:
-            out.add(key[:-3] + "y")
-        if key.endswith("es") and len(key) > 3:
-            out.add(key[:-2])
-            out.add(key[:-1])
-        if key.endswith("s") and len(key) > 2 and not key.endswith("ss"):
-            out.add(key[:-1])
+    # plural -> likely singular
+    if key.endswith("ies") and len(key) > 4:
+        out.add(key[:-3] + "y")
+    if key.endswith("es") and len(key) > 3:
+        out.add(key[:-2])
+        out.add(key[:-1])
+    if key.endswith("s") and len(key) > 2 and not key.endswith("ss"):
+        out.add(key[:-1])
 
-        # singular -> likely plural
-        if key.endswith("y") and len(key) > 2 and key[-2] not in "aeiou":
-            out.add(key[:-1] + "ies")
-        out.add(key + "s")
-        out.add(key + "es")
+    # singular -> likely plural. These are review candidates only; no merge is
+    # authorized by this relation.
+    if key.endswith("y") and len(key) > 2 and key[-2] not in "aeiou":
+        out.add(key[:-1] + "ies")
+    out.add(key + "s")
+    out.add(key + "es")
 
     out.discard(key)
+    out.difference_update(NON_INFLECTION_FORMS)
     return {x for x in out if x}
 
 
@@ -160,7 +167,7 @@ def main() -> None:
         f"- rows linked to an existing Klose identity by inflection: {existing_count}",
         f"- rows linked to another Beijing surface by inflection: {source_count}",
         "",
-        "The audit is intentionally conservative: it handles single-word noun-like singular/plural relations and a small explicit irregular map. It does not merge verb conjugations, phrases, compounds, or semantic relatives.",
+        "The audit is intentionally conservative: it handles single-word noun-like singular/plural relations and a small explicit irregular map. It excludes known function/title/greeting forms and does not merge verb conjugations, phrases, compounds, or semantic relatives.",
         "",
         "All rows remain `pending` until sense-aware review.",
     ]
