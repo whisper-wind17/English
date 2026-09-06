@@ -1,0 +1,19 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:card,card,*,keep-identity,,vocabulary,卡片；卡,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence consistently supports the common card noun learning unit.
+surface:careful,careful,*,keep-identity,,vocabulary,小心的；仔细的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary adjective learning unit.
+surface:careful with,careful with,*,route-expression,,expression,小心……；注意……,reviewed,medium,hujiao-object-routing,This complement-taking pattern is better represented as an Expression than as a standalone Vocabulary identity.
+surface:carefully,carefully,*,keep-identity,,vocabulary,小心地；仔细地,reviewed,high,hujiao-new-learning-unit,The source provides one clear elementary adverb learning unit.
+surface:carrot,carrot,*,keep-identity,,vocabulary,胡萝卜,reviewed,high,hujiao-evidence-revalidation,Expanded evidence consistently targets the vegetable noun.
+surface:carry,carry,*,keep-identity,,vocabulary,拿；携带；搬运,reviewed,medium,hujiao-evidence-revalidation,Elementary sources remain within the common carry/transport verb concept; unrelated technical dictionary senses are ignored.
+surface:cat,cat,*,keep-identity,,vocabulary,猫,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary animal noun.
+surface:catch,catch,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Catch has several elementary senses such as catch/grab catch a bus and catch an illness; the current word-list occurrences do not safely bind one target sense.
+surface:centimetre,centimetre,*,keep-identity,,vocabulary,厘米；公分,reviewed,high,hujiao-new-learning-unit,The source provides one clear measurement-unit noun.
+surface:chair,chair,*,keep-identity,,vocabulary,椅子,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence consistently targets the furniture noun.
+surface:change,change,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Change may mean alter/change or money/change in elementary materials; current source evidence does not safely bind one target sense.
+surface:chicken,chicken,*,split-required,,vocabulary,,split-required,high,hujiao-semantic-split-required,Combined sources support at least the animal/chick and food/chicken-meat learning units; do not collapse them into one identity.
+surface:child,child,*,held,,vocabulary,,held,high,irregular-form-policy-held,Child and children are both explicitly listed across sources and the irregular singular/plural pedagogical identity policy remains intentionally unresolved.
+surface:children,children,*,held,,vocabulary,,held,high,irregular-form-policy-held,Children is the irregular plural of child and is explicitly taught across sources; preserve the form-policy blocker rather than canonicalizing automatically.
+surface:china,china,*,keep-identity,,vocabulary,中国,reviewed,high,hujiao-evidence-revalidation,Elementary source evidence consistently targets the proper-name country sense; porcelain/china is dictionary noise here.
+surface:chinese,chinese,*,split-required,,vocabulary,,split-required,high,hujiao-semantic-split-required,Across elementary sources Chinese may denote the language the nationality/person concept or the adjective; these should not be silently collapsed without occurrence-level resolution.
+surface:chinese ink painting,chinese ink painting,*,keep-identity,,vocabulary,中国水墨画,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable art noun phrase.
+surface:chocolate,chocolate,*,keep-identity,,vocabulary,巧克力,reviewed,high,hujiao-evidence-revalidation,The elementary source use supports the common food noun learning unit.
