@@ -342,11 +342,13 @@ left=leave过去式 vs left=左边
 
 北京版 XLSX 的 `释义` 是 dictionary-style broad gloss，不可直接当教材 target sense 真源；缺少 Unit / sentence context 的 held 项在未来 merge 前仍需 actual textbook / same-edition context 或明确标注为非 source-confirmed 的人工/模型决策。
 
-当前用户要求是 staging only，因此不要把北京版 provenance 写入 `master/source_occurrences.csv`，不要 append 北京版 NoteID，不改 learner/release/publish/Anki。
+当前北京版与 Klose Stable Identity 的比较结果现在只视为 staging diagnostic / candidate evidence；根据统一第三方 corpus 的长期设计，它**不是最终 Klose 去重结果**。
+
+当前用户要求仍是 staging only，因此不要把北京版 provenance 写入 `master/source_occurrences.csv`，不要 append 北京版 NoteID，不改 learner/release/publish/Anki。
 
 ---
 
-## 9. Third-party Multi-Edition Vocabulary Corpus — design frozen
+## 9. Third-party Multi-Edition Vocabulary Corpus — two-stage design frozen
 
 2026-09-06 用户确认长期目标：北京版只是第一个 seed，后续把人教版、沪教版及其他第三方小学教材词表持续累加到同一个统一第三方 corpus，按 learning unit / target sense 做 sense-aware 去重。
 
@@ -356,13 +358,20 @@ left=leave过去式 vs left=左边
 docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 ```
 
-核心流程冻结为：
+两阶段流程冻结为：
 
 ```text
+Stage A — 第三方内部
+
 多个第三方教材 Raw Vocabulary
 → Source Adapters
-→ Third-party Unified Vocabulary Identity
-→ 与完整 Klose Stable Identity Registry 做差集
+→ 与 Third-party Unified Vocabulary 做 sense-aware 去重
+→ 完整 Third-party Unified Vocabulary
+
+Stage B — 所有第三方来源完成后
+
+完整 Third-party Unified Vocabulary
+→ 与 Klose Full Stable Identity Registry 做一次最终 sense-aware diff
 → Third-party New Vocabulary Pool
 → 后续全部作为 Klose 当前教材之外的新词学习
 ```
@@ -370,16 +379,19 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 重要约束：
 
 - 北京版只有 seed 身份，没有语义优先级；
+- 第二个及后续教材在 Stage A **只和第三方 Unified Vocabulary 去重**，不因 Klose 当前已有同词而删除第三方 Identity；
+- 在所有计划中的第三方来源处理完成前，不生成最终 `existing-in-klose / third-party-new` 结论；
+- 早期与 Klose 的比较可以保留为 diagnostic / candidate evidence，但不能作为第三方 corpus 删除依据；
 - 去重单位是 `learning unit / target sense`，不是字符串；
 - 同 surface 不同义项必须允许多个第三方 Identity；
-- 与 Klose 比较时必须使用完整 Stable Identity Registry，不能只看 Released / Unsuspended / Anki active cards；
+- Stage B 与 Klose 比较时必须使用完整 Stable Identity Registry，不能只看 Released / Unsuspended / Anki active cards；
 - `third-party-new` 的业务含义是“后续计划学习的新词”，不是可选参考词；
 - 仍通过 Identity → Learner Presentation → Admission → Review → Release → Anki 正式链路进入学习，staging 不自动发布；
 - 教材版本、最早年级、覆盖教材数、出现次数、年级分布都**不作为学习决策维度**；
 - provenance 只在 raw / Source Occurrence 层保留用于回溯，不进入正常学习界面；
 - 第三方统一 corpus 永远低于 Klose 实际教材 Source Truth 优先级。
 
-下一步实施方向：把当前 `beijing_start1_staging` 演进为统一第三方 corpus 的 Source Adapter #1，然后按同一规则加入其他教材版本。
+下一步实施方向：把当前 `beijing_start1_staging` 演进为统一第三方 corpus 的 Source Adapter #1，然后选择第二个教材版本，只执行 Stage A 的第三方内部去重。
 
 ---
 
