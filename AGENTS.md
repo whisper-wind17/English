@@ -80,7 +80,7 @@ Explicit learning admission                  implemented for current Grade-4 set
 Deterministic curriculum LearningOrder       implemented for current Grade-4 set
 Homograph front-side disambiguation          implemented via optional PromptHint
 Multiple source adapters                     planned
-Expressions release system                   source/pattern layer only
+Expressions stable identity / learner presentation / card contract first formal card implemented; deterministic publish / release gate pending
 ```
 
 当前物理兼容策略：既有 `source_identity_map.csv` 作为 legacy baseline 保持不动；新 Edition / 同词多义 identity 使用 `source_identity_extensions.csv`，避免为了升级 schema 重写已有 518 条 identity。
