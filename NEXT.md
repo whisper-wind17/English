@@ -11,36 +11,32 @@ AGENTS.md
 → NEXT.md
 ```
 
-当前 Expressions 任务继续读取：
-
-```text
-docs/EXPRESSIONS_SYSTEM.md
-→ anki/klose/expressions/review/grade3-grade4-baseline.md
-→ anki/klose/expressions/review/identity_resolution.csv
-→ anki/klose/expressions/review/full-baseline-review.md
-→ anki/klose/expressions/master/expression_registry.csv
-→ anki/klose/expressions/master/expression_occurrences.csv
-→ anki/klose/expressions/master/source_expression_map.csv
-→ anki/klose/expressions/learner/current.csv
-→ anki/klose/expressions/learner/learning_admission.csv
-→ anki/klose/expressions/learner/presentation_review_registry.csv
-→ anki/klose/expressions/master/release_registry.csv
-→ anki/klose/expressions/anki/README.md
-→ anki/klose/expressions/publish/anki-import.csv
-```
-
-当前第三方 Vocabulary corpus 任务读取：
+当前第三方 Vocabulary corpus 任务继续读取：
 
 ```text
 docs/THIRD_PARTY_VOCABULARY_CORPUS.md
-→ anki/klose/source_reference/beijing_start1_staging/PREMERGE_STATUS.md
+→ anki/klose/third_party_vocabulary/config/source_adapters.csv
+→ anki/klose/third_party_vocabulary/review/identity_decisions.csv
+→ anki/klose/third_party_vocabulary/staging/review_queue.csv
+```
+
+涉及 Klose 实际教材 reconciliation 时再读取：
+
+```text
+docs/SOURCE_RECONCILIATION.md
+```
+
+Expressions 任务读取：
+
+```text
+docs/EXPRESSIONS_SYSTEM.md
 ```
 
 不要仅凭聊天历史推测当前状态。
 
 ---
 
-## 1. Vocabulary status
+## 1. Vocabulary operational baseline
 
 Grade-4 Vocabulary 已闭环并正常学习：
 
@@ -55,475 +51,293 @@ FSRS              = ON
 Desired retention = 90%
 ```
 
-FSRS / Due / Interval / Review History / Card State 继续以 Anki 为唯一真源。
+完整 Klose Stable Vocabulary Identity Registry：
+
+```text
+note_registry.csv + note_registry_extensions.csv
+= 901 identities
+```
+
+GitHub 管 Source / Identity / Learner / Release；Anki 继续是 FSRS / Review History / Due / Interval / Card State 真源。
 
 ---
 
-## 2. Expressions source / identity baseline
+## 2. Expressions operational baseline
 
-当前复习范围只纳入 Klose 已学过的三、四年级实际教材 Expressions；一年级、二年级暂不复习。
-
-```text
-Grade 3 Source Occurrences = 94
-Grade 4 Source Occurrences = 72
-Total Source Occurrences   = 166
-
-Curated Pattern Candidates = 64
-Stable Expressions          = 66
-Grade-4 priority            = 37
-Grade-3-only                = 29
-LearningOrder               = 000001..000066
-```
-
-学习顺序冻结为：
+三、四年级 Expressions 已完成首次正式闭环：
 
 ```text
-KE000001..KE000037  = Grade-4 priority
-KE000038..KE000066  = Grade-3 only
+Stable Expressions = 66
+Grade-4 priority    = 37
+Grade-3-only        = 29
+LearningOrder       = 000001..000066
+approved            = 66
+admitted            = 66
+release-ready       = 66
 ```
 
-跨年级相同 Pattern 只学习一次，并归入 Grade-4 priority block。
-
-64 Candidate 最终得到 66 Stable Expressions，因为 Identity Review 拆分：
+Anki：
 
 ```text
-EC0035
-→ It's time for [noun].
-→ It's time to [verb].
-
-EC0058
-→ Excuse me?   # 没听清时请求重复
-→ Excuse me.   # 礼貌引起注意
+Deck              = Klose-English::Expressions
+Note Type         = Klose Expression
+Cards             = 66
+New/day           = 2
+FSRS              = ON
+Desired retention = 90%
+AnkiWeb Sync       = completed
 ```
 
-其他显式 Identity 调整：
-
-```text
-What's this? / What's that? → What's [demonstrative]?
-Can I [verb phrase], please? → Can I [verb phrase]?  # please 可选
-It's [weather adjective]... → It's [weather description]...
-What about [thing]? → ExpressionType=slot_frame
-```
+当前处于 real-learning pilot。一个月后主要观察 Again ratio、slot substitution、unseen-situation transfer、over-generalization、pronunciation/fluency 和 daily review load。不要因 repo 重建改变已经进入 Learning / Review 的 Card 调度状态。
 
 ---
 
-## 3. Full 66-card Presentation / approval
+## 3. Current repo task — Third-party Multi-Edition Vocabulary Corpus
 
-全部 66 个 Stable Expressions 已生成 Stage-A Learner Presentation，并已建立 source provenance / admission / LearningOrder。
+用户已冻结长期目标：
 
-Front：
+> 把北京版、人教版、沪教版及其他第三方小学教材词汇汇总成一个统一、sense-aware 去重的第三方词源。教材来源、最早年级、覆盖教材数、出现次数、年级分布不参与学习决策。所有第三方来源处理完成后，再与 Klose Full Stable Identity Registry 做一次最终去重，剩余 learning units 全部作为 Klose 当前教材之外的新词学习。
+
+两阶段流程：
 
 ```text
-中文短场景 / communicative intent
-+ English minimal slot cue
-→ active English production
+Stage A
+所有第三方 Source Occurrences
+→ 第三方内部 sense-aware Identity Resolution
+→ Third-party Unified Vocabulary
+
+Stage B（所有计划第三方来源完成后才执行）
+Third-party Unified Vocabulary
+→ vs Klose Full Stable Identity Registry
+→ Third-party New Vocabulary Pool
 ```
 
-Back：
+Stage A 不因 Klose 当前已有某词而删除第三方 learning unit。
+
+---
+
+## 4. Simplified Stage-A architecture — CURRENT
+
+2026-09-06 已完成一次工程复杂度复核。结论：业务规则正确，但原来的多层 `audit → apply → recheck` 专项流水线过度复杂，因此已经收敛为最简长期架构。
+
+唯一 active 数据流：
 
 ```text
-Target + Target TTS
-Pattern
-Meaning / Usage
-1–2 Examples
+Source Adapter occurrences
++ config/source_adapters.csv
++ review/identity_decisions.csv
+→ tools/build_third_party_corpus.py
+→ staging/surface_candidates.csv
+→ staging/review_queue.csv
+→ staging/unified_vocabulary_preview.csv
+→ tools/check_third_party_corpus.py
 ```
 
-TTS contract：
+核心边界：
 
 ```text
-Target      = 自动 TTS
-Examples    = 当前只显示文字，不自动 TTS
+Source Adapter = 只解析 Source Fact
+CandidateSignals = 只提供匹配证据
+identity_decisions.csv = 唯一内容决策真源
+review_queue.csv = 纯派生 unresolved/blocker view
+unified_vocabulary_preview.csv = reviewed Vocabulary preview
 ```
 
-长期 Front 演进仍为：
+不再为 exact / morphology / multiword / semantic / expression routing 分别创建长期 pipeline。
+
+当前 `identity_decisions.csv` Action：
 
 ```text
-Stage A — 中文短场景 + English cue
-→ Stage B — concise English intent + English cue
-→ Stage C — English-only situation / context
+keep-identity
+reuse-identity
+split-required
+held
+route-expression
+source-only
+pending
 ```
 
-只修改 Learner Presentation，不修改 Stable ExpressionID，也不重建 Anki FSRS / Review History。
+Content decision 是 data；通用 Python 只负责生成和校验。
 
-2026-09-06 用户明确授权将尚未逐张人工检查的剩余 57 张先按通过处理。为保留审计语义，ReviewBasis 记录为：
+---
+
+## 5. Enabled third-party Source Adapters
+
+配置真源：
 
 ```text
-user-authorized-batch-approval-without-individual-review
+anki/klose/third_party_vocabulary/config/source_adapters.csv
 ```
 
 当前：
 
 ```text
-approved       = 66
-model-reviewed = 0
-admitted       = 66
-publishable    = 66
-release-ready  = 66
+beijing_start1
+  Source books       = 12
+  Source occurrences = 808
+  MatchKeys          = 734
+
+renjiao_start1
+  Source books       = 12
+  Source occurrences = 908
+  MatchKeys          = 802
+```
+
+人教版目录另有“三年级起点”，未来必须作为独立 adapter，不能静默混入 `renjiao_start1`。
+
+Renjiao Source Adapter 当前物理职责已收敛为：
+
+```text
+Raw 12 XLSX
+→ source_reference/renjiao_start1_staging/occurrences.csv
+```
+
+它不再自己比较北京版，也不再生成 exact/morph/new 等 identity 队列。
+
+北京版现有 staging 中历史的 Klose comparison / semantic audit 仍可作为来源审计证据，但不代表 Stage-B 最终 Klose diff。
+
+---
+
+## 6. Current unified Stage-A baseline
+
+当前北京 + 人教一年级起点：
+
+```text
+Source occurrences      = 1716
+Normalized surfaces     = 1144
+Durable decisions       = 1144
+Vocabulary preview      = 851
+Review/blocker surfaces = 254
+
+keep-identity     = 849
+reuse-identity    = 13
+held              = 50
+pending           = 192
+split-required    = 12
+route-expression  = 3
+source-only       = 25
+```
+
+`403 Renjiao new surfaces = 403 new words` 已明确否定。原始第三方“单词”列可能包含 lexical word、multiword lexical unit、format alias、inflected form、Expression、event/source chunk；最终对象类型由统一 Identity Resolution 决定。
+
+当前仍然：
+
+```text
+Stable ThirdPartyID minted = no
+Final Klose diff executed  = no
+Klose Master modified      = no
+Klose Learner modified     = no
+Klose Publish modified     = no
+Anki modified              = no
 ```
 
 ---
 
-## 4. Deterministic publish / Anki operational status
+## 7. Completion Recheck protections
 
-Expressions 生成链：
+每次阶段完成后必须执行独立 Completion Recheck；CI success 不能单独等同“做对了”。
 
-```text
-upstream registries
-→ tools/build_klose_expressions.py
-→ publish/study.csv
-→ publish/anki-import.csv
-→ tools/check_klose_expressions_release_ready.py
-```
-
-正式唯一导入文件：
+当前通用 checker 至少验证：
 
 ```text
-anki/klose/expressions/publish/anki-import.csv
+enabled adapter occurrence union 完整闭合
+SourceOccurrenceKey 唯一
+surface set 与 occurrences 闭合
+DecisionKey 唯一且只引用 enabled surfaces
+new undecided surface 自动进入 pending
+review_queue 是纯派生 blocker/pending view
+reuse-identity 必须有 CanonicalMatchKey
+Vocabulary / Expression / source-only 对象边界一致
+Klose Master / Learner / Publish / Anki 无改动
 ```
 
-2026-09-06 用户已完成首次正式 Anki Desktop 导入并确认：
+代表性语义边界持续锁定：
 
 ```text
-Deck              = Klose-English::Expressions
-Note Type         = Klose Expression
-Card Type         = Production
-Notes / Cards     = 66 / 66
-LearningOrder     = 000001..000066
-New #             = 1..66
-AnkiWeb Sync       = completed
+May(月份) / may(情态动词)
+like=喜欢 / weather-like construction
+square=正方形 / square=广场
+left=左边 / left=leave过去式
+cook=动词 / cook=名词
+cold=寒冷 / cold=感冒
+study=学习 / study=书房
 ```
 
-New # 只在全部 66 张仍为 `is:new` 时按 LearningOrder materialize；后续一旦进入真实 Learning / Review，不再用 repo 重建调度状态。
-
-当前独立 Deck Options preset：
+代表性 morphology/form 边界：
 
 ```text
-Preset                = Klose Expressions
-New cards/day         = 2
-Maximum reviews/day   = 9999
-Learning steps        = 1m 10m
-New card gather order = Ascending position
-New card sort order   = Order gathered
-New/review order      = Show after reviews
-FSRS                  = ON
-Desired retention     = 90%
-FSRS parameters       = Default parameters
-FSRS search scope     = deck:"Klose-English::Expressions" -is:suspended
-Reschedule on change  = OFF
+danced → dance          reuse candidate
+cartoons → cartoon      reuse candidate
+gloves → glove          reuse candidate
+scissors                 keep lexicalized learning unit
+crossroads               keep lexicalized learning unit
+slept / swam / were / won held irregular-form policy
 ```
 
-当前状态：
-
-```text
-Build Valid        = yes
-Content Releasable = yes
-Anki Updated       = yes
-Learning Admitted  = yes
-Pilot Ready        = yes
-```
-
-Anki 是 FSRS / Review History / Due / Interval / Card State 真源；repo 这里只记录用户确认过的 operational baseline，不回写真实记忆状态。
+工程简化后的 Completion Recheck 还发现并修正过一次迁移偏差：北京 seed 的 `a few / get well / how many / ice cream / make use of / pencil case / sweet potato / take part in / the U.K. / the U.S.A. / the United States of America` 未经过 Vocabulary/Expression/object routing，不能因 seed 身份自动当 Vocabulary Identity；现已回到统一 review queue。
 
 ---
 
-## 5. NEXT TASK — real-learning pilot
+## 8. NEXT TASK
 
-Expressions 内容侧和首次 Anki 部署已经结束。下一步不是继续扩卡，而是让 Klose 按当前设置真实学习。
+不要恢复旧 multi-pass 专项流水线。
 
-首月保持：
-
-```text
-New/day = 2
-四年级优先 → 三年级
-不因为 repo 顺序变化重排已进入 Learning / Review 的 Cards
-```
-
-第一周先观察实际负担，再决定是否需要调整 `New/day`；不要为了更快清完 66 张而提前提高。
-
-建议第一周检查一次：
+下一步只操作统一入口：
 
 ```text
-Again ratio
-actual daily review load
-明显卡住的 Expression
-是否只能背原句、不能替换 slot
-Target TTS / 发音是否有问题
+anki/klose/third_party_vocabulary/staging/review_queue.csv
 ```
 
-一个月后再做完整 pilot review。
+处理原则：
+
+```text
+1. 只审核真正 unresolved / held / split-required 的 learning-unit 问题；
+2. 结果只写入 review/identity_decisions.csv；
+3. rebuild；
+4. independent Completion Recheck；
+5. 不为了 pending=0 强行猜测缺乏 source context 的义项；
+6. 在 corpus 足够稳定前不 mint Stable ThirdPartyID；
+7. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
+```
+
+当前优先事项是把 254 个统一 blocker/review surface 进一步区分：
+
+```text
+可直接 resolve 的 Vocabulary learning unit
+可 canonicalize/reuse 的 form/alias
+Expression
+source-only chunk
+真实 semantic split
+必须继续 held 的 source-context / identity-policy blocker
+```
+
+不再按“138 phrase + 42 routing + 其他 form pass”分别维护工作流。
+
+完成当前两 adapter 的统一 queue 后，再接入下一个第三方 Source Adapter；新增 adapter 只增加标准 occurrences + `source_adapters.csv` 配置，不复制 builder/checker。
 
 ---
 
-## 6. One-month evaluation
+## 9. Deferred
 
-只观察有决策价值的指标：
-
-```text
-Again ratio
-slot substitution success
-transfer to unseen situations
-pattern over-generalization
-pronunciation / fluency issues
-actual daily review load
-```
-
-核心问题：Klose 是记住了一条原句，还是获得了可迁移、可主动调用的 Expression。
-
-Front 是否从 Stage A 向 Stage B 演进，也只根据真实学习表现决定。
-
----
-
-## 7. Next repo engineering work / deferred
-
-Expressions pilot 可以在 Anki 中独立运行；仓库侧当前可并行推进第三方 Vocabulary corpus 构建。
-
-原计划仍保留：
+仍保留但不是当前任务：
 
 ```text
-Grade 1–3 Vocabulary actual-source reconciliation
+Grade 1–3 Klose actual-source Vocabulary reconciliation
+Grade 5/6 actual-source reconciliation
+99 held legacy Vocabulary Notes 的 British/American IPA 补齐（对应 admission 前）
+Expressions one-month real-learning evaluation
 ```
 
-仍 deferred：
-
-- Grade 5/6 actual source reconciliation：后续处理；
-- 99 个 held legacy Vocabulary Notes 缺 British/American IPA：对应 Note admission 前再补齐并 re-review。
-
----
-
-## 8. Beijing Edition Grade 1–6 Vocabulary pre-merge staging
-
-2026-09-06 用户要求先整理 repo 内北京版一年级起点 1–6 年级上下册，并与当前 Klose Vocabulary 做 sense-aware 去重，但**暂时不得加入当前词表**。
-
-当前 staging 入口：
-
-```text
-anki/klose/source_reference/beijing_start1_staging/PREMERGE_STATUS.md
-```
-
-当前基线：
-
-```text
-Source books                    = 12
-Source occurrences              = 808
-Distinct normalized MatchKeys   = 734
-Existing stable identities compared = 901
-
-surface exact-single            = 433
-surface exact-multiple          = 7
-surface format-alias            = 1
-surface morphology              = 2
-surface no-existing-match       = 291
-
-Beijing Premerge Valid          = yes
-Merge Authorized                = no
-Klose Master / Release / Publish / Anki changed = no
-```
-
-已完成：
-
-- 12 册 XLSX deterministic parsing；
-- occurrence-level source row 保留；
-- 与 `note_registry.csv + note_registry_extensions.csv` 全量比较；
-- exact / multiple / format alias / morphology / new candidate 分桶；
-- 10 个高风险 identity candidate 显式 review；
-- 6 个真实 inflection candidate 显式 review，并清除 `hi -> his`、`Mr -> Mrs` 等误报；
-- occurrence-level semantic collision review；
-- 独立 CI + `tools/check_klose_beijing_premerge.py` gate；
-- 所有 review 保持 `MergeAuthorized=no`。
-
-已确认 surface-only 去重会产生错误。例如：
-
-```text
-May(月份) vs may(情态动词)
-like=喜欢 vs weather ... like ...
-square=广场 vs square=正方形
-left=leave过去式 vs left=左边
-```
-
-北京版 XLSX 的 `释义` 是 dictionary-style broad gloss，不可直接当教材 target sense 真源；缺少 Unit / sentence context 的 held 项在未来 merge 前仍需 actual textbook / same-edition context 或明确标注为非 source-confirmed 的人工/模型决策。
-
-当前北京版与 Klose Stable Identity 的比较结果现在只视为 staging diagnostic / candidate evidence；根据统一第三方 corpus 的长期设计，它**不是最终 Klose 去重结果**。
-
-当前用户要求仍是 staging only，因此不要把北京版 provenance 写入 `master/source_occurrences.csv`，不要 append 北京版 NoteID，不改 learner/release/publish/Anki。
-
----
-
-## 9. Third-party Multi-Edition Vocabulary Corpus — two-stage design + current progress
-
-2026-09-06 用户确认长期目标：北京版只是第一个 seed，后续把人教版、沪教版及其他第三方小学教材词表持续累加到同一个统一第三方 corpus，按 learning unit / target sense 做 sense-aware 去重。
-
-长期设计：
-
-```text
-docs/THIRD_PARTY_VOCABULARY_CORPUS.md
-```
-
-两阶段流程冻结为：
-
-```text
-Stage A — 第三方内部
-
-多个第三方教材 Raw Vocabulary
-→ Source Adapters
-→ 与 Third-party Unified Vocabulary 做 sense-aware 去重
-→ 完整 Third-party Unified Vocabulary
-
-Stage B — 所有第三方来源完成后
-
-完整 Third-party Unified Vocabulary
-→ 与 Klose Full Stable Identity Registry 做一次最终 sense-aware diff
-→ Third-party New Vocabulary Pool
-→ 后续全部作为 Klose 当前教材之外的新词学习
-```
-
-当前已接入两个独立 Source Adapter：
-
-```text
-Adapter #1  beijing_start1
-Source books             = 12
-Source occurrences       = 808
-Distinct MatchKeys       = 734
-
-Adapter #2  renjiao_start1
-Source books             = 12
-Source occurrences       = 908
-Distinct MatchKeys       = 802
-```
-
-人教版目录同时存在“一年级起点”和“三年级起点”；当前只接入 `renjiao_start1`。三年级起点未来作为独立 adapter，不能静默混入一年级起点。
-
-北京 + 人教一年级起点当前联合 Stage A 工作区：
-
-```text
-anki/klose/third_party_vocabulary/staging/
-
-Total source occurrences       = 1716
-Distinct normalized MatchKeys  = 1144
-Cross-source exact overlaps    = 392
-Single-source surfaces         = 752
-Renjiao morphology candidates  = 6
-Renjiao new-surface candidates = 403
-Cross-source context reviews   = 392
-Semantic-risk queue            = 287
-```
-
-Cross-source exact-overlap Identity Resolution：
-
-```text
-rule-reviewed reuse             = 105
-model-reviewed rows             = 287
-pending semantic review         = 0
-
-reuse-learning-unit             = 362
-partial-overlap-split-required  = 8
-do-not-merge                    = 3
-held / policy-context blocker   = 19
-
-morphology resolved             = 5
-morphology held                 = 1
-```
-
-当前已显式保护的 cross-source semantic collision 包括：
-
-```text
-May(月份) vs may(情态动词)
-like=喜欢 vs weather ... like ...
-square=正方形 vs square=广场
-left=左边 vs left=leave过去式
-cook=烹饪/煮 vs cook=厨师
-cold=寒冷 vs cold=感冒
-study=学习 vs study=书房
-```
-
-人教版 403 个原始 `new surface` 已完成对象类型审计；**403 surface 不等于 403 Vocabulary Identity**：
-
-```text
-single-token lexical             = 189
-multiword lexical                = 138
-multiword routing                = 42
-expression / event chunk         = 27
-ordinal format alias             = 5
-single-token form                = 2
-```
-
-其中 `shopping centre / shopping list / shopping mall` 已显式保护为 lexical compounds，不能因为首词为 `shopping` 就被 gerund heuristic 错误路由成 event chunk。
-
-当前 Renjiao new-surface Object / Sense Resolution：
-
-```text
-rule-reviewed rows                       = 131
-model-reviewed rows                      = 92
-pending rows                             = 180
-
-new Vocabulary learning-unit candidates = 172
-single-token sense pending               = 0
-multiword phrase sense pending           = 138
-Vocabulary-vs-Expression pending         = 42
-ordinal aliases                          = 5
-Expression candidates                    = 3
-source chunks / no Vocabulary identity   = 25
-held source-context blockers             = 16
-held form-policy blockers                = 1
-within-source split-required             = 1
-identity/object review queue             = 197
-```
-
-Single-token semantic-risk review 已完成独立闭合：原 90 条中，73 条明确为新 Vocabulary learning-unit candidate，16 条因 source context 不足保持 held，`French` 因同时出现“法语”和国籍/形容词用法标记为 within-source split-required。
-
-当前工程状态：
-
-```text
-Renjiao Stage A Valid                    = yes
-Combined Stage A build                   = yes
-Cross-source context audit               = yes
-Cross-source Identity Resolution         = complete / pending 0
-New-surface type audit                   = complete
-New-surface object routing               = complete
-Single-token sense review                = complete / pending 0
-Independent Completion Rechecks          = pass
-Stable ThirdPartyID minted               = no
-Final Klose diff executed                = no
-Klose Master/Release/Publish/Anki changed = no
-```
-
-重要约束继续有效：
-
-- 北京版只有 seed 身份，没有语义优先级；
-- 第二个及后续教材在 Stage A **只和第三方 Unified Vocabulary 去重**，不因 Klose 当前已有同词而删除第三方 Identity；
-- 在所有计划中的第三方来源处理完成前，不生成最终 `existing-in-klose / third-party-new` 结论；
-- 早期与 Klose 的比较可以保留为 diagnostic / candidate evidence，但不能作为第三方 corpus 删除依据；
-- 去重单位是 `learning unit / target sense`，不是字符串；
-- 同 surface 不同义项必须允许多个第三方 Identity；
-- morphology / phrase / punctuation 只产生 candidate，不自动 merge；
-- Vocabulary 与 Expressions 是不同学习对象；不能因为第三方词表里出现一个短语/句块就自动 mint Vocabulary Identity；
-- 教材版本、最早年级、覆盖教材数、出现次数、年级分布都不作为学习决策维度；
-- provenance 只在 raw / Source Occurrence 层保留用于回溯，不进入正常学习界面；
-- 第三方统一 corpus 永远低于 Klose 实际教材 Source Truth 优先级。
-
-当前下一步：
-
-```text
-1. 处理 138 个 multiword lexical phrase sense reviews；
-2. 处理 42 个 Vocabulary-vs-Expression routing reviews；
-3. 复核 held / form-policy blockers 与 within-source split，再判断是否足够稳定到 mint 第一版 Stable ThirdPartyID；
-4. Stable ThirdPartyID 建立后继续接入后续第三方 adapter；
-5. 所有计划第三方来源完成前，不执行 Klose Stage-B final diff；
-6. 每个阶段完成后必须执行独立 Completion Recheck。
-```
 ---
 
 ## 10. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
-- Source Occurrence 与 Expression Identity 分离；
-- Expression Identity 以 `CanonicalForm + CommunicativeFunction` 判断；同 surface form 不同 function 必须允许 split；
+- Source Occurrence 与 Vocabulary / Expression Identity 分离；
 - Source Grade、LearnerLevel、Learning Admission 分离；
 - Vocabulary 与 Expressions 使用独立 Identity / Review / Release / Note Type；
-- Expression 训练方向固定为 communicative intent → active production；
-- Grade-4-related Expressions 当前优先于 Grade-3-only Expressions；
-- Front 语言从中文支撑逐步演进到 English-only，但只修改 Presentation；
-- Target 有 TTS；Examples 当前不自动 TTS；
-- review basis 必须准确区分逐张确认、批量授权与 model review；
-- LearningOrder 不进入内容 fingerprint；
-- generated publish 文件禁止手工维护，只能由确定性上游状态得到；
+- 第三方教材 provenance 只用于回溯，不作为学习优先级；
+- MatchKey / morphology / format alias 只做 candidate matching；
+- 同 surface 不同 target sense 必须允许 split；
+- generated publish 文件禁止手工维护；
 - Anki 保存真实 FSRS / Review History，GitHub 不重建学习历史。
