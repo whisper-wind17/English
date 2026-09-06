@@ -15,16 +15,14 @@ AGENTS.md
 
 ```text
 docs/EXPRESSIONS_SYSTEM.md
-→ anki/klose/source_reference/rj_start1-grade3-klose-expressions.csv
-→ anki/klose/source_reference/rj_start1-grade4-klose-expressions.csv
-→ anki/klose/expressions/review/grade3-grade4-baseline.md
-→ anki/klose/expressions/review/candidate_registry.csv
 → anki/klose/expressions/review/grade4-pilot-review.md
 → anki/klose/expressions/master/expression_registry.csv
 → anki/klose/expressions/learner/current.csv
 → anki/klose/expressions/learner/learning_admission.csv
 → anki/klose/expressions/learner/presentation_review_registry.csv
+→ anki/klose/expressions/master/release_registry.csv
 → anki/klose/expressions/anki/README.md
+→ anki/klose/expressions/publish/anki-import.csv
 ```
 
 不要仅凭聊天历史推测当前状态。
@@ -52,40 +50,32 @@ FSRS / Due / Interval / Review History / Card State 继续以 Anki 为唯一真�
 
 ## 2. Expressions source baseline
 
-当前只纳入 Klose 已学过的三、四年级实际教材 Expressions；一年级、二年级过于简单，暂不进入复习范围。
+当前复习范围只纳入三、四年级实际教材 Expressions；一年级、二年级暂不复习。
 
 ```text
 Grade 3 Source Occurrences = 94
 Grade 4 Source Occurrences = 72
 Total                      = 166
-```
 
-166 条 Source Fact 已整理为：
-
-```text
 Curated Pattern Candidates = 64
-core                       = 38
-secondary                  = 26
-pilot_candidate            = 19
+Grade-4 priority block     = 36
+Grade-3-only block         = 28
 ```
 
-学习优先级冻结为：
+学习顺序冻结为：
 
 ```text
-Grade-4 priority block = 36  # SourceGrades=4 或 3|4
-Grade-3-only block      = 28
-
 Grade 4 related first
 → Grade 3 only second
 ```
 
-跨年级相同 Pattern 只学习一次，并归到 Grade-4 priority block。
+跨年级相同 Pattern 只学习一次，并归入 Grade-4 priority block。
 
 ---
 
-## 3. Current Grade-4 pilot — 9 formal identities
+## 3. Grade-4 pilot — 9 cards approved and release-ready
 
-Grade-4 priority 的 pilot candidates 已完成第一轮 Identity Resolution，共 9 个 Stable Expressions：
+首批 Grade-4 priority pilot 已冻结 9 个 Stable Expressions：
 
 ```text
 KE000001  What's [person]'s job?
@@ -105,17 +95,23 @@ LearningOrder：
 000001..000009
 ```
 
-当前全部属于 Grade-4 priority pilot；三年级独有 Expressions 尚未进入正式 Identity。
+2026-09-06 用户已确认整个 9-card pilot Presentation：
 
-`EC0014` 在 Identity Review 中做了显式修正：Candidate 草案 `Can I [verb phrase], please?` 冻结为更通用的 `Can I [verb phrase]?`；`please` 作为可选礼貌成分进入 Usage，不作为 Identity 的强制组成部分。
+```text
+approved       = 9
+model-reviewed = 0
+admitted       = 9
+publishable    = 9
+release-ready  = 9
+```
 
-Source Occurrence / mapping 已覆盖当前 9 个 Identity，包括跨三、四年级重复来源；Source Fact 与 Stable Identity 仍分离。
+`EC0014` 已显式从 Candidate 草案 `Can I [verb phrase], please?` 修正并冻结为正式 Identity `Can I [verb phrase]?`；`please` 是可选礼貌成分，不属于 Identity 的强制部分。
 
 ---
 
-## 4. Learner Presentation / review state
+## 4. Front / Back policy
 
-Front 当前统一采用 Stage A：
+当前 Front 使用 Stage A：
 
 ```text
 中文短场景 / communicative intent
@@ -123,9 +119,9 @@ Front 当前统一采用 Stage A：
 → active English production
 ```
 
-中文只建立意图，不写成完整中译英目标句。
+中文只建立意图，不直接提供可逐词翻译的完整中文目标句。
 
-长期演进保持：
+长期演进：
 
 ```text
 Stage A — 中文短场景 + English cue
@@ -135,26 +131,20 @@ Stage A — 中文短场景 + English cue
 
 语言升级只修改 Learner Presentation；Stable ExpressionID、CanonicalForm 和 Anki FSRS / Review History 不变。Presentation 变化后 fingerprint 必须重新 review。
 
-当前 review state：
+Back 保持最小 micro-lesson：
 
 ```text
-approved       = 1  # KE000001，用户已确认
-model-reviewed = 8  # KE000002..KE000009，尚未视为人工确认
-```
-
-`model-reviewed != approved`。模型生成并审校的卡片不得因为模板已获认可就自动冒充用户逐条确认。
-
-人工 review 入口：
-
-```text
-anki/klose/expressions/review/grade4-pilot-review.md
+Target + TTS
+Pattern
+Meaning / Usage
+1–2 Examples
 ```
 
 ---
 
-## 5. Deterministic publish / release gate implemented
+## 5. Deterministic publish / release status
 
-Expressions 独立发布链已经建立：
+Expressions 独立生成链：
 
 ```text
 upstream registries
@@ -164,85 +154,44 @@ upstream registries
 → tools/check_klose_expressions_release_ready.py
 ```
 
-共享 fingerprint：
+当前已根据 9 个 approved Presentation 重新生成 publish artifacts；内容为 `KE000001..KE000009`，顺序 `000001..000009`。
+
+正式导入文件：
 
 ```text
-tools/klose_expression_review_fingerprint.py
-```
-
-关键门禁：
-
-- Stable `KE000001...` Identity 唯一且 active；
-- Candidate / CreatedFromOccurrence / confirmed source mapping 可追溯；
-- 当前 pilot 只允许 Grade-4 priority identities；
-- LearningOrder 六位、唯一、连续；
-- current learner fingerprint 必须与 review registry 一致；
-- 只有 `ReviewStatus=approved` 的 Presentation 能进入 publish；
-- `model-reviewed` drafts 必须保持 `PublishStatus=pending / ReleaseStatus=pending`；
-- `study.csv` 必须完全可由上游推导；
-- `anki-import.csv` 数据必须与 `study.csv` 完全一致，且 Anki headers 固定。
-
-本轮用当前上游状态执行同一生成/检查逻辑，结果：
-
-```text
-Built Klose Expressions:
-approved = 1
-drafts   = 8
-
-Expression Release Gate PASS:
-publishable            = 1
-model_reviewed_drafts   = 8
-admitted                = 9
-```
-
-当前 generated artifact 因此只包含已明确批准的 `KE000001`：
-
-```text
-anki/klose/expressions/publish/study.csv
 anki/klose/expressions/publish/anki-import.csv
 ```
 
-这不是缺失，而是门禁按设计阻止 8 张仅 model-reviewed 的 draft 泄漏到 Anki。
+当前状态：
 
-Anki 尚未更新。
+```text
+Build Valid        = yes
+Content Releasable = yes
+Anki Updated       = no
+Learning Admitted  = yes
+```
+
+不要手工修改 `publish/study.csv` 或 `publish/anki-import.csv`；后续 Presentation / Admission 变化后仍通过生成链重建。
 
 ---
 
-## 6. NEXT TASK — approve Grade-4 pilot batch, then rebuild
+## 6. NEXT TASK — first Anki import
 
-下一步优先 review `KE000002..KE000009` 的 Stage-A Presentation：
-
-```text
-Front intent / cue
-Target
-Pattern
-Meaning / Usage
-Examples
-```
-
-确认后：
+下一步在 Anki Desktop 完成首次 Expressions 建库：
 
 ```text
-ReviewStatus → approved
-release PresentationStatus → approved
-PublishStatus / ReleaseStatus 按生成与 gate 结果推进
-→ rerun tools/build_klose_expressions.py
-→ rerun tools/check_klose_expressions_release_ready.py
+1. 创建/确认 Deck: Klose-English::Expressions
+2. 创建/确认 Note Type: Klose Expression
+3. 按 anki/klose/expressions/anki/README.md 配置字段、Production Card template、styling
+4. 导入 anki/klose/expressions/publish/anki-import.csv
+5. 仅对 is:new 卡按 LearningOrder materialize New #
+6. Sync 到 AnkiWeb / iPad
+7. 开始 one-month pilot
 ```
 
-预期正式 publish 从 1 张扩展为 9 张。
+Anki 是 FSRS / Review History / Due / Card State 真源；repo 不重建这些状态。
 
-随后才进入：
-
-```text
-Desktop 创建/确认 Klose Expression Note Type
-→ import publish/anki-import.csv
-→ LearningOrder materialize New #（仅 is:new）
-→ Sync
-→ iPad 实学一个月
-```
-
-Pilot `New/day` 仍不提前冻结；等 9 张正式 batch 与实际卡片复杂度确定后，再结合 Vocabulary `New/day=8` 和总复习负担设定。
+Pilot `New/day` 尚未冻结。因为首批只有 9 张，可以在首次导入时先采用较低的新卡负担，再根据 Vocabulary `New/day=8` 与首周实际 review load 调整；不要为了尽快清空 9 张而一次性全部引入。
 
 ---
 
@@ -267,6 +216,7 @@ actual daily review load
 
 ## 8. Deferred work
 
+- Grade-3-only Expressions：Grade-4 pilot 进入真实学习后再继续正式 Identity / Presentation；
 - Grade 1–3 Vocabulary actual-source reconciliation：Expressions pilot 建立后继续；
 - Grade 5/6 actual source reconciliation：后续处理；
 - 99 个 held legacy Vocabulary Notes 缺 British/American IPA：对应 Note admission 前再补齐并 re-review。
