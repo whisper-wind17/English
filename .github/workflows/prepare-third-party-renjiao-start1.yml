@@ -18,6 +18,8 @@ on:
       - 'tools/recheck_third_party_renjiao_new_surface_routing.py'
       - 'tools/apply_third_party_renjiao_single_token_sense_review.py'
       - 'tools/recheck_third_party_renjiao_single_token_sense_review.py'
+      - 'tools/audit_third_party_renjiao_single_token_forms.py'
+      - 'tools/recheck_third_party_renjiao_single_token_forms.py'
       - 'tools/sync_third_party_status_to_next.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
@@ -80,6 +82,12 @@ jobs:
 
       - name: Independent single-token semantic Completion Recheck
         run: python tools/recheck_third_party_renjiao_single_token_sense_review.py
+
+      - name: Audit Renjiao single-token morphology and form relations
+        run: python tools/audit_third_party_renjiao_single_token_forms.py
+
+      - name: Independent single-token form Completion Recheck
+        run: python tools/recheck_third_party_renjiao_single_token_forms.py
 
       - name: Sync third-party progress to NEXT
         run: python tools/sync_third_party_status_to_next.py
