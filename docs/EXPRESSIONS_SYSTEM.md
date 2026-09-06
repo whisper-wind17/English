@@ -224,31 +224,80 @@ FunctionLabel
 ContextNote
 ```
 
-小学阶段 Prompt 可以使用中文场景提示；随着能力提高可以逐步转为英文 situation cue。不要把字段命名硬编码为 `ChinesePrompt`。
+字段保持语言中性，不使用 `ChinesePrompt` 这类硬编码命名，因为同一个 Expression 的 Front 语言会随学习能力演进。
+
+### Front language evolution policy
+
+长期方向不是永久使用中文，也不是现在就强制全英文，而是逐步降低母语支撑：
+
+```text
+Stage A — current elementary phase
+中文短场景 / 交际意图 + 英文最小 slot cue
+→ English production
+
+Stage B — transition phase
+简短英文 intent + 英文 slot cue
+→ English production
+
+Stage C — advanced phase
+纯英文 situation / context
+→ English production
+```
+
+当前 Klose 使用 Stage A。原因是 Front 的核心任务是触发 communicative intent 后主动产出目标英语，而不是同时测试较长英文场景的阅读理解。
+
+Stage A 的中文必须保持“短场景 / 意图提示”，不能直接给出可逐词翻译的完整中文目标句。例如优先：
+
+```text
+【询问职业】
+想知道同学妈妈的职业
+person: your mother
+```
+
+而不是：
+
+```text
+你妈妈做什么工作？
+```
+
+后者过于接近中译英，会强化 translation route，而不是 intent → English production。
+
+Front 向英文迁移不按固定年级或年龄自动触发，也不需要新增 acquisition-history 状态。应根据真实学习表现决定：当 Klose 能稳定理解简短英文 intent，且英文 Front 不再显著增加无关阅读负担时，可以把 Presentation 从 Stage A 调整到 Stage B；以后再进入 Stage C。
+
+这种变化只属于 Learner Presentation：
+
+```text
+ExpressionID 不变
+CanonicalForm 不变
+已有 Anki FSRS / Review History 不变
+Prompt / PromptHint 可更新
+Presentation fingerprint 变化 → 重新 review / approve
+```
 
 例如同一个 Expression：
 
 ```text
-KE000010
-CanonicalForm: What's the weather like in [place]?
+KE000001
+CanonicalForm: What's [person]'s job?
 ```
 
-小学 Presentation：
+当前：
 
 ```text
-Prompt: 询问悉尼的天气
-slot: Sydney
-Target: What's the weather like in Sydney?
+Prompt: 想知道同学妈妈的职业
+PromptHint: person: your mother
+Target: What's your mother's job?
 ```
 
 以后可以变成：
 
 ```text
-Prompt: Ask about the weather in Melbourne.
-Target: What's the weather like in Melbourne?
+Prompt: Ask about your classmate's mother's job.
+PromptHint: person: your mother
+Target: What's your mother's job?
 ```
 
-Identity 与已有 Anki Review History 不因此改变。
+再往后可以使用更自然的纯英文 situation，而无需建立新的 ExpressionID。
 
 Presentation fingerprint 应覆盖当前发布可见学习内容，例如：
 
@@ -314,10 +363,18 @@ Intent / Situation
 → English Production
 ```
 
-典型 Front：
+当前 Front 采用：
+
+```text
+中文短场景 / intent
++ English minimal slot cue
+```
+
+例如：
 
 ```text
 【询问职业】
+想知道同学妈妈的职业
 person: your mother
 ```
 
@@ -347,7 +404,7 @@ TTS
 
 解释保持短小，只承担 micro-lesson，不把卡片做成完整语法课。
 
-正面优先使用场景 / intent / slot cue，避免长期形成机械的“完整中文句子 → 英文翻译”通路。
+正面优先使用场景 / intent / slot cue，避免长期形成机械的“完整中文句子 → 英文翻译”通路。Front 语言按第 6 节的 Stage A → B → C 演进，但 Card 训练方向始终保持 intent / situation → English production。
 
 具体字段、模板和 tag contract 在 pilot implementation 时冻结。
 
@@ -383,14 +440,7 @@ anki/klose/expressions/
 anki/klose/source_reference/
 ```
 
-现有四上输入：
-
-```text
-rj_start1-grade4-upper-klose-expressions.csv
-rj_start1-grade4-upper-pattern-candidates.csv
-```
-
-它们仍是 Source / Candidate，不直接成为正式 KE Notes。
+Source / Candidate 不直接成为正式 KE Notes。
 
 ---
 
@@ -420,7 +470,6 @@ Expressions 重点观察：
 
 ```text
 Again ratio
-response latency
 can produce without Chinese translation
 slot substitution success
 pattern over-generalization
@@ -442,6 +491,8 @@ acquired reusable production pattern
 
 如果 Klose 只能复现卡片原句、不能替换 slot 或迁移到新场景，应优先修改 Presentation / practice design，而不是增加更多相似卡。
 
+Front 语言是否可以从 Stage A 向 Stage B / C 演进，也应依据真实学习表现判断，而不是为了形式上的“全英文”提前增加负担。
+
 ---
 
 ## 12. Current design decision
@@ -450,13 +501,28 @@ Phase B 先采用小规模 one-month pilot：
 
 ```text
 freeze identity/release contract
-→ resolve Grade-4 upper candidates
-→ select a small high-value batch
+→ resolve Grade-4 priority candidates
 → create reviewed learner presentations
 → build deterministic publish + release gate
 → create formal Anki Note Type / Deck
 → run real learning for one month
 → evaluate before scaling
 ```
+
+当前 Front policy：
+
+```text
+Stage A = 中文短场景 / intent + English minimal slot cue
+```
+
+长期演进：
+
+```text
+Stage A
+→ Stage B: concise English intent + English cue
+→ Stage C: English-only situation / context
+```
+
+这一演进只修改 Learner Presentation，不修改 Stable ExpressionID，也不重建 Anki 学习历史。
 
 Pilot 的具体批次、LearningOrder、New/day 和评估状态以 `NEXT.md` 为准。
