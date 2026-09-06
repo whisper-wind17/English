@@ -9,6 +9,7 @@ on:
       - 'tools/build_third_party_vocabulary_stage_a.py'
       - 'tools/audit_third_party_cross_source_semantics.py'
       - 'tools/build_third_party_cross_source_resolution.py'
+      - 'tools/apply_third_party_cross_source_second_pass.py'
       - 'tools/recheck_third_party_beijing_renjiao_stage_a.py'
       - 'tools/sync_third_party_status_to_next.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
@@ -45,6 +46,9 @@ jobs:
 
       - name: Build first-pass cross-source Identity Resolution
         run: python tools/build_third_party_cross_source_resolution.py
+
+      - name: Apply second-pass semantic review
+        run: python tools/apply_third_party_cross_source_second_pass.py
 
       - name: Independent Completion Recheck
         run: python tools/recheck_third_party_beijing_renjiao_stage_a.py
