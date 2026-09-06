@@ -8,3 +8,60 @@ KE000006,Can I [verb phrase]?,request_permission,slot_frame,verb_phrase,active,E
 KE000007,What time is it?,ask_time,fixed,,active,EC0033,EO000020
 KE000008,Can you please [verb phrase]?,polite_request_action,slot_frame,verb_phrase,active,EC0036,EO000021
 KE000009,Would you like [thing]?,offer_or_ask_want,slot_frame,thing,active,EC0015,EO000022
+KE000010,What are these?,ask_plural_object_identity,fixed,,active,EC0017,EO000024
+KE000011,[Person] is a/an [job].,state_job,slot_frame,person|job,active,EC0022,EO000026
+KE000012,What's [person]'s name?,ask_other_name,slot_frame,person,active,EC0023,EO000029
+KE000013,His/Her name is [name].,state_other_name,slot_frame,possessive_pronoun|name,active,EC0024,EO000030
+KE000014,There are [plural noun].,state_existence_plural,slot_frame,plural_noun,active,EC0026,EO000031
+KE000015,My favourite [category] is [item].,state_favourite,slot_frame,category|item,active,EC0027,EO000033
+KE000016,[Person] is [verb-ing].,describe_current_action,slot_frame,person|verb_ing,active,EC0028,EO000034
+KE000017,It's [weather description] [time/place].,state_weather,slot_frame,weather_description|time_place,active,EC0030,EO000036
+KE000018,It's [person]'s.,state_ownership,slot_frame,person,active,EC0032,EO000039
+KE000019,It's [time] o'clock.,state_clock_time,slot_frame,time,active,EC0034,EO000040
+KE000020,It's time for [noun].,signal_time_for,slot_frame,noun,active,EC0035,EO000042
+KE000021,It's time to [verb].,signal_time_to,slot_frame,verb,active,EC0035,EO000043
+KE000022,"Don't [verb phrase], please.",polite_prohibition,slot_frame,verb_phrase,active,EC0037,EO000044
+KE000023,Can I help you?,offer_help,fixed,,active,EC0038,EO000045
+KE000024,I like [thing].,state_preference,slot_frame,thing,active,EC0041,EO000046
+KE000025,They're [plural noun].,identify_plural_objects,slot_frame,plural_noun,active,EC0043,EO000049
+KE000026,Who's your [relationship]?,ask_relationship_person,slot_frame,relationship,active,EC0049,EO000051
+KE000027,[Person] is [adjective] and [adjective].,describe_person_traits,slot_frame,person|adjective1|adjective2,active,EC0050,EO000052
+KE000028,What can we do for [person]?,ask_help_action,slot_frame,person,active,EC0051,EO000053
+KE000029,We can [verb phrase].,suggest_possible_action,slot_frame,verb_phrase,active,EC0052,EO000054
+KE000030,[Name] speaking.,phone_self_identify_name,slot_frame,name,active,EC0053,EO000057
+KE000031,This is [name].,phone_self_identify_this,slot_frame,name,active,EC0054,EO000014
+KE000032,Which [category] do you like?,ask_choice_preference,slot_frame,category,active,EC0055,EO000058
+KE000033,You have to [verb phrase] first.,state_required_first,slot_frame,verb_phrase,active,EC0056,EO000059
+KE000034,Have a nice day!,wish_nice_day,fixed,,active,EC0057,EO000060
+KE000035,Excuse me?,ask_for_repetition,fixed,,active,EC0058,EO000061
+KE000036,Be careful!,warn_be_careful,fixed,,active,EC0061,EO000062
+KE000037,Hurry up!,urge_hurry,fixed,,active,EC0062,EO000064
+KE000038,What's your name?,ask_name,fixed,,active,EC0001,EO000065
+KE000039,My name is [name].,state_own_name,slot_frame,name,active,EC0002,EO000066
+KE000040,Where are you from?,ask_origin,fixed,,active,EC0003,EO000068
+KE000041,I'm from [place].,state_origin,slot_frame,place,active,EC0004,EO000069
+KE000042,Nice to meet you.,greet_first_meeting,fixed,,active,EC0005,EO000070
+KE000043,This is my [person].,introduce_person,slot_frame,person,active,EC0006,EO000072
+KE000044,Do you have [thing]?,ask_possession,slot_frame,thing,active,EC0007,EO000074
+KE000045,What's [demonstrative]?,ask_object_identity,slot_frame,demonstrative,active,EC0009,EO000076
+KE000046,Do you like [thing]?,ask_like,slot_frame,thing,active,EC0010,EO000078
+KE000047,What colour is [thing]?,ask_colour,slot_frame,thing,active,EC0011,EO000080
+KE000048,How old are you?,ask_age,fixed,,active,EC0012,EO000081
+KE000049,Here you are.,give_item,fixed,,active,EC0013,EO000082
+KE000050,"I'd like [thing], please.",state_desire,slot_frame,thing,active,EC0016,EO000084
+KE000051,Where is [thing]?,ask_location,slot_frame,thing,active,EC0018,EO000085
+KE000052,How many [plural noun] do [subject] [verb]?,ask_quantity,slot_frame,plural_noun|subject|verb,active,EC0019,EO000086
+KE000053,How much is [thing]?,ask_price,slot_frame,thing,active,EC0020,EO000088
+KE000054,Is that your [person]?,confirm_person_identity,slot_frame,person,active,EC0039,EO000089
+KE000055,It's a/an [noun].,identify_singular_object,slot_frame,noun,active,EC0040,EO000090
+KE000056,I'm [number] years old.,state_age,slot_frame,number,active,EC0042,EO000092
+KE000057,It's [preposition phrase].,state_location,slot_frame,preposition_phrase,active,EC0044,EO000093
+KE000058,[Subject] [verb] [number] [plural noun].,state_quantity,slot_frame,subject|verb|number|plural_noun,active,EC0045,EO000094
+KE000059,It's [price].,state_price,slot_frame,price,active,EC0046,EO000096
+KE000060,What about [thing]?,ask_about_alternative,slot_frame,thing,active,EC0047,EO000097
+KE000061,How about [proposal]?,propose_alternative,slot_frame,proposal,active,EC0048,EO000098
+KE000062,Excuse me.,get_attention,fixed,,active,EC0058,EO000099
+KE000063,You're welcome.,respond_thanks,fixed,,active,EC0059,EO000100
+KE000064,No problem.,reassure_no_problem,fixed,,active,EC0060,EO000101
+KE000065,After you!,yield_precedence,fixed,,active,EC0063,EO000102
+KE000066,Me too.,agree_same,fixed,,active,EC0064,EO000103
