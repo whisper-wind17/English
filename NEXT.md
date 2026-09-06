@@ -29,6 +29,13 @@ docs/EXPRESSIONS_SYSTEM.md
 → anki/klose/expressions/publish/anki-import.csv
 ```
 
+当前第三方 Vocabulary corpus 任务读取：
+
+```text
+docs/THIRD_PARTY_VOCABULARY_CORPUS.md
+→ anki/klose/source_reference/beijing_start1_staging/PREMERGE_STATUS.md
+```
+
 不要仅凭聊天历史推测当前状态。
 
 ---
@@ -268,7 +275,9 @@ Front 是否从 Stage A 向 Stage B 演进，也只根据真实学习表现决�
 
 ## 7. Next repo engineering work / deferred
 
-Expressions pilot 可以在 Anki 中独立运行；仓库侧下一项可恢复：
+Expressions pilot 可以在 Anki 中独立运行；仓库侧当前可并行推进第三方 Vocabulary corpus 构建。
+
+原计划仍保留：
 
 ```text
 Grade 1–3 Vocabulary actual-source reconciliation
@@ -337,7 +346,44 @@ left=leave过去式 vs left=左边
 
 ---
 
-## 9. Frozen long-term rules
+## 9. Third-party Multi-Edition Vocabulary Corpus — design frozen
+
+2026-09-06 用户确认长期目标：北京版只是第一个 seed，后续把人教版、沪教版及其他第三方小学教材词表持续累加到同一个统一第三方 corpus，按 learning unit / target sense 做 sense-aware 去重。
+
+长期设计：
+
+```text
+docs/THIRD_PARTY_VOCABULARY_CORPUS.md
+```
+
+核心流程冻结为：
+
+```text
+多个第三方教材 Raw Vocabulary
+→ Source Adapters
+→ Third-party Unified Vocabulary Identity
+→ 与完整 Klose Stable Identity Registry 做差集
+→ Third-party New Vocabulary Pool
+→ 后续全部作为 Klose 当前教材之外的新词学习
+```
+
+重要约束：
+
+- 北京版只有 seed 身份，没有语义优先级；
+- 去重单位是 `learning unit / target sense`，不是字符串；
+- 同 surface 不同义项必须允许多个第三方 Identity；
+- 与 Klose 比较时必须使用完整 Stable Identity Registry，不能只看 Released / Unsuspended / Anki active cards；
+- `third-party-new` 的业务含义是“后续计划学习的新词”，不是可选参考词；
+- 仍通过 Identity → Learner Presentation → Admission → Review → Release → Anki 正式链路进入学习，staging 不自动发布；
+- 教材版本、最早年级、覆盖教材数、出现次数、年级分布都**不作为学习决策维度**；
+- provenance 只在 raw / Source Occurrence 层保留用于回溯，不进入正常学习界面；
+- 第三方统一 corpus 永远低于 Klose 实际教材 Source Truth 优先级。
+
+下一步实施方向：把当前 `beijing_start1_staging` 演进为统一第三方 corpus 的 Source Adapter #1，然后按同一规则加入其他教材版本。
+
+---
+
+## 10. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Expression Identity 分离；
