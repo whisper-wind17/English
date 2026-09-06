@@ -2,6 +2,28 @@
 
 Last updated: 2026-09-06
 
+## Long-term role
+
+北京版 staging 现在明确定位为统一第三方教材词源的 **第一个 seed / Source Adapter**，而不是长期维护的“北京版主词表”。
+
+长期设计见：
+
+```text
+docs/THIRD_PARTY_VOCABULARY_CORPUS.md
+```
+
+后续人教版、沪教版及其他第三方教材词表都会进入同一个 sense-aware 去重流程，最终形成：
+
+```text
+Third-party Unified Vocabulary
+- Klose existing Stable Vocabulary Identity
+= Third-party New Vocabulary Pool
+```
+
+这个 New Vocabulary Pool 的业务含义是：**Klose 当前实际教材之外、后续计划全部学习的新 Vocabulary learning units**。
+
+教材版本、最早出现年级、覆盖教材数、跨册出现次数、年级分布都不作为学习决策维度；来源信息只在 raw / Source Occurrence 层保留用于回溯。
+
 ## State
 
 ```text
@@ -36,6 +58,8 @@ surface no-existing-match       = 291
 ```
 
 The 734 MatchKeys are a surface index, not the final Vocabulary Identity count.
+
+These counts are audit/build facts for this seed only. They are not intended to become learning priority or curriculum statistics.
 
 ## Completed pre-merge work
 
@@ -112,7 +136,7 @@ Klose actual textbook evidence
 > otherwise explicit model/human decision marked as non-source-confirmed
 ```
 
-This blocker does **not** prevent keeping the Beijing corpus staged. It only prevents treating every MatchKey candidate as a safe identity merge.
+This blocker does **not** prevent keeping the Beijing corpus staged or using it as the first seed of the unified third-party corpus. It only prevents treating every MatchKey candidate as a safe identity merge.
 
 ## Merge boundary
 
@@ -124,4 +148,6 @@ Until the user explicitly starts the merge phase:
 - do not generate or import new Anki cards from this staging directory;
 - keep every review row `MergeAuthorized=no`.
 
-When merge is eventually approved, first convert the reviewed occurrence-level decisions into a final proposed identity map, then apply only confirmed reuse/new-identity decisions to upstream registries. Existing NoteIDs remain stable and new NoteIDs are append-only.
+When the unified third-party corpus implementation starts, first convert this Beijing staging into Source Adapter #1, then add other third-party versions into the same third-party Identity Registry. Only after the unified corpus is sense-aware deduplicated should it be diffed against the complete Klose Stable Identity Registry to produce `Third-party New Vocabulary Pool`.
+
+When Klose merge is eventually approved, apply only resolved `third-party-new` learning units to the normal Klose Identity / Learner / Admission / Review / Release chain. Existing NoteIDs remain stable and new NoteIDs are append-only.
