@@ -1,0 +1,33 @@
+{{FrontSide}}
+
+<hr id="answer">
+
+<div class="target">{{Target}}</div>
+<div class="tts">{{tts en_US:Target}}</div>
+
+{{#Pattern}}
+<div class="section">
+  <div class="section-label">Pattern</div>
+  <div class="pattern">{{Pattern}}</div>
+</div>
+{{/Pattern}}
+
+{{#MeaningUsage}}
+<div class="section">
+  <div class="section-label">用法</div>
+  <div class="meaning-usage">{{MeaningUsage}}</div>
+</div>
+{{/MeaningUsage}}
+
+{{#Examples}}
+<div class="section">
+  <div class="section-label">Examples</div>
+  <div class="examples" id="examples">{{Examples}}</div>
+</div>
+<script>
+  (function () {
+    var el = document.getElementById('examples');
+    if (el) el.innerHTML = el.innerHTML.replace(/\s\|\s/g, '<br>');
+  })();
+</script>
+{{/Examples}}
