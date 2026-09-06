@@ -12,3 +12,60 @@ KE000006,请求许可,今天想穿新衬衫，先征求妈妈同意,action: wear
 KE000007,询问时间,想知道现在几点了,,What time is it?,What time is it?,询问现在的时间。,"What time is it now? | Excuse me, what time is it?",4,000007,rj_start1,rj_start1::grade4-lower
 KE000008,礼貌请求别人做事,吃饭时，想请别人把蔬菜递给你,action: pass me the vegetables,Can you please pass me the vegetables?,Can you please [verb phrase]?,礼貌地请求别人帮你做某事。,Can you please open the door? | Can you please help me?,4,000008,rj_start1,rj_start1::grade4-lower
 KE000009,询问对方是否想要,吃饭时，问对方要不要刀叉,thing: a knife and fork,Would you like a knife and fork?,Would you like [thing]?,礼貌地询问对方是否想要某物。,Would you like some rice? | Would you like some milk?,4,000009,rj_start1,rj_start1::grade3-lower|rj_start1::grade4-lower
+KE000010,询问这些是什么,看到桌上几样东西，想知道是什么,objects: these,What are these?,What are these?,询问眼前的多个东西是什么。,What are these? | What are those?,4,000010,rj_start1,rj_start1::grade3-lower|rj_start1::grade4-lower
+KE000011,说明职业,介绍妈妈的职业,person: she; job: doctor,She's a doctor.,[Person] is a/an [job].,说明某人从事什么职业。,He's a firefighter. | She's a teacher.,4,000011,rj_start1,rj_start1::grade4-upper
+KE000012,询问他人姓名,想知道新朋友叫什么名字,person: your friend,What's your friend's name?,What's [person]'s name?,询问另一个人的姓名。,What's your teacher's name? | What's his name?,4,000012,rj_start1,rj_start1::grade4-upper
+KE000013,介绍他人姓名,告诉别人你的朋友叫什么,person: he; name: Zhang Peng,His name is Zhang Peng.,His/Her name is [name].,告诉别人另一个人的姓名。,Her name is Amy. | His name is Mike.,4,000013,rj_start1,rj_start1::grade4-upper
+KE000014,介绍某处有多个事物,介绍一个地方有很多人,things: many people,There are many people.,There are [plural noun].,表示某处有多个或一些人、事物。,There are two cats. | There are many books.,4,000014,rj_start1,rj_start1::grade4-upper
+KE000015,表达最喜欢的事物,告诉别人你最喜欢的地方,category: place; item: the museum,My favourite place is the museum.,My favourite [category] is [item].,表达自己在某一类别中最喜欢的事物。,My favourite sport is football. | My favourite food is noodles.,4,000015,rj_start1,rj_start1::grade4-upper
+KE000016,描述正在做的动作,看到陈杰正在铺床，描述她在做什么,person: Chen Jie; action: make the bed,Chen Jie is making the bed.,[Person] is [verb-ing].,描述某人正在进行的动作。,Mike is reading. | Amy is singing.,4,000016,rj_start1,rj_start1::grade4-upper
+KE000017,描述天气,告诉朋友今天是晴天,weather: sunny; time: today,It's sunny today.,It's [weather description] [time/place].,描述某个时间或地点的天气状态。,It's cold and windy outside. | It's hot and sunny here.,4,000017,rj_start1,rj_start1::grade4-upper
+KE000018,回答物品是谁的,别人问这件毛衣是谁的，你说是爸爸的,owner: your dad,It's your dad's.,It's [person]'s.,说明某件物品属于谁。,It's Amy's. | It's my brother's.,4,000018,rj_start1,rj_start1::grade4-upper
+KE000019,说明整点时间,看钟后告诉别人现在五点,time: 5,It's 5 o'clock.,It's [time] o'clock.,说明现在是某个整点。,It's seven o'clock. | It's nine o'clock.,4,000019,rj_start1,rj_start1::grade3-upper|rj_start1::grade4-lower
+KE000020,提醒该进行某项活动,到晚饭时间了，提醒大家,activity: dinner,It's time for dinner.,It's time for [noun].,表示到了进行某项活动的时间。,It's time for class. | It's time for bed.,4,000020,rj_start1,rj_start1::grade4-lower
+KE000021,提醒该做某事,早上到起床时间了，提醒对方,action: get up,It's time to get up.,It's time to [verb].,表示到了做某个动作的时间。,It's time to go home. | It's time to study.,4,000021,rj_start1,rj_start1::grade4-lower
+KE000022,礼貌提醒不要做某事,吃饭时提醒别人不要浪费食物,action: waste food,"Don't waste food, please.","Don't [verb phrase], please.",礼貌地提醒或要求对方不要做某事。,"Don't run, please. | Don't touch it, please.",4,000022,rj_start1,rj_start1::grade4-lower
+KE000023,主动提供帮助,看到别人可能需要帮助，主动询问,,Can I help you?,Can I help you?,主动询问自己是否可以提供帮助。,Can I help you? | Can I help you with that?,4,000023,rj_start1,rj_start1::grade4-lower
+KE000024,表达喜好,告诉别人你喜欢这件粉色连衣裙,thing: this pink dress,I like this pink dress.,I like [thing].,表达自己喜欢某个事物。,I like winter. | I like the fresh air.,4,000024,rj_start1,rj_start1::grade3-upper|rj_start1::grade4-lower|rj_start1::grade4-upper
+KE000025,说明这些是什么,告诉别人这些是西红柿,things: tomatoes,They're tomatoes.,They're [plural noun].,说明多个东西是什么。,They're grapes. | They're apples.,4,000025,rj_start1,rj_start1::grade3-lower|rj_start1::grade4-lower
+KE000026,询问某种关系中的人物,想知道对方最好的朋友是谁,relationship: best friend,Who's your best friend?,Who's your [relationship]?,询问某种关系中的人是谁。,Who's your teacher? | Who's your neighbour?,4,000026,rj_start1,rj_start1::grade4-upper
+KE000027,描述人物特征,描述朋友又高又壮,"person: he; traits: tall, strong",He's tall and strong.,[Person] is [adjective] and [adjective].,用两个特征描述一个人。,She's kind and funny. | He's quiet and friendly.,4,000027,rj_start1,rj_start1::grade4-upper
+KE000028,询问能为别人做什么,爸爸妈妈很累，想知道能为他们做什么,person: them,What can we do for them?,What can we do for [person]?,询问可以为某人做些什么。,What can I do for you? | What can we do for Grandma?,4,000028,rj_start1,rj_start1::grade4-upper
+KE000029,表达可以做的事,想告诉别人可以做一些家务,action: do some chores,We can do some chores.,We can [verb phrase].,表达我们可以采取某个行动。,We can go to the library. | We can plant new trees.,4,000029,rj_start1,rj_start1::grade3-upper|rj_start1::grade4-upper
+KE000030,电话中自报姓名,接电话时告诉对方你是 Mark,name: Mark,Mark speaking.,[Name] speaking.,电话中接听时用姓名加 speaking 表示“我是……”。,Amy speaking. | John speaking.,4,000030,rj_start1,rj_start1::grade4-upper
+KE000031,电话中自报身份,打电话时告诉对方你是 John,name: John,This is John.,This is [name].,电话中用 This is [name]. 表示“我是……”。,This is Amy. | This is Mike.,4,000031,rj_start1,rj_start1::grade4-upper
+KE000032,询问类别中的偏好,想知道对方喜欢哪个季节,category: season,Which season do you like?,Which [category] do you like?,询问对方在某一类别中喜欢哪一个。,Which colour do you like? | Which sport do you like?,4,000032,rj_start1,rj_start1::grade4-upper
+KE000033,表达必须先做某事,想看电视，但妈妈提醒你先做作业,action: do your homework,You have to do your homework first.,You have to [verb phrase] first.,表示必须先完成某件事。,You have to wash your hands first. | You have to finish your work first.,4,000033,rj_start1,rj_start1::grade4-lower
+KE000034,祝愿一天愉快,和别人分别时祝他今天过得愉快,,Have a nice day!,Have a nice day!,分别时祝对方一天愉快。,Have a nice day! | Have a good day!,4,000034,rj_start1,rj_start1::grade4-lower
+KE000035,请对方再说一遍,没听清对方的话，想请他再说一次,,Excuse me?,Excuse me?,没听清时用升调礼貌地请对方再说一遍。,Excuse me? | Sorry?,4,000035,rj_start1,rj_start1::grade4-lower
+KE000036,提醒小心,看到朋友要碰烫的东西，提醒他小心,,Be careful!,Be careful!,提醒对方注意安全、小心一些。,Be careful! It's hot. | Be careful on the stairs.,4,000036,rj_start1,rj_start1::grade3-upper|rj_start1::grade4-lower
+KE000037,催促快一点,快迟到了，催朋友快一点,,Hurry up!,Hurry up!,催促对方动作快一点。,"Hurry up! We're late. | Hurry up, please.",4,000037,rj_start1,rj_start1::grade4-lower
+KE000038,询问姓名,刚认识一个新同学，想知道他叫什么名字,,What's your name?,What's your name?,询问对方的姓名。,"Hi! What's your name? | Excuse me, what's your name?",4,000038,rj_start1,rj_start1::grade3-lower
+KE000039,介绍自己的姓名,向新同学介绍自己的名字,name: Amy Green,My name's Amy Green.,My name is [name].,告诉别人自己的姓名；口语中常用 My name's…。,My name is Mike. | My name's Sarah.,4,000039,rj_start1,rj_start1::grade3-lower|rj_start1::grade3-upper
+KE000040,询问来自哪里,刚认识新朋友，想知道他来自哪里,,Where are you from?,Where are you from?,询问对方来自哪个国家、城市或地方。,Where are you from? | Where's your family from?,4,000040,rj_start1,rj_start1::grade3-lower
+KE000041,说明来自哪里,告诉别人自己来自英国,place: the UK,I'm from the UK.,I'm from [place].,说明自己来自哪个国家、城市或地方。,I'm from China. | I'm from Beijing.,4,000041,rj_start1,rj_start1::grade3-lower
+KE000042,初次见面问候,第一次见面，礼貌地打招呼,,Nice to meet you.,Nice to meet you.,第一次见面时表达“很高兴认识你”。,Nice to meet you too. | It's nice to meet you.,4,000042,rj_start1,rj_start1::grade3-upper
+KE000043,介绍家人或朋友,向朋友介绍自己的奶奶,person: grandma,This is my grandma.,This is my [person].,向别人介绍自己的家人、朋友等。,This is my brother. | This is my friend.,4,000043,rj_start1,rj_start1::grade3-upper
+KE000044,询问是否有某物,想知道朋友有没有宠物,thing: a pet,Do you have a pet?,Do you have [thing]?,询问对方是否拥有某个东西。,Do you have a bike? | Do you have any old books?,4,000044,rj_start1,rj_start1::grade3-lower|rj_start1::grade3-upper
+KE000045,询问这或那是什么,看到手边一个不认识的东西，想知道是什么,demonstrative: this,What's this?,What's [demonstrative]?,询问近处或远处的一个东西是什么；可替换 this / that。,What's that? | What's this?,4,000045,rj_start1,rj_start1::grade3-upper
+KE000046,询问喜好,想知道朋友喜不喜欢苹果,thing: apples,Do you like apples?,Do you like [thing]?,询问对方是否喜欢某个事物。,Do you like football? | Do you like the farm?,4,000046,rj_start1,rj_start1::grade3-upper
+KE000047,询问颜色,想知道这个东西是什么颜色,thing: it,What colour is it?,What colour is [thing]?,询问某个东西是什么颜色。,What colour is your bag? | What colour is the car?,4,000047,rj_start1,rj_start1::grade3-upper
+KE000048,询问年龄,刚认识小朋友，想知道他几岁,,How old are you?,How old are you?,询问对方的年龄。,How old are you? | How old is your brother?,4,000048,rj_start1,rj_start1::grade3-upper
+KE000049,递给对方某物,把橡皮递给同学时说,,Here you are.,Here you are.,把东西递给别人时说“给你”。,Here you are. | Here you go.,4,000049,rj_start1,rj_start1::grade3-lower|rj_start1::grade3-upper
+KE000050,礼貌表达想要,点餐时想要一些面包和鸡蛋,thing: some bread and eggs,"I'd like some bread and eggs, please.","I'd like [thing], please.",礼貌地表达自己想要某个东西。,"I'd like some milk, please. | I'd like a sandwich, please.",4,000050,rj_start1,rj_start1::grade3-lower
+KE000051,询问物品位置,找不到动物书，想问它在哪里,thing: my animal book,Where is my animal book?,Where is [thing]?,询问某个东西在哪里。,Where is my pencil? | Where is your bag?,4,000051,rj_start1,rj_start1::grade3-lower
+KE000052,询问数量,想知道我们有多少本书,noun: books; subject/action: we have,How many books do we have?,How many [plural noun] do [subject] [verb]?,询问某类事物的数量。,How many boxes do we need? | How many apples do you have?,4,000052,rj_start1,rj_start1::grade3-lower
+KE000053,询问价格,在商店想知道这个包多少钱,thing: this bag,How much is this bag?,How much is [thing]?,询问一个东西的价格。,How much is this book? | How much is the T-shirt?,4,000053,rj_start1,rj_start1::grade3-lower
+KE000054,确认人物身份,看到远处一个男孩，想确认是不是对方的弟弟,person: brother,Is that your brother?,Is that your [person]?,确认远处某个人是不是对方认识的人。,Is that your teacher? | Is that your friend?,4,000054,rj_start1,rj_start1::grade3-upper
+KE000055,说明单个事物是什么,别人问这是什么，你回答是一只狐狸,thing: a fox,It's a fox.,It's a/an [noun].,说明一个东西或动物是什么。,It's a red panda. | It's an apple.,4,000055,rj_start1,rj_start1::grade3-upper
+KE000056,回答年龄,别人问你几岁，你回答五岁,age: five,I'm five years old.,I'm [number] years old.,说明自己的年龄。,I'm nine years old. | I'm ten years old.,4,000056,rj_start1,rj_start1::grade3-upper
+KE000057,说明物品位置,告诉妈妈动物书在盒子里,place: in the box,It's in the box.,It's [preposition phrase].,说明某个东西所在的位置。,It's on the shelf. | It's under the desk.,4,000057,rj_start1,rj_start1::grade3-lower
+KE000058,回答数量,告诉别人我们有十五本书,subject/action: we have; quantity: fifteen books,We have fifteen books.,[Subject] [verb] [number] [plural noun].,用完整句说明某类事物的数量。,We need three boxes. | I have two pencils.,4,000058,rj_start1,rj_start1::grade3-lower
+KE000059,说明价格,告诉顾客这个包二十元,price: twenty yuan,It's twenty yuan.,It's [price].,说明一个东西的价格。,It's ten yuan. | It's fifty yuan.,4,000059,rj_start1,rj_start1::grade3-lower
+KE000060,补充询问另一个对象,已经看过一个东西，还想问这个怎么样,thing: this,What about this?,What about [thing]?,在已有话题上继续询问另一个对象或选择。,What about that one? | What about the blue one?,4,000060,rj_start1,rj_start1::grade3-lower
+KE000061,提出替代方案或还价,对方说十七元三个，你提出十六元三个,proposal: three for sixteen yuan,How about three for sixteen yuan?,How about [proposal]?,提出一个替代建议，也可以用于简单还价。,How about ten yuan? | How about this one?,4,000061,rj_start1,rj_start1::grade3-lower
+KE000062,礼貌引起注意,想礼貌地叫住别人再开口,,Excuse me.,Excuse me.,在提问或请求前礼貌地引起对方注意。,"Excuse me, can you help me? | Excuse me, where is the library?",4,000062,rj_start1,rj_start1::grade3-lower
+KE000063,回应感谢,别人说谢谢，你礼貌回应,,You're welcome.,You're welcome.,对别人说 Thank you 后作礼貌回应。,You're welcome. | You're very welcome.,4,000063,rj_start1,rj_start1::grade3-lower
+KE000064,表示没问题,别人提出请求，你表示没问题,,No problem.,No problem.,表示“没问题”“可以”或对感谢作轻松回应。,"No problem. | Sure, no problem.",4,000064,rj_start1,rj_start1::grade3-lower
+KE000065,礼让对方先行,进门时想礼让别人先走,,After you!,After you!,礼貌地让对方先走、先做。,"After you! | Please, after you.",4,000065,rj_start1,rj_start1::grade3-lower
+KE000066,表达我也是,朋友说自己喜欢某样东西，你也一样,,Me too.,Me too.,表示自己和对方的情况、感受或喜好相同。,"“I like winter.” — “Me too.” | “I'm tired.” — “Me too.”",4,000066,rj_start1,rj_start1::grade3-upper
