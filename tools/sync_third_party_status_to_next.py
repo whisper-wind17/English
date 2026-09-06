@@ -2,13 +2,38 @@
 """Synchronize the current third-party vocabulary Stage A progress into NEXT.md."""
 from __future__ import annotations
 
-from pathlib import Path
+import csv
 import re
+from collections import Counter
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NEXT = ROOT / "NEXT.md"
+BASE = ROOT / "anki" / "klose"
+STAGING = BASE / "third_party_vocabulary" / "staging"
+RESOLUTION = STAGING / "cross_source_identity_resolution.csv"
+MORPH = BASE / "third_party_vocabulary" / "review" / "renjiao_start1_morphology_resolution.csv"
+NEW_SURFACE = BASE / "source_reference" / "renjiao_start1_staging" / "new_surface_candidates.csv"
+RISK = STAGING / "cross_source_semantic_risk_queue.csv"
 
-SECTION = r'''## 9. Third-party Multi-Edition Vocabulary Corpus — two-stage design + current progress
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def main() -> None:
+    resolution = read_csv(RESOLUTION)
+    morph = read_csv(MORPH)
+    new_surface = read_csv(NEW_SURFACE)
+    risk = read_csv(RISK)
+
+    statuses = Counter(r["ResolutionStatus"] for r in resolution)
+    decisions = Counter(r["ProposedDecision"] for r in resolution)
+    morph_held = sum(r["ProposedDecision"].startswith("held-") for r in morph)
+    morph_resolved = len(morph) - morph_held
+
+    section = f'''## 9. Third-party Multi-Edition Vocabulary Corpus — two-stage design + current progress
 
 2026-09-06 用户确认长期目标：北京版只是第一个 seed，后续把人教版、沪教版及其他第三方小学教材词表持续累加到同一个统一第三方 corpus，按 learning unit / target sense 做 sense-aware 去重。
 
@@ -61,10 +86,38 @@ Total source occurrences       = 1716
 Distinct normalized MatchKeys  = 1144
 Cross-source exact overlaps    = 392
 Single-source surfaces         = 752
-Renjiao morphology candidates  = 6
-Renjiao new-surface candidates = 403
-Cross-source context reviews   = 392
-Semantic-risk queue            = 287
+Renjiao morphology candidates  = {len(morph)}
+Renjiao new-surface candidates = {len(new_surface)}
+Cross-source context reviews   = {len(resolution)}
+Semantic-risk queue            = {len(risk)}
+```
+
+Cross-source exact-overlap 第一轮 Identity Resolution：
+
+```text
+rule-reviewed reuse             = {statuses.get('rule-reviewed', 0)}
+model-reviewed rows             = {statuses.get('model-reviewed', 0)}
+pending semantic review         = {statuses.get('pending', 0)}
+
+reuse-learning-unit             = {decisions.get('reuse-learning-unit', 0)}
+partial-overlap-split-required  = {decisions.get('partial-overlap-split-required', 0)}
+do-not-merge                    = {decisions.get('do-not-merge', 0)}
+held / policy-context blocker   = {sum(v for k, v in decisions.items() if k.startswith('held-'))}
+
+morphology resolved             = {morph_resolved}
+morphology held                 = {morph_held}
+```
+
+当前已显式保护的 semantic collision 包括：
+
+```text
+May(月份) vs may(情态动词)
+like=喜欢 vs weather ... like ...
+square=正方形 vs square=广场
+left=左边 vs left=leave过去式
+cook=烹饪/煮 vs cook=厨师
+cold=寒冷 vs cold=感冒
+study=学习 vs study=书房
 ```
 
 当前工程状态：
@@ -73,10 +126,14 @@ Semantic-risk queue            = 287
 Renjiao Stage A Valid          = yes
 Combined Stage A build         = yes
 Cross-source context audit     = yes
+First-pass Identity Resolution = yes
+Completion Recheck             = pass
 Stable ThirdPartyID minted     = no
 Final Klose diff executed      = no
 Klose Master/Release/Publish/Anki changed = no
 ```
+
+这里的 `rule-reviewed`、`model-reviewed`、`pending` 必须保持区分；第一轮 Resolution 不等于全部 392 个 overlap 已经 source-confirmed。只有明确无风险信号或已有显式语义判断的行才向前推进，其余继续 pending。
 
 重要约束继续有效：
 
@@ -94,16 +151,14 @@ Klose Master/Release/Publish/Anki changed = no
 当前下一步：
 
 ```text
-1. 对 392 个北京/人教 exact-surface overlap 做 context-aware sense review；
-2. 处理 6 个 morphology candidates；
-3. 对人教 403 个 new-surface candidates 做 within-source homograph / sense split 检查；
-4. 只有 Identity Resolution 足够稳定后，才开始 mint stable ThirdPartyID；
-5. 然后再接入下一个教材 adapter，仍只执行 Stage A。
+1. 继续处理剩余 {statuses.get('pending', 0)} 个 cross-source semantic-risk pending rows；
+2. 对人教 {len(new_surface)} 个 new-surface candidates 做 within-source homograph / sense-split audit；
+3. 复核两类 blocker 后，再判断是否已经足够稳定到可以 mint 第一版 Stable ThirdPartyID；
+4. 在此之前不执行 Klose Stage-B final diff；
+5. 每个阶段完成后必须执行独立 Completion Recheck。
 ```
 '''
 
-
-def main() -> None:
     text = NEXT.read_text(encoding="utf-8")
     pattern = re.compile(
         r"## 9\. Third-party Multi-Edition Vocabulary Corpus.*?(?=\n---\n\n## 10\. Frozen long-term rules)",
@@ -111,7 +166,7 @@ def main() -> None:
     )
     if not pattern.search(text):
         raise SystemExit("Cannot locate Third-party section in NEXT.md")
-    updated = pattern.sub(SECTION.rstrip(), text)
+    updated = pattern.sub(section.rstrip(), text)
     if updated != text:
         NEXT.write_text(updated, encoding="utf-8")
         print("NEXT third-party status updated = yes")
