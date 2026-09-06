@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import csv
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,9 +24,6 @@ EXPECTED_STAGING_FILES = {
 EXPECTED_REVIEW_FILES = {"identity_decisions.csv"}
 EXPECTED_RENJIAO_ADAPTER_FILES = {"README.md", "occurrences.csv"}
 
-# These source-specific multi-pass tools were migration scaffolding. Their
-# reviewed content now lives in identity_decisions.csv and they must not return
-# to the active architecture.
 LEGACY_MULTI_PASS_TOOLS = {
     "build_third_party_vocabulary_stage_a.py",
     "audit_third_party_cross_source_semantics.py",
@@ -59,8 +56,6 @@ def require(cond: bool, message: str) -> None:
 
 
 def main() -> None:
-    # Physical architecture recheck: the cleanup is part of the long-term
-    # contract, not merely a one-time repository tidy-up.
     require(
         {p.name for p in OUT.iterdir()} == EXPECTED_STAGING_FILES,
         f"Third-party staging contains unexpected/legacy files: {sorted(p.name for p in OUT.iterdir())}",
@@ -87,7 +82,6 @@ def main() -> None:
     configured_ids = [r.get("SourceID", "") for r in config]
     require(all(configured_ids) and len(configured_ids) == len(set(configured_ids)), "Source adapter config IDs invalid")
 
-    # Source Occurrence closure: combined workspace must equal the union of all enabled adapters.
     expected_occ = 0
     expected_occ_keys: set[str] = set()
     for row in config:
@@ -104,9 +98,13 @@ def main() -> None:
     require(len(occ) == expected_occ, f"Combined occurrence count drift: expected={expected_occ} actual={len(occ)}")
     require(actual_occ_keys == expected_occ_keys, "Combined occurrence set does not equal enabled adapter union")
 
+    current_by_match: dict[str, set[str]] = defaultdict(set)
+    for row in occ:
+        current_by_match[row["MatchKey"]].add(row["SourceOccurrenceKey"])
+
     surface_keys = {r["MatchKey"] for r in surfaces}
     require(len(surface_keys) == len(surfaces), "Surface MatchKey is not unique")
-    require(surface_keys == {r["MatchKey"] for r in occ}, "Surface set does not close over occurrence MatchKeys")
+    require(surface_keys == set(current_by_match), "Surface set does not close over occurrence MatchKeys")
 
     decision_keys = [r.get("DecisionKey", "") for r in decisions]
     require(all(decision_keys) and len(decision_keys) == len(set(decision_keys)), "DecisionKey must be non-empty and unique")
@@ -117,20 +115,38 @@ def main() -> None:
     } for r in decisions), "Invalid Action in identity_decisions")
     require(all(r.get("Status") in {"reviewed", "held", "pending"} for r in decisions), "Invalid Status in identity_decisions")
 
+    decisions_by_match: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in decisions:
+        reviewed_raw = row.get("OccurrenceKeys", "")
+        require(bool(reviewed_raw) and reviewed_raw != "*", f"Durable wildcard/empty OccurrenceKeys: {row['DecisionKey']}")
+        reviewed = reviewed_raw.split("|")
+        require(len(reviewed) == len(set(reviewed)), f"Duplicate reviewed OccurrenceKeys: {row['DecisionKey']}")
+        require(set(reviewed) <= current_by_match[row["MatchKey"]],
+                f"Decision occurrence evidence does not belong to its MatchKey: {row['DecisionKey']}")
         if row["Action"] == "reuse-identity":
             require(bool(row.get("CanonicalMatchKey")), f"reuse-identity lacks CanonicalMatchKey: {row['DecisionKey']}")
         if row["Action"] == "route-expression":
             require(row.get("ObjectType") == "expression", f"Expression object mismatch: {row['DecisionKey']}")
         if row["Action"] == "source-only":
             require(row.get("ObjectType") == "source-only", f"Source-only object mismatch: {row['DecisionKey']}")
+        decisions_by_match[row["MatchKey"]].append(row)
 
-    # New adapter surfaces are allowed to have no durable decision yet; they must appear as pending.
-    decision_matchkeys = {r["MatchKey"] for r in decisions}
     by_surface = {r["MatchKey"]: r for r in surfaces}
-    for key in surface_keys - decision_matchkeys:
-        require(by_surface[key].get("DecisionAction") == "pending" and by_surface[key].get("DecisionStatus") == "pending",
-                f"Undecided new surface did not enter pending queue: {key}")
+    stale_surfaces: set[str] = set()
+    for key in surface_keys:
+        ds = decisions_by_match.get(key, [])
+        reviewed: set[str] = set()
+        for d in ds:
+            reviewed.update(d["OccurrenceKeys"].split("|"))
+        if not ds:
+            require(by_surface[key].get("DecisionAction") == "pending" and by_surface[key].get("DecisionStatus") == "pending",
+                    f"Undecided new surface did not enter pending queue: {key}")
+        elif reviewed != current_by_match[key]:
+            stale_surfaces.add(key)
+            require(by_surface[key].get("DecisionAction") == "pending" and by_surface[key].get("DecisionStatus") == "pending",
+                    f"Changed source evidence did not requeue reviewed surface: {key}")
+            require("decision-evidence-changed" in by_surface[key].get("CandidateSignals", ""),
+                    f"Changed evidence signal missing: {key}")
 
     expected_review = {
         r["MatchKey"] for r in surfaces
@@ -139,7 +155,6 @@ def main() -> None:
     }
     require({r["MatchKey"] for r in review} == expected_review, "Review queue is not a pure derived blocker/pending view")
 
-    # Content-preservation samples from the completed Beijing + Renjiao migration.
     by_key = {r["MatchKey"]: r for r in decisions}
     for key in ("may", "like", "square", "left", "cook", "cold", "study"):
         require(key in by_key and by_key[key]["Action"] in {"split-required", "held"},
@@ -155,9 +170,6 @@ def main() -> None:
     for key in ("slept", "swam", "were", "won"):
         require(by_key.get(key, {}).get("Action") == "held", f"Irregular-form blocker lost: {key}")
 
-    # Migration correction: Beijing seed multiword items may never be accepted
-    # merely because they came from the seed. They can leave pending only after an
-    # explicit later review with a different DecisionBasis.
     for key in (
         "a few", "get well", "how many", "ice cream", "make use of", "pencil case",
         "sweet potato", "take part in", "the u.k.", "the u.s.a.", "the united states of america",
@@ -174,9 +186,10 @@ def main() -> None:
     require(len(preview_keys) == len(preview), "Preview canonical key is not unique")
     require(not (preview_keys & {"may", "like", "square", "left", "cook", "cold", "study"}),
             "Known semantic blocker leaked into preview")
+    for key in stale_surfaces:
+        require(key not in preview_keys, f"Evidence-stale identity leaked into preview: {key}")
 
     source_counts = Counter(r["SourceID"] for r in occ)
-    # Current adapter baselines remain guarded while additional adapters can be appended.
     if "beijing_start1" in configured_ids:
         require(source_counts["beijing_start1"] == 808, "Beijing occurrence baseline drift")
     if "renjiao_start1" in configured_ids:
@@ -190,8 +203,11 @@ def main() -> None:
     print(f"durable decisions = {len(decisions)}")
     print(f"review/blocker surfaces = {len(review)}")
     print(f"unified vocabulary preview = {len(preview)}")
+    print(f"evidence-changed surfaces = {len(stale_surfaces)}")
     for action in sorted(actions):
         print(f"decision {action} = {actions[action]}")
+    print("Explicit reviewed OccurrenceKeys = yes")
+    print("Changed source evidence requeues decision = yes")
     print("Simplified physical layout = yes")
     print("Legacy multi-pass tools absent = yes")
     print("Source occurrence closure = yes")
