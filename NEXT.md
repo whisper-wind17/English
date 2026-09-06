@@ -103,6 +103,27 @@ secondary                  = 26
 pilot_candidate            = 19
 ```
 
+按学习优先级进一步分为：
+
+```text
+Grade-4 priority block = 36  # SourceGrades=4 或 3|4
+Grade-3-only block      = 28  # SourceGrades=3
+Total                   = 64
+```
+
+凡一个 Pattern 同时在三、四年级出现，只学习一次，并归到 Grade-4 priority block。
+
+正式学习顺序已经冻结为：
+
+```text
+Grade 4 related first
+→ Grade 3 only second
+```
+
+因此未来正式 LearningOrder 必须先覆盖 36 个 Grade-4 priority Expressions，再进入 28 个 Grade-3-only Expressions。Candidate Registry 当前行序不等于正式 LearningOrder。
+
+当前 64 个 Candidate 对应理论最多 64 张卡；Identity Review 如果进一步 merge / reject，最终数量可以少于 64。不得为了保留年级来源而重复创建同一个 Pattern 的卡。
+
 结构化结果：
 
 ```text
@@ -114,7 +135,7 @@ anki/klose/expressions/review/grade3-grade4-baseline.md
 
 ### NEXT TASK — pilot identity resolution
 
-下一步处理 19 个 `PilotCandidate=yes`：
+下一步处理 `PilotCandidate=yes`，并首先处理 Grade-4 priority candidates：
 
 ```text
 review communicative function
@@ -124,6 +145,8 @@ review communicative function
 → freeze first Expression identities
 → assign stable KE000001...
 ```
+
+Stable KE IDs 不承担学习顺序语义；实际先后由 LearningOrder 表达。
 
 identity review 完成后再进入：
 
@@ -204,6 +227,7 @@ actual daily review load
 - Expression 训练方向固定为 communicative intent → active production；
 - 简单新 Expression 可以通过 Back micro-lesson 首次学习；
 - 不为首次见过 / 首次 Again 建额外状态；
+- Grade-4-related Expressions 当前优先于 Grade-3-only Expressions；
 - LearningOrder 不进入内容 fingerprint；
 - generated publish 文件禁止手工修改；
 - Anki 保存真实 FSRS / Review History，GitHub 不重建学习历史。
