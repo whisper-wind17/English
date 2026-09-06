@@ -407,7 +407,7 @@ Cross-source context reviews   = 392
 Semantic-risk queue            = 287
 ```
 
-Cross-source exact-overlap 第一轮 Identity Resolution：
+Cross-source exact-overlap Identity Resolution：
 
 ```text
 rule-reviewed reuse             = 105
@@ -423,7 +423,7 @@ morphology resolved             = 5
 morphology held                 = 1
 ```
 
-当前已显式保护的 semantic collision 包括：
+当前已显式保护的 cross-source semantic collision 包括：
 
 ```text
 May(月份) vs may(情态动词)
@@ -435,20 +435,56 @@ cold=寒冷 vs cold=感冒
 study=学习 vs study=书房
 ```
 
+人教版 403 个原始 `new surface` 已完成对象类型审计；**403 surface 不等于 403 Vocabulary Identity**：
+
+```text
+single-token lexical             = 189
+multiword lexical                = 138
+multiword routing                = 42
+expression / event chunk         = 27
+ordinal format alias             = 5
+single-token form                = 2
+```
+
+其中 `shopping centre / shopping list / shopping mall` 已显式保护为 lexical compounds，不能因为首词为 `shopping` 就被 gerund heuristic 错误路由成 event chunk。
+
+当前 Renjiao new-surface Object / Sense Resolution：
+
+```text
+rule-reviewed rows                       = 131
+model-reviewed rows                      = 92
+pending rows                             = 180
+
+new Vocabulary learning-unit candidates = 172
+single-token sense pending               = 0
+multiword phrase sense pending           = 138
+Vocabulary-vs-Expression pending         = 42
+ordinal aliases                          = 5
+Expression candidates                    = 3
+source chunks / no Vocabulary identity   = 25
+held source-context blockers             = 16
+held form-policy blockers                = 1
+within-source split-required             = 1
+identity/object review queue             = 197
+```
+
+Single-token semantic-risk review 已完成独立闭合：原 90 条中，73 条明确为新 Vocabulary learning-unit candidate，16 条因 source context 不足保持 held，`French` 因同时出现“法语”和国籍/形容词用法标记为 within-source split-required。
+
 当前工程状态：
 
 ```text
-Renjiao Stage A Valid          = yes
-Combined Stage A build         = yes
-Cross-source context audit     = yes
-First-pass Identity Resolution = yes
-Completion Recheck             = pass
-Stable ThirdPartyID minted     = no
-Final Klose diff executed      = no
+Renjiao Stage A Valid                    = yes
+Combined Stage A build                   = yes
+Cross-source context audit               = yes
+Cross-source Identity Resolution         = complete / pending 0
+New-surface type audit                   = complete
+New-surface object routing               = complete
+Single-token sense review                = complete / pending 0
+Independent Completion Rechecks          = pass
+Stable ThirdPartyID minted               = no
+Final Klose diff executed                = no
 Klose Master/Release/Publish/Anki changed = no
 ```
-
-这里的 `rule-reviewed`、`model-reviewed`、`pending` 必须保持区分；第一轮 Resolution 不等于全部 392 个 overlap 已经 source-confirmed。只有明确无风险信号或已有显式语义判断的行才向前推进，其余继续 pending。
 
 重要约束继续有效：
 
@@ -459,6 +495,7 @@ Klose Master/Release/Publish/Anki changed = no
 - 去重单位是 `learning unit / target sense`，不是字符串；
 - 同 surface 不同义项必须允许多个第三方 Identity；
 - morphology / phrase / punctuation 只产生 candidate，不自动 merge；
+- Vocabulary 与 Expressions 是不同学习对象；不能因为第三方词表里出现一个短语/句块就自动 mint Vocabulary Identity；
 - 教材版本、最早年级、覆盖教材数、出现次数、年级分布都不作为学习决策维度；
 - provenance 只在 raw / Source Occurrence 层保留用于回溯，不进入正常学习界面；
 - 第三方统一 corpus 永远低于 Klose 实际教材 Source Truth 优先级。
@@ -466,11 +503,12 @@ Klose Master/Release/Publish/Anki changed = no
 当前下一步：
 
 ```text
-1. 继续处理剩余 0 个 cross-source semantic-risk pending rows；
-2. 对人教 403 个 new-surface candidates 做 within-source homograph / sense-split audit；
-3. 复核两类 blocker 后，再判断是否已经足够稳定到可以 mint 第一版 Stable ThirdPartyID；
-4. 在此之前不执行 Klose Stage-B final diff；
-5. 每个阶段完成后必须执行独立 Completion Recheck。
+1. 处理 138 个 multiword lexical phrase sense reviews；
+2. 处理 42 个 Vocabulary-vs-Expression routing reviews；
+3. 复核 held / form-policy blockers 与 within-source split，再判断是否足够稳定到 mint 第一版 Stable ThirdPartyID；
+4. Stable ThirdPartyID 建立后继续接入后续第三方 adapter；
+5. 所有计划第三方来源完成前，不执行 Klose Stage-B final diff；
+6. 每个阶段完成后必须执行独立 Completion Recheck。
 ```
 ---
 
