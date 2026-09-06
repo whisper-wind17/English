@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Prepare Renjiao Edition (start-from-grade-1) vocabulary as third-party Source Adapter #2.
+"""Parse Renjiao start-from-grade-1 vocabulary into standardized occurrences.
 
-This tool performs Stage A only:
-- parse the 12 Renjiao Grade 1-6 XLSX books;
-- preserve every source occurrence;
-- compare Renjiao surfaces against the current Beijing third-party seed;
-- emit candidate-only overlap / morphology / new-surface staging outputs.
+Source Adapter responsibility is intentionally narrow:
+- parse the 12 Grade 1-6 XLSX books;
+- preserve every source occurrence and raw source fields;
+- write occurrences.csv only.
 
-It MUST NOT use the Klose Stable Vocabulary Registry as a deletion/filtering source and
-MUST NOT modify Klose master, learner, release, publish, or Anki state.
+Cross-source matching, morphology, semantic review, object routing, and corpus
+identity decisions belong to tools/build_third_party_corpus.py.
+
+Stage A only: no Klose final diff and no Klose Master/Learner/Publish/Anki writes.
 """
 from __future__ import annotations
 
@@ -16,16 +17,12 @@ import csv
 import re
 import unicodedata
 import zipfile
-from collections import Counter, defaultdict
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-RAW_ROOT = ROOT / "1.全国各大教材版本中小学同步"
-SOURCE_DIR = RAW_ROOT / "人教版"
-BASE = ROOT / "anki" / "klose"
-BEIJING_OCC = BASE / "source_reference" / "beijing_start1_staging" / "occurrences.csv"
-OUT = BASE / "source_reference" / "renjiao_start1_staging"
+SOURCE_DIR = ROOT / "1.全国各大教材版本中小学同步" / "人教版"
+OUT = ROOT / "anki" / "klose" / "source_reference" / "renjiao_start1_staging"
 
 EXPECTED_BOOKS = [(g, s) for g in range(1, 7) for s in ("上", "下")]
 GRADE_CN = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6}
@@ -36,29 +33,6 @@ OCC_FIELDS = [
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition",
     "SourceFile",
 ]
-CMP_FIELDS = OCC_FIELDS + [
-    "StageAClass", "SeedMatchKeys", "SeedDisplayForms", "SeedDefinitions",
-    "NeedsSenseReview", "ReviewReason",
-]
-SURFACE_FIELDS = [
-    "MatchKey", "DisplayForms", "Definitions", "Books", "OccurrenceCount",
-    "StageAClass", "SeedMatchKeys", "SeedDisplayForms", "SeedDefinitions",
-    "NeedsSenseReview",
-]
-
-
-def read_csv(path: Path) -> list[dict[str, str]]:
-    with path.open("r", encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
-
-
-def write_csv(path: Path, fields: list[str], rows: list[dict[str, object]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
-        w.writeheader()
-        for row in rows:
-            w.writerow({k: "" if row.get(k) is None else str(row.get(k, "")) for k in fields})
 
 
 def norm_display(value: str) -> str:
@@ -71,45 +45,31 @@ def match_key(value: str) -> str:
     return norm_display(value).casefold()
 
 
-def format_alias_key(value: str) -> str:
-    value = match_key(value)
-    value = re.sub(r"(?:\.{2,}|…)+", " ", value)
-    value = re.sub(r"[?!,;:]+$", "", value)
-    return re.sub(r"\s+", " ", value).strip()
-
-
 def shared_strings(zf: zipfile.ZipFile) -> list[str]:
     name = "xl/sharedStrings.xml"
     if name not in zf.namelist():
         return []
     root = ET.fromstring(zf.read(name))
     ns = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
-    out: list[str] = []
-    for si in root.findall(f"{ns}si"):
-        out.append("".join(t.text or "" for t in si.iter(f"{ns}t")))
-    return out
+    return ["".join(t.text or "" for t in si.iter(f"{ns}t")) for si in root.findall(f"{ns}si")]
 
 
 def cell_value(cell: ET.Element, strings: list[str]) -> str:
     ns = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
     typ = cell.attrib.get("t", "")
     if typ == "inlineStr":
-        isel = cell.find(f"{ns}is")
-        if isel is None:
-            return ""
-        return "".join(t.text or "" for t in isel.iter(f"{ns}t"))
-    v = cell.find(f"{ns}v")
-    raw = "" if v is None else (v.text or "")
-    if typ == "s" and raw:
-        return strings[int(raw)]
-    return raw
+        node = cell.find(f"{ns}is")
+        return "" if node is None else "".join(t.text or "" for t in node.iter(f"{ns}t"))
+    node = cell.find(f"{ns}v")
+    raw = "" if node is None else (node.text or "")
+    return strings[int(raw)] if typ == "s" and raw else raw
 
 
 def col_index(ref: str) -> int:
     letters = "".join(ch for ch in ref if ch.isalpha())
     n = 0
     for ch in letters.upper():
-        n = n * 26 + (ord(ch) - ord("A") + 1)
+        n = n * 26 + ord(ch) - ord("A") + 1
     return n - 1
 
 
@@ -125,24 +85,19 @@ def read_xlsx_rows(path: Path) -> list[tuple[int, list[str]]]:
         for row in root.iter(f"{ns}row"):
             row_no = int(row.attrib.get("r", "0") or 0)
             vals: dict[int, str] = {}
-            for c in row.findall(f"{ns}c"):
-                idx = col_index(c.attrib.get("r", "A1"))
-                vals[idx] = norm_display(cell_value(c, strings))
-            if not vals:
-                continue
-            width = max(vals) + 1
-            result.append((row_no, [vals.get(i, "") for i in range(width)]))
+            for cell in row.findall(f"{ns}c"):
+                vals[col_index(cell.attrib.get("r", "A1"))] = norm_display(cell_value(cell, strings))
+            if vals:
+                result.append((row_no, [vals.get(i, "") for i in range(max(vals) + 1)]))
         return result
 
 
 def parse_source(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
     rows = read_xlsx_rows(path)
-    header_pos = None
-    for i, (_, vals) in enumerate(rows[:10]):
-        joined = "|".join(vals)
-        if "单词" in joined and "释义" in joined:
-            header_pos = i
-            break
+    header_pos = next(
+        (i for i, (_, vals) in enumerate(rows[:10]) if "单词" in "|".join(vals) and "释义" in "|".join(vals)),
+        None,
+    )
     if header_pos is None:
         raise SystemExit(f"Cannot find vocabulary header in {path.name}")
 
@@ -172,197 +127,59 @@ def parse_source(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
     return out
 
 
-IRREGULAR = {
-    "children": "child", "men": "man", "women": "woman", "feet": "foot",
-    "teeth": "tooth", "mice": "mouse", "geese": "goose",
-}
-NON_PLURAL_S_FORMS = {"its", "his", "this", "is", "was", "has", "does", "yes", "news"}
-
-
-def morphology_keys(key: str) -> list[str]:
-    if " " in key:
-        return []
-    out: list[str] = []
-    if key in IRREGULAR:
-        out.append(IRREGULAR[key])
-    if key not in NON_PLURAL_S_FORMS:
-        if key.endswith("ies") and len(key) > 4:
-            out.append(key[:-3] + "y")
-        if key.endswith("es") and len(key) > 3:
-            out.append(key[:-2])
-        if key.endswith("s") and len(key) > 2 and not key.endswith("ss"):
-            out.append(key[:-1])
-    return list(dict.fromkeys(x for x in out if x and x != key))
-
-
-def unique_join(values: list[str]) -> str:
-    return "|".join(dict.fromkeys(v for v in values if v))
+def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=OCC_FIELDS)
+        w.writeheader()
+        w.writerows(rows)
 
 
 def main() -> None:
-    if not BEIJING_OCC.exists():
-        raise SystemExit(f"Missing Beijing seed occurrences: {BEIJING_OCC}")
-
     source_files: dict[tuple[int, str], Path] = {}
     for path in SOURCE_DIR.glob("人教版一年级起点*年级*.xlsx"):
         m = BOOK_RE.fullmatch(path.name)
-        if not m:
-            continue
-        source_files[(GRADE_CN[m.group(1)], m.group(2))] = path
+        if m:
+            source_files[(GRADE_CN[m.group(1)], m.group(2))] = path
 
     missing = [f"{g}年级{s}" for g, s in EXPECTED_BOOKS if (g, s) not in source_files]
-    if missing:
-        raise SystemExit(f"Missing Renjiao start1 source books: {missing}")
-    if len(source_files) != 12:
-        raise SystemExit(f"Expected exactly 12 Renjiao start1 Grade1-6 books, found {len(source_files)}")
+    if missing or len(source_files) != 12:
+        raise SystemExit(f"Renjiao start1 source-book set invalid; missing={missing}; found={len(source_files)}")
 
     occurrences: list[dict[str, str]] = []
-    per_book: Counter[str] = Counter()
-    for grade, sem in EXPECTED_BOOKS:
-        rows = parse_source(source_files[(grade, sem)], grade, sem)
-        occurrences.extend(rows)
-        per_book[f"{grade}年级{sem}"] += len(rows)
+    for grade, semester in EXPECTED_BOOKS:
+        occurrences.extend(parse_source(source_files[(grade, semester)], grade, semester))
 
-    seed_rows = read_csv(BEIJING_OCC)
-    seed_by_key: dict[str, list[dict[str, str]]] = defaultdict(list)
-    seed_by_alias: dict[str, list[dict[str, str]]] = defaultdict(list)
-    seed_morph_reverse: dict[str, list[dict[str, str]]] = defaultdict(list)
-    for row in seed_rows:
-        key = row.get("MatchKey", "").strip() or match_key(row.get("Word", ""))
-        seed_by_key[key].append(row)
-        alias = format_alias_key(row.get("Word", ""))
-        if alias:
-            seed_by_alias[alias].append(row)
-        for mk in morphology_keys(key):
-            seed_morph_reverse[mk].append(row)
+    write_csv(OUT / "occurrences.csv", occurrences)
+    distinct = len({r["MatchKey"] for r in occurrences})
+    readme = f"""# Renjiao Start1 — Third-party Source Adapter
 
-    compared: list[dict[str, str]] = []
-    for occ in occurrences:
-        key = occ["MatchKey"]
-        seed_match: list[dict[str, str]] = []
-        cls: str
-        reason: str
-
-        if seed_by_key.get(key):
-            seed_match = seed_by_key[key]
-            cls = "exact-surface-overlap"
-            reason = "Same MatchKey exists in Beijing seed; target sense must be resolved before third-party identity reuse."
-        else:
-            alias = format_alias_key(occ["Word"])
-            if alias and seed_by_alias.get(alias):
-                seed_match = seed_by_alias[alias]
-                cls = "format-alias-overlap"
-                reason = "Presentation-only punctuation/ellipsis candidate exists in Beijing seed."
-            else:
-                morph_rows: list[dict[str, str]] = []
-                for mk in morphology_keys(key):
-                    morph_rows.extend(seed_by_key.get(mk, []))
-                morph_rows.extend(seed_morph_reverse.get(key, []))
-                uniq: dict[str, dict[str, str]] = {}
-                for row in morph_rows:
-                    uniq[row.get("SourceOccurrenceKey", "") or f"{row.get('MatchKey','')}|{row.get('Word','')}"] = row
-                seed_match = list(uniq.values())
-                if seed_match:
-                    cls = "morphology-overlap"
-                    reason = "Inflection-related Beijing seed candidate; candidate-only, never auto-merge."
-                else:
-                    cls = "new-surface-candidate"
-                    reason = "No Beijing seed surface/format/morphology candidate; still requires identity review for homographs and within-source sense splits."
-
-        row = dict(occ)
-        row.update({
-            "StageAClass": cls,
-            "SeedMatchKeys": unique_join([r.get("MatchKey", "") for r in seed_match]),
-            "SeedDisplayForms": unique_join([r.get("Word", "") for r in seed_match]),
-            "SeedDefinitions": unique_join([r.get("Definition", "") for r in seed_match]),
-            "NeedsSenseReview": "yes",
-            "ReviewReason": reason,
-        })
-        compared.append(row)
-
-    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
-    for row in compared:
-        grouped[row["MatchKey"]].append(row)
-
-    surfaces: list[dict[str, str]] = []
-    for key in sorted(grouped):
-        rows = grouped[key]
-        first = rows[0]
-        surfaces.append({
-            "MatchKey": key,
-            "DisplayForms": unique_join([r["Word"] for r in rows]),
-            "Definitions": unique_join([r["Definition"] for r in rows]),
-            "Books": unique_join([r["SourceBook"] for r in rows]),
-            "OccurrenceCount": str(len(rows)),
-            "StageAClass": first["StageAClass"],
-            "SeedMatchKeys": first["SeedMatchKeys"],
-            "SeedDisplayForms": first["SeedDisplayForms"],
-            "SeedDefinitions": first["SeedDefinitions"],
-            "NeedsSenseReview": "yes",
-        })
-
-    OUT.mkdir(parents=True, exist_ok=True)
-    write_csv(OUT / "occurrences.csv", OCC_FIELDS, occurrences)
-    write_csv(OUT / "comparison_to_beijing_seed.csv", CMP_FIELDS, compared)
-    write_csv(OUT / "surface_inventory.csv", SURFACE_FIELDS, surfaces)
-    write_csv(OUT / "overlap_candidates.csv", SURFACE_FIELDS,
-              [r for r in surfaces if r["StageAClass"] in {"exact-surface-overlap", "format-alias-overlap"}])
-    write_csv(OUT / "morphology_review_queue.csv", SURFACE_FIELDS,
-              [r for r in surfaces if r["StageAClass"] == "morphology-overlap"])
-    write_csv(OUT / "new_surface_candidates.csv", SURFACE_FIELDS,
-              [r for r in surfaces if r["StageAClass"] == "new-surface-candidate"])
-
-    occ_counts = Counter(r["StageAClass"] for r in compared)
-    surface_counts = Counter(r["StageAClass"] for r in surfaces)
-    readme = f"""# Renjiao Start1 Grade 1-6 — Third-party Source Adapter #2 Staging
-
-Generated by `tools/prepare_third_party_renjiao_start1.py`.
-
-This is **Stage A only**. It compares Renjiao start1 against the Beijing third-party seed.
-It does not perform the final Klose diff and does not remove anything because Klose already knows it.
-
-## Scope
+Active output:
 
 ```text
-Source books              = 12
-Source occurrences        = {len(occurrences)}
-Distinct MatchKeys        = {len(surfaces)}
-Beijing seed occurrences  = {len(seed_rows)}
+occurrences.csv
 ```
 
-## Occurrence-level candidate classes
+The adapter only captures source facts. Cross-source comparison, morphology,
+semantic resolution, Vocabulary/Expression routing, and corpus identity logic
+are handled centrally by `tools/build_third_party_corpus.py`.
 
 ```text
-exact-surface-overlap = {occ_counts['exact-surface-overlap']}
-format-alias-overlap  = {occ_counts['format-alias-overlap']}
-morphology-overlap    = {occ_counts['morphology-overlap']}
-new-surface-candidate = {occ_counts['new-surface-candidate']}
+Source books       = 12
+Source occurrences = {len(occurrences)}
+Distinct MatchKeys = {distinct}
 ```
 
-## Surface-level candidate classes
-
-```text
-exact-surface-overlap = {surface_counts['exact-surface-overlap']}
-format-alias-overlap  = {surface_counts['format-alias-overlap']}
-morphology-overlap    = {surface_counts['morphology-overlap']}
-new-surface-candidate = {surface_counts['new-surface-candidate']}
-```
-
-## Boundary
-
-- Exact surface overlap is a candidate, not an automatic identity merge.
-- Morphology is candidate-only.
-- Same surface may still contain multiple target senses.
-- New surface may still need within-source sense split.
-- No Klose Master / Learner / Release / Publish / Anki state is modified.
-- Final `existing-in-klose / third-party-new` classification is deferred until all planned third-party sources are complete.
+Other older CSVs in this directory are legacy migration/audit history and are
+not inputs to the active simplified Stage-A pipeline.
 """
     (OUT / "README.md").write_text(readme, encoding="utf-8")
 
-    print(f"Renjiao start1 books = {len(source_files)}")
-    print(f"Renjiao start1 occurrences = {len(occurrences)}")
-    print(f"Renjiao start1 surfaces = {len(surfaces)}")
-    print("Stage A only = yes")
+    print("Renjiao source adapter = valid")
+    print("source books = 12")
+    print(f"source occurrences = {len(occurrences)}")
+    print(f"distinct MatchKeys = {distinct}")
+    print("cross-source identity logic executed here = no")
     print("Final Klose diff executed = no")
 
 
