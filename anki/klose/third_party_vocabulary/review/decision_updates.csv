@@ -1,0 +1,44 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:holiday,holiday,*,keep-identity,,vocabulary,假日；假期；节日,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence remains within the holiday/vacation time concept.
+surface:home,home,*,keep-identity,,vocabulary,家；在家；回家,reviewed,medium,hujiao-evidence-revalidation,Noun/adverb uses remain within the same elementary home concept.
+surface:horse,horse,*,keep-identity,,vocabulary,马,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the animal noun.
+surface:hospital,hospital,*,keep-identity,,vocabulary,医院,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the place noun.
+surface:hot,hot,*,split-required,,vocabulary,,held,high,hujiao-semantic-split-required,Combined elementary sources can teach hot=热的 and hot=辣的 for food; these target senses must not be collapsed.
+surface:hotel,hotel,*,keep-identity,,vocabulary,旅馆；酒店,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the accommodation-place noun.
+surface:hour,hour,*,keep-identity,,vocabulary,小时；钟头,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the time-unit noun.
+surface:house,house,*,keep-identity,,vocabulary,房子；住宅,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the dwelling noun.
+surface:how,how,*,keep-identity,,vocabulary,怎样；如何,reviewed,medium,hujiao-evidence-revalidation,Elementary source use supports the interrogative manner word as one learning unit.
+surface:how long,how long,*,route-expression,,expression,多长；多久,reviewed,high,hujiao-object-routing,This interrogative pattern is used to ask duration or length and is better represented as an Expression.
+surface:how many,how many,*,route-expression,,expression,多少（可数名词）,reviewed,high,hujiao-object-routing,This open-slot quantity question pattern belongs in Expressions.
+surface:how much,how much,*,route-expression,,expression,多少；多少钱（不可数/价格）,reviewed,high,hujiao-object-routing,This open-slot quantity/price question pattern belongs in Expressions.
+surface:how old,how old,*,route-expression,,expression,多大；多少岁,reviewed,high,hujiao-object-routing,This age-question pattern is better represented as an Expression and unifies the format-alias evidence.
+surface:hundred,hundred,*,keep-identity,,vocabulary,一百；百,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the number learning unit.
+surface:hungry,hungry,*,keep-identity,,vocabulary,饿的；饥饿的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the physical-state adjective.
+surface:hurt,hurt,*,keep-identity,,vocabulary,受伤；疼；弄伤,reviewed,medium,hujiao-evidence-revalidation,Verb/adjective uses stay within the same elementary injury/pain concept.
+surface:i,i,*,keep-identity,,vocabulary,我,reviewed,high,hujiao-evidence-revalidation,Elementary sources clearly target the first-person pronoun; letter/chemical dictionary senses are irrelevant.
+surface:ice cream,ice cream,*,keep-identity,,vocabulary,冰淇淋,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the food noun phrase.
+surface:idea,idea,*,keep-identity,,vocabulary,想法；主意,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the abstract noun.
+surface:ill,ill,*,keep-identity,,vocabulary,生病的；不舒服的,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence consistently targets the health adjective.
+surface:important,important,*,keep-identity,,vocabulary,重要的,reviewed,high,hujiao-new-learning-unit,The Hujiao source provides one clear adjective learning unit.
+surface:in,in,*,held,,vocabulary,,held,medium,hujiao-function-word-boundary-held,In has multiple elementary grammatical uses and learner-facing meanings; word-list evidence alone is insufficient to define one target unit safely.
+surface:in a short time,in a short time,*,keep-identity,,vocabulary,不久；很快,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable time phrase.
+surface:in danger,in danger,*,keep-identity,,vocabulary,处于危险中,reviewed,high,hujiao-new-learning-unit,This is a stable lexical state phrase with a clear meaning.
+surface:in front of,in front of,*,keep-identity,,vocabulary,在……前面,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the lexicalized multiword preposition.
+surface:in the east of,in the east of,*,route-expression,,expression,在……的东部,reviewed,high,hujiao-object-routing,This geographic relation pattern requires a location complement and belongs in Expressions.
+surface:in the future,in the future,*,keep-identity,,vocabulary,将来；今后,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the stable time phrase.
+surface:in the middle,in the middle,*,keep-identity,,vocabulary,在中间；在中部,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable position phrase.
+surface:in the north of,in the north of,*,route-expression,,expression,在……的北部,reviewed,high,hujiao-object-routing,This geographic relation pattern requires a location complement and belongs in Expressions.
+surface:in the past,in the past,*,keep-identity,,vocabulary,过去；在过去,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable time phrase.
+surface:in the south of,in the south of,*,route-expression,,expression,在……的南部,reviewed,high,hujiao-object-routing,This geographic relation pattern requires a location complement and belongs in Expressions.
+surface:ink,ink,*,keep-identity,,vocabulary,墨水；墨汁,reviewed,high,hujiao-new-learning-unit,The Hujiao source provides one clear concrete noun.
+surface:insect,insect,*,keep-identity,,vocabulary,昆虫,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the animal-category noun.
+surface:insect museum,insect museum,*,keep-identity,,vocabulary,昆虫博物馆,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable place noun phrase.
+surface:inside,inside,*,keep-identity,,vocabulary,里面；在里面；在……里面,reviewed,medium,hujiao-new-learning-unit,Noun/adverb/preposition uses remain within the same elementary interior/spatial concept.
+surface:interesting,interesting,*,keep-identity,,vocabulary,有趣的；令人感兴趣的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the lexicalized adjective.
+surface:into,into,*,keep-identity,,vocabulary,进入；到……里面,reviewed,medium,hujiao-evidence-revalidation,Elementary evidence supports the movement-into preposition concept.
+surface:invent,invent,*,keep-identity,,vocabulary,发明；创造,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the ordinary invention verb.
+surface:invention,invention,*,keep-identity,,vocabulary,发明；发明物,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the invention noun.
+surface:is,is,*,held,,vocabulary,,held,high,be-form-policy-held,Is is an inflected form of be and is explicitly taught as a standalone surface; preserve the form-identity policy blocker rather than auto-canonicalizing.
+surface:island,island,*,keep-identity,,vocabulary,岛；岛屿,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the geographic noun.
+surface:it,it,*,keep-identity,,vocabulary,它；这件事/这个东西,reviewed,high,hujiao-evidence-revalidation,Elementary sources clearly target the third-person neuter pronoun.
+surface:its,its,*,keep-identity,,vocabulary,它的,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the possessive determiner/pronoun learning unit.
