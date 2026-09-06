@@ -15,8 +15,12 @@ AGENTS.md
 
 ```text
 docs/EXPRESSIONS_SYSTEM.md
-→ anki/klose/expressions/review/grade4-pilot-review.md
+→ anki/klose/expressions/review/grade3-grade4-baseline.md
+→ anki/klose/expressions/review/identity_resolution.csv
+→ anki/klose/expressions/review/full-baseline-review.md
 → anki/klose/expressions/master/expression_registry.csv
+→ anki/klose/expressions/master/expression_occurrences.csv
+→ anki/klose/expressions/master/source_expression_map.csv
 → anki/klose/expressions/learner/current.csv
 → anki/klose/expressions/learner/learning_admission.csv
 → anki/klose/expressions/learner/presentation_review_registry.csv
@@ -48,70 +52,74 @@ FSRS / Due / Interval / Review History / Card State 继续以 Anki 为唯一真�
 
 ---
 
-## 2. Expressions source baseline
+## 2. Expressions source / identity baseline
 
-当前复习范围只纳入三、四年级实际教材 Expressions；一年级、二年级暂不复习。
+当前复习范围只纳入 Klose 已学过的三、四年级实际教材 Expressions；一年级、二年级暂不复习。
 
 ```text
 Grade 3 Source Occurrences = 94
 Grade 4 Source Occurrences = 72
-Total                      = 166
+Total Source Occurrences   = 166
 
 Curated Pattern Candidates = 64
-Grade-4 priority block     = 36
-Grade-3-only block         = 28
+Stable Expressions          = 66
+Grade-4 priority            = 37
+Grade-3-only                = 29
+LearningOrder               = 000001..000066
 ```
 
-学习顺序冻结为：
+学习顺序已经冻结：
 
 ```text
 Grade 4 related first
 → Grade 3 only second
 ```
 
+对应：
+
+```text
+KE000001..KE000037  = Grade-4 priority
+KE000038..KE000066  = Grade-3 only
+```
+
 跨年级相同 Pattern 只学习一次，并归入 Grade-4 priority block。
 
----
-
-## 3. Grade-4 pilot — 9 cards approved and release-ready
-
-首批 Grade-4 priority pilot 已冻结 9 个 Stable Expressions：
+64 Candidate 最终得到 66 Stable Expressions，是因为 Identity Review 明确拆分了两个 Candidate：
 
 ```text
-KE000001  What's [person]'s job?
-KE000002  There is a/an [singular noun].
-KE000003  Let's [verb phrase].
-KE000004  What's the weather like in [place]?
-KE000005  Whose [noun] is this?
-KE000006  Can I [verb phrase]?
-KE000007  What time is it?
-KE000008  Can you please [verb phrase]?
-KE000009  Would you like [thing]?
+EC0035
+→ It's time for [noun].
+→ It's time to [verb].
+
+EC0058
+→ Excuse me?   # 没听清时请求重复
+→ Excuse me.   # 礼貌引起注意
 ```
 
-LearningOrder：
+这两个 split 遵守 `CanonicalForm + CommunicativeFunction` 身份规则，不是重复制卡。
+
+其他显式调整：
 
 ```text
-000001..000009
+What's this? / What's that? → What's [demonstrative]?
+Can I [verb phrase], please? → Can I [verb phrase]?  # please 可选
+It's [weather adjective]... → It's [weather description]...
+What about [thing]? → formal ExpressionType=slot_frame
 ```
 
-2026-09-06 用户已确认整个 9-card pilot Presentation：
+完整 Identity 决策：
 
 ```text
-approved       = 9
-model-reviewed = 0
-admitted       = 9
-publishable    = 9
-release-ready  = 9
+anki/klose/expressions/review/identity_resolution.csv
 ```
-
-`EC0014` 已显式从 Candidate 草案 `Can I [verb phrase], please?` 修正并冻结为正式 Identity `Can I [verb phrase]?`；`please` 是可选礼貌成分，不属于 Identity 的强制部分。
 
 ---
 
-## 4. Front / Back policy
+## 3. Full 66-card Learner Presentation generated
 
-当前 Front 使用 Stage A：
+全部 66 个 Stable Expressions 已生成当前 Stage-A Learner Presentation，并已建立 source provenance / admission / LearningOrder。
+
+Front 当前统一采用：
 
 ```text
 中文短场景 / communicative intent
@@ -140,11 +148,43 @@ Meaning / Usage
 1–2 Examples
 ```
 
+完整 66 张卡的 review sheet：
+
+```text
+anki/klose/expressions/review/full-baseline-review.md
+```
+
 ---
 
-## 5. Deterministic publish / release status
+## 4. Review / release state
 
-Expressions 独立生成链：
+当前：
+
+```text
+approved       = 9   # KE000001..KE000009，用户已明确确认
+model-reviewed = 57  # KE000010..KE000066，已生成并模型审校
+admitted       = 66
+Anki Updated   = no
+```
+
+`model-reviewed != approved`。后 57 张虽然已经生成完整卡片 Presentation，但在用户最终 batch approval 前不得进入正式 full import artifact。
+
+因此当前 generated publish 仍只包含已批准的前 9 张：
+
+```text
+anki/klose/expressions/publish/study.csv
+anki/klose/expressions/publish/anki-import.csv
+```
+
+这不是缺失；Release Gate 正在阻止未经明确批准的 57 张 draft 泄漏到 Anki。
+
+当前不要导入这个 9-card artifact，因为用户已经决定等全部卡片完成后一次性导入。
+
+---
+
+## 5. Deterministic publish / release gate
+
+Expressions 生成链：
 
 ```text
 upstream registries
@@ -154,48 +194,85 @@ upstream registries
 → tools/check_klose_expressions_release_ready.py
 ```
 
-当前已根据 9 个 approved Presentation 重新生成 publish artifacts；内容为 `KE000001..KE000009`，顺序 `000001..000009`。
+Release Gate 已扩展到完整 Grade 3–4 baseline，验证：
 
-正式导入文件：
+- 64 Candidate 都有显式 Identity Resolution；
+- 66 Stable ExpressionID 唯一且 active；
+- CreatedFromOccurrence 均存在 confirmed source mapping；
+- Grade-4 priority 必须有 Grade-4 source；
+- Grade-3-only 不得混入 Grade-4 source；
+- LearningOrder 六位、唯一、连续；
+- Grade-4 block 必须完整位于 Grade-3 block 之前；
+- current Presentation fingerprint 必须与 review registry 一致；
+- `model-reviewed` draft 必须保持 `pending / pending`；
+- approved Expression 才能进入 generated publish；
+- `study.csv` / `anki-import.csv` 必须完全由上游确定性推导。
+
+Generated publish 文件禁止手工维护。
+
+---
+
+## 6. NEXT TASK — final batch approval, then one full import artifact
+
+下一步不是 Anki 导入，而是完成剩余 57 张的最终 batch review：
+
+```text
+KE000010..KE000066
+```
+
+以：
+
+```text
+anki/klose/expressions/review/full-baseline-review.md
+```
+
+为人工 review 入口。
+
+用户确认后：
+
+```text
+ReviewStatus → approved
+PresentationStatus → approved
+→ deterministic rebuild
+→ study.csv / anki-import.csv = 66 cards
+→ full Expression Release Gate
+→ 首次 Anki Desktop 导入
+```
+
+用户计划等全部卡片 release-ready 后再一次性导入，因此不要提前执行 9-card import。
+
+---
+
+## 7. First Anki import target state
+
+最终首次导入仍使用：
+
+```text
+Deck      = Klose-English::Expressions
+Note Type = Klose Expression
+Card Type = Production
+```
+
+正式唯一导入文件：
 
 ```text
 anki/klose/expressions/publish/anki-import.csv
 ```
 
-当前状态：
+待 full batch approval 后，该文件应包含：
 
 ```text
-Build Valid        = yes
-Content Releasable = yes
-Anki Updated       = no
-Learning Admitted  = yes
+KE000001..KE000066
+LearningOrder 000001..000066
 ```
 
-不要手工修改 `publish/study.csv` 或 `publish/anki-import.csv`；后续 Presentation / Admission 变化后仍通过生成链重建。
+导入后仅对 `is:new` Cards 按 LearningOrder materialize New #；Anki 继续作为 FSRS / Due / Interval / Review History / Card State 真源。
+
+`New/day` 到首次正式导入时再结合 Vocabulary `New/day=8` 与实际总负担设置。
 
 ---
 
-## 6. NEXT TASK — first Anki import
-
-下一步在 Anki Desktop 完成首次 Expressions 建库：
-
-```text
-1. 创建/确认 Deck: Klose-English::Expressions
-2. 创建/确认 Note Type: Klose Expression
-3. 按 anki/klose/expressions/anki/README.md 配置字段、Production Card template、styling
-4. 导入 anki/klose/expressions/publish/anki-import.csv
-5. 仅对 is:new 卡按 LearningOrder materialize New #
-6. Sync 到 AnkiWeb / iPad
-7. 开始 one-month pilot
-```
-
-Anki 是 FSRS / Review History / Due / Card State 真源；repo 不重建这些状态。
-
-Pilot `New/day` 尚未冻结。因为首批只有 9 张，可以在首次导入时先采用较低的新卡负担，再根据 Vocabulary `New/day=8` 与首周实际 review load 调整；不要为了尽快清空 9 张而一次性全部引入。
-
----
-
-## 7. One-month evaluation
+## 8. One-month evaluation
 
 只观察有决策价值的指标：
 
@@ -214,19 +291,19 @@ actual daily review load
 
 ---
 
-## 8. Deferred work
+## 9. Deferred work
 
-- Grade-3-only Expressions：Grade-4 pilot 进入真实学习后再继续正式 Identity / Presentation；
-- Grade 1–3 Vocabulary actual-source reconciliation：Expressions pilot 建立后继续；
+- Grade 1–3 Vocabulary actual-source reconciliation：Expressions 首次正式导入后继续；
 - Grade 5/6 actual source reconciliation：后续处理；
 - 99 个 held legacy Vocabulary Notes 缺 British/American IPA：对应 Note admission 前再补齐并 re-review。
 
 ---
 
-## 9. Frozen long-term rules
+## 10. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Expression Identity 分离；
+- Expression Identity 以 `CanonicalForm + CommunicativeFunction` 判断；同 surface form 不同 function 必须允许 split；
 - Source Grade、LearnerLevel、Learning Admission 分离；
 - Vocabulary 与 Expressions 使用独立 Identity / Review / Release / Note Type；
 - Expression 训练方向固定为 communicative intent → active production；
