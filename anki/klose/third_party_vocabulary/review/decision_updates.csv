@@ -1,0 +1,23 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:begin,begin,*,keep-identity,,vocabulary,开始,reviewed,high,hujiao-evidence-revalidation,Expanded evidence remains consistent with the elementary verb begin/开始.
+surface:behind,behind,*,keep-identity,,vocabulary,在……后面；在后面,reviewed,high,hujiao-evidence-revalidation,Elementary sources consistently support the spatial relation rather than unrelated dictionary senses.
+surface:bell,bell,*,keep-identity,,vocabulary,铃；钟,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary object/sound noun.
+surface:beside,beside,*,keep-identity,,vocabulary,在……旁边,reviewed,high,hujiao-evidence-revalidation,Elementary sources consistently support the spatial preposition.
+surface:best,best,*,held,,vocabulary,,held,high,form-policy-held,Best is an irregular superlative of good and also appears as an independent lexical form; keep the form-policy blocker rather than minting or canonicalizing automatically.
+surface:better and better,better and better,*,keep-identity,,vocabulary,越来越好,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable comparative phrase as one elementary learning unit.
+surface:between,between,*,keep-identity,,vocabulary,在……之间,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary spatial relation.
+surface:big,big,*,keep-identity,,vocabulary,大的；大,reviewed,high,hujiao-evidence-revalidation,Elementary sources consistently target the basic size adjective.
+surface:bigger,bigger,*,reuse-identity,big,vocabulary,更大的,reviewed,high,regular-comparative-canonicalization,Bigger is the regular comparative form of big and should reuse the canonical base learning unit.
+surface:by bus,by bus,*,keep-identity,,vocabulary,乘公共汽车；坐公交车,reviewed,high,hujiao-evidence-revalidation,Both sources support the same stable transport phrase.
+surface:by car,by car,*,keep-identity,,vocabulary,乘汽车；坐汽车,reviewed,high,hujiao-evidence-revalidation,Both sources support the same stable transport phrase.
+surface:by hand,by hand,*,keep-identity,,vocabulary,用手；手工,reviewed,medium,hujiao-new-learning-unit,The elementary phrase is stable enough as a manual-method learning unit; unrelated dictionary extensions are not imported.
+surface:bye,bye,*,keep-identity,,vocabulary,再见,reviewed,high,hujiao-new-learning-unit,The Grade-3 source clearly targets the farewell interjection.
+surface:cake,cake,*,keep-identity,,vocabulary,蛋糕,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence consistently targets the food noun.
+surface:call,call,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Call has multiple elementary senses including telephone/call and name/address; current occurrence evidence does not safely bind one target sense.
+surface:camera,camera,*,keep-identity,,vocabulary,照相机；相机,reviewed,high,hujiao-evidence-revalidation,Expanded evidence confirms the elementary device noun.
+surface:can,can,*,held,,vocabulary,,held,high,hujiao-semantic-boundary-held,Can may represent the modal verb or the container noun; the added Hujiao evidence does not safely identify a single target sense from the word-list source alone.
+surface:candy,candy,*,keep-identity,,vocabulary,糖果,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence consistently targets the food noun.
+surface:cap,cap,*,keep-identity,,vocabulary,帽子；便帽,reviewed,high,hujiao-evidence-revalidation,Elementary sources consistently target the clothing noun.
+surface:capital,capital,*,held,,vocabulary,,held,medium,hujiao-semantic-boundary-held,Capital may mean a city capital or a capital letter in elementary materials; the current source occurrence lacks enough context to bind one target sense.
+surface:car,car,*,keep-identity,,vocabulary,汽车；小汽车,reviewed,high,hujiao-evidence-revalidation,Expanded elementary evidence confirms the transport noun.
+surface:car museum,car museum,*,keep-identity,,vocabulary,汽车博物馆,reviewed,high,hujiao-new-learning-unit,The source explicitly lists this stable place noun phrase.
