@@ -10,6 +10,7 @@ on:
       - 'tools/audit_third_party_cross_source_semantics.py'
       - 'tools/build_third_party_cross_source_resolution.py'
       - 'tools/apply_third_party_cross_source_second_pass.py'
+      - 'tools/apply_third_party_cross_source_final_review.py'
       - 'tools/recheck_third_party_beijing_renjiao_stage_a.py'
       - 'tools/sync_third_party_status_to_next.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
@@ -49,6 +50,9 @@ jobs:
 
       - name: Apply second-pass semantic review
         run: python tools/apply_third_party_cross_source_second_pass.py
+
+      - name: Resolve final cross-source pending set
+        run: python tools/apply_third_party_cross_source_final_review.py
 
       - name: Independent Completion Recheck
         run: python tools/recheck_third_party_beijing_renjiao_stage_a.py
