@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -53,6 +54,20 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 def require(cond: bool, message: str) -> None:
     if not cond:
         raise SystemExit(message)
+
+
+def decode_occurrence_keys(raw: str, decision_key: str) -> list[str]:
+    require(bool(raw) and raw != "*", f"Durable wildcard/empty OccurrenceKeys: {decision_key}")
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"OccurrenceKeys is not valid JSON for {decision_key}: {exc}") from exc
+    require(
+        isinstance(value, list) and bool(value) and all(isinstance(x, str) and x for x in value),
+        f"OccurrenceKeys must be a non-empty JSON string array: {decision_key}",
+    )
+    require(len(value) == len(set(value)), f"Duplicate reviewed OccurrenceKeys: {decision_key}")
+    return value
 
 
 def main() -> None:
@@ -117,10 +132,7 @@ def main() -> None:
 
     decisions_by_match: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in decisions:
-        reviewed_raw = row.get("OccurrenceKeys", "")
-        require(bool(reviewed_raw) and reviewed_raw != "*", f"Durable wildcard/empty OccurrenceKeys: {row['DecisionKey']}")
-        reviewed = reviewed_raw.split("|")
-        require(len(reviewed) == len(set(reviewed)), f"Duplicate reviewed OccurrenceKeys: {row['DecisionKey']}")
+        reviewed = decode_occurrence_keys(row.get("OccurrenceKeys", ""), row["DecisionKey"])
         require(set(reviewed) <= current_by_match[row["MatchKey"]],
                 f"Decision occurrence evidence does not belong to its MatchKey: {row['DecisionKey']}")
         if row["Action"] == "reuse-identity":
@@ -137,7 +149,7 @@ def main() -> None:
         ds = decisions_by_match.get(key, [])
         reviewed: set[str] = set()
         for d in ds:
-            reviewed.update(d["OccurrenceKeys"].split("|"))
+            reviewed.update(decode_occurrence_keys(d["OccurrenceKeys"], d["DecisionKey"]))
         if not ds:
             require(by_surface[key].get("DecisionAction") == "pending" and by_surface[key].get("DecisionStatus") == "pending",
                     f"Undecided new surface did not enter pending queue: {key}")
@@ -207,6 +219,7 @@ def main() -> None:
     for action in sorted(actions):
         print(f"decision {action} = {actions[action]}")
     print("Explicit reviewed OccurrenceKeys = yes")
+    print("OccurrenceKeys serialization = JSON array")
     print("Changed source evidence requeues decision = yes")
     print("Simplified physical layout = yes")
     print("Legacy multi-pass tools absent = yes")
