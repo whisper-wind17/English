@@ -33,6 +33,8 @@ SourceBooks
 
 `ExpressionID` 必须为第一字段，并长期稳定。
 
+`Prompt` / `PromptHint` 使用语言中性字段名；不要改成 `ChinesePrompt`，因为 Front 语言会随 Learner Presentation 演进。
+
 `LearningOrder` 是 curriculum/admission metadata，固定使用 6 位零填充字符串；它不属于 Identity，也不进入 Presentation fingerprint。
 
 ## Production contract
@@ -72,6 +74,52 @@ TTS 使用：
 ```
 
 Examples 默认不自动播放。
+
+## Front language policy
+
+当前 Klose 使用：
+
+```text
+Stage A
+中文短场景 / 交际意图
++ English minimal slot cue
+→ English production
+```
+
+中文 Prompt 必须短，只负责建立 communicative intent，不应直接给出可逐词翻译的完整目标句。
+
+推荐：
+
+```text
+【询问职业】
+想知道同学妈妈的职业
+person: your mother
+```
+
+不推荐：
+
+```text
+你妈妈做什么工作？
+```
+
+长期演进：
+
+```text
+Stage A — 中文短场景 / intent + English cue
+Stage B — concise English intent + English cue
+Stage C — English-only situation / context
+```
+
+迁移到下一阶段不按固定年龄或年级自动发生；以真实学习表现为依据。当英文 Front 不再显著增加无关阅读负担时，才调整 Learner Presentation。
+
+Front 语言变化只修改 `Prompt / PromptHint` 等 Presentation 字段：
+
+```text
+ExpressionID 不变
+CanonicalForm 不变
+FSRS / Review History 不重建
+Presentation fingerprint 更新并重新 review / approve
+```
 
 ## Card-back micro-lesson
 
@@ -127,7 +175,7 @@ Front：
 
 ```text
 【询问职业】
-你刚认识一个同学，想了解他妈妈的职业。
+想知道同学妈妈的职业
 person: your mother
 ```
 
