@@ -137,6 +137,7 @@ tools/klose_expression_review_fingerprint.py
 
 - 开始任务先判断变更属于 Source / Edition / Occurrence / Identity / Learner / Admission / Review / Release / Publish / Anki 哪一层。
 - 较大批量处理先验证样本和边界案例，再全量执行。
+- **每个阶段性任务或批量处理在宣告“完成 / 通过”之前，必须执行一次 Completion Recheck。** Recheck 必须独立于主生成路径，至少核对：计数/集合是否闭合；代表性样本与高风险边界是否符合预期；Git diff / 输出范围是否误改其他层；已知 blocker 是否仍被正确保留。CI / script success 只能证明相应自动检查通过，不能单独作为“结果正确”的结论。发现问题必须先修正并重新验证，再对用户宣告完成。
 - 发现用户建议与长期不变量冲突时，先给判断、证据和影响，不因“用户同意”而破坏稳定身份或学习历史。
 - `AGENTS.md` 只维护项目规则、能力地图和完成标准；架构细节与 SOP 放 `docs/`。
 - 较大阶段结束或切换新对话前更新 `/NEXT.md`。
