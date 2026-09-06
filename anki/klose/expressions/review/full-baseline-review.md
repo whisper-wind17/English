@@ -1,6 +1,6 @@
 # Grade 3–4 Expressions Full Baseline Review
 
-本文件是三、四年级全部 Curated Pattern Candidates 完成 Identity Review 后的正式卡片草案总览。
+本文件是三、四年级全部 Curated Pattern Candidates 完成 Identity Review 后的正式卡片总览。
 
 ## Result
 
@@ -9,8 +9,8 @@ Curated Pattern Candidates = 64
 Stable Expressions          = 66
 Grade-4 priority            = 37
 Grade-3-only                = 29
-approved                    = 9
-model-reviewed              = 57
+approved                    = 66
+model-reviewed              = 0
 LearningOrder               = 000001..000066
 ```
 
@@ -99,6 +99,8 @@ Stable Expressions 多于 Candidate 的原因不是重复制卡，而是 Identit
 
 ## Review semantics
 
-`KE000001..KE000009` 已由用户明确确认，为 `approved`。
+`KE000001..KE000009` 是用户逐批明确确认的首批卡片。
 
-`KE000010..KE000066` 已按当前 Stage-A 规则完成模型审校，但仍保持 `model-reviewed`，不冒充用户确认；因此在用户进行最终 batch approval 前，不进入正式 full import artifact。
+2026-09-06 用户因当前无法逐张审核，明确授权将 `KE000010..KE000066` 先按通过处理。对应 `ReviewStatus=approved`，但 `ReviewBasis=user-authorized-batch-approval-without-individual-review`，用于明确区分“批量授权通过”与“逐张人工审核”。
+
+完整当前 approval / release 状态以 `presentation_review_registry.csv`、`release_registry.csv` 和根目录 `NEXT.md` 为真源。
