@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Independent Completion Recheck for Beijing + Renjiao start1 Stage A.
 
-This is intentionally separate from the generation scripts. It checks count
-closure, cross-source resolution coverage, known semantic edge cases,
-morphology decisions, and the current no-merge boundary.
+This is intentionally separate from the generation/review scripts. It checks
+count closure, cross-source resolution coverage, known semantic edge cases,
+morphology decisions, second-pass status closure, and the current no-merge
+boundary.
 """
 from __future__ import annotations
 
 import csv
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,12 +66,16 @@ def main() -> None:
         "study": "partial-overlap-split-required",
         "chicken": "partial-overlap-split-required",
         "duck": "partial-overlap-split-required",
+        "cool": "partial-overlap-split-required",
     }
     for key, decision in expected_nonmerge.items():
         assert by_key[key]["ProposedDecision"] == decision, (key, by_key[key]["ProposedDecision"])
         assert by_key[key]["ResolutionStatus"] == "model-reviewed"
 
-    expected_held = {"fan", "kind", "light", "speak", "sound", "star", "plant", "live", "tongue", "fish"}
+    expected_held = {
+        "fan", "kind", "light", "speak", "sound", "star", "plant", "live", "tongue", "fish",
+        "call", "dear", "earth", "exercise", "get", "stop", "there", "welcome",
+    }
     for key in expected_held:
         assert by_key[key]["ProposedDecision"].startswith("held-"), (key, by_key[key]["ProposedDecision"])
         assert by_key[key]["ResolutionStatus"] == "model-reviewed"
@@ -77,12 +83,32 @@ def main() -> None:
     assert by_key["can"]["ProposedDecision"] == "reuse-learning-unit"
     assert by_key["can"]["ResolutionStatus"] == "model-reviewed"
 
-    # Strict-rule reuse is allowed only for rows that had no risk signal.
+    # Rule-reviewed reuse remains restricted to zero-risk rows. Second-pass
+    # model-reviewed reuse must be explicitly attributable to the second pass.
     for row in resolution:
         if row["ResolutionStatus"] == "rule-reviewed":
             assert row["RiskSignals"] == "none-detected", row["MatchKey"]
             assert row["ProposedDecision"] == "reuse-learning-unit", row["MatchKey"]
+        if row["ResolutionBasis"] == "model-second-pass-source-neighborhood-review":
+            assert row["ResolutionStatus"] == "model-reviewed", row["MatchKey"]
         assert row["KloseMergeAuthorized"] == "no", row["MatchKey"]
+
+    statuses = Counter(r["ResolutionStatus"] for r in resolution)
+    decisions = Counter(r["ProposedDecision"] for r in resolution)
+    bases = Counter(r["ResolutionBasis"] for r in resolution)
+
+    # Expected closure after the reviewed second pass. These counts are
+    # intentionally strict so an accidental list drift cannot silently pass.
+    assert statuses == Counter({"model-reviewed": 281, "rule-reviewed": 105, "pending": 6}), statuses
+    assert decisions == Counter({
+        "reuse-learning-unit": 357,
+        "partial-overlap-split-required": 8,
+        "do-not-merge": 3,
+        "held-source-context-required": 16,
+        "held-identity-policy": 2,
+        "pending-semantic-review": 6,
+    }), decisions
+    assert bases["model-second-pass-source-neighborhood-review"] == 260, bases
 
     # Morphology decisions are separate and must preserve the held irregular case.
     assert len(morph) == 6, len(morph)
@@ -104,20 +130,17 @@ def main() -> None:
     stable_registry = BASE / "third_party_vocabulary" / "master" / "identity_registry.csv"
     assert not stable_registry.exists(), "Stable ThirdPartyID registry exists before Identity Resolution is ready"
 
-    pending = sum(r["ResolutionStatus"] == "pending" for r in resolution)
-    rule_reviewed = sum(r["ResolutionStatus"] == "rule-reviewed" for r in resolution)
-    model_reviewed = sum(r["ResolutionStatus"] == "model-reviewed" for r in resolution)
-
     print("Completion Recheck = pass")
     print(f"Beijing occurrences = {len(bj)}")
     print(f"Renjiao occurrences = {len(rj)}")
     print(f"Combined occurrences = {len(combined)}")
     print(f"Combined MatchKeys = {len(unique_keys(combined, 'MatchKey'))}")
     print(f"Cross-source resolution rows = {len(resolution)}")
-    print(f"rule-reviewed = {rule_reviewed}")
-    print(f"model-reviewed = {model_reviewed}")
-    print(f"pending = {pending}")
+    print(f"rule-reviewed = {statuses['rule-reviewed']}")
+    print(f"model-reviewed = {statuses['model-reviewed']}")
+    print(f"pending = {statuses['pending']}")
     print("Known semantic blockers preserved = yes")
+    print("Second-pass closure verified = yes")
     print("Klose merge authorized = no")
 
 
