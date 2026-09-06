@@ -1,39 +1,73 @@
 # Third-party Multi-Edition Vocabulary Corpus
 
-本文定义 Klose Vocabulary 的统一第三方教材词源。目标不是研究不同教材版本本身，而是把多个第三方小学英语教材词表合并成一个 **sense-aware、去重、可继续增量扩展的新词候选池**。
+本文定义 Klose Vocabulary 的统一第三方教材词源。目标不是研究不同教材版本本身，而是把多个第三方小学英语教材词表合并成一个 **sense-aware、去重、可继续增量扩展的统一 Vocabulary corpus**；只有在所有第三方来源处理完成后，才与 Klose Stable Vocabulary Identity 做最终差集，得到真正的新词学习池。
 
-## 1. 目标
+## 1. 目标与两阶段去重
 
-多个教材版本只作为原始输入：
+长期流程固定为两阶段：
 
 ```text
+阶段 A：第三方 corpus 内部去重
+
 北京版
 人教版
 沪教版
 其他版本
     ↓
-统一解析
+各版本 Source Adapter
     ↓
-Sense-aware 去重
+统一解析 / normalize
+    ↓
+sense-aware Identity Resolution
     ↓
 Third-party Unified Vocabulary
+
+阶段 B：全部第三方来源完成后，才与 Klose 做最终去重
+
+Third-party Unified Vocabulary
     ↓
-与 Klose Stable Vocabulary Identity 做差集
+vs Klose Full Stable Vocabulary Identity Registry
     ↓
 Third-party New Vocabulary Pool
 ```
 
-最终真正有学习价值的是：
+核心公式：
 
 ```text
 Third-party New Vocabulary Pool
-= 统一第三方 Vocabulary Identity
-  - Klose 当前已存在的同一 learning unit / target sense
+= 完整 Third-party Unified Vocabulary
+  - Klose 已存在的同一 learning unit / target sense
 ```
 
 这些剩余 learning units 的产品定义是：**Klose 当前实际教材之外、后续计划学习的新词**。
 
-## 2. 北京版的角色
+## 2. 为什么必须分成两阶段
+
+构建第三方 corpus 时，不因为 Klose 当前是否已有某个词而删除第三方 Identity。
+
+例如第二个教材加入时，只回答：
+
+```text
+它与当前 Third-party Unified Vocabulary
+是否是同一 learning unit / target sense？
+```
+
+而不是同时回答：
+
+```text
+Klose 现在是否已经学过它？
+```
+
+这样可以避免：
+
+- 第三方来源的加入顺序影响最终 corpus；
+- 某个 surface 因为与 Klose 暂时匹配而过早被过滤，后续才发现其实是不同 target sense；
+- Klose 当前 Stable Registry 的演进反向污染第三方 corpus；
+- 每加入一个教材版本都重复执行一遍 Klose reconciliation。
+
+因此在所有第三方教材完成前，与 Klose 的匹配只能作为 diagnostic / candidate 信息存在，**不能据此从第三方 corpus 删除 Identity，也不能生成最终 New Vocabulary Pool**。
+
+## 3. 北京版的角色
 
 北京版 1–6 年级当前 staging 是这个统一词源的第一个 seed，不具有长期语义优先级。
 
@@ -48,7 +82,7 @@ Shanghai = Source Adapter #3
 
 任何一个第三方版本都不能因为先加入而覆盖其他版本的不同 target sense。
 
-## 3. 什么重要，什么不重要
+## 4. 什么重要，什么不重要
 
 ### 核心业务字段
 
@@ -92,7 +126,7 @@ IdentityStatus
 
 它们不进入 Klose 正常学习界面，也不决定是否学习。
 
-## 4. 去重单位：learning unit / target sense
+## 5. 去重单位：learning unit / target sense
 
 禁止按字符串简单去重。
 
@@ -134,9 +168,43 @@ How old ...? vs how old
 
 必须按当前 Vocabulary Identity 规则做 sense-aware review。
 
-## 5. 与 Klose 当前词库做差集
+## 6. 阶段 A：增量构建完整第三方 corpus
 
-统一第三方 corpus 内部去重完成后，再与完整 Klose Stable Identity Registry 比较：
+每加入一个新教材版本，只执行第三方内部 Identity Resolution：
+
+```text
+1. parse raw vocabulary occurrences
+2. normalize presentation form
+3. 与 Third-party Unified Vocabulary 做 candidate matching
+4. same sense → reuse third-party identity
+5. same surface / different sense → split identity
+6. morphology / phrase ambiguity → review
+7. genuinely new → append third-party identity
+8. rebuild Third-party Unified Vocabulary
+```
+
+阶段 A 明确禁止：
+
+```text
+- 因 Klose 已存在而删除第三方 Identity
+- 把 Klose NoteID 当第三方 corpus 的 Identity
+- 每加入一个版本就生成最终 Third-party New Vocabulary Pool
+- 把 staging 自动写入 Klose learner / release / publish / Anki
+```
+
+新增教材不重新编号已有第三方 Identity。
+
+## 7. 阶段 B：全部第三方完成后，与 Klose 做最终差集
+
+只有当计划纳入的第三方教材版本都已经完成解析和内部 sense-aware 去重后，才执行一次最终 reconciliation：
+
+```text
+Third-party Unified Vocabulary
+vs
+Klose Full Stable Identity Registry
+```
+
+Klose 比较范围必须是完整 Stable Identity Registry：
 
 ```text
 note_registry.csv
@@ -160,14 +228,21 @@ Klose 没有该 learning unit / target sense
 例：
 
 ```text
-Klose 已有 bank = 银行
-第三方还有 bank = 河岸
+Third-party Unified Vocabulary:
+bank = 银行
+bank = 河岸
 
+Klose Stable Vocabulary:
+bank = 银行
+
+最终：
 bank = 银行 → existing-in-klose
 bank = 河岸 → third-party-new
 ```
 
-## 6. 学习语义
+这一步也是 sense-aware reconciliation，不是 `MatchKey` 字符串差集。
+
+## 8. 学习语义
 
 `third-party-new` 的含义不是“可有可无的参考词”，而是：
 
@@ -186,27 +261,9 @@ Third-party New Vocabulary Pool
 → Anki
 ```
 
-“全部计划学习”不等于 staging 阶段自动写入当前 Master / Release / Anki。
+“全部计划学习”不等于 corpus 构建阶段自动写入当前 Master / Release / Anki。
 
-## 7. 增量加入新教材版本
-
-每加入一个新版本，执行固定流程：
-
-```text
-1. parse raw vocabulary occurrences
-2. normalize presentation form
-3. 与 Third-party Unified Vocabulary 做 candidate matching
-4. same sense → reuse third-party identity
-5. same surface / different sense → split identity
-6. morphology / phrase ambiguity → review
-7. genuinely new → append third-party identity
-8. 重新计算与 Klose Stable Identity 的差集
-9. 更新 Third-party New Vocabulary Pool
-```
-
-新增教材不重新编号已有第三方 Identity；真正并入 Klose 时也不重编号已有 Klose NoteID。
-
-## 8. Source Truth 边界
+## 9. Source Truth 边界
 
 统一第三方 corpus 即使已经充分清洗，仍然是第三方数据，不升级为 Klose 实际教材真源。
 
@@ -220,7 +277,7 @@ Klose 手中实际教材
 
 如果第三方 corpus 与 Klose 实际教材发生冲突，按 `docs/SOURCE_RECONCILIATION.md` 处理，不能反向覆盖实际教材 Source Fact。
 
-## 9. 当前实现状态
+## 10. 当前实现状态
 
 当前第一个 seed：
 
@@ -228,10 +285,12 @@ Klose 手中实际教材
 anki/klose/source_reference/beijing_start1_staging/
 ```
 
-北京版已完成 12 册解析、surface inventory、与 Klose Stable Identity candidate matching、主要高风险 review；当前仍保持：
+北京版已完成 12 册解析、surface inventory、主要高风险 review，并曾与 Klose Stable Identity 做 candidate matching。该匹配结果保留为北京版 staging 的审计/诊断信息，但根据本设计，**不再把它视为第三方 corpus 构建阶段的最终去重结果**。
+
+当前仍保持：
 
 ```text
 MergeAuthorized = no
 ```
 
-下一阶段应把北京版 staging 从“单版本 pre-merge 工作区”演进为这个统一第三方 corpus 的第一个 Source Adapter，然后按同一规则继续加入其他教材版本。
+下一阶段应把北京版 staging 演进为统一第三方 corpus 的 Source Adapter #1，然后继续加入其他教材版本。等计划中的第三方教材都完成内部 sense-aware 去重后，再执行阶段 B 的最终 Klose diff。
