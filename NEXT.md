@@ -112,14 +112,14 @@ Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1546
-Review/blocker surfaces   = 347
+Vocabulary preview        = 1549
+Review/blocker surfaces   = 344
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1537
+keep-identity     = 1540
 reuse-identity    =   61
-held              =  302
+held              =  299
 split-required    =   45
 route-expression  =   83
 source-only       =   34
@@ -128,10 +128,10 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34115124182
-latest blocker-audit commit                = 59c76380b4cb6a0c62fd61b13e917f9c91f7dd42
-bot-generated data commit                  = aa6e90bde6573981396147873d4db85882575e3c
-Vocabulary Preview TargetSense complete    = 1546 / 1546
+GitHub Actions run                         = 34117112935
+latest blocker-audit commit                = 05625fc2388c7edb1c336b61c693d1cdd5df1079
+bot-generated data commit                  = 761c4de91b8dc45806e306c6d84a56e37595ce1e
+Vocabulary Preview TargetSense complete    = 1549 / 1549
 Third-party Completion Recheck             = PASS
 Independent post-workflow recheck          = PASS
 Source occurrence closure                  = PASS
@@ -159,39 +159,50 @@ split-required          = 39
 当前：
 
 ```text
-444 blockers → 347 blockers
-1451 preview → 1546 preview
+444 blockers → 344 blockers
+1451 preview → 1549 preview
 81 Expressions → 83 Expressions
 39 split-required → 45 split-required
 ```
 
-累计完成 103 次 blocker decision refinement：97 个 blocker 被证据充分地释放/路由出 review_queue（其中 95 个进入 Vocabulary Preview、2 个 route-expression）；6 个 `save / break / dish / cut / drop / dream` 因 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。blocker 数量下降不是质量目标。
+累计完成 106 次 blocker decision refinement：100 个 blocker 被证据充分地释放/路由出 review_queue（其中 98 个进入 Vocabulary Preview、2 个 route-expression）；6 个 `save / break / dish / cut / drop / dream` 因 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。blocker 数量下降不是质量目标。
 
 ### 最新独立批次
 
 ```text
-dark → held → keep-identity → 黑暗的；昏暗的
-dry  → held → keep-identity → 干的；干燥的
-grab → held → keep-identity → 抓住；抓取
+fast food          → held → keep-identity → 快餐；速食
+physical education → held → keep-identity → 体育；体育课
+miaow              → held → keep-identity → 猫叫；猫叫声
 ```
 
 Source evidence：
 
 ```text
-dark
-- waiyan_start1|g6-lower|r012|dark
-- 位于 to go / dark / cloud / Oh dear! / dry / stay / cloudy 的 weather/story sequence；紧邻 cloud，锁定描述光线/明暗的 adjective sense。
+fast food
+- waiyan_start1|g3-upper|r016|fast food
+- 位于 hamburger / chips / grass / food / fast food / make / cake 的 food sequence，并直接释义为名词“快餐；速食”；可绑定为单一 elementary food learning unit。
 
-dry
-- waiyan_start1|g6-lower|r015|dry
-- 位于同一 weather/story sequence，并紧邻 stay / cloudy；锁定 stay-dry/weather 的 adjective sense“干的；干燥的”。
+physical education
+- waiyan_start1|g3-lower|r079|physical education
+- 位于 English / PE / physical education / Chinese / art / report 的 school-subject sequence，并直接释义为“体育教学”；完整形式可作为“体育；体育课”学习单元。
+- `PE` 仍受 abbreviation/canonical-form policy 约束；释放 full form 不代表 abbreviation policy 已解决。
 
-grab
-- waiyan_start1|g6-lower|r025|grab
-- 位于 cry / thing / need / grab / balloon / fly away 的 narrative/action sequence；锁定普通动作义“抓住；抓取”。
+miaow
+- waiyan_start1|g1-lower|r085|miaow
+- source gloss 仅给出猫发声概念：vi. 猫叫 / n. 猫叫声。noun/verb POS 差异没有形成两个独立 elementary meanings；与已接受的 woof / beep / chug sound-action boundary 一致。
+- 此判断只适用于该 source-bound sound/action concept，不代表全局 multi-POS 合并规则。
 ```
 
-本批 workflow 全部 PASS。独立复核确认三条 decision 均以显式 JSON `OccurrenceKeys` 持久化并进入 Preview；三条均已从 `review_queue` 消失；transient `decision_updates.csv` 已删除。Git compare 仅修改 third-party Stage-A transient inbox、durable decision 和 derived staging 文件，没有触碰 Klose Master / Learner / Publish / Anki。`study` 与 `won` 等已知 semantic/form blockers 仍保持 held。
+本批 workflow 全部 PASS。独立复核确认三条 decision 均以显式 JSON `OccurrenceKeys` 持久化并进入 Preview；三条均已从 `review_queue` 消失；transient `decision_updates.csv` 已删除。Git compare 仅修改 third-party Stage-A transient inbox、durable decision 和 derived staging 文件，没有触碰 Klose Master / Learner / Publish / Anki。`study`、`won` 等已知 semantic/form blockers 仍保持 held。
+
+本批同时复核但继续保留的代表性 blocker：
+
+```text
+plus           → held / arithmetic context 存在，但 noun/preposition object boundary 尚不足以安全收窄
+street sweeper → held / source gloss 同时暴露“扫街车”和“街道清洁工”，存在真实 sense split 风险
+wild geese     → held / irregular plural form policy 尚未冻结
+parrot         → held / source dictionary gloss 跨 noun/person/verb，neighborhood 不足以唯一绑定
+```
 
 近期已确认的 split-required 边界：
 
@@ -230,6 +241,9 @@ crisp → 薯片；炸薯片
 dark → 黑暗的；昏暗的
 dry → 干的；干燥的
 grab → 抓住；抓取
+fast food → 快餐；速食
+physical education → 体育；体育课
+miaow → 猫叫；猫叫声
 hot dog → 热狗
 lion dance → 舞狮
 long ago → 很久以前；从前
@@ -268,7 +282,7 @@ cold       → split-required
 **当前不要自动启用 `waiyan_start3`。**
 
 ```text
-1. 继续审计当前 347 个 held/split blocker。
+1. 继续审计当前 344 个 held/split blocker。
 2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目。
 3. 若 source occurrences 明确暴露多个真实 learning units，升级为 split-required，不强行释放。
 4. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split。
@@ -308,7 +322,7 @@ CI / script success 不能单独作为“结果正确”的结论；必须再做
 
 ```text
 waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
-剩余 347 held/split blockers — continue evidence-driven audit
+剩余 344 held/split blockers — continue evidence-driven audit
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes British/American IPA completion before admission
