@@ -85,96 +85,116 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A checkpoint — POLICY REVIEW BATCH 3 CLOSED
+## 4. Current Stage-A checkpoint — SPLIT ARCHITECTURE SMOKE CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
-Vocabulary preview        = 1615
-Review/blocker surfaces   = 200
+Vocabulary preview        = 1621
+Review/blocker surfaces   = 197
 Evidence-changed surfaces = 0
+Multipart resolved        = 3
 pending                   = 0
 ```
 
-Source reconciliation lane remains closed at `0`.
-
-### Completed active passes
+此前 active pass：
 
 ```text
-object-boundary original 39
-├─ released / routed = 29
-└─ audited-defer     = 10
-
-policy batch 1 = 30
-├─ route-expression = 24
-└─ keep-identity     = 6
-blockers 256 → 226
-preview  1594 → 1600
-
-policy batch 2 = 30
-├─ released          = 19
-└─ audited-defer     = 11
-blockers 226 → 207
-preview  1600 → 1615
-
-policy batch 3 = 28
-├─ transparent form reuse = 7
-└─ held/audited-defer     = 21
-blockers 207 → 200
-preview  1615 → 1615
+object-boundary original 39 → 29 released/routed + 10 audited-defer
+policy batch 1            30 → blockers 256 → 226 / preview 1594 → 1600
+policy batch 2            30 → blockers 226 → 207 / preview 1600 → 1615
+policy batch 3            28 → blockers 207 → 200 / preview 1615 → 1615
 ```
 
-Batch 3 的 7 个 reuse：
+### Occurrence-partitioned split architecture
+
+Stage A 已支持：
 
 ```text
-carried -> carry
-drove   -> drive
-found   -> find
-painted -> paint
-said    -> say
-spent   -> spend
-spoke   -> speak
+one MatchKey
++ multiple reviewed decision rows
++ disjoint explicit OccurrenceKeys subsets
++ complete current-occurrence cover
+→ multiple provisional Stage-A learning identities
 ```
 
-这些只是 source-form alias reuse，因此 blocker 减少 7，但不会增加 canonical Preview 行数。
+硬门禁：
 
-Batch 3 其余 21 个将 canonical split/missing、surface ambiguity、protected exception 固化为明确 audited-defer；无新 evidence 不重复审查。
+```text
+subsets non-empty + disjoint
+完整释放前 union = all current occurrences
+任一 subgroup unresolved → whole MatchKey remains blocker
+new source evidence changes cover → requeue
+multipart keep uses <MatchKey>#<variant> Stage-A key
+multipart TargetSense non-empty
+multipart reuse cannot bypass canonical blocker
+no Stable ThirdPartyID
+```
 
-`decision_proposals.csv` 当前仍为 derived-only；不得机械 AutoApply。
+实现已覆盖：
+
+```text
+tools/build_third_party_corpus.py
+  → partition completeness/disjointness
+  → multipart-reviewed state
+  → multiple provisional Preview rows
+
+tools/check_third_party_corpus.py
+  → independent partition/provenance/TargetSense/canonical guards
+
+tools/recheck_third_party_audit_batch.py
+  → explicit OccurrenceKeys batch verification
+  → MatchKey-group-aware multipart verification
+```
+
+### Frozen smoke baseline
+
+```text
+dish  → dish#plate / dish#food
+cut   → cut#verb / cut#injury
+dream → dream#aspiration / dream#sleep
+```
+
+结果：
+
+```text
+blockers   200 → 197
+Preview    1615 → 1621
+multipart resolved = 3
+```
+
+独立确认：3 个 Source MatchKey 均已退出 `review_queue.csv`；6 条 provisional Preview row 均存在、TargetSense 与 subgroup occurrence count 正确；transient inbox 已删除；smoke diff 未触碰 Klose Master/Learner/Publish/Anki。
 
 ---
 
-## 5. Latest batch validation
+## 5. Latest architecture/smoke validation
 
 ```text
-policy batch 3 decision commit               = b20bea79f0193f321df7b99c791878102cacdab7
-GitHub Actions run                           = 34166009732   SUCCESS
-bot-generated data commit                    = 5534e141d94e3d372ab790109c599c1c66026fc7
-batch decisions                              = 28
-net blocker release                          = 7
-Vocabulary Preview                           = 1615
-Review/blocker surfaces                      = 200
-Third-party core Completion Recheck          = PASS
-Audit-batch Completion Recheck               = PASS
-Decision-only fast path                      = PASS
-Source adapters reparsed                     = NO
-Explicit reviewed OccurrenceKeys             = PASS
-Changed source evidence requeues decision    = PASS
-Canonical blocker bypass                     = NO
-Transient decision inbox                     = removed
-Independent durable sample                   = PASS
-Independent diff-scope recheck               = PASS
-Klose Master/Learner/Publish/Anki touched    = NO
-Stable ThirdPartyID minted                   = NO
-Final Klose diff executed                    = NO
-```
-
-Independent sample confirmed：
-
-```text
-carried = reuse-identity -> carry
-sweets  = held / policy-protected-form-held
+build split support commit                    = 59020c3d2fb73692ccb6e80c6330b68a2e2aa273
+build zero-multipart regression workflow      = 34166461616   SUCCESS
+core checker split support commit             = e4320d30c2de6ab0bc13c7d802400aa222c026ca
+core checker regression workflow              = 34166538226   SUCCESS
+batch checker split support commit            = cb5662f0962ba6a951f8ba4216a76acb229127e7
+batch checker regression workflow             = 34166649909   SUCCESS
+smoke decision commit                         = 1997961573164243885042ee83ea86d22acb116d
+smoke workflow                                = 34166687405   SUCCESS
+smoke bot-generated data commit               = c9ea1f96cb98e0ebf46ab15391dc16f1e2a7a543
+Third-party core Completion Recheck           = PASS
+Audit-batch Completion Recheck                = PASS
+Decision-only fast path                       = PASS
+Source adapters reparsed                      = NO
+Split partition disjoint/complete             = PASS
+Partial split remains blocker                 = PASS
+Multipart Preview provenance/count            = PASS
+Explicit reviewed OccurrenceKeys              = PASS
+Changed source evidence requeues decision     = PASS
+Canonical blocker bypass                      = NO
+Transient decision inbox                      = removed
+Independent diff-scope recheck                = PASS
+Klose Master/Learner/Publish/Anki touched     = NO
+Stable ThirdPartyID minted                    = NO
+Final Klose diff executed                     = NO
 ```
 
 Protected invariants remain：
@@ -188,64 +208,32 @@ won   -> win reuse
 
 ---
 
-## 6. Current throughput bottleneck
-
-Current blockers = 200.
-
-After three policy batches：
-
-```text
-policy-executable = effectively only protected blockers remain
-policy-review     = mostly explicit canonical-blocked / canonical-missing / ambiguity defers
-actionable-semantic = limited high-value release set; many rows are already audited-defer
-deferred-high-ambiguity = skip without stronger evidence
-split-resolution = major unresolved blocker family
-```
-
-继续重复扫描 held form / low-evidence semantic rows收益很低。当前真正的架构瓶颈是：
-
-```text
-一个 normalized MatchKey
-→ 多个 Source Occurrence groups
-→ 多个 provisional Stage-A learning identities
-```
-
-现有 corpus 必须支持 occurrence-partitioned provisional identity，才能正确解决 `split-required`，而不是把多义 surface 强行 flatten 成一个 Vocabulary identity。
-
----
-
-## 7. NEXT TASK — OCCURRENCE-PARTITIONED SPLIT ARCHITECTURE
+## 6. NEXT TASK — PRODUCTION SPLIT BATCH
 
 **当前不要自动启用 `waiyan_start3`。**
 
-下一步：
+下一步直接用正式 split mechanism 批处理当前 `split-resolution` lane：
 
 ```text
-1. 审查 build_third_party_corpus.py / decision update workflow / check_third_party_corpus.py 当前是否已部分支持一个 MatchKey 多 decision rows。
-2. 定义最小 split decision schema：
-   - 每个 provisional identity 有稳定的 Stage-A scoped key（非 Stable ThirdPartyID）；
-   - 每个 identity 绑定互斥、非空 OccurrenceKeys subset；
-   - reviewed split groups 对该 MatchKey 的 current occurrences 必须 complete cover；
-   - 不允许 occurrence overlap；
-   - 每个 group 独立 ObjectType / TargetSense / canonical relation；
-   - source evidence 变化后只允许安全 requeue，不静默沿用旧 partition。
-3. Preview 必须能一 surface 输出多个 provisional learning-unit rows，同时保留 source provenance。
-4. review_queue 对已 complete-partition 的 split surface 必须解除 blocker；partial partition 仍 blocker。
-5. checker 增加 partition completeness / disjointness / TargetSense / canonical-integrity / stale-evidence regression guards。
-6. transient decision batch workflow 必须支持同 MatchKey 多 rows，不允许覆盖成一行。
-7. 架构完成后先选 2–3 个清晰 split surface 做 smoke test，例如：
-   - dish = 盘子 / 菜肴
-   - cut = 剪/切 / 伤口
-   - dream = 梦想 / 睡梦
-8. smoke test 完成独立 recheck 后，再按 20–25 split surface / batch 批量处理。
-9. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
+1. 每批 20–25 Source MatchKeys；只选择 occurrence partition 明确的 surface，不为凑数强行归类。
+2. 每个 surface 的 decision rows 必须 complete cover current OccurrenceKeys，且 subsets disjoint。
+3. 同一 lexical unit 的词形可使用 multipart reuse 指向 reviewed canonical；不得重复 mint provisional identity。
+4. 真正不同 target sense 才使用 <MatchKey>#<variant> multipart keep。
+5. 如某 subgroup 实际属于 Expression/source-only，可使用 route-expression/source-only；只有全 partition resolved 后 surface 才退出 review。
+6. 第一批优先处理 source neighborhood 已明确分开的高置信 surface，例如：
+   break / save / square / water / left / saw / orange / film / match / miss /
+   past / point / thin / watch / chicken / duck / fish / fly / hot / cook / cold
+7. 暂跳过 occurrence 归属仍有疑点的 mouse / like / light / kind / letter / live / look 等。
+8. 每批仍执行 fast workflow + core/batch recheck + independent sample/high-risk/diff recheck。
+9. blocker quality 稳定后，经用户确认才考虑启用 waiyan_start3。
+10. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
 ```
 
 ---
 
-## 8. Completion Recheck contract
+## 7. Completion Recheck contract
 
-每批/每次架构修改必须验证：
+每批必须验证：
 
 ```text
 Source adapter occurrence closure
@@ -256,6 +244,7 @@ Split occurrence groups disjoint + complete
 Partial split remains blocker
 Completed split leaves review_queue
 Each provisional learning unit has non-empty TargetSense
+Multipart reuse canonical ready
 Stale SourceMatchKey excluded from preview provenance
 review_queue remains pure derived blocker view
 Review Bundle closes exactly over current blockers
@@ -271,7 +260,7 @@ CI/script success 不能单独作为“结果正确”；必须再做 independen
 
 ---
 
-## 9. Frozen long-term rules
+## 8. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
@@ -279,6 +268,7 @@ CI/script success 不能单独作为“结果正确”；必须再做 independen
 - Vocabulary 与 Expressions 使用独立 Identity / Review / Release / Note Type；
 - 第三方教材 provenance 只用于回溯，不作为学习优先级；
 - MatchKey / morphology / format alias 只做 candidate matching；
-- 同 surface 不同 target sense 必须允许 split；
+- 同 surface 不同 target sense 必须允许 occurrence-partitioned split；
+- Stage-A `<MatchKey>#<variant>` 不是 Stable ThirdPartyID；
 - generated publish 文件禁止手工维护；
 - Anki 保存真实 FSRS / Review History，GitHub 不重建学习历史。
