@@ -226,57 +226,29 @@ pending             = 0
 
 这表示当前 2062 个 surface 都有显式 durable Stage-A decision 并绑定完整 occurrence evidence；不表示 2062 个 surface 都是 Vocabulary。
 
-## 12. A–Z Vocabulary Preview content-quality closure — 2026-09-07
+## 12. A–Z Vocabulary Preview content-quality closure — historical checkpoint
 
-在 five-adapter decision closure 后，对当时的 Vocabulary Preview 做 A–Z 全量内容质量审计，重点检查：
+2026-09-07 完成 five-adapter Vocabulary Preview A–Z 内容质量审计，重点检查 TargetSense、canonical/alias 污染、reuse blocker bypass、morphology canonicalization、Vocabulary/Expression routing 和 event chunk。
 
-```text
-TargetSense 空值
-canonical / alias 语义污染
-reuse 是否绕过 canonical held/split blocker
-漏掉的 morphology canonicalization
-Vocabulary vs Expression object routing
-过度具体 event chunk
-```
-
-处理规则：
+当时可信 checkpoint：
 
 ```text
-source evidence 足够清楚       → 补窄义 TargetSense
-证据不足/语义或语法边界不稳    → held
-规则词形/表现变体               → reuse canonical identity
-交际句型                       → route-expression
-过度具体事件块                  → source-only
+GitHub Actions run        = 34084215849
+content-audit commit      = ba1c0afe5e1107447f46084f9462a3aa554f6374
+bot-generated data commit = 8bc04ffa74914e02ecbf453b47cbf93c837acb53
+
+Vocabulary preview      = 1451
+Review/blocker surfaces = 444
+keep-identity           = 1442
+reuse-identity          =   61
+held                    =  405
+split-required          =   39
+route-expression        =   81
+source-only             =   34
+TargetSense complete    = 1451 / 1451
 ```
 
-最终可信基线来自 GitHub Actions run `34084215849`；内容审计提交 `ba1c0afe5e1107447f46084f9462a3aa554f6374`，bot-generated data commit `8bc04ffa74914e02ecbf453b47cbf93c837acb53`：
-
-```text
-Enabled adapters          = 5
-Source occurrences        = 4848
-Normalized surfaces       = 2062
-Durable decisions         = 2062
-Vocabulary preview        = 1451
-Review/blocker surfaces   = 444
-Evidence-changed surfaces = 0
-pending                   = 0
-
-Durable decision actions:
-keep-identity     = 1442
-reuse-identity    =   61
-held              =  405
-split-required    =   39
-route-expression  =   81
-source-only       =   34
-```
-
-硬门禁：
-
-```text
-Vocabulary Preview TargetSense complete = 1451 / 1451
-```
-
-典型修正：
+典型 canonicalization / routing：
 
 ```text
 be afraid of → afraid of
@@ -291,43 +263,111 @@ climb on the window ledge → source-only
 women → 保留独立 pedagogically salient plural-form identity
 ```
 
-新增/强化 blocker 示例：
+这个 `1451 / 444` 仅是历史 checkpoint，不再是当前 baseline。
+
+## 13. Blocker quality audit — current checkpoint
+
+A–Z closure 后继续对 `held / split-required` 做 context-bound recheck。原则不是追求 blocker 数量下降，而是用 source neighborhood / source glossary 判断是否已经能绑定一个明确的小学 learning unit：
 
 ```text
-a lot / as / British / broke / date / dish / excuse
-has / hold / in one hour / jam / model
-order / out / out of / pop
-stage / tie / upset / would
+source context 足够明确       → keep-identity + 窄义 TargetSense
+同形不同义                   → split-required
+功能词/广泛多义               → held
+irregular / form-policy 未定   → held
+交际句型                      → route-expression
 ```
 
-既有高风险边界继续正确保留：
+从历史 data commit `8bc04ffa74914e02ecbf453b47cbf93c837acb53` 到当前 `fa5e97a47c8a972316723aed58fc1a6aa949e879`，Git compare 显示共有 16 个连续提交，累计重新审定 79 个 blocker：
 
 ```text
-study      = 多义 → held
-saw        = see过去式 / 锯子 → split-required
-watch      = 手表 / 观看 → split-required
-may        = May / modal may → split-required
-like       = 喜欢 / 像等 → split-required
-square     = 正方形 / 广场 → split-required
-left       = 左边 / leave过去式 → split-required
-cook       = 烹饪 / 厨师 → split-required
-cold       = 寒冷 / 感冒 → split-required
-won        = irregular-form policy blocker → held
+review_queue        -79
+Vocabulary preview  +77
+route-expression     +2
 ```
 
-本轮独立 Completion Recheck 确认：
+因此当前可信 baseline：
 
 ```text
-Source occurrence closure      = PASS
-Decision / occurrence closure  = PASS
-TargetSense gate               = PASS
-Canonical blocker bypass       = NO
-Canonical TargetSense priority = PASS
-Known blockers preserved       = PASS
-Transient decision inbox       = removed
-Klose Master/Learner/Publish/Anki modified = NO
-Stable ThirdPartyID minted     = NO
-Final Klose diff executed      = NO
+GitHub Actions run                         = 34100218425
+latest blocker-audit commit                = 1b46a6e4fdd66378656ccb303eb05e5b779980a3
+bot-generated data commit                  = fa5e97a47c8a972316723aed58fc1a6aa949e879
+
+Enabled adapters          = 5
+Source occurrences        = 4848
+Normalized surfaces       = 2062
+Durable decisions         = 2062
+Vocabulary preview        = 1528
+Review/blocker surfaces   = 365
+Evidence-changed surfaces = 0
+pending                   = 0
+
+keep-identity     = 1519
+reuse-identity    =   61
+held              =  326
+split-required    =   39
+route-expression  =   83
+source-only       =   34
 ```
 
-下一步暂不启用 `waiyan_start3`。先由用户审视当前 `1451` Vocabulary preview、`444` blockers、`81` Expressions、`34` source-only 的结构与质量；用户确认后再决定继续接入外研三年级起点，仍属于 Stage A。所有计划第三方小学来源完成前不进入 Stage B。
+硬门禁与 Completion Recheck：
+
+```text
+Vocabulary Preview TargetSense complete = 1528 / 1528
+Source occurrence closure               = PASS
+Decision / occurrence closure           = PASS
+Explicit reviewed OccurrenceKeys        = PASS
+Changed source evidence requeues        = PASS
+Canonical blocker bypass                = NO
+Canonical TargetSense precedence        = PASS
+Known semantic blockers preserved       = PASS
+Known morphology decisions preserved    = PASS
+Transient decision inbox                = removed
+Klose Master/Learner/Publish/Anki        = untouched
+Stable ThirdPartyID minted               = NO
+Final Klose diff executed                = NO
+```
+
+代表性被安全释放的 blocker：
+
+```text
+blow → 吹；刮
+land → 陆地；土地
+smoke → 烟；冒烟
+tape → 胶带
+attention → 注意；注意力
+jam → 果酱
+flute → 长笛
+hiking → 徒步旅行
+a bit → 有点儿；稍微
+a knife and fork → 一副刀叉
+all over the world → 世界各地；遍及全世界
+at first → 起初；一开始
+at the same time → 同时；与此同时
+be able to → 能够；可以
+be interested in → 对……感兴趣
+bench → 长凳
+bicycle → 自行车
+cashier → 收银员
+cheese → 奶酪；干酪
+hot dog → 热狗
+lion dance → 舞狮
+long ago → 很久以前；从前
+```
+
+高风险边界继续保留：
+
+```text
+about      = held
+study      = held
+won        = held / irregular-form policy
+saw        = split-required
+watch      = split-required
+may        = split-required
+like       = split-required
+square     = split-required
+left       = split-required
+cook       = split-required
+cold       = split-required
+```
+
+下一步继续审计当前 365 个 blocker；只有 source evidence 足够时才释放。**暂不自动启用 `waiyan_start3`**。待 blocker 质量形成稳定 checkpoint 并经用户确认后，再决定是否接入 `waiyan_start3`；其接入仍只属于 Stage A。所有计划第三方小学来源完成前不进入 Stage B。
