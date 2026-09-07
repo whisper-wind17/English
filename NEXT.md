@@ -162,7 +162,7 @@ hujiao_start3
 
 ---
 
-## 7. Current Stage-A baseline — 4 adapters IN REVIEW
+## 7. Current Stage-A baseline — 4 adapters / Hujiao residual review
 
 三-adapter 闭合基线曾为：
 
@@ -186,62 +186,76 @@ true blockers             = 125
 
 这验证了 evidence-aware gate：旧 decision 没有因 surface 相同而静默沿用。
 
-经过当前 Hujiao A–D 多批统一审校并逐批通过 independent Completion Recheck，最新可信基线（run `34067517554`）为：
+Hujiao 第一轮 A–Z 已逐批完成统一审校，并且每批都通过 independent Completion Recheck。最新可信基线（run `34070209190`）为：
 
 ```text
 Enabled adapters          = 4
 Source occurrences        = 3678
 Normalized surfaces       = 1788
-Durable decisions         = 1510
-Vocabulary preview        = 759
-Review/blocker surfaces   = 949
-Evidence-changed surfaces = 570
+Durable decisions         = 1703
+Vocabulary preview        = 1242
+Review/blocker surfaces   = 428
+Evidence-changed surfaces = 158
 
 Generated current surface state:
-keep-identity     = 731
-reuse-identity    = 49
-held              = 96
-pending           = 848
-split-required    = 5
-route-expression  = 26
+keep-identity     = 1225
+reuse-identity    = 51
+held              = 153
+pending           = 243
+split-required    = 32
+route-expression  = 51
 source-only       = 33
 ```
 
 Hujiao 收敛变化：
 
 ```text
-pending            1067 → 848
-review/blocker     1134 → 949
-evidence-changed    722 → 570
-Vocabulary preview  582 → 759
+pending            1067 → 243
+review/blocker     1134 → 428
+evidence-changed    722 → 158
+Vocabulary preview  582 → 1242
 ```
 
-已显式保护的新增/复核边界包括：
+注意：**A–Z 第一轮完成 ≠ Hujiao Identity Resolution 完成。** 当前 `243 pending` 是各字母批次中尚未处理的 residual surfaces；下一阶段继续统一 residual sweep。真正的 `held / split-required` blocker 不应为了追求 `pending=0` 被猜测性合并。
+
+当前显式保护的代表性边界包括：
 
 ```text
 can        = modal / container → held
-call       = 电话/呼叫/称呼等 → held
-capital    = 首都 / 大写字母 → held
 chicken    = 鸡 / 鸡肉 → split-required
-Chinese    = 汉语 / 中国人 / 中国的 → split-required
-class      = 班级 / 课 → held
-clean      = adj / verb → held
-clear      = 清楚 / 晴朗等 → held
-cloth      = 布料 → independent identity
-clothes    = 衣服 → independent identity
 cold       = 寒冷 / 感冒 → split-required
 cook       = 烹饪 / 厨师 → split-required
-colour     = 颜色 / 涂颜色 → held
-country    = 国家 / 乡下 → held
-cross/cut/dear/diamond → source context insufficient, held
+kind       = 种类 / 友善 → split-required
+left       = 左边 / leave过去式 → split-required
+light      = 多个小学核心义项 → split-required
+like       = 喜欢 / 像等 → split-required
+mouse      = 老鼠 / 鼠标 → split-required
+orange     = 水果 / 颜色 → split-required
+plant      = 植物 / 种植 → split-required
+play       = 玩/运动 / 演奏 → split-required
+present    = 礼物 / 现在 → split-required
+right      = 右边 / 正确 → split-required
+sound      = 声音 / 听起来 → split-required
+square     = 正方形 / 广场 → split-required
+taste      = 味道 / 尝、尝起来 → split-required
+thin       = 瘦的 / 薄的 → split-required
+too        = 也 / 太、过度 → split-required
+watch      = 手表 / 观看 → split-required
+water      = 水 / 浇水 → split-required
+will       = 当前来源锁定 future modal“将/会”
+way/well/wish/with = Source Fact 不足 → held
+wild goose / wild geese = irregular-form policy → held
+tooth / teeth = irregular-form policy → held
+your / yours、their / theirs = 独立 grammar learning units，不做 morphology merge
+wash ... face、weak in、try ... on = route-expression
 ```
 
 最近通过：
 
 ```text
-GitHub Actions run     = 34067517554
+GitHub Actions run     = 34070209190
 Completion Recheck     = PASS
-Generated data commit  = 81b18be
+Generated data commit  = 63c3a68
 Klose publishing state = untouched
 ```
 
@@ -258,22 +272,26 @@ Anki modified              = no
 
 ---
 
-## 8. NEXT TASK
+## 8. NEXT TASK — residual sweep
 
-继续只处理统一 `review_queue.csv`，从 D 后段 / E / F 往后推进：
+继续只处理统一 `review_queue.csv`，不增加新的 edition-specific 审校流水线：
 
 ```text
-1. evidence-changed 的普通稳定义项 → revalidate；
-2. Hujiao 新 surface → 只在 target sense 清晰时 keep/reuse；
-3. morphology / irregular form → 按既有 policy canonicalize 或 held；
-4. Vocabulary vs Expression → 显式 route；
-5. 同 surface 多个真实 target sense → split-required；
-6. Source Fact 不足 → held，不为了 pending=0 猜测；
-7. 每批 decision update 后 rebuild + independent Completion Recheck；
-8. 串行写入，前一 workflow 完成前不提交下一批；
-9. 不 mint Stable ThirdPartyID；
-10. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
+1. residual pending = 243：从统一 review_queue 做第二轮 sweep；
+2. 优先处理 evidence-changed = 158，再处理其余 genuinely new pending；
+3. target sense 清晰的稳定义项 → keep/reuse/revalidate；
+4. morphology / irregular form → 按既有 policy canonicalize 或 held；
+5. Vocabulary vs Expression → 显式 route；
+6. 同 surface 多个真实 target sense → split-required；
+7. Source Fact 不足 → held，不为了 pending=0 猜测；
+8. 每批 update 后 rebuild + independent Completion Recheck；
+9. 串行写入，前一 workflow 完成前不提交下一批；
+10. residual pending 收敛后再评估是否达到当前四-adapter Stage-A identity closure；
+11. 仍不 mint Stable ThirdPartyID；
+12. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
 ```
+
+目标不是机械 `pending=0`；目标是 **pending 只因尚未审校而存在，而真正无法安全定案的项目必须显式落到 held / split-required blocker。**
 
 ---
 
