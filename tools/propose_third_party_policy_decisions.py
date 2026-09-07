@@ -93,9 +93,7 @@ def main() -> None:
             raise SystemExit(f"Executable proposal canonical lacks TargetSense: {key} -> {canonical}")
 
         score = int(item.get("ActionabilityScore", "0") or 0)
-        if score < 60:
-            raise SystemExit(f"Executable proposal has unexpectedly low actionability: {key} = {score}")
-
+        confidence = "high" if score >= 60 else "medium"
         occ_keys = occurrence_keys(item.get("OccurrenceEvidenceJSON", ""), key)
         rationale = (
             f"Frozen Stage-A form policy: {key} is treated as a form realization candidate of reviewed "
@@ -111,7 +109,7 @@ def main() -> None:
             "ObjectType": "vocabulary",
             "TargetSense": "",
             "Status": "reviewed",
-            "Confidence": "high",
+            "Confidence": confidence,
             "DecisionBasis": "frozen-form-policy-proposal",
             "Rationale": rationale,
             "ActionabilityScore": str(score),
@@ -126,8 +124,12 @@ def main() -> None:
     if any(row["AutoApply"] != "no" for row in rows):
         raise SystemExit("Policy proposal engine must never auto-apply decisions")
 
+    high = sum(1 for row in rows if row["Confidence"] == "high")
+    medium = sum(1 for row in rows if row["Confidence"] == "medium")
     print(f"policy proposals = {len(rows)}")
     print("policy proposal action reuse-identity = " + str(len(rows)))
+    print(f"policy proposal confidence high = {high}")
+    print(f"policy proposal confidence medium = {medium}")
     print("policy proposal canonical reviewed keep = yes")
     print("policy proposal explicit OccurrenceKeys = yes")
     print("policy proposal review mode = confirm-or-reject")
