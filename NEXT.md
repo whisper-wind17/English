@@ -72,14 +72,14 @@ Total            = 4848
 
 ---
 
-## 3. Current checkpoint — FIVE-ADAPTER QUALITY BOUNDARY
+## 3. Current checkpoint — HIGH-THROUGHPUT POLICY PASS CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
-Vocabulary preview        = 1682
-Review/blocker surfaces   = 156
+Vocabulary preview        = 1685
+Review/blocker surfaces   = 153
 Evidence-changed surfaces = 0
 Multipart resolved        = 34
 pending                   = 0
@@ -95,63 +95,116 @@ production split batch 2  176 → 168 / preview 1661 → 1675
 residual split batch 3    168 → 163 / preview 1675 → 1682
 scoped reuse smoke        163 → 160 / preview 1682 → 1682
 scoped reuse batch        160 → 156 / preview 1682 → 1682
+full policy-review pass   156 → 153 / preview 1682 → 1685
 ```
 
-当前 review bundle：
+### 本轮吞吐定义修正
+
+此前把“净释放数”误当成“review throughput”，导致只挑容易释放的少量 surface，退化成低吞吐逐项处理。现已修正：
 
 ```text
-deferred-high-ambiguity = 110
-object-boundary         = 10
-policy-executable       = 3
-policy-review           = 23
-split-resolution        = 10
-actionable-semantic     = 0
-semantic-review         = 0
+Original policy-review lane = 23 surfaces
+Reviewed end-to-end         = 23 / 23
+Released                    = 3
+Audited-defer               = 20
+policy-review after pass    = 0
 ```
 
-这 156 个 blocker 是当前 evidence/policy boundary，不是“漏审 156 个”；Blocker=0 不是质量目标。
+这两个指标必须分开：
+
+```text
+Review throughput = 一批实际完成审查/归类多少 surface
+Net blocker release = 最终有多少 surface 能安全离开 blocker
+```
+
+高吞吐要求前者按 20–30/batch 执行；后者服从 evidence quality，不为数字强行 release。
+
+本轮 release：
+
+```text
+a        → keep-identity / 一个；一（用于辅音音素前）
+mice     → keep-identity / 老鼠（mouse 的复数）
+sometime → keep-identity / 在某一时候；改天
+```
+
+`sweets` 原拟 release，但 core checker 正确拦截 `Protected form-policy blocker lost: sweets`。未削弱 checker；最终保持 audited-defer。该失败 run 没有持久化错误 decision。
 
 ---
 
-## 4. Raw source evidence ceiling — VERIFIED
+## 4. Review-lane normalization — FROZEN
 
-2026-09-08 对 5 个 enabled adapter 的 **48 册原始 XLSX** 做了只读结构审计，直接检查 workbook XML，而不是从 adapter 输出推测：
+发现 scheduler 只会把 semantic `audited-defer` 移出 active lane，而 form-policy / abbreviation-policy / object-boundary 的已审核 defer 会反复重新出现，造成重复扫描和假低吞吐。
+
+已加入 derived-only normalizer：
 
 ```text
-beijing_start1   12/12 books
-renjiao_start1   12/12 books
-renjiao_start3    8/8  books
-hujiao_start3     8/8  books
-waiyan_start1    12/12 books
+tools/normalize_third_party_review_lanes.py
 ```
 
-全部结果一致：
+规则：
+
+```text
+held + DecisionBasis contains audited-defer
+→ ReviewLane = deferred-high-ambiguity
+→ RecommendedBatchSize = 0
+→ no identity decision change
+→ source evidence changed 后仍按原机制 requeue
+```
+
+最终 normalized review bundle：
+
+```text
+deferred-high-ambiguity = 140
+policy-executable       = 3
+split-resolution        = 10
+policy-review           = 0
+object-boundary         = 0
+actionable-semantic     = 0
+semantic-review         = 0
+Total blockers          = 153
+```
+
+因此 140 个 deferred 不是“未审”；没有新 evidence 时禁止重复扫描。
+
+`policy-executable=3`：
+
+```text
+were / pleased / lost
+```
+
+proposal engine 仍输出 0：1 个 grammar-special + 2 个 multi-POS/lexicalization-risk。按 frozen policy 不机械 AutoApply，也不为降低 blocker 强行处理。
+
+---
+
+## 5. Raw source evidence ceiling — VERIFIED
+
+2026-09-08 已对 5 个 enabled adapter 的 48 册原始 XLSX 做只读 workbook XML 审计：
 
 ```text
 Sheets/book       = 1
 Max non-empty col = 4
-Columns            = A 单词 | B 英音 | C 美音 | D 释义
-Rows with E+ data  = 0
+Columns           = A 单词 | B 英音 | C 美音 | D 释义
+Rows with E+ data = 0
 Unit/Module/Lesson structural metadata = 0
 ```
 
-审计中命中的 `lesson / homework / study / PE` 等只是普通 vocabulary rows，不是结构标记。
+结论：raw source 本身就是 flat vocabulary list；当前歧义不是 adapter 丢失 Unit 字段。
 
-结论：当前歧义不是 Source Adapter 丢失 Unit 字段；**raw source 本身就是 flat vocabulary list**。因此：
+因此：
 
 ```text
-- 不扩 adapter schema 去虚构 Unit/Module；
+- 不虚构 Unit/Module；
 - 不从固定 row window 推导伪 Unit；
-- ±8 neighborhood 只能作为弱 contextual evidence；
-- 无更强 source 时，evidence-bound blocker 保持 held/split-required；
-- 要继续降低这些 blocker，只能引入更强教材证据或新的 source adapter evidence。
+- ±8 neighborhood 只能作弱 contextual evidence；
+- evidence-bound blocker 保持 held/split-required；
+- 要继续降低这部分 blocker，需要更强教材证据或新 adapter evidence。
 ```
-
-一次性 raw-XLSX audit workflow 已删除，没有长期 CI/数据文件残留。
 
 ---
 
-## 5. Occurrence-partitioned split — FROZEN
+## 6. Occurrence-partitioned split + scoped reuse — FROZEN
+
+Occurrence split：
 
 ```text
 one MatchKey
@@ -161,8 +214,6 @@ one MatchKey
 → multiple provisional Stage-A learning identities
 ```
 
-硬门禁：union(partitions)=all current occurrences；任一 subgroup unresolved 则整个 MatchKey 仍 blocker；新增 evidence 改变 cover 必须 requeue；multipart keep key=`<MatchKey>#<variant>`；TargetSense 非空；Stage-A provisional key != Stable ThirdPartyID。
-
 Residual split：
 
 ```text
@@ -171,13 +222,7 @@ too / french / kind / little / live / look / mouse / plant / right / sound
 
 这些至少有一个 current occurrence 无法用当前 flat source evidence 安全归属；无新 evidence 不重复强拆。
 
----
-
-## 6. Scoped multipart canonical reuse — FROZEN
-
-已完成显式 subgroup reuse 能力：form/alias 只能指向已存在、complete + reviewed 的 `<base>#<variant>`；alias 绑定全部 current OccurrenceKeys，不得 mint 新 subgroup，不得覆盖 canonical Display/TargetSense，Preview 只合并 provenance + occurrence count。
-
-已验证：
+Scoped multipart reuse 已验证：
 
 ```text
 broke    → break#damage
@@ -189,70 +234,94 @@ drinking → drink#verb
 playing  → play#general
 ```
 
-独立抽查：
-
-```text
-fall#verb    = fall|fell / 4 occurrences
-cook#verb    = cook|cooking / 4
-drink#verb   = drink|drank|drinking / 9
-play#general = play|playing / 7
-```
-
-剩余 `broken / watches / felt` 有真实 lexical/form ambiguity，不做 scoped reuse。
+`broken / watches / felt` 仍有真实 lexical/form ambiguity，不做 scoped reuse。
 
 ---
 
-## 7. Scheduler + latest validation
+## 7. Latest validation
 
-Stable semantic defer 已从 active semantic lanes 排除；`actionable-semantic=0 / semantic-review=0`，无 evidence 变化不重复审计。
+Lane normalization infrastructure：
 
 ```text
-scheduler fix commit               = 5ae44d54fb775b39706a9dbcb46d8f27f68cc4de
-scoped reuse architecture commit   = 195adb3bcc6ee363cd930ab72b32440e1188727e
-scoped reuse smoke workflow        = 34168194013 SUCCESS
-scoped reuse smoke bot commit      = b67e5fdd9957e92b14e4be823a8557d8d5ae0329
-scoped reuse batch workflow        = 34168312268 SUCCESS
-scoped reuse batch bot commit      = 8f93eea74f419dd8187abb5f747672a57ad49709
-raw XLSX structure audit run       = 34168623201 SUCCESS
+workflow integration commit = 4c1adaf7737d30e06e2abcf5d437a67f9430d99f
+normalization workflow       = 34169519390 SUCCESS
+```
+
+Full policy batch：
+
+```text
+corrected decision commit    = 9b87c3be682b2bc6961d44b95c8320d671f85543
+workflow                     = 34169727538 SUCCESS
+bot data commit              = f08de4716ae51e38d7961fe040e93183dd96dec6
+batch decisions              = 14
+  keep-identity              = 3
+  held/audited-defer         = 11
+```
+
+Final historical-marker normalization：
+
+```text
+PS decision commit           = df80f2c156e43cdf600be8af8af32536f35e6349
+workflow                     = 34169781528 SUCCESS
+bot data commit              = b15d92fc5853f894f3547641a46b6d6220b80140
 ```
 
 Completion Recheck：
 
 ```text
 Decision-only fast path                    PASS
+Source adapters reparsed in decision runs  NO
 Source occurrence closure                  PASS
-Core / split-aware batch recheck           PASS
-Scoped canonical integrity                 PASS
-Preview TargetSense                        1682 / 1682
+Core Completion Recheck                    PASS
+Audit-batch Completion Recheck             PASS
+Preview TargetSense                        1685 / 1685
 Explicit reviewed OccurrenceKeys           PASS
 Changed evidence requeue                   PASS
-Stable defer excluded from active lanes    PASS
+Audited defer absent from active lanes     PASS
+policy-review                              0
+object-boundary                            0
 Transient inbox removed                    PASS
 Klose Master/Learner/Publish/Anki touched  NO
 Stable ThirdPartyID minted                 NO
 Final Klose diff executed                  NO
 ```
 
-`policy-executable=3` 仍受 grammar-special / lexicalization-risk 保护；proposal engine 不机械 AutoApply。
+Independent samples：
+
+```text
+a        Preview reviewed / 4 occurrences
+mice     Preview reviewed / 2 occurrences
+sometime Preview reviewed / 1 occurrence
+sweets   remains blocker / audited-defer
+broken   remains blocker / audited-defer
+felt     remains blocker / audited-defer
+```
+
+Diff-scope recheck from pre-normalization five-adapter checkpoint through `b15d92f` only touched workflow + third-party review/audit/staging + lane-normalizer tool；未触碰 Klose Master/Learner/Publish/Anki。
 
 ---
 
 ## 8. NEXT TASK — USER GATE BEFORE `waiyan_start3`
 
-Five-adapter Stage-A quality boundary 已形成，当前不要继续为了降低 blocker 数重复扫描 156 个 evidence/policy-bound rows。
+Five-adapter Stage-A 的可执行 review lanes 已按高吞吐方式清空；当前剩余：
 
-**下一 planned adapter 是 `waiyan_start3`，但不得自动启用。必须在用户看到上述 checkpoint 后明确确认。**
+```text
+140 = reviewed evidence/policy defers
+  3 = policy-executable but proposal guard blocks AutoApply
+ 10 = residual split requiring stronger occurrence evidence
+```
 
-用户确认启用后：
+下一 planned evidence expansion 是 `waiyan_start3`，但不得自动启用。用户确认后：
 
 ```text
 1. Enabled=yes 接入 waiyan_start3。
 2. 完整 source parse + validation；不能走 decision-only fast path。
-3. 用新增 occurrence evidence 对全部 durable decisions 做 exact OccurrenceKeys revalidation。
-4. evidence-changed MatchKey 必须自动 requeue，不静默继承旧结论。
+3. 对 durable decisions 做 exact OccurrenceKeys revalidation。
+4. evidence-changed MatchKey 自动 requeue，不静默继承旧结论。
 5. rebuild review_queue / review_bundle / Preview。
-6. 独立核对 source closure、blocker delta、multipart partition、scoped reuse 与高风险 surface。
-7. 更新 NEXT.md。
+6. 新 active lanes 继续按 frozen batch-size 高吞吐处理，不退回逐项 review。
+7. 独立核对 source closure、blocker delta、multipart partition、scoped reuse、高风险 surface。
+8. 更新 NEXT.md。
 ```
 
 仍禁止：Stage-B Klose diff、Stable ThirdPartyID minting、修改 Klose Master/Learner/Publish/Anki、为了 blocker=0 强行解释 evidence-bound rows。
