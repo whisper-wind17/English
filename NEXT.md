@@ -72,16 +72,16 @@ Total           4848
 
 ---
 
-## 3. Current checkpoint — PRODUCTION SPLIT BATCH 1 CLOSED
+## 3. Current checkpoint — PRODUCTION SPLIT BATCH 2 CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
-Vocabulary preview        = 1661
-Review/blocker surfaces   = 176
+Vocabulary preview        = 1675
+Review/blocker surfaces   = 168
 Evidence-changed surfaces = 0
-Multipart resolved        = 24
+Multipart resolved        = 32
 pending                   = 0
 ```
 
@@ -94,23 +94,25 @@ policy batch 2            blockers 226 → 207 / preview 1600 → 1615
 policy batch 3            blockers 207 → 200 / preview 1615 → 1615
 split smoke (3 surfaces)  blockers 200 → 197 / preview 1615 → 1621
 production split batch 1  blockers 197 → 176 / preview 1621 → 1661
+production split batch 2  blockers 176 → 168 / preview 1661 → 1675
 ```
 
-Production split batch 1：21 Source MatchKeys / 42 subgroup decisions。
+Production split batch 2：8 Source MatchKeys / 16 subgroup decisions。
 
 ```text
-break / save / square / water / left / saw / orange / film / match / miss /
-past / point / thin / watch / chicken / duck / fish / fly / hot / cook / cold
+may / like / play / drop / fall / feel / drink / light
 ```
 
-其中高风险 canonical reuse：
+Mixed-object partition 已验证：
 
 ```text
-left(past) -> leave
-saw(past)  -> see
+May(month)       -> Vocabulary keep / may#month
+may(modal)       -> Expressions route
+like(preference) -> Vocabulary keep / like#preference
+like(weather)    -> Expressions route
 ```
 
-均通过 canonical-ready + provenance 检查；不会 mint 重复 provisional identity。
+其余 6 个 surface 生成两条 Vocabulary provisional identities。
 
 ---
 
@@ -134,15 +136,16 @@ new evidence changes cover → requeue
 multipart keep uses <MatchKey>#<variant>
 multipart TargetSense non-empty
 multipart reuse cannot bypass canonical blocker
+route-expression/source-only subgroup allowed only in complete resolved partition
 Stage-A provisional key != Stable ThirdPartyID
 ```
 
 实现：
 
 ```text
-build_third_party_corpus.py             split build/materialization
-check_third_party_corpus.py             core independent partition guards
-recheck_third_party_audit_batch.py      split-aware batch Completion Recheck
+build_third_party_corpus.py
+check_third_party_corpus.py
+recheck_third_party_audit_batch.py
 ```
 
 ---
@@ -150,16 +153,15 @@ recheck_third_party_audit_batch.py      split-aware batch Completion Recheck
 ## 5. Latest validation
 
 ```text
-split build commit                  = 59020c3d2fb73692ccb6e80c6330b68a2e2aa273
-split core-check commit             = e4320d30c2de6ab0bc13c7d802400aa222c026ca
-split batch-check commit            = cb5662f0962ba6a951f8ba4216a76acb229127e7
-smoke data commit                   = c9ea1f96cb98e0ebf46ab15391dc16f1e2a7a543
 production batch 1 decision commit  = e17b138d2957e7ab01c5bb1ab0af8180efc9941d
 production batch 1 workflow         = 34167059586 SUCCESS
 production batch 1 bot data commit  = 7ce39252b0531ebd37d603eec55be68511ce64a1
+production batch 2 decision commit  = 4edffce6b845a78e5c8f94848549da86a3badcf7
+production batch 2 workflow         = 34167269958 SUCCESS
+production batch 2 bot data commit  = d94cc6d4cdaddc0fd34ee974472cf4577acb0410
 ```
 
-Validation：
+Batch 2 independent recheck：
 
 ```text
 Decision-only fast path                    PASS
@@ -167,9 +169,9 @@ Source adapters reparsed                   NO
 Core Completion Recheck                    PASS
 Split-aware batch Completion Recheck       PASS
 Partition disjoint + complete              PASS
-Partial split remains blocker              PASS
-Preview TargetSense/provenance/count       PASS
-Canonical blocker bypass                   NO
+Mixed Vocabulary/Expression partition      PASS
+May modal leakage to Vocabulary Preview    NO
+Like weather leakage to Vocabulary Preview NO
 Transient inbox removed                    PASS
 Independent review-queue sample            PASS
 Independent Preview sample                 PASS
@@ -190,24 +192,34 @@ won   -> win reuse
 
 ---
 
-## 6. NEXT TASK — CONTINUE SPLIT-RESOLUTION PRODUCTION
+## 6. NEXT TASK — RESIDUAL SPLIT-RESOLUTION
 
-继续从当前 generated `review_bundle.csv` 读取剩余 `split-resolution`；不要沿用历史候选列表。
+当前 generated `review_bundle.csv` 中剩余 split-resolution 已收敛为 15 个：
+
+```text
+too / chinese / exercise / french / kind / letter / little / live /
+look / mouse / plant / present / right / sound / taste
+```
 
 规则：
 
 ```text
-1. 每批目标 20–25 Source MatchKeys；证据不足时宁可少，不凑数。
-2. occurrence neighborhood 可明确 partition 才处理。
-3. 同 lexical unit 的 inflected/form subgroup 优先 reuse reviewed canonical。
-4. 真正不同 target sense 使用 <MatchKey>#<variant> keep。
-5. functional/grammar subgroup 如对象边界不明确，不为了释放 blocker 强行 route。
-6. 已 audited-defer / protected blocker 无新 evidence 不重复扫。
-7. 每批执行 transient inbox + fast workflow + core/batch recheck + independent sample/high-risk/diff recheck。
-8. split-resolution 明显收敛后再回 actionable-semantic；不要在低 actionability form 上消耗吞吐。
-9. blocker quality 稳定后，经用户确认才考虑启用 waiyan_start3。
-10. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
+1. 不再强求 20–25/batch；只处理 occurrence partition 能完整闭合的 residual surface。
+2. 历史 split rationale 只是 evidence，不是事实；若 current occurrence evidence 只支持一个 learning unit，可以改为单一 keep/reuse，而不是强行拆义。
+3. evidence 只能明确部分 occurrence 时保持 blocker，不允许为了降低 blocker 数猜测剩余 occurrence。
+4. mixed Vocabulary/Expression/source-only subgroup 可以使用，但整个 partition 必须 complete + resolved。
+5. residual split lane 收敛后转 actionable-semantic；已 audited-defer / protected blocker 无新 evidence 不重复扫。
+6. 每批仍执行 transient inbox + fast workflow + core/batch recheck + independent sample/high-risk/diff recheck。
+7. 暂不启用 waiyan_start3；所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
 ```
+
+当前优先重新核实较可能闭合的 residual：
+
+```text
+mouse / too / sound / letter / present / right
+```
+
+`chinese / exercise / french / kind / little / live / look / plant / taste` 若无法覆盖全部 occurrences，继续 held/split-required。
 
 ---
 
