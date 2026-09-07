@@ -1,14 +1,18 @@
 {
   "PlanVersion": "v3",
-  "ReviewLane": "policy-executable",
+  "ReviewLane": "split-resolution",
   "SelectedMatchKeys": [
-    "were",
-    "pleased",
-    "lost"
+    "too",
+    "french",
+    "kind",
+    "little",
+    "live",
+    "look"
   ],
-  "SelectedCount": 3,
-  "EvidenceWeight": 17,
-  "SurfaceCap": 80,
-  "WeightBudget": 120,
+  "SelectedCount": 6,
+  "EvidenceWeight": 65,
+  "SurfaceCap": 25,
+  "WeightBudget": 70,
+  "SkippedGuardedPolicyRows": 3,
   "ReviewBundleFingerprint": "e60e609ef098d5947e64c0ba8f143dd983c23f377f0b8397f5bd72b614ff257d"
 }
