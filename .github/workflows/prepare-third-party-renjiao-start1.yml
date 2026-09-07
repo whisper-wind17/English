@@ -15,6 +15,7 @@ on:
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_review_bundle.py'
+      - 'tools/normalize_third_party_review_lanes.py'
       - 'tools/propose_third_party_policy_decisions.py'
       - 'tools/check_third_party_corpus.py'
       - 'tools/recheck_third_party_audit_batch.py'
@@ -123,6 +124,9 @@ jobs:
 
       - name: Build high-throughput blocker review bundle
         run: python tools/build_third_party_review_bundle.py
+
+      - name: Retire audited blockers from active review lanes
+        run: python tools/normalize_third_party_review_lanes.py
 
       - name: Build deterministic policy decision proposals
         run: python tools/propose_third_party_policy_decisions.py
