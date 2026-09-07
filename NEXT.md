@@ -87,9 +87,9 @@ Source Adapter occurrences
 → tools/check_third_party_corpus.py
 ```
 
-`identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv` 只是 derived blocker/pending view。新增教材导致 occurrence evidence 改变时，旧 decision 必须自动 pending，不能静默继承。
+`identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv` 只是 derived blocker view。新增教材导致 occurrence evidence 改变时，旧 decision 必须自动 pending，不能静默继承。
 
-Vocabulary Preview 现在有额外发布前门禁：任何 reviewed provisional Vocabulary candidate 的 `TargetSense` 为空都会直接使 Stage-A workflow 失败。
+Vocabulary Preview 有硬门禁：任何 provisional Vocabulary candidate 的 `TargetSense` 为空，Stage-A workflow 必须失败。
 
 ---
 
@@ -109,71 +109,61 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ## 4. Current Stage-A baseline — REVIEW + PREVIEW QUALITY CLOSURE
 
-五个 adapter 合计：
+五个 adapter 最终可信状态：
 
 ```text
-Enabled adapters    = 5
-Source occurrences  = 4848
-Normalized surfaces = 2062
-Durable decisions   = 2062
-pending             = 0
-evidence-changed    = 0
+Enabled adapters          = 5
+Source occurrences        = 4848
+Normalized surfaces       = 2062
+Durable decisions         = 2062
+Vocabulary preview        = 1451
+Review/blocker surfaces   = 444
+Evidence-changed surfaces = 0
+pending                   = 0
+
+keep-identity     = 1442
+reuse-identity    =   61
+held              =  405
+split-required    =   39
+route-expression  =   81
+source-only       =   34
 ```
 
-在五-adapter decision closure 后，又对当时的 1477 条 Vocabulary Preview 执行了 A–Z 全量内容质量审计，重点检查：
+最终验证：
 
 ```text
-TargetSense 空值
-canonical / alias 语义污染
-reuse 是否绕过 canonical held/split blocker
-漏掉的 morphology canonicalization
-Vocabulary vs Expression object routing
-过度具体 event chunk
+GitHub Actions run                         = 34084215849
+content-audit commit                       = ba1c0afe5e1107447f46084f9462a3aa554f6374
+bot-generated data commit                  = 8bc04ffa74914e02ecbf453b47cbf93c837acb53
+Vocabulary Preview TargetSense complete    = 1451 / 1451
+Third-party Completion Recheck             = PASS
+Source occurrence closure                  = PASS
+Explicit reviewed OccurrenceKeys           = PASS
+Changed source evidence requeues decision  = PASS
+Canonical blocker bypass                   = NO
+Canonical TargetSense precedence           = PASS
+Klose Master/Learner/Publish/Anki touched  = NO
+Stable ThirdPartyID minted                 = NO
+Final Klose diff executed                  = NO
 ```
 
-结构层修复：
+本轮对原 1477 条 Vocabulary Preview 做了 A–Z 内容质量审计。原则不是“空义项就翻译”，而是逐项判断：
 
 ```text
-reuse alias 不得绕过 canonical held/split/pending blocker
-canonical surface 的 TargetSense 高于 alias/form TargetSense
-ice-cream → ice cream
-listening to music → listen to music
-smart → 聪明的；机灵的
+明确 learning unit       → 补窄义 TargetSense
+证据不足/边界不稳        → held
+规则词形/表现变体         → reuse canonical identity
+交际句型                 → route-expression
+过度具体事件块            → source-only
 ```
 
-内容层审计把原有空 TargetSense 全部重新分类，而不是按字典首义硬填：
+新增/强化典型 blocker：
 
 ```text
-1. source evidence 足够清楚 → 补窄义 TargetSense
-2. 证据不足/语义或语法边界不稳 → held
-3. 规则词形/表现变体 → reuse canonical identity
-4. 交际句型 → route-expression
-5. 过度具体事件块 → source-only
-```
-
-新增/强化的典型 blocker：
-
-```text
-a lot
-as
-British
-broke
-date
-dish
-excuse
-has
-hold
-in one hour
-jam
-model
-order
-out
-out of
-pop
-stage
-tie
-upset
-would
+a lot / as / British / broke / date / dish / excuse
+has / hold / in one hour / jam / model
+order / out / out of / pop
+stage / tie / upset / would
 ```
 
 典型 canonicalization / routing：
@@ -183,36 +173,45 @@ be afraid of → afraid of
 dropped → drop
 grapes → grape
 happened → happen
+stayed at home → stay at home
+walking the dog → walk the dog
+watering the plants → water the plants
 How old ...? → Expression
 climb on the window ledge → source-only
 women → 保留独立 pedagogically salient plural-form identity
 ```
 
-当前 workflow 还必须通过：
+已知 semantic blockers 继续保留：
 
 ```text
-Vocabulary Preview TargetSense complete = all / all
+study      → held
+saw        → split-required
+watch      → split-required
+may        → split-required
+like       → split-required
+square     → split-required
+left       → split-required
+cook       → split-required
+cold       → split-required
 ```
-
-本轮最终计数以 `data: close vocabulary preview content audit` 对应 workflow 及其 bot-generated data commit 为准；在 workflow 完成前不要手工填写计数。
-
-仍未 mint Stable ThirdPartyID，仍未执行 Stage-B Klose diff。
 
 ---
 
-## 5. NEXT TASK — REVIEW FINAL FIVE-ADAPTER CORPUS, THEN DECIDE WAIYAN START3
+## 5. NEXT TASK — USER REVIEW, THEN DECIDE WAIYAN START3
 
 **当前不要自动启用 `waiyan_start3`。**
 
 下一步：
 
 ```text
-1. 读取最新 generated staging 与 workflow 结果，确认最终 preview / blocker / action counts；
-2. 向用户展示五-adapter corpus 的最终质量闭合结果与代表性边界；
-3. 若用户认可当前质量，再启用 waiyan_start3；
-4. waiyan_start3 接入仍只做 Stage A：Source Adapter → evidence requeue → identity review → preview；
-5. 仍不 mint Stable ThirdPartyID；
-6. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
+1. 向用户展示当前五-adapter corpus 最终结构与计数；
+2. 解释 1451 Vocabulary preview、444 blockers、81 Expressions、34 source-only 的含义；
+3. 抽样展示 keep / reuse / held / split / expression 的真实例子；
+4. 根据用户反馈决定是否需要进一步质量抽查或 Identity policy 调整；
+5. 用户确认后，才考虑启用 waiyan_start3；
+6. waiyan_start3 接入仍只做 Stage A；
+7. 仍不 mint Stable ThirdPartyID；
+8. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
 ```
 
 ---
@@ -243,7 +242,7 @@ CI / script success 不能单独作为“结果正确”的结论；必须再做
 
 ```text
 waiyan_start3 adapter enablement — wait for user review
-当前 held/split blockers — wait for more source context / actual textbook / form policy
+当前 444 held/split blockers — wait for more source context / actual textbook / form policy
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（admission 前）
