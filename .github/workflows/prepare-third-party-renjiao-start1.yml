@@ -16,6 +16,8 @@ on:
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_review_bundle.py'
       - 'tools/normalize_third_party_review_lanes.py'
+      - 'tools/plan_third_party_review_batch.py'
+      - 'tools/check_third_party_batch_manifest.py'
       - 'tools/propose_third_party_policy_decisions.py'
       - 'tools/check_third_party_corpus.py'
       - 'tools/recheck_third_party_audit_batch.py'
@@ -27,11 +29,16 @@ on:
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - 'anki/klose/third_party_vocabulary/review/decision_updates.csv'
+      - 'anki/klose/third_party_vocabulary/review/batch_manifest.json'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: third-party-stage-a-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   prepare:
@@ -62,6 +69,9 @@ jobs:
           if [[ -f /tmp/third_party_changed_files.txt ]]; then
             cat /tmp/third_party_changed_files.txt
           fi
+
+      - name: Require deterministic selected-batch closure
+        run: python tools/check_third_party_batch_manifest.py
 
       - name: Capture transient audit decision batch
         run: python tools/recheck_third_party_audit_batch.py capture
@@ -99,7 +109,9 @@ jobs:
         run: python tools/check_third_party_waiyan_start1.py
 
       - name: Apply transient reviewed identity decisions
-        run: python tools/apply_third_party_identity_decision_updates.py
+        run: |
+          python tools/apply_third_party_identity_decision_updates.py
+          rm -f anki/klose/third_party_vocabulary/review/batch_manifest.json
 
       - name: Build simplified third-party corpus workspace
         run: python tools/build_third_party_corpus.py
@@ -125,8 +137,11 @@ jobs:
       - name: Build high-throughput blocker review bundle
         run: python tools/build_third_party_review_bundle.py
 
-      - name: Retire audited blockers from active review lanes
+      - name: Normalize audited blockers with context invalidation
         run: python tools/normalize_third_party_review_lanes.py
+
+      - name: Plan evidence-weighted next review batch
+        run: python tools/plan_third_party_review_batch.py
 
       - name: Build deterministic policy decision proposals
         run: python tools/propose_third_party_policy_decisions.py
