@@ -1,0 +1,44 @@
+name: Apply Scoped Multipart Reuse Patch
+
+on:
+  push:
+    paths:
+      - 'tools/apply_scoped_reuse_patch.py'
+      - '.github/workflows/apply-scoped-reuse-patch.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply exact scoped-reuse patch
+        run: python tools/apply_scoped_reuse_patch.py
+      - name: Compile patched tools
+        run: python -m py_compile tools/build_third_party_corpus.py tools/check_third_party_corpus.py tools/recheck_third_party_audit_batch.py
+      - name: Rebuild current Stage A baseline
+        run: python tools/build_third_party_corpus.py
+      - name: Core Completion Recheck
+        run: python tools/check_third_party_corpus.py
+      - name: Assert current third-party data is unchanged
+        run: git diff --exit-code -- anki/klose/third_party_vocabulary
+      - name: Check patch whitespace
+        run: git diff --check
+      - name: Persist architecture only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/build_third_party_corpus.py tools/check_third_party_corpus.py docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
+          if git diff --cached --quiet; then
+            echo 'No architecture changes to commit'
+            exit 1
+          fi
+          git commit -m 'feat: support scoped multipart canonical reuse'
+          git push
