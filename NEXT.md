@@ -116,14 +116,14 @@ Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1533
-Review/blocker surfaces   = 360
+Vocabulary preview        = 1534
+Review/blocker surfaces   = 359
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1524
+keep-identity     = 1525
 reuse-identity    =   61
-held              =  321
+held              =  320
 split-required    =   39
 route-expression  =   83
 source-only       =   34
@@ -132,10 +132,10 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34105850919
-latest blocker-audit commit                = e6056fcddfca15fcb14c353e73e58b277542f10e
-bot-generated data commit                  = 2230085e7f918ad22981e81d1a2fa32af85eb6b7
-Vocabulary Preview TargetSense complete    = 1533 / 1533
+GitHub Actions run                         = 34106213514
+latest blocker-audit commit                = 88e2369247ef172d3e3fe4f11615c8a69ce8076e
+bot-generated data commit                  = c1fcb52cc7528c9d0bd2afcca3e06d97577ce57f
+Vocabulary Preview TargetSense complete    = 1534 / 1534
 Third-party Completion Recheck             = PASS
 Independent post-workflow recheck          = PASS
 Source occurrence closure                  = PASS
@@ -159,42 +159,39 @@ Review/blocker surfaces = 444
 route-expression        = 81
 ```
 
-到当前 `2230085e7f918ad22981e81d1a2fa32af85eb6b7`，累计重新审定 84 个 blocker：
+到当前 `c1fcb52cc7528c9d0bd2afcca3e06d97577ce57f`，累计重新审定 85 个 blocker：
 
 ```text
-review_queue            -84
-Vocabulary preview      +82
+review_queue            -85
+Vocabulary preview      +83
 route-expression         +2
 ```
 
 因此：
 
 ```text
-444 blockers → 360 blockers
-1451 preview → 1533 preview
+444 blockers → 359 blockers
+1451 preview → 1534 preview
 81 Expressions → 83 Expressions
 ```
 
 最新独立批次只更新 1 条 decision：
 
 ```text
-capital → keep-identity → 首都
+brush → keep-identity → 画笔；毛笔
 ```
 
 最新批次的 source-context 依据：
 
 ```text
-capital：沪教三年级起点六上 occurrence `hujiao_start3|g6-upper|r091|capital`
-         后面直接连续 north / east / west / south；
-         外研一年级起点四下 occurrence `waiyan_start1|g4-lower|r068|capital`
-         位于 country / speak / capital / map / language / Australian 语境。
-         两个独立教材来源均锁定国家/地理义项，因此 TargetSense 收窄为“首都”，
-         排除“资金/资本”和“大写字母”等 dictionary noise。
+brush：沪教三年级起点六下 occurrence `hujiao_start3|g6-lower|r046|brush`
+       位于 oil / oil painting / powerful / ink / Chinese ink painting /
+       brush / paints / artist 的连续美术材料语境。
+       该 neighborhood 能唯一绑定绘画/书画工具这一名词义项，
+       因此 TargetSense 收窄为“画笔；毛笔”，排除“刷；擦”等动词义项和其他 dictionary noise。
 ```
 
-Completion Recheck：workflow 中 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；Git compare 显示 bot commit 只修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived staging 文件，并删除 transient inbox。Preview 已确认包含 `capital → 首都`；`study` 仍 held，`won` 仍 held，`saw` 仍 split-required。
-
-本批还独立复核了 `CD`：外研二上 music / listen / CD / drum 的 source neighborhood 已能说明其语义为 Compact Disc，但现有 durable decision 明确把它作为 abbreviation/canonical-form policy blocker。当前规则要求此类 policy blocker 保守处理，因此 `CD` **继续 held**，不因语义明显而绕过未冻结的 abbreviation identity policy。
+Completion Recheck：workflow 中 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；Git compare 显示 bot commit 只修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived staging 文件，并删除 transient inbox。Preview 已确认包含 `brush → 画笔；毛笔`；`study` 仍 held，`won` 仍 held，`saw` 仍 split-required，`CD` 仍为 abbreviation-policy held。
 
 代表性已释放 learning units：
 
@@ -226,6 +223,7 @@ long ago → 很久以前；从前
 date → 日期；日子
 crossing → 十字路口；交叉路口
 capital → 首都
+brush → 画笔；毛笔
 ```
 
 高风险 blocker 继续保留，不因“压数量”而释放：
@@ -254,7 +252,7 @@ cold       → split-required
 下一步：
 
 ```text
-1. 继续审计当前 360 个 held/split blocker；
+1. 继续审计当前 359 个 held/split blocker；
 2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目；
 3. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split；
 4. 每批 decision update 后必须运行 workflow + 独立 Completion Recheck；
@@ -296,7 +294,7 @@ CI / script success 不能单独作为“结果正确”的结论；必须再做
 
 ```text
 waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
-剩余 360 held/split blockers — continue evidence-driven audit; true blockers remain deferred
+剩余 359 held/split blockers — continue evidence-driven audit; true blockers remain deferred
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（admission 前）
