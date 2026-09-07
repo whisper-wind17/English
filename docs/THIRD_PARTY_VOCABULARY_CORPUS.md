@@ -195,87 +195,99 @@ Klose 手中实际教材
 
 ## 11. 当前基线 — 2026-09-07
 
-已启用四个小学 Source Adapter：
+当前已启用五个小学 Source Adapter：
 
 ```text
-beijing_start1   = 12 books / 808 occurrences / 734 MatchKeys
-renjiao_start1   = 12 books / 908 occurrences / 802 MatchKeys
-renjiao_start3   =  8 books / 851 occurrences / 818 MatchKeys
+beijing_start1   = 12 books /  808 occurrences /  734 MatchKeys
+renjiao_start1   = 12 books /  908 occurrences /  802 MatchKeys
+renjiao_start3   =  8 books /  851 occurrences /  818 MatchKeys
 hujiao_start3    =  8 books / 1111 occurrences / 1067 MatchKeys
+waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 ```
 
-`hujiao_start3` 只纳入沪教版三年级起点 3–6 年级上下册；同目录 7–9 年级牛津英语不属于当前小学 adapter。Hujiao parser/checker 已冻结真实源基线 `1111 / 1067`。
+边界：
 
-三-adapter 闭合时：
+- `hujiao_start3` 只纳入沪教版三年级起点 3–6 年级上下册；同目录 7–9 年级牛津英语不属于当前小学 adapter；真实源基线 `1111 / 1067` 已冻结。
+- `waiyan_start1` 只纳入外研版一年级起点 1–6 年级上下册；外研三年级起点与初高中资料均明确排除；真实源基线 `1170 / 1071` 已冻结。
+- 外研版三年级起点 3–6 年级上下册已完成 Source Inventory，确认是独立完整 8-book family，但尚未启用。
 
-```text
-Source occurrences        = 2567
-Normalized surfaces       = 1443
-Durable decisions         = 1443
-Vocabulary preview        = 1223
-pending                   = 0
-evidence-changed          = 0
-true blockers             = 125
-```
-
-启用 Hujiao 后，generic builder 自动识别：
-
-```text
-722 previously reviewed surfaces with changed evidence
-345 completely new surfaces
-= 1067 pending
-```
-
-说明 evidence-aware decision binding 正常工作，旧 surface 没有静默继承 decision。
-
-截至 GitHub Actions run `34067517554`，Hujiao A–D 已完成多批统一审校并逐批通过 independent Completion Recheck：
+四-adapter 阶段曾达到 review closure：
 
 ```text
 Enabled adapters          = 4
 Source occurrences        = 3678
 Normalized surfaces       = 1788
-Durable decisions         = 1510
-Vocabulary preview        = 759
-Review/blocker surfaces   = 949
-Evidence-changed surfaces = 570
+Durable decisions         = 1788
+Vocabulary preview        = 1441
+Review/blocker surfaces   = 219
+Evidence-changed surfaces = 0
+pending                   = 0
+```
 
-Generated current surface state:
-keep-identity     = 731
-reuse-identity    = 49
-held              = 96
-pending           = 848
-split-required    = 5
-route-expression  = 26
+启用 `waiyan_start1` 后，generic builder 正确执行 evidence-aware requeue。最新可信 rebuild 为 GitHub Actions run `34074078620`，generated data commit `2bedfeb249ce2acef975b920f2420f3b931b310b`：
+
+```text
+Enabled adapters          = 5
+Source occurrences        = 4848
+Normalized surfaces       = 2062
+Durable decisions         = 1788
+Vocabulary preview        = 799
+Review/blocker surfaces   = 1169
+Evidence-changed surfaces = 797
+pending                   = 1071
+
+Generated current surface actions:
+keep-identity     = 765
+reuse-identity    = 50
+held              = 92
+pending           = 1071
+split-required    = 6
+route-expression  = 45
 source-only       = 33
 ```
 
-从 Hujiao 初始状态的收敛：
+集合严格闭合：
 
 ```text
-pending            1067 → 848
-evidence-changed    722 → 570
-review/blocker     1134 → 949
-Vocabulary preview  582 → 759
+4848 - 3678 = 1170
+= Waiyan source occurrences
+
+2062 - 1788 = 274
+= completely new normalized surfaces
+
+797 evidence-changed existing surfaces
++ 274 completely new surfaces
+= 1071 pending
+= Waiyan distinct MatchKeys
 ```
 
-已明确保护的新增边界包括：
+这证明旧 decision 没有被新教材静默继承。`identity_decisions.csv` 仍保留原 1788 条 durable decisions，但只有当其 `OccurrenceKeys` 与五-adapter current occurrence set 完全一致时，generated current state 才继续 reviewed。
+
+典型行为：
 
 ```text
-can        = modal / container → held
-call       = 电话/呼叫/称呼 → held
-capital    = 首都 / 大写字母 → held
-chicken    = 鸡 / 鸡肉 → split-required
-Chinese    = 汉语 / 中国人 / 中国的 → split-required
-class      = 班级 / 课 → held
-clean      = adjective / verb → held
-clear      = 清楚 / 晴朗等 → held
-cloth      = 布料 → independent identity
-clothes    = 衣服 → independent identity
-cold       = 寒冷 / 感冒 → split-required
-cook       = 烹饪 / 厨师 → split-required
-colour     = 颜色 / 涂颜色 → held
-country    = 国家 / 乡下 → held
-cross / cut / dear / diamond → source context insufficient, held
+apple / afraid
+→ 旧 surface + Waiyan 新 occurrence
+→ decision-evidence-changed
+→ current pending
+
+study
+→ durable decision 仍为 held（学习/研究等 semantic collision）
+→ Waiyan 新 occurrence 改变 evidence set
+→ current pending，等待五-adapter revalidation
+
+saw
+→ durable decision 仍为 split-required（see过去式 / 锯子）
+→ Waiyan 新 occurrence 改变 evidence set
+→ current pending
+
+stronger
+→ evidence 未变化
+→ reuse-identity → strong 继续 reviewed
+
+swing
+→ evidence 未变化
+→ keep-identity / 秋千 继续 reviewed
 ```
 
 当前仍然：
@@ -286,4 +298,4 @@ Final Klose diff executed  = no
 Klose Master / Learner / Publish / Anki modified = no
 ```
 
-下一步继续按唯一 `review_queue.csv` 从 D 后段 / E / F 往后审校；真实 held/split blocker 不为了清零而猜测。每批必须 rebuild + independent Completion Recheck，并串行写入唯一决策真源。
+下一步只处理唯一 `review_queue.csv` 中的 1071 个 pending surface：先审 known semantic collisions / morphology-form edge cases，再按字母区间批量 revalidate 稳定项。所有判断继续写入 `identity_decisions.csv`，每批都执行 rebuild + independent Completion Recheck。当前 1071 pending 闭合后，再考虑启用已盘点完成的 `waiyan_start3`；所有计划第三方小学来源完成前仍不进入 Stage B。
