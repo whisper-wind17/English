@@ -1,16 +1,10 @@
 #!/usr/bin/env python3
 """Build the unified third-party Vocabulary Stage-A workspace.
 
-Inputs:
-- config/source_adapters.csv: enabled standardized Source Occurrence adapters
-- review/identity_decisions.csv: the single durable content-decision truth
-
-A durable surface decision is valid only for the exact SourceOccurrenceKey set
-recorded in its `OccurrenceKeys` JSON array. If a new/changed adapter adds evidence
-for the same MatchKey, that decision becomes stale in generated views and the
-surface is re-queued for review. Candidate signals never equal Identity truth.
-
-Stage A never performs the final Klose diff and never mints stable ThirdPartyID.
+Source adapters provide facts. `identity_decisions.csv` is the only content-decision
+truth. Decisions are valid only for the exact SourceOccurrenceKey set they reviewed.
+Candidate signals are evidence only. Stage A neither mints stable ThirdPartyID nor
+performs the final Klose diff.
 """
 from __future__ import annotations
 
@@ -70,8 +64,7 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, object]]) -> N
 
 
 def norm_display(value: str) -> str:
-    value = unicodedata.normalize("NFKC", value or "")
-    value = value.replace("’", "'").replace("‘", "'")
+    value = unicodedata.normalize("NFKC", value or "").replace("’", "'").replace("‘", "'")
     return re.sub(r"\s+", " ", value.strip())
 
 
@@ -119,10 +112,9 @@ def decode_occurrence_keys(raw: str, decision_key: str) -> list[str]:
 
 
 def enabled_adapters() -> list[tuple[str, Path]]:
-    rows = read_csv(CONFIG)
     adapters: list[tuple[str, Path]] = []
     seen: set[str] = set()
-    for row in rows:
+    for row in read_csv(CONFIG):
         if row.get("Enabled", "").lower() != "yes":
             continue
         source_id = row.get("SourceID", "").strip()
@@ -140,8 +132,7 @@ def build_occurrences(adapters: list[tuple[str, Path]]) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     seen: set[str] = set()
     for source_id, path in adapters:
-        source_rows = read_csv(path)
-        for row in source_rows:
+        for row in read_csv(path):
             if row.get("SourceID") != source_id:
                 raise SystemExit(f"SourceID mismatch in {path}: {row.get('SourceID')} != {source_id}")
             key = row.get("SourceOccurrenceKey", "")
@@ -181,7 +172,6 @@ def build_surfaces(occurrences: list[dict[str, str]]) -> list[dict[str, str]]:
         source_ids = list(dict.fromkeys(r["SourceID"] for r in rows))
         signals: list[str] = []
         candidates: list[str] = []
-
         if len(source_ids) > 1:
             signals.append("cross-source-exact")
         if len(rows) > 1:
@@ -190,7 +180,6 @@ def build_surfaces(occurrences: list[dict[str, str]]) -> list[dict[str, str]]:
             signals.append("multiword")
         if re.search(r"[?!]|\.{2,}|…", unique_join([r.get("Word", "") for r in rows])):
             signals.append("punctuated")
-
         for word in {r.get("Word", "") for r in rows}:
             alias = format_alias_key(word)
             for other in sorted(alias_index.get(alias, set())):
@@ -200,7 +189,6 @@ def build_surfaces(occurrences: list[dict[str, str]]) -> list[dict[str, str]]:
         if morph_index.get(key):
             signals.append("morphology")
             candidates.extend(sorted(morph_index[key]))
-
         surfaces.append({
             "MatchKey": key,
             "DisplayForms": unique_join([r["Word"] for r in rows]),
@@ -216,11 +204,11 @@ def build_surfaces(occurrences: list[dict[str, str]]) -> list[dict[str, str]]:
 
 def load_decisions(surface_keys: set[str], occurrence_keys: set[str]) -> dict[str, list[dict[str, str]]]:
     groups: dict[str, list[dict[str, str]]] = defaultdict(list)
-    seen_decision_keys: set[str] = set()
+    seen: set[str] = set()
     for row in read_csv(DECISIONS):
         dkey = row.get("DecisionKey", "")
         key = row.get("MatchKey", "")
-        if not dkey or dkey in seen_decision_keys:
+        if not dkey or dkey in seen:
             raise SystemExit(f"Duplicate/empty DecisionKey: {dkey}")
         if key not in surface_keys:
             raise SystemExit(f"Decision references missing enabled surface: {key}")
@@ -230,22 +218,22 @@ def load_decisions(surface_keys: set[str], occurrence_keys: set[str]) -> dict[st
             raise SystemExit(f"Invalid Status for {dkey}: {row.get('Status')}")
         if row.get("Action") == "reuse-identity" and not row.get("CanonicalMatchKey"):
             raise SystemExit(f"reuse-identity lacks CanonicalMatchKey: {dkey}")
-        reviewed = row.get("OccurrenceKeys", "")
-        if not reviewed or reviewed == "*":
+        raw = row.get("OccurrenceKeys", "")
+        if not raw or raw == "*":
             raise SystemExit(f"Durable decision must bind explicit OccurrenceKeys: {dkey}")
-        keys = decode_occurrence_keys(reviewed, dkey)
+        keys = decode_occurrence_keys(raw, dkey)
         if not set(keys) <= occurrence_keys:
             raise SystemExit(f"Invalid reviewed OccurrenceKeys for {dkey}")
-        seen_decision_keys.add(dkey)
+        seen.add(dkey)
         groups[key].append(row)
     return groups
 
 
 def covered_keys(ds: list[dict[str, str]]) -> set[str]:
-    result: set[str] = set()
+    out: set[str] = set()
     for d in ds:
-        result.update(decode_occurrence_keys(d.get("OccurrenceKeys", ""), d.get("DecisionKey", "")))
-    return result
+        out.update(decode_occurrence_keys(d.get("OccurrenceKeys", ""), d.get("DecisionKey", "")))
+    return out
 
 
 def main() -> None:
@@ -264,13 +252,12 @@ def main() -> None:
     for surface in surfaces:
         key = surface["MatchKey"]
         ds = decisions.get(key, [])
-        evidence_current = current_by_match[key]
-        evidence_reviewed = covered_keys(ds)
-        evidence_stale = bool(ds) and evidence_reviewed != evidence_current
-
+        current = current_by_match[key]
+        reviewed = covered_keys(ds)
+        stale = bool(ds) and reviewed != current
         if not ds:
             action, status, canonical, sense = "pending", "pending", "", ""
-        elif evidence_stale:
+        elif stale:
             action, status, canonical, sense = "pending", "pending", "", ""
             surface["CandidateSignals"] = unique_join([surface["CandidateSignals"], "decision-evidence-changed"])
         elif len(ds) == 1:
@@ -282,7 +269,6 @@ def main() -> None:
             action = "multipart-reviewed" if fully_reviewed else "split-required"
             status = "reviewed" if fully_reviewed else "held"
             canonical, sense = "", ""
-
         row = dict(surface)
         row.update({
             "DecisionAction": action,
@@ -294,24 +280,47 @@ def main() -> None:
         if action in {"pending", "held", "split-required"} or status in {"pending", "held"}:
             review_rows.append(row)
 
+    surface_by_key = {r["MatchKey"]: r for r in candidate_rows}
+    valid_decision: dict[str, dict[str, str]] = {}
+    for key in surface_keys:
+        ds = decisions.get(key, [])
+        if len(ds) == 1 and covered_keys(ds) == current_by_match[key]:
+            valid_decision[key] = ds[0]
+
+    # Preview semantics are canonical-first:
+    # 1. A reuse alias may not bypass a current canonical surface that is held/split/pending.
+    # 2. If a canonical surface exists and is reviewed keep-identity, its DisplayWord and
+    #    TargetSense are authoritative; alias/form TargetSense never overwrites them.
     groups: dict[str, dict[str, object]] = {}
     for surface in candidate_rows:
         key = surface["MatchKey"]
-        ds = decisions.get(key, [])
-        if len(ds) != 1 or covered_keys(ds) != current_by_match[key]:
+        d = valid_decision.get(key)
+        if not d or d.get("Status") != "reviewed" or d.get("Action") not in {"keep-identity", "reuse-identity"}:
             continue
-        d = ds[0]
-        if d.get("Status") != "reviewed" or d.get("Action") not in {"keep-identity", "reuse-identity"}:
-            continue
+
         canonical = d.get("CanonicalMatchKey", "") if d["Action"] == "reuse-identity" else key
         canonical = canonical or key
-        group = groups.setdefault(canonical, {"matchkeys": [], "occ": 0, "display": "", "sense": ""})
+        canonical_d = valid_decision.get(canonical) if canonical in surface_keys else None
+        if d["Action"] == "reuse-identity" and canonical in surface_keys:
+            if not canonical_d or canonical_d.get("Status") != "reviewed" or canonical_d.get("Action") != "keep-identity":
+                continue
+
+        group = groups.setdefault(canonical, {
+            "matchkeys": [], "occ": 0, "display": "", "sense": "", "canonical_present": canonical in surface_keys,
+        })
         group["matchkeys"].append(key)
         group["occ"] = int(group["occ"]) + int(surface["OccurrenceCount"])
-        if not group["display"]:
-            group["display"] = canonical if d["Action"] == "reuse-identity" and canonical != key else surface["DisplayForms"].split("|")[0]
-        if d.get("TargetSense") and not group["sense"]:
-            group["sense"] = d["TargetSense"]
+
+        if canonical in surface_keys:
+            if canonical_d and canonical_d.get("Status") == "reviewed" and canonical_d.get("Action") == "keep-identity":
+                base_surface = surface_by_key[canonical]
+                group["display"] = base_surface["DisplayForms"].split("|")[0]
+                group["sense"] = canonical_d.get("TargetSense", "")
+        else:
+            if not group["display"]:
+                group["display"] = canonical
+            if d.get("TargetSense") and not group["sense"]:
+                group["sense"] = d["TargetSense"]
 
     preview_rows = [{
         "ProvisionalIdentityKey": f"candidate:{canonical}",
@@ -357,8 +366,9 @@ Evidence-changed surfaces = {stale_count}
 
 Each durable decision is bound to the exact Source Occurrences it reviewed via an
 unambiguous JSON array in `OccurrenceKeys`. Additional source evidence automatically
-re-queues that MatchKey. Candidate signals are evidence only. `identity_decisions.csv`
-remains the single content-decision truth. Stable ThirdPartyID is not minted and
+re-queues that MatchKey. Candidate signals are evidence only. Canonical blockers cannot
+be bypassed by reuse aliases, and canonical learner-facing TargetSense always comes from
+the reviewed canonical surface when it exists. Stable ThirdPartyID is not minted and
 Stage-B Klose diff is not executed here.
 """
     OUT.mkdir(parents=True, exist_ok=True)
@@ -374,6 +384,8 @@ Stage-B Klose diff is not executed here.
     print(f"evidence-changed surfaces = {stale_count}")
     for action in sorted(action_counts):
         print(f"action {action} = {action_counts[action]}")
+    print("Canonical blocker bypass = no")
+    print("Canonical TargetSense precedence = yes")
     print("Stable ThirdPartyID minted = no")
     print("Final Klose diff executed = no")
 

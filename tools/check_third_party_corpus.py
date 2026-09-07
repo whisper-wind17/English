@@ -17,17 +17,12 @@ RENJIAO_ADAPTERS = {
     "renjiao_start1": BASE / "source_reference" / "renjiao_start1_staging",
     "renjiao_start3": BASE / "source_reference" / "renjiao_start3_staging",
 }
-
 EXPECTED_STAGING_FILES = {
-    "README.md",
-    "occurrences.csv",
-    "surface_candidates.csv",
-    "review_queue.csv",
+    "README.md", "occurrences.csv", "surface_candidates.csv", "review_queue.csv",
     "unified_vocabulary_preview.csv",
 }
 EXPECTED_REVIEW_FILES = {"identity_decisions.csv"}
 EXPECTED_NARROW_ADAPTER_FILES = {"README.md", "occurrences.csv"}
-
 LEGACY_MULTI_PASS_TOOLS = {
     "build_third_party_vocabulary_stage_a.py",
     "audit_third_party_cross_source_semantics.py",
@@ -44,6 +39,13 @@ LEGACY_MULTI_PASS_TOOLS = {
     "audit_third_party_renjiao_single_token_forms.py",
     "recheck_third_party_renjiao_single_token_forms.py",
     "sync_third_party_status_to_next.py",
+}
+EXPECTED_SOURCE_COUNTS = {
+    "beijing_start1": 808,
+    "renjiao_start1": 908,
+    "renjiao_start3": 851,
+    "hujiao_start3": 1111,
+    "waiyan_start1": 1170,
 }
 
 
@@ -74,22 +76,16 @@ def decode_occurrence_keys(raw: str, decision_key: str) -> list[str]:
 
 
 def main() -> None:
-    require(
-        {p.name for p in OUT.iterdir()} == EXPECTED_STAGING_FILES,
-        f"Third-party staging contains unexpected/legacy files: {sorted(p.name for p in OUT.iterdir())}",
-    )
-    require(
-        {p.name for p in (TP / "review").iterdir()} == EXPECTED_REVIEW_FILES,
-        f"Third-party review directory must contain only identity_decisions.csv: {sorted(p.name for p in (TP / 'review').iterdir())}",
-    )
+    require({p.name for p in OUT.iterdir()} == EXPECTED_STAGING_FILES,
+            f"Third-party staging contains unexpected/legacy files: {sorted(p.name for p in OUT.iterdir())}")
+    require({p.name for p in (TP / "review").iterdir()} == EXPECTED_REVIEW_FILES,
+            f"Third-party review directory must contain only identity_decisions.csv: {sorted(p.name for p in (TP / 'review').iterdir())}")
     for source_id, adapter_dir in RENJIAO_ADAPTERS.items():
         require(adapter_dir.exists(), f"Missing narrow Source Adapter directory: {source_id}")
-        require(
-            {p.name for p in adapter_dir.iterdir()} == EXPECTED_NARROW_ADAPTER_FILES,
-            f"{source_id} Source Adapter must contain only source facts: {sorted(p.name for p in adapter_dir.iterdir())}",
-        )
-    present_legacy_tools = sorted(name for name in LEGACY_MULTI_PASS_TOOLS if (ROOT / "tools" / name).exists())
-    require(not present_legacy_tools, f"Legacy multi-pass tools returned to active repo: {present_legacy_tools}")
+        require({p.name for p in adapter_dir.iterdir()} == EXPECTED_NARROW_ADAPTER_FILES,
+                f"{source_id} Source Adapter must contain only source facts: {sorted(p.name for p in adapter_dir.iterdir())}")
+    present_legacy = sorted(name for name in LEGACY_MULTI_PASS_TOOLS if (ROOT / "tools" / name).exists())
+    require(not present_legacy, f"Legacy multi-pass tools returned to active repo: {present_legacy}")
 
     config = [r for r in read_csv(CONFIG) if r.get("Enabled", "").lower() == "yes"]
     occ = read_csv(OUT / "occurrences.csv")
@@ -102,8 +98,8 @@ def main() -> None:
     configured_ids = [r.get("SourceID", "") for r in config]
     require(all(configured_ids) and len(configured_ids) == len(set(configured_ids)), "Source adapter config IDs invalid")
 
-    expected_occ = 0
     expected_occ_keys: set[str] = set()
+    expected_occ = 0
     for row in config:
         source_id = row["SourceID"]
         source_rows = read_csv(ROOT / row["OccurrencesPath"])
@@ -118,10 +114,15 @@ def main() -> None:
     require(len(occ) == expected_occ, f"Combined occurrence count drift: expected={expected_occ} actual={len(occ)}")
     require(actual_occ_keys == expected_occ_keys, "Combined occurrence set does not equal enabled adapter union")
 
+    source_counts = Counter(r["SourceID"] for r in occ)
+    for source_id in configured_ids:
+        if source_id in EXPECTED_SOURCE_COUNTS:
+            require(source_counts[source_id] == EXPECTED_SOURCE_COUNTS[source_id],
+                    f"{source_id} occurrence baseline drift")
+
     current_by_match: dict[str, set[str]] = defaultdict(set)
     for row in occ:
         current_by_match[row["MatchKey"]].add(row["SourceOccurrenceKey"])
-
     surface_keys = {r["MatchKey"] for r in surfaces}
     require(len(surface_keys) == len(surfaces), "Surface MatchKey is not unique")
     require(surface_keys == set(current_by_match), "Surface set does not close over occurrence MatchKeys")
@@ -150,6 +151,7 @@ def main() -> None:
 
     by_surface = {r["MatchKey"]: r for r in surfaces}
     stale_surfaces: set[str] = set()
+    valid_decision: dict[str, dict[str, str]] = {}
     for key in surface_keys:
         ds = decisions_by_match.get(key, [])
         reviewed: set[str] = set()
@@ -164,6 +166,8 @@ def main() -> None:
                     f"Changed source evidence did not requeue reviewed surface: {key}")
             require("decision-evidence-changed" in by_surface[key].get("CandidateSignals", ""),
                     f"Changed evidence signal missing: {key}")
+        elif len(ds) == 1:
+            valid_decision[key] = ds[0]
 
     expected_review = {
         r["MatchKey"] for r in surfaces
@@ -199,28 +203,61 @@ def main() -> None:
             require(row.get("Action") == "pending" and row.get("Status") == "pending",
                     f"Unreviewed Beijing multiword must stay pending: {key}")
 
-    preview_keys = {r["CanonicalMatchKey"] for r in preview}
+    preview_by_key = {r["CanonicalMatchKey"]: r for r in preview}
+    preview_keys = set(preview_by_key)
     require(len(preview_keys) == len(preview), "Preview canonical key is not unique")
     require(not (preview_keys & {"may", "like", "square", "left", "cook", "cold", "study"}),
             "Known semantic blocker leaked into preview")
 
-    # A stale surface may share its canonical identity with another unaffected,
-    # fully reviewed source surface (e.g. shoes -> shoe). Therefore the invariant
-    # is that the stale SourceMatchKey itself is absent from preview provenance,
-    # not that its canonical spelling can never appear as a preview identity.
     preview_source_matchkeys: set[str] = set()
     for row in preview:
         preview_source_matchkeys.update(x for x in row.get("SourceMatchKeys", "").split("|") if x)
-    leaked_stale = sorted(stale_surfaces & preview_source_matchkeys)
-    require(not leaked_stale, f"Evidence-stale source surfaces leaked into preview: {leaked_stale[:10]}")
+    require(not (stale_surfaces & preview_source_matchkeys),
+            f"Evidence-stale source surfaces leaked into preview: {sorted(stale_surfaces & preview_source_matchkeys)[:10]}")
 
-    source_counts = Counter(r["SourceID"] for r in occ)
-    if "beijing_start1" in configured_ids:
-        require(source_counts["beijing_start1"] == 808, "Beijing occurrence baseline drift")
-    if "renjiao_start1" in configured_ids:
-        require(source_counts["renjiao_start1"] == 908, "Renjiao start1 occurrence baseline drift")
-    if "renjiao_start3" in configured_ids:
-        require(source_counts["renjiao_start3"] == 851, "Renjiao start3 occurrence baseline drift")
+    # Generic canonical integrity: reuse cannot bypass a current canonical blocker;
+    # when the canonical current surface is reviewed keep-identity, its TargetSense
+    # is authoritative for learner-facing preview.
+    blocked_canonical_targets: set[str] = set()
+    for key, d in valid_decision.items():
+        if d.get("Status") != "reviewed" or d.get("Action") != "reuse-identity":
+            continue
+        canonical = d.get("CanonicalMatchKey", "")
+        if canonical not in surface_keys:
+            continue
+        base = valid_decision.get(canonical)
+        if not base or base.get("Status") != "reviewed" or base.get("Action") != "keep-identity":
+            blocked_canonical_targets.add(canonical)
+            require(key not in preview_source_matchkeys,
+                    f"Reuse alias bypassed canonical blocker in preview: {key} -> {canonical}")
+        else:
+            require(canonical in preview_by_key, f"Reviewed canonical missing from preview: {canonical}")
+            require(preview_by_key[canonical].get("TargetSense", "") == base.get("TargetSense", ""),
+                    f"Alias TargetSense overwrote canonical TargetSense: {key} -> {canonical}")
+    require(not (blocked_canonical_targets & preview_keys),
+            f"Blocked canonical targets leaked into preview: {sorted(blocked_canonical_targets & preview_keys)[:10]}")
+
+    # Quality-audit regression guards.
+    require(by_key.get("ice-cream", {}).get("Action") == "reuse-identity"
+            and by_key["ice-cream"].get("CanonicalMatchKey") == "ice cream",
+            "ice-cream orthographic alias regression")
+    require(by_key.get("listening to music", {}).get("Action") == "reuse-identity"
+            and by_key["listening to music"].get("CanonicalMatchKey") == "listen to music",
+            "listen-to-music activity canonicalization regression")
+    require(by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
+            "smart canonical TargetSense regression")
+    for key in ("old", "thin", "stay", "do", "watch"):
+        require(key not in preview_keys, f"Blocked canonical leaked into preview via reuse alias: {key}")
+    require(preview_by_key.get("candy", {}).get("TargetSense") == "糖果",
+            "candy canonical TargetSense polluted by candies alias")
+    require(preview_by_key.get("story", {}).get("TargetSense") == "故事",
+            "story canonical TargetSense polluted by stories alias")
+    require(preview_by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
+            "smart preview TargetSense is not canonical")
+    require("ice-cream" not in preview_keys and "ice cream" in preview_keys,
+            "ice-cream duplicate identity remains in preview")
+    require("listening to music" not in preview_keys and "listen to music" in preview_keys,
+            "listen-to-music duplicate activity identity remains in preview")
 
     actions = Counter(r["Action"] for r in decisions)
     print("Third-party Simplified Completion Recheck = pass")
@@ -237,6 +274,8 @@ def main() -> None:
     print("OccurrenceKeys serialization = JSON array")
     print("Changed source evidence requeues decision = yes")
     print("Stale source surface excluded from preview provenance = yes")
+    print("Canonical blocker bypass = no")
+    print("Canonical TargetSense precedence = yes")
     print("Simplified physical layout = yes")
     print("Legacy multi-pass tools absent = yes")
     print("Source occurrence closure = yes")
