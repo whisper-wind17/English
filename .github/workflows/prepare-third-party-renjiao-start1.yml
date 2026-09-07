@@ -70,6 +70,14 @@ jobs:
             cat /tmp/third_party_changed_files.txt
           fi
 
+      - name: Forbid mixed source and decision mutation
+        if: steps.scope.outputs.source_changed == 'true'
+        run: |
+          if [[ -f anki/klose/third_party_vocabulary/review/decision_updates.csv ]]; then
+            echo 'Do not combine source/config changes with a planned decision batch.'
+            exit 1
+          fi
+
       - name: Require deterministic selected-batch closure
         run: python tools/check_third_party_batch_manifest.py
 
@@ -140,11 +148,11 @@ jobs:
       - name: Normalize audited blockers with context invalidation
         run: python tools/normalize_third_party_review_lanes.py
 
-      - name: Plan evidence-weighted next review batch
-        run: python tools/plan_third_party_review_batch.py
-
       - name: Build deterministic policy decision proposals
         run: python tools/propose_third_party_policy_decisions.py
+
+      - name: Plan evidence-weighted next review batch
+        run: python tools/plan_third_party_review_batch.py
 
       - name: Independent audit-batch Completion Recheck
         run: python tools/recheck_third_party_audit_batch.py verify
