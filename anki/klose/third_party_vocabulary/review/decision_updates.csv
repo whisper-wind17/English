@@ -1,0 +1,79 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:face,face,*,keep-identity,,vocabulary,脸；面部,reviewed,high,residual-eh-body-sense,Current low-grade body-part blocks support the face noun.
+surface:factory,factory,*,keep-identity,,vocabulary,工厂,reviewed,high,residual-eh-place-sense,Current occupation and place contexts support the factory noun.
+surface:fairest,fairest,*,held,,vocabulary,,held,medium,residual-eh-form-policy-held,Fairest is a superlative form but a stable fair base identity is not established in the current corpus so do not mint or collapse automatically.
+surface:fairy,fairy,*,keep-identity,,vocabulary,仙女；小精灵,reviewed,high,residual-eh-story-sense,The Hujiao story context supports the fairy noun.
+surface:fairy tale,fairy tale,*,keep-identity,,vocabulary,童话故事,reviewed,high,residual-eh-fixed-lexical-unit,The phrase is a stable story-genre lexical unit.
+surface:fall,fall,*,split-required,,vocabulary,,held,high,residual-eh-semantic-split,Renjiao places fall beside leaf and months for autumn while other source positions support physical falling so occurrence-level split is required.
+surface:fall asleep,fall asleep,*,keep-identity,,vocabulary,入睡；睡着,reviewed,high,residual-eh-fixed-lexical-unit,The phrasal lexical unit has one clear elementary meaning.
+surface:family,family,*,keep-identity,,vocabulary,家庭；家人,reviewed,high,residual-eh-family-sense,All current elementary occurrences support the family learning unit.
+surface:famous,famous,*,keep-identity,,vocabulary,著名的,reviewed,high,residual-eh-adjective-sense,Current elementary occurrences support the well-known adjective.
+surface:fan,fan,*,held,,vocabulary,,held,medium,residual-eh-semantic-boundary-held,Renjiao explicitly supports an electric fan while other source positions do not safely rule out fan as an enthusiast so keep held.
+surface:fantastic,fantastic,*,keep-identity,,vocabulary,极好的；很棒的,reviewed,high,residual-eh-evaluative-sense,Current upper-primary occurrences support the positive evaluative adjective.
+surface:far away from ...,far away from ...,*,route-expression,,expression,远离……；离……很远,reviewed,high,residual-eh-slot-expression,The explicit open slot makes this an Expression pattern.
+surface:far from,far from,*,keep-identity,,vocabulary,远离；离……远,reviewed,medium,residual-eh-distance-sense,Hujiao transport context supports the spatial distance phrase rather than the idiomatic not-at-all sense.
+surface:farm,farm,*,keep-identity,,vocabulary,农场,reviewed,high,residual-eh-place-sense,Current elementary source positions support the farm noun.
+surface:farmer,farmer,*,keep-identity,,vocabulary,农民；农夫,reviewed,high,residual-eh-occupation-sense,Current occupation contexts support the farmer noun.
+surface:fast,fast,*,keep-identity,,vocabulary,快的；快速地,reviewed,high,residual-eh-speed-sense,Current elementary movement contexts support the speed concept.
+surface:fat,fat,*,keep-identity,,vocabulary,胖的,reviewed,high,residual-eh-description-sense,Current people-description occurrences support the adjective fat.
+surface:father,father,*,keep-identity,,vocabulary,父亲；爸爸,reviewed,high,residual-eh-family-sense,All current family occurrences support the father noun.
+surface:favourite,favourite,*,keep-identity,,vocabulary,最喜欢的,reviewed,high,residual-eh-preference-sense,Current elementary preference contexts support the adjective favourite.
+surface:february,february,*,keep-identity,,vocabulary,二月,reviewed,high,residual-eh-month-sense,The month name has one stable learning-unit meaning.
+surface:feel,feel,*,split-required,,vocabulary,,held,high,residual-eh-semantic-split,Hujiao places feel in a touch-soft-hard sensory block while Renjiao has feel well in a health block so distinct elementary constructions require occurrence-level resolution.
+surface:feet,feet,*,held,,vocabulary,,held,medium,residual-eh-irregular-form-policy,Feet remains under the existing irregular singular-plural policy with foot and is not string-collapsed automatically.
+surface:festival,festival,*,keep-identity,,vocabulary,节日,reviewed,high,residual-eh-event-sense,The Hujiao occurrence supports the holiday or festival noun.
+surface:fever,fever,*,keep-identity,,vocabulary,发烧；发热,reviewed,high,residual-eh-health-sense,Current health vocabulary supports the fever noun.
+surface:film,film,*,split-required,,vocabulary,,held,high,residual-eh-semantic-split,Hujiao uses film in a weekend-entertainment block and also beside photographer and digital in a photography block so movie and photographic-film learning units must be separated.
+surface:finally,finally,*,keep-identity,,vocabulary,最后；终于,reviewed,high,residual-eh-adverb-sense,The Hujiao occurrence supports the sequence or completion adverb.
+surface:find,find,*,keep-identity,,vocabulary,找到；发现,reviewed,high,residual-eh-core-verb-sense,Current elementary occurrences share the core finding concept.
+surface:gatekeeper,gatekeeper,*,keep-identity,,vocabulary,看门人；守门人,reviewed,high,residual-eh-occupation-sense,The Hujiao occupation noun has one clear meaning.
+surface:gently,gently,*,keep-identity,,vocabulary,轻轻地；温柔地,reviewed,high,residual-eh-adverb-sense,The Hujiao occurrence supports the manner adverb.
+surface:get,get,*,held,,vocabulary,,held,medium,residual-eh-semantic-boundary-held,Get has several elementary senses including obtain become and arrive so the current occurrence set cannot safely map to one learning unit.
+surface:get ... in,get ... in,*,route-expression,,expression,把……弄进来；让……进入,reviewed,medium,residual-eh-slot-expression,The explicit slot-bearing source surface is an Expression object and the exact lexical realization remains context-dependent.
+surface:get lost,get lost,*,keep-identity,,vocabulary,迷路,reviewed,high,residual-eh-fixed-lexical-unit,The Hujiao primary phrase is retained in its elementary become-lost meaning.
+surface:get off,get off,*,keep-identity,,vocabulary,下车,reviewed,high,residual-eh-transport-sense,Hujiao places get off directly inside a by-bus by-bike by-car transport block.
+surface:get out,get out,*,keep-identity,,vocabulary,出去；走出,reviewed,medium,residual-eh-movement-sense,The Hujiao primary source supports the basic movement-out meaning while broader dictionary senses are not adopted.
+surface:get through,get through,*,held,,vocabulary,,held,medium,residual-eh-semantic-boundary-held,The Hujiao source row occurs in a directions block but the local evidence does not safely distinguish pass-through from other get-through senses.
+surface:get to,get to,*,keep-identity,,vocabulary,到达,reviewed,medium,residual-eh-direction-sense,Renjiao places get to in a neighbourhood and crossroads block and Hujiao also uses it in route contexts so the arrival sense is supported.
+surface:get up,get up,*,keep-identity,,vocabulary,起床；起身,reviewed,high,residual-eh-fixed-lexical-unit,All current routine contexts support the get-up phrase.
+surface:get well,get well,*,keep-identity,,vocabulary,康复；恢复健康,reviewed,high,residual-eh-health-sense,Current health contexts support the recovery phrase.
+surface:giant,giant,*,keep-identity,,vocabulary,巨人；巨大的生物,reviewed,medium,residual-eh-story-sense,The Hujiao story item supports the elementary giant noun.
+surface:girl,girl,*,keep-identity,,vocabulary,女孩,reviewed,high,residual-eh-person-sense,All current low-grade occurrences support the girl noun.
+surface:give,give,*,keep-identity,,vocabulary,给；给予,reviewed,high,residual-eh-core-verb-sense,The Hujiao primary occurrence supports the ordinary give action.
+surface:glass,glass,*,held,,vocabulary,,held,medium,residual-eh-semantic-boundary-held,Glass is distinct from glasses but current source facts do not safely choose drinking glass versus glass material for a single target sense.
+surface:glasses,glasses,*,keep-identity,,vocabulary,眼镜,reviewed,high,residual-eh-lexicalized-plural,Renjiao and Hujiao clothing-description contexts support eyeglasses as a lexicalized plural noun and it must not merge into glass.
+surface:glue,glue,*,keep-identity,,vocabulary,胶水；胶,reviewed,high,residual-eh-object-sense,The Hujiao school or craft item supports adhesive glue.
+surface:go,go,*,keep-identity,,vocabulary,去；走,reviewed,high,residual-eh-movement-sense,Current low-grade standalone occurrences support the basic movement verb.
+surface:go down,go down,*,keep-identity,,vocabulary,下去；向下走,reviewed,medium,residual-eh-direction-sense,The Hujiao primary phrase is retained in its elementary downward-movement meaning.
+surface:go fishing,go fishing,*,keep-identity,,vocabulary,去钓鱼,reviewed,high,residual-eh-fixed-lexical-unit,The activity phrase has one stable meaning.
+surface:go for a walk,go for a walk,*,keep-identity,,vocabulary,去散步,reviewed,high,residual-eh-fixed-lexical-unit,The activity phrase has one stable meaning.
+surface:go shopping,go shopping,*,keep-identity,,vocabulary,去购物,reviewed,high,residual-eh-fixed-lexical-unit,The activity phrase has one stable meaning.
+surface:go swimming,go swimming,*,keep-identity,,vocabulary,去游泳,reviewed,high,residual-eh-fixed-lexical-unit,The activity phrase has one stable meaning.
+surface:go to bed,go to bed,*,keep-identity,,vocabulary,上床睡觉,reviewed,high,residual-eh-fixed-lexical-unit,Current routine contexts support the bedtime phrase.
+surface:go to school,go to school,*,keep-identity,,vocabulary,去上学,reviewed,high,residual-eh-fixed-lexical-unit,Current school-routine contexts support the phrase.
+surface:have fun,have fun,*,keep-identity,,vocabulary,玩得开心；玩得愉快,reviewed,high,residual-eh-fixed-lexical-unit,The Hujiao fixed phrase has one clear elementary meaning.
+surface:have lunch,have lunch,*,keep-identity,,vocabulary,吃午饭,reviewed,high,residual-eh-fixed-lexical-unit,The Hujiao meal phrase has one clear meaning.
+surface:have to,have to,*,keep-identity,,vocabulary,必须；不得不,reviewed,high,residual-eh-modal-phrase,The fixed modal phrase has one stable elementary function and contains no open slot.
+surface:he,he,*,keep-identity,,vocabulary,他,reviewed,high,residual-eh-grammar-learning-unit,Current occurrences support the third-person masculine subject pronoun.
+surface:head,head,*,keep-identity,,vocabulary,头；头部,reviewed,high,residual-eh-body-sense,Current low-grade body-part occurrences support the head noun.
+surface:head teacher,head teacher,*,keep-identity,,vocabulary,校长；班主任,reviewed,medium,residual-eh-school-role-sense,The current school-role compound is retained as a head-teacher learning unit without importing unrelated head senses.
+surface:headache,headache,*,keep-identity,,vocabulary,头痛,reviewed,high,residual-eh-health-sense,Current health contexts support the physical headache noun.
+surface:healthy,healthy,*,keep-identity,,vocabulary,健康的,reviewed,high,residual-eh-health-sense,Current elementary health contexts support the adjective.
+surface:hear,hear,*,keep-identity,,vocabulary,听见；听到,reviewed,high,residual-eh-hearing-sense,Current elementary source positions support auditory perception.
+surface:heat,heat,*,keep-identity,,vocabulary,热；热量；高温,reviewed,high,residual-eh-fire-safety-sense,Hujiao places heat beside smoke match and burn down in a fire-safety block so the physical heat noun is supported.
+surface:heavy,heavy,*,keep-identity,,vocabulary,重的；沉重的,reviewed,high,residual-eh-weight-sense,Current elementary descriptions support physical weight.
+surface:hello,hello,*,keep-identity,,vocabulary,你好；喂,reviewed,high,residual-eh-greeting-sense,Current low-grade dialogue occurrences support the greeting.
+surface:help,help,*,keep-identity,,vocabulary,帮助,reviewed,high,residual-eh-core-verb-noun-sense,Current elementary occurrences share the basic help concept.
+surface:her,her,*,keep-identity,,vocabulary,她的,reviewed,high,residual-eh-grammar-learning-unit,Source-order evidence places her before name or other nouns across current textbook occurrences and supports the possessive-determiner use.
+surface:here,here,*,keep-identity,,vocabulary,这里；在这里,reviewed,high,residual-eh-location-sense,Current low-grade location contexts support the locative adverb.
+surface:hers,hers,*,keep-identity,,vocabulary,她的；她的东西,reviewed,high,residual-eh-grammar-learning-unit,Hers is an independent possessive-pronoun learning unit and must not morphology-merge into her.
+surface:hi,hi,*,keep-identity,,vocabulary,嗨；你好,reviewed,high,residual-eh-greeting-sense,Current low-grade dialogue occurrences support the greeting.
+surface:high,high,*,keep-identity,,vocabulary,高的,reviewed,high,residual-eh-height-sense,Current elementary contexts support physical height.
+surface:high jump,high jump,*,keep-identity,,vocabulary,跳高,reviewed,high,residual-eh-sport-sense,The sport compound has one stable meaning.
+surface:hill,hill,*,keep-identity,,vocabulary,小山；山丘,reviewed,high,residual-eh-landform-sense,Current geography and nature contexts support the hill noun.
+surface:him,him,*,keep-identity,,vocabulary,他,reviewed,high,residual-eh-grammar-learning-unit,Current occurrences support the masculine object pronoun.
+surface:himself,himself,*,keep-identity,,vocabulary,他自己,reviewed,high,residual-eh-grammar-learning-unit,The reflexive pronoun is a stable independent learning unit.
+surface:his,his,*,keep-identity,,vocabulary,他的,reviewed,high,residual-eh-grammar-learning-unit,Current source positions support the masculine possessive form.
+surface:hit,hit,*,keep-identity,,vocabulary,打；击,reviewed,medium,residual-eh-action-sense,The Hujiao upper-primary item is retained in the basic physical striking sense.
+surface:hobby,hobby,*,keep-identity,,vocabulary,爱好；业余爱好,reviewed,high,residual-eh-activity-sense,All current elementary occurrences support the hobby noun.
+surface:hole,hole,*,keep-identity,,vocabulary,洞；孔,reviewed,high,residual-eh-object-sense,The Hujiao source supports the physical hole noun.
