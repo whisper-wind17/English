@@ -47,6 +47,12 @@ EXPECTED_SOURCE_COUNTS = {
     "hujiao_start3": 1111,
     "waiyan_start1": 1170,
 }
+ACTIONS = {
+    "keep-identity", "reuse-identity", "split-required", "held",
+    "route-expression", "source-only", "pending",
+}
+RESOLVED_ACTIONS = {"keep-identity", "reuse-identity", "route-expression", "source-only"}
+KNOWN_SEMANTIC_COLLISIONS = {"may", "like", "square", "left", "cook", "cold", "study"}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -73,6 +79,25 @@ def decode_occurrence_keys(raw: str, decision_key: str) -> list[str]:
     )
     require(len(value) == len(set(value)), f"Duplicate reviewed OccurrenceKeys: {decision_key}")
     return value
+
+
+def partition_state(
+    key: str,
+    ds: list[dict[str, str]],
+    current: set[str],
+) -> tuple[set[str], bool, bool]:
+    covered: set[str] = set()
+    for d in ds:
+        part = set(decode_occurrence_keys(d["OccurrenceKeys"], d["DecisionKey"]))
+        require(part <= current, f"Decision occurrence evidence does not belong to its MatchKey: {d['DecisionKey']}")
+        overlap = covered & part
+        require(not overlap, f"Overlapping multipart OccurrenceKeys for {key}: {sorted(overlap)[:10]}")
+        covered.update(part)
+    complete = covered == current
+    resolved = complete and all(
+        d.get("Status") == "reviewed" and d.get("Action") in RESOLVED_ACTIONS for d in ds
+    )
+    return covered, complete, resolved
 
 
 def main() -> None:
@@ -130,10 +155,7 @@ def main() -> None:
     decision_keys = [r.get("DecisionKey", "") for r in decisions]
     require(all(decision_keys) and len(decision_keys) == len(set(decision_keys)), "DecisionKey must be non-empty and unique")
     require(all(r.get("MatchKey") in surface_keys for r in decisions), "Decision references a missing enabled surface")
-    require(all(r.get("Action") in {
-        "keep-identity", "reuse-identity", "split-required", "held",
-        "route-expression", "source-only", "pending",
-    } for r in decisions), "Invalid Action in identity_decisions")
+    require(all(r.get("Action") in ACTIONS for r in decisions), "Invalid Action in identity_decisions")
     require(all(r.get("Status") in {"reviewed", "held", "pending"} for r in decisions), "Invalid Status in identity_decisions")
 
     decisions_by_match: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -152,56 +174,86 @@ def main() -> None:
     by_surface = {r["MatchKey"]: r for r in surfaces}
     stale_surfaces: set[str] = set()
     valid_decision: dict[str, dict[str, str]] = {}
+    resolved_multipart: dict[str, list[dict[str, str]]] = {}
     for key in surface_keys:
         ds = decisions_by_match.get(key, [])
-        reviewed: set[str] = set()
-        for d in ds:
-            reviewed.update(decode_occurrence_keys(d["OccurrenceKeys"], d["DecisionKey"]))
         if not ds:
             require(by_surface[key].get("DecisionAction") == "pending" and by_surface[key].get("DecisionStatus") == "pending",
                     f"Undecided new surface did not enter pending queue: {key}")
-        elif reviewed != current_by_match[key]:
+            continue
+
+        _, complete, resolved = partition_state(key, ds, current_by_match[key])
+        if not complete:
             stale_surfaces.add(key)
             require(by_surface[key].get("DecisionAction") == "pending" and by_surface[key].get("DecisionStatus") == "pending",
-                    f"Changed source evidence did not requeue reviewed surface: {key}")
+                    f"Changed/partial evidence did not requeue surface: {key}")
             require("decision-evidence-changed" in by_surface[key].get("CandidateSignals", ""),
                     f"Changed evidence signal missing: {key}")
         elif len(ds) == 1:
             valid_decision[key] = ds[0]
+        elif resolved:
+            resolved_multipart[key] = ds
+            require(by_surface[key].get("DecisionAction") == "multipart-reviewed"
+                    and by_surface[key].get("DecisionStatus") == "reviewed",
+                    f"Complete reviewed split did not resolve surface: {key}")
+            keep_keys: set[str] = set()
+            for d in ds:
+                if d.get("Action") != "keep-identity":
+                    continue
+                provisional = d.get("CanonicalMatchKey", "")
+                require(provisional.startswith(key + "#"),
+                        f"Multipart keep requires Stage-A key {key}#<variant>: {d['DecisionKey']}")
+                require(provisional not in surface_keys,
+                        f"Multipart provisional key collides with Source MatchKey: {provisional}")
+                require(provisional not in keep_keys,
+                        f"Duplicate multipart provisional key: {provisional}")
+                require(bool(d.get("TargetSense", "").strip()),
+                        f"Multipart keep lacks TargetSense: {d['DecisionKey']}")
+                keep_keys.add(provisional)
+        else:
+            require(by_surface[key].get("DecisionAction") == "split-required"
+                    and by_surface[key].get("DecisionStatus") == "held",
+                    f"Incomplete/unresolved multipart must remain blocker: {key}")
 
     expected_review = {
         r["MatchKey"] for r in surfaces
         if r.get("DecisionAction") in {"pending", "held", "split-required"}
         or r.get("DecisionStatus") in {"pending", "held"}
     }
-    require({r["MatchKey"] for r in review} == expected_review, "Review queue is not a pure derived blocker/pending view")
+    review_keys = {r["MatchKey"] for r in review}
+    require(review_keys == expected_review, "Review queue is not a pure derived blocker/pending view")
+    require(not (set(resolved_multipart) & review_keys), "Resolved multipart surface remains in review queue")
 
-    by_key = {r["MatchKey"]: r for r in decisions}
-    for key in ("may", "like", "square", "left", "cook", "cold", "study"):
-        require(key in by_key and by_key[key]["Action"] in {"split-required", "held"},
-                f"Known semantic collision flattened: {key}")
-    require(by_key.get("danced", {}).get("Action") == "reuse-identity" and by_key["danced"]["CanonicalMatchKey"] == "dance",
-            "danced canonicalization lost")
-    require(by_key.get("cartoons", {}).get("Action") == "reuse-identity" and by_key["cartoons"]["CanonicalMatchKey"] == "cartoon",
-            "cartoons canonicalization lost")
-    require(by_key.get("gloves", {}).get("Action") == "reuse-identity" and by_key["gloves"]["CanonicalMatchKey"] == "glove",
-            "gloves canonicalization lost")
-    require(by_key.get("scissors", {}).get("Action") == "keep-identity", "scissors lexicalized decision lost")
-    require(by_key.get("crossroads", {}).get("Action") == "keep-identity", "crossroads lexicalized decision lost")
+    single_by_key = {k: ds[0] for k, ds in decisions_by_match.items() if len(ds) == 1}
+    for key in KNOWN_SEMANTIC_COLLISIONS:
+        ds = decisions_by_match.get(key, [])
+        require(ds, f"Known semantic collision missing decision: {key}")
+        if key in resolved_multipart:
+            require(len(ds) >= 2, f"Known semantic collision resolved without partition: {key}")
+        else:
+            require(len(ds) == 1 and ds[0]["Action"] in {"split-required", "held"},
+                    f"Known semantic collision flattened: {key}")
+
+    require(single_by_key.get("danced", {}).get("Action") == "reuse-identity"
+            and single_by_key["danced"]["CanonicalMatchKey"] == "dance", "danced canonicalization lost")
+    require(single_by_key.get("cartoons", {}).get("Action") == "reuse-identity"
+            and single_by_key["cartoons"]["CanonicalMatchKey"] == "cartoon", "cartoons canonicalization lost")
+    require(single_by_key.get("gloves", {}).get("Action") == "reuse-identity"
+            and single_by_key["gloves"]["CanonicalMatchKey"] == "glove", "gloves canonicalization lost")
+    require(single_by_key.get("scissors", {}).get("Action") == "keep-identity", "scissors lexicalized decision lost")
+    require(single_by_key.get("crossroads", {}).get("Action") == "keep-identity", "crossroads lexicalized decision lost")
     for key, canonical in {"slept": "sleep", "swam": "swim", "won": "win"}.items():
-        require(
-            by_key.get(key, {}).get("Action") == "reuse-identity"
-            and by_key[key].get("CanonicalMatchKey") == canonical,
-            f"Frozen form-policy reuse regression: {key} -> {canonical}",
-        )
+        require(single_by_key.get(key, {}).get("Action") == "reuse-identity"
+                and single_by_key[key].get("CanonicalMatchKey") == canonical,
+                f"Frozen form-policy reuse regression: {key} -> {canonical}")
     for key in ("were", "sweets", "pleased", "lost"):
-        require(by_key.get(key, {}).get("Action") == "held", f"Protected form-policy blocker lost: {key}")
+        require(single_by_key.get(key, {}).get("Action") == "held", f"Protected form-policy blocker lost: {key}")
 
     for key in (
         "a few", "get well", "how many", "ice cream", "make use of", "pencil case",
         "sweet potato", "take part in", "the u.k.", "the u.s.a.", "the united states of america",
     ):
-        row = by_key.get(key, {})
+        row = single_by_key.get(key, {})
         require(row, f"Missing Beijing multiword migration guard: {key}")
         require(row.get("DecisionBasis") != "beijing-seed-carried-forward",
                 f"Beijing multiword bypassed explicit object review: {key}")
@@ -209,11 +261,16 @@ def main() -> None:
             require(row.get("Action") == "pending" and row.get("Status") == "pending",
                     f"Unreviewed Beijing multiword must stay pending: {key}")
 
+    provisional_keys = [r.get("ProvisionalIdentityKey", "") for r in preview]
+    require(all(provisional_keys) and len(provisional_keys) == len(set(provisional_keys)),
+            "Preview ProvisionalIdentityKey is not unique")
     preview_by_key = {r["CanonicalMatchKey"]: r for r in preview}
     preview_keys = set(preview_by_key)
-    require(len(preview_keys) == len(preview), "Preview canonical key is not unique")
-    require(not (preview_keys & {"may", "like", "square", "left", "cook", "cold", "study"}),
-            "Known semantic blocker leaked into preview")
+    require(len(preview_keys) == len(preview), "Preview CanonicalMatchKey is not unique")
+    require(all(r.get("TargetSense", "").strip() for r in preview), "Preview contains empty TargetSense")
+
+    for key in KNOWN_SEMANTIC_COLLISIONS - set(resolved_multipart):
+        require(key not in preview_keys, f"Known semantic blocker leaked into preview: {key}")
 
     preview_source_matchkeys: set[str] = set()
     for row in preview:
@@ -221,9 +278,7 @@ def main() -> None:
     require(not (stale_surfaces & preview_source_matchkeys),
             f"Evidence-stale source surfaces leaked into preview: {sorted(stale_surfaces & preview_source_matchkeys)[:10]}")
 
-    # Generic canonical integrity: reuse cannot bypass a current canonical blocker;
-    # when the canonical current surface is reviewed keep-identity, its TargetSense
-    # is authoritative for learner-facing preview.
+    # Generic canonical integrity for single-decision reuse aliases.
     blocked_canonical_targets: set[str] = set()
     for key, d in valid_decision.items():
         if d.get("Status") != "reviewed" or d.get("Action") != "reuse-identity":
@@ -243,14 +298,35 @@ def main() -> None:
     require(not (blocked_canonical_targets & preview_keys),
             f"Blocked canonical targets leaked into preview: {sorted(blocked_canonical_targets & preview_keys)[:10]}")
 
+    # Multipart identities must be represented independently and preserve provenance.
+    for key, ds in resolved_multipart.items():
+        for d in ds:
+            action = d.get("Action")
+            part_count = len(decode_occurrence_keys(d["OccurrenceKeys"], d["DecisionKey"]))
+            if action == "keep-identity":
+                provisional = d["CanonicalMatchKey"]
+                row = preview_by_key.get(provisional)
+                require(row is not None, f"Multipart keep missing from preview: {d['DecisionKey']}")
+                require(row.get("TargetSense") == d.get("TargetSense"),
+                        f"Multipart TargetSense drift: {d['DecisionKey']}")
+                require(key in row.get("SourceMatchKeys", "").split("|"),
+                        f"Multipart provenance missing: {d['DecisionKey']}")
+                require(int(row.get("SourceOccurrenceCount", "0")) == part_count,
+                        f"Multipart occurrence count drift: {d['DecisionKey']}")
+            elif action == "reuse-identity":
+                canonical = d.get("CanonicalMatchKey", "")
+                require(canonical in preview_by_key, f"Multipart reuse canonical missing: {d['DecisionKey']} -> {canonical}")
+                require(key in preview_by_key[canonical].get("SourceMatchKeys", "").split("|"),
+                        f"Multipart reuse provenance missing: {d['DecisionKey']} -> {canonical}")
+
     # Quality-audit regression guards.
-    require(by_key.get("ice-cream", {}).get("Action") == "reuse-identity"
-            and by_key["ice-cream"].get("CanonicalMatchKey") == "ice cream",
+    require(single_by_key.get("ice-cream", {}).get("Action") == "reuse-identity"
+            and single_by_key["ice-cream"].get("CanonicalMatchKey") == "ice cream",
             "ice-cream orthographic alias regression")
-    require(by_key.get("listening to music", {}).get("Action") == "reuse-identity"
-            and by_key["listening to music"].get("CanonicalMatchKey") == "listen to music",
+    require(single_by_key.get("listening to music", {}).get("Action") == "reuse-identity"
+            and single_by_key["listening to music"].get("CanonicalMatchKey") == "listen to music",
             "listen-to-music activity canonicalization regression")
-    require(by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
+    require(single_by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
             "smart canonical TargetSense regression")
     for key in ("old", "thin", "stay", "do", "watch"):
         require(key not in preview_keys, f"Blocked canonical leaked into preview via reuse alias: {key}")
@@ -274,18 +350,22 @@ def main() -> None:
     print(f"review/blocker surfaces = {len(review)}")
     print(f"unified vocabulary preview = {len(preview)}")
     print(f"evidence-changed surfaces = {len(stale_surfaces)}")
+    print(f"resolved multipart surfaces = {len(resolved_multipart)}")
     for action in sorted(actions):
         print(f"decision {action} = {actions[action]}")
     print("Explicit reviewed OccurrenceKeys = yes")
     print("OccurrenceKeys serialization = JSON array")
     print("Changed source evidence requeues decision = yes")
+    print("Split occurrence partitions disjoint = yes")
+    print("Split occurrence partitions complete before release = yes")
+    print("Partial split remains blocker = yes")
     print("Stale source surface excluded from preview provenance = yes")
     print("Canonical blocker bypass = no")
     print("Canonical TargetSense precedence = yes")
     print("Simplified physical layout = yes")
     print("Legacy multi-pass tools absent = yes")
     print("Source occurrence closure = yes")
-    print("Known semantic blockers preserved = yes")
+    print("Known semantic blockers preserved or explicitly partitioned = yes")
     print("Known morphology decisions preserved = yes")
     print("Beijing multiword requires explicit review = yes")
     print("Stable ThirdPartyID minted = no")
