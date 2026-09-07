@@ -1,6 +1,8 @@
 ﻿ProvisionalIdentityKey,CanonicalMatchKey,DisplayWord,TargetSense,SourceMatchKeys,SourceOccurrenceCount,DecisionStatus
+candidate:a bit,a bit,a bit,有点儿；稍微,a bit,1,reviewed
 candidate:a box of crayons,a box of crayons,a box of crayons,一盒蜡笔,a box of crayons,1,reviewed
 candidate:a few,a few,a few,几个；少数几个,a few,3,reviewed
+candidate:a knife and fork,a knife and fork,a knife and fork,一副刀叉,a knife and fork,1,reviewed
 candidate:a little,a little,a little,一点；少量,a little,1,reviewed
 candidate:a long time ago,a long time ago,a long time ago,很久以前,a long time ago,1,reviewed
 candidate:a lot of,a lot of,a lot of,许多；大量,a lot of,3,reviewed
@@ -30,6 +32,7 @@ candidate:alaska,alaska,Alaska,阿拉斯加州,alaska,1,reviewed
 candidate:alive,alive,alive,活着的；有生命的,alive,1,reviewed
 candidate:all,all,all,全部；所有,all,5,reviewed
 candidate:all day,all day,all day,整天；一整天,all day,1,reviewed
+candidate:all over the world,all over the world,all over the world,全世界；遍及全世界,all over the world,1,reviewed
 candidate:all the time,all the time,all the time,一直；始终,all the time,1,reviewed
 candidate:all year round,all year round,all year round,全年；一年到头,all year round,1,reviewed
 candidate:almost,almost,almost,"差不多,几乎",almost,1,reviewed
@@ -63,11 +66,13 @@ candidate:asia,asia,Asia,亚洲,asia,1,reviewed
 candidate:ask,ask,ask,问；询问,ask,4,reviewed
 candidate:asleep,asleep,asleep,睡着的,asleep,1,reviewed
 candidate:at,at,at,在；于,at,4,reviewed
+candidate:at first,at first,at first,起初；开始时,at first,1,reviewed
 candidate:at home,at home,at home,在家,at home,1,reviewed
 candidate:at least,at least,at least,至少,at least,1,reviewed
 candidate:at night,at night,at night,在夜里；晚上,at night,2,reviewed
 candidate:at noon,at noon,at noon,在中午,at noon,1,reviewed
 candidate:at the end of,at the end of,at the end of,在……末尾；在……结束时,at the end of,1,reviewed
+candidate:at the same time,at the same time,at the same time,同时；与此同时,at the same time,1,reviewed
 candidate:at the top of,at the top of,at the top of,在……顶部；在……最上面,at the top of,1,reviewed
 candidate:at the weekend,at the weekend,at the weekend,在周末,at the weekend,1,reviewed
 candidate:at work,at work,at work,在工作；工作中,at work,1,reviewed
@@ -92,11 +97,13 @@ candidate:basket,basket,basket,篮子,basket,1,reviewed
 candidate:basketball,basketball,basketball,篮球；篮球运动,basketball,5,reviewed
 candidate:bathroom,bathroom,bathroom,浴室；洗手间,bathroom,4,reviewed
 candidate:be,be,be,是；成为（be 的原形）,be,1,reviewed
+candidate:be able to,be able to,be able to,能够；能,be able to,1,reviewed
 candidate:be back,be back,be back,回来；返回,be back,1,reviewed
 candidate:be born,be born,be born,出生,be born,1,reviewed
 candidate:be careful with,be careful with,be careful with,小心……；注意……,be careful with,1,reviewed
 candidate:be full of,be full of,be full of,充满……,be full of,1,reviewed
 candidate:be good at,be good at,be good at,擅长……,be good at,2,reviewed
+candidate:be interested in,be interested in,be interested in,对……感兴趣,be interested in,1,reviewed
 candidate:be late for,be late for,be late for,……迟到；迟到,be late for,1,reviewed
 candidate:be weak in,be weak in,be weak in,不擅长……；在……方面较弱,be weak in,1,reviewed
 candidate:beach,beach,beach,海滩；沙滩,beach,4,reviewed
@@ -114,9 +121,11 @@ candidate:before,before,before,在……之前；以前,before,6,reviewed
 candidate:begin,begin,begin,开始,begin,3,reviewed
 candidate:behind,behind,behind,在……后面；在后面,behind,5,reviewed
 candidate:bell,bell,bell,铃；钟,bell,3,reviewed
+candidate:bench,bench,bench,长凳,bench,1,reviewed
 candidate:beside,beside,beside,在……旁边,beside,4,reviewed
 candidate:better and better,better and better,better and better,越来越好,better and better,1,reviewed
 candidate:between,between,between,在……之间,between,5,reviewed
+candidate:bicycle,bicycle,bicycle,自行车,bicycle,1,reviewed
 candidate:big,big,big,大的；大,big|bigger,9,reviewed
 candidate:big ben,big ben,Big Ben,大本钟,big ben,1,reviewed
 candidate:bike,bike,bike,自行车,bike,5,reviewed
@@ -195,6 +204,7 @@ candidate:careless,careless,careless,粗心的；不小心的,careless,1,reviewe
 candidate:carrot,carrot,carrot,胡萝卜,carrot,3,reviewed
 candidate:carry,carry,carry,拿；携带；搬运,carry,4,reviewed
 candidate:cartoon,cartoon,cartoon,卡通；动画片,cartoon|cartoons,3,reviewed
+candidate:cashier,cashier,cashier,收银员,cashier,1,reviewed
 candidate:cat,cat,cat,猫,cat,7,reviewed
 candidate:cave,cave,cave,洞穴,cave,1,reviewed
 candidate:celebrate,celebrate,celebrate,庆祝,celebrate,1,reviewed
@@ -203,6 +213,7 @@ candidate:centimetre,centimetre,centimetre,厘米；公分,centimetre,1,reviewed
 candidate:chair,chair,chair,椅子,chair,6,reviewed
 candidate:chase,chase,chase,追逐；追赶,chase,1,reviewed
 candidate:cheap,cheap,cheap,便宜的,cheap,2,reviewed
+candidate:cheese,cheese,cheese,奶酪；干酪,cheese,1,reviewed
 candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chemistry,chemistry,chemistry,化学,chemistry,1,reviewed
 candidate:chess,chess,chess,国际象棋；棋,chess,1,reviewed
@@ -584,6 +595,7 @@ candidate:home,home,home,家；在家；回家,home,5,reviewed
 candidate:homework,homework,homework,家庭作业,homework,3,reviewed
 candidate:horse,horse,horse,马,horse,5,reviewed
 candidate:hospital,hospital,hospital,医院,hospital,6,reviewed
+candidate:hot dog,hot dog,hot dog,热狗,hot dog,1,reviewed
 candidate:hot pot,hot pot,hot pot,火锅,hot pot,1,reviewed
 candidate:hotel,hotel,hotel,旅馆；酒店,hotel,4,reviewed
 candidate:hour,hour,hour,小时；钟头,hour,3,reviewed
@@ -680,14 +692,17 @@ candidate:library,library,library,图书馆,library,5,reviewed
 candidate:lick,lick,lick,舔,licked,1,reviewed
 candidate:lifeguard,lifeguard,lifeguard,救生员,lifeguard,1,reviewed
 candidate:lion,lion,lion,狮子,lion,3,reviewed
+candidate:lion dance,lion dance,lion dance,舞狮,lion dance,1,reviewed
 candidate:listen,listen,listen,听；倾听,listen,3,reviewed
 candidate:listen to music,listen to music,listen to music,听音乐,listened to music|listening to music,3,reviewed
 candidate:litter,litter,litter,垃圾；废弃物,litter,2,reviewed
 candidate:living room,living room,living room,客厅；起居室,living room,3,reviewed
 candidate:london,london,London,伦敦,london,2,reviewed
 candidate:long,long,long,长的；长时间的,long|longer,6,reviewed
+candidate:long ago,long ago,long ago,很久以前；从前,long ago,1,reviewed
 candidate:long jump,long jump,long jump,跳远,long jump,2,reviewed
 candidate:long race,long race,long race,长跑；长距离比赛,long race,1,reviewed
+candidate:look after,look after,look after,照顾；照料,look after,1,reviewed
 candidate:look at,look at,look at,看；看着,look at,2,reviewed
 candidate:look for,look for,look for,寻找；找,look for,5,reviewed
 candidate:look forward to,look forward to,look forward to,期待；盼望,look forward to,2,reviewed
