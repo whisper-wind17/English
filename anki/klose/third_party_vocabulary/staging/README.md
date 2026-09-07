@@ -17,8 +17,8 @@ config/source_adapters.csv
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
-Vocabulary preview        = 1533
-Review/blocker surfaces   = 360
+Vocabulary preview        = 1534
+Review/blocker surfaces   = 359
 Evidence-changed surfaces = 0
 ```
 
