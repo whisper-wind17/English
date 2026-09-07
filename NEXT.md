@@ -85,165 +85,151 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A checkpoint — OBJECT BOUNDARY ACTIVE PASS CLOSED
+## 4. Current Stage-A checkpoint — POLICY REVIEW BATCH 1 CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1594
-Review/blocker surfaces   = 256
+Vocabulary preview        = 1600
+Review/blocker surfaces   = 226
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1585
+keep-identity     = 1591
 reuse-identity    =   83
-held              =  209
+held              =  179
 split-required    =   47
-route-expression  =  104
+route-expression  =  128
 source-only       =   34
 ```
 
 Source reconciliation lane remains closed at `0`.
 
-### Object-boundary audit result
+### Object-boundary active pass
 
-Batch 1：25 个一次处理：
+此前两批已关闭：39 个原 object-boundary 中，29 个解除 blocker，10 个明确 `object-boundary-audited-defer`；无新 source evidence 不重复扫描。
+
+### Policy-review batch 1
+
+推荐上限 30 个一次处理：
 
 ```text
-19 route-expression
+24 route-expression
+├─ contractions / grammar forms:
+│  i'm / it's / he's / she's / couldn't / didn't / doesn't / here's / isn't
+│  shouldn't / they're / wasn't / weren't / what's / where's / won't / don't
+│  you'll / wouldn't / can't / cannot / have got
+└─ false abbreviation reactions: hm / mm
+
 6 keep-identity
-blockers 285 → 260
-preview  1586 → 1592
+├─ CD         → 光盘；激光唱片
+├─ DVD        → DVD；数字光盘
+├─ p.m.       → 下午；午后（p.m.）
+├─ make peace → 讲和；和解
+├─ stairs     → 楼梯
+└─ skating    → 滑冰；溜冰
 ```
 
-Residual batch：14 个一次审完：
+第一次尝试把 `sweets` 作为 lexicalized plural release，被独立 checker 正确拦截：`sweets` 是当前显式 protected form-policy blocker。该尝试未持久化。修正后保留 `sweets=held`，用 source 明确的 `skating` activity noun 替换，并整批重新通过。
+
+结果：
 
 ```text
-2 route-expression
-├─ all right → 好；没问题；没事
-└─ has got   → 有；拥有
-
-2 keep-identity
-├─ go out          → 出去；外出
-└─ street sweeper  → 扫街车；道路清扫车
-
-10 held / audited-defer
-├─ in one hour / get through / keep on / out of / see the world
-├─ take away / take down / take off / all over / a lot
-└─ 无新 source evidence 时不再重复扫描
+blockers 256 → 226
+preview  1594 → 1600
 ```
-
-Residual batch 结果：
-
-```text
-blockers       260 → 256
-preview        1592 → 1594
-object-boundary 14 → 10 derived blockers
-```
-
-这 10 个仍会被 heuristic 显示为 `object-boundary`，但 durable decision 已明确 `object-boundary-audited-defer`。调度层应视为 inactive exception，除非 evidence 改变。
 
 ---
 
 ## 5. Latest batch validation
 
 ```text
-GitHub Actions run                         = 34139028904   SUCCESS
-decision commit                            = 151277258cdc6049bc99f51ba03ca467d7a9ac2b
-bot-generated data commit                  = 8a6f95b054b76766f023c1b20f9ec013cb819448
-batch decisions                            = 14 = 2 route + 2 keep + 10 held-refinement
-Vocabulary Preview TargetSense complete    = 1594 / 1594
-Third-party core Completion Recheck         = PASS
-Audit-batch Completion Recheck              = PASS
-Decision-only fast path                     = PASS
-Source adapters reparsed                    = NO
-Review Bundle closure                       = 256 / 256 PASS
-Source-reconciliation lane                  = 0
-Policy proposals remaining                  = 0
-Explicit reviewed OccurrenceKeys            = PASS
-Changed source evidence requeues decision   = PASS
-Canonical blocker bypass                    = NO
-Transient decision inbox                    = removed
-Klose Master/Learner/Publish/Anki touched   = NO
-Stable ThirdPartyID minted                  = NO
-Final Klose diff executed                   = NO
+failed pre-gate attempt commit              = c767cec9981e918a4ce3b5ea1cb637954b2f9d5c
+failed run                                  = 34139599060  # blocked by protected sweets invariant; no data persisted
+corrected decision commit                   = 9c0f6cac7e754c0c62abdd53bd0fd60e9d265cd7
+GitHub Actions run                          = 34139721820   SUCCESS
+bot-generated data commit                   = 329cd6bbdf0c1166c3895f891ecf423c1a1405df
+batch decisions                             = 30 = 24 route-expression + 6 keep
+Vocabulary Preview TargetSense complete     = 1600 / 1600
+Third-party core Completion Recheck          = PASS
+Audit-batch Completion Recheck               = PASS
+Decision-only fast path                      = PASS
+Source adapters reparsed                     = NO
+Explicit reviewed OccurrenceKeys             = PASS
+Changed source evidence requeues decision    = PASS
+Canonical blocker bypass                     = NO
+Protected form-policy blockers               = PASS
+Transient decision inbox                     = removed
+Klose Master/Learner/Publish/Anki touched    = NO
+Stable ThirdPartyID minted                   = NO
+Final Klose diff executed                    = NO
 ```
 
-Independent diff recheck：checkpoint `18eaf211...` → bot `8a6f95b...` 只变化 third-party audit/review/staging 六个文件；`review_queue -4`，Vocabulary Preview `+2`。无 Klose Master/Learner/Publish/Anki、无 tool/code 修改。
+The failed first attempt is useful gate evidence: the independent checker caught a semantic-policy regression after build succeeded, demonstrating that script/build success alone does not bypass frozen invariants.
 
 ---
 
 ## 6. Throughput architecture v2 — CURRENT
 
-当前 256 blockers 分类：
+Current blockers = 226.
 
-```text
-abbreviation-policy       = 14
-form-policy               = 81
-functional-polysemy       = 18
-multiword-object-boundary = 10   # audited-defer exceptions
-semantic-cross-source     = 56
-semantic-easy             = 28
-semantic-hard             =  2
-split-resolution          = 47
-```
-
-当前 derived execution lanes：
+Active scheduling rules：
 
 ```text
 source-reconciliation-needed  = 0
-actionable-semantic           = 0
-semantic-review               = 2   # ever/player; audited-defer exceptions
-policy-executable             = 10  # proposal engine outputs 0
-policy-review                 = 85  # NEXT ACTIVE LANE
 object-boundary               = 10  # all audited-defer; inactive without new evidence
-deferred-high-ambiguity       = 102
-split-resolution              = 47
+semantic-review               = 2   # ever/player; audited-defer
+policy-executable             = 10  # proposal engine remains guarded; do not mechanically apply
+policy-review                 ≈55  # NEXT ACTIVE LANE; batch 1 removed 30
+split-resolution              = 47  # separate architecture task
+deferred-high-ambiguity       = default skip
 ```
 
-Actionability bands：
+Exact derived lane/class counts after each workflow should be read from the current generated `review_bundle.csv`; do not infer release decisions from the count alone.
+
+Protected invariants currently enforced by `check_third_party_corpus.py` include：
 
 ```text
-80–100 =   2
-65–79  =  10
-45–64  =  47
-0–44   = 197
+were / sweets / pleased / lost = held
+slept -> sleep reuse
+swam  -> swim reuse
+won   -> win reuse
 ```
 
-`decision_proposals.csv` 当前仍为空；policy proposal 不能机械 AutoApply。
-
-`ever/player` 与 10 个 object-boundary residual 均按 audited-defer 处理；无新 evidence 不重复扫描。`deferred-high-ambiguity` 默认不扫描。
+Do not attempt to reduce blockers by violating these regression guards.
 
 ---
 
-## 7. NEXT TASK — HIGH-THROUGHPUT POLICY REVIEW
+## 7. NEXT TASK — CONTINUE HIGH-THROUGHPUT POLICY REVIEW
 
 **当前不要自动启用 `waiyan_start3`。**
 
-下一 active batch = `policy-review = 85`。
-
-处理原则：
+下一批继续从 current `policy-review` 派生视图按 policy family 分组：
 
 ```text
-1. 先按 policy family 分组，而不是逐词扫描：
-   - transparent past / participle forms
-   - plural / irregular plural forms
-   - third-person forms
-   - -ing / lexicalized activity boundary
-   - contractions / abbreviations
-2. canonical = reviewed keep-identity 且 occurrence same-sense 才可 reuse。
-3. canonical held/split/pending 时严禁绕过 blocker。
-4. -ing activity noun、plural pedagogical unit、abbreviation expansion 必须保留人工/object evidence 判断。
-5. 优先一次处理可共享同一 frozen policy 的大组；不要退回 2–3 个词的微批次。
-6. policy-executable = 10 当前 proposal = 0，不脱离 proposal guard 机械处理。
-7. 10 个 object-boundary audited-defer、ever/player、deferred-high-ambiguity 默认跳过。
-8. split-resolution = 47 等待 occurrence-partitioned multiple provisional Stage-A identity 架构。
-9. 每个 batch：1 decision_updates + 1 fast workflow + core/batch/independent recheck；闭环后立即更新 NEXT.md。
-10. blocker 数量下降不是质量目标。
-11. blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 waiyan_start3。
-12. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
+1. -ing / activity boundary：
+   source 明确稳定 activity noun → keep-identity；
+   纯透明进行时/动名词 + reviewed canonical same-sense → reuse candidate；
+   canonical held/split → 保留 held。
+2. irregular plural / pedagogical form：
+   只在教材明确作为独立学习单元且符合 frozen exception 时 keep；
+   split/semantic canonical 不得绕过。
+3. past/comparative/3sg forms：
+   canonical reviewed keep + same-sense 才 reuse；
+   canonical held/split/missing 保留 held/audited-defer。
+4. abbreviation：
+   source 明确单一 lexical expansion 才 keep；
+   communicative sound/frame route-expression；
+   多 expansion 或 evidence 不足保持 held。
+5. policy-executable 当前仍受 proposal guard；proposal=0 时不机械处理。
+6. 每批目标 25–30；不要退回微批次。
+7. 每批仍必须：1 transient inbox + 1 fast workflow + core/batch/independent recheck + 更新 NEXT。
+8. blocker 数下降不是质量目标；audited-defer 也是完成的审计结果。
+9. split-resolution = 47 等待 occurrence-partitioned provisional identity 架构。
+10. blocker quality 稳定后经用户确认才考虑启用 waiyan_start3。
+11. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
 ```
 
 ---
