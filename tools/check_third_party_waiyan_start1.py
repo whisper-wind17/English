@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the narrow Waiyan start-from-grade-1 primary source-adapter contract.
-
-This first-pass checker intentionally discovers the real occurrence/MatchKey
-baseline from the raw XLSX set. After the first successful CI run, freeze those
-exact counts here and rerun before enabling the adapter in the unified corpus.
-"""
+"""Validate the narrow Waiyan start-from-grade-1 primary source-adapter contract."""
 from __future__ import annotations
 
 import csv
@@ -18,6 +13,8 @@ EXPECTED_FIELDS = [
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition", "SourceFile",
 ]
 SOURCE_FILE_RE = re.compile(r"外研版一年级起点[一二三四五六]年级[上下]\.xlsx$")
+EXPECTED_OCCURRENCES = 1170
+EXPECTED_MATCHKEYS = 1071
 
 
 def main() -> None:
@@ -29,8 +26,8 @@ def main() -> None:
             raise SystemExit(f"Unexpected occurrence schema: {reader.fieldnames}")
         rows = list(reader)
 
-    if not rows:
-        raise SystemExit("Waiyan start1 adapter produced no occurrences")
+    if len(rows) != EXPECTED_OCCURRENCES:
+        raise SystemExit(f"Expected {EXPECTED_OCCURRENCES} Waiyan start1 occurrences, found {len(rows)}")
     if any(row.get("SourceID") != "waiyan_start1" for row in rows):
         raise SystemExit("SourceID drift in Waiyan start1 adapter")
 
@@ -48,8 +45,8 @@ def main() -> None:
         raise SystemExit(f"Expected 12 grade/semester books, got {sorted(books)}")
 
     distinct = len({row["MatchKey"] for row in rows})
-    if distinct <= 0:
-        raise SystemExit("Distinct MatchKey count must be positive")
+    if distinct != EXPECTED_MATCHKEYS:
+        raise SystemExit(f"Expected {EXPECTED_MATCHKEYS} normalized MatchKeys, found {distinct}")
 
     forbidden = {"CandidateNoteIDs", "ProposedNoteID", "StageAClass", "existing-in-klose", "third-party-new"}
     if forbidden & set(EXPECTED_FIELDS):
@@ -59,7 +56,7 @@ def main() -> None:
     print(f"source occurrences = {len(rows)}")
     print(f"distinct MatchKeys = {distinct}")
     print("source books = 12")
-    print("exact source baseline frozen = no (discovery pass)")
+    print("exact source baseline frozen = yes")
     print("identity/matching state in adapter = no")
     print("Final Klose diff executed = no")
 
