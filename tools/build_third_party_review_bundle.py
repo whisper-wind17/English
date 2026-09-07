@@ -20,7 +20,7 @@ STAGING = TP / "staging"
 DECISIONS = TP / "review" / "identity_decisions.csv"
 OCCURRENCES = STAGING / "occurrences.csv"
 REVIEW_QUEUE = STAGING / "review_queue.csv"
-OUT = STAGING / "review_bundle.csv"
+OUT = TP / "audit" / "review_bundle.csv"
 
 FIELDS = [
     "AuditPriority",
