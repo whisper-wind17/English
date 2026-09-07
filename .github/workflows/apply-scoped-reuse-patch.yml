@@ -22,6 +22,13 @@ jobs:
           python-version: '3.12'
       - name: Apply exact scoped-reuse patch
         run: python tools/apply_scoped_reuse_patch.py
+      - name: Normalize review-policy EOF
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md')
+          p.write_text(p.read_text(encoding='utf-8').rstrip() + '\n', encoding='utf-8')
+          PY
       - name: Compile patched tools
         run: python -m py_compile tools/build_third_party_corpus.py tools/check_third_party_corpus.py tools/recheck_third_party_audit_batch.py
       - name: Rebuild current Stage A baseline
