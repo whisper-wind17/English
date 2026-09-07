@@ -100,6 +100,12 @@ RECONCILIATION_MARKERS = (
     "reconciliation", "dictionary gloss", "bad dictionary", "source conflict",
     "gloss gives", "gloss conflicts",
 )
+SEMANTIC_DEFER_MARKERS = (
+    "audited-defer",
+    "audited-context-insufficient-defer",
+    "canonical-blocked-defer",
+    "canonical-missing-defer",
+)
 ACTIVITY_ANCHORS = {
     "activity", "activities", "hobby", "sport", "sports", "game", "games",
     "running", "reading", "singing", "dancing", "cycling", "hiking",
@@ -373,6 +379,13 @@ def lane_for(
         return "object-boundary", 25, "review-object-boundary", ""
     if blocker_class == "functional-polysemy":
         return "deferred-high-ambiguity", 0, "defer", "functional/polysemy evidence cost is high"
+    if any(marker in text for marker in SEMANTIC_DEFER_MARKERS):
+        return (
+            "deferred-high-ambiguity",
+            0,
+            "defer",
+            "existing reviewed semantic defer remains valid until source/canonical evidence changes",
+        )
     if score >= 65:
         return "actionable-semantic", 50, "review-semantic-release", ""
     if score >= 45:
@@ -501,6 +514,21 @@ def main() -> None:
 
     if {row["MatchKey"] for row in bundle} != set(review_keys):
         raise SystemExit("Review Bundle closure mismatch with review_queue.csv")
+
+    stale_active_semantic = [
+        row["MatchKey"]
+        for row in bundle
+        if row["ReviewLane"] in {"actionable-semantic", "semantic-review"}
+        and any(
+            marker in f'{row["CurrentDecisionBasis"]} {row["CurrentRationale"]}'.casefold()
+            for marker in SEMANTIC_DEFER_MARKERS
+        )
+    ]
+    if stale_active_semantic:
+        raise SystemExit(
+            "Review Bundle active semantic lane contains stable defer decisions: "
+            + ", ".join(stale_active_semantic[:20])
+        )
 
     class_counts: dict[str, int] = defaultdict(int)
     lane_counts: dict[str, int] = defaultdict(int)
