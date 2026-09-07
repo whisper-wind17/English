@@ -12,6 +12,7 @@ on:
       - 'tools/check_third_party_hujiao_start3.py'
       - 'tools/prepare_third_party_waiyan_start1.py'
       - 'tools/check_third_party_waiyan_start1.py'
+      - 'tools/revalidate_waiyan_start1_existing_decisions.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/check_third_party_corpus.py'
@@ -62,6 +63,9 @@ jobs:
 
       - name: Validate Waiyan start1 source adapter
         run: python tools/check_third_party_waiyan_start1.py
+
+      - name: Prepare one-time Waiyan exact-surface revalidation inbox
+        run: python tools/revalidate_waiyan_start1_existing_decisions.py
 
       - name: Apply transient reviewed identity decisions
         run: python tools/apply_third_party_identity_decision_updates.py
