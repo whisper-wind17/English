@@ -1051,7 +1051,7 @@ maths,maths|Maths,n. 数学(等于mathematics),beijing_start1|renjiao_start1|huj
 maths book,maths book,无,renjiao_start3,renjiao_start3:4年级上,1,multiword,,keep-identity,reviewed,,数学书
 matter,matter,n. 物质;事件 vi. 有关系;要紧,waiyan_start1,waiyan_start1:4年级上,1,,,held,held,,
 may,May|may,"aux. 可以,能够;可能,也许;祝,愿;会,能",beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3,beijing_start1:3年级上|beijing_start1:3年级下|renjiao_start1:3年级上|renjiao_start3:5年级下|hujiao_start3:4年级下|hujiao_start3:6年级下,6,cross-source-exact|multiple-occurrences,,split-required,held,,
-maybe,maybe,adv. 也许;可能;大概 n. 可能性;不确定性,waiyan_start1,waiyan_start1:4年级下,1,,,held,held,,
+maybe,maybe,adv. 也许;可能;大概 n. 可能性;不确定性,waiyan_start1,waiyan_start1:4年级下,1,,,keep-identity,reviewed,,也许；可能；大概
 me,me,pron. 我(宾格) n. 自我;极端自私的人;自我的一部分,beijing_start1|hujiao_start3|waiyan_start1,beijing_start1:2年级上|hujiao_start3:3年级上|waiyan_start1:1年级下,3,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,我（宾格）
 meal,meal,"n. 一餐,一顿饭;膳食 vi. 进餐",waiyan_start1,waiyan_start1:6年级下,1,,,keep-identity,reviewed,,一餐；一顿饭
 meat,meat,"n. 肉,肉类(食用)",beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1,beijing_start1:5年级上|renjiao_start1:3年级上|hujiao_start3:4年级上|waiyan_start1:2年级上,4,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,肉；肉类
@@ -1246,12 +1246,12 @@ parent,parent,n. 父亲(或母亲);父母亲;根源,beijing_start1|hujiao_start3
 parents,parents,n. 父母;双亲(parent的复数) v. 教养;引起(parent的三单形式),renjiao_start3,renjiao_start3:4年级上,1,morphology,parent,reuse-identity,reviewed,parent,父母；双亲
 parents' day,Parents' Day,无,waiyan_start1,waiyan_start1:3年级下,1,multiword,,held,held,,
 park,park,n. 公园;[交] 停车场 vt. 停放;放置;寄存 vi. 停放车辆,beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:1年级下|beijing_start1:2年级上|renjiao_start1:2年级上|renjiao_start1:4年级上|renjiao_start3:5年级上|hujiao_start3:4年级上|waiyan_start1:2年级上,7,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,公园
-parrot,parrot,"n. 鹦鹉;学舌者,应声虫;机械模仿别人的人 vt. 机械地模仿",waiyan_start1,waiyan_start1:3年级下,1,,,held,held,,
+parrot,parrot,"n. 鹦鹉;学舌者,应声虫;机械模仿别人的人 vt. 机械地模仿",waiyan_start1,waiyan_start1:3年级下,1,,,keep-identity,reviewed,,鹦鹉
 part,part,n. 部分;角色;零件;一些;片段 adj. 部分的 vt. 分离;分配;分开 adv. 部分地 vi. 断裂;分手,renjiao_start3|hujiao_start3,renjiao_start3:6年级下|hujiao_start3:6年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,部分；一部分
 party,party,"n. 政党,党派;聚会,派对;当事人 [复数 parties] vi. 参加社交聚会 [ 过去式 partied 过去分词 partied 现在分词 partying ]",renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1,renjiao_start1:3年级上|renjiao_start1:5年级上|renjiao_start3:5年级上|hujiao_start3:5年级上|waiyan_start1:2年级上,5,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,聚会；派对
 pass,pass,n. 及格;经过;护照;途径;传球 vt. 通过;经过;传递 vi. 经过;传递;变化;终止,beijing_start1|renjiao_start3,beijing_start1:5年级上|renjiao_start3:4年级上,2,cross-source-exact|multiple-occurrences,,held,held,,
 passport,passport,"n. 护照,通行证;手段",waiyan_start1,waiyan_start1:5年级下,1,,,keep-identity,reviewed,,"护照,通行证"
-past,past,n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过,waiyan_start1,waiyan_start1:2年级下|waiyan_start1:5年级上,2,multiple-occurrences,,held,held,,
+past,past,n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过,waiyan_start1,waiyan_start1:2年级下|waiyan_start1:5年级上,2,multiple-occurrences,,split-required,held,,
 path,path,n. 道路;小路;轨道,hujiao_start3,hujiao_start3:6年级下,1,,,keep-identity,reviewed,,小路；道路
 pay,pay,"n. 工资,薪水;付款;报答 vt. 支付,付;偿还,补偿;给予 vi. 付款;偿还 adj. 收费的;需付费的",beijing_start1,beijing_start1:5年级上,1,,,keep-identity,reviewed,,支付；付款
 pay attention to,pay attention to,na. 注意,renjiao_start3,renjiao_start3:6年级上,1,multiword,,keep-identity,reviewed,,注意；留意
@@ -1329,7 +1329,7 @@ pm,pm,"abbr. (拉)下午(Post Meridiem,等于afternoon);调相(Phase Modulation)
 pod,pod,n. 蚕茧;豆荚 vt. 从豆荚中剥出 vi. 结豆荚,hujiao_start3,hujiao_start3:6年级下,1,,,keep-identity,reviewed,,豆荚
 poem,poem,n. 诗,renjiao_start1|renjiao_start3|waiyan_start1,renjiao_start1:6年级上|renjiao_start3:6年级上|waiyan_start1:2年级下,3,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,诗；诗歌
 poet,poet,n. 诗人,renjiao_start1,renjiao_start1:6年级上,1,,,keep-identity,reviewed,,诗人
-point,point,n. 要点;得分;标点;[机] 尖端 vt. 指向;弄尖;加标点于 vi. 表明;指向,waiyan_start1,waiyan_start1:1年级上|waiyan_start1:5年级上,2,multiple-occurrences,,held,held,,
+point,point,n. 要点;得分;标点;[机] 尖端 vt. 指向;弄尖;加标点于 vi. 表明;指向,waiyan_start1,waiyan_start1:1年级上|waiyan_start1:5年级上,2,multiple-occurrences,,split-required,held,,
 police,police,"n. 警察,警方;治安 adj. 警察的;有关警察的 vt. 监督;管辖;维持治安;为...配备警察",beijing_start1|hujiao_start3,beijing_start1:6年级下|hujiao_start3:6年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,警察；警方
 police officer,police officer,n. 警官;警察;警务人员,renjiao_start1|renjiao_start3,renjiao_start1:4年级上|renjiao_start3:6年级上,2,cross-source-exact|multiple-occurrences|multiword,,keep-identity,reviewed,,警察；警官
 policeman,policeman,"n. 警察,警员;[分化] 淀帚(橡皮头玻璃搅棒)",hujiao_start3|waiyan_start1,hujiao_start3:6年级上|waiyan_start1:1年级下,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,警察；男警察
@@ -1677,7 +1677,7 @@ sunshine,sunshine,n. 阳光;愉快;晴天;快活,hujiao_start3,hujiao_start3:5�
 supermarket,supermarket,n. 超级市场;自助售货商店,beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:5年级上|renjiao_start1:2年级上|renjiao_start1:4年级下|renjiao_start3:6年级上|hujiao_start3:4年级上|waiyan_start1:2年级下,6,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,超市
 supper,supper,"n. 晚餐,晚饭;夜宵",beijing_start1,beijing_start1:6年级上,1,,,keep-identity,reviewed,,晚餐；晚饭
 sure,sure,adj. 确信的;可靠的;必定的 adv. 当然;的确,beijing_start1|renjiao_start1|renjiao_start3|waiyan_start1,beijing_start1:3年级下|renjiao_start1:1年级下|renjiao_start3:5年级下|waiyan_start1:6年级上,4,cross-source-exact|multiple-occurrences,,held,held,,
-surprise,surprise,"n. 惊奇,诧异;突然袭击 adj. 令人惊讶的 vt. 使惊奇;奇袭",waiyan_start1,waiyan_start1:4年级下,1,,,held,held,,
+surprise,surprise,"n. 惊奇,诧异;突然袭击 adj. 令人惊讶的 vt. 使惊奇;奇袭",waiyan_start1,waiyan_start1:4年级下,1,,,keep-identity,reviewed,,惊喜；惊讶
 surprised,surprised,"v. 使惊奇(surprise的过去分词形式) adj. 感到惊讶的,出人意料的",beijing_start1|waiyan_start1,beijing_start1:4年级上|waiyan_start1:6年级下,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,惊讶的
 sushi,sushi,n. 寿司(生鱼片冷饭团),renjiao_start3|hujiao_start3,renjiao_start3:5年级下|hujiao_start3:6年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,寿司
 swam,swam,v. 游泳(swim的过去式),renjiao_start1,renjiao_start1:5年级下,1,morphology,swim,reuse-identity,reviewed,swim,
@@ -1821,7 +1821,7 @@ together,together,"adj. 新潮的;情绪稳定的,做事有效率的 adv. 一起
 toilet,toilet,"n. 厕所,盥洗室;梳妆,打扮 vt. 给...梳妆打扮 vi. 梳妆,打扮",beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1,beijing_start1:6年级下|renjiao_start1:3年级下|hujiao_start3:4年级上|waiyan_start1:4年级上,4,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,厕所；洗手间
 told,told,v. 告诉(tell的过去式);讲述,waiyan_start1,waiyan_start1:5年级下,1,,,reuse-identity,reviewed,tell,
 tomato,tomato,"n. 番茄,西红柿",beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:5年级下|renjiao_start1:3年级上|renjiao_start3:4年级下|hujiao_start3:4年级上|waiyan_start1:2年级上,5,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,西红柿；番茄
-tomb,tomb,n. 坟墓;死亡 vt. 埋葬,waiyan_start1,waiyan_start1:6年级上,1,,,held,held,,
+tomb,tomb,n. 坟墓;死亡 vt. 埋葬,waiyan_start1,waiyan_start1:6年级上,1,,,keep-identity,reviewed,,坟墓；陵墓
 tomorrow,tomorrow,n. 明天;未来 adv. 明天;未来地(等于to-morrow),beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:3年级下|renjiao_start1:3年级下|renjiao_start3:6年级上|hujiao_start3:5年级下|waiyan_start1:3年级下,5,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,明天
 tongue,tongue,n. 舌头;语言 vt. 舔;斥责;用舌吹 vi. 说话;吹管乐器,beijing_start1|renjiao_start1,beijing_start1:5年级上|renjiao_start1:3年级上,2,cross-source-exact|multiple-occurrences,,held,held,,
 tonight,tonight,n. 今晚 adv. 在今晚,renjiao_start3,renjiao_start3:6年级上,1,,,keep-identity,reviewed,,今晚
@@ -1857,13 +1857,13 @@ trick or treat,trick or treat,int. 不给糖就捣蛋 n. 不给糖就捣蛋,waiy
 trip,trip,n. 旅行;绊倒;差错 vt. 绊倒;使犯错 vi. 绊倒;远足;犯错误;轻快地走,renjiao_start3|waiyan_start1,renjiao_start3:5年级下|renjiao_start3:6年级上|renjiao_start3:6年级下|waiyan_start1:4年级上,4,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,旅行；出行
 trousers,trousers,"n. 裤子,长裤",beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1,beijing_start1:2年级下|renjiao_start1:3年级上|hujiao_start3:5年级下|waiyan_start1:2年级上,4,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,长裤；裤子
 truck,truck,n. 卡车;交易;手推车 adj. (美)运货汽车的 vt. 交易;以卡车运输 vi. 驾驶卡车;以物易物,hujiao_start3,hujiao_start3:6年级下,1,,,keep-identity,reviewed,,卡车；货车
-true,true,n. 真实;准确 adj. 真实的;正确的 vt. 装准 adv. 真实地;准确地,waiyan_start1,waiyan_start1:5年级上,1,,,held,held,,
+true,true,n. 真实;准确 adj. 真实的;正确的 vt. 装准 adv. 真实地;准确地,waiyan_start1,waiyan_start1:5年级上,1,,,keep-identity,reviewed,,真实的；正确的
 trunk,trunk,n. 树干;躯干;象鼻;汽车车尾的行李箱 adj. 干线的;躯干的;箱子的 vt. 把...放入旅行箱内,renjiao_start1,renjiao_start1:6年级上,1,,,keep-identity,reviewed,,象鼻
 try,try,"n. 尝试;努力;试验 vt. 试图,努力;试验;审判;考验 vi. 尝试;努力;试验",beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:3年级下|renjiao_start3:4年级上|hujiao_start3:4年级上|waiyan_start1:3年级下,4,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,尝试；试着
 try ... on,try ... on,na. 试穿;〈非正式〉搞恶作剧(以试探能否被容忍);〈非正式〉耍花招,hujiao_start3,hujiao_start3:5年级下,1,multiword|punctuated|format-alias,try on,route-expression,reviewed,,试穿……
 try on,try on,na. 试穿;〈非正式〉搞恶作剧(以试探能否被容忍);〈非正式〉耍花招,renjiao_start3,renjiao_start3:4年级下,1,multiword|format-alias,try ... on,keep-identity,reviewed,,试穿
 tuesday,Tuesday,n. 星期二,beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:2年级上|renjiao_start1:2年级下|renjiao_start1:4年级上|renjiao_start3:5年级上|hujiao_start3:4年级下|waiyan_start1:3年级下,6,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,星期二
-tunnel,tunnel,n. 隧道;坑道;洞穴通道 vt. 挖;在...打开通道;在...挖掘隧道 vi. 挖掘隧道;打开通道,waiyan_start1,waiyan_start1:6年级下,1,,,held,held,,
+tunnel,tunnel,n. 隧道;坑道;洞穴通道 vt. 挖;在...打开通道;在...挖掘隧道 vi. 挖掘隧道;打开通道,waiyan_start1,waiyan_start1:6年级下,1,,,keep-identity,reviewed,,隧道
 turkey,turkey,n. 土耳其(横跨欧亚两洲的国家),hujiao_start3,hujiao_start3:6年级下,1,,,keep-identity,reviewed,,土耳其
 turn,turn,"n. 转弯;变化;(损害或有益于别人的)行为,举动,举止 vi. 转向;转变;转动 vt. 转动,使旋转;转弯;翻过来;兑换",beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1,beijing_start1:3年级下|renjiao_start3:5年级下|renjiao_start3:6年级上|hujiao_start3:5年级上|waiyan_start1:2年级下,5,cross-source-exact|multiple-occurrences,,held,held,,
 turn around,turn around,na. 转身;〈美〉使向好的方向转变,waiyan_start1,waiyan_start1:2年级下,1,multiword,,held,held,,
