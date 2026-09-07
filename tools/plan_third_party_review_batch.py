@@ -118,6 +118,18 @@ def main() -> None:
             if len(selected) >= surface_cap:
                 break
 
+    execution_ready = bool(selected)
+    gate_reason = ""
+    if selected_lane == "split-resolution" and selected:
+        changed = any(
+            "decision-evidence-changed" in {x for x in row.get("CandidateSignals", "").split("|") if x}
+            or row.get("PolicyRecommendedAction", "").startswith("re-review-")
+            for row in selected
+        )
+        if not changed:
+            execution_ready = False
+            gate_reason = "unchanged residual split requires stronger source evidence or explicit user gate"
+
     plan = {
         "PlanVersion": PLAN_VERSION,
         "ReviewLane": selected_lane,
@@ -127,6 +139,8 @@ def main() -> None:
         "SurfaceCap": surface_cap,
         "WeightBudget": weight_budget,
         "SkippedGuardedPolicyRows": skipped_guarded_policy,
+        "ExecutionReady": execution_ready,
+        "GateReason": gate_reason,
         "ReviewBundleFingerprint": bundle_fingerprint(rows),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -138,6 +152,9 @@ def main() -> None:
     print(f"review batch evidence weight = {total_weight} / {weight_budget}")
     print(f"review batch surface cap = {surface_cap}")
     print(f"review batch guarded policy rows skipped = {skipped_guarded_policy}")
+    print(f"review batch execution ready = {'yes' if execution_ready else 'no'}")
+    if gate_reason:
+        print(f"review batch gate reason = {gate_reason}")
     print("review batch selection = deterministic")
     print("review batch decision truth = derived-only")
 
