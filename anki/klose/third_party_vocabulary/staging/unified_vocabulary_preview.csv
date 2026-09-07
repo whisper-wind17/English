@@ -189,7 +189,7 @@ candidate:camp,camp,camp,露营；营地,camp,1,reviewed
 candidate:campfire,campfire,campfire,,campfire,1,reviewed
 candidate:canada,canada,Canada,加拿大,canada,3,reviewed
 candidate:canberra,canberra,Canberra,堪培拉,canberra,1,reviewed
-candidate:candy,candy,candy,"糖果,果饵(candy的复数)",candies|candy,4,reviewed
+candidate:candy,candy,candy,糖果,candies|candy,4,reviewed
 candidate:cap,cap,cap,帽子；便帽,cap,6,reviewed
 candidate:car,car,car,汽车；小汽车,car,6,reviewed
 candidate:car museum,car museum,car museum,汽车博物馆,car museum,1,reviewed
@@ -301,7 +301,6 @@ candidate:dinosaur,dinosaur,dinosaur,恐龙,dinosaur,2,reviewed
 candidate:dirty,dirty,dirty,脏的；肮脏的,dirty,6,reviewed
 candidate:dish,dish,dish,,dish,2,reviewed
 candidate:disneyland,disneyland,Disneyland,,disneyland,1,reviewed
-candidate:do,do,do,,does,1,reviewed
 candidate:do a survey,do a survey,do a survey,做调查；进行调查,do a survey,1,reviewed
 candidate:do exercise,do exercise,do exercise,锻炼；做运动,do exercise,1,reviewed
 candidate:do homework,do homework,do homework,做作业,do homework,1,reviewed
@@ -612,9 +611,8 @@ candidate:hurt,hurt,hurt,受伤；疼；弄伤,hurt,9,reviewed
 candidate:hut,hut,hut,,hut,1,reviewed
 candidate:i,i,I,我,i,4,reviewed
 candidate:ice,ice,ice,,ice,3,reviewed
-candidate:ice cream,ice cream,ice cream,冰淇淋,ice cream,5,reviewed
+candidate:ice cream,ice cream,ice cream,冰淇淋,ice cream|ice-cream,6,reviewed
 candidate:ice lantern,ice lantern,ice lantern,冰灯,ice lantern,1,reviewed
-candidate:ice-cream,ice-cream,ice-cream,,ice-cream,1,reviewed
 candidate:ice-skate,ice-skate,ice-skate,滑冰；溜冰,ice-skate,1,reviewed
 candidate:idea,idea,idea,想法；主意,idea,5,reviewed
 candidate:if,if,if,如果；假如,if,1,reviewed
@@ -700,8 +698,7 @@ candidate:lick,lick,lick,舔,licked,1,reviewed
 candidate:lifeguard,lifeguard,lifeguard,救生员,lifeguard,1,reviewed
 candidate:lion,lion,lion,狮子,lion,3,reviewed
 candidate:listen,listen,listen,听；倾听,listen,3,reviewed
-candidate:listen to music,listen to music,listen to music,,listened to music,1,reviewed
-candidate:listening to music,listening to music,listening to music,听音乐,listening to music,2,reviewed
+candidate:listen to music,listen to music,listen to music,听音乐,listened to music|listening to music,3,reviewed
 candidate:litter,litter,litter,垃圾；废弃物,litter,2,reviewed
 candidate:living room,living room,living room,客厅；起居室,living room,3,reviewed
 candidate:london,london,London,伦敦,london,2,reviewed
@@ -855,7 +852,6 @@ candidate:october,october,October,十月,october,4,reviewed
 candidate:office,office,office,办公室,office,3,reviewed
 candidate:often,often,often,经常；常常,often,5,reviewed
 candidate:oil painting,oil painting,oil painting,油画,oil painting,1,reviewed
-candidate:old,old,old,更老的；年长的,older,1,reviewed
 candidate:on foot,on foot,on foot,步行；徒步,on foot,3,reviewed
 candidate:on holiday,on holiday,on holiday,在度假；休假中,on holiday,2,reviewed
 candidate:on the left,on the left,on the left,在左边；在左侧,on the left,1,reviewed
@@ -1136,7 +1132,7 @@ candidate:slow,slow,slow,慢的；缓慢的,slow,3,reviewed
 candidate:slow down,slow down,slow down,减速；慢下来,slow down,1,reviewed
 candidate:slowly,slowly,slowly,慢慢地；缓慢地,slowly,2,reviewed
 candidate:small,small,small,小的；小,small|smaller,6,reviewed
-candidate:smart,smart,smart,更聪明的,smart|smarter,3,reviewed
+candidate:smart,smart,smart,聪明的；机灵的,smart|smarter,3,reviewed
 candidate:smile,smile,smile,微笑；笑容,smile,3,reviewed
 candidate:snake,snake,snake,,snake,3,reviewed
 candidate:snowman,snowman,snowman,雪人,snowman,1,reviewed
@@ -1179,12 +1175,11 @@ candidate:stage,stage,stage,,stage,1,reviewed
 candidate:stamp,stamp,stamp,,stamp,4,reviewed
 candidate:start,start,start,开始；出发,start,4,reviewed
 candidate:station,station,station,车站,station,4,reviewed
-candidate:stay,stay,stay,停留了；待过,stayed,1,reviewed
 candidate:stay at home,stay at home,stay at home,,stayed at home,1,reviewed
 candidate:still,still,still,仍然；还是,still,3,reviewed
 candidate:stomachache,stomachache,stomachache,,stomachache,1,reviewed
 candidate:stone,stone,stone,石头,stone,3,reviewed
-candidate:story,story,story,故事(story的复数),stories|story,4,reviewed
+candidate:story,story,story,故事,stories|story,4,reviewed
 candidate:storybook,storybook,storybook,故事书,storybook,2,reviewed
 candidate:straight,straight,straight,直；笔直地,straight,4,reviewed
 candidate:strawberry,strawberry,strawberry,草莓,strawberry,2,reviewed
@@ -1272,8 +1267,8 @@ candidate:the potala palace,the potala palace,the Potala Palace,布达拉宫,the
 candidate:the stone forest,the stone forest,the Stone Forest,石林,the stone forest,1,reviewed
 candidate:the summer palace,the summer palace,the Summer Palace,颐和园,the summer palace,1,reviewed
 candidate:the terracotta army,the terracotta army,the Terracotta Army,兵马俑,the terracotta army,1,reviewed
-candidate:the uk,the uk,the uk,英国,the u.k.|the uk,2,reviewed
-candidate:the usa,the usa,the usa,美国,the u.s.a.|the united states of america|the usa,3,reviewed
+candidate:the uk,the uk,the UK,英国,the u.k.|the uk,2,reviewed
+candidate:the usa,the usa,the USA,美国,the u.s.a.|the united states of america|the usa,3,reviewed
 candidate:the white house,the white house,the White House,白宫,the white house,1,reviewed
 candidate:the yangtze river,the yangtze river,the Yangtze River,长江,the yangtze river,1,reviewed
 candidate:theatre,theatre,theatre,剧院；戏院,theatre,3,reviewed
@@ -1284,7 +1279,6 @@ candidate:themselves,themselves,themselves,他们自己；她们自己；它们�
 candidate:these,these,these,这些,these,4,reviewed
 candidate:they,they,they,他们；她们；它们,they,4,reviewed
 candidate:thick,thick,thick,厚的,thick,2,reviewed
-candidate:thin,thin,thin,更薄的；更瘦的；更细的,thinner,1,reviewed
 candidate:thing,thing,thing,东西；事物,thing,5,reviewed
 candidate:third,third,third,第三,third,3,reviewed
 candidate:thirsty,thirsty,thirsty,口渴的,thirsty,5,reviewed
@@ -1408,7 +1402,6 @@ candidate:warm-up,warm-up,warm-up,热身；准备运动,warm-up,1,reviewed
 candidate:wash,wash,wash,洗；清洗,wash|washed,5,reviewed
 candidate:wash clothes,wash clothes,wash clothes,洗衣服,wash clothes|wash my clothes|washed clothes,3,reviewed
 candidate:washington d.c.,washington d.c.,Washington D.C.,华盛顿特区,washington d.c.,1,reviewed
-candidate:watch,watch,watch,看；观看,watched,1,reviewed
 candidate:watch tv,watch tv,watch TV,看电视,watch tv|watched tv|watching tv,5,reviewed
 candidate:water bottle,water bottle,water bottle,水瓶；水杯,water bottle,2,reviewed
 candidate:water the plants,water the plants,water the plants,,watering the plants,1,reviewed
