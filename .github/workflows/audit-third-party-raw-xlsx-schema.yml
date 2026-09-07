@@ -1,3 +1,4 @@
+# one-shot raw schema audit trigger
 name: Audit Third-party Raw XLSX Structure
 
 on:
@@ -75,7 +76,6 @@ jobs:
                   continue
               files=[p for p in folder.glob('*.xlsx') if pat.fullmatch(p.name)]
               if family=='beijing_start1':
-                  # Beijing naming differs; source adapter truth will be inspected separately if this broad match is empty/large.
                   files=sorted(files)[:12]
               print(f'=== FAMILY {family} files={len(files)} ===')
               for p in sorted(files):
