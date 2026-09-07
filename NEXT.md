@@ -116,14 +116,14 @@ Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1536
-Review/blocker surfaces   = 357
+Vocabulary preview        = 1537
+Review/blocker surfaces   = 356
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1527
+keep-identity     = 1528
 reuse-identity    =   61
-held              =  316
+held              =  315
 split-required    =   41
 route-expression  =   83
 source-only       =   34
@@ -132,10 +132,10 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34109382978
-latest blocker-audit commit                = 5c4a1e7dab7b2333f822f854efcf352caaa0e745
-bot-generated data commit                  = b127b7e6b19bcd787bffd75cd12b80e0c45705cd
-Vocabulary Preview TargetSense complete    = 1536 / 1536
+GitHub Actions run                         = 34110209336
+latest blocker-audit commit                = 72fabdb87a7cba949f8b65ab7ed720f3e38edc6d
+bot-generated data commit                  = 01fc6b0d11de8a95cddcfccbea3606feb5e36199
+Vocabulary Preview TargetSense complete    = 1537 / 1537
 Third-party Completion Recheck             = PASS
 Independent post-workflow recheck          = PASS
 Source occurrence closure                  = PASS
@@ -159,11 +159,11 @@ Review/blocker surfaces = 444
 route-expression        = 81
 ```
 
-到当前 `b127b7e6b19bcd787bffd75cd12b80e0c45705cd`：
+到当前 `01fc6b0d11de8a95cddcfccbea3606feb5e36199`：
 
 ```text
-review_queue            -87
-Vocabulary preview      +85
+review_queue            -88
+Vocabulary preview      +86
 route-expression         +2
 held → split-required    +2（save、break，均仍保留为 blocker）
 ```
@@ -171,35 +171,30 @@ held → split-required    +2（save、break，均仍保留为 blocker）
 因此：
 
 ```text
-444 blockers → 357 blockers
-1451 preview → 1536 preview
+444 blockers → 356 blockers
+1451 preview → 1537 preview
 81 Expressions → 83 Expressions
 ```
 
-累计完成 89 次独立 blocker decision refinement：其中 87 个 blocker 被证据充分地释放/路由出 review_queue；另 2 个 `save`、`break` 依据 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。
+累计完成 90 次独立 blocker decision refinement：其中 88 个 blocker 被证据充分地释放/路由出 review_queue；另 2 个 `save`、`break` 依据 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。
 
 最新独立批次只更新 1 条 decision：
 
 ```text
-break → held → split-required
+boating → held → keep-identity → 划船；划船活动
 ```
 
 最新批次 source-context：
 
 ```text
-`beijing_start1|g4-lower|r054|break`
-位于 crowd / push / slowly / break / broke / drop / dropped / fix 的连续语境，锁定“打破 / 弄坏”这一物理损坏义项。
+`renjiao_start3|g5-upper|r129|boating`
+位于 hill / tree / bridge / building / village / house / boating / go boating 的自然与休闲活动词汇序列中。
+教材把 `boating` 作为独立 headword，并紧邻固定短语 `go boating`；这足以把当前 occurrence 绑定为 lexicalized activity noun“划船；划船活动”，而不是任意的 boat + -ing 形式。
 
-`hujiao_start3|g4-lower|r051|break`
-位于 subject / lesson / timetable / a.m. / p.m. / break / from ... to ... / sport 的课程表语境，锁定学校“课间休息 / 休息时间”义项。
-
-`waiyan_start1|g5-upper|r070|break`
-现有 neighborhood 与休息义项相容，但不改变前两处证据已经明确暴露两个独立 elementary learning units 的判断。
-
-因此不能把两个义项压平为一个 TargetSense；当前正确状态是 `split-required`，等待 occurrence-level sense split 与独立 LearnerCN 映射。
+该判断与现有 `hiking → 徒步旅行` 的 Stage-A 边界一致；它只解决 `boating` 这一条 source-bound learning unit，不代表全局 gerund/form policy 已冻结。`cycling`、`dancing` 仍继续 held，等待各自 source evidence 独立审计。
 ```
 
-Completion Recheck：workflow 的 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；transient `decision_updates.csv` 已删除。Git compare 显示 bot commit 仅修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived staging 文件。Preview 仍为 1536；`break` 保留在 blocker 中但已从普通 `held` 提升为 `split-required`。`study`、`won`、`CD` 继续 held；`save`、`saw`、`break` 继续 split-required。
+Completion Recheck：workflow 的 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；transient `decision_updates.csv` 已删除。独立复核确认 `boating` 已使用显式 JSON `OccurrenceKeys` 持久化，并进入 Preview；Git compare 显示 bot commit 只修改 `anki/klose/third_party_vocabulary/` 下的 transient inbox、durable decision 与 derived staging 文件，没有触碰 Klose Master/Learner/Publish/Anki。`study`、`won`、`cycling`、`dancing` 继续 held；此前 `save`、`saw`、`break` 等 split-required 边界未被本批修改。
 
 此前筛查但未释放：
 
@@ -233,6 +228,7 @@ be interested in → 对……感兴趣
 bench → 长凳
 bicycle → 自行车
 bike ride → 骑自行车出行；骑车兜风
+boating → 划船；划船活动
 cashier → 收银员
 cheese → 奶酪；干酪
 hot dog → 热狗
@@ -254,6 +250,8 @@ bright     → held
 study      → held
 CD         → held / abbreviation policy
 won        → held / irregular-form policy
+cycling    → held / gerund-form boundary
+dancing    → held / gerund-form boundary
 save       → split-required / 节约资源 vs 救助人
 break      → split-required / 物理损坏 vs 课间休息
 saw        → split-required
@@ -275,7 +273,7 @@ cold       → split-required
 下一步：
 
 ```text
-1. 继续审计当前 357 个 held/split blocker；
+1. 继续审计当前 356 个 held/split blocker；
 2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目；
 3. 若 source occurrences 已明确暴露多个真实 learning units，应从 held 升级为 split-required，而不是强行释放；
 4. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split；
@@ -318,7 +316,7 @@ CI / script success 不能单独作为“结果正确”的结论；必须再做
 
 ```text
 waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
-剩余 357 held/split blockers — continue evidence-driven audit; true blockers remain deferred
+剩余 356 held/split blockers — continue evidence-driven audit; true blockers remain deferred
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（admission 前）
