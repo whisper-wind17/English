@@ -15,6 +15,7 @@ on:
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_review_bundle.py'
+      - 'tools/propose_third_party_policy_decisions.py'
       - 'tools/check_third_party_corpus.py'
       - 'tools/recheck_third_party_audit_batch.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
@@ -122,6 +123,9 @@ jobs:
 
       - name: Build high-throughput blocker review bundle
         run: python tools/build_third_party_review_bundle.py
+
+      - name: Build deterministic policy decision proposals
+        run: python tools/propose_third_party_policy_decisions.py
 
       - name: Independent audit-batch Completion Recheck
         run: python tools/recheck_third_party_audit_batch.py verify
