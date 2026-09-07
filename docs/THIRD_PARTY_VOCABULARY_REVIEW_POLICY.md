@@ -1,18 +1,30 @@
 # Third-party Vocabulary — High-throughput Review Policy
 
-本文件只定义 Stage-A blocker 审计的批处理策略与类级 policy。它不改变 Source/Identity 真源边界：`identity_decisions.csv` 仍是唯一内容决策真源，`review_queue.csv` / `review_bundle.csv` 都是 derived views。
+本文件定义 Stage-A blocker 审计的批处理策略与类级 policy。它不改变 Source/Identity 真源边界：`identity_decisions.csv` 仍是唯一内容决策真源；`review_queue.csv`、`review_bundle.csv`、`decision_proposals.csv` 都是 generated/derived views。
 
 ## 1. Batch review contract
 
-默认不再采用 2–3 个词一个 workflow 的微批次。
+不再采用 2–3 个词一个 workflow 的微批次，也不再给所有 blocker 使用同一 batch size。
 
 ```text
-每批扫描 blocker        = 30–50
-目标有效 refinement     = 10–25（证据允许时可更高）
-每批 decision_updates   = 1 次
-每批 Stage-A workflow   = 1 次
-每批 Completion Recheck = 1 次 core + 1 次 batch-aware
-每批完成后              = 立即更新 NEXT.md
+policy-executable          = 60–100 / batch
+actionable-semantic        = 40–60 / batch
+semantic-review            = 20–40 / batch
+split-resolution           = 20–30 / batch
+object-boundary            = 20–30 / batch
+source-reconciliation      = 10–15 / batch
+deferred-high-ambiguity    = 0 / default scan
+```
+
+每个独立批次仍然只允许：
+
+```text
+1 个 decision_updates.csv
+1 次 Stage-A workflow
+1 次 core Completion Recheck
+1 次 batch-aware Completion Recheck
+1 次 independent sample/high-risk/diff recheck
+完成后立即更新 NEXT.md
 ```
 
 吞吐提升不能通过降低内容门槛实现。仍遵守：
@@ -25,83 +37,152 @@ source context 明确单一 elementary learning unit → keep-identity
 证据不足 / policy 未满足                         → held
 ```
 
-## 2. Review Bundle
+## 2. Review Bundle v2
 
-`anki/klose/third_party_vocabulary/audit/review_bundle.csv` 是 generated audit aid，一行一个当前 blocker，按 AuditPriority 排序，包含：
+`anki/klose/third_party_vocabulary/audit/review_bundle.csv` 是 generated audit aid，一行一个当前 blocker。除原有 source neighborhood 外，v2 还直接提供：
 
 ```text
-BlockerClass / AuditPriority
-当前 DecisionAction / Status / Confidence / Basis / Rationale
-Definitions / CandidateSignals / SourceIDs / SourceBooks
+ActionabilityScore
+ReviewLane
+RecommendedBatchSize
+BlockerClass
+CandidateCanonical
+CanonicalExists
+CanonicalAction / CanonicalStatus
+CanonicalTargetSense
+CanonicalDefinitions
+CanonicalOccurrenceCount
+PolicyRecommendedAction
+DeferReason
 所有 active SourceOccurrenceKey
 每个 occurrence 同书前后各 8 个 source words
 ```
 
-`audit/` 只是吞吐优化用的 generated 辅助层，不属于 core staging truth；这样 `staging/` 的 frozen physical contract 不需要扩张。Review Bundle 的用途是让一次模型上下文直接覆盖 30–50 个 blocker，避免逐词反复 GitHub lookup。它不允许被手工编辑，也不能反向覆盖 `identity_decisions.csv`。
+Review Bundle 必须与 `review_queue.csv` MatchKey 集合完全闭合；不允许出现缺项或额外项。
 
-## 3. Blocker classes
+### 2.1 Actionability
+
+`semantic-easy` 不再仅凭“single source + single occurrence”决定执行优先级。Actionability 结合：
 
 ```text
-semantic-easy             priority 10
-semantic-cross-source     priority 20
-split-resolution          priority 30
-semantic-hard             priority 40
-multiword-object-boundary priority 45
-form-policy               priority 60
-abbreviation-policy       priority 70
-functional-polysemy       priority 80
+正向：单一 POS / source context 可读 / canonical 已 reviewed / evidence 一致
+负向：多 POS / 多小学义项 / 当前 rationale 明示 evidence insufficient /
+      source-gloss conflict / functional polysemy / unresolved canonical
 ```
 
-审计顺序默认从低 priority 到高 priority。目的不是优先“容易降 blocker 数量”，而是先处理证据充分且决策成本低的内容，再把系统性 policy blocker 与真正高歧义词分离。
+分数只是 review scheduling 信号，不是内容真源，不得自动产生 identity decision。
 
-## 4. Irregular / inflected-form policy
+### 2.2 Execution lanes
+
+当前 derived lane：
+
+```text
+policy-executable             # frozen policy + reviewed canonical，可快速确认
+policy-review                 # policy 已冻结，但 occurrence/object boundary 仍需判断
+actionable-semantic           # 高 actionability semantic review
+semantic-review               # 普通 semantic review
+split-resolution              # 已知 occurrence-level 多义
+object-boundary               # multiword / Vocabulary vs Expression/source-only
+source-reconciliation-needed  # glossary/source evidence 冲突
+deferred-high-ambiguity       # 无新 evidence 时默认不重复扫描
+```
+
+`deferred-high-ambiguity` 的意义是减少重复推理，不等于永久放弃；source evidence 或 policy 变化后可以重新进入 active lane。
+
+## 3. Canonical evidence rule
+
+对于 form / alias blocker，Review Bundle 必须直接展示 canonical current state，避免模型第二次 lookup：
+
+```text
+CandidateCanonical
+CanonicalAction
+CanonicalStatus
+CanonicalTargetSense
+CanonicalDefinitions
+CanonicalOccurrenceCount
+```
+
+只有：
+
+```text
+canonical exists
+AND CanonicalAction = keep-identity
+AND CanonicalStatus = reviewed
+AND occurrence 与 canonical 是同一 lexical sense
+```
+
+才可以把 form proposal 确认为 `reuse-identity`。canonical 仍是 held/split/pending 时严禁绕过 blocker。
+
+## 4. Deterministic policy proposal engine
+
+`tools/propose_third_party_policy_decisions.py` 读取 Review Bundle，生成：
+
+```text
+anki/klose/third_party_vocabulary/audit/decision_proposals.csv
+```
+
+Proposal 只针对机械可检查的 frozen-policy 情况，例如 reviewed canonical 上的 transparent inflected/form reuse。
+
+硬规则：
+
+```text
+decision_proposals.csv = derived-only
+AutoApply               = no
+ReviewMode              = confirm-or-reject
+proposal 必须显式包含当前 OccurrenceKeys
+proposal canonical 必须 reviewed keep-identity + 非空 TargetSense
+proposal 不得写 identity_decisions.csv
+proposal 不得写 decision_updates.csv
+```
+
+模型/人工仍需依据 occurrence evidence 确认“该 occurrence 与 canonical 同义”，确认后才可转换成 transient `decision_updates.csv`。
+
+## 5. Irregular / inflected-form policy
 
 原则：**词形不是新的 lexical sense。**
 
 - 规则/不规则过去式、过去分词、普通复数、第三人称单数等，若只是 base lexical unit 的形态实现，默认不 mint 新 Vocabulary identity。
-- 当 base surface 已存在、其 target sense 已 reviewed 且 source occurrence 与其语义一致时，可 `reuse-identity → base`。
-- 若 base identity 仍被 semantic blocker 阻塞，form 不得绕过 canonical blocker；继续 held，直到 base resolved。
-- 若教材把某 form 作为具有独立记忆价值的明确 pedagogical learning unit，允许显式例外；必须有 rationale，不通过 morphology 自动决定。
-- 已冻结的 pedagogical exceptions（如当前系统明确保留的 `women`）不因本 policy 被自动重写。
+- 当 base surface 已存在、target sense 已 reviewed 且 source occurrence 与其语义一致时，可 `reuse-identity → base`。
+- 若 base identity 仍被 semantic blocker 阻塞，form 不得绕过 canonical blocker。
+- 若教材把某 form 作为具有独立记忆价值的明确 pedagogical learning unit，允许显式例外；必须有 rationale。
+- 已冻结 pedagogical exception（例如 `women`）不因 proposal engine 被自动重写。
 
-因此，`won / wrote / ate / bought / came / rode / swam ...` 不再逐词重新讨论“是不是过去式”；只需要检查：base 是否存在、base sense 是否已冻结、该 occurrence 是否同义。其余属于机械 policy application。
+因此 `won / wrote / ate / bought / came / rode / swam ...` 不再逐词重新讨论“是不是过去式”；只检查 canonical readiness + occurrence same-sense。
 
-## 5. `-ing` / activity policy
+## 6. `-ing` / activity policy
 
 不能把所有 `-ing` 都视为 form，也不能把所有 `-ing` 都视为独立词。
 
-- 透明进行时/动名词形态，仅表达 base verb 同一 lexical concept → 默认 form alias / reuse candidate。
-- 教材把 `-ing` surface 作为独立 headword，并在活动/运动类别中作为稳定 activity noun 使用 → 可保留独立 Vocabulary learning unit。
-- `hiking`、`boating` 属于已由 source context 确认的 lexicalized activity units；它们不是“所有 -ing 自动 keep”的先例。
-- `cycling / dancing / reading / running ...` 按同一规则审 evidence，不因词尾自动释放或自动 collapse。
+- 透明进行时/普通动名词，仅表达 base verb 同一 lexical concept → form/reuse candidate。
+- 教材把 `-ing` surface 作为独立 headword，并在活动/运动类别中作为稳定 activity noun → 可保留独立 Vocabulary learning unit。
+- `hiking / boating / reading / running / singing` 是 evidence-based 个案，不是“所有 -ing 自动 keep”。
+- Review Bundle 检测到 hobby/activity neighborhood 时，必须进入 `policy-review`，不得由 deterministic proposal engine 自动 reuse。
 
-## 6. Abbreviation / contraction policy
+## 7. Abbreviation / contraction policy
 
-分两类处理：
+### 7.1 Grammatical contractions
 
-### 6.1 Grammatical contractions
-
-`won't / you'll / you're / where's / wouldn't ...` 是 grammatical presentation forms，不因缩写形式本身 mint 新 lexical identity。
+`won't / you'll / you're / where's / wouldn't ...` 是 grammatical presentation forms，不因缩写本身 mint 新 lexical identity。
 
 - expansion/canonical object 已明确且可复用 → reuse candidate；
-- canonical/object boundary 仍未冻结 → held；
-- 不允许用错误 dictionary gloss 把 contraction 解释成无关 lexical sense。
+- canonical/object boundary 未冻结 → held / policy-review；
+- 不允许使用错误 dictionary gloss 定义 contraction。
 
-### 6.2 Lexical abbreviations
+### 7.2 Lexical abbreviations
 
-`CD / a.m. / p.m. / PS / RSVP ...` 只有在 source context 能明确绑定一个小学 learning unit 时才释放。
+`CD / a.m. / p.m. / PS / RSVP ...` 只有 source context 能明确绑定一个小学 learning unit 时才释放。
 
-- 单一、稳定且教材明确教授的 abbreviation concept 可 keep-identity；
+- 单一、稳定且教材明确教授的 abbreviation concept → keep-identity；
 - 多 expansion / source context 不足 → held；
-- 实际是 communicative instruction/formula 的，可 route-expression。
+- communicative instruction/formula → route-expression。
 
-## 7. Fast workflow path
+## 8. Fast workflow path
 
-Decision-only 更新不需要重新 parse 未变化的教材 source。
+Decision-only 更新不重新 parse 未变化教材 source。
 
 ```text
 Source/raw/parser/config changed
-→ parse + validate all affected adapters
+→ parse + validate affected adapters
 → apply decisions
 → build corpus
 → core recheck
@@ -121,12 +202,14 @@ source occurrence closure
 explicit OccurrenceKeys
 changed evidence requeues
 canonical blocker cannot be bypassed
+Review Bundle closes over current blockers
+policy proposals never auto-apply
 Klose Master/Learner/Publish/Anki untouched
 ```
 
-## 8. Batch-aware Completion Recheck
+## 9. Batch-aware Completion Recheck
 
-`tools/recheck_third_party_audit_batch.py` 在 apply 前 capture 本批 transient decisions，在 build 后 verify：
+`tools/recheck_third_party_audit_batch.py` 在 apply 前 capture transient decisions，在 build 后 verify：
 
 - 每个 intended DecisionKey 已持久化；
 - action/status/TargetSense/basis/rationale 与本批输入一致；
@@ -138,3 +221,17 @@ Klose Master/Learner/Publish/Anki untouched
 - transient inbox 已删除。
 
 该检查补充 `tools/check_third_party_corpus.py`，不替代 core Completion Recheck。
+
+## 10. Split-resolution is a separate architecture task
+
+当前 `split-required` 已能表达“同一 MatchKey 存在多个真实 learning units”，但 Stage-A Preview 的 multipart provisional identity materialization 仍需独立实现和回归测试。
+
+因此吞吐 v2 不允许为了降低 blocker 数而把 split surface 强压成单一 TargetSense。后续单独实现：
+
+```text
+one MatchKey
++ occurrence-partitioned reviewed decisions
+→ multiple provisional Stage-A identities
+```
+
+该能力仍不得 mint Stable ThirdPartyID，也不得提前进入 Stage B。
