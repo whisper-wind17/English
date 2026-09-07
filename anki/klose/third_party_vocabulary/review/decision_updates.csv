@@ -1,0 +1,80 @@
+DecisionKey,MatchKey,OccurrenceKeys,Action,CanonicalMatchKey,ObjectType,TargetSense,Status,Confidence,DecisionBasis,Rationale
+surface:vase,vase,*,keep-identity,,vocabulary,花瓶,reviewed,high,hujiao-vz-stable-sense,Current elementary occurrences support the flower-vase noun.
+surface:vegetable,vegetable,*,keep-identity,,vocabulary,蔬菜,reviewed,high,hujiao-vz-stable-sense,Current food vocabulary occurrences support the vegetable noun.
+surface:very,very,*,keep-identity,,vocabulary,非常；很,reviewed,high,hujiao-vz-stable-sense,The Hujiao occurrence supports the degree adverb.
+surface:village,village,*,keep-identity,,vocabulary,村庄,reviewed,high,hujiao-vz-stable-sense,Current place vocabulary supports the village noun.
+surface:violin,violin,*,keep-identity,,vocabulary,小提琴,reviewed,high,hujiao-vz-stable-sense,The Hujiao music occurrence supports the instrument noun.
+surface:visit,visit,*,keep-identity,,vocabulary,参观；访问,reviewed,high,hujiao-vz-core-visit-sense,Current occurrences share the elementary visit concept.
+surface:volleyball,volleyball,*,keep-identity,,vocabulary,排球,reviewed,high,hujiao-vz-stable-sense,The sport noun has one stable elementary meaning.
+surface:wait,wait,*,keep-identity,,vocabulary,等待；等候,reviewed,high,hujiao-vz-stable-sense,Current occurrences support the ordinary waiting action.
+surface:walk,walk,*,keep-identity,,vocabulary,走；步行；散步,reviewed,high,hujiao-vz-core-walk-sense,Current noun and verb occurrences share the elementary walking concept.
+surface:wall,wall,*,keep-identity,,vocabulary,墙；墙壁,reviewed,high,hujiao-vz-stable-sense,Current building and room vocabulary supports the wall noun.
+surface:want,want,*,keep-identity,,vocabulary,想要,reviewed,high,hujiao-vz-core-verb-sense,Current elementary occurrences support the want or desire meaning rather than lack.
+surface:warm,warm,*,keep-identity,,vocabulary,温暖的,reviewed,high,hujiao-vz-weather-sense,Current weather and season occurrences support the temperature adjective.
+surface:warm-up,warm-up,*,keep-identity,,vocabulary,热身；准备运动,reviewed,high,hujiao-vz-fixed-lexical-unit,The Hujiao item is a stable exercise lexical unit.
+surface:wash,wash,*,keep-identity,,vocabulary,洗；清洗,reviewed,high,hujiao-vz-core-verb-sense,Current daily-routine occurrences support the washing action.
+surface:wash ... face,wash ... face,*,route-expression,,expression,洗……的脸,reviewed,high,hujiao-vz-slot-expression,The explicit slot-bearing pattern is an Expression object rather than a Vocabulary identity.
+surface:watch,watch,*,split-required,,vocabulary,,held,high,hujiao-vz-semantic-split,Source evidence spans the noun wristwatch and the verb watch or view including explicit watch TV context so occurrence-level resolution is required.
+surface:watch tv,watch tv,*,keep-identity,,vocabulary,看电视,reviewed,high,hujiao-vz-fixed-lexical-unit,The fixed collocation has one clear elementary meaning.
+surface:water,water,*,split-required,,vocabulary,,held,high,hujiao-vz-semantic-split,Source occurrences include beverage noun water and plant-care verb water so these are distinct elementary learning units.
+surface:watermelon,watermelon,*,keep-identity,,vocabulary,西瓜,reviewed,high,hujiao-vz-stable-sense,The fruit noun has one stable elementary meaning.
+surface:way,way,*,held,,vocabulary,,held,medium,hujiao-vz-semantic-boundary-held,Way can mean method road or direction and current source facts do not safely lock one target sense across editions.
+surface:we,we,*,keep-identity,,vocabulary,我们,reviewed,high,hujiao-vz-grammar-learning-unit,Current occurrences support the first-person plural subject pronoun.
+surface:weak in,weak in,*,route-expression,,expression,在……方面较弱；不擅长……,reviewed,high,hujiao-vz-open-complement-expression,Weak in requires an open complement and is better represented as an Expression pattern.
+surface:wear,wear,*,keep-identity,,vocabulary,穿；戴,reviewed,high,hujiao-vz-clothing-sense,Current clothing and safety contexts support wearing clothes or accessories.
+surface:wear glasses,wear glasses,*,keep-identity,,vocabulary,戴眼镜,reviewed,high,hujiao-vz-fixed-lexical-unit,The fixed collocation has one clear elementary meaning.
+surface:weather,weather,*,keep-identity,,vocabulary,天气,reviewed,high,hujiao-vz-weather-sense,All current elementary occurrences support the weather noun.
+surface:wednesday,wednesday,*,keep-identity,,vocabulary,星期三,reviewed,high,hujiao-vz-stable-sense,The weekday name has one stable learning-unit meaning.
+surface:week,week,*,keep-identity,,vocabulary,星期；周,reviewed,high,hujiao-vz-stable-sense,The time noun has one stable elementary meaning.
+surface:weekend,weekend,*,keep-identity,,vocabulary,周末,reviewed,high,hujiao-vz-stable-sense,Current occurrences support the weekend noun.
+surface:weigh,weigh,*,keep-identity,,vocabulary,称重量；重……,reviewed,high,hujiao-vz-measurement-sense,The Hujiao measurement sequence with kilograms and centimetres locks the weight-measurement sense.
+surface:welcome,welcome,*,keep-identity,,vocabulary,欢迎,reviewed,high,hujiao-vz-core-welcome-sense,Current elementary occurrences share the welcoming concept.
+surface:well,well,*,held,,vocabulary,,held,medium,hujiao-vz-semantic-boundary-held,Source context excludes the well-as-water-source noun but still does not safely choose between healthy and well-as-adverb learning units across editions.
+surface:well-known,well-known,*,keep-identity,,vocabulary,著名的；众所周知的,reviewed,high,hujiao-vz-stable-sense,The adjective has one clear elementary meaning.
+surface:west,west,*,keep-identity,,vocabulary,西；西方,reviewed,high,hujiao-vz-direction-sense,Current geography occurrences support the west direction or region sense.
+surface:western,western,*,keep-identity,,vocabulary,西方的；西部的,reviewed,high,hujiao-vz-direction-sense,The Hujiao geography and culture context supports the adjective.
+surface:what,what,*,keep-identity,,vocabulary,什么,reviewed,high,hujiao-vz-question-word,Current low-grade occurrences support the interrogative question word.
+surface:when,when,*,keep-identity,,vocabulary,什么时候；何时,reviewed,medium,hujiao-vz-question-word,Current textbook positions are time-question contexts and do not provide evidence for a separate conjunction learning unit in this corpus slice.
+surface:where,where,*,keep-identity,,vocabulary,哪里；在哪里,reviewed,high,hujiao-vz-question-word,Current low-grade location contexts support the interrogative question word.
+surface:which,which,*,keep-identity,,vocabulary,哪一个；哪些,reviewed,high,hujiao-vz-question-word,Current choice and comparison contexts support the interrogative determiner or pronoun.
+surface:white,white,*,keep-identity,,vocabulary,白色；白色的,reviewed,high,hujiao-vz-colour-sense,Current elementary colour occurrences support the colour learning unit.
+surface:who,who,*,keep-identity,,vocabulary,谁,reviewed,high,hujiao-vz-question-word,Current occurrences support the interrogative person question word.
+surface:whose,whose,*,keep-identity,,vocabulary,谁的,reviewed,high,hujiao-vz-question-word,Current occurrences support the interrogative possessive question word.
+surface:why,why,*,keep-identity,,vocabulary,为什么,reviewed,high,hujiao-vz-question-word,Current occurrences support the interrogative reason question word.
+surface:wife,wife,*,keep-identity,,vocabulary,妻子,reviewed,high,hujiao-vz-family-sense,The Hujiao family noun has one clear meaning.
+surface:wild,wild,*,keep-identity,,vocabulary,野生的,reviewed,high,hujiao-vz-animal-sense,The Hujiao endangered-animal context locks the wild-animal adjective sense.
+surface:wild geese,wild geese,*,held,,vocabulary,,held,medium,hujiao-vz-irregular-form-policy,Wild geese is the irregular plural of wild goose and remains under the existing irregular-form policy rather than being string-collapsed.
+surface:wild goose,wild goose,*,held,,vocabulary,,held,medium,hujiao-vz-irregular-form-policy,Wild goose and wild geese remain under the same irregular singular-plural identity policy used for child-children and tooth-teeth.
+surface:will,will,*,keep-identity,,vocabulary,将；会（表示将来）,reviewed,high,hujiao-vz-future-modal,Beijing Renjiao and Hujiao source positions all support the future modal rather than noun will or testament senses.
+surface:win,win,*,keep-identity,,vocabulary,赢；获胜,reviewed,high,hujiao-vz-core-verb-sense,Current competition contexts support the win verb while past-form won remains separately held under form policy.
+surface:wind,wind,*,keep-identity,,vocabulary,风,reviewed,high,hujiao-vz-weather-sense,The Hujiao occurrence sits in a weather block with rainy cloudy windy sunny cloud rain and sun so the noun wind is locked.
+surface:wind-bell,wind-bell,*,keep-identity,,vocabulary,风铃,reviewed,high,hujiao-vz-stable-sense,The compound noun has one clear elementary meaning.
+surface:windmill,windmill,*,keep-identity,,vocabulary,风车,reviewed,high,hujiao-vz-stable-sense,The Hujiao compound noun supports the windmill or wind-driven toy sense.
+surface:window,window,*,keep-identity,,vocabulary,窗户,reviewed,high,hujiao-vz-stable-sense,Current room and building vocabulary supports the window noun.
+surface:windy,windy,*,keep-identity,,vocabulary,有风的；多风的,reviewed,high,hujiao-vz-weather-sense,Current weather occurrences support the adjective.
+surface:winter,winter,*,keep-identity,,vocabulary,冬天；冬季,reviewed,high,hujiao-vz-season-sense,Current season occurrences support the winter noun.
+surface:wish,wish,*,held,,vocabulary,,held,medium,hujiao-vz-semantic-boundary-held,The single Hujiao source fact does not safely distinguish noun wish from verb wish for identity purposes.
+surface:with,with,*,held,,vocabulary,,held,medium,hujiao-vz-function-word-held,With has several elementary relations including accompaniment and instrument and current source facts do not lock one target learning unit.
+surface:wonderful,wonderful,*,keep-identity,,vocabulary,精彩的；极好的,reviewed,high,hujiao-vz-stable-sense,Current evaluative adjective occurrences share one elementary meaning.
+surface:wood,wood,*,keep-identity,,vocabulary,木头；木材,reviewed,medium,hujiao-vz-material-sense,Current source positions are consistent with the wood material sense rather than a woodland sense.
+surface:woof,woof,*,keep-identity,,vocabulary,汪；狗叫声,reviewed,high,hujiao-vz-onomatopoeia-sense,The Hujiao elementary item targets the sound of a dog barking.
+surface:word,word,*,keep-identity,,vocabulary,单词,reviewed,high,hujiao-vz-language-sense,Current language-learning contexts including a Renjiao word-book block lock the word-as-vocabulary-item sense.
+surface:work,work,*,keep-identity,,vocabulary,工作,reviewed,high,hujiao-vz-core-work-sense,Current elementary activity and occupation contexts share the ordinary work concept.
+surface:worker,worker,*,keep-identity,,vocabulary,工人；劳动者,reviewed,high,hujiao-vz-occupation-sense,Current occupation contexts support the worker noun.
+surface:world,world,*,keep-identity,,vocabulary,世界,reviewed,high,hujiao-vz-stable-sense,Current geography and general contexts support the world noun.
+surface:worry,worry,*,keep-identity,,vocabulary,担心；发愁,reviewed,high,hujiao-vz-feeling-sense,Current health and feeling contexts support the worry concept.
+surface:would like,would like,*,keep-identity,,vocabulary,想要,reviewed,high,hujiao-vz-fixed-lexical-unit,The fixed lexical phrase has one clear elementary meaning and contains no explicit open slot in the source surface.
+surface:write,write,*,keep-identity,,vocabulary,写；书写,reviewed,high,hujiao-vz-core-verb-sense,Current literacy contexts support the writing action.
+surface:writer,writer,*,keep-identity,,vocabulary,作家；作者,reviewed,high,hujiao-vz-occupation-sense,Current occurrences support the writer or author noun.
+surface:wrong,wrong,*,keep-identity,,vocabulary,错误的；不对的,reviewed,high,hujiao-vz-adjective-sense,Current elementary problem and health contexts support the adjective meaning.
+surface:yard,yard,*,keep-identity,,vocabulary,院子；庭院,reviewed,high,hujiao-vz-place-sense,Beijing and Hujiao contexts support the yard-as-courtyard sense rather than the unit of length.
+surface:year,year,*,keep-identity,,vocabulary,年,reviewed,high,hujiao-vz-time-sense,Current elementary time occurrences support the calendar-year noun.
+surface:yellow,yellow,*,keep-identity,,vocabulary,黄色；黄色的,reviewed,high,hujiao-vz-colour-sense,Current low-grade occurrences support the colour learning unit.
+surface:yes,yes,*,keep-identity,,vocabulary,是；是的,reviewed,high,hujiao-vz-response-sense,Current low-grade dialogue occurrences support the affirmative response.
+surface:yesterday,yesterday,*,keep-identity,,vocabulary,昨天,reviewed,high,hujiao-vz-time-sense,Current elementary time occurrences support the previous-day meaning.
+surface:you,you,*,keep-identity,,vocabulary,你；你们,reviewed,high,hujiao-vz-grammar-learning-unit,Current occurrences support the second-person pronoun.
+surface:young,young,*,keep-identity,,vocabulary,年轻的；年幼的,reviewed,high,hujiao-vz-age-sense,Current people and animal-description contexts support the age adjective.
+surface:your,your,*,keep-identity,,vocabulary,你的；你们的,reviewed,high,hujiao-vz-grammar-learning-unit,Your is a possessive determiner and remains a separate grammar learning unit from yours.
+surface:yours,yours,*,keep-identity,,vocabulary,你的；你们的,reviewed,high,hujiao-vz-grammar-learning-unit,Yours is an independent possessive pronoun learning unit and must not be morphology-merged into your.
+surface:yourself,yourself,*,keep-identity,,vocabulary,你自己,reviewed,high,hujiao-vz-grammar-learning-unit,The reflexive pronoun is a stable independent learning unit.
+surface:zoo,zoo,*,keep-identity,,vocabulary,动物园,reviewed,high,hujiao-vz-stable-sense,All current elementary occurrences support the zoo noun.
