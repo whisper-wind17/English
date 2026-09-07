@@ -16,6 +16,39 @@ source-reconciliation      = 10–15 / batch
 deferred-high-ambiguity    = 0 / default scan
 ```
 
+### 1.1 Full-batch adjudication — FROZEN
+
+`RecommendedBatchSize` 表示一次应完成 adjudication 的 active surface 数，不是“最多挑多少个容易 release 的 surface”。一旦选定一个 active batch，本批中的每个 surface 都必须在同一次 review pass 中得到明确结果：
+
+```text
+release / canonical reuse / route-expression / source-only
+OR
+held + explicit audited-defer rationale
+OR
+split-required / occurrence-partitioned resolution
+```
+
+禁止只提交其中容易 release 的子集，并把其余 surface 留到后续重复扫描。若 evidence 不足，正确结果是本批内写入显式 audited-defer，而不是把该 item 当作“尚未处理”。
+
+必须同时报告两个独立指标：
+
+```text
+Review throughput    = 本批实际完成 adjudication 的 surface 数
+Net blocker release  = 本批最终安全离开 blocker 的 surface 数
+```
+
+二者不得互相替代。高吞吐的目标是提高 `Review throughput` 并减少重复审查；`Net blocker release` 必须服从 evidence quality，不得为了数字降低 identity / object / canonical / split 门槛。
+
+Batch completion 必须满足：
+
+```text
+selected active batch closure = 100%
+```
+
+也就是本轮选中的 active surfaces 要么安全 release/route/reuse，要么形成 durable、可解释的 audited-defer/split 结果；不能以“只处理了可释放项”宣告 batch 完成。
+
+已进入 `deferred-high-ambiguity` 且 evidence 未变化的 surface 不计入后续 active throughput，也不得重复扫描；source evidence / policy / canonical state 变化触发 requeue 后，才重新进入 active batch。
+
 每个独立批次仍然只允许：
 
 ```text
