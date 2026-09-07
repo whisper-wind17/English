@@ -112,14 +112,14 @@ Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1543
-Review/blocker surfaces   = 350
+Vocabulary preview        = 1546
+Review/blocker surfaces   = 347
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1534
+keep-identity     = 1537
 reuse-identity    =   61
-held              =  305
+held              =  302
 split-required    =   45
 route-expression  =   83
 source-only       =   34
@@ -128,10 +128,10 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34114544756
-latest blocker-audit commit                = 75e7a8a7e3bb8f2e3dc58ee880e23ff326ca2463
-bot-generated data commit                  = d5e7c7653478cad1c1fb526ee65a04325e3ac143
-Vocabulary Preview TargetSense complete    = 1543 / 1543
+GitHub Actions run                         = 34115124182
+latest blocker-audit commit                = 59c76380b4cb6a0c62fd61b13e917f9c91f7dd42
+bot-generated data commit                  = aa6e90bde6573981396147873d4db85882575e3c
+Vocabulary Preview TargetSense complete    = 1546 / 1546
 Third-party Completion Recheck             = PASS
 Independent post-workflow recheck          = PASS
 Source occurrence closure                  = PASS
@@ -159,54 +159,55 @@ split-required          = 39
 当前：
 
 ```text
-444 blockers → 350 blockers
-1451 preview → 1543 preview
+444 blockers → 347 blockers
+1451 preview → 1546 preview
 81 Expressions → 83 Expressions
 39 split-required → 45 split-required
 ```
 
-累计完成 100 次 blocker decision refinement：94 个 blocker 被证据充分地释放/路由出 review_queue；6 个 `save / break / dish / cut / drop / dream` 因 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。blocker 数量下降不是质量目标。
+累计完成 103 次 blocker decision refinement：97 个 blocker 被证据充分地释放/路由出 review_queue（其中 95 个进入 Vocabulary Preview、2 个 route-expression）；6 个 `save / break / dish / cut / drop / dream` 因 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。blocker 数量下降不是质量目标。
 
 ### 最新独立批次
 
 ```text
-cut   → held → split-required
-        ├─ 剪；切
-        └─ 伤口；割伤
-
-drop  → held → split-required
-        ├─ 掉落；使掉下
-        └─ 水滴
-
-dream → held → split-required
-        ├─ 梦想；愿望
-        └─ 梦；做梦
+dark → held → keep-identity → 黑暗的；昏暗的
+dry  → held → keep-identity → 干的；干燥的
+grab → held → keep-identity → 抓住；抓取
 ```
 
 Source evidence：
 
 ```text
-cut
-- hujiao_start3|g5-upper|r133|cut：wind-bell / cut / paper，锁定 craft action“剪；切”。
-- waiyan_start1|g4-upper|r103|cut：bump / hurt / knee / cut / finger，锁定 injury noun“伤口；割伤”。
+dark
+- waiyan_start1|g6-lower|r012|dark
+- 位于 to go / dark / cloud / Oh dear! / dry / stay / cloudy 的 weather/story sequence；紧邻 cloud，锁定描述光线/明暗的 adjective sense。
 
-drop
-- beijing_start1|g4-lower|r056|drop：break / broke / drop / dropped / fix，锁定 action“掉落；使掉下”。
-- hujiao_start3|g5-upper|r142|drop：Water unit 的 useful / drop / up / shine / over / mountain / tree / ground，锁定 concrete noun“水滴”。
-- hujiao_start3|g5-lower|r012|drop 不足以消除上述 noun/verb split，因此保留 occurrence-level split。
+dry
+- waiyan_start1|g6-lower|r015|dry
+- 位于同一 weather/story sequence，并紧邻 stay / cloudy；锁定 stay-dry/weather 的 adjective sense“干的；干燥的”。
 
-dream
-- renjiao_start1|g4-lower|r044|dream：travel/vacation destination sequence，支持“梦想；愿望”。
-- renjiao_start3|g6-lower|r093|dream：紧邻 woke，锁定 sleep sense“梦；做梦”。
+grab
+- waiyan_start1|g6-lower|r025|grab
+- 位于 cry / thing / need / grab / balloon / fly away 的 narrative/action sequence；锁定普通动作义“抓住；抓取”。
 ```
 
-本批 workflow 全部 PASS。独立复核确认三条 decision 均以显式 JSON `OccurrenceKeys` 持久化，仍留在 `review_queue`；Preview 计数保持 1543；transient `decision_updates.csv` 已删除。Git compare 只修改 third-party Stage-A 的 durable decision / derived blocker view，没有触碰 Klose Master / Learner / Publish / Anki。
+本批 workflow 全部 PASS。独立复核确认三条 decision 均以显式 JSON `OccurrenceKeys` 持久化并进入 Preview；三条均已从 `review_queue` 消失；transient `decision_updates.csv` 已删除。Git compare 仅修改 third-party Stage-A transient inbox、durable decision 和 derived staging 文件，没有触碰 Klose Master / Learner / Publish / Anki。`study` 与 `won` 等已知 semantic/form blockers 仍保持 held。
+
+近期已确认的 split-required 边界：
+
+```text
+save  → 节约资源 vs 救助人
+break → 物理损坏 vs 课间休息
+dish  → 盘；盘子 vs 菜肴；一道菜
+cut   → 剪；切 vs 伤口；割伤
+drop  → 掉落；使掉下 vs 水滴
+dream → 梦想；愿望 vs 梦；做梦
+```
 
 代表性已释放 learning units：
 
 ```text
 blow → 吹；刮
-blow off → 吹掉；刮掉
 attention → 注意；注意力
 hiking → 徒步旅行
 a bit → 有点儿；稍微
@@ -226,6 +227,9 @@ clapping game → 拍手游戏
 come back → 回来；返回
 comic → 漫画；连环漫画
 crisp → 薯片；炸薯片
+dark → 黑暗的；昏暗的
+dry → 干的；干燥的
+grab → 抓住；抓取
 hot dog → 热狗
 lion dance → 舞狮
 long ago → 很久以前；从前
@@ -264,7 +268,7 @@ cold       → split-required
 **当前不要自动启用 `waiyan_start3`。**
 
 ```text
-1. 继续审计当前 350 个 held/split blocker。
+1. 继续审计当前 347 个 held/split blocker。
 2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目。
 3. 若 source occurrences 明确暴露多个真实 learning units，升级为 split-required，不强行释放。
 4. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split。
@@ -304,7 +308,7 @@ CI / script success 不能单独作为“结果正确”的结论；必须再做
 
 ```text
 waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
-剩余 350 held/split blockers — continue evidence-driven audit
+剩余 347 held/split blockers — continue evidence-driven audit
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes British/American IPA completion before admission
