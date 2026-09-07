@@ -2,9 +2,9 @@
 """Build an evidence-rich, high-throughput review bundle for Stage-A blockers.
 
 `identity_decisions.csv` remains the only content-decision truth. This generated
-bundle adds triage class, actionability, execution lane, canonical evidence and
-source neighborhoods so model review can focus on the most actionable blockers
-without repeated repository lookups.
+bundle adds triage class, actionability, execution lane, directional canonical
+evidence and source neighborhoods so review can focus on actionable blockers without
+repeated repository lookups.
 """
 from __future__ import annotations
 
@@ -36,6 +36,7 @@ FIELDS = [
     "OccurrenceCount",
     "CandidateSignals",
     "CandidateCanonical",
+    "CanonicalRelation",
     "CanonicalExists",
     "CanonicalAction",
     "CanonicalStatus",
@@ -86,6 +87,10 @@ CONTRACTION_BASE = {
 }
 
 POS_RE = re.compile(r"(?:^|[\s;,/])(?:n|v|vt|vi|adj|adv|prep|pron|conj|aux)\.", re.I)
+NAMED_FORM_RE = re.compile(
+    r"\b([A-Za-z][A-Za-z' -]{0,30}?)\s*的\s*(过去式|过去分词|过去式和过去分词|复数|ing形式|现在分词|第三人称单数)",
+    re.I,
+)
 LOW_EVIDENCE_MARKERS = (
     "insufficient", "does not bind", "cannot safely", "do not safely", "ambig",
     "multiple", "several", "polysem", "boundary", "without source context",
@@ -130,28 +135,89 @@ def decision_summary(rows: list[dict[str, str]]) -> tuple[str, str, str, str]:
     return "multipart-reviewed" if reviewed else "split-required", "reviewed" if reviewed else "held", "", ""
 
 
-def candidate_bases(key: str, explicit_candidates: list[str], all_keys: set[str]) -> list[str]:
-    candidates: list[str] = []
-    candidates.extend(explicit_candidates)
-    if key in IRREGULAR_BASE:
-        candidates.append(IRREGULAR_BASE[key])
-    if key in CONTRACTION_BASE:
-        candidates.append(CONTRACTION_BASE[key])
+def spelling_past_candidates(key: str) -> list[str]:
+    out: list[str] = []
+    if key.endswith("ied") and len(key) > 4:
+        out.append(key[:-3] + "y")
+    if key.endswith("ed") and len(key) > 3:
+        out.extend([key[:-2], key[:-1]])
+        if len(key) > 4 and key[-3] == key[-4]:
+            out.append(key[:-3])
+    return list(dict.fromkeys(out))
 
-    if " " not in key and key not in PEDAGOGICAL_FORM_EXCEPTIONS:
-        if key.endswith("ied") and len(key) > 4:
-            candidates.append(key[:-3] + "y")
-        if key.endswith("ed") and len(key) > 3:
-            candidates.extend([key[:-2], key[:-1]])
-            if len(key) > 4 and key[-3] == key[-4]:
-                candidates.append(key[:-3])
-        if key.endswith("ing") and len(key) > 4:
-            stem = key[:-3]
-            candidates.extend([stem, stem + "e"])
-            if len(stem) > 2 and stem[-1] == stem[-2]:
-                candidates.append(stem[:-1])
 
-    return list(dict.fromkeys(c for c in candidates if c in all_keys and c != key))
+def spelling_ing_candidates(key: str) -> list[str]:
+    if not key.endswith("ing") or len(key) <= 4:
+        return []
+    stem = key[:-3]
+    out = [stem, stem + "e"]
+    if len(stem) > 2 and stem[-1] == stem[-2]:
+        out.append(stem[:-1])
+    return list(dict.fromkeys(out))
+
+
+def spelling_plural_candidates(key: str) -> list[str]:
+    out: list[str] = []
+    if key.endswith("ies") and len(key) > 4:
+        out.append(key[:-3] + "y")
+    if key.endswith("ves") and len(key) > 4:
+        out.extend([key[:-3] + "f", key[:-3] + "fe"])
+    if key.endswith("es") and len(key) > 3:
+        out.append(key[:-2])
+    if key.endswith("s") and len(key) > 2 and not key.endswith("ss"):
+        out.append(key[:-1])
+    return list(dict.fromkeys(out))
+
+
+def candidate_bases(
+    key: str,
+    explicit_candidates: list[str],
+    all_keys: set[str],
+    definitions: str,
+) -> tuple[list[str], str]:
+    """Return only directional form candidates; never trust symmetric morph links alone."""
+    named: list[tuple[str, str]] = []
+    for match in NAMED_FORM_RE.finditer(definitions):
+        base = match.group(1).strip().casefold()
+        marker = match.group(2).casefold()
+        if "复数" in marker:
+            relation = "plural-form"
+        elif "ing" in marker or "现在分词" in marker:
+            relation = "ing-form"
+        elif "第三人称" in marker:
+            relation = "third-person-form"
+        else:
+            relation = "named-past-form"
+        named.append((base, relation))
+    named = [(base, relation) for base, relation in named if base in all_keys and base != key]
+    if named:
+        relations = {relation for _, relation in named}
+        bases = list(dict.fromkeys(base for base, _ in named))
+        return bases, relations.pop() if len(relations) == 1 else "named-form"
+
+    if key in IRREGULAR_BASE and IRREGULAR_BASE[key] in all_keys:
+        return [IRREGULAR_BASE[key]], "irregular-form"
+    if key in CONTRACTION_BASE and CONTRACTION_BASE[key] in all_keys:
+        return [CONTRACTION_BASE[key]], "contraction"
+
+    definition_cf = definitions.casefold()
+    if "过去式" in definition_cf or "过去分词" in definition_cf:
+        derived = [candidate for candidate in spelling_past_candidates(key) if candidate in all_keys]
+        if explicit_candidates:
+            directional = [candidate for candidate in derived if candidate in explicit_candidates]
+            if directional:
+                derived = directional
+        return list(dict.fromkeys(derived)), "regular-past-form"
+
+    if "ing形式" in definition_cf or "现在分词" in definition_cf:
+        derived = [candidate for candidate in spelling_ing_candidates(key) if candidate in all_keys]
+        return list(dict.fromkeys(derived)), "ing-form"
+
+    if "复数" in definition_cf:
+        derived = [candidate for candidate in spelling_plural_candidates(key) if candidate in all_keys]
+        return list(dict.fromkeys(derived)), "plural-form"
+
+    return [], ""
 
 
 def evidence_words(evidence: list[dict[str, object]]) -> set[str]:
@@ -226,6 +292,7 @@ def score_actionability(
     candidate_canonical: str,
     canonical_action: str,
     canonical_status: str,
+    canonical_relation: str,
 ) -> int:
     score = 50
     key = blocker["MatchKey"].casefold()
@@ -233,7 +300,7 @@ def score_actionability(
     text = decision_text.casefold()
     source_ids = [x for x in blocker.get("SourceIDs", "").split("|") if x]
     occ_count = int(blocker.get("OccurrenceCount", "0") or 0)
-    pos_count = len(set(m.group(0).strip().casefold() for m in POS_RE.finditer(definitions)))
+    pos_count = len(set(match.group(0).strip().casefold() for match in POS_RE.finditer(definitions)))
 
     if len(source_ids) == 1 and occ_count == 1:
         score += 10
@@ -261,8 +328,10 @@ def score_actionability(
     canonical_ready = candidate_canonical and canonical_action == "keep-identity" and canonical_status == "reviewed"
     if blocker_class == "form-policy":
         score += 25 if canonical_ready else -15
+        if canonical_relation in {"plural-form", "ing-form", "third-person-form"}:
+            score -= 15
         if key.endswith("ing") and evidence_words(evidence) & ACTIVITY_ANCHORS:
-            score -= 10
+            score -= 15
 
     return max(0, min(100, score))
 
@@ -275,6 +344,7 @@ def lane_for(
     candidate_canonical: str,
     canonical_action: str,
     canonical_status: str,
+    canonical_relation: str,
     evidence: list[dict[str, object]],
 ) -> tuple[str, int, str, str]:
     text = decision_text.casefold()
@@ -287,10 +357,15 @@ def lane_for(
     if blocker_class == "form-policy":
         if key in PEDAGOGICAL_FORM_EXCEPTIONS:
             return "policy-review", 30, "preserve-pedagogical-exception", "explicit form exception"
+        if canonical_relation in {"plural-form", "ing-form", "third-person-form"}:
+            reason = "plural/-ing/3sg form can encode a pedagogical or lexicalized unit; confirm manually"
+            return "policy-review", 30, "review-form-boundary", reason
         if key.endswith("ing") and evidence_words(evidence) & ACTIVITY_ANCHORS:
             return "policy-review", 30, "review-lexicalized-activity", "activity-noun boundary needs evidence confirmation"
-        if canonical_ready:
+        if canonical_ready and score >= 60 and canonical_relation in {"irregular-form", "regular-past-form", "named-past-form", "contraction"}:
             return "policy-executable", 80, "reuse-identity", ""
+        if canonical_ready:
+            return "policy-review", 30, "review-form-reuse", "canonical is ready but occurrence evidence/relation is not deterministic enough"
         return "policy-review", 30, "hold-canonical-unresolved", "canonical not reviewed keep-identity"
     if blocker_class == "abbreviation-policy":
         return "policy-review", 30, "manual-abbreviation-review", "abbreviation expansion/object boundary needs confirmation"
@@ -344,8 +419,8 @@ def main() -> None:
         evidence: list[dict[str, object]] = []
         for occurrence in occurrences_by_match.get(key, []):
             rows, index = position[occurrence["SourceOccurrenceKey"]]
-            before = [r["Word"] for r in rows[max(0, index - 8):index]]
-            after = [r["Word"] for r in rows[index + 1:index + 9]]
+            before = [row["Word"] for row in rows[max(0, index - 8):index]]
+            after = [row["Word"] for row in rows[index + 1:index + 9]]
             evidence.append({
                 "SourceOccurrenceKey": occurrence["SourceOccurrenceKey"],
                 "SourceID": occurrence["SourceID"],
@@ -359,8 +434,10 @@ def main() -> None:
                 "After": after,
             })
 
-        explicit_candidates = [x for x in blocker.get("CandidateMatchKeys", "").split("|") if x]
-        bases = candidate_bases(key.casefold(), explicit_candidates, all_keys)
+        explicit_candidates = [value for value in blocker.get("CandidateMatchKeys", "").split("|") if value]
+        bases, canonical_relation = candidate_bases(
+            key.casefold(), explicit_candidates, all_keys, blocker.get("Definitions", "")
+        )
         candidate_canonical = bases[0] if len(bases) == 1 else ""
         canonical_rows = decisions_by_match.get(candidate_canonical, []) if candidate_canonical else []
         canonical_action, canonical_status, canonical_sense, _ = decision_summary(canonical_rows)
@@ -376,11 +453,11 @@ def main() -> None:
         )
         score = score_actionability(
             blocker, blocker_class, decision_text, evidence,
-            candidate_canonical, canonical_action, canonical_status,
+            candidate_canonical, canonical_action, canonical_status, canonical_relation,
         )
         lane, batch_size, recommended_action, defer_reason = lane_for(
             key.casefold(), blocker_class, score, decision_text,
-            candidate_canonical, canonical_action, canonical_status, evidence,
+            candidate_canonical, canonical_action, canonical_status, canonical_relation, evidence,
         )
 
         bundle.append({
@@ -397,6 +474,7 @@ def main() -> None:
             "OccurrenceCount": blocker.get("OccurrenceCount", ""),
             "CandidateSignals": blocker.get("CandidateSignals", ""),
             "CandidateCanonical": candidate_canonical,
+            "CanonicalRelation": canonical_relation,
             "CanonicalExists": "yes" if candidate_canonical else "no",
             "CanonicalAction": canonical_action,
             "CanonicalStatus": canonical_status,
@@ -442,7 +520,7 @@ def main() -> None:
     for name in ("80-100", "65-79", "45-64", "0-44"):
         print(f"review bundle actionability {name} = {score_bands[name]}")
     print("review bundle neighborhood radius = 8")
-    print("review bundle canonical evidence = yes")
+    print("review bundle canonical evidence = directional")
     print("review bundle closure = pass")
     print("review bundle decision truth = derived-only")
 
