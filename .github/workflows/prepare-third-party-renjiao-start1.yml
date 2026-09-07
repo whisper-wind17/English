@@ -14,7 +14,9 @@ on:
       - 'tools/check_third_party_waiyan_start1.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
+      - 'tools/build_third_party_review_bundle.py'
       - 'tools/check_third_party_corpus.py'
+      - 'tools/recheck_third_party_audit_batch.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/人教版/人教版三年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/沪教版/沪教版三年级起点*.xlsx'
@@ -34,33 +36,64 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
+      - name: Detect source-adapter changes
+        id: scope
+        shell: bash
+        run: |
+          source_changed=true
+          if [[ "${{ github.event_name }}" == "push" ]] && git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --name-only HEAD^ HEAD > /tmp/third_party_changed_files.txt
+            source_changed=false
+            if grep -Eq '^((tools/(prepare|check)_third_party_(renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1)\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/beijing_start1_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
+              source_changed=true
+            fi
+          fi
+          echo "source_changed=$source_changed" >> "$GITHUB_OUTPUT"
+          echo "Source adapter refresh required = $source_changed"
+          if [[ -f /tmp/third_party_changed_files.txt ]]; then
+            cat /tmp/third_party_changed_files.txt
+          fi
+
+      - name: Capture transient audit decision batch
+        run: python tools/recheck_third_party_audit_batch.py capture
+
       - name: Parse Renjiao start1 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/prepare_third_party_renjiao_start1.py
 
       - name: Validate Renjiao start1 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_renjiao_start1.py
 
       - name: Parse Renjiao start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/prepare_third_party_renjiao_start3.py
 
       - name: Validate Renjiao start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_renjiao_start3.py
 
       - name: Parse Hujiao start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/prepare_third_party_hujiao_start3.py
 
       - name: Validate Hujiao start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_hujiao_start3.py
 
       - name: Parse Waiyan start1 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/prepare_third_party_waiyan_start1.py
 
       - name: Validate Waiyan start1 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_waiyan_start1.py
 
       - name: Apply transient reviewed identity decisions
@@ -87,6 +120,12 @@ jobs:
       - name: Independent third-party Completion Recheck
         run: python tools/check_third_party_corpus.py
 
+      - name: Build high-throughput blocker review bundle
+        run: python tools/build_third_party_review_bundle.py
+
+      - name: Independent audit-batch Completion Recheck
+        run: python tools/recheck_third_party_audit_batch.py verify
+
       - name: Assert Klose publishing state is untouched
         run: |
           git diff --exit-code -- \
@@ -101,6 +140,7 @@ jobs:
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add -A \
             anki/klose/third_party_vocabulary/review \
+            anki/klose/third_party_vocabulary/audit \
             anki/klose/source_reference/renjiao_start1_staging/README.md \
             anki/klose/source_reference/renjiao_start1_staging/occurrences.csv \
             anki/klose/source_reference/renjiao_start3_staging/README.md \
