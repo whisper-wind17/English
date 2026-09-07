@@ -24,7 +24,7 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
 ```
 
-动态进度/当前计数只以本 `NEXT.md` 为准；`docs/THIRD_PARTY_VOCABULARY_CORPUS.md` 中旧 checkpoint 是历史记录。不要仅凭聊天历史推测当前状态。
+动态进度/当前计数只以本 `NEXT.md` 为准；旧 checkpoint 只作历史记录。不要仅凭聊天历史推测当前状态。
 
 ---
 
@@ -85,62 +85,78 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A checkpoint — ACTIVE SEMANTIC LANES CLOSED
+## 4. Current Stage-A checkpoint — SOURCE RECONCILIATION LANE CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1580
-Review/blocker surfaces   = 291
+Vocabulary preview        = 1586
+Review/blocker surfaces   = 285
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1571
+keep-identity     = 1577
 reuse-identity    =   83
-held              =  246
-split-required    =   45
+held              =  238
+split-required    =   47
 route-expression  =   83
 source-only       =   34
 ```
 
-与上一 checkpoint（293 blockers / 1578 preview）相比：
+本批处理原 `source-reconciliation-needed = 17`：
 
 ```text
-5 intended decision refinements
-├─ hall     held → keep   = 大厅；礼堂
-├─ poor     held → keep   = 贫穷的；贫困的
-├─ cannot   held → held   = reclassified to form-policy
-├─ heavier  held → held   = reclassified to form-policy
-└─ has      held → held   = reclassified to form-policy
+6 keep-identity
+├─ maybe     → 也许；可能；大概
+├─ parrot    → 鹦鹉
+├─ surprise  → 惊喜；惊讶
+├─ tomb      → 坟墓；陵墓
+├─ true      → 真实的；正确的
+└─ tunnel    → 隧道
 
-blockers 293 → 291
-preview  1578 → 1580
-keep     1569 → 1571
-held      248 → 246
+2 held → split-required
+├─ past   → 方向“经过” vs 时间“……过”
+└─ point  → point to 动作 vs 分数/数值 point
+
+9 held refinements
+├─ won't / don't → frozen contraction policy
+├─ Australian    → nationality POS boundary
+└─ ever / player / coin / line / matter / report
+   → current source neighborhood insufficient; do not force release
 ```
 
-三个 held refinement 没有为了减少 blocker 数而强行 release；它们通过新的 DecisionBasis/Rationale 自动进入正确的 `form-policy / policy-review` lane，无需扩张代码 heuristics。
+结果：
 
-当前 `actionable-semantic = 0`、`semantic-review = 0`，这两个 active semantic lanes 已清空。
+```text
+blockers 291 → 285
+preview  1580 → 1586
+keep     1571 → 1577
+held      246 → 238
+split      45 → 47
+source-reconciliation-needed 17 → 0
+```
+
+blocker 数下降不是质量目标；9 个 held refinement 只改善分类/审计状态，不靠强行 release 降数量。
 
 ---
 
 ## 5. Latest batch validation
 
 ```text
-GitHub Actions run                         = 34133509823   SUCCESS
-decision commit                            = ca9978473fce9ae7b68cde98973deff233a51f91
-bot-generated data commit                  = ab8211b46681684940c592742ad65f4e93339afc
-batch decisions                            = 5 = 2 keep + 3 held refinement
-Vocabulary Preview TargetSense complete    = 1580 / 1580
+GitHub Actions run                         = 34134125248   SUCCESS
+decision commit                            = 487ed5bbe3d469d63ec0d10917d178b7d59d00ce
+bot-generated data commit                  = 6307238
+batch decisions                            = 17 = 6 keep + 9 held + 2 split
+Vocabulary Preview TargetSense complete    = 1586 / 1586
 Third-party core Completion Recheck         = PASS
 Audit-batch Completion Recheck              = PASS
 Independent post-workflow recheck           = PASS
 Decision-only fast path                     = PASS
 Source adapters reparsed                    = NO
-Review Bundle closure                       = 291 / 291 PASS
+Review Bundle closure                       = 285 / 285 PASS
+Source-reconciliation lane                  = 0
 Policy proposals remaining                  = 0
 Source occurrence closure                   = PASS
 Explicit reviewed OccurrenceKeys            = PASS
@@ -155,33 +171,19 @@ Final Klose diff executed                   = NO
 
 Independent verification：
 
-- `hall` durable row = reviewed keep-identity，TargetSense `大厅；礼堂`；Preview 已出现 `candidate:hall`；
-- `poor` durable row = reviewed keep-identity，TargetSense `贫穷的；贫困的`；Preview 已出现 `candidate:poor`；
-- `cannot` / `heavier` / `has` 仍 held，但 Review Bundle 已正确归到 `form-policy / policy-review`；
+- `maybe / parrot / surprise / tomb / true / tunnel` 均已进入 Preview，TargetSense 与本批 decision 一致；
+- `past / point` 均为 `split-required`，没有泄漏进 Preview；
 - `study` 仍 held，`may` 仍 split-required；
-- transient `decision_updates.csv` 已删除；
-- compare `75855905... → ab8211b...` 只包含 third-party audit/review/staging 六类 derived/content files，没有 Klose Master/Learner/Publish/Anki，也没有额外代码变更。
+- `decision_updates.csv` 已删除；
+- compare 本批前 checkpoint `28df4379...` → bot `6307238...` 只变化 third-party audit/review/staging 六个文件，无 Klose Master/Learner/Publish/Anki、无 tool/code 修改。
+
+注意：`ever` 与 `player` 已完成一次 source audit 并明确应 defer，但当前 score heuristic 仍将它们显示为 `semantic-review`；没有新 source evidence 时 **不要再次扫描这两个词**。这是 derived triage 的已知轻微欠拟合，不改变 durable decision truth。
 
 ---
 
 ## 6. Throughput architecture v2 — FROZEN
 
-Review Bundle 每个 blocker 一行，提供：
-
-```text
-ActionabilityScore
-ReviewLane
-RecommendedBatchSize
-BlockerClass
-Current Decision + Definitions
-all active occurrences + 同书前后 ±8 words
-CandidateCanonical + CanonicalRelation
-CanonicalAction / Status / TargetSense / Definitions / OccurrenceCount
-PolicyRecommendedAction
-DeferReason
-```
-
-当前 291 blockers 分类：
+当前 285 blockers 分类：
 
 ```text
 abbreviation-policy       = 14
@@ -189,22 +191,22 @@ form-policy               = 81
 functional-polysemy       = 18
 multiword-object-boundary = 39
 semantic-cross-source     = 56
-semantic-easy             = 34
-semantic-hard             = 4
-split-resolution          = 45
+semantic-easy             = 28
+semantic-hard             = 2
+split-resolution          = 47
 ```
 
 当前 execution lanes：
 
 ```text
+source-reconciliation-needed  = 0
 actionable-semantic           = 0
-semantic-review               = 0
-source-reconciliation-needed  = 17
-policy-executable             = 10
-policy-review                 = 83
+semantic-review               = 2   # ever/player; audited-defer exceptions
+policy-executable             = 10  # proposal engine outputs 0
+policy-review                 = 85
 object-boundary               = 39
-deferred-high-ambiguity       = 97
-split-resolution              = 45
+deferred-high-ambiguity       = 102
+split-resolution              = 47
 ```
 
 Actionability bands：
@@ -212,13 +214,13 @@ Actionability bands：
 ```text
 80–100 = 2
 65–79  = 10
-45–64  = 45
-0–44   = 234
+45–64  = 47
+0–44   = 226
 ```
 
-`policy-executable = 10` 但 deterministic proposal engine 输出 0：1 个 grammar-special + 9 个 multi-POS/lexicalization-risk 被 guard 拦截，不能机械 reuse。
+`policy-executable = 10` 仍全部被 proposal guard 拦截：1 grammar-special + 9 multi-POS/lexicalization-risk，不能机械 reuse。
 
-`deferred-high-ambiguity = 97` 默认不扫描；只有 source evidence / policy 变化才重新激活。
+`deferred-high-ambiguity` 默认不扫描；`ever/player` 也按人工 audited-defer 处理，除非 evidence 改变。
 
 ---
 
@@ -226,9 +228,9 @@ Actionability bands：
 
 ```text
 about      → held / functional polysemy
-bright     → held / source evidence insufficient
+bright     → held / insufficient context
 study      → held / multiple target senses
-quarter    → held / cross-source sense evidence insufficient
+quarter    → held / sense evidence insufficient
 CD         → held / abbreviation review
 cannot     → held / full grammatical form + contraction boundary
 heavier    → held / comparative; base heavy not reviewed canonical
@@ -239,6 +241,8 @@ pleased    → held / lexical adjective vs please form
 lost       → held / lose form + lexical adjective
 cycling    → held / -ing lexicalized-activity boundary
 dancing    → held / -ing lexicalized-activity boundary
+past       → split-required / direction vs clock-time
+point      → split-required / point-to vs numeric/score
 save       → split-required / 节约资源 vs 救助人
 break      → split-required / 物理损坏 vs 课间休息
 dish       → split-required / 盘子 vs 菜肴
@@ -250,23 +254,24 @@ saw/watch/may/like/square/left/cook/cold → split-required
 
 ---
 
-## 8. NEXT TASK — SOURCE RECONCILIATION LANE
+## 8. NEXT TASK — OBJECT / POLICY BOUNDARIES BEFORE SPLIT ARCHITECTURE
 
 **当前不要自动启用 `waiyan_start3`。**
 
-下一批：
+下一阶段：
 
 ```text
-1. 处理 source-reconciliation-needed = 17。
-2. 推荐每批 10–15；先处理 source/gloss conflict 可以靠 current occurrence neighborhood 明确校正的项目。
-3. 对真正存在 source conflict / dictionary-noise-vs-source ambiguity 的项，不为降低 blocker 数强行 release；必要时保持 held 或升级 split-required。
-4. 每个 batch 只做一次 decision_updates + 一次 fast workflow。
-5. core + batch-aware + independent sample/high-risk/diff recheck 全部 PASS 后，立即更新 NEXT.md。
-6. 后续再处理 object-boundary / policy-review；deferred-high-ambiguity 默认不扫描。
-7. split-resolution = 45 仍独立排队，等待 occurrence-partitioned multiple provisional Stage-A identity 架构。
-8. blocker 数量下降不是质量目标。
-9. blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 waiyan_start3。
-10. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
+1. 不再扫描 source-reconciliation（已清零）。
+2. ever/player 虽显示 semantic-review，但已人工 defer；无新 evidence 不重复处理。
+3. 下一 active batch 优先 `object-boundary = 39`：每批 20–25，区分 Vocabulary / Expression / source-only / held。
+4. 之后处理 `policy-review = 85`，按 frozen form/-ing/abbreviation policy 批量 evidence application；不要机械 reuse。
+5. `policy-executable = 10` 不直接处理，除非 proposal guard 条件变化；当前 proposal = 0。
+6. `deferred-high-ambiguity = 102` 默认不扫描。
+7. `split-resolution = 47` 仍独立排队，等待 occurrence-partitioned multiple provisional Stage-A identity 架构，不把多义词压成单一 TargetSense。
+8. 每个 batch：1 decision_updates + 1 fast workflow + core/batch/independent recheck；闭环后立即更新 NEXT.md。
+9. blocker 数量下降不是质量目标。
+10. blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 waiyan_start3。
+11. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
 ```
 
 ---
