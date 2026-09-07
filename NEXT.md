@@ -85,125 +85,62 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A content checkpoint — FORM POLICY BATCH CLOSED
+## 4. Current Stage-A checkpoint — ACTIVE SEMANTIC LANES CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1578
-Review/blocker surfaces   = 293
+Vocabulary preview        = 1580
+Review/blocker surfaces   = 291
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1569
+keep-identity     = 1571
 reuse-identity    =   83
-held              =  248
+held              =  246
 split-required    =   45
 route-expression  =   83
 source-only       =   34
 ```
 
-与上一 checkpoint 相比：
+与上一 checkpoint（293 blockers / 1578 preview）相比：
 
 ```text
-blockers 314 → 293   (-21)
-held     269 → 248   (-21)
-reuse     62 →  83   (+21)
-preview 1578 → 1578  (unchanged)
+5 intended decision refinements
+├─ hall     held → keep   = 大厅；礼堂
+├─ poor     held → keep   = 贫穷的；贫困的
+├─ cannot   held → held   = reclassified to form-policy
+├─ heavier  held → held   = reclassified to form-policy
+└─ has      held → held   = reclassified to form-policy
+
+blockers 293 → 291
+preview  1578 → 1580
+keep     1569 → 1571
+held      248 → 246
 ```
 
-Preview 不增加是正确结果：本批 21 个 surface 全部是现有 reviewed canonical identity 的 form aliases，不应产生新的 provisional Vocabulary identity。
+三个 held refinement 没有为了减少 blocker 数而强行 release；它们通过新的 DecisionBasis/Rationale 自动进入正确的 `form-policy / policy-review` lane，无需扩张代码 heuristics。
 
-### 最新 content batch — 21 deterministic form reuses
-
-全部 proposal 经 source definition / occurrence neighborhood / canonical current state 复核后确认：
-
-```text
-became  → become
-brought → bring
-came    → come
-drew    → draw
-forgot  → forget
-learnt  → learn
-met     → meet
-ran     → run
-rode    → ride
-sent    → send
-swam    → swim
-taught  → teach
-told    → tell
-wore    → wear
-wrote   → write
-ate     → eat
-bought  → buy
-gave    → give
-slept   → sleep
-went    → go
-won     → win
-```
-
-所有 21 个 durable rows 均为：
-
-```text
-Action           = reuse-identity
-Status           = reviewed
-Confidence       = high
-OccurrenceKeys   = explicit current JSON array
-Canonical        = reviewed keep-identity + non-empty TargetSense
-DecisionBasis    = frozen-form-policy-proposal-confirmed
-```
-
-受保护的非机械 form boundaries 仍保持 blocker：
-
-```text
-were     → held / grammar-special canonical boundary
-sweets   → held / plural noun 糖果 vs sweet adjective/noun
-pleased  → held / lexical adjective vs please form
-lost     → held / lose form + lexical adjective
-```
-
-高风险 semantic blockers `study` 仍 held，`may` 仍 split-required；没有被本批误改。
+当前 `actionable-semantic = 0`、`semantic-review = 0`，这两个 active semantic lanes 已清空。
 
 ---
 
-## 5. Validation / Completion Recheck
-
-第一次提交 21 decisions 后，workflow run `34132499562` 在 core Completion Recheck 中失败：
+## 5. Latest batch validation
 
 ```text
-Irregular-form blocker lost: slept
-```
-
-原因不是 content decision 错误，而是 `tools/check_third_party_corpus.py` 仍保留旧 hardcoded contract，要求 `slept / swam / won` 永久 held，与已经冻结并实现的 form-reuse policy 冲突。
-
-已修正 checker：
-
-```text
-slept → sleep / swam → swim / won → win
-必须保持 reviewed reuse-identity
-
-were / sweets / pleased / lost
-必须继续 held
-```
-
-该修改使 regression guard 与冻结 policy 对齐，同时保留对 lexicalized / grammar-special 边界的保护。
-
-最终 authoritative validation：
-
-```text
-successful GitHub Actions run               = 34132821989
-21-decision commit                          = 8902011e96dabc3e9bde25bbf000191774879ae8
-recheck-contract fix commit                 = b408fe56dde2880777c32d48dfca172055f59423
-bot-generated data commit                  = 8d03dfddfad3a3fc0e7f1da7d6955bce8edbff9a
-Vocabulary Preview TargetSense complete    = 1578 / 1578
+GitHub Actions run                         = 34133509823   SUCCESS
+decision commit                            = ca9978473fce9ae7b68cde98973deff233a51f91
+bot-generated data commit                  = ab8211b46681684940c592742ad65f4e93339afc
+batch decisions                            = 5 = 2 keep + 3 held refinement
+Vocabulary Preview TargetSense complete    = 1580 / 1580
 Third-party core Completion Recheck         = PASS
 Audit-batch Completion Recheck              = PASS
 Independent post-workflow recheck           = PASS
 Decision-only fast path                     = PASS
 Source adapters reparsed                    = NO
-Review Bundle closure                       = 293 / 293 PASS
+Review Bundle closure                       = 291 / 291 PASS
 Policy proposals remaining                  = 0
 Source occurrence closure                   = PASS
 Explicit reviewed OccurrenceKeys            = PASS
@@ -216,17 +153,20 @@ Stable ThirdPartyID minted                  = NO
 Final Klose diff executed                   = NO
 ```
 
-Independent diff recheck from prior checkpoint `a42db5a...` to `8d03dfd...` contains only third-party audit/review/staging files plus `tools/check_third_party_corpus.py`。没有 Klose Master / Learner / Publish / Anki 变化。
+Independent verification：
 
-`decision_proposals.csv` 现在只有 header：21 条 high-confidence proposal 已全部消费；剩余 10 个 `policy-executable` derived rows 被 proposal engine 主动过滤，其中 1 个 grammar-special + 9 个 multi-POS/lexicalization-risk，不能机械 reuse。
+- `hall` durable row = reviewed keep-identity，TargetSense `大厅；礼堂`；Preview 已出现 `candidate:hall`；
+- `poor` durable row = reviewed keep-identity，TargetSense `贫穷的；贫困的`；Preview 已出现 `candidate:poor`；
+- `cannot` / `heavier` / `has` 仍 held，但 Review Bundle 已正确归到 `form-policy / policy-review`；
+- `study` 仍 held，`may` 仍 split-required；
+- transient `decision_updates.csv` 已删除；
+- compare `75855905... → ab8211b...` 只包含 third-party audit/review/staging 六类 derived/content files，没有 Klose Master/Learner/Publish/Anki，也没有额外代码变更。
 
 ---
 
 ## 6. Throughput architecture v2 — FROZEN
 
-### Review Bundle v2
-
-每个 blocker 一行，直接包含：
+Review Bundle 每个 blocker 一行，提供：
 
 ```text
 ActionabilityScore
@@ -235,36 +175,35 @@ RecommendedBatchSize
 BlockerClass
 Current Decision + Definitions
 all active occurrences + 同书前后 ±8 words
-CandidateCanonical
-CanonicalRelation
+CandidateCanonical + CanonicalRelation
 CanonicalAction / Status / TargetSense / Definitions / OccurrenceCount
 PolicyRecommendedAction
 DeferReason
 ```
 
-当前 293 blockers 分类：
+当前 291 blockers 分类：
 
 ```text
 abbreviation-policy       = 14
-form-policy               = 78
+form-policy               = 81
 functional-polysemy       = 18
 multiword-object-boundary = 39
-semantic-cross-source     = 59
-semantic-easy             = 36
+semantic-cross-source     = 56
+semantic-easy             = 34
 semantic-hard             = 4
 split-resolution          = 45
 ```
 
-当前 lanes：
+当前 execution lanes：
 
 ```text
-actionable-semantic           = 2
-deferred-high-ambiguity       = 97
-object-boundary               = 39
-policy-executable             = 10
-policy-review                 = 80
-semantic-review               = 3
+actionable-semantic           = 0
+semantic-review               = 0
 source-reconciliation-needed  = 17
+policy-executable             = 10
+policy-review                 = 83
+object-boundary               = 39
+deferred-high-ambiguity       = 97
 split-resolution              = 45
 ```
 
@@ -272,35 +211,14 @@ Actionability bands：
 
 ```text
 80–100 = 2
-65–79  = 12
-45–64  = 47
-0–44   = 232
+65–79  = 10
+45–64  = 45
+0–44   = 234
 ```
 
-`deferred-high-ambiguity` 默认不再重复扫描，只有 source evidence / policy 变化才重新激活。
+`policy-executable = 10` 但 deterministic proposal engine 输出 0：1 个 grammar-special + 9 个 multi-POS/lexicalization-risk 被 guard 拦截，不能机械 reuse。
 
-### Batch sizes
-
-```text
-policy proposal confirmation = 60–100 / scan
-actionable-semantic          = 40–60
-semantic-review              = 20–40
-split-resolution             = 20–30
-object-boundary              = 20–30
-source-reconciliation        = 10–15
-deferred-high-ambiguity      = 0 / default scan
-```
-
-每个 independently closed batch：
-
-```text
-1 decision_updates.csv
-1 workflow
-1 core Completion Recheck
-1 batch-aware Completion Recheck
-1 independent sample/high-risk/diff recheck
-完成后立即更新 NEXT.md
-```
+`deferred-high-ambiguity = 97` 默认不扫描；只有 source evidence / policy 变化才重新激活。
 
 ---
 
@@ -312,12 +230,15 @@ bright     → held / source evidence insufficient
 study      → held / multiple target senses
 quarter    → held / cross-source sense evidence insufficient
 CD         → held / abbreviation review
+cannot     → held / full grammatical form + contraction boundary
+heavier    → held / comparative; base heavy not reviewed canonical
+has        → held / third-person form; canonical have blocked
+were       → held / grammar-special form boundary
+sweets     → held / plural noun 糖果 vs sweet adjective/noun
+pleased    → held / lexical adjective vs please form
+lost       → held / lose form + lexical adjective
 cycling    → held / -ing lexicalized-activity boundary
 dancing    → held / -ing lexicalized-activity boundary
-sweets     → held / plural noun 糖果 vs canonical sweet adjective，禁止机械 reuse
-pleased    → held / lexical adjective vs please form，禁止机械 reuse
-lost       → held / inflected lose + lexical adjective，禁止机械 reuse
-were       → held / grammar-special form boundary
 save       → split-required / 节约资源 vs 救助人
 break      → split-required / 物理损坏 vs 课间休息
 dish       → split-required / 盘子 vs 菜肴
@@ -329,43 +250,24 @@ saw/watch/may/like/square/left/cook/cold → split-required
 
 ---
 
-## 8. NEXT TASK — ACTIVE SEMANTIC LANES; DO NOT ENABLE WAIYAN START3
+## 8. NEXT TASK — SOURCE RECONCILIATION LANE
 
 **当前不要自动启用 `waiyan_start3`。**
 
-21 条 deterministic proposal 已完成。下一批执行顺序：
+下一批：
 
 ```text
-1. actionable-semantic (2)
-   - cannot
-   - heavier
-   注意：Actionability 表示“适合快速决策”，不等于应该 release。
-   cannot 实际靠近 contraction/form boundary；
-   heavier 是 comparative，base heavy 当前不在 reviewed canonical source unit 中。
-   如分类不准确，应修正 lane/class，而不是为降低 blocker 数强行 release。
-
-2. semantic-review (3)
-   一次读取全部 bundle evidence，批量决策。
-
-3. source-reconciliation-needed (17)
-   每批 10–15；先处理 source/gloss 可直接校正的项目。
-
-4. object-boundary / policy-review
-   按 evidence 和冻结 policy 批量处理。
-
-5. deferred-high-ambiguity (97)
-   默认不扫描。
-
-6. split-resolution (45)
-   仍作为独立 architecture task：
-   one MatchKey + occurrence-partitioned reviewed decisions
-   → multiple provisional Stage-A identities
-   当前不为降低 blocker 数强压成单一 TargetSense。
+1. 处理 source-reconciliation-needed = 17。
+2. 推荐每批 10–15；先处理 source/gloss conflict 可以靠 current occurrence neighborhood 明确校正的项目。
+3. 对真正存在 source conflict / dictionary-noise-vs-source ambiguity 的项，不为降低 blocker 数强行 release；必要时保持 held 或升级 split-required。
+4. 每个 batch 只做一次 decision_updates + 一次 fast workflow。
+5. core + batch-aware + independent sample/high-risk/diff recheck 全部 PASS 后，立即更新 NEXT.md。
+6. 后续再处理 object-boundary / policy-review；deferred-high-ambiguity 默认不扫描。
+7. split-resolution = 45 仍独立排队，等待 occurrence-partitioned multiple provisional Stage-A identity 架构。
+8. blocker 数量下降不是质量目标。
+9. blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 waiyan_start3。
+10. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
 ```
-
-每个 batch 完成后必须立即更新 NEXT.md，再开始下一批。
-
-blocker 数量下降不是质量目标。blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 `waiyan_start3`。所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
 
 ---
 
