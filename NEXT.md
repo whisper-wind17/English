@@ -162,136 +162,127 @@ hujiao_start3
 
 ---
 
-## 7. Current Stage-A baseline — 4 adapters / Hujiao residual review
+## 7. Current Stage-A baseline — four-adapter review closure reached
 
-三-adapter 闭合基线曾为：
+北京一年级起点 + 人教一年级起点 + 人教三年级起点 + 沪教三年级起点的统一 residual review 已闭合。
 
-```text
-Source occurrences        = 2567
-Normalized surfaces       = 1443
-Durable decisions         = 1443
-Vocabulary preview        = 1223
-pending                   = 0
-evidence-changed          = 0
-true blockers             = 125
-```
-
-启用 `hujiao_start3` 后自动产生：
-
-```text
-722 previously reviewed surfaces with changed evidence
-345 completely new surfaces
-= 1067 pending
-```
-
-这验证了 evidence-aware gate：旧 decision 没有因 surface 相同而静默沿用。
-
-Hujiao 第一轮 A–Z 已逐批完成统一审校，并且每批都通过 independent Completion Recheck。最新可信基线（run `34070209190`）为：
+最新可信基线（GitHub Actions run `34072447467`，generated data commit `4d91766852b22027882b939eb8d6c53c96b5b0a9`）：
 
 ```text
 Enabled adapters          = 4
 Source occurrences        = 3678
 Normalized surfaces       = 1788
-Durable decisions         = 1703
-Vocabulary preview        = 1242
-Review/blocker surfaces   = 428
-Evidence-changed surfaces = 158
+Durable decisions         = 1788
+Vocabulary preview        = 1441
+Review/blocker surfaces   = 219
+Evidence-changed surfaces = 0
+pending                   = 0
 
-Generated current surface state:
-keep-identity     = 1225
-reuse-identity    = 51
-held              = 153
-pending           = 243
-split-required    = 32
-route-expression  = 51
+Durable decision actions:
+keep-identity     = 1427
+reuse-identity    = 52
+held              = 180
+split-required    = 39
+route-expression  = 57
 source-only       = 33
 ```
 
-Hujiao 收敛变化：
+关键解释：
 
 ```text
-pending            1067 → 243
-review/blocker     1134 → 428
-evidence-changed    722 → 158
-Vocabulary preview  582 → 1242
+1788 surfaces = 1788 durable decisions
+pending = 0
 ```
 
-注意：**A–Z 第一轮完成 ≠ Hujiao Identity Resolution 完成。** 当前 `243 pending` 是各字母批次中尚未处理的 residual surfaces；下一阶段继续统一 residual sweep。真正的 `held / split-required` blocker 不应为了追求 `pending=0` 被猜测性合并。
+表示当前四个 adapter 的每个 surface 都已经得到显式 Stage-A 决策；并不表示 1788 个 surface 都已成为 Vocabulary Identity。
 
-当前显式保护的代表性边界包括：
+`review_queue = 219` 全部是真实 blocker：
 
 ```text
-can        = modal / container → held
-chicken    = 鸡 / 鸡肉 → split-required
-cold       = 寒冷 / 感冒 → split-required
-cook       = 烹饪 / 厨师 → split-required
-kind       = 种类 / 友善 → split-required
-left       = 左边 / leave过去式 → split-required
-light      = 多个小学核心义项 → split-required
+held          = 180
+split-required = 39
+```
+
+这些 blocker 不应为了“清零队列”被猜测性合并。`evidence-changed=0` 表示所有当前 decision 都绑定了完整的现行 Source Occurrence evidence。
+
+本轮 Completion Recheck 曾准确拦截一次错误：`study` 被误压成单一 learning unit 时 checker 报 `Known semantic collision flattened: study`。修正为 `held` 后重新执行全流程并 PASS。因此 `study` 继续作为显式 semantic blocker。
+
+代表性已确认边界：
+
+```text
+may        = May / modal may → split-required
 like       = 喜欢 / 像等 → split-required
-mouse      = 老鼠 / 鼠标 → split-required
-orange     = 水果 / 颜色 → split-required
-plant      = 植物 / 种植 → split-required
-play       = 玩/运动 / 演奏 → split-required
-present    = 礼物 / 现在 → split-required
-right      = 右边 / 正确 → split-required
-sound      = 声音 / 听起来 → split-required
 square     = 正方形 / 广场 → split-required
+left       = 左边 / leave过去式 → split-required
+cook       = 烹饪 / 厨师 → split-required
+cold       = 寒冷 / 感冒 → split-required
+study      = 学习 / 研究等 source sense boundary → held
+saw        = see过去式 / 锯子 → split-required
+watch      = 手表 / 观看 → split-required
+water      = 水 / 浇水 → split-required
 taste      = 味道 / 尝、尝起来 → split-required
 thin       = 瘦的 / 薄的 → split-required
 too        = 也 / 太、过度 → split-required
-watch      = 手表 / 观看 → split-required
-water      = 水 / 浇水 → split-required
-will       = 当前来源锁定 future modal“将/会”
-way/well/wish/with = Source Fact 不足 → held
+right      = 右边 / 正确 → split-required
+mouse      = 老鼠 / 鼠标 → split-required
+orange     = 水果 / 颜色 → split-required
+plant      = 植物 / 种植 → split-required
+present    = 礼物 / 现在 → split-required
+sound      = 声音 / 听起来 → split-required
+save/second/stand/star/stay/stick/stop = Source Fact 不足 → held
+stronger   = reuse strong
+swing      = 秋千 → keep-identity
 wild goose / wild geese = irregular-form policy → held
 tooth / teeth = irregular-form policy → held
-your / yours、their / theirs = 独立 grammar learning units，不做 morphology merge
-wash ... face、weak in、try ... on = route-expression
 ```
 
-最近通过：
+最新验证：
 
 ```text
-GitHub Actions run     = 34070209190
-Completion Recheck     = PASS
-Generated data commit  = 63c3a68
-Klose publishing state = untouched
+GitHub Actions run             = 34072447467
+Completion Recheck             = PASS
+Source occurrence closure      = PASS
+Known semantic blockers        = PASS
+Known morphology blockers      = PASS
+Klose publishing state         = untouched
+Transient decision inbox       = removed
+Stable ThirdPartyID minted     = no
+Final Klose diff executed      = no
 ```
 
-当前仍然：
+独立人工 Completion Recheck 亦确认：
 
 ```text
-Stable ThirdPartyID minted = no
-Final Klose diff executed  = no
-Klose Master modified      = no
-Klose Learner modified     = no
-Klose Publish modified     = no
-Anki modified              = no
+review_queue contains pending  = no
+study                          = held
+saw                            = split-required
+swing                          = keep-identity / 秋千
+stronger                       = reuse-identity → strong
+save / second                  = held
+bot commit touched only Stage-A third-party files
+Klose Master/Learner/Publish/Anki = untouched
 ```
 
 ---
 
-## 8. NEXT TASK — residual sweep
+## 8. NEXT TASK — continue Stage A, not Stage B
 
-继续只处理统一 `review_queue.csv`，不增加新的 edition-specific 审校流水线：
+当前四-adapter **review closure 已达到**，但整个 Third-party Stage A 是否结束取决于是否还有计划纳入的小学第三方教材来源。
+
+下一步按以下顺序：
 
 ```text
-1. residual pending = 243：从统一 review_queue 做第二轮 sweep；
-2. 优先处理 evidence-changed = 158，再处理其余 genuinely new pending；
-3. target sense 清晰的稳定义项 → keep/reuse/revalidate；
-4. morphology / irregular form → 按既有 policy canonicalize 或 held；
-5. Vocabulary vs Expression → 显式 route；
-6. 同 surface 多个真实 target sense → split-required；
-7. Source Fact 不足 → held，不为了 pending=0 猜测；
-8. 每批 update 后 rebuild + independent Completion Recheck；
-9. 串行写入，前一 workflow 完成前不提交下一批；
-10. residual pending 收敛后再评估是否达到当前四-adapter Stage-A identity closure；
-11. 仍不 mint Stable ThirdPartyID；
-12. 所有计划第三方来源完成前不执行 Stage-B Klose diff。
+1. 检查第三方教材源目录与 source_adapters.csv，确认下一个尚未接入的计划小学 Source Adapter；
+2. 若仍有计划来源：按 Source Adapter → unified rebuild → evidence-aware requeue → unified review_queue 的同一架构继续接入；
+3. 新 adapter 只能新增 Source Fact，不得自行做 edition-specific Identity Resolution；
+4. 新来源导致已有 surface evidence 改变时，旧 decision 必须自动回到 pending；
+5. 每批 review 后继续执行 independent Completion Recheck；
+6. 不为当前 219 held/split blockers 做猜测性清零；更多教材上下文可用于后续收敛它们；
+7. 仍不 mint Stable ThirdPartyID；
+8. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
 ```
 
-目标不是机械 `pending=0`；目标是 **pending 只因尚未审校而存在，而真正无法安全定案的项目必须显式落到 held / split-required blocker。**
+如果确认 **没有更多计划第三方小学来源**，再进入 Stage-A finalization 设计：先评估 219 blockers 的处理策略与 Stable ThirdPartyID mint gate，完成后才有资格讨论 Stage B。
 
 ---
 
@@ -312,12 +303,14 @@ legacy multi-pass tools absent
 Klose Master/Learner/Publish/Anki untouched
 ```
 
+CI / script success 不能单独作为“结果正确”的结论；必须再做独立 Completion Recheck。
+
 ---
 
 ## 10. Deferred
 
 ```text
-当前 held/split 第三方 blocker：等更多教材上下文、actual textbook 或 form policy 后收敛
+当前 219 held/split 第三方 blocker：等待更多教材上下文、actual textbook 或 form policy 后继续收敛
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（admission 前）
