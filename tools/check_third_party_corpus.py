@@ -188,8 +188,14 @@ def main() -> None:
             "gloves canonicalization lost")
     require(by_key.get("scissors", {}).get("Action") == "keep-identity", "scissors lexicalized decision lost")
     require(by_key.get("crossroads", {}).get("Action") == "keep-identity", "crossroads lexicalized decision lost")
-    for key in ("slept", "swam", "were", "won"):
-        require(by_key.get(key, {}).get("Action") == "held", f"Irregular-form blocker lost: {key}")
+    for key, canonical in {"slept": "sleep", "swam": "swim", "won": "win"}.items():
+        require(
+            by_key.get(key, {}).get("Action") == "reuse-identity"
+            and by_key[key].get("CanonicalMatchKey") == canonical,
+            f"Frozen form-policy reuse regression: {key} -> {canonical}",
+        )
+    for key in ("were", "sweets", "pleased", "lost"):
+        require(by_key.get(key, {}).get("Action") == "held", f"Protected form-policy blocker lost: {key}")
 
     for key in (
         "a few", "get well", "how many", "ice cream", "make use of", "pencil case",
