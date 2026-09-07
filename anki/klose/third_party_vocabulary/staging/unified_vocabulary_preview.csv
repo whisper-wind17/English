@@ -159,7 +159,7 @@ candidate:box,box,box,盒子；箱子,box,7,reviewed
 candidate:boy,boy,boy,男孩,boy,5,reviewed
 candidate:brave,brave,brave,勇敢的,brave,2,reviewed
 candidate:bread,bread,bread,面包,bread,5,reviewed
-candidate:break#damage,break#damage,break,打破；弄坏,break,1,reviewed
+candidate:break#damage,break#damage,break,打破；弄坏,break|broke,2,reviewed
 candidate:break#recess,break#recess,break,课间休息；休息时间,break,2,reviewed
 candidate:breakfast,breakfast,breakfast,早餐；早饭,breakfast,4,reviewed
 candidate:breath,breath,breath,呼吸；气息,breath,1,reviewed
@@ -370,7 +370,7 @@ candidate:dream#aspiration,dream#aspiration,dream,梦想；愿望,dream,1,review
 candidate:dream#sleep,dream#sleep,dream,梦；睡梦,dream,1,reviewed
 candidate:drink cold drinks,drink cold drinks,drink cold drinks,喝冷饮,drank cold drinks,1,reviewed
 candidate:drink#noun,drink#noun,drink,饮料,drink,1,reviewed
-candidate:drink#verb,drink#verb,drink,喝；饮用,drink,6,reviewed
+candidate:drink#verb,drink#verb,drink,喝；饮用,drink|drank,8,reviewed
 candidate:drive,drive,drive,驾驶；开车,drive|drove,4,reviewed
 candidate:drive away,drive away,drive away,赶走；驱赶,drive away,1,reviewed
 candidate:driver,driver,driver,司机；驾驶员,driver,3,reviewed
@@ -505,7 +505,7 @@ candidate:flute,flute,flute,长笛,flute,1,reviewed
 candidate:fly a kite,fly a kite,fly a kite,放风筝,fly a kite,2,reviewed
 candidate:fly away,fly away,fly away,飞走；飞离,fly away,1,reviewed
 candidate:fly#insect,fly#insect,fly,苍蝇,fly,1,reviewed
-candidate:fly#verb,fly#verb,fly,飞；飞行,fly,5,reviewed
+candidate:fly#verb,fly#verb,fly,飞；飞行,fly|flew,6,reviewed
 candidate:foggy,foggy,foggy,有雾的；多雾的,foggy,1,reviewed
 candidate:follow,follow,follow,跟随；遵循,follow,3,reviewed
 candidate:food,food,food,食物,food,4,reviewed
