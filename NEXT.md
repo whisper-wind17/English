@@ -83,10 +83,13 @@ Source Adapter occurrences
 → staging/surface_candidates.csv
 → staging/review_queue.csv
 → staging/unified_vocabulary_preview.csv
+→ learner-facing TargetSense gate
 → tools/check_third_party_corpus.py
 ```
 
 `identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv` 只是 derived blocker/pending view。新增教材导致 occurrence evidence 改变时，旧 decision 必须自动 pending，不能静默继承。
+
+Vocabulary Preview 现在有额外发布前门禁：任何 reviewed provisional Vocabulary candidate 的 `TargetSense` 为空都会直接使 Stage-A workflow 失败。
 
 ---
 
@@ -104,154 +107,112 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A baseline — REVIEW CLOSURE REACHED
+## 4. Current Stage-A baseline — REVIEW + PREVIEW QUALITY CLOSURE
 
-外研一年级起点接入时产生：
-
-```text
-797 existing surfaces with changed evidence
-274 completely new surfaces
-= 1071 pending
-```
-
-处理过程：
+五个 adapter 合计：
 
 ```text
-797 → five-adapter exact-surface evidence revalidation
-274 → conservative new learning-unit/object/form review
-→ independent content-quality Completion Recheck
-→ correction pass for confirmed false positives
+Enabled adapters    = 5
+Source occurrences  = 4848
+Normalized surfaces = 2062
+Durable decisions   = 2062
+pending             = 0
+evidence-changed    = 0
 ```
 
-独立 Recheck 抓到并修正的典型问题：
+在五-adapter decision closure 后，又对当时的 1477 条 Vocabulary Preview 执行了 A–Z 全量内容质量审计，重点检查：
 
 ```text
-aah / hey / whoops / sh
-→ dictionary noise / interjection misrouting
-→ route-expression
-
-here's / what's / where's / they're / couldn't / ...
-→ contraction false-positive Vocabulary
-→ held
-
-leaves / sometime / sweets / watches
-→ unsafe morphology canonicalization
-→ held
-
-of / ever / ticket
-→ broad or conflicting dictionary gloss cannot fix target sense
-→ held
+TargetSense 空值
+canonical / alias 语义污染
+reuse 是否绕过 canonical held/split blocker
+漏掉的 morphology canonicalization
+Vocabulary vs Expression object routing
+过度具体 event chunk
 ```
 
-最新可信数据：GitHub Actions run `34076701208`，generated data commit `aa2dcc0`。
+结构层修复：
 
 ```text
-Enabled adapters          = 5
-Source occurrences        = 4848
-Normalized surfaces       = 2062
-Durable decisions         = 2062
-Vocabulary preview        = 1484
-Review/blocker surfaces   = 424
-Evidence-changed surfaces = 0
-pending                   = 0
-
-keep-identity     = 1470
-reuse-identity    =   55
-held              =  385
-split-required    =   39
-route-expression  =   80
-source-only       =   33
+reuse alias 不得绕过 canonical held/split/pending blocker
+canonical surface 的 TargetSense 高于 alias/form TargetSense
+ice-cream → ice cream
+listening to music → listen to music
+smart → 聪明的；机灵的
 ```
 
-Closure meaning：
+内容层审计把原有空 TargetSense 全部重新分类，而不是按字典首义硬填：
 
 ```text
-2062 surfaces = 2062 explicit durable decisions
-pending = 0
-evidence-changed = 0
+1. source evidence 足够清楚 → 补窄义 TargetSense
+2. 证据不足/语义或语法边界不稳 → held
+3. 规则词形/表现变体 → reuse canonical identity
+4. 交际句型 → route-expression
+5. 过度具体事件块 → source-only
 ```
 
-不是说 2062 个 surface 都是 Vocabulary。当前 `unified_vocabulary_preview.csv = 1484` 才是 evidence 完整、已 reviewed 的 provisional Vocabulary candidates；仍未 mint Stable ThirdPartyID。
-
-当前 `review_queue = 424` 全部是真 blocker：
+新增/强化的典型 blocker：
 
 ```text
-held           = 385
-split-required = 39
+a lot
+as
+British
+broke
+date
+dish
+excuse
+has
+hold
+in one hour
+jam
+model
+order
+out
+out of
+pop
+stage
+tie
+upset
+would
 ```
 
-不能为了清零而猜测性合并。
-
-代表性边界：
+典型 canonicalization / routing：
 
 ```text
-study      = 学习 / 研究等 → held
-saw        = see过去式 / 锯子 → split-required
-watch      = 手表 / 观看 → split-required
-may        = May / modal may → split-required
-like       = 喜欢 / 像等 → split-required
-square     = 正方形 / 广场 → split-required
-left       = 左边 / leave过去式 → split-required
-cook       = 烹饪 / 厨师 → split-required
-cold       = 寒冷 / 感冒 → split-required
-stronger   = reuse → strong
-swing      = keep / 秋千
-candies    = reuse → candy
-goes       = reuse → go
-stories    = reuse → story
+be afraid of → afraid of
+dropped → drop
+grapes → grape
+happened → happen
+How old ...? → Expression
+climb on the window ledge → source-only
+women → 保留独立 pedagogically salient plural-form identity
 ```
 
-新增 Expression routing 示例：
+当前 workflow 还必须通过：
 
 ```text
-hey
-how are you?
-nice to meet you.
-here you are.
-how about ...?
-what about ...?
-why not?
-how much ...?
-you're welcome!
-happy new year!
-excuse me
-hurry up
-trick or treat
-see you!
+Vocabulary Preview TargetSense complete = all / all
 ```
 
-最新验证：
+本轮最终计数以 `data: close vocabulary preview content audit` 对应 workflow 及其 bot-generated data commit 为准；在 workflow 完成前不要手工填写计数。
 
-```text
-GitHub Actions run             = 34076701208
-Completion Recheck             = PASS
-Source occurrence closure      = PASS
-pending                        = 0
-evidence-changed               = 0
-Known semantic blockers        = preserved
-Known morphology boundaries    = preserved
-Transient decision inbox       = removed
-Klose Master/Learner/Publish/Anki = untouched
-Stable ThirdPartyID minted     = no
-Final Klose diff executed      = no
-```
+仍未 mint Stable ThirdPartyID，仍未执行 Stage-B Klose diff。
 
 ---
 
-## 5. NEXT TASK — PAUSE FOR USER REVIEW
+## 5. NEXT TASK — REVIEW FINAL FIVE-ADAPTER CORPUS, THEN DECIDE WAIYAN START3
 
-**不要继续启用 `waiyan_start3`。** 用户明确要求：本轮处理完成后，先查看当前第三方词汇表情况。
+**当前不要自动启用 `waiyan_start3`。**
 
 下一步：
 
 ```text
-1. 向用户展示当前五-adapter corpus 总体结构与计数；
-2. 解释 1484 Vocabulary preview、424 blockers、80 Expressions、33 source-only 的含义；
-3. 抽样展示 keep / reuse / held / split / expression 的真实例子；
-4. 根据用户反馈决定是否需要进一步质量抽查或调整 Identity policy；
-5. 用户确认后，才考虑启用 waiyan_start3；
-6. 仍不 mint Stable ThirdPartyID；
-7. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
+1. 读取最新 generated staging 与 workflow 结果，确认最终 preview / blocker / action counts；
+2. 向用户展示五-adapter corpus 的最终质量闭合结果与代表性边界；
+3. 若用户认可当前质量，再启用 waiyan_start3；
+4. waiyan_start3 接入仍只做 Stage A：Source Adapter → evidence requeue → identity review → preview；
+5. 仍不 mint Stable ThirdPartyID；
+6. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
 ```
 
 ---
@@ -267,6 +228,7 @@ Explicit reviewed OccurrenceKeys JSON arrays
 Changed source evidence automatically requeues
 Stale SourceMatchKey excluded from preview provenance
 review_queue 纯派生
+Vocabulary Preview TargetSense 全部非空
 known semantic/morphology blockers preserved
 simplified physical layout
 legacy multi-pass tools absent
@@ -281,7 +243,7 @@ CI / script success 不能单独作为“结果正确”的结论；必须再做
 
 ```text
 waiyan_start3 adapter enablement — wait for user review
-当前 424 held/split blockers — wait for more source context / actual textbook / form policy
+当前 held/split blockers — wait for more source context / actual textbook / form policy
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（admission 前）
