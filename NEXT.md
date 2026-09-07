@@ -85,114 +85,111 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A checkpoint — SOURCE RECONCILIATION LANE CLOSED
+## 4. Current Stage-A checkpoint — OBJECT BOUNDARY BATCH 1 CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1586
-Review/blocker surfaces   = 285
+Vocabulary preview        = 1592
+Review/blocker surfaces   = 260
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1577
+keep-identity     = 1583
 reuse-identity    =   83
-held              =  238
+held              =  213
 split-required    =   47
-route-expression  =   83
+route-expression  =  102
 source-only       =   34
 ```
 
-本批处理原 `source-reconciliation-needed = 17`：
+Source reconciliation lane remains closed at `0`.
+
+### Object-boundary batch 1
+
+25 个 blocker 一次处理：
 
 ```text
+19 route-expression
+├─ could not / did not / do not / does not
+├─ he is / here is / i am / is not / it is / she is
+├─ should not / there are / there is / they are
+└─ was not / were not / what is / where is / will not
+
 6 keep-identity
-├─ maybe     → 也许；可能；大概
-├─ parrot    → 鹦鹉
-├─ surprise  → 惊喜；惊讶
-├─ tomb      → 坟墓；陵墓
-├─ true      → 真实的；正确的
-└─ tunnel    → 隧道
-
-2 held → split-required
-├─ past   → 方向“经过” vs 时间“……过”
-└─ point  → point to 动作 vs 分数/数值 point
-
-9 held refinements
-├─ won't / don't → frozen contraction policy
-├─ Australian    → nationality POS boundary
-└─ ever / player / coin / line / matter / report
-   → current source neighborhood insufficient; do not force release
+├─ Parents' Day → 家长日
+├─ pick up      → 捡起；拾起
+├─ put on       → 穿上；戴上
+├─ to go        → 外带；打包带走
+├─ turn around  → 转身；掉头
+└─ turn back    → 返回；往回走
 ```
 
 结果：
 
 ```text
-blockers 291 → 285
-preview  1580 → 1586
-keep     1571 → 1577
-held      246 → 238
-split      45 → 47
-source-reconciliation-needed 17 → 0
+blockers       285 → 260
+preview        1586 → 1592
+object-boundary 39 → 14
 ```
 
-blocker 数下降不是质量目标；9 个 held refinement 只改善分类/审计状态，不靠强行 release 降数量。
+多词项没有机械统一路由：稳定 lexical chunk 仍可属于 Vocabulary；开放句型、语法 presentation frame、交际框架才 route-expression。
 
 ---
 
 ## 5. Latest batch validation
 
 ```text
-GitHub Actions run                         = 34134125248   SUCCESS
-decision commit                            = 487ed5bbe3d469d63ec0d10917d178b7d59d00ce
-bot-generated data commit                  = 6307238
-batch decisions                            = 17 = 6 keep + 9 held + 2 split
-Vocabulary Preview TargetSense complete    = 1586 / 1586
+GitHub Actions run                         = 34138413698   SUCCESS
+decision commit                            = 5fc29c00134afea4d65f7c2e06045c85c2504ef2
+bot-generated data commit                  = fcbabb95bed5fb758faeb1ab600e4fa551fca1ab
+batch decisions                            = 25 = 19 route-expression + 6 keep
+Vocabulary Preview TargetSense complete    = 1592 / 1592
 Third-party core Completion Recheck         = PASS
 Audit-batch Completion Recheck              = PASS
-Independent post-workflow recheck           = PASS
 Decision-only fast path                     = PASS
 Source adapters reparsed                    = NO
-Review Bundle closure                       = 285 / 285 PASS
+Review Bundle closure                       = 260 / 260 PASS
 Source-reconciliation lane                  = 0
 Policy proposals remaining                  = 0
-Source occurrence closure                   = PASS
 Explicit reviewed OccurrenceKeys            = PASS
 Changed source evidence requeues decision   = PASS
 Canonical blocker bypass                    = NO
-Canonical TargetSense precedence            = PASS
 Transient decision inbox                    = removed
 Klose Master/Learner/Publish/Anki touched   = NO
 Stable ThirdPartyID minted                  = NO
 Final Klose diff executed                   = NO
 ```
 
-Independent verification：
+Independent diff recheck：本批前 `5393084...` → bot `fcbabb95...` 仅变化 third-party audit/review/staging 六个文件：
 
-- `maybe / parrot / surprise / tomb / true / tunnel` 均已进入 Preview，TargetSense 与本批 decision 一致；
-- `past / point` 均为 `split-required`，没有泄漏进 Preview；
-- `study` 仍 held，`may` 仍 split-required；
-- `decision_updates.csv` 已删除；
-- compare 本批前 checkpoint `28df4379...` → bot `6307238...` 只变化 third-party audit/review/staging 六个文件，无 Klose Master/Learner/Publish/Anki、无 tool/code 修改。
+```text
+review_bundle.csv
+identity_decisions.csv
+staging/README.md
+review_queue.csv
+surface_candidates.csv
+unified_vocabulary_preview.csv
+```
 
-注意：`ever` 与 `player` 已完成一次 source audit 并明确应 defer，但当前 score heuristic 仍将它们显示为 `semantic-review`；没有新 source evidence 时 **不要再次扫描这两个词**。这是 derived triage 的已知轻微欠拟合，不改变 durable decision truth。
+无 Source Adapter 重解析、无 Klose Master/Learner/Publish/Anki、无 tool/code 修改。
 
 ---
 
-## 6. Throughput architecture v2 — FROZEN
+## 6. Throughput architecture v2 — CURRENT
 
-当前 285 blockers 分类：
+当前 260 blockers 分类：
 
 ```text
 abbreviation-policy       = 14
 form-policy               = 81
 functional-polysemy       = 18
-multiword-object-boundary = 39
+multiword-object-boundary = 14
 semantic-cross-source     = 56
 semantic-easy             = 28
-semantic-hard             = 2
+semantic-hard             =  2
 split-resolution          = 47
 ```
 
@@ -204,7 +201,7 @@ actionable-semantic           = 0
 semantic-review               = 2   # ever/player; audited-defer exceptions
 policy-executable             = 10  # proposal engine outputs 0
 policy-review                 = 85
-object-boundary               = 39
+object-boundary               = 14
 deferred-high-ambiguity       = 102
 split-resolution              = 47
 ```
@@ -212,62 +209,55 @@ split-resolution              = 47
 Actionability bands：
 
 ```text
-80–100 = 2
-65–79  = 10
-45–64  = 47
-0–44   = 226
+80–100 =   2
+65–79  =  10
+45–64  =  47
+0–44   = 201
 ```
 
-`policy-executable = 10` 仍全部被 proposal guard 拦截：1 grammar-special + 9 multi-POS/lexicalization-risk，不能机械 reuse。
+`policy-executable = 10` 仍全部被 proposal guard 拦截；`decision_proposals.csv` 当前为空，不能机械 reuse。
 
-`deferred-high-ambiguity` 默认不扫描；`ever/player` 也按人工 audited-defer 处理，除非 evidence 改变。
+`ever/player` 已人工 defer；无新 evidence 不重复处理。`deferred-high-ambiguity` 默认不扫描。
 
 ---
 
-## 7. Representative unresolved boundaries
+## 7. Remaining object-boundary set
+
+当前剩余 14：
 
 ```text
-about      → held / functional polysemy
-bright     → held / insufficient context
-study      → held / multiple target senses
-quarter    → held / sense evidence insufficient
-CD         → held / abbreviation review
-cannot     → held / full grammatical form + contraction boundary
-heavier    → held / comparative; base heavy not reviewed canonical
-has        → held / third-person form; canonical have blocked
-were       → held / grammar-special form boundary
-sweets     → held / plural noun 糖果 vs sweet adjective/noun
-pleased    → held / lexical adjective vs please form
-lost       → held / lose form + lexical adjective
-cycling    → held / -ing lexicalized-activity boundary
-dancing    → held / -ing lexicalized-activity boundary
-past       → split-required / direction vs clock-time
-point      → split-required / point-to vs numeric/score
-save       → split-required / 节约资源 vs 救助人
-break      → split-required / 物理损坏 vs 课间休息
-dish       → split-required / 盘子 vs 菜肴
-cut        → split-required / 剪切 vs 伤口
-drop       → split-required / 掉落动作 vs 水滴
-dream      → split-required / 梦想愿望 vs 睡梦
-saw/watch/may/like/square/left/cook/cold → split-required
+in one hour
+all right
+get through
+go out
+has got
+keep on
+out of
+see the world
+street sweeper
+take away
+take down
+take off
+all over
+a lot
 ```
+
+其中多项已有明确“证据不足/多义”审计结论。第二批应一次性做 residual pass：能明确对象边界才 release/route；其余保留 held 并标成 audited-defer，避免后续重复扫描。
 
 ---
 
-## 8. NEXT TASK — OBJECT / POLICY BOUNDARIES BEFORE SPLIT ARCHITECTURE
+## 8. NEXT TASK — CLOSE OBJECT BOUNDARY, THEN POLICY REVIEW
 
 **当前不要自动启用 `waiyan_start3`。**
 
-下一阶段：
-
 ```text
-1. 不再扫描 source-reconciliation（已清零）。
-2. ever/player 虽显示 semantic-review，但已人工 defer；无新 evidence 不重复处理。
-3. 下一 active batch 优先 `object-boundary = 39`：每批 20–25，区分 Vocabulary / Expression / source-only / held。
-4. 之后处理 `policy-review = 85`，按 frozen form/-ing/abbreviation policy 批量 evidence application；不要机械 reuse。
-5. `policy-executable = 10` 不直接处理，除非 proposal guard 条件变化；当前 proposal = 0。
-6. `deferred-high-ambiguity = 102` 默认不扫描。
-7. `split-resolution = 47` 仍独立排队，等待 occurrence-partitioned multiple provisional Stage-A identity 架构，不把多义词压成单一 TargetSense。
+1. 一次处理剩余 object-boundary = 14；这是该 lane 的 residual batch。
+2. 对已有 source evidence 仍不足的项保留 held；不要为了清零 blocker 强行 release。
+3. residual pass 后不再反复扫描 audited-defer object-boundary；无新 evidence 不重审。
+4. 然后切换到 policy-review = 85，按 frozen form/-ing/abbreviation policy 高吞吐批量处理。
+5. policy-executable = 10 当前 proposal = 0，不直接机械处理。
+6. deferred-high-ambiguity = 102 默认不扫描。
+7. split-resolution = 47 等待 occurrence-partitioned multiple provisional Stage-A identity 架构，不把多义词压成单一 TargetSense。
 8. 每个 batch：1 decision_updates + 1 fast workflow + core/batch/independent recheck；闭环后立即更新 NEXT.md。
 9. blocker 数量下降不是质量目标。
 10. blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 waiyan_start3。
