@@ -11,15 +11,19 @@ AGENTS.md
 → NEXT.md
 ```
 
-当前第三方 Vocabulary corpus 任务继续读取：
+当前 Third-party Vocabulary blocker audit 继续读取：
 
 ```text
 docs/THIRD_PARTY_VOCABULARY_CORPUS.md
+→ docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
 → anki/klose/third_party_vocabulary/config/source_adapters.csv
 → anki/klose/third_party_vocabulary/review/identity_decisions.csv
 → anki/klose/third_party_vocabulary/staging/review_queue.csv
+→ anki/klose/third_party_vocabulary/audit/review_bundle.csv
 → anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
 ```
+
+动态进度/当前计数只以本 `NEXT.md` 为准；`docs/THIRD_PARTY_VOCABULARY_CORPUS.md` 中旧 checkpoint 视为历史记录，不用其数字覆盖 NEXT。
 
 涉及 Klose 实际教材 reconciliation 时再读取 `docs/SOURCE_RECONCILIATION.md`；Expressions 任务读取 `docs/EXPRESSIONS_SYSTEM.md`。不要仅凭聊天历史推测当前状态。
 
@@ -27,29 +31,21 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 
 ## 1. Klose operational baseline
 
-Vocabulary：
-
 ```text
-Deck              = Klose-English::Vocabulary
-Note Type         = Klose Vocabulary
-Total Notes/Cards = 638
-Unsuspended       = 221
-Suspended         = 417
-New/day           = 8
-FSRS              = ON
-Desired retention = 90%
-Stable Identity Registry = 901 identities
-```
+Vocabulary Deck    = Klose-English::Vocabulary
+Note Type          = Klose Vocabulary
+Total Notes/Cards  = 638
+Unsuspended        = 221
+Suspended          = 417
+New/day            = 8
+FSRS               = ON / 90%
+Stable Registry    = 901 identities
 
-Expressions：
-
-```text
-Stable Expressions = 66
-Grade-4 priority    = 37
-Grade-3-only        = 29
-approved/admitted/release-ready = 66
-Anki New/day = 2
-FSRS = ON / 90%
+Expressions Stable = 66
+Grade-4 priority   = 37
+Grade-3-only       = 29
+Expressions New/day = 2
+FSRS               = ON / 90%
 ```
 
 GitHub 管 Source / Identity / Learner / Release；Anki 管 FSRS / Review History / Due / Interval / Card State。
@@ -70,9 +66,9 @@ Third-party Unified Vocabulary
 → Third-party New Vocabulary Pool
 ```
 
-Stage A 禁止因 Klose 当前已有某词而删除第三方 learning unit；当前仍未进入 Stage B。
+Stage A 禁止因 Klose 当前已有某词而删除第三方 learning unit；当前未进入 Stage B。
 
-Frozen Stage-A flow：
+Frozen core flow：
 
 ```text
 Source Adapter occurrences
@@ -83,11 +79,11 @@ Source Adapter occurrences
 → staging/surface_candidates.csv
 → staging/review_queue.csv
 → staging/unified_vocabulary_preview.csv
-→ learner-facing TargetSense gate
+→ TargetSense gate
 → tools/check_third_party_corpus.py
 ```
 
-`identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv` 只是 derived blocker view。`OccurrenceKeys` 必须显式绑定当前审校 evidence；evidence 变化必须自动 requeue。Vocabulary Preview 的 TargetSense 不能为空。
+`identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv` 与 `audit/review_bundle.csv` 都是 generated/derived views。Reviewed decision 必须显式绑定当前 JSON `OccurrenceKeys`；evidence 变化必须自动 requeue。
 
 ---
 
@@ -101,25 +97,25 @@ hujiao_start3    =  8 books / 1111 occurrences / 1067 MatchKeys
 waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 ```
 
-`waiyan_start3` 已完成 Source Inventory，但 **尚未启用**。
+`waiyan_start3` Source Inventory 已完成，但 **尚未启用**。
 
 ---
 
-## 4. Current Stage-A checkpoint — BLOCKER QUALITY AUDIT
+## 4. Current Stage-A checkpoint — HIGH-THROUGHPUT BLOCKER AUDIT
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1554
-Review/blocker surfaces   = 339
+Vocabulary preview        = 1578
+Review/blocker surfaces   = 314
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1545
-reuse-identity    =   61
-held              =  294
+keep-identity     = 1569
+reuse-identity    =   62
+held              =  269
 split-required    =   45
 route-expression  =   83
 source-only       =   34
@@ -128,26 +124,40 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34119430831
-latest blocker-audit commit                = 4f9fbc78de151a779ad482e8d81682ae075942f9
-bot-generated data commit                  = 1267c2064feb32906b98978f3d866a98c830dee2
-Vocabulary Preview TargetSense complete    = 1554 / 1554
-Third-party Completion Recheck             = PASS
-Independent post-workflow recheck          = PASS
-Source occurrence closure                  = PASS
-Explicit reviewed OccurrenceKeys           = PASS
-Changed source evidence requeues decision  = PASS
-Canonical blocker bypass                   = NO
-Canonical TargetSense precedence           = PASS
-Transient decision inbox                   = removed
-Klose Master/Learner/Publish/Anki touched  = NO
-Stable ThirdPartyID minted                 = NO
-Final Klose diff executed                  = NO
+GitHub Actions run                         = 34122486998
+latest blocker-audit commit                = c645748cf6f454f462d6413131970664f6960692
+bot-generated data commit                  = ac64eec02210b0a8dd004b73fa3c111dea34256a
+Vocabulary Preview TargetSense complete    = 1578 / 1578
+Third-party core Completion Recheck         = PASS
+Audit-batch Completion Recheck              = PASS
+Independent post-workflow recheck           = PASS
+Decision-only fast path                     = PASS
+Source adapters reparsed in latest batch    = NO
+Review Bundle generated                     = 314 / 314 blockers
+Source occurrence closure                   = PASS
+Explicit reviewed OccurrenceKeys            = PASS
+Changed source evidence requeues decision   = PASS
+Canonical blocker bypass                    = NO
+Canonical TargetSense precedence            = PASS
+Transient decision inbox                    = removed
+Klose Master/Learner/Publish/Anki touched   = NO
+Stable ThirdPartyID minted                  = NO
+Final Klose diff executed                   = NO
 ```
+
+Independent post-workflow recheck confirms：
+
+- 25 intended decisions all persisted; 24 `keep-identity` + 1 `reuse-identity`；
+- all 25 left `review_queue`；
+- `fixed → fix` is a canonical reuse, so it does not create a duplicate Preview identity; `candidate:fix` provenance is now `fix|fixed`；
+- representative released rows such as `reading` / `ticket` carry the intended TargetSense；
+- known blockers including `study` / `won` remain blocked；
+- transient `decision_updates.csv` is absent；
+- bot diff contains only third-party audit/review/staging files; no Klose Master/Learner/Publish/Anki changes。
 
 ### 累计 blocker audit 进展
 
-历史 A–Z checkpoint：
+Historical A–Z checkpoint：
 
 ```text
 Vocabulary preview      = 1451
@@ -156,105 +166,126 @@ route-expression        = 81
 split-required          = 39
 ```
 
-当前：
+Current：
 
 ```text
-444 blockers → 339 blockers
-1451 preview → 1554 preview
+444 blockers → 314 blockers
+1451 preview → 1578 preview
 81 Expressions → 83 Expressions
 39 split-required → 45 split-required
 ```
 
-累计完成 111 次 blocker decision refinement：105 个 blocker 被证据充分地释放/路由出 review_queue（其中 103 个进入 Vocabulary Preview、2 个 route-expression）；6 个 `save / break / dish / cut / drop / dream` 因 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。blocker 数量下降不是质量目标。
-
-### 最新独立批次
+累计 136 次 decision refinement：
 
 ```text
-fit     → held → keep-identity → 健康的；健壮的
-primary → held → keep-identity → 小学的；初级的
+130 个 surface 离开 review_queue
+  ├─ 127 个净增加 Vocabulary Preview identity
+  ├─   2 个 route-expression
+  └─   1 个 fixed → fix reuse alias（离开 blocker，但不增加 Preview identity）
+
+6 个 held → split-required
+  save / break / dish / cut / drop / dream
+  仍作为 blocker 保留
 ```
 
-Source evidence：
+blocker 数量下降不是质量目标。
+
+### 最新 high-throughput batch — 25 decisions
 
 ```text
-fit
-- hujiao_start3|g6-lower|r078|fit
-- 位于 long/short race、long/high jump、swimsuit、swimming cap/pool、warm-up、swimming goggles 的连续体育/游泳词汇序列中，且直接紧随 warm-up；可明确绑定 physical fitness 的形容词 learning unit“健康的；健壮的”。“合适的”、痉挛名词义、安装/适配动词义不属于本 occurrence。
-
-primary
-- waiyan_start1|g6-lower|r070|primary
-- 紧接明确的 `primary school`，并处于 school-stage 词汇序列；可绑定“小学的；初级的”学校阶段形容词 learning unit。primary 作为名词、以及宽泛“主要的”义不属于本 occurrence。
+fixed   → reuse fix
+hide    → 躲藏；隐藏
+Italian → 意大利的
+lie     → 说谎；撒谎
+plus    → 加；加上
+pound   → 英镑
+reading → 阅读；阅读活动
+real    → 真实的；真正的
+reply   → 回复；答复
+ring    → （电话、铃等）响；铃声
+rise    → 升起；上升
+row     → 划船
+rubber  → 橡胶；橡胶材料
+rule    → 规则；规定
+running → 跑步；跑步活动
+sharp   → 尖的；锋利的
+shout   → 喊叫；大声喊
+singing → 唱歌；歌唱活动
+skip    → 跳；跳绳
+stage   → 舞台
+stuck   → 卡住的；陷住的
+ticket  → 票；票券
+tower   → 塔；塔楼
+tweet   → 啾啾叫；鸟叫声
+upset   → 心烦的；难过的
 ```
 
-本批 workflow 全部 PASS。独立复核确认两条 decision 均以显式 JSON `OccurrenceKeys` 持久化并进入 Preview，两条均已从 `review_queue` 消失；transient `decision_updates.csv` 已删除。Git compare 显示 bot commit 只修改 third-party Stage-A transient inbox、durable decision 与 derived staging 文件，没有触碰 Klose Master / Learner / Publish / Anki。`study`、`won`、`saw` 等已知 semantic/form/split blocker 均继续保留。
+本批不是仅挑 25 个词逐个 lookup；实际先用 Review Bundle 扫描约 50 个低风险 blocker，再一次性提交 25 个证据充分的 refinement。decision-only workflow 正确跳过全部 unchanged Source Adapter parser/validator。
 
-本批同时复核但继续保留的代表性 blocker：
+---
+
+## 5. High-throughput operating mode — FROZEN
+
+后续 blocker audit 默认使用：
 
 ```text
-quarter → held / Hujiao occurrence 明确位于 o'clock / quarter / time / half 的钟点语境，但当前 Waiyan occurrence 的 neighborhood 不能独立锁定“一刻钟”还是“四分之一”等 elementary sense；由于 durable decision 必须覆盖两条 active occurrence evidence，继续 held，不用单一来源覆盖另一来源的不确定性。
+一次扫描              = 30–50 blockers
+目标有效 refinement   = 10–25（证据允许可更高）
+一次 decision_updates = 1 batch
+一次 workflow          = 1 batch
+Completion Recheck     = core + batch-aware + independent sample/diff recheck
+批次完成               = 立即更新 NEXT.md，再开始下一批
 ```
 
-近期已确认的 split-required 边界：
+`audit/review_bundle.csv` 每个 blocker 一行，直接提供 Current Decision + Definitions + all active occurrences + 同书前后各 8 个词，避免逐词重复 GitHub evidence lookup。
+
+当前 314 blockers 自动分层：
 
 ```text
-save  → 节约资源 vs 救助人
-break → 物理损坏 vs 课间休息
-dish  → 盘；盘子 vs 菜肴；一道菜
-cut   → 剪；切 vs 伤口；割伤
-drop  → 掉落；使掉下 vs 水滴
-dream → 梦想；愿望 vs 梦；做梦
+semantic-easy             = 38
+semantic-cross-source     = 62
+split-resolution          = 45
+semantic-hard             = 4
+multiword-object-boundary = 39
+form-policy               = 94
+abbreviation-policy       = 14
+functional-polysemy       = 18
 ```
 
-代表性已释放 learning units：
+默认优先级：semantic-easy → cross-source → split → hard/multiword → form/abbreviation/functional。已确认 policy blocker 不与普通 semantic blocker 混在同一思路里反复研究。
+
+Class-level policies 已冻结在 `docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md`：
 
 ```text
-blow → 吹；刮
-attention → 注意；注意力
-hiking → 徒步旅行
-a bit → 有点儿；稍微
-a knife and fork → 一副刀叉
-all over the world → 世界各地；遍及全世界
-be able to → 能够；可以
-be interested in → 对……感兴趣
-bench → 长凳
-bicycle → 自行车
-bike ride → 骑自行车出行；骑车兜风
-boating → 划船；划船活动
-cashier → 收银员
-cheese → 奶酪；干酪
-chug → 轧轧声；发出轧轧声
-clap → 拍手；鼓掌
-clapping game → 拍手游戏
-come back → 回来；返回
-comic → 漫画；连环漫画
-crisp → 薯片；炸薯片
-dark → 黑暗的；昏暗的
-dry → 干的；干燥的
-grab → 抓住；抓取
-fast food → 快餐；速食
-physical education → 体育；体育课
-miaow → 猫叫；猫叫声
-bump → 碰；撞
-fall off → 从……掉下来；跌落
-fall over → 跌倒；摔倒
-fit → 健康的；健壮的
-primary → 小学的；初级的
-hot dog → 热狗
-lion dance → 舞狮
-long ago → 很久以前；从前
+Irregular/inflected forms:
+  词形本身默认不是新 lexical sense；base 已 reviewed 且 occurrence 同义时可 reuse base；
+  canonical 仍 blocked 时 form 不得绕过；显式 pedagogical exception 可保留（如 women）。
+
+-ing / activity:
+  透明形态 → form/reuse candidate；
+  教材明确作为活动类别独立 headword → 可 keep lexicalized activity；
+  hiking / boating / reading / running / singing 属于 evidence-based 个案，不是所有 -ing 自动 keep。
+
+Abbreviation/contraction:
+  grammatical contraction 不因缩写本身 mint lexical identity；
+  lexical abbreviation 只有 source context 绑定单一学习单元才 keep，否则 held / route-expression。
 ```
 
-高风险 blocker 继续保留：
+Decision-only CI fast path 已实现：只改 decision 时直接复用 committed adapter occurrences，跳过教材 parser/validator，但仍执行 apply → build → TargetSense gate → core recheck → review bundle → batch recheck → Klose untouched guard。
+
+---
+
+## 6. Representative unresolved boundaries
 
 ```text
-about      → held
-bright     → held
-study      → held
+about      → held / functional polysemy
+bright     → held / source evidence insufficient
+study      → held / multiple target senses
 quarter    → held / cross-source sense evidence insufficient
-CD         → held / abbreviation policy
-won        → held / irregular-form policy
-cycling    → held / gerund-form boundary
-dancing    → held / gerund-form boundary
+CD         → held / lexical abbreviation context/policy application pending
+won        → held / frozen form policy 尚未应用到该 occurrence/base relation
+cycling    → held / -ing policy evidence application pending
+dancing    → held / -ing policy evidence application pending
 save       → split-required / 节约资源 vs 救助人
 break      → split-required / 物理损坏 vs 课间休息
 dish       → split-required / 盘子 vs 菜肴
@@ -271,29 +302,30 @@ cook       → split-required
 cold       → split-required
 ```
 
+注意：form / -ing / abbreviation **policy 已冻结**，但剩余相应 blocker 仍需按 current occurrence + canonical evidence 批量应用 policy；不能仅因 policy 存在就机械全部 release。
+
 ---
 
-## 5. NEXT TASK — CONTINUE BLOCKER QUALITY AUDIT BEFORE WAIYAN START3
+## 7. NEXT TASK — CONTINUE HIGH-THROUGHPUT AUDIT BEFORE WAIYAN START3
 
 **当前不要自动启用 `waiyan_start3`。**
 
 ```text
-1. 继续审计当前 339 个 held/split blocker。
-2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目。
-3. 若 source occurrences 明确暴露多个真实 learning units，升级为 split-required，不强行释放。
-4. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split。
-5. 每批 decision update 后运行 workflow + 独立 Completion Recheck。
-6. 每个独立闭环批次完成后立即更新 NEXT.md，再开始下一批。
-7. 不以 blocker 数量下降作为质量目标。
-8. blocker 质量达到稳定 checkpoint 后，向用户展示当前结构与代表性边界。
-9. 用户确认后才考虑启用 waiyan_start3；其接入仍只属于 Stage A。
-10. 仍不 mint Stable ThirdPartyID。
-11. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
+1. 从 Review Bundle 继续每批扫描 30–50 个 blocker。
+2. 优先处理剩余 38 semantic-easy，再处理 semantic-cross-source。
+3. 每批只提交 evidence 足够的 10–25+ refinement；未充分者保持 held。
+4. 多义 occurrence 明确时升级 split-required，不强行压成一个 TargetSense。
+5. 对 94 form-policy / 14 abbreviation-policy / -ing items 按冻结 policy 做批量 evidence application，不再逐词重新讨论 policy 本身。
+6. 每批只跑一次 workflow；decision-only 必须走 fast path。
+7. 每批 core + batch-aware + independent Completion Recheck 全部 PASS 后，立即更新 NEXT.md。
+8. 不以 blocker 数下降作为质量目标。
+9. blocker 质量达到稳定 checkpoint 后，向用户展示结构与代表性边界；用户确认后才考虑启用 waiyan_start3。
+10. 仍不 mint Stable ThirdPartyID；所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
 ```
 
 ---
 
-## 6. Completion Recheck contract
+## 8. Completion Recheck contract
 
 每批必须验证：
 
@@ -303,22 +335,26 @@ Decision schema / canonical reuse correctness
 Explicit reviewed OccurrenceKeys JSON arrays
 Changed source evidence automatically requeues
 Stale SourceMatchKey excluded from preview provenance
-review_queue 纯派生
-Vocabulary Preview TargetSense 全部非空
-known semantic/morphology/policy blockers preserved
+review_queue remains pure derived blocker view
+Review Bundle closes exactly over current blockers
+Vocabulary Preview TargetSense all non-empty
+batch intended decisions exactly persisted
+keep/reuse/split/route derived state correct
+known semantic/morphology/policy blockers preserved unless explicitly changed in batch
 transient decision inbox removed
+Git diff scope contains only intended third-party layers
 Klose Master/Learner/Publish/Anki untouched
 ```
 
-CI / script success 不能单独作为“结果正确”的结论；必须再做独立 Completion Recheck。
+CI success 不能单独作为“结果正确”；仍需 independent sample + high-risk boundary + diff recheck。
 
 ---
 
-## 7. Deferred
+## 9. Deferred
 
 ```text
 waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
-剩余 339 held/split blockers — continue evidence-driven audit
+remaining 314 blockers — continue evidence-driven high-throughput audit
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes British/American IPA completion before admission
@@ -327,7 +363,7 @@ Expressions one-month real-learning evaluation
 
 ---
 
-## 8. Frozen long-term rules
+## 10. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因教材顺序、来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
