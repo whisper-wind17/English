@@ -354,8 +354,22 @@ def main() -> None:
         elif len(ds) > 1 and multipart_resolved:
             resolved_multipart[key] = ds
 
+    # Resolved multipart keep groups are addressable Stage-A canonical subgroups.
+    # A reuse alias may target one only by its explicit MatchKey#variant key; the
+    # subgroup remains the TargetSense/display authority.
+    multipart_keep_index: dict[str, tuple[str, dict[str, str]]] = {}
+    for base_key, ds in resolved_multipart.items():
+        for d in ds:
+            if d.get("Action") != "keep-identity":
+                continue
+            scoped = d.get("CanonicalMatchKey", "")
+            if scoped in multipart_keep_index:
+                raise SystemExit(f"Duplicate resolved multipart canonical subgroup: {scoped}")
+            multipart_keep_index[scoped] = (base_key, d)
+
     # Single-decision preview remains canonical-first.
     groups: dict[str, dict[str, object]] = {}
+    scoped_reuse_rows: list[tuple[dict[str, str], dict[str, str]]] = []
     for surface in candidate_rows:
         key = surface["MatchKey"]
         d = valid_decision.get(key)
@@ -364,6 +378,16 @@ def main() -> None:
 
         canonical = d.get("CanonicalMatchKey", "") if d["Action"] == "reuse-identity" else key
         canonical = canonical or key
+        if d["Action"] == "reuse-identity" and "#" in canonical:
+            target = multipart_keep_index.get(canonical)
+            if target is None:
+                raise SystemExit(f"Scoped reuse target is not a resolved multipart keep subgroup: {d['DecisionKey']} -> {canonical}")
+            target_sense = target[1].get("TargetSense", "")
+            alias_sense = d.get("TargetSense", "").strip()
+            if alias_sense and alias_sense != target_sense:
+                raise SystemExit(f"Scoped reuse TargetSense disagrees with canonical subgroup: {d['DecisionKey']} -> {canonical}")
+            scoped_reuse_rows.append((surface, d))
+            continue
         canonical_d = valid_decision.get(canonical) if canonical in surface_keys else None
         if d["Action"] == "reuse-identity" and canonical in surface_keys:
             if not canonical_d or canonical_d.get("Status") != "reviewed" or canonical_d.get("Action") != "keep-identity":
@@ -427,6 +451,23 @@ def main() -> None:
                     display=target_display,
                     sense=target_sense,
                 )
+
+    # Single-surface aliases targeting an explicit resolved multipart subgroup are
+    # appended only after the subgroup itself has been materialized. This prevents
+    # an alias from minting an external-looking #variant identity or overriding
+    # the subgroup's learner-facing presentation.
+    for surface, d in scoped_reuse_rows:
+        canonical = d["CanonicalMatchKey"]
+        target = multipart_keep_index[canonical]
+        if canonical not in groups:
+            raise SystemExit(f"Scoped reuse canonical subgroup missing from Preview groups: {d['DecisionKey']} -> {canonical}")
+        add_preview_group(
+            groups, canonical,
+            match_key_value=surface["MatchKey"],
+            occurrence_count=int(surface["OccurrenceCount"]),
+            display="",
+            sense=target[1].get("TargetSense", ""),
+        )
 
     preview_rows = [{
         "ProvisionalIdentityKey": f"candidate:{canonical}",

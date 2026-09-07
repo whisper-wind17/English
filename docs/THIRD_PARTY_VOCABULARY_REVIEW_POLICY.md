@@ -301,3 +301,18 @@ Vocabulary Preview          1615 → 1621
 ```
 
 core checker、batch checker、TargetSense gate、Klose isolation 均 PASS。该能力因此从“待实现 architecture task”升级为正式 Stage-A review mechanism。
+
+## Resolved multipart subgroup reuse
+
+当 canonical surface 已通过 occurrence partition 形成多个 reviewed Stage-A learning units 时，
+form/alias 不得笼统 reuse 到原 surface；只有人工确认其 lexical sense 后，才允许显式指向
+已存在的 scoped provisional key（例如 `drank -> drink#verb`）。
+
+硬约束：
+
+- `#variant` target 必须是当前 complete + reviewed multipart partition 中的 `keep-identity` subgroup；
+- alias 自身必须绑定完整 current `OccurrenceKeys`，并为 `reviewed / reuse-identity`；
+- alias 不得创建新的 `#variant`，不得覆盖 subgroup 的 Display / TargetSense；
+- Preview provenance 与 occurrence count 必须合并 alias evidence；
+- source evidence 变化后仍按原 stale-evidence 规则 requeue；
+- `#variant` 仍只是 Stage-A provisional identity，不是 Stable ThirdPartyID。

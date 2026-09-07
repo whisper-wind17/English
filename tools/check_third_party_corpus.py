@@ -215,6 +215,15 @@ def main() -> None:
                     and by_surface[key].get("DecisionStatus") == "held",
                     f"Incomplete/unresolved multipart must remain blocker: {key}")
 
+    multipart_keep_index: dict[str, tuple[str, dict[str, str]]] = {}
+    for base_key, ds in resolved_multipart.items():
+        for d in ds:
+            if d.get("Action") != "keep-identity":
+                continue
+            scoped = d.get("CanonicalMatchKey", "")
+            require(scoped not in multipart_keep_index, f"Duplicate multipart canonical subgroup: {scoped}")
+            multipart_keep_index[scoped] = (base_key, d)
+
     expected_review = {
         r["MatchKey"] for r in surfaces
         if r.get("DecisionAction") in {"pending", "held", "split-required"}
@@ -284,6 +293,21 @@ def main() -> None:
         if d.get("Status") != "reviewed" or d.get("Action") != "reuse-identity":
             continue
         canonical = d.get("CanonicalMatchKey", "")
+        if "#" in canonical:
+            target = multipart_keep_index.get(canonical)
+            require(target is not None,
+                    f"Scoped reuse target is not a resolved multipart keep subgroup: {key} -> {canonical}")
+            target_decision = target[1]
+            row = preview_by_key.get(canonical)
+            require(row is not None, f"Scoped reuse canonical missing from preview: {key} -> {canonical}")
+            require(key in row.get("SourceMatchKeys", "").split("|"),
+                    f"Scoped reuse provenance missing: {key} -> {canonical}")
+            require(row.get("TargetSense", "") == target_decision.get("TargetSense", ""),
+                    f"Scoped reuse changed canonical TargetSense: {key} -> {canonical}")
+            alias_sense = d.get("TargetSense", "").strip()
+            require(not alias_sense or alias_sense == target_decision.get("TargetSense", ""),
+                    f"Scoped reuse decision disagrees with canonical TargetSense: {key} -> {canonical}")
+            continue
         if canonical not in surface_keys:
             continue
         base = valid_decision.get(canonical)
@@ -311,7 +335,14 @@ def main() -> None:
                         f"Multipart TargetSense drift: {d['DecisionKey']}")
                 require(key in row.get("SourceMatchKeys", "").split("|"),
                         f"Multipart provenance missing: {d['DecisionKey']}")
-                require(int(row.get("SourceOccurrenceCount", "0")) == part_count,
+                scoped_alias_count = sum(
+                    len(decode_occurrence_keys(alias_d["OccurrenceKeys"], alias_d["DecisionKey"]))
+                    for alias_d in valid_decision.values()
+                    if alias_d.get("Status") == "reviewed"
+                    and alias_d.get("Action") == "reuse-identity"
+                    and alias_d.get("CanonicalMatchKey") == provisional
+                )
+                require(int(row.get("SourceOccurrenceCount", "0")) == part_count + scoped_alias_count,
                         f"Multipart occurrence count drift: {d['DecisionKey']}")
             elif action == "reuse-identity":
                 canonical = d.get("CanonicalMatchKey", "")
