@@ -18,7 +18,7 @@ Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Vocabulary preview        = 1578
-Review/blocker surfaces   = 314
+Review/blocker surfaces   = 293
 Evidence-changed surfaces = 0
 ```
 
