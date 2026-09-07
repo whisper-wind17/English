@@ -457,7 +457,7 @@ candidate:fisherman,fisherman,fisherman,渔夫；渔民,fisherman,1,reviewed
 candidate:fit,fit,fit,健康的；健壮的,fit,1,reviewed
 candidate:five,five,five,五,five,5,reviewed
 candidate:five-stones,five-stones,five-stones,(抛掷五颗小石子的)五子游戏,five-stones,1,reviewed
-candidate:fix,fix,fix,修理；修好,fix,1,reviewed
+candidate:fix,fix,fix,修理；修好,fix|fixed,2,reviewed
 candidate:flag,flag,flag,旗；旗帜,flag,3,reviewed
 candidate:flower,flower,flower,花,flower,5,reviewed
 candidate:flower shop,flower shop,flower shop,花店,flower shop,1,reviewed
@@ -618,6 +618,7 @@ candidate:her,her,her,她的,her,6,reviewed
 candidate:here,here,here,这里；在这里,here,3,reviewed
 candidate:hers,hers,hers,她的；她的东西,hers,3,reviewed
 candidate:hi,hi,hi,嗨；你好,hi,3,reviewed
+candidate:hide,hide,hide,躲藏；隐藏,hide,1,reviewed
 candidate:hide-and-seek,hide-and-seek,hide-and-seek,捉迷藏,hide-and-seek,1,reviewed
 candidate:high,high,high,高的,high,5,reviewed
 candidate:high jump,high jump,high jump,跳高,high jump,2,reviewed
@@ -679,6 +680,7 @@ candidate:invitation,invitation,invitation,邀请,invitation,1,reviewed
 candidate:invite,invite,invite,邀请,invite,1,reviewed
 candidate:island,island,island,岛；岛屿,island,3,reviewed
 candidate:it,it,it,它；这件事/这个东西,it,4,reviewed
+candidate:italian,italian,Italian,意大利的,italian,1,reviewed
 candidate:its,its,its,它的,its,4,reviewed
 candidate:jack-o'-lantern,jack-o'-lantern,jack-o'-lantern,南瓜灯；杰克灯,jack-o'-lantern,1,reviewed
 candidate:jacket,jacket,jacket,夹克；短外套,jacket,4,reviewed
@@ -736,6 +738,7 @@ candidate:lesson,lesson,lesson,课；课程,lesson,4,reviewed
 candidate:librarian,librarian,librarian,图书馆员,librarian,1,reviewed
 candidate:library,library,library,图书馆,library,5,reviewed
 candidate:lick,lick,lick,舔,licked,1,reviewed
+candidate:lie,lie,lie,说谎；撒谎,lie,1,reviewed
 candidate:lifeguard,lifeguard,lifeguard,救生员,lifeguard,1,reviewed
 candidate:lion,lion,lion,狮子,lion,3,reviewed
 candidate:lion dance,lion dance,lion dance,舞狮,lion dance,1,reviewed
@@ -1007,6 +1010,7 @@ candidate:play with fire,play with fire,play with fire,玩火,play with fire,1,r
 candidate:playground,playground,playground,操场；游乐场,playground,5,reviewed
 candidate:playtime,playtime,playtime,游戏时间；玩耍时间,playtime,1,reviewed
 candidate:please,please,please,请,please,5,reviewed
+candidate:plus,plus,plus,加；加上,plus,1,reviewed
 candidate:pod,pod,pod,豆荚,pod,1,reviewed
 candidate:poem,poem,poem,诗；诗歌,poem,3,reviewed
 candidate:poet,poet,poet,诗人,poet,1,reviewed
@@ -1020,6 +1024,7 @@ candidate:postcard,postcard,postcard,明信片,postcard,2,reviewed
 candidate:poster,poster,poster,海报；招贴,poster,2,reviewed
 candidate:postman,postman,postman,邮递员；邮差,postman,1,reviewed
 candidate:potato,potato,potato,土豆；马铃薯,potato,5,reviewed
+candidate:pound,pound,pound,英镑,pound,1,reviewed
 candidate:powerful,powerful,powerful,强大的；有力的,powerful,1,reviewed
 candidate:practice,practice,practice,练习；训练,practice,1,reviewed
 candidate:practise,practise,practise,练习；实践,practise,1,reviewed
@@ -1062,7 +1067,9 @@ candidate:rainy,rainy,rainy,下雨的；多雨的,rainy,4,reviewed
 candidate:rat,rat,rat,老鼠；大老鼠,rat,1,reviewed
 candidate:read,read,read,读；阅读,read,6,reviewed
 candidate:read books,read books,read books,读书；看书,read books,2,reviewed
+candidate:reading,reading,reading,阅读；阅读活动,reading,1,reviewed
 candidate:ready,ready,ready,准备好的,ready,1,reviewed
+candidate:real,real,real,真实的；真正的,real,1,reviewed
 candidate:really,really,really,真的；确实；非常,really,4,reviewed
 candidate:rectangle,rectangle,rectangle,长方形；矩形,rectangle,1,reviewed
 candidate:recycle,recycle,recycle,回收利用；再利用,recycle,1,reviewed
@@ -1070,6 +1077,7 @@ candidate:red,red,red,红色；红色的,red,6,reviewed
 candidate:red packet,red packet,red packet,红包,red packet,1,reviewed
 candidate:relative,relative,relative,亲戚；亲属,relative,1,reviewed
 candidate:remember,remember,remember,记得；记住,remember,1,reviewed
+candidate:reply,reply,reply,回复；答复,reply,1,reviewed
 candidate:reporter,reporter,reporter,记者,reporter,1,reviewed
 candidate:reptile,reptile,reptile,爬行动物,reptile,1,reviewed
 candidate:rest,rest,rest,休息；休息时间,rest,2,reviewed
@@ -1080,6 +1088,8 @@ candidate:rice,rice,rice,米饭；大米,rice,6,reviewed
 candidate:ride,ride,ride,骑；乘坐,ride,3,reviewed
 candidate:ride a bike,ride a bike,ride a bike,骑自行车,ride a bike,2,reviewed
 candidate:right away,right away,right away,立刻；马上,right away,1,reviewed
+candidate:ring,ring,ring,（电话、铃等）响；铃声,ring,1,reviewed
+candidate:rise,rise,rise,升起；上升,rise,1,reviewed
 candidate:river,river,river,河；河流,river,5,reviewed
 candidate:road,road,road,路；道路；公路,road,2,reviewed
 candidate:roar,roar,roar,吼叫；咆哮,roar,1,reviewed
@@ -1090,14 +1100,18 @@ candidate:roller skating,roller skating,roller skating,轮滑；滑旱冰,roller
 candidate:roof,roof,roof,屋顶,roof,1,reviewed
 candidate:room,room,room,房间,room,3,reviewed
 candidate:round,round,round,圆的；圆形的,round,4,reviewed
+candidate:row,row,row,划船,row,1,reviewed
 candidate:row a boat,row a boat,row a boat,划船,row a boat|rowed a boat,3,reviewed
+candidate:rubber,rubber,rubber,橡胶；橡胶材料,rubber,1,reviewed
 candidate:rubbish,rubbish,rubbish,垃圾；废物,rubbish,1,reviewed
 candidate:rubbish bin,rubbish bin,rubbish bin,垃圾桶；垃圾箱,rubbish bin,1,reviewed
+candidate:rule,rule,rule,规则；规定,rule,1,reviewed
 candidate:ruler,ruler,ruler,尺子；直尺,ruler,6,reviewed
 candidate:run,run,run,跑；奔跑,run,4,reviewed
 candidate:run a race,run a race,run a race,赛跑；参加赛跑,run a race,1,reviewed
 candidate:run away,run away,run away,逃跑；跑开,run away,1,reviewed
 candidate:run down the stairs,run down the stairs,run down the stairs,跑下楼梯,run down the stairs,1,reviewed
+candidate:running,running,running,跑步；跑步活动,running,1,reviewed
 candidate:sad,sad,sad,难过的；悲伤的,sad,6,reviewed
 candidate:safe,safe,safe,安全的,safe,2,reviewed
 candidate:safety,safety,safety,安全,safety,2,reviewed
@@ -1150,6 +1164,7 @@ candidate:shall,shall,shall,shall 情态动词（用于将来/提议等）,shall
 candidate:shape,shape,shape,形状,shape,2,reviewed
 candidate:share,share,share,分享；共享,share,1,reviewed
 candidate:shark,shark,shark,鲨鱼,shark,1,reviewed
+candidate:sharp,sharp,sharp,尖的；锋利的,sharp,1,reviewed
 candidate:she,she,she,她,she,5,reviewed
 candidate:sheep,sheep,sheep,绵羊；羊,sheep,6,reviewed
 candidate:shell,shell,shell,贝壳；壳,shell,1,reviewed
@@ -1167,6 +1182,7 @@ candidate:short race,short race,short race,短跑；短距离比赛,short race,1
 candidate:shorts,shorts,shorts,短裤,shorts,6,reviewed
 candidate:should,should,should,应该；应当,should,6,reviewed
 candidate:shoulder,shoulder,shoulder,肩膀,shoulder,2,reviewed
+candidate:shout,shout,shout,喊叫；大声喊,shout,1,reviewed
 candidate:show ... around,show ... around,show ... around,带……参观；领……四处看看,show ... around,1,reviewed
 candidate:shy,shy,shy,害羞的；腼腆的,shy,2,reviewed
 candidate:sick,sick,sick,生病的；不舒服的,sick,2,reviewed
@@ -1178,6 +1194,7 @@ candidate:sing english songs,sing english songs,sing English songs,唱英文歌,
 candidate:sing songs,sing songs,sing songs,唱歌,sing songs,1,reviewed
 candidate:singapore,singapore,Singapore,新加坡,singapore,1,reviewed
 candidate:singer,singer,singer,歌手；歌唱家,singer,2,reviewed
+candidate:singing,singing,singing,唱歌；歌唱活动,singing,1,reviewed
 candidate:sir,sir,sir,先生；老师,sir,2,reviewed
 candidate:sister,sister,sister,姐妹；姐姐；妹妹,sister,6,reviewed
 candidate:sit,sit,sit,坐；坐下,sit,4,reviewed
@@ -1189,6 +1206,7 @@ candidate:size,size,size,大小；尺寸,size,2,reviewed
 candidate:skate,skate,skate,滑冰；溜冰,skate,2,reviewed
 candidate:skateboarding,skateboarding,skateboarding,滑板运动,skateboarding,1,reviewed
 candidate:ski,ski,ski,滑雪,ski,3,reviewed
+candidate:skip,skip,skip,跳；跳绳,skip,1,reviewed
 candidate:skirt,skirt,skirt,裙子,skirt,7,reviewed
 candidate:sky,sky,sky,天空,sky,3,reviewed
 candidate:sled,sled,sled,雪橇,sled,1,reviewed
@@ -1241,6 +1259,7 @@ candidate:sports meet,sports meet,sports meet,运动会,sports meet,1,reviewed
 candidate:spring,spring,spring,春天；春季,spring,5,reviewed
 candidate:squirrel,squirrel,squirrel,松鼠,squirrel,1,reviewed
 candidate:stadium,stadium,stadium,体育场；运动场,stadium,1,reviewed
+candidate:stage,stage,stage,舞台,stage,1,reviewed
 candidate:stamp,stamp,stamp,邮票,stamp,4,reviewed
 candidate:start,start,start,开始；出发,start,4,reviewed
 candidate:station,station,station,车站,station,4,reviewed
@@ -1259,6 +1278,7 @@ candidate:strict,strict,strict,严格的；严厉的,strict,1,reviewed
 candidate:string,string,string,"线,弦,细绳",string,1,reviewed
 candidate:strong,strong,strong,强壮的；强的,strong|stronger,6,reviewed
 candidate:strongly,strongly,strongly,强劲地；强烈地,strongly,1,reviewed
+candidate:stuck,stuck,stuck,卡住的；陷住的,stuck,1,reviewed
 candidate:student,student,student,学生,student,3,reviewed
 candidate:subject,subject,subject,学科；科目,subject,5,reviewed
 candidate:subway,subway,subway,地铁,subway,1,reviewed
@@ -1370,6 +1390,7 @@ candidate:through,through,through,穿过；通过,through,1,reviewed
 candidate:throw,throw,throw,扔；投,throw,1,reviewed
 candidate:throw away,throw away,throw away,扔掉；丢弃,throw away,1,reviewed
 candidate:thursday,thursday,Thursday,星期四,thursday,6,reviewed
+candidate:ticket,ticket,ticket,票；票券,ticket,1,reviewed
 candidate:tidy,tidy,tidy,整洁的,tidy,3,reviewed
 candidate:tidy the desk,tidy the desk,tidy the desk,整理书桌,tidy the desk,1,reviewed
 candidate:tidy up,tidy up,tidy up,整理；收拾整齐,tidy up,2,reviewed
@@ -1391,6 +1412,7 @@ candidate:toothless,toothless,toothless,无牙的,toothless,1,reviewed
 candidate:toronto,toronto,Toronto,多伦多,toronto,1,reviewed
 candidate:touch,touch,touch,触摸；碰,touch,2,reviewed
 candidate:tourist,tourist,tourist,游客；旅行者,tourist,1,reviewed
+candidate:tower,tower,tower,塔；塔楼,tower,1,reviewed
 candidate:tower bridge,tower bridge,Tower Bridge,伦敦塔桥,tower bridge,1,reviewed
 candidate:town,town,town,"城镇,市镇",town,1,reviewed
 candidate:toy,toy,toy,玩具,toy,5,reviewed
@@ -1420,6 +1442,7 @@ candidate:turpan,turpan,Turpan,吐鲁番,turpan,1,reviewed
 candidate:turtle,turtle,turtle,龟；海龟,turtle,2,reviewed
 candidate:tusk,tusk,tusk,长牙；象牙,tusk,1,reviewed
 candidate:tv,tv,TV,电视,tv,5,reviewed
+candidate:tweet,tweet,tweet,啾啾叫；鸟叫声,tweet,1,reviewed
 candidate:twelfth,twelfth,twelfth,第十二,12th|twelfth,4,reviewed
 candidate:twelve,twelve,twelve,十二,twelve,4,reviewed
 candidate:twentieth,twentieth,twentieth,第二十,twentieth,1,reviewed
@@ -1443,6 +1466,7 @@ candidate:uniform,uniform,uniform,制服；校服,uniform,2,reviewed
 candidate:university,university,university,大学,university,2,reviewed
 candidate:until,until,until,直到……为止,until,1,reviewed
 candidate:up,up,up,向上；在上方,up,3,reviewed
+candidate:upset,upset,upset,心烦的；难过的,upset,1,reviewed
 candidate:us,us,us,我们,us,3,reviewed
 candidate:usa,usa,USA,美国；美利坚合众国,usa,1,reviewed
 candidate:use,use,use,使用,use,5,reviewed
