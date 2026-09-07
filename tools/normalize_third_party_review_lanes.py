@@ -6,6 +6,9 @@ an explicit ``audited-defer`` marker is removed from active review only while th
 context it was audited against remains unchanged. Context includes current source
 evidence, directional canonical state, and the review-policy version.
 
+Any builder-level ``decision-evidence-changed`` signal is always reactivated before
+defer retirement so new source evidence cannot remain hidden in a zero-scan lane.
+
 This script never changes identity_decisions.csv, blocker counts, or release state.
 """
 from __future__ import annotations
@@ -26,15 +29,6 @@ CONTEXT_FIELDS = [
     "MatchKey", "DecisionSignature", "ContextFingerprint", "DeferReasonCode",
     "DeferDependency", "PolicyVersion",
 ]
-
-ACTIVE_REVIEW_LANES = {
-    "policy-review",
-    "object-boundary",
-    "actionable-semantic",
-    "semantic-review",
-    "source-reconciliation-needed",
-    "split-resolution",
-}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -94,7 +88,7 @@ def defer_dependency(row: dict[str, str]) -> str:
     canonical = row.get("CandidateCanonical", "").strip()
     if canonical:
         return f"canonical:{canonical}"
-    if row.get("BlockerClass") == "source-reconciliation":
+    if "reconciliation" in row.get("BlockerClass", ""):
         return "source-evidence"
     return f"policy:{POLICY_VERSION}"
 
@@ -125,8 +119,24 @@ def main() -> None:
     next_context: list[dict[str, str]] = []
     retired: list[str] = []
     reactivated: list[str] = []
+    evidence_reactivated: list[str] = []
+
+    # Source occurrence-set changes are builder-level invalidation and must never be
+    # hidden merely because the base scheduler classifies the surface as expensive.
+    for row in rows:
+        signals = {x for x in row.get("CandidateSignals", "").split("|") if x}
+        if "decision-evidence-changed" not in signals:
+            continue
+        lane, batch = reactivation_lane(row)
+        row["ReviewLane"] = lane
+        row["RecommendedBatchSize"] = batch
+        row["PolicyRecommendedAction"] = "re-review-evidence-changed"
+        row["DeferReason"] = "source evidence changed; explicit re-review required"
+        evidence_reactivated.append(row["MatchKey"])
 
     for row in rows:
+        if row["MatchKey"] in set(evidence_reactivated):
+            continue
         if row.get("CurrentStatus") != "held":
             continue
         basis = row.get("CurrentDecisionBasis", "").casefold()
@@ -198,6 +208,14 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(sorted(next_context, key=lambda row: row["MatchKey"]))
 
+    hidden_changed = [
+        row["MatchKey"] for row in rows
+        if "decision-evidence-changed" in row.get("CandidateSignals", "").split("|")
+        and row.get("ReviewLane") == "deferred-high-ambiguity"
+    ]
+    if hidden_changed:
+        raise SystemExit("Changed source evidence remained hidden: " + ", ".join(hidden_changed[:20]))
+
     stale_hidden = [
         row["MatchKey"] for row in rows
         if row.get("CurrentStatus") == "held"
@@ -209,6 +227,7 @@ def main() -> None:
         raise SystemExit("Stale audited defer remained hidden: " + ", ".join(stale_hidden[:20]))
 
     counts = Counter(row["ReviewLane"] for row in rows)
+    print(f"source-evidence-changed rows reactivated = {len(evidence_reactivated)}")
     print(f"audited defer rows retired from active lanes = {len(retired)}")
     print(f"audited defer rows reactivated by context change = {len(reactivated)}")
     print("reactivated MatchKeys = " + ("|".join(reactivated) if reactivated else "none"))
