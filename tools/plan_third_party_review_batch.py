@@ -3,7 +3,9 @@
 
 The normalized review bundle remains derived-only. This planner selects one active
 lane at a time, preserving bundle order while enforcing both a surface-count cap
-and an evidence-weight budget. The resulting next_batch.json is a review plan, not
+and an evidence-weight budget. policy-executable rows are eligible only when the
+deterministic proposal engine emitted a confirm-or-reject proposal, so guarded rows
+cannot starve later lanes. The resulting next_batch.json is a review plan, not
 content-decision truth.
 """
 from __future__ import annotations
@@ -17,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
 BUNDLE = TP / "audit" / "review_bundle.csv"
+PROPOSALS = TP / "audit" / "decision_proposals.csv"
 OUT = TP / "audit" / "next_batch.json"
 PLAN_VERSION = "v3"
 
@@ -41,9 +44,11 @@ LIMITS = {
 }
 
 
-def read_csv(path: Path) -> list[dict[str, str]]:
+def read_csv(path: Path, *, required: bool = True) -> list[dict[str, str]]:
     if not path.exists():
-        raise SystemExit(f"Missing review bundle: {path}")
+        if required:
+            raise SystemExit(f"Missing required file: {path}")
+        return []
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
 
@@ -82,10 +87,17 @@ def bundle_fingerprint(rows: list[dict[str, str]]) -> str:
 
 def main() -> None:
     rows = read_csv(BUNDLE)
+    proposal_keys = {row.get("MatchKey", "") for row in read_csv(PROPOSALS, required=False) if row.get("MatchKey", "")}
+
     selected_lane = ""
     lane_rows: list[dict[str, str]] = []
+    skipped_guarded_policy = 0
     for lane in LANE_ORDER:
         candidates = [row for row in rows if row.get("ReviewLane") == lane]
+        if lane == "policy-executable":
+            guarded = [row for row in candidates if row.get("MatchKey") not in proposal_keys]
+            skipped_guarded_policy += len(guarded)
+            candidates = [row for row in candidates if row.get("MatchKey") in proposal_keys]
         if candidates:
             selected_lane = lane
             lane_rows = candidates
@@ -114,6 +126,7 @@ def main() -> None:
         "EvidenceWeight": total_weight,
         "SurfaceCap": surface_cap,
         "WeightBudget": weight_budget,
+        "SkippedGuardedPolicyRows": skipped_guarded_policy,
         "ReviewBundleFingerprint": bundle_fingerprint(rows),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -124,6 +137,7 @@ def main() -> None:
     print(f"review batch selected surfaces = {len(selected)}")
     print(f"review batch evidence weight = {total_weight} / {weight_budget}")
     print(f"review batch surface cap = {surface_cap}")
+    print(f"review batch guarded policy rows skipped = {skipped_guarded_policy}")
     print("review batch selection = deterministic")
     print("review batch decision truth = derived-only")
 
