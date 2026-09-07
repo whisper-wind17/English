@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Require decision batches to close the deterministic next-batch plan exactly."""
+"""Require decision batches to close an execution-ready deterministic plan exactly."""
 from __future__ import annotations
 
 import csv
@@ -34,7 +34,7 @@ def read_json(path: Path, label: str) -> dict[str, object]:
 
 def keys(value: object, label: str) -> list[str]:
     if not isinstance(value, list) or not all(isinstance(x, str) and x for x in value):
-        raise SystemExit(f"Invalid {label}: expected non-empty string list")
+        raise SystemExit(f"Invalid {label}: expected string list")
     if len(value) != len(set(value)):
         raise SystemExit(f"Invalid {label}: duplicate MatchKey")
     return value
@@ -51,10 +51,16 @@ def main() -> None:
     manifest = read_json(MANIFEST, "batch manifest")
     plan = read_json(PLAN, "next batch plan")
 
+    if plan.get("ExecutionReady") is not True:
+        reason = str(plan.get("GateReason", "planned batch is not execution-ready"))
+        raise SystemExit(f"Next review batch is gated and cannot be executed: {reason}")
+
     selected = keys(manifest.get("SelectedMatchKeys"), "manifest SelectedMatchKeys")
     planned = keys(plan.get("SelectedMatchKeys"), "plan SelectedMatchKeys")
     touched = list(dict.fromkeys(row.get("MatchKey", "") for row in updates if row.get("MatchKey", "")))
 
+    if not selected:
+        raise SystemExit("Execution-ready decision batch has empty SelectedMatchKeys")
     if selected != planned:
         raise SystemExit(
             "Batch manifest does not match deterministic next-batch plan: "
@@ -79,6 +85,7 @@ def main() -> None:
     print(f"planned batch selected surfaces = {len(selected)}")
     print(f"planned batch touched MatchKeys = {len(set(touched))}")
     print(f"planned batch lane = {plan.get('ReviewLane', '')}")
+    print("planned batch execution ready = yes")
     print("selected active batch closure = 100%")
 
 
