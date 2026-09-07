@@ -31,7 +31,7 @@ deferred-high-ambiguity    = 0 / default scan
 
 ```text
 source context 明确单一 elementary learning unit → keep-identity
-多个真实 source-level learning units            → split-required
+多个真实 source-level learning units            → split-required / occurrence partition
 对象应属于 Expressions                           → route-expression
 仅为 source/event chunk                          → source-only
 证据不足 / policy 未满足                         → held
@@ -213,25 +213,91 @@ Klose Master/Learner/Publish/Anki untouched
 
 - 每个 intended DecisionKey 已持久化；
 - action/status/TargetSense/basis/rationale 与本批输入一致；
-- keep-identity 已进入 Preview；
+- explicit `OccurrenceKeys` subset 与 durable decision 完全一致；
+- single keep-identity 已进入 Preview；
 - held/split/pending 仍在 review queue；
 - route-expression/source-only 不泄漏到 Preview；
 - reuse 不绕过 canonical blocker；
+- multipart decision 按 MatchKey 整体验证，不把 subgroup 当成完整 surface；
+- complete reviewed multipart 的 keep/reuse provenance 正确进入 Preview；
+- unresolved multipart 不得逃离 review queue；
 - Preview TargetSense 全非空；
 - transient inbox 已删除。
 
 该检查补充 `tools/check_third_party_corpus.py`，不替代 core Completion Recheck。
 
-## 10. Split-resolution is a separate architecture task
+## 10. Occurrence-partitioned split policy
 
-当前 `split-required` 已能表达“同一 MatchKey 存在多个真实 learning units”，但 Stage-A Preview 的 multipart provisional identity materialization 仍需独立实现和回归测试。
-
-因此吞吐 v2 不允许为了降低 blocker 数而把 split surface 强压成单一 TargetSense。后续单独实现：
+Stage A 已正式支持一个 normalized `MatchKey` 解析成多个 provisional learning identities。
 
 ```text
 one MatchKey
-+ occurrence-partitioned reviewed decisions
++ multiple reviewed decision rows
++ occurrence-partitioned evidence
 → multiple provisional Stage-A identities
 ```
 
-该能力仍不得 mint Stable ThirdPartyID，也不得提前进入 Stage B。
+硬约束：
+
+```text
+每个 decision 的 OccurrenceKeys    = 非空 explicit JSON subset
+同一 MatchKey 各 subset            = disjoint，不允许 overlap
+完整解除 split blocker 前           = union 必须覆盖全部 current occurrences
+任一 subgroup 未 reviewed/resolved  = 整个 MatchKey 仍是 blocker
+新增 source evidence 导致 cover 变化 = requeue，不静默沿用旧 partition
+multipart keep TargetSense          = 必须非空
+```
+
+Multipart `keep-identity` 使用现有 `CanonicalMatchKey` 存放 Stage-A scoped provisional key：
+
+```text
+<MatchKey>#<variant>
+```
+
+例如：
+
+```text
+dish#plate
+dish#food
+cut#verb
+cut#injury
+dream#aspiration
+dream#sleep
+```
+
+这些 key 只是 Stage-A provisional identity scope，**不是 Stable ThirdPartyID**，不得提前进入 Stage B 或 Klose Stable Registry。
+
+Multipart `reuse-identity` 仍指向现有 reviewed canonical，并继续受 canonical blocker rule 约束。`route-expression` / `source-only` 可以作为某个 occurrence subgroup，但只有整个 partition complete 且所有 subgroup resolved 后，Source MatchKey 才能退出 review。
+
+### 10.1 Preview materialization
+
+完整 partition 后：
+
+- 每个 multipart keep subgroup 生成一条独立 Preview row；
+- `ProvisionalIdentityKey = candidate:<MatchKey>#<variant>`；
+- `CanonicalMatchKey = <MatchKey>#<variant>`；
+- `SourceOccurrenceCount` 只统计该 subgroup；
+- `SourceMatchKeys` 保留原始 Source MatchKey provenance；
+- multipart reuse 合并到 reviewed canonical，不新建重复 identity。
+
+partial partition 不进入 multipart Preview，仍留在 review queue。
+
+### 10.2 Frozen smoke baseline
+
+首个真实 smoke 已通过：
+
+```text
+dish  → dish#plate / dish#food
+cut   → cut#verb / cut#injury
+dream → dream#aspiration / dream#sleep
+```
+
+结果：
+
+```text
+resolved multipart surfaces = 3
+blockers                    200 → 197
+Vocabulary Preview          1615 → 1621
+```
+
+core checker、batch checker、TargetSense gate、Klose isolation 均 PASS。该能力因此从“待实现 architecture task”升级为正式 Stage-A review mechanism。
