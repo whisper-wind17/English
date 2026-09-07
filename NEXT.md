@@ -123,8 +123,8 @@ pending                   = 0
 
 keep-identity     = 1525
 reuse-identity    =   61
-held              =  320
-split-required    =   39
+held              =  319
+split-required    =   40
 route-expression  =   83
 source-only       =   34
 ```
@@ -132,9 +132,9 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34106213514
-latest blocker-audit commit                = 88e2369247ef172d3e3fe4f11615c8a69ce8076e
-bot-generated data commit                  = c1fcb52cc7528c9d0bd2afcca3e06d97577ce57f
+GitHub Actions run                         = 34106655936
+latest blocker-audit commit                = 3e8ce88ef7ad2e3fdaca911c3b61f569d97d6cfa
+bot-generated data commit                  = 39d61cf39da4a9f511a42aaa9ccb83a5d1cb7831
 Vocabulary Preview TargetSense complete    = 1534 / 1534
 Third-party Completion Recheck             = PASS
 Independent post-workflow recheck          = PASS
@@ -159,12 +159,13 @@ Review/blocker surfaces = 444
 route-expression        = 81
 ```
 
-到当前 `c1fcb52cc7528c9d0bd2afcca3e06d97577ce57f`，累计重新审定 85 个 blocker：
+到当前 `39d61cf39da4a9f511a42aaa9ccb83a5d1cb7831`：
 
 ```text
 review_queue            -85
 Vocabulary preview      +83
 route-expression         +2
+held → split-required    +1（save，仍保留为 blocker）
 ```
 
 因此：
@@ -175,23 +176,29 @@ route-expression         +2
 81 Expressions → 83 Expressions
 ```
 
+累计完成 86 次独立 blocker decision refinement：其中 85 个 blocker 被证据充分地释放/路由出 review_queue；另 1 个 `save` 没有被释放，而是依据 source-level 多义证据从普通 held 提升为 `split-required`。这符合“以质量为目标，不以 blocker 数量下降为目标”的规则。
+
 最新独立批次只更新 1 条 decision：
 
 ```text
-brush → keep-identity → 画笔；毛笔
+save → split-required → 仍为 blocker
 ```
 
 最新批次的 source-context 依据：
 
 ```text
-brush：沪教三年级起点六下 occurrence `hujiao_start3|g6-lower|r046|brush`
-       位于 oil / oil painting / powerful / ink / Chinese ink painting /
-       brush / paints / artist 的连续美术材料语境。
-       该 neighborhood 能唯一绑定绘画/书画工具这一名词义项，
-       因此 TargetSense 收窄为“画笔；毛笔”，排除“刷；擦”等动词义项和其他 dictionary noise。
+Beijing：`beijing_start1|g6-lower|r040|save`
+         位于 protect / stop / litter / answer / clean / print / OK / paper /
+         save / also 的环保与纸张资源语境，锁定“节约/节省纸张或资源”义项。
+
+Hujiao：`hujiao_start3|g5-upper|r012|save`
+        位于 singer / fall / lifeguard / save / become / good at 的职业语境，
+        锁定“救；救助（人）”义项。
 ```
 
-Completion Recheck：workflow 中 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；Git compare 显示 bot commit 只修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived staging 文件，并删除 transient inbox。Preview 已确认包含 `brush → 画笔；毛笔`；`study` 仍 held，`won` 仍 held，`saw` 仍 split-required，`CD` 仍为 abbreviation-policy held。
+两个独立教材来源明确给出两个真实 elementary learning units，因此不能继续用一个模糊 held 描述，更不能 flatten 成单一 Vocabulary Identity；需要 occurrence-level sense split。
+
+Completion Recheck：workflow 中 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；transient `decision_updates.csv` 已删除。Git compare 显示 bot commit 只修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived blocker/candidate staging 文件；Vocabulary Preview 仍为 1534，且不存在未完成 split 的 `candidate:save`。`study` 仍 held，`won` 仍 held，`saw` 仍 split-required，`CD` 仍为 abbreviation-policy held。
 
 代表性已释放 learning units：
 
@@ -233,6 +240,7 @@ about      → held
 study      → held
 CD         → held / abbreviation policy
 won        → held / irregular-form policy
+save       → split-required / 节约资源 vs 救助人
 saw        → split-required
 watch      → split-required
 may        → split-required
@@ -254,15 +262,16 @@ cold       → split-required
 ```text
 1. 继续审计当前 359 个 held/split blocker；
 2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目；
-3. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split；
-4. 每批 decision update 后必须运行 workflow + 独立 Completion Recheck；
-5. 每个独立闭环批次完成后立即更新 NEXT.md，再开始下一批；
-6. 不以 blocker 数量下降作为质量目标；
-7. blocker 质量达到稳定 checkpoint 后，向用户展示当前结构与代表性边界；
-8. 用户确认后，才考虑启用 waiyan_start3；
-9. waiyan_start3 接入仍只做 Stage A；
-10. 仍不 mint Stable ThirdPartyID；
-11. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
+3. 若 source occurrences 已明确暴露多个真实 learning units，应从 held 升级为 split-required，而不是强行释放；
+4. 功能词、多义词、同形异义、irregular/form-policy/abbreviation-policy 项继续保守 held/split；
+5. 每批 decision update 后必须运行 workflow + 独立 Completion Recheck；
+6. 每个独立闭环批次完成后立即更新 NEXT.md，再开始下一批；
+7. 不以 blocker 数量下降作为质量目标；
+8. blocker 质量达到稳定 checkpoint 后，向用户展示当前结构与代表性边界；
+9. 用户确认后，才考虑启用 waiyan_start3；
+10. waiyan_start3 接入仍只做 Stage A；
+11. 仍不 mint Stable ThirdPartyID；
+12. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
 ```
 
 ---
