@@ -1,6 +1,6 @@
 # Third-party Vocabulary — High-throughput Review Policy
 
-本文件定义 Stage-A blocker 审计的批处理策略与类级 policy。它不改变 Source/Identity 真源边界：`identity_decisions.csv` 仍是唯一内容决策真源；`review_queue.csv`、`review_bundle.csv`、`decision_proposals.csv` 都是 generated/derived views。
+本文件定义 Stage-A blocker 审计的批处理策略与类级 policy。它不改变 Source/Identity 真源边界：`identity_decisions.csv` 仍是唯一内容决策真源；`review_queue.csv`、`review_bundle.csv`、`decision_proposals.csv`、`defer_context.csv`、`next_batch.json` 都是 generated/derived views。
 
 ## 1. Batch review contract
 
@@ -49,10 +49,104 @@ selected active batch closure = 100%
 
 已进入 `deferred-high-ambiguity` 且 evidence 未变化的 surface 不计入后续 active throughput，也不得重复扫描；source evidence / policy / canonical state 变化触发 requeue 后，才重新进入 active batch。
 
+### 1.2 High-throughput v3 execution safeguards — FROZEN
+
+高吞吐不能只依赖模型遵守 batch size。Stage A 使用可执行计划、manifest closure、context invalidation 和 workflow serialization 保证长期不退化。
+
+#### Deterministic batch plan + evidence budget
+
+`tools/plan_third_party_review_batch.py` 基于 normalized Review Bundle 生成 derived-only：
+
+```text
+anki/klose/third_party_vocabulary/audit/next_batch.json
+```
+
+计划同时受两个上限约束：
+
+```text
+SurfaceCount <= lane surface cap
+AND
+EvidenceWeight <= lane evidence budget
+```
+
+EvidenceWeight 至少考虑 occurrence 数、source 数、split complexity、canonical dependency 与 evidence payload 大小。简单 policy lane 仍保持高 surface cap；复杂 split/semantic batch 只在 evidence workload 高时缩小，不退回固定 2–3 item 微批次。
+
+`policy-executable` 只有 deterministic proposal engine 真正产出 confirm-or-reject proposal 的 row 才能进入 executable plan；proposal guard 拦截的 row 不得饿死后续 lane。
+
+#### Batch manifest + CI set closure
+
+真正执行 decision batch 时必须同时提交：
+
+```text
+review/decision_updates.csv
+review/batch_manifest.json
+```
+
+manifest 必须逐项绑定当前 `next_batch.json` 的：
+
+```text
+PlanVersion
+ReviewLane
+SelectedMatchKeys
+SelectedCount
+ReviewBundleFingerprint
+```
+
+`tools/check_third_party_batch_manifest.py` 在 apply 前强制：
+
+```text
+manifest SelectedMatchKeys == deterministic plan SelectedMatchKeys
+set(decision_updates.MatchKey) == set(SelectedMatchKeys)
+selected active batch closure = 100%
+```
+
+少处理、额外处理、使用 stale plan、lane/fingerprint 不一致均直接 FAIL。成功 apply 后 transient `batch_manifest.json` 与 `decision_updates.csv` 都必须删除。
+
+`next_batch.json` 还包含 `ExecutionReady`。若为 `false`，manifest checker 必须拒绝执行；不能把“候选计划”误当成“允许强行 adjudicate”。当前 evidence 未变化的 residual split 默认 `ExecutionReady=false`，需要更强 source evidence 或未来显式 override 机制。
+
+#### Audited-defer context invalidation
+
+`audited-defer` 不是永久豁免。`tools/normalize_third_party_review_lanes.py` 维护 derived-only：
+
+```text
+anki/klose/third_party_vocabulary/audit/defer_context.csv
+```
+
+至少记录：
+
+```text
+MatchKey
+DecisionSignature
+ContextFingerprint
+DeferReasonCode
+DeferDependency
+PolicyVersion
+```
+
+ContextFingerprint 绑定当前 source occurrence evidence、directional canonical state 与 policy version。若 durable decision 未重新审而 context 变化，则该 defer 必须重新进入 active lane；builder 产生的 `decision-evidence-changed` signal 始终优先 requeue，禁止继续隐藏在 zero-scan lane。
+
+`defer_context.csv` 只是 scheduling/audit metadata，不是第二套内容决策真源；内容判断仍只在 `identity_decisions.csv`。
+
+#### Source mutation / decision mutation separation
+
+Source/raw/parser/config 变化时必须先完整 parse + rebuild + requeue，再基于新的 `next_batch.json` 做 decision review。禁止在同一个 commit/workflow 中混合 source mutation 与 `decision_updates.csv`，避免使用 stale batch plan 审新 evidence。
+
+#### Workflow serialization
+
+Stage-A mutation workflow 必须使用同一 concurrency group：
+
+```text
+third-party-stage-a-${ref}
+cancel-in-progress = false
+```
+
+同一 branch 的 Stage-A mutation 串行执行；不得通过并行 bot persist 换吞吐，也不得取消已经开始的 decision batch。
+
 每个独立批次仍然只允许：
 
 ```text
 1 个 decision_updates.csv
+1 个 matching batch_manifest.json
 1 次 Stage-A workflow
 1 次 core Completion Recheck
 1 次 batch-aware Completion Recheck
@@ -120,7 +214,7 @@ source-reconciliation-needed  # glossary/source evidence 冲突
 deferred-high-ambiguity       # 无新 evidence 时默认不重复扫描
 ```
 
-`deferred-high-ambiguity` 的意义是减少重复推理，不等于永久放弃；source evidence 或 policy 变化后可以重新进入 active lane。
+`deferred-high-ambiguity` 的意义是减少重复推理，不等于永久放弃；source evidence、canonical dependency 或 policy 变化后可以重新进入 active lane。
 
 ## 3. Canonical evidence rule
 
@@ -216,12 +310,12 @@ Decision-only 更新不重新 parse 未变化教材 source。
 ```text
 Source/raw/parser/config changed
 → parse + validate affected adapters
-→ apply decisions
-→ build corpus
-→ core recheck
+→ build/requeue/plan
+→ 后续独立 decision batch
 
 Only decision_updates / identity decisions changed
 → reuse committed adapter occurrences
+→ require current plan + manifest closure
 → apply decisions
 → build corpus
 → core recheck
@@ -237,6 +331,8 @@ changed evidence requeues
 canonical blocker cannot be bypassed
 Review Bundle closes over current blockers
 policy proposals never auto-apply
+selected batch closure = 100%
+ExecutionReady = true before decision apply
 Klose Master/Learner/Publish/Anki untouched
 ```
 
@@ -257,7 +353,7 @@ Klose Master/Learner/Publish/Anki untouched
 - Preview TargetSense 全非空；
 - transient inbox 已删除。
 
-该检查补充 `tools/check_third_party_corpus.py`，不替代 core Completion Recheck。
+该检查补充 `tools/check_third_party_corpus.py` 与 batch-manifest closure gate，不替代二者。
 
 ## 10. Occurrence-partitioned split policy
 
