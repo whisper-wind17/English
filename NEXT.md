@@ -21,6 +21,8 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → anki/klose/third_party_vocabulary/staging/review_queue.csv
 → anki/klose/third_party_vocabulary/audit/review_bundle.csv
 → anki/klose/third_party_vocabulary/audit/decision_proposals.csv
+→ anki/klose/third_party_vocabulary/audit/defer_context.csv
+→ anki/klose/third_party_vocabulary/audit/next_batch.json
 → anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
 ```
 
@@ -72,7 +74,7 @@ Total            = 4848
 
 ---
 
-## 3. Current checkpoint — HIGH-THROUGHPUT POLICY PASS CLOSED
+## 3. Current checkpoint — HIGH-THROUGHPUT V3 HARDENED
 
 ```text
 Enabled adapters          = 5
@@ -96,28 +98,25 @@ residual split batch 3    168 → 163 / preview 1675 → 1682
 scoped reuse smoke        163 → 160 / preview 1682 → 1682
 scoped reuse batch        160 → 156 / preview 1682 → 1682
 full policy-review pass   156 → 153 / preview 1682 → 1685
+v3 hardening              counts unchanged
 ```
 
-### 本轮吞吐定义修正
-
-此前把“净释放数”误当成“review throughput”，导致只挑容易释放的少量 surface，退化成低吞吐逐项处理。现已修正：
+高吞吐指标必须分开：
 
 ```text
-Original policy-review lane = 23 surfaces
+Review throughput   = 本批实际完成 adjudication 的 surface 数
+Net blocker release = 本批最终安全离开 blocker 的 surface 数
+```
+
+最近 full policy pass：
+
+```text
+Original policy-review lane = 23
 Reviewed end-to-end         = 23 / 23
 Released                    = 3
 Audited-defer               = 20
 policy-review after pass    = 0
 ```
-
-这两个指标必须分开：
-
-```text
-Review throughput = 一批实际完成审查/归类多少 surface
-Net blocker release = 最终有多少 surface 能安全离开 blocker
-```
-
-高吞吐要求前者按 20–30/batch 执行；后者服从 evidence quality，不为数字强行 release。
 
 本轮 release：
 
@@ -127,44 +126,117 @@ mice     → keep-identity / 老鼠（mouse 的复数）
 sometime → keep-identity / 在某一时候；改天
 ```
 
-`sweets` 原拟 release，但 core checker 正确拦截 `Protected form-policy blocker lost: sweets`。未削弱 checker；最终保持 audited-defer。该失败 run 没有持久化错误 decision。
+`sweets` 曾被尝试 release，但 core checker 正确拦截 `Protected form-policy blocker lost: sweets`；未削弱 checker，最终保持 blocker。
 
 ---
 
-## 4. Review-lane normalization — FROZEN
+## 4. High-throughput v3 execution mechanism — FROZEN
 
-发现 scheduler 只会把 semantic `audited-defer` 移出 active lane，而 form-policy / abbreviation-policy / object-boundary 的已审核 defer 会反复重新出现，造成重复扫描和假低吞吐。
+长期规则已写入 `docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md`。
 
-已加入 derived-only normalizer：
+### 4.1 Full-batch closure is executable
 
-```text
-tools/normalize_third_party_review_lanes.py
-```
-
-规则：
+不再只靠 Prompt 要求“整批处理”。当前执行链：
 
 ```text
-held + DecisionBasis contains audited-defer
-→ ReviewLane = deferred-high-ambiguity
-→ RecommendedBatchSize = 0
-→ no identity decision change
-→ source evidence changed 后仍按原机制 requeue
+normalized review_bundle.csv
+→ tools/propose_third_party_policy_decisions.py
+→ tools/plan_third_party_review_batch.py
+→ audit/next_batch.json
+→ review/batch_manifest.json + review/decision_updates.csv
+→ tools/check_third_party_batch_manifest.py
+→ apply/build/recheck/persist
 ```
 
-最终 normalized review bundle：
+真正执行 decision batch 时：
+
+```text
+manifest SelectedMatchKeys == deterministic next_batch SelectedMatchKeys
+set(decision_updates.MatchKey) == selected MatchKeys
+ExecutionReady == true
+→ selected active batch closure = 100%
+```
+
+少处理、额外处理、stale plan、lane/fingerprint 不一致或 `ExecutionReady=false` 均 FAIL。成功 apply 后 transient manifest/inbox 删除。
+
+### 4.2 Evidence-weighted batch sizing
+
+仍保留高 surface cap，但同时限制 evidence workload：
+
+```text
+SurfaceCount <= lane cap
+AND
+EvidenceWeight <= lane budget
+```
+
+简单 policy / semantic 不退回 2–3 item 微批次；复杂 split/cross-source batch 会按 occurrence/source/canonical/evidence payload 动态缩小。
+
+`policy-executable` 只有 proposal engine 实际产生 confirm-or-reject proposal 时才进入计划；当前 `were / pleased / lost` proposal=0，因此不会阻塞后续 lane。
+
+### 4.3 Audited-defer context invalidation
+
+`tools/normalize_third_party_review_lanes.py` 维护 derived-only：
+
+```text
+anki/klose/third_party_vocabulary/audit/defer_context.csv
+```
+
+每个显式 audited defer 记录：
+
+```text
+DecisionSignature
+ContextFingerprint
+DeferReasonCode
+DeferDependency
+PolicyVersion=v3
+```
+
+ContextFingerprint 包含当前 source occurrence evidence + directional canonical state + policy version。
+
+```text
+same decision + same context
+→ deferred / no rescan
+
+same decision + changed context
+→ active re-review
+
+decision-evidence-changed
+→ 始终 active re-review，不允许藏在 deferred
+```
+
+`defer_context.csv` 只是 derived scheduling/audit metadata；`identity_decisions.csv` 仍是唯一内容决策真源。
+
+### 4.4 Source mutation and decision mutation cannot mix
+
+Source/raw/parser/config 变化必须先完成 parse/rebuild/requeue/plan，再做新的 decision batch。Workflow 已禁止同一 source-changing commit 携带 `decision_updates.csv`，避免 stale plan 审核新 evidence。
+
+### 4.5 Workflow serialization
+
+Stage-A workflow 已加入：
+
+```text
+concurrency group = third-party-stage-a-${ref}
+cancel-in-progress = false
+```
+
+同一 branch 的 mutation 串行执行；不再允许两个 bot persist 相互 push race，也不取消已启动 decision batch。
+
+---
+
+## 5. Current normalized review boundary
 
 ```text
 deferred-high-ambiguity = 140
-policy-executable       = 3
-split-resolution        = 10
-policy-review           = 0
-object-boundary         = 0
-actionable-semantic     = 0
-semantic-review         = 0
+policy-executable       =   3
+split-resolution        =  10
+policy-review           =   0
+object-boundary         =   0
+actionable-semantic     =   0
+semantic-review         =   0
 Total blockers          = 153
 ```
 
-因此 140 个 deferred 不是“未审”；没有新 evidence 时禁止重复扫描。
+140 个 deferred 不是“未审”；无 context/evidence 变化时禁止重复扫描。
 
 `policy-executable=3`：
 
@@ -172,11 +244,35 @@ Total blockers          = 153
 were / pleased / lost
 ```
 
-proposal engine 仍输出 0：1 个 grammar-special + 2 个 multi-POS/lexicalization-risk。按 frozen policy 不机械 AutoApply，也不为降低 blocker 强行处理。
+proposal engine 输出 0：1 个 grammar-special + 2 个 multi-POS/lexicalization-risk。v3 planner 会跳过这些 guarded rows，不允许 lane starvation。
+
+Residual split：
+
+```text
+too / french / kind / little / live / look / mouse / plant / right / sound
+```
+
+这些至少有一个 current occurrence 无法用当前 flat source evidence 安全归属；无新 evidence 不重复强拆。
+
+当前 deterministic next-batch candidate：
+
+```text
+ReviewLane         = split-resolution
+SelectedMatchKeys  = too / french / kind / little / live / look
+SelectedCount      = 6
+EvidenceWeight     = 65 / 70
+SurfaceCap         = 25
+SkippedGuardedRows = 3
+ExecutionReady     = false
+```
+
+GateReason：`unchanged residual split requires stronger source evidence or explicit user gate`。
+
+因此这 6 个只是 planner 给出的下一候选，不允许直接生成 decision batch。
 
 ---
 
-## 5. Raw source evidence ceiling — VERIFIED
+## 6. Raw source evidence ceiling — VERIFIED
 
 2026-09-08 已对 5 个 enabled adapter 的 48 册原始 XLSX 做只读 workbook XML 审计：
 
@@ -202,7 +298,7 @@ Unit/Module/Lesson structural metadata = 0
 
 ---
 
-## 6. Occurrence-partitioned split + scoped reuse — FROZEN
+## 7. Occurrence-partitioned split + scoped reuse — FROZEN
 
 Occurrence split：
 
@@ -213,14 +309,6 @@ one MatchKey
 + complete current-occurrence cover
 → multiple provisional Stage-A learning identities
 ```
-
-Residual split：
-
-```text
-too / french / kind / little / live / look / mouse / plant / right / sound
-```
-
-这些至少有一个 current occurrence 无法用当前 flat source evidence 安全归属；无新 evidence 不重复强拆。
 
 Scoped multipart reuse 已验证：
 
@@ -238,76 +326,57 @@ playing  → play#general
 
 ---
 
-## 7. Latest validation
+## 8. V3 validation checkpoint
 
-Lane normalization infrastructure：
-
-```text
-workflow integration commit = 4c1adaf7737d30e06e2abcf5d437a67f9430d99f
-normalization workflow       = 34169519390 SUCCESS
-```
-
-Full policy batch：
+主要实现：
 
 ```text
-corrected decision commit    = 9b87c3be682b2bc6961d44b95c8320d671f85543
-workflow                     = 34169727538 SUCCESS
-bot data commit              = f08de4716ae51e38d7961fe040e93183dd96dec6
-batch decisions              = 14
-  keep-identity              = 3
-  held/audited-defer         = 11
+full-batch policy freeze       = cdefc87546969ee6ac74244a1b9c21332b7b5f8e
+batch planner                  = tools/plan_third_party_review_batch.py
+batch manifest checker         = tools/check_third_party_batch_manifest.py
+defer context normalizer       = tools/normalize_third_party_review_lanes.py
+workflow serialization/mixing  = .github/workflows/prepare-third-party-renjiao-start1.yml
+execution-ready gate commit    = 942fb5db59407a9fb370abe1ce5c15cfe85dbc36
+policy v3 doc commit           = d3250a735267df8ead994eeaa3b0ebcd97cf5d98
 ```
 
-Final historical-marker normalization：
+Final regression workflow：
 
 ```text
-PS decision commit           = df80f2c156e43cdf600be8af8af32536f35e6349
-workflow                     = 34169781528 SUCCESS
-bot data commit              = b15d92fc5853f894f3547641a46b6d6220b80140
+run = 34170966959
+status = SUCCESS
 ```
 
-Completion Recheck：
+前一完整 v3 regression `34170814246` 也 SUCCESS，并验证：
 
 ```text
-Decision-only fast path                    PASS
-Source adapters reparsed in decision runs  NO
-Source occurrence closure                  PASS
-Core Completion Recheck                    PASS
-Audit-batch Completion Recheck             PASS
-Preview TargetSense                        1685 / 1685
-Explicit reviewed OccurrenceKeys           PASS
-Changed evidence requeue                   PASS
-Audited defer absent from active lanes     PASS
-policy-review                              0
-object-boundary                            0
-Transient inbox removed                    PASS
-Klose Master/Learner/Publish/Anki touched  NO
-Stable ThirdPartyID minted                 NO
-Final Klose diff executed                  NO
+Decision-only fast path                  PASS
+Source parser skip on decision/code-only PASS
+Core Completion Recheck                  PASS
+Audit-batch Completion Recheck           PASS
+Preview TargetSense                      1685 / 1685
+Source occurrence closure                PASS
+Explicit reviewed OccurrenceKeys         PASS
+Changed source evidence active requeue   PASS
+Audited defer context tracking           PASS
+Guarded policy rows skipped by planner   PASS
+Evidence-weighted batch planning         PASS
+Klose Master/Learner/Publish/Anki touched NO
+Stable ThirdPartyID minted               NO
+Final Klose diff executed                NO
 ```
 
-Independent samples：
-
-```text
-a        Preview reviewed / 4 occurrences
-mice     Preview reviewed / 2 occurrences
-sometime Preview reviewed / 1 occurrence
-sweets   remains blocker / audited-defer
-broken   remains blocker / audited-defer
-felt     remains blocker / audited-defer
-```
-
-Diff-scope recheck from pre-normalization five-adapter checkpoint through `b15d92f` only touched workflow + third-party review/audit/staging + lane-normalizer tool；未触碰 Klose Master/Learner/Publish/Anki。
+V3 hardening 未改变 corpus content baseline：仍为 `1685 Preview / 153 blockers / 34 multipart resolved`。
 
 ---
 
-## 8. NEXT TASK — USER GATE BEFORE `waiyan_start3`
+## 9. NEXT TASK — USER GATE BEFORE `waiyan_start3`
 
-Five-adapter Stage-A 的可执行 review lanes 已按高吞吐方式清空；当前剩余：
+Five-adapter Stage-A 当前没有可安全自动执行的 active review batch。剩余：
 
 ```text
-140 = reviewed evidence/policy defers
-  3 = policy-executable but proposal guard blocks AutoApply
+140 = deferred evidence/policy rows
+  3 = guarded policy rows, proposal=0
  10 = residual split requiring stronger occurrence evidence
 ```
 
@@ -315,11 +384,11 @@ Five-adapter Stage-A 的可执行 review lanes 已按高吞吐方式清空；当
 
 ```text
 1. Enabled=yes 接入 waiyan_start3。
-2. 完整 source parse + validation；不能走 decision-only fast path。
-3. 对 durable decisions 做 exact OccurrenceKeys revalidation。
-4. evidence-changed MatchKey 自动 requeue，不静默继承旧结论。
-5. rebuild review_queue / review_bundle / Preview。
-6. 新 active lanes 继续按 frozen batch-size 高吞吐处理，不退回逐项 review。
+2. 完整 source parse + validation；不能与 decision batch 混在同一次 mutation。
+3. rebuild corpus / review bundle / defer context / proposals / next_batch。
+4. 新增 occurrence evidence 导致 durable OccurrenceKeys 不匹配时自动 requeue。
+5. canonical/context fingerprint 变化导致 audited-defer 自动 re-review。
+6. 新 active batch 使用 v3 planner + manifest，100% closure；不退回逐项 review。
 7. 独立核对 source closure、blocker delta、multipart partition、scoped reuse、高风险 surface。
 8. 更新 NEXT.md。
 ```
@@ -328,7 +397,7 @@ Five-adapter Stage-A 的可执行 review lanes 已按高吞吐方式清空；当
 
 ---
 
-## 9. Frozen long-term rules
+## 10. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
