@@ -159,6 +159,8 @@ candidate:box,box,box,盒子；箱子,box,7,reviewed
 candidate:boy,boy,boy,男孩,boy,5,reviewed
 candidate:brave,brave,brave,勇敢的,brave,2,reviewed
 candidate:bread,bread,bread,面包,bread,5,reviewed
+candidate:break#damage,break#damage,break,打破；弄坏,break,1,reviewed
+candidate:break#recess,break#recess,break,课间休息；休息时间,break,2,reviewed
 candidate:breakfast,breakfast,breakfast,早餐；早饭,breakfast,4,reviewed
 candidate:breath,breath,breath,呼吸；气息,breath,1,reviewed
 candidate:bridge,bridge,bridge,桥,bridge,2,reviewed
@@ -228,6 +230,8 @@ candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chemistry,chemistry,chemistry,化学,chemistry,1,reviewed
 candidate:chess,chess,chess,国际象棋；棋,chess,1,reviewed
 candidate:chick,chick,chick,小鸡；雏鸡,chick,1,reviewed
+candidate:chicken#animal,chicken#animal,chicken,鸡；小鸡,chicken,2,reviewed
+candidate:chicken#meat,chicken#meat,chicken,鸡肉,chicken,6,reviewed
 candidate:child,child,child,孩子；儿童,child,3,reviewed
 candidate:children,children,children,孩子们；儿童（child 的复数）,children,5,reviewed
 candidate:children's day,children's day,Children's Day,儿童节,children's day,2,reviewed
@@ -267,6 +271,8 @@ candidate:coach,coach,coach,教练,coach,1,reviewed
 candidate:coat,coat,coat,外套；大衣,coat,6,reviewed
 candidate:coconut,coconut,coconut,椰子,coconut,1,reviewed
 candidate:cola,cola,cola,可乐,cola,3,reviewed
+candidate:cold#illness,cold#illness,cold,感冒,cold,2,reviewed
+candidate:cold#temperature,cold#temperature,cold,冷的；寒冷的,cold,5,reviewed
 candidate:collect,collect,collect,收集；收集起来,collect,3,reviewed
 candidate:come,come,come,来,came|come,4,reviewed
 candidate:come back,come back,come back,回来；返回,come back,1,reviewed
@@ -279,6 +285,8 @@ candidate:computer game,computer game,computer game,电脑游戏,computer game,1
 candidate:computer room,computer room,computer room,计算机教室；电脑室,computer room,1,reviewed
 candidate:concert,concert,concert,音乐会,concert,1,reviewed
 candidate:contest,contest,contest,比赛；竞赛,contest,1,reviewed
+candidate:cook#person,cook#person,cook,厨师；厨子,cook,3,reviewed
+candidate:cook#verb,cook#verb,cook,做饭；烹饪,cook,3,reviewed
 candidate:corn,corn,corn,玉米,corn,1,reviewed
 candidate:cost,cost,cost,费用；花费,cost,1,reviewed
 candidate:cough,cough,cough,咳嗽；咳嗽声,cough,1,reviewed
@@ -364,6 +372,8 @@ candidate:drive away,drive away,drive away,赶走；驱赶,drive away,1,reviewed
 candidate:driver,driver,driver,司机；驾驶员,driver,3,reviewed
 candidate:drum,drum,drum,鼓,drum,1,reviewed
 candidate:dry,dry,dry,干的；干燥的,dry,1,reviewed
+candidate:duck#animal,duck#animal,duck,鸭子,duck,5,reviewed
+candidate:duck#meat,duck#meat,duck,鸭肉,duck,1,reviewed
 candidate:duckling,duckling,duckling,小鸭子,duckling,1,reviewed
 candidate:dumpling,dumpling,dumpling,饺子,dumpling,3,reviewed
 candidate:during,during,during,在……期间；在……的时候,during,2,reviewed
@@ -453,6 +463,8 @@ candidate:fifteen,fifteen,fifteen,十五,fifteen,3,reviewed
 candidate:fifteenth,fifteenth,fifteenth,第十五,15th|fifteenth,3,reviewed
 candidate:fifth,fifth,fifth,第五,5th|fifth,4,reviewed
 candidate:fifty,fifty,fifty,五十,fifty,3,reviewed
+candidate:film#movie,film#movie,film,电影,film,5,reviewed
+candidate:film#photo,film#photo,film,胶卷；胶片,film,1,reviewed
 candidate:finally,finally,finally,最后；终于,finally,1,reviewed
 candidate:find,find,find,找到；发现,find|found,7,reviewed
 candidate:fine,fine,fine,好的；健康的；不错的,fine,3,reviewed
@@ -466,6 +478,8 @@ candidate:firework,firework,firework,烟花；烟火,firework,1,reviewed
 candidate:first,first,first,第一；首先,first,6,reviewed
 candidate:first floor,first floor,first floor,一楼；第一层,first floor,1,reviewed
 candidate:fish and chips,fish and chips,fish and chips,炸鱼薯条,fish and chips,2,reviewed
+candidate:fish#noun,fish#noun,fish,鱼；鱼类,fish,11,reviewed
+candidate:fish#verb,fish#verb,fish,钓鱼；捕鱼,fish,1,reviewed
 candidate:fisherman,fisherman,fisherman,渔夫；渔民,fisherman,1,reviewed
 candidate:fit,fit,fit,健康的；健壮的,fit,1,reviewed
 candidate:five,five,five,五,five,5,reviewed
@@ -479,6 +493,8 @@ candidate:flu,flu,flu,流感,flu,1,reviewed
 candidate:flute,flute,flute,长笛,flute,1,reviewed
 candidate:fly a kite,fly a kite,fly a kite,放风筝,fly a kite,2,reviewed
 candidate:fly away,fly away,fly away,飞走；飞离,fly away,1,reviewed
+candidate:fly#insect,fly#insect,fly,苍蝇,fly,1,reviewed
+candidate:fly#verb,fly#verb,fly,飞；飞行,fly,5,reviewed
 candidate:foggy,foggy,foggy,有雾的；多雾的,foggy,1,reviewed
 candidate:follow,follow,follow,跟随；遵循,follow,3,reviewed
 candidate:food,food,food,食物,food,4,reviewed
@@ -657,6 +673,8 @@ candidate:horse,horse,horse,马,horse,5,reviewed
 candidate:hospital,hospital,hospital,医院,hospital,6,reviewed
 candidate:hot dog,hot dog,hot dog,热狗,hot dog,1,reviewed
 candidate:hot pot,hot pot,hot pot,火锅,hot pot,1,reviewed
+candidate:hot#spicy,hot#spicy,hot,辣的,hot,1,reviewed
+candidate:hot#temperature,hot#temperature,hot,热的,hot,5,reviewed
 candidate:hotel,hotel,hotel,旅馆；酒店,hotel,4,reviewed
 candidate:hour,hour,hour,小时；钟头,hour,3,reviewed
 candidate:house,house,house,房子；住宅,house,7,reviewed
@@ -748,7 +766,8 @@ candidate:laugh at,laugh at,laugh at,嘲笑；因……发笑,laugh at,1,reviewe
 candidate:lazy,lazy,lazy,懒惰的；懒洋洋的,lazy,2,reviewed
 candidate:leaf,leaf,leaf,叶子；树叶,leaf,4,reviewed
 candidate:learn,learn,learn,学习；学会,learn|learnt,3,reviewed
-candidate:leave,leave,leave,离开；出发,leave,2,reviewed
+candidate:leave,leave,leave,离开；出发,leave|left,4,reviewed
+candidate:left#direction,left#direction,left,左边；左侧,left,4,reviewed
 candidate:leg,leg,leg,腿,leg,5,reviewed
 candidate:lemon,lemon,lemon,柠檬,lemon,1,reviewed
 candidate:less,less,less,更少；较少,less,1,reviewed
@@ -808,6 +827,8 @@ candidate:march,march,March,三月,march,4,reviewed
 candidate:mark,mark,mark,分数；成绩,mark,1,reviewed
 candidate:marker,marker,marker,马克笔；记号笔,marker,1,reviewed
 candidate:mask,mask,mask,面具,mask,1,reviewed
+candidate:match#game,match#game,match,比赛；竞赛,match,1,reviewed
+candidate:match#stick,match#stick,match,火柴,match,2,reviewed
 candidate:maths,maths,maths,数学,maths,4,reviewed
 candidate:maths book,maths book,maths book,数学书,maths book,1,reviewed
 candidate:maybe,maybe,maybe,也许；可能；大概,maybe,1,reviewed
@@ -835,6 +856,8 @@ candidate:milkshake,milkshake,milkshake,奶昔,milkshake,1,reviewed
 candidate:mine,mine,mine,我的；我的东西,mine,4,reviewed
 candidate:minute,minute,minute,分钟,minute,3,reviewed
 candidate:mirror,mirror,mirror,镜子,mirror,1,reviewed
+candidate:miss#title,miss#title,Miss,小姐；女士（称谓）,miss,3,reviewed
+candidate:miss#verb,miss#verb,Miss,错过；想念,miss,3,reviewed
 candidate:mistake,mistake,mistake,错误；过失,mistake,1,reviewed
 candidate:model car,model car,model car,汽车模型；模型车,model car,1,reviewed
 candidate:model house,model house,model house,房屋模型；模型房屋,model house,1,reviewed
@@ -948,6 +971,8 @@ candidate:online,online,online,在线的；在线地,online,1,reviewed
 candidate:only,only,only,只；仅仅；唯一的,only,4,reviewed
 candidate:open,open,open,打开；开着的；开放的,open,5,reviewed
 candidate:or,or,or,或者；还是,or,5,reviewed
+candidate:orange#color,orange#color,orange,橙色；橘色,orange,2,reviewed
+candidate:orange#fruit,orange#fruit,orange,橙子；桔子,orange,7,reviewed
 candidate:other,other,other,其他的；另外的,other,3,reviewed
 candidate:our,our,our,我们的,our,5,reviewed
 candidate:ours,ours,ours,我们的；我们的东西,ours,1,reviewed
@@ -975,6 +1000,8 @@ candidate:parrot,parrot,parrot,鹦鹉,parrot,1,reviewed
 candidate:part,part,part,部分；一部分,part,2,reviewed
 candidate:party,party,party,聚会；派对,party,5,reviewed
 candidate:passport,passport,passport,"护照,通行证",passport,1,reviewed
+candidate:past#clock,past#clock,past,过（用于钟点）,past,1,reviewed
+candidate:past#movement,past#movement,past,经过；越过,past,1,reviewed
 candidate:path,path,path,小路；道路,path,1,reviewed
 candidate:pay,pay,pay,支付；付款,pay,1,reviewed
 candidate:pay attention to,pay attention to,pay attention to,注意；留意,pay attention to,1,reviewed
@@ -1041,6 +1068,8 @@ candidate:pm,pm,pm,下午；午后（p.m.）,pm,1,reviewed
 candidate:pod,pod,pod,豆荚,pod,1,reviewed
 candidate:poem,poem,poem,诗；诗歌,poem,3,reviewed
 candidate:poet,poet,poet,诗人,poet,1,reviewed
+candidate:point#score,point#score,point,分；得分,point,1,reviewed
+candidate:point#verb,point#verb,point,指；指向,point,1,reviewed
 candidate:police,police,police,警察；警方,police,2,reviewed
 candidate:police officer,police officer,police officer,警察；警官,police officer,2,reviewed
 candidate:policeman,policeman,policeman,警察；男警察,policeman,2,reviewed
@@ -1153,6 +1182,9 @@ candidate:same,same,same,相同的；一样的,same,4,reviewed
 candidate:sandwich,sandwich,sandwich,三明治,sandwich,4,reviewed
 candidate:saturday,saturday,Saturday,星期六,saturday,6,reviewed
 candidate:sausage,sausage,sausage,香肠,sausage,1,reviewed
+candidate:save#conserve,save#conserve,save,节省；节约,save,1,reviewed
+candidate:save#rescue,save#rescue,save,救；挽救,save,1,reviewed
+candidate:saw#tool,saw#tool,saw,锯子,saw,1,reviewed
 candidate:say,say,say,说；讲,said|say,7,reviewed
 candidate:say to oneself,say to oneself,say to oneself,心里想；自言自语地说,say to oneself,1,reviewed
 candidate:scared,scared,scared,害怕的；受惊的,scared,2,reviewed
@@ -1173,7 +1205,7 @@ candidate:season,season,season,季节,season,4,reviewed
 candidate:second floor,second floor,second floor,二楼,second floor,1,reviewed
 candidate:secret,secret,secret,秘密；秘密的,secret,1,reviewed
 candidate:secretary,secretary,secretary,秘书,secretary,1,reviewed
-candidate:see,see,see,看见；看到,see,3,reviewed
+candidate:see,see,see,看见；看到,see|saw,5,reviewed
 candidate:see a doctor,see a doctor,see a doctor,看医生；就医,see a doctor,1,reviewed
 candidate:see a film,see a film,see a film,看电影,see a film,3,reviewed
 candidate:seed,seed,seed,种子,seed,2,reviewed
@@ -1287,6 +1319,8 @@ candidate:sports centre,sports centre,sports centre,体育中心,sports centre,1
 candidate:sports day,sports day,sports day,学校运动会；运动日,sports day,1,reviewed
 candidate:sports meet,sports meet,sports meet,运动会,sports meet,1,reviewed
 candidate:spring,spring,spring,春天；春季,spring,5,reviewed
+candidate:square#plaza,square#plaza,square,广场,square,1,reviewed
+candidate:square#shape,square#shape,square,正方形,square,2,reviewed
 candidate:squirrel,squirrel,squirrel,松鼠,squirrel,1,reviewed
 candidate:stadium,stadium,stadium,体育场；运动场,stadium,1,reviewed
 candidate:stage,stage,stage,舞台,stage,1,reviewed
@@ -1409,6 +1443,8 @@ candidate:themselves,themselves,themselves,他们自己；她们自己；它们�
 candidate:these,these,these,这些,these,4,reviewed
 candidate:they,they,they,他们；她们；它们,they,4,reviewed
 candidate:thick,thick,thick,厚的,thick,2,reviewed
+candidate:thin#object,thin#object,thin,薄的,thin,1,reviewed
+candidate:thin#slim,thin#slim,thin,瘦的,thin,5,reviewed
 candidate:thing,thing,thing,东西；事物,thing,5,reviewed
 candidate:third,third,third,第三,third,3,reviewed
 candidate:thirsty,thirsty,thirsty,口渴的,thirsty,5,reviewed
@@ -1543,8 +1579,12 @@ candidate:wash,wash,wash,洗；清洗,wash|washed,5,reviewed
 candidate:wash clothes,wash clothes,wash clothes,洗衣服,wash clothes|wash my clothes|washed clothes,3,reviewed
 candidate:washington d.c.,washington d.c.,Washington D.C.,华盛顿特区,washington d.c.,1,reviewed
 candidate:watch tv,watch tv,watch TV,看电视,watch tv|watched tv|watching tv,5,reviewed
+candidate:watch#noun,watch#noun,watch,手表,watch,2,reviewed
+candidate:watch#verb,watch#verb,watch,观看；注视,watch,3,reviewed
 candidate:water bottle,water bottle,water bottle,水瓶；水杯,water bottle,2,reviewed
 candidate:water the plants,water the plants,water the plants,给植物浇水,watering the plants,1,reviewed
+candidate:water#noun,water#noun,water,水,water,6,reviewed
+candidate:water#verb,water#verb,water,浇水；给……浇水,water,1,reviewed
 candidate:watermelon,watermelon,watermelon,西瓜,watermelon,3,reviewed
 candidate:we,we,we,我们,we,4,reviewed
 candidate:we will,we will,we will,我们将会；我们会,we will|we'll,2,reviewed
