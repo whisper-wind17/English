@@ -107,35 +107,35 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A baseline — REVIEW + PREVIEW QUALITY CLOSURE
+## 4. Current Stage-A baseline — BLOCKER QUALITY AUDIT CHECKPOINT
 
-五个 adapter 最终可信状态：
+当前五-adapter 可信状态：
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1451
-Review/blocker surfaces   = 444
+Vocabulary preview        = 1528
+Review/blocker surfaces   = 365
 Evidence-changed surfaces = 0
 pending                   = 0
 
-keep-identity     = 1442
+keep-identity     = 1519
 reuse-identity    =   61
-held              =  405
+held              =  326
 split-required    =   39
-route-expression  =   81
+route-expression  =   83
 source-only       =   34
 ```
 
-最终验证：
+当前验证：
 
 ```text
-GitHub Actions run                         = 34084215849
-content-audit commit                       = ba1c0afe5e1107447f46084f9462a3aa554f6374
-bot-generated data commit                  = 8bc04ffa74914e02ecbf453b47cbf93c837acb53
-Vocabulary Preview TargetSense complete    = 1451 / 1451
+GitHub Actions run                         = 34100218425
+latest blocker-audit commit                = 1b46a6e4fdd66378656ccb303eb05e5b779980a3
+bot-generated data commit                  = fa5e97a47c8a972316723aed58fc1a6aa949e879
+Vocabulary Preview TargetSense complete    = 1528 / 1528
 Third-party Completion Recheck             = PASS
 Source occurrence closure                  = PASS
 Explicit reviewed OccurrenceKeys           = PASS
@@ -147,44 +147,67 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-本轮对原 1477 条 Vocabulary Preview 做了 A–Z 内容质量审计。原则不是“空义项就翻译”，而是逐项判断：
+### 从 A–Z quality closure 到当前 blocker audit 的累计变化
+
+旧 checkpoint `8bc04ffa74914e02ecbf453b47cbf93c837acb53`：
 
 ```text
-明确 learning unit       → 补窄义 TargetSense
-证据不足/边界不稳        → held
-规则词形/表现变体         → reuse canonical identity
-交际句型                 → route-expression
-过度具体事件块            → source-only
+Vocabulary preview      = 1451
+Review/blocker surfaces = 444
+route-expression        = 81
 ```
 
-新增/强化典型 blocker：
+到当前 `fa5e97a47c8a972316723aed58fc1a6aa949e879`，Git compare 显示共有 16 个连续提交，累计重新审定 79 个 blocker：
 
 ```text
-a lot / as / British / broke / date / dish / excuse
-has / hold / in one hour / jam / model
-order / out / out of / pop
-stage / tie / upset / would
+review_queue            -79
+Vocabulary preview      +77
+route-expression         +2
 ```
 
-典型 canonicalization / routing：
+因此：
 
 ```text
-be afraid of → afraid of
-dropped → drop
-grapes → grape
-happened → happen
-stayed at home → stay at home
-walking the dog → walk the dog
-watering the plants → water the plants
-How old ...? → Expression
-climb on the window ledge → source-only
-women → 保留独立 pedagogically salient plural-form identity
+444 blockers → 365 blockers
+1451 preview → 1528 preview
+81 Expressions → 83 Expressions
 ```
 
-已知 semantic blockers 继续保留：
+这 79 条是多批人工/模型 context-bound blocker recheck 的累计结果，不是最后一批 workflow 隐式释放。最后一批只更新 14 条 decision。
+
+代表性已释放 learning units：
 
 ```text
+blow → 吹；刮
+land → 陆地；土地
+smoke → 烟；冒烟
+tape → 胶带
+attention → 注意；注意力
+jam → 果酱
+flute → 长笛
+hiking → 徒步旅行
+a bit → 有点儿；稍微
+a knife and fork → 一副刀叉
+all over the world → 世界各地；遍及全世界
+at first → 起初；一开始
+at the same time → 同时；与此同时
+be able to → 能够；可以
+be interested in → 对……感兴趣
+bench → 长凳
+bicycle → 自行车
+cashier → 收银员
+cheese → 奶酪；干酪
+hot dog → 热狗
+lion dance → 舞狮
+long ago → 很久以前；从前
+```
+
+高风险 blocker 继续保留，不因“压数量”而释放：
+
+```text
+about      → held
 study      → held
+won        → held / irregular-form policy
 saw        → split-required
 watch      → split-required
 may        → split-required
@@ -197,21 +220,23 @@ cold       → split-required
 
 ---
 
-## 5. NEXT TASK — USER REVIEW, THEN DECIDE WAIYAN START3
+## 5. NEXT TASK — CONTINUE BLOCKER QUALITY AUDIT BEFORE WAIYAN START3
 
 **当前不要自动启用 `waiyan_start3`。**
 
 下一步：
 
 ```text
-1. 向用户展示当前五-adapter corpus 最终结构与计数；
-2. 解释 1451 Vocabulary preview、444 blockers、81 Expressions、34 source-only 的含义；
-3. 抽样展示 keep / reuse / held / split / expression 的真实例子；
-4. 根据用户反馈决定是否需要进一步质量抽查或 Identity policy 调整；
-5. 用户确认后，才考虑启用 waiyan_start3；
-6. waiyan_start3 接入仍只做 Stage A；
-7. 仍不 mint Stable ThirdPartyID；
-8. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
+1. 继续审计当前 365 个 held/split blocker；
+2. 只释放 source neighborhood / glossary 已能明确绑定单一 elementary learning unit 的条目；
+3. 功能词、多义词、同形异义、irregular/form-policy 项继续保守 held/split；
+4. 每批 decision update 后必须运行 workflow + 独立 Completion Recheck；
+5. 不以 blocker 数量下降作为质量目标；
+6. blocker 质量达到稳定 checkpoint 后，向用户展示当前结构与代表性边界；
+7. 用户确认后，才考虑启用 waiyan_start3；
+8. waiyan_start3 接入仍只做 Stage A；
+9. 仍不 mint Stable ThirdPartyID；
+10. 所有计划第三方小学来源完成前，不执行 Stage-B Klose diff。
 ```
 
 ---
@@ -231,18 +256,19 @@ Vocabulary Preview TargetSense 全部非空
 known semantic/morphology blockers preserved
 simplified physical layout
 legacy multi-pass tools absent
+transient decision inbox removed
 Klose Master/Learner/Publish/Anki untouched
 ```
 
-CI / script success 不能单独作为“结果正确”的结论；必须再做独立 Completion Recheck。
+CI / script success 不能单独作为“结果正确”的结论；必须再做独立 Completion Recheck。若单批 update 数量与最终 count delta 不一致，必须先用 Git compare 解释历史累计变更，再接受新 baseline。
 
 ---
 
 ## 7. Deferred
 
 ```text
-waiyan_start3 adapter enablement — wait for user review
-当前 444 held/split blockers — wait for more source context / actual textbook / form policy
+waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
+剩余 365 held/split blockers — continue evidence-driven audit; true blockers remain deferred
 Grade 1–3 Klose actual-source Vocabulary reconciliation
 Grade 5/6 actual-source reconciliation
 99 held legacy Vocabulary Notes 的 British/American IPA 补齐（admission 前）
