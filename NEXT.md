@@ -1,6 +1,6 @@
 # NEXT — Klose Learning
 
-Last updated: 2026-09-07
+Last updated: 2026-09-08
 
 ## 启动顺序
 
@@ -85,74 +85,64 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A checkpoint — POLICY REVIEW BATCH 1 CLOSED
+## 4. Current Stage-A checkpoint — POLICY REVIEW BATCH 2 CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
 Durable decisions         = 2062
-Vocabulary preview        = 1600
-Review/blocker surfaces   = 226
+Vocabulary preview        = 1615
+Review/blocker surfaces   = 207
 Evidence-changed surfaces = 0
 pending                   = 0
-
-keep-identity     = 1591
-reuse-identity    =   83
-held              =  179
-split-required    =   47
-route-expression  =  128
-source-only       =   34
 ```
 
 Source reconciliation lane remains closed at `0`.
 
 ### Object-boundary active pass
 
-此前两批已关闭：39 个原 object-boundary 中，29 个解除 blocker，10 个明确 `object-boundary-audited-defer`；无新 source evidence 不重复扫描。
+39 个原 object-boundary 中，29 个解除 blocker，10 个明确 `object-boundary-audited-defer`；无新 source evidence 不重复扫描。
 
 ### Policy-review batch 1
 
-推荐上限 30 个一次处理：
+30 个：24 route-expression + 6 keep-identity；结果 `blockers 256 → 226`、`preview 1594 → 1600`。
+
+### Policy-review batch 2
+
+30 个按 form-policy family 处理：
 
 ```text
-24 route-expression
-├─ contractions / grammar forms:
-│  i'm / it's / he's / she's / couldn't / didn't / doesn't / here's / isn't
-│  shouldn't / they're / wasn't / weren't / what's / where's / won't / don't
-│  you'll / wouldn't / can't / cannot / have got
-└─ false abbreviation reactions: hm / mm
+真正解除 blocker = 19
+├─ irregular plural / pedagogical unit
+├─ stable activity noun / lexicalized -ing
+└─ transparent same-sense form reuse where canonical was reviewed keep
 
-6 keep-identity
-├─ CD         → 光盘；激光唱片
-├─ DVD        → DVD；数字光盘
-├─ p.m.       → 下午；午后（p.m.）
-├─ make peace → 讲和；和解
-├─ stairs     → 楼梯
-└─ skating    → 滑冰；溜冰
+audited-defer = 11
+└─ canonical held / split / missing，不允许 form 绕过 canonical blocker
 ```
-
-第一次尝试把 `sweets` 作为 lexicalized plural release，被独立 checker 正确拦截：`sweets` 是当前显式 protected form-policy blocker。该尝试未持久化。修正后保留 `sweets=held`，用 source 明确的 `skating` activity noun 替换，并整批重新通过。
 
 结果：
 
 ```text
-blockers 256 → 226
-preview  1594 → 1600
+blockers 226 → 207
+preview  1600 → 1615
 ```
+
+`decision_proposals.csv` 当前仍只有 header，proposal = 0；因此没有机械执行 `policy-executable`。
 
 ---
 
 ## 5. Latest batch validation
 
 ```text
-failed pre-gate attempt commit              = c767cec9981e918a4ce3b5ea1cb637954b2f9d5c
-failed run                                  = 34139599060  # blocked by protected sweets invariant; no data persisted
-corrected decision commit                   = 9c0f6cac7e754c0c62abdd53bd0fd60e9d265cd7
-GitHub Actions run                          = 34139721820   SUCCESS
-bot-generated data commit                   = 329cd6bbdf0c1166c3895f891ecf423c1a1405df
-batch decisions                             = 30 = 24 route-expression + 6 keep
-Vocabulary Preview TargetSense complete     = 1600 / 1600
+policy batch 2 decision commit               = 4cf7fc9b45f8e6ae02ea07ef6fabf8c679191865
+GitHub Actions run                           = 34140101533   SUCCESS
+bot-generated data commit                    = ac155fe97ad9680f9b9376d3e14c0bc76dbf0c5c
+batch decisions                              = 30
+net blocker release                          = 19
+Vocabulary Preview                           = 1615
+Review/blocker surfaces                      = 207
 Third-party core Completion Recheck          = PASS
 Audit-batch Completion Recheck               = PASS
 Decision-only fast path                      = PASS
@@ -167,29 +157,7 @@ Stable ThirdPartyID minted                   = NO
 Final Klose diff executed                    = NO
 ```
 
-The failed first attempt is useful gate evidence: the independent checker caught a semantic-policy regression after build succeeded, demonstrating that script/build success alone does not bypass frozen invariants.
-
----
-
-## 6. Throughput architecture v2 — CURRENT
-
-Current blockers = 226.
-
-Active scheduling rules：
-
-```text
-source-reconciliation-needed  = 0
-object-boundary               = 10  # all audited-defer; inactive without new evidence
-semantic-review               = 2   # ever/player; audited-defer
-policy-executable             = 10  # proposal engine remains guarded; do not mechanically apply
-policy-review                 ≈55  # NEXT ACTIVE LANE; batch 1 removed 30
-split-resolution              = 47  # separate architecture task
-deferred-high-ambiguity       = default skip
-```
-
-Exact derived lane/class counts after each workflow should be read from the current generated `review_bundle.csv`; do not infer release decisions from the count alone.
-
-Protected invariants currently enforced by `check_third_party_corpus.py` include：
+Protected invariants remain：
 
 ```text
 were / sweets / pleased / lost = held
@@ -198,7 +166,25 @@ swam  -> swim reuse
 won   -> win reuse
 ```
 
-Do not attempt to reduce blockers by violating these regression guards.
+---
+
+## 6. Throughput architecture v2 — CURRENT
+
+Current blockers = 207.
+
+Active scheduling rules：
+
+```text
+source-reconciliation-needed = 0
+object-boundary              = audited-defer set; inactive without new evidence
+semantic-review              = ever/player audited-defer plus remaining semantic items
+policy-executable            = derived candidates exist, but proposal=0; manual confirmation only
+policy-review                = NEXT ACTIVE LANE
+split-resolution             = separate architecture task
+deferred-high-ambiguity      = default skip
+```
+
+Exact lane/class counts以当前 generated `review_bundle.csv` 为准；不要从历史数字推断。
 
 ---
 
@@ -206,30 +192,23 @@ Do not attempt to reduce blockers by violating these regression guards.
 
 **当前不要自动启用 `waiyan_start3`。**
 
-下一批继续从 current `policy-review` 派生视图按 policy family 分组：
+下一批：
 
 ```text
-1. -ing / activity boundary：
-   source 明确稳定 activity noun → keep-identity；
-   纯透明进行时/动名词 + reviewed canonical same-sense → reuse candidate；
-   canonical held/split → 保留 held。
-2. irregular plural / pedagogical form：
-   只在教材明确作为独立学习单元且符合 frozen exception 时 keep；
-   split/semantic canonical 不得绕过。
-3. past/comparative/3sg forms：
-   canonical reviewed keep + same-sense 才 reuse；
-   canonical held/split/missing 保留 held/audited-defer。
-4. abbreviation：
-   source 明确单一 lexical expansion 才 keep；
-   communicative sound/frame route-expression；
-   多 expansion 或 evidence 不足保持 held。
-5. policy-executable 当前仍受 proposal guard；proposal=0 时不机械处理。
-6. 每批目标 25–30；不要退回微批次。
-7. 每批仍必须：1 transient inbox + 1 fast workflow + core/batch/independent recheck + 更新 NEXT。
-8. blocker 数下降不是质量目标；audited-defer 也是完成的审计结果。
-9. split-resolution = 47 等待 occurrence-partitioned provisional identity 架构。
-10. blocker quality 稳定后经用户确认才考虑启用 waiyan_start3。
-11. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
+1. 先人工确认 current policy-executable 中 canonical=reviewed keep 且 occurrence same-sense 的 form reuse；
+   proposal=0 表示不能机械 apply，不表示人工确认后禁止 reuse。
+2. protected blockers were / sweets / pleased / lost 必须保持 held。
+3. 剩余 policy-review 中：
+   canonical held/split/missing → audited-defer；
+   abbreviation source 单义明确 → keep；
+   多 expansion/evidence 不足 → held；
+   source 明确是 communicative form → route-expression。
+4. 每批目标 25–30；若当前高置信 active set 少于 25，不为凑数跨越语义门槛。
+5. 每批仍必须：1 transient inbox + 1 fast workflow + core/batch/independent recheck + 更新 NEXT。
+6. blocker 数下降不是质量目标；audited-defer 也是完成的审计结果。
+7. split-resolution 等待 occurrence-partitioned provisional identity 架构。
+8. blocker quality 稳定后经用户确认才考虑启用 waiyan_start3。
+9. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff，不 mint Stable ThirdPartyID。
 ```
 
 ---
