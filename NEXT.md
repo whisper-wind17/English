@@ -123,8 +123,8 @@ pending                   = 0
 
 keep-identity     = 1527
 reuse-identity    =   61
-held              =  317
-split-required    =   40
+held              =  316
+split-required    =   41
 route-expression  =   83
 source-only       =   34
 ```
@@ -132,9 +132,9 @@ source-only       =   34
 当前验证：
 
 ```text
-GitHub Actions run                         = 34107491203
-latest blocker-audit commit                = 57007cede60db4f6488476b1f644004a28cb061b
-bot-generated data commit                  = e1bbb471ddd0f7cb0e104e76b6f5804f06d26216
+GitHub Actions run                         = 34109382978
+latest blocker-audit commit                = 5c4a1e7dab7b2333f822f854efcf352caaa0e745
+bot-generated data commit                  = b127b7e6b19bcd787bffd75cd12b80e0c45705cd
 Vocabulary Preview TargetSense complete    = 1536 / 1536
 Third-party Completion Recheck             = PASS
 Independent post-workflow recheck          = PASS
@@ -159,13 +159,13 @@ Review/blocker surfaces = 444
 route-expression        = 81
 ```
 
-到当前 `e1bbb471ddd0f7cb0e104e76b6f5804f06d26216`：
+到当前 `b127b7e6b19bcd787bffd75cd12b80e0c45705cd`：
 
 ```text
 review_queue            -87
 Vocabulary preview      +85
 route-expression         +2
-held → split-required    +1（save，仍保留为 blocker）
+held → split-required    +2（save、break，均仍保留为 blocker）
 ```
 
 因此：
@@ -176,24 +176,30 @@ held → split-required    +1（save，仍保留为 blocker）
 81 Expressions → 83 Expressions
 ```
 
-累计完成 88 次独立 blocker decision refinement：其中 87 个 blocker 被证据充分地释放/路由出 review_queue；另 1 个 `save` 依据 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。
+累计完成 89 次独立 blocker decision refinement：其中 87 个 blocker 被证据充分地释放/路由出 review_queue；另 2 个 `save`、`break` 依据 source-level 多义证据从普通 held 提升为 `split-required`，仍保留为 blocker。
 
 最新独立批次只更新 1 条 decision：
 
 ```text
-grow → keep-identity → 生长；成长
+break → held → split-required
 ```
 
 最新批次 source-context：
 
 ```text
-`hujiao_start3|g4-lower|r133|grow`
-位于 garden / plant / leaf / water / them / grow / seed / every day 的连续植物生长语境。
-该 neighborhood 锁定植物“生长；成长”的不及物义项；
-“种植/栽培”义项已有独立 learning unit `grow crops → 种庄稼；种植农作物`，因此不做错误合并。
+`beijing_start1|g4-lower|r054|break`
+位于 crowd / push / slowly / break / broke / drop / dropped / fix 的连续语境，锁定“打破 / 弄坏”这一物理损坏义项。
+
+`hujiao_start3|g4-lower|r051|break`
+位于 subject / lesson / timetable / a.m. / p.m. / break / from ... to ... / sport 的课程表语境，锁定学校“课间休息 / 休息时间”义项。
+
+`waiyan_start1|g5-upper|r070|break`
+现有 neighborhood 与休息义项相容，但不改变前两处证据已经明确暴露两个独立 elementary learning units 的判断。
+
+因此不能把两个义项压平为一个 TargetSense；当前正确状态是 `split-required`，等待 occurrence-level sense split 与独立 LearnerCN 映射。
 ```
 
-Completion Recheck：workflow 的 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；transient `decision_updates.csv` 已删除。Git compare 显示 bot commit 仅修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived staging 文件。Preview 已确认包含 `grow → 生长；成长`；`study`、`won`、`CD` 继续 held，`save` 与 `saw` 继续 split-required。
+Completion Recheck：workflow 的 TargetSense gate、独立 Third-party Completion Recheck、Klose publishing untouched assertion 均 PASS；transient `decision_updates.csv` 已删除。Git compare 显示 bot commit 仅修改 `anki/klose/third_party_vocabulary/` 下的 durable decision 与 derived staging 文件。Preview 仍为 1536；`break` 保留在 blocker 中但已从普通 `held` 提升为 `split-required`。`study`、`won`、`CD` 继续 held；`save`、`saw`、`break` 继续 split-required。
 
 此前筛查但未释放：
 
@@ -203,7 +209,7 @@ bright → 继续 held
 
 原因：北京三上 neighborhood 更接近装饰/颜色语境，沪教六下 neighborhood 为混合故事/文化词汇；现有 occurrence evidence 仍不足以唯一排除“明亮的 / 鲜艳的 / 聪明的”等小学常见义项。保持 held 比强行收窄更可靠。
 
-此前已确认的高风险边界继续有效：`CD` 虽能从 music / listen / CD / drum 锁定 Compact Disc 语义，但仍受 abbreviation/canonical-form policy 阻塞；`save` 已确认存在“节约资源 vs 救助人”两个 source-level learning units，保持 split-required。
+此前已确认的高风险边界继续有效：`CD` 虽能从 music / listen / CD / drum 锁定 Compact Disc 语义，但仍受 abbreviation/canonical-form policy 阻塞；`save` 已确认存在“节约资源 vs 救助人”两个 source-level learning units，保持 split-required；`break` 已确认存在“物理损坏 vs 课间休息”两个 source-level learning units，保持 split-required。
 
 代表性已释放 learning units：
 
@@ -249,6 +255,7 @@ study      → held
 CD         → held / abbreviation policy
 won        → held / irregular-form policy
 save       → split-required / 节约资源 vs 救助人
+break      → split-required / 物理损坏 vs 课间休息
 saw        → split-required
 watch      → split-required
 may        → split-required
