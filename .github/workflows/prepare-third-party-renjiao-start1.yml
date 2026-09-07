@@ -69,6 +69,21 @@ jobs:
       - name: Build simplified third-party corpus workspace
         run: python tools/build_third_party_corpus.py
 
+      - name: Require learner-facing TargetSense in Vocabulary Preview
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path('anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv')
+          with path.open('r', encoding='utf-8-sig', newline='') as f:
+              rows = list(csv.DictReader(f))
+          missing = [r['CanonicalMatchKey'] for r in rows if not r.get('TargetSense', '').strip()]
+          if missing:
+              raise SystemExit(f'Vocabulary Preview has empty TargetSense ({len(missing)}): {missing[:50]}')
+          print(f'Vocabulary Preview TargetSense complete = {len(rows)} / {len(rows)}')
+          PY
+
       - name: Independent third-party Completion Recheck
         run: python tools/check_third_party_corpus.py
 
