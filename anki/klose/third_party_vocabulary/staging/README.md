@@ -20,11 +20,12 @@ Normalized surfaces       = 2062
 Vocabulary preview        = 1615
 Review/blocker surfaces   = 200
 Evidence-changed surfaces = 0
+Multipart resolved        = 0
 ```
 
 Each durable decision is bound to the exact Source Occurrences it reviewed via an
 unambiguous JSON array in `OccurrenceKeys`. Additional source evidence automatically
-re-queues that MatchKey. Candidate signals are evidence only. Canonical blockers cannot
-be bypassed by reuse aliases, and canonical learner-facing TargetSense always comes from
-the reviewed canonical surface when it exists. Stable ThirdPartyID is not minted and
-Stage-B Klose diff is not executed here.
+re-queues that MatchKey. Multipart split decisions must form a disjoint, complete
+occurrence partition before leaving review. Candidate signals are evidence only.
+Canonical blockers cannot be bypassed by reuse aliases. Stable ThirdPartyID is not
+minted and Stage-B Klose diff is not executed here.
