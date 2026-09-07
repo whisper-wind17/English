@@ -20,12 +20,11 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → anki/klose/third_party_vocabulary/review/identity_decisions.csv
 → anki/klose/third_party_vocabulary/staging/review_queue.csv
 → anki/klose/third_party_vocabulary/audit/review_bundle.csv
+→ anki/klose/third_party_vocabulary/audit/decision_proposals.csv
 → anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
 ```
 
-动态进度/当前计数只以本 `NEXT.md` 为准；`docs/THIRD_PARTY_VOCABULARY_CORPUS.md` 中旧 checkpoint 视为历史记录，不用其数字覆盖 NEXT。
-
-涉及 Klose 实际教材 reconciliation 时再读取 `docs/SOURCE_RECONCILIATION.md`；Expressions 任务读取 `docs/EXPRESSIONS_SYSTEM.md`。不要仅凭聊天历史推测当前状态。
+动态进度/当前计数只以本 `NEXT.md` 为准；`docs/THIRD_PARTY_VOCABULARY_CORPUS.md` 中旧 checkpoint 是历史记录。不要仅凭聊天历史推测当前状态。
 
 ---
 
@@ -48,7 +47,7 @@ Expressions New/day = 2
 FSRS               = ON / 90%
 ```
 
-GitHub 管 Source / Identity / Learner / Release；Anki 管 FSRS / Review History / Due / Interval / Card State。
+GitHub 管 Source / Identity / Learner / Review / Release；Anki 管 FSRS / Review History / Due / Interval / Card State。
 
 ---
 
@@ -68,22 +67,7 @@ Third-party Unified Vocabulary
 
 Stage A 禁止因 Klose 当前已有某词而删除第三方 learning unit；当前未进入 Stage B。
 
-Frozen core flow：
-
-```text
-Source Adapter occurrences
-+ config/source_adapters.csv
-+ review/identity_decisions.csv
-→ tools/build_third_party_corpus.py
-→ staging/occurrences.csv
-→ staging/surface_candidates.csv
-→ staging/review_queue.csv
-→ staging/unified_vocabulary_preview.csv
-→ TargetSense gate
-→ tools/check_third_party_corpus.py
-```
-
-`identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv` 与 `audit/review_bundle.csv` 都是 generated/derived views。Reviewed decision 必须显式绑定当前 JSON `OccurrenceKeys`；evidence 变化必须自动 requeue。
+`identity_decisions.csv` 是唯一内容决策真源；`review_queue.csv`、`review_bundle.csv`、`decision_proposals.csv` 都是 generated/derived views。Reviewed decision 必须显式绑定当前 JSON `OccurrenceKeys`；evidence 变化必须自动 requeue。
 
 ---
 
@@ -101,7 +85,9 @@ waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 
 ---
 
-## 4. Current Stage-A checkpoint — HIGH-THROUGHPUT BLOCKER AUDIT
+## 4. Current Stage-A content checkpoint
+
+本轮是 throughput architecture 优化，没有应用新的 durable vocabulary decisions，因此内容 baseline 与上一批一致：
 
 ```text
 Enabled adapters          = 5
@@ -121,52 +107,16 @@ route-expression  =   83
 source-only       =   34
 ```
 
-当前验证：
+最近一次实际 content audit batch：
 
 ```text
-GitHub Actions run                         = 34122486998
-latest blocker-audit commit                = c645748cf6f454f462d6413131970664f6960692
-bot-generated data commit                  = ac64eec02210b0a8dd004b73fa3c111dea34256a
-Vocabulary Preview TargetSense complete    = 1578 / 1578
-Third-party core Completion Recheck         = PASS
-Audit-batch Completion Recheck              = PASS
-Independent post-workflow recheck           = PASS
-Decision-only fast path                     = PASS
-Source adapters reparsed in latest batch    = NO
-Review Bundle generated                     = 314 / 314 blockers
-Source occurrence closure                   = PASS
-Explicit reviewed OccurrenceKeys            = PASS
-Changed source evidence requeues decision   = PASS
-Canonical blocker bypass                    = NO
-Canonical TargetSense precedence            = PASS
-Transient decision inbox                    = removed
-Klose Master/Learner/Publish/Anki touched   = NO
-Stable ThirdPartyID minted                  = NO
-Final Klose diff executed                   = NO
+GitHub Actions run        = 34122486998
+content decision commit   = c645748cf6f454f462d6413131970664f6960692
+content data commit       = ac64eec02210b0a8dd004b73fa3c111dea34256a
+batch decisions           = 25 = 24 keep + 1 reuse
 ```
 
-Independent post-workflow recheck confirms：
-
-- 25 intended decisions all persisted; 24 `keep-identity` + 1 `reuse-identity`；
-- all 25 left `review_queue`；
-- `fixed → fix` is a canonical reuse, so it does not create a duplicate Preview identity; `candidate:fix` provenance is now `fix|fixed`；
-- representative released rows such as `reading` / `ticket` carry the intended TargetSense；
-- known blockers including `study` / `won` remain blocked；
-- transient `decision_updates.csv` is absent；
-- bot diff contains only third-party audit/review/staging files; no Klose Master/Learner/Publish/Anki changes。
-
-### 累计 blocker audit 进展
-
-Historical A–Z checkpoint：
-
-```text
-Vocabulary preview      = 1451
-Review/blocker surfaces = 444
-route-expression        = 81
-split-required          = 39
-```
-
-Current：
+累计从历史 A–Z checkpoint：
 
 ```text
 444 blockers → 314 blockers
@@ -175,157 +125,281 @@ Current：
 39 split-required → 45 split-required
 ```
 
-累计 136 次 decision refinement：
-
-```text
-130 个 surface 离开 review_queue
-  ├─ 127 个净增加 Vocabulary Preview identity
-  ├─   2 个 route-expression
-  └─   1 个 fixed → fix reuse alias（离开 blocker，但不增加 Preview identity）
-
-6 个 held → split-required
-  save / break / dish / cut / drop / dream
-  仍作为 blocker 保留
-```
-
-blocker 数量下降不是质量目标。
-
-### 最新 high-throughput batch — 25 decisions
-
-```text
-fixed   → reuse fix
-hide    → 躲藏；隐藏
-Italian → 意大利的
-lie     → 说谎；撒谎
-plus    → 加；加上
-pound   → 英镑
-reading → 阅读；阅读活动
-real    → 真实的；真正的
-reply   → 回复；答复
-ring    → （电话、铃等）响；铃声
-rise    → 升起；上升
-row     → 划船
-rubber  → 橡胶；橡胶材料
-rule    → 规则；规定
-running → 跑步；跑步活动
-sharp   → 尖的；锋利的
-shout   → 喊叫；大声喊
-singing → 唱歌；歌唱活动
-skip    → 跳；跳绳
-stage   → 舞台
-stuck   → 卡住的；陷住的
-ticket  → 票；票券
-tower   → 塔；塔楼
-tweet   → 啾啾叫；鸟叫声
-upset   → 心烦的；难过的
-```
-
-本批不是仅挑 25 个词逐个 lookup；实际先用 Review Bundle 扫描约 50 个低风险 blocker，再一次性提交 25 个证据充分的 refinement。decision-only workflow 正确跳过全部 unchanged Source Adapter parser/validator。
-
 ---
 
-## 5. High-throughput operating mode — FROZEN
+## 5. Throughput architecture v2 — IMPLEMENTED / FROZEN
 
-后续 blocker audit 默认使用：
+目标：提高审计吞吐，但不降低 source-evidence / target-sense / identity 边界门槛。
+
+### 5.1 Review Bundle v2
+
+`tools/build_third_party_review_bundle.py` 生成：
 
 ```text
-一次扫描              = 30–50 blockers
-目标有效 refinement   = 10–25（证据允许可更高）
-一次 decision_updates = 1 batch
-一次 workflow          = 1 batch
-Completion Recheck     = core + batch-aware + independent sample/diff recheck
-批次完成               = 立即更新 NEXT.md，再开始下一批
+anki/klose/third_party_vocabulary/audit/review_bundle.csv
 ```
 
-`audit/review_bundle.csv` 每个 blocker 一行，直接提供 Current Decision + Definitions + all active occurrences + 同书前后各 8 个词，避免逐词重复 GitHub evidence lookup。
-
-当前 314 blockers 自动分层：
+每个当前 blocker 一行，包含：
 
 ```text
-semantic-easy             = 38
-semantic-cross-source     = 62
-split-resolution          = 45
-semantic-hard             = 4
-multiword-object-boundary = 39
-form-policy               = 94
+ActionabilityScore
+ReviewLane
+RecommendedBatchSize
+BlockerClass
+Current Decision + Definitions
+all active occurrences + 同书前后 ±8 words
+CandidateCanonical
+CanonicalRelation
+CanonicalAction / Status / TargetSense / Definitions / OccurrenceCount
+PolicyRecommendedAction
+DeferReason
+```
+
+硬约束：
+
+```text
+Review Bundle MatchKey set == review_queue MatchKey set
+canonical evidence 必须 directional，不再把 corpus builder 的对称 morphology signal 当作 canonical 方向
+bundle 仅用于审计调度，不是 content truth
+```
+
+当前 314 blockers 的分类：
+
+```text
 abbreviation-policy       = 14
+form-policy               = 99
 functional-polysemy       = 18
+multiword-object-boundary = 39
+semantic-cross-source     = 59
+semantic-easy             = 36
+semantic-hard             = 4
+split-resolution          = 45
 ```
 
-默认优先级：semantic-easy → cross-source → split → hard/multiword → form/abbreviation/functional。已确认 policy blocker 不与普通 semantic blocker 混在同一思路里反复研究。
-
-Class-level policies 已冻结在 `docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md`：
+当前 execution lanes：
 
 ```text
-Irregular/inflected forms:
-  词形本身默认不是新 lexical sense；base 已 reviewed 且 occurrence 同义时可 reuse base；
-  canonical 仍 blocked 时 form 不得绕过；显式 pedagogical exception 可保留（如 women）。
-
--ing / activity:
-  透明形态 → form/reuse candidate；
-  教材明确作为活动类别独立 headword → 可 keep lexicalized activity；
-  hiking / boating / reading / running / singing 属于 evidence-based 个案，不是所有 -ing 自动 keep。
-
-Abbreviation/contraction:
-  grammatical contraction 不因缩写本身 mint lexical identity；
-  lexical abbreviation 只有 source context 绑定单一学习单元才 keep，否则 held / route-expression。
+actionable-semantic           = 2
+deferred-high-ambiguity       = 97
+object-boundary               = 39
+policy-executable             = 31
+policy-review                 = 80
+semantic-review               = 3
+source-reconciliation-needed  = 17
+split-resolution              = 45
 ```
 
-Decision-only CI fast path 已实现：只改 decision 时直接复用 committed adapter occurrences，跳过教材 parser/validator，但仍执行 apply → build → TargetSense gate → core recheck → review bundle → batch recheck → Klose untouched guard。
+Actionability bands：
+
+```text
+80–100 = 23
+65–79  = 12
+45–64  = 47
+0–44   = 232
+```
+
+这意味着后续默认不再重复扫描 97 个 `deferred-high-ambiguity`；只有 source evidence / policy 变化才重新激活。
+
+### 5.2 Adaptive batch size
+
+不再所有 blocker 固定一个 batch size：
+
+```text
+policy proposal confirmation = 60–100 / scan
+actionable-semantic          = 40–60
+semantic-review              = 20–40
+split-resolution             = 20–30
+object-boundary              = 20–30
+source-reconciliation        = 10–15
+deferred-high-ambiguity      = 0 / default scan
+```
+
+每个独立 batch 仍然只允许：
+
+```text
+1 decision_updates.csv
+1 workflow
+1 core Completion Recheck
+1 batch-aware Completion Recheck
+1 independent sample/high-risk/diff recheck
+完成后立即更新 NEXT.md
+```
+
+### 5.3 Deterministic policy proposal engine
+
+`tools/propose_third_party_policy_decisions.py` 生成：
+
+```text
+anki/klose/third_party_vocabulary/audit/decision_proposals.csv
+```
+
+当前生成 **21 条高置信 directional form reuse proposals**。例如：
+
+```text
+became → become
+brought → bring
+came → come
+drew → draw
+forgot → forget
+learnt → learn
+met → meet
+ran → run
+rode → ride
+sent → send
+swam → swim
+taught → teach
+told → tell
+wore → wear
+wrote → write
+ate → eat
+bought → buy
+gave → give
+slept → sleep
+went → go
+won → win
+```
+
+Proposal engine 的硬边界：
+
+```text
+AutoApply = no
+ReviewMode = confirm-or-reject
+explicit current OccurrenceKeys required
+canonical must be reviewed keep-identity + non-empty TargetSense
+canonical relation must be directional and in safe form set
+multi-POS / lexicalized-form risk is filtered out
+special grammar canonical is forced back to manual review
+proposal cannot write identity_decisions.csv / decision_updates.csv
+```
+
+Independent quality recheck 曾捕获第一版 proposal 的过宽 canonicalization（例如 `glass → glasses`、`sweets → sweet`、`pleased → please`、部分 -ing form）；已修正。最终 engine 从 31 个 executable candidates 中保留 21 个高置信 proposal，过滤 9 个 multi-POS/lexicalization-risk + 1 个 special grammar canonical。
+
+### 5.4 Decision-only fast path
+
+仅 review/proposal/decision 变化时：
+
+```text
+reuse committed adapter occurrences
+→ skip all unchanged source parsers/validators
+→ apply
+→ build corpus
+→ TargetSense gate
+→ core recheck
+→ Review Bundle
+→ policy proposals
+→ batch-aware recheck
+→ Klose untouched guard
+```
+
+最终 throughput-v2 validation run 中四套 source parser/validator 均正确 skipped。
 
 ---
 
-## 6. Representative unresolved boundaries
+## 6. Throughput-v2 validation checkpoint
+
+最终验证：
+
+```text
+GitHub Actions run                         = 34130291047   SUCCESS
+latest throughput code commit             = 4211246cf53f6e4eef53bb9935fd6934980d8b84
+bot-generated audit data commit           = 16db0a42279cfb41d5fa11830be5139e98b25fc4
+Vocabulary Preview TargetSense complete    = 1578 / 1578
+Third-party core Completion Recheck         = PASS
+Audit-batch Completion Recheck              = PASS
+Independent post-workflow recheck           = PASS
+Decision-only fast path                     = PASS
+Source adapters reparsed                    = NO
+Review Bundle closure                       = 314 / 314 PASS
+Directional canonical evidence              = PASS
+Policy proposals                            = 21 high-confidence
+Policy proposal AutoApply                   = NO
+Source occurrence closure                   = PASS
+Explicit reviewed OccurrenceKeys            = PASS
+Changed source evidence requeues decision   = PASS
+Canonical blocker bypass                    = NO
+Transient decision inbox                    = removed
+Klose Master/Learner/Publish/Anki touched   = NO
+Stable ThirdPartyID minted                  = NO
+Final Klose diff executed                   = NO
+```
+
+Git compare 从上一个 NEXT checkpoint `03d5078...` 到最终 bot commit `16db0a4...` 只包含：
+
+```text
+.github/workflows/prepare-third-party-renjiao-start1.yml
+anki/klose/third_party_vocabulary/audit/review_bundle.csv
+anki/klose/third_party_vocabulary/audit/decision_proposals.csv
+docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
+tools/build_third_party_review_bundle.py
+tools/propose_third_party_policy_decisions.py
+```
+
+没有改变 durable vocabulary decisions，也没有触碰 Klose Master / Learner / Publish / Anki。
+
+---
+
+## 7. Representative unresolved boundaries
 
 ```text
 about      → held / functional polysemy
 bright     → held / source evidence insufficient
 study      → held / multiple target senses
 quarter    → held / cross-source sense evidence insufficient
-CD         → held / lexical abbreviation context/policy application pending
-won        → held / frozen form policy 尚未应用到该 occurrence/base relation
-cycling    → held / -ing policy evidence application pending
-dancing    → held / -ing policy evidence application pending
+CD         → held / abbreviation review
+cycling    → held / -ing lexicalized-activity boundary
+dancing    → held / -ing lexicalized-activity boundary
+sweets     → held / plural noun 糖果 vs canonical sweet adjective，禁止机械 reuse
+pleased    → held / lexical adjective vs please form，禁止机械 reuse
+lost       → held / inflected lose + lexical adjective，禁止机械 reuse
 save       → split-required / 节约资源 vs 救助人
 break      → split-required / 物理损坏 vs 课间休息
 dish       → split-required / 盘子 vs 菜肴
 cut        → split-required / 剪切 vs 伤口
 drop       → split-required / 掉落动作 vs 水滴
 dream      → split-required / 梦想愿望 vs 睡梦
-saw        → split-required
-watch      → split-required
-may        → split-required
-like       → split-required
-square     → split-required
-left       → split-required
-cook       → split-required
-cold       → split-required
+saw/watch/may/like/square/left/cook/cold → split-required
 ```
-
-注意：form / -ing / abbreviation **policy 已冻结**，但剩余相应 blocker 仍需按 current occurrence + canonical evidence 批量应用 policy；不能仅因 policy 存在就机械全部 release。
 
 ---
 
-## 7. NEXT TASK — CONTINUE HIGH-THROUGHPUT AUDIT BEFORE WAIYAN START3
+## 8. NEXT TASK — USE V2 LANES; DO NOT ENABLE WAIYAN START3
 
 **当前不要自动启用 `waiyan_start3`。**
 
+执行顺序：
+
 ```text
-1. 从 Review Bundle 继续每批扫描 30–50 个 blocker。
-2. 优先处理剩余 38 semantic-easy，再处理 semantic-cross-source。
-3. 每批只提交 evidence 足够的 10–25+ refinement；未充分者保持 held。
-4. 多义 occurrence 明确时升级 split-required，不强行压成一个 TargetSense。
-5. 对 94 form-policy / 14 abbreviation-policy / -ing items 按冻结 policy 做批量 evidence application，不再逐词重新讨论 policy 本身。
-6. 每批只跑一次 workflow；decision-only 必须走 fast path。
-7. 每批 core + batch-aware + independent Completion Recheck 全部 PASS 后，立即更新 NEXT.md。
-8. 不以 blocker 数下降作为质量目标。
-9. blocker 质量达到稳定 checkpoint 后，向用户展示结构与代表性边界；用户确认后才考虑启用 waiyan_start3。
-10. 仍不 mint Stable ThirdPartyID；所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
+1. 先批量 confirm/reject 当前 21 条 high-confidence policy proposals；
+   - 一次读取全部 proposal + occurrence evidence；
+   - 只确认 same lexical sense 的 reuse；
+   - 一次 decision_updates + 一次 fast workflow。
+
+2. 再处理 active semantic lanes：
+   actionable-semantic → semantic-review → source-reconciliation-needed。
+   不再默认遍历 deferred-high-ambiguity。
+
+3. policy-review 中的 -ing / plural / multi-POS form 只按 evidence 个案处理；
+   不机械 canonicalize。
+
+4. split-resolution = 45 暂时独立排队。
+   当前 builder 能表达 split-required，但还未完整 materialize occurrence-partitioned
+   multiple provisional Stage-A identities。后续将该能力作为独立 architecture batch：
+
+   one MatchKey
+   + occurrence-partitioned reviewed decisions
+   → multiple provisional Stage-A identities
+
+   该能力仍不得 mint Stable ThirdPartyID，也不得进入 Stage B。
+
+5. 每个 independently closed batch 后立即更新 NEXT.md。
+6. blocker 数量下降不是质量目标。
+7. blocker quality 稳定后向用户展示结构；用户确认后才考虑启用 waiyan_start3。
+8. 所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
 ```
 
 ---
 
-## 8. Completion Recheck contract
+## 9. Completion Recheck contract
 
 每批必须验证：
 
@@ -337,29 +411,16 @@ Changed source evidence automatically requeues
 Stale SourceMatchKey excluded from preview provenance
 review_queue remains pure derived blocker view
 Review Bundle closes exactly over current blockers
+Policy proposals remain derived-only / AutoApply=no
 Vocabulary Preview TargetSense all non-empty
 batch intended decisions exactly persisted
-keep/reuse/split/route derived state correct
-known semantic/morphology/policy blockers preserved unless explicitly changed in batch
+known semantic/morphology/policy blockers preserved unless explicitly changed
 transient decision inbox removed
 Git diff scope contains only intended third-party layers
 Klose Master/Learner/Publish/Anki untouched
 ```
 
-CI success 不能单独作为“结果正确”；仍需 independent sample + high-risk boundary + diff recheck。
-
----
-
-## 9. Deferred
-
-```text
-waiyan_start3 adapter enablement — wait for blocker audit checkpoint + user review
-remaining 314 blockers — continue evidence-driven high-throughput audit
-Grade 1–3 Klose actual-source Vocabulary reconciliation
-Grade 5/6 actual-source reconciliation
-99 held legacy Vocabulary Notes British/American IPA completion before admission
-Expressions one-month real-learning evaluation
-```
+CI/script success 不能单独作为“结果正确”；必须再做 independent sample + high-risk boundary + diff recheck。
 
 ---
 
