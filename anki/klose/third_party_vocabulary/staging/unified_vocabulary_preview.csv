@@ -288,7 +288,7 @@ candidate:computer room,computer room,computer room,计算机教室；电脑室,
 candidate:concert,concert,concert,音乐会,concert,1,reviewed
 candidate:contest,contest,contest,比赛；竞赛,contest,1,reviewed
 candidate:cook#person,cook#person,cook,厨师；厨子,cook,3,reviewed
-candidate:cook#verb,cook#verb,cook,做饭；烹饪,cook,3,reviewed
+candidate:cook#verb,cook#verb,cook,做饭；烹饪,cook|cooking,4,reviewed
 candidate:corn,corn,corn,玉米,corn,1,reviewed
 candidate:cost,cost,cost,费用；花费,cost,1,reviewed
 candidate:cough,cough,cough,咳嗽；咳嗽声,cough,1,reviewed
@@ -370,7 +370,7 @@ candidate:dream#aspiration,dream#aspiration,dream,梦想；愿望,dream,1,review
 candidate:dream#sleep,dream#sleep,dream,梦；睡梦,dream,1,reviewed
 candidate:drink cold drinks,drink cold drinks,drink cold drinks,喝冷饮,drank cold drinks,1,reviewed
 candidate:drink#noun,drink#noun,drink,饮料,drink,1,reviewed
-candidate:drink#verb,drink#verb,drink,喝；饮用,drink|drank,8,reviewed
+candidate:drink#verb,drink#verb,drink,喝；饮用,drink|drank|drinking,9,reviewed
 candidate:drive,drive,drive,驾驶；开车,drive|drove,4,reviewed
 candidate:drive away,drive away,drive away,赶走；驱赶,drive away,1,reviewed
 candidate:driver,driver,driver,司机；驾驶员,driver,3,reviewed
@@ -444,7 +444,7 @@ candidate:fall asleep,fall asleep,fall asleep,入睡；睡着,fall asleep,1,revi
 candidate:fall off,fall off,fall off,从……掉下来；跌落,fall off,1,reviewed
 candidate:fall over,fall over,fall over,跌倒；摔倒,fall over,1,reviewed
 candidate:fall#autumn,fall#autumn,fall,秋天；秋季,fall,1,reviewed
-candidate:fall#verb,fall#verb,fall,落下；跌倒,fall,2,reviewed
+candidate:fall#verb,fall#verb,fall,落下；跌倒,fall|fell,4,reviewed
 candidate:family,family,family,家庭；家人,family,5,reviewed
 candidate:famous,famous,famous,著名的,famous,4,reviewed
 candidate:fantastic,fantastic,fantastic,极好的；很棒的,fantastic,3,reviewed
@@ -1076,7 +1076,7 @@ candidate:play the pipa,play the pipa,play the pipa,弹琵琶；演奏琵琶,pla
 candidate:play the violin,play the violin,play the violin,拉小提琴,play the violin,2,reviewed
 candidate:play volleyball,play volleyball,play volleyball,打排球,play volleyball,1,reviewed
 candidate:play with fire,play with fire,play with fire,玩火,play with fire,1,reviewed
-candidate:play#general,play#general,play,玩；玩耍；参加游戏或运动,play,6,reviewed
+candidate:play#general,play#general,play,玩；玩耍；参加游戏或运动,play|playing,7,reviewed
 candidate:play#instrument,play#instrument,play,演奏,play,1,reviewed
 candidate:playground,playground,playground,操场；游乐场,playground,5,reviewed
 candidate:playtime,playtime,playtime,游戏时间；玩耍时间,playtime,1,reviewed
