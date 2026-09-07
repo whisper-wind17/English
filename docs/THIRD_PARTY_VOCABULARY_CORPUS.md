@@ -193,7 +193,7 @@ Klose 手中实际教材
 
 冲突按 `docs/SOURCE_RECONCILIATION.md` 处理。
 
-## 11. 当前基线 — 2026-09-07
+## 11. 当前基线 — 2026-09-07 — five-adapter review closure
 
 当前已启用五个小学 Source Adapter：
 
@@ -205,89 +205,127 @@ hujiao_start3    =  8 books / 1111 occurrences / 1067 MatchKeys
 waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
 ```
 
-边界：
+Source-family boundaries：
 
-- `hujiao_start3` 只纳入沪教版三年级起点 3–6 年级上下册；同目录 7–9 年级牛津英语不属于当前小学 adapter；真实源基线 `1111 / 1067` 已冻结。
-- `waiyan_start1` 只纳入外研版一年级起点 1–6 年级上下册；外研三年级起点与初高中资料均明确排除；真实源基线 `1170 / 1071` 已冻结。
-- 外研版三年级起点 3–6 年级上下册已完成 Source Inventory，确认是独立完整 8-book family，但尚未启用。
+- `hujiao_start3` 只纳入沪教版三年级起点 3–6 年级上下册；同目录 7–9 年级牛津英语未纳入；真实源基线 `1111 / 1067` 已冻结。
+- `waiyan_start1` 只纳入外研版一年级起点 1–6 年级上下册；外研三年级起点与初高中资料均排除；真实源基线 `1170 / 1071` 已冻结。
+- `waiyan_start3` 已完成 Source Inventory，确认是独立完整 8-book family，但尚未启用；当前先暂停新增 adapter，供用户审视五教材 corpus。
 
-四-adapter 阶段曾达到 review closure：
+启用 `waiyan_start1` 时，generic builder 识别：
 
 ```text
-Enabled adapters          = 4
-Source occurrences        = 3678
-Normalized surfaces       = 1788
-Durable decisions         = 1788
-Vocabulary preview        = 1441
-Review/blocker surfaces   = 219
-Evidence-changed surfaces = 0
-pending                   = 0
+797 previously reviewed surfaces with changed evidence
+274 completely new surfaces
+= 1071 pending
+= Waiyan start1 distinct MatchKeys
 ```
 
-启用 `waiyan_start1` 后，generic builder 正确执行 evidence-aware requeue。最新可信 rebuild 为 GitHub Actions run `34074078620`，generated data commit `2bedfeb249ce2acef975b920f2420f3b931b310b`：
+本轮已完成：
+
+```text
+797 existing surfaces → explicit five-adapter evidence revalidation
+274 new surfaces       → conservative learning-unit/object/form review
+independent content recheck → correction pass
+```
+
+独立 content recheck 曾发现并修正几类规则误判：
+
+```text
+aah / hey / whoops / sh
+→ broad dictionary noise or interjection misrouting
+→ corrected to route-expression with learner-relevant meaning
+
+here's / what's / where's / they're / couldn't / ...
+→ contractions were incorrectly admitted by dictionary-format heuristics
+→ corrected to held form-policy blockers
+
+leaves / sometime / sweets / watches
+→ morphology similarity produced unsafe canonicalization
+→ corrected to held
+
+of / ever / ticket
+→ first dictionary gloss could not safely determine textbook target sense
+→ corrected to held
+```
+
+最终可信状态来自 GitHub Actions run `34076701208`，generated data commit `aa2dcc0`：
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
-Durable decisions         = 1788
-Vocabulary preview        = 799
-Review/blocker surfaces   = 1169
-Evidence-changed surfaces = 797
-pending                   = 1071
+Durable decisions         = 2062
+Vocabulary preview        = 1484
+Review/blocker surfaces   = 424
+Evidence-changed surfaces = 0
+pending                   = 0
 
-Generated current surface actions:
-keep-identity     = 765
-reuse-identity    = 50
-held              = 92
-pending           = 1071
-split-required    = 6
-route-expression  = 45
-source-only       = 33
+Durable decision actions:
+keep-identity     = 1470
+reuse-identity    =   55
+held              =  385
+split-required    =   39
+route-expression  =   80
+source-only       =   33
 ```
 
-集合严格闭合：
+关键解释：
 
 ```text
-4848 - 3678 = 1170
-= Waiyan source occurrences
-
-2062 - 1788 = 274
-= completely new normalized surfaces
-
-797 evidence-changed existing surfaces
-+ 274 completely new surfaces
-= 1071 pending
-= Waiyan distinct MatchKeys
+2062 normalized surfaces = 2062 explicit durable decisions
+pending = 0
+Evidence-changed = 0
 ```
 
-这证明旧 decision 没有被新教材静默继承。`identity_decisions.csv` 仍保留原 1788 条 durable decisions，但只有当其 `OccurrenceKeys` 与五-adapter current occurrence set 完全一致时，generated current state 才继续 reviewed。
+这表示五个 adapter 的每个当前 surface 都已有显式 Stage-A 决策并绑定完整 current Source Occurrence evidence；不表示 2062 个 surface 都是 Vocabulary Identity。
 
-典型行为：
+`unified_vocabulary_preview = 1484` 是当前可进入 Third-party Vocabulary identity preview 的 provisional learning-unit candidates；它仍不是 Stable ThirdPartyID，也尚未与 Klose 做差集。
+
+`review_queue = 424` 现在全部是真实 blocker：
 
 ```text
-apple / afraid
-→ 旧 surface + Waiyan 新 occurrence
-→ decision-evidence-changed
-→ current pending
+held           = 385
+split-required = 39
+```
 
-study
-→ durable decision 仍为 held（学习/研究等 semantic collision）
-→ Waiyan 新 occurrence 改变 evidence set
-→ current pending，等待五-adapter revalidation
+它们保留的原因是 source sense、object boundary、morphology/form policy 或 occurrence-level split 仍需更多证据；不得为了清零而猜测性合并。
 
-saw
-→ durable decision 仍为 split-required（see过去式 / 锯子）
-→ Waiyan 新 occurrence 改变 evidence set
-→ current pending
+代表性边界继续正确：
 
-stronger
-→ evidence 未变化
-→ reuse-identity → strong 继续 reviewed
+```text
+study      = 学习 / 研究等 semantic collision → held
+saw        = see过去式 / 锯子 → split-required
+watch      = 手表 / 观看 → split-required
+may        = May / modal may → split-required
+like       = 喜欢 / 像等 → split-required
+square     = 正方形 / 广场 → split-required
+left       = 左边 / leave过去式 → split-required
+cook       = 烹饪 / 厨师 → split-required
+cold       = 寒冷 / 感冒 → split-required
+stronger   = reuse-identity → strong
+swing      = keep-identity / 秋千
+candies    = reuse-identity → candy
+goes       = reuse-identity → go
+stories    = reuse-identity → story
+```
 
-swing
-→ evidence 未变化
-→ keep-identity / 秋千 继续 reviewed
+新增明确 Expression routing 示例：
+
+```text
+hey
+how are you?
+nice to meet you.
+here you are.
+how about ...?
+what about ...?
+why not?
+how much ...?
+you're welcome!
+happy new year!
+excuse me
+hurry up
+trick or treat
+see you!
 ```
 
 当前仍然：
@@ -298,4 +336,4 @@ Final Klose diff executed  = no
 Klose Master / Learner / Publish / Anki modified = no
 ```
 
-下一步只处理唯一 `review_queue.csv` 中的 1071 个 pending surface：先审 known semantic collisions / morphology-form edge cases，再按字母区间批量 revalidate 稳定项。所有判断继续写入 `identity_decisions.csv`，每批都执行 rebuild + independent Completion Recheck。当前 1071 pending 闭合后，再考虑启用已盘点完成的 `waiyan_start3`；所有计划第三方小学来源完成前仍不进入 Stage B。
+下一步暂不启用 `waiyan_start3`。先对当前 `unified_vocabulary_preview.csv` / blocker composition 做用户侧审视；确认 corpus 状态与质量符合预期后，再决定继续接入外研三年级起点，仍属于 Stage A。所有计划第三方小学来源完成前不进入 Stage B。
