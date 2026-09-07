@@ -72,16 +72,16 @@ Total           4848
 
 ---
 
-## 3. Current checkpoint — PRODUCTION SPLIT BATCH 2 CLOSED
+## 3. Current checkpoint — RESIDUAL SPLIT BATCH 3 CLOSED
 
 ```text
 Enabled adapters          = 5
 Source occurrences        = 4848
 Normalized surfaces       = 2062
-Vocabulary preview        = 1675
-Review/blocker surfaces   = 168
+Vocabulary preview        = 1682
+Review/blocker surfaces   = 163
 Evidence-changed surfaces = 0
-Multipart resolved        = 32
+Multipart resolved        = 34
 pending                   = 0
 ```
 
@@ -95,24 +95,20 @@ policy batch 3            blockers 207 → 200 / preview 1615 → 1615
 split smoke (3 surfaces)  blockers 200 → 197 / preview 1615 → 1621
 production split batch 1  blockers 197 → 176 / preview 1621 → 1661
 production split batch 2  blockers 176 → 168 / preview 1661 → 1675
+residual split batch 3    blockers 168 → 163 / preview 1675 → 1682
 ```
 
-Production split batch 2：8 Source MatchKeys / 16 subgroup decisions。
+Residual split batch 3：5 Source MatchKeys / 7 durable decisions。
 
 ```text
-may / like / play / drop / fall / feel / drink / light
+exercise → single learning unit: 锻炼；运动
+letter   → single learning unit: 信；信件
+present  → single learning unit: 礼物
+Chinese  → chinese#language / chinese#national
+taste    → taste#sample / taste#flavour
 ```
 
-Mixed-object partition 已验证：
-
-```text
-May(month)       -> Vocabulary keep / may#month
-may(modal)       -> Expressions route
-like(preference) -> Vocabulary keep / like#preference
-like(weather)    -> Expressions route
-```
-
-其余 6 个 surface 生成两条 Vocabulary provisional identities。
+重要修正：`exercise / letter / present` 的旧 `split-required` 来自 dictionary polysemy，而不是当前 source occurrence evidence。当前五-adapter corpus 只支持一个 elementary learning unit，因此撤销伪 split；不人为制造教材未实际教授的第二义项。
 
 ---
 
@@ -140,38 +136,30 @@ route-expression/source-only subgroup allowed only in complete resolved partitio
 Stage-A provisional key != Stable ThirdPartyID
 ```
 
-实现：
-
-```text
-build_third_party_corpus.py
-check_third_party_corpus.py
-recheck_third_party_audit_batch.py
-```
-
 ---
 
 ## 5. Latest validation
 
 ```text
-production batch 1 decision commit  = e17b138d2957e7ab01c5bb1ab0af8180efc9941d
-production batch 1 workflow         = 34167059586 SUCCESS
-production batch 1 bot data commit  = 7ce39252b0531ebd37d603eec55be68511ce64a1
 production batch 2 decision commit  = 4edffce6b845a78e5c8f94848549da86a3badcf7
 production batch 2 workflow         = 34167269958 SUCCESS
 production batch 2 bot data commit  = d94cc6d4cdaddc0fd34ee974472cf4577acb0410
+residual batch 3 decision commit    = bfac12b6e4921478db659b63ab806376a60d4903
+residual batch 3 workflow           = 34167550721 SUCCESS
+residual batch 3 bot data commit    = 63faa0ce74af7c3d1f1ca7bef89c44a8cfb60301
 ```
 
-Batch 2 independent recheck：
+Batch 3 Completion Recheck：
 
 ```text
 Decision-only fast path                    PASS
 Source adapters reparsed                   NO
 Core Completion Recheck                    PASS
 Split-aware batch Completion Recheck       PASS
-Partition disjoint + complete              PASS
-Mixed Vocabulary/Expression partition      PASS
-May modal leakage to Vocabulary Preview    NO
-Like weather leakage to Vocabulary Preview NO
+Source-only single-unit correction         PASS
+True multipart partition                   PASS
+Chinese preview 3 + 3 occurrences          PASS
+Taste preview 1 + 1 occurrences            PASS
 Transient inbox removed                    PASS
 Independent review-queue sample            PASS
 Independent Preview sample                 PASS
@@ -192,38 +180,48 @@ won   -> win reuse
 
 ---
 
-## 6. NEXT TASK — RESIDUAL SPLIT-RESOLUTION
+## 6. Residual split lane — EVIDENCE-BOUND
 
-当前 generated `review_bundle.csv` 中剩余 split-resolution 已收敛为 15 个：
+当前 generated `review_bundle.csv` 剩余 split-resolution 约 10 个：
 
 ```text
-too / chinese / exercise / french / kind / letter / little / live /
-look / mouse / plant / present / right / sound / taste
+too / french / kind / little / live / look / mouse / plant / right / sound
 ```
+
+这些 surface 的部分 occurrence 可以判断，但至少一个 current occurrence 不能仅凭现有 standardized source row + ±8 neighborhood 安全归属。当前 `occurrences.csv` 也没有 Unit 字段，因此不允许为了降低 blocker 数强行 complete partition。
+
+典型边界：
+
+```text
+mouse  前三个 occurrence 明显是动物；waiyan g4 occurrence 无法安全判断 mouse=老鼠/鼠标
+kind   noun/adjective 两义都有强证据，但 Beijing/Waiyan 部分 occurrence 归属不足
+right  directions occurrence 清晰，其他 occurrence 正确/方向边界不足
+sound  noun/linking-verb 都可能成立，但部分 occurrence 缺少绑定证据
+```
+
+无新 source evidence 时，这 10 个默认保持 blocker，不重复推理扫描。
+
+---
+
+## 7. NEXT TASK — ACTIONABLE SEMANTIC RECHECK
+
+从当前 generated `review_bundle.csv` 重新筛 `actionable-semantic`，不要把已有 `*-audited-defer` 当待执行项。
 
 规则：
 
 ```text
-1. 不再强求 20–25/batch；只处理 occurrence partition 能完整闭合的 residual surface。
-2. 历史 split rationale 只是 evidence，不是事实；若 current occurrence evidence 只支持一个 learning unit，可以改为单一 keep/reuse，而不是强行拆义。
-3. evidence 只能明确部分 occurrence 时保持 blocker，不允许为了降低 blocker 数猜测剩余 occurrence。
-4. mixed Vocabulary/Expression/source-only subgroup 可以使用，但整个 partition 必须 complete + resolved。
-5. residual split lane 收敛后转 actionable-semantic；已 audited-defer / protected blocker 无新 evidence 不重复扫。
-6. 每批仍执行 transient inbox + fast workflow + core/batch recheck + independent sample/high-risk/diff recheck。
+1. 优先 current source evidence 已经能绑定单一 elementary learning unit 的 surface。
+2. canonical-missing / canonical-blocked / context-insufficient 且已有 audited-defer 的不重复处理。
+3. dictionary gloss 多义但 source evidence 单义时，允许 keep 窄义 TargetSense。
+4. 任何 form reuse 继续要求 canonical reviewed + same lexical sense；multipart canonical 不默认等价于单一 ready canonical。
+5. 每批执行 transient inbox + fast workflow + core/batch recheck + independent sample/high-risk/diff recheck。
+6. 若 actionable-semantic 已无实质可释放集合，则将 blocker checkpoint 视为 evidence-quality boundary，不以 blocker=0 为目标。
 7. 暂不启用 waiyan_start3；所有计划第三方小学来源完成前不执行 Stage-B Klose diff。
 ```
 
-当前优先重新核实较可能闭合的 residual：
-
-```text
-mouse / too / sound / letter / present / right
-```
-
-`chinese / exercise / french / kind / little / live / look / plant / taste` 若无法覆盖全部 occurrences，继续 held/split-required。
-
 ---
 
-## 7. Completion Recheck contract
+## 8. Completion Recheck contract
 
 每批必须验证：
 
@@ -234,7 +232,7 @@ Split subsets disjoint + complete
 Partial split remains blocker
 Completed split leaves review_queue
 TargetSense non-empty
-Multipart reuse canonical ready
+Canonical reuse ready
 Changed source evidence requeues
 Review Bundle closes over blockers
 Policy proposals derived-only / AutoApply=no
@@ -247,7 +245,7 @@ CI success 不能单独作为结果正确；必须 independent sample + high-ris
 
 ---
 
-## 8. Frozen long-term rules
+## 9. Frozen long-term rules
 
 - Stable NoteID / ExpressionID 不因来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
