@@ -5,6 +5,10 @@ Source adapters provide facts. `identity_decisions.csv` is the only content-deci
 truth. Decisions are valid only for the exact SourceOccurrenceKey set they reviewed.
 Candidate signals are evidence only. Stage A neither mints stable ThirdPartyID nor
 performs the final Klose diff.
+
+A MatchKey may have multiple reviewed decision rows when its Source Occurrences are
+partitioned into distinct provisional learning units. Multipart partitions must be
+non-overlapping and complete before the surface leaves the blocker queue.
 """
 from __future__ import annotations
 
@@ -39,6 +43,7 @@ ACTIONS = {
     "keep-identity", "reuse-identity", "split-required", "held",
     "route-expression", "source-only", "pending",
 }
+RESOLVED_ACTIONS = {"keep-identity", "reuse-identity", "route-expression", "source-only"}
 IRREGULAR = {
     "children": "child", "men": "man", "women": "woman", "feet": "foot",
     "teeth": "tooth", "mice": "mouse", "geese": "goose", "slept": "sleep",
@@ -229,11 +234,61 @@ def load_decisions(surface_keys: set[str], occurrence_keys: set[str]) -> dict[st
     return groups
 
 
-def covered_keys(ds: list[dict[str, str]]) -> set[str]:
-    out: set[str] = set()
+def partition_state(
+    key: str,
+    ds: list[dict[str, str]],
+    current: set[str],
+) -> tuple[set[str], bool, bool]:
+    """Return (covered, complete, resolved); reject overlap immediately."""
+    covered: set[str] = set()
     for d in ds:
-        out.update(decode_occurrence_keys(d.get("OccurrenceKeys", ""), d.get("DecisionKey", "")))
-    return out
+        part = set(decode_occurrence_keys(d.get("OccurrenceKeys", ""), d.get("DecisionKey", "")))
+        if not part <= current:
+            raise SystemExit(f"Decision occurrence evidence does not belong to MatchKey {key}: {d.get('DecisionKey')}")
+        overlap = covered & part
+        if overlap:
+            raise SystemExit(f"Overlapping multipart OccurrenceKeys for {key}: {sorted(overlap)[:10]}")
+        covered.update(part)
+    complete = covered == current
+    resolved = complete and all(
+        d.get("Status") == "reviewed" and d.get("Action") in RESOLVED_ACTIONS for d in ds
+    )
+    if len(ds) > 1 and resolved:
+        split_keys: set[str] = set()
+        for d in ds:
+            if d.get("Action") != "keep-identity":
+                continue
+            provisional = d.get("CanonicalMatchKey", "")
+            if not provisional or not provisional.startswith(key + "#"):
+                raise SystemExit(
+                    f"Multipart keep-identity requires CanonicalMatchKey={key}#<variant>: {d.get('DecisionKey')}"
+                )
+            if provisional in split_keys:
+                raise SystemExit(f"Duplicate multipart provisional key for {key}: {provisional}")
+            if not d.get("TargetSense", "").strip():
+                raise SystemExit(f"Multipart keep-identity lacks TargetSense: {d.get('DecisionKey')}")
+            split_keys.add(provisional)
+    return covered, complete, resolved
+
+
+def add_preview_group(
+    groups: dict[str, dict[str, object]],
+    canonical: str,
+    *,
+    match_key_value: str,
+    occurrence_count: int,
+    display: str,
+    sense: str,
+) -> None:
+    group = groups.setdefault(canonical, {
+        "matchkeys": [], "occ": 0, "display": "", "sense": "",
+    })
+    group["matchkeys"].append(match_key_value)
+    group["occ"] = int(group["occ"]) + occurrence_count
+    if display and not group["display"]:
+        group["display"] = display
+    if sense and not group["sense"]:
+        group["sense"] = sense
 
 
 def main() -> None:
@@ -247,14 +302,20 @@ def main() -> None:
         current_by_match[row["MatchKey"]].add(row["SourceOccurrenceKey"])
     decisions = load_decisions(surface_keys, all_occurrence_keys)
 
+    states: dict[str, tuple[set[str], bool, bool]] = {}
     candidate_rows: list[dict[str, str]] = []
     review_rows: list[dict[str, str]] = []
     for surface in surfaces:
         key = surface["MatchKey"]
         ds = decisions.get(key, [])
         current = current_by_match[key]
-        reviewed = covered_keys(ds)
-        stale = bool(ds) and reviewed != current
+        if ds:
+            states[key] = partition_state(key, ds, current)
+            _, complete, multipart_resolved = states[key]
+        else:
+            complete, multipart_resolved = False, False
+
+        stale = bool(ds) and not complete
         if not ds:
             action, status, canonical, sense = "pending", "pending", "", ""
         elif stale:
@@ -265,10 +326,10 @@ def main() -> None:
             action, status = d["Action"], d["Status"]
             canonical, sense = d.get("CanonicalMatchKey", ""), d.get("TargetSense", "")
         else:
-            fully_reviewed = all(d.get("Status") == "reviewed" for d in ds)
-            action = "multipart-reviewed" if fully_reviewed else "split-required"
-            status = "reviewed" if fully_reviewed else "held"
+            action = "multipart-reviewed" if multipart_resolved else "split-required"
+            status = "reviewed" if multipart_resolved else "held"
             canonical, sense = "", ""
+
         row = dict(surface)
         row.update({
             "DecisionAction": action,
@@ -282,15 +343,18 @@ def main() -> None:
 
     surface_by_key = {r["MatchKey"]: r for r in candidate_rows}
     valid_decision: dict[str, dict[str, str]] = {}
+    resolved_multipart: dict[str, list[dict[str, str]]] = {}
     for key in surface_keys:
         ds = decisions.get(key, [])
-        if len(ds) == 1 and covered_keys(ds) == current_by_match[key]:
+        if not ds:
+            continue
+        _, complete, multipart_resolved = states[key]
+        if len(ds) == 1 and complete:
             valid_decision[key] = ds[0]
+        elif len(ds) > 1 and multipart_resolved:
+            resolved_multipart[key] = ds
 
-    # Preview semantics are canonical-first:
-    # 1. A reuse alias may not bypass a current canonical surface that is held/split/pending.
-    # 2. If a canonical surface exists and is reviewed keep-identity, its DisplayWord and
-    #    TargetSense are authoritative; alias/form TargetSense never overwrites them.
+    # Single-decision preview remains canonical-first.
     groups: dict[str, dict[str, object]] = {}
     for surface in candidate_rows:
         key = surface["MatchKey"]
@@ -305,22 +369,64 @@ def main() -> None:
             if not canonical_d or canonical_d.get("Status") != "reviewed" or canonical_d.get("Action") != "keep-identity":
                 continue
 
-        group = groups.setdefault(canonical, {
-            "matchkeys": [], "occ": 0, "display": "", "sense": "", "canonical_present": canonical in surface_keys,
-        })
-        group["matchkeys"].append(key)
-        group["occ"] = int(group["occ"]) + int(surface["OccurrenceCount"])
-
+        display = ""
+        sense = ""
         if canonical in surface_keys:
             if canonical_d and canonical_d.get("Status") == "reviewed" and canonical_d.get("Action") == "keep-identity":
                 base_surface = surface_by_key[canonical]
-                group["display"] = base_surface["DisplayForms"].split("|")[0]
-                group["sense"] = canonical_d.get("TargetSense", "")
+                display = base_surface["DisplayForms"].split("|")[0]
+                sense = canonical_d.get("TargetSense", "")
         else:
-            if not group["display"]:
-                group["display"] = canonical
-            if d.get("TargetSense") and not group["sense"]:
-                group["sense"] = d["TargetSense"]
+            display = canonical
+            sense = d.get("TargetSense", "")
+        add_preview_group(
+            groups, canonical,
+            match_key_value=key,
+            occurrence_count=int(surface["OccurrenceCount"]),
+            display=display,
+            sense=sense,
+        )
+
+    # Multipart preview: every keep group gets its own explicit Stage-A provisional
+    # CanonicalMatchKey (MatchKey#variant). Reuse groups join the reviewed canonical.
+    for key, ds in resolved_multipart.items():
+        surface = surface_by_key[key]
+        display = surface["DisplayForms"].split("|")[0]
+        for d in ds:
+            action = d.get("Action")
+            part_count = len(decode_occurrence_keys(d["OccurrenceKeys"], d["DecisionKey"]))
+            if action == "keep-identity":
+                canonical = d["CanonicalMatchKey"]
+                if canonical in surface_keys:
+                    raise SystemExit(f"Multipart provisional key collides with Source MatchKey: {canonical}")
+                if canonical in groups:
+                    raise SystemExit(f"Multipart provisional key collides with Preview identity: {canonical}")
+                add_preview_group(
+                    groups, canonical,
+                    match_key_value=key,
+                    occurrence_count=part_count,
+                    display=display,
+                    sense=d.get("TargetSense", ""),
+                )
+            elif action == "reuse-identity":
+                canonical = d.get("CanonicalMatchKey", "")
+                canonical_d = valid_decision.get(canonical) if canonical in surface_keys else None
+                if canonical in surface_keys:
+                    if not canonical_d or canonical_d.get("Status") != "reviewed" or canonical_d.get("Action") != "keep-identity":
+                        raise SystemExit(f"Multipart reuse bypasses canonical blocker: {d['DecisionKey']} -> {canonical}")
+                    base_surface = surface_by_key[canonical]
+                    target_display = base_surface["DisplayForms"].split("|")[0]
+                    target_sense = canonical_d.get("TargetSense", "")
+                else:
+                    target_display = canonical
+                    target_sense = d.get("TargetSense", "")
+                add_preview_group(
+                    groups, canonical,
+                    match_key_value=key,
+                    occurrence_count=part_count,
+                    display=target_display,
+                    sense=target_sense,
+                )
 
     preview_rows = [{
         "ProvisionalIdentityKey": f"candidate:{canonical}",
@@ -331,6 +437,11 @@ def main() -> None:
         "SourceOccurrenceCount": str(group["occ"]),
         "DecisionStatus": "reviewed",
     } for canonical, group in sorted(groups.items())]
+
+    if len({r["CanonicalMatchKey"] for r in preview_rows}) != len(preview_rows):
+        raise SystemExit("Preview CanonicalMatchKey is not unique")
+    if len({r["ProvisionalIdentityKey"] for r in preview_rows}) != len(preview_rows):
+        raise SystemExit("Preview ProvisionalIdentityKey is not unique")
 
     write_csv(OUT / "occurrences.csv", OCC_FIELDS, occurrences)
     write_csv(OUT / "surface_candidates.csv", SURFACE_FIELDS, candidate_rows)
@@ -362,14 +473,15 @@ Normalized surfaces       = {len(surfaces)}
 Vocabulary preview        = {len(preview_rows)}
 Review/blocker surfaces   = {len(review_rows)}
 Evidence-changed surfaces = {stale_count}
+Multipart resolved        = {len(resolved_multipart)}
 ```
 
 Each durable decision is bound to the exact Source Occurrences it reviewed via an
 unambiguous JSON array in `OccurrenceKeys`. Additional source evidence automatically
-re-queues that MatchKey. Candidate signals are evidence only. Canonical blockers cannot
-be bypassed by reuse aliases, and canonical learner-facing TargetSense always comes from
-the reviewed canonical surface when it exists. Stable ThirdPartyID is not minted and
-Stage-B Klose diff is not executed here.
+re-queues that MatchKey. Multipart split decisions must form a disjoint, complete
+occurrence partition before leaving review. Candidate signals are evidence only.
+Canonical blockers cannot be bypassed by reuse aliases. Stable ThirdPartyID is not
+minted and Stage-B Klose diff is not executed here.
 """
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "README.md").write_text(readme, encoding="utf-8")
@@ -382,8 +494,11 @@ Stage-B Klose diff is not executed here.
     print(f"unified vocabulary preview = {len(preview_rows)}")
     print(f"review/blocker surfaces = {len(review_rows)}")
     print(f"evidence-changed surfaces = {stale_count}")
+    print(f"multipart resolved = {len(resolved_multipart)}")
     for action in sorted(action_counts):
         print(f"action {action} = {action_counts[action]}")
+    print("Split occurrence partition overlap = no")
+    print("Split occurrence partition completeness = enforced")
     print("Canonical blocker bypass = no")
     print("Canonical TargetSense precedence = yes")
     print("Stable ThirdPartyID minted = no")
