@@ -27,7 +27,7 @@ source context 明确单一 elementary learning unit → keep-identity
 
 ## 2. Review Bundle
 
-`staging/review_bundle.csv` 是 generated audit aid，一行一个当前 blocker，按 AuditPriority 排序，包含：
+`anki/klose/third_party_vocabulary/audit/review_bundle.csv` 是 generated audit aid，一行一个当前 blocker，按 AuditPriority 排序，包含：
 
 ```text
 BlockerClass / AuditPriority
@@ -37,7 +37,7 @@ Definitions / CandidateSignals / SourceIDs / SourceBooks
 每个 occurrence 同书前后各 8 个 source words
 ```
 
-用途是让一次模型上下文直接覆盖 30–50 个 blocker，避免逐词反复 GitHub lookup。它不允许被手工编辑，也不能反向覆盖 `identity_decisions.csv`。
+`audit/` 只是吞吐优化用的 generated 辅助层，不属于 core staging truth；这样 `staging/` 的 frozen physical contract 不需要扩张。Review Bundle 的用途是让一次模型上下文直接覆盖 30–50 个 blocker，避免逐词反复 GitHub lookup。它不允许被手工编辑，也不能反向覆盖 `identity_decisions.csv`。
 
 ## 3. Blocker classes
 
