@@ -8,6 +8,14 @@ anki/klose/third_party_vocabulary/review/identity_decisions.csv
 
 `review_queue.csv`、`review_bundle.csv`、`decision_proposals.csv`、`defer_context.csv`、`next_batch.json` 均为 generated / derived view，不得成为第二套内容真源。
 
+Learner Admission 与 Identity Resolution 分层。当前 Klose grammar-stage gate 的 durable truth 是：
+
+```text
+anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv
+```
+
+它只决定“当前是否进入 Klose learner-facing view”，不得重写 Source Fact 或 Vocabulary Identity。
+
 目标不是把 blocker 数字机械降到 0，而是在不破坏 Source Fact、Identity、Vocabulary / Expression 边界和 future Stage-B 的前提下，最大化可安全完成的 learner-facing identity resolution。
 
 ## 1. Review output contract
@@ -54,9 +62,11 @@ Stage A 不再把“没有 textbook sentence / Unit metadata”本身视为永�
 - dictionary 存在大量无关义，但小学阶段有明显高价值 core sense；
 - noun / verb / adjective 等语法实现仍属于同一个紧密 learner concept；
 - 固定 phrasal verb / collocation / time phrase / multiword preposition 本身是稳定可 recall 的 lexical unit；
-- 某个高频 form 具有独立 pedagogical recall value，并有显式 rationale。
+- 某个高频 form 在 Identity 层具有独立 pedagogical learning-unit 价值，并有显式 rationale。
 
 TargetSense 必须窄，不得把整本词典的所有义项塞进一张卡。
+
+注意：Identity 层 `keep/reuse` **不等于当前 Learner Admission**。Grammar-stage gate 可以在 Identity 已 resolved 的情况下仍阻止该 form 进入当前 Klose learner view。
 
 例如：
 
@@ -134,7 +144,7 @@ Multipart keep 使用：
 
 例如 `dish#plate / dish#food / break#damage / look#see`。这些只是 Stage-A provisional key，不是 Stable ThirdPartyID。
 
-Partial partition 不得进入 Preview。
+Partial partition 不得进入 Identity Preview。
 
 ## 4. Canonical / morphology / form policy
 
@@ -162,11 +172,65 @@ drank → drink#verb
 flew  → fly#verb
 ```
 
-### 4.2 Inflected forms
+### 4.2 Inflected forms：Identity 与 Learner Admission 必须分层
 
-规则/不规则过去式、过去分词、普通复数、第三人称单数等，若只是 base lexical unit 的形态实现，默认 reuse base，不 mint 新 lexical identity。
+Identity 层规则保持：规则/不规则过去式、过去分词、普通复数、第三人称单数等，若只是 base lexical unit 的形态实现，可以 `reuse-identity`，不因形态差异 mint 新 lexical identity。教材若确实把某个 form 作为独立 pedagogical learning unit，也可以显式 `keep-identity`。
 
-若教材把某个 form 作为有直接 recall 价值的 pedagogical unit，可以显式 `keep-identity`；必须说明 learner value，不得自动泛化为“所有 form 都独立”。
+但 Klose 当前 grammar stage 尚不适合系统学习过去时、过去分词及完成时相关形态，因此新增 learner gate：
+
+```text
+纯 one-word 过去式 / 过去分词
+→ Identity relation 正常保留
+→ 写入 learner/grammar_form_quarantine.csv
+→ 不进入 learner/learner_vocabulary_preview.csv
+→ 等 Learner grammar stage 提升后再显式解冻
+```
+
+这不是 `held`：Identity 已经可以 resolved；只是当前 Learning Admission = blocked。
+
+Gate 必须可审计：
+
+```text
+GateKey
+MatchKey
+DecisionKey
+BaseForm
+FormType
+Scope
+PolicyVersion
+Rationale
+```
+
+边界：
+
+```text
+纯过去式/过去分词形态                → quarantine
+could / would 等当前明显超前情态形态 → 当前同样 quarantine
+lexicalized adjective/noun            → 不因词形外观自动 quarantine
+普通复数 / 三单 / -ing                → 不受本规则自动影响
+base 与 past 拼写完全相同             → 不按 surface 一刀切
+```
+
+例如：
+
+```text
+went → go                 Identity reuse；learner quarantine
+broke → break#damage      Identity reuse；learner quarantine
+lost = 迷路的/丢失的      lexicalized adjective；正常 learner candidate
+broken = 坏的/破损的      lexicalized adjective；正常 learner candidate
+```
+
+Homograph / multipart 必须按 `DecisionKey` 精确 gate，不能把整个 surface 隐藏。例如：
+
+```text
+left = 左边/左侧          保留
+left = leave 的过去式     quarantine
+
+saw = 锯子               保留
+saw = see 的过去式        quarantine
+```
+
+因此 `Identity reuse ≠ learner admission` 是硬约束。
 
 ### 4.3 `-ing`
 
@@ -241,8 +305,6 @@ durable decision changed after re-review
 audited-defer ≠ 未处理
 audited-defer ≠ 永久忽略
 ```
-
-它表示“当前 evidence 下已经完整 adjudicate；没有 context 变化时禁止重复消耗 review throughput”。
 
 Normalizer 必须 machine-check：
 
@@ -329,7 +391,9 @@ selected active batch closure = 100%
 
 `decision_proposals.csv` 是 derived-only、`AutoApply=no`。
 
-Proposal 只用于机械可检查的 frozen policy，例如 reviewed canonical 上 transparent form reuse。模型/人工仍需 confirm occurrence 与 canonical 同义后，才能写 transient decision update。
+Proposal 只用于机械可检查的 frozen identity policy，例如 reviewed canonical 上 transparent form reuse。模型/人工仍需 confirm occurrence 与 canonical 同义后，才能写 transient decision update。
+
+即使 proposal 最终为 `reuse-identity`，若该 surface 属于当前 grammar-form quarantine，learner-stage gate 仍独立生效。
 
 Proposal guard 拦截的 row 不得饿死后续 lane。
 
@@ -374,16 +438,33 @@ Review Bundle closes current blockers
 batch manifest closure
 batch decisions persisted exactly
 transient inbox removed
+learner grammar-form gate referential integrity
+one-word past/past-participle leak into learner view = NO
+lexicalized adjective/noun over-gating = NO
+homograph decision-scope gate = enforced
 Klose Master/Learner/Publish/Anki untouched
 Stable ThirdPartyID minted = no
 Final Klose diff executed = no
 ```
 
-`tools/check_third_party_corpus.py` 与 `tools/recheck_third_party_audit_batch.py` 互补，任何一个不能代替另一个。
+`tools/check_third_party_corpus.py`、`tools/check_third_party_learner_view.py` 与 `tools/recheck_third_party_audit_batch.py` 互补，任何一个不能代替另一个。
 
 ## 9. Stage-A / Stage-B boundary
 
 Stage A 只构建第三方 unified vocabulary corpus，不以 Klose 当前 deck 是否已有某词决定删除第三方 learning unit。
+
+Stage A 同时保留两种不同语义的 view：
+
+```text
+staging/unified_vocabulary_preview.csv
+= Identity-level reviewed vocabulary candidates
+
+learner/learner_vocabulary_preview.csv
+= Identity-level candidates
+  - current learner-stage quarantine
+```
+
+未来 Stage B 若生成“当前可进入 Klose 学习管线”的候选，必须消费 learner-stage view，而不能直接把 identity-level preview 当作当前 admission 结果。Identity-level preview 仍用于完整 corpus identity reconciliation。
 
 在所有计划中的 third-party source 完成前：
 
@@ -394,7 +475,7 @@ Stage A 只构建第三方 unified vocabulary corpus，不以 Klose 当前 deck 
 不得破坏已有 NoteID / FSRS history
 ```
 
-第三方 source evidence 与 Klose learner admission 是两层不同问题。
+第三方 source evidence、Identity Resolution 与 Klose Learner Admission 是三层不同问题。
 
 ## 10. Review quality rule
 
@@ -409,4 +490,4 @@ Stage A 只构建第三方 unified vocabulary corpus，不以 Klose 当前 deck 
 
 Dictionary 是辅助证据，不得把明显无关的长尾义项导入 TargetSense。
 
-当“更多 release”与“保持 identity/object/split 边界正确”冲突时，选择后者。
+当“更多 release”与“保持 identity/object/split/learner-stage 边界正确”冲突时，选择后者。
