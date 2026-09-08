@@ -15,6 +15,7 @@ candidate:a.m.,a.m.,a.m.,上午；午前,a.m.,2,reviewed
 candidate:able,able,able,能,able,1,reviewed
 candidate:about,about,about,关于；有关,about,7,reviewed
 candidate:above,above,above,在……上面；在……之上,above,2,reviewed
+candidate:accident,accident,accident,事故；意外,accident,1,reviewed
 candidate:across from,across from,across from,在……正对面,across from,1,reviewed
 candidate:active,active,active,积极的；活跃的,active,2,reviewed
 candidate:actor,actor,actor,男演员,actor,2,reviewed
@@ -52,6 +53,7 @@ candidate:an,an,an,一个；一（用于元音音素前）,an,8,reviewed
 candidate:and,and,and,和；与；而且,and,7,reviewed
 candidate:angry,angry,angry,生气的；愤怒的,angry,8,reviewed
 candidate:animal,animal,animal,动物,animal,8,reviewed
+candidate:ankle,ankle,ankle,脚踝；踝关节,ankle,1,reviewed
 candidate:another,another,another,另一个；又一个,another,3,reviewed
 candidate:answer,answer,answer,回答；答案,answer,6,reviewed
 candidate:ant,ant,ant,蚂蚁,ant,3,reviewed
@@ -75,6 +77,7 @@ candidate:as well,as well,as well,也；还,as well,1,reviewed
 candidate:asia,asia,Asia,亚洲,asia,1,reviewed
 candidate:ask,ask,ask,问；询问,ask,8,reviewed
 candidate:asleep,asleep,asleep,睡着的,asleep,1,reviewed
+candidate:astronaut,astronaut,astronaut,宇航员；航天员,astronaut,1,reviewed
 candidate:at,at,at,在；于；向（用于地点、时间或目标）,at,6,reviewed
 candidate:at all,at all,at all,根本；完全（用于否定或疑问）,at all,1,reviewed
 candidate:at first,at first,at first,起初；一开始,at first,1,reviewed
@@ -94,6 +97,7 @@ candidate:australia,australia,Australia,澳大利亚,australia,1,reviewed
 candidate:australian,australian,Australian,澳大利亚的；澳大利亚人,australian,1,reviewed
 candidate:autumn,autumn,autumn,秋天；秋季,autumn,8,reviewed
 candidate:away,away,away,离开；在远处,away,2,reviewed
+candidate:awful,awful,awful,糟糕的；可怕的,awful,1,reviewed
 candidate:baby,baby,baby,婴儿；宝宝,baby,6,reviewed
 candidate:baby brother,baby brother,baby brother,弟弟；小弟弟,baby brother,1,reviewed
 candidate:back,back,back,向后；回到原处,back,7,reviewed
@@ -121,6 +125,7 @@ candidate:be interested in,be interested in,be interested in,对……感兴趣,
 candidate:be late for,be late for,be late for,……迟到；迟到,be late for,1,reviewed
 candidate:be weak in,be weak in,be weak in,不擅长……；在……方面较弱,be weak in,1,reviewed
 candidate:beach,beach,beach,海滩；沙滩,beach,4,reviewed
+candidate:beans,beans,beans,豆子；豆类,beans,1,reviewed
 candidate:bear,bear,bear,熊,bear,7,reviewed
 candidate:beautiful,beautiful,beautiful,美丽的；漂亮的,beautiful,9,reviewed
 candidate:beautifully,beautifully,beautifully,漂亮地；优美地,beautifully,1,reviewed
@@ -163,6 +168,7 @@ candidate:boat,boat,boat,船；小船,boat,8,reviewed
 candidate:boating,boating,boating,划船；划船活动,boating,1,reviewed
 candidate:body,body,body,身体,body,8,reviewed
 candidate:book,book,book,书；书本,book,11,reviewed
+candidate:bookshelf,bookshelf,bookshelf,书架,bookshelf,1,reviewed
 candidate:bookshop,bookshop,bookshop,书店,bookshop,2,reviewed
 candidate:bookstore,bookstore,bookstore,书店,bookstore,1,reviewed
 candidate:bored,bored,bored,感到无聊的；厌倦的,bored,4,reviewed
@@ -216,6 +222,7 @@ candidate:by subway,by subway,by subway,乘地铁,by subway,1,reviewed
 candidate:by taxi,by taxi,by taxi,乘出租车,by taxi,2,reviewed
 candidate:by train,by train,by train,乘火车,by train,1,reviewed
 candidate:bye,bye,bye,再见,bye,2,reviewed
+candidate:cabbages,cabbages,cabbages,卷心菜；洋白菜,cabbages,1,reviewed
 candidate:cake,cake,cake,蛋糕,cake,10,reviewed
 candidate:call,call,call,打电话；呼叫,call,7,reviewed
 candidate:camera,camera,camera,照相机；相机,camera,5,reviewed
@@ -244,7 +251,7 @@ candidate:cave,cave,cave,洞穴,cave,1,reviewed
 candidate:cd,cd,CD,光盘；激光唱片,cd,3,reviewed
 candidate:celebrate,celebrate,celebrate,庆祝,celebrate,1,reviewed
 candidate:cent,cent,cent,分（货币单位）,cent,2,reviewed
-candidate:centimetre,centimetre,centimetre,厘米；公分,centimetre,1,reviewed
+candidate:centimetre,centimetre,centimetre,厘米；公分,centimeter|centimetre,2,reviewed
 candidate:central,central,central,中心的；中央的,central,1,reviewed
 candidate:chair,chair,chair,椅子,chair,10,reviewed
 candidate:chameleon,chameleon,chameleon,变色龙,chameleon,1,reviewed
@@ -302,6 +309,7 @@ candidate:coffee,coffee,coffee,咖啡,coffee,2,reviewed
 candidate:coin,coin,coin,硬币,coin,1,reviewed
 candidate:cola,cola,cola,可乐,cola,5,reviewed
 candidate:collect,collect,collect,收集；收集起来,collect,4,reviewed
+candidate:colorful,colorful,colorful,色彩鲜艳的；丰富多彩的,colorful,1,reviewed
 candidate:colour,colour,colour,颜色；给……涂色,colour,7,reviewed
 candidate:come,come,come,来,come,7,reviewed
 candidate:come back,come back,come back,回来；返回,come back,2,reviewed
@@ -309,12 +317,15 @@ candidate:come out of,come out of,come out of,从……出来；出自,come out 
 candidate:comic,comic,comic,漫画；连环漫画,comic,1,reviewed
 candidate:comic book,comic book,comic book,漫画书,comic book,1,reviewed
 candidate:competition,competition,competition,比赛；竞赛,competition,2,reviewed
+candidate:competitor,competitor,competitor,参赛者；竞争者,competitor,1,reviewed
 candidate:computer,computer,computer,电脑；计算机,computer,8,reviewed
 candidate:computer class,computer class,computer class,计算机课；电脑课,computer class,1,reviewed
 candidate:computer game,computer game,computer game,电脑游戏,computer game,1,reviewed
 candidate:computer room,computer room,computer room,计算机教室；电脑室,computer room,1,reviewed
 candidate:concert,concert,concert,音乐会,concert,3,reviewed
 candidate:contest,contest,contest,比赛；竞赛,contest,1,reviewed
+candidate:cookbook,cookbook,cookbook,食谱；烹饪书,cookbook,1,reviewed
+candidate:cookie,cookie,cookie,饼干,cookie,1,reviewed
 candidate:cool,cool,cool,凉爽的；凉的,cool,13,reviewed
 candidate:corn,corn,corn,玉米,corn,1,reviewed
 candidate:cost,cost,cost,费用；花费,cost,2,reviewed
@@ -429,6 +440,7 @@ candidate:eat dinner,eat dinner,eat dinner,吃晚餐；吃晚饭,eat dinner,2,re
 candidate:eat lunch,eat lunch,eat lunch,吃午饭,eat lunch,1,reviewed
 candidate:eat seafood,eat seafood,eat seafood,吃海鲜,eat seafood,1,reviewed
 candidate:egg,egg,egg,鸡蛋；蛋,egg,11,reviewed
+candidate:eggplants,eggplants,eggplants,茄子,eggplants,1,reviewed
 candidate:eight,eight,eight,八,eight,9,reviewed
 candidate:eighteen,eighteen,eighteen,十八,eighteen,6,reviewed
 candidate:eighteenth,eighteenth,eighteenth,第十八,eighteenth,1,reviewed
@@ -448,8 +460,10 @@ candidate:english class,english class,English class,英语课,english class,1,re
 candidate:english-chinese dictionary,english-chinese dictionary,English-Chinese dictionary,英汉词典,english-chinese dictionary,1,reviewed
 candidate:enjoy,enjoy,enjoy,喜欢；享受,enjoy,6,reviewed
 candidate:enough,enough,enough,足够；充足,enough,4,reviewed
+candidate:entry,entry,entry,报名；参赛登记,entry,1,reviewed
 candidate:envelope,envelope,envelope,信封,envelope,1,reviewed
 candidate:eraser,eraser,eraser,橡皮；橡皮擦,eraser,4,reviewed
+candidate:especially,especially,especially,尤其；特别,especially,1,reviewed
 candidate:even,even,even,甚至；连……都,even,1,reviewed
 candidate:evening,evening,evening,晚上；傍晚,evening,7,reviewed
 candidate:ever,ever,ever,曾经；在任何时候,ever,1,reviewed
@@ -467,7 +481,9 @@ candidate:exercise,exercise,exercise,锻炼；运动,exercise,8,reviewed
 candidate:exercise book,exercise book,exercise book,练习本,exercise book,1,reviewed
 candidate:exhibition,exhibition,exhibition,展览；展览会,exhibition,1,reviewed
 candidate:expensive,expensive,expensive,昂贵的；贵的,expensive,4,reviewed
+candidate:explain,explain,explain,解释；说明,explain,1,reviewed
 candidate:eye,eye,eye,眼睛,eye,10,reviewed
+candidate:eyesight,eyesight,eyesight,视力,eyesight,1,reviewed
 candidate:face,face,face,脸；面部,face,10,reviewed
 candidate:factory,factory,factory,工厂,factory,4,reviewed
 candidate:fairest,fairest,fairest,最美的（fair 的最高级）,fairest,1,reviewed
@@ -576,6 +592,7 @@ candidate:full,full,full,饱的；吃饱的,full,1,reviewed
 candidate:fun,fun,fun,乐趣；有趣的事,fun,7,reviewed
 candidate:funny,funny,funny,有趣的；好笑的；滑稽的,funny,6,reviewed
 candidate:fur,fur,fur,毛皮；软毛,fur,1,reviewed
+candidate:furniture,furniture,furniture,家具,furniture,1,reviewed
 candidate:future,future,future,未来；将来,future,5,reviewed
 candidate:game,game,game,游戏；比赛,game,5,reviewed
 candidate:garden,garden,garden,花园；园子,garden,5,reviewed
@@ -704,6 +721,7 @@ candidate:healthy,healthy,healthy,健康的,healthy,6,reviewed
 candidate:hear,hear,hear,听见；听到,hear,8,reviewed
 candidate:heat,heat,heat,热；热量；高温,heat,1,reviewed
 candidate:heavy,heavy,heavy,重的；沉重的,heavier|heavy,7,reviewed
+candidate:height,height,height,身高；高度,height,1,reviewed
 candidate:helicopter,helicopter,helicopter,直升机,helicopter,1,reviewed
 candidate:hello,hello,hello,你好；喂,hello,10,reviewed
 candidate:helmet,helmet,helmet,头盔,helmet,2,reviewed
@@ -744,6 +762,7 @@ candidate:hour,hour,hour,小时；钟头,hour,5,reviewed
 candidate:house,house,house,房子；住宅,house,10,reviewed
 candidate:housework,housework,housework,家务,housework,2,reviewed
 candidate:how,how,how,怎样；如何,how,6,reviewed
+candidate:huge,huge,huge,巨大的；庞大的,huge,1,reviewed
 candidate:hundred,hundred,hundred,一百；百,hundred,5,reviewed
 candidate:hungry,hungry,hungry,饿的；饥饿的,hungry,7,reviewed
 candidate:hurry,hurry,hurry,匆忙；赶紧,hurry,2,reviewed
@@ -769,6 +788,7 @@ candidate:in the middle,in the middle,in the middle,在中间；在中部,in the
 candidate:in the past,in the past,in the past,过去；在过去,in the past,1,reviewed
 candidate:information,information,information,信息；资料,information,2,reviewed
 candidate:information centre,information centre,Information Centre,信息中心；咨询中心,information centre,1,reviewed
+candidate:injection,injection,injection,注射；打针,injection,1,reviewed
 candidate:ink,ink,ink,墨水；墨汁,ink,1,reviewed
 candidate:insect,insect,insect,昆虫,insect,3,reviewed
 candidate:insect museum,insect museum,insect museum,昆虫博物馆,insect museum,1,reviewed
@@ -778,6 +798,7 @@ candidate:interesting,interesting,interesting,有趣的；令人感兴趣的,int
 candidate:internet,internet,Internet,互联网；因特网,internet,2,reviewed
 candidate:interviewer,interviewer,interviewer,采访者；采访人,interviewer,1,reviewed
 candidate:into,into,into,进入；到……里面,into,4,reviewed
+candidate:introduce,introduce,introduce,介绍,introduce,1,reviewed
 candidate:invent,invent,invent,发明；创造,invent,3,reviewed
 candidate:invention,invention,invention,发明；发明物,invention,2,reviewed
 candidate:inventor,inventor,inventor,发明家,inventor,1,reviewed
@@ -787,18 +808,23 @@ candidate:is,is,is,是；处于（be 的第三人称单数）,is,12,reviewed
 candidate:island,island,island,岛；岛屿,island,3,reviewed
 candidate:it,it,it,它；这件事/这个东西,it,9,reviewed
 candidate:italian,italian,Italian,意大利的,italian,1,reviewed
+candidate:italy,italy,Italy,意大利,italy,1,reviewed
 candidate:its,its,its,它的,its,6,reviewed
 candidate:jack-o'-lantern,jack-o'-lantern,jack-o'-lantern,南瓜灯；杰克灯,jack-o'-lantern,1,reviewed
 candidate:jacket,jacket,jacket,夹克；短外套,jacket,6,reviewed
 candidate:jam,jam,jam,果酱,jam,1,reviewed
 candidate:january,january,January,一月,jan.|january,6,reviewed
+candidate:japan,japan,Japan,日本,japan,1,reviewed
 candidate:japanese,japanese,Japanese,日本的；日本人；日语,japanese,1,reviewed
 candidate:jasmine,jasmine,jasmine,茉莉；茉莉花,jasmine,1,reviewed
+candidate:jeans,jeans,jeans,牛仔裤,jeans,1,reviewed
+candidate:jeep,jeep,jeep,吉普车,jeep,1,reviewed
 candidate:job,job,job,工作；职业,job,5,reviewed
 candidate:join,join,join,加入；参加,join,4,reviewed
 candidate:joke,joke,joke,玩笑；笑话,joke,2,reviewed
 candidate:journey,journey,journey,旅行；行程,journey,1,reviewed
 candidate:joy,joy,joy,欢乐；快乐；喜悦,joy,2,reviewed
+candidate:juggler,juggler,juggler,杂耍演员；玩杂耍的人,juggler,1,reviewed
 candidate:juice,juice,juice,果汁；汁,juice,9,reviewed
 candidate:july,july,July,七月,jul.|july,8,reviewed
 candidate:jump,jump,jump,跳；跳跃,jump|jumping,7,reviewed
@@ -807,6 +833,7 @@ candidate:june,june,June,六月,jun.|june,7,reviewed
 candidate:junior high school,junior high school,junior high school,初中；初级中学,junior high school,1,reviewed
 candidate:just,just,just,只是；仅仅,just,3,reviewed
 candidate:kangaroo,kangaroo,kangaroo,袋鼠,kangaroo,3,reviewed
+candidate:karate,karate,karate,空手道,karate,1,reviewed
 candidate:keep,keep,keep,保持；保留,keep,5,reviewed
 candidate:keep on,keep on,keep on,继续；坚持,keep on,2,reviewed
 candidate:keep quiet,keep quiet,keep quiet,保持安静,keep quiet,1,reviewed
