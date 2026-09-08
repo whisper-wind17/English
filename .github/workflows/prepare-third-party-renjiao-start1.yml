@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
     paths:
+      - 'tools/prepare_third_party_beijing_start1.py'
+      - 'tools/check_third_party_beijing_start1.py'
+      - 'tools/prepare_third_party_beishida_start1.py'
+      - 'tools/check_third_party_beishida_start1.py'
+      - 'tools/prepare_third_party_jijiao_start3.py'
+      - 'tools/check_third_party_jijiao_start3.py'
       - 'tools/prepare_third_party_renjiao_start1.py'
       - 'tools/check_third_party_renjiao_start1.py'
       - 'tools/prepare_third_party_renjiao_start3.py'
@@ -14,6 +20,7 @@ on:
       - 'tools/check_third_party_waiyan_start1.py'
       - 'tools/prepare_third_party_waiyan_start3.py'
       - 'tools/check_third_party_waiyan_start3.py'
+      - 'tools/check_third_party_source_adapters.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_learner_view.py'
@@ -26,6 +33,9 @@ on:
       - 'tools/check_third_party_corpus.py'
       - 'tools/recheck_third_party_audit_batch.py'
       - 'tools/seal_third_party_stage_a_checkpoint.py'
+      - '1.全国各大教材版本中小学同步/北京版/北京版一年级起点*.xlsx'
+      - '1.全国各大教材版本中小学同步/北师大/北师大版一年级起点*.xlsx'
+      - '1.全国各大教材版本中小学同步/冀教版/冀教版三年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/人教版/人教版三年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/沪教版/沪教版三年级起点*.xlsx'
@@ -73,7 +83,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "push" ]] && git rev-parse HEAD^ >/dev/null 2>&1; then
             git diff --name-only HEAD^ HEAD > /tmp/third_party_changed_files.txt
             source_changed=false
-            if grep -Eq '^((tools/(prepare|check)_third_party_(renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3)\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/(beijing_start1|jijiao_start3|beishida_start1)_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
+            if grep -Eq '^((tools/(prepare|check)_third_party_(beijing_start1|beishida_start1|jijiao_start3|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3)\.py)|(tools/check_third_party_source_adapters\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/(beijing_start1|jijiao_start3|beishida_start1)_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
               source_changed=true
             fi
           fi
@@ -97,12 +107,32 @@ jobs:
       - name: Capture transient audit decision batch
         run: python tools/recheck_third_party_audit_batch.py capture
 
+      - name: Parse Beijing start1 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
+        run: python tools/prepare_third_party_beijing_start1.py
+
+      - name: Validate Beijing start1 source adapter
+        run: python tools/check_third_party_beijing_start1.py
+
+      - name: Parse Beishida start1 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
+        run: python tools/prepare_third_party_beishida_start1.py
+
+      - name: Validate Beishida start1 source adapter
+        run: python tools/check_third_party_beishida_start1.py
+
+      - name: Parse Jijiao start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
+        run: python tools/prepare_third_party_jijiao_start3.py
+
+      - name: Validate Jijiao start3 source adapter
+        run: python tools/check_third_party_jijiao_start3.py
+
       - name: Parse Renjiao start1 source adapter
         if: steps.scope.outputs.source_changed == 'true'
         run: python tools/prepare_third_party_renjiao_start1.py
 
       - name: Validate Renjiao start1 source adapter
-        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_renjiao_start1.py
 
       - name: Parse Renjiao start3 source adapter
@@ -110,7 +140,6 @@ jobs:
         run: python tools/prepare_third_party_renjiao_start3.py
 
       - name: Validate Renjiao start3 source adapter
-        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_renjiao_start3.py
 
       - name: Parse Hujiao start3 source adapter
@@ -118,7 +147,6 @@ jobs:
         run: python tools/prepare_third_party_hujiao_start3.py
 
       - name: Validate Hujiao start3 source adapter
-        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_hujiao_start3.py
 
       - name: Parse Waiyan start1 source adapter
@@ -126,7 +154,6 @@ jobs:
         run: python tools/prepare_third_party_waiyan_start1.py
 
       - name: Validate Waiyan start1 source adapter
-        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_waiyan_start1.py
 
       - name: Parse Waiyan start3 source adapter
@@ -134,8 +161,10 @@ jobs:
         run: python tools/prepare_third_party_waiyan_start3.py
 
       - name: Validate Waiyan start3 source adapter
-        if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_waiyan_start3.py
+
+      - name: Validate enabled source-adapter closure
+        run: python tools/check_third_party_source_adapters.py
 
       - name: Apply transient reviewed identity decisions
         run: |
@@ -205,6 +234,12 @@ jobs:
             anki/klose/third_party_vocabulary/review \
             anki/klose/third_party_vocabulary/audit \
             anki/klose/third_party_vocabulary/learner \
+            anki/klose/source_reference/beijing_start1_staging/README.md \
+            anki/klose/source_reference/beijing_start1_staging/occurrences.csv \
+            anki/klose/source_reference/beishida_start1_staging/README.md \
+            anki/klose/source_reference/beishida_start1_staging/occurrences.csv \
+            anki/klose/source_reference/jijiao_start3_staging/README.md \
+            anki/klose/source_reference/jijiao_start3_staging/occurrences.csv \
             anki/klose/source_reference/renjiao_start1_staging/README.md \
             anki/klose/source_reference/renjiao_start1_staging/occurrences.csv \
             anki/klose/source_reference/renjiao_start3_staging/README.md \
