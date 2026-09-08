@@ -21,7 +21,6 @@ QUARANTINE_VIEW = LEARNER / "grammar_form_quarantine_view.csv"
 ALLOWED_FORM_TYPES = {"past-form", "past-or-past-participle", "modal-past-form"}
 ALLOWED_SCOPES = {"matchkey", "decision"}
 POLICY_VERSION = "klose-grammar-gate-v1"
-LEXICALIZED_MARKER = "lexicalized"
 PAST_MARKERS = (
     "过去式", "过去分词", "past tense", "past-tense", "past form", "past-form",
     "past participle", "past-participle", "past/participle", "past or past-participle",
@@ -58,16 +57,25 @@ def split_matchkeys(raw: str) -> list[str]:
     return [x for x in raw.split("|") if x]
 
 
-def decision_is_lexicalized(decision: dict[str, str]) -> bool:
-    text = " ".join([
-        decision.get("DecisionBasis", ""), decision.get("Rationale", ""),
-    ]).casefold()
-    return decision.get("Action") == "keep-identity" and LEXICALIZED_MARKER in text
-
-
 def has_past_marker(text: str) -> bool:
     folded = text.casefold()
     return any(marker in folded for marker in PAST_MARKERS)
+
+
+def decision_explicitly_self_identifies_past_form(decision: dict[str, str]) -> bool:
+    """Return true only for decision metadata that classifies *this* learning unit.
+
+    Source definitions and free-form rationale are deliberately excluded. They can
+    mention morphology of another surface (for example canonical `win` discussing
+    `won`) or dictionary noise (for example noun `ground` mentioning grind forms).
+    TargetSense and DecisionBasis are the narrow, decision-bound fields safe enough
+    for a fail-closed coverage check.
+    """
+    if decision.get("Action") not in {"keep-identity", "reuse-identity"}:
+        return False
+    return has_past_marker(decision.get("TargetSense", "")) or has_past_marker(
+        decision.get("DecisionBasis", "")
+    )
 
 
 def main() -> None:
@@ -115,37 +123,22 @@ def main() -> None:
         gate_by_decision[dkey] = gate
         gated_matchkeys.add(key)
 
-    # Source/decision evidence must not be able to introduce an obvious one-word
-    # past/past-participle form into the learner view without an explicit gate.
-    # Lexicalized adjective/noun identities are intentionally exempt.
-    explicit_past_matchkeys: set[str] = set()
-    for key, rows in occ_by_match.items():
-        if " " in key:
-            continue
-        if any(has_past_marker(r.get("Definition", "")) for r in rows):
-            current_decisions = decisions_by_match.get(key, [])
-            if current_decisions and not all(decision_is_lexicalized(d) for d in current_decisions):
-                explicit_past_matchkeys.add(key)
-
-    # Only TargetSense / DecisionBasis are authoritative enough to classify the
-    # current surface itself. Rationale may mention a *different* alias (for example
-    # canonical `win` mentioning that `won` is its past form), so scanning rationale
-    # here creates false positives.
-    for dkey, decision in decision_by_key.items():
-        key = decision.get("MatchKey", "")
-        if " " in key or decision_is_lexicalized(decision):
-            continue
-        text = " ".join([
-            decision.get("TargetSense", ""), decision.get("DecisionBasis", ""),
-        ])
-        if has_past_marker(text):
-            explicit_past_matchkeys.add(key)
-            require(dkey in gate_by_decision or key in gated_matchkeys,
-                    f"Reviewed one-word past form lacks learner-stage gate: {dkey}")
-
-    missing_source_gates = sorted(explicit_past_matchkeys - gated_matchkeys)
-    require(not missing_source_gates,
-            f"Source-described one-word past forms lack learner-stage gate: {missing_source_gates[:30]}")
+    # Fail closed only when durable decision metadata explicitly says that the
+    # decision itself is a past/past-participle learning unit. Broad source glosses
+    # are evidence, not a reliable machine grammar classifier; using them here caused
+    # false positives such as go/hold/party/ground and would silently encode dictionary
+    # noise as learner policy.
+    explicit_past_decisions = {
+        dkey
+        for dkey, decision in decision_by_key.items()
+        if " " not in decision.get("MatchKey", "")
+        and decision_explicitly_self_identifies_past_form(decision)
+    }
+    missing_decision_gates = sorted(explicit_past_decisions - set(gate_by_decision))
+    require(
+        not missing_decision_gates,
+        f"Reviewed one-word past-form decisions lack learner-stage gate: {missing_decision_gates[:30]}",
+    )
 
     require(not (LEXICALIZED_EXCEPTIONS & gated_matchkeys),
             f"Lexicalized adjective/noun exception was incorrectly grammar-gated: {sorted(LEXICALIZED_EXCEPTIONS & gated_matchkeys)}")
@@ -207,10 +200,11 @@ def main() -> None:
     print(f"identity-level vocabulary preview = {len(identity_preview)}")
     print(f"learner-stage vocabulary preview = {len(learner_preview)}")
     print(f"grammar-form quarantine gates = {len(gates)}")
-    print(f"source/decision explicit past-form surfaces = {len(explicit_past_matchkeys)}")
+    print(f"explicit decision-bound past-form requirements = {len(explicit_past_decisions)}")
     print("past-form leak into learner preview = no")
     print("lexicalized participle/adjective over-gating = no")
     print("homograph decision-scope gate = enforced")
+    print("source-definition heuristic used as identity truth = no")
     print("identity truth mutated by learner gate = no")
 
 
