@@ -59,7 +59,7 @@ candidate:any,any,any,任何；一些（用于疑问或否定）,any,6,reviewed
 candidate:anything,anything,anything,任何事；任何东西,anything,2,reviewed
 candidate:anywhere,anywhere,anywhere,任何地方；无论哪里,anywhere,1,reviewed
 candidate:apple,apple,apple,苹果,apple,9,reviewed
-candidate:april,april,April,四月,april,4,reviewed
+candidate:april,april,April,四月,apr.|april,5,reviewed
 candidate:are,are,are,是（be 的第二人称及复数现在式）,are,9,reviewed
 candidate:are not,are not,are not,不是；没有；不（are 的否定形式）,are not|aren't,4,reviewed
 candidate:argue,argue,argue,争论；争吵,argue,1,reviewed
@@ -88,7 +88,7 @@ candidate:at the top of,at the top of,at the top of,在……顶部；在……�
 candidate:at the weekend,at the weekend,at the weekend,在周末,at the weekend,1,reviewed
 candidate:at work,at work,at work,在工作；工作中,at work,1,reviewed
 candidate:attention,attention,attention,注意；注意力,attention,1,reviewed
-candidate:august,august,August,八月,august,5,reviewed
+candidate:august,august,August,八月,aug.|august,6,reviewed
 candidate:aunt,aunt,aunt,姑妈；姨妈；伯母；舅妈等女性长辈,aunt,7,reviewed
 candidate:australia,australia,Australia,澳大利亚,australia,1,reviewed
 candidate:australian,australian,Australian,澳大利亚的；澳大利亚人,australian,1,reviewed
@@ -258,6 +258,8 @@ candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chemistry,chemistry,chemistry,化学,chemistry,2,reviewed
 candidate:chess,chess,chess,国际象棋；棋,chess,2,reviewed
 candidate:chick,chick,chick,小鸡；雏鸡,chick,1,reviewed
+candidate:chicken#animal,chicken#animal,chicken,鸡；小鸡,chicken,3,reviewed
+candidate:chicken#meat,chicken#meat,chicken,鸡肉,chicken,7,reviewed
 candidate:child,child,child,孩子；儿童,child,5,reviewed
 candidate:children,children,children,孩子们；儿童（child 的复数）,children,7,reviewed
 candidate:children's day,children's day,Children's Day,儿童节,children's day,2,reviewed
@@ -265,6 +267,8 @@ candidate:china,china,China,中国,china,7,reviewed
 candidate:chinatown,chinatown,Chinatown,唐人街；中国城,chinatown,2,reviewed
 candidate:chinese book,chinese book,Chinese book,语文书；中文书,chinese book,1,reviewed
 candidate:chinese ink painting,chinese ink painting,Chinese ink painting,中国水墨画,chinese ink painting,1,reviewed
+candidate:chinese#language,chinese#language,Chinese,中文；语文,chinese,6,reviewed
+candidate:chinese#national,chinese#national,Chinese,中国的；中国人的,chinese,4,reviewed
 candidate:chips,chips,chips,[食品] 炸土豆条,chips,1,reviewed
 candidate:chocolate,chocolate,chocolate,巧克力,chocolate,5,reviewed
 candidate:choose,choose,choose,选择,choose,1,reviewed
@@ -303,6 +307,8 @@ candidate:coconut,coconut,coconut,椰子,coconut,1,reviewed
 candidate:coffee,coffee,coffee,咖啡,coffee,1,reviewed
 candidate:coin,coin,coin,硬币,coin,1,reviewed
 candidate:cola,cola,cola,可乐,cola,4,reviewed
+candidate:cold#illness,cold#illness,cold,感冒,cold,3,reviewed
+candidate:cold#temperature,cold#temperature,cold,冷的；寒冷的,cold,8,reviewed
 candidate:collect,collect,collect,收集；收集起来,collect,4,reviewed
 candidate:colour,colour,colour,颜色；给……涂色,colour,7,reviewed
 candidate:come,come,come,来,came|come,8,reviewed
@@ -638,7 +644,7 @@ candidate:goat,goat,goat,山羊,goat,1,reviewed
 candidate:gold,gold,gold,金；黄金；金色,gold,4,reviewed
 candidate:golf,golf,golf,高尔夫球；高尔夫运动,golf,1,reviewed
 candidate:good,good,good,好的；不错的,best|better|good,13,reviewed
-candidate:goodbye,goodbye,goodbye,再见,goodbye,4,reviewed
+candidate:goodbye,goodbye,goodbye,再见,good-bye|goodbye,5,reviewed
 candidate:got,got,got,得到；获得（get 的过去式）,got,3,reviewed
 candidate:gps,gps,GPS,全球定位系统；GPS,gps,1,reviewed
 candidate:grab,grab,grab,抓住；抓取,grab,1,reviewed
@@ -798,7 +804,7 @@ candidate:its,its,its,它的,its,6,reviewed
 candidate:jack-o'-lantern,jack-o'-lantern,jack-o'-lantern,南瓜灯；杰克灯,jack-o'-lantern,1,reviewed
 candidate:jacket,jacket,jacket,夹克；短外套,jacket,4,reviewed
 candidate:jam,jam,jam,果酱,jam,1,reviewed
-candidate:january,january,January,一月,january,4,reviewed
+candidate:january,january,January,一月,jan.|january,5,reviewed
 candidate:japanese,japanese,Japanese,日本的；日本人；日语,japanese,1,reviewed
 candidate:jasmine,jasmine,jasmine,茉莉；茉莉花,jasmine,1,reviewed
 candidate:job,job,job,工作；职业,job,5,reviewed
@@ -986,9 +992,9 @@ candidate:mouse#animal,mouse#animal,mouse,老鼠,mouse,3,reviewed
 candidate:mouse#computer,mouse#computer,mouse,鼠标；电脑鼠标,mouse,1,reviewed
 candidate:mouth,mouth,mouth,嘴；口,mouth,9,reviewed
 candidate:move,move,move,移动；搬动；搬家,move,2,reviewed
-candidate:mr,mr,Mr,先生,mr,4,reviewed
-candidate:mrs,mrs,Mrs,太太；夫人,mrs,5,reviewed
-candidate:ms,ms,Ms,女士,ms,5,reviewed
+candidate:mr,mr,Mr,先生,mr|mr.,5,reviewed
+candidate:mrs,mrs,Mrs,太太；夫人,mrs|mrs.,6,reviewed
+candidate:ms,ms,Ms,女士,ms|ms.,6,reviewed
 candidate:much,much,much,许多；很多,much,4,reviewed
 candidate:mud,mud,mud,泥；泥巴,mud,1,reviewed
 candidate:mule,mule,mule,骡子,mule,1,reviewed
