@@ -12,6 +12,8 @@ on:
       - 'tools/check_third_party_hujiao_start3.py'
       - 'tools/prepare_third_party_waiyan_start1.py'
       - 'tools/check_third_party_waiyan_start1.py'
+      - 'tools/prepare_third_party_waiyan_start3.py'
+      - 'tools/check_third_party_waiyan_start3.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_review_bundle.py'
@@ -25,6 +27,7 @@ on:
       - '1.全国各大教材版本中小学同步/人教版/人教版三年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/沪教版/沪教版三年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/外研版/外研版一年级起点*.xlsx'
+      - '1.全国各大教材版本中小学同步/外研版/外研版三年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
@@ -60,7 +63,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "push" ]] && git rev-parse HEAD^ >/dev/null 2>&1; then
             git diff --name-only HEAD^ HEAD > /tmp/third_party_changed_files.txt
             source_changed=false
-            if grep -Eq '^((tools/(prepare|check)_third_party_(renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1)\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/beijing_start1_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
+            if grep -Eq '^((tools/(prepare|check)_third_party_(renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3)\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/beijing_start1_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
               source_changed=true
             fi
           fi
@@ -115,6 +118,14 @@ jobs:
       - name: Validate Waiyan start1 source adapter
         if: steps.scope.outputs.source_changed == 'true'
         run: python tools/check_third_party_waiyan_start1.py
+
+      - name: Parse Waiyan start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
+        run: python tools/prepare_third_party_waiyan_start3.py
+
+      - name: Validate Waiyan start3 source adapter
+        if: steps.scope.outputs.source_changed == 'true'
+        run: python tools/check_third_party_waiyan_start3.py
 
       - name: Apply transient reviewed identity decisions
         run: |
@@ -180,6 +191,8 @@ jobs:
             anki/klose/source_reference/hujiao_start3_staging/occurrences.csv \
             anki/klose/source_reference/waiyan_start1_staging/README.md \
             anki/klose/source_reference/waiyan_start1_staging/occurrences.csv \
+            anki/klose/source_reference/waiyan_start3_staging/README.md \
+            anki/klose/source_reference/waiyan_start3_staging/occurrences.csv \
             anki/klose/third_party_vocabulary/staging/README.md \
             anki/klose/third_party_vocabulary/staging/occurrences.csv \
             anki/klose/third_party_vocabulary/staging/surface_candidates.csv \
