@@ -16,6 +16,8 @@ on:
       - 'tools/check_third_party_waiyan_start3.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
+      - 'tools/build_third_party_learner_view.py'
+      - 'tools/check_third_party_learner_view.py'
       - 'tools/build_third_party_review_bundle.py'
       - 'tools/normalize_third_party_review_lanes.py'
       - 'tools/plan_third_party_review_batch.py'
@@ -33,6 +35,7 @@ on:
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - 'anki/klose/third_party_vocabulary/review/decision_updates.csv'
       - 'anki/klose/third_party_vocabulary/review/batch_manifest.json'
+      - 'anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
 
@@ -153,6 +156,12 @@ jobs:
       - name: Independent third-party Completion Recheck
         run: python tools/check_third_party_corpus.py
 
+      - name: Build learner-stage vocabulary view
+        run: python tools/build_third_party_learner_view.py
+
+      - name: Check learner-stage grammar-form quarantine
+        run: python tools/check_third_party_learner_view.py
+
       - name: Build high-throughput blocker review bundle
         run: python tools/build_third_party_review_bundle.py
 
@@ -183,6 +192,7 @@ jobs:
           git add -A \
             anki/klose/third_party_vocabulary/review \
             anki/klose/third_party_vocabulary/audit \
+            anki/klose/third_party_vocabulary/learner \
             anki/klose/source_reference/renjiao_start1_staging/README.md \
             anki/klose/source_reference/renjiao_start1_staging/occurrences.csv \
             anki/klose/source_reference/renjiao_start3_staging/README.md \
