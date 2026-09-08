@@ -1,20 +1,20 @@
 {
   "PlanVersion": "v4-learner-first",
-  "ReviewLane": "semantic-review",
+  "ReviewLane": "split-resolution",
   "SelectedMatchKeys": [
-    "on",
-    "out",
-    "over",
-    "so",
-    "to",
-    "would"
+    "too",
+    "french",
+    "kind",
+    "little",
+    "live",
+    "look"
   ],
   "SelectedCount": 6,
-  "EvidenceWeight": 39,
-  "SurfaceCap": 30,
-  "WeightBudget": 60,
+  "EvidenceWeight": 65,
+  "SurfaceCap": 25,
+  "WeightBudget": 70,
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
-  "ReviewBundleFingerprint": "977ce5e480f6ec470927ae05054f7e86bd12e1e12409202234175ea5049fb99f"
+  "ReviewBundleFingerprint": "fc8d34de6c3cbe512c15014f25a2ff286f1c602bc97395af3e625c204df72ba7"
 }
