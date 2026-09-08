@@ -1,0 +1,4622 @@
+{
+  "PlanVersion": "v5-throughput-delta",
+  "ReviewLane": "evidence-revalidation",
+  "ReviewMode": "delta-evidence",
+  "SelectedMatchKeys": [
+    "beautiful",
+    "because",
+    "beside",
+    "birthday",
+    "blackboard",
+    "boy",
+    "bring",
+    "brother",
+    "bus",
+    "camera",
+    "car",
+    "careful",
+    "cat",
+    "chess",
+    "chopsticks",
+    "christmas",
+    "cinema",
+    "classmate",
+    "classroom",
+    "clever",
+    "cloudy",
+    "cola",
+    "computer",
+    "cousin",
+    "cute",
+    "dad",
+    "dancer",
+    "dangerous",
+    "deaf",
+    "delicious",
+    "dictionary",
+    "different",
+    "difficult",
+    "dinner",
+    "dollar",
+    "door",
+    "driver",
+    "dumpling",
+    "elephant",
+    "enjoy",
+    "every",
+    "factory",
+    "famous",
+    "farmer",
+    "food",
+    "forever",
+    "four",
+    "fourteen",
+    "friday",
+    "friend",
+    "girl",
+    "goodbye",
+    "grandma",
+    "grandpa",
+    "grandparent",
+    "hamburger",
+    "happen",
+    "happily",
+    "happy",
+    "headache"
+  ],
+  "SelectedCount": 60,
+  "ReviewBundleFingerprint": "44c148d44483885b11619343aca235c76b2a26e215938fca62898226366b57fb",
+  "ReviewPacketFingerprint": "5dd30f5b30c73cadf70b6d7989baccaf9a663c2e37119dd200e0c0533ec662d1",
+  "Items": [
+    {
+      "MatchKey": "beautiful",
+      "DisplayForms": "beautiful",
+      "Definitions": "adj. 美丽的 出色地 出色的 迷人的 迷人地",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:6年级下|renjiao_start1:3年级下|renjiao_start3:3年级下|hujiao_start3:3年级上|waiyan_start1:3年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:beautiful",
+        "MatchKey": "beautiful",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "美丽的；漂亮的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary adjective. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g6-lower|r014|beautiful",
+        "hujiao_start3|g3-upper|r029|beautiful",
+        "renjiao_start1|g3-lower|r048|beautiful",
+        "renjiao_start3|g3-lower|r072|beautiful",
+        "waiyan_start1|g3-lower|r086|beautiful"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g6-lower|r014|beautiful",
+        "renjiao_start1|g3-lower|r048|beautiful",
+        "renjiao_start3|g3-lower|r072|beautiful",
+        "hujiao_start3|g3-upper|r029|beautiful",
+        "waiyan_start1|g3-lower|r086|beautiful",
+        "waiyan_start3|g4-lower|r018|beautiful"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r018|beautiful"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r018|beautiful",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "18",
+          "Word": "beautiful",
+          "Definition": "adj. 美丽的 出色地 出色的 迷人的 迷人地",
+          "Before": [
+            "cool",
+            "aunt",
+            "uncle",
+            "big",
+            "little",
+            "cute",
+            "city",
+            "ship"
+          ],
+          "After": [
+            "whose",
+            "queen",
+            "close",
+            "old",
+            "famous",
+            "robot",
+            "will",
+            "everything"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "because",
+      "DisplayForms": "because",
+      "Definitions": "conj. 因为",
+      "SourceIDs": "renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:6年级上|renjiao_start3:5年级下|hujiao_start3:5年级下|waiyan_start1:4年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:because",
+        "MatchKey": "because",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "因为",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary conjunction. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g5-lower|r022|because",
+        "renjiao_start1|g6-upper|r071|because",
+        "renjiao_start3|g5-lower|r054|because",
+        "waiyan_start1|g4-lower|r071|because"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g6-upper|r071|because",
+        "renjiao_start3|g5-lower|r054|because",
+        "hujiao_start3|g5-lower|r022|because",
+        "waiyan_start1|g4-lower|r071|because",
+        "waiyan_start3|g4-lower|r048|because"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r048|because"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r048|because",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "48",
+          "Word": "because",
+          "Definition": "conj. 因为",
+          "Before": [
+            "week",
+            "holiday",
+            "take",
+            "fly",
+            "picnic",
+            "great",
+            "why",
+            "Why not?"
+          ],
+          "After": [
+            "so",
+            "cloudy",
+            "weather",
+            "was",
+            "am",
+            "is",
+            "then",
+            "grandparent"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "beside",
+      "DisplayForms": "beside",
+      "Definitions": "prep. 在旁边;与...相比;和...无关",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级下|renjiao_start3:5年级上|hujiao_start3:4年级上|waiyan_start1:4年级上|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:beside",
+        "MatchKey": "beside",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "在……旁边",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Elementary sources consistently support the spatial preposition. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-lower|r029|beside",
+        "hujiao_start3|g4-upper|r104|beside",
+        "renjiao_start3|g5-upper|r104|beside",
+        "waiyan_start1|g4-upper|r031|beside"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-lower|r029|beside",
+        "renjiao_start3|g5-upper|r104|beside",
+        "hujiao_start3|g4-upper|r104|beside",
+        "waiyan_start1|g4-upper|r031|beside",
+        "waiyan_start3|g4-upper|r016|beside"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r016|beside"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r016|beside",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "16",
+          "Word": "beside",
+          "Definition": "prep. 在旁边;与...相比;和...无关",
+          "Before": [
+            "No.",
+            "number",
+            "street",
+            "excuse me",
+            "turn left",
+            "turn right",
+            "next to",
+            "supermarket"
+          ],
+          "After": [
+            "cinema",
+            "so much",
+            "You're welcome!",
+            "station",
+            "train",
+            "hill",
+            "near",
+            "house"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "birthday",
+      "DisplayForms": "birthday",
+      "Definitions": "n. 生日,诞辰;诞生的日子",
+      "SourceIDs": "beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级下|renjiao_start1:3年级上|renjiao_start1:5年级下|hujiao_start3:3年级下|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:birthday",
+        "MatchKey": "birthday",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "生日",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-lower|r052|birthday",
+        "hujiao_start3|g3-lower|r071|birthday",
+        "renjiao_start1|g3-upper|r102|birthday",
+        "renjiao_start1|g5-lower|r029|birthday",
+        "waiyan_start1|g1-upper|r125|birthday"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-lower|r052|birthday",
+        "renjiao_start1|g3-upper|r102|birthday",
+        "renjiao_start1|g5-lower|r029|birthday",
+        "hujiao_start3|g3-lower|r071|birthday",
+        "waiyan_start1|g1-upper|r125|birthday",
+        "waiyan_start3|g3-upper|r083|birthday"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r083|birthday"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r083|birthday",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "83",
+          "Word": "birthday",
+          "Definition": "n. 生日,诞辰;诞生的日子",
+          "Before": [
+            "seven",
+            "eight",
+            "nine",
+            "oh",
+            "ten",
+            "eleven",
+            "twelve",
+            "happy"
+          ],
+          "After": [
+            "here",
+            "here's",
+            "here is",
+            "present",
+            "this",
+            "pencil",
+            "pen",
+            "cake"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "blackboard",
+      "DisplayForms": "blackboard",
+      "Definitions": "n. 黑板",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|renjiao_start1:1年级下|renjiao_start1:3年级下|renjiao_start3:4年级上|hujiao_start3:3年级上|waiyan_start1:6年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:blackboard",
+        "MatchKey": "blackboard",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "黑板",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the classroom-object noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g3-upper|r074|blackboard",
+        "hujiao_start3|g3-upper|r046|blackboard",
+        "renjiao_start1|g1-lower|r004|blackboard",
+        "renjiao_start1|g3-lower|r025|blackboard",
+        "renjiao_start3|g4-upper|r004|blackboard",
+        "waiyan_start1|g6-upper|r054|blackboard"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r074|blackboard",
+        "renjiao_start1|g1-lower|r004|blackboard",
+        "renjiao_start1|g3-lower|r025|blackboard",
+        "renjiao_start3|g4-upper|r004|blackboard",
+        "hujiao_start3|g3-upper|r046|blackboard",
+        "waiyan_start1|g6-upper|r054|blackboard",
+        "waiyan_start3|g3-upper|r044|blackboard"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r044|blackboard"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r044|blackboard",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "44",
+          "Word": "blackboard",
+          "Definition": "n. 黑板",
+          "Before": [
+            "to",
+            "the",
+            "door",
+            "sit",
+            "down",
+            "stand",
+            "up",
+            "window"
+          ],
+          "After": [
+            "bird",
+            "tweet",
+            "desk",
+            "chair",
+            "it",
+            "it's",
+            "it is",
+            "red"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "boy",
+      "DisplayForms": "boy",
+      "Definitions": "n. 男孩;男人",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|renjiao_start1:2年级上|renjiao_start3:3年级下|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:boy",
+        "MatchKey": "boy",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "男孩",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary person noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g3-upper|r002|boy",
+        "hujiao_start3|g3-upper|r014|boy",
+        "renjiao_start1|g2-upper|r016|boy",
+        "renjiao_start3|g3-lower|r011|boy",
+        "waiyan_start1|g1-upper|r036|boy"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r002|boy",
+        "renjiao_start1|g2-upper|r016|boy",
+        "renjiao_start3|g3-lower|r011|boy",
+        "hujiao_start3|g3-upper|r014|boy",
+        "waiyan_start1|g1-upper|r036|boy",
+        "waiyan_start3|g3-upper|r020|boy"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r020|boy"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r020|boy",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "20",
+          "Word": "boy",
+          "Definition": "n. 男孩;男人",
+          "Before": [
+            "are",
+            "How are you?",
+            "good",
+            "morning",
+            "fine",
+            "thank",
+            "you",
+            "Ms"
+          ],
+          "After": [
+            "girl",
+            "whoops",
+            "and",
+            "too",
+            "ha ha",
+            "what",
+            "is",
+            "what's"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "bring",
+      "DisplayForms": "bring",
+      "Definitions": "vt. 带来;促使;引起;使某人处于某种情况或境地",
+      "SourceIDs": "beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:6年级上|hujiao_start3:5年级上|waiyan_start1:3年级上|waiyan_start3:5年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:bring",
+        "MatchKey": "bring",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "带来；拿来",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary movement verb. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-upper|r018|bring",
+        "hujiao_start3|g5-upper|r036|bring",
+        "renjiao_start1|g6-upper|r096|bring",
+        "waiyan_start1|g3-upper|r065|bring"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r018|bring",
+        "renjiao_start1|g6-upper|r096|bring",
+        "hujiao_start3|g5-upper|r036|bring",
+        "waiyan_start1|g3-upper|r065|bring",
+        "waiyan_start3|g5-lower|r150|bring",
+        "waiyan_start3|g6-lower|r046|bring"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r150|bring",
+        "waiyan_start3|g6-lower|r046|bring"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r150|bring",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "150",
+          "Word": "bring",
+          "Definition": "vt. 带来;促使;引起;使某人处于某种情况或境地",
+          "Before": [
+            "read",
+            "at all",
+            "in",
+            "another",
+            "history",
+            "ask",
+            "question",
+            "forget"
+          ],
+          "After": [
+            "soon",
+            "when",
+            "end",
+            "nervous",
+            "all right",
+            "airport",
+            "ticket",
+            "passport"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r046|bring",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "46",
+          "Word": "bring",
+          "Definition": "vt. 带来;促使;引起;使某人处于某种情况或境地",
+          "Before": [
+            "get",
+            "space",
+            "interested",
+            "spaceship",
+            "finish",
+            "decide",
+            "paper",
+            "brought"
+          ],
+          "After": [
+            "bring back",
+            "model",
+            "taikonaut",
+            "first",
+            "national",
+            "seed",
+            "spent",
+            "about"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "brother",
+      "DisplayForms": "brother",
+      "Definitions": "n. 兄弟;同事;战友 int. 我的老兄!",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|renjiao_start1:2年级上|renjiao_start1:3年级下|renjiao_start3:3年级上|renjiao_start3:3年级下|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:brother",
+        "MatchKey": "brother",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "兄弟；哥哥；弟弟",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the family-relation noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-upper|r018|brother",
+        "hujiao_start3|g3-upper|r030|brother",
+        "renjiao_start1|g2-upper|r004|brother",
+        "renjiao_start1|g3-lower|r059|brother",
+        "renjiao_start3|g3-lower|r023|brother",
+        "renjiao_start3|g3-upper|r064|brother",
+        "waiyan_start1|g1-upper|r138|brother"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r018|brother",
+        "renjiao_start1|g2-upper|r004|brother",
+        "renjiao_start1|g3-lower|r059|brother",
+        "renjiao_start3|g3-upper|r064|brother",
+        "renjiao_start3|g3-lower|r023|brother",
+        "hujiao_start3|g3-upper|r030|brother",
+        "waiyan_start1|g1-upper|r138|brother",
+        "waiyan_start3|g3-upper|r128|brother"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r128|brother"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r128|brother",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "128",
+          "Word": "brother",
+          "Definition": "n. 兄弟;同事;战友 int. 我的老兄!",
+          "Before": [
+            "where",
+            "where's",
+            "where is",
+            "in",
+            "bag",
+            "mother",
+            "father",
+            "sister"
+          ],
+          "After": [
+            "she",
+            "she's",
+            "she is",
+            "grandpa",
+            "grandma",
+            "that's",
+            "that is",
+            "me"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "bus",
+      "DisplayForms": "bus",
+      "Definitions": "n. 公共汽车 乘公共汽车",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级下|renjiao_start3:6年级上|hujiao_start3:3年级下|waiyan_start1:2年级上|waiyan_start3:3年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:bus",
+        "MatchKey": "bus",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "公共汽车；公交车",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the transport noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g2-lower|r061|bus",
+        "hujiao_start3|g3-lower|r020|bus",
+        "renjiao_start3|g6-upper|r029|bus",
+        "waiyan_start1|g2-upper|r062|bus"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-lower|r061|bus",
+        "renjiao_start3|g6-upper|r029|bus",
+        "hujiao_start3|g3-lower|r020|bus",
+        "waiyan_start1|g2-upper|r062|bus",
+        "waiyan_start3|g3-lower|r151|bus"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r151|bus"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r151|bus",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "151",
+          "Word": "bus",
+          "Definition": "n. 公共汽车 乘公共汽车",
+          "Before": [
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't",
+            "hasn't got",
+            "has not",
+            "has not got",
+            "by"
+          ],
+          "After": [
+            "car",
+            "hat",
+            "come",
+            "back",
+            "come back",
+            "clothes",
+            "open",
+            "let's"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "camera",
+      "DisplayForms": "camera",
+      "Definitions": "n. 照相机;摄影机",
+      "SourceIDs": "beijing_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级下|hujiao_start3:5年级下|waiyan_start1:2年级下|waiyan_start3:6年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:camera",
+        "MatchKey": "camera",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "照相机；相机",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary device noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-lower|r066|camera",
+        "hujiao_start3|g5-lower|r143|camera",
+        "waiyan_start1|g2-lower|r017|camera"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-lower|r066|camera",
+        "hujiao_start3|g5-lower|r143|camera",
+        "waiyan_start1|g2-lower|r017|camera",
+        "waiyan_start3|g6-upper|r069|camera"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-upper|r069|camera"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r069|camera",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "69",
+          "Word": "camera",
+          "Definition": "n. 照相机;摄影机",
+          "Before": [
+            "flute",
+            "get",
+            "frightened",
+            "long ago",
+            "I'd love to",
+            "not really",
+            "stop",
+            "clean"
+          ],
+          "After": [
+            "show",
+            "never",
+            "around",
+            "all around",
+            "member state",
+            "inside",
+            "should",
+            "line"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "car",
+      "DisplayForms": "car",
+      "Definitions": "n. 汽车;车厢",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:1年级上|beijing_start1:2年级下|renjiao_start1:1年级下|renjiao_start3:3年级下|hujiao_start3:3年级下|waiyan_start1:1年级上|waiyan_start3:3年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:car",
+        "MatchKey": "car",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "汽车；小汽车",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded elementary evidence confirms the transport noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g1-upper|r009|car",
+        "beijing_start1|g2-lower|r063|car",
+        "hujiao_start3|g3-lower|r022|car",
+        "renjiao_start1|g1-lower|r020|car",
+        "renjiao_start3|g3-lower|r047|car",
+        "waiyan_start1|g1-upper|r136|car"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g1-upper|r009|car",
+        "beijing_start1|g2-lower|r063|car",
+        "renjiao_start1|g1-lower|r020|car",
+        "renjiao_start3|g3-lower|r047|car",
+        "hujiao_start3|g3-lower|r022|car",
+        "waiyan_start1|g1-upper|r136|car",
+        "waiyan_start3|g3-lower|r152|car"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r152|car"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r152|car",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "152",
+          "Word": "car",
+          "Definition": "n. 汽车;车厢",
+          "Before": [
+            "has got",
+            "have got",
+            "hasn't",
+            "hasn't got",
+            "has not",
+            "has not got",
+            "by",
+            "bus"
+          ],
+          "After": [
+            "hat",
+            "come",
+            "back",
+            "come back",
+            "clothes",
+            "open",
+            "let's",
+            "let us"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "careful",
+      "DisplayForms": "careful",
+      "Definitions": "adj. 仔细的,小心的",
+      "SourceIDs": "beijing_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:6年级下|hujiao_start3:5年级上|waiyan_start1:3年级上|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:careful",
+        "MatchKey": "careful",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "小心的；仔细的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary adjective learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g6-lower|r057|careful",
+        "hujiao_start3|g5-upper|r156|careful",
+        "waiyan_start1|g3-upper|r051|careful"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g6-lower|r057|careful",
+        "hujiao_start3|g5-upper|r156|careful",
+        "waiyan_start1|g3-upper|r051|careful",
+        "waiyan_start3|g6-lower|r008|careful"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r008|careful"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r008|careful",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "8",
+          "Word": "careful",
+          "Definition": "adj. 仔细的,小心的",
+          "Before": [
+            "look",
+            "cashier",
+            "cola",
+            "dollar",
+            "cent",
+            "enjoy"
+          ],
+          "After": [
+            "Be careful!",
+            "later",
+            "to go",
+            "duck",
+            "pond",
+            "cloud",
+            "dry",
+            "like"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cat",
+      "DisplayForms": "cat",
+      "Definitions": "n. 猫,猫科动物",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:1年级上|beijing_start1:2年级上|renjiao_start1:1年级上|renjiao_start1:3年级上|renjiao_start3:3年级上|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:cat",
+        "MatchKey": "cat",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "猫",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary animal noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g1-upper|r037|cat",
+        "beijing_start1|g2-upper|r049|cat",
+        "hujiao_start3|g3-upper|r090|cat",
+        "renjiao_start1|g1-upper|r023|cat",
+        "renjiao_start1|g3-upper|r064|cat",
+        "renjiao_start3|g3-upper|r036|cat",
+        "waiyan_start1|g1-upper|r070|cat"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g1-upper|r037|cat",
+        "beijing_start1|g2-upper|r049|cat",
+        "renjiao_start1|g1-upper|r023|cat",
+        "renjiao_start1|g3-upper|r064|cat",
+        "renjiao_start3|g3-upper|r036|cat",
+        "hujiao_start3|g3-upper|r090|cat",
+        "waiyan_start1|g1-upper|r070|cat",
+        "waiyan_start3|g3-upper|r066|cat"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r066|cat"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r066|cat",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "66",
+          "Word": "cat",
+          "Definition": "n. 猫,猫科动物",
+          "Before": [
+            "an",
+            "chameleon",
+            "my",
+            "panda",
+            "now",
+            "green",
+            "black",
+            "dog"
+          ],
+          "After": [
+            "cap",
+            "how many",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "chess",
+      "DisplayForms": "chess",
+      "Definitions": "n. 国际象棋,西洋棋",
+      "SourceIDs": "beijing_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级下|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:chess",
+        "MatchKey": "chess",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "国际象棋；棋",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "quality-audit-target-sense",
+        "Rationale": "TargetSense narrowed to the clear elementary source learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-lower|r007|chess"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-lower|r007|chess",
+        "waiyan_start3|g4-upper|r053|chess"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r053|chess"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r053|chess",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "53",
+          "Word": "chess",
+          "Definition": "n. 国际象棋,西洋棋",
+          "Before": [
+            "people",
+            "row",
+            "dragon",
+            "boat",
+            "dragon boat",
+            "men",
+            "man",
+            "between"
+          ],
+          "After": [
+            "play chess",
+            "drink",
+            "soya milk",
+            "clock",
+            "hungry",
+            "Me too.",
+            "draw",
+            "jump"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "chopsticks",
+      "DisplayForms": "chopsticks",
+      "Definitions": "n. 筷子",
+      "SourceIDs": "renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:5年级下|renjiao_start3:4年级上|waiyan_start1:3年级上|waiyan_start3:6年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:chopsticks",
+        "MatchKey": "chopsticks",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "筷子",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "New source evidence confirms the same elementary tableware noun learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "renjiao_start1|g5-lower|r101|chopsticks",
+        "renjiao_start3|g4-upper|r059|chopsticks",
+        "waiyan_start1|g3-upper|r003|chopsticks"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g5-lower|r101|chopsticks",
+        "renjiao_start3|g4-upper|r059|chopsticks",
+        "waiyan_start1|g3-upper|r003|chopsticks",
+        "waiyan_start3|g6-upper|r050|chopsticks"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-upper|r050|chopsticks"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r050|chopsticks",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "50",
+          "Word": "chopsticks",
+          "Definition": "n. 筷子",
+          "Before": [
+            "age",
+            "story",
+            "candy",
+            "world",
+            "often",
+            "difficult",
+            "knife",
+            "fork"
+          ],
+          "After": [
+            "Japanese",
+            "believe",
+            "snake",
+            "DVD",
+            "together",
+            "lucky",
+            "bamboo",
+            "its"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "christmas",
+      "DisplayForms": "Christmas",
+      "Definitions": "n. 圣诞节;圣诞节期间",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|renjiao_start1:2年级上|renjiao_start3:5年级下|waiyan_start1:2年级上|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:christmas",
+        "MatchKey": "christmas",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "圣诞节",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "New source evidence confirms the same holiday-name learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g3-upper|r080|christmas",
+        "renjiao_start1|g2-upper|r044|christmas",
+        "renjiao_start3|g5-lower|r089|christmas",
+        "waiyan_start1|g2-upper|r117|christmas"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r080|christmas",
+        "renjiao_start1|g2-upper|r044|christmas",
+        "renjiao_start3|g5-lower|r089|christmas",
+        "waiyan_start1|g2-upper|r117|christmas",
+        "waiyan_start3|g4-upper|r149|christmas"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r149|christmas"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r149|christmas",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "149",
+          "Word": "Christmas",
+          "Definition": "n. 圣诞节;圣诞节期间",
+          "Before": [
+            "year",
+            "New Year",
+            "Chinese",
+            "festival",
+            "the Spring Festival",
+            "I see.",
+            "peanut",
+            "merry"
+          ],
+          "After": [
+            "Merry Christmas!"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cinema",
+      "DisplayForms": "cinema",
+      "Definitions": "n. 电影;电影院;电影业,电影制作术",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级下|renjiao_start3:6年级上|hujiao_start3:4年级下|waiyan_start1:2年级下|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:cinema",
+        "MatchKey": "cinema",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "电影院",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Elementary source evidence consistently supports the cinema/movie-theatre place noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-lower|r039|cinema",
+        "hujiao_start3|g4-lower|r138|cinema",
+        "renjiao_start3|g6-upper|r006|cinema",
+        "waiyan_start1|g2-lower|r111|cinema"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-lower|r039|cinema",
+        "renjiao_start3|g6-upper|r006|cinema",
+        "hujiao_start3|g4-lower|r138|cinema",
+        "waiyan_start1|g2-lower|r111|cinema",
+        "waiyan_start3|g4-upper|r017|cinema"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r017|cinema"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r017|cinema",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "17",
+          "Word": "cinema",
+          "Definition": "n. 电影;电影院;电影业,电影制作术",
+          "Before": [
+            "number",
+            "street",
+            "excuse me",
+            "turn left",
+            "turn right",
+            "next to",
+            "supermarket",
+            "beside"
+          ],
+          "After": [
+            "so much",
+            "You're welcome!",
+            "station",
+            "train",
+            "hill",
+            "near",
+            "house",
+            "read"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "classmate",
+      "DisplayForms": "classmate",
+      "Definitions": "n. 同班同学",
+      "SourceIDs": "renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:2年级上|hujiao_start3:4年级上|waiyan_start1:5年级下|waiyan_start1:6年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:classmate",
+        "MatchKey": "classmate",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "同班同学",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary person noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g4-upper|r005|classmate",
+        "renjiao_start1|g2-upper|r011|classmate",
+        "waiyan_start1|g5-lower|r073|classmate",
+        "waiyan_start1|g6-lower|r060|classmate"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g2-upper|r011|classmate",
+        "hujiao_start3|g4-upper|r005|classmate",
+        "waiyan_start1|g5-lower|r073|classmate",
+        "waiyan_start1|g6-lower|r060|classmate",
+        "waiyan_start3|g6-lower|r098|classmate"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r098|classmate"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r098|classmate",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "98",
+          "Word": "classmate",
+          "Definition": "n. 同班同学",
+          "Before": [
+            "joy",
+            "future",
+            "wonderful",
+            "happiness",
+            "what",
+            "middle",
+            "middle school",
+            "speech"
+          ],
+          "After": [
+            "leave",
+            "September",
+            "excited",
+            "geography",
+            "same",
+            "at the same time",
+            "spoke",
+            "speak"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "classroom",
+      "DisplayForms": "classroom",
+      "Definitions": "n. 教室",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:6年级下|renjiao_start1:3年级下|renjiao_start3:4年级上|hujiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:classroom",
+        "MatchKey": "classroom",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "教室",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the school-place noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g6-lower|r066|classroom",
+        "hujiao_start3|g4-upper|r073|classroom",
+        "renjiao_start1|g3-lower|r012|classroom",
+        "renjiao_start3|g4-upper|r002|classroom",
+        "waiyan_start1|g1-upper|r079|classroom"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g6-lower|r066|classroom",
+        "renjiao_start1|g3-lower|r012|classroom",
+        "renjiao_start3|g4-upper|r002|classroom",
+        "hujiao_start3|g4-upper|r073|classroom",
+        "waiyan_start1|g1-upper|r079|classroom",
+        "waiyan_start3|g3-upper|r100|classroom"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r100|classroom"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r100|classroom",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "100",
+          "Word": "classroom",
+          "Definition": "n. 教室",
+          "Before": [
+            "old",
+            "how old",
+            "yes",
+            "you're",
+            "you are",
+            "teacher",
+            "pupil",
+            "school"
+          ],
+          "After": [
+            "English",
+            "that",
+            "say",
+            "again",
+            "schoolbag",
+            "ball",
+            "book",
+            "monster"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "clever",
+      "DisplayForms": "clever",
+      "Definitions": "adj. 聪明的;机灵的;熟练的 [ 比较级cleverer 最高级 cleverest ]",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:5年级上|renjiao_start3:5年级上|hujiao_start3:5年级上|waiyan_start1:3年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:clever",
+        "MatchKey": "clever",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "聪明的；机灵的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "The elementary source use supports the common intelligence adjective learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-upper|r057|clever",
+        "hujiao_start3|g5-upper|r050|clever",
+        "renjiao_start1|g5-upper|r002|clever",
+        "renjiao_start3|g5-upper|r010|clever",
+        "waiyan_start1|g3-upper|r060|clever"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r057|clever",
+        "renjiao_start1|g5-upper|r002|clever",
+        "renjiao_start3|g5-upper|r010|clever",
+        "hujiao_start3|g5-upper|r050|clever",
+        "waiyan_start1|g3-upper|r060|clever",
+        "waiyan_start3|g4-lower|r003|clever"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r003|clever"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r003|clever",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "3",
+          "Word": "clever",
+          "Definition": "adj. 聪明的;机灵的;熟练的 [ 比较级cleverer 最高级 cleverest ]",
+          "Before": [
+            "nice"
+          ],
+          "After": [
+            "naughty",
+            "a bit",
+            "shy",
+            "answer",
+            "call",
+            "bad",
+            "cool",
+            "aunt"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cloudy",
+      "DisplayForms": "cloudy",
+      "Definitions": "adj. 多云的;阴天的;愁容满面的",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|renjiao_start1:2年级下|renjiao_start3:4年级下|hujiao_start3:4年级上|waiyan_start1:6年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:cloudy",
+        "MatchKey": "cloudy",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "多云的；阴天的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "All current elementary occurrences are weather adjectives. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g3-upper|r063|cloudy",
+        "hujiao_start3|g4-upper|r133|cloudy",
+        "renjiao_start1|g2-lower|r010|cloudy",
+        "renjiao_start3|g4-lower|r039|cloudy",
+        "waiyan_start1|g6-lower|r017|cloudy"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r063|cloudy",
+        "renjiao_start1|g2-lower|r010|cloudy",
+        "renjiao_start3|g4-lower|r039|cloudy",
+        "hujiao_start3|g4-upper|r133|cloudy",
+        "waiyan_start1|g6-lower|r017|cloudy",
+        "waiyan_start3|g4-lower|r050|cloudy"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r050|cloudy"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r050|cloudy",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "50",
+          "Word": "cloudy",
+          "Definition": "adj. 多云的;阴天的;愁容满面的",
+          "Before": [
+            "take",
+            "fly",
+            "picnic",
+            "great",
+            "why",
+            "Why not?",
+            "because",
+            "so"
+          ],
+          "After": [
+            "weather",
+            "was",
+            "am",
+            "is",
+            "then",
+            "grandparent",
+            "were",
+            "are"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cola",
+      "DisplayForms": "cola",
+      "Definitions": "n. 可乐;可乐树(其子含咖啡碱)",
+      "SourceIDs": "renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:3年级上|hujiao_start3:6年级上|waiyan_start1:6年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:cola",
+        "MatchKey": "cola",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "可乐",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current occurrences support the beverage noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g6-upper|r023|cola",
+        "renjiao_start1|g3-upper|r045|cola",
+        "waiyan_start1|g6-lower|r004|cola"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g3-upper|r045|cola",
+        "hujiao_start3|g6-upper|r023|cola",
+        "waiyan_start1|g6-lower|r004|cola",
+        "waiyan_start3|g6-lower|r004|cola"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r004|cola"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r004|cola",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "4",
+          "Word": "cola",
+          "Definition": "n. 可乐;可乐树(其子含咖啡碱)",
+          "Before": [
+            "look",
+            "cashier"
+          ],
+          "After": [
+            "dollar",
+            "cent",
+            "enjoy",
+            "careful",
+            "Be careful!",
+            "later",
+            "to go",
+            "duck"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "computer",
+      "DisplayForms": "computer",
+      "Definitions": "n. 计算机;电脑;电子计算机",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start3:4年级上|hujiao_start3:4年级上|waiyan_start1:3年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:computer",
+        "MatchKey": "computer",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "电脑；计算机",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary device noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-upper|r024|computer",
+        "hujiao_start3|g4-upper|r069|computer",
+        "renjiao_start3|g4-upper|r009|computer",
+        "waiyan_start1|g3-lower|r058|computer"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r024|computer",
+        "renjiao_start3|g4-upper|r009|computer",
+        "hujiao_start3|g4-upper|r069|computer",
+        "waiyan_start1|g3-lower|r058|computer",
+        "waiyan_start3|g4-lower|r089|computer"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r089|computer"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r089|computer",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "89",
+          "Word": "computer",
+          "Definition": "n. 计算机;电脑;电子计算机",
+          "Before": [
+            "cook",
+            "really",
+            "wash",
+            "What about ...?",
+            "did",
+            "do",
+            "didn't",
+            "did not"
+          ],
+          "After": [
+            "love",
+            "him",
+            "Mrs",
+            "Miss",
+            "sang",
+            "sing",
+            "beautifully",
+            "saw"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cousin",
+      "DisplayForms": "cousin",
+      "Definitions": "n. 堂兄弟姊妹;表兄弟姊妹",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|renjiao_start1:3年级下|renjiao_start3:4年级上|hujiao_start3:4年级上|waiyan_start1:2年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:cousin",
+        "MatchKey": "cousin",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "堂兄弟姐妹；表兄弟姐妹",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the family-relation noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-upper|r063|cousin",
+        "hujiao_start3|g4-upper|r031|cousin",
+        "renjiao_start1|g3-lower|r046|cousin",
+        "renjiao_start3|g4-upper|r070|cousin",
+        "waiyan_start1|g2-lower|r101|cousin"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r063|cousin",
+        "renjiao_start1|g3-lower|r046|cousin",
+        "renjiao_start3|g4-upper|r070|cousin",
+        "hujiao_start3|g4-upper|r031|cousin",
+        "waiyan_start1|g2-lower|r101|cousin",
+        "waiyan_start3|g4-lower|r123|cousin"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r123|cousin"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r123|cousin",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "123",
+          "Word": "cousin",
+          "Definition": "n. 堂兄弟姊妹;表兄弟姊妹",
+          "Before": [
+            "tell",
+            "great",
+            "delicious",
+            "made",
+            "make",
+            "poster",
+            "welcome",
+            "postcard"
+          ],
+          "After": [
+            "dear",
+            "on holiday",
+            "travel",
+            "came",
+            "come",
+            "pop",
+            "concert",
+            "earth"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cute",
+      "DisplayForms": "cute",
+      "Definitions": "adj. 可爱的;漂亮的;聪明的,伶俐的",
+      "SourceIDs": "renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:4年级下|renjiao_start1:5年级上|renjiao_start3:4年级上|hujiao_start3:6年级上|waiyan_start1:1年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:cute",
+        "MatchKey": "cute",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "可爱的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence consistently targets the elementary adjective. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g6-upper|r003|cute",
+        "renjiao_start1|g4-lower|r086|cute",
+        "renjiao_start1|g5-upper|r006|cute",
+        "renjiao_start3|g4-upper|r030|cute",
+        "waiyan_start1|g1-lower|r071|cute"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g4-lower|r086|cute",
+        "renjiao_start1|g5-upper|r006|cute",
+        "renjiao_start3|g4-upper|r030|cute",
+        "hujiao_start3|g6-upper|r003|cute",
+        "waiyan_start1|g1-lower|r071|cute",
+        "waiyan_start3|g4-lower|r015|cute"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r015|cute"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r015|cute",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "15",
+          "Word": "cute",
+          "Definition": "adj. 可爱的;漂亮的;聪明的,伶俐的",
+          "Before": [
+            "answer",
+            "call",
+            "bad",
+            "cool",
+            "aunt",
+            "uncle",
+            "big",
+            "little"
+          ],
+          "After": [
+            "city",
+            "ship",
+            "beautiful",
+            "whose",
+            "queen",
+            "close",
+            "old",
+            "famous"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dad",
+      "DisplayForms": "dad",
+      "Definitions": "n. 爸爸;爹爹",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级下|renjiao_start1:4年级上|renjiao_start3:3年级下|hujiao_start3:3年级上|waiyan_start1:3年级上|waiyan_start3:3年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dad",
+        "MatchKey": "dad",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "爸爸",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the family noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g2-lower|r015|dad",
+        "hujiao_start3|g3-upper|r060|dad",
+        "renjiao_start1|g4-upper|r075|dad",
+        "renjiao_start3|g3-lower|r018|dad",
+        "waiyan_start1|g3-upper|r020|dad"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-lower|r015|dad",
+        "renjiao_start1|g4-upper|r075|dad",
+        "renjiao_start3|g3-lower|r018|dad",
+        "hujiao_start3|g3-upper|r060|dad",
+        "waiyan_start1|g3-upper|r020|dad",
+        "waiyan_start3|g3-lower|r073|dad"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r073|dad"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r073|dad",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "73",
+          "Word": "dad",
+          "Definition": "n. 爸爸;爹爹",
+          "Before": [
+            "who",
+            "only",
+            "year",
+            "work",
+            "go to work",
+            "Saturday",
+            "shopping",
+            "go shopping"
+          ],
+          "After": [
+            "do",
+            "Sunday",
+            "swimming",
+            "go swimming",
+            "eat",
+            "in",
+            "sleep",
+            "watch"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dancer",
+      "DisplayForms": "dancer",
+      "Definitions": "n. 舞蹈家;舞蹈演员;舞女;跳舞者",
+      "SourceIDs": "hujiao_start3|waiyan_start3",
+      "SourceBooks": "hujiao_start3:6年级上|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dancer",
+        "MatchKey": "dancer",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "舞者；舞蹈演员",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "hujiao-new-learning-unit",
+        "Rationale": "The source provides one clear person noun learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g6-upper|r085|dancer"
+      ],
+      "CurrentOccurrenceKeys": [
+        "hujiao_start3|g6-upper|r085|dancer",
+        "waiyan_start3|g5-lower|r032|dancer"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r032|dancer"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r032|dancer",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "32",
+          "Word": "dancer",
+          "Definition": "n. 舞蹈家;舞蹈演员;舞女;跳舞者",
+          "Before": [
+            "hope",
+            "learnt",
+            "learn",
+            "taught",
+            "teach",
+            "language",
+            "wrote",
+            "write"
+          ],
+          "After": [
+            "foreign",
+            "studied",
+            "study",
+            "hard",
+            "hamburger",
+            "English",
+            "breakfast",
+            "lunch"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dangerous",
+      "DisplayForms": "dangerous",
+      "Definitions": "adj. 危险的 危险地",
+      "SourceIDs": "beijing_start1|renjiao_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级下|renjiao_start1:4年级上|waiyan_start1:4年级下|waiyan_start3:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dangerous",
+        "MatchKey": "dangerous",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "危险的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "quality-audit-target-sense",
+        "Rationale": "TargetSense narrowed to the clear elementary source learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-lower|r046|dangerous",
+        "renjiao_start1|g4-upper|r082|dangerous",
+        "waiyan_start1|g4-lower|r007|dangerous"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-lower|r046|dangerous",
+        "renjiao_start1|g4-upper|r082|dangerous",
+        "waiyan_start1|g4-lower|r007|dangerous",
+        "waiyan_start3|g5-upper|r162|dangerous"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-upper|r162|dangerous"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r162|dangerous",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "162",
+          "Word": "dangerous",
+          "Definition": "adj. 危险的 危险地",
+          "Before": [
+            "hide-and-seek",
+            "now",
+            "last",
+            "hide",
+            "sofa",
+            "shout",
+            "grass",
+            "baby"
+          ],
+          "After": []
+        }
+      ]
+    },
+    {
+      "MatchKey": "deaf",
+      "DisplayForms": "deaf",
+      "Definitions": "adj. 聋的",
+      "SourceIDs": "renjiao_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:6年级上|waiyan_start1:6年级上|waiyan_start3:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:deaf",
+        "MatchKey": "deaf",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "聋的；听不见的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "quality-audit-target-sense",
+        "Rationale": "TargetSense narrowed to the clear elementary source learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "renjiao_start1|g6-upper|r090|deaf",
+        "waiyan_start1|g6-upper|r043|deaf"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g6-upper|r090|deaf",
+        "waiyan_start1|g6-upper|r043|deaf",
+        "waiyan_start3|g5-upper|r109|deaf"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-upper|r109|deaf"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r109|deaf",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "109",
+          "Word": "deaf",
+          "Definition": "adj. 聋的",
+          "Before": [
+            "swim",
+            "slow",
+            "healthy",
+            "a lot",
+            "useful",
+            "show",
+            "presenter",
+            "blind"
+          ],
+          "After": [
+            "hear",
+            "her",
+            "fire",
+            "firefighter",
+            "hot dog",
+            "sausage",
+            "kind",
+            "time"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "delicious",
+      "DisplayForms": "delicious",
+      "Definitions": "adj. 美味的;可口的",
+      "SourceIDs": "renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:3年级上|renjiao_start1:5年级下|renjiao_start3:5年级上|waiyan_start1:5年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:delicious",
+        "MatchKey": "delicious",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "美味的；可口的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the same elementary adjective learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "renjiao_start1|g3-upper|r105|delicious",
+        "renjiao_start1|g5-lower|r080|delicious",
+        "renjiao_start3|g5-upper|r056|delicious",
+        "waiyan_start1|g5-lower|r012|delicious"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g3-upper|r105|delicious",
+        "renjiao_start1|g5-lower|r080|delicious",
+        "renjiao_start3|g5-upper|r056|delicious",
+        "waiyan_start1|g5-lower|r012|delicious",
+        "waiyan_start3|g4-lower|r117|delicious"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r117|delicious"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r117|delicious",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "117",
+          "Word": "delicious",
+          "Definition": "adj. 美味的;可口的",
+          "Before": [
+            "drink",
+            "time",
+            "have a good time",
+            "busy",
+            "took",
+            "take",
+            "tell",
+            "great"
+          ],
+          "After": [
+            "made",
+            "make",
+            "poster",
+            "welcome",
+            "postcard",
+            "cousin",
+            "dear",
+            "on holiday"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dictionary",
+      "DisplayForms": "dictionary",
+      "Definitions": "n. 字典;词典",
+      "SourceIDs": "renjiao_start3|hujiao_start3|waiyan_start3",
+      "SourceBooks": "renjiao_start3:6年级上|hujiao_start3:5年级下|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dictionary",
+        "MatchKey": "dictionary",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "字典；词典",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "hujiao-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the reference-book noun."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g5-lower|r056|dictionary",
+        "renjiao_start3|g6-upper|r066|dictionary"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start3|g6-upper|r066|dictionary",
+        "hujiao_start3|g5-lower|r056|dictionary",
+        "waiyan_start3|g5-lower|r058|dictionary"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r058|dictionary"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r058|dictionary",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "58",
+          "Word": "dictionary",
+          "Definition": "n. 字典;词典",
+          "Before": [
+            "student",
+            "sent",
+            "send",
+            "CD",
+            "idea",
+            "put",
+            "shelf",
+            "heavy"
+          ],
+          "After": [
+            "card",
+            "library card",
+            "ask",
+            "wrong",
+            "dear",
+            "information",
+            "e-book",
+            "project"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "different",
+      "DisplayForms": "different",
+      "Definitions": "adj. 不同的;个别的,与众不同的",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级下|renjiao_start1:4年级下|renjiao_start3:6年级下|hujiao_start3:5年级上|waiyan_start1:5年级上|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:different",
+        "MatchKey": "different",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "不同的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the elementary adjective. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-lower|r013|different",
+        "hujiao_start3|g5-upper|r057|different",
+        "renjiao_start1|g4-lower|r062|different",
+        "renjiao_start3|g6-lower|r084|different",
+        "waiyan_start1|g5-upper|r003|different"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-lower|r013|different",
+        "renjiao_start1|g4-lower|r062|different",
+        "renjiao_start3|g6-lower|r084|different",
+        "hujiao_start3|g5-upper|r057|different",
+        "waiyan_start1|g5-upper|r003|different",
+        "waiyan_start3|g5-lower|r006|different"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r006|different"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r006|different",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "6",
+          "Word": "different",
+          "Definition": "adj. 不同的;个别的,与众不同的",
+          "Before": [
+            "still",
+            "programme",
+            "lady",
+            "life"
+          ],
+          "After": [
+            "ago",
+            "interviewer",
+            "enough",
+            "television",
+            "grandchildren",
+            "grandchild",
+            "change",
+            "night"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "difficult",
+      "DisplayForms": "difficult",
+      "Definitions": "adj. 困难的;不随和的;执拗的",
+      "SourceIDs": "beijing_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|waiyan_start1:6年级上|waiyan_start3:6年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:difficult",
+        "MatchKey": "difficult",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "困难的；难的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "quality-audit-target-sense",
+        "Rationale": "TargetSense narrowed to the clear elementary source learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-upper|r007|difficult",
+        "waiyan_start1|g6-upper|r036|difficult"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r007|difficult",
+        "waiyan_start1|g6-upper|r036|difficult",
+        "waiyan_start3|g6-upper|r047|difficult"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-upper|r047|difficult"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r047|difficult",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "47",
+          "Word": "difficult",
+          "Definition": "adj. 困难的;不随和的;执拗的",
+          "Before": [
+            "Pleased to meet you!",
+            "address",
+            "French",
+            "age",
+            "story",
+            "candy",
+            "world",
+            "often"
+          ],
+          "After": [
+            "knife",
+            "fork",
+            "chopsticks",
+            "Japanese",
+            "believe",
+            "snake",
+            "DVD",
+            "together"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dinner",
+      "DisplayForms": "dinner",
+      "Definitions": "n. 晚餐,晚宴;宴会;正餐",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|renjiao_start3:4年级上|renjiao_start3:4年级下|hujiao_start3:4年级下|waiyan_start1:2年级上|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dinner",
+        "MatchKey": "dinner",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "晚餐；正餐",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current elementary meal contexts support dinner. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-upper|r070|dinner",
+        "hujiao_start3|g4-lower|r082|dinner",
+        "renjiao_start3|g4-lower|r020|dinner",
+        "renjiao_start3|g4-upper|r064|dinner",
+        "waiyan_start1|g2-upper|r119|dinner"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r070|dinner",
+        "renjiao_start3|g4-upper|r064|dinner",
+        "renjiao_start3|g4-lower|r020|dinner",
+        "hujiao_start3|g4-lower|r082|dinner",
+        "waiyan_start1|g2-upper|r119|dinner",
+        "waiyan_start3|g4-upper|r140|dinner"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r140|dinner"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r140|dinner",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "140",
+          "Word": "dinner",
+          "Definition": "n. 晚餐,晚宴;宴会;正餐",
+          "Before": [
+            "luck",
+            "good luck",
+            "come on",
+            "high jump",
+            "long jump",
+            "How about ...?",
+            "subject",
+            "family"
+          ],
+          "After": [
+            "year",
+            "New Year",
+            "Chinese",
+            "festival",
+            "the Spring Festival",
+            "I see.",
+            "peanut",
+            "merry"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dollar",
+      "DisplayForms": "dollar",
+      "Definitions": "n. 美元",
+      "SourceIDs": "renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start3:4年级下|waiyan_start1:6年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dollar",
+        "MatchKey": "dollar",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "美元",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "The source provides one clear elementary currency noun learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "renjiao_start3|g4-lower|r102|dollar",
+        "waiyan_start1|g6-lower|r006|dollar"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start3|g4-lower|r102|dollar",
+        "waiyan_start1|g6-lower|r006|dollar",
+        "waiyan_start3|g6-lower|r005|dollar"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r005|dollar"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r005|dollar",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "5",
+          "Word": "dollar",
+          "Definition": "n. 美元",
+          "Before": [
+            "look",
+            "cashier",
+            "cola"
+          ],
+          "After": [
+            "cent",
+            "enjoy",
+            "careful",
+            "Be careful!",
+            "later",
+            "to go",
+            "duck",
+            "pond"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "door",
+      "DisplayForms": "door",
+      "Definitions": "n. 门;家,户;门口;通道",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:1年级下|renjiao_start1:3年级下|renjiao_start3:4年级上|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:door",
+        "MatchKey": "door",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "门",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current room and building occurrences support the ordinary door noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-upper|r027|door",
+        "hujiao_start3|g3-upper|r049|door",
+        "renjiao_start1|g1-lower|r012|door",
+        "renjiao_start1|g3-lower|r084|door",
+        "renjiao_start3|g4-upper|r007|door",
+        "waiyan_start1|g1-upper|r048|door"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r027|door",
+        "renjiao_start1|g1-lower|r012|door",
+        "renjiao_start1|g3-lower|r084|door",
+        "renjiao_start3|g4-upper|r007|door",
+        "hujiao_start3|g3-upper|r049|door",
+        "waiyan_start1|g1-upper|r048|door",
+        "waiyan_start3|g3-upper|r038|door"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r038|door"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r038|door",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "38",
+          "Word": "door",
+          "Definition": "n. 门;家,户;门口;通道",
+          "Before": [
+            "your",
+            "name",
+            "please",
+            "afternoon",
+            "Mr",
+            "point",
+            "to",
+            "the"
+          ],
+          "After": [
+            "sit",
+            "down",
+            "stand",
+            "up",
+            "window",
+            "blackboard",
+            "bird",
+            "tweet"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "driver",
+      "DisplayForms": "driver",
+      "Definitions": "n. 驾驶员;驱动程序;起子;传动器",
+      "SourceIDs": "beijing_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|renjiao_start3:4年级上|waiyan_start1:1年级下|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:driver",
+        "MatchKey": "driver",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "司机；驾驶员",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "New source evidence confirms the same elementary occupation noun learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-upper|r066|driver",
+        "renjiao_start3|g4-upper|r076|driver",
+        "waiyan_start1|g1-lower|r011|driver"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r066|driver",
+        "renjiao_start3|g4-upper|r076|driver",
+        "waiyan_start1|g1-lower|r011|driver",
+        "waiyan_start3|g3-upper|r143|driver"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r143|driver"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r143|driver",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "143",
+          "Word": "driver",
+          "Definition": "n. 驾驶员;驱动程序;起子;传动器",
+          "Before": [
+            "that is",
+            "me",
+            "he",
+            "he's",
+            "he is",
+            "doctor",
+            "policeman",
+            "nurse"
+          ],
+          "After": [
+            "farmer",
+            "his",
+            "head",
+            "leg",
+            "foot",
+            "on",
+            "arm",
+            "hand"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dumpling",
+      "DisplayForms": "dumpling",
+      "Definitions": "n. 饺子,汤团;面团布丁",
+      "SourceIDs": "renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:6年级上|hujiao_start3:5年级下|waiyan_start1:2年级上|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:dumpling",
+        "MatchKey": "dumpling",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "饺子",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded elementary evidence consistently targets the food noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g5-lower|r148|dumpling",
+        "renjiao_start1|g6-upper|r093|dumpling",
+        "waiyan_start1|g2-upper|r111|dumpling"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g6-upper|r093|dumpling",
+        "hujiao_start3|g5-lower|r148|dumpling",
+        "waiyan_start1|g2-upper|r111|dumpling",
+        "waiyan_start3|g4-upper|r077|dumpling"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r077|dumpling"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r077|dumpling",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "77",
+          "Word": "dumpling",
+          "Definition": "n. 饺子,汤团;面团布丁",
+          "Before": [
+            "food",
+            "fast food",
+            "make",
+            "tomato",
+            "egg",
+            "potato",
+            "How much ...?",
+            "flower"
+          ],
+          "After": [
+            "help",
+            "buy",
+            "run",
+            "fast",
+            "sky",
+            "high",
+            "winner",
+            "far"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "elephant",
+      "DisplayForms": "elephant",
+      "Definitions": "n. 象;大号图画纸",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:1年级下|beijing_start1:2年级上|renjiao_start1:5年级上|renjiao_start3:3年级上|hujiao_start3:3年级下|waiyan_start1:1年级下|waiyan_start3:3年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:elephant",
+        "MatchKey": "elephant",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "大象",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the animal noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g1-lower|r029|elephant",
+        "beijing_start1|g2-upper|r045|elephant",
+        "hujiao_start3|g3-lower|r029|elephant",
+        "renjiao_start1|g5-upper|r029|elephant",
+        "renjiao_start3|g3-upper|r039|elephant",
+        "waiyan_start1|g1-lower|r064|elephant"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g1-lower|r029|elephant",
+        "beijing_start1|g2-upper|r045|elephant",
+        "renjiao_start1|g5-upper|r029|elephant",
+        "renjiao_start3|g3-upper|r039|elephant",
+        "hujiao_start3|g3-lower|r029|elephant",
+        "waiyan_start1|g1-lower|r064|elephant",
+        "waiyan_start3|g3-lower|r016|elephant"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r016|elephant"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r016|elephant",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "16",
+          "Word": "elephant",
+          "Definition": "n. 象;大号图画纸",
+          "Before": [
+            "they're",
+            "they are",
+            "monkey",
+            "baby",
+            "all",
+            "zoo",
+            "tiger",
+            "lion"
+          ],
+          "After": [
+            "fat",
+            "man",
+            "short",
+            "tall",
+            "small",
+            "thin",
+            "big",
+            "like"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "enjoy",
+      "DisplayForms": "enjoy",
+      "Definitions": "vt. 欣赏,享受;喜爱;使过得快活",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级下|renjiao_start1:4年级上|renjiao_start3:6年级下|hujiao_start3:5年级上|waiyan_start1:6年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:enjoy",
+        "MatchKey": "enjoy",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "喜欢；享受",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the common enjoyment verb. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-lower|r060|enjoy",
+        "hujiao_start3|g5-upper|r085|enjoy",
+        "renjiao_start1|g4-upper|r059|enjoy",
+        "renjiao_start3|g6-lower|r046|enjoy",
+        "waiyan_start1|g6-lower|r008|enjoy"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-lower|r060|enjoy",
+        "renjiao_start1|g4-upper|r059|enjoy",
+        "renjiao_start3|g6-lower|r046|enjoy",
+        "hujiao_start3|g5-upper|r085|enjoy",
+        "waiyan_start1|g6-lower|r008|enjoy",
+        "waiyan_start3|g6-lower|r007|enjoy"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r007|enjoy"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r007|enjoy",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "7",
+          "Word": "enjoy",
+          "Definition": "vt. 欣赏,享受;喜爱;使过得快活",
+          "Before": [
+            "look",
+            "cashier",
+            "cola",
+            "dollar",
+            "cent"
+          ],
+          "After": [
+            "careful",
+            "Be careful!",
+            "later",
+            "to go",
+            "duck",
+            "pond",
+            "cloud",
+            "dry"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "every",
+      "DisplayForms": "every",
+      "Definitions": "adj. 每一的,每个的;每隔...的",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|renjiao_start3:5年级上|hujiao_start3:5年级下|waiyan_start1:4年级上|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:every",
+        "MatchKey": "every",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "每一；每个",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the determiner meaning. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g3-upper|r044|every",
+        "hujiao_start3|g5-lower|r030|every",
+        "renjiao_start3|g5-upper|r046|every",
+        "waiyan_start1|g4-upper|r106|every"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r044|every",
+        "renjiao_start3|g5-upper|r046|every",
+        "hujiao_start3|g5-lower|r030|every",
+        "waiyan_start1|g4-upper|r106|every",
+        "waiyan_start3|g4-upper|r130|every"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r130|every"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r130|every",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "130",
+          "Word": "every",
+          "Definition": "adj. 每一的,每个的;每隔...的",
+          "Before": [
+            "sock",
+            "fish",
+            "hooray",
+            "sports day",
+            "win",
+            "month",
+            "hundred",
+            "metre"
+          ],
+          "After": [
+            "day",
+            "luck",
+            "good luck",
+            "come on",
+            "high jump",
+            "long jump",
+            "How about ...?",
+            "subject"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "factory",
+      "DisplayForms": "factory",
+      "Definitions": "n. 工厂;制造厂;代理店",
+      "SourceIDs": "renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start3:6年级上|hujiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:factory",
+        "MatchKey": "factory",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "工厂",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current occupation and place contexts support the factory noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g6-upper|r107|factory",
+        "renjiao_start3|g6-upper|r097|factory",
+        "waiyan_start1|g2-lower|r099|factory"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start3|g6-upper|r097|factory",
+        "hujiao_start3|g6-upper|r107|factory",
+        "waiyan_start1|g2-lower|r099|factory",
+        "waiyan_start3|g5-lower|r104|factory"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r104|factory"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r104|factory",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "104",
+          "Word": "factory",
+          "Definition": "n. 工厂;制造厂;代理店",
+          "Before": [
+            "best",
+            "north",
+            "rest",
+            "have a rest",
+            "rode",
+            "evening",
+            "late",
+            "worker"
+          ],
+          "After": [
+            "early",
+            "taxi",
+            "quarter",
+            "to",
+            "worry",
+            "paper",
+            "Chinese",
+            "so"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "famous",
+      "DisplayForms": "famous",
+      "Definitions": "adj. 著名的;极好的,非常令人满意的",
+      "SourceIDs": "beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级下|renjiao_start1:6年级上|hujiao_start3:6年级上|waiyan_start1:6年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:famous",
+        "MatchKey": "famous",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "著名的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current elementary occurrences support the well-known adjective. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-lower|r062|famous",
+        "hujiao_start3|g6-upper|r013|famous",
+        "renjiao_start1|g6-upper|r015|famous",
+        "waiyan_start1|g6-upper|r058|famous"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-lower|r062|famous",
+        "renjiao_start1|g6-upper|r015|famous",
+        "hujiao_start3|g6-upper|r013|famous",
+        "waiyan_start1|g6-upper|r058|famous",
+        "waiyan_start3|g4-lower|r023|famous"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r023|famous"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r023|famous",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "23",
+          "Word": "famous",
+          "Definition": "adj. 著名的;极好的,非常令人满意的",
+          "Before": [
+            "cute",
+            "city",
+            "ship",
+            "beautiful",
+            "whose",
+            "queen",
+            "close",
+            "old"
+          ],
+          "After": [
+            "robot",
+            "will",
+            "everything",
+            "one day",
+            "housework",
+            "learn",
+            "our",
+            "homework"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "farmer",
+      "DisplayForms": "farmer",
+      "Definitions": "n. 农夫,农民",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:4年级上|renjiao_start3:4年级上|hujiao_start3:5年级上|waiyan_start1:3年级下|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:farmer",
+        "MatchKey": "farmer",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "农民；农夫",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current occupation contexts support the farmer noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-upper|r062|farmer",
+        "hujiao_start3|g5-upper|r140|farmer",
+        "renjiao_start1|g4-upper|r101|farmer",
+        "renjiao_start3|g4-upper|r077|farmer",
+        "waiyan_start1|g3-lower|r030|farmer"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r062|farmer",
+        "renjiao_start1|g4-upper|r101|farmer",
+        "renjiao_start3|g4-upper|r077|farmer",
+        "hujiao_start3|g5-upper|r140|farmer",
+        "waiyan_start1|g3-lower|r030|farmer",
+        "waiyan_start3|g3-upper|r144|farmer"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r144|farmer"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r144|farmer",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "144",
+          "Word": "farmer",
+          "Definition": "n. 农夫,农民",
+          "Before": [
+            "me",
+            "he",
+            "he's",
+            "he is",
+            "doctor",
+            "policeman",
+            "nurse",
+            "driver"
+          ],
+          "After": [
+            "his",
+            "head",
+            "leg",
+            "foot",
+            "on",
+            "arm",
+            "hand",
+            "her"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "food",
+      "DisplayForms": "food",
+      "Definitions": "n. 食物;养料",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级下|renjiao_start3:5年级上|hujiao_start3:4年级上|waiyan_start1:3年级上|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:food",
+        "MatchKey": "food",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "食物",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the common noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g3-lower|r033|food",
+        "hujiao_start3|g4-upper|r120|food",
+        "renjiao_start3|g5-upper|r062|food",
+        "waiyan_start1|g3-upper|r015|food"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-lower|r033|food",
+        "renjiao_start3|g5-upper|r062|food",
+        "hujiao_start3|g4-upper|r120|food",
+        "waiyan_start1|g3-upper|r015|food",
+        "waiyan_start3|g4-upper|r069|food"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r069|food"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r069|food",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "69",
+          "Word": "food",
+          "Definition": "n. 食物;养料",
+          "Before": [
+            "jump",
+            "sing",
+            "dance",
+            "want",
+            "some",
+            "juice",
+            "ice",
+            "also"
+          ],
+          "After": [
+            "fast food",
+            "make",
+            "tomato",
+            "egg",
+            "potato",
+            "How much ...?",
+            "flower",
+            "dumpling"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "forever",
+      "DisplayForms": "forever",
+      "Definitions": "adv. 永远;不断地;常常",
+      "SourceIDs": "hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "hujiao_start3:6年级下|waiyan_start1:6年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:forever",
+        "MatchKey": "forever",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "永远",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "The source provides one clear time adverb learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g6-lower|r128|forever",
+        "waiyan_start1|g6-lower|r073|forever"
+      ],
+      "CurrentOccurrenceKeys": [
+        "hujiao_start3|g6-lower|r128|forever",
+        "waiyan_start1|g6-lower|r073|forever",
+        "waiyan_start3|g6-lower|r089|forever"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r089|forever"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r089|forever",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "89",
+          "Word": "forever",
+          "Definition": "adv. 永远;不断地;常常",
+          "Before": [
+            "say",
+            "raincoat",
+            "wish",
+            "best wishes",
+            "primary",
+            "primary school",
+            "message",
+            "keep"
+          ],
+          "After": [
+            "joy",
+            "future",
+            "wonderful",
+            "happiness",
+            "what",
+            "middle",
+            "middle school",
+            "speech"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "four",
+      "DisplayForms": "four",
+      "Definitions": "num. 四;四个 adj. 四的;四个的",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级上|renjiao_start1:1年级上|renjiao_start3:3年级上|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:four",
+        "MatchKey": "four",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "四",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the cardinal number. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g2-upper|r047|four",
+        "hujiao_start3|g3-upper|r081|four",
+        "renjiao_start1|g1-upper|r029|four",
+        "renjiao_start3|g3-upper|r057|four",
+        "waiyan_start1|g1-upper|r107|four"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-upper|r047|four",
+        "renjiao_start1|g1-upper|r029|four",
+        "renjiao_start3|g3-upper|r057|four",
+        "hujiao_start3|g3-upper|r081|four",
+        "waiyan_start1|g1-upper|r107|four",
+        "waiyan_start3|g3-upper|r072|four"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r072|four"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r072|four",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "72",
+          "Word": "four",
+          "Definition": "num. 四;四个 adj. 四的;四个的",
+          "Before": [
+            "black",
+            "dog",
+            "cat",
+            "cap",
+            "how many",
+            "one",
+            "two",
+            "three"
+          ],
+          "After": [
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "oh",
+            "ten",
+            "eleven"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "fourteen",
+      "DisplayForms": "fourteen",
+      "Definitions": "num. 十四;十四个;第十四 n. 十四的记号;十四岁;十四点钟;十五世纪",
+      "SourceIDs": "renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:2年级下|renjiao_start3:3年级下|waiyan_start1:3年级下|waiyan_start3:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:fourteen",
+        "MatchKey": "fourteen",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "十四",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "New source evidence confirms the same number learning unit. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "renjiao_start1|g2-lower|r035|fourteen",
+        "renjiao_start3|g3-lower|r064|fourteen",
+        "waiyan_start1|g3-lower|r038|fourteen"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g2-lower|r035|fourteen",
+        "renjiao_start3|g3-lower|r064|fourteen",
+        "waiyan_start1|g3-lower|r038|fourteen",
+        "waiyan_start3|g5-upper|r075|fourteen"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-upper|r075|fourteen"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r075|fourteen",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "75",
+          "Word": "fourteen",
+          "Definition": "num. 十四;十四个;第十四 n. 十四的记号;十四岁;十四点钟;十五世纪",
+          "Before": [
+            "hey",
+            "nineteen",
+            "crayon",
+            "fifteen",
+            "begin",
+            "give out",
+            "all right",
+            "thirteen"
+          ],
+          "After": [
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "floor",
+            "forty",
+            "number",
+            "thirty",
+            "fifty"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "friday",
+      "DisplayForms": "Friday",
+      "Definitions": "n. 星期五",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:6年级下|renjiao_start1:2年级下|renjiao_start1:4年级上|renjiao_start3:5年级上|hujiao_start3:4年级下|waiyan_start1:3年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:friday",
+        "MatchKey": "friday",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "星期五",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the weekday name. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g6-lower|r053|friday",
+        "hujiao_start3|g4-lower|r100|friday",
+        "renjiao_start1|g2-lower|r054|friday",
+        "renjiao_start1|g4-upper|r116|friday",
+        "renjiao_start3|g5-upper|r025|friday",
+        "waiyan_start1|g3-upper|r059|friday"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g6-lower|r053|friday",
+        "renjiao_start1|g2-lower|r054|friday",
+        "renjiao_start1|g4-upper|r116|friday",
+        "renjiao_start3|g5-upper|r025|friday",
+        "hujiao_start3|g4-lower|r100|friday",
+        "waiyan_start1|g3-upper|r059|friday",
+        "waiyan_start3|g4-lower|r037|friday"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r037|friday"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r037|friday",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "37",
+          "Word": "Friday",
+          "Definition": "n. 星期五",
+          "Before": [
+            "learn",
+            "our",
+            "homework",
+            "won't",
+            "will not",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ],
+          "After": [
+            "have",
+            "next",
+            "week",
+            "holiday",
+            "take",
+            "fly",
+            "picnic",
+            "great"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "friend",
+      "DisplayForms": "friend",
+      "Definitions": "n. 朋友;助手;赞助者",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|renjiao_start1:2年级上|renjiao_start1:4年级上|renjiao_start3:3年级下|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:friend",
+        "MatchKey": "friend",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "朋友",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the person-relation noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g5-upper|r055|friend",
+        "hujiao_start3|g3-upper|r020|friend",
+        "renjiao_start1|g2-upper|r012|friend",
+        "renjiao_start1|g4-upper|r013|friend",
+        "renjiao_start3|g3-lower|r015|friend",
+        "waiyan_start1|g1-upper|r134|friend"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r055|friend",
+        "renjiao_start1|g2-upper|r012|friend",
+        "renjiao_start1|g4-upper|r013|friend",
+        "renjiao_start3|g3-lower|r015|friend",
+        "hujiao_start3|g3-upper|r020|friend",
+        "waiyan_start1|g1-upper|r134|friend",
+        "waiyan_start3|g3-lower|r061|friend"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r061|friend"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r061|friend",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "61",
+          "Word": "friend",
+          "Definition": "n. 朋友;助手;赞助者",
+          "Before": [
+            "go",
+            "go to school",
+            "on",
+            "Monday",
+            "play",
+            "phone",
+            "on the phone",
+            "with"
+          ],
+          "After": [
+            "at",
+            "home",
+            "at home",
+            "who",
+            "only",
+            "year",
+            "work",
+            "go to work"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "girl",
+      "DisplayForms": "girl",
+      "Definitions": "n. 女孩;姑娘,未婚女子;女职员,女演员;(男人的)女朋友 n. (捷)吉尔",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:1年级上|beijing_start1:3年级上|renjiao_start1:2年级上|renjiao_start3:3年级下|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:girl",
+        "MatchKey": "girl",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "女孩",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "All current low-grade occurrences support the girl noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g1-upper|r012|girl",
+        "beijing_start1|g3-upper|r003|girl",
+        "hujiao_start3|g3-upper|r015|girl",
+        "renjiao_start1|g2-upper|r014|girl",
+        "renjiao_start3|g3-lower|r013|girl",
+        "waiyan_start1|g1-upper|r037|girl"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g1-upper|r012|girl",
+        "beijing_start1|g3-upper|r003|girl",
+        "renjiao_start1|g2-upper|r014|girl",
+        "renjiao_start3|g3-lower|r013|girl",
+        "hujiao_start3|g3-upper|r015|girl",
+        "waiyan_start1|g1-upper|r037|girl",
+        "waiyan_start3|g3-upper|r021|girl"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r021|girl"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r021|girl",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "21",
+          "Word": "girl",
+          "Definition": "n. 女孩;姑娘,未婚女子;女职员,女演员;(男人的)女朋友 n. (捷)吉尔",
+          "Before": [
+            "How are you?",
+            "good",
+            "morning",
+            "fine",
+            "thank",
+            "you",
+            "Ms",
+            "boy"
+          ],
+          "After": [
+            "whoops",
+            "and",
+            "too",
+            "ha ha",
+            "what",
+            "is",
+            "what's",
+            "what is"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "goodbye",
+      "DisplayForms": "goodbye",
+      "Definitions": "int. 再见 放弃 告别",
+      "SourceIDs": "beijing_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:6年级上|hujiao_start3:3年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:goodbye",
+        "MatchKey": "goodbye",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "再见",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the farewell interjection. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g6-upper|r047|goodbye",
+        "hujiao_start3|g3-upper|r007|goodbye",
+        "waiyan_start1|g1-upper|r010|goodbye"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g6-upper|r047|goodbye",
+        "hujiao_start3|g3-upper|r007|goodbye",
+        "waiyan_start1|g1-upper|r010|goodbye",
+        "waiyan_start3|g3-upper|r010|goodbye"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r010|goodbye"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r010|goodbye",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "10",
+          "Word": "goodbye",
+          "Definition": "int. 再见 放弃 告别",
+          "Before": [
+            "I",
+            "am",
+            "I'm",
+            "I am",
+            "aah",
+            "hello",
+            "hi",
+            "ooh"
+          ],
+          "After": [
+            "bye-bye",
+            "are",
+            "How are you?",
+            "good",
+            "morning",
+            "fine",
+            "thank",
+            "you"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "grandma",
+      "DisplayForms": "grandma",
+      "Definitions": "n. 奶奶;外婆",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级上|renjiao_start3:3年级下|hujiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:grandma",
+        "MatchKey": "grandma",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "奶奶；外婆",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the informal family-relation noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g2-upper|r025|grandma",
+        "hujiao_start3|g4-upper|r039|grandma",
+        "renjiao_start3|g3-lower|r025|grandma",
+        "waiyan_start1|g1-upper|r133|grandma"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-upper|r025|grandma",
+        "renjiao_start3|g3-lower|r025|grandma",
+        "hujiao_start3|g4-upper|r039|grandma",
+        "waiyan_start1|g1-upper|r133|grandma",
+        "waiyan_start3|g3-upper|r133|grandma"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r133|grandma"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r133|grandma",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "133",
+          "Word": "grandma",
+          "Definition": "n. 奶奶;外婆",
+          "Before": [
+            "mother",
+            "father",
+            "sister",
+            "brother",
+            "she",
+            "she's",
+            "she is",
+            "grandpa"
+          ],
+          "After": [
+            "that's",
+            "that is",
+            "me",
+            "he",
+            "he's",
+            "he is",
+            "doctor",
+            "policeman"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "grandpa",
+      "DisplayForms": "grandpa",
+      "Definitions": "n. 爷爷;外公",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级上|renjiao_start3:3年级下|hujiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:grandpa",
+        "MatchKey": "grandpa",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "爷爷；外公",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the informal family-relation noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g2-upper|r027|grandpa",
+        "hujiao_start3|g4-upper|r037|grandpa",
+        "renjiao_start3|g3-lower|r027|grandpa",
+        "waiyan_start1|g1-upper|r132|grandpa"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-upper|r027|grandpa",
+        "renjiao_start3|g3-lower|r027|grandpa",
+        "hujiao_start3|g4-upper|r037|grandpa",
+        "waiyan_start1|g1-upper|r132|grandpa",
+        "waiyan_start3|g3-upper|r132|grandpa"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r132|grandpa"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r132|grandpa",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "132",
+          "Word": "grandpa",
+          "Definition": "n. 爷爷;外公",
+          "Before": [
+            "bag",
+            "mother",
+            "father",
+            "sister",
+            "brother",
+            "she",
+            "she's",
+            "she is"
+          ],
+          "After": [
+            "grandma",
+            "that's",
+            "that is",
+            "me",
+            "he",
+            "he's",
+            "he is",
+            "doctor"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "grandparent",
+      "DisplayForms": "grandparent",
+      "Definitions": "n. 祖父母;祖父或祖母;外祖父母;外祖父或外祖母",
+      "SourceIDs": "renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start3:5年级上|hujiao_start3:4年级上|waiyan_start1:3年级下|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:grandparent",
+        "MatchKey": "grandparent",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "祖父母；外祖父母",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the family-category noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g4-upper|r034|grandparent",
+        "renjiao_start3|g5-upper|r107|grandparent",
+        "waiyan_start1|g3-lower|r091|grandparent"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start3|g5-upper|r107|grandparent",
+        "hujiao_start3|g4-upper|r034|grandparent",
+        "waiyan_start1|g3-lower|r091|grandparent",
+        "waiyan_start3|g4-lower|r056|grandparent"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r056|grandparent"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r056|grandparent",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "56",
+          "Word": "grandparent",
+          "Definition": "n. 祖父母;祖父或祖母;外祖父母;外祖父或外祖母",
+          "Before": [
+            "because",
+            "so",
+            "cloudy",
+            "weather",
+            "was",
+            "am",
+            "is",
+            "then"
+          ],
+          "After": [
+            "were",
+            "are",
+            "young",
+            "old",
+            "hair",
+            "so",
+            "short",
+            "long"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "hamburger",
+      "DisplayForms": "hamburger",
+      "Definitions": "n. 汉堡包,火腿汉堡;牛肉饼,肉饼;碎牛肉",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:4年级上|renjiao_start3:5年级上|hujiao_start3:6年级上|waiyan_start1:3年级上|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:hamburger",
+        "MatchKey": "hamburger",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "汉堡包",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the food noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-upper|r053|hamburger",
+        "hujiao_start3|g6-upper|r022|hamburger",
+        "renjiao_start1|g4-upper|r076|hamburger",
+        "renjiao_start3|g5-upper|r051|hamburger",
+        "waiyan_start1|g3-upper|r012|hamburger"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r053|hamburger",
+        "renjiao_start1|g4-upper|r076|hamburger",
+        "renjiao_start3|g5-upper|r051|hamburger",
+        "hujiao_start3|g6-upper|r022|hamburger",
+        "waiyan_start1|g3-upper|r012|hamburger",
+        "waiyan_start3|g5-lower|r037|hamburger"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r037|hamburger"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r037|hamburger",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "37",
+          "Word": "hamburger",
+          "Definition": "n. 汉堡包,火腿汉堡;牛肉饼,肉饼;碎牛肉",
+          "Before": [
+            "language",
+            "wrote",
+            "write",
+            "dancer",
+            "foreign",
+            "studied",
+            "study",
+            "hard"
+          ],
+          "After": [
+            "English",
+            "breakfast",
+            "lunch",
+            "sandwich",
+            "fish and chips",
+            "traditional",
+            "dish",
+            "very much"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "happen",
+      "DisplayForms": "happen",
+      "Definitions": "vi. 发生;碰巧;偶然遇到",
+      "SourceIDs": "beijing_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级下|waiyan_start1:4年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:happen",
+        "MatchKey": "happen",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "发生",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "quality-audit-target-sense",
+        "Rationale": "TargetSense narrowed to the clear elementary source learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-lower|r065|happen",
+        "waiyan_start1|g4-upper|r093|happen"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-lower|r065|happen",
+        "waiyan_start1|g4-upper|r093|happen",
+        "waiyan_start3|g4-lower|r140|happen"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r140|happen"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r140|happen",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "140",
+          "Word": "happen",
+          "Definition": "vi. 发生;碰巧;偶然遇到",
+          "Before": [
+            "fall",
+            "fall off",
+            "fell",
+            "fall",
+            "fall down",
+            "found",
+            "find",
+            "town"
+          ],
+          "After": [
+            "ride",
+            "then",
+            "thirsty",
+            "water",
+            "bought",
+            "buy",
+            "watermelon",
+            "carried"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "happily",
+      "DisplayForms": "happily",
+      "Definitions": "adv. 快乐地;幸福地;幸运地;恰当地",
+      "SourceIDs": "hujiao_start3|waiyan_start3",
+      "SourceBooks": "hujiao_start3:5年级上|waiyan_start3:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:happily",
+        "MatchKey": "happily",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "快乐地；高兴地",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "hujiao-new-learning-unit",
+        "Rationale": "The source provides one clear manner adverb learning unit."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g5-upper|r126|happily"
+      ],
+      "CurrentOccurrenceKeys": [
+        "hujiao_start3|g5-upper|r126|happily",
+        "waiyan_start3|g5-upper|r088|happily"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-upper|r088|happily"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r088|happily",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "88",
+          "Word": "happily",
+          "Definition": "adv. 快乐地;幸福地;幸运地;恰当地",
+          "Before": [
+            "forty",
+            "number",
+            "thirty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety"
+          ],
+          "After": [
+            "many",
+            "well",
+            "team",
+            "really",
+            "good at",
+            "catch",
+            "goalkeeper",
+            "think"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "happy",
+      "DisplayForms": "happy",
+      "Definitions": "adj. 幸福的;高兴的;巧妙的",
+      "SourceIDs": "renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:2年级上|renjiao_start1:6年级上|renjiao_start3:6年级上|hujiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:happy",
+        "MatchKey": "happy",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "高兴的；快乐的",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Expanded evidence confirms the emotion adjective. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "hujiao_start3|g4-upper|r020|happy",
+        "renjiao_start1|g2-upper|r055|happy",
+        "renjiao_start1|g6-upper|r065|happy",
+        "renjiao_start3|g6-upper|r122|happy",
+        "waiyan_start1|g1-upper|r124|happy"
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g2-upper|r055|happy",
+        "renjiao_start1|g6-upper|r065|happy",
+        "renjiao_start3|g6-upper|r122|happy",
+        "hujiao_start3|g4-upper|r020|happy",
+        "waiyan_start1|g1-upper|r124|happy",
+        "waiyan_start3|g3-upper|r082|happy"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g3-upper|r082|happy"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r082|happy",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "82",
+          "Word": "happy",
+          "Definition": "adj. 幸福的;高兴的;巧妙的",
+          "Before": [
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "oh",
+            "ten",
+            "eleven",
+            "twelve"
+          ],
+          "After": [
+            "birthday",
+            "here",
+            "here's",
+            "here is",
+            "present",
+            "this",
+            "pencil",
+            "pen"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "headache",
+      "DisplayForms": "headache",
+      "Definitions": "n. 头痛;麻烦;令人头痛之事",
+      "SourceIDs": "beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级下|renjiao_start1:5年级下|hujiao_start3:5年级下|waiyan_start1:3年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "ReviewMode": "delta-evidence",
+      "DurableDecision": {
+        "DecisionKey": "surface:headache",
+        "MatchKey": "headache",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "头痛",
+        "Status": "reviewed",
+        "Confidence": "high",
+        "DecisionBasis": "waiyan-start1-exact-surface-evidence-revalidation",
+        "Rationale": "Current health contexts support the physical headache noun. Waiyan start1 adds exact-MatchKey source occurrences; this previously explicit Stage-A decision is revalidated for the expanded five-adapter evidence set."
+      },
+      "ReviewedOccurrenceKeys": [
+        "beijing_start1|g4-lower|r011|headache",
+        "hujiao_start3|g5-lower|r118|headache",
+        "renjiao_start1|g5-lower|r013|headache",
+        "waiyan_start1|g3-upper|r056|headache"
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-lower|r011|headache",
+        "renjiao_start1|g5-lower|r013|headache",
+        "hujiao_start3|g5-lower|r118|headache",
+        "waiyan_start1|g3-upper|r056|headache",
+        "waiyan_start3|g4-lower|r157|headache"
+      ],
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r157|headache"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r157|headache",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "157",
+          "Word": "headache",
+          "Definition": "n. 头痛;麻烦;令人头痛之事",
+          "Before": [
+            "carry",
+            "bump",
+            "hospital",
+            "had",
+            "have",
+            "chocolate",
+            "stomach ache",
+            "cold"
+          ],
+          "After": [
+            "fever"
+          ]
+        }
+      ]
+    }
+  ]
+}
