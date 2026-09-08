@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "90c3571e4ba09f27e7f401f7211d81e1efa8d27e",
-  "WorkflowRunID": "34221755279",
-  "WorkflowRunNumber": "242",
+  "InputCommit": "ef409dae9f80ce70f63eb46bc11b69fe09c3bae1",
+  "WorkflowRunID": "34221962082",
+  "WorkflowRunNumber": "243",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2152,
@@ -18,17 +18,17 @@
     "ReviewLane": "split-resolution",
     "SelectedCount": 6,
     "SelectedMatchKeys": [
-      "french",
-      "kind",
-      "letter",
-      "little",
-      "pass",
-      "right"
+      "show",
+      "sound",
+      "time",
+      "flies",
+      "fan",
+      "line"
     ],
-    "EvidenceWeight": 69,
+    "EvidenceWeight": 64,
     "EffectiveWeightBudget": 70,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "8c52f4364f60d38b02f47242ce6af844d126aade82a5eb43bc22ff6813a72986",
-    "ReviewPacketFingerprint": "7563815464d70e2f6a0ed5f6a5e88b57002e5ccf3329ef737e1b9907ef25ffc8"
+    "ReviewBundleFingerprint": "af04393eb1d3a330277701bb4a82440e56b2be7203e69073c98f5163d86665cf",
+    "ReviewPacketFingerprint": "79cf5f28d976b4a1d1c48e3ed215c67f25635c52b75cf3a138c014f42edd8935"
   }
 }
