@@ -166,6 +166,7 @@ candidate:breakfast,breakfast,breakfast,早餐；早饭,breakfast,4,reviewed
 candidate:breath,breath,breath,呼吸；气息,breath,1,reviewed
 candidate:bridge,bridge,bridge,桥,bridge,2,reviewed
 candidate:bring,bring,bring,带来；拿来,bring|brought,5,reviewed
+candidate:broken,broken,broken,坏的；破损的,broken,3,reviewed
 candidate:broom,broom,broom,扫帚,broom,1,reviewed
 candidate:brother,brother,brother,兄弟；哥哥；弟弟,brother,7,reviewed
 candidate:brown,brown,brown,棕色；棕色的,brown,4,reviewed
@@ -464,7 +465,7 @@ candidate:feature,feature,feature,特点；特征,feature,1,reviewed
 candidate:february,february,February,二月,february,4,reviewed
 candidate:feed,feed,feed,喂；喂养,feed,2,reviewed
 candidate:feed the fish,feed the fish,feed the fish,喂鱼,feeding the fish,1,reviewed
-candidate:feel#state,feel#state,feel,感觉；觉得,feel,2,reviewed
+candidate:feel#state,feel#state,feel,感觉；觉得,feel|felt,3,reviewed
 candidate:feel#touch,feel#touch,feel,摸起来；触摸感受,feel,1,reviewed
 candidate:feet,feet,feet,脚；足（foot 的复数）,feet,3,reviewed
 candidate:ferry,ferry,ferry,渡船,ferry,1,reviewed
@@ -594,6 +595,7 @@ candidate:gold,gold,gold,金；黄金；金色,gold,4,reviewed
 candidate:golf,golf,golf,高尔夫球；高尔夫运动,golf,1,reviewed
 candidate:good,good,good,好的；不错的,good,3,reviewed
 candidate:goodbye,goodbye,goodbye,再见,goodbye,3,reviewed
+candidate:got,got,got,得到；获得（get 的过去式）,got,1,reviewed
 candidate:gps,gps,GPS,全球定位系统；GPS,gps,1,reviewed
 candidate:grab,grab,grab,抓住；抓取,grab,1,reviewed
 candidate:grandfather,grandfather,grandfather,祖父；外祖父,grandfather,5,reviewed
@@ -615,6 +617,7 @@ candidate:guess,guess,guess,猜；猜测,guess,2,reviewed
 candidate:guitar,guitar,guitar,吉他,guitar,2,reviewed
 candidate:gym,gym,gym,体育馆；健身房,gym,3,reviewed
 candidate:habit,habit,habit,习惯,habit,1,reviewed
+candidate:had,had,had,有；拥有（have 的过去式）,had,2,reviewed
 candidate:hair,hair,hair,头发；毛发,hair,6,reviewed
 candidate:half,half,half,一半；半,half,4,reviewed
 candidate:hall,hall,hall,大厅；礼堂,hall,2,reviewed
@@ -776,7 +779,7 @@ candidate:later,later,later,后来；稍后；以后,later,2,reviewed
 candidate:laugh,laugh,laugh,笑；大笑,laugh|laughed,3,reviewed
 candidate:laugh at,laugh at,laugh at,嘲笑；因……发笑,laugh at,1,reviewed
 candidate:lazy,lazy,lazy,懒惰的；懒洋洋的,lazy,2,reviewed
-candidate:leaf,leaf,leaf,叶子；树叶,leaf,4,reviewed
+candidate:leaf,leaf,leaf,叶子；树叶,leaf|leaves,5,reviewed
 candidate:learn,learn,learn,学习；学会,learn|learnt,3,reviewed
 candidate:leave,leave,leave,离开；出发,leave|left,4,reviewed
 candidate:left#direction,left#direction,left,左边；左侧,left,4,reviewed
@@ -810,6 +813,7 @@ candidate:look for,look for,look for,寻找；找,look for,5,reviewed
 candidate:look forward to,look forward to,look forward to,期待；盼望,look forward to,2,reviewed
 candidate:look up,look up,look up,查找；查阅,look up,1,reviewed
 candidate:lose,lose,lose,丢失；失去,lose,1,reviewed
+candidate:lost,lost,lost,迷路的；丢失的,lost,6,reviewed
 candidate:lots of,lots of,lots of,许多；很多,lots of,2,reviewed
 candidate:loud,loud,loud,大声的；响亮的,loud,1,reviewed
 candidate:love,love,love,爱；喜爱；喜欢,love,6,reviewed
@@ -1083,6 +1087,7 @@ candidate:play#instrument,play#instrument,play,演奏,play,1,reviewed
 candidate:playground,playground,playground,操场；游乐场,playground,5,reviewed
 candidate:playtime,playtime,playtime,游戏时间；玩耍时间,playtime,1,reviewed
 candidate:please,please,please,请,please,5,reviewed
+candidate:pleased,pleased,pleased,高兴的；满意的,pleased,1,reviewed
 candidate:plus,plus,plus,加；加上,plus,1,reviewed
 candidate:pm,pm,pm,下午；午后（p.m.）,pm,1,reviewed
 candidate:pod,pod,pod,豆荚,pod,1,reviewed
@@ -1095,6 +1100,7 @@ candidate:police officer,police officer,police officer,警察；警官,police of
 candidate:policeman,policeman,policeman,警察；男警察,policeman,2,reviewed
 candidate:polite,polite,polite,有礼貌的；礼貌的,polite,2,reviewed
 candidate:poor,poor,poor,贫穷的；贫困的,poor,2,reviewed
+candidate:pop,pop,pop,流行音乐,pop,1,reviewed
 candidate:popular,popular,popular,受欢迎的；流行的,popular,1,reviewed
 candidate:post office,post office,post office,邮局,post office,3,reviewed
 candidate:postcard,postcard,postcard,明信片,postcard,2,reviewed
@@ -1120,6 +1126,7 @@ candidate:problem,problem,problem,问题；难题,problem,2,reviewed
 candidate:project,project,project,项目；课题；计划,project,1,reviewed
 candidate:protect,protect,protect,保护,protect,1,reviewed
 candidate:proud,proud,proud,自豪的；骄傲的,proud,2,reviewed
+candidate:ps,ps,PS,附言；又及（P.S.）,ps,1,reviewed
 candidate:public library,public library,public library,公共图书馆,public library,1,reviewed
 candidate:pull,pull,pull,拉；拔,pull,1,reviewed
 candidate:pupil,pupil,pupil,学生；小学生,pupil,5,reviewed
@@ -1368,6 +1375,7 @@ candidate:strong,strong,strong,强壮的；强的,strong|stronger,6,reviewed
 candidate:strongly,strongly,strongly,强劲地；强烈地,strongly,1,reviewed
 candidate:stuck,stuck,stuck,卡住的；陷住的,stuck,1,reviewed
 candidate:student,student,student,学生,student,3,reviewed
+candidate:study,study,study,学习；读书,studies|study,7,reviewed
 candidate:subject,subject,subject,学科；科目,subject,5,reviewed
 candidate:subway,subway,subway,地铁,subway,1,reviewed
 candidate:summer,summer,summer,夏天；夏季,summer,5,reviewed
@@ -1390,6 +1398,7 @@ candidate:sweep,sweep,sweep,扫；打扫,sweep,1,reviewed
 candidate:sweep the floor,sweep the floor,sweep the floor,扫地,sweep the floor,1,reviewed
 candidate:sweet,sweet,sweet,甜的,sweet,3,reviewed
 candidate:sweet potato,sweet potato,sweet potato,红薯；甘薯,sweet potato,1,reviewed
+candidate:sweets,sweets,sweets,糖果；甜食,sweets,1,reviewed
 candidate:swim,swim,swim,游泳,swam|swim,8,reviewed
 candidate:swimming,swimming,swimming,游泳,swimming,1,reviewed
 candidate:swimming cap,swimming cap,swimming cap,泳帽,swimming cap,1,reviewed
@@ -1503,6 +1512,7 @@ candidate:tomb,tomb,tomb,坟墓；陵墓,tomb,1,reviewed
 candidate:tomorrow,tomorrow,tomorrow,明天,tomorrow,5,reviewed
 candidate:tonight,tonight,tonight,今晚,tonight,1,reviewed
 candidate:too much,too much,too much,太多；过多,too much,1,reviewed
+candidate:took,took,took,拿；取（take 的过去式）,took,4,reviewed
 candidate:tool,tool,tool,工具,tool,1,reviewed
 candidate:tooth,tooth,tooth,牙齿,tooth,2,reviewed
 candidate:toothache,toothache,toothache,牙痛,toothache,2,reviewed
@@ -1599,12 +1609,14 @@ candidate:want,want,want,想要,want,6,reviewed
 candidate:wardrobe,wardrobe,wardrobe,衣柜,wardrobe,1,reviewed
 candidate:warm,warm,warm,温暖的,warm,5,reviewed
 candidate:warm-up,warm-up,warm-up,热身；准备运动,warm-up,1,reviewed
+candidate:was,was,was,是；在（be 的过去式，第一、第三人称单数）,was,1,reviewed
 candidate:wash,wash,wash,洗；清洗,wash|washed,5,reviewed
 candidate:wash clothes,wash clothes,wash clothes,洗衣服,wash clothes|wash my clothes|washed clothes,3,reviewed
 candidate:washington d.c.,washington d.c.,Washington D.C.,华盛顿特区,washington d.c.,1,reviewed
 candidate:watch tv,watch tv,watch TV,看电视,watch tv|watched tv|watching tv,5,reviewed
 candidate:watch#noun,watch#noun,watch,手表,watch,2,reviewed
 candidate:watch#verb,watch#verb,watch,观看；注视,watch,3,reviewed
+candidate:watches,watches,watches,手表（watch 的复数）,watches,1,reviewed
 candidate:water bottle,water bottle,water bottle,水瓶；水杯,water bottle,2,reviewed
 candidate:water the plants,water the plants,water the plants,给植物浇水,watering the plants,1,reviewed
 candidate:water#noun,water#noun,water,水,water,6,reviewed
@@ -1621,6 +1633,7 @@ candidate:weekend,weekend,weekend,周末,weekend,4,reviewed
 candidate:weigh,weigh,weigh,称重量；重……,weigh,1,reviewed
 candidate:welcome,welcome,welcome,欢迎,welcome,4,reviewed
 candidate:well-known,well-known,well-known,著名的；众所周知的,well-known,1,reviewed
+candidate:were,were,were,是；在（be 的过去式，第二人称及复数）,were,2,reviewed
 candidate:west,west,west,西；西方,west,4,reviewed
 candidate:west lake,west lake,West Lake,西湖,west lake,1,reviewed
 candidate:western,western,Western,西方的；西部的,western,1,reviewed
@@ -1651,6 +1664,7 @@ candidate:winner,winner,winner,胜利者,winner,1,reviewed
 candidate:winter,winter,winter,冬天；冬季,winter,5,reviewed
 candidate:wish,wish,wish,愿望；祝愿,wish,3,reviewed
 candidate:without,without,without,没有；不带,without,1,reviewed
+candidate:woke,woke,woke,醒来；唤醒（wake 的过去式）,woke,1,reviewed
 candidate:wolf,wolf,wolf,狼,wolf,1,reviewed
 candidate:woman,woman,woman,女人；妇女；成年女子,woman,4,reviewed
 candidate:women,women,women,女人们；妇女们（woman 的复数）,women,2,reviewed
