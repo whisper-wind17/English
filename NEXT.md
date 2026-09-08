@@ -75,36 +75,36 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #11 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #12 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
 Durable Identity decisions         = 2105
-Identity-level Vocabulary Preview  = 1053
-Review/blocker surfaces            = 905
-Evidence-changed surfaces          = 811
-Multipart resolved                 = 10
+Identity-level Vocabulary Preview  = 1060
+Review/blocker surfaces            = 899
+Evidence-changed surfaces          = 805
+Multipart resolved                 = 11
 ```
 
 Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1041
+Learner-stage Vocabulary Preview   = 1048
 Identity rows suppressed by gate   = 12
-Preview occurrence contributions removed = 34
+Preview occurrence contributions removed = 40
 Explicit decision-bound past-form requirements = 13
 ```
 
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1053   (+68)
-Learner Preview    979  → 1041   (+62)
-Blockers          1010  →  905   (-105)
-Evidence-changed   911  →  811   (-100)
-Multipart            7  →   10   (+3)
+Identity Preview   985  → 1060   (+75)
+Learner Preview    979  → 1048   (+69)
+Blockers          1010  →  899   (-111)
+Evidence-changed   911  →  805   (-106)
+Multipart            7  →   11   (+4)
 ```
 
 ---
@@ -143,8 +143,12 @@ running          → lexicalized activity 跑步；not generic run inflection
 stairs           → lexicalized plural noun 楼梯
 broken           → lexicalized adjective 破损的/坏掉的，not automatic break reuse
 fell             → reuse fall#verb；learner layer remains grammar-quarantined
-flies            → split-required / held；source cannot disambiguate insect plural vs fly 3sg
+fly#verb         → 飞；飞行；current 10 occurrences complete/disjoint with fly#insect
+fly#insect       → 苍蝇；current 1 occurrence
+flies            → split-required / held；canonical fly 已 resolve，但唯一 source occurrence 仍同时可解释 insect plural / fly 3sg，禁止 silent release
 ```
+
+`fly` 的 Waiyan Start3 `Flag Day` occurrence 属于同一 verb identity 的 construction-specific extension；为保持既有 scoped reuse（例如 `flew → fly#verb`）的 canonical TargetSense 一致性，Stage-A learner-facing core sense 仍冻结为 `飞；飞行`，不为单一构式额外 mint identity。
 
 ---
 
@@ -161,24 +165,29 @@ flies            → split-required / held；source cannot disambiguate insect p
 #9  your / running / stairs / a / actor / cent / chemistry / chinatown / dragon / everything / firefighter / geography / halloween / happiness
 #10 hide-and-seek / kilometre / language / librarian / passport / physics / raincoat / sausage / someday / spaceship / speech / string / taikonaut / town / traditional / winner / child / no. / flies
 #11 at / no / broken / candy / don't / fell
+#12 fly / foot / go / leave / paint / shoe
 ```
 
-### Latest validation — Batch #11
+### Latest validation — Batch #12
 
 ```text
-run               = 34190195775 / #205 = SUCCESS
-batch commit       = 69b7d2478782e2042a3ec55ccf508bfa2eb4c7fd
-bot persist        = ee264d7467a0969f94bdb4970aa68ac65a878a9d
+first run          = 34191550317 / #206 = FAIL at canonical TargetSense consistency only; no bot persist
+batch commit       = ebc56fbf765e4ff085e8d5ea8285680e694e426e
+TargetSense fix    = 086906ec8634bbed94e931126f42298dbac354b9
+corrected run      = 34191620560 / #207 = SUCCESS
+bot persist        = 712fe66...
 ```
+
+第一次失败原因：`fly#verb` 被暂时扩写为“飞；飞行；使（风筝、旗帜等）飞扬”，与既有 scoped reuse `flew → fly#verb` 的 TargetSense `飞；飞行` 不一致。修复策略是保持 canonical learner-facing core sense，不修改 planner 外的 `flew`；Flag Day transitive usage 仅保留为 source evidence / rationale。失败 workflow 未 persist durable workspace。
 
 ```text
 selected active batch closure              = 100%
-Batch decisions                            = 6
-keep-identity                              = 4
-reuse-identity                             = 1   (fell → fall#verb)
-route-expression                           = 1   (don't)
+Batch decision rows                        = 7
+Touched MatchKeys                          = 6
+keep-identity                              = 7
+fly multipart partition                    = 10 verb + 1 insect, complete/disjoint
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1053 / 1053
+Identity Preview TargetSense               = 1060 / 1060
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
@@ -190,16 +199,17 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-Batch #11 delta：
+Batch #12 delta：
 
 ```text
-Blockers          911 → 905   (-6)
-Evidence-changed  817 → 811   (-6)
-Identity Preview 1049 → 1053  (+4)
-Learner Preview  1037 → 1041  (+4)
+Blockers          905 → 899   (-6)
+Evidence-changed  811 → 805   (-6)
+Identity Preview 1053 → 1060  (+7)
+Learner Preview  1041 → 1048  (+7)
+Multipart          10 →   11  (+1)
 ```
 
-`fell` 正确 scoped reuse 到 `fall#verb`，未新增 Identity；`don't` 继续进入 Expressions；因此 Preview 只增加 4。`broken` 的 sixth-source 证据仍支持 lexicalized defective-state adjective，没有被错误并入 `break`。
+Preview 增加 7 而 selected surface 只有 6，是因为 `fly` 一个 MatchKey 完成了两个有效 provisional identities：`fly#verb` 与 `fly#insect`；其余 `foot/go/leave/paint/shoe` 各恢复一个 Identity。`flies` 经 bot persist 后仍是 `split-required / held`，没有被 canonical completion 自动放行。
 
 ---
 
@@ -232,53 +242,62 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #12
+## 8. NEXT TASK — POLICY-REVIEW BATCH #13
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
 SelectedCount     = 6
-EvidenceWeight    = 59 / 60
+EvidenceWeight    = 49 / 60
 ExecutionReady    = true
-ReviewBundleFingerprint = b6bb19e15f33f59215f4b10868c72553b3a13976978de8213621ed9fbdd68dbf
+ReviewBundleFingerprint = 9a2c2fc7d626a12b8c063abf5ebef8c1466daa87d3cf4cd00e5eae8167fef9c2
 SelectedMatchKeys =
-  fly
-  foot
-  go
-  leave
-  paint
-  shoe
+  short
+  sleep
+  sock
+  sometime
+  sport
+  story
 ```
 
 本批重点：
 
 ```text
-fly
-→ current multipart canonical / insect-vs-verb boundary；同时与 held `flies` 有依赖，禁止粗暴合并。
+short
+→ height / length / duration 等 core-sense 边界；不得被 lexicalized `shorts` 反向污染。
 
-foot / go / leave / paint / shoe
-→ sixth-source exact evidence 可能扩展 multi-POS / polysemy；必须按教材 context 重新确认 learner-facing target sense。
+sleep
+→ noun / verb 是否仍可保持一个 elementary concept，需按 sixth-source context 复核。
 
-尤其：
-- leave 与历史 past-form `left#leave-past` 有 canonical dependency；
-- fly 若 source evidence 足以完善 canonical multipart，必须再检查 `flies` 是否可解；若仍不足则继续 hold。
+sock
+→ concrete clothing noun vs dictionary noise。
+
+sometime
+→ 与已冻结 lexical frequency adverb `sometimes` 明确分离；不得 morphology/format 合并。
+
+sport
+→ singular activity concept 与已处理 `sports` 的关系必须 learner-first 判断，不能机械 morphology reuse。
+
+story
+→ elementary narrative noun vs broad dictionary extensions；按 exact source context 收窄。
 ```
 
 执行要求：
 
 ```text
-1. 读取 current review_bundle / exact source occurrences / related multipart/canonical decisions。
+1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
 4. 6/6 closure，不 cherry-pick；manifest fingerprint 必须从当前 next_batch.json 直接读取。
 5. apply + rebuild Identity/Learner views。
 6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
 7. 核对 blocker / Identity Preview / Learner Preview / canonical dependency delta。
-8. 对 fly 额外复查 held flies 的后续状态，禁止 silent release。
-9. Klose isolation 必须 PASS。
-10. bot persist 后重新 planner；阶段结束更新 NEXT.md。
+8. Klose isolation 必须 PASS。
+9. bot persist 后重新 planner；阶段结束更新 NEXT.md。
 ```
+
+`flies` 当前仍是 independently held split-resolution item；除非后续 deterministic planner 明确选择并且 source evidence 足以消除 ambiguity，否则不得在其他 batch 中顺手修改。
 
 仍然禁止：
 
