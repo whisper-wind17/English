@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Validate closure of every enabled Third-party Vocabulary source adapter.
 
-This is a source-layer gate only. It verifies that each enabled adapter has a
-standard occurrence output and a dedicated prepare/check implementation. It does
-not perform identity matching or mutate Klose state.
+This is a source-layer gate only. It verifies the invariants shared by every
+enabled adapter: standard occurrence schema, SourceID/key closure, and dedicated
+prepare/check implementations. Edition-specific source quality constraints remain
+owned by each adapter checker; the generic gate must not invent stricter rules.
+It does not perform identity matching or mutate Klose state.
 """
 from __future__ import annotations
 
@@ -42,7 +44,8 @@ def main() -> None:
 
     global_occurrence_keys: set[str] = set()
     total = 0
-    counts: list[tuple[str, int]] = []
+    blank_definition_total = 0
+    counts: list[tuple[str, int, int]] = []
     missing_tools: list[str] = []
 
     for row in enabled:
@@ -60,8 +63,13 @@ def main() -> None:
             raise SystemExit(f"Enabled adapter has no occurrences: {source_id}")
         if any(item.get("SourceID") != source_id for item in occurrences):
             raise SystemExit(f"SourceID drift inside adapter output: {source_id}")
-        if any(not item.get("Word") or not item.get("MatchKey") or not item.get("Definition") for item in occurrences):
-            raise SystemExit(f"Blank Word/MatchKey/Definition in adapter output: {source_id}")
+        if any(not item.get("Word") or not item.get("MatchKey") for item in occurrences):
+            raise SystemExit(f"Blank Word/MatchKey in adapter output: {source_id}")
+
+        # Definition completeness is edition-specific. Some source workbooks have
+        # legitimate blank gloss cells; their dedicated checker owns that contract.
+        blank_definitions = sum(1 for item in occurrences if not item.get("Definition", "").strip())
+        blank_definition_total += blank_definitions
 
         keys = [item.get("SourceOccurrenceKey", "") for item in occurrences]
         if any(not key for key in keys) or len(keys) != len(set(keys)):
@@ -78,20 +86,22 @@ def main() -> None:
                 f"{source_id}: prepare={'yes' if prepare.exists() else 'no'} check={'yes' if checker.exists() else 'no'}"
             )
         total += len(occurrences)
-        counts.append((source_id, len(occurrences)))
+        counts.append((source_id, len(occurrences), blank_definitions))
 
     if missing_tools:
         raise SystemExit("Enabled adapter lacks dedicated prepare/check contract: " + "; ".join(missing_tools))
 
     print("Third-party enabled Source Adapter closure = pass")
     print(f"enabled adapters = {len(enabled)}")
-    for source_id, count in counts:
-        print(f"adapter {source_id} occurrences = {count}")
+    for source_id, count, blank_definitions in counts:
+        print(f"adapter {source_id} occurrences = {count}; blank definitions = {blank_definitions}")
     print(f"enabled source occurrences = {total}")
+    print(f"blank definitions (edition-specific contract) = {blank_definition_total}")
     print("common occurrence schema = enforced")
     print("cross-adapter occurrence-key collision = no")
     print("dedicated prepare/check per enabled adapter = yes")
     print("identity/reconciliation fields in occurrence outputs = no")
+    print("generic gate invents edition-specific Definition rule = no")
     print("Klose state mutated = no")
 
 
