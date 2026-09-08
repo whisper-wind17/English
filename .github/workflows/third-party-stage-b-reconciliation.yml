@@ -43,11 +43,32 @@ jobs:
       - name: Rebuild current read-only premerge candidates
         run: python tools/build_third_party_klose_premerge.py
 
-      - name: Verify premerge readiness
+      - name: Verify current premerge snapshot
         run: python tools/check_third_party_klose_premerge.py
 
+      - name: Read premerge gate
+        id: gate
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+
+          path = Path('anki/klose/third_party_vocabulary/premerge/readiness.json')
+          status = json.loads(path.read_text(encoding='utf-8-sig'))
+          ready = status.get('ReadyForPremergeReview') is True
+          print(f"ready={'true' if ready else 'false'}")
+          PY
+
       - name: Check durable Stage-B reconciliation decisions
+        if: steps.gate.outputs.ready == 'true'
         run: python tools/check_third_party_stage_b_reconciliation.py
+
+      - name: Report Stage-B reconciliation gate
+        if: steps.gate.outputs.ready != 'true'
+        run: |
+          echo 'Stage-B reconciliation is gated by current Stage-A review work.'
+          echo 'No reconciliation decision validation or mutation is authorized.'
 
       - name: Assert reconciliation does not mutate Klose state
         shell: bash
