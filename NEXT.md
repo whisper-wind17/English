@@ -75,36 +75,36 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #13 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #14 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
 Durable Identity decisions         = 2105
-Identity-level Vocabulary Preview  = 1066
-Review/blocker surfaces            = 893
-Evidence-changed surfaces          = 799
-Multipart resolved                 = 11
+Identity-level Vocabulary Preview  = 1072
+Review/blocker surfaces            = 888
+Evidence-changed surfaces          = 794
+Multipart resolved                 = 12
 ```
 
 Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1054
+Learner-stage Vocabulary Preview   = 1060
 Identity rows suppressed by gate   = 12
-Preview occurrence contributions removed = 42
+Preview occurrence contributions removed = 44
 Explicit decision-bound past-form requirements = 13
 ```
 
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1066   (+81)
-Learner Preview    979  → 1054   (+75)
-Blockers          1010  →  893   (-117)
-Evidence-changed   911  →  799   (-112)
-Multipart            7  →   11   (+4)
+Identity Preview   985  → 1072   (+87)
+Learner Preview    979  → 1060   (+81)
+Blockers          1010  →  888   (-122)
+Evidence-changed   911  →  794   (-117)
+Multipart            7  →   12   (+5)
 ```
 
 ---
@@ -124,7 +124,8 @@ Source Fact
 - contractions 默认 route-expression；
 - dictionary/free-text Definition 不得作为 source identity truth；
 - lexical abbreviation 若教材明确绑定小学 lexical concept 可 keep；若 full form 同时存在且 identity 等价，优先 canonicalize；
-- 多个真实 target senses 必须 occurrence split，complete/disjoint cover 前不能 release；证据不足时可显式 `split-required / held`，不得猜 sense。
+- 多个真实 target senses 必须 occurrence split，complete/disjoint cover 前不能 release；证据不足时可显式 `split-required / held`，不得猜 sense；
+- former semantic collision 若不 split/held，必须使用显式 `learner-first` DecisionBasis + narrow TargetSense 才能 release。
 
 已冻结典型：
 
@@ -145,6 +146,13 @@ sport            → canonical 运动；体育运动
 sports           → reuse sport
 sleep            → 睡觉；睡眠
 slept            → reuse sleep；learner quarantine
+study            → learner-first narrow sense 学习；读书
+swim             → 游泳
+swam             → reuse swim；learner quarantine
+thank            → 感谢；distinct from lexicalized thanks
+vegetable        → 蔬菜；vegetables reuse vegetable
+watch#noun       → 手表；current 2 occurrences
+watch#verb       → 观看；注视；current 4 occurrences
 running          → lexicalized activity 跑步；not generic run inflection
 stairs           → lexicalized plural noun 楼梯
 broken           → lexicalized adjective 破损的/坏掉的，not automatic break reuse
@@ -153,8 +161,6 @@ fly#verb         → 飞；飞行；current 10 occurrences complete/disjoint wit
 fly#insect       → 苍蝇；current 1 occurrence
 flies            → split-required / held；canonical fly 已 resolve，但唯一 source occurrence 仍同时可解释 insect plural / fly 3sg，禁止 silent release
 ```
-
-`fly` 的 Waiyan Start3 `Flag Day` occurrence 属于同一 verb identity 的 construction-specific extension；为保持既有 scoped reuse（例如 `flew → fly#verb`）的 canonical TargetSense 一致性，Stage-A learner-facing core sense 仍冻结为 `飞；飞行`，不为单一构式额外 mint identity。
 
 ---
 
@@ -173,26 +179,34 @@ flies            → split-required / held；canonical fly 已 resolve，但唯�
 #11 at / no / broken / candy / don't / fell
 #12 fly / foot / go / leave / paint / shoe
 #13 short / sleep / sock / sometime / sport / story
+#14 study / swim / thank / vegetable / watch
 ```
 
-### Latest validation — Batch #13
+### Latest validation — Batch #14
 
 ```text
-run               = 34191932272 / #208 = SUCCESS
-batch commit       = c0039a098baab61a1a01b22432cb6ae8984306d3
-bot persist        = 4d59274169837c6c0cbb914a85fd0db793466505
+initial batch commit = 87ea8c80c3eaa022e108289057f7cfd8d2365dd0
+first run            = 34192303590 / #209 = FAIL at former-semantic-collision marker; no bot persist
+study marker fix     = 7293f8ed349cf515cd637f685204ba932dee9e76
+corrected run        = 34192385503 / #210 = SUCCESS
+bot persist          = 9368335ea8ce7dc2fd4e9c571688982a06d99077
 ```
+
+第一次失败不是 sense 判断错误：`study` 是 checker 冻结的 former semantic collision，单一 keep 放行必须在 `DecisionBasis` 显式带 `learner-first`。修复后继续保留 narrow TargetSense `学习；读书`，不引入 research / study-room dictionary senses。
 
 ```text
 selected active batch closure              = 100%
-Batch decisions                            = 6
+Batch decision rows                        = 6
+Touched MatchKeys                          = 5
 keep-identity                              = 6
+watch multipart partition                  = 2 noun + 4 verb, complete/disjoint
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1066 / 1066
+Identity Preview TargetSense               = 1072 / 1072
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
 homograph decision-scope gate              = ENFORCED
+former semantic collision policy           = ENFORCED
 known morphology decisions preserved       = YES
 canonical blocker bypass                   = NO
 source occurrence closure                  = PASS
@@ -201,19 +215,19 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-Batch #13 delta：
+Batch #14 delta：
 
 ```text
-Blockers          899 → 893   (-6)
-Evidence-changed  805 → 799   (-6)
-Identity Preview 1060 → 1066  (+6)
-Learner Preview  1048 → 1054  (+6)
-Multipart          11 →   11
+Blockers          893 → 888   (-5)
+Evidence-changed  799 → 794   (-5)
+Identity Preview 1066 → 1072  (+6)
+Learner Preview  1054 → 1060  (+6)
+Multipart          11 →   12  (+1)
 ```
 
-`short/shorts`、`sometime/sometimes`、`sport/sports` 三组关系保持原判，没有被 sixth-source revalidation 反向改写；`sleep` 仍是 noun/verb unified elementary concept，`slept` 继续 canonical reuse + learner quarantine。
+Preview 增加 6 而 selected surface 只有 5，是因为 `watch` 完整恢复两个 provisional identities：`watch#noun` 与 `watch#verb`。`swam → swim`、`thanks`、`vegetables → vegetable` 等既有关系保持不变。
 
-独立 compare `c0039a0... → 4d59274...` 只包含 Stage-A review/audit/learner/staging 生成物与 transient batch 文件删除；未触碰 source adapter/raw，也未触碰 Klose Master/Learner/Publish/Anki。
+独立 compare `7293f8e... → 9368335...` 只包含 Stage-A review/audit/learner/staging 生成物与 transient batch 文件删除；未触碰 source adapter/raw，也未触碰 Klose Master/Learner/Publish/Anki。
 
 ---
 
@@ -246,56 +260,40 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #14
+## 8. NEXT TASK — POLICY-REVIEW BATCH #15
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
-SelectedCount     = 5
-EvidenceWeight    = 57 / 60
+SelectedCount     = 2
+EvidenceWeight    = 20 / 60
 ExecutionReady    = true
-ReviewBundleFingerprint = 0d10c69531b03500e0b4efbe1554b5b5dd7c329a523ff805314960af1f56db2b
+ReviewBundleFingerprint = d38d0c70f2216406d99aaa922535f8d1d8f0c5136709b6bf41a3686691322ac8
 SelectedMatchKeys =
-  study
-  swim
-  thank
-  vegetable
-  watch
+  win
+  man
 ```
 
 本批重点：
 
 ```text
-study
-→ existing learner-first core 为“学习；读书”；需检查 sixth-source 是否引入 study-room / research 等真实 source sense，而不是 dictionary noise。
+win
+→ canonical 与 won reuse 关系已冻结；需用 sixth-source evidence 重绑，不扩张 TargetSense。
 
-swim
-→ noun / verb unified activity concept；同时与 swam reuse 有 canonical dependency，TargetSense 不得无意扩张。
-
-thank
-→ verb / interjection-like textbook presentation 边界；检查是否仍为稳定 gratitude lexical unit。
-
-vegetable
-→ concrete food noun vs plant/person dictionary noise。
-
-watch
-→ known multipart/homograph risk：watch#verb 与手表 noun boundary；必须检查 current occurrence partition，不能用一个 TargetSense 粗暴覆盖。
+man
+→ singular adult/person concept 与 men reuse 的关系；检查 Waiyan Start3 的多个 source contexts，避免 dictionary broad sense 污染。
 ```
 
 执行要求：
 
 ```text
-1. 读取 current review_bundle / exact source occurrences / related canonical/multipart decisions。
+1. 读取 exact source occurrences + current win/man/won/men decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
-4. 5/5 closure，不 cherry-pick；manifest fingerprint 必须从当前 next_batch.json 直接读取。
-5. apply + rebuild Identity/Learner views。
-6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
-7. 核对 blocker / Identity Preview / Learner Preview / canonical dependency delta。
-8. watch 若需要 multipart，必须 complete/disjoint；swam 等 scoped reuse 必须保持 canonical TargetSense 一致。
-9. Klose isolation 必须 PASS。
-10. bot persist 后重新 planner；阶段结束更新 NEXT.md。
+4. 2/2 closure；fingerprint 使用当前 next_batch 原值。
+5. apply/build/recheck/learner/batch/Klose isolation 全部 PASS。
+6. bot persist 后重新 planner并更新 NEXT.md。
 ```
 
 `flies` 当前仍是 independently held split-resolution item；除非后续 deterministic planner 明确选择并且 source evidence 足以消除 ambiguity，否则不得在其他 batch 中顺手修改。
