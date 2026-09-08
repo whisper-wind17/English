@@ -189,6 +189,8 @@ candidate:boy,boy,boy,男孩,boy,9,reviewed
 candidate:brake,brake,brake,刹车；制动,brake,1,reviewed
 candidate:brave,brave,brave,勇敢的,brave,2,reviewed
 candidate:bread,bread,bread,面包,bread,8,reviewed
+candidate:break#damage,break#damage,break,打破；弄坏,break|broke,4,reviewed
+candidate:break#recess,break#recess,break,课间休息；休息时间,break,2,reviewed
 candidate:breakfast,breakfast,breakfast,早餐；早饭,breakfast,7,reviewed
 candidate:breath,breath,breath,呼吸；气息,breath,1,reviewed
 candidate:bridge,bridge,bridge,桥,bridge,2,reviewed
@@ -273,6 +275,8 @@ candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chemistry,chemistry,chemistry,化学,chemistry,2,reviewed
 candidate:chess,chess,chess,国际象棋；棋,chess,2,reviewed
 candidate:chick,chick,chick,小鸡；雏鸡,chick,1,reviewed
+candidate:chicken#animal,chicken#animal,chicken,鸡；小鸡,chicken,4,reviewed
+candidate:chicken#meat,chicken#meat,chicken,鸡肉,chicken,8,reviewed
 candidate:child,child,child,孩子；儿童,child,5,reviewed
 candidate:children,children,children,孩子们；儿童（child 的复数）,children,9,reviewed
 candidate:children's day,children's day,Children's Day,儿童节,children's day,3,reviewed
@@ -281,6 +285,8 @@ candidate:china,china,China,中国,china,8,reviewed
 candidate:chinatown,chinatown,Chinatown,唐人街；中国城,chinatown,2,reviewed
 candidate:chinese book,chinese book,Chinese book,语文书；中文书,chinese book,1,reviewed
 candidate:chinese ink painting,chinese ink painting,Chinese ink painting,中国水墨画,chinese ink painting,1,reviewed
+candidate:chinese#language,chinese#language,Chinese,中文；语文,chinese,7,reviewed
+candidate:chinese#national,chinese#national,Chinese,中国的；中国人的,chinese,4,reviewed
 candidate:chips,chips,chips,[食品] 炸土豆条,chips,1,reviewed
 candidate:chocolate,chocolate,chocolate,巧克力,chocolate,5,reviewed
 candidate:choose,choose,choose,选择,choose,1,reviewed
@@ -1747,6 +1753,7 @@ candidate:tied,tied,tied,系住的；绑好的,tied,2,reviewed
 candidate:tiger,tiger,tiger,老虎,tiger,12,reviewed
 candidate:till,till,till,直到；直到……为止,till,1,reviewed
 candidate:timetable,timetable,timetable,时间表；课程表,timetable,1,reviewed
+candidate:tire,tire,tire,轮胎,tire,1,reviewed
 candidate:tired,tired,tired,疲倦的；累的,tired,9,reviewed
 candidate:to,to,to,到；向；往,to,8,reviewed
 candidate:to go,to go,to go,外带；打包带走,to go,2,reviewed
@@ -1775,11 +1782,13 @@ candidate:town,town,town,"城镇,市镇",town,3,reviewed
 candidate:toy,toy,toy,玩具,toy|toys,9,reviewed
 candidate:toy bear,toy bear,toy bear,玩具熊,toy bear,1,reviewed
 candidate:toy shop,toy shop,toy shop,玩具店,toy shop,1,reviewed
+candidate:track,track,track,赛道；轨道,track,1,reviewed
 candidate:traditional,traditional,traditional,传统的,traditional,2,reviewed
 candidate:traffic,traffic,traffic,交通,traffic,1,reviewed
 candidate:traffic lights,traffic lights,traffic lights,交通信号灯；红绿灯,traffic lights,1,reviewed
 candidate:train,train,train,火车,train,8,reviewed
 candidate:transportation,transportation,transportation,交通；运输,transportation,1,reviewed
+candidate:trash,trash,trash,垃圾；废物,trash,1,reviewed
 candidate:trashcan,trashcan,trashcan,垃圾桶,trashcan,1,reviewed
 candidate:travel,travel,travel,旅行,travel,7,reviewed
 candidate:tree,tree,tree,树,tree,8,reviewed
@@ -1844,6 +1853,7 @@ candidate:vegetable,vegetable,vegetable,蔬菜,vegetable|vegetables,11,reviewed
 candidate:very,very,very,非常；很,very,4,reviewed
 candidate:very much,very much,very much,非常；很,very much,1,reviewed
 candidate:vest,vest,vest,背心；马甲,vest,1,reviewed
+candidate:vet,vet,vet,兽医,vet,1,reviewed
 candidate:video,video,video,视频；录像,video,2,reviewed
 candidate:village,village,village,村庄,village,4,reviewed
 candidate:violin,violin,violin,小提琴,violin,4,reviewed
@@ -1864,8 +1874,9 @@ candidate:want,want,want,想要,want,8,reviewed
 candidate:wardrobe,wardrobe,wardrobe,衣柜,wardrobe,2,reviewed
 candidate:warm,warm,warm,温暖的,warm,8,reviewed
 candidate:warm-up,warm-up,warm-up,热身；准备运动,warm-up,1,reviewed
+candidate:warning,warning,warning,警告；警示,warning,1,reviewed
 candidate:was,was,was,是；在（be 的过去式，第一、第三人称单数）,was,4,reviewed
-candidate:wash,wash,wash,洗；清洗,wash|washed,8,reviewed
+candidate:wash,wash,wash,洗；清洗,wash|washed|washing,9,reviewed
 candidate:wash clothes,wash clothes,wash clothes,洗衣服,wash clothes|wash my clothes|washed clothes,3,reviewed
 candidate:washington d.c.,washington d.c.,Washington D.C.,华盛顿特区,washington d.c.,1,reviewed
 candidate:watch a film,watch a film,watch a film,看电影；观看电影,watch a film,1,reviewed
@@ -1884,6 +1895,7 @@ candidate:wednesday,wednesday,Wednesday,星期三,wednesday,9,reviewed
 candidate:week,week,week,星期；周,week,8,reviewed
 candidate:weekend,weekend,weekend,周末,weekend,6,reviewed
 candidate:weigh,weigh,weigh,称重量；重……,weigh,2,reviewed
+candidate:weight,weight,weight,重量；体重,weight,1,reviewed
 candidate:welcome,welcome,welcome,欢迎,welcome,7,reviewed
 candidate:well,well,well,好；很好地,well,11,reviewed
 candidate:well-known,well-known,well-known,著名的；众所周知的,well-known,1,reviewed
@@ -1937,15 +1949,18 @@ candidate:worry,worry,worry,担心；发愁,worry,7,reviewed
 candidate:would,would,would,会；将会（用于假设或过去将来）,would,1,reviewed
 candidate:would like,would like,would like,想要,would like,1,reviewed
 candidate:wow,wow,wow,哇；呀（表示惊讶或赞叹）,wow,4,reviewed
-candidate:write,write,write,写；书写,write|wrote,10,reviewed
+candidate:wrist,wrist,wrist,手腕；腕关节,wrist,1,reviewed
+candidate:write,write,write,写；书写,write|writing|wrote,11,reviewed
 candidate:write a letter,write a letter,write a letter,写信,write a letter,1,reviewed
 candidate:writer,writer,writer,作家；作者,writer,3,reviewed
 candidate:wrong,wrong,wrong,错误的；不对的,wrong,6,reviewed
+candidate:x-ray,x-ray,X-ray,X光；X光片,x-ray,1,reviewed
 candidate:yard,yard,yard,院子；庭院,yard,2,reviewed
 candidate:year,year,year,年,year,8,reviewed
 candidate:yellow,yellow,yellow,黄色；黄色的,yellow,9,reviewed
 candidate:yes,yes,yes,是；是的,yes,7,reviewed
 candidate:yesterday,yesterday,yesterday,昨天,yesterday,7,reviewed
+candidate:yo-yo,yo-yo,yo-yo,溜溜球；悠悠球,yo-yo,1,reviewed
 candidate:yogurt,yogurt,yogurt,酸奶,yogurt,1,reviewed
 candidate:you,you,you,你；你们,you,6,reviewed
 candidate:young,young,young,年轻的；年幼的,young|younger,10,reviewed
