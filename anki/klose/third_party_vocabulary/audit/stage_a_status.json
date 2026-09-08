@@ -1,32 +1,33 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "a4ffc6d03595d4f5ce66d9108614cbc4bbd78797",
-  "WorkflowRunID": "34220869671",
-  "WorkflowRunNumber": "237",
+  "InputCommit": "f0b01a896b11bb236d31e3e99090b783f3d3bdc6",
+  "WorkflowRunID": "34221085893",
+  "WorkflowRunNumber": "238",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2149,
-  "IdentityVocabularyPreview": 1829,
-  "LearnerVocabularyPreview": 1814,
-  "ReviewBlockers": 78,
-  "EvidenceChangedSurfaces": 11,
-  "MultipartResolved": 25,
+  "IdentityVocabularyPreview": 1837,
+  "LearnerVocabularyPreview": 1822,
+  "ReviewBlockers": 74,
+  "EvidenceChangedSurfaces": 7,
+  "MultipartResolved": 29,
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "semantic-review",
-    "SelectedCount": 4,
+    "SelectedCount": 5,
     "SelectedMatchKeys": [
-      "fish",
-      "hot",
-      "light",
-      "look"
+      "miss",
+      "orange",
+      "play",
+      "point",
+      "thin"
     ],
-    "EvidenceWeight": 58,
+    "EvidenceWeight": 57,
     "EffectiveWeightBudget": 60,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "a88264a97561b389d1b446af144e89bc82f657e21284d88a7bee8476a2bffd09",
-    "ReviewPacketFingerprint": "b25648a4cba2cf460977a1c5da70e820c83af0cbfa0c0af7f8a668109c457962"
+    "ReviewBundleFingerprint": "2941b15cf30b7e9cf645bdb62110e2ab1084edca5caf85c2056eea959d2fb705",
+    "ReviewPacketFingerprint": "f305606832313460b0e9bc9600ec951c02ee3f61d8ad859c6aa920225009b636"
   }
 }
