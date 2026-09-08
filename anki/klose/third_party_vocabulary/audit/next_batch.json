@@ -1,22 +1,19 @@
 {
   "PlanVersion": "v5-throughput-delta",
-  "ReviewLane": "split-resolution",
+  "ReviewLane": "",
   "ReviewMode": "full-evidence",
-  "SelectedMatchKeys": [
-    "right",
-    "sound"
-  ],
-  "SelectedCount": 2,
-  "EvidenceWeight": 26,
-  "SurfaceCap": 25,
-  "WeightBudget": 70,
-  "EffectiveWeightBudget": 70,
+  "SelectedMatchKeys": [],
+  "SelectedCount": 0,
+  "EvidenceWeight": 0,
+  "SurfaceCap": 0,
+  "WeightBudget": 0,
+  "EffectiveWeightBudget": 0,
   "PackingSkippedMatchKeys": [],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
-  "ExecutionReady": true,
-  "GateReason": "",
-  "ReviewBundleFingerprint": "dbb162979ecfb5cf7339d7b2a69c53269011aa757f441a55ddd0317c9bfb5a76",
-  "ReviewPacketFingerprint": "2fdb5aa559370a50b7e7a31060838bf1ef710297b5810e2d96b04d06d65dc048"
+  "ExecutionReady": false,
+  "GateReason": "no active review batch",
+  "ReviewBundleFingerprint": "45980818652c9e02e127ba6368eab48bf4eef8de0df47f14ce2cca738fdbb7a2",
+  "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
 }

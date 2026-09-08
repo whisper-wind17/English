@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "c7ecce2c8250481c476cec208f120ca3492c9cf4",
-  "WorkflowRunID": "34226147440",
-  "WorkflowRunNumber": "250",
+  "InputCommit": "76ba2eab330be1ed622fadcd2033a28d21b3fb14",
+  "WorkflowRunID": "34226315393",
+  "WorkflowRunNumber": "251",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2204,
@@ -15,16 +15,13 @@
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
-    "ReviewLane": "split-resolution",
-    "SelectedCount": 2,
-    "SelectedMatchKeys": [
-      "right",
-      "sound"
-    ],
-    "EvidenceWeight": 26,
-    "EffectiveWeightBudget": 70,
-    "ExecutionReady": true,
-    "ReviewBundleFingerprint": "dbb162979ecfb5cf7339d7b2a69c53269011aa757f441a55ddd0317c9bfb5a76",
-    "ReviewPacketFingerprint": "2fdb5aa559370a50b7e7a31060838bf1ef710297b5810e2d96b04d06d65dc048"
+    "ReviewLane": "",
+    "SelectedCount": 0,
+    "SelectedMatchKeys": [],
+    "EvidenceWeight": 0,
+    "EffectiveWeightBudget": 0,
+    "ExecutionReady": false,
+    "ReviewBundleFingerprint": "45980818652c9e02e127ba6368eab48bf4eef8de0df47f14ce2cca738fdbb7a2",
+    "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
   }
 }
