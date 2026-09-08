@@ -46,6 +46,7 @@ EXPECTED_SOURCE_COUNTS = {
     "renjiao_start3": 851,
     "hujiao_start3": 1111,
     "waiyan_start1": 1170,
+    "waiyan_start3": 1157,
 }
 ACTIONS = {
     "keep-identity", "reuse-identity", "split-required", "held",
@@ -151,9 +152,9 @@ def main() -> None:
 
     source_counts = Counter(r["SourceID"] for r in occ)
     for source_id in configured_ids:
-        if source_id in EXPECTED_SOURCE_COUNTS:
-            require(source_counts[source_id] == EXPECTED_SOURCE_COUNTS[source_id],
-                    f"{source_id} occurrence baseline drift")
+        require(source_id in EXPECTED_SOURCE_COUNTS, f"Enabled adapter lacks frozen source baseline: {source_id}")
+        require(source_counts[source_id] == EXPECTED_SOURCE_COUNTS[source_id],
+                f"{source_id} occurrence baseline drift")
 
     current_by_match: dict[str, set[str]] = defaultdict(set)
     for row in occ:
@@ -247,6 +248,8 @@ def main() -> None:
     for key in FORMER_SEMANTIC_COLLISIONS:
         ds = decisions_by_match.get(key, [])
         require(ds, f"Known semantic collision missing decision: {key}")
+        if key in stale_surfaces:
+            continue
         if key in resolved_multipart:
             require(len(ds) >= 2, f"Known semantic collision resolved without partition: {key}")
         else:
@@ -299,6 +302,8 @@ def main() -> None:
     require(all(r.get("TargetSense", "").strip() for r in preview), "Preview contains empty TargetSense")
 
     for key in FORMER_SEMANTIC_COLLISIONS - set(resolved_multipart):
+        if key in stale_surfaces:
+            continue
         d = single_by_key.get(key, {})
         if d.get("Action") in {"held", "split-required"}:
             require(key not in preview_keys, f"Unresolved semantic blocker leaked into preview: {key}")
@@ -318,8 +323,13 @@ def main() -> None:
         canonical = d.get("CanonicalMatchKey", "")
         if "#" in canonical:
             target = multipart_keep_index.get(canonical)
-            require(target is not None,
-                    f"Scoped reuse target is not a resolved multipart keep subgroup: {key} -> {canonical}")
+            if target is None:
+                base_key = canonical.split("#", 1)[0]
+                require(base_key in surface_keys and base_key not in resolved_multipart,
+                        f"Scoped reuse target is invalid despite current canonical state: {key} -> {canonical}")
+                require(key not in preview_source_matchkeys,
+                        f"Scoped reuse bypassed unresolved multipart canonical: {key} -> {canonical}")
+                continue
             target_decision = target[1]
             row = preview_by_key.get(canonical)
             require(row is not None, f"Scoped reuse canonical missing from preview: {key} -> {canonical}")
@@ -381,21 +391,32 @@ def main() -> None:
     require(single_by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
             "smart canonical TargetSense regression")
     for key in ("old", "thin", "stay", "do", "watch"):
+        if key in stale_surfaces:
+            continue
         d = single_by_key.get(key, {})
         if d.get("Action") in {"held", "split-required"}:
             require(key not in preview_keys, f"Blocked canonical leaked into preview via reuse alias: {key}")
         elif learner_first_resolved(d):
             require(key in preview_keys, f"Learner-first canonical missing from preview: {key}")
-    require(preview_by_key.get("candy", {}).get("TargetSense") == "糖果",
-            "candy canonical TargetSense polluted by candies alias")
-    require(preview_by_key.get("story", {}).get("TargetSense") == "故事",
-            "story canonical TargetSense polluted by stories alias")
-    require(preview_by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
-            "smart preview TargetSense is not canonical")
-    require("ice-cream" not in preview_keys and "ice cream" in preview_keys,
-            "ice-cream duplicate identity remains in preview")
-    require("listening to music" not in preview_keys and "listen to music" in preview_keys,
-            "listen-to-music duplicate activity identity remains in preview")
+
+    for key, expected_sense in {
+        "candy": "糖果",
+        "story": "故事",
+        "smart": "聪明的；机灵的",
+    }.items():
+        if key in stale_surfaces:
+            require(key not in preview_source_matchkeys,
+                    f"Stale canonical leaked into preview provenance: {key}")
+        else:
+            require(preview_by_key.get(key, {}).get("TargetSense") == expected_sense,
+                    f"{key} canonical TargetSense regression")
+
+    if not ({"ice-cream", "ice cream"} & stale_surfaces):
+        require("ice-cream" not in preview_keys and "ice cream" in preview_keys,
+                "ice-cream duplicate identity remains in preview")
+    if not ({"listening to music", "listen to music"} & stale_surfaces):
+        require("listening to music" not in preview_keys and "listen to music" in preview_keys,
+                "listen-to-music duplicate activity identity remains in preview")
 
     actions = Counter(r["Action"] for r in decisions)
     print("Third-party Simplified Completion Recheck = pass")
@@ -416,6 +437,7 @@ def main() -> None:
     print("Split occurrence partitions complete before release = yes")
     print("Partial split remains blocker = yes")
     print("Stale source surface excluded from preview provenance = yes")
+    print("Scoped reuse waits for unresolved multipart canonical = yes")
     print("Canonical blocker bypass = no")
     print("Canonical TargetSense precedence = yes")
     print("Simplified physical layout = yes")
