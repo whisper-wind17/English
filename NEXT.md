@@ -59,7 +59,7 @@ Third-party Source Occurrences
 → Klose learner-stage vocabulary view
 ```
 
-两份 durable truth 必须分层：
+Durable truth 必须分层：
 
 ```text
 review/identity_decisions.csv
@@ -69,7 +69,7 @@ learner/grammar_form_quarantine.csv
 = current Klose Learner Admission gate
 ```
 
-Reviewed identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evidence 变化必须 requeue。
+Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evidence 变化必须 requeue。
 
 Enabled adapters：
 
@@ -83,165 +83,199 @@ waiyan_start3    = 1157
 Total            = 6005
 ```
 
+仍处于 Stage A：不得 mint Stable ThirdPartyID，不得运行 Stage-B Klose diff，不得修改 Klose Master/Learner/Publish/Anki。
+
 ---
 
-## 3. Current checkpoint — SIX-ADAPTER / GRAMMAR-STAGE GATE VALIDATED
+## 3. Current checkpoint — POLICY REVIEW THROUGH BATCH #5 CHECKPOINTED
 
-Identity-level corpus 未被 learner gate 改写：
+当前 six-adapter corpus：
 
 ```text
 Enabled adapters                   = 6
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
-Durable Identity decisions         = 2098
-Identity-level Vocabulary Preview  = 985
-Review/blocker surfaces            = 1010
-Evidence-changed surfaces          = 911
-Multipart resolved                 = 7
+Durable Identity decisions         = 2102
+Identity-level Vocabulary Preview  = 1005
+Review/blocker surfaces            = 970
+Evidence-changed surfaces          = 875
+Multipart resolved                 = 9
 ```
 
-新增 current learner-stage projection：
+Current learner-stage projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 979
-Identity rows suppressed by gate   = 6
-Preview occurrence contributions removed = 11
+Learner-stage Vocabulary Preview   = 993
+Identity rows suppressed by gate   = 12
+Preview occurrence contributions removed = 34
+Explicit decision-bound past-form requirements = 11
 ```
 
-这里 `985 → 979` 不是删除 Identity：
+Identity / Learner separation 仍成立：
 
 ```text
-staging/unified_vocabulary_preview.csv
-= Stage-A Identity-level reviewed candidates
-
-learner/learner_vocabulary_preview.csv
-= 当前 Klose 可继续进入 learner pipeline 的视图
+Identity Preview 1005
+→ learner grammar-stage gate
+→ Learner Preview 993
 ```
+
+被 gate 的 12 个 Identity 没有被删除，只是当前不进入 Klose learner-facing view。
 
 ---
 
-## 4. Klose grammar-stage quarantine — FROZEN
+## 4. Grammar-stage quarantine — FROZEN
 
-用户确认：Klose 当前对过去式、过去分词/完成时相关语法仍处于较早阶段，因此 one-word past/past-participle forms 暂不进入当前 learner vocabulary。
-
-核心规则：
+Klose 当前尚未系统学习过去式、过去分词/完成时，因此 pure one-word past/past-participle forms 暂不进入 learner vocabulary。
 
 ```text
-went → go
-ate → eat
-broke → break#damage
-was → be
-
-Identity relation
-→ 保留 / 正常 resolved
-
-Learner Admission
-→ grammar-form quarantine
-→ 当前不进入 learner_vocabulary_preview.csv
+Identity resolved
+≠ current Learner Admission
 ```
 
-这不是 `held`，也不是 blocker。以后 grammar stage 提升时解除 learner gate 即可，不需要重做 Identity。
-
-当前 gate 同时暂缓 `could / would` 这类明显超出当前阶段的 modal-past / hypothetical forms。
-
-### Boundary guards
-
-不得按 `-ed` / dictionary gloss 粗暴过滤：
+典型：
 
 ```text
-scared = 害怕的；受惊的
-broken = 坏的；破损的
-lost   = 迷路的 / 丢失的
+went → go                 Identity resolved；learner quarantine
+broke → break#damage      Identity resolved；learner quarantine
+had / made / took / were  pedagogical Identity 可保留；learner quarantine
 ```
 
-若已 lexicalized 为独立 adjective/noun learning unit，正常保留。
+不得按字面形态粗暴过滤：
 
-普通复数、第三人称单数、`-ing` 不受本规则自动影响；`goes` 不 quarantine。
+```text
+lost   = 迷路的 / 丢失的      → lexicalized adjective，保留
+scared = 害怕的；受惊的       → 保留
+broken = 坏的；破损的         → 保留
+```
+
+普通复数、三单、`-ing` 不自动 quarantine。
 
 Homograph 必须 decision-scoped：
 
 ```text
-left = 左边/左侧           → 保留
-left = leave 的过去式      → quarantine
+left#direction   → 保留
+left#leave-past  → quarantine
 
-saw = 锯子                → 保留
-saw = see 的过去式         → quarantine
+saw#tool         → 保留
+saw#see-past     → quarantine
 ```
 
-Machine checker 不允许把 free-text dictionary `Definition` 当 grammar identity truth；否则 `go / hold / party / ground` 等会产生 false positive。
+Machine checker 不得把第三方 dictionary/free-text Definition 当 grammar identity truth。
 
 ---
 
-## 5. Validation checkpoint
+## 5. Completed deterministic policy batches after grammar-gate baseline
 
-Learner-gate architecture / policy / checker / workflow 已实现并通过完整 Stage-A 集成验证。
+Grammar-gate baseline：
+
+```text
+Decisions 2098 / Identity Preview 985 / Learner Preview 979
+Blockers 1010 / Evidence-changed 911 / Multipart 7
+```
+
+### Batch #2 — 10 surfaces
+
+```text
+swam / taught / told / took / went / were / won / wore / wrote / goes
+```
+
+完成 exact-evidence rebind；过去式继续由 learner gate 隔离，`goes` 不 quarantine。
+
+### Batch #3 — 8 surfaces
+
+```text
+noodles / sweets / thanks / women / sports / found / had / left
+```
+
+关键边界：`left` 完整拆为 direction 与 leave-past 两个 subgroup。`left#leave-past` 作为高频 pedagogical form 在 Identity 层显式 keep，当前 learner gate 精确隔离；不绕过 evidence-stale canonical `leave`。
+
+最终：
+
+```text
+Identity Preview 993 / Learner Preview 983 / Blockers 992
+Evidence-changed 894 / Multipart 8
+```
+
+### Batch #4 — 10 surfaces
+
+```text
+lost / made / said / saw / spent / spoke / er / hasn't / children / men
+```
+
+关键边界：
+
+```text
+lost      → lexicalized adjective，保留
+saw       → saw#tool + saw#see-past multipart
+saw#see-past → learner quarantine
+er        → 犹豫语气词，route-expression；第三方 ER 缩写释义为 glossary noise
+hasn't    → grammatical contraction，route-expression
+children / men → pedagogically salient irregular plural，keep
+```
+
+最终：
+
+```text
+Identity Preview 999 / Learner Preview 987 / Blockers 982
+Evidence-changed 886 / Multipart 9
+```
+
+### Batch #5 — 12 surfaces
+
+```text
+you're / am / can't / cd / dvd / he's / i'm / it / it's / mm / mr / ms
+```
+
+Adjudication：
+
+```text
+route-expression = you're / can't / he's / i'm / it's / mm
+keep-vocabulary  = am / cd / dvd / it / mr / ms
+```
+
+关键边界：
+
+- contractions 属 grammar presentation / Expressions；
+- `mm` 由教材 food/tasting neighborhood 绑定为反应语气词，millimetre 等释义为 glossary noise；
+- `CD / DVD / Mr / Ms` 虽是 abbreviation，但教材绑定明确小学 lexical concept，保留 Vocabulary；
+- `am` 是高频 present be-form pedagogical Identity，不属于 past-form quarantine；
+- `it` 是代词，技术缩写释义不作为 source identity truth。
 
 最终 successful workflow：
 
 ```text
-run 34183172105 / #193 = SUCCESS
-head = 2bbff1e9acc7ce25862c4e1651bc386a576aefd5
+run 34186941286 / #198 = SUCCESS
+batch commit = 767c367ea580e4e20beb8f34fbedf2dd11db1466
+bot persist  = 677bbc65657ed5eaa9cfb8e5f118715f0c741532
 ```
 
-bot generated learner views：
+Batch #5 validation：
 
 ```text
-177d220e616522703839aa4412427d45ce8a204a
-data: refresh simplified third-party Stage A workspace
+selected active batch closure              = 100%
+Third-party Simplified Completion Recheck  = PASS
+Identity Preview TargetSense               = 1005 / 1005
+Third-party learner-stage quarantine       = PASS
+past-form leak into learner preview        = NO
+lexicalized adjective/noun over-gating     = NO
+homograph decision-scope gate              = ENFORCED
+canonical blocker bypass                   = NO
+source occurrence closure                  = PASS
+transient batch files removed              = YES
+Klose Master/Learner/Publish/Anki          = UNTOUCHED
+Stable ThirdPartyID minted                 = NO
+Final Klose diff executed                  = NO
 ```
 
-核心验证：
+Cumulative delta from grammar-gate baseline：
 
 ```text
-Third-party Simplified Completion Recheck     = PASS
-Identity Preview TargetSense                  = 985 / 985
-Third-party learner-stage grammar quarantine  = PASS
-Learner-stage Vocabulary Preview              = 979
-Grammar-form quarantine gates                 = 56
-Past-form leak into learner preview           = NO
-Lexicalized participle/adjective over-gating  = NO
-Homograph decision-scope gate                 = ENFORCED
-Source-definition heuristic as identity truth = NO
-Identity truth mutated by learner gate        = NO
-Klose Master/Learner/Publish/Anki             = UNTOUCHED
-Stable ThirdPartyID minted                    = NO
-Final Klose diff executed                     = NO
-```
-
-Spot-check：
-
-```text
-got / was / took
-→ learner preview 中不存在
-
-scared = 害怕的；受惊的
-→ Identity + learner view 均保留
-
-break#damage
-Identity provenance = break|broke / 2
-Learner provenance  = break       / 1
-→ broke 被隔离，break 本体保留
-```
-
-Quarantine audit 明确记录 `left#leave-past`、`saw=see past` 为 `Scope=decision`，不会对整个 surface 一刀切。
-
-独立 diff-scope：task-start `99e9de33...` → bot checkpoint `177d220...` 只涉及：
-
-```text
-third_party_vocabulary/learner/*
-learner-view builder/checker
-Stage-A workflow wiring
-review policy
-```
-
-Klose Master/Learner/Publish/Anki 不在 diff 中。
-
-架构文档已同步更新：
-
-```text
-75697daf15b522f6958b69e32128087f1e8e01bc
-docs: separate third-party identity and learner views
+Identity Preview   985  → 1005   (+20)
+Learner Preview    979  →  993   (+14)
+Blockers          1010  →  970   (-40)
+Evidence-changed   911  →  875   (-36)
+Multipart            7  →    9   (+2)
 ```
 
 ---
@@ -258,9 +292,9 @@ Source Fact
 因此：
 
 ```text
-reuse-identity ≠ 当前必须学习
-keep-identity  ≠ 当前必须学习
-learner quarantine ≠ Identity unresolved
+reuse-identity      ≠ 当前必须学习
+keep-identity       ≠ 当前必须学习
+learner quarantine  ≠ Identity unresolved
 ```
 
 Future Stage B 不能直接消费 `unified_vocabulary_preview.csv` 作为当前学习清单；Identity reconciliation 后必须再经过 learner-stage gate。
@@ -289,7 +323,9 @@ event / tense-specific source chunk
 → complete cover 前不能 release
 ```
 
-所有 reviewed identity decision 仍以 exact current `OccurrenceKeys` 为 validity boundary。
+Contractions 默认属于 grammar presentation / Expression；lexical abbreviation 只有 source 能绑定明确小学概念时才 keep。
+
+所有 reviewed Identity decision 仍以 exact current `OccurrenceKeys` 为 validity boundary。
 
 ---
 
@@ -302,7 +338,7 @@ review_bundle.csv
 → deterministic next_batch.json
 → batch_manifest.json + decision_updates.csv
 → manifest closure check
-→ apply/build identity view
+→ apply/build Identity view
 → build/check learner-stage view
 → core Completion Recheck
 → batch Completion Recheck
@@ -322,52 +358,62 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 9. NEXT TASK — POLICY-REVIEW BATCH #2
+## 9. NEXT TASK — POLICY-REVIEW BATCH #6
 
-当前 deterministic planner 仍是 Identity review；learner quarantine 不替代 Identity adjudication。
+Current deterministic planner：
 
 ```text
-ReviewLane         = policy-review
-SelectedCount      = 10
-EvidenceWeight     = 53 / 60
-ExecutionReady     = true
-SelectedMatchKeys  =
-  swam
-  taught
-  told
-  took
-  went
-  were
-  won
-  wore
-  wrote
-  goes
+ReviewLane        = policy-review
+SelectedCount     = 10
+EvidenceWeight    = 57 / 60
+ExecutionReady    = true
+SelectedMatchKeys =
+  o'clock
+  pe
+  physical education
+  pop
+  she's
+  tv
+  clothes
+  couldn't
+  didn't
+  doesn't
 ```
 
-其中：
+本批重点边界：
 
 ```text
-swam / taught / told / took / went / were / won / wore / wrote
-→ 继续完成 exact-evidence Identity re-review
-→ 即使 resolved，current Learner Admission 仍 quarantine
+she's / couldn't / didn't / doesn't
+→ contraction / grammar-object boundary
 
-goes
-→ 正常 form-policy Identity review
-→ 不属于 current past-form quarantine
+pe / physical education
+→ school-subject abbreviation / canonical relation
+
+tv
+→ lexical abbreviation
+
+o'clock
+→ fixed lexical/time expression boundary
+
+pop
+→ source-context lexical sense，防止 broad dictionary polysemy 污染
+
+clothes
+→ lexicalized plural vs morphology policy
 ```
 
 执行要求：
 
 ```text
-1. 读取 current review_bundle.csv / next_batch.json 与 exact source evidence。
+1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
 2. 不修改 source/raw/parser/config。
-3. 精确生成 planner 对应 batch_manifest.json + decision_updates.csv。
-4. selected active batch closure = 100%。
-5. apply 后 rebuild Identity + Learner views。
-6. core Completion Recheck + learner gate checker + batch Completion Recheck 全部 PASS。
+3. 生成与 planner 精确一致的 batch_manifest.json + decision_updates.csv。
+4. 10/10 closure，不 cherry-pick。
+5. apply + rebuild Identity/Learner views。
+6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
 7. 核对 blocker / Identity Preview / Learner Preview delta。
 8. Klose isolation 必须 PASS。
-9. 更新 NEXT.md。
+9. bot persist 后重新 planner；阶段结束时更新 NEXT.md。
 ```
 
 仍然禁止：
