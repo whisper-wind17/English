@@ -234,7 +234,7 @@ candidate:card,card,card,卡片；卡,card,6,reviewed
 candidate:careful,careful,careful,小心的；仔细的,careful,4,reviewed
 candidate:carefully,carefully,carefully,小心地；仔细地,carefully,1,reviewed
 candidate:careless,careless,careless,粗心的；不小心的,careless,1,reviewed
-candidate:carrot,carrot,carrot,胡萝卜,carrot,3,reviewed
+candidate:carrot,carrot,carrot,胡萝卜,carrot|carrots,4,reviewed
 candidate:carry,carry,carry,拿；携带；搬运,carried|carry,8,reviewed
 candidate:cartoon,cartoon,cartoon,卡通；动画片,cartoon|cartoons,3,reviewed
 candidate:cashier,cashier,cashier,收银员,cashier,2,reviewed
@@ -409,7 +409,7 @@ candidate:drop#verb,drop#verb,drop,掉下；使掉落,drop|dropped,5,reviewed
 candidate:drum,drum,drum,鼓,drum,2,reviewed
 candidate:dry,dry,dry,干的；干燥的,dry,2,reviewed
 candidate:duckling,duckling,duckling,小鸭子,duckling,1,reviewed
-candidate:dumpling,dumpling,dumpling,饺子,dumpling,4,reviewed
+candidate:dumpling,dumpling,dumpling,饺子,dumpling|dumplings,5,reviewed
 candidate:during,during,during,在……期间；在……的时候,during,2,reviewed
 candidate:dvd,dvd,DVD,DVD；数字光盘,dvd,2,reviewed
 candidate:e-book,e-book,e-book,电子书,e-book,1,reviewed
@@ -667,7 +667,7 @@ candidate:hair,hair,hair,头发；毛发,hair,10,reviewed
 candidate:half,half,half,一半；半,half,6,reviewed
 candidate:hall,hall,hall,大厅；礼堂,hall,2,reviewed
 candidate:halloween,halloween,Halloween,万圣节前夕,halloween,2,reviewed
-candidate:hamburger,hamburger,hamburger,汉堡包,hamburger,6,reviewed
+candidate:hamburger,hamburger,hamburger,汉堡包,hamburger|hamburgers,8,reviewed
 candidate:hand,hand,hand,手,hand,9,reviewed
 candidate:handsome,handsome,handsome,英俊的；帅气的,handsome,3,reviewed
 candidate:hang,hang,hang,悬挂；挂,hang,1,reviewed
@@ -846,6 +846,8 @@ candidate:lazy,lazy,lazy,懒惰的；懒洋洋的,lazy,2,reviewed
 candidate:leaf,leaf,leaf,叶子；树叶,leaf|leaves,6,reviewed
 candidate:learn,learn,learn,学习；学会,learn|learnt,7,reviewed
 candidate:leave,leave,leave,离开；出发,leave,4,reviewed
+candidate:left#direction,left#direction,left,左边；左侧,left,9,reviewed
+candidate:left#leave-past,left#leave-past,left,离开；出发（leave 的过去式）,left,2,reviewed
 candidate:leg,leg,leg,腿,leg,9,reviewed
 candidate:lemon,lemon,lemon,柠檬,lemon,2,reviewed
 candidate:less,less,less,更少；较少,less,1,reviewed
@@ -1073,7 +1075,7 @@ candidate:once upon a time,once upon a time,once upon a time,从前；很久很�
 candidate:one,one,one,一；一个,one,10,reviewed
 candidate:one by one,one by one,one by one,一个接一个地；逐个地,one by one,1,reviewed
 candidate:one day,one day,one day,有一天；某一天,one day,1,reviewed
-candidate:onion,onion,onion,洋葱,onion,2,reviewed
+candidate:onion,onion,onion,洋葱,onion|onions,3,reviewed
 candidate:online,online,online,在线的；在线地,online,1,reviewed
 candidate:only,only,only,只；仅仅；唯一的,only,5,reviewed
 candidate:open,open,open,打开；开着的；开放的,open,8,reviewed
@@ -1197,7 +1199,7 @@ candidate:post office,post office,post office,邮局,post office,4,reviewed
 candidate:postcard,postcard,postcard,明信片,postcard,3,reviewed
 candidate:poster,poster,poster,海报；招贴,poster,3,reviewed
 candidate:postman,postman,postman,邮递员；邮差,postman,1,reviewed
-candidate:potato,potato,potato,土豆；马铃薯,potato,7,reviewed
+candidate:potato,potato,potato,土豆；马铃薯,potato|potatoes,8,reviewed
 candidate:pound,pound,pound,英镑,pound,1,reviewed
 candidate:powerful,powerful,powerful,强大的；有力的,powerful,1,reviewed
 candidate:practice,practice,practice,练习；训练,practice,1,reviewed
@@ -1311,6 +1313,8 @@ candidate:saturday,saturday,Saturday,星期六,saturday,9,reviewed
 candidate:sausage,sausage,sausage,香肠,sausage,2,reviewed
 candidate:save#conserve,save#conserve,save,节省；节约,save,1,reviewed
 candidate:save#rescue,save#rescue,save,救；挽救,save,1,reviewed
+candidate:saw#see-past,saw#see-past,saw,看见；看到（see 的过去式）,saw,6,reviewed
+candidate:saw#tool,saw#tool,saw,锯子,saw,1,reviewed
 candidate:say,say,say,说；讲,said|say,13,reviewed
 candidate:say to oneself,say to oneself,say to oneself,心里想；自言自语地说,say to oneself,1,reviewed
 candidate:scared,scared,scared,害怕的；受惊的,scared,3,reviewed
@@ -1637,7 +1641,7 @@ candidate:to go,to go,to go,外带；打包带走,to go,2,reviewed
 candidate:today,today,today,今天,today,8,reviewed
 candidate:together,together,together,一起,together,7,reviewed
 candidate:toilet,toilet,toilet,厕所；洗手间,toilet,7,reviewed
-candidate:tomato,tomato,tomato,西红柿；番茄,tomato,8,reviewed
+candidate:tomato,tomato,tomato,西红柿；番茄,tomato|tomatoes,9,reviewed
 candidate:tomb,tomb,tomb,坟墓；陵墓,tomb,1,reviewed
 candidate:tomorrow,tomorrow,tomorrow,明天,tomorrow,8,reviewed
 candidate:tongue,tongue,tongue,舌头,tongue,2,reviewed
@@ -1656,7 +1660,7 @@ candidate:tourist,tourist,tourist,游客；旅行者,tourist,1,reviewed
 candidate:tower,tower,tower,塔；塔楼,tower,1,reviewed
 candidate:tower bridge,tower bridge,Tower Bridge,伦敦塔桥,tower bridge,1,reviewed
 candidate:town,town,town,"城镇,市镇",town,3,reviewed
-candidate:toy,toy,toy,玩具,toy,8,reviewed
+candidate:toy,toy,toy,玩具,toy|toys,9,reviewed
 candidate:toy bear,toy bear,toy bear,玩具熊,toy bear,1,reviewed
 candidate:toy shop,toy shop,toy shop,玩具店,toy shop,1,reviewed
 candidate:traditional,traditional,traditional,传统的,traditional,2,reviewed
@@ -1808,6 +1812,7 @@ candidate:woman,woman,woman,女人；妇女；成年女子,woman,7,reviewed
 candidate:women,women,women,女人们；妇女们（woman 的复数）,women,4,reviewed
 candidate:wonderful,wonderful,wonderful,精彩的；极好的,wonderful,7,reviewed
 candidate:wood,wood,wood,木头；木材,wood,3,reviewed
+candidate:woods,woods,woods,树林；森林,woods,1,reviewed
 candidate:woof,woof,woof,汪；狗叫声,woof,3,reviewed
 candidate:word,word,word,单词,word,6,reviewed
 candidate:word book,word book,word book,单词本；词汇本,word book,1,reviewed

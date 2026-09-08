@@ -1,5 +1,5 @@
 ﻿MatchKey,DisplayForms,Definitions,SourceIDs,SourceBooks,OccurrenceCount,CandidateSignals,CandidateMatchKeys,DecisionAction,DecisionStatus,CanonicalMatchKey,TargetSense
-... o'clock,... o'clock,abbr. ...点钟(等于of the clock),beishida_start1,beishida_start1:4年级下,1,multiword|punctuated|format-alias,o'clock,pending,pending,,
+... o'clock,... o'clock,abbr. ...点钟(等于of the clock),beishida_start1,beishida_start1:4年级下,1,multiword|punctuated|format-alias,o'clock,route-expression,reviewed,,……点钟（用于整点时间表达）
 10th,10th,无,renjiao_start1,renjiao_start1:5年级下,1,,,reuse-identity,reviewed,tenth,
 12th,12th,无,renjiao_start1,renjiao_start1:5年级下,1,,,reuse-identity,reviewed,twelfth,
 15th,15th,无,renjiao_start1,renjiao_start1:5年级下,1,,,reuse-identity,reviewed,fifteenth,
@@ -297,7 +297,7 @@ carefully,carefully,adv. 小心地,hujiao_start3,hujiao_start3:6年级下,1,,,ke
 careless,careless,adj. 粗心的;无忧无虑的;淡漠的,renjiao_start1,renjiao_start1:5年级上,1,,,keep-identity,reviewed,,粗心的；不小心的
 carried,carried,v. 保持(carry的过去式和过去分词);搬运 adj. 被运的;入神的;忘我的,waiyan_start1|waiyan_start3,waiyan_start1:4年级上|waiyan_start3:4年级下,2,cross-source-exact|multiple-occurrences,,reuse-identity,reviewed,carry,
 carrot,carrot,n. 胡萝卜 诱饵,beijing_start1|hujiao_start3|renjiao_start3,beijing_start1:5年级下|hujiao_start3:4年级上|renjiao_start3:4年级下,3,cross-source-exact|multiple-occurrences|morphology,carrots,keep-identity,reviewed,,胡萝卜
-carrots,carrots,n. [园艺] 胡萝卜;红萝卜(carrot的复数形式),beishida_start1,beishida_start1:2年级下,1,morphology,carrot,pending,pending,,
+carrots,carrots,n. [园艺] 胡萝卜;红萝卜(carrot的复数形式),beishida_start1,beishida_start1:2年级下,1,morphology,carrot,reuse-identity,reviewed,carrot,
 carry,carry,"n. 运载;[计] 进位;射程 vi. 能达到;被携带;被搬运 vt. 拿,扛;携带;支持;搬运",beijing_start1|beishida_start1|hujiao_start3|waiyan_start1|waiyan_start3,beijing_start1:5年级下|beishida_start1:2年级下|hujiao_start3:5年级上|hujiao_start3:6年级下|waiyan_start1:5年级下|waiyan_start3:4年级下,6,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,拿；携带；搬运
 cartoon,cartoon,"n. 卡通片,[电影] 动画片;连环漫画 vt. 为...画漫画 vi. 画漫画",renjiao_start3|waiyan_start1,renjiao_start3:5年级上|waiyan_start1:4年级下,2,cross-source-exact|multiple-occurrences|morphology,cartoons,keep-identity,reviewed,,卡通；动画片
 cartoons,cartoons,n. 卡通动画;动漫图书(cartoon的复数) v. 画漫画(cartoon的三单形式),renjiao_start1,renjiao_start1:5年级上,1,morphology,cartoon,reuse-identity,reviewed,cartoon,
@@ -529,7 +529,7 @@ dry,dry,n. 干涸 adj. 干的;口渴的;枯燥无味的;禁酒的 vt. 把...弄�
 duck,duck,n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中,beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:1年级下|beijing_start1:4年级上|beishida_start1:1年级上|hujiao_start3:4年级下|jijiao_start3:3年级下|renjiao_start1:3年级上|renjiao_start3:3年级上|waiyan_start1:1年级下|waiyan_start3:6年级下,9,cross-source-exact|multiple-occurrences|decision-evidence-changed,,pending,pending,,
 duckling,duckling,n. 小鸭子,hujiao_start3,hujiao_start3:4年级下,1,,,keep-identity,reviewed,,小鸭子
 dumpling,dumpling,"n. 饺子,汤团;面团布丁",hujiao_start3|renjiao_start1|waiyan_start1|waiyan_start3,hujiao_start3:5年级下|renjiao_start1:6年级上|waiyan_start1:2年级上|waiyan_start3:4年级上,4,cross-source-exact|multiple-occurrences|morphology,dumplings,keep-identity,reviewed,,饺子
-dumplings,dumplings,n. 饺子(dumpling的复数),beishida_start1,beishida_start1:3年级下,1,morphology,dumpling,pending,pending,,
+dumplings,dumplings,n. 饺子(dumpling的复数),beishida_start1,beishida_start1:3年级下,1,morphology,dumpling,reuse-identity,reviewed,dumpling,
 during,during,"prep. 在...的时候,在...的期间",hujiao_start3|waiyan_start1,hujiao_start3:6年级上|waiyan_start1:4年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,在……期间；在……的时候
 dust,dust,n. 灰尘;尘埃;尘土 vt. 撒;拂去灰尘 vi. 拂去灰尘;化为粉末,beishida_start1,beishida_start1:6年级上,1,,,pending,pending,,
 dvd,DVD,abbr. 数字化视频光盘(Digital Video Disk),waiyan_start1|waiyan_start3,waiyan_start1:5年级下|waiyan_start3:6年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,DVD；数字光盘
@@ -843,7 +843,7 @@ half past ...,half past ...,点半;半点;踏半,hujiao_start3,hujiao_start3:4�
 hall,hall,"n. 过道,门厅,走廊;会堂;食堂;学生宿舍;大厅,前厅;娱乐中心,会所",hujiao_start3|renjiao_start3,hujiao_start3:5年级下|renjiao_start3:6年级下,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,大厅；礼堂
 halloween,Halloween,n. 万圣节前夕(指十月三十一日夜晚),waiyan_start1|waiyan_start3,waiyan_start1:5年级上|waiyan_start3:4年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,万圣节前夕
 hamburger,hamburger,"n. 汉堡包,火腿汉堡;牛肉饼,肉饼;碎牛肉",beijing_start1|hujiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:4年级上|hujiao_start3:6年级上|renjiao_start1:4年级上|renjiao_start3:5年级上|waiyan_start1:3年级上|waiyan_start3:5年级下,6,cross-source-exact|multiple-occurrences|morphology,hamburgers,keep-identity,reviewed,,汉堡包
-hamburgers,hamburgers,n. 汉堡包( hamburger的名词复数 ),beishida_start1,beishida_start1:1年级下|beishida_start1:3年级下,2,multiple-occurrences|morphology,hamburger,pending,pending,,
+hamburgers,hamburgers,n. 汉堡包( hamburger的名词复数 ),beishida_start1,beishida_start1:1年级下|beishida_start1:3年级下,2,multiple-occurrences|morphology,hamburger,reuse-identity,reviewed,hamburger,
 hammer,hammer,n. 铁锤;链球;[解剖] 锤骨;音锤 vi. 锤击;敲打;重复 vt. 锤击;锤打,beishida_start1,beishida_start1:1年级上,1,,,pending,pending,,
 hand,hand,"n. 手,手艺;帮助;指针;插手 vt. 传递,交给;支持;搀扶",beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:2年级上|beishida_start1:3年级下|hujiao_start3:3年级下|jijiao_start3:3年级上|jijiao_start3:6年级下|renjiao_start1:3年级上|renjiao_start3:3年级上|waiyan_start1:1年级下|waiyan_start3:3年级上,9,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,手
 handsome,handsome,"adj. (男子)英俊的;可观的;大方的,慷慨的;健美而端庄的",hujiao_start3|renjiao_start1,hujiao_start3:6年级上|renjiao_start1:2年级上|renjiao_start1:3年级下,3,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,英俊的；帅气的
@@ -1107,7 +1107,7 @@ learned to walk,learned to walk,无,renjiao_start1,renjiao_start1:5年级下,1,m
 learnt,learnt,v. 学习(learn的过去式和过去分词),waiyan_start1|waiyan_start3,waiyan_start1:4年级下|waiyan_start3:5年级下,2,cross-source-exact|multiple-occurrences,,reuse-identity,reviewed,learn,
 leave,leave,"vt. 离开;留下;遗忘;委托 vi. 离开,出发;留下 n. 许可,同意;休假",beishida_start1|renjiao_start1|waiyan_start1|waiyan_start3,beishida_start1:6年级下|renjiao_start1:4年级下|waiyan_start1:5年级下|waiyan_start3:6年级下,4,cross-source-exact|multiple-occurrences|morphology,leaves,keep-identity,reviewed,,离开；出发
 leaves,leaves,n. 树叶;花瓣(leaf的复数) v. 离开(leave的第三人称单数),waiyan_start1,waiyan_start1:4年级上,1,morphology,leave,reuse-identity,reviewed,leaf,
-left,left,adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式),beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|hujiao_start3:5年级上|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上,11,cross-source-exact|multiple-occurrences|decision-evidence-changed,,pending,pending,,
+left,left,adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式),beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|hujiao_start3:5年级上|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上,11,cross-source-exact|multiple-occurrences,,multipart-reviewed,reviewed,,
 leg,leg,n. 腿;支柱,beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:2年级上|beishida_start1:3年级下|hujiao_start3:3年级下|jijiao_start3:3年级上|jijiao_start3:6年级上|renjiao_start1:3年级上|renjiao_start3:3年级上|waiyan_start1:1年级下|waiyan_start3:3年级上,9,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,腿
 lemon,lemon,adj. 柠檬色的 n. 柠檬,beishida_start1|hujiao_start3,beishida_start1:2年级下|hujiao_start3:3年级下,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,柠檬
 leopard,leopard,n. 豹;美洲豹,beishida_start1,beishida_start1:4年级上,1,,,pending,pending,,
@@ -1272,7 +1272,7 @@ most,most,"adv. 最;非常,极其;最多;几乎 adj. 大部分的,多数的;最�
 mother,mother,n. 母亲;大娘;女修道院院长 vt. 生下;养育;像母亲般关怀或照管 adj. 母亲的;出生地的,beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:3年级下|beishida_start1:1年级下|beishida_start1:2年级上|hujiao_start3:3年级上|jijiao_start3:3年级上|jijiao_start3:5年级上|renjiao_start1:2年级上|renjiao_start1:3年级下|renjiao_start3:3年级下|waiyan_start1:1年级上|waiyan_start3:3年级上,11,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,母亲；妈妈
 mother's day,Mother's Day,na. (美国和加拿大的)母亲节,renjiao_start1|waiyan_start1,renjiao_start1:5年级下|waiyan_start1:3年级下,2,cross-source-exact|multiple-occurrences|multiword,,keep-identity,reviewed,,母亲节
 mountain,mountain,n. 山;山脉,beijing_start1|beishida_start1|hujiao_start3|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:6年级上|beishida_start1:6年级上|hujiao_start3:5年级上|hujiao_start3:6年级下|renjiao_start3:5年级上|waiyan_start1:4年级上|waiyan_start3:5年级上,7,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,山；山脉
-mouse,mouse,n. 鼠标;老鼠;胆小羞怯的人 vt. 探出 vi. 捕鼠;窥探,beijing_start1|beishida_start1|hujiao_start3|renjiao_start3|waiyan_start1,beijing_start1:1年级上|beishida_start1:1年级下|hujiao_start3:3年级上|renjiao_start3:5年级上|waiyan_start1:4年级上,5,cross-source-exact|multiple-occurrences|morphology|decision-evidence-changed,mice,pending,pending,,
+mouse,mouse,n. 鼠标;老鼠;胆小羞怯的人 vt. 探出 vi. 捕鼠;窥探,beijing_start1|beishida_start1|hujiao_start3|renjiao_start3|waiyan_start1,beijing_start1:1年级上|beishida_start1:1年级下|hujiao_start3:3年级上|renjiao_start3:5年级上|waiyan_start1:4年级上,5,cross-source-exact|multiple-occurrences|morphology,mice,split-required,held,,
 mouth,mouth,"n. 口,嘴;河口 vt. 做作地说,装腔作势地说;喃喃地说出 vi. 装腔作势说话",beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:4年级下|beishida_start1:3年级下|hujiao_start3:3年级上|jijiao_start3:3年级上|jijiao_start3:6年级上|renjiao_start1:1年级上|renjiao_start1:3年级上|renjiao_start3:3年级上|waiyan_start1:1年级下|waiyan_start3:3年级上,10,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,嘴；口
 move,move,"n. 移动;步骤;迁居;策略 vi. 移动;搬家,迁移;离开 vt. 移动;感动",beishida_start1|hujiao_start3|renjiao_start3,beishida_start1:3年级上|hujiao_start3:5年级上|renjiao_start3:5年级上,3,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,移动；搬动；搬家
 mr,Mr,abbr. 先生(Mister),beijing_start1|hujiao_start3|waiyan_start1|waiyan_start3,beijing_start1:6年级上|hujiao_start3:3年级上|waiyan_start1:4年级上|waiyan_start3:3年级上,4,cross-source-exact|multiple-occurrences|morphology,mrs,keep-identity,reviewed,,先生
@@ -1396,7 +1396,7 @@ one,one,pron. 一个人;任何人 adj. 一的;唯一的 n. 一 num. 一;一个,b
 one by one,one by one,na. 一个一个;一个一个地,hujiao_start3,hujiao_start3:6年级下,1,multiword,,keep-identity,reviewed,,一个接一个地；逐个地
 one day,one day,na. 有一天;(过去或将来的)某一天,waiyan_start3,waiyan_start3:4年级下,1,multiword,,keep-identity,reviewed,,有一天；某一天
 onion,onion,n. 洋葱;洋葱头,renjiao_start3|waiyan_start1,renjiao_start3:5年级上|waiyan_start1:2年级上,2,cross-source-exact|multiple-occurrences|morphology,onions,keep-identity,reviewed,,洋葱
-onions,onions,n. [园艺] 洋葱(onion的复数) v. 因洋葱使掉泪(onion的单三形式),beishida_start1,beishida_start1:2年级下,1,morphology,onion,pending,pending,,
+onions,onions,n. [园艺] 洋葱(onion的复数) v. 因洋葱使掉泪(onion的单三形式),beishida_start1,beishida_start1:2年级下,1,morphology,onion,reuse-identity,reviewed,onion,
 online,online,adj. 联机的;在线的 adv. 在线地,hujiao_start3,hujiao_start3:6年级下,1,,,keep-identity,reviewed,,在线的；在线地
 only,only,"adv. 只,仅仅;不料 adj. 唯一的,仅有的;最合适的 conj. 但是;不过;可是",beijing_start1|hujiao_start3|renjiao_start1|waiyan_start1|waiyan_start3,beijing_start1:6年级下|hujiao_start3:5年级下|renjiao_start1:5年级上|waiyan_start1:4年级上|waiyan_start3:3年级下,5,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,只；仅仅；唯一的
 ooh,ooh,int. (表示惊异、热心、高兴或不悦的叫声)哦!,waiyan_start1|waiyan_start3,waiyan_start1:1年级上|waiyan_start3:3年级上,2,cross-source-exact|multiple-occurrences,,route-expression,reviewed,,哦；哇（表示惊讶、高兴等反应）
@@ -1554,7 +1554,7 @@ postcard,postcard,n. 明信片,renjiao_start3|waiyan_start1|waiyan_start3,renjia
 poster,poster,"n. 海报,广告;招贴",hujiao_start3|waiyan_start1|waiyan_start3,hujiao_start3:5年级下|waiyan_start1:2年级上|waiyan_start3:4年级下,3,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,海报；招贴
 postman,postman,n. 邮递员;邮差,renjiao_start3,renjiao_start3:6年级上,1,,,keep-identity,reviewed,,邮递员；邮差
 potato,potato,"n. [作物] 土豆,[作物] 马铃薯",beijing_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:3年级下|hujiao_start3:4年级上|jijiao_start3:4年级上|renjiao_start1:3年级上|renjiao_start3:4年级下|waiyan_start1:4年级下|waiyan_start3:4年级上,7,cross-source-exact|multiple-occurrences|morphology,potatoes,keep-identity,reviewed,,土豆；马铃薯
-potatoes,potatoes,n. [作物] 土豆(potato的复数形式);[作物] 马铃薯,beishida_start1,beishida_start1:2年级下,1,morphology,potato,pending,pending,,
+potatoes,potatoes,n. [作物] 土豆(potato的复数形式);[作物] 马铃薯,beishida_start1,beishida_start1:2年级下,1,morphology,potato,reuse-identity,reviewed,potato,
 pound,pound,"n. 英镑;重击,重击声;兽栏;拘留所 vt. 捣烂;敲打;监禁,拘留 vi. 连续重击,猛击",waiyan_start1,waiyan_start1:5年级下,1,,,keep-identity,reviewed,,英镑
 pour,pour,"n. 倾泻;流出;骤雨 vt. 灌,注;倒;倾泻;倾吐 vi. 倾泻;涌流;斟茶",beishida_start1,beishida_start1:5年级下,1,,,pending,pending,,
 powerful,powerful,adj. 强大的;强有力的 adv. 很;非常,hujiao_start3,hujiao_start3:6年级下,1,,,keep-identity,reviewed,,强大的；有力的
@@ -1693,7 +1693,7 @@ sang,sang,"v. 唱,唱歌(sing的过去式)",waiyan_start3,waiyan_start3:4年级�
 saturday,Saturday,n. 星期六,beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:2年级上|beishida_start1:4年级下|hujiao_start3:4年级下|jijiao_start3:5年级上|renjiao_start1:2年级下|renjiao_start1:4年级上|renjiao_start3:5年级上|waiyan_start1:3年级上|waiyan_start3:3年级下,9,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,星期六
 sausage,sausage,n. 香肠;腊肠;装香肠的碎肉,waiyan_start1|waiyan_start3,waiyan_start1:5年级下|waiyan_start3:5年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,香肠
 save,save,prep. 除...之外 n. 救援 vi. 节省;挽救 vt. 节省;保存;储蓄;解救,beijing_start1|hujiao_start3,beijing_start1:6年级下|hujiao_start3:5年级上,2,cross-source-exact|multiple-occurrences,,multipart-reviewed,reviewed,,
-saw,saw,"n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",beishida_start1|hujiao_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3,beishida_start1:5年级上|hujiao_start3:6年级下|jijiao_start3:5年级下|renjiao_start3:6年级下|waiyan_start1:4年级上|waiyan_start3:4年级下,7,cross-source-exact|multiple-occurrences|decision-evidence-changed,,pending,pending,,
+saw,saw,"n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",beishida_start1|hujiao_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3,beishida_start1:5年级上|hujiao_start3:6年级下|jijiao_start3:5年级下|renjiao_start3:6年级下|waiyan_start1:4年级上|waiyan_start3:4年级下,7,cross-source-exact|multiple-occurrences,,multipart-reviewed,reviewed,,
 saw flowers,saw flowers,无,renjiao_start1,renjiao_start1:5年级下,1,multiword,,source-only,reviewed,,
 say,say,vt. 讲;说明;例如;声称;假设;指明 vi. 讲;表示;念;假定;背诵,beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:4年级上|beishida_start1:5年级上|hujiao_start3:5年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:5年级下|waiyan_start1:1年级上|waiyan_start1:2年级下|waiyan_start3:3年级上|waiyan_start3:6年级下,10,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,说；讲
 say to oneself,say to oneself,心里想到,hujiao_start3,hujiao_start3:6年级下,1,multiword,,keep-identity,reviewed,,心里想；自言自语地说
@@ -2091,7 +2091,7 @@ together,together,"adj. 新潮的;情绪稳定的,做事有效率的 adv. 一起
 toilet,toilet,"n. 厕所,盥洗室;梳妆,打扮 vt. 给...梳妆打扮 vi. 梳妆,打扮",beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|waiyan_start1|waiyan_start3,beijing_start1:6年级下|beishida_start1:4年级上|hujiao_start3:4年级上|jijiao_start3:6年级上|renjiao_start1:3年级下|waiyan_start1:4年级上|waiyan_start3:5年级上,7,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,厕所；洗手间
 told,told,v. 告诉(tell的过去式);讲述,waiyan_start1|waiyan_start3,waiyan_start1:5年级下|waiyan_start3:5年级上|waiyan_start3:5年级下,3,cross-source-exact|multiple-occurrences,,reuse-identity,reviewed,tell,
 tomato,tomato,"n. 番茄,西红柿",beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:5年级下|beishida_start1:1年级下|hujiao_start3:4年级上|jijiao_start3:4年级上|renjiao_start1:3年级上|renjiao_start3:4年级下|waiyan_start1:2年级上|waiyan_start3:4年级上,8,cross-source-exact|multiple-occurrences|morphology,tomatoes,keep-identity,reviewed,,西红柿；番茄
-tomatoes,tomatoes,n. 蕃茄(tomato的复数形式),beishida_start1,beishida_start1:2年级下,1,morphology,tomato,pending,pending,,
+tomatoes,tomatoes,n. 蕃茄(tomato的复数形式),beishida_start1,beishida_start1:2年级下,1,morphology,tomato,reuse-identity,reviewed,tomato,
 tomb,tomb,n. 坟墓;死亡 vt. 埋葬,waiyan_start1,waiyan_start1:6年级上,1,,,keep-identity,reviewed,,坟墓；陵墓
 tomorrow,tomorrow,n. 明天;未来 adv. 明天;未来地(等于to-morrow),beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:3年级下|beishida_start1:4年级下|hujiao_start3:5年级下|jijiao_start3:6年级上|renjiao_start1:3年级下|renjiao_start3:6年级上|waiyan_start1:3年级下|waiyan_start3:4年级上,8,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,明天
 tongue,tongue,n. 舌头;语言 vt. 舔;斥责;用舌吹 vi. 说话;吹管乐器,beijing_start1|renjiao_start1,beijing_start1:5年级上|renjiao_start1:3年级上,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,舌头
@@ -2116,7 +2116,7 @@ town,town,"n. 城镇,市镇;市内商业区",beishida_start1|waiyan_start1|waiya
 toy,toy,n. 玩具;小装饰品;不值钱的东西 adj. 作为玩具的;玩物似的 vi. 玩弄;调情;随随便便地对待,beijing_start1|beishida_start1|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:2年级上|beishida_start1:3年级上|jijiao_start3:4年级上|renjiao_start1:4年级下|renjiao_start3:3年级下|renjiao_start3:4年级上|waiyan_start1:1年级下|waiyan_start3:3年级下,8,cross-source-exact|multiple-occurrences|morphology,toys,keep-identity,reviewed,,玩具
 toy bear,toy bear,无,hujiao_start3,hujiao_start3:3年级下,1,multiword,,keep-identity,reviewed,,玩具熊
 toy shop,toy shop,na. 玩具店,hujiao_start3,hujiao_start3:5年级上,1,multiword,,keep-identity,reviewed,,玩具店
-toys,toys,n. [轻] 玩具(toy的复数) v. 摆弄;调情(toy的第三人称单数),beishida_start1,beishida_start1:3年级下,1,morphology,toy,pending,pending,,
+toys,toys,n. [轻] 玩具(toy的复数) v. 摆弄;调情(toy的第三人称单数),beishida_start1,beishida_start1:3年级下,1,morphology,toy,reuse-identity,reviewed,toy,
 track,track,"n. 轨道;足迹,踪迹;小道 vt. 追踪;通过;循路而行;用纤拉 vi. 追踪;走;留下足迹",beishida_start1,beishida_start1:6年级下,1,,,pending,pending,,
 traditional,traditional,adj. 传统的;惯例的,waiyan_start1|waiyan_start3,waiyan_start1:5年级下|waiyan_start3:5年级下,2,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,传统的
 traffic,traffic,"n. 交通;运输;贸易;[通信] 通信量 vt. 用...作交换;在...通行 vi. 交易,买卖",renjiao_start3,renjiao_start3:6年级上,1,,,keep-identity,reviewed,,交通
@@ -2318,7 +2318,7 @@ won,won,vt. 赢得(win的过去式和过去分词),beishida_start1|renjiao_start
 won't,won't,[澳大利亚、新西兰口语]厌恶;不能容忍;= will not,waiyan_start1|waiyan_start3,waiyan_start1:3年级下|waiyan_start3:4年级下,2,cross-source-exact|multiple-occurrences,,route-expression,reviewed,,
 wonderful,wonderful,"adj. 极好的,精彩的,绝妙的;奇妙的;美妙;胜;神妙",beijing_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:3年级下|hujiao_start3:4年级下|jijiao_start3:5年级上|renjiao_start1:5年级上|renjiao_start3:5年级上|waiyan_start1:6年级下|waiyan_start3:6年级下,7,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,精彩的；极好的
 wood,wood,n. 木材;木制品;树林 vt. 植林于;给...添加木柴 vi. 收集木材,beijing_start1|hujiao_start3,beijing_start1:1年级上|beijing_start1:5年级下|hujiao_start3:6年级上,3,cross-source-exact|multiple-occurrences|morphology,woods,keep-identity,reviewed,,木头；木材
-woods,woods,n. [林] 树林;森林;木头(wood的复数) v. 供以木材;用森林覆盖(wood的第三人称单数),beishida_start1,beishida_start1:6年级下,1,morphology,wood,pending,pending,,
+woods,woods,n. [林] 树林;森林;木头(wood的复数) v. 供以木材;用森林覆盖(wood的第三人称单数),beishida_start1,beishida_start1:6年级下,1,morphology,wood,keep-identity,reviewed,,树林；森林
 woof,woof,n. 纬线;织物;低吠声 vi. 发出低吠声;发低音,hujiao_start3|waiyan_start1|waiyan_start3,hujiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start3:5年级上,3,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,汪；狗叫声
 word,word,n. [语] 单词;话语;消息;诺言;命令 vt. 用言辞表达,beijing_start1|hujiao_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3,beijing_start1:4年级上|hujiao_start3:5年级上|jijiao_start3:6年级上|renjiao_start3:6年级上|waiyan_start1:6年级下|waiyan_start3:5年级下,6,cross-source-exact|multiple-occurrences,,keep-identity,reviewed,,单词
 word book,word book,n. 词典;字汇表;歌词集,renjiao_start3,renjiao_start3:6年级上,1,multiword,,keep-identity,reviewed,,单词本；词汇本
