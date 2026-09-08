@@ -1,18 +1,20 @@
 {
-  "StatusVersion": "third-party-stage-b-readiness-v1",
+  "StatusVersion": "third-party-stage-b-readiness-v2",
   "PolicyVersion": "v6-minimal-identity",
-  "SourceOccurrences": 6005,
+  "StageAStatusVersion": "stage-a-status-v2",
+  "StageACheckpointFingerprint": "eadb2d5163ff3193cc735b834a20dcec393df51f8d9d48867f93b5532060a556",
+  "SourceOccurrences": 7535,
   "StageAIdentityCandidates": 2039,
   "StageALearnerCandidates": 2024,
   "AuditedDeferredSurfaces": 20,
-  "ActiveReviewBatch": false,
+  "ActiveReviewBatch": true,
   "KloseActiveNoteIDs": 901,
   "CandidateClassCounts": {
     "exact-multiple": 7,
     "exact-single": 811,
     "no-existing-match": 1221
   },
-  "ReadyForPremergeReview": true,
+  "ReadyForPremergeReview": false,
   "StageBMutationAuthorized": false,
   "StableThirdPartyIDMinted": false,
   "MergeAuthorizedRows": 0
