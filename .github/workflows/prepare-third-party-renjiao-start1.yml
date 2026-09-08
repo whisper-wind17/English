@@ -42,8 +42,13 @@ on:
       - '1.全国各大教材版本中小学同步/外研版/外研版一年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/外研版/外研版三年级起点*.xlsx'
       - 'anki/klose/source_reference/beijing_start1_staging/occurrences.csv'
-      - 'anki/klose/source_reference/jijiao_start3_staging/occurrences.csv'
       - 'anki/klose/source_reference/beishida_start1_staging/occurrences.csv'
+      - 'anki/klose/source_reference/hujiao_start3_staging/occurrences.csv'
+      - 'anki/klose/source_reference/jijiao_start3_staging/occurrences.csv'
+      - 'anki/klose/source_reference/renjiao_start1_staging/occurrences.csv'
+      - 'anki/klose/source_reference/renjiao_start3_staging/occurrences.csv'
+      - 'anki/klose/source_reference/waiyan_start1_staging/occurrences.csv'
+      - 'anki/klose/source_reference/waiyan_start3_staging/occurrences.csv'
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - 'anki/klose/third_party_vocabulary/review/decision_updates.csv'
@@ -83,7 +88,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "push" ]] && git rev-parse HEAD^ >/dev/null 2>&1; then
             git diff --name-only HEAD^ HEAD > /tmp/third_party_changed_files.txt
             source_changed=false
-            if grep -Eq '^((tools/(prepare|check)_third_party_(beijing_start1|beishida_start1|jijiao_start3|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3)\.py)|(tools/check_third_party_source_adapters\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/(beijing_start1|jijiao_start3|beishida_start1)_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
+            if grep -Eq '^((tools/(prepare|check)_third_party_(beijing_start1|beishida_start1|jijiao_start3|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3)\.py)|(tools/check_third_party_source_adapters\.py)|(1\.全国各大教材版本中小学同步/)|(anki/klose/source_reference/(beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3)_staging/occurrences\.csv)|(anki/klose/third_party_vocabulary/config/source_adapters\.csv)|(\.github/workflows/prepare-third-party-renjiao-start1\.yml))' /tmp/third_party_changed_files.txt; then
               source_changed=true
             fi
           fi
@@ -185,7 +190,7 @@ jobs:
               rows = list(csv.DictReader(f))
           missing = [r['CanonicalMatchKey'] for r in rows if not r.get('TargetSense', '').strip()]
           if missing:
-              raise SystemExit(f'Vocabulary Preview has empty TargetSense ({len(missing)}): {missing[:50]}')
+            raise SystemExit(f'Vocabulary Preview has empty TargetSense ({len(missing)}): {missing[:50]}')
           print(f'Vocabulary Preview TargetSense complete = {len(rows)} / {len(rows)}')
           PY
 
