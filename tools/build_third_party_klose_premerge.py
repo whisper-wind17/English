@@ -7,6 +7,9 @@ Klose stable Note registry by MatchKey only. Exact MatchKey equality is a candid
 signal, not a same-sense decision.
 
 Audited Stage-A defers are carried forward explicitly rather than silently dropped.
+The readiness snapshot is always bound to the current sealed Stage-A checkpoint.
+When Stage A still has an active review batch, the snapshot is persisted as current
+but gated (`ReadyForPremergeReview=false`) instead of leaving an older ready snapshot.
 """
 from __future__ import annotations
 
@@ -21,8 +24,10 @@ TP = BASE / "third_party_vocabulary"
 PREVIEW = TP / "staging" / "unified_vocabulary_preview.csv"
 LEARNER = TP / "learner" / "learner_vocabulary_preview.csv"
 REVIEW = TP / "staging" / "review_queue.csv"
+OCCURRENCES = TP / "staging" / "occurrences.csv"
 DEFER = TP / "audit" / "defer_context.csv"
 NEXT_BATCH = TP / "audit" / "next_batch.json"
+STAGE_STATUS = TP / "audit" / "stage_a_status.json"
 NOTE_REGISTRY = BASE / "master" / "note_registry.csv"
 NOTE_EXTENSIONS = BASE / "master" / "note_registry_extensions.csv"
 OUT = TP / "premerge"
@@ -30,6 +35,7 @@ CANDIDATES = OUT / "identity_candidates.csv"
 DEFERRED = OUT / "audited_deferred.csv"
 STATUS = OUT / "readiness.json"
 POLICY_VERSION = "v6-minimal-identity"
+SEALED_STATUS_VERSION = "stage-a-status-v2"
 
 CANDIDATE_FIELDS = [
     "ProvisionalIdentityKey", "CanonicalMatchKey", "LookupMatchKey", "DisplayWord",
@@ -80,8 +86,28 @@ def main() -> None:
     preview = read_csv(PREVIEW)
     learner = read_csv(LEARNER)
     review = read_csv(REVIEW)
+    occurrences = read_csv(OCCURRENCES)
     defer = read_csv(DEFER)
     plan = read_json(NEXT_BATCH)
+    stage_status = read_json(STAGE_STATUS)
+
+    if stage_status.get("StatusVersion") != SEALED_STATUS_VERSION:
+        raise SystemExit(
+            f"Premerge requires sealed {SEALED_STATUS_VERSION}; "
+            f"actual={stage_status.get('StatusVersion', '')!r}"
+        )
+    checkpoint = str(stage_status.get("CheckpointFingerprint", "")).strip()
+    if not checkpoint:
+        raise SystemExit("Sealed Stage-A checkpoint lacks CheckpointFingerprint")
+    try:
+        sealed_source_count = int(stage_status.get("SourceOccurrences", -1))
+    except (TypeError, ValueError):
+        raise SystemExit("Sealed Stage-A SourceOccurrences is not an integer")
+    if sealed_source_count != len(occurrences):
+        raise SystemExit(
+            "Stage-A source occurrence count drift before premerge build: "
+            f"sealed={sealed_source_count} actual={len(occurrences)}"
+        )
 
     stable_rows = read_csv(NOTE_REGISTRY) + read_csv(NOTE_EXTENSIONS)
     active = [r for r in stable_rows if r.get("Status", "").strip().casefold() == "active"]
@@ -165,9 +191,11 @@ def main() -> None:
     write_csv(CANDIDATES, CANDIDATE_FIELDS, candidate_rows)
     write_csv(DEFERRED, DEFER_FIELDS, deferred_rows)
     status = {
-        "StatusVersion": "third-party-stage-b-readiness-v1",
+        "StatusVersion": "third-party-stage-b-readiness-v2",
         "PolicyVersion": POLICY_VERSION,
-        "SourceOccurrences": 6005,
+        "StageAStatusVersion": SEALED_STATUS_VERSION,
+        "StageACheckpointFingerprint": checkpoint,
+        "SourceOccurrences": len(occurrences),
         "StageAIdentityCandidates": len(candidate_rows),
         "StageALearnerCandidates": len(learner_ids),
         "AuditedDeferredSurfaces": len(deferred_rows),
@@ -182,12 +210,15 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     STATUS.write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    print(f"Stage-A checkpoint = {checkpoint}")
+    print(f"Stage-A source occurrences = {len(occurrences)}")
     print(f"Stage-A identity candidates = {len(candidate_rows)}")
     print(f"Stage-A learner candidates = {len(learner_ids)}")
     print(f"audited deferred surfaces carried forward = {len(deferred_rows)}")
     print(f"Klose active NoteIDs = {len(active)}")
     for cls in sorted(classes):
         print(f"premerge candidate {cls} = {classes[cls]}")
+    print(f"Stage A active review batch = {'yes' if active_plan else 'no'}")
     print(f"Ready for premerge review = {'yes' if ready else 'no'}")
     print("Stage-B mutation authorized = no")
     print("Stable ThirdPartyID minted = no")
