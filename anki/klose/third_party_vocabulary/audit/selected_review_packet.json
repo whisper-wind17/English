@@ -4,2251 +4,296 @@
   "ReviewLane": "evidence-revalidation",
   "ReviewMode": "delta-evidence",
   "SelectedMatchKeys": [
-    "thousand",
-    "three",
-    "time",
-    "tired",
-    "today",
-    "together",
-    "toilet",
-    "tomorrow",
-    "tonight",
-    "toy",
-    "train",
-    "travel",
-    "tree",
-    "trip",
-    "try",
-    "turn",
-    "tweet",
-    "twelve",
-    "twenty",
-    "two",
-    "under",
-    "use",
-    "very",
-    "video",
-    "visit",
-    "wait",
-    "walk",
-    "wall",
-    "want",
-    "warm",
-    "wash",
-    "way",
-    "wear",
-    "weather",
-    "weekend",
-    "welcome",
-    "west",
-    "what",
-    "wheel",
-    "when",
-    "where",
-    "white",
-    "will",
-    "winter",
-    "wish",
-    "woof",
-    "word",
-    "work",
-    "worry",
-    "write",
-    "wrong",
-    "yellow",
-    "yes",
-    "yesterday",
-    "young",
-    "american",
-    "bicycle",
-    "british",
-    "class",
-    "exercise"
+    "get",
+    "letter",
+    "present",
+    "speak",
+    "well"
   ],
-  "SelectedCount": 60,
-  "ReviewBundleFingerprint": "df86231ddf0e3a2c7915ba7b920b4a457bd74b3817f28b47b7009a5da5731a98",
-  "ReviewPacketFingerprint": "a883571dcee8e47588c5b98a1475528f8d2c24833b4a537ddd71e89125a9c502",
+  "SelectedCount": 5,
+  "ReviewBundleFingerprint": "44ac830530db467227cbc0cb61c9981d581111ba3414d9e53c9f20fa3a2090b5",
+  "ReviewPacketFingerprint": "c258653db00c911ae73fdd5c4e122987d23e6a28061f47b514b39a36d3d7a782",
   "Items": [
     {
-      "MatchKey": "thousand",
+      "MatchKey": "get",
       "ReviewMode": "delta-evidence",
       "BlockerClass": "semantic-cross-source",
       "DurableDecision": {
-        "DecisionKey": "surface:thousand",
-        "MatchKey": "thousand",
+        "DecisionKey": "surface:get",
+        "MatchKey": "get",
         "Action": "keep-identity",
         "CanonicalMatchKey": "",
         "ObjectType": "vocabulary",
-        "TargetSense": "一千",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 2,
-      "CurrentOccurrenceCount": 3,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g6-upper|r003|thousand"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r003|thousand",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "3",
-          "Word": "thousand",
-          "Definition": "n. 一千;一千个;许许多多 adj. 成千的;无数的",
-          "Before": [
-            "more than"
-          ],
-          "After": [
-            "kilometre",
-            "something",
-            "million",
-            "map",
-            "right",
-            "country",
-            "dancing",
-            "Chinatown"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "three",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:three",
-        "MatchKey": "three",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "三",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r071|three"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r071|three",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "71",
-          "Word": "three",
-          "Definition": "num. 三 n. 三,三个 adj. 三的,三个的",
-          "Before": [
-            "green",
-            "black",
-            "dog",
-            "cat",
-            "cap",
-            "how many",
-            "one",
-            "two"
-          ],
-          "After": [
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight",
-            "nine",
-            "oh",
-            "ten"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "time",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:time",
-        "MatchKey": "time",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "时间",
-        "Status": "reviewed",
-        "Confidence": "medium"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 7,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r110|time",
-        "waiyan_start3|g5-upper|r117|time",
-        "waiyan_start3|g6-lower|r032|time"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r110|time",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "110",
-          "Word": "time",
-          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
-          "Before": [
-            "went",
-            "go",
-            "there",
-            "ate",
-            "eat",
-            "drank",
-            "drink",
-            "drink"
-          ],
-          "After": [
-            "have a good time",
-            "busy",
-            "took",
-            "take",
-            "tell",
-            "great",
-            "delicious",
-            "made"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r117|time",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "117",
-          "Word": "time",
-          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
-          "Before": [
-            "deaf",
-            "hear",
-            "her",
-            "fire",
-            "firefighter",
-            "hot dog",
-            "sausage",
-            "kind"
-          ],
-          "After": [
-            "school",
-            "start",
-            "past",
-            "late",
-            "go to bed",
-            "exercise",
-            "playground",
-            "before"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r032|time",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "32",
-          "Word": "time",
-          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
-          "Before": [
-            "cow",
-            "blow",
-            "rabbit",
-            "balloon",
-            "stairs",
-            "mess",
-            "play",
-            "third"
-          ],
-          "After": [
-            "bark",
-            "loudly",
-            "nothing",
-            "home",
-            "got",
-            "get",
-            "space",
-            "interested"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "tired",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:tired",
-        "MatchKey": "tired",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "疲倦的；累的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r145|tired"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r145|tired",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "145",
-          "Word": "tired",
-          "Definition": "v. 疲倦;对...腻烦(tire的过去分词形式) adj. 疲倦的;厌倦的,厌烦的",
-          "Before": [
-            "sad",
-            "woof",
-            "miss",
-            "angry",
-            "ill",
-            "told",
-            "better",
-            "farm"
-          ],
-          "After": [
-            "won",
-            "win",
-            "ruler",
-            "smell",
-            "kitchen",
-            "toilet",
-            "room",
-            "living room"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "today",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:today",
-        "MatchKey": "today",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "今天",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r086|today"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r086|today",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "86",
-          "Word": "today",
-          "Definition": "n. 今天;现今 adv. 今天;现今",
-          "Before": [
-            "eat",
-            "in",
-            "sleep",
-            "watch",
-            "TV",
-            "watch TV",
-            "have",
-            "class"
-          ],
-          "After": [
-            "music",
-            "has",
-            "have",
-            "Chinese",
-            "maths",
-            "art",
-            "PE",
-            "physical education"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "together",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:together",
-        "MatchKey": "together",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "一起",
+        "TargetSense": "得到；获得",
         "Status": "reviewed",
         "Confidence": "high"
       },
       "ReviewedOccurrenceCount": 6,
-      "CurrentOccurrenceCount": 7,
+      "CurrentOccurrenceCount": 9,
       "AddedOccurrenceKeys": [
-        "waiyan_start3|g6-upper|r055|together"
+        "waiyan_start3|g5-lower|r087|get",
+        "waiyan_start3|g6-lower|r038|get",
+        "waiyan_start3|g6-upper|r062|get"
       ],
       "AddedEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r055|together",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "55",
-          "Word": "together",
-          "Definition": "adj. 新潮的;情绪稳定的,做事有效率的 adv. 一起;同时;相互;连续地;总共",
-          "Before": [
-            "difficult",
-            "knife",
-            "fork",
-            "chopsticks",
-            "Japanese",
-            "believe",
-            "snake",
-            "DVD"
-          ],
-          "After": [
-            "lucky",
-            "bamboo",
-            "its",
-            "body",
-            "come out of",
-            "flute",
-            "get",
-            "frightened"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "toilet",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:toilet",
-        "MatchKey": "toilet",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "厕所；洗手间",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r151|toilet"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r151|toilet",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "151",
-          "Word": "toilet",
-          "Definition": "n. 厕所,盥洗室;梳妆,打扮 vt. 给...梳妆打扮 vi. 梳妆,打扮",
-          "Before": [
-            "better",
-            "farm",
-            "tired",
-            "won",
-            "win",
-            "ruler",
-            "smell",
-            "kitchen"
-          ],
-          "After": [
-            "room",
-            "living room",
-            "hide-and-seek",
-            "now",
-            "last",
-            "hide",
-            "sofa",
-            "shout"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "tomorrow",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:tomorrow",
-        "MatchKey": "tomorrow",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "明天",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-upper|r115|tomorrow"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r115|tomorrow",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "115",
-          "Word": "tomorrow",
-          "Definition": "n. 明天;未来 adv. 明天;未来地(等于to-morrow)",
-          "Before": [
-            "vegetable",
-            "climb",
-            "face",
-            "fruit",
-            "chicken",
-            "bear",
-            "pig",
-            "visit"
-          ],
-          "After": [
-            "plane",
-            "get up",
-            "o'clock",
-            "from",
-            "sea",
-            "swimsuit",
-            "sock",
-            "fish"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "tonight",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:tonight",
-        "MatchKey": "tonight",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "今晚",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 1,
-      "CurrentOccurrenceCount": 2,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r048|tonight"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r048|tonight",
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r087|get",
           "SourceID": "waiyan_start3",
           "SourceBook": "5年级下",
           "Grade": "5",
           "Semester": "下",
-          "SourceRow": "48",
-          "Word": "tonight",
-          "Definition": "n. 今晚 adv. 在今晚",
+          "SourceRow": "87",
+          "Word": "get",
+          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
           "Before": [
-            "lunch",
-            "sandwich",
-            "fish and chips",
-            "traditional",
-            "dish",
-            "very much",
-            "gave",
-            "give"
-          ],
-          "After": [
-            "library",
-            "student",
-            "sent",
-            "send",
-            "CD",
-            "idea",
-            "put",
-            "shelf"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "toy",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:toy",
-        "MatchKey": "toy",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "玩具",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r116|toy"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r116|toy",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "116",
-          "Word": "toy",
-          "Definition": "n. 玩具;小装饰品;不值钱的东西 adj. 作为玩具的;玩物似的 vi. 玩弄;调情;随随便便地对待",
-          "Before": [
-            "skating",
-            "go skating",
-            "play",
-            "snow",
-            "rain",
-            "sunny",
-            "windy",
-            "very"
-          ],
-          "After": [
-            "under",
-            "for",
-            "box",
-            "behind",
-            "bedroom",
-            "flies",
-            "fly",
-            "park"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "train",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:train",
-        "MatchKey": "train",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "火车",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-upper|r021|train"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r021|train",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "21",
-          "Word": "train",
-          "Definition": "n. 火车;行列;长队;裙裾 v. 培养;训练;瞄准",
-          "Before": [
-            "turn right",
-            "next to",
-            "supermarket",
-            "beside",
-            "cinema",
-            "so much",
-            "You're welcome!",
-            "station"
-          ],
-          "After": [
-            "hill",
-            "near",
-            "house",
-            "read",
-            "running",
-            "these",
-            "picture",
-            "take"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "travel",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:travel",
-        "MatchKey": "travel",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "旅行",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r126|travel"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r126|travel",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "126",
-          "Word": "travel",
-          "Definition": "n. 旅行;游历;漫游 vt. 经过;在...旅行 vi. 旅行;行进;步行;交往",
-          "Before": [
-            "made",
-            "make",
-            "poster",
-            "welcome",
-            "postcard",
-            "cousin",
-            "dear",
-            "on holiday"
-          ],
-          "After": [
-            "came",
-            "come",
-            "pop",
-            "concert",
-            "earth",
-            "fall",
-            "fall off",
-            "fell"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "tree",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:tree",
-        "MatchKey": "tree",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "树",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r126|tree"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r126|tree",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "126",
-          "Word": "tree",
-          "Definition": "n. 树;木料;树状物 vt. 把...赶上树 vi. 爬上树;逃上树",
-          "Before": [
-            "for",
-            "box",
-            "behind",
-            "bedroom",
-            "flies",
-            "fly",
-            "park",
-            "lake"
-          ],
-          "After": [
-            "fishing",
-            "go fishing",
-            "walk",
-            "have got",
-            "sweater",
-            "bed",
-            "line",
-            "about"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "trip",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:trip",
-        "MatchKey": "trip",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "旅行；出行",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r044|trip"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r044|trip",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "44",
-          "Word": "trip",
-          "Definition": "n. 旅行;绊倒;差错 vt. 绊倒;使犯错 vi. 绊倒;远足;犯错误;轻快地走",
-          "Before": [
-            "weekend",
-            "place",
-            "British",
-            "museum",
-            "how",
-            "best",
-            "took",
-            "take"
-          ],
-          "After": [
-            "along",
-            "river",
-            "hour",
-            "twenty",
-            "minute",
-            "of",
-            "wall",
-            "arrive"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "try",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:try",
-        "MatchKey": "try",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "尝试；试着",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r084|try"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r084|try",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "84",
-          "Word": "try",
-          "Definition": "n. 尝试;努力;试验 vt. 试图,努力;试验;审判;考验 vi. 尝试;努力;试验",
-          "Before": [
-            "department store",
-            "pocket",
-            "umbrella",
             "sales assistant",
-            "wheel",
-            "easy",
-            "take",
-            "too"
-          ],
-          "After": [
-            "lovely",
-            "moon",
-            "get",
-            "west",
-            "parent",
-            "stay",
-            "July",
-            "south"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "turn",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:turn",
-        "MatchKey": "turn",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "转；转动",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r173|turn"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r173|turn",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "173",
-          "Word": "turn",
-          "Definition": "n. 转弯;变化;(损害或有益于别人的)行为,举动,举止 vi. 转向;转变;转动 vt. 转动,使旋转;转弯;翻过来;兑换",
-          "Before": [
-            "brown",
-            "trousers",
-            "orange",
-            "shirt",
-            "look at",
-            "shoe",
-            "can't",
-            "cannot"
-          ],
-          "After": [
-            "white",
-            "photo",
-            "skirt"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "tweet",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:tweet",
-        "MatchKey": "tweet",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "啾啾叫；鸟叫声",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 1,
-      "CurrentOccurrenceCount": 2,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r046|tweet"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r046|tweet",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "46",
-          "Word": "tweet",
-          "Definition": "n. 小鸟叫声;自录音再现装置发出的高音;推特 vi. 吱吱地叫;啾鸣",
-          "Before": [
-            "door",
-            "sit",
-            "down",
-            "stand",
-            "up",
-            "window",
-            "blackboard",
-            "bird"
-          ],
-          "After": [
-            "desk",
-            "chair",
-            "it",
-            "it's",
-            "it is",
-            "red",
-            "look",
-            "wow"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "twelve",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:twelve",
-        "MatchKey": "twelve",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "十二",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r081|twelve"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r081|twelve",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "81",
-          "Word": "twelve",
-          "Definition": "num. 十二;十二个 n. 十二;十二个 adj. 十二的;十二个的",
-          "Before": [
-            "five",
-            "six",
-            "seven",
-            "eight",
-            "nine",
-            "oh",
-            "ten",
-            "eleven"
-          ],
-          "After": [
-            "happy",
-            "birthday",
-            "here",
-            "here's",
-            "here is",
-            "present",
-            "this",
-            "pencil"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "twenty",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:twenty",
-        "MatchKey": "twenty",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "二十",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r048|twenty"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r048|twenty",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "48",
-          "Word": "twenty",
-          "Definition": "num. 二十 n. 二十;二十年代 adj. 二十的",
-          "Before": [
-            "how",
-            "best",
-            "took",
-            "take",
-            "trip",
-            "along",
-            "river",
-            "hour"
-          ],
-          "After": [
-            "minute",
-            "of",
-            "wall",
-            "arrive",
-            "for",
-            "mountain",
-            "with",
-            "plant"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "two",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:two",
-        "MatchKey": "two",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "二；两个",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r070|two"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r070|two",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "70",
-          "Word": "two",
-          "Definition": "num. 二 n. 两个 adj. 两个的",
-          "Before": [
-            "now",
-            "green",
-            "black",
-            "dog",
-            "cat",
-            "cap",
-            "how many",
-            "one"
-          ],
-          "After": [
-            "three",
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight",
-            "nine",
-            "oh"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "under",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:under",
-        "MatchKey": "under",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "在……下面",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r117|under"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r117|under",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "117",
-          "Word": "under",
-          "Definition": "prep. 低于,少于;在...之下 adj. 下面的;从属的 adv. 在下面;在下方",
-          "Before": [
-            "go skating",
-            "play",
-            "snow",
-            "rain",
-            "sunny",
-            "windy",
-            "very",
-            "toy"
-          ],
-          "After": [
-            "for",
-            "box",
-            "behind",
-            "bedroom",
-            "flies",
-            "fly",
-            "park",
-            "lake"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "use",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:use",
-        "MatchKey": "use",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "使用",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r030|use"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r030|use",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "30",
-          "Word": "use",
-          "Definition": "n. 使用;用途;发挥 vt. 利用;耗费 vi. 使用,运用",
-          "Before": [
-            "need",
-            "first",
-            "can",
-            "lost",
-            "lose",
-            "how much",
-            "cheese",
-            "any"
-          ],
-          "After": [
-            "over there",
-            "bottle",
-            "half",
-            "kilo",
-            "a lot of",
-            "weekend",
-            "place",
-            "British"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "very",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:very",
-        "MatchKey": "very",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "非常；很",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 2,
-      "CurrentOccurrenceCount": 3,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r115|very"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r115|very",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "115",
-          "Word": "very",
-          "Definition": "adv. 非常,很;完全 adj. 恰好是,正是;甚至;十足的;特有的",
-          "Before": [
-            "cold",
-            "skating",
-            "go skating",
-            "play",
-            "snow",
-            "rain",
-            "sunny",
-            "windy"
-          ],
-          "After": [
-            "toy",
-            "under",
-            "for",
-            "box",
-            "behind",
-            "bedroom",
-            "flies",
-            "fly"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "video",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:video",
-        "MatchKey": "video",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "视频；录像",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 1,
-      "CurrentOccurrenceCount": 2,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g6-lower|r058|video"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r058|video",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "58",
-          "Word": "video",
-          "Definition": "n. [电子] 视频;录像,录像机;电视 adj. 视频的;录像的;电视的 v. 录制",
-          "Before": [
-            "first",
-            "national",
-            "seed",
-            "spent",
-            "about",
-            "flew",
-            "fly",
-            "October"
-          ],
-          "After": [
-            "proud",
-            "someday",
-            "born",
-            "as",
-            "became",
-            "become",
-            "letter",
-            "spell"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "visit",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:visit",
-        "MatchKey": "visit",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "参观；访问",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 3,
-      "CurrentOccurrenceCount": 4,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-upper|r114|visit"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r114|visit",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "114",
-          "Word": "visit",
-          "Definition": "n. 访问;参观;逗留 vt. 访问;参观;视察 vi. 访问;暂住;闲谈",
-          "Before": [
-            "sheep",
-            "vegetable",
-            "climb",
-            "face",
-            "fruit",
-            "chicken",
-            "bear",
-            "pig"
-          ],
-          "After": [
-            "tomorrow",
-            "plane",
-            "get up",
-            "o'clock",
-            "from",
-            "sea",
-            "swimsuit",
-            "sock"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "wait",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:wait",
-        "MatchKey": "wait",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "等待；等候",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 3,
-      "CurrentOccurrenceCount": 4,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r010|wait"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r010|wait",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "10",
-          "Word": "wait",
-          "Definition": "n. 等待;等候 vi. 等待;耽搁;伺候用餐 vt. 等候;推迟;延缓",
-          "Before": [
-            "met",
-            "meet",
-            "above",
-            "ground",
-            "those",
-            "ice cream",
-            "us",
-            "finish"
-          ],
-          "After": [
-            "hurry",
-            "hurry up",
-            "dropped",
-            "drop",
-            "send",
-            "email",
-            "ran",
-            "run"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "walk",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:walk",
-        "MatchKey": "walk",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "走；步行；散步",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r129|walk"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r129|walk",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "129",
-          "Word": "walk",
-          "Definition": "n. 步行,走;散步 vi. 走,步行;散步 vt. 散步;走过",
-          "Before": [
-            "bedroom",
-            "flies",
-            "fly",
-            "park",
-            "lake",
-            "tree",
-            "fishing",
-            "go fishing"
-          ],
-          "After": [
-            "have got",
-            "sweater",
-            "bed",
-            "line",
-            "about",
-            "animal",
-            "sport",
-            "haven't"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "wall",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:wall",
-        "MatchKey": "wall",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "墙；墙壁",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r051|wall"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r051|wall",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "51",
-          "Word": "wall",
-          "Definition": "n. 墙壁,围墙;似墙之物 adj. 墙壁的 vt. 用墙围住,围以墙",
-          "Before": [
-            "take",
-            "trip",
-            "along",
-            "river",
-            "hour",
-            "twenty",
-            "minute",
-            "of"
-          ],
-          "After": [
-            "arrive",
-            "for",
-            "mountain",
-            "with",
-            "plant",
-            "pair",
-            "shorts",
-            "argue"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "want",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:want",
-        "MatchKey": "want",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "想要",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 6,
-      "CurrentOccurrenceCount": 7,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-upper|r064|want"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r064|want",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "64",
-          "Word": "want",
-          "Definition": "n. 需要;缺乏;贫困;必需品 vt. 需要;希望;应该;缺少 vi. 需要;缺少",
-          "Before": [
-            "soya milk",
-            "clock",
-            "hungry",
-            "Me too.",
-            "draw",
-            "jump",
-            "sing",
-            "dance"
-          ],
-          "After": [
-            "some",
-            "juice",
-            "ice",
-            "also",
-            "food",
-            "fast food",
-            "make",
-            "tomato"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "warm",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:warm",
-        "MatchKey": "warm",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "温暖的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r102|warm"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r102|warm",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "102",
-          "Word": "warm",
-          "Definition": "n. 取暖;加热 adj. 温暖的;热情的 vt. 使...兴奋;使...温暖;使...感兴趣 vi. 同情;激动;变温暖",
-          "Before": [
-            "physical education",
-            "science",
-            "we",
-            "fly",
-            "spring",
-            "summer",
-            "season",
-            "nice"
-          ],
-          "After": [
-            "hot",
-            "autumn",
-            "cool",
-            "winter",
-            "cold",
-            "skating",
-            "go skating",
-            "play"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "wash",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:wash",
-        "MatchKey": "wash",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "洗；清洗",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r083|wash"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r083|wash",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "83",
-          "Word": "wash",
-          "Definition": "n. 洗涤;洗的衣服;化妆水;冲积物 vt. 洗涤;洗刷;冲走;拍打 vi. 洗澡;被冲蚀",
-          "Before": [
-            "sun",
-            "lesson",
-            "village",
-            "had",
-            "have",
-            "phone",
-            "cook",
-            "really"
-          ],
-          "After": [
-            "What about ...?",
-            "did",
-            "do",
-            "didn't",
-            "did not",
-            "computer",
-            "love",
-            "him"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "way",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:way",
-        "MatchKey": "way",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "路；道路；方向",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r070|way"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r070|way",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "70",
-          "Word": "way",
-          "Definition": "n. 方法;道路;方向;行业;习惯 adj. 途中的 adv. 大大地;远远地",
-          "Before": [
-            "wrong",
-            "dear",
-            "information",
-            "e-book",
-            "project",
-            "guide",
-            "film",
-            "as well"
-          ],
-          "After": [
-            "on",
-            "topic",
-            "light",
-            "hard",
-            "broken",
-            "department store",
-            "pocket",
-            "umbrella"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "wear",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:wear",
-        "MatchKey": "wear",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "穿；戴",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 7,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r127|wear",
-        "waiyan_start3|g5-upper|r064|wear"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r064|wear",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "64",
-          "Word": "wear",
-          "Definition": "n. 衣物;磨损;耐久性 v. 穿着;用旧;耗损;面露",
-          "Before": [
-            "plant",
-            "pair",
-            "shorts",
-            "argue",
-            "matter",
-            "What's the matter?",
-            "took",
-            "take"
-          ],
-          "After": [
-            "That's OK.",
-            "sports",
-            "hey",
-            "nineteen",
-            "crayon",
-            "fifteen",
-            "begin",
-            "give out"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r127|wear",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "127",
-          "Word": "wear",
-          "Definition": "n. 衣物;磨损;耐久性 v. 穿着;用旧;耗损;面露",
-          "Before": [
-            "paint",
-            "put",
-            "put",
-            "stick",
-            "tied",
-            "string",
-            "laugh",
-            "wore"
-          ],
-          "After": [
-            "letter",
-            "theatre",
-            "women",
-            "woman",
-            "actor",
-            "told",
-            "tell",
-            "joke"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "weather",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:weather",
-        "MatchKey": "weather",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "天气",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r051|weather"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r051|weather",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "51",
-          "Word": "weather",
-          "Definition": "n. 天气;气象;气候;处境 vt. 经受住;使风化;侵蚀;使受风吹雨打 adj. 露天的;迎风的 vi. 风化;受侵蚀;经受风雨",
-          "Before": [
-            "fly",
-            "picnic",
-            "great",
-            "why",
-            "Why not?",
-            "because",
-            "so",
-            "cloudy"
-          ],
-          "After": [
-            "was",
-            "am",
-            "is",
-            "then",
-            "grandparent",
-            "were",
-            "are",
-            "young"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "weekend",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:weekend",
-        "MatchKey": "weekend",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "周末",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r036|weekend"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r036|weekend",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "36",
-          "Word": "weekend",
-          "Definition": "n. 周末,周末休假;周末聚会 adj. 周末的,周末用的 vi. 度周末",
-          "Before": [
-            "cheese",
-            "any",
-            "use",
-            "over there",
-            "bottle",
-            "half",
-            "kilo",
-            "a lot of"
-          ],
-          "After": [
-            "place",
-            "British",
-            "museum",
-            "how",
-            "best",
-            "took",
-            "take",
-            "trip"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "welcome",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:welcome",
-        "MatchKey": "welcome",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "欢迎",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r121|welcome"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r121|welcome",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "121",
-          "Word": "welcome",
-          "Definition": "n. 欢迎 vt. 欢迎 adj. 受欢迎的 int. 欢迎",
-          "Before": [
-            "took",
-            "take",
-            "tell",
-            "great",
-            "delicious",
-            "made",
-            "make",
-            "poster"
-          ],
-          "After": [
-            "postcard",
-            "cousin",
-            "dear",
-            "on holiday",
-            "travel",
-            "came",
-            "come",
-            "pop"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "west",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:west",
-        "MatchKey": "west",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "西；西方",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r088|west"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r088|west",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "88",
-          "Word": "west",
-          "Definition": "n. 西;西方;西部 adj. 西方的;朝西的 adv. 在西方;向西方;自西方",
-          "Before": [
             "wheel",
             "easy",
             "take",
             "too",
             "try",
             "lovely",
-            "moon",
-            "get"
+            "moon"
           ],
           "After": [
+            "west",
             "parent",
             "stay",
             "July",
             "south",
             "remember",
             "June",
-            "east",
-            "best"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "what",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:what",
-        "MatchKey": "what",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "什么",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 7,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r026|what",
-        "waiyan_start3|g6-lower|r094|what"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r026|what",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "26",
-          "Word": "what",
-          "Definition": "pron. 什么;多么;多少 adv. 到什么程度,在哪一方面 adj. 什么;多么;何等 int. 什么;多么",
-          "Before": [
-            "you",
-            "Ms",
-            "boy",
-            "girl",
-            "whoops",
-            "and",
-            "too",
-            "ha ha"
-          ],
-          "After": [
-            "is",
-            "what's",
-            "what is",
-            "your",
-            "name",
-            "please",
-            "afternoon",
-            "Mr"
+            "east"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r094|what",
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r062|get",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "62",
+          "Word": "get",
+          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
+          "Before": [
+            "DVD",
+            "together",
+            "lucky",
+            "bamboo",
+            "its",
+            "body",
+            "come out of",
+            "flute"
+          ],
+          "After": [
+            "frightened",
+            "long ago",
+            "I'd love to",
+            "not really",
+            "stop",
+            "clean",
+            "camera",
+            "show"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r038|get",
           "SourceID": "waiyan_start3",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "94",
-          "Word": "what",
-          "Definition": "pron. 什么;多么;多少 adv. 到什么程度,在哪一方面 adj. 什么;多么;何等 int. 什么;多么",
+          "SourceRow": "38",
+          "Word": "get",
+          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
           "Before": [
-            "primary school",
-            "message",
-            "keep",
-            "forever",
-            "joy",
-            "future",
-            "wonderful",
-            "happiness"
+            "play",
+            "third",
+            "time",
+            "bark",
+            "loudly",
+            "nothing",
+            "home",
+            "got"
           ],
           "After": [
-            "middle",
-            "middle school",
-            "speech",
-            "classmate",
-            "leave",
-            "September",
-            "excited",
-            "geography"
+            "space",
+            "interested",
+            "spaceship",
+            "finish",
+            "decide",
+            "paper",
+            "brought",
+            "bring"
           ]
         }
       ]
     },
     {
-      "MatchKey": "wheel",
+      "MatchKey": "letter",
       "ReviewMode": "delta-evidence",
       "BlockerClass": "semantic-cross-source",
       "DurableDecision": {
-        "DecisionKey": "surface:wheel",
-        "MatchKey": "wheel",
+        "DecisionKey": "surface:letter",
+        "MatchKey": "letter",
         "Action": "keep-identity",
-        "CanonicalMatchKey": "",
+        "CanonicalMatchKey": "letter",
         "ObjectType": "vocabulary",
-        "TargetSense": "车轮；轮子",
+        "TargetSense": "信；信件",
         "Status": "reviewed",
         "Confidence": "high"
       },
-      "ReviewedOccurrenceCount": 1,
-      "CurrentOccurrenceCount": 2,
+      "ReviewedOccurrenceCount": 3,
+      "CurrentOccurrenceCount": 5,
       "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r080|wheel"
+        "waiyan_start3|g5-lower|r128|letter",
+        "waiyan_start3|g6-lower|r065|letter"
       ],
       "AddedEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r080|wheel",
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r128|letter",
           "SourceID": "waiyan_start3",
           "SourceBook": "5年级下",
           "Grade": "5",
           "Semester": "下",
-          "SourceRow": "80",
-          "Word": "wheel",
-          "Definition": "n. 车轮;方向盘;转动 vt. 转动;使变换方向;给...装轮子 vi. 旋转;突然转变方向;盘旋飞行",
+          "SourceRow": "128",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
           "Before": [
-            "topic",
-            "light",
-            "hard",
-            "broken",
-            "department store",
-            "pocket",
-            "umbrella",
-            "sales assistant"
+            "put",
+            "put",
+            "stick",
+            "tied",
+            "string",
+            "laugh",
+            "wore",
+            "wear"
           ],
           "After": [
-            "easy",
-            "take",
-            "too",
-            "try",
-            "lovely",
-            "moon",
-            "get",
-            "west"
+            "theatre",
+            "women",
+            "woman",
+            "actor",
+            "told",
+            "tell",
+            "joke",
+            "after"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r065|letter",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "65",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "October",
+            "video",
+            "proud",
+            "someday",
+            "born",
+            "as",
+            "became",
+            "become"
+          ],
+          "After": [
+            "spell",
+            "herself",
+            "all over",
+            "live",
+            "role model",
+            "cup",
+            "planned",
+            "plan"
           ]
         }
       ]
     },
     {
-      "MatchKey": "when",
+      "MatchKey": "present",
       "ReviewMode": "delta-evidence",
       "BlockerClass": "semantic-cross-source",
       "DurableDecision": {
-        "DecisionKey": "surface:when",
-        "MatchKey": "when",
+        "DecisionKey": "surface:present",
+        "MatchKey": "present",
         "Action": "keep-identity",
-        "CanonicalMatchKey": "",
+        "CanonicalMatchKey": "present",
         "ObjectType": "vocabulary",
-        "TargetSense": "什么时候；何时",
+        "TargetSense": "礼物",
         "Status": "reviewed",
-        "Confidence": "medium"
+        "Confidence": "high"
       },
-      "ReviewedOccurrenceCount": 6,
-      "CurrentOccurrenceCount": 7,
+      "ReviewedOccurrenceCount": 3,
+      "CurrentOccurrenceCount": 4,
       "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r152|when"
+        "waiyan_start3|g3-upper|r087|present"
       ],
       "AddedEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r152|when",
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r087|present",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "87",
+          "Word": "present",
+          "Definition": "n. 现在;礼物;瞄准 adj. 现在的;出席的 vt. 提出;介绍;呈现;赠送 vi. 举枪瞄准",
+          "Before": [
+            "ten",
+            "eleven",
+            "twelve",
+            "happy",
+            "birthday",
+            "here",
+            "here's",
+            "here is"
+          ],
+          "After": [
+            "this",
+            "pencil",
+            "pen",
+            "cake",
+            "old",
+            "how old",
+            "yes",
+            "you're"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "speak",
+      "ReviewMode": "delta-evidence",
+      "BlockerClass": "semantic-cross-source",
+      "DurableDecision": {
+        "DecisionKey": "surface:speak",
+        "MatchKey": "speak",
+        "Action": "keep-identity",
+        "CanonicalMatchKey": "",
+        "ObjectType": "vocabulary",
+        "TargetSense": "说；讲；讲某种语言",
+        "Status": "reviewed",
+        "Confidence": "high"
+      },
+      "ReviewedOccurrenceCount": 6,
+      "CurrentOccurrenceCount": 8,
+      "AddedOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r161|speak",
+        "waiyan_start3|g6-lower|r106|speak"
+      ],
+      "AddedEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r161|speak",
           "SourceID": "waiyan_start3",
           "SourceBook": "5年级下",
           "Grade": "5",
           "Semester": "下",
-          "SourceRow": "152",
-          "Word": "when",
-          "Definition": "conj. 考虑到;既然;当...时;在...时;如果 n. 时间,时候;日期;场合 adv. 什么时候,何时;(用于时间的表达方式之后)在那时;其时;当时 pron. 那时;什么时侯",
+          "SourceRow": "161",
+          "Word": "speak",
+          "Definition": "vi. 说话;演讲;表明;陈述 vt. 讲话;发言;讲演",
           "Before": [
-            "in",
-            "another",
-            "history",
-            "ask",
-            "question",
-            "forget",
-            "bring",
-            "soon"
-          ],
-          "After": [
             "end",
             "nervous",
             "all right",
@@ -2257,1096 +302,155 @@
             "passport",
             "safe",
             "pet"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "where",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:where",
-        "MatchKey": "where",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "哪里；在哪里",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r120|where"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r120|where",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "120",
-          "Word": "where",
-          "Definition": "conj. 在...的地方 n. 地点 adv. 在哪里 pron. 哪里",
-          "Before": [
-            "don't",
-            "do not",
-            "know",
-            "no",
-            "not",
-            "isn't",
-            "is not",
-            "help"
           ],
           "After": [
-            "where's",
-            "where is",
-            "in",
-            "bag",
-            "mother",
-            "father",
-            "sister",
-            "brother"
+            "building",
+            "American",
+            "find out",
+            "more"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "white",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:white",
-        "MatchKey": "white",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "白色；白色的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r174|white"
-      ],
-      "AddedEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r174|white",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "174",
-          "Word": "white",
-          "Definition": "n. 白色;洁白;白种人 adj. 白色的;白种的;纯洁的",
-          "Before": [
-            "trousers",
-            "orange",
-            "shirt",
-            "look at",
-            "shoe",
-            "can't",
-            "cannot",
-            "turn"
-          ],
-          "After": [
-            "photo",
-            "skirt"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "will",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:will",
-        "MatchKey": "will",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "将；会（表示将来）",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r025|will"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r025|will",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "25",
-          "Word": "will",
-          "Definition": "n. 意志;决心;情感;遗嘱;意图;心愿 vt. 决心要;遗赠;用意志力使 vi. 愿意;下决心 aux. 将;愿意;必须",
-          "Before": [
-            "ship",
-            "beautiful",
-            "whose",
-            "queen",
-            "close",
-            "old",
-            "famous",
-            "robot"
-          ],
-          "After": [
-            "everything",
-            "one day",
-            "housework",
-            "learn",
-            "our",
-            "homework",
-            "won't",
-            "will not"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "winter",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:winter",
-        "MatchKey": "winter",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "冬天；冬季",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r106|winter"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r106|winter",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "106",
-          "Word": "winter",
-          "Definition": "n. 冬季;年岁;萧条期 adj. 冬天的;越冬的 vi. 过冬",
-          "Before": [
-            "spring",
-            "summer",
-            "season",
-            "nice",
-            "warm",
-            "hot",
-            "autumn",
-            "cool"
-          ],
-          "After": [
-            "cold",
-            "skating",
-            "go skating",
-            "play",
-            "snow",
-            "rain",
-            "sunny",
-            "windy"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "wish",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:wish",
-        "MatchKey": "wish",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "愿望；祝愿",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 3,
-      "CurrentOccurrenceCount": 4,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g6-lower|r083|wish"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r083|wish",
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r106|speak",
           "SourceID": "waiyan_start3",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "83",
-          "Word": "wish",
-          "Definition": "n. 希望;祝福;心愿 vt. 祝愿;渴望;向...致问候语 vi. 愿望;需要",
+          "SourceRow": "106",
+          "Word": "speak",
+          "Definition": "vi. 说话;演讲;表明;陈述 vt. 讲话;发言;讲演",
           "Before": [
-            "more",
-            "smile",
-            "mistake",
-            "make mistakes",
-            "with",
-            "said",
-            "say",
-            "raincoat"
+            "classmate",
+            "leave",
+            "September",
+            "excited",
+            "geography",
+            "same",
+            "at the same time",
+            "spoke"
           ],
           "After": [
-            "best wishes",
-            "primary",
-            "primary school",
-            "message",
-            "keep",
-            "forever",
-            "joy",
-            "future"
+            "little",
+            "keep on",
+            "practise",
+            "sometime",
+            "each other",
+            "chemistry",
+            "physics"
           ]
         }
       ]
     },
     {
-      "MatchKey": "woof",
+      "MatchKey": "well",
       "ReviewMode": "delta-evidence",
       "BlockerClass": "semantic-cross-source",
       "DurableDecision": {
-        "DecisionKey": "surface:woof",
-        "MatchKey": "woof",
+        "DecisionKey": "surface:well",
+        "MatchKey": "well",
         "Action": "keep-identity",
         "CanonicalMatchKey": "",
         "ObjectType": "vocabulary",
-        "TargetSense": "汪；狗叫声",
+        "TargetSense": "好；很好地",
         "Status": "reviewed",
         "Confidence": "high"
       },
-      "ReviewedOccurrenceCount": 2,
-      "CurrentOccurrenceCount": 3,
+      "ReviewedOccurrenceCount": 6,
+      "CurrentOccurrenceCount": 9,
       "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r138|woof"
+        "waiyan_start3|g4-lower|r073|well",
+        "waiyan_start3|g4-upper|r094|well",
+        "waiyan_start3|g5-upper|r090|well"
       ],
       "AddedEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r138|woof",
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r094|well",
           "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "138",
-          "Word": "woof",
-          "Definition": "n. 纬线;织物;低吠声 vi. 发出低吠声;发低音",
-          "Before": [
-            "always",
-            "bell",
-            "rang",
-            "ring",
-            "into",
-            "feel",
-            "bored",
-            "sad"
-          ],
-          "After": [
-            "miss",
-            "angry",
-            "ill",
-            "told",
-            "better",
-            "farm",
-            "tired",
-            "won"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "word",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:word",
-        "MatchKey": "word",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "单词",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r113|word"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r113|word",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "113",
-          "Word": "word",
-          "Definition": "n. [语] 单词;话语;消息;诺言;命令 vt. 用言辞表达",
-          "Before": [
-            "early",
-            "taxi",
-            "quarter",
-            "to",
-            "worry",
-            "paper",
-            "Chinese",
-            "so"
-          ],
-          "After": [
-            "drew",
-            "draw",
-            "cut",
-            "cut",
-            "piece",
-            "paint",
-            "put",
-            "put"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "work",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:work",
-        "MatchKey": "work",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "工作",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r068|work",
-        "waiyan_start3|g5-lower|r015|work"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r068|work",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "68",
-          "Word": "work",
-          "Definition": "n. 工作;[物] 功;产品;操作;职业;行为;事业;工厂;著作;文学、音乐或艺术作品 vt. 使工作;操作;经营;使缓慢前进 vi. 工作;运作;起作用",
-          "Before": [
-            "with",
-            "friend",
-            "at",
-            "home",
-            "at home",
-            "who",
-            "only",
-            "year"
-          ],
-          "After": [
-            "go to work",
-            "Saturday",
-            "shopping",
-            "go shopping",
-            "dad",
-            "do",
-            "Sunday",
-            "swimming"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r015|work",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "15",
-          "Word": "work",
-          "Definition": "n. 工作;[物] 功;产品;操作;职业;行为;事业;工厂;著作;文学、音乐或艺术作品 vt. 使工作;操作;经营;使缓慢前进 vi. 工作;运作;起作用",
-          "Before": [
-            "ago",
-            "interviewer",
-            "enough",
-            "television",
-            "grandchildren",
-            "grandchild",
-            "change",
-            "night"
-          ],
-          "After": [
-            "field",
-            "fire",
-            "or",
-            "radio",
-            "telephone",
-            "couldn't",
-            "could not",
-            "write"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "worry",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:worry",
-        "MatchKey": "worry",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "担心；发愁",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r109|worry"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r109|worry",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "109",
-          "Word": "worry",
-          "Definition": "n. 担心;烦恼;撕咬 vi. 担心;烦恼;撕咬 vt. 担心;发愁;折磨",
-          "Before": [
-            "evening",
-            "late",
-            "worker",
-            "factory",
-            "early",
-            "taxi",
-            "quarter",
-            "to"
-          ],
-          "After": [
-            "paper",
-            "Chinese",
-            "so",
-            "word",
-            "drew",
-            "draw",
-            "cut",
-            "cut"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "write",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:write",
-        "MatchKey": "write",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "写；书写",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 3,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r023|write",
-        "waiyan_start3|g5-lower|r031|write"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r023|write",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "23",
-          "Word": "write",
-          "Definition": "vi. 写,写字;写作,作曲;写信 vt. 写,书写;写信给;著述",
-          "Before": [
-            "work",
-            "field",
-            "fire",
-            "or",
-            "radio",
-            "telephone",
-            "couldn't",
-            "could not"
-          ],
-          "After": [
-            "hope",
-            "learnt",
-            "learn",
-            "taught",
-            "teach",
-            "language",
-            "wrote",
-            "write"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r031|write",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "31",
-          "Word": "write",
-          "Definition": "vi. 写,写字;写作,作曲;写信 vt. 写,书写;写信给;著述",
-          "Before": [
-            "write",
-            "hope",
-            "learnt",
-            "learn",
-            "taught",
-            "teach",
-            "language",
-            "wrote"
-          ],
-          "After": [
-            "dancer",
-            "foreign",
-            "studied",
-            "study",
-            "hard",
-            "hamburger",
-            "English",
-            "breakfast"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "wrong",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:wrong",
-        "MatchKey": "wrong",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "错误的；不对的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r062|wrong"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r062|wrong",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "62",
-          "Word": "wrong",
-          "Definition": "n. 坏事;不公正 adj. 错误的;失常的;不适当的 vt. 委屈;无理地对待;诽谤 adv. 错误地;邪恶地,不正当地",
-          "Before": [
-            "idea",
-            "put",
-            "shelf",
-            "heavy",
-            "dictionary",
-            "card",
-            "library card",
-            "ask"
-          ],
-          "After": [
-            "dear",
-            "information",
-            "e-book",
-            "project",
-            "guide",
-            "film",
-            "as well",
-            "way"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "yellow",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:yellow",
-        "MatchKey": "yellow",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "黄色；黄色的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r055|yellow"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r055|yellow",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "55",
-          "Word": "yellow",
-          "Definition": "n. 黄色;黄种人;黄色颜料 adj. 黄色的;黄皮肤的 vt. 使变黄或发黄 vi. 变黄或发黄",
-          "Before": [
-            "desk",
-            "chair",
-            "it",
-            "it's",
-            "it is",
-            "red",
-            "look",
-            "wow"
-          ],
-          "After": [
-            "blue",
-            "a",
-            "an",
-            "chameleon",
-            "my",
-            "panda",
-            "now",
-            "green"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "yes",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:yes",
-        "MatchKey": "yes",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "是；是的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-upper|r094|yes"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r094|yes",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
           "Semester": "上",
           "SourceRow": "94",
-          "Word": "yes",
-          "Definition": "n. 是(表示肯定) adv. 是, 是的",
+          "Word": "well",
+          "Definition": "n. 井;源泉 adj. 良好的;健康的;适宜的 adv. 很好地;充分地;满意地;适当地 v. 涌出",
           "Before": [
-            "here is",
-            "present",
-            "this",
-            "pencil",
-            "pen",
-            "cake",
-            "old",
-            "how old"
+            "afraid",
+            "strong",
+            "star",
+            "sweets",
+            "soup",
+            "sorry",
+            "bread",
+            "dark"
           ],
           "After": [
-            "you're",
-            "you are",
-            "teacher",
-            "pupil",
-            "school",
-            "classroom",
-            "English",
-            "that"
+            "turn on",
+            "light",
+            "Halloween",
+            "trick or treat",
+            "give",
+            "come in",
+            "of course",
+            "there is"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "yesterday",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:yesterday",
-        "MatchKey": "yesterday",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "昨天",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 4,
-      "CurrentOccurrenceCount": 5,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r071|yesterday"
-      ],
-      "AddedEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r071|yesterday",
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r073|well",
           "SourceID": "waiyan_start3",
           "SourceBook": "4年级下",
           "Grade": "4",
           "Semester": "下",
-          "SourceRow": "71",
-          "Word": "yesterday",
-          "Definition": "n. 昨天;往昔 adv. 昨天",
+          "SourceRow": "73",
+          "Word": "well",
+          "Definition": "n. 井;源泉 adj. 良好的;健康的;适宜的 adv. 很好地;充分地;满意地;适当地 v. 涌出",
           "Before": [
-            "short",
-            "long",
             "wasn't",
             "was not",
             "weren't",
             "were not",
             "clean",
-            "dirty"
+            "dirty",
+            "yesterday",
+            "out"
           ],
           "After": [
-            "out",
-            "well",
             "thanks",
             "sun",
             "lesson",
             "village",
             "had",
-            "have"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "young",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:young",
-        "MatchKey": "young",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "年轻的；年幼的",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g4-lower|r059|young"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r059|young",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "59",
-          "Word": "young",
-          "Definition": "n. 年轻人;(动物的)崽,仔 adj. 年轻的;初期的;没有经验的",
-          "Before": [
-            "weather",
-            "was",
-            "am",
-            "is",
-            "then",
-            "grandparent",
-            "were",
-            "are"
-          ],
-          "After": [
-            "old",
-            "hair",
-            "so",
-            "short",
-            "long",
-            "wasn't",
-            "was not",
-            "weren't"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "american",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:american",
-        "MatchKey": "american",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "美国的；美国人",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 3,
-      "CurrentOccurrenceCount": 4,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-lower|r163|american"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r163|american",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "163",
-          "Word": "American",
-          "Definition": "n. 美国人,美洲人;美国英语 adj. 美国的,美洲的;地道美国式的",
-          "Before": [
-            "all right",
-            "airport",
-            "ticket",
-            "passport",
-            "safe",
-            "pet",
-            "speak",
-            "building"
-          ],
-          "After": [
-            "find out",
-            "more"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "bicycle",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:bicycle",
-        "MatchKey": "bicycle",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "自行车",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 1,
-      "CurrentOccurrenceCount": 2,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g6-upper|r021|bicycle"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r021|bicycle",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "21",
-          "Word": "bicycle",
-          "Definition": "n. 自行车 vt. 骑自行车运送 vi. 骑脚踏车",
-          "Before": [
-            "shop",
-            "then",
-            "ah",
-            "strong",
-            "collect",
-            "stamp",
-            "hobby",
-            "doll"
-          ],
-          "After": [
-            "Thanksgiving",
-            "Thanksgiving Day",
-            "flag",
-            "Flag Day",
-            "fly",
-            "special",
-            "meal",
-            "sound"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "british",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:british",
-        "MatchKey": "british",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "英国的；英国人",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 1,
-      "CurrentOccurrenceCount": 2,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r038|british"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r038|british",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "38",
-          "Word": "British",
-          "Definition": "n. 英国人 adj. 英国的;英国人的;大不列颠的",
-          "Before": [
-            "use",
-            "over there",
-            "bottle",
-            "half",
-            "kilo",
-            "a lot of",
-            "weekend",
-            "place"
-          ],
-          "After": [
-            "museum",
-            "how",
-            "best",
-            "took",
-            "take",
-            "trip",
-            "along",
-            "river"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "class",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:class",
-        "MatchKey": "class",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "",
-        "ObjectType": "vocabulary",
-        "TargetSense": "班级；课；课堂",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 6,
-      "CurrentOccurrenceCount": 7,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g3-lower|r085|class"
-      ],
-      "AddedEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r085|class",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "85",
-          "Word": "class",
-          "Definition": "n. 阶级;班级;种类;班;等级 adj. 极好的;很好的,优秀的,出色的 vt. 分类;把...分等级;把...归入某等级,把...看作(或分类、归类);把...编入某一班级 vi. 属于...类(或等级),被列为某类(或某级)",
-          "Before": [
-            "go swimming",
-            "eat",
-            "in",
-            "sleep",
-            "watch",
-            "TV",
-            "watch TV",
-            "have"
-          ],
-          "After": [
-            "today",
-            "music",
-            "has",
             "have",
-            "Chinese",
-            "maths",
-            "art",
-            "PE"
+            "phone",
+            "cook"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "exercise",
-      "ReviewMode": "delta-evidence",
-      "BlockerClass": "semantic-cross-source",
-      "DurableDecision": {
-        "DecisionKey": "surface:exercise",
-        "MatchKey": "exercise",
-        "Action": "keep-identity",
-        "CanonicalMatchKey": "exercise",
-        "ObjectType": "vocabulary",
-        "TargetSense": "锻炼；运动",
-        "Status": "reviewed",
-        "Confidence": "high"
-      },
-      "ReviewedOccurrenceCount": 5,
-      "CurrentOccurrenceCount": 6,
-      "AddedOccurrenceKeys": [
-        "waiyan_start3|g5-upper|r123|exercise"
-      ],
-      "AddedEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r123|exercise",
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r090|well",
           "SourceID": "waiyan_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "123",
-          "Word": "exercise",
-          "Definition": "n. 运动;练习;运用;操练;礼拜;典礼 vt. 锻炼;练习;使用;使忙碌;使惊恐 vi. 运动;练习",
+          "SourceRow": "90",
+          "Word": "well",
+          "Definition": "n. 井;源泉 adj. 良好的;健康的;适宜的 adv. 很好地;充分地;满意地;适当地 v. 涌出",
           "Before": [
-            "sausage",
-            "kind",
-            "time",
-            "school",
-            "start",
-            "past",
-            "late",
-            "go to bed"
+            "thirty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety",
+            "happily",
+            "many"
           ],
           "After": [
-            "playground",
-            "before",
-            "join",
-            "skipping rope",
-            "coffee",
-            "tea",
-            "always",
-            "bell"
+            "team",
+            "really",
+            "good at",
+            "catch",
+            "goalkeeper",
+            "think",
+            "fantastic",
+            "fan"
           ]
         }
       ]
