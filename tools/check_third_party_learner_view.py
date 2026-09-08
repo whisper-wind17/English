@@ -123,20 +123,26 @@ def main() -> None:
         if " " in key:
             continue
         if any(has_past_marker(r.get("Definition", "")) for r in rows):
-            if not all(decision_is_lexicalized(d) for d in decisions_by_match.get(key, [])):
+            current_decisions = decisions_by_match.get(key, [])
+            if current_decisions and not all(decision_is_lexicalized(d) for d in current_decisions):
                 explicit_past_matchkeys.add(key)
+
+    # Only TargetSense / DecisionBasis are authoritative enough to classify the
+    # current surface itself. Rationale may mention a *different* alias (for example
+    # canonical `win` mentioning that `won` is its past form), so scanning rationale
+    # here creates false positives.
     for dkey, decision in decision_by_key.items():
         key = decision.get("MatchKey", "")
         if " " in key or decision_is_lexicalized(decision):
             continue
         text = " ".join([
             decision.get("TargetSense", ""), decision.get("DecisionBasis", ""),
-            decision.get("Rationale", ""),
         ])
         if has_past_marker(text):
             explicit_past_matchkeys.add(key)
             require(dkey in gate_by_decision or key in gated_matchkeys,
                     f"Reviewed one-word past form lacks learner-stage gate: {dkey}")
+
     missing_source_gates = sorted(explicit_past_matchkeys - gated_matchkeys)
     require(not missing_source_gates,
             f"Source-described one-word past forms lack learner-stage gate: {missing_source_gates[:30]}")
