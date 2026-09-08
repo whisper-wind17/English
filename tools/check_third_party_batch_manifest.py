@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Require decision batches to close an execution-ready deterministic plan exactly."""
+"""Require decision batches to close an execution-ready deterministic plan exactly.
+
+v5 throughput mode allows one compact transient artifact: decision_updates.csv can
+carry PlanVersion/ReviewLane/ReviewBundleFingerprint/ReviewPacketFingerprint columns,
+so batch_manifest.json is optional. Legacy two-file batches remain supported.
+"""
 from __future__ import annotations
 
 import csv
@@ -11,6 +16,11 @@ TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
 UPDATES = TP / "review" / "decision_updates.csv"
 MANIFEST = TP / "review" / "batch_manifest.json"
 PLAN = TP / "audit" / "next_batch.json"
+PACKET = TP / "audit" / "selected_review_packet.json"
+
+COMPACT_META = (
+    "PlanVersion", "ReviewLane", "ReviewBundleFingerprint", "ReviewPacketFingerprint",
+)
 
 
 def read_updates() -> list[dict[str, str]]:
@@ -40,6 +50,21 @@ def keys(value: object, label: str) -> list[str]:
     return value
 
 
+def compact_metadata(updates: list[dict[str, str]]) -> dict[str, str] | None:
+    if not updates:
+        return None
+    if not all(field in updates[0] for field in COMPACT_META):
+        return None
+    meta = {field: updates[0].get(field, "") for field in COMPACT_META}
+    if not all(meta.values()):
+        raise SystemExit("Compact decision_updates.csv has incomplete batch metadata")
+    for row in updates[1:]:
+        for field, expected in meta.items():
+            if row.get(field, "") != expected:
+                raise SystemExit(f"Compact decision_updates.csv has inconsistent {field}")
+    return meta
+
+
 def main() -> None:
     updates = read_updates()
     if not updates:
@@ -48,45 +73,74 @@ def main() -> None:
         print("planned batch closure = not applicable (no decision batch)")
         return
 
-    manifest = read_json(MANIFEST, "batch manifest")
     plan = read_json(PLAN, "next batch plan")
-
+    packet = read_json(PACKET, "selected review packet") if PACKET.exists() else {}
     if plan.get("ExecutionReady") is not True:
         reason = str(plan.get("GateReason", "planned batch is not execution-ready"))
         raise SystemExit(f"Next review batch is gated and cannot be executed: {reason}")
 
-    selected = keys(manifest.get("SelectedMatchKeys"), "manifest SelectedMatchKeys")
     planned = keys(plan.get("SelectedMatchKeys"), "plan SelectedMatchKeys")
     touched = list(dict.fromkeys(row.get("MatchKey", "") for row in updates if row.get("MatchKey", "")))
-
-    if not selected:
+    if not planned:
         raise SystemExit("Execution-ready decision batch has empty SelectedMatchKeys")
-    if selected != planned:
-        raise SystemExit(
-            "Batch manifest does not match deterministic next-batch plan: "
-            f"selected={selected[:20]} planned={planned[:20]}"
-        )
-    if set(touched) != set(selected):
-        missing = sorted(set(selected) - set(touched))
-        extra = sorted(set(touched) - set(selected))
+    if set(touched) != set(planned):
+        missing = sorted(set(planned) - set(touched))
+        extra = sorted(set(touched) - set(planned))
         raise SystemExit(
             "Selected active batch closure failed: "
             f"missing={missing[:20]} extra={extra[:20]}"
         )
-    if int(manifest.get("SelectedCount", -1)) != len(selected):
-        raise SystemExit("Batch manifest SelectedCount mismatch")
-    if manifest.get("PlanVersion") != plan.get("PlanVersion"):
-        raise SystemExit("Batch manifest PlanVersion mismatch")
-    if manifest.get("ReviewLane") != plan.get("ReviewLane"):
-        raise SystemExit("Batch manifest ReviewLane mismatch")
-    if manifest.get("ReviewBundleFingerprint") != plan.get("ReviewBundleFingerprint"):
-        raise SystemExit("Batch manifest ReviewBundleFingerprint mismatch")
 
-    print(f"planned batch selected surfaces = {len(selected)}")
+    compact = compact_metadata(updates)
+    mode = "compact-single-file" if compact else "legacy-manifest"
+    if compact:
+        if MANIFEST.exists():
+            raise SystemExit("Compact decision_updates.csv must not be combined with batch_manifest.json")
+        if compact["PlanVersion"] != str(plan.get("PlanVersion", "")):
+            raise SystemExit("Compact batch PlanVersion mismatch")
+        if compact["ReviewLane"] != str(plan.get("ReviewLane", "")):
+            raise SystemExit("Compact batch ReviewLane mismatch")
+        if compact["ReviewBundleFingerprint"] != str(plan.get("ReviewBundleFingerprint", "")):
+            raise SystemExit("Compact batch ReviewBundleFingerprint mismatch")
+        if compact["ReviewPacketFingerprint"] != str(plan.get("ReviewPacketFingerprint", "")):
+            raise SystemExit("Compact batch ReviewPacketFingerprint mismatch")
+    else:
+        manifest = read_json(MANIFEST, "batch manifest")
+        selected = keys(manifest.get("SelectedMatchKeys"), "manifest SelectedMatchKeys")
+        if selected != planned:
+            raise SystemExit(
+                "Batch manifest does not match deterministic next-batch plan: "
+                f"selected={selected[:20]} planned={planned[:20]}"
+            )
+        if int(manifest.get("SelectedCount", -1)) != len(selected):
+            raise SystemExit("Batch manifest SelectedCount mismatch")
+        if manifest.get("PlanVersion") != plan.get("PlanVersion"):
+            raise SystemExit("Batch manifest PlanVersion mismatch")
+        if manifest.get("ReviewLane") != plan.get("ReviewLane"):
+            raise SystemExit("Batch manifest ReviewLane mismatch")
+        if manifest.get("ReviewBundleFingerprint") != plan.get("ReviewBundleFingerprint"):
+            raise SystemExit("Batch manifest ReviewBundleFingerprint mismatch")
+        packet_fp = manifest.get("ReviewPacketFingerprint")
+        if packet_fp and packet_fp != plan.get("ReviewPacketFingerprint"):
+            raise SystemExit("Batch manifest ReviewPacketFingerprint mismatch")
+
+    if packet:
+        packet_selected = keys(packet.get("SelectedMatchKeys"), "packet SelectedMatchKeys")
+        if packet_selected != planned:
+            raise SystemExit("Selected review packet no longer matches planned batch")
+        if packet.get("ReviewBundleFingerprint") != plan.get("ReviewBundleFingerprint"):
+            raise SystemExit("Selected review packet bundle fingerprint mismatch")
+        if packet.get("ReviewPacketFingerprint") != plan.get("ReviewPacketFingerprint"):
+            raise SystemExit("Selected review packet fingerprint mismatch")
+
+    print(f"planned batch selected surfaces = {len(planned)}")
     print(f"planned batch touched MatchKeys = {len(set(touched))}")
     print(f"planned batch lane = {plan.get('ReviewLane', '')}")
+    print(f"planned batch review mode = {plan.get('ReviewMode', '')}")
+    print(f"planned batch submission mode = {mode}")
     print("planned batch execution ready = yes")
     print("selected active batch closure = 100%")
+    print("selected review packet fingerprint bound = yes")
 
 
 if __name__ == "__main__":
