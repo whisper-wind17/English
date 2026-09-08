@@ -4,98 +4,30 @@
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "once",
-    "pad",
-    "pain",
-    "parking",
-    "partner",
-    "pat",
-    "peppers",
-    "polish",
-    "post",
-    "pour",
-    "prefer",
-    "press",
-    "program",
-    "puddle",
-    "pyramid",
-    "quick",
-    "quilt",
-    "receive",
-    "relax",
-    "salt",
-    "sandals",
-    "score",
-    "screen",
-    "skid",
-    "smoking",
-    "stomach",
-    "store",
-    "style",
-    "sugar",
-    "switch"
+    "tire",
+    "track",
+    "trash",
+    "vet",
+    "warning",
+    "washing",
+    "weight",
+    "wrist",
+    "writing",
+    "x-ray",
+    "yo-yo",
+    "break",
+    "chicken",
+    "chinese"
   ],
-  "SelectedCount": 30,
-  "ReviewBundleFingerprint": "9c8ef6ec9a50126a80487a8ddfb2590bf3e1de186c04bcbe18ef15de279eca06",
-  "ReviewPacketFingerprint": "1c18310f43b45f0b32ea67a0fd9b808dafa09c4bf5077beb5648c015b0230be1",
+  "SelectedCount": 14,
+  "ReviewBundleFingerprint": "126ea8601241f14af1ee2fdcdb69038719f75c2911cc151da3a9399d581a4e1c",
+  "ReviewPacketFingerprint": "45ba99adef4d4f354e0d32853c9bf26ba30d2494fbcbaba343f95072bcbc4a88",
   "Items": [
     {
-      "MatchKey": "once",
+      "MatchKey": "tire",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "once",
-      "Definitions": "adv. 一次;曾经 conj. 一旦 n. 一次,一回",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r033|once"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r033|once",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "33",
-          "Word": "once",
-          "Definition": "adv. 一次;曾经 conj. 一旦 n. 一次,一回",
-          "Before": [
-            "dust",
-            "feed",
-            "feel",
-            "furniture",
-            "grass",
-            "hardly ever",
-            "homework",
-            "never"
-          ],
-          "After": [
-            "person",
-            "plant",
-            "polish",
-            "street",
-            "tell",
-            "think",
-            "trash",
-            "twice"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "pad",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "pad",
-      "Definitions": "n. 衬垫;护具;便笺簿;填补 vi. 步行;放轻脚步走 vt. 填补;走",
+      "DisplayForms": "tire",
+      "Definitions": "n. 轮胎;头饰 vt. 使...疲倦;使...厌烦 vi. 疲劳;厌倦",
       "SourceIDs": "beishida_start1",
       "SourceBooks": "beishida_start1:6年级下",
       "CandidateSignals": "",
@@ -108,29 +40,224 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r016|pad"
+        "beishida_start1|g6-lower|r023|tire"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r016|pad",
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r023|tire",
           "SourceID": "beishida_start1",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "16",
-          "Word": "pad",
-          "Definition": "n. 衬垫;护具;便笺簿;填补 vi. 步行;放轻脚步走 vt. 填补;走",
+          "SourceRow": "23",
+          "Word": "tire",
+          "Definition": "n. 轮胎;头饰 vt. 使...疲倦;使...厌烦 vi. 疲劳;厌倦",
           "Before": [
-            "fill out",
-            "flat",
-            "form",
-            "helmet",
-            "invite",
-            "mail",
-            "number",
-            "official"
+            "official",
+            "pad",
+            "post",
+            "puddle",
+            "rider",
+            "sign",
+            "skid",
+            "slippery"
           ],
           "After": [
+            "track",
+            "warning",
+            "awful",
+            "bone",
+            "brake",
+            "chin",
+            "crutch",
+            "emergency"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "track",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "track",
+      "Definitions": "n. 轨道;足迹,踪迹;小道 vt. 追踪;通过;循路而行;用纤拉 vi. 追踪;走;留下足迹",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-lower|r024|track"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r024|track",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "24",
+          "Word": "track",
+          "Definition": "n. 轨道;足迹,踪迹;小道 vt. 追踪;通过;循路而行;用纤拉 vi. 追踪;走;留下足迹",
+          "Before": [
+            "pad",
+            "post",
+            "puddle",
+            "rider",
+            "sign",
+            "skid",
+            "slippery",
+            "tire"
+          ],
+          "After": [
+            "warning",
+            "awful",
+            "bone",
+            "brake",
+            "chin",
+            "crutch",
+            "emergency",
+            "eyesight"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "trash",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "trash",
+      "Definitions": "n. 垃圾;废物 vt. 丢弃;修剪树枝",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-upper|r040|trash"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-upper|r040|trash",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "40",
+          "Word": "trash",
+          "Definition": "n. 垃圾;废物 vt. 丢弃;修剪树枝",
+          "Before": [
+            "never",
+            "once",
+            "person",
+            "plant",
+            "polish",
+            "street",
+            "tell",
+            "think"
+          ],
+          "After": [
+            "twice",
+            "bowling",
+            "cool",
+            "find",
+            "gym",
+            "ice-skate",
+            "information",
+            "invitation"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "vet",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "vet",
+      "Definitions": "n. 兽医 vt. 审查;诊疗 vi. 作兽医;诊疗",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:4年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g4-upper|r007|vet"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g4-upper|r007|vet",
+          "SourceID": "beishida_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "7",
+          "Word": "vet",
+          "Definition": "n. 兽医 vt. 审查;诊疗 vi. 作兽医;诊疗",
+          "Before": [
+            "juggler",
+            "does",
+            "teacher",
+            "juggle",
+            "doctor"
+          ],
+          "After": [
+            "farmer",
+            "policeman",
+            "nurse",
+            "bus driver",
+            "singer",
+            "worker",
+            "teach",
+            "see"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "warning",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "warning",
+      "Definitions": "n. 警告;预兆;预告 v. 警告(warn的ing形式) adj. 警告的;引以为戒的",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "ing-form",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-lower|r025|warning"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r025|warning",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "25",
+          "Word": "warning",
+          "Definition": "n. 警告;预兆;预告 v. 警告(warn的ing形式) adj. 警告的;引以为戒的",
+          "Before": [
             "post",
             "puddle",
             "rider",
@@ -139,171 +266,77 @@
             "slippery",
             "tire",
             "track"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "pain",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "pain",
-      "Definitions": "n. 疼痛;努力 vt. 使...痛苦;使...烦恼 vi. 感到疼痛;引起疼痛",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r038|pain"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r038|pain",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "38",
-          "Word": "pain",
-          "Definition": "n. 疼痛;努力 vt. 使...痛苦;使...烦恼 vi. 感到疼痛;引起疼痛",
-          "Before": [
+          ],
+          "After": [
+            "awful",
+            "bone",
+            "brake",
+            "chin",
             "crutch",
             "emergency",
             "eyesight",
-            "fall",
-            "hear",
-            "injection",
-            "letter",
-            "outside"
-          ],
-          "After": [
-            "relax",
-            "smell",
-            "taste",
-            "wrist",
-            "agree",
-            "bottle",
-            "break",
-            "city"
+            "fall"
           ]
         }
       ]
     },
     {
-      "MatchKey": "parking",
+      "MatchKey": "washing",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "parking",
-      "Definitions": "n. 停车 adj. 停车的 v. 停车(park的ing形式)",
+      "DisplayForms": "washing",
+      "Definitions": "n. 洗涤;洗涤剂;要洗的衣物 v. 洗;使受洗礼(wash的ing形式) adj. 洗涤用的,清洗用的",
       "SourceIDs": "beishida_start1",
       "SourceBooks": "beishida_start1:3年级上",
       "CandidateSignals": "",
-      "CandidateCanonical": "park",
+      "CandidateCanonical": "wash",
       "CanonicalRelation": "ing-form",
       "CanonicalAction": "keep-identity",
       "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "公园",
+      "CanonicalTargetSense": "洗；清洗",
       "BlockerClass": "semantic-easy",
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g3-upper|r013|parking"
+        "beishida_start1|g3-upper|r044|washing"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g3-upper|r013|parking",
+          "SourceOccurrenceKey": "beishida_start1|g3-upper|r044|washing",
           "SourceID": "beishida_start1",
           "SourceBook": "3年级上",
           "Grade": "3",
           "Semester": "上",
-          "SourceRow": "13",
-          "Word": "parking",
-          "Definition": "n. 停车 adj. 停车的 v. 停车(park的ing形式)",
+          "SourceRow": "44",
+          "Word": "washing",
+          "Definition": "n. 洗涤;洗涤剂;要洗的衣物 v. 洗;使受洗礼(wash的ing形式) adj. 洗涤用的,清洗用的",
           "Before": [
-            "litter",
-            "touch",
-            "move",
-            "camera",
-            "worry",
-            "cry",
-            "food",
-            "smoking"
+            "mobile phone",
+            "come in",
+            "living room",
+            "bedroom",
+            "sleep",
+            "sleeping",
+            "bathroom",
+            "wash"
           ],
           "After": [
-            "how much",
-            "toy",
-            "please",
-            "fifty",
-            "thirty",
-            "robot",
-            "sixty",
-            "ninety"
+            "come out",
+            "fish",
+            "fishing",
+            "kitchen",
+            "cook",
+            "cooking",
+            "dinner",
+            "write"
           ]
         }
       ]
     },
     {
-      "MatchKey": "partner",
+      "MatchKey": "weight",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "partner",
-      "Definitions": "n. 伙伴;合伙人;配偶 vt. 使合作;与...合伙 vi. 合伙;合股;成为搭档",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r051|partner"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r051|partner",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "51",
-          "Word": "partner",
-          "Definition": "n. 伙伴;合伙人;配偶 vt. 使合作;与...合伙 vi. 合伙;合股;成为搭档",
-          "Before": [
-            "cool",
-            "find",
-            "gym",
-            "ice-skate",
-            "information",
-            "invitation",
-            "karate",
-            "learn"
-          ],
-          "After": [
-            "receive",
-            "ski",
-            "sometimes",
-            "sound",
-            "work out",
-            "baseball",
-            "belt",
-            "buy"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "pat",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "pat",
-      "Definitions": "n. 轻拍;小块;轻拍声 adj. 恰好的;熟练的;合适的 vt. 轻拍 adv. 恰好;熟记地 vi. 轻拍",
+      "DisplayForms": "weight",
+      "Definitions": "n. 重量,重力;负担;砝码;重要性 vt. 加重量于,使变重",
       "SourceIDs": "beishida_start1",
       "SourceBooks": "beishida_start1:5年级上",
       "CandidateSignals": "",
@@ -316,150 +349,45 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-upper|r032|pat"
+        "beishida_start1|g5-upper|r087|weight"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g5-upper|r032|pat",
+          "SourceOccurrenceKey": "beishida_start1|g5-upper|r087|weight",
           "SourceID": "beishida_start1",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "32",
-          "Word": "pat",
-          "Definition": "n. 轻拍;小块;轻拍声 adj. 恰好的;熟练的;合适的 vt. 轻拍 adv. 恰好;熟记地 vi. 轻拍",
+          "SourceRow": "87",
+          "Word": "weight",
+          "Definition": "n. 重量,重力;负担;砝码;重要性 vt. 加重量于,使变重",
           "Before": [
-            "give",
-            "gave",
-            "eat",
-            "ate",
-            "happen",
-            "make",
-            "made",
-            "cough"
+            "July",
+            "August",
+            "November",
+            "December",
+            "summer",
+            "winter",
+            "than",
+            "height"
           ],
           "After": [
-            "patted",
-            "clean",
-            "visit",
-            "go",
-            "went",
-            "do",
-            "did",
-            "race"
+            "centimeter",
+            "weigh",
+            "kilogram",
+            "heavy",
+            "photo",
+            "take",
+            "took"
           ]
         }
       ]
     },
     {
-      "MatchKey": "peppers",
+      "MatchKey": "wrist",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "peppers",
-      "Definitions": "n. [植] 胡椒;[食品] 胡椒粉(pepper的复数) v. 加胡椒粉于...;连续打击;殴打(pepper的第三人称单数)",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:2年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "plural-form",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g2-lower|r025|peppers"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g2-lower|r025|peppers",
-          "SourceID": "beishida_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "25",
-          "Word": "peppers",
-          "Definition": "n. [植] 胡椒;[食品] 胡椒粉(pepper的复数) v. 加胡椒粉于...;连续打击;殴打(pepper的第三人称单数)",
-          "Before": [
-            "those",
-            "beans",
-            "mushrooms",
-            "cabbages",
-            "onions",
-            "potatoes",
-            "carrots",
-            "eggplants"
-          ],
-          "After": [
-            "number",
-            "bird",
-            "how many",
-            "there",
-            "nest",
-            "too",
-            "egg",
-            "flower"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "polish",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "polish",
-      "Definitions": "n. 磨光,擦亮;上光剂,擦亮剂;优雅,精良 vi. 擦亮,变光滑 vt. 磨光,使发亮 adj. 波兰的",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r036|polish"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r036|polish",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "36",
-          "Word": "polish",
-          "Definition": "n. 磨光,擦亮;上光剂,擦亮剂;优雅,精良 vi. 擦亮,变光滑 vt. 磨光,使发亮 adj. 波兰的",
-          "Before": [
-            "furniture",
-            "grass",
-            "hardly ever",
-            "homework",
-            "never",
-            "once",
-            "person",
-            "plant"
-          ],
-          "After": [
-            "street",
-            "tell",
-            "think",
-            "trash",
-            "twice",
-            "bowling",
-            "cool",
-            "find"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "post",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "post",
-      "Definitions": "n. 岗位;邮件;标杆 vt. 张贴;公布;邮递;布置 vi. 快速行进",
+      "DisplayForms": "wrist",
+      "Definitions": "n. 手腕;腕关节 vt. 用腕力移动",
       "SourceIDs": "beishida_start1",
       "SourceBooks": "beishida_start1:6年级下",
       "CandidateSignals": "",
@@ -472,401 +400,98 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r017|post"
+        "beishida_start1|g6-lower|r042|wrist"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r017|post",
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r042|wrist",
           "SourceID": "beishida_start1",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "17",
-          "Word": "post",
-          "Definition": "n. 岗位;邮件;标杆 vt. 张贴;公布;邮递;布置 vi. 快速行进",
+          "SourceRow": "42",
+          "Word": "wrist",
+          "Definition": "n. 手腕;腕关节 vt. 用腕力移动",
           "Before": [
-            "flat",
-            "form",
-            "helmet",
-            "invite",
-            "mail",
-            "number",
-            "official",
-            "pad"
+            "hear",
+            "injection",
+            "letter",
+            "outside",
+            "pain",
+            "relax",
+            "smell",
+            "taste"
           ],
           "After": [
-            "puddle",
-            "rider",
-            "sign",
-            "skid",
-            "slippery",
-            "tire",
-            "track",
-            "warning"
+            "agree",
+            "bottle",
+            "break",
+            "city",
+            "country",
+            "dark",
+            "different",
+            "field"
           ]
         }
       ]
     },
     {
-      "MatchKey": "pour",
+      "MatchKey": "writing",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "pour",
-      "Definitions": "n. 倾泻;流出;骤雨 vt. 灌,注;倒;倾泻;倾吐 vi. 倾泻;涌流;斟茶",
+      "DisplayForms": "writing",
+      "Definitions": "n. 书写;作品;著作;[法] 笔迹 v. 书写(write的ing形式)",
       "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:5年级下",
+      "SourceBooks": "beishida_start1:3年级上",
       "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
+      "CandidateCanonical": "write",
+      "CanonicalRelation": "ing-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "写；书写",
       "BlockerClass": "semantic-easy",
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-lower|r078|pour"
+        "beishida_start1|g3-upper|r053|writing"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g5-lower|r078|pour",
+          "SourceOccurrenceKey": "beishida_start1|g3-upper|r053|writing",
           "SourceID": "beishida_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "78",
-          "Word": "pour",
-          "Definition": "n. 倾泻;流出;骤雨 vt. 灌,注;倒;倾泻;倾吐 vi. 倾泻;涌流;斟茶",
-          "Before": [
-            "change",
-            "cookbook",
-            "flour",
-            "guess",
-            "knife",
-            "mix",
-            "need",
-            "plate"
-          ],
-          "After": [
-            "puzzled",
-            "recipe",
-            "salt",
-            "shout",
-            "step",
-            "sugar",
-            "tell",
-            "eat out"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "prefer",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "prefer",
-      "Definitions": "vt. 更喜欢;宁愿;提出;提升 vi. 喜欢;愿意",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r070|prefer"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r070|prefer",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
+          "SourceBook": "3年级上",
+          "Grade": "3",
           "Semester": "上",
-          "SourceRow": "70",
-          "Word": "prefer",
-          "Definition": "vt. 更喜欢;宁愿;提出;提升 vi. 喜欢;愿意",
+          "SourceRow": "53",
+          "Word": "writing",
+          "Definition": "n. 书写;作品;著作;[法] 笔迹 v. 书写(write的ing形式)",
           "Before": [
-            "idea",
-            "in the end",
-            "latest",
-            "mall",
-            "pair",
-            "people",
-            "pop",
-            "popcorn"
+            "come out",
+            "fish",
+            "fishing",
+            "kitchen",
+            "cook",
+            "cooking",
+            "dinner",
+            "write"
           ],
           "After": [
-            "quick",
-            "spend",
-            "style",
-            "sunglasses",
-            "sweatpants",
-            "video game",
-            "accident",
-            "advice"
+            "drink",
+            "drinking",
+            "play",
+            "playing",
+            "paint",
+            "painting",
+            "our",
+            "math"
           ]
         }
       ]
     },
     {
-      "MatchKey": "press",
+      "MatchKey": "x-ray",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "press",
-      "Definitions": "n. 压;按;新闻;出版社;[印刷] 印刷机 vt. 压;按;逼迫;紧抱 vi. 压;逼;重压",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r090|press"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r090|press",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "90",
-          "Word": "press",
-          "Definition": "n. 压;按;新闻;出版社;[印刷] 印刷机 vt. 压;按;逼迫;紧抱 vi. 压;逼;重压",
-          "Before": [
-            "deep",
-            "dentist",
-            "dizzy",
-            "explain",
-            "give",
-            "glad",
-            "manual",
-            "medicine"
-          ],
-          "After": [
-            "problem",
-            "scared",
-            "screen",
-            "sure",
-            "switch",
-            "tell",
-            "tired",
-            "toothache"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "program",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "program",
-      "Definitions": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-lower|r031|program"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g5-lower|r031|program",
-          "SourceID": "beishida_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "31",
-          "Word": "program",
-          "Definition": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
-          "Before": [
-            "concert",
-            "drum",
-            "flute",
-            "guitar",
-            "kid",
-            "music",
-            "piano",
-            "play the piano"
-          ],
-          "After": [
-            "really",
-            "start",
-            "tonight",
-            "violin",
-            "row",
-            "team",
-            "basketball",
-            "badminton"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "puddle",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "puddle",
-      "Definitions": "n. 水坑,泥潭;胶土(由粘土与水和成,不透水) vt. 使泥泞,搅浑;把...捣制成胶土;搅炼;用胶土填塞 vi. 搅泥浆;在水坑中嬉戏",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r018|puddle"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r018|puddle",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "18",
-          "Word": "puddle",
-          "Definition": "n. 水坑,泥潭;胶土(由粘土与水和成,不透水) vt. 使泥泞,搅浑;把...捣制成胶土;搅炼;用胶土填塞 vi. 搅泥浆;在水坑中嬉戏",
-          "Before": [
-            "form",
-            "helmet",
-            "invite",
-            "mail",
-            "number",
-            "official",
-            "pad",
-            "post"
-          ],
-          "After": [
-            "rider",
-            "sign",
-            "skid",
-            "slippery",
-            "tire",
-            "track",
-            "warning",
-            "awful"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "pyramid",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "pyramid",
-      "Definitions": "n. 金字塔;角锥体 vt. 使...渐增;使...上涨;使...成金字塔状 vi. 渐增;上涨;成金字塔状",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r112|pyramid"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r112|pyramid",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "112",
-          "Word": "pyramid",
-          "Definition": "n. 金字塔;角锥体 vt. 使...渐增;使...上涨;使...成金字塔状 vi. 渐增;上涨;成金字塔状",
-          "Before": [
-            "Internet",
-            "Italy",
-            "Japan",
-            "lake",
-            "lesson",
-            "Mexico",
-            "mountain",
-            "pollution"
-          ],
-          "After": []
-        }
-      ]
-    },
-    {
-      "MatchKey": "quick",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "quick",
-      "Definitions": "n. 核心;伤口的嫩肉 adj. 快的;迅速的,敏捷的;灵敏的 adv. 迅速地,快",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r071|quick"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r071|quick",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "71",
-          "Word": "quick",
-          "Definition": "n. 核心;伤口的嫩肉 adj. 快的;迅速的,敏捷的;灵敏的 adv. 迅速地,快",
-          "Before": [
-            "in the end",
-            "latest",
-            "mall",
-            "pair",
-            "people",
-            "pop",
-            "popcorn",
-            "prefer"
-          ],
-          "After": [
-            "spend",
-            "style",
-            "sunglasses",
-            "sweatpants",
-            "video game",
-            "accident",
-            "advice",
-            "angry"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "quilt",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "quilt",
-      "Definitions": "n. 被子;棉被 vt. 东拼西凑地编;加软衬料后缝制 vi. 缝被子",
+      "DisplayForms": "X-ray",
+      "Definitions": "n. 伦琴射线;X光;X光照片 adj. 伦琴线的 v. 用X线检查[摄影,处理,治疗]",
       "SourceIDs": "beishida_start1",
       "SourceBooks": "beishida_start1:1年级下",
       "CandidateSignals": "",
@@ -879,48 +504,43 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g1-lower|r034|quilt"
+        "beishida_start1|g1-lower|r062|x-ray"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g1-lower|r034|quilt",
+          "SourceOccurrenceKey": "beishida_start1|g1-lower|r062|x-ray",
           "SourceID": "beishida_start1",
           "SourceBook": "1年级下",
           "Grade": "1",
           "Semester": "下",
-          "SourceRow": "34",
-          "Word": "quilt",
-          "Definition": "n. 被子;棉被 vt. 东拼西凑地编;加软衬料后缝制 vi. 缝被子",
+          "SourceRow": "62",
+          "Word": "X-ray",
+          "Definition": "n. 伦琴射线;X光;X光照片 adj. 伦琴线的 v. 用X线检查[摄影,处理,治疗]",
           "Before": [
-            "octopus",
-            "ostrich",
-            "panda",
-            "pants",
-            "peacock",
-            "pig",
-            "pizza",
-            "queen"
+            "this",
+            "tiger",
+            "triangle",
+            "umbrella",
+            "violin",
+            "watch",
+            "watermelon",
+            "walk"
           ],
           "After": [
-            "rabbit",
-            "rain",
-            "rectangle",
-            "rice",
-            "robot",
-            "run",
-            "salad",
-            "sandwich"
+            "yo-yo",
+            "zebra",
+            "zoo"
           ]
         }
       ]
     },
     {
-      "MatchKey": "receive",
+      "MatchKey": "yo-yo",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "receive",
-      "Definitions": "vt. 收到;接待;接纳 vi. 接收",
+      "DisplayForms": "yo-yo",
+      "Definitions": "n. 溜溜球(一种线轴般的玩具);优柔寡断 adj. 上下起落的;摇摆不定的 vi. 摇摆不定;上下起落",
       "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
+      "SourceBooks": "beishida_start1:1年级下",
       "CandidateSignals": "",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -931,658 +551,1018 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r052|receive"
+        "beishida_start1|g1-lower|r063|yo-yo"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r052|receive",
+          "SourceOccurrenceKey": "beishida_start1|g1-lower|r063|yo-yo",
           "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "52",
-          "Word": "receive",
-          "Definition": "vt. 收到;接待;接纳 vi. 接收",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "63",
+          "Word": "yo-yo",
+          "Definition": "n. 溜溜球(一种线轴般的玩具);优柔寡断 adj. 上下起落的;摇摆不定的 vi. 摇摆不定;上下起落",
           "Before": [
-            "find",
-            "gym",
-            "ice-skate",
-            "information",
-            "invitation",
-            "karate",
-            "learn",
-            "partner"
+            "tiger",
+            "triangle",
+            "umbrella",
+            "violin",
+            "watch",
+            "watermelon",
+            "walk",
+            "X-ray"
           ],
           "After": [
-            "ski",
-            "sometimes",
-            "sound",
-            "work out",
-            "baseball",
-            "belt",
-            "buy",
-            "cost"
+            "zebra",
+            "zoo"
           ]
         }
       ]
     },
     {
-      "MatchKey": "relax",
+      "MatchKey": "break",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "relax",
-      "Definitions": "vi. 放松,休息;松懈,松弛;变从容;休养 vt. 放松;使休息;使松弛;缓和;使松懈",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级下",
-      "CandidateSignals": "",
+      "DisplayForms": "break",
+      "Definitions": "vi. 打破;折断;弄坏;削弱 vt. (使)破;打破(纪录);(常指好天气)突变;开始 vi. (嗓音)突变;突破;破晓;(价格)突然下跌 n. 破裂;间断;(持续一段时间的状况的)改变;间歇",
+      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|waiyan_start1",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:5年级下|beishida_start1:6年级下|hujiao_start3:4年级下|waiyan_start1:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:break",
+          "MatchKey": "break",
+          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r054|break\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "break#damage",
+          "ObjectType": "vocabulary",
+          "TargetSense": "打破；弄坏",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Beijing Grade-4 lower binds break to physical damage through break/broke/drop/fix; keep a distinct damage learning unit."
+        },
+        {
+          "DecisionKey": "surface:break#recess",
+          "MatchKey": "break",
+          "OccurrenceKeys": "[\"hujiao_start3|g4-lower|r051|break\",\"waiyan_start1|g5-upper|r070|break\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "break#recess",
+          "ObjectType": "vocabulary",
+          "TargetSense": "课间休息；休息时间",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Hujiao timetable and Waiyan study/time neighborhoods bind break to school recess or rest time."
+        }
+      ],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r039|relax"
+        "beijing_start1|g4-lower|r054|break",
+        "beishida_start1|g5-lower|r068|break",
+        "beishida_start1|g6-lower|r045|break",
+        "hujiao_start3|g4-lower|r051|break",
+        "waiyan_start1|g5-upper|r070|break"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r039|relax",
+          "SourceOccurrenceKey": "beijing_start1|g4-lower|r054|break",
+          "SourceID": "beijing_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "54",
+          "Word": "break",
+          "Definition": "vi. 打破;折断;弄坏;削弱 vt. (使)破;打破(纪录);(常指好天气)突变;开始 vi. (嗓音)突变;突破;破晓;(价格)突然下跌 n. 破裂;间断;(持续一段时间的状况的)改变;间歇",
+          "Before": [
+            "dangerous",
+            "front",
+            "thick",
+            "enough",
+            "safety",
+            "crowd",
+            "push",
+            "slowly"
+          ],
+          "After": [
+            "broke",
+            "drop",
+            "dropped",
+            "fix",
+            "never",
+            "lose",
+            "lost",
+            "key"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r068|break",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "68",
+          "Word": "break",
+          "Definition": "vi. 打破;折断;弄坏;削弱 vt. (使)破;打破(纪录);(常指好天气)突变;开始 vi. (嗓音)突变;突破;破晓;(价格)突然下跌 n. 破裂;间断;(持续一段时间的状况的)改变;间歇",
+          "Before": [
+            "expensive",
+            "interesting",
+            "picture",
+            "story",
+            "a liter of milk",
+            "ask",
+            "add",
+            "bake"
+          ],
+          "After": [
+            "butter",
+            "change",
+            "cookbook",
+            "flour",
+            "guess",
+            "knife",
+            "mix",
+            "need"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r045|break",
           "SourceID": "beishida_start1",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "39",
-          "Word": "relax",
-          "Definition": "vi. 放松,休息;松懈,松弛;变从容;休养 vt. 放松;使休息;使松弛;缓和;使松懈",
+          "SourceRow": "45",
+          "Word": "break",
+          "Definition": "vi. 打破;折断;弄坏;削弱 vt. (使)破;打破(纪录);(常指好天气)突变;开始 vi. (嗓音)突变;突破;破晓;(价格)突然下跌 n. 破裂;间断;(持续一段时间的状况的)改变;间歇",
           "Before": [
-            "emergency",
-            "eyesight",
-            "fall",
-            "hear",
-            "injection",
-            "letter",
             "outside",
-            "pain"
-          ],
-          "After": [
+            "pain",
+            "relax",
             "smell",
             "taste",
             "wrist",
             "agree",
-            "bottle",
-            "break",
+            "bottle"
+          ],
+          "After": [
             "city",
-            "country"
+            "country",
+            "dark",
+            "different",
+            "field",
+            "future",
+            "hate",
+            "hope"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r051|break",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "51",
+          "Word": "break",
+          "Definition": "vi. 打破;折断;弄坏;削弱 vt. (使)破;打破(纪录);(常指好天气)突变;开始 vi. (嗓音)突变;突破;破晓;(价格)突然下跌 n. 破裂;间断;(持续一段时间的状况的)改变;间歇",
+          "Before": [
+            "Science",
+            "PE",
+            "Music",
+            "Art",
+            "timetable",
+            "from",
+            "a.m.",
+            "p.m."
+          ],
+          "After": [
+            "from ... to ...",
+            "sport",
+            "football",
+            "club",
+            "join",
+            "tell",
+            "about",
+            "basketball"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g5-upper|r070|break",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "70",
+          "Word": "break",
+          "Definition": "vi. 打破;折断;弄坏;削弱 vt. (使)破;打破(纪录);(常指好天气)突变;开始 vi. (嗓音)突变;突破;破晓;(价格)突然下跌 n. 破裂;间断;(持续一段时间的状况的)改变;间歇",
+          "Before": [
+            "line",
+            "half",
+            "past",
+            "miss",
+            "study",
+            "open",
+            "wall",
+            "have fun"
+          ],
+          "After": [
+            "nothing",
+            "think",
+            "drank",
+            "should",
+            "go to bed",
+            "shouldn't",
+            "should not",
+            "take down"
           ]
         }
       ]
     },
     {
-      "MatchKey": "salt",
+      "MatchKey": "chicken",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "salt",
-      "Definitions": "n. 盐;风趣,刺激性 adj. 咸水的;含盐的,咸味的;盐腌的;猥亵的 vt. 用盐腌;给...加盐;将盐撒在道路上使冰或雪融化",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:5年级下",
-      "CandidateSignals": "",
+      "DisplayForms": "chicken",
+      "Definitions": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级上|beishida_start1:1年级下|beishida_start1:3年级下|hujiao_start3:6年级上|jijiao_start3:3年级下|renjiao_start1:1年级下|renjiao_start1:3年级上|renjiao_start3:4年级上|waiyan_start1:1年级下|waiyan_start1:5年级下|waiyan_start3:4年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-lower|r081|salt"
-      ],
-      "FullEvidence": [
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g5-lower|r081|salt",
-          "SourceID": "beishida_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "81",
-          "Word": "salt",
-          "Definition": "n. 盐;风趣,刺激性 adj. 咸水的;含盐的,咸味的;盐腌的;猥亵的 vt. 用盐腌;给...加盐;将盐撒在道路上使冰或雪融化",
-          "Before": [
-            "guess",
-            "knife",
-            "mix",
-            "need",
-            "plate",
-            "pour",
-            "puzzled",
-            "recipe"
-          ],
-          "After": [
-            "shout",
-            "step",
-            "sugar",
-            "tell",
-            "eat out",
-            "hate",
-            "try out",
-            "walk through"
-          ]
+          "DecisionKey": "surface:chicken",
+          "MatchKey": "chicken",
+          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r052|chicken\",\"hujiao_start3|g6-upper|r030|chicken\",\"jijiao_start3|g3-lower|r054|chicken\",\"renjiao_start1|g1-lower|r029|chicken\",\"renjiao_start1|g3-upper|r051|chicken\",\"renjiao_start3|g4-upper|r055|chicken\",\"waiyan_start1|g5-lower|r013|chicken\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "chicken#meat",
+          "ObjectType": "vocabulary",
+          "TargetSense": "鸡肉",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-food-partition-revalidation",
+          "Rationale": "The new Jijiao occurrence is in an explicit food sequence (soup/noodle/rice/chicken/vegetable/fruit), so it joins chicken#meat."
+        },
+        {
+          "DecisionKey": "surface:chicken#animal",
+          "MatchKey": "chicken",
+          "OccurrenceKeys": "[\"renjiao_start1|g3-upper|r054|chicken\",\"waiyan_start1|g1-lower|r054|chicken\",\"waiyan_start3|g4-upper|r111|chicken\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "chicken#animal",
+          "ObjectType": "vocabulary",
+          "TargetSense": "鸡；小鸡",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "multipart-animal-partition-preserved",
+          "Rationale": "Existing farm/pet occurrences remain the animal subgroup. The new Jijiao occurrence is food evidence and does not change this partition."
         }
-      ]
-    },
-    {
-      "MatchKey": "sandals",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "sandals",
-      "Definitions": "n. [服装] 凉鞋;[服装] 拖鞋(sandal的复数);便鞋 v. 使穿凉鞋(sandal的第三人称单数)",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:4年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "plural-form",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
+      ],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g4-upper|r049|sandals"
+        "beijing_start1|g4-upper|r052|chicken",
+        "beishida_start1|g1-lower|r006|chicken",
+        "beishida_start1|g3-lower|r005|chicken",
+        "hujiao_start3|g6-upper|r030|chicken",
+        "jijiao_start3|g3-lower|r054|chicken",
+        "renjiao_start1|g1-lower|r029|chicken",
+        "renjiao_start1|g3-upper|r051|chicken",
+        "renjiao_start1|g3-upper|r054|chicken",
+        "renjiao_start3|g4-upper|r055|chicken",
+        "waiyan_start1|g1-lower|r054|chicken",
+        "waiyan_start1|g5-lower|r013|chicken",
+        "waiyan_start3|g4-upper|r111|chicken"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g4-upper|r049|sandals",
-          "SourceID": "beishida_start1",
+          "SourceOccurrenceKey": "beijing_start1|g4-upper|r052|chicken",
+          "SourceID": "beijing_start1",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "49",
-          "Word": "sandals",
-          "Definition": "n. [服装] 凉鞋;[服装] 拖鞋(sandal的复数);便鞋 v. 使穿凉鞋(sandal的第三人称单数)",
+          "SourceRow": "52",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
           "Before": [
-            "size",
-            "cap",
-            "dress",
-            "coat",
-            "sweater",
-            "jacket",
-            "jeans",
-            "shorts"
+            "eat",
+            "healthy",
+            "sour",
+            "cook",
+            "duck",
+            "soup",
+            "sorry",
+            "pie"
           ],
           "After": [
-            "where",
-            "here",
-            "behind",
-            "sofa",
-            "under",
-            "in",
-            "bed",
-            "wardrobe"
+            "hamburger",
+            "change",
+            "money",
+            "become",
+            "clever",
+            "ice",
+            "walk",
+            "interesting"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "score",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "score",
-      "Definitions": "n. 分数;二十;配乐;刻痕 vt. 获得;评价;划线,刻划;把...记下 vi. 得分;记分;刻痕",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-lower|r046|score"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g5-lower|r046|score",
+          "SourceOccurrenceKey": "beishida_start1|g1-lower|r006|chicken",
           "SourceID": "beishida_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
+          "SourceBook": "1年级下",
+          "Grade": "1",
           "Semester": "下",
-          "SourceRow": "46",
-          "Word": "score",
-          "Definition": "n. 分数;二十;配乐;刻痕 vt. 获得;评价;划线,刻划;把...记下 vi. 得分;记分;刻痕",
+          "SourceRow": "6",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
           "Before": [
-            "basketball",
-            "badminton",
-            "table tennis",
-            "tennis",
-            "volleyball",
-            "goalkeeper",
-            "goal",
-            "sports star"
+            "are",
+            "bird",
+            "brother",
+            "can"
           ],
           "After": [
-            "at the same time",
-            "at last",
-            "corner kick",
-            "field",
-            "cheer for",
-            "fall",
-            "up and down",
-            "boring"
+            "circle",
+            "dance",
+            "dress",
+            "father",
+            "French fries",
+            "friend",
+            "hamburgers",
+            "heart"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "screen",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "screen",
-      "Definitions": "n. 屏,幕;屏风 vt. 筛;拍摄;放映;掩蔽 vi. 拍电影",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r093|screen"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r093|screen",
+          "SourceOccurrenceKey": "beishida_start1|g3-lower|r005|chicken",
           "SourceID": "beishida_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "5",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "restaurant",
+            "menu",
+            "like"
+          ],
+          "After": [
+            "noodles",
+            "bread",
+            "fruit",
+            "meat",
+            "vegetables",
+            "dumplings",
+            "hamburgers",
+            "big"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-upper|r030|chicken",
+          "SourceID": "hujiao_start3",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "93",
-          "Word": "screen",
-          "Definition": "n. 屏,幕;屏风 vt. 筛;拍摄;放映;掩蔽 vi. 拍电影",
+          "SourceRow": "30",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
           "Before": [
-            "explain",
-            "give",
-            "glad",
-            "manual",
-            "medicine",
-            "press",
-            "problem",
-            "scared"
+            "hamburger",
+            "cola",
+            "yesterday",
+            "fruit",
+            "pie",
+            "pizza",
+            "sandwich",
+            "vegetable"
           ],
           "After": [
+            "chocolate",
+            "a little",
+            "fish and chips",
+            "neighbour",
+            "son",
+            "daughter",
+            "noisy",
+            "owl"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g3-lower|r054|chicken",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "54",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "food",
+            "eat",
+            "drink",
+            "juice",
+            "I",
+            "soup",
+            "noodle",
+            "rice"
+          ],
+          "After": [
+            "vegetable",
+            "fruit",
+            "like",
+            "good",
+            "milk",
+            "egg",
+            "bread",
+            "apple"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g1-lower|r029|chicken",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "29",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "bear",
+            "can",
             "sure",
-            "switch",
-            "tell",
-            "tired",
-            "toothache",
-            "turn on",
-            "understand",
-            "weekend"
+            "sorry",
+            "rice",
+            "noodles",
+            "vegetable",
+            "fish"
+          ],
+          "After": [
+            "egg",
+            "hungry",
+            "want",
+            "and",
+            "juice",
+            "tea",
+            "milk",
+            "water"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g3-upper|r051|chicken",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "51",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "for",
+            "shopping list",
+            "cola",
+            "buy",
+            "rice",
+            "noodles",
+            "vegetables",
+            "fish"
+          ],
+          "After": [
+            "egg",
+            "duck",
+            "chicken",
+            "rabbit",
+            "pet",
+            "snake",
+            "turtle",
+            "small"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g3-upper|r054|chicken",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "54",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "buy",
+            "rice",
+            "noodles",
+            "vegetables",
+            "fish",
+            "chicken",
+            "egg",
+            "duck"
+          ],
+          "After": [
+            "rabbit",
+            "pet",
+            "snake",
+            "turtle",
+            "small",
+            "long",
+            "look for",
+            "tail"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r055|chicken",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "55",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "bed",
+            "phone",
+            "table",
+            "sofa",
+            "fridge",
+            "find",
+            "them",
+            "beef"
+          ],
+          "After": [
+            "noodles",
+            "soup",
+            "vegetable",
+            "chopsticks",
+            "bowl",
+            "fork",
+            "knife",
+            "spoon"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g1-lower|r054|chicken",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "54",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "baby",
+            "they",
+            "they're",
+            "they are",
+            "cow",
+            "pig",
+            "farm",
+            "duck"
+          ],
+          "After": [
+            "egg",
+            "thin",
+            "very",
+            "fat",
+            "big",
+            "little",
+            "snake",
+            "short"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g5-lower|r013|chicken",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "13",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "office",
+            "fish",
+            "sausage",
+            "sandwich",
+            "fish and chips",
+            "traditional",
+            "dish",
+            "delicious"
+          ],
+          "After": [
+            "DVD",
+            "librarian",
+            "show",
+            "borrow",
+            "sent",
+            "American",
+            "read",
+            "interesting"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r111|chicken",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "111",
+          "Word": "chicken",
+          "Definition": "n. 鸡肉;小鸡;胆小鬼,懦夫 adj. 鸡肉的;胆怯的;幼小的",
+          "Before": [
+            "horse",
+            "there are",
+            "have a look",
+            "sheep",
+            "vegetable",
+            "climb",
+            "face",
+            "fruit"
+          ],
+          "After": [
+            "bear",
+            "pig",
+            "visit",
+            "tomorrow",
+            "plane",
+            "get up",
+            "o'clock",
+            "from"
           ]
         }
       ]
     },
     {
-      "MatchKey": "skid",
+      "MatchKey": "chinese",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "skid",
-      "Definitions": "n. 打滑;[车辆] 刹车;滑轨,滑动垫木 vt. 刹住,使减速;滚滑 vi. 打滑",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级下",
-      "CandidateSignals": "",
+      "DisplayForms": "Chinese",
+      "Definitions": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|beishida_start1:3年级上|hujiao_start3:4年级下|jijiao_start3:4年级下|renjiao_start1:3年级下|waiyan_start1:2年级上|waiyan_start1:3年级下|waiyan_start1:5年级下|waiyan_start3:3年级下|waiyan_start3:4年级上|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:chinese",
+          "MatchKey": "chinese",
+          "OccurrenceKeys": "[\"hujiao_start3|g4-lower|r040|chinese\",\"jijiao_start3|g4-lower|r077|chinese\",\"renjiao_start1|g3-lower|r002|chinese\",\"waiyan_start1|g3-lower|r080|chinese\",\"waiyan_start3|g3-lower|r090|chinese\",\"waiyan_start3|g5-lower|r111|chinese\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "chinese#language",
+          "ObjectType": "vocabulary",
+          "TargetSense": "中文；语文",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-language-partition-revalidation",
+          "Rationale": "The new Jijiao occurrence appears in the school-subject sequence Chinese/English/science/math/PE/art/music, so it joins the language/subject subgroup."
+        },
+        {
+          "DecisionKey": "surface:chinese#national",
+          "MatchKey": "chinese",
+          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r082|chinese\",\"waiyan_start1|g2-upper|r113|chinese\",\"waiyan_start1|g5-lower|r049|chinese\",\"waiyan_start3|g4-upper|r143|chinese\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "chinese#national",
+          "ObjectType": "vocabulary",
+          "TargetSense": "中国的；中国人的",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "multipart-national-partition-preserved",
+          "Rationale": "Existing national/cultural occurrences remain unchanged; the new Jijiao school-subject occurrence belongs to chinese#language."
+        }
+      ],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r021|skid"
+        "beijing_start1|g3-upper|r082|chinese",
+        "beishida_start1|g3-upper|r070|chinese",
+        "hujiao_start3|g4-lower|r040|chinese",
+        "jijiao_start3|g4-lower|r077|chinese",
+        "renjiao_start1|g3-lower|r002|chinese",
+        "waiyan_start1|g2-upper|r113|chinese",
+        "waiyan_start1|g3-lower|r080|chinese",
+        "waiyan_start1|g5-lower|r049|chinese",
+        "waiyan_start3|g3-lower|r090|chinese",
+        "waiyan_start3|g4-upper|r143|chinese",
+        "waiyan_start3|g5-lower|r111|chinese"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r021|skid",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "21",
-          "Word": "skid",
-          "Definition": "n. 打滑;[车辆] 刹车;滑轨,滑动垫木 vt. 刹住,使减速;滚滑 vi. 打滑",
+          "SourceOccurrenceKey": "beijing_start1|g3-upper|r082|chinese",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "82",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
           "Before": [
-            "mail",
-            "number",
-            "official",
-            "pad",
-            "post",
-            "puddle",
-            "rider",
-            "sign"
+            "blackboard",
+            "seventy",
+            "eighty",
+            "ninety",
+            "hundred",
+            "holiday",
+            "Christmas",
+            "know"
           ],
           "After": [
-            "slippery",
-            "tire",
-            "track",
-            "warning",
-            "awful",
-            "bone",
-            "brake",
-            "chin"
+            "ball",
+            "gold",
+            "gift",
+            "pink",
+            "star",
+            "bell",
+            "together",
+            "bright"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "smoking",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "smoking",
-      "Definitions": "n. 抽烟;冒气 v. 吸烟;冒烟(smoke的现在分词) adj. 准许吸烟的 adv. 冒着烟",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:3年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "smoke",
-      "CanonicalRelation": "ing-form",
-      "CanonicalAction": "keep-identity",
-      "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "烟；冒烟",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g3-upper|r012|smoking"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g3-upper|r012|smoking",
+          "SourceOccurrenceKey": "beishida_start1|g3-upper|r070|chinese",
           "SourceID": "beishida_start1",
           "SourceBook": "3年级上",
           "Grade": "3",
           "Semester": "上",
-          "SourceRow": "12",
-          "Word": "smoking",
-          "Definition": "n. 抽烟;冒气 v. 吸烟;冒烟(smoke的现在分词) adj. 准许吸烟的 adv. 冒着烟",
+          "SourceRow": "70",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
           "Before": [
-            "right",
-            "litter",
-            "touch",
-            "move",
-            "camera",
-            "worry",
-            "cry",
-            "food"
+            "English",
+            "subject",
+            "classroom",
+            "playground",
+            "their",
+            "library",
+            "music",
+            "art"
           ],
           "After": [
-            "parking",
-            "how much",
-            "toy",
-            "please",
-            "fifty",
-            "thirty",
-            "robot",
-            "sixty"
+            "science",
+            "P.E.",
+            "Christmas",
+            "parents"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "stomach",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "stomach",
-      "Definitions": "n. 胃;腹部;胃口 vt. 忍受;吃下 vi. 忍受",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:3年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g3-lower|r055|stomach"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g3-lower|r055|stomach",
-          "SourceID": "beishida_start1",
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r040|chinese",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "40",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+          "Before": [
+            "him",
+            "stop",
+            "at noon",
+            "go down",
+            "at night",
+            "take a walk",
+            "subject",
+            "lesson"
+          ],
+          "After": [
+            "Maths",
+            "English",
+            "Science",
+            "PE",
+            "Music",
+            "Art",
+            "timetable",
+            "from"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r077|chinese",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "77",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+          "Before": [
+            "favourite",
+            "colour",
+            "brown",
+            "blue",
+            "clothes",
+            "our",
+            "their",
+            "subject"
+          ],
+          "After": [
+            "English",
+            "science",
+            "math",
+            "PE",
+            "art",
+            "music",
+            "and",
+            "but"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g3-lower|r002|chinese",
+          "SourceID": "renjiao_start1",
           "SourceBook": "3年级下",
           "Grade": "3",
           "Semester": "下",
-          "SourceRow": "55",
-          "Word": "stomach",
-          "Definition": "n. 胃;腹部;胃口 vt. 忍受;吃下 vi. 忍受",
-          "Before": [
-            "storybook",
-            "sell",
-            "newspaper",
-            "magazine",
-            "watch",
-            "umbrella",
-            "toys",
-            "well"
-          ],
+          "SourceRow": "2",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+          "Before": [],
           "After": [
-            "hurt",
-            "mouth",
-            "hair",
-            "face",
-            "head",
-            "arm",
-            "hand",
-            "leg"
+            "English",
+            "science",
+            "PE",
+            "music",
+            "maths",
+            "art",
+            "computer class",
+            "we"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "store",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "store",
-      "Definitions": "n. 商店;储备,贮藏;仓库 vt. 贮藏,储存",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:3年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g3-lower|r043|store"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g3-lower|r043|store",
-          "SourceID": "beishida_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "43",
-          "Word": "store",
-          "Definition": "n. 商店;储备,贮藏;仓库 vt. 贮藏,储存",
-          "Before": [
-            "hungry",
-            "milk",
-            "cold",
-            "fresh",
-            "favorite",
-            "coffee",
-            "water",
-            "iced tea"
-          ],
-          "After": [
-            "hat",
-            "new",
-            "clock",
-            "storybook",
-            "sell",
-            "newspaper",
-            "magazine",
-            "watch"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "style",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "style",
-      "Definitions": "n. 风格;时尚;类型;字体 vt. 设计;称呼;使合潮流 vi. 设计式样;用刻刀作装饰画",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r073|style"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r073|style",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
+          "SourceOccurrenceKey": "waiyan_start1|g2-upper|r113|chinese",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级上",
+          "Grade": "2",
           "Semester": "上",
-          "SourceRow": "73",
-          "Word": "style",
-          "Definition": "n. 风格;时尚;类型;字体 vt. 设计;称呼;使合潮流 vi. 设计式样;用刻刀作装饰画",
+          "SourceRow": "113",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
           "Before": [
-            "mall",
-            "pair",
-            "people",
-            "pop",
-            "popcorn",
-            "prefer",
-            "quick",
-            "spend"
+            "cold",
+            "coat",
+            "year",
+            "Happy New Year!",
+            "come in",
+            "present",
+            "dumpling",
+            "eat"
           ],
           "After": [
-            "sunglasses",
-            "sweatpants",
-            "video game",
-            "accident",
-            "advice",
-            "angry",
-            "bored",
-            "check"
+            "hair",
+            "firecracker",
+            "have",
+            "Christmas",
+            "wish",
+            "dinner"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "sugar",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "sugar",
-      "Definitions": "n. 糖;食糖;甜言蜜语 vt. 加糖于;粉饰 vi. 形成糖",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-lower|r084|sugar"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g5-lower|r084|sugar",
-          "SourceID": "beishida_start1",
+          "SourceOccurrenceKey": "waiyan_start1|g3-lower|r080|chinese",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "80",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+          "Before": [
+            "Parents' Day",
+            "speak",
+            "with",
+            "quite",
+            "good at",
+            "English",
+            "PE",
+            "physical education"
+          ],
+          "After": [
+            "art",
+            "report",
+            "try",
+            "were",
+            "young",
+            "beautiful",
+            "was",
+            "also"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g5-lower|r049|chinese",
+          "SourceID": "waiyan_start1",
           "SourceBook": "5年级下",
           "Grade": "5",
           "Semester": "下",
-          "SourceRow": "84",
-          "Word": "sugar",
-          "Definition": "n. 糖;食糖;甜言蜜语 vt. 加糖于;粉饰 vi. 形成糖",
+          "SourceRow": "49",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
           "Before": [
-            "need",
-            "plate",
-            "pour",
-            "puzzled",
-            "recipe",
-            "salt",
-            "shout",
-            "step"
+            "amazing",
+            "take",
+            "short",
+            "helicopter",
+            "evening",
+            "actor",
+            "busy",
+            "quarter"
           ],
           "After": [
-            "tell",
-            "eat out",
-            "hate",
-            "try out",
-            "walk through"
+            "drew",
+            "piece",
+            "painted",
+            "scissors",
+            "stick",
+            "tied",
+            "string",
+            "theatre"
           ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "switch",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "switch",
-      "Definitions": "n. 开关;转换;鞭子 vi. 转换;抽打;换防 vt. 转换;用鞭子等抽打",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r095|switch"
-      ],
-      "FullEvidence": [
+        },
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r095|switch",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "95",
-          "Word": "switch",
-          "Definition": "n. 开关;转换;鞭子 vi. 转换;抽打;换防 vt. 转换;用鞭子等抽打",
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r090|chinese",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "90",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
           "Before": [
-            "glad",
-            "manual",
-            "medicine",
-            "press",
-            "problem",
-            "scared",
-            "screen",
-            "sure"
+            "TV",
+            "watch TV",
+            "have",
+            "class",
+            "today",
+            "music",
+            "has",
+            "have"
           ],
           "After": [
-            "tell",
-            "tired",
-            "toothache",
-            "turn on",
-            "understand",
-            "weekend",
-            "work",
-            "city"
+            "maths",
+            "art",
+            "PE",
+            "physical education",
+            "science",
+            "we",
+            "fly",
+            "spring"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r143|chinese",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "143",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+          "Before": [
+            "high jump",
+            "long jump",
+            "How about ...?",
+            "subject",
+            "family",
+            "dinner",
+            "year",
+            "New Year"
+          ],
+          "After": [
+            "festival",
+            "the Spring Festival",
+            "I see.",
+            "peanut",
+            "merry",
+            "Christmas",
+            "Merry Christmas!"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r111|chinese",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "111",
+          "Word": "Chinese",
+          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
+          "Before": [
+            "worker",
+            "factory",
+            "early",
+            "taxi",
+            "quarter",
+            "to",
+            "worry",
+            "paper"
+          ],
+          "After": [
+            "so",
+            "word",
+            "drew",
+            "draw",
+            "cut",
+            "cut",
+            "piece",
+            "paint"
           ]
         }
       ]
