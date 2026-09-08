@@ -712,6 +712,7 @@ candidate:invention,invention,invention,发明；发明物,invention,2,reviewed
 candidate:inventor,inventor,inventor,发明家,inventor,1,reviewed
 candidate:invitation,invitation,invitation,邀请,invitation,1,reviewed
 candidate:invite,invite,invite,邀请,invite,1,reviewed
+candidate:is,is,is,是；处于（be 的第三人称单数）,is,6,reviewed
 candidate:island,island,island,岛；岛屿,island,3,reviewed
 candidate:it,it,it,它；这件事/这个东西,it,5,reviewed
 candidate:italian,italian,Italian,意大利的,italian,1,reviewed
@@ -722,44 +723,61 @@ candidate:jam,jam,jam,果酱,jam,1,reviewed
 candidate:january,january,January,一月,january,4,reviewed
 candidate:jasmine,jasmine,jasmine,茉莉；茉莉花,jasmine,1,reviewed
 candidate:job,job,job,工作；职业,job,5,reviewed
+candidate:join,join,join,加入；参加,join,4,reviewed
+candidate:joke,joke,joke,玩笑；笑话,joke,2,reviewed
 candidate:journey,journey,journey,旅行；行程,journey,1,reviewed
+candidate:joy,joy,joy,欢乐；快乐；喜悦,joy,2,reviewed
 candidate:juice,juice,juice,果汁；汁,juice,7,reviewed
 candidate:july,july,July,七月,july,6,reviewed
+candidate:jump,jump,jump,跳；跳跃,jump|jumping,5,reviewed
 candidate:jump rope,jump rope,jump rope,跳绳,jumped rope|jumping rope,2,reviewed
 candidate:june,june,June,六月,june,5,reviewed
 candidate:junior high school,junior high school,junior high school,初中；初级中学,junior high school,1,reviewed
+candidate:just,just,just,只是；仅仅,just,3,reviewed
 candidate:kangaroo,kangaroo,kangaroo,袋鼠,kangaroo,2,reviewed
+candidate:keep,keep,keep,保持；保留,keep,5,reviewed
 candidate:keep quiet,keep quiet,keep quiet,保持安静,keep quiet,1,reviewed
 candidate:key,key,key,钥匙,key,5,reviewed
 candidate:kick,kick,kick,踢,kick,1,reviewed
+candidate:kid,kid,kid,小孩；孩子,kid,5,reviewed
 candidate:kill,kill,kill,杀死；杀害,kill,1,reviewed
 candidate:kilogram,kilogram,kilogram,千克；公斤,kilo|kilogram,3,reviewed
 candidate:kilometre,kilometre,kilometre,[计量] 公里,kilometre,2,reviewed
 candidate:king,king,king,国王,king,2,reviewed
 candidate:kitchen,kitchen,kitchen,厨房,kitchen,7,reviewed
+candidate:kite,kite,kite,风筝,kite,6,reviewed
 candidate:kitten,kitten,kitten,小猫,kitten,2,reviewed
 candidate:knee,knee,knee,膝盖,knee,2,reviewed
+candidate:knife,knife,knife,刀；小刀,knife,4,reviewed
 candidate:knock down,knock down,knock down,撞倒；击倒；拆倒,knock down,1,reviewed
+candidate:know,know,know,知道；认识；了解,know,6,reviewed
 candidate:koala,koala,koala,考拉；树袋熊,koala,2,reviewed
 candidate:kung fu,kung fu,kung fu,功夫；中国功夫,kung fu,1,reviewed
 candidate:labour,labour,labour,劳动,labour,1,reviewed
 candidate:labour day,labour day,Labour Day,劳动节,labour day,1,reviewed
 candidate:lady,lady,lady,女士；夫人,lady,1,reviewed
+candidate:lake,lake,lake,湖；湖泊,lake,7,reviewed
 candidate:lake ontario,lake ontario,Lake Ontario,安大略湖,lake ontario,1,reviewed
 candidate:lamp,lamp,lamp,灯；台灯,lamp,1,reviewed
 candidate:land,land,land,陆地；土地,land,1,reviewed
 candidate:language,language,language,语言,language,2,reviewed
 candidate:lantern,lantern,lantern,灯笼,lantern,1,reviewed
 candidate:large,large,large,大的；大型的,large,1,reviewed
+candidate:last,last,last,最后的；上一个的,last,6,reviewed
+candidate:late,late,late,晚的；迟的；迟到的,late,7,reviewed
+candidate:later,later,later,后来；稍后；以后,later,3,reviewed
+candidate:laugh,laugh,laugh,笑；大笑,laugh|laughed,4,reviewed
 candidate:laugh at,laugh at,laugh at,嘲笑；因……发笑,laugh at,1,reviewed
 candidate:lazy,lazy,lazy,懒惰的；懒洋洋的,lazy,2,reviewed
 candidate:leaf,leaf,leaf,叶子；树叶,leaf|leaves,5,reviewed
+candidate:learn,learn,learn,学习；学会,learn|learnt,6,reviewed
 candidate:leave,leave,leave,离开；出发,leave,3,reviewed
 candidate:left#direction,left#direction,left,左边；左侧,left,5,reviewed
 candidate:left#leave-past,left#leave-past,left,离开；出发（leave 的过去式）,left,2,reviewed
 candidate:leg,leg,leg,腿,leg,6,reviewed
 candidate:lemon,lemon,lemon,柠檬,lemon,1,reviewed
 candidate:less,less,less,更少；较少,less,1,reviewed
+candidate:lesson,lesson,lesson,课；课程,lesson,5,reviewed
 candidate:let,let,let,让；允许,let,3,reviewed
 candidate:librarian,librarian,librarian,图书馆员,librarian,2,reviewed
 candidate:library,library,library,图书馆,library,6,reviewed
@@ -769,24 +787,33 @@ candidate:life,life,life,生活；生命,life,3,reviewed
 candidate:lifeguard,lifeguard,lifeguard,救生员,lifeguard,1,reviewed
 candidate:lion,lion,lion,狮子,lion,4,reviewed
 candidate:lion dance,lion dance,lion dance,舞狮,lion dance,1,reviewed
+candidate:listen,listen,listen,听；倾听,listen,4,reviewed
 candidate:listen to music,listen to music,listen to music,听音乐,listened to music|listening to music,3,reviewed
 candidate:litter,litter,litter,垃圾；废弃物,litter,2,reviewed
+candidate:live,live,live,居住；生活,live,8,reviewed
 candidate:london,london,London,伦敦,london,2,reviewed
+candidate:long,long,long,长的；长时间的,long|longer,7,reviewed
 candidate:long race,long race,long race,长跑；长距离比赛,long race,1,reviewed
 candidate:look after,look after,look after,照顾；照料,look after,1,reviewed
 candidate:look for,look for,look for,寻找；找,look for,5,reviewed
 candidate:look forward to,look forward to,look forward to,期待；盼望,look forward to,2,reviewed
 candidate:look up,look up,look up,查找；查阅,look up,1,reviewed
+candidate:lose,lose,lose,丢失；失去,lose,2,reviewed
 candidate:lost,lost,lost,迷路的；丢失的,lost,8,reviewed
 candidate:loud,loud,loud,大声的；响亮的,loud,1,reviewed
 candidate:loudly,loudly,loudly,大声地；响亮地,loudly,1,reviewed
+candidate:love,love,love,爱；喜爱；喜欢,love,8,reviewed
+candidate:lovely,lovely,lovely,可爱的；美好的,lovely,6,reviewed
 candidate:lower,lower,lower,更低的；较低的,lower,1,reviewed
+candidate:luck,luck,luck,运气；幸运,luck,2,reviewed
 candidate:lucky,lucky,lucky,幸运的,lucky,2,reviewed
+candidate:lunch,lunch,lunch,午餐；午饭,lunch,5,reviewed
 candidate:machine,machine,machine,机器,machine,2,reviewed
 candidate:made,made,made,制作；做（make 的过去式）,made,2,reviewed
 candidate:magazine,magazine,magazine,杂志,magazine,2,reviewed
 candidate:magic,magic,magic,魔法；魔术,magic,2,reviewed
 candidate:mail a present,mail a present,mail a present,邮寄礼物,mail a present,1,reviewed
+candidate:make,make,make,制作；做,make,5,reviewed
 candidate:make a card,make a card,make a card,制作卡片,make a card,1,reviewed
 candidate:make a model plane,make a model plane,make a model plane,制作模型飞机,make a model plane,2,reviewed
 candidate:make a phone call,make a phone call,make a phone call,打电话,make a phone call,1,reviewed
@@ -801,6 +828,8 @@ candidate:make the bed,make the bed,make the bed,整理床铺,make the bed,1,rev
 candidate:make use of,make use of,make use of,利用；使用,make use of,1,reviewed
 candidate:mammal,mammal,mammal,哺乳动物,mammal,1,reviewed
 candidate:man,man,man,男人；男性,man,7,reviewed
+candidate:many,many,many,许多；很多,many,5,reviewed
+candidate:map,map,map,地图,map,7,reviewed
 candidate:maple leaves,maple leaves,maple leaves,枫叶,maple leaves,1,reviewed
 candidate:march,march,March,三月,march,4,reviewed
 candidate:mark,mark,mark,分数；成绩,mark,1,reviewed
@@ -810,37 +839,55 @@ candidate:match#game,match#game,match,比赛；竞赛,match,1,reviewed
 candidate:match#stick,match#stick,match,火柴,match,2,reviewed
 candidate:maths,maths,maths,数学,maths,5,reviewed
 candidate:maths book,maths book,maths book,数学书,maths book,1,reviewed
+candidate:matter,matter,matter,事情；问题,matter,2,reviewed
 candidate:may#month,may#month,May,五月,may,4,reviewed
 candidate:maybe,maybe,maybe,也许；可能；大概,maybe,1,reviewed
+candidate:me,me,me,我（宾格）,me,4,reviewed
+candidate:meal,meal,meal,一餐；一顿饭,meal,2,reviewed
 candidate:meat,meat,meat,肉；肉类,meat,5,reviewed
 candidate:meatball,meatball,meatball,肉丸子,meatball,1,reviewed
 candidate:medicine,medicine,medicine,药；药物,medicine,2,reviewed
+candidate:meet,meet,meet,遇见；见面,meet|met,9,reviewed
 candidate:meeting place,meeting place,meeting place,集合地点；会面地点,meeting place,1,reviewed
 candidate:meeting room,meeting room,meeting room,会议室,meeting room,1,reviewed
 candidate:men,men,men,男人；男性（man 的复数）,men,4,reviewed
+candidate:merry,merry,merry,愉快的；快乐的,merry,2,reviewed
+candidate:mess,mess,mess,脏乱；一团糟,mess,3,reviewed
+candidate:message,message,message,消息；信息,message,2,reviewed
 candidate:messy,messy,messy,"凌乱的,散乱的",messy,1,reviewed
 candidate:metre,metre,metre,米；公尺,meter|metre,5,reviewed
 candidate:miaow,miaow,miaow,猫叫；猫叫声,miaow,1,reviewed
 candidate:mice,mice,mice,老鼠（mouse 的复数）,mice,2,reviewed
 candidate:mid-autumn festival,mid-autumn festival,Mid-Autumn Festival,中秋节,mid-autumn festival,1,reviewed
+candidate:middle,middle,middle,中间；中部,middle,3,reviewed
+candidate:milk,milk,milk,牛奶,milk,6,reviewed
 candidate:milkshake,milkshake,milkshake,奶昔,milkshake,1,reviewed
 candidate:mine,mine,mine,我的；我的东西,mine,4,reviewed
+candidate:minute,minute,minute,分钟,minute,4,reviewed
 candidate:mirror,mirror,mirror,镜子,mirror,1,reviewed
+candidate:mistake,mistake,mistake,错误；过失,mistake,2,reviewed
+candidate:model,model,model,模型,model,3,reviewed
 candidate:model car,model car,model car,汽车模型；模型车,model car,1,reviewed
 candidate:model house,model house,model house,房屋模型；模型房屋,model house,1,reviewed
 candidate:model plane,model plane,model plane,模型飞机,model plane,1,reviewed
 candidate:modern,modern,modern,现代的,modern,1,reviewed
 candidate:monday,monday,Monday,星期一,monday,7,reviewed
 candidate:money,money,money,钱；货币,money,3,reviewed
+candidate:monkey,monkey,monkey,猴子,monkey,8,reviewed
+candidate:monster,monster,monster,怪物,monster,3,reviewed
 candidate:month,month,month,月；一个月,month,4,reviewed
+candidate:moon,moon,moon,月亮；月球,moon,5,reviewed
 candidate:mooncake,mooncake,mooncake,月饼,mooncake,2,reviewed
 candidate:moose,moose,moose,驼鹿,moose,1,reviewed
+candidate:more,more,more,更多的；更多,more,8,reviewed
 candidate:morning,morning,morning,早晨；上午,morning,5,reviewed
 candidate:morning tea,morning tea,morning tea,上午茶；早茶,morning tea,1,reviewed
 candidate:moscow,moscow,Moscow,莫斯科,moscow,1,reviewed
 candidate:most,most,most,最多的；大多数的,most,2,reviewed
+candidate:mother,mother,mother,母亲；妈妈,mother,7,reviewed
 candidate:mother's day,mother's day,Mother's Day,母亲节,mother's day,2,reviewed
 candidate:mountain,mountain,mountain,山；山脉,mountain,6,reviewed
+candidate:mouth,mouth,mouth,嘴；口,mouth,7,reviewed
 candidate:move,move,move,移动；搬动；搬家,move,2,reviewed
 candidate:mr,mr,Mr,先生,mr,4,reviewed
 candidate:mrs,mrs,Mrs,太太；夫人,mrs,5,reviewed
@@ -848,6 +895,7 @@ candidate:ms,ms,Ms,女士,ms,5,reviewed
 candidate:much,much,much,许多；很多,much,3,reviewed
 candidate:mud,mud,mud,泥；泥巴,mud,1,reviewed
 candidate:mule,mule,mule,骡子,mule,1,reviewed
+candidate:mum,mum,mum,妈妈,mum,5,reviewed
 candidate:munich,munich,Munich,慕尼黑,munich,1,reviewed
 candidate:museum,museum,museum,博物馆,museum,6,reviewed
 candidate:music,music,music,音乐,music,5,reviewed
@@ -857,29 +905,38 @@ candidate:must,must,must,必须；一定要,must,3,reviewed
 candidate:my,my,my,我的,my,6,reviewed
 candidate:myself,myself,myself,我自己；我本人,myself,3,reviewed
 candidate:nail,nail,nail,指甲,nail,1,reviewed
+candidate:name,name,name,名字；姓名；命名,name,6,reviewed
+candidate:national,national,national,国家的；全国性的,national,3,reviewed
 candidate:national day,national day,National Day,国庆节；国庆日,national day,3,reviewed
 candidate:nature,nature,nature,自然；大自然,nature,1,reviewed
 candidate:nature shows,nature shows,nature shows,自然类节目,nature shows,1,reviewed
 candidate:naughty,naughty,naughty,淘气的；顽皮的,naughty,2,reviewed
+candidate:near,near,near,在……附近；近的,near,7,reviewed
 candidate:nearby,nearby,nearby,在附近；附近的,nearby,1,reviewed
 candidate:nearly,nearly,nearly,"差不多,几乎",nearly,1,reviewed
 candidate:neck,neck,neck,脖子；颈部,neck,2,reviewed
+candidate:need,need,need,需要,need,4,reviewed
 candidate:neighbour,neighbour,neighbour,邻居,neighbour,2,reviewed
 candidate:neighbourhood,neighbourhood,neighbourhood,社区；街区,neighbourhood,1,reviewed
 candidate:nephew,nephew,nephew,侄子；外甥,nephew,1,reviewed
 candidate:nervous,nervous,nervous,紧张的；焦虑的,nervous,3,reviewed
 candidate:net,net,net,网；网子,net,1,reviewed
 candidate:never,never,never,从不；从未,never,5,reviewed
+candidate:new,new,new,新的,new,7,reviewed
 candidate:new year's day,new year's day,New Year's Day,元旦；新年第一天,new year's day,1,reviewed
 candidate:new york,new york,New York,纽约,new york,1,reviewed
 candidate:news shows,news shows,news shows,新闻节目,news shows,1,reviewed
 candidate:newspaper,newspaper,newspaper,报纸,newspaper,2,reviewed
+candidate:next,next,next,下一个；接下来,next,5,reviewed
 candidate:next time,next time,next time,下一次；下次,next time,1,reviewed
 candidate:next week,next week,next week,下周；下星期,next week,1,reviewed
 candidate:nice,nice,nice,好的；友善的；令人愉快的,nice,8,reviewed
 candidate:niece,niece,niece,侄女；外甥女,niece,1,reviewed
+candidate:night,night,night,夜晚；晚上,night,5,reviewed
+candidate:nine,nine,nine,九,nine,6,reviewed
 candidate:nineteen,nineteen,nineteen,十九,nineteen,4,reviewed
 candidate:nineteenth,nineteenth,nineteenth,第十九,nineteenth,1,reviewed
+candidate:ninety,ninety,ninety,九十,ninety,2,reviewed
 candidate:ninth,ninth,ninth,第九,ninth,1,reviewed
 candidate:no,no,no,不；不是；没有,no,7,reviewed
 candidate:no entry,no entry,no entry,禁止进入,no entry,1,reviewed
@@ -890,6 +947,7 @@ candidate:noise,noise,noise,噪音；响声,noise,3,reviewed
 candidate:noisy,noisy,noisy,吵闹的；嘈杂的,noisy,2,reviewed
 candidate:noodle,noodle,noodle,面条,noodle|noodles,7,reviewed
 candidate:noon,noon,noon,中午；正午,noon,1,reviewed
+candidate:north,north,north,北；北方,north,5,reviewed
 candidate:notebook,notebook,notebook,笔记本,notebook,1,reviewed
 candidate:november,november,November,十一月,november,5,reviewed
 candidate:nut,nut,nut,坚果,nut,2,reviewed
