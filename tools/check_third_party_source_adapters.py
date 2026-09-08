@@ -2,10 +2,11 @@
 """Validate closure of every enabled Third-party Vocabulary source adapter.
 
 This is a source-layer gate only. It verifies the invariants shared by every
-enabled adapter: standard occurrence schema, SourceID/key closure, and dedicated
-prepare/check implementations. Edition-specific source quality constraints remain
-owned by each adapter checker; the generic gate must not invent stricter rules.
-It does not perform identity matching or mutate Klose state.
+enabled adapter: standard occurrence schema, SourceID/key closure, dedicated
+prepare/check implementations, and a single automated workflow owner.
+Edition-specific source quality constraints remain owned by each adapter checker;
+the generic gate must not invent stricter rules. It does not perform identity
+matching or mutate Klose state.
 """
 from __future__ import annotations
 
@@ -14,6 +15,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "anki" / "klose" / "third_party_vocabulary" / "config" / "source_adapters.csv"
+UNIFIED_WORKFLOW = ROOT / ".github" / "workflows" / "prepare-third-party-renjiao-start1.yml"
+LEGACY_AUTO_WRITERS = [
+    ROOT / ".github" / "workflows" / "prepare-klose-beijing-vocabulary.yml",
+    ROOT / ".github" / "workflows" / "prepare-third-party-beishida-start1.yml",
+    ROOT / ".github" / "workflows" / "prepare-third-party-jijiao-start3.yml",
+]
 EXPECTED_FIELDS = [
     "SourceOccurrenceKey", "SourceID", "SourceBook", "Grade", "Semester",
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition", "SourceFile",
@@ -33,6 +40,15 @@ def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def main() -> None:
+    if not UNIFIED_WORKFLOW.exists():
+        raise SystemExit("Missing unified Third-party Stage-A workflow owner")
+    active_legacy = [path.relative_to(ROOT).as_posix() for path in LEGACY_AUTO_WRITERS if path.exists()]
+    if active_legacy:
+        raise SystemExit(
+            "Duplicate source-adapter workflow writers are forbidden; retire: "
+            + ", ".join(active_legacy)
+        )
+
     fields, config = read_csv(CONFIG)
     if fields != ["SourceID", "OccurrencesPath", "Enabled"]:
         raise SystemExit(f"Unexpected source-adapter config schema: {fields}")
@@ -100,6 +116,8 @@ def main() -> None:
     print("common occurrence schema = enforced")
     print("cross-adapter occurrence-key collision = no")
     print("dedicated prepare/check per enabled adapter = yes")
+    print("single automated adapter workflow owner = yes")
+    print("legacy duplicate workflow writers = no")
     print("identity/reconciliation fields in occurrence outputs = no")
     print("generic gate invents edition-specific Definition rule = no")
     print("Klose state mutated = no")
