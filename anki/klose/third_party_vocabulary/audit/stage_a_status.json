@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "81dd23cab1e96f4337cf42f7f4ad4a5828f0515c",
-  "WorkflowRunID": "34226021650",
-  "WorkflowRunNumber": "249",
+  "InputCommit": "c7ecce2c8250481c476cec208f120ca3492c9cf4",
+  "WorkflowRunID": "34226147440",
+  "WorkflowRunNumber": "250",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2204,
@@ -16,19 +16,15 @@
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "split-resolution",
-    "SelectedCount": 6,
+    "SelectedCount": 2,
     "SelectedMatchKeys": [
-      "flies",
-      "fan",
-      "get",
-      "letter",
-      "line",
-      "plant"
+      "right",
+      "sound"
     ],
-    "EvidenceWeight": 66,
+    "EvidenceWeight": 26,
     "EffectiveWeightBudget": 70,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "d36dec32bed3575be3e4d09e4136e1e27a2303172232d2bddc40f5ff723532c2",
-    "ReviewPacketFingerprint": "2faf3b12612681cf9d29842bf0e699bd7e72830b06517984f8dfa0daf8a581a2"
+    "ReviewBundleFingerprint": "dbb162979ecfb5cf7339d7b2a69c53269011aa757f441a55ddd0317c9bfb5a76",
+    "ReviewPacketFingerprint": "2fdb5aa559370a50b7e7a31060838bf1ef710297b5810e2d96b04d06d65dc048"
   }
 }
