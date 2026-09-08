@@ -25,6 +25,7 @@ on:
       - 'tools/propose_third_party_policy_decisions.py'
       - 'tools/check_third_party_corpus.py'
       - 'tools/recheck_third_party_audit_batch.py'
+      - 'tools/seal_third_party_stage_a_checkpoint.py'
       - '1.全国各大教材版本中小学同步/人教版/人教版一年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/人教版/人教版三年级起点*.xlsx'
       - '1.全国各大教材版本中小学同步/沪教版/沪教版三年级起点*.xlsx'
@@ -184,6 +185,9 @@ jobs:
             anki/klose/learner \
             anki/klose/publish \
             anki/klose/anki
+
+      - name: Seal validated Stage-A checkpoint
+        run: python tools/seal_third_party_stage_a_checkpoint.py seal
 
       - name: Persist third-party Stage A data only
         run: |
