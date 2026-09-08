@@ -1,0 +1,66 @@
+name: Third-party Stage-B Identity Reconciliation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/check_third_party_stage_b_reconciliation.py'
+      - 'tools/build_third_party_klose_premerge.py'
+      - 'tools/check_third_party_klose_premerge.py'
+      - 'tools/seal_third_party_stage_a_checkpoint.py'
+      - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
+      - 'anki/klose/third_party_vocabulary/audit/stage_a_status.json'
+      - 'anki/klose/third_party_vocabulary/premerge/identity_candidates.csv'
+      - 'anki/klose/third_party_vocabulary/premerge/readiness.json'
+      - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/note_registry_extensions.csv'
+      - 'anki/klose/master/identity_migrations.csv'
+      - '.github/workflows/third-party-stage-b-reconciliation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: third-party-stage-b-reconciliation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  reconciliation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify sealed Stage-A checkpoint
+        run: python tools/seal_third_party_stage_a_checkpoint.py verify
+
+      - name: Rebuild current read-only premerge candidates
+        run: python tools/build_third_party_klose_premerge.py
+
+      - name: Verify premerge readiness
+        run: python tools/check_third_party_klose_premerge.py
+
+      - name: Check durable Stage-B reconciliation decisions
+        run: python tools/check_third_party_stage_b_reconciliation.py
+
+      - name: Assert reconciliation does not mutate Klose state
+        shell: bash
+        run: |
+          unexpected="$(git diff --name-only | grep -Ev '^anki/klose/third_party_vocabulary/premerge/' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo 'Reconciliation validation mutated files outside derived premerge state:'
+            echo "$unexpected"
+            exit 1
+          fi
+          git diff --exit-code -- \
+            anki/klose/master \
+            anki/klose/learner \
+            anki/klose/publish \
+            anki/klose/anki
+          echo 'Stage-B reconciliation validation is read-only.'
