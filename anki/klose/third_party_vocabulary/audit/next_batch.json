@@ -1,24 +1,31 @@
 {
   "PlanVersion": "v5-throughput-delta",
-  "ReviewLane": "semantic-review",
+  "ReviewLane": "split-resolution",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "time",
-    "water",
-    "may",
-    "like"
+    "too",
+    "little",
+    "right",
+    "flies",
+    "letter"
   ],
-  "SelectedCount": 4,
-  "EvidenceWeight": 57,
-  "SurfaceCap": 30,
-  "WeightBudget": 60,
-  "EffectiveWeightBudget": 60,
-  "PackingSkippedMatchKeys": [],
+  "SelectedCount": 5,
+  "EvidenceWeight": 66,
+  "SurfaceCap": 25,
+  "WeightBudget": 70,
+  "EffectiveWeightBudget": 70,
+  "PackingSkippedMatchKeys": [
+    "fan",
+    "get",
+    "kind",
+    "plant",
+    "sound"
+  ],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
-  "ReviewBundleFingerprint": "df89872e36ecc1ab483bc53f8cbea1402ddb0c58ace724ee8920b0f9d29e20fa",
-  "ReviewPacketFingerprint": "825ce8f8a7534ee73a07539b4a2fac3c6c37a03eb817322aa4771824c95b40d6"
+  "ReviewBundleFingerprint": "3020250639176550865830573975a637098fc12e9ff701479efef070c1894f0a",
+  "ReviewPacketFingerprint": "2e3e0e209d9ae47e63622683b1c93cd50d10bbed68a16a224cdec723182acfd0"
 }
