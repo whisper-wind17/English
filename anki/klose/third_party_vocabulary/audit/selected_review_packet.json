@@ -4,485 +4,17 @@
   "ReviewLane": "split-resolution",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "fan",
-    "floor",
     "french",
-    "get",
-    "hard",
-    "line"
+    "kind",
+    "letter",
+    "little",
+    "pass",
+    "right"
   ],
   "SelectedCount": 6,
-  "ReviewBundleFingerprint": "608f2146c2ecc570862fea60f0c670575ddd90cc25f14fac660c4c09b00dbc71",
-  "ReviewPacketFingerprint": "622b281f03c4d01bea548637142f8489897a81a902263504ddaf99259128be2e",
+  "ReviewBundleFingerprint": "8c52f4364f60d38b02f47242ce6af844d126aade82a5eb43bc22ff6813a72986",
+  "ReviewPacketFingerprint": "7563815464d70e2f6a0ed5f6a5e88b57002e5ccf3329ef737e1b9907ef25ffc8",
   "Items": [
-    {
-      "MatchKey": "fan",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "fan",
-      "Definitions": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:6年级下|renjiao_start1:6年级上|renjiao_start3:4年级上|hujiao_start3:6年级下|waiyan_start1:5年级上|waiyan_start3:5年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:fan",
-          "MatchKey": "fan",
-          "OccurrenceKeys": "[\"beijing_start1|g6-lower|r061|fan\",\"hujiao_start3|g6-lower|r006|fan\",\"renjiao_start1|g6-upper|r054|fan\",\"renjiao_start1|g6-upper|r094|fan\",\"renjiao_start3|g4-upper|r010|fan\",\"waiyan_start1|g5-upper|r045|fan\",\"waiyan_start3|g5-upper|r098|fan\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "waiyan-start3-semantic-collision-split-required",
-          "Rationale": "New Waiyan Start3 sports/goalkeeper context binds fan to supporter/enthusiast, which is a distinct learning unit from the previously frozen fan=风扇/扇子 object sense. The prior rationale explicitly reserved enthusiast/fan for separate treatment when stronger evidence appeared. Current batch has not re-partitioned all seven source occurrences with sufficient exact evidence, so preserve the collision as split-required rather than fabricate a complete partition."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g6-lower|r061|fan",
-        "renjiao_start1|g6-upper|r054|fan",
-        "renjiao_start1|g6-upper|r094|fan",
-        "renjiao_start3|g4-upper|r010|fan",
-        "hujiao_start3|g6-lower|r006|fan",
-        "waiyan_start1|g5-upper|r045|fan",
-        "waiyan_start3|g5-upper|r098|fan"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g6-lower|r061|fan",
-          "SourceID": "beijing_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "61",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "Friday",
-            "slow",
-            "yesterday",
-            "nose",
-            "careful",
-            "all",
-            "ill",
-            "begin"
-          ],
-          "After": [
-            "large",
-            "invite",
-            "heavy",
-            "gym",
-            "classroom",
-            "club",
-            "behind",
-            "stand"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r054|fan",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "54",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "penguin",
-            "shark",
-            "whale",
-            "kind",
-            "metre",
-            "spend",
-            "trunk",
-            "peanut"
-          ],
-          "After": [
-            "tusk",
-            "Africa",
-            "Asia",
-            "smart",
-            "scared",
-            "worried",
-            "angry",
-            "proud"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r094|fan",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "94",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "invent",
-            "study",
-            "story",
-            "university",
-            "deaf",
-            "blind",
-            "fall",
-            "dumpling"
-          ],
-          "After": [
-            "ice lantern",
-            "bring",
-            "be afraid of",
-            "hear",
-            "pen pal",
-            "broken",
-            "pity",
-            "prize"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r010|fan",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "10",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "classroom",
-            "window",
-            "blackboard",
-            "light",
-            "picture",
-            "door",
-            "teacher's desk",
-            "computer"
-          ],
-          "After": [
-            "wall",
-            "floor",
-            "really",
-            "near",
-            "TV",
-            "clean",
-            "help",
-            "schoolbag"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g6-lower|r006|fan",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "6",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "weigh",
-            "kilogram",
-            "centimetre",
-            "taller"
-          ],
-          "After": [
-            "fantastic",
-            "themselves",
-            "theatre",
-            "go fishing",
-            "enjoy oneself",
-            "get ... in",
-            "life",
-            "writer"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g5-upper|r045|fan",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "45",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "worker",
-            "still",
-            "well",
-            "high",
-            "true",
-            "got",
-            "eighty",
-            "point"
-          ],
-          "After": [
-            "seventy",
-            "sixty",
-            "useful",
-            "show",
-            "presenter",
-            "blind",
-            "could",
-            "speak"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r098|fan",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "98",
-          "Word": "fan",
-          "Definition": "n. 迷;风扇;爱好者 vt. 煽动;刺激;吹拂 vi. 成扇形散开;飘动",
-          "Before": [
-            "well",
-            "team",
-            "really",
-            "good at",
-            "catch",
-            "goalkeeper",
-            "think",
-            "fantastic"
-          ],
-          "After": [
-            "past",
-            "swam",
-            "swim",
-            "slow",
-            "healthy",
-            "a lot",
-            "useful",
-            "show"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "floor",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "floor",
-      "Definitions": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级下|renjiao_start1:3年级下|renjiao_start3:4年级上|hujiao_start3:4年级上|waiyan_start1:3年级下|waiyan_start3:5年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:floor",
-          "MatchKey": "floor",
-          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r025|floor\",\"hujiao_start3|g4-upper|r106|floor\",\"renjiao_start1|g3-lower|r019|floor\",\"renjiao_start3|g4-upper|r012|floor\",\"waiyan_start1|g3-lower|r100|floor\",\"waiyan_start3|g5-upper|r079|floor\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "waiyan-start3-semantic-collision-split-required",
-          "Rationale": "New Waiyan Start3 number/floor neighborhood supplies explicit storey/楼层 evidence, distinct from the previously frozen floor=地板 room-surface sense. The prior rationale explicitly reserved storey/楼层 for a separate unit once occurrence evidence could bind it. Current batch has not re-partitioned all six source occurrences with sufficient exact evidence, so preserve the collision as split-required rather than fabricate a complete partition."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-lower|r025|floor",
-        "renjiao_start1|g3-lower|r019|floor",
-        "renjiao_start3|g4-upper|r012|floor",
-        "hujiao_start3|g4-upper|r106|floor",
-        "waiyan_start1|g3-lower|r100|floor",
-        "waiyan_start3|g5-upper|r079|floor"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g4-lower|r025|floor",
-          "SourceID": "beijing_start1",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "25",
-          "Word": "floor",
-          "Definition": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-          "Before": [
-            "soon",
-            "man",
-            "men",
-            "right",
-            "hurt",
-            "near",
-            "excuse",
-            "library"
-          ],
-          "After": [
-            "building",
-            "nearby",
-            "grey",
-            "beside",
-            "station",
-            "far",
-            "way",
-            "then"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g3-lower|r019|floor",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "19",
-          "Word": "floor",
-          "Definition": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-          "Before": [
-            "that",
-            "classroom",
-            "library",
-            "toilet",
-            "playground",
-            "first",
-            "second",
-            "third"
-          ],
-          "After": [
-            "room",
-            "our",
-            "they",
-            "chair",
-            "desk",
-            "blackboard",
-            "after school",
-            "play sports"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r012|floor",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "12",
-          "Word": "floor",
-          "Definition": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-          "Before": [
-            "blackboard",
-            "light",
-            "picture",
-            "door",
-            "teacher's desk",
-            "computer",
-            "fan",
-            "wall"
-          ],
-          "After": [
-            "really",
-            "near",
-            "TV",
-            "clean",
-            "help",
-            "schoolbag",
-            "maths book",
-            "English book"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-upper|r106|floor",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "106",
-          "Word": "floor",
-          "Definition": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-          "Before": [
-            "give",
-            "plate",
-            "on",
-            "table",
-            "lunch",
-            "under",
-            "beside",
-            "kitchen"
-          ],
-          "After": [
-            "angry",
-            "around",
-            "home",
-            "street",
-            "park",
-            "near",
-            "behind",
-            "supermarket"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-lower|r100|floor",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "100",
-          "Word": "floor",
-          "Definition": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-          "Before": [
-            "old",
-            "yesterday",
-            "weren't",
-            "were not",
-            "wasn't",
-            "was not",
-            "fun",
-            "second"
-          ],
-          "After": [
-            "worried",
-            "find",
-            "first",
-            "remember",
-            "Mother's Day",
-            "vegetable",
-            "last"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r079|floor",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "79",
-          "Word": "floor",
-          "Definition": "n. 地板,地面;楼层;基底;议员席 vt. 铺地板;打倒,击倒;(被困难)难倒",
-          "Before": [
-            "begin",
-            "give out",
-            "all right",
-            "thirteen",
-            "fourteen",
-            "sixteen",
-            "seventeen",
-            "eighteen"
-          ],
-          "After": [
-            "forty",
-            "number",
-            "thirty",
-            "fifty",
-            "sixty",
-            "seventy",
-            "eighty",
-            "ninety"
-          ]
-        }
-      ]
-    },
     {
       "MatchKey": "french",
       "ReviewMode": "full-evidence",
@@ -497,7 +29,7 @@
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
       "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
+      "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [
         {
           "DecisionKey": "surface:french",
@@ -509,8 +41,8 @@
           "TargetSense": "",
           "Status": "held",
           "Confidence": "high",
-          "DecisionBasis": "split-audited-defer",
-          "Rationale": "Renjiao r035 explicitly supports French=法语 through speak French, while r081 supports a nationality/person/adjective use beside American and Danish. The Waiyan occurrence lacks enough context to assign safely to either subgroup, so a complete disjoint partition would be fabricated."
+          "DecisionBasis": "minimal-identity-audited-split-v1",
+          "Rationale": "Speak French proves the language sense and American/French/Danish proves nationality/person/adjective use, but both Waiyan flat-list occurrences lack enough context for complete assignment. Keep held."
         }
       ],
       "CurrentOccurrenceKeys": [
@@ -643,12 +175,278 @@
       ]
     },
     {
-      "MatchKey": "get",
+      "MatchKey": "kind",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "get",
-      "Definitions": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得|n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
+      "DisplayForms": "kind",
+      "Definitions": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
       "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:4年级下|renjiao_start3:6年级上|hujiao_start3:4年级下|waiyan_start1:3年级上|waiyan_start1:5年级下|waiyan_start3:5年级下|waiyan_start3:6年级上|waiyan_start3:6年级下",
+      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:6年级上|renjiao_start3:5年级上|hujiao_start3:5年级下|hujiao_start3:6年级上|waiyan_start1:5年级上|waiyan_start3:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "split-resolution",
+      "PolicyRecommendedAction": "re-review-context-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:kind",
+          "MatchKey": "kind",
+          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r028|kind\",\"beijing_start1|g4-upper|r035|kind\",\"hujiao_start3|g5-lower|r161|kind\",\"hujiao_start3|g6-upper|r083|kind\",\"renjiao_start1|g6-upper|r049|kind\",\"renjiao_start3|g5-upper|r005|kind\",\"waiyan_start1|g5-upper|r081|kind\",\"waiyan_start3|g5-upper|r116|kind\"]",
+          "Action": "split-required",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "split-audited-defer",
+          "Rationale": "Current evidence proves two distinct units: kind=种类 in animal/many-kinds contexts and kind=友善的 in personality/kind-to contexts. However the duplicated Beijing occurrences and the Waiyan occurrence do not provide enough sentence/unit evidence for a complete occurrence partition, so keep the split explicit without arbitrary assignment."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-upper|r028|kind",
+        "beijing_start1|g4-upper|r035|kind",
+        "renjiao_start1|g6-upper|r049|kind",
+        "renjiao_start3|g5-upper|r005|kind",
+        "hujiao_start3|g5-lower|r161|kind",
+        "hujiao_start3|g6-upper|r083|kind",
+        "waiyan_start1|g5-upper|r081|kind",
+        "waiyan_start3|g5-upper|r116|kind"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g4-upper|r028|kind",
+          "SourceID": "beijing_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "28",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "bad",
+            "cold",
+            "drink",
+            "word",
+            "computer",
+            "easy",
+            "light",
+            "door"
+          ],
+          "After": [
+            "window",
+            "glass",
+            "take",
+            "fine",
+            "get",
+            "pen",
+            "kind",
+            "brown"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beijing_start1|g4-upper|r035|kind",
+          "SourceID": "beijing_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "35",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "door",
+            "kind",
+            "window",
+            "glass",
+            "take",
+            "fine",
+            "get",
+            "pen"
+          ],
+          "After": [
+            "brown",
+            "think",
+            "pair",
+            "shoe",
+            "how much",
+            "buy",
+            "shop",
+            "sell"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r049|kind",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "49",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "reptile",
+            "bird",
+            "fish",
+            "mammal",
+            "insect",
+            "penguin",
+            "shark",
+            "whale"
+          ],
+          "After": [
+            "metre",
+            "spend",
+            "trunk",
+            "peanut",
+            "fan",
+            "tusk",
+            "Africa",
+            "Asia"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g5-upper|r005|kind",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "5",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "old",
+            "young",
+            "funny"
+          ],
+          "After": [
+            "strict",
+            "polite",
+            "hard-working",
+            "helpful",
+            "clever",
+            "shy",
+            "know",
+            "our"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g5-lower|r161|kind",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "161",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "end",
+            "village",
+            "last",
+            "firecracker",
+            "mooncake",
+            "at the end of",
+            "giant",
+            "wall"
+          ],
+          "After": [
+            "through",
+            "no entry",
+            "kind to ...",
+            "be kind to ...",
+            "knock down"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-upper|r083|kind",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "83",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "asleep",
+            "next time",
+            "once upon a time",
+            "fall asleep",
+            "bee",
+            "insect",
+            "ant",
+            "anything"
+          ],
+          "After": [
+            "finger",
+            "dancer",
+            "insect museum",
+            "car museum",
+            "model car",
+            "science museum",
+            "many kinds of",
+            "capital"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g5-upper|r081|kind",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "81",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "drank",
+            "should",
+            "go to bed",
+            "shouldn't",
+            "should not",
+            "take down",
+            "clean",
+            "rule"
+          ],
+          "After": []
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r116|kind",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "116",
+          "Word": "kind",
+          "Definition": "n. 种类;性质 adj. 和蔼的;宽容的;令人感激的",
+          "Before": [
+            "blind",
+            "deaf",
+            "hear",
+            "her",
+            "fire",
+            "firefighter",
+            "hot dog",
+            "sausage"
+          ],
+          "After": [
+            "time",
+            "school",
+            "start",
+            "past",
+            "late",
+            "go to bed",
+            "exercise",
+            "playground"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "letter",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "letter",
+      "Definitions": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+      "SourceIDs": "renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start3:5年级下|hujiao_start3:5年级上|waiyan_start1:2年级下|waiyan_start3:5年级下|waiyan_start3:6年级下",
       "CandidateSignals": "cross-source-exact|multiple-occurrences",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -659,9 +457,9 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [
         {
-          "DecisionKey": "surface:get",
-          "MatchKey": "get",
-          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r033|get\",\"hujiao_start3|g4-lower|r021|get\",\"renjiao_start1|g4-lower|r015|get\",\"renjiao_start3|g6-upper|r020|get\",\"waiyan_start1|g3-upper|r067|get\",\"waiyan_start1|g5-lower|r039|get\",\"waiyan_start3|g5-lower|r087|get\",\"waiyan_start3|g6-lower|r038|get\",\"waiyan_start3|g6-upper|r062|get\"]",
+          "DecisionKey": "surface:letter",
+          "MatchKey": "letter",
+          "OccurrenceKeys": "[\"hujiao_start3|g5-upper|r090|letter\",\"renjiao_start3|g5-lower|r031|letter\",\"waiyan_start1|g2-lower|r022|letter\",\"waiyan_start3|g5-lower|r128|letter\",\"waiyan_start3|g6-lower|r065|letter\"]",
           "Action": "split-required",
           "CanonicalMatchKey": "",
           "ObjectType": "vocabulary",
@@ -669,661 +467,870 @@
           "Status": "held",
           "Confidence": "high",
           "DecisionBasis": "six-source-semantic-collision-hold",
-          "Rationale": "Expanded Waiyan Start3 evidence now independently supports get as a change-of-state verb in get frightened, while existing reviewed evidence supports get=得到；获得 and other new evidence may represent arrival/state constructions. The prior learner-first decision intentionally retained only the highest-value acquisition sense while common get constructions were separate. Because the new standalone evidence now proves another elementary base use and the flat lists do not support a complete disjoint partition, preserve the collision as split-required."
+          "Rationale": "The previous reviewed decision explicitly stated that no current occurrence evidenced the alphabet-character meaning and therefore released letter=信；信件. Waiyan Start3 now adds letter directly followed by spell, independently supporting letter=字母, while another new occurrence and prior evidence still support written correspondence. A complete disjoint occurrence partition is not provable from the flat lists, so preserve both elementary senses as split-required rather than broadening one learning unit."
         }
       ],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-upper|r033|get",
-        "renjiao_start1|g4-lower|r015|get",
-        "renjiao_start3|g6-upper|r020|get",
-        "hujiao_start3|g4-lower|r021|get",
-        "waiyan_start1|g3-upper|r067|get",
-        "waiyan_start1|g5-lower|r039|get",
-        "waiyan_start3|g5-lower|r087|get",
-        "waiyan_start3|g6-upper|r062|get",
-        "waiyan_start3|g6-lower|r038|get"
+        "renjiao_start3|g5-lower|r031|letter",
+        "hujiao_start3|g5-upper|r090|letter",
+        "waiyan_start1|g2-lower|r022|letter",
+        "waiyan_start3|g5-lower|r128|letter",
+        "waiyan_start3|g6-lower|r065|letter"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g4-upper|r033|get",
+          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r031|letter",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "31",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "shop",
+            "work",
+            "last",
+            "sound",
+            "also",
+            "busy",
+            "need",
+            "play"
+          ],
+          "After": [
+            "live",
+            "island",
+            "always",
+            "cave",
+            "go swimming",
+            "win",
+            "spring",
+            "summer"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r090|letter",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "90",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "watch TV",
+            "tell a story",
+            "beach",
+            "enjoy",
+            "sunshine",
+            "collect",
+            "shell",
+            "sea"
+          ],
+          "After": [
+            "put",
+            "know",
+            "year",
+            "on holiday",
+            "have a good time",
+            "outing",
+            "map",
+            "hill"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r022|letter",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "22",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "photo",
+            "newspaper",
+            "little",
+            "camera",
+            "smile",
+            "draw",
+            "picture",
+            "write"
+          ],
+          "After": [
+            "colour",
+            "tidy",
+            "room",
+            "do",
+            "homework",
+            "sleep",
+            "secret",
+            "card"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r128|letter",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "128",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "put",
+            "put",
+            "stick",
+            "tied",
+            "string",
+            "laugh",
+            "wore",
+            "wear"
+          ],
+          "After": [
+            "theatre",
+            "women",
+            "woman",
+            "actor",
+            "told",
+            "tell",
+            "joke",
+            "after"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r065|letter",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "65",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "October",
+            "video",
+            "proud",
+            "someday",
+            "born",
+            "as",
+            "became",
+            "become"
+          ],
+          "After": [
+            "spell",
+            "herself",
+            "all over",
+            "live",
+            "role model",
+            "cup",
+            "planned",
+            "plan"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "little",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "little",
+      "Definitions": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:6年级下|renjiao_start3:4年级上|hujiao_start3:3年级下|waiyan_start1:1年级下|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "split-resolution",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:little",
+          "MatchKey": "little",
+          "OccurrenceKeys": "[\"beijing_start1|g6-lower|r012|little\",\"hujiao_start3|g3-lower|r111|little\",\"renjiao_start3|g4-upper|r081|little\",\"waiyan_start1|g1-lower|r060|little\",\"waiyan_start1|g2-lower|r016|little\",\"waiyan_start1|g6-lower|r087|little\",\"waiyan_start3|g4-lower|r014|little\",\"waiyan_start3|g6-lower|r107|little\"]",
+          "Action": "split-required",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "six-source-semantic-collision-hold",
+          "Rationale": "Expanded Waiyan Start3 evidence now includes a Grade-6 occurrence in a spoke/speak/little/practise neighborhood that supports the small-amount use, while existing occurrences strongly support the size adjective little. The separately reviewed a little phrase does not erase this new standalone evidence. Because the flat lists do not support a complete disjoint occurrence partition, hold as split-required instead of collapsing distinct learner senses."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g6-lower|r012|little",
+        "renjiao_start3|g4-upper|r081|little",
+        "hujiao_start3|g3-lower|r111|little",
+        "waiyan_start1|g1-lower|r060|little",
+        "waiyan_start1|g2-lower|r016|little",
+        "waiyan_start1|g6-lower|r087|little",
+        "waiyan_start3|g4-lower|r014|little",
+        "waiyan_start3|g6-lower|r107|little"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g6-lower|r012|little",
           "SourceID": "beijing_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+          "Before": [
+            "use",
+            "cup",
+            "worried",
+            "worry",
+            "purple",
+            "desk",
+            "whose",
+            "wide"
+          ],
+          "After": [
+            "police",
+            "beautiful",
+            "head",
+            "only",
+            "street",
+            "garden",
+            "vacation",
+            "shoulder"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r081|little",
+          "SourceID": "renjiao_start3",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "33",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得",
+          "SourceRow": "81",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
           "Before": [
-            "easy",
-            "light",
-            "door",
-            "kind",
-            "window",
-            "glass",
-            "take",
-            "fine"
+            "baby brother",
+            "doctor",
+            "cook",
+            "driver",
+            "farmer",
+            "nurse",
+            "people",
+            "but"
           ],
           "After": [
-            "pen",
-            "kind",
-            "brown",
-            "think",
-            "pair",
-            "shoe",
-            "how much",
-            "buy"
+            "puppy",
+            "football player",
+            "job",
+            "basketball"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start1|g4-lower|r015|get",
-          "SourceID": "renjiao_start1",
+          "SourceOccurrenceKey": "hujiao_start3|g3-lower|r111|little",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "111",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+          "Before": [
+            "love",
+            "photo",
+            "tea",
+            "afraid",
+            "afraid of",
+            "bad",
+            "go",
+            "house"
+          ],
+          "After": [
+            "make",
+            "now",
+            "there",
+            "very"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g1-lower|r060|little",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "60",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+          "Before": [
+            "farm",
+            "duck",
+            "chicken",
+            "egg",
+            "thin",
+            "very",
+            "fat",
+            "big"
+          ],
+          "After": [
+            "snake",
+            "short",
+            "small",
+            "elephant",
+            "go",
+            "zoo",
+            "long",
+            "giraffe"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r016|little",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "16",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+          "Before": [
+            "sofa",
+            "street",
+            "rain",
+            "snow",
+            "ski",
+            "radio",
+            "photo",
+            "newspaper"
+          ],
+          "After": [
+            "camera",
+            "smile",
+            "draw",
+            "picture",
+            "write",
+            "letter",
+            "colour",
+            "tidy"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g6-lower|r087|little",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "87",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+          "Before": [
+            "middle",
+            "middle school",
+            "speech",
+            "September",
+            "excited",
+            "geography",
+            "same",
+            "at the same time"
+          ],
+          "After": [
+            "keep on",
+            "sometime",
+            "each other",
+            "chemistry",
+            "physics"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r014|little",
+          "SourceID": "waiyan_start3",
           "SourceBook": "4年级下",
           "Grade": "4",
           "Semester": "下",
-          "SourceRow": "15",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
+          "SourceRow": "14",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
           "Before": [
-            "bank",
-            "grocery",
-            "turn left",
-            "turn right",
-            "go straight",
-            "crossroads",
-            "neighbourhood",
-            "send"
+            "shy",
+            "answer",
+            "call",
+            "bad",
+            "cool",
+            "aunt",
+            "uncle",
+            "big"
           ],
           "After": [
-            "money",
-            "get to",
-            "before",
-            "leave",
-            "toy",
-            "hospital",
-            "bookshop",
-            "school"
+            "cute",
+            "city",
+            "ship",
+            "beautiful",
+            "whose",
+            "queen",
+            "close",
+            "old"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r020|get",
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r107|little",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "107",
+          "Word": "little",
+          "Definition": "adj. 小的;很少的;短暂的;小巧可爱的 adv. 完全不 n. 少许;没有多少;短时间",
+          "Before": [
+            "leave",
+            "September",
+            "excited",
+            "geography",
+            "same",
+            "at the same time",
+            "spoke",
+            "speak"
+          ],
+          "After": [
+            "keep on",
+            "practise",
+            "sometime",
+            "each other",
+            "chemistry",
+            "physics"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "pass",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "pass",
+      "Definitions": "n. 及格;经过;护照;途径;传球 vt. 通过;经过;传递 vi. 经过;传递;变化;终止",
+      "SourceIDs": "beijing_start1|renjiao_start3|waiyan_start3",
+      "SourceBooks": "beijing_start1:5年级上|renjiao_start3:4年级上|waiyan_start3:3年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "split-resolution",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:pass",
+          "MatchKey": "pass",
+          "OccurrenceKeys": "[\"beijing_start1|g5-upper|r019|pass\",\"renjiao_start3|g4-upper|r067|pass\",\"waiyan_start3|g3-lower|r036|pass\"]",
+          "Action": "split-required",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "six-source-semantic-collision-hold",
+          "Rationale": "Expanded Waiyan Start3 evidence places pass between meat and rice in an elementary food/table context, providing the hand-over/传递 sense that the prior learner-first rationale explicitly reserved for later distinct evidence. Existing occurrences support movement/completion pass=经过；通过. The flat lists do not prove a complete disjoint occurrence partition, so preserve both learner senses as split-required rather than broadening one identity."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g5-upper|r019|pass",
+        "renjiao_start3|g4-upper|r067|pass",
+        "waiyan_start3|g3-lower|r036|pass"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g5-upper|r019|pass",
+          "SourceID": "beijing_start1",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "19",
+          "Word": "pass",
+          "Definition": "n. 及格;经过;护照;途径;传球 vt. 通过;经过;传递 vi. 经过;传递;变化;终止",
+          "Before": [
+            "art",
+            "science",
+            "sheep",
+            "bear",
+            "minute",
+            "put",
+            "must",
+            "brother"
+          ],
+          "After": [
+            "finish",
+            "homework",
+            "half",
+            "late",
+            "dirty",
+            "ask",
+            "join",
+            "wash"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r067|pass",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "67",
+          "Word": "pass",
+          "Definition": "n. 及格;经过;护照;途径;传球 vt. 通过;经过;传递 vi. 经过;传递;变化;终止",
+          "Before": [
+            "chopsticks",
+            "bowl",
+            "fork",
+            "knife",
+            "spoon",
+            "dinner",
+            "ready",
+            "help yourself"
+          ],
+          "After": [
+            "try",
+            "parents",
+            "cousin",
+            "uncle",
+            "aunt",
+            "baby brother",
+            "doctor",
+            "cook"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r036|pass",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "36",
+          "Word": "pass",
+          "Definition": "n. 及格;经过;护照;途径;传球 vt. 通过;经过;传递 vi. 经过;传递;变化;终止",
+          "Before": [
+            "basketball",
+            "table tennis",
+            "morning exercises",
+            "ride",
+            "bike",
+            "swim",
+            "skip",
+            "meat"
+          ],
+          "After": [
+            "rice",
+            "mum",
+            "noodles",
+            "fish",
+            "but",
+            "milk",
+            "mm",
+            "does"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "right",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "right",
+      "Definitions": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+      "SourceIDs": "beijing_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级上|beijing_start1:4年级下|renjiao_start3:4年级上|renjiao_start3:6年级上|hujiao_start3:5年级上|waiyan_start1:2年级下|waiyan_start1:4年级上|waiyan_start3:4年级上|waiyan_start3:6年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "split-resolution",
+      "PolicyRecommendedAction": "re-review-context-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:right",
+          "MatchKey": "right",
+          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r026|right\",\"beijing_start1|g4-lower|r020|right\",\"hujiao_start3|g5-upper|r115|right\",\"renjiao_start3|g4-upper|r039|right\",\"renjiao_start3|g6-upper|r012|right\",\"waiyan_start1|g2-lower|r091|right\",\"waiyan_start1|g4-upper|r027|right\",\"waiyan_start3|g4-upper|r005|right\",\"waiyan_start3|g6-upper|r008|right\"]",
+          "Action": "split-required",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "split-audited-defer",
+          "Rationale": "Renjiao Start3 g6 upper r012, Hujiao g5 upper r115 and Waiyan g2 lower r091 clearly support the direction/right-side sense. The remaining date, health, description and invention-neighborhood occurrences do not reliably distinguish correct vs direction from the flat list. A complete multipart cover would require guessing, so preserve split-required."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r026|right",
+        "beijing_start1|g4-lower|r020|right",
+        "renjiao_start3|g4-upper|r039|right",
+        "renjiao_start3|g6-upper|r012|right",
+        "hujiao_start3|g5-upper|r115|right",
+        "waiyan_start1|g2-lower|r091|right",
+        "waiyan_start1|g4-upper|r027|right",
+        "waiyan_start3|g4-upper|r005|right",
+        "waiyan_start3|g6-upper|r008|right"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g3-upper|r026|right",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "26",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+          "Before": [
+            "card",
+            "tenth",
+            "eighth",
+            "ninth",
+            "month",
+            "October",
+            "eleventh",
+            "November"
+          ],
+          "After": [
+            "twelfth",
+            "December",
+            "date",
+            "today",
+            "thirteenth",
+            "football",
+            "seventeenth",
+            "eighteenth"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beijing_start1|g4-lower|r020|right",
+          "SourceID": "beijing_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "20",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+          "Before": [
+            "fever",
+            "has",
+            "mouth",
+            "flu",
+            "pill",
+            "soon",
+            "man",
+            "men"
+          ],
+          "After": [
+            "hurt",
+            "near",
+            "excuse",
+            "library",
+            "floor",
+            "building",
+            "nearby",
+            "grey"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r039|right",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "39",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+          "Before": [
+            "strong",
+            "friendly",
+            "quiet",
+            "hair",
+            "shoe",
+            "glasses",
+            "his",
+            "or"
+          ],
+          "After": [
+            "hat",
+            "her",
+            "bedroom",
+            "living room",
+            "study",
+            "kitchen",
+            "bathroom",
+            "bed"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r012|right",
           "SourceID": "renjiao_start3",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "20",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
+          "SourceRow": "12",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
           "Before": [
-            "right",
+            "post office",
+            "bookstore",
+            "cinema",
+            "hospital",
+            "crossing",
+            "turn",
+            "left",
+            "straight"
+          ],
+          "After": [
             "ask",
             "sir",
             "interesting",
             "Italian",
             "restaurant",
             "pizza",
-            "street"
-          ],
-          "After": [
-            "GPS",
-            "gave",
-            "feature",
-            "follow",
-            "far",
-            "tell",
-            "on foot",
-            "by"
+            "street",
+            "get"
           ]
         },
         {
-          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r021|get",
+          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r115|right",
           "SourceID": "hujiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "21",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "or",
-            "watermelon",
-            "grape",
-            "fox",
-            "round",
-            "purple",
-            "wait",
-            "minute"
-          ],
-          "After": [
-            "those",
-            "rise",
-            "shadow",
-            "noon",
-            "high",
-            "sky",
-            "evening",
-            "again"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r067|get",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "67",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "Friday",
-            "clever",
-            "cold",
-            "class",
-            "begin",
-            "cough",
-            "bring",
-            "umbrella"
-          ],
-          "After": [
-            "which",
-            "broken",
-            "long jump",
-            "make friends",
-            "sports day",
-            "high",
-            "high jump",
-            "race"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g5-lower|r039|get",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "39",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "shoulder",
-            "build",
-            "place",
-            "thousand",
-            "circle",
-            "answer",
-            "hope",
-            "so"
-          ],
-          "After": [
-            "hour",
-            "amazing",
-            "take",
-            "short",
-            "helicopter",
-            "evening",
-            "actor",
-            "busy"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r087|get",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "87",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "sales assistant",
-            "wheel",
-            "easy",
-            "take",
-            "too",
-            "try",
-            "lovely",
-            "moon"
-          ],
-          "After": [
-            "west",
-            "parent",
-            "stay",
-            "July",
-            "south",
-            "remember",
-            "June",
-            "east"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r062|get",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "62",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "DVD",
-            "together",
-            "lucky",
-            "bamboo",
-            "its",
-            "body",
-            "come out of",
-            "flute"
-          ],
-          "After": [
-            "frightened",
-            "long ago",
-            "I'd love to",
-            "not really",
-            "stop",
-            "clean",
-            "camera",
-            "show"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r038|get",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "38",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "play",
-            "third",
-            "time",
-            "bark",
-            "loudly",
-            "nothing",
-            "home",
-            "got"
-          ],
-          "After": [
-            "space",
-            "interested",
-            "spaceship",
-            "finish",
-            "decide",
-            "paper",
-            "brought",
-            "bring"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "hard",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "hard",
-      "Definitions": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-      "SourceIDs": "beijing_start1|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:3年级下|hujiao_start3:4年级下|hujiao_start3:5年级下|waiyan_start1:3年级上|waiyan_start1:3年级下|waiyan_start3:5年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:hard",
-          "MatchKey": "hard",
-          "OccurrenceKeys": "[\"beijing_start1|g3-lower|r060|hard\",\"hujiao_start3|g4-lower|r005|hard\",\"hujiao_start3|g5-lower|r043|hard\",\"waiyan_start1|g3-lower|r069|hard\",\"waiyan_start1|g3-upper|r007|hard\",\"waiyan_start3|g5-lower|r036|hard\",\"waiyan_start3|g5-lower|r074|hard\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "waiyan-start3-semantic-collision-split-required",
-          "Rationale": "New Waiyan Start3 evidence proves at least two additional elementary uses beyond the frozen hard=困难的/艰难的 sense: study hard binds the manner adverb 努力地, while the light/hard/broken neighborhood supports physical hardness 硬的. These are distinct learning units. Current batch has not re-partitioned all seven source occurrences completely, so preserve the collision as split-required rather than merge unrelated senses or guess occurrence assignments."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g3-lower|r060|hard",
-        "hujiao_start3|g4-lower|r005|hard",
-        "hujiao_start3|g5-lower|r043|hard",
-        "waiyan_start1|g3-upper|r007|hard",
-        "waiyan_start1|g3-lower|r069|hard",
-        "waiyan_start3|g5-lower|r036|hard",
-        "waiyan_start3|g5-lower|r074|hard"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g3-lower|r060|hard",
-          "SourceID": "beijing_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "60",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "mother",
-            "box",
-            "drive",
-            "parent",
-            "father",
-            "write",
-            "open",
-            "much"
-          ],
-          "After": [
-            "afraid",
-            "be",
-            "aunt",
-            "uncle",
-            "hospital",
-            "nurse",
-            "doctor",
-            "tooth"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r005|hard",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "5",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "touch",
-            "feel",
-            "soft"
-          ],
-          "After": [
-            "thick",
-            "thin",
-            "blind",
-            "noise",
-            "young",
-            "smell",
-            "strawberry",
-            "or"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g5-lower|r043|hard",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "43",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "all day",
-            "future",
-            "stand",
-            "machine",
-            "will",
-            "exercise",
-            "early",
-            "easily"
-          ],
-          "After": [
-            "more",
-            "in the future",
-            "in front of",
-            "take a photo",
-            "wear glasses",
-            "do exercise",
-            "weak in",
-            "be weak in"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r007|hard",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "7",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "use",
-            "chopsticks",
-            "want",
-            "hungry",
-            "mess"
-          ],
-          "After": [
-            "knife",
-            "fork",
-            "a knife and fork",
-            "easy",
-            "hamburger",
-            "chips",
-            "grass",
-            "food"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-lower|r069|hard",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "69",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "class",
-            "any",
-            "ask",
-            "question",
-            "forty",
-            "so",
-            "about",
-            "thirty"
-          ],
-          "After": [
-            "lazy",
-            "parent",
-            "Parents' Day",
-            "speak",
-            "with",
-            "quite",
-            "good at",
-            "English"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r036|hard",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "36",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "teach",
-            "language",
-            "wrote",
-            "write",
-            "dancer",
-            "foreign",
-            "studied",
-            "study"
-          ],
-          "After": [
-            "hamburger",
-            "English",
-            "breakfast",
-            "lunch",
-            "sandwich",
-            "fish and chips",
-            "traditional",
-            "dish"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r074|hard",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "74",
-          "Word": "hard",
-          "Definition": "adj. 努力的;硬的;困难的;辛苦的;确实的;严厉的;猛烈的;冷酷无情的 adv. 努力地;困难地;辛苦地;接近地;猛烈地;牢固地",
-          "Before": [
-            "project",
-            "guide",
-            "film",
-            "as well",
-            "way",
-            "on",
-            "topic",
-            "light"
-          ],
-          "After": [
-            "broken",
-            "department store",
-            "pocket",
-            "umbrella",
-            "sales assistant",
-            "wheel",
-            "easy",
-            "take"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "line",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "line",
-      "Definitions": "n. 路线,航线;排;绳 vt. 排成一行;划线于;以线条标示;使...起皱纹 vi. 排队;站成一排",
-      "SourceIDs": "waiyan_start1|waiyan_start3",
-      "SourceBooks": "waiyan_start1:5年级上|waiyan_start3:3年级下|waiyan_start3:6年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:line",
-          "MatchKey": "line",
-          "OccurrenceKeys": "[\"waiyan_start1|g5-upper|r062|line\",\"waiyan_start3|g3-lower|r133|line\",\"waiyan_start3|g6-upper|r077|line\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "six-source-semantic-collision-hold",
-          "Rationale": "Expanded Waiyan Start3 evidence introduces a standalone line occurrence directly adjacent to stand in line, supporting the queue/row concept rather than the existing line/mark TargetSense. Other current line evidence remains compatible with the concrete line/mark sense, and the flat source lists do not prove a complete disjoint occurrence partition. Preserve the collision explicitly as split-required rather than broadening one learning unit."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "waiyan_start1|g5-upper|r062|line",
-        "waiyan_start3|g3-lower|r133|line",
-        "waiyan_start3|g6-upper|r077|line"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g5-upper|r062|line",
-          "SourceID": "waiyan_start1",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "62",
-          "Word": "line",
-          "Definition": "n. 路线,航线;排;绳 vt. 排成一行;划线于;以线条标示;使...起皱纹 vi. 排队;站成一排",
+          "SourceRow": "115",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
           "Before": [
-            "fire",
-            "inside",
-            "firefighter",
-            "couldn't",
-            "could not",
-            "often",
-            "around",
-            "start"
+            "at the top of",
+            "get through",
+            "post office",
+            "quite",
+            "along",
+            "turn",
+            "left",
+            "straight"
           ],
           "After": [
-            "half",
-            "past",
-            "miss",
-            "study",
-            "open",
-            "wall",
-            "have fun",
-            "break"
+            "between",
+            "flower shop",
+            "hospital",
+            "toy shop",
+            "road",
+            "get to",
+            "blow",
+            "gently"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r133|line",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r091|right",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
           "Semester": "下",
-          "SourceRow": "133",
-          "Word": "line",
-          "Definition": "n. 路线,航线;排;绳 vt. 排成一行;划线于;以线条标示;使...起皱纹 vi. 排队;站成一排",
+          "SourceRow": "91",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
           "Before": [
-            "lake",
-            "tree",
-            "fishing",
-            "go fishing",
-            "walk",
-            "have got",
-            "sweater",
-            "bed"
+            "turn around",
+            "ground",
+            "again",
+            "jump",
+            "back",
+            "come back",
+            "left",
+            "turn left"
           ],
           "After": [
-            "about",
-            "animal",
-            "sport",
-            "haven't",
-            "haven't got",
-            "have not",
-            "have not got",
-            "dress"
+            "turn right",
+            "road",
+            "excuse me",
+            "straight",
+            "go straight on",
+            "lost",
+            "out",
+            "factory"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r077|line",
+          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r027|right",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "27",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+          "Before": [
+            "what",
+            "boring",
+            "day",
+            "invent",
+            "paper",
+            "important",
+            "printing",
+            "print"
+          ],
+          "After": [
+            "between",
+            "bicycle",
+            "mouse",
+            "beside",
+            "man",
+            "went",
+            "saw",
+            "trip"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r005|right",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "5",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+          "Before": [
+            "straight",
+            "go straight on",
+            "left"
+          ],
+          "After": [
+            "lost",
+            "live",
+            "No.",
+            "number",
+            "street",
+            "excuse me",
+            "turn left",
+            "turn right"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r008|right",
           "SourceID": "waiyan_start3",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "77",
-          "Word": "line",
-          "Definition": "n. 路线,航线;排;绳 vt. 排成一行;划线于;以线条标示;使...起皱纹 vi. 排队;站成一排",
+          "SourceRow": "8",
+          "Word": "right",
+          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
           "Before": [
-            "camera",
-            "show",
-            "never",
-            "around",
-            "all around",
-            "member state",
-            "inside",
-            "should"
+            "more than",
+            "thousand",
+            "kilometre",
+            "something",
+            "million",
+            "map"
           ],
           "After": [
-            "stand in line",
-            "close",
-            "librarian",
-            "rule",
-            "quiet",
-            "problem",
-            "No problem.",
-            "cross"
+            "country",
+            "dancing",
+            "Chinatown",
+            "sometimes",
+            "shop",
+            "then",
+            "ah",
+            "strong"
           ]
         }
       ]
