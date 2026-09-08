@@ -1,35 +1,34 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "7c54916f69cf7bee128756017bdd6afdd8c76fee",
-  "WorkflowRunID": "34217840078",
-  "WorkflowRunNumber": "233",
+  "InputCommit": "dc49aed3a0732e205c193f0a8a09e89d2b1fef27",
+  "WorkflowRunID": "34218173789",
+  "WorkflowRunNumber": "234",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2148,
-  "IdentityVocabularyPreview": 1723,
-  "LearnerVocabularyPreview": 1708,
-  "ReviewBlockers": 218,
-  "EvidenceChangedSurfaces": 156,
-  "MultipartResolved": 14,
+  "IdentityVocabularyPreview": 1734,
+  "LearnerVocabularyPreview": 1719,
+  "ReviewBlockers": 211,
+  "EvidenceChangedSurfaces": 149,
+  "MultipartResolved": 19,
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "semantic-review",
-    "SelectedCount": 7,
+    "SelectedCount": 6,
     "SelectedMatchKeys": [
-      "chinese",
-      "cold",
-      "cook",
-      "dancing",
-      "dish",
-      "drop",
-      "dropped"
+      "drink",
+      "duck",
+      "fall",
+      "feel",
+      "film",
+      "french"
     ],
     "EvidenceWeight": 60,
     "EffectiveWeightBudget": 60,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "f1ff6b21afe5add5e048a60aa3e86a16ab622d7ef2138005523b2a3bd754e6a4",
-    "ReviewPacketFingerprint": "fd1872da4f7058a5eb49ef0303f8264274c71e286fc5bac89831a601a4e63be0"
+    "ReviewBundleFingerprint": "df5247859092e94ca35b230b2925a0a0fc2f17335240c079e06ec1b10f393cf4",
+    "ReviewPacketFingerprint": "c27daf9cab6659fba944b9608ee48b03a00c553707df8b8341cec35561d2eb91"
   }
 }

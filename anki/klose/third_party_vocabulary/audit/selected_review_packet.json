@@ -4,340 +4,24 @@
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "chinese",
-    "cold",
-    "cook",
-    "dancing",
-    "dish",
-    "drop",
-    "dropped"
+    "drink",
+    "duck",
+    "fall",
+    "feel",
+    "film",
+    "french"
   ],
-  "SelectedCount": 7,
-  "ReviewBundleFingerprint": "f1ff6b21afe5add5e048a60aa3e86a16ab622d7ef2138005523b2a3bd754e6a4",
-  "ReviewPacketFingerprint": "fd1872da4f7058a5eb49ef0303f8264274c71e286fc5bac89831a601a4e63be0",
+  "SelectedCount": 6,
+  "ReviewBundleFingerprint": "df5247859092e94ca35b230b2925a0a0fc2f17335240c079e06ec1b10f393cf4",
+  "ReviewPacketFingerprint": "c27daf9cab6659fba944b9608ee48b03a00c553707df8b8341cec35561d2eb91",
   "Items": [
     {
-      "MatchKey": "chinese",
+      "MatchKey": "drink",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "Chinese",
-      "Definitions": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-      "SourceIDs": "beijing_start1|renjiao_start1|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:3年级上|renjiao_start1:3年级下|hujiao_start3:4年级下|waiyan_start1:2年级上|waiyan_start1:3年级下|waiyan_start1:5年级下|waiyan_start3:3年级下|waiyan_start3:4年级上|waiyan_start3:5年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:chinese",
-          "MatchKey": "chinese",
-          "OccurrenceKeys": "[\"hujiao_start3|g4-lower|r040|chinese\",\"renjiao_start1|g3-lower|r002|chinese\",\"waiyan_start1|g3-lower|r080|chinese\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "chinese#language",
-          "ObjectType": "vocabulary",
-          "TargetSense": "中文；语文",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "residual-split-occurrence-partition",
-          "Rationale": "These three occurrences sit directly inside school-subject/language sequences with English PE Maths Science Art or report evidence; they bind Chinese to the language/school-subject learning unit."
-        },
-        {
-          "DecisionKey": "surface:chinese#national",
-          "MatchKey": "chinese",
-          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r082|chinese\",\"waiyan_start1|g2-upper|r113|chinese\",\"waiyan_start1|g5-lower|r049|chinese\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "chinese#national",
-          "ObjectType": "vocabulary",
-          "TargetSense": "中国的；中国人的",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "residual-split-occurrence-partition",
-          "Rationale": "These occurrences occur in Chinese-cultural/New-Year or Chinese craft/context sequences rather than school-subject sequences; keep the national/cultural adjective as a separate elementary learning unit."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g3-upper|r082|chinese",
-        "renjiao_start1|g3-lower|r002|chinese",
-        "hujiao_start3|g4-lower|r040|chinese",
-        "waiyan_start1|g2-upper|r113|chinese",
-        "waiyan_start1|g3-lower|r080|chinese",
-        "waiyan_start1|g5-lower|r049|chinese",
-        "waiyan_start3|g3-lower|r090|chinese",
-        "waiyan_start3|g4-upper|r143|chinese",
-        "waiyan_start3|g5-lower|r111|chinese"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g3-upper|r082|chinese",
-          "SourceID": "beijing_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "82",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "blackboard",
-            "seventy",
-            "eighty",
-            "ninety",
-            "hundred",
-            "holiday",
-            "Christmas",
-            "know"
-          ],
-          "After": [
-            "ball",
-            "gold",
-            "gift",
-            "pink",
-            "star",
-            "bell",
-            "together",
-            "bright"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g3-lower|r002|chinese",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "2",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [],
-          "After": [
-            "English",
-            "science",
-            "PE",
-            "music",
-            "maths",
-            "art",
-            "computer class",
-            "we"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r040|chinese",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "40",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "him",
-            "stop",
-            "at noon",
-            "go down",
-            "at night",
-            "take a walk",
-            "subject",
-            "lesson"
-          ],
-          "After": [
-            "Maths",
-            "English",
-            "Science",
-            "PE",
-            "Music",
-            "Art",
-            "timetable",
-            "from"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g2-upper|r113|chinese",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "113",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "cold",
-            "coat",
-            "year",
-            "Happy New Year!",
-            "come in",
-            "present",
-            "dumpling",
-            "eat"
-          ],
-          "After": [
-            "hair",
-            "firecracker",
-            "have",
-            "Christmas",
-            "wish",
-            "dinner"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-lower|r080|chinese",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "80",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "Parents' Day",
-            "speak",
-            "with",
-            "quite",
-            "good at",
-            "English",
-            "PE",
-            "physical education"
-          ],
-          "After": [
-            "art",
-            "report",
-            "try",
-            "were",
-            "young",
-            "beautiful",
-            "was",
-            "also"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g5-lower|r049|chinese",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "49",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "amazing",
-            "take",
-            "short",
-            "helicopter",
-            "evening",
-            "actor",
-            "busy",
-            "quarter"
-          ],
-          "After": [
-            "drew",
-            "piece",
-            "painted",
-            "scissors",
-            "stick",
-            "tied",
-            "string",
-            "theatre"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r090|chinese",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "90",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "TV",
-            "watch TV",
-            "have",
-            "class",
-            "today",
-            "music",
-            "has",
-            "have"
-          ],
-          "After": [
-            "maths",
-            "art",
-            "PE",
-            "physical education",
-            "science",
-            "we",
-            "fly",
-            "spring"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r143|chinese",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "143",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "high jump",
-            "long jump",
-            "How about ...?",
-            "subject",
-            "family",
-            "dinner",
-            "year",
-            "New Year"
-          ],
-          "After": [
-            "festival",
-            "the Spring Festival",
-            "I see.",
-            "peanut",
-            "merry",
-            "Christmas",
-            "Merry Christmas!"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r111|chinese",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "111",
-          "Word": "Chinese",
-          "Definition": "n. 中文,汉语;中国人 adj. 中国的,中国人的;中国话的",
-          "Before": [
-            "worker",
-            "factory",
-            "early",
-            "taxi",
-            "quarter",
-            "to",
-            "worry",
-            "paper"
-          ],
-          "After": [
-            "so",
-            "word",
-            "drew",
-            "draw",
-            "cut",
-            "cut",
-            "piece",
-            "paint"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "cold",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "cold",
-      "Definitions": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+      "DisplayForms": "drink",
+      "Definitions": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
       "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:2年级下|beijing_start1:4年级上|renjiao_start1:2年级下|renjiao_start3:4年级下|hujiao_start3:3年级上|waiyan_start1:2年级上|waiyan_start1:3年级上|waiyan_start3:3年级下|waiyan_start3:4年级下",
+      "SourceBooks": "beijing_start1:3年级下|beijing_start1:4年级上|renjiao_start1:5年级下|renjiao_start3:5年级上|hujiao_start3:4年级上|waiyan_start1:2年级下|waiyan_start1:3年级上|waiyan_start3:4年级上|waiyan_start3:4年级下",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -348,311 +32,352 @@
       "PolicyRecommendedAction": "re-review-evidence-changed",
       "DurableDecisions": [
         {
-          "DecisionKey": "surface:cold",
-          "MatchKey": "cold",
-          "OccurrenceKeys": "[\"beijing_start1|g2-lower|r077|cold\",\"hujiao_start3|g3-upper|r100|cold\",\"renjiao_start1|g2-lower|r025|cold\",\"renjiao_start3|g4-lower|r033|cold\",\"waiyan_start1|g2-upper|r105|cold\"]",
+          "DecisionKey": "surface:drink",
+          "MatchKey": "drink",
+          "OccurrenceKeys": "[\"beijing_start1|g3-lower|r037|drink\",\"beijing_start1|g4-upper|r022|drink\",\"hujiao_start3|g4-upper|r029|drink\",\"renjiao_start1|g5-lower|r008|drink\",\"waiyan_start1|g2-lower|r036|drink\",\"waiyan_start1|g3-upper|r044|drink\"]",
           "Action": "keep-identity",
-          "CanonicalMatchKey": "cold#temperature",
+          "CanonicalMatchKey": "drink#verb",
           "ObjectType": "vocabulary",
-          "TargetSense": "冷的；寒冷的",
+          "TargetSense": "喝；饮用",
           "Status": "reviewed",
           "Confidence": "high",
           "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "Weather/season temperature contrasts bind these occurrences to cold temperature."
+          "Rationale": "Health/action/bottle contexts bind these occurrences to the verb drink=喝."
         },
         {
-          "DecisionKey": "surface:cold#illness",
-          "MatchKey": "cold",
-          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r021|cold\",\"waiyan_start1|g3-upper|r061|cold\"]",
+          "DecisionKey": "surface:drink#noun",
+          "MatchKey": "drink",
+          "OccurrenceKeys": "[\"renjiao_start3|g5-upper|r059|drink\"]",
           "Action": "keep-identity",
-          "CanonicalMatchKey": "cold#illness",
+          "CanonicalMatchKey": "drink#noun",
           "ObjectType": "vocabulary",
-          "TargetSense": "感冒",
+          "TargetSense": "饮料",
           "Status": "reviewed",
           "Confidence": "high",
           "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "Bad-cold/health/headache/cough neighborhoods bind these occurrences to the illness a cold."
+          "Rationale": "Food-category sequence ending in drink/thirsty/favourite food binds this occurrence to the beverage noun."
         }
       ],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g2-lower|r077|cold",
-        "beijing_start1|g4-upper|r021|cold",
-        "renjiao_start1|g2-lower|r025|cold",
-        "renjiao_start3|g4-lower|r033|cold",
-        "hujiao_start3|g3-upper|r100|cold",
-        "waiyan_start1|g2-upper|r105|cold",
-        "waiyan_start1|g3-upper|r061|cold",
-        "waiyan_start3|g3-lower|r107|cold",
-        "waiyan_start3|g4-lower|r156|cold"
+        "beijing_start1|g3-lower|r037|drink",
+        "beijing_start1|g4-upper|r022|drink",
+        "renjiao_start1|g5-lower|r008|drink",
+        "renjiao_start3|g5-upper|r059|drink",
+        "hujiao_start3|g4-upper|r029|drink",
+        "waiyan_start1|g2-lower|r036|drink",
+        "waiyan_start1|g3-upper|r044|drink",
+        "waiyan_start3|g4-upper|r055|drink",
+        "waiyan_start3|g4-lower|r108|drink",
+        "waiyan_start3|g4-lower|r109|drink"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g2-lower|r077|cold",
+          "SourceOccurrenceKey": "beijing_start1|g3-lower|r037|drink",
           "SourceID": "beijing_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
+          "SourceBook": "3年级下",
+          "Grade": "3",
           "Semester": "下",
-          "SourceRow": "77",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+          "SourceRow": "37",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
           "Before": [
-            "taxi",
-            "they",
-            "sky",
-            "blue",
-            "green",
-            "white",
-            "snow",
-            "cool"
+            "before",
+            "sweet",
+            "potato",
+            "sweet potato",
+            "food",
+            "best",
+            "great",
+            "apple"
           ],
           "After": [
-            "make",
-            "which",
-            "spring"
+            "may",
+            "tea",
+            "sure",
+            "child",
+            "children",
+            "fly",
+            "kite",
+            "song"
           ]
         },
         {
-          "SourceOccurrenceKey": "beijing_start1|g4-upper|r021|cold",
+          "SourceOccurrenceKey": "beijing_start1|g4-upper|r022|drink",
           "SourceID": "beijing_start1",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "21",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+          "SourceRow": "22",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
           "Before": [
-            "housework",
             "Ms",
             "Mrs",
             "there",
             "really",
             "bring",
             "school",
-            "bad"
+            "bad",
+            "cold"
           ],
           "After": [
-            "drink",
             "word",
             "computer",
             "easy",
             "light",
             "door",
             "kind",
-            "window"
+            "window",
+            "glass"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start1|g2-lower|r025|cold",
+          "SourceOccurrenceKey": "renjiao_start1|g5-lower|r008|drink",
           "SourceID": "renjiao_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "8",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
+          "Before": [
+            "too much",
+            "candy",
+            "go to bed",
+            "early",
+            "exercise",
+            "tired"
+          ],
+          "After": [
+            "before",
+            "dirty",
+            "always",
+            "stomachache",
+            "headache",
+            "toothache",
+            "a lot of",
+            "sleepy"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g5-upper|r059|drink",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "59",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
+          "Before": [
+            "hamburger",
+            "ice cream",
+            "tea",
+            "fresh",
+            "healthy",
+            "delicious",
+            "hot",
+            "sweet"
+          ],
+          "After": [
+            "thirsty",
+            "favourite",
+            "food",
+            "Dear",
+            "onion",
+            "sing",
+            "song",
+            "sing English songs"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-upper|r029|drink",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "29",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
+          "Before": [
+            "sad",
+            "tired",
+            "hungry",
+            "full",
+            "thirsty",
+            "bird",
+            "see",
+            "bottle"
+          ],
+          "After": [
+            "any",
+            "cousin",
+            "family",
+            "parent",
+            "grandparent",
+            "son",
+            "grandfather",
+            "grandpa"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r036|drink",
+          "SourceID": "waiyan_start1",
           "SourceBook": "2年级下",
           "Grade": "2",
           "Semester": "下",
-          "SourceRow": "25",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+          "SourceRow": "36",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
           "Before": [
-            "let's",
-            "spring",
-            "summer",
-            "autumn",
-            "winter",
-            "hot",
-            "warm",
-            "cool"
+            "sleep",
+            "secret",
+            "card",
+            "flower",
+            "science",
+            "today",
+            "call",
+            "noise"
           ],
           "After": [
-            "favourite",
-            "season",
-            "eleven",
-            "twelve",
-            "twenty",
-            "thirty",
-            "forty",
-            "fifty"
+            "talk",
+            "stone",
+            "five-stones",
+            "behind",
+            "hide",
+            "seek",
+            "hide-and-seek",
+            "skip"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start3|g4-lower|r033|cold",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "33",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
-          "Before": [
-            "over",
-            "now",
-            "o'clock",
-            "kid",
-            "thirty",
-            "hurry up",
-            "come on",
-            "just a minute"
-          ],
-          "After": [
-            "cool",
-            "warm",
-            "hot",
-            "sunny",
-            "windy",
-            "cloudy",
-            "snowy",
-            "rainy"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g3-upper|r100|cold",
-          "SourceID": "hujiao_start3",
+          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r044|drink",
+          "SourceID": "waiyan_start1",
           "SourceBook": "3年级上",
           "Grade": "3",
           "Semester": "上",
-          "SourceRow": "100",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+          "SourceRow": "44",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
           "Before": [
-            "fish",
-            "its",
-            "mouse",
-            "mice",
-            "rabbit",
-            "tail",
-            "what",
-            "autumn"
+            "winner",
+            "can't",
+            "cannot",
+            "slow",
+            "fly",
+            "koala",
+            "climb",
+            "cry"
           ],
           "After": [
-            "cool",
-            "hot",
-            "in",
-            "spring",
-            "summer",
-            "warm",
-            "winter"
+            "shop",
+            "go out",
+            "thanks",
+            "library",
+            "worry",
+            "have got",
+            "careful",
+            "wash"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start1|g2-upper|r105|cold",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r055|drink",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
           "Semester": "上",
-          "SourceRow": "105",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+          "SourceRow": "55",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
           "Before": [
-            "go skating",
-            "warm",
-            "wear",
-            "jacket",
-            "sunglasses",
-            "cool",
-            "sweater",
-            "glove"
+            "dragon",
+            "boat",
+            "dragon boat",
+            "men",
+            "man",
+            "between",
+            "chess",
+            "play chess"
           ],
           "After": [
-            "coat",
-            "year",
-            "Happy New Year!",
-            "come in",
-            "present",
-            "dumpling",
+            "soya milk",
+            "clock",
+            "hungry",
+            "Me too.",
+            "draw",
+            "jump",
+            "sing",
+            "dance"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r108|drink",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "108",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
+          "Before": [
+            "last",
+            "fun",
+            "went",
+            "go",
+            "there",
+            "ate",
             "eat",
-            "Chinese"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r061|cold",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "61",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
-          "Before": [
-            "has got",
-            "pear",
-            "peach",
-            "headache",
-            "stomach ache",
-            "test",
-            "Friday",
-            "clever"
+            "drank"
           ],
           "After": [
-            "class",
-            "begin",
-            "cough",
-            "bring",
-            "umbrella",
-            "get",
-            "which",
-            "broken"
+            "drink",
+            "time",
+            "have a good time",
+            "busy",
+            "took",
+            "take",
+            "tell",
+            "great"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r107|cold",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "107",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
-          "Before": [
-            "summer",
-            "season",
-            "nice",
-            "warm",
-            "hot",
-            "autumn",
-            "cool",
-            "winter"
-          ],
-          "After": [
-            "skating",
-            "go skating",
-            "play",
-            "snow",
-            "rain",
-            "sunny",
-            "windy",
-            "very"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r156|cold",
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r109|drink",
           "SourceID": "waiyan_start3",
           "SourceBook": "4年级下",
           "Grade": "4",
           "Semester": "下",
-          "SourceRow": "156",
-          "Word": "cold",
-          "Definition": "n. 寒冷;感冒 adj. 寒冷的;冷淡的,不热情的;失去知觉的 adv. 完全地",
+          "SourceRow": "109",
+          "Word": "drink",
+          "Definition": "n. 酒,饮料;喝酒 vt. 喝,饮;吸收;举杯庆贺 vi. 喝酒;饮水;干杯",
           "Before": [
-            "carried",
-            "carry",
-            "bump",
-            "hospital",
-            "had",
-            "have",
-            "chocolate",
-            "stomach ache"
+            "fun",
+            "went",
+            "go",
+            "there",
+            "ate",
+            "eat",
+            "drank",
+            "drink"
           ],
           "After": [
-            "headache",
-            "fever"
+            "time",
+            "have a good time",
+            "busy",
+            "took",
+            "take",
+            "tell",
+            "great",
+            "delicious"
           ]
         }
       ]
     },
     {
-      "MatchKey": "cook",
+      "MatchKey": "duck",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "cook",
-      "Definitions": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+      "DisplayForms": "duck",
+      "Definitions": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
       "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:4年级上|renjiao_start3:4年级上|renjiao_start3:5年级上|hujiao_start3:5年级上|waiyan_start1:2年级下|waiyan_start3:4年级下",
+      "SourceBooks": "beijing_start1:1年级下|beijing_start1:4年级上|renjiao_start1:3年级上|renjiao_start3:3年级上|hujiao_start3:4年级下|waiyan_start1:1年级下|waiyan_start3:6年级下",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -663,784 +388,1032 @@
       "PolicyRecommendedAction": "re-review-evidence-changed",
       "DurableDecisions": [
         {
-          "DecisionKey": "surface:cook",
-          "MatchKey": "cook",
-          "OccurrenceKeys": "[\"hujiao_start3|g5-upper|r006|cook\",\"renjiao_start1|g4-upper|r096|cook\",\"renjiao_start3|g4-upper|r075|cook\"]",
+          "DecisionKey": "surface:duck",
+          "MatchKey": "duck",
+          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r048|duck\"]",
           "Action": "keep-identity",
-          "CanonicalMatchKey": "cook#person",
+          "CanonicalMatchKey": "duck#meat",
           "ObjectType": "vocabulary",
-          "TargetSense": "厨师；厨子",
+          "TargetSense": "鸭肉",
           "Status": "reviewed",
           "Confidence": "high",
           "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "Occupation lists bind these occurrences to a cook as a person/job."
+          "Rationale": "Cook/duck/soup/pie food context binds this occurrence to duck meat."
         },
         {
-          "DecisionKey": "surface:cook#verb",
-          "MatchKey": "cook",
-          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r047|cook\",\"renjiao_start3|g5-upper|r075|cook\",\"waiyan_start1|g2-lower|r062|cook\"]",
+          "DecisionKey": "surface:duck#animal",
+          "MatchKey": "duck",
+          "OccurrenceKeys": "[\"beijing_start1|g1-lower|r042|duck\",\"hujiao_start3|g4-lower|r144|duck\",\"renjiao_start1|g3-upper|r053|duck\",\"renjiao_start3|g3-upper|r034|duck\",\"waiyan_start1|g1-lower|r053|duck\"]",
           "Action": "keep-identity",
-          "CanonicalMatchKey": "cook#verb",
+          "CanonicalMatchKey": "duck#animal",
           "ObjectType": "vocabulary",
-          "TargetSense": "做饭；烹饪",
+          "TargetSense": "鸭子",
           "Status": "reviewed",
           "Confidence": "high",
           "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "Food/action/kitchen contexts bind these occurrences to cooking as a verb."
+          "Rationale": "Animal/farm/duckling/quack contexts bind these occurrences to the duck animal."
         }
       ],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-upper|r047|cook",
-        "renjiao_start1|g4-upper|r096|cook",
-        "renjiao_start3|g4-upper|r075|cook",
-        "renjiao_start3|g5-upper|r075|cook",
-        "hujiao_start3|g5-upper|r006|cook",
-        "waiyan_start1|g2-lower|r062|cook",
-        "waiyan_start3|g4-lower|r081|cook"
+        "beijing_start1|g1-lower|r042|duck",
+        "beijing_start1|g4-upper|r048|duck",
+        "renjiao_start1|g3-upper|r053|duck",
+        "renjiao_start3|g3-upper|r034|duck",
+        "hujiao_start3|g4-lower|r144|duck",
+        "waiyan_start1|g1-lower|r053|duck",
+        "waiyan_start3|g6-lower|r012|duck"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g4-upper|r047|cook",
+          "SourceOccurrenceKey": "beijing_start1|g1-lower|r042|duck",
+          "SourceID": "beijing_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "42",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
+          "Before": [
+            "sun",
+            "leaf",
+            "king",
+            "park",
+            "gift",
+            "queen",
+            "river",
+            "ox"
+          ],
+          "After": [
+            "egg",
+            "cow",
+            "rabbit",
+            "kitten",
+            "map",
+            "flag",
+            "desk"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beijing_start1|g4-upper|r048|duck",
           "SourceID": "beijing_start1",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "47",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+          "SourceRow": "48",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
           "Before": [
-            "shoe",
             "how much",
             "buy",
             "shop",
             "sell",
             "eat",
             "healthy",
-            "sour"
+            "sour",
+            "cook"
           ],
           "After": [
-            "duck",
             "soup",
             "sorry",
             "pie",
             "chicken",
             "hamburger",
             "change",
-            "money"
+            "money",
+            "become"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start1|g4-upper|r096|cook",
+          "SourceOccurrenceKey": "renjiao_start1|g3-upper|r053|duck",
           "SourceID": "renjiao_start1",
-          "SourceBook": "4年级上",
-          "Grade": "4",
+          "SourceBook": "3年级上",
+          "Grade": "3",
           "Semester": "上",
-          "SourceRow": "96",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+          "SourceRow": "53",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
           "Before": [
-            "safe",
-            "stop",
-            "street",
-            "safety rule",
-            "green",
-            "red",
-            "play football",
-            "nurse"
+            "cola",
+            "buy",
+            "rice",
+            "noodles",
+            "vegetables",
+            "fish",
+            "chicken",
+            "egg"
           ],
           "After": [
-            "doctor",
-            "bus driver",
-            "police officer",
-            "taxi driver",
-            "farmer",
-            "worker",
-            "in the future",
-            "great"
+            "chicken",
+            "rabbit",
+            "pet",
+            "snake",
+            "turtle",
+            "small",
+            "long",
+            "look for"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r075|cook",
+          "SourceOccurrenceKey": "renjiao_start3|g3-upper|r034|duck",
           "SourceID": "renjiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
+          "SourceBook": "3年级上",
+          "Grade": "3",
           "Semester": "上",
-          "SourceRow": "75",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+          "SourceRow": "34",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
           "Before": [
-            "pass",
-            "try",
-            "parents",
-            "cousin",
-            "uncle",
-            "aunt",
-            "baby brother",
-            "doctor"
+            "mouth",
+            "arm",
+            "hand",
+            "head",
+            "body",
+            "leg",
+            "foot",
+            "school"
           ],
           "After": [
-            "driver",
-            "farmer",
-            "nurse",
-            "people",
-            "but",
+            "pig",
+            "cat",
+            "bear",
+            "dog",
+            "elephant",
+            "monkey",
+            "bird",
+            "tiger"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r144|duck",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "144",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
+          "Before": [
+            "song",
+            "zoo",
+            "cinema",
+            "museum",
+            "also",
+            "have a party",
+            "ugly",
+            "duckling"
+          ],
+          "After": [
+            "river",
+            "baby",
+            "later",
+            "quack",
+            "back",
+            "away",
+            "swan",
+            "into"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g1-lower|r053|duck",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "53",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
+          "Before": [
+            "feet",
+            "baby",
+            "they",
+            "they're",
+            "they are",
+            "cow",
+            "pig",
+            "farm"
+          ],
+          "After": [
+            "chicken",
+            "egg",
+            "thin",
+            "very",
+            "fat",
+            "big",
             "little",
-            "puppy",
-            "football player"
+            "snake"
           ]
         },
         {
-          "SourceOccurrenceKey": "renjiao_start3|g5-upper|r075|cook",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "75",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r012|duck",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "duck",
+          "Definition": "n. 鸭子;鸭肉;(英)宝贝儿;零分 vt. 躲避;猛按...入水 vi. 闪避;没入水中",
           "Before": [
-            "sing English songs",
-            "play the pipa",
-            "kung fu",
-            "do kung fu",
-            "dance",
-            "draw",
-            "cartoon",
-            "draw cartoons"
+            "cola",
+            "dollar",
+            "cent",
+            "enjoy",
+            "careful",
+            "Be careful!",
+            "later",
+            "to go"
           ],
           "After": [
-            "swim",
-            "play basketball",
-            "ping-pong",
-            "play ping-pong",
-            "speak English",
-            "we'll",
-            "we will",
-            "party"
+            "pond",
+            "cloud",
+            "dry",
+            "like",
+            "look like",
+            "stay",
+            "shine",
+            "cry"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "fall",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "fall",
+      "Definitions": "n. 下降;秋天;瀑布 adj. 秋天的 vi. 落下;变成;来临;减弱 vt. 砍倒;击倒",
+      "SourceIDs": "renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start3",
+      "SourceBooks": "renjiao_start1:6年级上|renjiao_start3:5年级下|hujiao_start3:5年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:fall",
+          "MatchKey": "fall",
+          "OccurrenceKeys": "[\"renjiao_start3|g5-lower|r060|fall\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "fall#autumn",
+          "ObjectType": "vocabulary",
+          "TargetSense": "秋天；秋季",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Leaf/fall followed by the month sequence binds this occurrence to the season autumn/fall."
+        },
+        {
+          "DecisionKey": "surface:fall#verb",
+          "MatchKey": "fall",
+          "OccurrenceKeys": "[\"hujiao_start3|g5-upper|r010|fall\",\"renjiao_start1|g6-upper|r092|fall\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "fall#verb",
+          "ObjectType": "vocabulary",
+          "TargetSense": "落下；跌倒",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Story/action contexts bind these occurrences to physical falling rather than the season."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g6-upper|r092|fall",
+        "renjiao_start3|g5-lower|r060|fall",
+        "hujiao_start3|g5-upper|r010|fall",
+        "waiyan_start3|g4-lower|r132|fall",
+        "waiyan_start3|g4-lower|r135|fall"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r092|fall",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "92",
+          "Word": "fall",
+          "Definition": "n. 下降;秋天;瀑布 adj. 秋天的 vi. 落下;变成;来临;减弱 vt. 砍倒;击倒",
+          "Before": [
+            "paint",
+            "invention",
+            "invent",
+            "study",
+            "story",
+            "university",
+            "deaf",
+            "blind"
+          ],
+          "After": [
+            "dumpling",
+            "fan",
+            "ice lantern",
+            "bring",
+            "be afraid of",
+            "hear",
+            "pen pal",
+            "broken"
           ]
         },
         {
-          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r006|cook",
+          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r060|fall",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "60",
+          "Word": "fall",
+          "Definition": "n. 下降;秋天;瀑布 adj. 秋天的 vi. 落下;变成;来临;减弱 vt. 砍倒;击倒",
+          "Before": [
+            "snow",
+            "good job",
+            "because",
+            "vacation",
+            "all",
+            "pink",
+            "lovely",
+            "leaf"
+          ],
+          "After": [
+            "paint",
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r010|fall",
           "SourceID": "hujiao_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "6",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+          "SourceRow": "10",
+          "Word": "fall",
+          "Definition": "n. 下降;秋天;瀑布 adj. 秋天的 vi. 落下;变成;来临;减弱 vt. 砍倒;击倒",
           "Before": [
             "future",
             "want",
             "pilot",
-            "teach"
-          ],
-          "After": [
+            "teach",
+            "cook",
             "taxi driver",
             "job",
-            "singer",
-            "fall",
+            "singer"
+          ],
+          "After": [
             "lifeguard",
             "save",
             "become",
-            "good at"
+            "good at",
+            "be good at",
+            "by",
+            "walk",
+            "Ms"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r062|cook",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "62",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
-          "Before": [
-            "kid",
-            "catch",
-            "of course",
-            "usually",
-            "us",
-            "ride",
-            "thing",
-            "ill"
-          ],
-          "After": [
-            "her",
-            "go shopping",
-            "kitchen",
-            "Children's Day",
-            "TV",
-            "play",
-            "say",
-            "poem"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r081|cook",
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r132|fall",
           "SourceID": "waiyan_start3",
           "SourceBook": "4年级下",
           "Grade": "4",
           "Semester": "下",
-          "SourceRow": "81",
-          "Word": "cook",
-          "Definition": "n. 厨师,厨子 vt. 烹调,煮 vi. 烹调,做菜",
+          "SourceRow": "132",
+          "Word": "fall",
+          "Definition": "n. 下降;秋天;瀑布 adj. 秋天的 vi. 落下;变成;来临;减弱 vt. 砍倒;击倒",
           "Before": [
-            "well",
-            "thanks",
-            "sun",
-            "lesson",
-            "village",
-            "had",
-            "have",
-            "phone"
-          ],
-          "After": [
-            "really",
-            "wash",
-            "What about ...?",
-            "did",
-            "do",
-            "didn't",
-            "did not",
-            "computer"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "dancing",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "dancing",
-      "Definitions": "n. 跳舞;舞蹈 v. 跳舞;摇晃(dance的ing形式)",
-      "SourceIDs": "renjiao_start1|renjiao_start3|waiyan_start3",
-      "SourceBooks": "renjiao_start1:4年级下|renjiao_start3:5年级下|waiyan_start3:6年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "dance",
-      "CanonicalRelation": "ing-form",
-      "CanonicalAction": "keep-identity",
-      "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "跳舞；舞蹈",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:dancing",
-          "MatchKey": "dancing",
-          "OccurrenceKeys": "[\"renjiao_start1|g4-lower|r058|dancing\",\"renjiao_start3|g5-lower|r012|dancing\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "跳舞；舞蹈",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "policy-activity-noun-learning-unit",
-          "Rationale": "One source places dancing in a hobby/activity list and another in take a dancing class; this supports an independent elementary activity learning unit."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "renjiao_start1|g4-lower|r058|dancing",
-        "renjiao_start3|g5-lower|r012|dancing",
-        "waiyan_start3|g6-upper|r010|dancing"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g4-lower|r058|dancing",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "58",
-          "Word": "dancing",
-          "Definition": "n. 跳舞;舞蹈 v. 跳舞;摇晃(dance的ing形式)",
-          "Before": [
-            "row a boat",
-            "the Great Wall",
-            "take photos",
-            "summer vacation",
+            "dear",
+            "on holiday",
             "travel",
-            "reading",
-            "skateboarding",
-            "singing"
+            "came",
+            "come",
+            "pop",
+            "concert",
+            "earth"
           ],
           "After": [
-            "doing jigsaw puzzles",
-            "making models",
-            "collecting erasers",
-            "different",
-            "hobby",
-            "stamp",
-            "catch",
-            "go for a picnic"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r012|dancing",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "12",
-          "Word": "dancing",
-          "Definition": "n. 跳舞;舞蹈 v. 跳舞;摇晃(dance的ing形式)",
-          "Before": [
-            "play sports",
-            "exercise",
-            "do morning exercises",
-            "eat dinner",
-            "clean my room",
-            "go for a walk",
-            "go shopping",
-            "take"
-          ],
-          "After": [
-            "take a dancing class",
-            "when",
-            "after",
-            "start",
-            "usually",
-            "Spain",
-            "late",
-            "a.m."
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r010|dancing",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "10",
-          "Word": "dancing",
-          "Definition": "n. 跳舞;舞蹈 v. 跳舞;摇晃(dance的ing形式)",
-          "Before": [
-            "more than",
-            "thousand",
-            "kilometre",
-            "something",
-            "million",
-            "map",
-            "right",
-            "country"
-          ],
-          "After": [
-            "Chinatown",
-            "sometimes",
-            "shop",
-            "then",
-            "ah",
-            "strong",
-            "collect",
-            "stamp"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "dish",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "dish",
-      "Definitions": "n. 盘;餐具;一盘食物;外貌有吸引力的人 vt. 盛于碟盘中;分发;使某人的希望破灭;说(某人)的闲话 vi. 成碟状;闲谈",
-      "SourceIDs": "beijing_start1|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:1年级上|waiyan_start1:5年级下|waiyan_start3:5年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:dish",
-          "MatchKey": "dish",
-          "OccurrenceKeys": "[\"beijing_start1|g1-upper|r017|dish\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "dish#plate",
-          "ObjectType": "vocabulary",
-          "TargetSense": "盘子；盘",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "split-occurrence-partition-smoke",
-          "Rationale": "Beijing Grade-1 upper places dish in a concrete tableware sequence with cake cup and spoon; this occurrence is the plate/tableware learning unit."
-        },
-        {
-          "DecisionKey": "surface:dish#food",
-          "MatchKey": "dish",
-          "OccurrenceKeys": "[\"waiyan_start1|g5-lower|r011|dish\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "dish#food",
-          "ObjectType": "vocabulary",
-          "TargetSense": "菜肴；一道菜",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "split-occurrence-partition-smoke",
-          "Rationale": "Waiyan Grade-5 lower places dish in a food sequence with fish and chips traditional delicious and chicken; this occurrence is the prepared-food learning unit."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g1-upper|r017|dish",
-        "waiyan_start1|g5-lower|r011|dish",
-        "waiyan_start3|g5-lower|r044|dish"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g1-upper|r017|dish",
-          "SourceID": "beijing_start1",
-          "SourceBook": "1年级上",
-          "Grade": "1",
-          "Semester": "上",
-          "SourceRow": "17",
-          "Word": "dish",
-          "Definition": "n. 盘;餐具;一盘食物;外貌有吸引力的人 vt. 盛于碟盘中;分发;使某人的希望破灭;说(某人)的闲话 vi. 成碟状;闲谈",
-          "Before": [
-            "car",
-            "gate",
-            "kite",
-            "girl",
-            "bike",
-            "uniform",
-            "bag",
-            "cake"
-          ],
-          "After": [
-            "cup",
-            "nut",
-            "spoon",
-            "eye",
-            "ear",
-            "knee",
-            "foot",
-            "bed"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g5-lower|r011|dish",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "11",
-          "Word": "dish",
-          "Definition": "n. 盘;餐具;一盘食物;外貌有吸引力的人 vt. 盛于碟盘中;分发;使某人的希望破灭;说(某人)的闲话 vi. 成碟状;闲谈",
-          "Before": [
-            "drove",
-            "player",
-            "office",
-            "fish",
-            "sausage",
-            "sandwich",
-            "fish and chips",
-            "traditional"
-          ],
-          "After": [
-            "delicious",
-            "chicken",
-            "DVD",
-            "librarian",
-            "show",
-            "borrow",
-            "sent",
-            "American"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r044|dish",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "44",
-          "Word": "dish",
-          "Definition": "n. 盘;餐具;一盘食物;外貌有吸引力的人 vt. 盛于碟盘中;分发;使某人的希望破灭;说(某人)的闲话 vi. 成碟状;闲谈",
-          "Before": [
-            "hard",
-            "hamburger",
-            "English",
-            "breakfast",
-            "lunch",
-            "sandwich",
-            "fish and chips",
-            "traditional"
-          ],
-          "After": [
-            "very much",
-            "gave",
-            "give",
-            "tonight",
-            "library",
-            "student",
-            "sent",
-            "send"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "drop",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "drop",
-      "Definitions": "n. 滴;落下;空投;微量;滴剂 vt. 滴;使降低;使终止;随口漏出 vi. 下降;终止",
-      "SourceIDs": "beijing_start1|hujiao_start3|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级下|hujiao_start3:5年级上|hujiao_start3:5年级下|waiyan_start3:5年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:drop",
-          "MatchKey": "drop",
-          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r056|drop\",\"hujiao_start3|g5-lower|r012|drop\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "drop#verb",
-          "ObjectType": "vocabulary",
-          "TargetSense": "掉下；使掉落",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "Break/broke/drop/dropped and object-action contexts bind these occurrences to the falling/dropping verb."
-        },
-        {
-          "DecisionKey": "surface:drop#noun",
-          "MatchKey": "drop",
-          "OccurrenceKeys": "[\"hujiao_start3|g5-upper|r142|drop\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "drop#noun",
-          "ObjectType": "vocabulary",
-          "TargetSense": "水滴；一滴",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "The Water-unit context binds this occurrence to a concrete drop of water."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-lower|r056|drop",
-        "hujiao_start3|g5-upper|r142|drop",
-        "hujiao_start3|g5-lower|r012|drop",
-        "waiyan_start3|g5-upper|r014|drop"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g4-lower|r056|drop",
-          "SourceID": "beijing_start1",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "56",
-          "Word": "drop",
-          "Definition": "n. 滴;落下;空投;微量;滴剂 vt. 滴;使降低;使终止;随口漏出 vi. 下降;终止",
-          "Before": [
-            "thick",
-            "enough",
-            "safety",
-            "crowd",
-            "push",
-            "slowly",
-            "break",
-            "broke"
-          ],
-          "After": [
-            "dropped",
-            "fix",
-            "never",
-            "lose",
-            "lost",
-            "key",
-            "playground",
-            "next"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r142|drop",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "142",
-          "Word": "drop",
-          "Definition": "n. 滴;落下;空投;微量;滴剂 vt. 滴;使降低;使终止;随口漏出 vi. 下降;终止",
-          "Before": [
-            "paper",
-            "quiet",
-            "tap",
-            "use",
-            "vegetable",
-            "clothes",
-            "farmer",
-            "useful"
-          ],
-          "After": [
-            "up",
-            "shine",
-            "over",
-            "mountain",
-            "tree",
-            "ground",
-            "inside",
-            "grow crops"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g5-lower|r012|drop",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "12",
-          "Word": "drop",
-          "Definition": "n. 滴;落下;空投;微量;滴剂 vt. 滴;使降低;使终止;随口漏出 vi. 下降;终止",
-          "Before": [
-            "let",
-            "sock",
-            "yours",
-            "cap",
-            "mine",
-            "crayon",
-            "umbrella",
-            "nail"
-          ],
-          "After": [
-            "stick",
-            "second",
-            "hers",
-            "theirs",
-            "tidy up",
-            "full of",
-            "be full of",
-            "a few"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r014|drop",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "14",
-          "Word": "drop",
-          "Definition": "n. 滴;落下;空投;微量;滴剂 vt. 滴;使降低;使终止;随口漏出 vi. 下降;终止",
-          "Before": [
-            "those",
-            "ice cream",
-            "us",
-            "finish",
-            "wait",
-            "hurry",
-            "hurry up",
-            "dropped"
-          ],
-          "After": [
-            "send",
-            "email",
-            "ran",
-            "run",
-            "love",
-            "list",
-            "er",
-            "need"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "dropped",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "dropped",
-      "Definitions": "v. 下降,减少;掉下,滴下(drop的过去式和过去分词形式) adj. 抛踢球得分的",
-      "SourceIDs": "beijing_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级下|waiyan_start3:5年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "drop",
-      "CanonicalRelation": "named-past-form",
-      "CanonicalAction": "multipart-reviewed",
-      "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:dropped",
-          "MatchKey": "dropped",
-          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r057|dropped\"]",
-          "Action": "reuse-identity",
-          "CanonicalMatchKey": "drop",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "quality-audit-canonicalization",
-          "Rationale": "Dropped is a regular past-tense presentation of drop; preserve the source form as provenance and do not mint a separate lexical identity."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-lower|r057|dropped",
-        "waiyan_start3|g5-upper|r013|dropped"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g4-lower|r057|dropped",
-          "SourceID": "beijing_start1",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "57",
-          "Word": "dropped",
-          "Definition": "v. 下降,减少;掉下,滴下(drop的过去式和过去分词形式) adj. 抛踢球得分的",
-          "Before": [
-            "enough",
-            "safety",
-            "crowd",
-            "push",
-            "slowly",
-            "break",
-            "broke",
-            "drop"
-          ],
-          "After": [
-            "fix",
-            "never",
-            "lose",
-            "lost",
-            "key",
-            "playground",
-            "next",
+            "fall off",
+            "fell",
+            "fall",
+            "fall down",
+            "found",
+            "find",
+            "town",
             "happen"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r013|dropped",
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r135|fall",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "135",
+          "Word": "fall",
+          "Definition": "n. 下降;秋天;瀑布 adj. 秋天的 vi. 落下;变成;来临;减弱 vt. 砍倒;击倒",
+          "Before": [
+            "came",
+            "come",
+            "pop",
+            "concert",
+            "earth",
+            "fall",
+            "fall off",
+            "fell"
+          ],
+          "After": [
+            "fall down",
+            "found",
+            "find",
+            "town",
+            "happen",
+            "ride",
+            "then",
+            "thirsty"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "feel",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "feel",
+      "Definitions": "n. 感觉;触摸 vi. 觉得;摸索 vt. 感觉;认为;触摸;试探",
+      "SourceIDs": "renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start3:6年级上|hujiao_start3:4年级下|waiyan_start1:3年级下|waiyan_start3:5年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:feel",
+          "MatchKey": "feel",
+          "OccurrenceKeys": "[\"renjiao_start3|g6-upper|r138|feel\",\"waiyan_start1|g3-lower|r046|feel\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "feel#state",
+          "ObjectType": "vocabulary",
+          "TargetSense": "感觉；觉得",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Feel well / feel all right health-state contexts bind these occurrences to experiencing a state or feeling."
+        },
+        {
+          "DecisionKey": "surface:feel#touch",
+          "MatchKey": "feel",
+          "OccurrenceKeys": "[\"hujiao_start3|g4-lower|r003|feel\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "feel#touch",
+          "ObjectType": "vocabulary",
+          "TargetSense": "摸起来；触摸感受",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Touch/feel/soft/hard/thick/thin explicitly binds this occurrence to tactile sensing."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start3|g6-upper|r138|feel",
+        "hujiao_start3|g4-lower|r003|feel",
+        "waiyan_start1|g3-lower|r046|feel",
+        "waiyan_start3|g5-upper|r135|feel"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r138|feel",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "138",
+          "Word": "feel",
+          "Definition": "n. 感觉;触摸 vi. 觉得;摸索 vt. 感觉;认为;触摸;试探",
+          "Before": [
+            "count to ten",
+            "chase",
+            "mice",
+            "bad",
+            "hurt",
+            "ill",
+            "wrong",
+            "should"
+          ],
+          "After": [
+            "well",
+            "sit",
+            "grass",
+            "hear",
+            "ant",
+            "worry",
+            "stuck",
+            "mud"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r003|feel",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "3",
+          "Word": "feel",
+          "Definition": "n. 感觉;触摸 vi. 觉得;摸索 vt. 感觉;认为;触摸;试探",
+          "Before": [
+            "touch"
+          ],
+          "After": [
+            "soft",
+            "hard",
+            "thick",
+            "thin",
+            "blind",
+            "noise",
+            "young",
+            "smell"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g3-lower|r046|feel",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "46",
+          "Word": "feel",
+          "Definition": "n. 感觉;触摸 vi. 觉得;摸索 vt. 感觉;认为;触摸;试探",
+          "Before": [
+            "fourteen",
+            "sixteen",
+            "eighteen",
+            "thirteen",
+            "fifteen",
+            "seventeen",
+            "nineteen",
+            "afraid"
+          ],
+          "After": [
+            "all right",
+            "tomorrow",
+            "Monday",
+            "why",
+            "Why not?",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r135|feel",
           "SourceID": "waiyan_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "13",
-          "Word": "dropped",
-          "Definition": "v. 下降,减少;掉下,滴下(drop的过去式和过去分词形式) adj. 抛踢球得分的",
+          "SourceRow": "135",
+          "Word": "feel",
+          "Definition": "n. 感觉;触摸 vi. 觉得;摸索 vt. 感觉;认为;触摸;试探",
           "Before": [
-            "ground",
-            "those",
-            "ice cream",
-            "us",
-            "finish",
-            "wait",
-            "hurry",
-            "hurry up"
+            "skipping rope",
+            "coffee",
+            "tea",
+            "always",
+            "bell",
+            "rang",
+            "ring",
+            "into"
           ],
           "After": [
-            "drop",
-            "send",
-            "email",
-            "ran",
-            "run",
-            "love",
-            "list",
-            "er"
+            "bored",
+            "sad",
+            "woof",
+            "miss",
+            "angry",
+            "ill",
+            "told",
+            "better"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "film",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "film",
+      "Definitions": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧|n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级上|renjiao_start1:4年级上|renjiao_start3:6年级上|hujiao_start3:5年级下|hujiao_start3:6年级下|waiyan_start1:3年级上|waiyan_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:film",
+          "MatchKey": "film",
+          "OccurrenceKeys": "[\"beijing_start1|g2-upper|r024|film\",\"hujiao_start3|g5-lower|r069|film\",\"renjiao_start1|g4-upper|r054|film\",\"renjiao_start3|g6-upper|r057|film\",\"waiyan_start1|g3-upper|r083|film\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "film#movie",
+          "ObjectType": "vocabulary",
+          "TargetSense": "电影",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Entertainment/cinema/see-a-film neighborhoods bind these occurrences to movie."
+        },
+        {
+          "DecisionKey": "surface:film#photo",
+          "MatchKey": "film",
+          "OccurrenceKeys": "[\"hujiao_start3|g6-lower|r016|film\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "film#photo",
+          "ObjectType": "vocabulary",
+          "TargetSense": "胶卷；胶片",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Photographer/film/digital context binds this occurrence to photographic film."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-upper|r024|film",
+        "renjiao_start1|g4-upper|r054|film",
+        "renjiao_start3|g6-upper|r057|film",
+        "hujiao_start3|g5-lower|r069|film",
+        "hujiao_start3|g6-lower|r016|film",
+        "waiyan_start1|g3-upper|r083|film",
+        "waiyan_start3|g5-lower|r068|film"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g2-upper|r024|film",
+          "SourceID": "beijing_start1",
+          "SourceBook": "2年级上",
+          "Grade": "2",
+          "Semester": "上",
+          "SourceRow": "24",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧",
+          "Before": [
+            "park",
+            "class",
+            "we",
+            "to",
+            "the",
+            "Sunday",
+            "zoo",
+            "Saturday"
+          ],
+          "After": [
+            "grandma",
+            "grandmother",
+            "grandpa",
+            "grandfather",
+            "or",
+            "is",
+            "eleven",
+            "his"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g4-upper|r054|film",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "54",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧",
+          "Before": [
+            "by school bus",
+            "by subway",
+            "by plane",
+            "by train",
+            "garden",
+            "meeting place",
+            "gate",
+            "transportation"
+          ],
+          "After": [
+            "earth",
+            "snow",
+            "theatre",
+            "come",
+            "enjoy",
+            "park",
+            "apple",
+            "pen"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r057|film",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "57",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;",
+          "Before": [
+            "Germany",
+            "Alaska",
+            "sled",
+            "fast",
+            "ferry",
+            "Papa Westray",
+            "Scotland",
+            "visit"
+          ],
+          "After": [
+            "see a film",
+            "trip",
+            "take a trip",
+            "supermarket",
+            "evening",
+            "tonight",
+            "tomorrow",
+            "next week"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g5-lower|r069|film",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "69",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧",
+          "Before": [
+            "poster",
+            "best",
+            "writer",
+            "over there",
+            "do a survey",
+            "act ... out",
+            "weekend",
+            "stay"
+          ],
+          "After": [
+            "boat",
+            "plan",
+            "tomorrow",
+            "build",
+            "next",
+            "swing",
+            "cry",
+            "until"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-lower|r016|film",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "16",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧",
+          "Before": [
+            "themselves",
+            "theatre",
+            "go fishing",
+            "enjoy oneself",
+            "get ... in",
+            "life",
+            "writer",
+            "photographer"
+          ],
+          "After": [
+            "digital",
+            "street cleaner",
+            "sweep",
+            "broom",
+            "drive",
+            "street sweeper",
+            "wife",
+            "poor"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r083|film",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "83",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧",
+          "Before": [
+            "race",
+            "run a race",
+            "star",
+            "uncle",
+            "airport",
+            "sea",
+            "visit",
+            "Saturday"
+          ],
+          "After": []
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r068|film",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "68",
+          "Word": "film",
+          "Definition": "n. 电影;薄膜;胶卷;轻烟 vt. 在...上覆以薄膜;把...拍成电影 vi. 摄制电影;生薄膜;变得朦胧",
+          "Before": [
+            "library card",
+            "ask",
+            "wrong",
+            "dear",
+            "information",
+            "e-book",
+            "project",
+            "guide"
+          ],
+          "After": [
+            "as well",
+            "way",
+            "on",
+            "topic",
+            "light",
+            "hard",
+            "broken",
+            "department store"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "french",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "French",
+      "Definitions": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+      "SourceIDs": "renjiao_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "renjiao_start1:6年级上|waiyan_start1:6年级上|waiyan_start3:6年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:french",
+          "MatchKey": "french",
+          "OccurrenceKeys": "[\"renjiao_start1|g6-upper|r035|french\",\"renjiao_start1|g6-upper|r081|french\",\"waiyan_start1|g6-upper|r033|french\"]",
+          "Action": "split-required",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "split-audited-defer",
+          "Rationale": "Renjiao r035 explicitly supports French=法语 through speak French, while r081 supports a nationality/person/adjective use beside American and Danish. The Waiyan occurrence lacks enough context to assign safely to either subgroup, so a complete disjoint partition would be fabricated."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start1|g6-upper|r035|french",
+        "renjiao_start1|g6-upper|r081|french",
+        "waiyan_start1|g6-upper|r033|french",
+        "waiyan_start3|g6-upper|r041|french"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r035|french",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "35",
+          "Word": "French",
+          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+          "Before": [
+            "Washington D.C.",
+            "the British Museum",
+            "the CN Tower",
+            "kangaroo",
+            "the Opera House",
+            "the White House",
+            "clock",
+            "speak"
+          ],
+          "After": [
+            "Tower Bridge",
+            "the London Eye",
+            "hiking",
+            "sunrise",
+            "president",
+            "reptile",
+            "bird",
+            "fish"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r081|french",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "81",
+          "Word": "French",
+          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+          "Before": [
+            "competition",
+            "hurt",
+            "inventor",
+            "artist",
+            "scientist",
+            "poet",
+            "writer",
+            "American"
+          ],
+          "After": [
+            "Danish",
+            "poem",
+            "paint",
+            "invention",
+            "invent",
+            "study",
+            "story",
+            "university"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g6-upper|r033|french",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "33",
+          "Word": "French",
+          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+          "Before": [
+            "Thanksgiving",
+            "nearly",
+            "the Spring Festival",
+            "sure",
+            "December",
+            "light",
+            "pleased",
+            "pretty"
+          ],
+          "After": [
+            "phone",
+            "world",
+            "difficult",
+            "answer",
+            "Miss",
+            "bamboo",
+            "gave",
+            "its"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r041|french",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "41",
+          "Word": "French",
+          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+          "Before": [
+            "the Dragon Boat Festival",
+            "race",
+            "lantern",
+            "the Lantern Festival",
+            "hang",
+            "pen friend",
+            "Pleased to meet you!",
+            "address"
+          ],
+          "After": [
+            "age",
+            "story",
+            "candy",
+            "world",
+            "often",
+            "difficult",
+            "knife",
+            "fork"
           ]
         }
       ]
