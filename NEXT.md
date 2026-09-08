@@ -75,15 +75,15 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #9 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #10 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
-Durable Identity decisions         = 2103
-Identity-level Vocabulary Preview  = 1032
-Review/blocker surfaces            = 929
-Evidence-changed surfaces          = 834
+Durable Identity decisions         = 2105
+Identity-level Vocabulary Preview  = 1049
+Review/blocker surfaces            = 911
+Evidence-changed surfaces          = 817
 Multipart resolved                 = 10
 ```
 
@@ -91,7 +91,7 @@ Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1020
+Learner-stage Vocabulary Preview   = 1037
 Identity rows suppressed by gate   = 12
 Preview occurrence contributions removed = 34
 Explicit decision-bound past-form requirements = 13
@@ -100,10 +100,10 @@ Explicit decision-bound past-form requirements = 13
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1032   (+47)
-Learner Preview    979  → 1020   (+41)
-Blockers          1010  →  929   (-81)
-Evidence-changed   911  →  834   (-77)
+Identity Preview   985  → 1049   (+64)
+Learner Preview    979  → 1037   (+58)
+Blockers          1010  →  911   (-99)
+Evidence-changed   911  →  817   (-94)
 Multipart            7  →   10   (+3)
 ```
 
@@ -124,7 +124,7 @@ Source Fact
 - contractions 默认 route-expression；
 - dictionary/free-text Definition 不得作为 source identity truth；
 - lexical abbreviation 若教材明确绑定小学 lexical concept 可 keep；若 full form 同时存在且 identity 等价，优先 canonicalize；
-- 多个真实 target senses 必须 occurrence split，complete/disjoint cover 前不能 release。
+- 多个真实 target senses 必须 occurrence split，complete/disjoint cover 前不能 release；证据不足时可显式 `split-required / held`，不得猜 sense。
 
 已冻结典型：
 
@@ -136,10 +136,12 @@ saw#see-past     → quarantine
 her#possessive   → 她的
 her#object       → 她（宾格）
 PE               → reuse physical education
+No.              → reuse number
 shorts           → lexicalized 短裤，not short morphology
 sometimes        → lexical frequency adverb，not sometime morphology
 running          → lexicalized activity 跑步；not generic run inflection
 stairs           → lexicalized plural noun 楼梯
+flies            → split-required / held；source cannot disambiguate insect plural vs fly 3sg
 ```
 
 ---
@@ -155,22 +157,27 @@ stairs           → lexicalized plural noun 楼梯
 #7  drank / flew / her / here's / isn't / mrs / our / parent
 #8  shorts / sometimes / they're / wasn't / weren't / what's / where's / woman / won't
 #9  your / running / stairs / a / actor / cent / chemistry / chinatown / dragon / everything / firefighter / geography / halloween / happiness
+#10 hide-and-seek / kilometre / language / librarian / passport / physics / raincoat / sausage / someday / spaceship / speech / string / taikonaut / town / traditional / winner / child / no. / flies
 ```
 
-### Latest validation — Batch #9
+### Latest validation — Batch #10
 
 ```text
-run 34189090892 / #202 = SUCCESS
-batch commit = 2ed87b4ab08a96f00643978a6cf4ce586ae6001d
-bot persist  = af12ffc3943e1c804a2964b3bd24a4f34ada6848
+first run 34189627528 / #203 = FAIL at manifest fingerprint only; no durable apply/build executed
+corrected run 34189731265 / #204 = SUCCESS
+batch commit       = 1d492793108b4f317e3f072f2b127b2d3fe685c3
+fingerprint fix    = 8f01fff6e8e5c0d2025a89e08fb07b63ca6fe358
+bot persist        = 89aeaba...
 ```
 
 ```text
 selected active batch closure              = 100%
-Batch decisions                            = 14
-keep-identity                              = 14
+Batch decisions                            = 19
+keep-identity                              = 17
+reuse-identity                             = 1   (No. → number)
+split-required                             = 1   (flies held)
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1032 / 1032
+Identity Preview TargetSense               = 1049 / 1049
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
@@ -182,15 +189,16 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-Batch #9 evidence notes：
+Batch #10 delta：
 
 ```text
-running  → activity noun/learning unit 跑步；sixth-source evidence does not justify collapsing to run
-stairs   → conventional lexicalized plural noun 楼梯
-cent     → currency unit 分；cashier/dollar payment neighborhood is decisive
-a        → indefinite article；waiyan_start3 dictionary “letter A/ampere” gloss is source-definition noise
-all other selected rows → exact sixth-source evidence revalidated existing elementary lexical identity
+Blockers          929 → 911   (-18)
+Evidence-changed  834 → 817   (-17)
+Identity Preview 1032 → 1049  (+17)
+Learner Preview  1020 → 1037  (+17)
 ```
+
+为什么不是净释放 19：`flies` 已完成审查，但唯一 source occurrence 同时可解释为 insect plural 与 `fly` 的 third-person singular，当前 flat vocabulary neighborhood 无法证明哪一个才是教材 target sense，因此显式保留为 blocker；这属于正确的 evidence-aware hold，而非未处理。
 
 ---
 
@@ -215,6 +223,7 @@ review_bundle.csv
 ```text
 ExecutionReady must be true
 manifest set == planner selected set
+manifest fingerprint == current next_batch fingerprint
 decision_updates MatchKey set == selected set
 selected active batch closure = 100%
 source mutation 与 decision mutation 不得混合
@@ -222,54 +231,42 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #10
+## 8. NEXT TASK — POLICY-REVIEW BATCH #11
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
-SelectedCount     = 19
-EvidenceWeight    = 58 / 60
+SelectedCount     = 6
+EvidenceWeight    = 46 / 60
 ExecutionReady    = true
+ReviewBundleFingerprint = 4f605c11ac420fd025c803327fa04e9b9f419fa93b26bae714caa52d674a080e
 SelectedMatchKeys =
-  hide-and-seek
-  kilometre
-  language
-  librarian
-  passport
-  physics
-  raincoat
-  sausage
-  someday
-  spaceship
-  speech
-  string
-  taikonaut
-  town
-  traditional
-  winner
-  child
-  no.
-  flies
+  at
+  no
+  broken
+  candy
+  don't
+  fell
 ```
 
 本批重点：
 
 ```text
-hide-and-seek / raincoat / spaceship / taikonaut
-→ lexicalized compound boundaries
+at / no
+→ dictionary abbreviation noise vs elementary grammatical core
 
-kilometre / language / librarian / passport / physics / sausage / someday / speech / string / town / traditional / winner
-→ sixth-source exact-evidence lexical revalidation
+broken
+→ lexicalized adjective vs break participle
 
-child
-→ singular identity vs irregular plural children pedagogical treatment
+candy
+→ elementary food noun despite broad dictionary noise
 
-no.
-→ abbreviation identity vs source presentation form
+don't
+→ contraction；继续 route-expression，并重绑 sixth-source evidence
 
-flies
-→ inflectional form vs possible lexical/homograph reading；不得机械 morphology collapse
+fell
+→ past form of multipart canonical fall；必须核对 scoped canonical reuse 与 learner quarantine
 ```
 
 执行要求：
@@ -278,10 +275,10 @@ flies
 1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
-4. 19/19 closure，不 cherry-pick。
+4. 6/6 closure，不 cherry-pick；manifest fingerprint 必须从当前 next_batch.json 直接读取。
 5. apply + rebuild Identity/Learner views。
 6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
-7. 核对 blocker / Identity Preview / Learner Preview delta。
+7. 核对 blocker / Identity Preview / Learner Preview / canonical dependency delta。
 8. Klose isolation 必须 PASS。
 9. bot persist 后重新 planner；阶段结束更新 NEXT.md。
 ```
