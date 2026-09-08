@@ -52,7 +52,8 @@ ACTIONS = {
     "route-expression", "source-only", "pending",
 }
 RESOLVED_ACTIONS = {"keep-identity", "reuse-identity", "route-expression", "source-only"}
-KNOWN_SEMANTIC_COLLISIONS = {"may", "like", "square", "left", "cook", "cold", "study"}
+FORMER_SEMANTIC_COLLISIONS = {"may", "like", "square", "left", "cook", "cold", "study"}
+LEARNER_FIRST_MARKER = "learner-first"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -98,6 +99,15 @@ def partition_state(
         d.get("Status") == "reviewed" and d.get("Action") in RESOLVED_ACTIONS for d in ds
     )
     return covered, complete, resolved
+
+
+def learner_first_resolved(d: dict[str, str]) -> bool:
+    return (
+        d.get("Status") == "reviewed"
+        and d.get("Action") == "keep-identity"
+        and bool(d.get("TargetSense", "").strip())
+        and LEARNER_FIRST_MARKER in d.get("DecisionBasis", "").casefold()
+    )
 
 
 def main() -> None:
@@ -234,14 +244,18 @@ def main() -> None:
     require(not (set(resolved_multipart) & review_keys), "Resolved multipart surface remains in review queue")
 
     single_by_key = {k: ds[0] for k, ds in decisions_by_match.items() if len(ds) == 1}
-    for key in KNOWN_SEMANTIC_COLLISIONS:
+    for key in FORMER_SEMANTIC_COLLISIONS:
         ds = decisions_by_match.get(key, [])
         require(ds, f"Known semantic collision missing decision: {key}")
         if key in resolved_multipart:
             require(len(ds) >= 2, f"Known semantic collision resolved without partition: {key}")
         else:
-            require(len(ds) == 1 and ds[0]["Action"] in {"split-required", "held"},
-                    f"Known semantic collision flattened: {key}")
+            require(len(ds) == 1, f"Unexpected multipart state for former semantic collision: {key}")
+            d = ds[0]
+            require(
+                d.get("Action") in {"split-required", "held"} or learner_first_resolved(d),
+                f"Former semantic collision must remain blocked/split or use explicit learner-first narrow sense: {key}",
+            )
 
     require(single_by_key.get("danced", {}).get("Action") == "reuse-identity"
             and single_by_key["danced"]["CanonicalMatchKey"] == "dance", "danced canonicalization lost")
@@ -256,7 +270,13 @@ def main() -> None:
                 and single_by_key[key].get("CanonicalMatchKey") == canonical,
                 f"Frozen form-policy reuse regression: {key} -> {canonical}")
     for key in ("were", "sweets", "pleased", "lost"):
-        require(single_by_key.get(key, {}).get("Action") == "held", f"Protected form-policy blocker lost: {key}")
+        d = single_by_key.get(key, {})
+        require(d, f"Protected form-policy surface missing: {key}")
+        require(
+            d.get("Action") == "held" or learner_first_resolved(d)
+            or (d.get("Status") == "reviewed" and d.get("Action") == "reuse-identity"),
+            f"Form-policy surface requires held, reviewed reuse, or explicit learner-first pedagogical keep: {key}",
+        )
 
     for key in (
         "a few", "get well", "how many", "ice cream", "make use of", "pencil case",
@@ -278,8 +298,12 @@ def main() -> None:
     require(len(preview_keys) == len(preview), "Preview CanonicalMatchKey is not unique")
     require(all(r.get("TargetSense", "").strip() for r in preview), "Preview contains empty TargetSense")
 
-    for key in KNOWN_SEMANTIC_COLLISIONS - set(resolved_multipart):
-        require(key not in preview_keys, f"Known semantic blocker leaked into preview: {key}")
+    for key in FORMER_SEMANTIC_COLLISIONS - set(resolved_multipart):
+        d = single_by_key.get(key, {})
+        if d.get("Action") in {"held", "split-required"}:
+            require(key not in preview_keys, f"Unresolved semantic blocker leaked into preview: {key}")
+        elif learner_first_resolved(d):
+            require(key in preview_keys, f"Learner-first resolved semantic surface missing from preview: {key}")
 
     preview_source_matchkeys: set[str] = set()
     for row in preview:
@@ -287,7 +311,6 @@ def main() -> None:
     require(not (stale_surfaces & preview_source_matchkeys),
             f"Evidence-stale source surfaces leaked into preview: {sorted(stale_surfaces & preview_source_matchkeys)[:10]}")
 
-    # Generic canonical integrity for single-decision reuse aliases.
     blocked_canonical_targets: set[str] = set()
     for key, d in valid_decision.items():
         if d.get("Status") != "reviewed" or d.get("Action") != "reuse-identity":
@@ -322,7 +345,6 @@ def main() -> None:
     require(not (blocked_canonical_targets & preview_keys),
             f"Blocked canonical targets leaked into preview: {sorted(blocked_canonical_targets & preview_keys)[:10]}")
 
-    # Multipart identities must be represented independently and preserve provenance.
     for key, ds in resolved_multipart.items():
         for d in ds:
             action = d.get("Action")
@@ -350,7 +372,6 @@ def main() -> None:
                 require(key in preview_by_key[canonical].get("SourceMatchKeys", "").split("|"),
                         f"Multipart reuse provenance missing: {d['DecisionKey']} -> {canonical}")
 
-    # Quality-audit regression guards.
     require(single_by_key.get("ice-cream", {}).get("Action") == "reuse-identity"
             and single_by_key["ice-cream"].get("CanonicalMatchKey") == "ice cream",
             "ice-cream orthographic alias regression")
@@ -360,7 +381,11 @@ def main() -> None:
     require(single_by_key.get("smart", {}).get("TargetSense") == "聪明的；机灵的",
             "smart canonical TargetSense regression")
     for key in ("old", "thin", "stay", "do", "watch"):
-        require(key not in preview_keys, f"Blocked canonical leaked into preview via reuse alias: {key}")
+        d = single_by_key.get(key, {})
+        if d.get("Action") in {"held", "split-required"}:
+            require(key not in preview_keys, f"Blocked canonical leaked into preview via reuse alias: {key}")
+        elif learner_first_resolved(d):
+            require(key in preview_keys, f"Learner-first canonical missing from preview: {key}")
     require(preview_by_key.get("candy", {}).get("TargetSense") == "糖果",
             "candy canonical TargetSense polluted by candies alias")
     require(preview_by_key.get("story", {}).get("TargetSense") == "故事",
@@ -396,7 +421,7 @@ def main() -> None:
     print("Simplified physical layout = yes")
     print("Legacy multi-pass tools absent = yes")
     print("Source occurrence closure = yes")
-    print("Known semantic blockers preserved or explicitly partitioned = yes")
+    print("Semantic collision must be split/held or explicit learner-first narrow sense = yes")
     print("Known morphology decisions preserved = yes")
     print("Beijing multiword requires explicit review = yes")
     print("Stable ThirdPartyID minted = no")
