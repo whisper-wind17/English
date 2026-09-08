@@ -1,13 +1,28 @@
 {
   "PlanVersion": "v4-learner-first",
-  "ReviewLane": "",
-  "SelectedMatchKeys": [],
-  "SelectedCount": 0,
-  "EvidenceWeight": 0,
-  "SurfaceCap": 0,
-  "WeightBudget": 0,
+  "ReviewLane": "policy-review",
+  "SelectedMatchKeys": [
+    "did",
+    "ate",
+    "became",
+    "bought",
+    "brought",
+    "came",
+    "drew",
+    "gave",
+    "got",
+    "learnt",
+    "met",
+    "ran",
+    "rode",
+    "sent"
+  ],
+  "SelectedCount": 14,
+  "EvidenceWeight": 60,
+  "SurfaceCap": 30,
+  "WeightBudget": 60,
   "SkippedGuardedPolicyRows": 0,
-  "ExecutionReady": false,
-  "GateReason": "no active review batch",
-  "ReviewBundleFingerprint": "4d44e282d6d235de1858339b3d18da86cb87ad7ca1fd8d2d78206cfa093b6eee"
+  "ExecutionReady": true,
+  "GateReason": "",
+  "ReviewBundleFingerprint": "224170cedfae1ad43a62daeb50c71b6b7431d75d780ef28956920ad6080a9352"
 }
