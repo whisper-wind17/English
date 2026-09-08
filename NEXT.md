@@ -75,15 +75,15 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #14 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #15 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
 Durable Identity decisions         = 2105
-Identity-level Vocabulary Preview  = 1072
-Review/blocker surfaces            = 888
-Evidence-changed surfaces          = 794
+Identity-level Vocabulary Preview  = 1074
+Review/blocker surfaces            = 886
+Evidence-changed surfaces          = 792
 Multipart resolved                 = 12
 ```
 
@@ -91,21 +91,23 @@ Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1060
+Learner-stage Vocabulary Preview   = 1062
 Identity rows suppressed by gate   = 12
-Preview occurrence contributions removed = 44
+Preview occurrence contributions removed = 47
 Explicit decision-bound past-form requirements = 13
 ```
 
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1072   (+87)
-Learner Preview    979  → 1060   (+81)
-Blockers          1010  →  888   (-122)
-Evidence-changed   911  →  794   (-117)
+Identity Preview   985  → 1074   (+89)
+Learner Preview    979  → 1062   (+83)
+Blockers          1010  →  886   (-124)
+Evidence-changed   911  →  792   (-119)
 Multipart            7  →   12   (+5)
 ```
+
+Policy-review lane 已清空；deterministic planner 已切换到 `semantic-review`。
 
 ---
 
@@ -153,6 +155,10 @@ thank            → 感谢；distinct from lexicalized thanks
 vegetable        → 蔬菜；vegetables reuse vegetable
 watch#noun       → 手表；current 2 occurrences
 watch#verb       → 观看；注视；current 4 occurrences
+win              → 赢；获胜
+won              → reuse win；learner quarantine
+man              → 男人；男性
+men              → pedagogically salient irregular-plural Identity；不机械 reuse man
 running          → lexicalized activity 跑步；not generic run inflection
 stairs           → lexicalized plural noun 楼梯
 broken           → lexicalized adjective 破损的/坏掉的，not automatic break reuse
@@ -180,33 +186,28 @@ flies            → split-required / held；canonical fly 已 resolve，但唯�
 #12 fly / foot / go / leave / paint / shoe
 #13 short / sleep / sock / sometime / sport / story
 #14 study / swim / thank / vegetable / watch
+#15 win / man
 ```
 
-### Latest validation — Batch #14
+### Latest validation — Batch #15 / policy-review lane closure
 
 ```text
-initial batch commit = 87ea8c80c3eaa022e108289057f7cfd8d2365dd0
-first run            = 34192303590 / #209 = FAIL at former-semantic-collision marker; no bot persist
-study marker fix     = 7293f8ed349cf515cd637f685204ba932dee9e76
-corrected run        = 34192385503 / #210 = SUCCESS
-bot persist          = 9368335ea8ce7dc2fd4e9c571688982a06d99077
+batch commit       = 73b7b117c9af51b8375f1d83f0d4e1fe193e4e95
+run                = 34192623658 / #211 = SUCCESS
+bot persist        = cd3704bea2994a170650dbb7bfc84dcd00823214
 ```
-
-第一次失败不是 sense 判断错误：`study` 是 checker 冻结的 former semantic collision，单一 keep 放行必须在 `DecisionBasis` 显式带 `learner-first`。修复后继续保留 narrow TargetSense `学习；读书`，不引入 research / study-room dictionary senses。
 
 ```text
 selected active batch closure              = 100%
-Batch decision rows                        = 6
-Touched MatchKeys                          = 5
-keep-identity                              = 6
-watch multipart partition                  = 2 noun + 4 verb, complete/disjoint
+Batch decisions                            = 2
+Touched MatchKeys                          = 2
+keep-identity                              = 2
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1072 / 1072
+Identity Preview TargetSense               = 1074 / 1074
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
 homograph decision-scope gate              = ENFORCED
-former semantic collision policy           = ENFORCED
 known morphology decisions preserved       = YES
 canonical blocker bypass                   = NO
 source occurrence closure                  = PASS
@@ -215,19 +216,21 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-Batch #14 delta：
+Batch #15 delta：
 
 ```text
-Blockers          893 → 888   (-5)
-Evidence-changed  799 → 794   (-5)
-Identity Preview 1066 → 1072  (+6)
-Learner Preview  1054 → 1060  (+6)
-Multipart          11 →   12  (+1)
+Blockers          888 → 886   (-2)
+Evidence-changed  794 → 792   (-2)
+Identity Preview 1072 → 1074  (+2)
+Learner Preview  1060 → 1062  (+2)
+Multipart          12 →   12
 ```
 
-Preview 增加 6 而 selected surface 只有 5，是因为 `watch` 完整恢复两个 provisional identities：`watch#noun` 与 `watch#verb`。`swam → swim`、`thanks`、`vegetables → vegetable` 等既有关系保持不变。
+`win` 保持 canonical `赢；获胜`，`won → win` 关系不变且 learner quarantine 保持；`man` 保持 `男人；男性`，`men` 继续作为 pedagogically salient irregular-plural Identity，不机械 canonicalize。
 
-独立 compare `7293f8e... → 9368335...` 只包含 Stage-A review/audit/learner/staging 生成物与 transient batch 文件删除；未触碰 source adapter/raw，也未触碰 Klose Master/Learner/Publish/Anki。
+独立 compare `73b7b11... → cd3704b...` 只包含 Stage-A review/audit/learner/staging 生成物与 transient batch 文件删除；未触碰 source adapter/raw，也未触碰 Klose Master/Learner/Publish/Anki。
+
+Policy-review lane 在 Batch #15 后归零；planner 正式进入 `semantic-review`。
 
 ---
 
@@ -260,40 +263,87 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #15
+## 8. NEXT TASK — SEMANTIC-REVIEW BATCH #16
 
 Current deterministic planner：
 
 ```text
-ReviewLane        = policy-review
-SelectedCount     = 2
-EvidenceWeight    = 20 / 60
+ReviewLane        = semantic-review
+SelectedCount     = 29
+EvidenceWeight    = 53 / 60
 ExecutionReady    = true
-ReviewBundleFingerprint = d38d0c70f2216406d99aaa922535f8d1d8f0c5136709b6bf41a3686691322ac8
+ReviewBundleFingerprint = 0c2c2c587449fe0d069bb9b7b505eef1eb45423409aa951a5b5fff9ae8f1981f
 SelectedMatchKeys =
-  win
-  man
+  ah
+  beautifully
+  bye-bye
+  chameleon
+  coffee
+  e-book
+  foreign
+  goalkeeper
+  grandchild
+  grandchildren
+  haven't
+  herself
+  information
+  interviewer
+  kilo
+  lady
+  lantern
+  loudly
+  ouch
+  rang
+  sang
+  shelf
+  television
+  that's
+  topic
+  aah
+  afraid
+  afternoon
+  airport
 ```
 
-本批重点：
+本 lane 与 policy-review 不同：必须逐项检查 learner-facing semantic core、Vocabulary/Expression boundary、canonical dependency 与 exact source neighborhood，不能因为历史 decision 已存在就机械 rebind。
+
+重点风险：
 
 ```text
-win
-→ canonical 与 won reuse 关系已冻结；需用 sixth-source evidence 重绑，不扩张 TargetSense。
+ah / aah / ouch / bye-bye
+→ interjection / communicative formula，需检查 Vocabulary vs Expression object boundary。
 
-man
-→ singular adult/person concept 与 men reuse 的关系；检查 Waiyan Start3 的多个 source contexts，避免 dictionary broad sense 污染。
+haven't / that's
+→ grammatical contractions，默认 route-expression；不得 mint lexical Vocabulary identity。
+
+rang / sang
+→ likely past forms，Identity relation 与 learner grammar quarantine 必须分层；先核对 canonical ring/sing。
+
+grandchild / grandchildren
+→ irregular plural relation是否 pedagogically salient，不能机械套用 men/women policy。
+
+television / TV
+→ canonical/abbreviation relation需按 learner identity 判断。
+
+beautifully / loudly
+→ adverb derivative是否独立 learner unit，不能只按 morphology 自动 reuse。
+
+foreign / information / topic / lady 等
+→ dictionary broad senses 不得覆盖小学教材核心义。
 ```
 
 执行要求：
 
 ```text
-1. 读取 exact source occurrences + current win/man/won/men decisions。
-2. 不修改 source/raw/parser/config。
-3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
-4. 2/2 closure；fingerprint 使用当前 next_batch 原值。
-5. apply/build/recheck/learner/batch/Klose isolation 全部 PASS。
-6. bot persist 后重新 planner并更新 NEXT.md。
+1. 读取 current review_bundle + exact current occurrences + related durable decisions/canonicals。
+2. 29/29 closure，不 cherry-pick；semantic-review 允许 keep/reuse/route-expression/source-only/split/held，但每项必须 adjudicate。
+3. 不修改 source/raw/parser/config。
+4. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv；fingerprint 使用当前 next_batch 原值。
+5. apply/build Identity/Learner views。
+6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
+7. 检查 grammar-form quarantine、canonical TargetSense、Vocabulary/Expression boundary、multipart completeness。
+8. Klose isolation 必须 PASS。
+9. bot persist 后重新 planner并更新 NEXT.md。
 ```
 
 `flies` 当前仍是 independently held split-resolution item；除非后续 deterministic planner 明确选择并且 source evidence 足以消除 ambiguity，否则不得在其他 batch 中顺手修改。
