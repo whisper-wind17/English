@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v2",
   "CheckpointSemantics": "sealed only after Stage-A Completion Recheck, learner gate check, audit-batch recheck, and Klose isolation pass",
-  "InputCommit": "3d5bbc170be7919dca952167756690f27eb4ef9b",
-  "WorkflowRunID": "34246368788",
-  "WorkflowRunNumber": "266",
+  "InputCommit": "f9aeed70e6e08db66d93e1a17cbe52bac4f8a6bf",
+  "WorkflowRunID": "34246629278",
+  "WorkflowRunNumber": "267",
   "SourceOccurrences": 6610,
   "NormalizedSurfaces": 2181,
   "DurableIdentityDecisions": 2221,
@@ -15,32 +15,34 @@
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
-    "ReviewLane": "split-resolution",
-    "SelectedCount": 1,
+    "ReviewLane": "object-boundary",
+    "SelectedCount": 3,
     "SelectedMatchKeys": [
-      "sound"
+      "put up",
+      "take a picture",
+      "watch a film"
     ],
-    "EvidenceWeight": 11,
-    "EffectiveWeightBudget": 70,
+    "EvidenceWeight": 3,
+    "EffectiveWeightBudget": 50,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "693110f1290a18d390030336f9d56f17737c7bf48627f3bcc07b99c78e3d1c36",
-    "ReviewPacketFingerprint": "acdb498a60a61b24cf13b4d97d7730b96fda70f584cdcfb3c726f666a625f6b8"
+    "ReviewBundleFingerprint": "5f74e84edf02418394f79e93c5ffeca06c7a8b501bb70353f36b31c6bc23d743",
+    "ReviewPacketFingerprint": "ae309d811b0a8a7fd85c2ef92ebd0cf4e9e207008e02a677ac785400da1d87a4"
   },
-  "SealedInputCommit": "3d5bbc170be7919dca952167756690f27eb4ef9b",
-  "SealedWorkflowRunID": "34246368788",
-  "SealedWorkflowRunNumber": "266",
+  "SealedInputCommit": "f9aeed70e6e08db66d93e1a17cbe52bac4f8a6bf",
+  "SealedWorkflowRunID": "34246629278",
+  "SealedWorkflowRunNumber": "267",
   "ContentFingerprintAlgorithm": "sha256-raw-bytes-v1",
   "ContentFingerprints": {
     "anki/klose/third_party_vocabulary/config/source_adapters.csv": "ee3d553230c4ff03420cc6f5e936c980403226bac3414b152deaff4f9226bf3e",
-    "anki/klose/third_party_vocabulary/review/identity_decisions.csv": "03898acbce0dbf375931c0ccbed48927a8d0f9a3edc9a416366545e6e57a80ad",
+    "anki/klose/third_party_vocabulary/review/identity_decisions.csv": "23534ba20ef3b3a1bc971b9cd9ad4420386a992a290ca83fc074322962971cdb",
     "anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv": "df28c73e727573afa3500ac059012f956ea7c2f7cd65b30a162c291287e689e8",
     "anki/klose/third_party_vocabulary/staging/occurrences.csv": "e6cb96f8857a30e6c912b6c7bb0123ef6ec6b000fff1755a1adeeda01fba746a",
     "anki/klose/third_party_vocabulary/staging/surface_candidates.csv": "af7da39d9762779a50c56c960c26504aa0849692a2790e78e75748c4280ff591",
     "anki/klose/third_party_vocabulary/staging/review_queue.csv": "b9a41bcca052ece8237db1a562cc764d845cc7f1062f123ae85fa44bf6920d3a",
     "anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv": "33e28d24793f7c209967f53e74d921f68fc660784467d484868ea1ea19471c69",
     "anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv": "3ee693c5eecfcc4027a65863bc7a2c2e0abb766499cc8d85eee6fd9dd3cc1ce4",
-    "anki/klose/third_party_vocabulary/audit/defer_context.csv": "23b5961645d3c9b0931276901381742d8fb7f0f81d57869dba9684244397ecdf",
-    "anki/klose/third_party_vocabulary/audit/next_batch.json": "eb9062dd77b671502f9be1dd38107b5ff4105d92eacaa748d2b65df21dbf5b18"
+    "anki/klose/third_party_vocabulary/audit/defer_context.csv": "c58a56069e0c73fede5ac25c79a93012c8154adcc4cc74e64c2bf08db155e1f1",
+    "anki/klose/third_party_vocabulary/audit/next_batch.json": "9973a8d8a63f3e04e8b6a2dd40b345c96904a33e061f4dcd8b331c0586636690"
   },
-  "CheckpointFingerprint": "0c40f511414568d678b78cac637fc0751ac3504bb1d36df986b4aa387ea5b0e5"
+  "CheckpointFingerprint": "a019b9e2dc3900ad9c266ca966d237d04b5a99519c50cb267b606c06b7809ca4"
 }
