@@ -74,17 +74,11 @@ waiyan_start3    = 1157
 Total            = 6005
 ```
 
-`waiyan_start3` 已于 2026-09-08 经用户显式确认后启用。其 Source Adapter 独立 parse + validation 后冻结真实基线：
-
-```text
-Source books       = 8
-Source occurrences = 1157
-Distinct MatchKeys = 1023
-```
+`waiyan_start3` 已启用并独立完成 source parse + validation：8 books / 1157 occurrences / 1023 MatchKeys。
 
 ---
 
-## 3. Current checkpoint — SIX-ADAPTER SOURCE EXPANSION VALIDATED
+## 3. Current checkpoint — SIX-ADAPTER / POLICY BATCH #1 CLOSED
 
 当前 corpus：
 
@@ -92,147 +86,135 @@ Distinct MatchKeys = 1023
 Enabled adapters          = 6
 Source occurrences        = 6005
 Normalized surfaces       = 2161
-Durable decisions         = 2097
-Vocabulary preview        = 984
-Review/blocker surfaces   = 1024
-Evidence-changed surfaces = 924
+Durable decisions         = 2098
+Vocabulary preview        = 985
+Review/blocker surfaces   = 1010
+Evidence-changed surfaces = 911
 Multipart resolved        = 7
 ```
 
-从 five-adapter `1823 preview / 7 blockers` 变为 `984 preview / 1024 blockers` **不是内容丢失**。新增 `waiyan_start3` 后：
+与 sixth-source expansion 初始 checkpoint 相比：
 
 ```text
-924 个已有 surface 的 OccurrenceKeys 发生变化
-→ 旧 reviewed decision 自动失效并 requeue
-
-99 个新 surface
-→ 首次进入 pending review
-
-1 个 unchanged audited-defer
-→ mouse 继续 zero-scan
+Review throughput         = 14
+Net blocker release       = 14
+Blockers                  = 1024 → 1010
+Evidence-changed          = 924  → 911
+Vocabulary preview        = 984  → 985
+Durable decisions         = 2097 → 2098
 ```
 
-因此当前闭合关系：
+本批 14/14 deterministic closure：
 
 ```text
-1024 blockers
-= 924 evidence-changed
-+ 99 new pending surfaces
-+ 1 unchanged audited-defer
+did     → reuse do
+ate     → reuse eat
+became  → reuse become
+bought  → reuse buy
+brought → reuse bring
+came    → reuse come
+drew    → reuse draw
+gave    → reuse give
+got     → keep learner-first pedagogical form
+learnt  → reuse learn
+met     → reuse meet
+ran     → reuse run
+rode    → reuse ride
+sent    → reuse send
 ```
 
-旧 7 个 audited-defer 中，只有 `mouse` 当前 evidence/context 未变化并继续 zero-scan；`too / french / kind / plant / right / sound` 已因 source evidence 变化重新进入 active review。旧 accepted defer fingerprint 仍保留，直到 explicit re-review 真正更新 durable decision。
+Action count：
+
+```text
+reuse-identity = 13
+keep-identity  = 1
+```
+
+`got` 保留既有 narrow learner-facing identity：
+
+```text
+TargetSense = 得到；获得（get 的过去式）
+```
+
+新增 Waiyan evidence 同时含“明白”义，但本批不把 broader get semantics 注入该学习单元。
+
+Preview 只增加 1 是正确状态：`got` 独立 keep 立即进入 Preview；其余 13 个 alias 已完成 identity routing，但多数 canonical 自身仍因 sixth-source evidence change 待复审，因此 alias 不得绕过 canonical blocker 提前进入 Preview。
 
 ---
 
-## 4. Source-expansion hardening — VALIDATED
+## 4. Validation checkpoint
 
-本次 sixth-source expansion 暴露并修复了两个状态机边界问题。
-
-### Scoped reuse dependency invalidation
-
-新增 evidence 使 multipart canonical（例如 `cook`）暂时 stale/requeue 时，依赖 alias（例如 `cooking → cook#verb`）不能：
+Decision commit：
 
 ```text
-- 绕过 unresolved canonical 继续进入 Preview；
-- 因 canonical 暂时 unresolved 就被误判成永久非法；
-- 被静默重写 durable decision。
+4a7021e05e9d4948a5283d6a70b394f313dbaf14
+review: adjudicate next policy batch
 ```
 
-当前行为：
+Workflow：
 
 ```text
-canonical split unresolved
+run 34181676332 / #190 = SUCCESS
+```
+
+机器验证：
+
+```text
+planner selected surfaces             = 14
+batch touched MatchKeys               = 14
+selected active batch closure         = 100%
+decision updates applied              = 14
+replaced durable decisions            = 13
+appended durable decisions            = 1
+batch reuse-identity                  = 13
+batch keep-identity                   = 1
+Third-party Completion Recheck        = PASS
+Preview TargetSense                   = 985 / 985
+Explicit reviewed OccurrenceKeys      = PASS
+Changed source evidence requeue       = PASS
+Partial split remains blocker         = PASS
+Canonical blocker bypass              = NO
+Stable ThirdPartyID minted            = NO
+Final Klose diff executed             = NO
+Klose Master/Learner/Publish/Anki     = UNTOUCHED
+```
+
+Generated Stage-A workspace 已由 bot persist：
+
+```text
+be005495ca3f249d7d9838cad1978e2cd1a61024
+data: refresh simplified third-party Stage A workspace
+```
+
+独立 diff-scope：`f5138d3... → be00549...` 仅修改 third-party decision / audit / staging 派生状态；source adapters、raw/source staging、Klose Master/Learner/Publish/Anki 均未修改。
+
+---
+
+## 5. Source-expansion state-machine hardening — FROZEN
+
+Sixth-source expansion 已验证以下状态：
+
+```text
+decision-evidence-changed
+→ always active re-review
+
+new pending
+→ always schedulable
+→ 不得伪装成 deferred
+
+accepted audited-defer + same context
+→ zero-scan
+
+accepted audited-defer + changed context
+→ active re-review
+
+multipart canonical stale
 → dependent scoped reuse 暂时退出 Preview
 → durable alias decision 保留
 → canonical 复审后再恢复/验证
 ```
 
-若 base 已 resolved 但请求的 `#variant` 不存在，仍 hard FAIL。
-
-相关修复：
-
-```text
-c3ad9409024899382568eee55db1ca3a5a8ca902
-fix: defer scoped reuse behind stale multipart canonical
-```
-
-### New pending blocker scheduling
-
-曾发现 source expansion 产生的全新 pending surface 可能继承 low-actionability `deferred-high-ambiguity` lane。该状态不合法：未审 pending 不能伪装成 accepted audited-defer。
-
-当前 normalizer 强制：
-
-```text
-decision-evidence-changed → always active
-new pending               → always schedulable
-accepted audited-defer + same context → zero-scan
-accepted audited-defer + changed context → active re-review
-```
-
-相关修复：
-
-```text
-5a32e1d18b2e7b54fe2b30e3c7653a1ac8f40e73
-fix: activate new pending blockers after source expansion
-```
-
-Core checker 同时扩展为 source-expansion aware，并冻结 `waiyan_start3=1157`：
-
-```text
-6dadcb1d16ce15cffb18299210d23aa27fad8536
-test: validate source-expansion dependency invalidation
-```
-
----
-
-## 5. Validation checkpoint
-
-最终 workflow：
-
-```text
-run 34179654152 / #189 = SUCCESS
-job 101915966237          = SUCCESS
-```
-
-核心验证：
-
-```text
-Third-party Simplified Completion Recheck = PASS
-Vocabulary Preview TargetSense             = 984 / 984
-Source occurrence closure                  = PASS
-Explicit reviewed OccurrenceKeys           = PASS
-Changed source evidence requeue             = PASS
-Split subsets disjoint                      = PASS
-Split complete before release               = PASS
-Partial split remains blocker               = PASS
-Stale source excluded from Preview          = PASS
-Scoped reuse waits for unresolved canonical = PASS
-Canonical blocker bypass                    = NO
-Unreviewed pending hidden as defer           = NO
-Stable ThirdPartyID minted                  = NO
-Final Klose diff executed                   = NO
-Klose Master/Learner/Publish/Anki touched   = NO
-```
-
-Normalizer validation：
-
-```text
-source-evidence-changed reactivated = 924
-new/non-defer blockers reactivated  = 99
-unchanged audited-defer retired     = 1 (mouse)
-active rows                         = 1023
-deferred zero-scan                  = 1
-```
-
-最终 generated Stage-A workspace 已由 bot persist：
-
-```text
-7099f7d0765408059cbca281d747d56f39d4c7ce
-data: refresh simplified third-party Stage A workspace
-```
-
-独立 diff-scope recheck：task-start `aefbf4e43c6b4763ec8a1966e0ea44a14255b340` → `7099f7d...` 只涉及 third-party Source/Stage-A workflow/generated workspace 及对应 checker/state-machine hardening；Klose Master/Learner/Publish/Anki 不在 diff 中。
+若 scoped reuse 请求的 `#variant` 在已 resolved multipart canonical 中不存在，仍 hard FAIL。
 
 ---
 
@@ -257,48 +239,11 @@ event / tense-specific source chunk
 → complete cover 前不能 release
 ```
 
-Source evidence 变化不能由旧 decision 静默继承；所有 decision 仍以 exact current `OccurrenceKeys` 为 validity boundary。
+Source evidence 变化不能由旧 decision 静默继承；所有 reviewed decision 以 exact current `OccurrenceKeys` 为 validity boundary。
 
 ---
 
-## 7. Audited-defer state machine — FROZEN
-
-```text
-decision-evidence-changed
-→ always active
-→ 不提前接受新 context
-
-new audited-defer
-→ stamp current context
-→ zero-scan
-
-same decision + same context
-→ zero-scan
-
-same decision + context changed
-→ active re-review
-→ 保留 old accepted fingerprint
-
-decision changed after re-review
-→ accept current context
-→ 若仍 defer，可再次 zero-scan
-```
-
-Machine-enforced：
-
-```text
-changed evidence cannot be hidden
-new pending cannot be hidden as deferred
-unchanged accepted defer cannot reactivate
-stale-context defer cannot be hidden
-deferred row must match accepted decision/context fingerprint
-```
-
----
-
-## 8. High-throughput execution mechanism — FROZEN
-
-执行链：
+## 7. High-throughput execution mechanism — FROZEN
 
 ```text
 review_bundle.csv
@@ -324,49 +269,45 @@ selected active batch closure = 100%
 source mutation 与 decision mutation 不得混合
 ```
 
-必须持续区分 `Review throughput` 与 `Net blocker release`。
+持续区分 `Review throughput` 与 `Net blocker release`。
 
 ---
 
-## 9. NEXT TASK — SEPARATE DECISION-ONLY BATCH
-
-Six-adapter source expansion 已完成并 checkpoint。**不要在 source-expansion commit 中继续做内容 decision。**
+## 8. NEXT TASK — POLICY-REVIEW BATCH #2
 
 当前 deterministic planner：
 
 ```text
 ReviewLane         = policy-review
-SelectedCount      = 14
-EvidenceWeight     = 60 / 60
+SelectedCount      = 10
+EvidenceWeight     = 53 / 60
 ExecutionReady     = true
 SelectedMatchKeys  =
-  did
-  ate
-  became
-  bought
-  brought
-  came
-  drew
-  gave
-  got
-  learnt
-  met
-  ran
-  rode
-  sent
+  swam
+  taught
+  told
+  took
+  went
+  were
+  won
+  wore
+  wrote
+  goes
 ```
 
-下一任务按 decision-only fast path 完整处理这 14 个 surface：
+下一任务：完整 adjudicate 这 10 个 surface。不得只处理容易项。
+
+执行要求：
 
 ```text
-1. 读取 current review_bundle.csv / next_batch.json。
-2. 不重新修改 source/raw/parser/config。
-3. 为 planner 精确选中的 14 个 MatchKey 生成 batch_manifest.json + decision_updates.csv。
-4. manifest set == planner set；decision_updates MatchKey set == planner set。
-5. selected active batch closure = 100%，不得只处理容易项。
-6. apply durable decisions 后 rebuild corpus。
-7. 执行 core Completion Recheck + batch Completion Recheck + Klose isolation。
-8. 重新 normalize/propose/plan，得到下一 deterministic batch。
+1. 读取 current review_bundle.csv / next_batch.json 与 exact source evidence。
+2. 不修改 source/raw/parser/config。
+3. 精确生成 planner 对应的 batch_manifest.json + decision_updates.csv。
+4. manifest / decision_updates / planner MatchKey set 100% 一致。
+5. apply 后 rebuild + core Completion Recheck + batch Completion Recheck。
+6. 核对 blocker delta、Preview delta、canonical dependency。
+7. 重新 normalize/propose/plan。
+8. Klose isolation 必须 PASS。
 9. 更新 NEXT.md。
 ```
 
@@ -381,7 +322,7 @@ DO NOT bypass evidence-changed re-review with old TargetSense.
 
 ---
 
-## 10. Long-term invariants
+## 9. Long-term invariants
 
 - Stable NoteID / ExpressionID 不因来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
