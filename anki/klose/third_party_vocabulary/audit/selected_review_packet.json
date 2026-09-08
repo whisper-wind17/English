@@ -9,11 +9,11 @@
     "fall",
     "feel",
     "film",
-    "french"
+    "past"
   ],
   "SelectedCount": 6,
-  "ReviewBundleFingerprint": "df5247859092e94ca35b230b2925a0a0fc2f17335240c079e06ec1b10f393cf4",
-  "ReviewPacketFingerprint": "c27daf9cab6659fba944b9608ee48b03a00c553707df8b8341cec35561d2eb91",
+  "ReviewBundleFingerprint": "7efef4ffd4d4b291fec98c3486f56167cae857c0eb3a1355d5789abe66cd8b70",
+  "ReviewPacketFingerprint": "59e777e330b5c4fb8c7808c8a0cea507889d9e402a875b0ba8ba35062da5a611",
   "Items": [
     {
       "MatchKey": "drink",
@@ -1260,12 +1260,12 @@
       ]
     },
     {
-      "MatchKey": "french",
+      "MatchKey": "past",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "French",
-      "Definitions": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
-      "SourceIDs": "renjiao_start1|waiyan_start1|waiyan_start3",
-      "SourceBooks": "renjiao_start1:6年级上|waiyan_start1:6年级上|waiyan_start3:6年级上",
+      "DisplayForms": "past",
+      "Definitions": "n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过",
+      "SourceIDs": "waiyan_start1|waiyan_start3",
+      "SourceBooks": "waiyan_start1:2年级下|waiyan_start1:5年级上|waiyan_start3:5年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -1276,144 +1276,157 @@
       "PolicyRecommendedAction": "re-review-evidence-changed",
       "DurableDecisions": [
         {
-          "DecisionKey": "surface:french",
-          "MatchKey": "french",
-          "OccurrenceKeys": "[\"renjiao_start1|g6-upper|r035|french\",\"renjiao_start1|g6-upper|r081|french\",\"waiyan_start1|g6-upper|r033|french\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
+          "DecisionKey": "surface:past",
+          "MatchKey": "past",
+          "OccurrenceKeys": "[\"waiyan_start1|g2-lower|r077|past\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "past#movement",
           "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
+          "TargetSense": "经过；越过",
+          "Status": "reviewed",
           "Confidence": "high",
-          "DecisionBasis": "split-audited-defer",
-          "Rationale": "Renjiao r035 explicitly supports French=法语 through speak French, while r081 supports a nationality/person/adjective use beside American and Danish. The Waiyan occurrence lacks enough context to assign safely to either subgroup, so a complete disjoint partition would be fabricated."
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Directions context with station/hospital/turn binds past to movement beyond a place."
+        },
+        {
+          "DecisionKey": "surface:past#clock",
+          "MatchKey": "past",
+          "OccurrenceKeys": "[\"waiyan_start1|g5-upper|r064|past\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "past#clock",
+          "ObjectType": "vocabulary",
+          "TargetSense": "过（用于钟点）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Half/past time context binds past to clock-time expression such as half past."
         }
       ],
       "CurrentOccurrenceKeys": [
-        "renjiao_start1|g6-upper|r035|french",
-        "renjiao_start1|g6-upper|r081|french",
-        "waiyan_start1|g6-upper|r033|french",
-        "waiyan_start3|g6-upper|r041|french"
+        "waiyan_start1|g2-lower|r077|past",
+        "waiyan_start1|g5-upper|r064|past",
+        "waiyan_start3|g5-upper|r099|past",
+        "waiyan_start3|g5-upper|r120|past"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r035|french",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "35",
-          "Word": "French",
-          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
-          "Before": [
-            "Washington D.C.",
-            "the British Museum",
-            "the CN Tower",
-            "kangaroo",
-            "the Opera House",
-            "the White House",
-            "clock",
-            "speak"
-          ],
-          "After": [
-            "Tower Bridge",
-            "the London Eye",
-            "hiking",
-            "sunrise",
-            "president",
-            "reptile",
-            "bird",
-            "fish"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r081|french",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "81",
-          "Word": "French",
-          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
-          "Before": [
-            "competition",
-            "hurt",
-            "inventor",
-            "artist",
-            "scientist",
-            "poet",
-            "writer",
-            "American"
-          ],
-          "After": [
-            "Danish",
-            "poem",
-            "paint",
-            "invention",
-            "invent",
-            "study",
-            "story",
-            "university"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g6-upper|r033|french",
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r077|past",
           "SourceID": "waiyan_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "33",
-          "Word": "French",
-          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "77",
+          "Word": "past",
+          "Definition": "n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过",
           "Before": [
-            "Thanksgiving",
-            "nearly",
-            "the Spring Festival",
-            "sure",
-            "December",
-            "light",
-            "pleased",
-            "pretty"
+            "say",
+            "poem",
+            "dragon",
+            "dragon dance",
+            "picnic",
+            "family",
+            "beach",
+            "hill"
           ],
           "After": [
-            "phone",
-            "world",
-            "difficult",
-            "answer",
-            "Miss",
-            "bamboo",
-            "gave",
-            "its"
+            "station",
+            "hospital",
+            "stop",
+            "turn",
+            "around",
+            "turn around",
+            "ground",
+            "again"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r041|french",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
+          "SourceOccurrenceKey": "waiyan_start1|g5-upper|r064|past",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "5年级上",
+          "Grade": "5",
           "Semester": "上",
-          "SourceRow": "41",
-          "Word": "French",
-          "Definition": "n. 法国人;法语 adj. 法国的;法语的;法国人的",
+          "SourceRow": "64",
+          "Word": "past",
+          "Definition": "n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过",
           "Before": [
-            "the Dragon Boat Festival",
-            "race",
-            "lantern",
-            "the Lantern Festival",
-            "hang",
-            "pen friend",
-            "Pleased to meet you!",
-            "address"
+            "firefighter",
+            "couldn't",
+            "could not",
+            "often",
+            "around",
+            "start",
+            "line",
+            "half"
           ],
           "After": [
-            "age",
-            "story",
-            "candy",
-            "world",
-            "often",
-            "difficult",
-            "knife",
-            "fork"
+            "miss",
+            "study",
+            "open",
+            "wall",
+            "have fun",
+            "break",
+            "nothing",
+            "think"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r099|past",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "99",
+          "Word": "past",
+          "Definition": "n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过",
+          "Before": [
+            "team",
+            "really",
+            "good at",
+            "catch",
+            "goalkeeper",
+            "think",
+            "fantastic",
+            "fan"
+          ],
+          "After": [
+            "swam",
+            "swim",
+            "slow",
+            "healthy",
+            "a lot",
+            "useful",
+            "show",
+            "presenter"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r120|past",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "120",
+          "Word": "past",
+          "Definition": "n. 过去;往事 prep. 越过;晚于 adj. 过去的;结束的 adv. 过;经过",
+          "Before": [
+            "fire",
+            "firefighter",
+            "hot dog",
+            "sausage",
+            "kind",
+            "time",
+            "school",
+            "start"
+          ],
+          "After": [
+            "late",
+            "go to bed",
+            "exercise",
+            "playground",
+            "before",
+            "join",
+            "skipping rope",
+            "coffee"
           ]
         }
       ]
