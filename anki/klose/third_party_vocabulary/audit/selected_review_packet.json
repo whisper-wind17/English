@@ -1,318 +1,225 @@
 {
   "PlanVersion": "v5-throughput-delta",
   "ReviewPacketVersion": "selected-review-packet-v2",
-  "ReviewLane": "split-resolution",
+  "ReviewLane": "object-boundary",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "get",
-    "plant"
+    "all around",
+    "as well",
+    "at all",
+    "bring back",
+    "come out of",
+    "department store",
+    "fall down",
+    "find out",
+    "flag day",
+    "get on",
+    "give out",
+    "good luck",
+    "has not",
+    "has not got",
+    "hasn't got",
+    "have not",
+    "have not got",
+    "haven't got",
+    "i see.",
+    "i'd love to",
+    "let us",
+    "library card",
+    "listen to",
+    "look like",
+    "merry christmas!"
   ],
-  "SelectedCount": 2,
-  "ReviewBundleFingerprint": "63fd12ec43413f16be839175a46e33d702cbd3a3c81ddcb11fccd0fb5c196660",
-  "ReviewPacketFingerprint": "ed6f6f0b986103a383a4fa18de36ce842ffa88e3a34269fd605e0d3c14d04d60",
+  "SelectedCount": 25,
+  "ReviewBundleFingerprint": "eaa076b6681ef7e7f0e3170173a427d98ffeb6226b314efb3b40084f8b575378",
+  "ReviewPacketFingerprint": "a7f48e5efb18cb3c8ebf368d291c9a2d36db727fa9f2a8a08f2a7e7787792180",
   "Items": [
     {
-      "MatchKey": "get",
+      "MatchKey": "all around",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "get",
-      "Definitions": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得|n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级上|renjiao_start1:4年级下|renjiao_start3:6年级上|hujiao_start3:4年级下|waiyan_start1:3年级上|waiyan_start1:5年级下|waiyan_start3:5年级下|waiyan_start3:6年级上|waiyan_start3:6年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "DisplayForms": "all around",
+      "Definitions": "na. 四处;全面地;遍处;一一",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:6年级上",
+      "CandidateSignals": "multiword",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
+      "BlockerClass": "multiword-object-boundary",
       "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:get",
-          "MatchKey": "get",
-          "OccurrenceKeys": "[\"beijing_start1|g4-upper|r033|get\",\"hujiao_start3|g4-lower|r021|get\",\"renjiao_start1|g4-lower|r015|get\",\"renjiao_start3|g6-upper|r020|get\",\"waiyan_start1|g3-upper|r067|get\",\"waiyan_start1|g5-lower|r039|get\",\"waiyan_start3|g5-lower|r087|get\",\"waiyan_start3|g6-lower|r038|get\",\"waiyan_start3|g6-upper|r062|get\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "minimal-identity-audited-split-v1",
-          "Rationale": "Current evidence includes acquisition, arrival/construction, and get-frightened change-of-state uses, while several standalone flat-list occurrences remain ambiguous. Do not force one broad learner identity or guess a complete partition."
-        }
-      ],
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-upper|r033|get",
-        "renjiao_start1|g4-lower|r015|get",
-        "renjiao_start3|g6-upper|r020|get",
-        "hujiao_start3|g4-lower|r021|get",
-        "waiyan_start1|g3-upper|r067|get",
-        "waiyan_start1|g5-lower|r039|get",
-        "waiyan_start3|g5-lower|r087|get",
-        "waiyan_start3|g6-upper|r062|get",
-        "waiyan_start3|g6-lower|r038|get"
+        "waiyan_start3|g6-upper|r073|all around"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g4-upper|r033|get",
-          "SourceID": "beijing_start1",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "33",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得",
-          "Before": [
-            "easy",
-            "light",
-            "door",
-            "kind",
-            "window",
-            "glass",
-            "take",
-            "fine"
-          ],
-          "After": [
-            "pen",
-            "kind",
-            "brown",
-            "think",
-            "pair",
-            "shoe",
-            "how much",
-            "buy"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g4-lower|r015|get",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "15",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "bank",
-            "grocery",
-            "turn left",
-            "turn right",
-            "go straight",
-            "crossroads",
-            "neighbourhood",
-            "send"
-          ],
-          "After": [
-            "money",
-            "get to",
-            "before",
-            "leave",
-            "toy",
-            "hospital",
-            "bookshop",
-            "school"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r020|get",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "20",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "right",
-            "ask",
-            "sir",
-            "interesting",
-            "Italian",
-            "restaurant",
-            "pizza",
-            "street"
-          ],
-          "After": [
-            "GPS",
-            "gave",
-            "feature",
-            "follow",
-            "far",
-            "tell",
-            "on foot",
-            "by"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r021|get",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "21",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "or",
-            "watermelon",
-            "grape",
-            "fox",
-            "round",
-            "purple",
-            "wait",
-            "minute"
-          ],
-          "After": [
-            "those",
-            "rise",
-            "shadow",
-            "noon",
-            "high",
-            "sky",
-            "evening",
-            "again"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r067|get",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "67",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "Friday",
-            "clever",
-            "cold",
-            "class",
-            "begin",
-            "cough",
-            "bring",
-            "umbrella"
-          ],
-          "After": [
-            "which",
-            "broken",
-            "long jump",
-            "make friends",
-            "sports day",
-            "high",
-            "high jump",
-            "race"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g5-lower|r039|get",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "39",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "shoulder",
-            "build",
-            "place",
-            "thousand",
-            "circle",
-            "answer",
-            "hope",
-            "so"
-          ],
-          "After": [
-            "hour",
-            "amazing",
-            "take",
-            "short",
-            "helicopter",
-            "evening",
-            "actor",
-            "busy"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r087|get",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "87",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
-          "Before": [
-            "sales assistant",
-            "wheel",
-            "easy",
-            "take",
-            "too",
-            "try",
-            "lovely",
-            "moon"
-          ],
-          "After": [
-            "west",
-            "parent",
-            "stay",
-            "July",
-            "south",
-            "remember",
-            "June",
-            "east"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r062|get",
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r073|all around",
           "SourceID": "waiyan_start3",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "62",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
+          "SourceRow": "73",
+          "Word": "all around",
+          "Definition": "na. 四处;全面地;遍处;一一",
           "Before": [
-            "DVD",
-            "together",
-            "lucky",
-            "bamboo",
-            "its",
-            "body",
-            "come out of",
-            "flute"
-          ],
-          "After": [
-            "frightened",
-            "long ago",
             "I'd love to",
             "not really",
             "stop",
             "clean",
             "camera",
-            "show"
+            "show",
+            "never",
+            "around"
+          ],
+          "After": [
+            "member state",
+            "inside",
+            "should",
+            "line",
+            "stand in line",
+            "close",
+            "librarian",
+            "rule"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "as well",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "as well",
+      "Definitions": "na. 也;同样",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r069|as well"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r038|get",
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r069|as well",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "69",
+          "Word": "as well",
+          "Definition": "na. 也;同样",
+          "Before": [
+            "ask",
+            "wrong",
+            "dear",
+            "information",
+            "e-book",
+            "project",
+            "guide",
+            "film"
+          ],
+          "After": [
+            "way",
+            "on",
+            "topic",
+            "light",
+            "hard",
+            "broken",
+            "department store",
+            "pocket"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "at all",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "at all",
+      "Definitions": "na. 全然;究竟",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r143|at all"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r143|at all",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "143",
+          "Word": "at all",
+          "Definition": "na. 全然;究竟",
+          "Before": [
+            "joke",
+            "after",
+            "show",
+            "restaurant",
+            "ready",
+            "borrow",
+            "read",
+            "read"
+          ],
+          "After": [
+            "in",
+            "another",
+            "history",
+            "ask",
+            "question",
+            "forget",
+            "bring",
+            "soon"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "bring back",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "bring back",
+      "Definitions": "na. 送回;使恢复;使回忆起",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:6年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r047|bring back"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r047|bring back",
           "SourceID": "waiyan_start3",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "38",
-          "Word": "get",
-          "Definition": "n. 生殖;幼兽 vi. 成为;变得;到达 vt. 使得;获得;受到;变成",
+          "SourceRow": "47",
+          "Word": "bring back",
+          "Definition": "na. 送回;使恢复;使回忆起",
           "Before": [
-            "play",
-            "third",
-            "time",
-            "bark",
-            "loudly",
-            "nothing",
-            "home",
-            "got"
-          ],
-          "After": [
             "space",
             "interested",
             "spaceship",
@@ -321,317 +228,1089 @@
             "paper",
             "brought",
             "bring"
+          ],
+          "After": [
+            "model",
+            "taikonaut",
+            "first",
+            "national",
+            "seed",
+            "spent",
+            "about",
+            "flew"
           ]
         }
       ]
     },
     {
-      "MatchKey": "plant",
+      "MatchKey": "come out of",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "plant",
-      "Definitions": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:3年级下|beijing_start1:5年级下|renjiao_start1:5年级下|renjiao_start3:5年级上|renjiao_start3:5年级下|hujiao_start3:4年级下|hujiao_start3:6年级上|waiyan_start1:4年级上|waiyan_start3:5年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "DisplayForms": "come out of",
+      "Definitions": "na. 出自;(冲破...)出来",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:6年级上",
+      "CandidateSignals": "multiword",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:plant",
-          "MatchKey": "plant",
-          "OccurrenceKeys": "[\"beijing_start1|g3-lower|r006|plant\",\"beijing_start1|g5-lower|r017|plant\",\"hujiao_start3|g4-lower|r129|plant\",\"hujiao_start3|g6-upper|r113|plant\",\"renjiao_start1|g5-lower|r038|plant\",\"renjiao_start3|g5-lower|r082|plant\",\"renjiao_start3|g5-upper|r095|plant\",\"waiyan_start1|g4-upper|r043|plant\",\"waiyan_start3|g5-upper|r056|plant\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "split-audited-defer",
-          "Rationale": "Hujiao g4 lower r129 clearly supports the noun plant, while Hujiao g6 upper r113 beside plant trees supports a planting/verb context. Several Beijing, Renjiao and Waiyan standalone occurrences remain unbound in the flat word list. The existing reviewed phrase plant trees carries 植树/种树 separately but does not justify relabeling ambiguous standalone occurrences. Complete noun/verb partition is unavailable, so preserve split-required."
-        }
-      ],
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g3-lower|r006|plant",
-        "beijing_start1|g5-lower|r017|plant",
-        "renjiao_start1|g5-lower|r038|plant",
-        "renjiao_start3|g5-upper|r095|plant",
-        "renjiao_start3|g5-lower|r082|plant",
-        "hujiao_start3|g4-lower|r129|plant",
-        "hujiao_start3|g6-upper|r113|plant",
-        "waiyan_start1|g4-upper|r043|plant",
-        "waiyan_start3|g5-upper|r056|plant"
+        "waiyan_start3|g6-upper|r060|come out of"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g3-lower|r006|plant",
-          "SourceID": "beijing_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "6",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-          "Before": [
-            "tomorrow",
-            "woman",
-            "women",
-            "too"
-          ],
-          "After": [
-            "fun",
-            "people",
-            "favourite",
-            "turn",
-            "bird",
-            "hear",
-            "out",
-            "flag"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beijing_start1|g5-lower|r017|plant",
-          "SourceID": "beijing_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "17",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-          "Before": [
-            "picture",
-            "have",
-            "will",
-            "would",
-            "different",
-            "job",
-            "follow",
-            "listen"
-          ],
-          "After": [
-            "up",
-            "carry",
-            "nothing",
-            "earth",
-            "without",
-            "sun",
-            "their",
-            "forest"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g5-lower|r038|plant",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "38",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-          "Before": [
-            "fifth",
-            "5th",
-            "tenth",
-            "10th",
-            "twelfth",
-            "12th",
-            "twenty-fifth",
-            "25th"
-          ],
-          "After": [
-            "make a poster",
-            "celebrate",
-            "have a picnic",
-            "office",
-            "together",
-            "special",
-            "send an email",
-            "write a letter"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-upper|r095|plant",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "95",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-          "Before": [
-            "any",
-            "problem",
-            "no problem",
-            "want",
-            "send",
-            "email",
-            "at",
-            "clock"
-          ],
-          "After": [
-            "bottle",
-            "water bottle",
-            "bike",
-            "photo",
-            "front",
-            "in front of",
-            "between",
-            "above"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r082|plant",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "82",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-          "Before": [
-            "few",
-            "a few",
-            "thing",
-            "meet",
-            "sports meet",
-            "Easter",
-            "trip",
-            "year"
-          ],
-          "After": [
-            "contest",
-            "the Great Wall",
-            "national",
-            "National Day",
-            "American",
-            "Thanksgiving",
-            "Christmas",
-            "holiday"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r129|plant",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "129",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
-          "Before": [
-            "November",
-            "December",
-            "email",
-            "hat",
-            "wear",
-            "yours",
-            "every year",
-            "garden"
-          ],
-          "After": [
-            "leaf",
-            "water",
-            "them",
-            "grow",
-            "seed",
-            "every day",
-            "song",
-            "zoo"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g6-upper|r113|plant",
-          "SourceID": "hujiao_start3",
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r060|come out of",
+          "SourceID": "waiyan_start3",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "113",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
+          "SourceRow": "60",
+          "Word": "come out of",
+          "Definition": "na. 出自;(冲破...)出来",
           "Before": [
-            "alive",
-            "balloon",
-            "factory",
-            "smoke",
-            "dirty",
-            "clean",
-            "hurt",
-            "fresh"
+            "believe",
+            "snake",
+            "DVD",
+            "together",
+            "lucky",
+            "bamboo",
+            "its",
+            "body"
           ],
           "After": [
-            "keep ... alive",
-            "plant trees",
-            "wood",
-            "cool",
-            "match",
-            "miss",
-            "have to",
-            "cut ... down"
+            "flute",
+            "get",
+            "frightened",
+            "long ago",
+            "I'd love to",
+            "not really",
+            "stop",
+            "clean"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "department store",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "department store",
+      "Definitions": "n. 百货公司;大百货商店",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r076|department store"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r043|plant",
-          "SourceID": "waiyan_start1",
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r076|department store",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "76",
+          "Word": "department store",
+          "Definition": "n. 百货公司;大百货商店",
+          "Before": [
+            "film",
+            "as well",
+            "way",
+            "on",
+            "topic",
+            "light",
+            "hard",
+            "broken"
+          ],
+          "After": [
+            "pocket",
+            "umbrella",
+            "sales assistant",
+            "wheel",
+            "easy",
+            "take",
+            "too",
+            "try"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "fall down",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "fall down",
+      "Definitions": "na. (向下游)流下;〔美俚〕失败;跌倒;同“fall”",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:4年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g4-lower|r136|fall down"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r136|fall down",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "136",
+          "Word": "fall down",
+          "Definition": "na. (向下游)流下;〔美俚〕失败;跌倒;同“fall”",
+          "Before": [
+            "come",
+            "pop",
+            "concert",
+            "earth",
+            "fall",
+            "fall off",
+            "fell",
+            "fall"
+          ],
+          "After": [
+            "found",
+            "find",
+            "town",
+            "happen",
+            "ride",
+            "then",
+            "thirsty",
+            "water"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "find out",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "find out",
+      "Definitions": "na. 查出;发现;看清...的面目;识破",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r164|find out"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r164|find out",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "164",
+          "Word": "find out",
+          "Definition": "na. 查出;发现;看清...的面目;识破",
+          "Before": [
+            "airport",
+            "ticket",
+            "passport",
+            "safe",
+            "pet",
+            "speak",
+            "building",
+            "American"
+          ],
+          "After": [
+            "more"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "flag day",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Flag Day",
+      "Definitions": "n. 募捐售旗日;美国国旗纪念日(6 月 14 日)",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:6年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g6-upper|r025|flag day"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r025|flag day",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "25",
+          "Word": "Flag Day",
+          "Definition": "n. 募捐售旗日;美国国旗纪念日(6 月 14 日)",
+          "Before": [
+            "collect",
+            "stamp",
+            "hobby",
+            "doll",
+            "bicycle",
+            "Thanksgiving",
+            "Thanksgiving Day",
+            "flag"
+          ],
+          "After": [
+            "fly",
+            "special",
+            "meal",
+            "sound",
+            "football",
+            "moon cake",
+            "the Mid-Autumn Festival",
+            "the Dragon Boat Festival"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "get on",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "get on",
+      "Definitions": "na. 上马;安上;过日子;相投 (with together)",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:4年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r039|get on"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r039|get on",
+          "SourceID": "waiyan_start3",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "43",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
+          "SourceRow": "39",
+          "Word": "get on",
+          "Definition": "na. 上马;安上;过日子;相投 (with together)",
           "Before": [
-            "trip",
-            "took",
-            "fifty",
-            "minute",
-            "top",
-            "mountain",
-            "ate",
-            "candies"
+            "children",
+            "child",
+            "listen",
+            "listen to",
+            "talk",
+            "talk to",
+            "China",
+            "kid"
           ],
           "After": [
-            "had",
-            "have",
-            "have a good time",
-            "bought",
-            "wore",
-            "go on a trip",
-            "ice",
-            "at first"
+            "can",
+            "see",
+            "lots of",
+            "interesting",
+            "thing",
+            "people",
+            "row",
+            "dragon"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "give out",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "give out",
+      "Definitions": "na. 发表;放出;分发",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:5年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g5-upper|r072|give out"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r056|plant",
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r072|give out",
           "SourceID": "waiyan_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "56",
-          "Word": "plant",
-          "Definition": "n. 工厂,车间;植物;设备;庄稼 vt. 种植;培养;栽培;安置 vi. 种植",
+          "SourceRow": "72",
+          "Word": "give out",
+          "Definition": "na. 发表;放出;分发",
           "Before": [
-            "twenty",
-            "minute",
-            "of",
-            "wall",
-            "arrive",
-            "for",
-            "mountain",
-            "with"
+            "wear",
+            "That's OK.",
+            "sports",
+            "hey",
+            "nineteen",
+            "crayon",
+            "fifteen",
+            "begin"
           ],
           "After": [
-            "pair",
-            "shorts",
-            "argue",
-            "matter",
-            "What's the matter?",
-            "took",
-            "take",
-            "wear"
+            "all right",
+            "thirteen",
+            "fourteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "floor",
+            "forty"
           ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "good luck",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "good luck",
+      "Definitions": "na. 幸运",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:4年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r133|good luck"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r133|good luck",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "133",
+          "Word": "good luck",
+          "Definition": "na. 幸运",
+          "Before": [
+            "sports day",
+            "win",
+            "month",
+            "hundred",
+            "metre",
+            "every",
+            "day",
+            "luck"
+          ],
+          "After": [
+            "come on",
+            "high jump",
+            "long jump",
+            "How about ...?",
+            "subject",
+            "family",
+            "dinner",
+            "year"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "has not",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "has not",
+      "Definitions": "aux.没有",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r148|has not"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r148|has not",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "148",
+          "Word": "has not",
+          "Definition": "aux.没有",
+          "Before": [
+            "have not got",
+            "dress",
+            "coat",
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't",
+            "hasn't got"
+          ],
+          "After": [
+            "has not got",
+            "by",
+            "bus",
+            "car",
+            "hat",
+            "come",
+            "back",
+            "come back"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "has not got",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "has not got",
+      "Definitions": "无",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r149|has not got"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r149|has not got",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "149",
+          "Word": "has not got",
+          "Definition": "无",
+          "Before": [
+            "dress",
+            "coat",
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't",
+            "hasn't got",
+            "has not"
+          ],
+          "After": [
+            "by",
+            "bus",
+            "car",
+            "hat",
+            "come",
+            "back",
+            "come back",
+            "clothes"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "hasn't got",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "hasn't got",
+      "Definitions": "无",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r147|hasn't got"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r147|hasn't got",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "147",
+          "Word": "hasn't got",
+          "Definition": "无",
+          "Before": [
+            "have not",
+            "have not got",
+            "dress",
+            "coat",
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't"
+          ],
+          "After": [
+            "has not",
+            "has not got",
+            "by",
+            "bus",
+            "car",
+            "hat",
+            "come",
+            "back"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "have not",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "have not",
+      "Definitions": "n. 穷人;穷国",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r139|have not"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r139|have not",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "139",
+          "Word": "have not",
+          "Definition": "n. 穷人;穷国",
+          "Before": [
+            "sweater",
+            "bed",
+            "line",
+            "about",
+            "animal",
+            "sport",
+            "haven't",
+            "haven't got"
+          ],
+          "After": [
+            "have not got",
+            "dress",
+            "coat",
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't",
+            "hasn't got"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "have not got",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "have not got",
+      "Definitions": "无",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r140|have not got"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r140|have not got",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "140",
+          "Word": "have not got",
+          "Definition": "无",
+          "Before": [
+            "bed",
+            "line",
+            "about",
+            "animal",
+            "sport",
+            "haven't",
+            "haven't got",
+            "have not"
+          ],
+          "After": [
+            "dress",
+            "coat",
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't",
+            "hasn't got",
+            "has not"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "haven't got",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "haven't got",
+      "Definitions": "无",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r138|haven't got"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r138|haven't got",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "138",
+          "Word": "haven't got",
+          "Definition": "无",
+          "Before": [
+            "have got",
+            "sweater",
+            "bed",
+            "line",
+            "about",
+            "animal",
+            "sport",
+            "haven't"
+          ],
+          "After": [
+            "have not",
+            "have not got",
+            "dress",
+            "coat",
+            "T-shirt",
+            "has got",
+            "have got",
+            "hasn't"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "i see.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "I see.",
+      "Definitions": "我明白了;我知道了;我了解",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:4年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r146|i see."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r146|i see.",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "146",
+          "Word": "I see.",
+          "Definition": "我明白了;我知道了;我了解",
+          "Before": [
+            "subject",
+            "family",
+            "dinner",
+            "year",
+            "New Year",
+            "Chinese",
+            "festival",
+            "the Spring Festival"
+          ],
+          "After": [
+            "peanut",
+            "merry",
+            "Christmas",
+            "Merry Christmas!"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "i'd love to",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "I'd love to",
+      "Definitions": "无",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:6年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g6-upper|r065|i'd love to"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r065|i'd love to",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "65",
+          "Word": "I'd love to",
+          "Definition": "无",
+          "Before": [
+            "bamboo",
+            "its",
+            "body",
+            "come out of",
+            "flute",
+            "get",
+            "frightened",
+            "long ago"
+          ],
+          "After": [
+            "not really",
+            "stop",
+            "clean",
+            "camera",
+            "show",
+            "never",
+            "around",
+            "all around"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "let us",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "let us",
+      "Definitions": "让我们;让我们自己;让我们一起",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g3-lower|r160|let us"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r160|let us",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "160",
+          "Word": "let us",
+          "Definition": "让我们;让我们自己;让我们一起",
+          "Before": [
+            "car",
+            "hat",
+            "come",
+            "back",
+            "come back",
+            "clothes",
+            "open",
+            "let's"
+          ],
+          "After": [
+            "put on",
+            "funny",
+            "party",
+            "OK",
+            "brown",
+            "trousers",
+            "orange",
+            "shirt"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "library card",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "library card",
+      "Definitions": "n. 借书证",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g5-lower|r060|library card"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r060|library card",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "60",
+          "Word": "library card",
+          "Definition": "n. 借书证",
+          "Before": [
+            "send",
+            "CD",
+            "idea",
+            "put",
+            "shelf",
+            "heavy",
+            "dictionary",
+            "card"
+          ],
+          "After": [
+            "ask",
+            "wrong",
+            "dear",
+            "information",
+            "e-book",
+            "project",
+            "guide",
+            "film"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "listen to",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "listen to",
+      "Definitions": "v. 听",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:4年级上",
+      "CandidateSignals": "multiword|format-alias",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r034|listen to"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r034|listen to",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "34",
+          "Word": "listen to",
+          "Definition": "v. 听",
+          "Before": [
+            "running",
+            "these",
+            "picture",
+            "take",
+            "take pictures",
+            "children",
+            "child",
+            "listen"
+          ],
+          "After": [
+            "talk",
+            "talk to",
+            "China",
+            "kid",
+            "get on",
+            "can",
+            "see",
+            "lots of"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "look like",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "look like",
+      "Definitions": "看起来与(某人或某物)相像[相似]; 很可能出现[引起](某事、做某事); 伣; 似",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:6年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g6-lower|r017|look like"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r017|look like",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "17",
+          "Word": "look like",
+          "Definition": "看起来与(某人或某物)相像[相似]; 很可能出现[引起](某事、做某事); 伣; 似",
+          "Before": [
+            "Be careful!",
+            "later",
+            "to go",
+            "duck",
+            "pond",
+            "cloud",
+            "dry",
+            "like"
+          ],
+          "After": [
+            "stay",
+            "shine",
+            "cry",
+            "everyone",
+            "fly away",
+            "just",
+            "cow",
+            "blow"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "merry christmas!",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Merry Christmas!",
+      "Definitions": "na. 圣诞快乐",
+      "SourceIDs": "waiyan_start3",
+      "SourceBooks": "waiyan_start3:4年级上",
+      "CandidateSignals": "multiword|punctuated",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "waiyan_start3|g4-upper|r150|merry christmas!"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r150|merry christmas!",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "150",
+          "Word": "Merry Christmas!",
+          "Definition": "na. 圣诞快乐",
+          "Before": [
+            "New Year",
+            "Chinese",
+            "festival",
+            "the Spring Festival",
+            "I see.",
+            "peanut",
+            "merry",
+            "Christmas"
+          ],
+          "After": []
         }
       ]
     }
