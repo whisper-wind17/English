@@ -14,20 +14,16 @@ AGENTS.md
 当前 Third-party Vocabulary Stage A 继续读取：
 
 ```text
-docs/THIRD_PARTY_VOCABULARY_CORPUS.md
+docs/THIRD_PARTY_VOCABULARY_MINIMAL_IDENTITY.md
+→ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
-→ anki/klose/third_party_vocabulary/config/source_adapters.csv
+→ anki/klose/third_party_vocabulary/audit/stage_a_status.json
+→ anki/klose/third_party_vocabulary/audit/next_batch.json
 → anki/klose/third_party_vocabulary/review/identity_decisions.csv
 → anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv
-→ anki/klose/third_party_vocabulary/staging/review_queue.csv
-→ anki/klose/third_party_vocabulary/audit/review_bundle.csv
-→ anki/klose/third_party_vocabulary/audit/defer_context.csv
-→ anki/klose/third_party_vocabulary/audit/next_batch.json
-→ anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
-→ anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv
 ```
 
-动态进度只以 repo 当前文件为准。
+动态进度以 `stage_a_status.json` / generated state 为准，不从旧聊天推测。
 
 ---
 
@@ -62,220 +58,206 @@ waiyan_start3    = 1157
 Total            = 6005
 ```
 
-Durable truth：
-
-```text
-review/identity_decisions.csv       = Identity content truth
-learner/grammar_form_quarantine.csv = current Klose Learner Admission gate
-```
-
-Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evidence 变化必须 requeue。
-
-仍处于 Stage A：不得 mint Stable ThirdPartyID，不得运行 Stage-B Klose diff，不得修改 Klose Master/Learner/Publish/Anki。
-
----
-
-## 4. Current checkpoint — SEMANTIC REVIEW BATCH #17 CHECKPOINTED
-
-```text
-Source occurrences                 = 6005
-Normalized surfaces                = 2161
-Durable Identity decisions         = 2130
-Identity-level Vocabulary Preview  = 1100
-Review/blocker surfaces            = 852
-Evidence-changed surfaces          = 783
-Multipart resolved                 = 12
-```
-
-Current learner projection：
-
-```text
-Grammar-form quarantine gates      = 58
-Learner-stage Vocabulary Preview   = 1086
-Identity rows suppressed by gate   = 14
-Preview occurrence contributions removed = 49
-Explicit decision-bound past-form requirements = 15
-```
-
-从 grammar-gate baseline 到当前：
-
-```text
-Identity Preview   985  → 1100   (+115)
-Learner Preview    979  → 1086   (+107)
-Blockers          1010  →  852   (-158)
-Evidence-changed   911  →  783   (-128)
-Multipart            7  →   12   (+5)
-```
-
-Policy-review lane 已在 Batch #15 清空；当前持续执行 `semantic-review`。
-
----
-
-## 5. Frozen identity / learner rules
-
-```text
-Source Fact
-≠ Vocabulary Identity
-≠ Learner Admission
-≠ Anki learning state
-```
-
-- pure one-word past/past-participle forms当前 learner quarantine；Identity 可先 resolve；
-- lexicalized adjective/noun 不得因形态误 gate；
-- homograph 必须 decision-scoped；
-- contractions 默认 route-expression；
-- dictionary/free-text Definition 不得作为 source identity truth；
-- full form / abbreviation 若同一 learner identity，可 canonicalize 到已 reviewed provisional identity；
-- 多个真实 target senses 必须 occurrence split，complete/disjoint cover 前不能 release；证据不足时 `split-required / held`；
-- former semantic collision 若不 split/held，必须显式 learner-first narrow TargetSense。
-
-关键冻结边界：
-
-```text
-left#direction   → learner admit
-left#leave-past  → quarantine
-saw#tool         → learner admit
-saw#see-past     → quarantine
-her#possessive   → 她的
-her#object       → 她（宾格）
-PE               → reuse physical education
-No.              → reuse number
-shorts           → lexicalized 短裤
-sometimes        → lexical frequency adverb
-sports           → reuse sport
-slept/swam/won   → canonical reuse + learner quarantine
-watch#noun       → 手表
-watch#verb       → 观看；注视
-men/women/children/grandchildren → pedagogically salient irregular-plural Identity
-fly#verb         → 飞；飞行
-fly#insect       → 苍蝇
-flies            → split-required / held；禁止 silent release
-beautifully/loudly → 独立 learner adverb Identity
-kilo             → reuse kilogram
-television       → reuse current reviewed TV identity
-rang/sang        → pedagogical past-form Identity + learner quarantine
-```
-
-`rang/sang` 没有绕过 evidence-changed 的 `ring/sing` canonical blocker；以后 canonical re-review 完成后再决定是否迁移为 reuse。
-
----
-
-## 6. Completed deterministic batches
-
-Policy-review 已完成 #2–#15；semantic-review：
-
-```text
-#16 ah / beautifully / bye-bye / chameleon / coffee / e-book / foreign / goalkeeper / grandchild / grandchildren / haven't / herself / information / interviewer / kilo / lady / lantern / loudly / ouch / rang / sang / shelf / television / that's / topic / aah / afraid / afternoon / airport
-#17 always / an / and / angry / animal
-```
-
-### Latest validation — Batch #17
-
-```text
-batch commit       = ac8708e3ec6a8c829efe55a40bf623fcb46a199a
-run                = 34203667397 / #213 = SUCCESS
-bot persist        = 9d383e7f437448c5ce344ef6f7285abb0dab9ea4
-```
-
-```text
-selected active batch closure              = 100%
-Batch decisions                            = 5
-keep-identity                              = 5
-Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1100 / 1100
-Third-party learner-stage quarantine       = PASS
-Grammar-form quarantine gates              = 58
-Explicit decision-bound past requirements  = 15
-past-form leak into learner preview        = NO
-lexicalized participle/adjective over-gating = NO
-canonical blocker bypass                   = NO
-source occurrence closure                  = PASS
-Klose Master/Learner/Publish/Anki          = UNTOUCHED
-Stable ThirdPartyID minted                 = NO
-Final Klose diff executed                  = NO
-```
-
-Batch #17 delta：
-
-```text
-Blockers          857 → 852   (-5)
-Evidence-changed  788 → 783   (-5)
-Identity Preview 1095 → 1100  (+5)
-Learner Preview  1081 → 1086  (+5)
-```
-
-`always / an / and / angry / animal` 的 sixth-source evidence 均与既有 elementary core 一致；dictionary broad senses 未被导入 TargetSense。
-
-独立 compare `ac8708e... → 9d383e7...` 只包含 Stage-A review/audit/learner/staging 生成物与 transient batch 文件删除；未触碰 source adapter/raw，也未触碰 Klose Master/Learner/Publish/Anki。
-
----
-
-## 7. High-throughput execution mechanism — FROZEN
-
-```text
-review_bundle.csv
-→ normalize lanes
-→ deterministic next_batch.json
-→ batch_manifest.json + decision_updates.csv
-→ manifest closure check
-→ apply/build Identity view
-→ build/check learner-stage view
-→ core Completion Recheck
-→ batch Completion Recheck
-→ Klose isolation
-→ bot persist
-```
-
-硬规则：
-
-```text
-ExecutionReady must be true
-manifest set == planner selected set
-manifest fingerprint == current next_batch fingerprint
-decision_updates MatchKey set == selected set
-selected active batch closure = 100%
-source mutation 与 decision mutation 不得混合
-```
-
----
-
-## 8. NEXT TASK — SEMANTIC-REVIEW BATCH #18
-
-```text
-ReviewLane        = semantic-review
-SelectedCount     = 6
-EvidenceWeight    = 57 / 60
-ExecutionReady    = true
-ReviewBundleFingerprint = 06b78d12b93fb81b19daa3ea8b3b0944ebeb5c8667e8e655ca220df5dff52bac
-SelectedMatchKeys =
-  apple
-  arrive
-  aunt
-  banana
-  baseball
-  basketball
-```
-
-执行要求：
-
-```text
-1. 读取 current exact occurrences / source neighborhood / durable decisions。
-2. 6/6 semantic adjudication；重点排除 apple/banana 等 dictionary noise，并确认 arrive 与 aunt 的 elementary core。
-3. 不修改 source/raw/parser/config。
-4. manifest / decision_updates / planner set 100% 一致。
-5. apply/build Identity/Learner views。
-6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
-7. Klose isolation PASS；bot persist 后重新 planner并更新 NEXT.md。
-```
-
-`flies` 仍是 independently held split-resolution item，非 planner 选择不得顺手修改。
-
-仍然禁止：
+仍处于 Stage A：
 
 ```text
 DO NOT mint Stable ThirdPartyID.
 DO NOT run Stage-B Klose diff.
 DO NOT modify Klose Master/Learner/Publish/Anki.
-DO NOT bypass evidence-changed re-review with old TargetSense.
-DO NOT admit grammar-quarantined forms into current learner view.
+```
+
+---
+
+## 4. FROZEN — Minimal Learner Identity
+
+2026-09-08 起，废止旧的“所有 reviewed decision 因新增 occurrence 自动 stale/re-review”机制。
+
+新 contract：
+
+```text
+Singleton MatchKey
+→ Identity 内容稳定
+→ OccurrenceKeys 只是 current provenance snapshot
+→ source occurrence 增减自动重绑
+→ 不重新 semantic review
+
+Multipart MatchKey
+→ OccurrenceKeys 是真实 sense partition
+→ 必须 complete + disjoint
+→ source occurrence 变化仍 requeue
+```
+
+核心原则：
+
+```text
+Identity 绑定 learning unit，不绑定教材 occurrence。
+只有多义 Sense 才绑定 occurrence partition。
+```
+
+普通 singleton 只有在以下情况才 reopen：
+
+```text
+actual textbook 明确出现第二个 learner-relevant sense
+source reconciliation 证明原判断错误
+canonical / object boundary 被证明错误
+explicit split-required / held / pending
+```
+
+Dictionary 多义本身不是 reopen 条件。
+
+Machine implementation：
+
+```text
+tools/apply_third_party_identity_decision_updates.py
+```
+
+该工具在每次 workflow 自动刷新 singleton occurrence snapshot；multipart rows 不自动扩张。
+
+---
+
+## 5. Latest architecture validation — Minimal Identity
+
+Implementation commit：
+
+```text
+c824129b87a87a0f0a8d3f40d41f4ae5811ce31c
+refactor: decouple singleton identity from source occurrences
+```
+
+Workflow：
+
+```text
+#235 / 34219783836 = SUCCESS
+```
+
+Bot persist：
+
+```text
+1c61762870e3c91a23991856cd432abe7fc2e6bc
+```
+
+关键运行证据：
+
+```text
+singleton occurrence snapshots auto-rebound = 132
+multipart decision rows preserved/checked   = 72
+Source occurrences                          = 6005
+Normalized surfaces                         = 2161
+Durable Identity decisions                  = 2148
+Identity Vocabulary Preview                 = 1816
+Learner Vocabulary Preview                  = 1801
+Review blockers                             = 84
+Evidence-changed surfaces                   = 17
+Multipart resolved                          = 19
+Grammar-form quarantine gates               = 60
+```
+
+架构切换前 → 切换后：
+
+```text
+Review blockers          211 → 84   (-127)
+Evidence-changed         149 → 17   (-132)
+Identity Preview        1734 → 1816 (+82)
+Learner Preview         1719 → 1801 (+82)
+```
+
+完整 validation：
+
+```text
+Corpus Completion Recheck         = PASS
+TargetSense                       = 1816 / 1816
+Learner grammar quarantine        = PASS
+past-form leak                    = NO
+multipart overlap                 = NO
+multipart completeness            = enforced
+canonical blocker bypass          = NO
+Klose Master/Learner/Publish/Anki = UNTOUCHED
+Stable ThirdPartyID minted        = NO
+Stage-B diff executed             = NO
+```
+
+Independent compare 只涉及 Stage-A tool / review / audit / learner / staging generated state；未修改 Klose publishing state。
+
+---
+
+## 6. Remaining blocker structure
+
+当前 84 个 blocker 已不再是“大量普通词重复审核”。normalized lanes：
+
+```text
+object-boundary            = 49
+semantic-review            = 17
+split-resolution           = 16
+deferred-high-ambiguity     = 2
+Total                      = 84
+```
+
+其中 `semantic-review=17` 主要是已有 multipart 在第六来源加入后的真实 occurrence partition 更新；这是应该保留的精细审核。
+
+Current deterministic planner：
+
+```text
+ReviewLane    = semantic-review
+SelectedCount = 6
+SelectedMatchKeys =
+  drink
+  duck
+  fall
+  feel
+  film
+  past
+```
+
+---
+
+## 7. Next execution strategy
+
+不再建立大规模 evidence-revalidation batch。
+
+优先策略：
+
+```text
+A. multipart evidence change / split-resolution
+   → exact occurrence partition
+   → 真正语义问题，小批精审
+
+B. 49 个 object-boundary 新 surface
+   → contraction / explicit slot / communicative formula 规则化 route-expression
+   → stable lexical phrase / collocation 规则化 keep
+   → 只有规则无法确定的少数项再 review
+
+C. deferred-high-ambiguity
+   → 保持 defer，除非 context/policy 真变化
+```
+
+目标是让人工/模型只处理真正困难的几十个边界项，而不是再次审核普通 singleton。
+
+---
+
+## 8. Frozen learner rules
+
+```text
+Source Fact ≠ Vocabulary Identity ≠ Learner Admission ≠ Anki state
+```
+
+- past / past-participle pure form：Identity 可 resolved，当前 learner quarantine；
+- lexicalized adjective/noun 不得因词形误 gate；
+- homograph learner gate 必须 DecisionKey-scoped；
+- contractions 默认 Expressions；
+- ordinary plural / 三单 / -ing 不自动 quarantine；
+- irregular pedagogical forms 可按明确策略保留独立 Identity；
+- actual textbook evidence > third-party dictionary gloss。
+
+关键 multipart / boundary 继续保留：
+
+```text
+left#direction / left#leave-past
+saw#tool / saw#see-past
+her#possessive / her#object
+fly#verb / fly#insect
+watch#noun / watch#verb
+chicken#meat / chicken#animal
+cut#verb / cut#injury
+cold#temperature / cold#illness
+cook#person / cook#verb
 ```
