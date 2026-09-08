@@ -99,7 +99,7 @@ candidate:bathroom,bathroom,bathroom,浴室；洗手间,bathroom,4,reviewed
 candidate:be,be,be,是；成为（be 的原形）,be,1,reviewed
 candidate:be able to,be able to,be able to,能够；可以,be able to,1,reviewed
 candidate:be back,be back,be back,回来；返回,be back,1,reviewed
-candidate:be born,be born,be born,出生,be born,1,reviewed
+candidate:be born,be born,be born,出生,be born|born,5,reviewed
 candidate:be careful with,be careful with,be careful with,小心……；注意……,be careful with,1,reviewed
 candidate:be full of,be full of,be full of,充满……,be full of,1,reviewed
 candidate:be good at,be good at,be good at,擅长……,be good at,2,reviewed
@@ -174,6 +174,7 @@ candidate:brother,brother,brother,兄弟；哥哥；弟弟,brother,8,reviewed
 candidate:brown,brown,brown,棕色；棕色的,brown,5,reviewed
 candidate:brush,brush,brush,画笔；毛笔,brush,1,reviewed
 candidate:build,build,build,建造；建设,build,3,reviewed
+candidate:building,building,building,建筑物；大楼,building,4,reviewed
 candidate:bullet,bullet,bullet,子弹,bullet,1,reviewed
 candidate:bump,bump,bump,碰；撞,bump,2,reviewed
 candidate:bunny,bunny,bunny,小兔子；兔子,bunny,1,reviewed
@@ -218,7 +219,7 @@ candidate:careful,careful,careful,小心的；仔细的,careful,4,reviewed
 candidate:carefully,carefully,carefully,小心地；仔细地,carefully,1,reviewed
 candidate:careless,careless,careless,粗心的；不小心的,careless,1,reviewed
 candidate:carrot,carrot,carrot,胡萝卜,carrot,3,reviewed
-candidate:carry,carry,carry,拿；携带；搬运,carry,5,reviewed
+candidate:carry,carry,carry,拿；携带；搬运,carried|carry,7,reviewed
 candidate:cartoon,cartoon,cartoon,卡通；动画片,cartoon|cartoons,3,reviewed
 candidate:cashier,cashier,cashier,收银员,cashier,2,reviewed
 candidate:cat,cat,cat,猫,cat,8,reviewed
@@ -239,6 +240,8 @@ candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chemistry,chemistry,chemistry,化学,chemistry,2,reviewed
 candidate:chess,chess,chess,国际象棋；棋,chess,2,reviewed
 candidate:chick,chick,chick,小鸡；雏鸡,chick,1,reviewed
+candidate:chicken#animal,chicken#animal,chicken,鸡；小鸡,chicken,3,reviewed
+candidate:chicken#meat,chicken#meat,chicken,鸡肉,chicken,6,reviewed
 candidate:child,child,child,孩子；儿童,child,4,reviewed
 candidate:children,children,children,孩子们；儿童（child 的复数）,children,6,reviewed
 candidate:children's day,children's day,Children's Day,儿童节,children's day,2,reviewed
@@ -319,6 +322,8 @@ candidate:crown,crown,crown,王冠,crown,1,reviewed
 candidate:cry,cry,cry,哭；哭泣,cry,6,reviewed
 candidate:cup,cup,cup,杯子,cup,6,reviewed
 candidate:curly,curly,curly,卷曲的；卷发的,curly,1,reviewed
+candidate:cut#injury,cut#injury,cut,伤口；割伤,cut,1,reviewed
+candidate:cut#verb,cut#verb,cut,剪；切,cut,3,reviewed
 candidate:cute,cute,cute,可爱的,cute,6,reviewed
 candidate:cycling,cycling,cycling,骑自行车；骑行运动,cycling,1,reviewed
 candidate:dad,dad,dad,爸爸,dad,6,reviewed
@@ -584,7 +589,7 @@ candidate:goalkeeper,goalkeeper,goalkeeper,守门员,goalkeeper,1,reviewed
 candidate:goat,goat,goat,山羊,goat,1,reviewed
 candidate:gold,gold,gold,金；黄金；金色,gold,4,reviewed
 candidate:golf,golf,golf,高尔夫球；高尔夫运动,golf,1,reviewed
-candidate:good,good,good,好的；不错的,good,4,reviewed
+candidate:good,good,good,好的；不错的,best|better|good,12,reviewed
 candidate:goodbye,goodbye,goodbye,再见,goodbye,4,reviewed
 candidate:got,got,got,得到；获得（get 的过去式）,got,2,reviewed
 candidate:gps,gps,GPS,全球定位系统；GPS,gps,1,reviewed
@@ -1271,6 +1276,7 @@ candidate:ship,ship,ship,船,ship,5,reviewed
 candidate:shirt,shirt,shirt,衬衫,shirt,7,reviewed
 candidate:shoe,shoe,shoe,鞋,shoe|shoes,6,reviewed
 candidate:shop,shop,shop,商店；购物,shop,6,reviewed
+candidate:shopping,shopping,shopping,购物；买东西,shopping,1,reviewed
 candidate:shopping bag,shopping bag,shopping bag,购物袋,shopping bag,1,reviewed
 candidate:shopping centre,shopping centre,shopping centre,购物中心,shopping centre,1,reviewed
 candidate:shopping list,shopping list,shopping list,购物清单,shopping list,1,reviewed
@@ -1348,6 +1354,7 @@ candidate:speak,speak,speak,说；讲；讲某种语言,speak|spoke,10,reviewed
 candidate:speak english,speak english,speak English,说英语；讲英语,speak english,1,reviewed
 candidate:special,special,special,特别的；特殊的,special,6,reviewed
 candidate:speech,speech,speech,演讲,speech,2,reviewed
+candidate:spell,spell,spell,拼写,spell,1,reviewed
 candidate:spend,spend,spend,花费；度过,spend|spent,4,reviewed
 candidate:spicy,spicy,spicy,辣的；辛辣的,spicy,1,reviewed
 candidate:spoon,spoon,spoon,勺子；匙,spoon,2,reviewed
@@ -1387,7 +1394,7 @@ candidate:strong,strong,strong,强壮的；强的,strong|stronger,8,reviewed
 candidate:strongly,strongly,strongly,强劲地；强烈地,strongly,1,reviewed
 candidate:stuck,stuck,stuck,卡住的；陷住的,stuck,1,reviewed
 candidate:student,student,student,学生,student,4,reviewed
-candidate:study,study,study,学习；读书,studies|study,8,reviewed
+candidate:study,study,study,学习；读书,studied|studies|study,9,reviewed
 candidate:subject,subject,subject,学科；科目,subject,6,reviewed
 candidate:subway,subway,subway,地铁,subway,1,reviewed
 candidate:summary,summary,summary,总结；摘要,summary,1,reviewed

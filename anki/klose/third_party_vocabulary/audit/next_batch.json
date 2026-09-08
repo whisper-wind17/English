@@ -3,31 +3,21 @@
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "shopping",
-    "spell",
-    "studied",
-    "best",
-    "better",
-    "born",
-    "building",
-    "carried",
-    "chicken",
-    "cut"
-  ],
-  "SelectedCount": 10,
-  "EvidenceWeight": 58,
-  "SurfaceCap": 30,
-  "WeightBudget": 60,
-  "EffectiveWeightBudget": 60,
-  "PackingSkippedMatchKeys": [
     "chinese",
     "cold",
     "cook",
     "dancing",
     "dish",
-    "drink",
     "drop",
-    "dropped",
+    "dropped"
+  ],
+  "SelectedCount": 7,
+  "EvidenceWeight": 60,
+  "SurfaceCap": 30,
+  "WeightBudget": 60,
+  "EffectiveWeightBudget": 60,
+  "PackingSkippedMatchKeys": [
+    "drink",
     "duck",
     "fall",
     "feel",
@@ -85,6 +75,6 @@
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
-  "ReviewBundleFingerprint": "90d7166785e4de09a228dd699e21f27121956d904476801155d0eb7e236d1816",
-  "ReviewPacketFingerprint": "e8e561e23bdf5d5b213d6e5e47f42374b60cda670628c1543de42c7d8097bc37"
+  "ReviewBundleFingerprint": "f1ff6b21afe5add5e048a60aa3e86a16ab622d7ef2138005523b2a3bd754e6a4",
+  "ReviewPacketFingerprint": "fd1872da4f7058a5eb49ef0303f8264274c71e286fc5bac89831a601a4e63be0"
 }
