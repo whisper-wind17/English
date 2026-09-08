@@ -13,6 +13,8 @@ EXPECTED_FIELDS = [
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition", "SourceFile",
 ]
 SOURCE_FILE_RE = re.compile(r"外研版三年级起点[三四五六]年级[上下]\.xlsx$")
+EXPECTED_OCCURRENCES = 1157
+EXPECTED_MATCHKEYS = 1023
 
 
 def main() -> None:
@@ -24,8 +26,8 @@ def main() -> None:
             raise SystemExit(f"Unexpected occurrence schema: {reader.fieldnames}")
         rows = list(reader)
 
-    if not rows:
-        raise SystemExit("Waiyan start3 adapter produced no occurrences")
+    if len(rows) != EXPECTED_OCCURRENCES:
+        raise SystemExit(f"Expected {EXPECTED_OCCURRENCES} Waiyan start3 occurrences, found {len(rows)}")
     if any(row.get("SourceID") != "waiyan_start3" for row in rows):
         raise SystemExit("SourceID drift in Waiyan start3 adapter")
 
@@ -43,6 +45,9 @@ def main() -> None:
         raise SystemExit(f"Expected 8 grade/semester books, got {sorted(books)}")
 
     distinct = len({row["MatchKey"] for row in rows})
+    if distinct != EXPECTED_MATCHKEYS:
+        raise SystemExit(f"Expected {EXPECTED_MATCHKEYS} normalized MatchKeys, found {distinct}")
+
     forbidden = {"CandidateNoteIDs", "ProposedNoteID", "StageAClass", "existing-in-klose", "third-party-new"}
     if forbidden & set(EXPECTED_FIELDS):
         raise SystemExit("Source Adapter schema leaked matching/identity/final-diff state")
@@ -51,7 +56,7 @@ def main() -> None:
     print(f"source occurrences = {len(rows)}")
     print(f"distinct MatchKeys = {distinct}")
     print("source books = 8")
-    print("exact source baseline frozen = pending first validated parse")
+    print("exact source baseline frozen = yes")
     print("identity/matching state in adapter = no")
     print("Final Klose diff executed = no")
 
