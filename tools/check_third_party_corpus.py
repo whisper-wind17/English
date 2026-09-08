@@ -254,8 +254,20 @@ def main() -> None:
             continue
         if key in resolved_multipart:
             require(len(ds) >= 2, f"Known semantic collision resolved without partition: {key}")
+        elif len(ds) >= 2:
+            _, complete, resolved = partition_state(key, ds, current_by_match[key])
+            require(complete, f"Known semantic collision has incomplete multipart partition: {key}")
+            require(not resolved, f"Resolved known semantic collision missing resolved_multipart state: {key}")
+            require(
+                any(d.get("Status") == "held" or d.get("Action") in {"held", "split-required"} for d in ds),
+                f"Unresolved known semantic collision multipart lacks explicit held partition: {key}",
+            )
+            require(
+                by_surface[key].get("DecisionAction") == "split-required"
+                and by_surface[key].get("DecisionStatus") == "held",
+                f"Unresolved known semantic collision must remain blocker: {key}",
+            )
         else:
-            require(len(ds) == 1, f"Unexpected multipart state for former semantic collision: {key}")
             d = ds[0]
             require(
                 d.get("Action") in {"split-required", "held"} or learner_first_resolved(d),
