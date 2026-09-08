@@ -1,23 +1,19 @@
 {
   "PlanVersion": "v5-throughput-delta",
-  "ReviewLane": "object-boundary",
+  "ReviewLane": "",
   "ReviewMode": "full-evidence",
-  "SelectedMatchKeys": [
-    "put up",
-    "take a picture",
-    "watch a film"
-  ],
-  "SelectedCount": 3,
-  "EvidenceWeight": 3,
-  "SurfaceCap": 25,
-  "WeightBudget": 50,
-  "EffectiveWeightBudget": 50,
+  "SelectedMatchKeys": [],
+  "SelectedCount": 0,
+  "EvidenceWeight": 0,
+  "SurfaceCap": 0,
+  "WeightBudget": 0,
+  "EffectiveWeightBudget": 0,
   "PackingSkippedMatchKeys": [],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
-  "ExecutionReady": true,
-  "GateReason": "",
-  "ReviewBundleFingerprint": "5f74e84edf02418394f79e93c5ffeca06c7a8b501bb70353f36b31c6bc23d743",
-  "ReviewPacketFingerprint": "ae309d811b0a8a7fd85c2ef92ebd0cf4e9e207008e02a677ac785400da1d87a4"
+  "ExecutionReady": false,
+  "GateReason": "no active review batch",
+  "ReviewBundleFingerprint": "9724a951037ddb8fda24abb2bceef9101d0cd364d4183165f869721c81acce79",
+  "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
 }
