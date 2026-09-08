@@ -357,7 +357,7 @@ candidate:daughter,daughter,daughter,女儿,daughter,2,reviewed
 candidate:day,day,day,一天；白天,day,7,reviewed
 candidate:deaf,deaf,deaf,聋的；听不见的,deaf,3,reviewed
 candidate:dear,dear,dear,亲爱的；亲爱的（称呼语）,dear,8,reviewed
-candidate:december,december,December,十二月,december,5,reviewed
+candidate:december,december,December,十二月,dec.|december,6,reviewed
 candidate:decide,decide,decide,决定,decide,2,reviewed
 candidate:deep,deep,deep,深的；深处的,deep,1,reviewed
 candidate:deer,deer,deer,鹿,deer,1,reviewed
@@ -390,7 +390,7 @@ candidate:do jigsaw puzzles,do jigsaw puzzles,do jigsaw puzzles,拼拼图；做�
 candidate:do kung fu,do kung fu,do kung fu,练功夫；做中国功夫,do kung fu,1,reviewed
 candidate:do morning exercises,do morning exercises,do morning exercises,做早操；晨练,do morning exercises|doing morning exercises,2,reviewed
 candidate:do the housework,do the housework,do the housework,做家务,do the housework,1,reviewed
-candidate:doctor,doctor,doctor,医生,doctor,8,reviewed
+candidate:doctor,doctor,doctor,医生,doctor|dr.,9,reviewed
 candidate:dog,dog,dog,狗,dog,9,reviewed
 candidate:doll,doll,doll,洋娃娃；玩偶,doll,3,reviewed
 candidate:dollar,dollar,dollar,美元,dollar,3,reviewed
@@ -501,7 +501,7 @@ candidate:father christmas,father christmas,Father Christmas,圣诞老人,father
 candidate:father's day,father's day,Father's Day,父亲节,father's day,2,reviewed
 candidate:favourite,favourite,favourite,最喜欢的,favourite,8,reviewed
 candidate:feature,feature,feature,特点；特征,feature,1,reviewed
-candidate:february,february,February,二月,february,4,reviewed
+candidate:february,february,February,二月,feb.|february,5,reviewed
 candidate:feed,feed,feed,喂；喂养,feed,2,reviewed
 candidate:feed the fish,feed the fish,feed the fish,喂鱼,feeding the fish,1,reviewed
 candidate:feet,feet,feet,脚；足（foot 的复数）,feet,3,reviewed
@@ -715,6 +715,8 @@ candidate:helmet,helmet,helmet,头盔,helmet,1,reviewed
 candidate:help,help,help,帮助,help,8,reviewed
 candidate:helpful,helpful,helpful,有帮助的；有用的,helpful,3,reviewed
 candidate:hen,hen,hen,母鸡,hen,1,reviewed
+candidate:her#object,her#object,her,她（宾格）,her,1,reviewed
+candidate:her#possessive,her#possessive,her,她的（形容词性物主代词）,her,8,reviewed
 candidate:here,here,here,这里；在这里,here,5,reviewed
 candidate:hers,hers,hers,她的；她的东西,hers,3,reviewed
 candidate:herself,herself,herself,她自己（反身代词）,herself,1,reviewed
@@ -803,10 +805,10 @@ candidate:joke,joke,joke,玩笑；笑话,joke,2,reviewed
 candidate:journey,journey,journey,旅行；行程,journey,1,reviewed
 candidate:joy,joy,joy,欢乐；快乐；喜悦,joy,2,reviewed
 candidate:juice,juice,juice,果汁；汁,juice,8,reviewed
-candidate:july,july,July,七月,july,6,reviewed
+candidate:july,july,July,七月,jul.|july,7,reviewed
 candidate:jump,jump,jump,跳；跳跃,jump|jumping,6,reviewed
 candidate:jump rope,jump rope,jump rope,跳绳,jumped rope|jumping rope,2,reviewed
-candidate:june,june,June,六月,june,5,reviewed
+candidate:june,june,June,六月,jun.|june,6,reviewed
 candidate:junior high school,junior high school,junior high school,初中；初级中学,junior high school,1,reviewed
 candidate:just,just,just,只是；仅仅,just,3,reviewed
 candidate:kangaroo,kangaroo,kangaroo,袋鼠,kangaroo,2,reviewed
@@ -848,6 +850,8 @@ candidate:lazy,lazy,lazy,懒惰的；懒洋洋的,lazy,2,reviewed
 candidate:leaf,leaf,leaf,叶子；树叶,leaf|leaves,5,reviewed
 candidate:learn,learn,learn,学习；学会,learn|learnt,6,reviewed
 candidate:leave,leave,leave,离开；出发,leave,3,reviewed
+candidate:left#direction,left#direction,left,左边；左侧,left,7,reviewed
+candidate:left#leave-past,left#leave-past,left,离开；出发（leave 的过去式）,left,2,reviewed
 candidate:leg,leg,leg,腿,leg,8,reviewed
 candidate:lemon,lemon,lemon,柠檬,lemon,1,reviewed
 candidate:less,less,less,更少；较少,less,1,reviewed
@@ -915,13 +919,13 @@ candidate:man,man,man,男人；男性,man,9,reviewed
 candidate:many,many,many,许多；很多,many,6,reviewed
 candidate:map,map,map,地图,map,8,reviewed
 candidate:maple leaves,maple leaves,maple leaves,枫叶,maple leaves,1,reviewed
-candidate:march,march,March,三月,march,4,reviewed
+candidate:march,march,March,三月,mar.|march,5,reviewed
 candidate:mark,mark,mark,分数；成绩,mark,1,reviewed
 candidate:marker,marker,marker,马克笔；记号笔,marker,1,reviewed
 candidate:mask,mask,mask,面具,mask,1,reviewed
 candidate:match#game,match#game,match,比赛；竞赛,match,1,reviewed
 candidate:match#stick,match#stick,match,火柴,match,2,reviewed
-candidate:maths,maths,maths,数学,maths,5,reviewed
+candidate:maths,maths,maths,数学,math|maths,6,reviewed
 candidate:maths book,maths book,maths book,数学书,maths book,1,reviewed
 candidate:matter,matter,matter,事情；问题,matter,2,reviewed
 candidate:maybe,maybe,maybe,也许；可能；大概,maybe,1,reviewed
@@ -1045,14 +1049,14 @@ candidate:nose,nose,nose,鼻子,nose,10,reviewed
 candidate:not,not,not,不；没有（否定词）,not,5,reviewed
 candidate:notebook,notebook,notebook,笔记本,notebook,1,reviewed
 candidate:nothing,nothing,nothing,没有什么；没有东西,nothing,4,reviewed
-candidate:november,november,November,十一月,november,5,reviewed
+candidate:november,november,November,十一月,nov.|november,6,reviewed
 candidate:now,now,now,现在；此刻,now,7,reviewed
 candidate:number,number,number,数字；号码,no.|number,4,reviewed
 candidate:nurse,nurse,nurse,护士,nurse,7,reviewed
 candidate:nut,nut,nut,坚果,nut,2,reviewed
 candidate:o'clock,o'clock,o'clock,……点钟,o'clock,5,reviewed
 candidate:ocean,ocean,ocean,海洋,ocean,1,reviewed
-candidate:october,october,October,十月,october,5,reviewed
+candidate:october,october,October,十月,oct.|october,6,reviewed
 candidate:of,of,of,……的；属于……的,of,3,reviewed
 candidate:off,off,off,离开；脱离,off,1,reviewed
 candidate:office,office,office,办公室,office,3,reviewed
@@ -1312,6 +1316,8 @@ candidate:saturday,saturday,Saturday,星期六,saturday,8,reviewed
 candidate:sausage,sausage,sausage,香肠,sausage,2,reviewed
 candidate:save#conserve,save#conserve,save,节省；节约,save,1,reviewed
 candidate:save#rescue,save#rescue,save,救；挽救,save,1,reviewed
+candidate:saw#see-past,saw#see-past,saw,看见；看到（see 的过去式）,saw,5,reviewed
+candidate:saw#tool,saw#tool,saw,锯子,saw,1,reviewed
 candidate:say,say,say,说；讲,said|say,11,reviewed
 candidate:say to oneself,say to oneself,say to oneself,心里想；自言自语地说,say to oneself,1,reviewed
 candidate:scared,scared,scared,害怕的；受惊的,scared,2,reviewed
@@ -1343,7 +1349,7 @@ candidate:sell,sell,sell,卖；出售,sell,2,reviewed
 candidate:send,send,send,发送；寄送,send|sent,8,reviewed
 candidate:send a short message,send a short message,send a short message,发短消息,send a short message,1,reviewed
 candidate:send an email,send an email,send an email,发电子邮件,send an email,1,reviewed
-candidate:september,september,September,九月,september,6,reviewed
+candidate:september,september,September,九月,sept.|september,7,reviewed
 candidate:seven,seven,seven,七,seven,8,reviewed
 candidate:seventeen,seventeen,seventeen,十七,seventeen,4,reviewed
 candidate:seventeenth,seventeenth,seventeenth,第十七,seventeenth,1,reviewed
