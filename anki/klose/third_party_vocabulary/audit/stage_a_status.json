@@ -1,30 +1,34 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "07bf47ae0f4c836fe331903250e47ef507b49e7d",
-  "WorkflowRunID": "34221259061",
-  "WorkflowRunNumber": "240",
+  "InputCommit": "a8990a0dc32403ad50406e85be47753f4a998959",
+  "WorkflowRunID": "34221487868",
+  "WorkflowRunNumber": "241",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2149,
-  "IdentityVocabularyPreview": 1847,
-  "LearnerVocabularyPreview": 1832,
-  "ReviewBlockers": 69,
-  "EvidenceChangedSurfaces": 2,
-  "MultipartResolved": 34,
+  "IdentityVocabularyPreview": 1850,
+  "LearnerVocabularyPreview": 1835,
+  "ReviewBlockers": 67,
+  "EvidenceChangedSurfaces": 0,
+  "MultipartResolved": 36,
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
-    "ReviewLane": "semantic-review",
-    "SelectedCount": 2,
+    "ReviewLane": "split-resolution",
+    "SelectedCount": 6,
     "SelectedMatchKeys": [
-      "water",
-      "like"
+      "fan",
+      "floor",
+      "french",
+      "get",
+      "hard",
+      "line"
     ],
-    "EvidenceWeight": 27,
-    "EffectiveWeightBudget": 60,
+    "EvidenceWeight": 69,
+    "EffectiveWeightBudget": 70,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "66c2d822be8a8ff4780eef25be99825f65232cdeb898e1ccd65138face0ecfc0",
-    "ReviewPacketFingerprint": "810a8c4cc032e9f57ff23f86da3df213bcd2082dc33946b1771d8590e6245899"
+    "ReviewBundleFingerprint": "608f2146c2ecc570862fea60f0c670575ddd90cc25f14fac660c4c09b00dbc71",
+    "ReviewPacketFingerprint": "622b281f03c4d01bea548637142f8489897a81a902263504ddaf99259128be2e"
   }
 }
