@@ -408,6 +408,8 @@ candidate:dream#aspiration,dream#aspiration,dream,梦想；愿望,dream,1,review
 candidate:dream#sleep,dream#sleep,dream,梦；睡梦,dream,1,reviewed
 candidate:dress,dress,dress,连衣裙；裙子,dress,8,reviewed
 candidate:drink cold drinks,drink cold drinks,drink cold drinks,喝冷饮,drank cold drinks,1,reviewed
+candidate:drink#noun,drink#noun,drink,饮料,drink,1,reviewed
+candidate:drink#verb,drink#verb,drink,喝；饮用,drink|drinking,10,reviewed
 candidate:drive,drive,drive,驾驶；开车,drive,3,reviewed
 candidate:drive away,drive away,drive away,赶走；驱赶,drive away,1,reviewed
 candidate:driver,driver,driver,司机；驾驶员,driver,4,reviewed
@@ -415,6 +417,8 @@ candidate:drop#noun,drop#noun,drop,水滴；一滴,drop,1,reviewed
 candidate:drop#verb,drop#verb,drop,掉下；使掉落,drop,3,reviewed
 candidate:drum,drum,drum,鼓,drum,1,reviewed
 candidate:dry,dry,dry,干的；干燥的,dry,2,reviewed
+candidate:duck#animal,duck#animal,duck,鸭子,duck,6,reviewed
+candidate:duck#meat,duck#meat,duck,鸭肉,duck,1,reviewed
 candidate:duckling,duckling,duckling,小鸭子,duckling,1,reviewed
 candidate:dumpling,dumpling,dumpling,饺子,dumpling,4,reviewed
 candidate:during,during,during,在……期间；在……的时候,during,2,reviewed
@@ -484,6 +488,8 @@ candidate:fairy tale,fairy tale,fairy tale,童话故事,fairy tale,1,reviewed
 candidate:fall asleep,fall asleep,fall asleep,入睡；睡着,fall asleep,1,reviewed
 candidate:fall off,fall off,fall off,从……掉下来；跌落,fall off,2,reviewed
 candidate:fall over,fall over,fall over,跌倒；摔倒,fall over,1,reviewed
+candidate:fall#autumn,fall#autumn,fall,秋天；秋季,fall,1,reviewed
+candidate:fall#verb,fall#verb,fall,落下；跌倒,fall,4,reviewed
 candidate:family,family,family,家庭；家人,family,6,reviewed
 candidate:famous,famous,famous,著名的,famous,5,reviewed
 candidate:fantastic,fantastic,fantastic,极好的；很棒的,fantastic,4,reviewed
@@ -502,6 +508,8 @@ candidate:feature,feature,feature,特点；特征,feature,1,reviewed
 candidate:february,february,February,二月,february,4,reviewed
 candidate:feed,feed,feed,喂；喂养,feed,2,reviewed
 candidate:feed the fish,feed the fish,feed the fish,喂鱼,feeding the fish,1,reviewed
+candidate:feel#state,feel#state,feel,感觉；觉得,feel,3,reviewed
+candidate:feel#touch,feel#touch,feel,摸起来；触摸感受,feel,1,reviewed
 candidate:feet,feet,feet,脚；足（foot 的复数）,feet,3,reviewed
 candidate:ferry,ferry,ferry,渡船,ferry,1,reviewed
 candidate:festival,festival,festival,节日,festival,3,reviewed
@@ -512,6 +520,8 @@ candidate:fifteen,fifteen,fifteen,十五,fifteen,4,reviewed
 candidate:fifteenth,fifteenth,fifteenth,第十五,15th|fifteenth,3,reviewed
 candidate:fifth,fifth,fifth,第五,5th|fifth,4,reviewed
 candidate:fifty,fifty,fifty,五十,fifty,4,reviewed
+candidate:film#movie,film#movie,film,电影,film,6,reviewed
+candidate:film#photo,film#photo,film,胶卷；胶片,film,1,reviewed
 candidate:finally,finally,finally,最后；终于,finally,1,reviewed
 candidate:find,find,find,找到；发现,find,7,reviewed
 candidate:fine,fine,fine,好的；健康的；不错的,fine,4,reviewed
@@ -1094,6 +1104,9 @@ candidate:parrot,parrot,parrot,鹦鹉,parrot,1,reviewed
 candidate:part,part,part,部分；一部分,part,2,reviewed
 candidate:party,party,party,聚会；派对,party,6,reviewed
 candidate:passport,passport,passport,"护照,通行证",passport,2,reviewed
+candidate:past#clock,past#clock,past,过（用于钟点）,past,2,reviewed
+candidate:past#history,past#history,past,过去；从前,past,1,reviewed
+candidate:past#movement,past#movement,past,经过；越过,past,1,reviewed
 candidate:path,path,path,小路；道路,path,1,reviewed
 candidate:pay,pay,pay,支付；付款,pay,1,reviewed
 candidate:pay attention to,pay attention to,pay attention to,注意；留意,pay attention to,1,reviewed

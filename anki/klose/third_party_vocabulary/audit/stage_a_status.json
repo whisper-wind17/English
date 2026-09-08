@@ -1,34 +1,32 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "c824129b87a87a0f0a8d3f40d41f4ae5811ce31c",
-  "WorkflowRunID": "34219783836",
-  "WorkflowRunNumber": "235",
+  "InputCommit": "a4ffc6d03595d4f5ce66d9108614cbc4bbd78797",
+  "WorkflowRunID": "34220869671",
+  "WorkflowRunNumber": "237",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
-  "DurableIdentityDecisions": 2148,
-  "IdentityVocabularyPreview": 1816,
-  "LearnerVocabularyPreview": 1801,
-  "ReviewBlockers": 84,
-  "EvidenceChangedSurfaces": 17,
-  "MultipartResolved": 19,
+  "DurableIdentityDecisions": 2149,
+  "IdentityVocabularyPreview": 1829,
+  "LearnerVocabularyPreview": 1814,
+  "ReviewBlockers": 78,
+  "EvidenceChangedSurfaces": 11,
+  "MultipartResolved": 25,
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "semantic-review",
-    "SelectedCount": 6,
+    "SelectedCount": 4,
     "SelectedMatchKeys": [
-      "drink",
-      "duck",
-      "fall",
-      "feel",
-      "film",
-      "past"
+      "fish",
+      "hot",
+      "light",
+      "look"
     ],
-    "EvidenceWeight": 59,
+    "EvidenceWeight": 58,
     "EffectiveWeightBudget": 60,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "7efef4ffd4d4b291fec98c3486f56167cae857c0eb3a1355d5789abe66cd8b70",
-    "ReviewPacketFingerprint": "59e777e330b5c4fb8c7808c8a0cea507889d9e402a875b0ba8ba35062da5a611"
+    "ReviewBundleFingerprint": "a88264a97561b389d1b446af144e89bc82f657e21284d88a7bee8476a2bffd09",
+    "ReviewPacketFingerprint": "b25648a4cba2cf460977a1c5da70e820c83af0cbfa0c0af7f8a668109c457962"
   }
 }
