@@ -18,11 +18,14 @@ docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
 → anki/klose/third_party_vocabulary/config/source_adapters.csv
 → anki/klose/third_party_vocabulary/review/identity_decisions.csv
+→ anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv
 → anki/klose/third_party_vocabulary/staging/review_queue.csv
 → anki/klose/third_party_vocabulary/audit/review_bundle.csv
 → anki/klose/third_party_vocabulary/audit/defer_context.csv
 → anki/klose/third_party_vocabulary/audit/next_batch.json
 → anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv
+→ anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv
+→ anki/klose/third_party_vocabulary/learner/grammar_form_quarantine_view.csv
 ```
 
 动态进度只以 repo 当前文件为准。
@@ -51,16 +54,22 @@ GitHub 管 Source / Identity / Learner / Review / Release；Anki 管 FSRS / Revi
 ```text
 Third-party Source Occurrences
 → sense-aware Identity Resolution
-→ Third-party Unified Vocabulary
+→ Third-party Unified Vocabulary Identity View
+→ current Learner Admission gate
+→ Klose learner-stage vocabulary view
 ```
 
-内容决策真源：
+两份 durable truth 必须分层：
 
 ```text
-anki/klose/third_party_vocabulary/review/identity_decisions.csv
+review/identity_decisions.csv
+= Identity content truth
+
+learner/grammar_form_quarantine.csv
+= current Klose Learner Admission gate
 ```
 
-Reviewed decision 必须绑定 exact JSON `OccurrenceKeys`；source evidence 变化必须 requeue。
+Reviewed identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evidence 变化必须 requeue。
 
 Enabled adapters：
 
@@ -74,159 +83,200 @@ waiyan_start3    = 1157
 Total            = 6005
 ```
 
-`waiyan_start3` 已启用并独立完成 source parse + validation：8 books / 1157 occurrences / 1023 MatchKeys。
+---
+
+## 3. Current checkpoint — SIX-ADAPTER / GRAMMAR-STAGE GATE VALIDATED
+
+Identity-level corpus 未被 learner gate 改写：
+
+```text
+Enabled adapters                   = 6
+Source occurrences                 = 6005
+Normalized surfaces                = 2161
+Durable Identity decisions         = 2098
+Identity-level Vocabulary Preview  = 985
+Review/blocker surfaces            = 1010
+Evidence-changed surfaces          = 911
+Multipart resolved                 = 7
+```
+
+新增 current learner-stage projection：
+
+```text
+Grammar-form quarantine gates      = 56
+Learner-stage Vocabulary Preview   = 979
+Identity rows suppressed by gate   = 6
+Preview occurrence contributions removed = 11
+```
+
+这里 `985 → 979` 不是删除 Identity：
+
+```text
+staging/unified_vocabulary_preview.csv
+= Stage-A Identity-level reviewed candidates
+
+learner/learner_vocabulary_preview.csv
+= 当前 Klose 可继续进入 learner pipeline 的视图
+```
 
 ---
 
-## 3. Current checkpoint — SIX-ADAPTER / POLICY BATCH #1 CLOSED
+## 4. Klose grammar-stage quarantine — FROZEN
 
-当前 corpus：
+用户确认：Klose 当前对过去式、过去分词/完成时相关语法仍处于较早阶段，因此 one-word past/past-participle forms 暂不进入当前 learner vocabulary。
 
-```text
-Enabled adapters          = 6
-Source occurrences        = 6005
-Normalized surfaces       = 2161
-Durable decisions         = 2098
-Vocabulary preview        = 985
-Review/blocker surfaces   = 1010
-Evidence-changed surfaces = 911
-Multipart resolved        = 7
-```
-
-与 sixth-source expansion 初始 checkpoint 相比：
+核心规则：
 
 ```text
-Review throughput         = 14
-Net blocker release       = 14
-Blockers                  = 1024 → 1010
-Evidence-changed          = 924  → 911
-Vocabulary preview        = 984  → 985
-Durable decisions         = 2097 → 2098
+went → go
+ate → eat
+broke → break#damage
+was → be
+
+Identity relation
+→ 保留 / 正常 resolved
+
+Learner Admission
+→ grammar-form quarantine
+→ 当前不进入 learner_vocabulary_preview.csv
 ```
 
-本批 14/14 deterministic closure：
+这不是 `held`，也不是 blocker。以后 grammar stage 提升时解除 learner gate 即可，不需要重做 Identity。
+
+当前 gate 同时暂缓 `could / would` 这类明显超出当前阶段的 modal-past / hypothetical forms。
+
+### Boundary guards
+
+不得按 `-ed` / dictionary gloss 粗暴过滤：
 
 ```text
-did     → reuse do
-ate     → reuse eat
-became  → reuse become
-bought  → reuse buy
-brought → reuse bring
-came    → reuse come
-drew    → reuse draw
-gave    → reuse give
-got     → keep learner-first pedagogical form
-learnt  → reuse learn
-met     → reuse meet
-ran     → reuse run
-rode    → reuse ride
-sent    → reuse send
+scared = 害怕的；受惊的
+broken = 坏的；破损的
+lost   = 迷路的 / 丢失的
 ```
 
-Action count：
+若已 lexicalized 为独立 adjective/noun learning unit，正常保留。
+
+普通复数、第三人称单数、`-ing` 不受本规则自动影响；`goes` 不 quarantine。
+
+Homograph 必须 decision-scoped：
 
 ```text
-reuse-identity = 13
-keep-identity  = 1
+left = 左边/左侧           → 保留
+left = leave 的过去式      → quarantine
+
+saw = 锯子                → 保留
+saw = see 的过去式         → quarantine
 ```
 
-`got` 保留既有 narrow learner-facing identity：
-
-```text
-TargetSense = 得到；获得（get 的过去式）
-```
-
-新增 Waiyan evidence 同时含“明白”义，但本批不把 broader get semantics 注入该学习单元。
-
-Preview 只增加 1 是正确状态：`got` 独立 keep 立即进入 Preview；其余 13 个 alias 已完成 identity routing，但多数 canonical 自身仍因 sixth-source evidence change 待复审，因此 alias 不得绕过 canonical blocker 提前进入 Preview。
+Machine checker 不允许把 free-text dictionary `Definition` 当 grammar identity truth；否则 `go / hold / party / ground` 等会产生 false positive。
 
 ---
 
-## 4. Validation checkpoint
+## 5. Validation checkpoint
 
-Decision commit：
+Learner-gate architecture / policy / checker / workflow 已实现并通过完整 Stage-A 集成验证。
+
+最终 successful workflow：
 
 ```text
-4a7021e05e9d4948a5283d6a70b394f313dbaf14
-review: adjudicate next policy batch
+run 34183172105 / #193 = SUCCESS
+head = 2bbff1e9acc7ce25862c4e1651bc386a576aefd5
 ```
 
-Workflow：
+bot generated learner views：
 
 ```text
-run 34181676332 / #190 = SUCCESS
-```
-
-机器验证：
-
-```text
-planner selected surfaces             = 14
-batch touched MatchKeys               = 14
-selected active batch closure         = 100%
-decision updates applied              = 14
-replaced durable decisions            = 13
-appended durable decisions            = 1
-batch reuse-identity                  = 13
-batch keep-identity                   = 1
-Third-party Completion Recheck        = PASS
-Preview TargetSense                   = 985 / 985
-Explicit reviewed OccurrenceKeys      = PASS
-Changed source evidence requeue       = PASS
-Partial split remains blocker         = PASS
-Canonical blocker bypass              = NO
-Stable ThirdPartyID minted            = NO
-Final Klose diff executed             = NO
-Klose Master/Learner/Publish/Anki     = UNTOUCHED
-```
-
-Generated Stage-A workspace 已由 bot persist：
-
-```text
-be005495ca3f249d7d9838cad1978e2cd1a61024
+177d220e616522703839aa4412427d45ce8a204a
 data: refresh simplified third-party Stage A workspace
 ```
 
-独立 diff-scope：`f5138d3... → be00549...` 仅修改 third-party decision / audit / staging 派生状态；source adapters、raw/source staging、Klose Master/Learner/Publish/Anki 均未修改。
-
----
-
-## 5. Source-expansion state-machine hardening — FROZEN
-
-Sixth-source expansion 已验证以下状态：
+核心验证：
 
 ```text
-decision-evidence-changed
-→ always active re-review
-
-new pending
-→ always schedulable
-→ 不得伪装成 deferred
-
-accepted audited-defer + same context
-→ zero-scan
-
-accepted audited-defer + changed context
-→ active re-review
-
-multipart canonical stale
-→ dependent scoped reuse 暂时退出 Preview
-→ durable alias decision 保留
-→ canonical 复审后再恢复/验证
+Third-party Simplified Completion Recheck     = PASS
+Identity Preview TargetSense                  = 985 / 985
+Third-party learner-stage grammar quarantine  = PASS
+Learner-stage Vocabulary Preview              = 979
+Grammar-form quarantine gates                 = 56
+Past-form leak into learner preview           = NO
+Lexicalized participle/adjective over-gating  = NO
+Homograph decision-scope gate                 = ENFORCED
+Source-definition heuristic as identity truth = NO
+Identity truth mutated by learner gate        = NO
+Klose Master/Learner/Publish/Anki             = UNTOUCHED
+Stable ThirdPartyID minted                    = NO
+Final Klose diff executed                     = NO
 ```
 
-若 scoped reuse 请求的 `#variant` 在已 resolved multipart canonical 中不存在，仍 hard FAIL。
+Spot-check：
+
+```text
+got / was / took
+→ learner preview 中不存在
+
+scared = 害怕的；受惊的
+→ Identity + learner view 均保留
+
+break#damage
+Identity provenance = break|broke / 2
+Learner provenance  = break       / 1
+→ broke 被隔离，break 本体保留
+```
+
+Quarantine audit 明确记录 `left#leave-past`、`saw=see past` 为 `Scope=decision`，不会对整个 surface 一刀切。
+
+独立 diff-scope：task-start `99e9de33...` → bot checkpoint `177d220...` 只涉及：
+
+```text
+third_party_vocabulary/learner/*
+learner-view builder/checker
+Stage-A workflow wiring
+review policy
+```
+
+Klose Master/Learner/Publish/Anki 不在 diff 中。
+
+架构文档已同步更新：
+
+```text
+75697daf15b522f6958b69e32128087f1e8e01bc
+docs: separate third-party identity and learner views
+```
 
 ---
 
-## 6. V4 learner-first policy — FROZEN
+## 6. Identity / Learner separation — HARD INVARIANT
+
+```text
+Source Fact
+≠ Vocabulary Identity
+≠ Learner Admission
+≠ Anki learning state
+```
+
+因此：
+
+```text
+reuse-identity ≠ 当前必须学习
+keep-identity  ≠ 当前必须学习
+learner quarantine ≠ Identity unresolved
+```
+
+Future Stage B 不能直接消费 `unified_vocabulary_preview.csv` 作为当前学习清单；Identity reconciliation 后必须再经过 learner-stage gate。
+
+---
+
+## 7. V4 learner-first Identity policy — FROZEN
 
 ```text
 明显小学核心义 / 稳定 fixed lexical unit
 → learner-first narrow TargetSense
 → keep-identity
 
-高频、直接有 recall value 的 pedagogical form
-→ 可显式 keep，必须有 rationale
+高频 pedagogical form
+→ Identity 层可显式 keep，必须有 rationale
+→ 是否当前学习仍由 Learner Admission 独立决定
 
 显式 slot / reusable grammar pattern / communicative formula
 → route-expression
@@ -234,16 +284,16 @@ multipart canonical stale
 event / tense-specific source chunk
 → source-only
 
-已证明存在多个真实 target senses
+多个真实 target senses
 → occurrence split
 → complete cover 前不能 release
 ```
 
-Source evidence 变化不能由旧 decision 静默继承；所有 reviewed decision 以 exact current `OccurrenceKeys` 为 validity boundary。
+所有 reviewed identity decision 仍以 exact current `OccurrenceKeys` 为 validity boundary。
 
 ---
 
-## 7. High-throughput execution mechanism — FROZEN
+## 8. High-throughput execution mechanism — FROZEN
 
 ```text
 review_bundle.csv
@@ -252,7 +302,8 @@ review_bundle.csv
 → deterministic next_batch.json
 → batch_manifest.json + decision_updates.csv
 → manifest closure check
-→ apply/build
+→ apply/build identity view
+→ build/check learner-stage view
 → core Completion Recheck
 → batch Completion Recheck
 → Klose isolation
@@ -269,13 +320,11 @@ selected active batch closure = 100%
 source mutation 与 decision mutation 不得混合
 ```
 
-持续区分 `Review throughput` 与 `Net blocker release`。
-
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #2
+## 9. NEXT TASK — POLICY-REVIEW BATCH #2
 
-当前 deterministic planner：
+当前 deterministic planner 仍是 Identity review；learner quarantine 不替代 Identity adjudication。
 
 ```text
 ReviewLane         = policy-review
@@ -295,18 +344,28 @@ SelectedMatchKeys  =
   goes
 ```
 
-下一任务：完整 adjudicate 这 10 个 surface。不得只处理容易项。
+其中：
+
+```text
+swam / taught / told / took / went / were / won / wore / wrote
+→ 继续完成 exact-evidence Identity re-review
+→ 即使 resolved，current Learner Admission 仍 quarantine
+
+goes
+→ 正常 form-policy Identity review
+→ 不属于 current past-form quarantine
+```
 
 执行要求：
 
 ```text
 1. 读取 current review_bundle.csv / next_batch.json 与 exact source evidence。
 2. 不修改 source/raw/parser/config。
-3. 精确生成 planner 对应的 batch_manifest.json + decision_updates.csv。
-4. manifest / decision_updates / planner MatchKey set 100% 一致。
-5. apply 后 rebuild + core Completion Recheck + batch Completion Recheck。
-6. 核对 blocker delta、Preview delta、canonical dependency。
-7. 重新 normalize/propose/plan。
+3. 精确生成 planner 对应 batch_manifest.json + decision_updates.csv。
+4. selected active batch closure = 100%。
+5. apply 后 rebuild Identity + Learner views。
+6. core Completion Recheck + learner gate checker + batch Completion Recheck 全部 PASS。
+7. 核对 blocker / Identity Preview / Learner Preview delta。
 8. Klose isolation 必须 PASS。
 9. 更新 NEXT.md。
 ```
@@ -318,11 +377,12 @@ DO NOT mint Stable ThirdPartyID.
 DO NOT run Stage-B Klose diff.
 DO NOT modify Klose Master/Learner/Publish/Anki.
 DO NOT bypass evidence-changed re-review with old TargetSense.
+DO NOT admit grammar-quarantined forms into current learner view.
 ```
 
 ---
 
-## 9. Long-term invariants
+## 10. Long-term invariants
 
 - Stable NoteID / ExpressionID 不因来源增加或 Presentation 修改而变化；
 - Source Occurrence 与 Vocabulary / Expression Identity 分离；
