@@ -86,37 +86,37 @@ Total            = 6005
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #6 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #7 CHECKPOINTED
 
 ```text
 Enabled adapters                   = 6
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
-Durable Identity decisions         = 2102
-Identity-level Vocabulary Preview  = 1010
-Review/blocker surfaces            = 960
-Evidence-changed surfaces          = 865
-Multipart resolved                 = 9
+Durable Identity decisions         = 2103
+Identity-level Vocabulary Preview  = 1015
+Review/blocker surfaces            = 952
+Evidence-changed surfaces          = 857
+Multipart resolved                 = 10
 ```
 
 Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 998
+Learner-stage Vocabulary Preview   = 1003
 Identity rows suppressed by gate   = 12
 Preview occurrence contributions removed = 34
-Explicit decision-bound past-form requirements = 11
+Explicit decision-bound past-form requirements = 13
 ```
 
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1010   (+25)
-Learner Preview    979  →  998   (+19)
-Blockers          1010  →  960   (-50)
-Evidence-changed   911  →  865   (-46)
-Multipart            7  →    9   (+2)
+Identity Preview   985  → 1015   (+30)
+Learner Preview    979  → 1003   (+24)
+Blockers          1010  →  952   (-58)
+Evidence-changed   911  →  857   (-54)
+Multipart            7  →   10   (+3)
 ```
 
 Identity / Learner separation 仍是硬边界：被 gate 的 Identity 没有被删除，只是不进入当前 learner-facing view。
@@ -132,23 +132,7 @@ Identity resolved
 ≠ current Learner Admission
 ```
 
-典型：
-
-```text
-went → go                 Identity resolved；learner quarantine
-broke → break#damage      Identity resolved；learner quarantine
-had / made / took / were  pedagogical Identity 可保留；learner quarantine
-```
-
-不得按字面形态粗暴过滤：
-
-```text
-lost   = 迷路的 / 丢失的   → lexicalized adjective，保留
-scared = 害怕的；受惊的    → 保留
-broken = 坏的；破损的      → 保留
-```
-
-Homograph 必须 decision-scoped：
+不得按字面形态粗暴过滤；lexicalized adjective/noun 保留。Homograph 必须 decision-scoped，例如：
 
 ```text
 left#direction   → 保留
@@ -157,11 +141,13 @@ saw#tool         → 保留
 saw#see-past     → quarantine
 ```
 
+当前 explicit past-form requirements = 13；新增 `drank → drink#verb` 与 `flew → fly#verb` 已纳入 gate，past-form leak = no。
+
 Machine checker 不得把第三方 dictionary/free-text Definition 当 grammar identity truth。
 
 ---
 
-## 6. Completed deterministic policy batches after grammar-gate baseline
+## 6. Completed deterministic policy batches
 
 ```text
 #2  swam / taught / told / took / went / were / won / wore / wrote / goes
@@ -169,42 +155,44 @@ Machine checker 不得把第三方 dictionary/free-text Definition 当 grammar i
 #4  lost / made / said / saw / spent / spoke / er / hasn't / children / men
 #5  you're / am / can't / cd / dvd / he's / i'm / it / it's / mm / mr / ms
 #6  o'clock / pe / physical education / pop / she's / tv / clothes / couldn't / didn't / doesn't
+#7  drank / flew / her / here's / isn't / mrs / our / parent
 ```
 
 关键已冻结判断：
 
 - 过去式 Identity adjudication 与 Learner quarantine 分离；
 - `left`、`saw` 使用 occurrence-partitioned homograph split；
-- `lost` 等 lexicalized adjective 不因形态被误 gate；
 - contractions 默认 route-expression；
 - `er / mm` 按教材上下文识别为反应/犹豫语气词，第三方缩写释义为 glossary noise；
-- `CD / DVD / TV / Mr / Ms` 在教材明确绑定小学 lexical concept 时可保留 Vocabulary；
-- irregular plural `children / men / women` 可作为 pedagogically salient Identity；
+- `CD / DVD / TV / Mr / Ms / Mrs` 在教材明确绑定小学 lexical concept 时可保留 Vocabulary；
+- `PE` 与 `physical education` 是同一 school-subject Identity：full form canonical keep，`PE → physical education` reuse；
 - `clothes` 是 lexicalized clothing noun，不是 `cloth` 的普通复数；
-- `PE` 与 `physical education` 是同一 school-subject Identity：`physical education` canonical keep，`PE → physical education` reuse，历史 duplicate 已消除；
-- `o'clock` 保留为稳定 clock-time lexical unit；
-- `pop` 由 music / concert source neighborhood 绑定为流行音乐义，Point-of-Purchase 等释义不作为 source identity truth。
+- `her` 在 six-source evidence 下出现真实 functional split：
+  - `her#possessive` = 她的（形容词性物主代词）
+  - `her#object` = 她（宾格）
+  两个 partition 对 8 个 current occurrences complete/disjoint cover，不把两个 target senses 合并成一个 Note。
 
-### Latest validation — Batch #6
+### Latest validation — Batch #7
 
 ```text
-run 34187325943 / #199 = SUCCESS
-batch commit = 7056113f868bd1a79d564b0922ec96d88feb397b
-bot persist  = 07ef8cb557ee702f321ead78283ea70126b3a7bb
+run 34187602262 / #200 = SUCCESS
+batch commit = f8903a36877afc75774396f5a5df025d998c6c06
+bot persist  = 6645ebc99a154730480530131d412e7aab7da4ac
 ```
 
 ```text
 selected active batch closure              = 100%
-Batch decisions                            = 10
+Batch decisions                            = 9 rows / 8 MatchKeys
 keep-identity                              = 5
-reuse-identity                             = 1
-route-expression                           = 4
+reuse-identity                             = 2
+route-expression                           = 2
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1010 / 1010
+Identity Preview TargetSense               = 1015 / 1015
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
 homograph decision-scope gate              = ENFORCED
+split occurrence cover                     = COMPLETE / DISJOINT
 canonical blocker bypass                   = NO
 source occurrence closure                  = PASS
 Klose Master/Learner/Publish/Anki          = UNTOUCHED
@@ -221,14 +209,6 @@ Source Fact
 ≠ Vocabulary Identity
 ≠ Learner Admission
 ≠ Anki learning state
-```
-
-因此：
-
-```text
-reuse-identity      ≠ 当前必须学习
-keep-identity       ≠ 当前必须学习
-learner quarantine  ≠ Identity unresolved
 ```
 
 Future Stage B 不能直接把 `unified_vocabulary_preview.csv` 当当前学习清单；必须再经过 learner-stage gate。
@@ -290,43 +270,41 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 10. NEXT TASK — POLICY-REVIEW BATCH #7
+## 10. NEXT TASK — POLICY-REVIEW BATCH #8
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
-SelectedCount     = 8
-EvidenceWeight    = 57 / 60
+SelectedCount     = 9
+EvidenceWeight    = 54 / 60
 ExecutionReady    = true
 SelectedMatchKeys =
-  drank
-  flew
-  her
-  here's
-  isn't
-  mrs
-  our
-  parent
+  shorts
+  sometimes
+  they're
+  wasn't
+  weren't
+  what's
+  where's
+  woman
+  won't
 ```
 
 本批重点：
 
 ```text
-drank / flew
-→ past-form Identity re-review + learner quarantine boundary
+shorts
+→ lexicalized plural clothing noun vs morphology
 
-here's / isn't
+sometimes
+→ lexical adverb vs false morphology relation
+
+they're / wasn't / weren't / what's / where's / won't
 → contraction / Expression routing
 
-her / our
-→ high-frequency pronoun/determiner identity
-
-mrs
-→ lexical title abbreviation
-
-parent
-→ singular lexical identity vs regular plural relationship
+woman
+→ singular lexical identity vs pedagogical irregular plural women
 ```
 
 执行要求：
@@ -335,7 +313,7 @@ parent
 1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
-4. 8/8 closure，不 cherry-pick。
+4. 9/9 closure，不 cherry-pick。
 5. apply + rebuild Identity/Learner views。
 6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
 7. 核对 blocker / Identity Preview / Learner Preview delta。
