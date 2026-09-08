@@ -4,24 +4,21 @@
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "orange",
-    "play",
-    "taste",
-    "nest",
-    "peacock",
-    "understand"
+    "thin",
+    "time",
+    "water"
   ],
-  "SelectedCount": 6,
-  "ReviewBundleFingerprint": "8413c6373649f55e86303468f77ba9b708e5e31245c656ef073cf54995887037",
-  "ReviewPacketFingerprint": "832c572040518672311cb4b3ac22e42db81c9cb39199fdba8bb9dc53598ed808",
+  "SelectedCount": 3,
+  "ReviewBundleFingerprint": "2d7e115f8994cb6b2642a4d2ceafd1f8b45b6c6a725cba7fa5e414c04eb49afa",
+  "ReviewPacketFingerprint": "fe1e87c5b70c1b786d2a5077729782acc0d4de7402ce8b6c60d771f7321f6690",
   "Items": [
     {
-      "MatchKey": "orange",
+      "MatchKey": "thin",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "orange",
-      "Definitions": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
+      "DisplayForms": "thin",
+      "Definitions": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地|n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;",
       "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:1年级下|beijing_start1:2年级下|beishida_start1:2年级下|hujiao_start3:3年级上|hujiao_start3:3年级下|jijiao_start3:3年级上|jijiao_start3:3年级下|renjiao_start1:1年级上|renjiao_start3:3年级上|renjiao_start3:3年级下|waiyan_start1:1年级上|waiyan_start1:2年级上|waiyan_start3:3年级下",
+      "SourceBooks": "beijing_start1:2年级上|beishida_start1:3年级下|hujiao_start3:3年级上|hujiao_start3:4年级下|jijiao_start3:5年级上|renjiao_start1:2年级上|renjiao_start3:3年级下|waiyan_start1:1年级下|waiyan_start3:3年级下",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -32,1320 +29,978 @@
       "PolicyRecommendedAction": "re-review-evidence-changed",
       "DurableDecisions": [
         {
-          "DecisionKey": "surface:orange",
-          "MatchKey": "orange",
-          "OccurrenceKeys": "[\"beijing_start1|g1-lower|r018|orange\",\"beijing_start1|g2-lower|r030|orange\",\"hujiao_start3|g3-lower|r015|orange\",\"hujiao_start3|g3-upper|r065|orange\",\"jijiao_start3|g3-lower|r063|orange\",\"renjiao_start1|g1-upper|r049|orange\",\"renjiao_start3|g3-lower|r054|orange\",\"waiyan_start1|g2-upper|r018|orange\",\"waiyan_start3|g3-lower|r046|orange\"]",
+          "DecisionKey": "surface:thin",
+          "MatchKey": "thin",
+          "OccurrenceKeys": "[\"beijing_start1|g2-upper|r050|thin\",\"hujiao_start3|g3-upper|r027|thin\",\"jijiao_start3|g5-upper|r017|thin\",\"renjiao_start1|g2-upper|r025|thin\",\"renjiao_start3|g3-lower|r029|thin\",\"waiyan_start1|g1-lower|r056|thin\",\"waiyan_start3|g3-lower|r022|thin\"]",
           "Action": "keep-identity",
-          "CanonicalMatchKey": "orange#fruit",
+          "CanonicalMatchKey": "thin#slim",
           "ObjectType": "vocabulary",
-          "TargetSense": "橙子；桔子",
+          "TargetSense": "瘦的",
           "Status": "reviewed",
           "Confidence": "high",
-          "DecisionBasis": "jijiao-start3-multipart-fruit-revalidation",
-          "Rationale": "The Jijiao Grade-3-lower occurrence follows fruit/milk/egg/bread/apple in a food block, so it joins the fruit subgroup."
+          "DecisionBasis": "jijiao-start3-multipart-person-description-revalidation",
+          "Rationale": "The Jijiao occurrence is embedded in a family/person-description block (sister/parent/hair/uncle/aunt/cousin) before occupation words, so the learner-facing sense is slim/thin for a person."
         },
         {
-          "DecisionKey": "surface:orange#color",
-          "MatchKey": "orange",
-          "OccurrenceKeys": "[\"jijiao_start3|g3-upper|r033|orange\",\"renjiao_start3|g3-upper|r019|orange\",\"waiyan_start1|g1-upper|r074|orange\",\"waiyan_start3|g3-lower|r167|orange\"]",
+          "DecisionKey": "surface:thin#object",
+          "MatchKey": "thin",
+          "OccurrenceKeys": "[\"hujiao_start3|g4-lower|r007|thin\"]",
           "Action": "keep-identity",
-          "CanonicalMatchKey": "orange#color",
+          "CanonicalMatchKey": "thin#object",
           "ObjectType": "vocabulary",
-          "TargetSense": "橙色；橘色",
+          "TargetSense": "薄的",
           "Status": "reviewed",
           "Confidence": "high",
-          "DecisionBasis": "jijiao-start3-multipart-color-revalidation",
-          "Rationale": "The Jijiao Grade-3-upper occurrence is inside the explicit red/yellow/blue/green/orange/brown/white/black colour sequence, so it joins the colour subgroup."
+          "DecisionBasis": "multipart-thin-object-preserved",
+          "Rationale": "The Hujiao touch/feel/thick-thin material occurrence remains the object-thinness subgroup; the new Jijiao occurrence is a person description."
         }
       ],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g1-lower|r018|orange",
-        "beijing_start1|g2-lower|r030|orange",
-        "beishida_start1|g2-lower|r011|orange",
-        "beishida_start1|g2-lower|r055|orange",
-        "hujiao_start3|g3-upper|r065|orange",
-        "hujiao_start3|g3-lower|r015|orange",
-        "jijiao_start3|g3-upper|r033|orange",
-        "jijiao_start3|g3-lower|r063|orange",
-        "renjiao_start1|g1-upper|r049|orange",
-        "renjiao_start3|g3-upper|r019|orange",
-        "renjiao_start3|g3-lower|r054|orange",
-        "waiyan_start1|g1-upper|r074|orange",
-        "waiyan_start1|g2-upper|r018|orange",
-        "waiyan_start3|g3-lower|r046|orange",
-        "waiyan_start3|g3-lower|r167|orange"
+        "beijing_start1|g2-upper|r050|thin",
+        "beishida_start1|g3-lower|r028|thin",
+        "hujiao_start3|g3-upper|r027|thin",
+        "hujiao_start3|g4-lower|r007|thin",
+        "jijiao_start3|g5-upper|r017|thin",
+        "renjiao_start1|g2-upper|r025|thin",
+        "renjiao_start3|g3-lower|r029|thin",
+        "waiyan_start1|g1-lower|r056|thin",
+        "waiyan_start3|g3-lower|r022|thin"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g1-lower|r018|orange",
+          "SourceOccurrenceKey": "beijing_start1|g2-upper|r050|thin",
           "SourceID": "beijing_start1",
-          "SourceBook": "1年级下",
-          "Grade": "1",
-          "Semester": "下",
-          "SourceRow": "18",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "wall",
-            "ball",
-            "van",
-            "oil",
-            "net",
-            "banana",
-            "ice cream",
-            "ice"
-          ],
-          "After": [
-            "jam",
-            "apple",
-            "juice",
-            "peach",
-            "grapes",
-            "yogurt",
-            "zoo",
-            "tiger"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beijing_start1|g2-lower|r030|orange",
-          "SourceID": "beijing_start1",
-          "SourceBook": "2年级下",
+          "SourceBook": "2年级上",
           "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "30",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
+          "Semester": "上",
+          "SourceRow": "50",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
           "Before": [
-            "rice",
-            "noodle",
-            "down",
-            "ice cream",
-            "back",
-            "hungry",
-            "hello",
-            "dear"
-          ],
-          "After": [
-            "vegetable",
-            "evening",
-            "room",
-            "love",
-            "bed",
-            "big",
-            "chair",
-            "sit"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g2-lower|r011|orange",
-          "SourceID": "beishida_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "11",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "it",
-            "banana",
-            "nut",
-            "pear",
-            "strawberry",
+            "two",
+            "three",
+            "after",
+            "elephant",
             "yes",
-            "lemon",
-            "an"
+            "four",
+            "baby",
+            "cat"
           ],
           "After": [
-            "vegetables",
-            "are",
-            "these",
-            "they",
-            "tomatoes",
-            "those",
-            "beans",
-            "mushrooms"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g2-lower|r055|orange",
-          "SourceID": "beishida_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "55",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "color",
-            "butterfly",
-            "beautiful",
-            "red",
-            "yellow",
-            "blue",
-            "green",
-            "brown"
-          ],
-          "After": [
-            "look at",
-            "all",
-            "white",
-            "black",
-            "pink",
-            "purple",
-            "can",
-            "climb"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g3-upper|r065|orange",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "65",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "an",
-            "apple",
-            "banana",
-            "dad",
-            "good",
-            "here",
-            "how much",
-            "it"
-          ],
-          "After": [
-            "pear",
-            "they",
-            "bed",
-            "book",
-            "chair",
-            "desk",
-            "mum",
-            "pen"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g3-lower|r015|orange",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "15",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "green",
-            "red",
-            "white",
-            "yellow",
-            "candy",
-            "how",
-            "ice cream",
-            "lemon"
-          ],
-          "After": [
-            "sour",
-            "sweet",
-            "taste",
-            "bike",
-            "bus",
-            "can",
-            "car",
-            "hear"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "jijiao_start3|g3-upper|r033|orange",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "33",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "nine",
-            "ten",
-            "friend",
-            "window",
-            "red",
-            "yellow",
-            "blue",
-            "green"
-          ],
-          "After": [
-            "brown",
-            "white",
-            "black",
-            "cold",
-            "hot",
-            "tired",
-            "happy",
-            "sad"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "jijiao_start3|g3-lower|r063|orange",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "63",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "vegetable",
-            "fruit",
-            "like",
-            "good",
-            "milk",
-            "egg",
-            "bread",
-            "apple"
-          ],
-          "After": [
-            "eleven",
-            "twelve",
-            "thirteen",
-            "fourteen",
-            "fifteen",
-            "ice cream",
-            "sixteen",
-            "seventeen"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g1-upper|r049|orange",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "1年级上",
-          "Grade": "1",
-          "Semester": "上",
-          "SourceRow": "49",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "yellow",
-            "blue",
-            "red",
-            "green",
-            "colour",
-            "apple",
-            "pear",
-            "banana"
-          ],
-          "After": [
-            "do",
-            "you",
-            "like",
-            "yes",
-            "no"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g3-upper|r019|orange",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "19",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "your",
-            "red",
-            "green",
-            "yellow",
-            "blue",
-            "black",
-            "brown",
-            "white"
-          ],
-          "After": [
-            "OK",
-            "mum",
-            "face",
-            "ear",
-            "eye",
-            "nose",
-            "mouth",
-            "arm"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g3-lower|r054|orange",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "54",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "ball",
-            "car",
-            "boat",
-            "map",
-            "toy",
-            "box",
-            "pear",
-            "apple"
-          ],
-          "After": [
-            "banana",
-            "watermelon",
-            "strawberry",
-            "grape",
-            "buy",
-            "fruit",
-            "eleven",
-            "twelve"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g1-upper|r074|orange",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "1年级上",
-          "Grade": "1",
-          "Semester": "上",
-          "SourceRow": "74",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "now",
-            "black",
-            "white",
             "dog",
-            "cat",
-            "and",
-            "hey",
-            "look"
-          ],
-          "After": [
-            "this",
-            "our",
-            "teacher",
-            "school",
-            "classroom",
-            "Nice to meet you.",
-            "child",
-            "that"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g2-upper|r018|orange",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "18",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "ginger",
-            "nice",
-            "mm",
-            "onion",
-            "ice cream",
-            "banana",
-            "apple",
-            "milk"
-          ],
-          "After": [
-            "fruit",
-            "milkshake",
-            "Here you are.",
-            "everything",
-            "tomato",
-            "really",
-            "their",
-            "favourite"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r046|orange",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "46",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "mum",
-            "noodles",
-            "fish",
-            "but",
-            "milk",
-            "mm",
-            "does",
-            "do"
-          ],
-          "After": [
-            "apple",
-            "banana",
-            "pear",
-            "doesn't",
-            "does not",
-            "goes",
-            "go",
-            "go to school"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r167|orange",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "167",
-          "Word": "orange",
-          "Definition": "adj. 橙色的;橘色的 n. 橙;橙色;桔子",
-          "Before": [
-            "let's",
-            "let us",
-            "put on",
-            "funny",
-            "party",
-            "OK",
-            "brown",
-            "trousers"
-          ],
-          "After": [
-            "shirt",
-            "look at",
-            "shoe",
-            "can't",
-            "cannot",
-            "turn",
-            "white",
-            "photo"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "play",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "play",
-      "Definitions": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:6年级上|beishida_start1:2年级上|beishida_start1:3年级上|hujiao_start3:3年级下|jijiao_start3:4年级上|renjiao_start3:5年级上|renjiao_start3:5年级下|waiyan_start1:1年级下|waiyan_start1:2年级上|waiyan_start1:2年级下|waiyan_start3:3年级下|waiyan_start3:6年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:play",
-          "MatchKey": "play",
-          "OccurrenceKeys": "[\"beijing_start1|g6-upper|r002|play\",\"hujiao_start3|g3-lower|r043|play\",\"jijiao_start3|g4-upper|r042|play\",\"renjiao_start3|g5-lower|r030|play\",\"renjiao_start3|g5-upper|r037|play\",\"waiyan_start1|g1-lower|r105|play\",\"waiyan_start1|g2-lower|r068|play\",\"waiyan_start3|g3-lower|r057|play\",\"waiyan_start3|g3-lower|r110|play\",\"waiyan_start3|g6-lower|r030|play\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "play#general",
-          "ObjectType": "vocabulary",
-          "TargetSense": "玩；玩耍；参加游戏或运动",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "jijiao-start3-multipart-general-play-revalidation",
-          "Rationale": "The Jijiao occurrence sits in toy/ball/kite/fly/play/with/play with, which is general play activity rather than musical performance."
-        },
-        {
-          "DecisionKey": "surface:play#instrument",
-          "MatchKey": "play",
-          "OccurrenceKeys": "[\"waiyan_start1|g2-upper|r083|play\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "play#instrument",
-          "ObjectType": "vocabulary",
-          "TargetSense": "演奏",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "multipart-play-instrument-preserved",
-          "Rationale": "The existing piano/music occurrence remains the instrument-performance subgroup; the new Jijiao occurrence is general play."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beijing_start1|g6-upper|r002|play",
-        "beishida_start1|g2-upper|r030|play",
-        "beishida_start1|g3-upper|r056|play",
-        "hujiao_start3|g3-lower|r043|play",
-        "jijiao_start3|g4-upper|r042|play",
-        "renjiao_start3|g5-upper|r037|play",
-        "renjiao_start3|g5-lower|r030|play",
-        "waiyan_start1|g1-lower|r105|play",
-        "waiyan_start1|g2-upper|r083|play",
-        "waiyan_start1|g2-lower|r068|play",
-        "waiyan_start3|g3-lower|r057|play",
-        "waiyan_start3|g3-lower|r110|play",
-        "waiyan_start3|g6-lower|r030|play"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beijing_start1|g6-upper|r002|play",
-          "SourceID": "beijing_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "2",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [],
-          "After": [
-            "farm",
-            "swim",
-            "strong",
-            "some",
-            "Thursday",
-            "mountain",
-            "let",
-            "glasses"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g2-upper|r030|play",
-          "SourceID": "beishida_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "30",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "it",
-            "tiger",
-            "who",
-            "she",
-            "from",
-            "Canada",
-            "he",
-            "UK"
-          ],
-          "After": [
-            "football",
-            "China",
-            "USA",
-            "family",
-            "photo",
-            "mother",
-            "father",
-            "sister"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g3-upper|r056|play",
-          "SourceID": "beishida_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "56",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "kitchen",
-            "cook",
-            "cooking",
-            "dinner",
-            "write",
-            "writing",
-            "drink",
-            "drinking"
-          ],
-          "After": [
-            "playing",
-            "paint",
-            "painting",
-            "our",
-            "math",
-            "English",
-            "subject",
-            "classroom"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g3-lower|r043|play",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "43",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "old",
-            "our",
-            "panda",
-            "strong",
-            "tiger",
-            "fun",
-            "kite",
-            "lovely"
-          ],
-          "After": [
-            "robot",
-            "sorry",
-            "toy bear",
-            "biscuit",
-            "bread",
-            "breakfast",
-            "child",
-            "children"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "jijiao_start3|g4-upper|r042|play",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "42",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "listen",
-            "listen to",
-            "wash",
-            "face",
             "toy",
-            "ball",
-            "kite",
-            "fly"
-          ],
-          "After": [
-            "with",
-            "play with",
-            "school",
-            "classroom",
-            "library",
-            "playground",
-            "where",
-            "near"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-upper|r037|play",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "37",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "wash",
-            "wash my clothes",
-            "watch",
-            "watch TV",
-            "do",
-            "do homework",
-            "read",
-            "read books"
-          ],
-          "After": [
-            "play football",
-            "cooking",
-            "often",
-            "park",
-            "tired",
-            "sport",
-            "play sports",
-            "should"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r030|play",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "30",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "why",
-            "shop",
-            "work",
-            "last",
-            "sound",
-            "also",
-            "busy",
-            "need"
-          ],
-          "After": [
-            "letter",
-            "live",
-            "island",
-            "always",
-            "cave",
-            "go swimming",
-            "win",
-            "spring"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g1-lower|r105|play",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "1年级下",
-          "Grade": "1",
-          "Semester": "下",
-          "SourceRow": "105",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "here",
-            "football",
-            "basketball",
-            "ping-pong",
-            "like",
-            "lion",
+            "monkey",
+            "these",
             "them",
-            "all"
-          ],
-          "After": [
-            "with",
-            "together",
-            "favourite",
-            "sport",
-            "guess",
-            "meatball",
-            "What about ...?",
-            "swimming"
+            "no",
+            "ear",
+            "red"
           ]
         },
         {
-          "SourceOccurrenceKey": "waiyan_start1|g2-upper|r083|play",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "83",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "then",
-            "ship",
-            "plane",
-            "love",
-            "watches",
-            "weekend",
-            "read",
-            "come"
-          ],
-          "After": [
-            "piano",
-            "music",
-            "listen",
-            "listen to ...",
-            "CD",
-            "drum",
-            "winter",
-            "fly"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r068|play",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "68",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "thing",
-            "ill",
-            "cook",
-            "her",
-            "go shopping",
-            "kitchen",
-            "Children's Day",
-            "TV"
-          ],
-          "After": [
-            "say",
-            "poem",
-            "dragon",
-            "dragon dance",
-            "picnic",
-            "family",
-            "beach",
-            "hill"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r057|play",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "57",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "pear",
-            "doesn't",
-            "does not",
-            "goes",
-            "go",
-            "go to school",
-            "on",
-            "Monday"
-          ],
-          "After": [
-            "phone",
-            "on the phone",
-            "with",
-            "friend",
-            "at",
-            "home",
-            "at home",
-            "who"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r110|play",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "110",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "warm",
-            "hot",
-            "autumn",
-            "cool",
-            "winter",
-            "cold",
-            "skating",
-            "go skating"
-          ],
-          "After": [
-            "snow",
-            "rain",
-            "sunny",
-            "windy",
-            "very",
-            "toy",
-            "under",
-            "for"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r030|play",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "30",
-          "Word": "play",
-          "Definition": "n. 游戏;比赛;剧本 vt. 游戏;扮演;演奏;播放;同...比赛 vi. 演奏;玩耍;上演;参加比赛",
-          "Before": [
-            "fly away",
-            "just",
-            "cow",
-            "blow",
-            "rabbit",
-            "balloon",
-            "stairs",
-            "mess"
-          ],
-          "After": [
-            "third",
-            "time",
-            "bark",
-            "loudly",
-            "nothing",
-            "home",
-            "got",
-            "get"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "taste",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "taste",
-      "Definitions": "n. 味道;品味;审美 vt. 尝;体验 vi. 尝起来;有...的味道",
-      "SourceIDs": "beishida_start1|hujiao_start3|renjiao_start1",
-      "SourceBooks": "beishida_start1:6年级下|hujiao_start3:3年级下|renjiao_start1:6年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-cross-source",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:taste",
-          "MatchKey": "taste",
-          "OccurrenceKeys": "[\"renjiao_start1|g6-upper|r009|taste\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "taste#sample",
-          "ObjectType": "vocabulary",
-          "TargetSense": "尝；品尝",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "residual-split-occurrence-partition",
-          "Rationale": "The travel/food context binds this occurrence to the action of tasting or sampling food."
-        },
-        {
-          "DecisionKey": "surface:taste#flavour",
-          "MatchKey": "taste",
-          "OccurrenceKeys": "[\"hujiao_start3|g3-lower|r018|taste\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "taste#flavour",
-          "ObjectType": "vocabulary",
-          "TargetSense": "尝起来；有……味道",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "residual-split-occurrence-partition",
-          "Rationale": "The lemon/orange/sour/sweet sequence binds this occurrence to the linking sensory predicate describing how something tastes."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r041|taste",
-        "hujiao_start3|g3-lower|r018|taste",
-        "renjiao_start1|g6-upper|r009|taste"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r041|taste",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "41",
-          "Word": "taste",
-          "Definition": "n. 味道;品味;审美 vt. 尝;体验 vi. 尝起来;有...的味道",
-          "Before": [
-            "fall",
-            "hear",
-            "injection",
-            "letter",
-            "outside",
-            "pain",
-            "relax",
-            "smell"
-          ],
-          "After": [
-            "wrist",
-            "agree",
-            "bottle",
-            "break",
-            "city",
-            "country",
-            "dark",
-            "different"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g3-lower|r018|taste",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "18",
-          "Word": "taste",
-          "Definition": "n. 味道;品味;审美 vt. 尝;体验 vi. 尝起来;有...的味道",
-          "Before": [
-            "yellow",
-            "candy",
-            "how",
-            "ice cream",
-            "lemon",
-            "orange",
-            "sour",
-            "sweet"
-          ],
-          "After": [
-            "bike",
-            "bus",
-            "can",
-            "car",
-            "hear",
-            "listen",
-            "plane",
-            "ship"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g6-upper|r009|taste",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "9",
-          "Word": "taste",
-          "Definition": "n. 味道;品味;审美 vt. 尝;体验 vi. 尝起来;有...的味道",
-          "Before": [
-            "morning tea",
-            "soup",
-            "garden",
-            "the Potala Palace",
-            "the Summer Palace",
-            "the Terracotta Army",
-            "vacation"
-          ],
-          "After": [
-            "map",
-            "north",
-            "south",
-            "east",
-            "west",
-            "famous",
-            "temple",
-            "around"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "nest",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "nest",
-      "Definitions": "n. 巢,窝;安乐窝;温床 vt. 筑巢;嵌套 vi. 筑巢;找鸟巢",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:1年级下|beishida_start1:2年级下",
-      "CandidateSignals": "multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-hard",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g1-lower|r023|nest",
-        "beishida_start1|g2-lower|r030|nest"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g1-lower|r023|nest",
-          "SourceID": "beishida_start1",
-          "SourceBook": "1年级下",
-          "Grade": "1",
-          "Semester": "下",
-          "SourceRow": "23",
-          "Word": "nest",
-          "Definition": "n. 巢,窝;安乐窝;温床 vt. 筑巢;嵌套 vi. 筑巢;找鸟巢",
-          "Before": [
-            "juice",
-            "jump",
-            "like",
-            "lion",
-            "milk",
-            "mother",
-            "mouse",
-            "my"
-          ],
-          "After": [
-            "net",
-            "noodles",
-            "octopus",
-            "ostrich",
-            "panda",
-            "pants",
-            "peacock",
-            "pig"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g2-lower|r030|nest",
-          "SourceID": "beishida_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "30",
-          "Word": "nest",
-          "Definition": "n. 巢,窝;安乐窝;温床 vt. 筑巢;嵌套 vi. 筑巢;找鸟巢",
-          "Before": [
-            "potatoes",
-            "carrots",
-            "eggplants",
-            "peppers",
-            "number",
-            "bird",
-            "how many",
-            "there"
-          ],
-          "After": [
-            "too",
-            "egg",
-            "flower",
-            "eleven",
-            "thirteen",
-            "twelve",
-            "small",
-            "crocodile"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "peacock",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "peacock",
-      "Definitions": "n. 孔雀;雄孔雀;爱虚荣的人 vi. 炫耀;神气活现地走",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:1年级下|beishida_start1:3年级下",
-      "CandidateSignals": "multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-hard",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g1-lower|r030|peacock",
-        "beishida_start1|g3-lower|r017|peacock"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g1-lower|r030|peacock",
-          "SourceID": "beishida_start1",
-          "SourceBook": "1年级下",
-          "Grade": "1",
-          "Semester": "下",
-          "SourceRow": "30",
-          "Word": "peacock",
-          "Definition": "n. 孔雀;雄孔雀;爱虚荣的人 vi. 炫耀;神气活现地走",
-          "Before": [
-            "my",
-            "nest",
-            "net",
-            "noodles",
-            "octopus",
-            "ostrich",
-            "panda",
-            "pants"
-          ],
-          "After": [
-            "pig",
-            "pizza",
-            "queen",
-            "quilt",
-            "rabbit",
-            "rain",
-            "rectangle",
-            "rice"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g3-lower|r017|peacock",
+          "SourceOccurrenceKey": "beishida_start1|g3-lower|r028|thin",
           "SourceID": "beishida_start1",
           "SourceBook": "3年级下",
           "Grade": "3",
           "Semester": "下",
-          "SourceRow": "17",
-          "Word": "peacock",
-          "Definition": "n. 孔雀;雄孔雀;爱虚荣的人 vi. 炫耀;神气活现地走",
+          "SourceRow": "28",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
           "Before": [
-            "meat",
-            "vegetables",
-            "dumplings",
-            "hamburgers",
-            "big",
-            "beautiful",
-            "tall",
-            "small"
-          ],
-          "After": [
-            "old",
-            "turtle",
             "young",
             "bad",
             "good",
             "happy",
             "short",
-            "fast"
+            "fast",
+            "slow",
+            "fat"
+          ],
+          "After": [
+            "long",
+            "hot",
+            "soup",
+            "thirsty",
+            "some",
+            "cola",
+            "hungry",
+            "milk"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g3-upper|r027|thin",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "27",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
+          "Before": [
+            "fat",
+            "friend",
+            "he",
+            "is",
+            "my",
+            "she",
+            "short",
+            "tall"
+          ],
+          "After": [
+            "this",
+            "beautiful",
+            "brother",
+            "father",
+            "me",
+            "mother",
+            "sister",
+            "who"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r007|thin",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "7",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
+          "Before": [
+            "touch",
+            "feel",
+            "soft",
+            "hard",
+            "thick"
+          ],
+          "After": [
+            "blind",
+            "noise",
+            "young",
+            "smell",
+            "strawberry",
+            "or",
+            "watermelon",
+            "grape"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-upper|r017|thin",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "17",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;",
+          "Before": [
+            "sister",
+            "parent",
+            "white",
+            "hair",
+            "black",
+            "uncle",
+            "aunt",
+            "cousin"
+          ],
+          "After": [
+            "work",
+            "doctor",
+            "hospital",
+            "nurse",
+            "worker",
+            "walk",
+            "go for a walk",
+            "plant"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g2-upper|r025|thin",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "2年级上",
+          "Grade": "2",
+          "Semester": "上",
+          "SourceRow": "25",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
+          "Before": [
+            "look",
+            "his",
+            "name",
+            "her",
+            "or",
+            "big",
+            "tall",
+            "pretty"
+          ],
+          "After": [
+            "short",
+            "handsome",
+            "new",
+            "does",
+            "bookshop",
+            "zoo",
+            "school",
+            "supermarket"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g3-lower|r029|thin",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "29",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
+          "Before": [
+            "mother",
+            "sister",
+            "brother",
+            "grandmother",
+            "grandma",
+            "grandfather",
+            "grandpa",
+            "family"
+          ],
+          "After": [
+            "fat",
+            "tall",
+            "short",
+            "long",
+            "small",
+            "big",
+            "giraffe",
+            "so"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g1-lower|r056|thin",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "56",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
+          "Before": [
+            "they're",
+            "they are",
+            "cow",
+            "pig",
+            "farm",
+            "duck",
+            "chicken",
+            "egg"
+          ],
+          "After": [
+            "very",
+            "fat",
+            "big",
+            "little",
+            "snake",
+            "short",
+            "small",
+            "elephant"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r022|thin",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "22",
+          "Word": "thin",
+          "Definition": "n. 细小部分 adj. 薄的;瘦的;稀薄的;微弱的 vt. 使瘦;使淡;使稀疏 vi. 变薄;变瘦;变淡 adv. 稀疏地;微弱地",
+          "Before": [
+            "tiger",
+            "lion",
+            "elephant",
+            "fat",
+            "man",
+            "short",
+            "tall",
+            "small"
+          ],
+          "After": [
+            "big",
+            "like",
+            "football",
+            "them",
+            "ouch",
+            "basketball",
+            "table tennis",
+            "morning exercises"
           ]
         }
       ]
     },
     {
-      "MatchKey": "understand",
+      "MatchKey": "time",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "understand",
-      "Definitions": "vi. 理解;懂得;熟悉 vt. 理解;懂;获悉;推断;省略",
-      "SourceIDs": "beishida_start1",
-      "SourceBooks": "beishida_start1:6年级上|beishida_start1:6年级下",
-      "CandidateSignals": "multiple-occurrences",
+      "DisplayForms": "time",
+      "Definitions": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:2年级下|beishida_start1:4年级下|hujiao_start3:4年级下|jijiao_start3:6年级上|renjiao_start1:2年级下|waiyan_start1:4年级下|waiyan_start3:4年级下|waiyan_start3:5年级上|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-hard",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:time",
+          "MatchKey": "time",
+          "OccurrenceKeys": "[\"beijing_start1|g2-lower|r002|time\",\"hujiao_start3|g4-lower|r079|time\",\"jijiao_start3|g6-upper|r003|time\",\"renjiao_start1|g2-lower|r037|time\",\"waiyan_start1|g4-lower|r056|time\",\"waiyan_start3|g4-lower|r110|time\",\"waiyan_start3|g5-upper|r117|time\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "time#general",
+          "ObjectType": "vocabulary",
+          "TargetSense": "时间；时候",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-general-time-revalidation",
+          "Rationale": "The new Jijiao occurrence is directly followed by clock in a home/time vocabulary block, so it joins ordinary time/时候 rather than count-of-occurrences."
+        },
+        {
+          "DecisionKey": "surface:time#count",
+          "MatchKey": "time",
+          "OccurrenceKeys": "[\"waiyan_start3|g6-lower|r032|time\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "time#count",
+          "ObjectType": "vocabulary",
+          "TargetSense": "次；次数",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "multipart-time-count-preserved",
+          "Rationale": "The explicit third/time occurrence remains the count subgroup; the new Jijiao occurrence is ordinary clock/time usage."
+        }
+      ],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-upper|r100|understand",
-        "beishida_start1|g6-lower|r069|understand"
+        "beijing_start1|g2-lower|r002|time",
+        "beishida_start1|g4-lower|r022|time",
+        "hujiao_start3|g4-lower|r079|time",
+        "jijiao_start3|g6-upper|r003|time",
+        "renjiao_start1|g2-lower|r037|time",
+        "waiyan_start1|g4-lower|r056|time",
+        "waiyan_start3|g4-lower|r110|time",
+        "waiyan_start3|g5-upper|r117|time",
+        "waiyan_start3|g6-lower|r032|time"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r100|understand",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "100",
-          "Word": "understand",
-          "Definition": "vi. 理解;懂得;熟悉 vt. 理解;懂;获悉;推断;省略",
-          "Before": [
-            "scared",
-            "screen",
-            "sure",
-            "switch",
-            "tell",
-            "tired",
-            "toothache",
-            "turn on"
-          ],
+          "SourceOccurrenceKey": "beijing_start1|g2-lower|r002|time",
+          "SourceID": "beijing_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "2",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [],
           "After": [
-            "weekend",
-            "work",
-            "city",
-            "Internet",
-            "Italy",
-            "Japan",
-            "lake",
-            "lesson"
+            "o'clock",
+            "nice",
+            "when",
+            "thirty",
+            "home",
+            "five",
+            "fifty",
+            "nine"
           ]
         },
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r069|understand",
+          "SourceOccurrenceKey": "beishida_start1|g4-lower|r022|time",
           "SourceID": "beishida_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "22",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "diary",
+            "Wednesday",
+            "Thursday",
+            "visit",
+            "watch",
+            "late",
+            "hurry",
+            "... o'clock"
+          ],
+          "After": [
+            "early",
+            "slow",
+            "have dinner",
+            "fix",
+            "night",
+            "breakfast",
+            "always",
+            "often"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r079|time",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "79",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "city",
+            "bag",
+            "gold",
+            "all",
+            "play the violin",
+            "play the guitar",
+            "o'clock",
+            "quarter"
+          ],
+          "After": [
+            "half",
+            "wash",
+            "dinner",
+            "start",
+            "catch",
+            "get up",
+            "brush ... teeth",
+            "half past ..."
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g6-upper|r003|time",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "3",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "home"
+          ],
+          "After": [
+            "clock",
+            "house",
+            "study",
+            "kitchen",
+            "toilet",
+            "floor",
+            "there",
+            "breakfast"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g2-lower|r037|time",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "37",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "twelve",
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "thirteen",
+            "fourteen",
+            "fifteen"
+          ],
+          "After": [
+            "playtime",
+            "get up",
+            "eat breakfast",
+            "go to school",
+            "eat lunch",
+            "go home",
+            "eat dinner",
+            "go to bed"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g4-lower|r056|time",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "56",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "report",
+            "stick",
+            "fantastic",
+            "fun",
+            "meet",
+            "east",
+            "west",
+            "o'clock"
+          ],
+          "After": [
+            "cartoon",
+            "much",
+            "am",
+            "pm",
+            "best",
+            "north",
+            "south",
+            "rest"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r110|time",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "110",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "went",
+            "go",
+            "there",
+            "ate",
+            "eat",
+            "drank",
+            "drink",
+            "drink"
+          ],
+          "After": [
+            "have a good time",
+            "busy",
+            "took",
+            "take",
+            "tell",
+            "great",
+            "delicious",
+            "made"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r117|time",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "117",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
+          "Before": [
+            "deaf",
+            "hear",
+            "her",
+            "fire",
+            "firefighter",
+            "hot dog",
+            "sausage",
+            "kind"
+          ],
+          "After": [
+            "school",
+            "start",
+            "past",
+            "late",
+            "go to bed",
+            "exercise",
+            "playground",
+            "before"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r032|time",
+          "SourceID": "waiyan_start3",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "69",
-          "Word": "understand",
-          "Definition": "vi. 理解;懂得;熟悉 vt. 理解;懂;获悉;推断;省略",
+          "SourceRow": "32",
+          "Word": "time",
+          "Definition": "n. 时间;时代;次数;节拍;倍数 adj. 定时的;定期的;分期的 vt. 计时;测定...的时间;安排...的速度",
           "Before": [
-            "over there",
-            "part",
-            "pick up",
-            "place",
-            "plant",
-            "present",
-            "tin can",
-            "trashcan"
+            "cow",
+            "blow",
+            "rabbit",
+            "balloon",
+            "stairs",
+            "mess",
+            "play",
+            "third"
           ],
           "After": [
-            "woods",
-            "work"
+            "bark",
+            "loudly",
+            "nothing",
+            "home",
+            "got",
+            "get",
+            "space",
+            "interested"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "water",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "water",
+      "Definitions": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:3年级下|beishida_start1:3年级下|hujiao_start3:3年级下|hujiao_start3:4年级下|jijiao_start3:5年级下|renjiao_start1:1年级下|renjiao_start3:3年级上|waiyan_start1:3年级上|waiyan_start1:4年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:water",
+          "MatchKey": "water",
+          "OccurrenceKeys": "[\"beijing_start1|g3-lower|r049|water\",\"hujiao_start3|g3-lower|r058|water\",\"jijiao_start3|g5-lower|r029|water\",\"renjiao_start1|g1-lower|r037|water\",\"renjiao_start3|g3-upper|r050|water\",\"waiyan_start1|g3-upper|r022|water\",\"waiyan_start1|g4-upper|r097|water\",\"waiyan_start3|g4-lower|r144|water\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "water#noun",
+          "ObjectType": "vocabulary",
+          "TargetSense": "水",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-water-noun-revalidation",
+          "Rationale": "The new Jijiao occurrence follows hungry and precedes tea/candy in a food-and-drink context, so it is ordinary water as a noun."
+        },
+        {
+          "DecisionKey": "surface:water#verb",
+          "MatchKey": "water",
+          "OccurrenceKeys": "[\"hujiao_start3|g4-lower|r131|water\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "water#verb",
+          "ObjectType": "vocabulary",
+          "TargetSense": "浇水；给……浇水",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "multipart-water-verb-preserved",
+          "Rationale": "The garden/plant occurrence remains the watering verb; the new Jijiao occurrence is drinking water."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-lower|r049|water",
+        "beishida_start1|g3-lower|r041|water",
+        "hujiao_start3|g3-lower|r058|water",
+        "hujiao_start3|g4-lower|r131|water",
+        "jijiao_start3|g5-lower|r029|water",
+        "renjiao_start1|g1-lower|r037|water",
+        "renjiao_start3|g3-upper|r050|water",
+        "waiyan_start1|g3-upper|r022|water",
+        "waiyan_start1|g4-upper|r097|water",
+        "waiyan_start3|g4-lower|r144|water"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g3-lower|r049|water",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "49",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "child",
+            "children",
+            "fly",
+            "kite",
+            "song",
+            "voice",
+            "dance",
+            "pencil case"
+          ],
+          "After": [
+            "bottle",
+            "look",
+            "mother",
+            "box",
+            "drive",
+            "parent",
+            "father",
+            "write"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start1|g3-lower|r041|water",
+          "SourceID": "beishida_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "41",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "some",
+            "cola",
+            "hungry",
+            "milk",
+            "cold",
+            "fresh",
+            "favorite",
+            "coffee"
+          ],
+          "After": [
+            "iced tea",
+            "store",
+            "hat",
+            "new",
+            "clock",
+            "storybook",
+            "sell",
+            "newspaper"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g3-lower|r058|water",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "58",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "child",
+            "children",
+            "egg",
+            "have",
+            "juice",
+            "milk",
+            "some",
+            "too"
+          ],
+          "After": [
+            "we",
+            "at home",
+            "come in",
+            "dance",
+            "paint",
+            "read",
+            "sing",
+            "skate"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r131|water",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "131",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "email",
+            "hat",
+            "wear",
+            "yours",
+            "every year",
+            "garden",
+            "plant",
+            "leaf"
+          ],
+          "After": [
+            "them",
+            "grow",
+            "seed",
+            "every day",
+            "song",
+            "zoo",
+            "cinema",
+            "museum"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r029|water",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "29",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "woman",
+            "baby",
+            "cry",
+            "talk",
+            "man",
+            "sleep",
+            "who",
+            "hungry"
+          ],
+          "After": [
+            "tea",
+            "candy",
+            "people",
+            "many",
+            "child",
+            "children",
+            "women",
+            "woman"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g1-lower|r037|water",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "37",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "chicken",
+            "egg",
+            "hungry",
+            "want",
+            "and",
+            "juice",
+            "tea",
+            "milk"
+          ],
+          "After": [
+            "thirsty",
+            "thanks",
+            "shirt",
+            "T-shirt",
+            "skirt",
+            "dress",
+            "socks",
+            "shorts"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g3-upper|r050|water",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "50",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "tiger",
+            "panda",
+            "zoo",
+            "funny",
+            "bread",
+            "juice",
+            "egg",
+            "milk"
+          ],
+          "After": [
+            "cake",
+            "fish",
+            "rice",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g3-upper|r022|water",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "22",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "grass",
+            "food",
+            "fast food",
+            "make",
+            "cake",
+            "mum",
+            "dad",
+            "quiet"
+          ],
+          "After": [
+            "lovely",
+            "naughty",
+            "paper",
+            "boat",
+            "dragon boat",
+            "people",
+            "row",
+            "lake"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r097|water",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "97",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "practise",
+            "took",
+            "look",
+            "a lot",
+            "happen",
+            "fall off",
+            "bike ride",
+            "thirsty"
+          ],
+          "After": [
+            "watermelon",
+            "carried",
+            "bump",
+            "hurt",
+            "knee",
+            "cut",
+            "finger",
+            "early"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r144|water",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "144",
+          "Word": "water",
+          "Definition": "n. 水;海水;雨水;海域,大片的水 vt. 使湿;供以水;给...浇水 vi. 加水;流泪;流口水",
+          "Before": [
+            "fall down",
+            "found",
+            "find",
+            "town",
+            "happen",
+            "ride",
+            "then",
+            "thirsty"
+          ],
+          "After": [
+            "bought",
+            "buy",
+            "watermelon",
+            "carried",
+            "carry",
+            "bump",
+            "hospital",
+            "had"
           ]
         }
       ]
