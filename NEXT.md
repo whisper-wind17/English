@@ -75,15 +75,15 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #8 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #9 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
 Durable Identity decisions         = 2103
-Identity-level Vocabulary Preview  = 1018
-Review/blocker surfaces            = 943
-Evidence-changed surfaces          = 848
+Identity-level Vocabulary Preview  = 1032
+Review/blocker surfaces            = 929
+Evidence-changed surfaces          = 834
 Multipart resolved                 = 10
 ```
 
@@ -91,7 +91,7 @@ Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1006
+Learner-stage Vocabulary Preview   = 1020
 Identity rows suppressed by gate   = 12
 Preview occurrence contributions removed = 34
 Explicit decision-bound past-form requirements = 13
@@ -100,10 +100,10 @@ Explicit decision-bound past-form requirements = 13
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1018   (+33)
-Learner Preview    979  → 1006   (+27)
-Blockers          1010  →  943   (-67)
-Evidence-changed   911  →  848   (-63)
+Identity Preview   985  → 1032   (+47)
+Learner Preview    979  → 1020   (+41)
+Blockers          1010  →  929   (-81)
+Evidence-changed   911  →  834   (-77)
 Multipart            7  →   10   (+3)
 ```
 
@@ -138,6 +138,8 @@ her#object       → 她（宾格）
 PE               → reuse physical education
 shorts           → lexicalized 短裤，not short morphology
 sometimes        → lexical frequency adverb，not sometime morphology
+running          → lexicalized activity 跑步；not generic run inflection
+stairs           → lexicalized plural noun 楼梯
 ```
 
 ---
@@ -152,23 +154,23 @@ sometimes        → lexical frequency adverb，not sometime morphology
 #6  o'clock / pe / physical education / pop / she's / tv / clothes / couldn't / didn't / doesn't
 #7  drank / flew / her / here's / isn't / mrs / our / parent
 #8  shorts / sometimes / they're / wasn't / weren't / what's / where's / woman / won't
+#9  your / running / stairs / a / actor / cent / chemistry / chinatown / dragon / everything / firefighter / geography / halloween / happiness
 ```
 
-### Latest validation — Batch #8
+### Latest validation — Batch #9
 
 ```text
-run 34187882816 / #201 = SUCCESS
-batch commit = dd9da044b7979110d9aecde9ed392205abae4f62
-bot persist  = fe2e2f35f8250b544a9c590d19e9c2b575638100
+run 34189090892 / #202 = SUCCESS
+batch commit = 2ed87b4ab08a96f00643978a6cf4ce586ae6001d
+bot persist  = af12ffc3943e1c804a2964b3bd24a4f34ada6848
 ```
 
 ```text
 selected active batch closure              = 100%
-Batch decisions                            = 9
-keep-identity                              = 3
-route-expression                           = 6
+Batch decisions                            = 14
+keep-identity                              = 14
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1018 / 1018
+Identity Preview TargetSense               = 1032 / 1032
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
@@ -178,6 +180,16 @@ source occurrence closure                  = PASS
 Klose Master/Learner/Publish/Anki          = UNTOUCHED
 Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
+```
+
+Batch #9 evidence notes：
+
+```text
+running  → activity noun/learning unit 跑步；sixth-source evidence does not justify collapsing to run
+stairs   → conventional lexicalized plural noun 楼梯
+cent     → currency unit 分；cashier/dollar payment neighborhood is decisive
+a        → indefinite article；waiyan_start3 dictionary “letter A/ampere” gloss is source-definition noise
+all other selected rows → exact sixth-source evidence revalidated existing elementary lexical identity
 ```
 
 ---
@@ -210,46 +222,54 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #9
+## 8. NEXT TASK — POLICY-REVIEW BATCH #10
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
-SelectedCount     = 14
+SelectedCount     = 19
 EvidenceWeight    = 58 / 60
 ExecutionReady    = true
 SelectedMatchKeys =
-  your
-  running
-  stairs
-  a
-  actor
-  cent
-  chemistry
-  chinatown
-  dragon
-  everything
-  firefighter
-  geography
-  halloween
-  happiness
+  hide-and-seek
+  kilometre
+  language
+  librarian
+  passport
+  physics
+  raincoat
+  sausage
+  someday
+  spaceship
+  speech
+  string
+  taikonaut
+  town
+  traditional
+  winner
+  child
+  no.
+  flies
 ```
 
 本批重点：
 
 ```text
-your / a
-→ high-frequency function-word identity after sixth-source evidence expansion
+hide-and-seek / raincoat / spaceship / taikonaut
+→ lexicalized compound boundaries
 
-running / stairs
-→ lexicalized activity/plural noun vs morphology
+kilometre / language / librarian / passport / physics / sausage / someday / speech / string / town / traditional / winner
+→ sixth-source exact-evidence lexical revalidation
 
-cent
-→ lexical abbreviation/unit interpretation
+child
+→ singular identity vs irregular plural children pedagogical treatment
 
-actor / chemistry / chinatown / dragon / everything / firefighter / geography / halloween / happiness
-→ source-context lexical revalidation；避免 broad dictionary gloss 污染
+no.
+→ abbreviation identity vs source presentation form
+
+flies
+→ inflectional form vs possible lexical/homograph reading；不得机械 morphology collapse
 ```
 
 执行要求：
@@ -258,7 +278,7 @@ actor / chemistry / chinatown / dragon / everything / firefighter / geography / 
 1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
-4. 14/14 closure，不 cherry-pick。
+4. 19/19 closure，不 cherry-pick。
 5. apply + rebuild Identity/Learner views。
 6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
 7. 核对 blocker / Identity Preview / Learner Preview delta。
