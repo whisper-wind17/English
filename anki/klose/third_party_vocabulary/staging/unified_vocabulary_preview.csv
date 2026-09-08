@@ -133,6 +133,7 @@ candidate:chase,chase,chase,追逐；追赶,chase,1,reviewed
 candidate:cheap,cheap,cheap,便宜的,cheap,2,reviewed
 candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chick,chick,chick,小鸡；雏鸡,chick,1,reviewed
+candidate:children,children,children,孩子们；儿童（child 的复数）,children,6,reviewed
 candidate:children's day,children's day,Children's Day,儿童节,children's day,2,reviewed
 candidate:chinese book,chinese book,Chinese book,语文书；中文书,chinese book,1,reviewed
 candidate:chinese ink painting,chinese ink painting,Chinese ink painting,中国水墨画,chinese ink painting,1,reviewed
@@ -457,9 +458,11 @@ candidate:look after,look after,look after,照顾；照料,look after,1,reviewed
 candidate:look for,look for,look for,寻找；找,look for,5,reviewed
 candidate:look forward to,look forward to,look forward to,期待；盼望,look forward to,2,reviewed
 candidate:look up,look up,look up,查找；查阅,look up,1,reviewed
+candidate:lost,lost,lost,迷路的；丢失的,lost,8,reviewed
 candidate:loud,loud,loud,大声的；响亮的,loud,1,reviewed
 candidate:lower,lower,lower,更低的；较低的,lower,1,reviewed
 candidate:machine,machine,machine,机器,machine,2,reviewed
+candidate:made,made,made,制作；做（make 的过去式）,made,2,reviewed
 candidate:magazine,magazine,magazine,杂志,magazine,2,reviewed
 candidate:magic,magic,magic,魔法；魔术,magic,2,reviewed
 candidate:mail a present,mail a present,mail a present,邮寄礼物,mail a present,1,reviewed
@@ -490,6 +493,7 @@ candidate:meatball,meatball,meatball,肉丸子,meatball,1,reviewed
 candidate:medicine,medicine,medicine,药；药物,medicine,2,reviewed
 candidate:meeting place,meeting place,meeting place,集合地点；会面地点,meeting place,1,reviewed
 candidate:meeting room,meeting room,meeting room,会议室,meeting room,1,reviewed
+candidate:men,men,men,男人；男性（man 的复数）,men,4,reviewed
 candidate:messy,messy,messy,"凌乱的,散乱的",messy,1,reviewed
 candidate:miaow,miaow,miaow,猫叫；猫叫声,miaow,1,reviewed
 candidate:mice,mice,mice,老鼠（mouse 的复数）,mice,2,reviewed
@@ -704,6 +708,8 @@ candidate:sale,sale,sale,出售；特价销售,sale,1,reviewed
 candidate:saleswoman,saleswoman,saleswoman,女售货员；女销售员,saleswoman,1,reviewed
 candidate:save#conserve,save#conserve,save,节省；节约,save,1,reviewed
 candidate:save#rescue,save#rescue,save,救；挽救,save,1,reviewed
+candidate:saw#see-past,saw#see-past,saw,看见；看到（see 的过去式）,saw,3,reviewed
+candidate:saw#tool,saw#tool,saw,锯子,saw,1,reviewed
 candidate:say to oneself,say to oneself,say to oneself,心里想；自言自语地说,say to oneself,1,reviewed
 candidate:scared,scared,scared,害怕的；受惊的,scared,2,reviewed
 candidate:scarf,scarf,scarf,围巾,scarf,3,reviewed
@@ -775,7 +781,7 @@ candidate:south china tiger,south china tiger,South China tiger,华南虎,south 
 candidate:spain,spain,Spain,西班牙,spain,1,reviewed
 candidate:spanish,spanish,Spanish,西班牙的；西班牙人；西班牙语,spanish,1,reviewed
 candidate:speak english,speak english,speak English,说英语；讲英语,speak english,1,reviewed
-candidate:spend,spend,spend,花费；度过,spend,2,reviewed
+candidate:spend,spend,spend,花费；度过,spend|spent,4,reviewed
 candidate:spicy,spicy,spicy,辣的；辛辣的,spicy,1,reviewed
 candidate:spoon,spoon,spoon,勺子；匙,spoon,2,reviewed
 candidate:sports centre,sports centre,sports centre,体育中心,sports centre,1,reviewed
