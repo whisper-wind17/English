@@ -13,12 +13,8 @@ EXPECTED_FIELDS = [
     "SourceRow", "Word", "MatchKey", "British", "American", "Definition", "SourceFile",
 ]
 SOURCE_FILE_RE = re.compile(r"北师大版一年级起点[一二三四五六]年级[上下](?:册)?\.xlsx$")
-
-# First integration pass intentionally freezes structure before exact row-count baseline.
-# After the first successful parse, EXPECTED_OCCURRENCES / EXPECTED_MATCHKEYS are set
-# from the generated adapter output and this provisional mode is removed.
-EXPECTED_OCCURRENCES: int | None = None
-EXPECTED_MATCHKEYS: int | None = None
+EXPECTED_OCCURRENCES = 925
+EXPECTED_MATCHKEYS = 798
 
 
 def main() -> None:
@@ -30,9 +26,7 @@ def main() -> None:
             raise SystemExit(f"Unexpected occurrence schema: {reader.fieldnames}")
         rows = list(reader)
 
-    if not rows:
-        raise SystemExit("Beishida start1 adapter produced no occurrences")
-    if EXPECTED_OCCURRENCES is not None and len(rows) != EXPECTED_OCCURRENCES:
+    if len(rows) != EXPECTED_OCCURRENCES:
         raise SystemExit(
             f"Expected {EXPECTED_OCCURRENCES} Beishida start1 occurrences, found {len(rows)}"
         )
@@ -55,7 +49,7 @@ def main() -> None:
         raise SystemExit(f"Expected 12 grade/semester books, got {sorted(books)}")
 
     distinct = len({row["MatchKey"] for row in rows})
-    if EXPECTED_MATCHKEYS is not None and distinct != EXPECTED_MATCHKEYS:
+    if distinct != EXPECTED_MATCHKEYS:
         raise SystemExit(f"Expected {EXPECTED_MATCHKEYS} normalized MatchKeys, found {distinct}")
 
     forbidden = {
@@ -69,10 +63,7 @@ def main() -> None:
     print(f"source occurrences = {len(rows)}")
     print(f"distinct MatchKeys = {distinct}")
     print("source books = 12")
-    print(
-        "exact source baseline frozen = "
-        + ("yes" if EXPECTED_OCCURRENCES is not None and EXPECTED_MATCHKEYS is not None else "no (bootstrap pass)")
-    )
+    print("exact source baseline frozen = yes")
     print("identity/matching state in adapter = no")
     print("Stable ThirdPartyID minted = no")
     print("Final Klose diff executed = no")
