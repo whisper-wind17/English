@@ -1,17 +1,28 @@
 {
   "PlanVersion": "v4-learner-first",
-  "ReviewLane": "policy-review",
+  "ReviewLane": "semantic-review",
   "SelectedMatchKeys": [
-    "made",
-    "thought",
-    "glass"
+    "fairest",
+    "heavier",
+    "has",
+    "ever",
+    "player",
+    "better",
+    "tied",
+    "american",
+    "born",
+    "cross",
+    "ground",
+    "key",
+    "last",
+    "old"
   ],
-  "SelectedCount": 3,
-  "EvidenceWeight": 7,
+  "SelectedCount": 14,
+  "EvidenceWeight": 55,
   "SurfaceCap": 30,
   "WeightBudget": 60,
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
-  "ReviewBundleFingerprint": "2465060dbc18fc3d5e73eb6d8917aa2e8717d7e3f8dee5a756a7ec2c2ad8b20c"
+  "ReviewBundleFingerprint": "e7a35664ddbf7c5086d1b1d1a02139c5246a40a2ec068be14c98fef9aced72a0"
 }
