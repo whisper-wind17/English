@@ -42,6 +42,7 @@ LEGACY_MULTI_PASS_TOOLS = {
 }
 EXPECTED_SOURCE_COUNTS = {
     "beijing_start1": 808,
+    "beishida_start1": 925,
     "renjiao_start1": 908,
     "renjiao_start3": 851,
     "hujiao_start3": 1111,
