@@ -1,34 +1,34 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "fc92a7e40da85da3edb1ec52bef718c199410bc8",
-  "WorkflowRunID": "34225784648",
-  "WorkflowRunNumber": "248",
+  "InputCommit": "81dd23cab1e96f4337cf42f7f4ad4a5828f0515c",
+  "WorkflowRunID": "34226021650",
+  "WorkflowRunNumber": "249",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
-  "DurableIdentityDecisions": 2203,
-  "IdentityVocabularyPreview": 1890,
-  "LearnerVocabularyPreview": 1875,
-  "ReviewBlockers": 14,
+  "DurableIdentityDecisions": 2204,
+  "IdentityVocabularyPreview": 1892,
+  "LearnerVocabularyPreview": 1877,
+  "ReviewBlockers": 13,
   "EvidenceChangedSurfaces": 0,
-  "MultipartResolved": 40,
+  "MultipartResolved": 41,
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "split-resolution",
     "SelectedCount": 6,
     "SelectedMatchKeys": [
-      "too",
-      "french",
-      "kind",
-      "little",
-      "mouse",
-      "pass"
+      "flies",
+      "fan",
+      "get",
+      "letter",
+      "line",
+      "plant"
     ],
-    "EvidenceWeight": 68,
+    "EvidenceWeight": 66,
     "EffectiveWeightBudget": 70,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "4b94a7478df7f752cc7df6082fa3dda4a40e73cc23810ae4b0d335c2f054acc9",
-    "ReviewPacketFingerprint": "75b254f963b9e6381902097a397b42892285b4351b8693f64b294a806411e527"
+    "ReviewBundleFingerprint": "d36dec32bed3575be3e4d09e4136e1e27a2303172232d2bddc40f5ff723532c2",
+    "ReviewPacketFingerprint": "2faf3b12612681cf9d29842bf0e699bd7e72830b06517984f8dfa0daf8a581a2"
   }
 }
