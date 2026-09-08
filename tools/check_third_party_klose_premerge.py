@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Validate read-only Third-party → Klose Stage-B premerge readiness artifacts."""
+"""Validate read-only Third-party → Klose Stage-B premerge readiness artifacts.
+
+A premerge snapshot is valid in two states:
+- ready: Stage A has no active review batch;
+- gated: Stage A still has active review work.
+
+Both states must describe the current sealed Stage-A checkpoint exactly. This avoids
+leaving an older `ReadyForPremergeReview=true` artifact when Stage A changes later.
+"""
 from __future__ import annotations
 
 import csv
@@ -13,11 +21,15 @@ PREMERGE = TP / "premerge"
 PREVIEW = TP / "staging" / "unified_vocabulary_preview.csv"
 LEARNER = TP / "learner" / "learner_vocabulary_preview.csv"
 REVIEW = TP / "staging" / "review_queue.csv"
+OCCURRENCES = TP / "staging" / "occurrences.csv"
 DEFER = TP / "audit" / "defer_context.csv"
 NEXT_BATCH = TP / "audit" / "next_batch.json"
+STAGE_STATUS = TP / "audit" / "stage_a_status.json"
 NOTE_REGISTRY = BASE / "master" / "note_registry.csv"
 NOTE_EXTENSIONS = BASE / "master" / "note_registry_extensions.csv"
 POLICY_VERSION = "v6-minimal-identity"
+READINESS_VERSION = "third-party-stage-b-readiness-v2"
+SEALED_STATUS_VERSION = "stage-a-status-v2"
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -25,6 +37,15 @@ def rows(path: Path) -> list[dict[str, str]]:
         raise SystemExit(f"Missing required file: {path}")
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
+
+
+def json_obj(path: Path) -> dict[str, object]:
+    if not path.exists():
+        raise SystemExit(f"Missing required JSON: {path}")
+    value = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(value, dict):
+        raise SystemExit(f"Expected JSON object: {path}")
+    return value
 
 
 def require(cond: bool, message: str) -> None:
@@ -38,9 +59,26 @@ def main() -> None:
     preview = rows(PREVIEW)
     learner = rows(LEARNER)
     review = rows(REVIEW)
+    occurrences = rows(OCCURRENCES)
     accepted = rows(DEFER)
-    status = json.loads((PREMERGE / "readiness.json").read_text(encoding="utf-8"))
-    plan = json.loads(NEXT_BATCH.read_text(encoding="utf-8-sig"))
+    status = json_obj(PREMERGE / "readiness.json")
+    plan = json_obj(NEXT_BATCH)
+    stage_status = json_obj(STAGE_STATUS)
+
+    require(status.get("StatusVersion") == READINESS_VERSION,
+            f"Premerge readiness version drift: {status.get('StatusVersion', '')!r}")
+    require(stage_status.get("StatusVersion") == SEALED_STATUS_VERSION,
+            f"Stage-A status is not sealed {SEALED_STATUS_VERSION}")
+    checkpoint = str(stage_status.get("CheckpointFingerprint", "")).strip()
+    require(bool(checkpoint), "Stage-A checkpoint fingerprint missing")
+    require(status.get("StageAStatusVersion") == SEALED_STATUS_VERSION,
+            "Premerge StageAStatusVersion drift")
+    require(status.get("StageACheckpointFingerprint") == checkpoint,
+            "Premerge snapshot is not bound to current Stage-A checkpoint")
+    require(int(stage_status.get("SourceOccurrences", -1)) == len(occurrences),
+            "Sealed Stage-A source count drift")
+    require(int(status.get("SourceOccurrences", -1)) == len(occurrences),
+            "Premerge SourceOccurrences drift from current Stage-A source union")
 
     stable = rows(NOTE_REGISTRY) + rows(NOTE_EXTENSIONS)
     active = [r for r in stable if r.get("Status", "").casefold() == "active"]
@@ -94,10 +132,13 @@ def main() -> None:
         require(row.get("MergeAuthorized", "").casefold() == "no",
                 f"Deferred surface unexpectedly authorizes merge: {key}")
 
-    require(plan.get("ExecutionReady") is False and not plan.get("SelectedMatchKeys", []),
-            "Stage A still has an active review batch; premerge readiness must remain gated")
-    require(status.get("ReadyForPremergeReview") is True,
-            "readiness.json did not mark premerge review ready")
+    selected = plan.get("SelectedMatchKeys", [])
+    active_plan = bool(plan.get("ExecutionReady")) or bool(selected)
+    expected_ready = not active_plan
+    require(bool(status.get("ActiveReviewBatch")) == active_plan,
+            "readiness ActiveReviewBatch drift")
+    require(bool(status.get("ReadyForPremergeReview")) == expected_ready,
+            "readiness ReadyForPremergeReview does not reflect current Stage-A review gate")
     require(status.get("StageBMutationAuthorized") is False,
             "Stage-B mutation was unexpectedly authorized")
     require(status.get("StableThirdPartyIDMinted") is False,
@@ -113,12 +154,15 @@ def main() -> None:
     require(int(status.get("KloseActiveNoteIDs", -1)) == len(active),
             "readiness Klose NoteID count drift")
 
-    print("Third-party Stage-B premerge readiness = pass")
+    print("Third-party Stage-B premerge snapshot = pass")
+    print(f"Stage-A checkpoint = {checkpoint}")
+    print(f"Stage-A source occurrences = {len(occurrences)}")
     print(f"Stage-A identity candidates = {len(preview)}")
     print(f"Stage-A learner candidates = {len(learner)}")
     print(f"audited deferred carry-forward = {len(review)}")
     print(f"Klose active NoteIDs = {len(active)}")
-    print("Stage A active review batch = no")
+    print(f"Stage A active review batch = {'yes' if active_plan else 'no'}")
+    print(f"Premerge review ready = {'yes' if expected_ready else 'no (gated)'}")
     print("Premerge identity coverage = 100%")
     print("Deferred surface coverage = 100%")
     print("Unknown Klose NoteID references = no")
