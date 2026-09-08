@@ -6,6 +6,7 @@
 
 ```text
 Raw Source / Textbook Evidence
+→ Source Adapter
 → Source Occurrence
 → MatchKey / surface
 → Learner Identity
@@ -164,21 +165,52 @@ one-off tense/event chunk
 
 多词本身不是 Expression 判据。
 
-## 8. Source adapter baseline
+## 8. Source Adapter contract — CHECKPOINTED 2026-09-08
 
-当前启用：
+### 8.1 当前启用基线
 
 ```text
-beijing_start1   =  808
-renjiao_start1   =  908
-renjiao_start3   =  851
-hujiao_start3    = 1111
-waiyan_start1    = 1170
-waiyan_start3    = 1157
-Total            = 6005
+beijing_start1   =  808 occurrences /  734 MatchKeys / 12 books
+beishida_start1  =  925 occurrences /  798 MatchKeys / 12 books
+hujiao_start3    = 1111 occurrences / 1067 MatchKeys /  8 books
+jijiao_start3    =  605 occurrences /  510 MatchKeys /  8 books
+renjiao_start1   =  908 occurrences /  802 MatchKeys / 12 books
+renjiao_start3   =  851 occurrences /  818 MatchKeys /  8 books
+waiyan_start1    = 1170 occurrences / 1071 MatchKeys / 12 books
+waiyan_start3    = 1157 occurrences / 1023 MatchKeys /  8 books
+---------------------------------------------------------------
+Total            = 7535 source occurrences / 80 books
+Corpus surfaces  = 2362 normalized MatchKeys
 ```
 
-新增教材只输出标准 occurrence；generic corpus builder 合并，不复制 edition-specific semantic pipeline。
+`source_adapters.csv` 中所有 enabled adapter 必须遵守同一 source-only boundary：
+
+```text
+Raw XLSX
+→ tools/prepare_third_party_<SourceID>.py
+→ source_reference/<SourceID>_staging/occurrences.csv
+→ tools/check_third_party_<SourceID>.py
+→ tools/check_third_party_source_adapters.py
+→ generic corpus builder
+```
+
+每个 enabled adapter 必须：
+
+- 有独立 `prepare_third_party_<SourceID>.py`；
+- 有独立 `check_third_party_<SourceID>.py`；
+- 输出统一 occurrence schema；
+- `SourceOccurrenceKey` 在 adapter 内和跨 adapter 均唯一；
+- Source Adapter 不包含 Klose NoteID matching、Identity decision、Learner Admission 或 release state；
+- raw source、adapter tool、config 或任一 enabled `occurrences.csv` 变化都会触发 Stage-A source rebuild；
+- 每次 Stage-A workflow 都重新执行 8 个 edition-specific validator，再执行全局 closure gate。
+
+北京版旧的 pre-merge candidate/review 文件仅保留作历史审计；当前 Third-party Stage A 和 Stage B 不消费它们。北京版正式 source adapter 输出只有标准 `occurrences.csv`，不再依赖旧的 Klose pre-merge generator。
+
+### 8.2 Source Fact 不得被 adapter 修饰
+
+Adapter 负责忠实保留原始教材表格，不在这一层“纠正”词义。例如当前外研两套 source 各存在 2 条原始空 `Definition`：均为 contraction / expanded-form 邻域中的源表事实。Generic gate 只要求所有 adapter 共有的不变量；是否允许空 gloss 由 edition-specific checker 决定，不能为了统一格式擅自补写释义。
+
+新增教材只输出标准 occurrence；generic corpus builder 负责合并，不复制 edition-specific semantic pipeline。
 
 ## 9. Stage B boundary
 
