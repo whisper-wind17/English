@@ -1,842 +1,1308 @@
 {
   "PlanVersion": "v5-throughput-delta",
   "ReviewPacketVersion": "selected-review-packet-v2",
-  "ReviewLane": "split-resolution",
+  "ReviewLane": "object-boundary",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "right",
-    "sound",
-    "square"
+    "a liter of milk",
+    "amusement park",
+    "at last",
+    "candy bar",
+    "cheer for",
+    "come out",
+    "corner kick",
+    "cycling shoes",
+    "eat out",
+    "fill out",
+    "go away",
+    "go to a movie",
+    "go to the library",
+    "good morning",
+    "happy birthday!",
+    "hardly ever",
+    "iced tea",
+    "in the end",
+    "last night",
+    "mobile phone",
+    "over here",
+    "play games",
+    "play the piano",
+    "sports star",
+    "stay at home"
   ],
-  "SelectedCount": 3,
-  "ReviewBundleFingerprint": "2979e4a1baf09a71e5d47f73dab1f25ee33b5e45c2ee476da0207a224b7d9cc9",
-  "ReviewPacketFingerprint": "d9ea68e59f80b072e297d7dcf1ca62fa0ae33fbc4ece4ce461779f59c48d8324",
+  "SelectedCount": 25,
+  "ReviewBundleFingerprint": "b946dc5560cbfc54004eba4ee1e4b949e7a2a94878eb2a6f8a506338c0cef200",
+  "ReviewPacketFingerprint": "3baf48a2eeb40b1d737acfe2d17f6ff545108a043ace1ff88cd8d69189ae410a",
   "Items": [
     {
-      "MatchKey": "right",
+      "MatchKey": "a liter of milk",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "right",
-      "Definitions": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:3年级上|beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|hujiao_start3:5年级上|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start3:4年级上|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:4年级上|waiyan_start3:4年级上|waiyan_start3:6年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "DisplayForms": "a liter of milk",
+      "Definitions": "无",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:right",
-          "MatchKey": "right",
-          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r026|right\",\"beijing_start1|g4-lower|r020|right\",\"beishida_start1|g3-upper|r004|right\",\"beishida_start1|g4-upper|r071|right\",\"hujiao_start3|g5-upper|r115|right\",\"jijiao_start3|g3-upper|r049|right\",\"jijiao_start3|g5-lower|r065|right\",\"renjiao_start3|g4-upper|r039|right\",\"renjiao_start3|g6-upper|r012|right\",\"waiyan_start1|g2-lower|r091|right\",\"waiyan_start1|g4-upper|r027|right\",\"waiyan_start3|g4-upper|r005|right\",\"waiyan_start3|g6-upper|r008|right\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "minimal-identity-v6-split-audited-defer-jijiao-context-recheck",
-          "Rationale": "Explicit re-review after Jijiao expansion: several route/left-right occurrences, including Jijiao Grade-3, clearly support the right-side sense, while correct/right remains independently learner-relevant. Jijiao Grade-5 and several legacy date/health/description rows still cannot be assigned safely from flat-list evidence, so keep split-required."
-        }
-      ],
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g3-upper|r026|right",
-        "beijing_start1|g4-lower|r020|right",
-        "beishida_start1|g3-upper|r004|right",
-        "beishida_start1|g4-upper|r071|right",
-        "hujiao_start3|g5-upper|r115|right",
-        "jijiao_start3|g3-upper|r049|right",
-        "jijiao_start3|g5-lower|r065|right",
-        "renjiao_start3|g4-upper|r039|right",
-        "renjiao_start3|g6-upper|r012|right",
-        "waiyan_start1|g2-lower|r091|right",
-        "waiyan_start1|g4-upper|r027|right",
-        "waiyan_start3|g4-upper|r005|right",
-        "waiyan_start3|g6-upper|r008|right"
+        "beishida_start1|g5-lower|r064|a liter of milk"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g3-upper|r026|right",
-          "SourceID": "beijing_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "26",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "card",
-            "tenth",
-            "eighth",
-            "ninth",
-            "month",
-            "October",
-            "eleventh",
-            "November"
-          ],
-          "After": [
-            "twelfth",
-            "December",
-            "date",
-            "today",
-            "thirteenth",
-            "football",
-            "seventeenth",
-            "eighteenth"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beijing_start1|g4-lower|r020|right",
-          "SourceID": "beijing_start1",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "20",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "fever",
-            "has",
-            "mouth",
-            "flu",
-            "pill",
-            "soon",
-            "man",
-            "men"
-          ],
-          "After": [
-            "hurt",
-            "near",
-            "excuse",
-            "library",
-            "floor",
-            "building",
-            "nearby",
-            "grey"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g3-upper|r004|right",
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r064|a liter of milk",
           "SourceID": "beishida_start1",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "4",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "do",
-            "left"
-          ],
-          "After": [
-            "litter",
-            "touch",
-            "move",
-            "camera",
-            "worry",
-            "cry",
-            "food",
-            "smoking"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g4-upper|r071|right",
-          "SourceID": "beishida_start1",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "71",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "map",
-            "near",
-            "train station",
-            "zoo",
-            "park",
-            "go straight",
-            "turn",
-            "left"
-          ],
-          "After": [
-            "toilet",
-            "post office",
-            "supermarket",
-            "cinema",
-            "lake",
-            "street",
-            "bus stop",
-            "hospital"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r115|right",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "115",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "at the top of",
-            "get through",
-            "post office",
-            "quite",
-            "along",
-            "turn",
-            "left",
-            "straight"
-          ],
-          "After": [
-            "between",
-            "flower shop",
-            "hospital",
-            "toy shop",
-            "road",
-            "get to",
-            "blow",
-            "gently"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "jijiao_start3|g3-upper|r049|right",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "49",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "sad",
-            "body",
-            "hand",
-            "head",
-            "arm",
-            "leg",
-            "foot",
-            "left"
-          ],
-          "After": [
-            "hair",
-            "eye",
-            "mouth",
-            "ear",
-            "nose",
-            "face",
-            "warm",
-            "cool"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r065|right",
-          "SourceID": "jijiao_start3",
           "SourceBook": "5年级下",
           "Grade": "5",
           "Semester": "下",
-          "SourceRow": "65",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
+          "SourceRow": "64",
+          "Word": "a liter of milk",
+          "Definition": "无",
           "Before": [
-            "much",
-            "how much",
-            "write",
-            "mum",
-            "dad",
-            "dear",
-            "fine",
-            "left"
-          ],
-          "After": [
-            "turn",
-            "wrong",
-            "email",
-            "idea",
-            "computer",
-            "use",
-            "kind",
-            "us"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r039|right",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "39",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "strong",
-            "friendly",
-            "quiet",
-            "hair",
-            "shoe",
-            "glasses",
-            "his",
-            "or"
-          ],
-          "After": [
-            "hat",
-            "her",
-            "bedroom",
-            "living room",
-            "study",
-            "kitchen",
-            "bathroom",
-            "bed"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r012|right",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "12",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "post office",
-            "bookstore",
-            "cinema",
-            "hospital",
-            "crossing",
-            "turn",
-            "left",
-            "straight"
+            "colorful",
+            "dictionary",
+            "difficult",
+            "exciting",
+            "expensive",
+            "interesting",
+            "picture",
+            "story"
           ],
           "After": [
             "ask",
-            "sir",
-            "interesting",
-            "Italian",
-            "restaurant",
-            "pizza",
-            "street",
-            "get"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r091|right",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "91",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "turn around",
-            "ground",
-            "again",
-            "jump",
-            "back",
-            "come back",
-            "left",
-            "turn left"
-          ],
-          "After": [
-            "turn right",
-            "road",
-            "excuse me",
-            "straight",
-            "go straight on",
-            "lost",
-            "out",
-            "factory"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r027|right",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "27",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "what",
-            "boring",
-            "day",
-            "invent",
-            "paper",
-            "important",
-            "printing",
-            "print"
-          ],
-          "After": [
-            "between",
-            "bicycle",
-            "mouse",
-            "beside",
-            "man",
-            "went",
-            "saw",
-            "trip"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r005|right",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "5",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "straight",
-            "go straight on",
-            "left"
-          ],
-          "After": [
-            "lost",
-            "live",
-            "No.",
-            "number",
-            "street",
-            "excuse me",
-            "turn left",
-            "turn right"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r008|right",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "8",
-          "Word": "right",
-          "Definition": "n. 正确;右边;正义 adj. 正确的;直接的;右方的 vt. 纠正 adv. 正确地;恰当地;彻底地 vi. 复正;恢复平稳",
-          "Before": [
-            "more than",
-            "thousand",
-            "kilometre",
-            "something",
-            "million",
-            "map"
-          ],
-          "After": [
-            "country",
-            "dancing",
-            "Chinatown",
-            "sometimes",
-            "shop",
-            "then",
-            "ah",
-            "strong"
+            "add",
+            "bake",
+            "break",
+            "butter",
+            "change",
+            "cookbook",
+            "flour"
           ]
         }
       ]
     },
     {
-      "MatchKey": "sound",
+      "MatchKey": "amusement park",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "sound",
-      "Definitions": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发出声音;回响;测深 adv. 彻底地,充分地|n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发",
-      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|renjiao_start1|renjiao_start3|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:6年级上|hujiao_start3:5年级上|renjiao_start1:4年级上|renjiao_start3:5年级下|waiyan_start3:6年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "DisplayForms": "amusement park",
+      "Definitions": "n. 游乐场;娱乐园",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:4年级下",
+      "CandidateSignals": "multiword",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:sound",
-          "MatchKey": "sound",
-          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r044|sound\",\"beishida_start1|g6-upper|r055|sound\",\"hujiao_start3|g5-upper|r131|sound\",\"renjiao_start1|g4-upper|r111|sound\",\"renjiao_start3|g5-lower|r026|sound\",\"waiyan_start3|g6-upper|r029|sound\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "minimal-identity-v6-split-audited-defer-context-recheck",
-          "Rationale": "Explicit re-review confirms sound=声音 and sound=听起来 remain distinct learner-relevant units. Wind-bell and other noise contexts support the noun, but several flat-list rows still do not identify noun versus linking-verb usage reliably. Preserve split-required rather than manufacture a partial partition; retire this ambiguity until source/canonical/policy context changes again."
-        }
-      ],
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g4-lower|r044|sound",
-        "beishida_start1|g6-upper|r055|sound",
-        "hujiao_start3|g5-upper|r131|sound",
-        "renjiao_start1|g4-upper|r111|sound",
-        "renjiao_start3|g5-lower|r026|sound",
-        "waiyan_start3|g6-upper|r029|sound"
+        "beishida_start1|g4-lower|r046|amusement park"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g4-lower|r044|sound",
-          "SourceID": "beijing_start1",
+          "SourceOccurrenceKey": "beishida_start1|g4-lower|r046|amusement park",
+          "SourceID": "beishida_start1",
           "SourceBook": "4年级下",
           "Grade": "4",
           "Semester": "下",
-          "SourceRow": "44",
-          "Word": "sound",
-          "Definition": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发出声音;回响;测深 adv. 彻底地,充分地",
+          "SourceRow": "46",
+          "Word": "amusement park",
+          "Definition": "n. 游乐场;娱乐园",
           "Before": [
-            "China",
-            "labour",
-            "wall",
-            "cinema",
-            "museum",
-            "country",
-            "about",
-            "boat"
+            "have lunch",
+            "go to bed",
+            "do homework",
+            "let's",
+            "go to a movie",
+            "start",
+            "enough",
+            "shall"
           ],
           "After": [
-            "safe",
-            "dangerous",
-            "front",
-            "thick",
-            "enough",
-            "safety",
-            "crowd",
-            "push"
+            "museum",
+            "dinosaur",
+            "idea",
+            "free",
+            "close",
+            "by bus",
+            "go to the library",
+            "play sports"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "at last",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "at last",
+      "Definitions": "na. 终于",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r048|at last"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g6-upper|r055|sound",
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r048|at last",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "48",
+          "Word": "at last",
+          "Definition": "na. 终于",
+          "Before": [
+            "table tennis",
+            "tennis",
+            "volleyball",
+            "goalkeeper",
+            "goal",
+            "sports star",
+            "score",
+            "at the same time"
+          ],
+          "After": [
+            "corner kick",
+            "field",
+            "cheer for",
+            "fall",
+            "up and down",
+            "boring",
+            "buy",
+            "colorful"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "candy bar",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "candy bar",
+      "Definitions": "na. 方糖块",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:2年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g2-lower|r079|candy bar"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g2-lower|r079|candy bar",
+          "SourceID": "beishida_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "79",
+          "Word": "candy bar",
+          "Definition": "na. 方糖块",
+          "Before": [
+            "read",
+            "write",
+            "sing",
+            "dance",
+            "talk",
+            "draw",
+            "open",
+            "door"
+          ],
+          "After": [
+            "cookie",
+            "monkey",
+            "animal"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cheer for",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cheer for",
+      "Definitions": "un. 给加油",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r051|cheer for"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r051|cheer for",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "51",
+          "Word": "cheer for",
+          "Definition": "un. 给加油",
+          "Before": [
+            "goalkeeper",
+            "goal",
+            "sports star",
+            "score",
+            "at the same time",
+            "at last",
+            "corner kick",
+            "field"
+          ],
+          "After": [
+            "fall",
+            "up and down",
+            "boring",
+            "buy",
+            "colorful",
+            "dictionary",
+            "difficult",
+            "exciting"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "come out",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "come out",
+      "Definitions": "na. 出来",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:3年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g3-upper|r045|come out"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g3-upper|r045|come out",
+          "SourceID": "beishida_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "45",
+          "Word": "come out",
+          "Definition": "na. 出来",
+          "Before": [
+            "come in",
+            "living room",
+            "bedroom",
+            "sleep",
+            "sleeping",
+            "bathroom",
+            "wash",
+            "washing"
+          ],
+          "After": [
+            "fish",
+            "fishing",
+            "kitchen",
+            "cook",
+            "cooking",
+            "dinner",
+            "write",
+            "writing"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "corner kick",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "corner kick",
+      "Definitions": "n. 【足】角球",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r049|corner kick"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r049|corner kick",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "49",
+          "Word": "corner kick",
+          "Definition": "n. 【足】角球",
+          "Before": [
+            "tennis",
+            "volleyball",
+            "goalkeeper",
+            "goal",
+            "sports star",
+            "score",
+            "at the same time",
+            "at last"
+          ],
+          "After": [
+            "field",
+            "cheer for",
+            "fall",
+            "up and down",
+            "boring",
+            "buy",
+            "colorful",
+            "dictionary"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cycling shoes",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cycling shoes",
+      "Definitions": "自行车运动鞋",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-lower|r005|cycling shoes"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r005|cycling shoes",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "5",
+          "Word": "cycling shoes",
+          "Definition": "自行车运动鞋",
+          "Before": [
+            "ankle",
+            "competitor",
+            "crash"
+          ],
+          "After": [
+            "elbow",
+            "entry",
+            "fill out",
+            "flat",
+            "form",
+            "helmet",
+            "invite",
+            "mail"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "eat out",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "eat out",
+      "Definitions": "v. 出去吃;在外面吃饭",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r086|eat out"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r086|eat out",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "86",
+          "Word": "eat out",
+          "Definition": "v. 出去吃;在外面吃饭",
+          "Before": [
+            "pour",
+            "puzzled",
+            "recipe",
+            "salt",
+            "shout",
+            "step",
+            "sugar",
+            "tell"
+          ],
+          "After": [
+            "hate",
+            "try out",
+            "walk through"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "fill out",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "fill out",
+      "Definitions": "na. 填写(表格等);变胖;长胖;胖起来",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-lower|r008|fill out"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r008|fill out",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "8",
+          "Word": "fill out",
+          "Definition": "na. 填写(表格等);变胖;长胖;胖起来",
+          "Before": [
+            "ankle",
+            "competitor",
+            "crash",
+            "cycling shoes",
+            "elbow",
+            "entry"
+          ],
+          "After": [
+            "flat",
+            "form",
+            "helmet",
+            "invite",
+            "mail",
+            "number",
+            "official",
+            "pad"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "go away",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "go away",
+      "Definitions": "na. 离开;带走",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r009|go away"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r009|go away",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "9",
+          "Word": "go away",
+          "Definition": "na. 离开;带走",
+          "Before": [
+            "backpack",
+            "either",
+            "finally",
+            "find",
+            "Germany",
+            "get",
+            "give"
+          ],
+          "After": [
+            "go home",
+            "hers",
+            "his",
+            "meet",
+            "mine",
+            "ours",
+            "quickly",
+            "suitcase"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "go to a movie",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "go to a movie",
+      "Definitions": "去看电影;会去看电影;看场电影",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:4年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g4-lower|r042|go to a movie"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g4-lower|r042|go to a movie",
+          "SourceID": "beishida_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "42",
+          "Word": "go to a movie",
+          "Definition": "去看电影;会去看电影;看场电影",
+          "Before": [
+            "never",
+            "sometimes",
+            "exercise",
+            "get up",
+            "have lunch",
+            "go to bed",
+            "do homework",
+            "let's"
+          ],
+          "After": [
+            "start",
+            "enough",
+            "shall",
+            "amusement park",
+            "museum",
+            "dinosaur",
+            "idea",
+            "free"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "go to the library",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "go to the library",
+      "Definitions": "无",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:4年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g4-lower|r053|go to the library"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g4-lower|r053|go to the library",
+          "SourceID": "beishida_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "53",
+          "Word": "go to the library",
+          "Definition": "无",
+          "Before": [
+            "shall",
+            "amusement park",
+            "museum",
+            "dinosaur",
+            "idea",
+            "free",
+            "close",
+            "by bus"
+          ],
+          "After": [
+            "play sports",
+            "play games",
+            "by bike",
+            "by car",
+            "by taxi",
+            "weather",
+            "sunny",
+            "farm"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "good morning",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "good morning",
+      "Definitions": "int. (上午见面时用语,非正式场合常说 Morning)早上好",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:2年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g2-upper|r008|good morning"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g2-upper|r008|good morning",
+          "SourceID": "beishida_start1",
+          "SourceBook": "2年级上",
+          "Grade": "2",
+          "Semester": "上",
+          "SourceRow": "8",
+          "Word": "good morning",
+          "Definition": "int. (上午见面时用语,非正式场合常说 Morning)早上好",
+          "Before": [
+            "hello",
+            "what",
+            "is",
+            "your",
+            "name",
+            "my"
+          ],
+          "After": [
+            "children",
+            "good-bye",
+            "hi",
+            "I",
+            "am",
+            "friend",
+            "this",
+            "look"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "happy birthday!",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Happy birthday!",
+      "Definitions": "un. 生日快乐",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:1年级上",
+      "CandidateSignals": "multiword|punctuated",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g1-upper|r036|happy birthday!"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g1-upper|r036|happy birthday!",
+          "SourceID": "beishida_start1",
+          "SourceBook": "1年级上",
+          "Grade": "1",
+          "Semester": "上",
+          "SourceRow": "36",
+          "Word": "Happy birthday!",
+          "Definition": "un. 生日快乐",
+          "Before": [
+            "fish",
+            "five",
+            "four",
+            "frog",
+            "gift",
+            "girl",
+            "green",
+            "hammer"
+          ],
+          "After": [
+            "hat",
+            "hello",
+            "hi",
+            "how many",
+            "how old",
+            "ice cream",
+            "I'm",
+            "insect"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "hardly ever",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "hardly ever",
+      "Definitions": "na. 难得;很少",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-upper|r030|hardly ever"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-upper|r030|hardly ever",
           "SourceID": "beishida_start1",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "55",
-          "Word": "sound",
-          "Definition": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发出声音;回响;测深 adv. 彻底地,充分地",
+          "SourceRow": "30",
+          "Word": "hardly ever",
+          "Definition": "na. 难得;很少",
           "Before": [
-            "information",
-            "invitation",
-            "karate",
-            "learn",
-            "partner",
-            "receive",
-            "ski",
-            "sometimes"
+            "busy",
+            "chore",
+            "dish",
+            "dust",
+            "feed",
+            "feel",
+            "furniture",
+            "grass"
           ],
           "After": [
+            "homework",
+            "never",
+            "once",
+            "person",
+            "plant",
+            "polish",
+            "street",
+            "tell"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "iced tea",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "iced tea",
+      "Definitions": "n. 冰茶",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:3年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g3-lower|r042|iced tea"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g3-lower|r042|iced tea",
+          "SourceID": "beishida_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "42",
+          "Word": "iced tea",
+          "Definition": "n. 冰茶",
+          "Before": [
+            "cola",
+            "hungry",
+            "milk",
+            "cold",
+            "fresh",
+            "favorite",
+            "coffee",
+            "water"
+          ],
+          "After": [
+            "store",
+            "hat",
+            "new",
+            "clock",
+            "storybook",
+            "sell",
+            "newspaper",
+            "magazine"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "in the end",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "in the end",
+      "Definitions": "na. 终于",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-upper|r063|in the end"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-upper|r063|in the end",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "63",
+          "Word": "in the end",
+          "Definition": "na. 终于",
+          "Before": [
+            "sound",
             "work out",
             "baseball",
             "belt",
             "buy",
             "cost",
             "glove",
-            "idea",
-            "in the end"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r131|sound",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "131",
-          "Word": "sound",
-          "Definition": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发出声音;回响;测深 adv. 彻底地,充分地",
-          "Before": [
-            "gently",
-            "softly",
-            "strongly",
-            "happily",
-            "windmill",
-            "move",
-            "slowly",
-            "quickly"
+            "idea"
           ],
           "After": [
-            "wind-bell",
-            "cut",
-            "paper",
-            "quiet",
-            "tap",
-            "use",
-            "vegetable",
-            "clothes"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start1|g4-upper|r111|sound",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "111",
-          "Word": "sound",
-          "Definition": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发出声音;回响;测深 adv. 彻底地,充分地",
-          "Before": [
-            "in the future",
-            "great",
-            "job",
-            "sick",
+            "latest",
+            "mall",
+            "pair",
             "people",
-            "teach",
-            "just",
-            "myself"
-          ],
-          "After": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "teacher"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r026|sound",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "26",
-          "Word": "sound",
-          "Definition": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发",
-          "Before": [
-            "Spain",
-            "late",
-            "a.m.",
-            "p.m.",
-            "why",
-            "shop",
-            "work",
-            "last"
-          ],
-          "After": [
-            "also",
-            "busy",
-            "need",
-            "play",
-            "letter",
-            "live",
-            "island",
-            "always"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-upper|r029|sound",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "29",
-          "Word": "sound",
-          "Definition": "n. 声音,语音;噪音;海峡;吵闹;听力范围;[医] 探条 adj. 健全的,健康的;合理的;可靠的;有效彻底的 vt. 听(诊);测量,测...深;使发声;试探;宣告 vi. 听起来;发出声音;回响;测深 adv. 彻底地,充分地",
-          "Before": [
-            "bicycle",
-            "Thanksgiving",
-            "Thanksgiving Day",
-            "flag",
-            "Flag Day",
-            "fly",
-            "special",
-            "meal"
-          ],
-          "After": [
-            "football",
-            "moon cake",
-            "the Mid-Autumn Festival",
-            "the Dragon Boat Festival",
-            "race",
-            "lantern",
-            "the Lantern Festival",
-            "hang"
+            "pop",
+            "popcorn",
+            "prefer",
+            "quick"
           ]
         }
       ]
     },
     {
-      "MatchKey": "square",
+      "MatchKey": "last night",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "square",
-      "Definitions": "n. 平方;广场;正方形 adj. 平方的;正方形的;直角的;正直的 vt. 使成方形;与...一致 vi. 一致;成方形 adv. 成直角地",
-      "SourceIDs": "beijing_start1|beishida_start1|hujiao_start3|renjiao_start1",
-      "SourceBooks": "beijing_start1:3年级下|beishida_start1:1年级下|hujiao_start3:4年级上|renjiao_start1:4年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "DisplayForms": "last night",
+      "Definitions": "na. 昨晚;最后一夜",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级上",
+      "CandidateSignals": "multiword",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
+      "BlockerClass": "multiword-object-boundary",
       "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:square",
-          "MatchKey": "square",
-          "OccurrenceKeys": "[\"beijing_start1|g3-lower|r018|square\",\"hujiao_start3|g4-upper|r124|square\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "square#shape",
-          "ObjectType": "vocabulary",
-          "TargetSense": "正方形",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "beishida-start1-multipart-square-conservative-revalidation",
-          "Rationale": "Existing explicit shape contexts remain the geometric square subgroup. The Beishida flat list is not assigned by age or assumption alone."
-        },
-        {
-          "DecisionKey": "surface:square#plaza",
-          "MatchKey": "square",
-          "OccurrenceKeys": "[\"renjiao_start1|g4-lower|r030|square\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "square#plaza",
-          "ObjectType": "vocabulary",
-          "TargetSense": "广场",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "beishida-start1-multipart-square-conservative-revalidation",
-          "Rationale": "The existing city and place occurrence remains the public-plaza subgroup."
-        },
-        {
-          "DecisionKey": "surface:square#unresolved-beishida",
-          "MatchKey": "square",
-          "OccurrenceKeys": "[\"beishida_start1|g1-lower|r047|square\"]",
-          "Action": "held",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "beishida-start1-insufficient-sense-context",
-          "Rationale": "The Grade-1 Beishida occurrence is in an alphabetic flat list between socks and star. It does not provide enough source evidence to distinguish geometric square from plaza so keep it explicitly unresolved."
-        }
-      ],
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g3-lower|r018|square",
-        "beishida_start1|g1-lower|r047|square",
-        "hujiao_start3|g4-upper|r124|square",
-        "renjiao_start1|g4-lower|r030|square"
+        "beishida_start1|g5-upper|r006|last night"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g3-lower|r018|square",
-          "SourceID": "beijing_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "18",
-          "Word": "square",
-          "Definition": "n. 平方;广场;正方形 adj. 平方的;正方形的;直角的;正直的 vt. 使成方形;与...一致 vi. 一致;成方形 adv. 成直角地",
-          "Before": [
-            "turn",
-            "bird",
-            "hear",
-            "out",
-            "flag",
-            "yellow",
-            "watch",
-            "from"
-          ],
-          "After": [
-            "black",
-            "shape",
-            "round",
-            "circle",
-            "now",
-            "try",
-            "ship",
-            "wonderful"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g1-lower|r047|square",
+          "SourceOccurrenceKey": "beishida_start1|g5-upper|r006|last night",
           "SourceID": "beishida_start1",
-          "SourceBook": "1年级下",
-          "Grade": "1",
-          "Semester": "下",
-          "SourceRow": "47",
-          "Word": "square",
-          "Definition": "n. 平方;广场;正方形 adj. 平方的;正方形的;直角的;正直的 vt. 使成方形;与...一致 vi. 一致;成方形 adv. 成直角地",
-          "Before": [
-            "robot",
-            "run",
-            "salad",
-            "sandwich",
-            "shirt",
-            "shoes",
-            "sister",
-            "socks"
-          ],
-          "After": [
-            "star",
-            "sweater",
-            "swim",
-            "tomato",
-            "tea",
-            "these",
-            "this",
-            "tiger"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-upper|r124|square",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
+          "SourceBook": "5年级上",
+          "Grade": "5",
           "Semester": "上",
-          "SourceRow": "124",
-          "Word": "square",
-          "Definition": "n. 平方;广场;正方形 adj. 平方的;正方形的;直角的;正直的 vt. 使成方形;与...一致 vi. 一致;成方形 adv. 成直角地",
+          "SourceRow": "6",
+          "Word": "last night",
+          "Definition": "na. 昨晚;最后一夜",
           "Before": [
-            "live",
-            "old",
-            "eat",
-            "nice",
-            "food",
-            "a lot of",
-            "shape",
-            "picture"
+            "have",
+            "has",
+            "had",
+            "dream"
           ],
           "After": [
-            "circle",
-            "star",
-            "rectangle",
-            "triangle",
-            "today",
-            "well",
-            "weather",
-            "rainy"
+            "astronaut",
+            "am",
+            "is",
+            "was",
+            "are",
+            "were",
+            "spaceship",
+            "space"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "mobile phone",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "mobile phone",
+      "Definitions": "n. 手机;移动电话",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:3年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g3-upper|r036|mobile phone"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "renjiao_start1|g4-lower|r030|square",
-          "SourceID": "renjiao_start1",
+          "SourceOccurrenceKey": "beishida_start1|g3-upper|r036|mobile phone",
+          "SourceID": "beishida_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "36",
+          "Word": "mobile phone",
+          "Definition": "n. 手机;移动电话",
+          "Before": [
+            "computer",
+            "CD",
+            "glasses",
+            "watch",
+            "TV",
+            "children",
+            "photo",
+            "radio"
+          ],
+          "After": [
+            "come in",
+            "living room",
+            "bedroom",
+            "sleep",
+            "sleeping",
+            "bathroom",
+            "wash",
+            "washing"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "over here",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "over here",
+      "Definitions": "na. 在这边",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:6年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-lower|r060|over here"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r060|over here",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "60",
+          "Word": "over here",
+          "Definition": "na. 在这边",
+          "Before": [
+            "hate",
+            "hope",
+            "huge",
+            "leave",
+            "light",
+            "neither",
+            "modern",
+            "other"
+          ],
+          "After": [
+            "over there",
+            "part",
+            "pick up",
+            "place",
+            "plant",
+            "present",
+            "tin can",
+            "trashcan"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "play games",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "play games",
+      "Definitions": "做游戏;玩游戏;捣鬼",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:4年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g4-lower|r055|play games"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g4-lower|r055|play games",
+          "SourceID": "beishida_start1",
           "SourceBook": "4年级下",
           "Grade": "4",
           "Semester": "下",
-          "SourceRow": "30",
-          "Word": "square",
-          "Definition": "n. 平方;广场;正方形 adj. 平方的;正方形的;直角的;正直的 vt. 使成方形;与...一致 vi. 一致;成方形 adv. 成直角地",
+          "SourceRow": "55",
+          "Word": "play games",
+          "Definition": "做游戏;玩游戏;捣鬼",
           "Before": [
-            "bookshop",
-            "school",
-            "supermarket",
-            "ball",
-            "city",
-            "street",
-            "sports centre",
-            "hotel"
+            "museum",
+            "dinosaur",
+            "idea",
+            "free",
+            "close",
+            "by bus",
+            "go to the library",
+            "play sports"
           ],
           "After": [
-            "buy toys",
-            "see a film",
-            "go boating",
-            "busy",
-            "station",
-            "place",
-            "thing",
-            "stay"
+            "by bike",
+            "by car",
+            "by taxi",
+            "weather",
+            "sunny",
+            "farm",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "play the piano",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "play the piano",
+      "Definitions": "na. 弹钢琴",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r030|play the piano"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r030|play the piano",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "30",
+          "Word": "play the piano",
+          "Definition": "na. 弹钢琴",
+          "Before": [
+            "Children's Day",
+            "concert",
+            "drum",
+            "flute",
+            "guitar",
+            "kid",
+            "music",
+            "piano"
+          ],
+          "After": [
+            "program",
+            "really",
+            "start",
+            "tonight",
+            "violin",
+            "row",
+            "team",
+            "basketball"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "sports star",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "sports star",
+      "Definitions": "体育明星;运动明星;运动员",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r045|sports star"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r045|sports star",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "45",
+          "Word": "sports star",
+          "Definition": "体育明星;运动明星;运动员",
+          "Before": [
+            "team",
+            "basketball",
+            "badminton",
+            "table tennis",
+            "tennis",
+            "volleyball",
+            "goalkeeper",
+            "goal"
+          ],
+          "After": [
+            "score",
+            "at the same time",
+            "at last",
+            "corner kick",
+            "field",
+            "cheer for",
+            "fall",
+            "up and down"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "stay at home",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "stay at home",
+      "Definitions": "na. 长时间内不在",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:4年级下",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "multiword-object-boundary",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g4-lower|r067|stay at home"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g4-lower|r067|stay at home",
+          "SourceID": "beishida_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "67",
+          "Word": "stay at home",
+          "Definition": "na. 长时间内不在",
+          "Before": [
+            "weather",
+            "sunny",
+            "farm",
+            "cloud",
+            "rain",
+            "weather report",
+            "cloudy",
+            "fun"
+          ],
+          "After": [
+            "rainy",
+            "snowy",
+            "windy",
+            "fine",
+            "sky"
           ]
         }
       ]
