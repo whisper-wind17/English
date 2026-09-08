@@ -1,19 +1,35 @@
 {
   "PlanVersion": "v5-throughput-delta",
-  "ReviewLane": "",
+  "ReviewLane": "policy-review",
   "ReviewMode": "full-evidence",
-  "SelectedMatchKeys": [],
-  "SelectedCount": 0,
-  "EvidenceWeight": 0,
-  "SurfaceCap": 0,
-  "WeightBudget": 0,
-  "EffectiveWeightBudget": 0,
-  "PackingSkippedMatchKeys": [],
+  "SelectedMatchKeys": [
+    "carrots",
+    "dumplings",
+    "potatoes",
+    "tomatoes",
+    "hamburgers",
+    "toys",
+    "woods",
+    "left",
+    "saw",
+    "... o'clock",
+    "onions",
+    "mouse"
+  ],
+  "SelectedCount": 12,
+  "EvidenceWeight": 60,
+  "SurfaceCap": 30,
+  "WeightBudget": 60,
+  "EffectiveWeightBudget": 60,
+  "PackingSkippedMatchKeys": [
+    "her",
+    "watch"
+  ],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
-  "ExecutionReady": false,
-  "GateReason": "no active review batch",
-  "ReviewBundleFingerprint": "9724a951037ddb8fda24abb2bceef9101d0cd364d4183165f869721c81acce79",
-  "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  "ExecutionReady": true,
+  "GateReason": "",
+  "ReviewBundleFingerprint": "c170894bfb4b7151cfe17f4b6e8bafb9c17449fb46e508596b17ace455839c00",
+  "ReviewPacketFingerprint": "a3f2aa3ec399cfc101cd1bd6b7fe65f29c630ab619c9b541139c95701b897096"
 }
