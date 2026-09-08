@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Normalize Stage-A review lanes with learner-first execution and audited-defer retirement.
+"""Normalize Stage-A review lanes with Minimal Learner Identity and audited-defer retirement.
 
 The review bundle and defer-context registry are derived-only. Stage-A source evidence
 remains auditable, but lack of textbook sentence context is no longer a terminal reason
@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
 BUNDLE = TP / "audit" / "review_bundle.csv"
 CONTEXT = TP / "audit" / "defer_context.csv"
-POLICY_VERSION = "v4-learner-first"
+POLICY_VERSION = "v6-minimal-identity"
 
 CONTEXT_FIELDS = [
     "MatchKey", "DecisionSignature", "ContextFingerprint", "DeferReasonCode",
