@@ -381,6 +381,13 @@ def main() -> None:
         if d["Action"] == "reuse-identity" and "#" in canonical:
             target = multipart_keep_index.get(canonical)
             if target is None:
+                base_key = canonical.split("#", 1)[0]
+                if base_key in surface_keys and base_key not in resolved_multipart:
+                    # The canonical split gained/changed source evidence and is now
+                    # pending re-adjudication. Its dependent alias remains a valid
+                    # durable decision, but cannot appear in Preview until the
+                    # canonical subgroup is resolved again.
+                    continue
                 raise SystemExit(f"Scoped reuse target is not a resolved multipart keep subgroup: {d['DecisionKey']} -> {canonical}")
             target_sense = target[1].get("TargetSense", "")
             alias_sense = d.get("TargetSense", "").strip()
