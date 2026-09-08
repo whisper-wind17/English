@@ -3,10 +3,8 @@
 
 The normalized review bundle remains derived-only. This planner selects one active
 lane at a time, preserving bundle order while enforcing both a surface-count cap
-and an evidence-weight budget. policy-executable rows are eligible only when the
-deterministic proposal engine emitted a confirm-or-reject proposal, so guarded rows
-cannot starve later lanes. The resulting next_batch.json is a review plan, not
-content-decision truth.
+and an evidence-weight budget. In v4 learner-first finalization, missing textbook
+sentence context no longer makes residual split/semantic blockers non-executable.
 """
 from __future__ import annotations
 
@@ -21,7 +19,7 @@ TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
 BUNDLE = TP / "audit" / "review_bundle.csv"
 PROPOSALS = TP / "audit" / "decision_proposals.csv"
 OUT = TP / "audit" / "next_batch.json"
-PLAN_VERSION = "v3"
+PLAN_VERSION = "v4-learner-first"
 
 LANE_ORDER = [
     "source-reconciliation-needed",
@@ -119,16 +117,7 @@ def main() -> None:
                 break
 
     execution_ready = bool(selected)
-    gate_reason = ""
-    if selected_lane == "split-resolution" and selected:
-        changed = any(
-            "decision-evidence-changed" in {x for x in row.get("CandidateSignals", "").split("|") if x}
-            or row.get("PolicyRecommendedAction", "").startswith("re-review-")
-            for row in selected
-        )
-        if not changed:
-            execution_ready = False
-            gate_reason = "unchanged residual split requires stronger source evidence or explicit user gate"
+    gate_reason = "" if execution_ready else "no active review batch"
 
     plan = {
         "PlanVersion": PLAN_VERSION,
