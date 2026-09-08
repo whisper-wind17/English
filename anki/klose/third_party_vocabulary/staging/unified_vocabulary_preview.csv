@@ -42,6 +42,7 @@ candidate:also,also,also,也；而且,also,5,reviewed
 candidate:always,always,always,总是；一直,always,5,reviewed
 candidate:am,am,am,是（be 的第一人称单数现在式）,am,3,reviewed
 candidate:amazing,amazing,amazing,令人惊异的；令人惊叹的,amazing,3,reviewed
+candidate:american,american,American,美国的；美国人,american,3,reviewed
 candidate:an,an,an,一个；一（用于元音音素前）,an,4,reviewed
 candidate:and,and,and,和；与；而且,and,5,reviewed
 candidate:angry,angry,angry,生气的；愤怒的,angry,5,reviewed
@@ -101,7 +102,7 @@ candidate:bathroom,bathroom,bathroom,浴室；洗手间,bathroom,4,reviewed
 candidate:be,be,be,是；成为（be 的原形）,be,1,reviewed
 candidate:be able to,be able to,be able to,能够；可以,be able to,1,reviewed
 candidate:be back,be back,be back,回来；返回,be back,1,reviewed
-candidate:be born,be born,be born,出生,be born,1,reviewed
+candidate:be born,be born,be born,出生,be born|born,4,reviewed
 candidate:be careful with,be careful with,be careful with,小心……；注意……,be careful with,1,reviewed
 candidate:be full of,be full of,be full of,充满……,be full of,1,reviewed
 candidate:be good at,be good at,be good at,擅长……,be good at,2,reviewed
@@ -303,6 +304,7 @@ candidate:craft,craft,craft,工艺；手艺,craft,1,reviewed
 candidate:craftsman,craftsman,craftsman,工匠；手艺人,craftsman,1,reviewed
 candidate:crayon,crayon,crayon,蜡笔,crayon,5,reviewed
 candidate:crisp,crisp,crisp,薯片；炸薯片,crisp,1,reviewed
+candidate:cross,cross,cross,穿过；横过,cross,2,reviewed
 candidate:crossing,crossing,crossing,十字路口；交叉路口,crossing,1,reviewed
 candidate:crossroads,crossroads,crossroads,十字路口,crossroads,1,reviewed
 candidate:crowd,crowd,crowd,人群,crowd,1,reviewed
@@ -424,6 +426,7 @@ candidate:enjoy,enjoy,enjoy,喜欢；享受,enjoy,5,reviewed
 candidate:envelope,envelope,envelope,信封,envelope,1,reviewed
 candidate:eraser,eraser,eraser,橡皮；橡皮擦,eraser,4,reviewed
 candidate:evening,evening,evening,晚上；傍晚,evening,5,reviewed
+candidate:ever,ever,ever,曾经；在任何时候,ever,1,reviewed
 candidate:every,every,every,每一；每个,every,4,reviewed
 candidate:every day,every day,every day,每天,every day,2,reviewed
 candidate:every year,every year,every year,每年,every year,1,reviewed
@@ -440,6 +443,7 @@ candidate:expensive,expensive,expensive,昂贵的；贵的,expensive,2,reviewed
 candidate:eye,eye,eye,眼睛,eye,7,reviewed
 candidate:face,face,face,脸；面部,face,6,reviewed
 candidate:factory,factory,factory,工厂,factory,3,reviewed
+candidate:fairest,fairest,fairest,最美的（fair 的最高级）,fairest,1,reviewed
 candidate:fairy,fairy,fairy,仙女；小精灵,fairy,1,reviewed
 candidate:fairy tale,fairy tale,fairy tale,童话故事,fairy tale,1,reviewed
 candidate:fall asleep,fall asleep,fall asleep,入睡；睡着,fall asleep,1,reviewed
@@ -594,7 +598,7 @@ candidate:goal,goal,goal,目标,goal,2,reviewed
 candidate:goat,goat,goat,山羊,goat,1,reviewed
 candidate:gold,gold,gold,金；黄金；金色,gold,4,reviewed
 candidate:golf,golf,golf,高尔夫球；高尔夫运动,golf,1,reviewed
-candidate:good,good,good,好的；不错的,good,3,reviewed
+candidate:good,good,good,好的；不错的,better|good,4,reviewed
 candidate:goodbye,goodbye,goodbye,再见,goodbye,3,reviewed
 candidate:got,got,got,得到；获得（get 的过去式）,got,1,reviewed
 candidate:gps,gps,GPS,全球定位系统；GPS,gps,1,reviewed
@@ -611,6 +615,7 @@ candidate:green,green,green,绿色；绿色的,green,6,reviewed
 candidate:green beans,green beans,green beans,四季豆；青豆,green beans,1,reviewed
 candidate:grey,grey,grey,灰色；灰色的,grey,1,reviewed
 candidate:grocery,grocery,grocery,食品杂货；杂货,grocery,1,reviewed
+candidate:ground,ground,ground,地面；土地,ground,3,reviewed
 candidate:grow,grow,grow,生长；成长,grow,1,reviewed
 candidate:grow crops,grow crops,grow crops,种庄稼；种植农作物,grow crops,1,reviewed
 candidate:grow up,grow up,grow up,长大；成长,grow up,1,reviewed
@@ -632,6 +637,7 @@ candidate:happiness,happiness,happiness,幸福,happiness,1,reviewed
 candidate:happy,happy,happy,高兴的；快乐的,happy,5,reviewed
 candidate:hard-working,hard-working,hard-working,勤奋的；勤劳的,hard-working,1,reviewed
 candidate:hardly,hardly,hardly,"几乎不,简直不",hardly,1,reviewed
+candidate:has,has,has,有；拥有（have 的第三人称单数）,has,2,reviewed
 candidate:hat,hat,hat,帽子,hat,5,reviewed
 candidate:hate,hate,hate,讨厌；憎恨,hate,1,reviewed
 candidate:have a cold,have a cold,have a cold,感冒；患感冒,have a cold,1,reviewed
@@ -656,7 +662,7 @@ candidate:headache,headache,headache,头痛,headache,4,reviewed
 candidate:healthy,healthy,healthy,健康的,healthy,4,reviewed
 candidate:hear,hear,hear,听见；听到,hear,5,reviewed
 candidate:heat,heat,heat,热；热量；高温,heat,1,reviewed
-candidate:heavy,heavy,heavy,重的；沉重的,heavy,3,reviewed
+candidate:heavy,heavy,heavy,重的；沉重的,heavier|heavy,4,reviewed
 candidate:helicopter,helicopter,helicopter,直升机,helicopter,1,reviewed
 candidate:hello,hello,hello,你好；喂,hello,3,reviewed
 candidate:helmet,helmet,helmet,头盔,helmet,1,reviewed
@@ -752,6 +758,7 @@ candidate:june,june,June,六月,june,4,reviewed
 candidate:junior high school,junior high school,junior high school,初中；初级中学,junior high school,1,reviewed
 candidate:kangaroo,kangaroo,kangaroo,袋鼠,kangaroo,2,reviewed
 candidate:keep quiet,keep quiet,keep quiet,保持安静,keep quiet,1,reviewed
+candidate:key,key,key,钥匙,key,5,reviewed
 candidate:kick,kick,kick,踢,kick,1,reviewed
 candidate:kid,kid,kid,小孩；孩子,kid,4,reviewed
 candidate:kill,kill,kill,杀死；杀害,kill,1,reviewed
@@ -775,6 +782,7 @@ candidate:lamp,lamp,lamp,灯；台灯,lamp,1,reviewed
 candidate:land,land,land,陆地；土地,land,1,reviewed
 candidate:language,language,language,语言,language,1,reviewed
 candidate:large,large,large,大的；大型的,large,1,reviewed
+candidate:last,last,last,最后的；上一个的,last,4,reviewed
 candidate:late,late,late,晚的；迟的；迟到的,late,5,reviewed
 candidate:later,later,later,后来；稍后；以后,later,2,reviewed
 candidate:laugh,laugh,laugh,笑；大笑,laugh|laughed,3,reviewed
@@ -980,6 +988,7 @@ candidate:office,office,office,办公室,office,3,reviewed
 candidate:office building,office building,office building,办公楼,office building,1,reviewed
 candidate:often,often,often,经常；常常,often,5,reviewed
 candidate:oil painting,oil painting,oil painting,油画,oil painting,1,reviewed
+candidate:old,old,old,老的；年老的；旧的,old|older,8,reviewed
 candidate:on foot,on foot,on foot,步行；徒步,on foot,3,reviewed
 candidate:on holiday,on holiday,on holiday,在度假；休假中,on holiday,2,reviewed
 candidate:on the left,on the left,on the left,在左边；在左侧,on the left,1,reviewed
@@ -1086,6 +1095,7 @@ candidate:play volleyball,play volleyball,play volleyball,打排球,play volleyb
 candidate:play with fire,play with fire,play with fire,玩火,play with fire,1,reviewed
 candidate:play#general,play#general,play,玩；玩耍；参加游戏或运动,play|playing,7,reviewed
 candidate:play#instrument,play#instrument,play,演奏,play,1,reviewed
+candidate:player,player,player,运动员；选手,player,1,reviewed
 candidate:playground,playground,playground,操场；游乐场,playground,5,reviewed
 candidate:playtime,playtime,playtime,游戏时间；玩耍时间,playtime,1,reviewed
 candidate:please,please,please,请,please,5,reviewed
@@ -1501,6 +1511,7 @@ candidate:ticket,ticket,ticket,票；票券,ticket,1,reviewed
 candidate:tidy,tidy,tidy,整洁的,tidy,3,reviewed
 candidate:tidy the desk,tidy the desk,tidy the desk,整理书桌,tidy the desk,1,reviewed
 candidate:tidy up,tidy up,tidy up,整理；收拾整齐,tidy up,2,reviewed
+candidate:tied,tied,tied,系住的；绑好的,tied,1,reviewed
 candidate:tiger,tiger,tiger,老虎,tiger,7,reviewed
 candidate:till,till,till,直到；直到……为止,till,1,reviewed
 candidate:time,time,time,时间,time,4,reviewed
