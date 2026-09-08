@@ -1,6 +1,14 @@
 # Third-party Multi-Edition Vocabulary Corpus
 
-本文定义 Klose 的统一第三方教材 Vocabulary corpus。目标是把多个第三方小学英语教材词表汇总、按 **learning unit / target sense** 去重，形成独立统一词源；等计划中的第三方来源全部处理完成后，再与 Klose Full Stable Vocabulary Identity 做一次最终差集。
+本文定义 Klose 的统一第三方教材 Vocabulary corpus。目标是把多个第三方小学英语教材词表汇总、按 **learning unit / target sense** 去重，同时严格分离：
+
+```text
+Source Fact
+→ Vocabulary Identity
+→ Learner Admission / Presentation
+```
+
+第三方教材来源、Identity 判断和 Klose 当前是否适合学习，是三层不同问题。
 
 ## 1. 两阶段流程
 
@@ -10,20 +18,25 @@ Stage A — 第三方内部
 → 各 Source Adapter 只解析 Source Occurrence
 → 通用 candidate matching
 → sense-aware Identity Resolution
-→ Third-party Unified Vocabulary
+→ Third-party Unified Vocabulary Identity View
+→ current Learner Admission gate
+→ Klose learner-stage vocabulary view
 
 Stage B — 所有计划第三方来源完成后
-Third-party Unified Vocabulary
+Third-party Unified Vocabulary Identity View
 → vs Klose Full Stable Identity Registry
-→ Third-party New Vocabulary Pool
+→ identity reconciliation / new-learning-unit candidates
+→ current Learner Admission gate
 → 后续学习管线
 ```
 
-Stage A 不因为 Klose 当前已有某词而删除第三方 learning unit；Stage B 才执行最终 Klose diff。
+Stage A 不因为 Klose 当前已有某词而删除第三方 learning unit；Stage B 才执行最终 Klose identity diff。
+
+但 **Identity resolved ≠ 当前允许学习**。例如 `went → go` 的 identity relation 可以明确，同时 `went` 因当前 grammar stage 被隔离，不进入 Klose learner-facing vocabulary。
 
 ## 2. 产品上真正重要的内容
 
-统一第三方词源只关心 learning unit 本身：
+统一第三方词源的 Identity 层关心 learning unit 本身：
 
 ```text
 CanonicalWord
@@ -34,7 +47,15 @@ Meaning
 IdentityStatus
 ```
 
-教材版本、最早年级、覆盖教材数、出现次数、年级分布不参与学习排序、LearnerLevel、Anki Presentation 或是否学习。`SourceID / Book / Grade / Row / SourceOccurrenceKey` 保留在 Source Occurrence 层，仅用于追溯、重建和 source reconciliation。
+来源字段：
+
+```text
+SourceID / Book / Grade / Row / SourceOccurrenceKey
+```
+
+只用于追溯、重建和 source reconciliation，不直接决定学习排序、LearnerLevel 或 Anki admission。
+
+Learner Admission 是独立层，可以依据 Klose 当前学习阶段暂缓某些已 resolved identity/form，而不改写 Source Fact 或 Vocabulary Identity。
 
 ## 3. Identity 原则
 
@@ -53,9 +74,11 @@ square = 广场
 → 两个 Identity
 ```
 
-Morphology、format alias、multiword、punctuation、substring 等都只能产生 candidate signal，不能自动等同 Identity。Vocabulary / Expression / source-only chunk 必须分开，不能因为原始 XLSX 都放在“单词”列里就全部 mint Vocabulary Identity。
+Morphology、format alias、multiword、punctuation、substring 等只产生 candidate signal，不能自动等同 Identity。
 
-## 4. 最简长期实现 — FROZEN
+Vocabulary / Expression / source-only chunk 必须分开，不能因为原始 XLSX 都放在“单词”列里就全部 mint Vocabulary Identity。
+
+## 4. 当前长期架构 — FROZEN
 
 ```text
 Source Adapter occurrences
@@ -65,27 +88,51 @@ Source Adapter occurrences
 → staging/occurrences.csv
 → staging/surface_candidates.csv
 → staging/review_queue.csv
-→ staging/unified_vocabulary_preview.csv
-→ learner-facing TargetSense gate
-→ tools/check_third_party_corpus.py
+→ staging/unified_vocabulary_preview.csv        # Identity-level
+
+staging/unified_vocabulary_preview.csv
++ learner/grammar_form_quarantine.csv            # durable Learner gate
+→ tools/build_third_party_learner_view.py
+→ learner/learner_vocabulary_preview.csv         # current Klose learner-stage view
+→ learner/grammar_form_quarantine_view.csv        # generated audit view
+→ tools/check_third_party_learner_view.py
 ```
 
 物理路径：
 
 ```text
 anki/klose/third_party_vocabulary/
-├── config/source_adapters.csv
-├── review/identity_decisions.csv
-└── staging/
-    ├── occurrences.csv
-    ├── surface_candidates.csv
-    ├── review_queue.csv
-    └── unified_vocabulary_preview.csv
+├── config/
+│   └── source_adapters.csv
+├── review/
+│   └── identity_decisions.csv
+├── staging/
+│   ├── occurrences.csv
+│   ├── surface_candidates.csv
+│   ├── review_queue.csv
+│   └── unified_vocabulary_preview.csv
+└── learner/
+    ├── grammar_form_quarantine.csv
+    ├── grammar_form_quarantine_view.csv
+    └── learner_vocabulary_preview.csv
 ```
 
-每个 Source Adapter 只做 `Raw source → standardized occurrences.csv`；不负责跨教材比较、morphology/sense 决策、对象路由或 Klose diff。不要恢复 edition-specific `audit → apply → recheck` 多层流水线。
+其中：
 
-## 5. `identity_decisions.csv` 是唯一内容决策真源
+```text
+identity_decisions.csv
+= durable Identity decision truth
+
+grammar_form_quarantine.csv
+= durable current Learner Admission gate
+
+*_preview.csv / *_view.csv
+= generated / derived state
+```
+
+不得让 learner gate 反向改写 identity truth。
+
+## 5. `identity_decisions.csv` — Identity 内容决策真源
 
 核心字段：
 
@@ -106,13 +153,13 @@ Rationale
 `Action`：
 
 ```text
-keep-identity       # 独立 Vocabulary learning unit
-reuse-identity      # canonicalize / alias / form reuse
-split-required      # 同 surface 需要 occurrence-level 拆义
-held                # 证据或 identity/form policy 不足
-route-expression    # Expression 对象
-source-only         # 只保留 Source Fact
-pending             # 尚未审校 / evidence 已变化需重审
+keep-identity
+reuse-identity
+split-required
+held
+route-expression
+source-only
+pending
 ```
 
 内容审校使用 transient inbox：
@@ -124,69 +171,198 @@ review/decision_updates.csv
 → inbox 删除
 ```
 
-成功 workflow 后 `review/` 必须重新只剩 durable decision truth；`decision_updates.csv` 不得残留。
+成功 workflow 后 transient decision inbox / manifest 不得残留。
 
 ## 6. Evidence-aware decision binding
 
-一个 surface 已经 reviewed，不代表未来新增教材出现同一字符串时可以自动沿用旧判断。durable decision 的 `OccurrenceKeys` 必须记录审校时实际覆盖的 SourceOccurrenceKey 集合，并持久化为无歧义 JSON array。
+Reviewed decision 必须绑定审校时实际覆盖的 exact `OccurrenceKeys` JSON array。
 
 ```text
-当前 MatchKey occurrence set == reviewed occurrence set
+current occurrence set == reviewed occurrence set
 → decision 有效
 
-新增/变化 Source Occurrence 导致集合不同
-→ DecisionAction=pending
-→ CandidateSignals += decision-evidence-changed
-→ 自动回到 review_queue.csv
-→ stale SourceMatchKey 不得进入 preview provenance
+source evidence 新增/变化
+→ decision-evidence-changed
+→ 自动 requeue
+→ stale evidence 不得进入 Identity Preview provenance
 ```
 
-历史 wildcard / legacy serialization 已完成一次性迁移；当前 durable decisions 不允许长期 wildcard。
+因此新增教材不能静默继承旧 sense 判断。
 
-## 7. Generated views 与 learner-facing gate
+## 7. Generated Identity views
 
-- `surface_candidates.csv`：每个 normalized surface 一行，展示来源聚合、CandidateSignals 和派生 decision；signal 只是证据。
-- `review_queue.csv`：纯派生 view，只包含 `pending / held / split-required` 等需处理 surface，不是第二套决策真源。
-- `unified_vocabulary_preview.csv`：只包含 evidence 完整、已 reviewed 的 `keep-identity / reuse-identity` Vocabulary candidates；尚未 mint Stable ThirdPartyID。
-- Vocabulary Preview 中任何 candidate 的 `TargetSense` 为空，Stage-A workflow 必须失败。不能以 dictionary 第一义项或广义 gloss 自动补空值。
+- `surface_candidates.csv`：每个 normalized surface 一行，汇总 source evidence 与派生 decision state；signal 只是证据。
+- `review_queue.csv`：当前 `pending / held / split-required` 等需处理 surface；不是第二套决策真源。
+- `unified_vocabulary_preview.csv`：evidence 完整、已 reviewed、Identity 层可成立的 Vocabulary candidates；尚未 mint Stable ThirdPartyID。
+- Identity Preview 中任何 candidate 的 `TargetSense` 为空，workflow 必须失败。
 
-## 8. 新教材标准接入方式
+`unified_vocabulary_preview.csv` 是 **Identity-level view**，不是 Klose 当前可学习清单。
+
+## 8. Learner-stage grammar-form quarantine — FROZEN
+
+Klose 当前尚未进入系统性的过去时、过去分词/完成时学习阶段。因此 pure one-word grammar forms 必须与 Identity Resolution 分层处理：
+
+```text
+went → go
+broke → break#damage
+ate → eat
+was → be
+
+Identity relation
+→ 正常保留 / 可 resolved
+
+Learner Admission
+→ grammar-form quarantine
+→ 当前不进入 learner_vocabulary_preview.csv
+```
+
+Durable gate：
+
+```text
+learner/grammar_form_quarantine.csv
+```
+
+核心字段：
+
+```text
+GateKey
+MatchKey
+DecisionKey
+BaseForm
+FormType
+Scope
+PolicyVersion
+Rationale
+```
+
+当前 `PolicyVersion = klose-grammar-gate-v1`。
+
+### 8.1 不能按字符串外观粗暴过滤
+
+```text
+broken = 坏的；破损的
+scared = 害怕的；受惊的
+lost   = 迷路的 / 丢失的
+```
+
+若当前 learning unit 已 lexicalized 为独立 adjective/noun，不因 `-ed` 或 participle 外观自动 quarantine。
+
+普通复数、第三人称单数、`-ing` 也不属于本规则自动过滤范围。因此 `goes` 不能因为与 `went` 同属 verb morphology 就被隔离。
+
+### 8.2 Homograph 必须按 DecisionKey 精确 gate
+
+```text
+left = 左边/左侧
+→ 可保留
+
+left = leave 的过去式
+→ quarantine
+
+saw = 锯子
+→ 可保留
+
+saw = see 的过去式
+→ quarantine
+```
+
+因此 multipart/homograph 不允许 MatchKey 一刀切。
+
+### 8.3 Quarantine 不是 blocker
+
+```text
+Identity unresolved
+→ review/blocker
+
+Identity resolved but grammar stage too early
+→ learner quarantine
+```
+
+二者必须分开计数。以后 Klose grammar stage 提升，只需显式解除 learner gate；不需要重新 mint Identity，也不需要破坏 Source provenance。
+
+## 9. Learner view machine gate
+
+`tools/check_third_party_learner_view.py` 必须保证：
+
+```text
+gate registry referential integrity       = PASS
+learner preview subset of identity preview = PASS
+past-form leak into learner view          = NO
+lexicalized adjective/noun over-gating    = NO
+homograph decision-scope gate             = enforced
+identity truth mutated by learner gate     = NO
+```
+
+Machine checker 只把 **decision-bound 明确信号** 当 hard classification；不得把第三方 dictionary/free-text `Definition` 中出现“过去式/过去分词”字样直接当 identity truth。否则会把 `go / hold / party / ground` 等 dictionary noise 误判为过去式。
+
+## 10. 新教材标准接入方式
 
 ```text
 1. 新增 Source Adapter，只输出 occurrences.csv
 2. source_adapters.csv 增加 Enabled=yes
 3. generic builder 合并
-4. 全新 surface 自动 pending
-5. 已审 surface 若新增 occurrence evidence，也自动 pending
-6. 所有内容判断只写 identity_decisions.csv
-7. rebuild
-8. TargetSense gate
-9. check_third_party_corpus.py 独立 Completion Recheck
+4. 新 surface 自动 pending
+5. 已审 surface 若 occurrence evidence 变化，也自动 pending
+6. 所有 Identity 内容判断只写 identity_decisions.csv
+7. rebuild Identity views
+8. apply current Learner Admission gate
+9. core Completion Recheck + learner-view Completion Recheck
 ```
 
 不复制 builder/checker，不建立 edition-specific semantic pipeline。
 
-## 9. Stage B：最终 Klose diff
+## 11. Current six-adapter source baseline
 
-只有计划中的第三方教材都完成 Stage A 后才执行：
-
-```text
-Third-party Unified Vocabulary
-vs
-note_registry.csv + note_registry_extensions.csv
-```
-
-同一 learning unit 已在 Klose → `existing-in-klose`；Klose 没有该 target sense → `third-party-new`。
-
-Stage B 之前禁止：
+当前启用：
 
 ```text
-- 因 Klose 已存在而删除第三方 Identity
-- 把 Klose NoteID 当第三方 corpus Identity
-- 把 Stage-A staging 自动写入 Klose Master / Learner / Release / Publish / Anki
+beijing_start1   =  808
+renjiao_start1   =  908
+renjiao_start3   =  851
+hujiao_start3    = 1111
+waiyan_start1    = 1170
+waiyan_start3    = 1157
+Total            = 6005
 ```
 
-## 10. Source Truth 边界
+当前 source/corpus 动态进度必须以 `NEXT.md` 与 repo generated state 为准，不在本文长期冻结 blocker 数字。
+
+2026-09-08 grammar-stage gate 建立时的 validation checkpoint：
+
+```text
+Source occurrences               = 6005
+Normalized surfaces              = 2161
+Durable Identity decisions       = 2098
+Identity-level Vocabulary Preview = 985
+Learner-stage Vocabulary Preview  = 979
+Grammar-form quarantine gates     = 56
+Review/blocker surfaces           = 1010
+```
+
+该 checkpoint 只用于架构验证；后续 decision batch 会继续改变动态数量。
+
+## 12. Stage B boundary
+
+所有计划第三方来源完成前：
+
+```text
+DO NOT mint Stable ThirdPartyID.
+DO NOT run final Klose diff.
+DO NOT modify Klose Master/Learner/Publish/Anki.
+```
+
+Stage B 必须同时使用两层信息：
+
+```text
+Identity-level corpus
+→ 判断“是不是同一个 learning unit / Klose 是否已有”
+
+Learner-stage view / gate
+→ 判断“这个 learning unit/form 当前是否允许进入学习管线”
+```
+
+不得直接把 Identity Preview 当作当前 Learning Admission 结果。
+
+## 13. Source Truth 边界
 
 ```text
 Klose 手中实际教材
@@ -195,179 +371,3 @@ Klose 手中实际教材
 ```
 
 冲突按 `docs/SOURCE_RECONCILIATION.md` 处理。
-
-## 11. Five-adapter Source closure
-
-当前已启用五个小学 Source Adapter：
-
-```text
-beijing_start1   = 12 books /  808 occurrences /  734 MatchKeys
-renjiao_start1   = 12 books /  908 occurrences /  802 MatchKeys
-renjiao_start3   =  8 books /  851 occurrences /  818 MatchKeys
-hujiao_start3    =  8 books / 1111 occurrences / 1067 MatchKeys
-waiyan_start1    = 12 books / 1170 occurrences / 1071 MatchKeys
-```
-
-Source-family boundaries：
-
-- `hujiao_start3` 只纳入沪教版三年级起点 3–6 年级上下册；同目录 7–9 年级牛津英语未纳入；真实源基线 `1111 / 1067` 已冻结。
-- `waiyan_start1` 只纳入外研版一年级起点 1–6 年级上下册；外研三年级起点与初高中资料均排除；真实源基线 `1170 / 1071` 已冻结。
-- `waiyan_start3` 已完成 Source Inventory，确认是独立完整 8-book family，但尚未启用。
-
-五个 adapter 合计：
-
-```text
-Source occurrences  = 4848
-Normalized surfaces = 2062
-Durable decisions   = 2062
-Evidence-changed    = 0
-pending             = 0
-```
-
-这表示当前 2062 个 surface 都有显式 durable Stage-A decision 并绑定完整 occurrence evidence；不表示 2062 个 surface 都是 Vocabulary。
-
-## 12. A–Z Vocabulary Preview content-quality closure — historical checkpoint
-
-2026-09-07 完成 five-adapter Vocabulary Preview A–Z 内容质量审计，重点检查 TargetSense、canonical/alias 污染、reuse blocker bypass、morphology canonicalization、Vocabulary/Expression routing 和 event chunk。
-
-当时可信 checkpoint：
-
-```text
-GitHub Actions run        = 34084215849
-content-audit commit      = ba1c0afe5e1107447f46084f9462a3aa554f6374
-bot-generated data commit = 8bc04ffa74914e02ecbf453b47cbf93c837acb53
-
-Vocabulary preview      = 1451
-Review/blocker surfaces = 444
-keep-identity           = 1442
-reuse-identity          =   61
-held                    =  405
-split-required          =   39
-route-expression        =   81
-source-only             =   34
-TargetSense complete    = 1451 / 1451
-```
-
-典型 canonicalization / routing：
-
-```text
-be afraid of → afraid of
-dropped → drop
-grapes → grape
-happened → happen
-stayed at home → stay at home
-walking the dog → walk the dog
-watering the plants → water the plants
-How old ...? → route-expression
-climb on the window ledge → source-only
-women → 保留独立 pedagogically salient plural-form identity
-```
-
-这个 `1451 / 444` 仅是历史 checkpoint，不再是当前 baseline。
-
-## 13. Blocker quality audit — current checkpoint
-
-A–Z closure 后继续对 `held / split-required` 做 context-bound recheck。原则不是追求 blocker 数量下降，而是用 source neighborhood / source glossary 判断是否已经能绑定一个明确的小学 learning unit：
-
-```text
-source context 足够明确       → keep-identity + 窄义 TargetSense
-同形不同义                   → split-required
-功能词/广泛多义               → held
-irregular / form-policy 未定   → held
-交际句型                      → route-expression
-```
-
-从历史 data commit `8bc04ffa74914e02ecbf453b47cbf93c837acb53` 到当前 `fa5e97a47c8a972316723aed58fc1a6aa949e879`，Git compare 显示共有 16 个连续提交，累计重新审定 79 个 blocker：
-
-```text
-review_queue        -79
-Vocabulary preview  +77
-route-expression     +2
-```
-
-因此当前可信 baseline：
-
-```text
-GitHub Actions run                         = 34100218425
-latest blocker-audit commit                = 1b46a6e4fdd66378656ccb303eb05e5b779980a3
-bot-generated data commit                  = fa5e97a47c8a972316723aed58fc1a6aa949e879
-
-Enabled adapters          = 5
-Source occurrences        = 4848
-Normalized surfaces       = 2062
-Durable decisions         = 2062
-Vocabulary preview        = 1528
-Review/blocker surfaces   = 365
-Evidence-changed surfaces = 0
-pending                   = 0
-
-keep-identity     = 1519
-reuse-identity    =   61
-held              =  326
-split-required    =   39
-route-expression  =   83
-source-only       =   34
-```
-
-硬门禁与 Completion Recheck：
-
-```text
-Vocabulary Preview TargetSense complete = 1528 / 1528
-Source occurrence closure               = PASS
-Decision / occurrence closure           = PASS
-Explicit reviewed OccurrenceKeys        = PASS
-Changed source evidence requeues        = PASS
-Canonical blocker bypass                = NO
-Canonical TargetSense precedence        = PASS
-Known semantic blockers preserved       = PASS
-Known morphology decisions preserved    = PASS
-Transient decision inbox                = removed
-Klose Master/Learner/Publish/Anki        = untouched
-Stable ThirdPartyID minted               = NO
-Final Klose diff executed                = NO
-```
-
-代表性被安全释放的 blocker：
-
-```text
-blow → 吹；刮
-land → 陆地；土地
-smoke → 烟；冒烟
-tape → 胶带
-attention → 注意；注意力
-jam → 果酱
-flute → 长笛
-hiking → 徒步旅行
-a bit → 有点儿；稍微
-a knife and fork → 一副刀叉
-all over the world → 世界各地；遍及全世界
-at first → 起初；一开始
-at the same time → 同时；与此同时
-be able to → 能够；可以
-be interested in → 对……感兴趣
-bench → 长凳
-bicycle → 自行车
-cashier → 收银员
-cheese → 奶酪；干酪
-hot dog → 热狗
-lion dance → 舞狮
-long ago → 很久以前；从前
-```
-
-高风险边界继续保留：
-
-```text
-about      = held
-study      = held
-won        = held / irregular-form policy
-saw        = split-required
-watch      = split-required
-may        = split-required
-like       = split-required
-square     = split-required
-left       = split-required
-cook       = split-required
-cold       = split-required
-```
-
-下一步继续审计当前 365 个 blocker；只有 source evidence 足够时才释放。**暂不自动启用 `waiyan_start3`**。待 blocker 质量形成稳定 checkpoint 并经用户确认后，再决定是否接入 `waiyan_start3`；其接入仍只属于 Stage A。所有计划第三方小学来源完成前不进入 Stage B。
