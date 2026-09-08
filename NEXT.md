@@ -75,15 +75,15 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #10 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #11 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
 Durable Identity decisions         = 2105
-Identity-level Vocabulary Preview  = 1049
-Review/blocker surfaces            = 911
-Evidence-changed surfaces          = 817
+Identity-level Vocabulary Preview  = 1053
+Review/blocker surfaces            = 905
+Evidence-changed surfaces          = 811
 Multipart resolved                 = 10
 ```
 
@@ -91,7 +91,7 @@ Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1037
+Learner-stage Vocabulary Preview   = 1041
 Identity rows suppressed by gate   = 12
 Preview occurrence contributions removed = 34
 Explicit decision-bound past-form requirements = 13
@@ -100,10 +100,10 @@ Explicit decision-bound past-form requirements = 13
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1049   (+64)
-Learner Preview    979  → 1037   (+58)
-Blockers          1010  →  911   (-99)
-Evidence-changed   911  →  817   (-94)
+Identity Preview   985  → 1053   (+68)
+Learner Preview    979  → 1041   (+62)
+Blockers          1010  →  905   (-105)
+Evidence-changed   911  →  811   (-100)
 Multipart            7  →   10   (+3)
 ```
 
@@ -141,6 +141,8 @@ shorts           → lexicalized 短裤，not short morphology
 sometimes        → lexical frequency adverb，not sometime morphology
 running          → lexicalized activity 跑步；not generic run inflection
 stairs           → lexicalized plural noun 楼梯
+broken           → lexicalized adjective 破损的/坏掉的，not automatic break reuse
+fell             → reuse fall#verb；learner layer remains grammar-quarantined
 flies            → split-required / held；source cannot disambiguate insect plural vs fly 3sg
 ```
 
@@ -158,26 +160,25 @@ flies            → split-required / held；source cannot disambiguate insect p
 #8  shorts / sometimes / they're / wasn't / weren't / what's / where's / woman / won't
 #9  your / running / stairs / a / actor / cent / chemistry / chinatown / dragon / everything / firefighter / geography / halloween / happiness
 #10 hide-and-seek / kilometre / language / librarian / passport / physics / raincoat / sausage / someday / spaceship / speech / string / taikonaut / town / traditional / winner / child / no. / flies
+#11 at / no / broken / candy / don't / fell
 ```
 
-### Latest validation — Batch #10
+### Latest validation — Batch #11
 
 ```text
-first run 34189627528 / #203 = FAIL at manifest fingerprint only; no durable apply/build executed
-corrected run 34189731265 / #204 = SUCCESS
-batch commit       = 1d492793108b4f317e3f072f2b127b2d3fe685c3
-fingerprint fix    = 8f01fff6e8e5c0d2025a89e08fb07b63ca6fe358
-bot persist        = 89aeaba...
+run               = 34190195775 / #205 = SUCCESS
+batch commit       = 69b7d2478782e2042a3ec55ccf508bfa2eb4c7fd
+bot persist        = ee264d7467a0969f94bdb4970aa68ac65a878a9d
 ```
 
 ```text
 selected active batch closure              = 100%
-Batch decisions                            = 19
-keep-identity                              = 17
-reuse-identity                             = 1   (No. → number)
-split-required                             = 1   (flies held)
+Batch decisions                            = 6
+keep-identity                              = 4
+reuse-identity                             = 1   (fell → fall#verb)
+route-expression                           = 1   (don't)
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1049 / 1049
+Identity Preview TargetSense               = 1053 / 1053
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
@@ -189,16 +190,16 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-Batch #10 delta：
+Batch #11 delta：
 
 ```text
-Blockers          929 → 911   (-18)
-Evidence-changed  834 → 817   (-17)
-Identity Preview 1032 → 1049  (+17)
-Learner Preview  1020 → 1037  (+17)
+Blockers          911 → 905   (-6)
+Evidence-changed  817 → 811   (-6)
+Identity Preview 1049 → 1053  (+4)
+Learner Preview  1037 → 1041  (+4)
 ```
 
-为什么不是净释放 19：`flies` 已完成审查，但唯一 source occurrence 同时可解释为 insect plural 与 `fly` 的 third-person singular，当前 flat vocabulary neighborhood 无法证明哪一个才是教材 target sense，因此显式保留为 blocker；这属于正确的 evidence-aware hold，而非未处理。
+`fell` 正确 scoped reuse 到 `fall#verb`，未新增 Identity；`don't` 继续进入 Expressions；因此 Preview 只增加 4。`broken` 的 sixth-source 证据仍支持 lexicalized defective-state adjective，没有被错误并入 `break`。
 
 ---
 
@@ -231,56 +232,52 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #11
+## 8. NEXT TASK — POLICY-REVIEW BATCH #12
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
 SelectedCount     = 6
-EvidenceWeight    = 46 / 60
+EvidenceWeight    = 59 / 60
 ExecutionReady    = true
-ReviewBundleFingerprint = 4f605c11ac420fd025c803327fa04e9b9f419fa93b26bae714caa52d674a080e
+ReviewBundleFingerprint = b6bb19e15f33f59215f4b10868c72553b3a13976978de8213621ed9fbdd68dbf
 SelectedMatchKeys =
-  at
-  no
-  broken
-  candy
-  don't
-  fell
+  fly
+  foot
+  go
+  leave
+  paint
+  shoe
 ```
 
 本批重点：
 
 ```text
-at / no
-→ dictionary abbreviation noise vs elementary grammatical core
+fly
+→ current multipart canonical / insect-vs-verb boundary；同时与 held `flies` 有依赖，禁止粗暴合并。
 
-broken
-→ lexicalized adjective vs break participle
+foot / go / leave / paint / shoe
+→ sixth-source exact evidence 可能扩展 multi-POS / polysemy；必须按教材 context 重新确认 learner-facing target sense。
 
-candy
-→ elementary food noun despite broad dictionary noise
-
-don't
-→ contraction；继续 route-expression，并重绑 sixth-source evidence
-
-fell
-→ past form of multipart canonical fall；必须核对 scoped canonical reuse 与 learner quarantine
+尤其：
+- leave 与历史 past-form `left#leave-past` 有 canonical dependency；
+- fly 若 source evidence 足以完善 canonical multipart，必须再检查 `flies` 是否可解；若仍不足则继续 hold。
 ```
 
 执行要求：
 
 ```text
-1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
+1. 读取 current review_bundle / exact source occurrences / related multipart/canonical decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
 4. 6/6 closure，不 cherry-pick；manifest fingerprint 必须从当前 next_batch.json 直接读取。
 5. apply + rebuild Identity/Learner views。
 6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
 7. 核对 blocker / Identity Preview / Learner Preview / canonical dependency delta。
-8. Klose isolation 必须 PASS。
-9. bot persist 后重新 planner；阶段结束更新 NEXT.md。
+8. 对 fly 额外复查 held flies 的后续状态，禁止 silent release。
+9. Klose isolation 必须 PASS。
+10. bot persist 后重新 planner；阶段结束更新 NEXT.md。
 ```
 
 仍然禁止：
