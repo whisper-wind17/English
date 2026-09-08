@@ -10,6 +10,7 @@ candidate:a pair of scissors,a pair of scissors,a pair of scissors,一把剪刀�
 candidate:a piece of,a piece of,a piece of,一块；一片；一件,a piece of,1,reviewed
 candidate:a.m.,a.m.,a.m.,上午；午前,a.m.,2,reviewed
 candidate:able,able,able,能,able,1,reviewed
+candidate:above,above,above,在……上面；在……之上,above,2,reviewed
 candidate:across from,across from,across from,在……正对面,across from,1,reviewed
 candidate:active,active,active,积极的；活跃的,active,2,reviewed
 candidate:actor,actor,actor,男演员,actor,2,reviewed
@@ -20,6 +21,9 @@ candidate:afraid of,afraid of,afraid of,害怕……；担心……,afraid of|be
 candidate:africa,africa,Africa,非洲,africa,1,reviewed
 candidate:after school,after school,after school,放学后,after school,1,reviewed
 candidate:afternoon,afternoon,afternoon,下午,afternoon,5,reviewed
+candidate:again,again,again,再；又；再一次,again,4,reviewed
+candidate:age,age,age,年龄,age,2,reviewed
+candidate:ago,ago,ago,以前；……之前,ago,5,reviewed
 candidate:air,air,air,空气,air,2,reviewed
 candidate:airport,airport,airport,机场,airport,3,reviewed
 candidate:alaska,alaska,Alaska,阿拉斯加州,alaska,1,reviewed
@@ -29,6 +33,8 @@ candidate:all over the world,all over the world,all over the world,世界各地�
 candidate:all the time,all the time,all the time,一直；始终,all the time,1,reviewed
 candidate:all year round,all year round,all year round,全年；一年到头,all year round,1,reviewed
 candidate:almost,almost,almost,"差不多,几乎",almost,1,reviewed
+candidate:along,along,along,沿着；顺着,along,3,reviewed
+candidate:also,also,also,也；而且,also,6,reviewed
 candidate:always,always,always,总是；一直,always,6,reviewed
 candidate:am,am,am,是（be 的第一人称单数现在式）,am,5,reviewed
 candidate:amazing,amazing,amazing,令人惊异的；令人惊叹的,amazing,3,reviewed
@@ -36,17 +42,25 @@ candidate:an,an,an,一个；一（用于元音音素前）,an,5,reviewed
 candidate:and,and,and,和；与；而且,and,6,reviewed
 candidate:angry,angry,angry,生气的；愤怒的,angry,6,reviewed
 candidate:animal,animal,animal,动物,animal,6,reviewed
+candidate:another,another,another,另一个；又一个,another,3,reviewed
+candidate:answer,answer,answer,回答；答案,answer,5,reviewed
 candidate:ant,ant,ant,蚂蚁,ant,2,reviewed
+candidate:any,any,any,任何；一些（用于疑问或否定）,any,5,reviewed
 candidate:anything,anything,anything,任何事；任何东西,anything,2,reviewed
 candidate:anywhere,anywhere,anywhere,任何地方；无论哪里,anywhere,1,reviewed
 candidate:apple,apple,apple,苹果,apple,8,reviewed
 candidate:april,april,April,四月,april,4,reviewed
+candidate:are,are,are,是（be 的第二人称及复数现在式）,are,6,reviewed
 candidate:are not,are not,are not,不是；没有；不（are 的否定形式）,are not|aren't,4,reviewed
+candidate:arm,arm,arm,手臂；胳膊,arm,6,reviewed
+candidate:around,around,around,在……周围；到处；大约,around,6,reviewed
 candidate:arrive,arrive,arrive,到达,arrive,3,reviewed
+candidate:art,art,art,美术；艺术,art,5,reviewed
 candidate:art gallery,art gallery,art gallery,美术馆；艺术画廊,art gallery,1,reviewed
 candidate:art room,art room,art room,美术教室,art room,2,reviewed
 candidate:artist,artist,artist,艺术家；美术家,artist,2,reviewed
 candidate:asia,asia,Asia,亚洲,asia,1,reviewed
+candidate:ask,ask,ask,问；询问,ask,6,reviewed
 candidate:asleep,asleep,asleep,睡着的,asleep,1,reviewed
 candidate:at,at,at,在；于；向（用于地点、时间或目标）,at,5,reviewed
 candidate:at first,at first,at first,起初；一开始,at first,1,reviewed
@@ -62,11 +76,19 @@ candidate:august,august,August,八月,august,5,reviewed
 candidate:aunt,aunt,aunt,姑妈；姨妈；伯母；舅妈等女性长辈,aunt,6,reviewed
 candidate:australia,australia,Australia,澳大利亚,australia,1,reviewed
 candidate:australian,australian,Australian,澳大利亚的；澳大利亚人,australian,1,reviewed
+candidate:autumn,autumn,autumn,秋天；秋季,autumn,6,reviewed
 candidate:away,away,away,离开；在远处,away,2,reviewed
+candidate:baby,baby,baby,婴儿；宝宝,baby,5,reviewed
 candidate:baby brother,baby brother,baby brother,弟弟；小弟弟,baby brother,1,reviewed
+candidate:bad,bad,bad,坏的；不好的,bad,6,reviewed
 candidate:badminton,badminton,badminton,羽毛球；羽毛球运动,badminton,2,reviewed
+candidate:bag,bag,bag,袋子；包,bag,6,reviewed
+candidate:ball,ball,ball,球,ball,8,reviewed
+candidate:balloon,balloon,balloon,气球,balloon,3,reviewed
+candidate:bamboo,bamboo,bamboo,竹子,bamboo,3,reviewed
 candidate:banana,banana,banana,香蕉,banana,7,reviewed
 candidate:bank,bank,bank,银行,bank,1,reviewed
+candidate:bark,bark,bark,吠叫；狗叫,bark,3,reviewed
 candidate:baseball,baseball,baseball,棒球；棒球运动,baseball,3,reviewed
 candidate:basket,basket,basket,篮子,basket,1,reviewed
 candidate:basketball,basketball,basketball,篮球；篮球运动,basketball,6,reviewed
@@ -82,36 +104,60 @@ candidate:be interested in,be interested in,be interested in,对……感兴趣,
 candidate:be late for,be late for,be late for,……迟到；迟到,be late for,1,reviewed
 candidate:be weak in,be weak in,be weak in,不擅长……；在……方面较弱,be weak in,1,reviewed
 candidate:beach,beach,beach,海滩；沙滩,beach,4,reviewed
+candidate:bear,bear,bear,熊,bear,6,reviewed
 candidate:beautiful,beautiful,beautiful,美丽的；漂亮的,beautiful,6,reviewed
 candidate:beautifully,beautifully,beautifully,漂亮地；优美地,beautifully,1,reviewed
 candidate:beaver,beaver,beaver,河狸；海狸,beaver,1,reviewed
 candidate:because,because,because,因为,because,5,reviewed
+candidate:become,become,become,成为；变得,became|become,7,reviewed
+candidate:bed,bed,bed,床,bed,8,reviewed
+candidate:bedroom,bedroom,bedroom,卧室,bedroom,4,reviewed
 candidate:bedtime,bedtime,bedtime,就寝时间；睡觉时间,bedtime,1,reviewed
 candidate:bee,bee,bee,蜜蜂,bee,3,reviewed
 candidate:beef,beef,beef,牛肉,beef,1,reviewed
 candidate:beep,beep,beep,哔哔声；发出哔哔声,beep,1,reviewed
+candidate:begin,begin,begin,开始,begin,4,reviewed
+candidate:behind,behind,behind,在……后面；在后面,behind,6,reviewed
+candidate:bell,bell,bell,铃；钟,bell,4,reviewed
 candidate:bench,bench,bench,长凳,bench,1,reviewed
 candidate:beside,beside,beside,在……旁边,beside,5,reviewed
 candidate:better and better,better and better,better and better,越来越好,better and better,1,reviewed
+candidate:between,between,between,在……之间,between,6,reviewed
+candidate:big,big,big,大的；大,big|bigger,11,reviewed
 candidate:big ben,big ben,Big Ben,大本钟,big ben,1,reviewed
+candidate:bike,bike,bike,自行车,bike,6,reviewed
 candidate:bike ride,bike ride,bike ride,骑自行车出行；骑车兜风,bike ride,1,reviewed
+candidate:bird,bird,bird,鸟,bird,9,reviewed
 candidate:birthday,birthday,birthday,生日,birthday,6,reviewed
 candidate:biscuit,biscuit,biscuit,饼干,biscuit,1,reviewed
 candidate:bite,bite,bite,咬,bite,1,reviewed
+candidate:black,black,black,黑色；黑色的,black,6,reviewed
 candidate:blackboard,blackboard,blackboard,黑板,blackboard,7,reviewed
+candidate:blind,blind,blind,失明的；看不见的,blind,4,reviewed
+candidate:blow,blow,blow,吹；刮,blow,2,reviewed
 candidate:blow off,blow off,blow off,吹掉；刮掉,blow off,1,reviewed
+candidate:blue,blue,blue,蓝色；蓝色的,blue,6,reviewed
 candidate:blue whale,blue whale,blue whale,蓝鲸,blue whale,1,reviewed
 candidate:board,board,board,上车；登上（交通工具）,board,1,reviewed
+candidate:boat,boat,boat,船；小船,boat,7,reviewed
 candidate:boating,boating,boating,划船；划船活动,boating,1,reviewed
+candidate:body,body,body,身体,body,6,reviewed
+candidate:book,book,book,书；书本,book,8,reviewed
 candidate:bookshop,bookshop,bookshop,书店,bookshop,2,reviewed
 candidate:bookstore,bookstore,bookstore,书店,bookstore,1,reviewed
+candidate:bored,bored,bored,感到无聊的；厌倦的,bored,3,reviewed
 candidate:boring,boring,boring,无聊的；令人厌烦的,boring,3,reviewed
+candidate:borrow,borrow,borrow,借；借入,borrow,3,reviewed
 candidate:both,both,both,两者都；两个都,both,4,reviewed
+candidate:bottle,bottle,bottle,瓶子,bottle,4,reviewed
 candidate:bowl,bowl,bowl,碗,bowl,1,reviewed
+candidate:box,box,box,盒子；箱子,box,8,reviewed
 candidate:boy,boy,boy,男孩,boy,6,reviewed
 candidate:brave,brave,brave,勇敢的,brave,2,reviewed
+candidate:bread,bread,bread,面包,bread,6,reviewed
 candidate:break#damage,break#damage,break,打破；弄坏,break|broke,2,reviewed
 candidate:break#recess,break#recess,break,课间休息；休息时间,break,2,reviewed
+candidate:breakfast,breakfast,breakfast,早餐；早饭,breakfast,5,reviewed
 candidate:breath,breath,breath,呼吸；气息,breath,1,reviewed
 candidate:bridge,bridge,bridge,桥,bridge,2,reviewed
 candidate:bright,bright,bright,明亮的；光亮的,bright,2,reviewed
@@ -119,9 +165,11 @@ candidate:bring,bring,bring,带来；拿来,bring|brought,8,reviewed
 candidate:broken,broken,broken,破损的；坏掉的,broken,4,reviewed
 candidate:broom,broom,broom,扫帚,broom,1,reviewed
 candidate:brother,brother,brother,兄弟；哥哥；弟弟,brother,8,reviewed
+candidate:brown,brown,brown,棕色；棕色的,brown,5,reviewed
 candidate:brush,brush,brush,画笔；毛笔,brush,1,reviewed
 candidate:build,build,build,建造；建设,build,3,reviewed
 candidate:bullet,bullet,bullet,子弹,bullet,1,reviewed
+candidate:bump,bump,bump,碰；撞,bump,2,reviewed
 candidate:bunny,bunny,bunny,小兔子；兔子,bunny,1,reviewed
 candidate:burn,burn,burn,燃烧；烧伤；烧毁,burn,1,reviewed
 candidate:burn down,burn down,burn down,烧毁；烧成平地,burn down,1,reviewed
@@ -129,7 +177,10 @@ candidate:bus,bus,bus,公共汽车；公交车,bus,5,reviewed
 candidate:bus driver,bus driver,bus driver,公交车司机；公共汽车驾驶员,bus driver,2,reviewed
 candidate:bus stop,bus stop,bus stop,公交车站；公共汽车站,bus stop,1,reviewed
 candidate:businessman,businessman,businessman,商人；商人男性,businessman,1,reviewed
+candidate:busy,busy,busy,忙的；忙碌的,busy,6,reviewed
+candidate:but,but,but,但是；可是,but,6,reviewed
 candidate:butterfly,butterfly,butterfly,蝴蝶,butterfly,2,reviewed
+candidate:buy,buy,buy,买；购买,bought|buy,9,reviewed
 candidate:buy toys,buy toys,buy toys,买玩具,buy toys,1,reviewed
 candidate:by bike,by bike,by bike,骑自行车；乘自行车,by bike,2,reviewed
 candidate:by boat,by boat,by boat,乘船,by boat,1,reviewed
@@ -143,6 +194,8 @@ candidate:by subway,by subway,by subway,乘地铁,by subway,1,reviewed
 candidate:by taxi,by taxi,by taxi,乘出租车,by taxi,1,reviewed
 candidate:by train,by train,by train,乘火车,by train,1,reviewed
 candidate:bye,bye,bye,再见,bye,2,reviewed
+candidate:cake,cake,cake,蛋糕,cake,7,reviewed
+candidate:call,call,call,打电话；呼叫,call,5,reviewed
 candidate:camera,camera,camera,照相机；相机,camera,4,reviewed
 candidate:camp,camp,camp,露营；营地,camp,1,reviewed
 candidate:campfire,campfire,campfire,营火；篝火,campfire,1,reviewed
@@ -150,21 +203,27 @@ candidate:canada,canada,Canada,加拿大,canada,3,reviewed
 candidate:canadian,canadian,Canadian,加拿大的；加拿大人,canadian,1,reviewed
 candidate:canberra,canberra,Canberra,堪培拉,canberra,1,reviewed
 candidate:candy,candy,candy,糖果,candies|candy,5,reviewed
+candidate:cap,cap,cap,帽子；便帽,cap,7,reviewed
 candidate:capital,capital,capital,首都,capital,2,reviewed
 candidate:car,car,car,汽车；小汽车,car,7,reviewed
 candidate:car museum,car museum,car museum,汽车博物馆,car museum,1,reviewed
+candidate:card,card,card,卡片；卡,card,5,reviewed
 candidate:careful,careful,careful,小心的；仔细的,careful,4,reviewed
 candidate:carefully,carefully,carefully,小心地；仔细地,carefully,1,reviewed
 candidate:careless,careless,careless,粗心的；不小心的,careless,1,reviewed
 candidate:carrot,carrot,carrot,胡萝卜,carrot,3,reviewed
+candidate:carry,carry,carry,拿；携带；搬运,carry,5,reviewed
 candidate:cartoon,cartoon,cartoon,卡通；动画片,cartoon|cartoons,3,reviewed
+candidate:cashier,cashier,cashier,收银员,cashier,2,reviewed
 candidate:cat,cat,cat,猫,cat,8,reviewed
+candidate:catch,catch,catch,接住；抓住,catch,5,reviewed
 candidate:cave,cave,cave,洞穴,cave,1,reviewed
 candidate:cd,cd,CD,光盘；激光唱片,cd,2,reviewed
 candidate:celebrate,celebrate,celebrate,庆祝,celebrate,1,reviewed
 candidate:cent,cent,cent,分（货币单位）,cent,2,reviewed
 candidate:centimetre,centimetre,centimetre,厘米；公分,centimetre,1,reviewed
 candidate:central,central,central,中心的；中央的,central,1,reviewed
+candidate:chair,chair,chair,椅子,chair,7,reviewed
 candidate:chameleon,chameleon,chameleon,变色龙,chameleon,1,reviewed
 candidate:chase,chase,chase,追逐；追赶,chase,1,reviewed
 candidate:cheap,cheap,cheap,便宜的,cheap,2,reviewed
@@ -1133,6 +1192,7 @@ candidate:through,through,through,穿过；通过,through,1,reviewed
 candidate:throw,throw,throw,扔；投,throw,1,reviewed
 candidate:throw away,throw away,throw away,扔掉；丢弃,throw away,1,reviewed
 candidate:thursday,thursday,Thursday,星期四,thursday,7,reviewed
+candidate:ticket,ticket,ticket,票；票券,ticket,2,reviewed
 candidate:tidy,tidy,tidy,整洁的,tidy,3,reviewed
 candidate:tidy the desk,tidy the desk,tidy the desk,整理书桌,tidy the desk,1,reviewed
 candidate:tidy up,tidy up,tidy up,整理；收拾整齐,tidy up,2,reviewed
