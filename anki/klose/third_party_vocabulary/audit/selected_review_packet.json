@@ -5,13 +5,13 @@
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
     "too",
-    "letter",
     "feel",
-    "get"
+    "get",
+    "letter"
   ],
   "SelectedCount": 4,
-  "ReviewBundleFingerprint": "991b6c5a56384638b2c92b6cde127e83a6d7bc20d6195eca6d64a792ec216a90",
-  "ReviewPacketFingerprint": "308d248db3b803825c2729dc07efdf9e84e5624bbf20e44ae96f3a581f559d00",
+  "ReviewBundleFingerprint": "966728dee4aca8e7b953c3a6e0ecb089a5d3e831cc8dadb29c8985ae5faa3a30",
+  "ReviewPacketFingerprint": "025cf1762008385d62294fbe14cf728902f82b93637ed2fb070f5c7590cac946",
   "Items": [
     {
       "MatchKey": "too",
@@ -27,7 +27,7 @@
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
       "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
+      "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [
         {
           "DecisionKey": "surface:too",
@@ -39,8 +39,8 @@
           "TargetSense": "",
           "Status": "held",
           "Confidence": "high",
-          "DecisionBasis": "minimal-identity-v6-split-audited-defer-jijiao-context-recheck",
-          "Rationale": "Explicit re-review after Jijiao expansion: the added Jijiao flat-list occurrence (birthday/tall/live/too/foot...) does not disambiguate too=也 versus too=太/过度. Both senses remain learner-relevant and several older rows are still unassignable without guessing, so preserve split-required and retire this reviewed ambiguity until context changes again."
+          "DecisionBasis": "split-resolution-current-context-audit",
+          "Rationale": "Current full evidence still mixes additive too meaning also with degree or excess too meaning and several flat-list occurrences cannot be assigned safely. Preserve audited split-required rather than fabricate a partition."
         }
       ],
       "CurrentOccurrenceKeys": [
@@ -380,227 +380,6 @@
       ]
     },
     {
-      "MatchKey": "letter",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "letter",
-      "Definitions": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-      "SourceIDs": "beishida_start1|hujiao_start3|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beishida_start1:6年级下|hujiao_start3:5年级上|renjiao_start3:5年级下|waiyan_start1:2年级下|waiyan_start3:5年级下|waiyan_start3:6年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:letter",
-          "MatchKey": "letter",
-          "OccurrenceKeys": "[\"beishida_start1|g6-lower|r036|letter\",\"hujiao_start3|g5-upper|r090|letter\",\"renjiao_start3|g5-lower|r031|letter\",\"waiyan_start1|g2-lower|r022|letter\",\"waiyan_start3|g5-lower|r128|letter\",\"waiyan_start3|g6-lower|r065|letter\"]",
-          "Action": "split-required",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "",
-          "Status": "held",
-          "Confidence": "high",
-          "DecisionBasis": "minimal-identity-v6-split-audited-defer-explicit-recheck",
-          "Rationale": "Explicit re-review confirms both letter=信 and letter=字母 are present: write/letter supports mail and letter/spell supports alphabetic character, but the remaining flat-list rows are not safely assignable. Preserve split-required rather than create an incomplete semantic partition."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g6-lower|r036|letter",
-        "hujiao_start3|g5-upper|r090|letter",
-        "renjiao_start3|g5-lower|r031|letter",
-        "waiyan_start1|g2-lower|r022|letter",
-        "waiyan_start3|g5-lower|r128|letter",
-        "waiyan_start3|g6-lower|r065|letter"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g6-lower|r036|letter",
-          "SourceID": "beishida_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "36",
-          "Word": "letter",
-          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-          "Before": [
-            "brake",
-            "chin",
-            "crutch",
-            "emergency",
-            "eyesight",
-            "fall",
-            "hear",
-            "injection"
-          ],
-          "After": [
-            "outside",
-            "pain",
-            "relax",
-            "smell",
-            "taste",
-            "wrist",
-            "agree",
-            "bottle"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r090|letter",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "90",
-          "Word": "letter",
-          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-          "Before": [
-            "watch TV",
-            "tell a story",
-            "beach",
-            "enjoy",
-            "sunshine",
-            "collect",
-            "shell",
-            "sea"
-          ],
-          "After": [
-            "put",
-            "know",
-            "year",
-            "on holiday",
-            "have a good time",
-            "outing",
-            "map",
-            "hill"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r031|letter",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "31",
-          "Word": "letter",
-          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-          "Before": [
-            "shop",
-            "work",
-            "last",
-            "sound",
-            "also",
-            "busy",
-            "need",
-            "play"
-          ],
-          "After": [
-            "live",
-            "island",
-            "always",
-            "cave",
-            "go swimming",
-            "win",
-            "spring",
-            "summer"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r022|letter",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
-          "Semester": "下",
-          "SourceRow": "22",
-          "Word": "letter",
-          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-          "Before": [
-            "photo",
-            "newspaper",
-            "little",
-            "camera",
-            "smile",
-            "draw",
-            "picture",
-            "write"
-          ],
-          "After": [
-            "colour",
-            "tidy",
-            "room",
-            "do",
-            "homework",
-            "sleep",
-            "secret",
-            "card"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r128|letter",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "128",
-          "Word": "letter",
-          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-          "Before": [
-            "put",
-            "put",
-            "stick",
-            "tied",
-            "string",
-            "laugh",
-            "wore",
-            "wear"
-          ],
-          "After": [
-            "theatre",
-            "women",
-            "woman",
-            "actor",
-            "told",
-            "tell",
-            "joke",
-            "after"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r065|letter",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "65",
-          "Word": "letter",
-          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
-          "Before": [
-            "October",
-            "video",
-            "proud",
-            "someday",
-            "born",
-            "as",
-            "became",
-            "become"
-          ],
-          "After": [
-            "spell",
-            "herself",
-            "all over",
-            "live",
-            "role model",
-            "cup",
-            "planned",
-            "plan"
-          ]
-        }
-      ]
-    },
-    {
       "MatchKey": "feel",
       "ReviewMode": "full-evidence",
       "DisplayForms": "feel",
@@ -626,8 +405,8 @@
           "TargetSense": "感觉；觉得",
           "Status": "reviewed",
           "Confidence": "high",
-          "DecisionBasis": "beishida-start1-multipart-feel-conservative-revalidation",
-          "Rationale": "Existing emotion and linking-state occurrences remain the state sense. The Beishida flat-list occurrence is not assigned here without evidence."
+          "DecisionBasis": "split-resolution-current-context-audit",
+          "Rationale": "Emotion and linking-state occurrences continue to support the feel state or subjective sensation subgroup."
         },
         {
           "DecisionKey": "surface:feel#touch",
@@ -639,8 +418,8 @@
           "TargetSense": "摸起来；触摸感受",
           "Status": "reviewed",
           "Confidence": "high",
-          "DecisionBasis": "beishida-start1-multipart-feel-conservative-revalidation",
-          "Rationale": "The explicit touch/soft/hard/thick/thin occurrence remains the tactile subgroup."
+          "DecisionBasis": "split-resolution-current-context-audit",
+          "Rationale": "The explicit touch soft hard thick thin context continues to support the tactile feel subgroup."
         },
         {
           "DecisionKey": "surface:feel#unresolved-beishida",
@@ -652,8 +431,8 @@
           "TargetSense": "",
           "Status": "held",
           "Confidence": "high",
-          "DecisionBasis": "beishida-start1-insufficient-sense-context",
-          "Rationale": "The Beishida occurrence appears only in a flat chores vocabulary neighborhood between feed and furniture. It does not distinguish state/觉得 from tactile/触摸 safely; preserve the occurrence as an explicit unresolved partition instead of guessing."
+          "DecisionBasis": "split-resolution-current-context-audit",
+          "Rationale": "The Beishida occurrence remains in a flat chores vocabulary neighborhood and still cannot distinguish state from tactile use safely. Preserve the explicit unresolved partition."
         }
       ],
       "CurrentOccurrenceKeys": [
@@ -854,7 +633,7 @@
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
       "BlockerClass": "split-resolution",
-      "PolicyRecommendedAction": "re-review-context-changed",
+      "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [
         {
           "DecisionKey": "surface:get",
@@ -866,8 +645,8 @@
           "TargetSense": "",
           "Status": "held",
           "Confidence": "high",
-          "DecisionBasis": "minimal-identity-v6-split-audited-defer-jijiao-context-recheck",
-          "Rationale": "Explicit re-review after Jijiao expansion still finds acquisition, arrival/construction and change-of-state uses. The new Jijiao flat-list row does not uniquely bind one of them, and several older rows remain ambiguous. Preserve split-required; do not fabricate a complete partition."
+          "DecisionBasis": "split-resolution-current-context-audit",
+          "Rationale": "Current evidence still spans acquisition arrival construction and change-of-state uses while multiple flat-list occurrences remain ambiguous. Preserve audited split-required rather than invent a complete partition."
         }
       ],
       "CurrentOccurrenceKeys": [
@@ -1240,6 +1019,227 @@
             "paper",
             "brought",
             "bring"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "letter",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "letter",
+      "Definitions": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+      "SourceIDs": "beishida_start1|hujiao_start3|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beishida_start1:6年级下|hujiao_start3:5年级上|renjiao_start3:5年级下|waiyan_start1:2年级下|waiyan_start3:5年级下|waiyan_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "split-resolution",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:letter",
+          "MatchKey": "letter",
+          "OccurrenceKeys": "[\"beishida_start1|g6-lower|r036|letter\",\"hujiao_start3|g5-upper|r090|letter\",\"renjiao_start3|g5-lower|r031|letter\",\"waiyan_start1|g2-lower|r022|letter\",\"waiyan_start3|g5-lower|r128|letter\",\"waiyan_start3|g6-lower|r065|letter\"]",
+          "Action": "split-required",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "split-resolution-current-context-audit",
+          "Rationale": "Current evidence proves both mail letter and alphabetic character senses but several flat-list occurrences remain unassignable. Preserve audited split-required until source context can complete a disjoint occurrence partition."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g6-lower|r036|letter",
+        "hujiao_start3|g5-upper|r090|letter",
+        "renjiao_start3|g5-lower|r031|letter",
+        "waiyan_start1|g2-lower|r022|letter",
+        "waiyan_start3|g5-lower|r128|letter",
+        "waiyan_start3|g6-lower|r065|letter"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g6-lower|r036|letter",
+          "SourceID": "beishida_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "36",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "brake",
+            "chin",
+            "crutch",
+            "emergency",
+            "eyesight",
+            "fall",
+            "hear",
+            "injection"
+          ],
+          "After": [
+            "outside",
+            "pain",
+            "relax",
+            "smell",
+            "taste",
+            "wrist",
+            "agree",
+            "bottle"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r090|letter",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "90",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "watch TV",
+            "tell a story",
+            "beach",
+            "enjoy",
+            "sunshine",
+            "collect",
+            "shell",
+            "sea"
+          ],
+          "After": [
+            "put",
+            "know",
+            "year",
+            "on holiday",
+            "have a good time",
+            "outing",
+            "map",
+            "hill"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r031|letter",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "31",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "shop",
+            "work",
+            "last",
+            "sound",
+            "also",
+            "busy",
+            "need",
+            "play"
+          ],
+          "After": [
+            "live",
+            "island",
+            "always",
+            "cave",
+            "go swimming",
+            "win",
+            "spring",
+            "summer"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r022|letter",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "22",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "photo",
+            "newspaper",
+            "little",
+            "camera",
+            "smile",
+            "draw",
+            "picture",
+            "write"
+          ],
+          "After": [
+            "colour",
+            "tidy",
+            "room",
+            "do",
+            "homework",
+            "sleep",
+            "secret",
+            "card"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-lower|r128|letter",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "128",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "put",
+            "put",
+            "stick",
+            "tied",
+            "string",
+            "laugh",
+            "wore",
+            "wear"
+          ],
+          "After": [
+            "theatre",
+            "women",
+            "woman",
+            "actor",
+            "told",
+            "tell",
+            "joke",
+            "after"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r065|letter",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "65",
+          "Word": "letter",
+          "Definition": "n. 信;字母,文字;证书;文学,学问;字面意义 vt. 写字母于 vi. 写印刷体字母",
+          "Before": [
+            "October",
+            "video",
+            "proud",
+            "someday",
+            "born",
+            "as",
+            "became",
+            "become"
+          ],
+          "After": [
+            "spell",
+            "herself",
+            "all over",
+            "live",
+            "role model",
+            "cup",
+            "planned",
+            "plan"
           ]
         }
       ]
