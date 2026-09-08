@@ -1,4 +1,5 @@
 ﻿ProvisionalIdentityKey,CanonicalMatchKey,DisplayWord,TargetSense,SourceMatchKeys,SourceOccurrenceCount,DecisionStatus
+candidate:a,a,a,一个；一（用于辅音音素前）,a,5,reviewed
 candidate:a box of crayons,a box of crayons,a box of crayons,一盒蜡笔,a box of crayons,1,reviewed
 candidate:a few,a few,a few,几个；少数几个,a few,3,reviewed
 candidate:a knife and fork,a knife and fork,a knife and fork,一副刀叉,a knife and fork,1,reviewed
@@ -11,6 +12,7 @@ candidate:a.m.,a.m.,a.m.,上午；午前,a.m.,2,reviewed
 candidate:able,able,able,能,able,1,reviewed
 candidate:across from,across from,across from,在……正对面,across from,1,reviewed
 candidate:active,active,active,积极的；活跃的,active,2,reviewed
+candidate:actor,actor,actor,男演员,actor,2,reviewed
 candidate:adult,adult,adult,成年人；成人,adult,1,reviewed
 candidate:advice,advice,advice,建议；忠告,advice,1,reviewed
 candidate:afraid of,afraid of,afraid of,害怕……；担心……,afraid of|be afraid of,2,reviewed
@@ -129,14 +131,17 @@ candidate:cartoon,cartoon,cartoon,卡通；动画片,cartoon|cartoons,3,reviewed
 candidate:cave,cave,cave,洞穴,cave,1,reviewed
 candidate:cd,cd,CD,光盘；激光唱片,cd,2,reviewed
 candidate:celebrate,celebrate,celebrate,庆祝,celebrate,1,reviewed
+candidate:cent,cent,cent,分（货币单位）,cent,2,reviewed
 candidate:centimetre,centimetre,centimetre,厘米；公分,centimetre,1,reviewed
 candidate:central,central,central,中心的；中央的,central,1,reviewed
 candidate:chase,chase,chase,追逐；追赶,chase,1,reviewed
 candidate:cheap,cheap,cheap,便宜的,cheap,2,reviewed
 candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
+candidate:chemistry,chemistry,chemistry,化学,chemistry,2,reviewed
 candidate:chick,chick,chick,小鸡；雏鸡,chick,1,reviewed
 candidate:children,children,children,孩子们；儿童（child 的复数）,children,6,reviewed
 candidate:children's day,children's day,Children's Day,儿童节,children's day,2,reviewed
+candidate:chinatown,chinatown,Chinatown,唐人街；中国城,chinatown,2,reviewed
 candidate:chinese book,chinese book,Chinese book,语文书；中文书,chinese book,1,reviewed
 candidate:chinese ink painting,chinese ink painting,Chinese ink painting,中国水墨画,chinese ink painting,1,reviewed
 candidate:chips,chips,chips,[食品] 炸土豆条,chips,1,reviewed
@@ -208,6 +213,7 @@ candidate:do kung fu,do kung fu,do kung fu,练功夫；做中国功夫,do kung f
 candidate:do morning exercises,do morning exercises,do morning exercises,做早操；晨练,do morning exercises|doing morning exercises,2,reviewed
 candidate:do the housework,do the housework,do the housework,做家务,do the housework,1,reviewed
 candidate:downtown,downtown,downtown,市中心；在市中心,downtown,1,reviewed
+candidate:dragon,dragon,dragon,龙,dragon,2,reviewed
 candidate:dragon dance,dragon dance,dragon dance,舞龙,dragon dance,1,reviewed
 candidate:draw cartoons,draw cartoons,draw cartoons,画卡通；画漫画,draw cartoons,1,reviewed
 candidate:draw pictures,draw pictures,draw pictures,画画；画图,draw pictures,1,reviewed
@@ -244,6 +250,7 @@ candidate:even,even,even,甚至；连……都,even,1,reviewed
 candidate:ever,ever,ever,曾经；在任何时候,ever,1,reviewed
 candidate:every day,every day,every day,每天,every day,2,reviewed
 candidate:every year,every year,every year,每年,every year,1,reviewed
+candidate:everything,everything,everything,每件事物；一切,everything,2,reviewed
 candidate:everywhere,everywhere,everywhere,到处；各处,everywhere,4,reviewed
 candidate:example,example,example,例子；示例,example,1,reviewed
 candidate:exciting,exciting,exciting,令人兴奋的；令人激动的,exciting,2,reviewed
@@ -271,6 +278,7 @@ candidate:fifth,fifth,fifth,第五,5th|fifth,4,reviewed
 candidate:finally,finally,finally,最后；终于,finally,1,reviewed
 candidate:finger,finger,finger,手指,finger,2,reviewed
 candidate:firecracker,firecracker,firecracker,鞭炮；爆竹,firecracker,2,reviewed
+candidate:firefighter,firefighter,firefighter,消防队员,firefighter,2,reviewed
 candidate:fireman,fireman,fireman,消防员,fireman,1,reviewed
 candidate:firework,firework,firework,烟花；烟火,firework,1,reviewed
 candidate:first floor,first floor,first floor,一楼；第一层,first floor,1,reviewed
@@ -304,6 +312,7 @@ candidate:garden,garden,garden,花园；园子,garden,5,reviewed
 candidate:gate,gate,gate,大门；门,gate,2,reviewed
 candidate:gatekeeper,gatekeeper,gatekeeper,看门人；守门人,gatekeeper,1,reviewed
 candidate:gently,gently,gently,轻轻地；温柔地,gently,1,reviewed
+candidate:geography,geography,geography,地理,geography,2,reviewed
 candidate:germany,germany,Germany,德国,germany,1,reviewed
 candidate:get lost,get lost,get lost,迷路,get lost,1,reviewed
 candidate:get off,get off,get off,下车,get off,1,reviewed
@@ -358,7 +367,9 @@ candidate:gym,gym,gym,体育馆；健身房,gym,3,reviewed
 candidate:habit,habit,habit,习惯,habit,1,reviewed
 candidate:had,had,had,有；拥有（have 的过去式）,had,4,reviewed
 candidate:hall,hall,hall,大厅；礼堂,hall,2,reviewed
+candidate:halloween,halloween,Halloween,万圣节前夕,halloween,2,reviewed
 candidate:handsome,handsome,handsome,英俊的；帅气的,handsome,3,reviewed
+candidate:happiness,happiness,happiness,幸福；快乐,happiness,2,reviewed
 candidate:hard-working,hard-working,hard-working,勤奋的；勤劳的,hard-working,1,reviewed
 candidate:hardly,hardly,hardly,"几乎不,简直不",hardly,1,reviewed
 candidate:hate,hate,hate,讨厌；憎恨,hate,1,reviewed
@@ -716,6 +727,7 @@ candidate:rubbish bin,rubbish bin,rubbish bin,垃圾桶；垃圾箱,rubbish bin,
 candidate:run a race,run a race,run a race,赛跑；参加赛跑,run a race,1,reviewed
 candidate:run away,run away,run away,逃跑；跑开,run away,1,reviewed
 candidate:run down the stairs,run down the stairs,run down the stairs,跑下楼梯,run down the stairs,1,reviewed
+candidate:running,running,running,跑步；跑步活动,running,2,reviewed
 candidate:safety,safety,safety,安全,safety,2,reviewed
 candidate:safety rule,safety rule,safety rule,安全规则,safety rule,1,reviewed
 candidate:salad,salad,salad,沙拉；色拉,salad,1,reviewed
@@ -808,6 +820,7 @@ candidate:square#shape,square#shape,square,正方形,square,2,reviewed
 candidate:squirrel,squirrel,squirrel,松鼠,squirrel,1,reviewed
 candidate:stadium,stadium,stadium,体育场；运动场,stadium,1,reviewed
 candidate:stage,stage,stage,舞台,stage,1,reviewed
+candidate:stairs,stairs,stairs,楼梯,stairs,2,reviewed
 candidate:stay at home,stay at home,stay at home,待在家里,stayed at home,1,reviewed
 candidate:step,step,step,步；脚步,step,1,reviewed
 candidate:stomachache,stomachache,stomachache,胃痛；肚子痛,stomachache,1,reviewed
@@ -1013,6 +1026,7 @@ candidate:write a letter,write a letter,write a letter,写信,write a letter,1,r
 candidate:writer,writer,writer,作家；作者,writer,3,reviewed
 candidate:yard,yard,yard,院子；庭院,yard,2,reviewed
 candidate:yogurt,yogurt,yogurt,酸奶,yogurt,1,reviewed
+candidate:your,your,your,你的；你们的,your,7,reviewed
 candidate:yours,yours,yours,你的；你们的,yours,5,reviewed
 candidate:yourself,yourself,yourself,你自己,yourself,1,reviewed
 candidate:yum,yum,yum,真好吃；好吃；美味,yum,1,reviewed
