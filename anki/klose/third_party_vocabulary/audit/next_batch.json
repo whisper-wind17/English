@@ -1,19 +1,36 @@
 {
   "PlanVersion": "v5-throughput-delta",
-  "ReviewLane": "",
+  "ReviewLane": "policy-review",
   "ReviewMode": "full-evidence",
-  "SelectedMatchKeys": [],
-  "SelectedCount": 0,
-  "EvidenceWeight": 0,
-  "SurfaceCap": 0,
-  "WeightBudget": 0,
-  "EffectiveWeightBudget": 0,
-  "PackingSkippedMatchKeys": [],
+  "SelectedMatchKeys": [
+    "left",
+    "saw",
+    "dec.",
+    "dr.",
+    "feb.",
+    "jul.",
+    "jun.",
+    "mar.",
+    "nov.",
+    "oct.",
+    "sept.",
+    "math",
+    "her"
+  ],
+  "SelectedCount": 13,
+  "EvidenceWeight": 52,
+  "SurfaceCap": 30,
+  "WeightBudget": 60,
+  "EffectiveWeightBudget": 60,
+  "PackingSkippedMatchKeys": [
+    "fly",
+    "watch"
+  ],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
-  "ExecutionReady": false,
-  "GateReason": "no active review batch",
-  "ReviewBundleFingerprint": "45980818652c9e02e127ba6368eab48bf4eef8de0df47f14ce2cca738fdbb7a2",
-  "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  "ExecutionReady": true,
+  "GateReason": "",
+  "ReviewBundleFingerprint": "3e4f5747d71dab5079ee63e22fd3f51554e5eec65b20bbdf042e417ebf7b6cdd",
+  "ReviewPacketFingerprint": "24895b3d7f698840fcb12853955c770a5c7c5b8c79f3707b018db60cdc6cab51"
 }

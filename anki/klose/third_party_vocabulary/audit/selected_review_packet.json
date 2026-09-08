@@ -1,11 +1,1408 @@
 {
   "PlanVersion": "v5-throughput-delta",
   "ReviewPacketVersion": "selected-review-packet-v2",
-  "ReviewLane": "",
+  "ReviewLane": "policy-review",
   "ReviewMode": "full-evidence",
-  "SelectedMatchKeys": [],
-  "SelectedCount": 0,
-  "ReviewBundleFingerprint": "45980818652c9e02e127ba6368eab48bf4eef8de0df47f14ce2cca738fdbb7a2",
-  "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "Items": []
+  "SelectedMatchKeys": [
+    "left",
+    "saw",
+    "dec.",
+    "dr.",
+    "feb.",
+    "jul.",
+    "jun.",
+    "mar.",
+    "nov.",
+    "oct.",
+    "sept.",
+    "math",
+    "her"
+  ],
+  "SelectedCount": 13,
+  "ReviewBundleFingerprint": "3e4f5747d71dab5079ee63e22fd3f51554e5eec65b20bbdf042e417ebf7b6cdd",
+  "ReviewPacketFingerprint": "24895b3d7f698840fcb12853955c770a5c7c5b8c79f3707b018db60cdc6cab51",
+  "Items": [
+    {
+      "MatchKey": "left",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "left",
+      "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3|jijiao_start3",
+      "SourceBooks": "beijing_start1:4年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|hujiao_start3:5年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|jijiao_start3:3年级上|jijiao_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "leave",
+      "CanonicalRelation": "named-past-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "离开；出发",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:left",
+          "MatchKey": "left",
+          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r034|left\",\"hujiao_start3|g5-upper|r113|left\",\"renjiao_start3|g6-upper|r010|left\",\"waiyan_start1|g2-lower|r089|left\",\"waiyan_start3|g4-upper|r004|left\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "left#direction",
+          "ObjectType": "vocabulary",
+          "TargetSense": "左边；左侧",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-occurrence-direction-waiyan-start3-revalidation",
+          "Rationale": "The new Waiyan Start3 occurrence sits in a straight / go straight on / left / right directions block, so it joins the existing direction partition. These five occurrences bind left to the left-side/direction learning unit."
+        },
+        {
+          "DecisionKey": "surface:left#leave-past",
+          "MatchKey": "left",
+          "OccurrenceKeys": "[\"renjiao_start1|g5-lower|r083|left\",\"waiyan_start1|g6-lower|r020|left\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "left#leave-past",
+          "ObjectType": "vocabulary",
+          "TargetSense": "离开；出发（leave 的过去式）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "learner-first-pedagogical-past-form-split",
+          "Rationale": "These two occurrences are the high-frequency past form of leave. Preserve them as an explicit pedagogical-form subgroup rather than bypassing a currently evidence-stale canonical leave. The sibling direction partition covers the new Waiyan Start3 occurrence, preserving complete 7/7 coverage; current Klose Learner Admission keeps this subgroup grammar-quarantined."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g4-lower|r034|left",
+        "renjiao_start1|g5-lower|r083|left",
+        "renjiao_start3|g6-upper|r010|left",
+        "hujiao_start3|g5-upper|r113|left",
+        "waiyan_start1|g2-lower|r089|left",
+        "waiyan_start1|g6-lower|r020|left",
+        "waiyan_start3|g4-upper|r004|left",
+        "jijiao_start3|g3-upper|r048|left",
+        "jijiao_start3|g5-lower|r064|left"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g4-lower|r034|left",
+          "SourceID": "beijing_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "34",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "building",
+            "nearby",
+            "grey",
+            "beside",
+            "station",
+            "far",
+            "way",
+            "then"
+          ],
+          "After": [
+            "miss",
+            "China",
+            "labour",
+            "wall",
+            "cinema",
+            "museum",
+            "country",
+            "about"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g5-lower|r083|left",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "83",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "the Stone Forest",
+            "bought some gifts",
+            "took photos",
+            "saw flowers",
+            "slept",
+            "delicious",
+            "felt happy",
+            "sad"
+          ],
+          "After": [
+            "French fries",
+            "were",
+            "was born",
+            "started to speak",
+            "learned to walk",
+            "learned to ride a bike",
+            "went to kindergarten",
+            "went to school"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g6-upper|r010|left",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "10",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "science",
+            "museum",
+            "post office",
+            "bookstore",
+            "cinema",
+            "hospital",
+            "crossing",
+            "turn"
+          ],
+          "After": [
+            "straight",
+            "right",
+            "ask",
+            "sir",
+            "interesting",
+            "Italian",
+            "restaurant",
+            "pizza"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g5-upper|r113|left",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "113",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "key",
+            "think",
+            "at the top of",
+            "get through",
+            "post office",
+            "quite",
+            "along",
+            "turn"
+          ],
+          "After": [
+            "straight",
+            "right",
+            "between",
+            "flower shop",
+            "hospital",
+            "toy shop",
+            "road",
+            "get to"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r089|left",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "89",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "turn",
+            "around",
+            "turn around",
+            "ground",
+            "again",
+            "jump",
+            "back",
+            "come back"
+          ],
+          "After": [
+            "turn left",
+            "right",
+            "turn right",
+            "road",
+            "excuse me",
+            "straight",
+            "go straight on",
+            "lost"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g6-lower|r020|left",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "20",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "dark",
+            "cloud",
+            "Oh dear!",
+            "dry",
+            "stay",
+            "cloudy",
+            "close",
+            "quickly"
+          ],
+          "After": [
+            "shine",
+            "cry",
+            "thing",
+            "need",
+            "grab",
+            "balloon",
+            "fly away",
+            "stairs"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-upper|r004|left",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "4",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "straight",
+            "go straight on"
+          ],
+          "After": [
+            "right",
+            "lost",
+            "live",
+            "No.",
+            "number",
+            "street",
+            "excuse me",
+            "turn left"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g3-upper|r048|left",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "48",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "happy",
+            "sad",
+            "body",
+            "hand",
+            "head",
+            "arm",
+            "leg",
+            "foot"
+          ],
+          "After": [
+            "right",
+            "hair",
+            "eye",
+            "mouth",
+            "ear",
+            "nose",
+            "face",
+            "warm"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r064|left",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "64",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "busy",
+            "much",
+            "how much",
+            "write",
+            "mum",
+            "dad",
+            "dear",
+            "fine"
+          ],
+          "After": [
+            "right",
+            "turn",
+            "wrong",
+            "email",
+            "idea",
+            "computer",
+            "use",
+            "kind"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "saw",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "saw",
+      "Definitions": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+      "SourceIDs": "renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3|jijiao_start3",
+      "SourceBooks": "renjiao_start3:6年级下|hujiao_start3:6年级下|waiyan_start1:4年级上|waiyan_start3:4年级下|jijiao_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "see",
+      "CanonicalRelation": "named-past-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "看见；看到",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:saw",
+          "MatchKey": "saw",
+          "OccurrenceKeys": "[\"renjiao_start3|g6-lower|r032|saw\",\"waiyan_start1|g4-upper|r034|saw\",\"waiyan_start3|g4-lower|r097|saw\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "saw#see-past",
+          "ObjectType": "vocabulary",
+          "TargetSense": "看见；看到（see 的过去式）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "learner-first-pedagogical-past-form-split-waiyan-start3-revalidation",
+          "Rationale": "These three past-event occurrences bind saw to the high-frequency past form of see. Keep an explicit pedagogical subgroup alongside saw#tool; the new Waiyan Start3 saw/see neighborhood confirms the partition. Current Learner Admission grammar-quarantines only this decision-scoped past-form subgroup."
+        },
+        {
+          "DecisionKey": "surface:saw#tool",
+          "MatchKey": "saw",
+          "OccurrenceKeys": "[\"hujiao_start3|g6-lower|r059|saw\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "saw#tool",
+          "ObjectType": "vocabulary",
+          "TargetSense": "锯子",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "Craft/scissors/tape/glue/craftsman/tool context binds saw to the cutting tool."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "renjiao_start3|g6-lower|r032|saw",
+        "hujiao_start3|g6-lower|r059|saw",
+        "waiyan_start1|g4-upper|r034|saw",
+        "waiyan_start3|g4-lower|r097|saw",
+        "jijiao_start3|g5-lower|r012|saw",
+        "jijiao_start3|g5-lower|r084|saw"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g6-lower|r032|saw",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "32",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "cleaned",
+            "stayed",
+            "washed",
+            "watched",
+            "had",
+            "had a cold",
+            "slept",
+            "read"
+          ],
+          "After": [
+            "last",
+            "yesterday",
+            "before",
+            "drank",
+            "show",
+            "magazine",
+            "better",
+            "faster"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-lower|r059|saw",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "59",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "on the left",
+            "on the right",
+            "all the time",
+            "craft",
+            "crown",
+            "scissors",
+            "tape",
+            "glue"
+          ],
+          "After": [
+            "craftsman",
+            "tool",
+            "easily",
+            "himself",
+            "still",
+            "model house",
+            "a long time ago",
+            "at work"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r034|saw",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "34",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "print",
+            "right",
+            "between",
+            "bicycle",
+            "mouse",
+            "beside",
+            "man",
+            "went"
+          ],
+          "After": [
+            "trip",
+            "took",
+            "fifty",
+            "minute",
+            "top",
+            "mountain",
+            "ate",
+            "candies"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r097|saw",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "97",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "computer",
+            "love",
+            "him",
+            "Mrs",
+            "Miss",
+            "sang",
+            "sing",
+            "beautifully"
+          ],
+          "After": [
+            "see",
+            "game",
+            "last",
+            "fun",
+            "went",
+            "go",
+            "there",
+            "ate"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r012|saw",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "jump",
+            "sing",
+            "dance",
+            "sit",
+            "down",
+            "stand",
+            "up",
+            "see"
+          ],
+          "After": [
+            "look",
+            "look out of",
+            "look at",
+            "boy",
+            "girl",
+            "now",
+            "draw",
+            "picture"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r084|saw",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "84",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "did",
+            "do",
+            "yesterday",
+            "night",
+            "had",
+            "have",
+            "went",
+            "go"
+          ],
+          "After": [
+            "see",
+            "ate",
+            "eat",
+            "photo",
+            "were",
+            "are",
+            "was",
+            "am"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dec.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Dec.",
+      "Definitions": "abbr. 十二月(December)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r047|dec."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r047|dec.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "47",
+          "Word": "Dec.",
+          "Definition": "abbr. 十二月(December)",
+          "Before": [
+            "Apr.",
+            "May",
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sept.",
+            "Oct.",
+            "Nov."
+          ],
+          "After": [
+            "rain",
+            "sun",
+            "hot",
+            "snow",
+            "cold",
+            "how",
+            "weather",
+            "sunny"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "dr.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Dr.",
+      "Definitions": "abbr. (书写形式)医生;(用于街道名)路 n. 【摄】动态范围",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:3年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g3-upper|r059|dr."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g3-upper|r059|dr.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "59",
+          "Word": "Dr.",
+          "Definition": "abbr. (书写形式)医生;(用于街道名)路 n. 【摄】动态范围",
+          "Before": [
+            "eye",
+            "mouth",
+            "ear",
+            "nose",
+            "face",
+            "warm",
+            "cool",
+            "doctor"
+          ],
+          "After": [
+            "family",
+            "father",
+            "mother",
+            "brother",
+            "sister",
+            "China",
+            "short",
+            "tall"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "feb.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Feb.",
+      "Definitions": "abbr. 二月(February)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r037|feb."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r037|feb.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "37",
+          "Word": "Feb.",
+          "Definition": "abbr. 二月(February)",
+          "Before": [
+            "seventy",
+            "eighty",
+            "ninety",
+            "behind",
+            "he",
+            "she",
+            "month",
+            "Jan."
+          ],
+          "After": [
+            "Mar.",
+            "Apr.",
+            "May",
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sept.",
+            "Oct."
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "jul.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Jul.",
+      "Definitions": "abbr. 七月(July)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r042|jul."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r042|jul.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "42",
+          "Word": "Jul.",
+          "Definition": "abbr. 七月(July)",
+          "Before": [
+            "she",
+            "month",
+            "Jan.",
+            "Feb.",
+            "Mar.",
+            "Apr.",
+            "May",
+            "Jun."
+          ],
+          "After": [
+            "Aug.",
+            "Sept.",
+            "Oct.",
+            "Nov.",
+            "Dec.",
+            "rain",
+            "sun",
+            "hot"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "jun.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Jun.",
+      "Definitions": "abbr. 六月(June);初级的(Junior)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r041|jun."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r041|jun.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "41",
+          "Word": "Jun.",
+          "Definition": "abbr. 六月(June);初级的(Junior)",
+          "Before": [
+            "he",
+            "she",
+            "month",
+            "Jan.",
+            "Feb.",
+            "Mar.",
+            "Apr.",
+            "May"
+          ],
+          "After": [
+            "Jul.",
+            "Aug.",
+            "Sept.",
+            "Oct.",
+            "Nov.",
+            "Dec.",
+            "rain",
+            "sun"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "mar.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Mar.",
+      "Definitions": "abbr. 三月(March的缩写)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r038|mar."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r038|mar.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "38",
+          "Word": "Mar.",
+          "Definition": "abbr. 三月(March的缩写)",
+          "Before": [
+            "eighty",
+            "ninety",
+            "behind",
+            "he",
+            "she",
+            "month",
+            "Jan.",
+            "Feb."
+          ],
+          "After": [
+            "Apr.",
+            "May",
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sept.",
+            "Oct.",
+            "Nov."
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "nov.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Nov.",
+      "Definitions": "abbr. 十一月(November)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r046|nov."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r046|nov.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "46",
+          "Word": "Nov.",
+          "Definition": "abbr. 十一月(November)",
+          "Before": [
+            "Mar.",
+            "Apr.",
+            "May",
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sept.",
+            "Oct."
+          ],
+          "After": [
+            "Dec.",
+            "rain",
+            "sun",
+            "hot",
+            "snow",
+            "cold",
+            "how",
+            "weather"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "oct.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Oct.",
+      "Definitions": "abbr. (等于October)十月",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r045|oct."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r045|oct.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "45",
+          "Word": "Oct.",
+          "Definition": "abbr. (等于October)十月",
+          "Before": [
+            "Feb.",
+            "Mar.",
+            "Apr.",
+            "May",
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sept."
+          ],
+          "After": [
+            "Nov.",
+            "Dec.",
+            "rain",
+            "sun",
+            "hot",
+            "snow",
+            "cold",
+            "how"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "sept.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Sept.",
+      "Definitions": "abbr. 九月(September)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r044|sept."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r044|sept.",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "44",
+          "Word": "Sept.",
+          "Definition": "abbr. 九月(September)",
+          "Before": [
+            "Jan.",
+            "Feb.",
+            "Mar.",
+            "Apr.",
+            "May",
+            "Jun.",
+            "Jul.",
+            "Aug."
+          ],
+          "After": [
+            "Oct.",
+            "Nov.",
+            "Dec.",
+            "rain",
+            "sun",
+            "hot",
+            "snow",
+            "cold"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "math",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "math",
+      "Definitions": "n. 数学(等于mathematics)",
+      "SourceIDs": "jijiao_start3",
+      "SourceBooks": "jijiao_start3:4年级下",
+      "CandidateSignals": "morphology",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jijiao_start3|g4-lower|r080|math"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r080|math",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "80",
+          "Word": "math",
+          "Definition": "n. 数学(等于mathematics)",
+          "Before": [
+            "blue",
+            "clothes",
+            "our",
+            "their",
+            "subject",
+            "Chinese",
+            "English",
+            "science"
+          ],
+          "After": [
+            "PE",
+            "art",
+            "music",
+            "and",
+            "but"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "her",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "her",
+      "Definitions": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+      "SourceIDs": "beijing_start1|renjiao_start1|renjiao_start3|hujiao_start3|waiyan_start1|waiyan_start3|jijiao_start3",
+      "SourceBooks": "beijing_start1:2年级上|renjiao_start1:2年级上|renjiao_start3:4年级上|hujiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start1:2年级下|waiyan_start3:3年级上|waiyan_start3:5年级上|jijiao_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|morphology|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:her",
+          "MatchKey": "her",
+          "OccurrenceKeys": "[\"beijing_start1|g2-upper|r033|her\",\"hujiao_start3|g4-upper|r006|her\",\"renjiao_start1|g2-upper|r020|her\",\"renjiao_start3|g4-upper|r041|her\",\"waiyan_start1|g1-upper|r139|her\",\"waiyan_start1|g2-lower|r063|her\",\"waiyan_start3|g3-upper|r152|her\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "her#possessive",
+          "ObjectType": "vocabulary",
+          "TargetSense": "她的（形容词性物主代词）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "source-expansion-functional-split",
+          "Rationale": "The six previously reviewed occurrences plus Waiyan Start3 Grade-3 her/nose context place her before a noun and support the possessive-determiner function. Source expansion also adds a distinct object-pronoun use, so preserve this subgroup explicitly rather than broadening one TargetSense."
+        },
+        {
+          "DecisionKey": "surface:her#object",
+          "MatchKey": "her",
+          "OccurrenceKeys": "[\"waiyan_start3|g5-upper|r111|her\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "her#object",
+          "ObjectType": "vocabulary",
+          "TargetSense": "她（宾格）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "source-expansion-functional-split",
+          "Rationale": "Waiyan Start3 Grade-5 places her immediately after hear in the blind/deaf/hear/her sequence, binding the object-pronoun function. Keep it as a separate provisional subgroup; together the two her partitions cover all 8 current occurrences exactly once."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g2-upper|r033|her",
+        "renjiao_start1|g2-upper|r020|her",
+        "renjiao_start3|g4-upper|r041|her",
+        "hujiao_start3|g4-upper|r006|her",
+        "waiyan_start1|g1-upper|r139|her",
+        "waiyan_start1|g2-lower|r063|her",
+        "waiyan_start3|g3-upper|r152|her",
+        "waiyan_start3|g5-upper|r111|her",
+        "jijiao_start3|g4-lower|r012|her"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g2-upper|r033|her",
+          "SourceID": "beijing_start1",
+          "SourceBook": "2年级上",
+          "Grade": "2",
+          "Semester": "上",
+          "SourceRow": "33",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "grandma",
+            "grandmother",
+            "grandpa",
+            "grandfather",
+            "or",
+            "is",
+            "eleven",
+            "his"
+          ],
+          "After": [
+            "how many",
+            "pig",
+            "your",
+            "sixteen",
+            "my",
+            "cow",
+            "nineteen",
+            "our"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g2-upper|r020|her",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "2年级上",
+          "Grade": "2",
+          "Semester": "上",
+          "SourceRow": "20",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "friend",
+            "woman",
+            "girl",
+            "man",
+            "boy",
+            "look",
+            "his",
+            "name"
+          ],
+          "After": [
+            "or",
+            "big",
+            "tall",
+            "pretty",
+            "thin",
+            "short",
+            "handsome",
+            "new"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r041|her",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "41",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "quiet",
+            "hair",
+            "shoe",
+            "glasses",
+            "his",
+            "or",
+            "right",
+            "hat"
+          ],
+          "After": [
+            "bedroom",
+            "living room",
+            "study",
+            "kitchen",
+            "bathroom",
+            "bed",
+            "phone",
+            "table"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-upper|r006|her",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "6",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "meet",
+            "new",
+            "morning",
+            "classmate"
+          ],
+          "After": [
+            "name",
+            "sit",
+            "afternoon",
+            "his",
+            "run",
+            "fast",
+            "fly",
+            "draw"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g1-upper|r139|her",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "1年级上",
+          "Grade": "1",
+          "Semester": "上",
+          "SourceRow": "139",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "mother",
+            "grandpa",
+            "grandma",
+            "friend",
+            "his",
+            "car",
+            "sister",
+            "brother"
+          ],
+          "After": []
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r063|her",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "63",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "catch",
+            "of course",
+            "usually",
+            "us",
+            "ride",
+            "thing",
+            "ill",
+            "cook"
+          ],
+          "After": [
+            "go shopping",
+            "kitchen",
+            "Children's Day",
+            "TV",
+            "play",
+            "say",
+            "poem",
+            "dragon"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r152|her",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "152",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "farmer",
+            "his",
+            "head",
+            "leg",
+            "foot",
+            "on",
+            "arm",
+            "hand"
+          ],
+          "After": [
+            "nose",
+            "eye",
+            "mouth",
+            "ear"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r111|her",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "111",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "healthy",
+            "a lot",
+            "useful",
+            "show",
+            "presenter",
+            "blind",
+            "deaf",
+            "hear"
+          ],
+          "After": [
+            "fire",
+            "firefighter",
+            "hot dog",
+            "sausage",
+            "kind",
+            "time",
+            "school",
+            "start"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r012|her",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "her",
+          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "Before": [
+            "hello",
+            "your",
+            "hi",
+            "hello",
+            "name",
+            "friend",
+            "pupil",
+            "his"
+          ],
+          "After": [
+            "pencil",
+            "pencil box",
+            "what",
+            "pen",
+            "ruler",
+            "crayon",
+            "whose",
+            "blackboard"
+          ]
+        }
+      ]
+    }
+  ]
 }
