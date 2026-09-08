@@ -1,34 +1,30 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "ef409dae9f80ce70f63eb46bc11b69fe09c3bae1",
-  "WorkflowRunID": "34221962082",
-  "WorkflowRunNumber": "243",
+  "InputCommit": "d6be5d3deb41f1cb1a0b79d8d5403945aba6aacc",
+  "WorkflowRunID": "34222143348",
+  "WorkflowRunNumber": "244",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
-  "DurableIdentityDecisions": 2152,
-  "IdentityVocabularyPreview": 1855,
-  "LearnerVocabularyPreview": 1840,
-  "ReviewBlockers": 65,
+  "DurableIdentityDecisions": 2154,
+  "IdentityVocabularyPreview": 1859,
+  "LearnerVocabularyPreview": 1844,
+  "ReviewBlockers": 63,
   "EvidenceChangedSurfaces": 0,
-  "MultipartResolved": 38,
+  "MultipartResolved": 40,
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "split-resolution",
-    "SelectedCount": 6,
+    "SelectedCount": 2,
     "SelectedMatchKeys": [
-      "show",
-      "sound",
-      "time",
-      "flies",
-      "fan",
-      "line"
+      "get",
+      "plant"
     ],
-    "EvidenceWeight": 64,
+    "EvidenceWeight": 32,
     "EffectiveWeightBudget": 70,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "af04393eb1d3a330277701bb4a82440e56b2be7203e69073c98f5163d86665cf",
-    "ReviewPacketFingerprint": "79cf5f28d976b4a1d1c48e3ed215c67f25635c52b75cf3a138c014f42edd8935"
+    "ReviewBundleFingerprint": "63fd12ec43413f16be839175a46e33d702cbd3a3c81ddcb11fccd0fb5c196660",
+    "ReviewPacketFingerprint": "ed6f6f0b986103a383a4fa18de36ce842ffa88e3a34269fd605e0d3c14d04d60"
   }
 }
