@@ -196,7 +196,13 @@ def main() -> None:
         key = row["MatchKey"]
         if key in evidence_set:
             continue
-        if row.get("CurrentAction") not in {"held", "split-required"} and row.get("CurrentStatus") != "held":
+        # Every unresolved row must stay schedulable unless it is a currently
+        # accepted audited-defer. New pending surfaces are unresolved too; they
+        # must never inherit the builder's low-actionability deferred lane.
+        if (
+            row.get("CurrentAction") not in {"pending", "held", "split-required"}
+            and row.get("CurrentStatus") not in {"pending", "held"}
+        ):
             continue
 
         if not is_audited_defer(row):
@@ -347,6 +353,7 @@ def main() -> None:
     print(f"defer context policy version = {POLICY_VERSION}")
     print("audited-defer unchanged-context zero-scan = enforced")
     print("audited-defer stale-context requeue = enforced")
+    print("unreviewed pending blockers deferred = no")
     print("review lane normalization = pass")
     print("identity decision truth changed = no")
 
