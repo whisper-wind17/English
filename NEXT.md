@@ -1,6 +1,6 @@
 # NEXT — Klose Learning
 
-Last updated: 2026-09-08
+Last updated: 2026-09-09
 
 ## 1. 启动顺序
 
@@ -18,13 +18,11 @@ docs/THIRD_PARTY_VOCABULARY_MINIMAL_IDENTITY.md
 → docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
 → docs/SOURCE_RECONCILIATION.md
-→ docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
 → anki/klose/third_party_vocabulary/audit/stage_a_status.json
-→ anki/klose/third_party_vocabulary/premerge/readiness.json
-→ anki/klose/third_party_vocabulary/premerge/identity_candidates.csv
-→ anki/klose/third_party_vocabulary/premerge/audited_deferred.csv
-→ anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv
+→ anki/klose/third_party_vocabulary/audit/next_batch.json
 ```
+
+**不要直接从旧 `premerge/` / `reconciliation/` 文件恢复 Stage B。** 当前 Stage-A source corpus 已从旧 6005-occurrence baseline 扩展到 7535；旧 Stage-B artifacts 必须在当前 Stage-A 最终 seal 后重新生成并校验。
 
 动态进度以 repo 当前 machine state 为准。
 
@@ -47,29 +45,84 @@ GitHub 管 Source / Identity / Learner / Review / Release；Anki 管 FSRS / Revi
 
 ---
 
-## 3. Stage A — COMPLETE / SEALED
+## 3. Third-party Source Adapter phase — CHECKPOINTED
+
+8 个 enabled adapters 已全部纳入同一 Source-only contract：
 
 ```text
-Source occurrences                 = 6005
-Normalized surfaces                = 2161
-Durable Identity decisions         = 2204
-Identity Vocabulary Preview        = 1892
-Learner Vocabulary Preview         = 1877
-Review blockers                    = 13
+beijing_start1   =  808 occurrences /  734 MatchKeys / 12 books
+beishida_start1  =  925 occurrences /  798 MatchKeys / 12 books
+hujiao_start3    = 1111 occurrences / 1067 MatchKeys /  8 books
+jijiao_start3    =  605 occurrences /  510 MatchKeys /  8 books
+renjiao_start1   =  908 occurrences /  802 MatchKeys / 12 books
+renjiao_start3   =  851 occurrences /  818 MatchKeys /  8 books
+waiyan_start1    = 1170 occurrences / 1071 MatchKeys / 12 books
+waiyan_start3    = 1157 occurrences / 1023 MatchKeys /  8 books
+---------------------------------------------------------------
+Total            = 7535 source occurrences / 80 books
+```
+
+统一 contract：
+
+```text
+Raw XLSX
+→ prepare_third_party_<SourceID>.py
+→ source_reference/<SourceID>_staging/occurrences.csv
+→ check_third_party_<SourceID>.py
+→ check_third_party_source_adapters.py
+→ generic corpus builder
+```
+
+Machine-enforced：
+
+- 8/8 enabled adapters 均有 dedicated prepare + checker；
+- 8/8 raw source families、adapter tools、config、8 个 generated occurrence outputs 都能触发 Stage-A source rebuild；
+- 每次 Stage-A workflow 均执行 8 个 edition-specific validator + global adapter closure gate；
+- occurrence schema 统一；SourceID closure PASS；adapter 内及跨 adapter `SourceOccurrenceKey` 无冲突；
+- Source Adapter 不携带 Klose NoteID matching / Identity / Learner / Release state；
+- Beijing 已从旧 Klose pre-merge generator 分离出独立 source-only parser；重新 parse 后仍为 808 / 734，`occurrences.csv` 无 Source truth drift；
+- Beijing staging 内旧 pre-merge candidate/review 文件仅保留为历史审计，不被当前 Third-party Stage A / Stage B 消费；
+- Waiyan start1 / start3 各有 2 条 source-native 空 `Definition`，均为 contraction / expanded-form 邻域中的原 XLSX 事实；不得在 adapter 层擅自补写 gloss。Edition-specific checkers接受该基线。
+
+Validation / checkpoint：
+
+```text
+684113b7e4b377324bb2ef027b0a3499732a47ef
+ci: trigger Stage A on every enabled adapter output
+
+Workflow #298 / 34291873165 = SUCCESS
+8 adapter parsers                 = PASS
+8 adapter validators              = PASS
+global adapter closure            = PASS
+Corpus Completion Recheck         = PASS
+Learner quarantine check          = PASS
+Audit-batch Recheck               = PASS
+Klose isolation                   = PASS
+Stage-A seal                      = PASS
+bot persist                       = ceec28315cde0bb94d9c3139e1fa6f160c4e133c
+```
+
+当前 adapter 层没有未处理的结构性 blocker。后续 residual semantic blockers 属于 Identity/source-context review，不应重新记为 adapter defect。
+
+---
+
+## 4. Current Stage-A machine state — SEALED, one targeted Identity audit active
+
+```text
+Source occurrences                 = 7535
+Normalized surfaces                = 2362
+Durable Identity decisions         = 2411
+Identity Vocabulary Preview        = 2039
+Learner Vocabulary Preview         = 2024
+Real review_queue blockers         = 20
+Machine review workload            = 21   # 20 blockers + program orthographic audit
 Evidence-changed surfaces          = 0
-Multipart resolved                 = 41
-Grammar-form quarantine gates      = 60
-NextBatch SelectedCount            = 0
-ExecutionReady                     = false
+Multipart resolved                 = 35
+Grammar-form quarantine gates      = 61
+NextBatch SelectedCount            = 1
+NextBatch MatchKey                  = program
+ExecutionReady                     = true
 ```
-
-13 个 residual blocker 是 Minimal Identity v6 下已审计的 source-context limitations，不是未处理 backlog：
-
-```text
-fan / flies / french / get / kind / letter / line / little / pass / plant / right / sound / too
-```
-
-这些 surface 保持 `split-required / held / audited-defer`，不得为了 blocker=0 猜 occurrence partition。
 
 Stage-A machine seal：
 
@@ -77,23 +130,73 @@ Stage-A machine seal：
 StatusVersion         = stage-a-status-v2
 CheckpointFiles       = 10
 FingerprintAlgorithm  = sha256-raw-bytes-v1
-CheckpointFingerprint = 7ae428440b6f6e6298db8de2984da799179fef68e35ce2cd4022373e83afa0a0
+CheckpointFingerprint = eadb2d5163ff3193cc735b834a20dcec393df51f8d9d48867f93b5532060a556
+SealedInputCommit     = 684113b7e4b377324bb2ef027b0a3499732a47ef
+Workflow              = #298 / 34291873165
 ```
 
-Implementation / validation：
+20 个真实 residual blocker 都已 machine-stamped 为 current-context `audited-defer`：
 
 ```text
-0f7a2f279741609dd965f916d58c57c71cb76c14  feat: seal validated third-party Stage-A checkpoint
-f24d2133f7836c83408613f391051cd2bbc4614d  ci: seal validated third-party Stage-A checkpoint
-Workflow #252 / 34238181554 = SUCCESS
-bot persist = 8fa64d0...
+fan / feel / flies / french / get / kind / letter / light / like / line /
+little / mouse / pass / plant / put up / right / sound / square / too / watch
 ```
 
-Seal 只有在 Corpus Completion Recheck、Learner checker、Audit-batch Recheck、Klose isolation 全部 PASS 后才生成。Stage-B 必须先验证 seal，再消费 Stage-A generated state。
+它们是当前 source evidence 无法安全完成 occurrence-level sense partition / object boundary 的限制，不是 adapter 漏解析，也不是未执行 review backlog。不得为了 blocker=0 猜义。
 
 ---
 
-## 4. Frozen Minimal Identity / learner rules
+## 5. NEXT TASK — resolve `program / programme` targeted Identity audit
+
+Adapter phase 完成后，Stage A 只剩 1 个 active deterministic batch：
+
+```text
+program
+```
+
+Targeted orthographic audit 对当前 corpus 的显式 US/UK pairs 做了 read-only 扫描，唯一发现的独立重复 identity 是：
+
+```text
+program   = 节目；节目单
+programme = 节目；电视节目
+```
+
+两边实际 source context 均指向 media/event programme learner unit；这是 orthographic variation，不应保留两个 Vocabulary identities。
+
+预期 adjudication：
+
+```text
+program → reuse-identity → programme
+```
+
+但仍必须通过当前 deterministic selected-batch contract：
+
+```text
+selected_review_packet
+→ decision_updates.csv
+→ batch closure 100%
+→ apply
+→ corpus/learner rebuild
+→ independent Completion Recheck
+→ Klose isolation
+→ seal + persist
+```
+
+Targeted audit `AutoApply = no`；不要直接编辑 durable `identity_decisions.csv`。
+
+完成后必须确认：
+
+```text
+NextBatch SelectedCount = 0
+ExecutionReady = false
+EvidenceChangedSurfaces = 0
+20 residual blockers remain audited-defer
+program/programme only one learner Identity
+```
+
+---
+
+## 6. Frozen Minimal Identity / learner rules
 
 ```text
 Source Fact ≠ Vocabulary Identity ≠ Learner Admission ≠ Anki state
@@ -110,223 +213,48 @@ Source Fact ≠ Vocabulary Identity ≠ Learner Admission ≠ Anki state
 
 ---
 
-## 5. Stage-B premerge readiness — CHECKPOINTED
+## 7. Stage-B artifacts — STALE / DO NOT CONSUME YET
 
-Read-only premerge artifacts：
+当前 `premerge/` / `reconciliation/` 文件来自较早 Stage-A checkpoint。已确认 `premerge/readiness.json` 存在内部新旧状态混合：
 
 ```text
-premerge/identity_candidates.csv
-premerge/audited_deferred.csv
-premerge/readiness.json
+SourceOccurrences          = 6005   # stale
+StageAIdentityCandidates   = 2039
+StageALearnerCandidates    = 2024
+AuditedDeferredSurfaces    = 20
 ```
 
-Current candidate state：
+因此现有 Stage-B readiness 不是当前 7535-occurrence seal 的可信 machine state。
+
+旧 Stage-B decisions 也绑定旧 `StageACheckpointFingerprint`，不能直接继续消费。历史 exact-multiple adjudication 可作为 review evidence，但必须在新的 Stage-B generation/checker 下重新绑定当前 Stage-A + CandidateFingerprint。
+
+当前强制：
 
 ```text
-Stage-A Identity candidates = 1892
-Learner-admitted candidates = 1877
-Audited deferred carry-forward = 13
-Klose active NoteIDs = 901
-
-exact-single       = 821
-exact-multiple     = 7
-no-existing-match  = 1064
-
-ReadyForPremergeReview   = true
-StageBMutationAuthorized = false
-StableThirdPartyIDMinted = false
-MergeAuthorizedRows      = 0
-```
-
-Implementation / validation：
-
-```text
-3a463f109981f770b8ebc99683cda10abb023545  feat: add third-party Stage-B premerge readiness
-4fe04adfc1fe9f4988d38a2b7aff5af434cef73c  data: refresh third-party Stage-B premerge readiness
-ea79964e2dd3c6a7b6956a2ffca087696cdbc341  ci: bind Stage-B readiness to sealed Stage-A checkpoint
-Workflow #2 / 34238313346 = SUCCESS
-```
-
-Stage-B readiness 先重算 Stage-A 10 个 SHA-256 fingerprint；任何 sealed content 漂移直接 fail closed。
-
----
-
-## 6. Stage-B reconciliation contract — CHECKPOINTED
-
-Durable decision truth：
-
-```text
-anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv
-```
-
-Contract / checker：
-
-```text
-docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
-tools/check_third_party_stage_b_reconciliation.py
-.github/workflows/third-party-stage-b-reconciliation.yml
-```
-
-Core contract：
-
-```text
-premerge candidate map = derived matching evidence
-reconciliation_decisions.csv = durable reviewed decision truth
-```
-
-每条 durable decision 必须同时绑定：
-
-```text
-StageACheckpointFingerprint
-+
-CandidateFingerprint
-```
-
-前者保护 Stage-A identity truth；后者保护当前 Klose candidate NoteID / sense context。任一侧变化，旧 decision 必须失效并重审。
-
-Allowed actions：
-
-```text
-reuse-existing
-new-stable-identity
-held
-```
-
-所有行当前强制：
-
-```text
-MutationAuthorized = no
-```
-
-不得在 reconciliation 阶段 mint NoteID、修改 Klose Master/Learner/Release/Publish/Anki。
-
-Implementation：
-
-```text
-e86c5e7c03b6771164e07da98314d1fc5c09c30e
-feat: establish Stage-B reconciliation decision contract
-```
-
-Validation：
-
-```text
-Workflow #1 / 34239573534 = SUCCESS
-Stage-A seal verified = 7ae42844...
-Premerge candidates = 1892
-Durable decisions = 7
-Exact-multiple coverage = 7 / 7 = 100%
-reuse-existing = 4
-new-stable-identity = 1
-held = 2
-overall reconciliation closure = 7 / 1892
-Stage-B mutation authorized = NO
-Stable NoteID minted = NO
-Klose state mutated = NO
-```
-
-Independent compare `2cc267ec... → e86c5e7c...` 仅新增 reconciliation workflow / checker / contract doc / decision CSV；未修改 Klose Master/Learner/Publish/Anki。
-
----
-
-## 7. Exact-multiple adjudication — FROZEN
-
-```text
-can
-→ reuse KV000074 = 能；会；可以
-→ KV000885 = 金属罐，明确不同 sense
-
-cook#person
-→ HELD
-→ likely noun identity KV000424 仍是 legacy mixed SenseLabel“厨师；做饭”
-→ KV000805 已承担 Klose actual Grade-4 verb“烹饪；煮”
-→ 先清理 Klose stable identity boundary，再考虑 person reuse
-
-cook#verb
-→ reuse KV000805 = 烹饪；煮
-
-free
-→ reuse KV000502 = 空闲的
-→ KV000876 = 免费的，明确不同 sense
-
-milk
-→ reuse KV000088 = 牛奶
-→ KV000890 = 挤奶，明确不同 sense
-
-over
-→ new-stable-identity candidate
-→ proposed sense = 在……上方；在……上面
-→ KV000816 = 在……的远端（或对面）
-→ KV000863 = 结束（的）
-→ 两个 existing NoteID 均不等价；当前只形成 proposed identity，不 mint NoteID
-
-speak
-→ HELD
-→ provisional broad sense = 说；讲；讲某种语言
-→ 同时跨 KV000705 = 说/讲某种语言 与 KV000901 = 说话/发言
-→ identity_migrations.csv 已明确批准两者 sense split
-→ 不得任意二选一；需 occurrence-level reconciliation 或回到 Stage-A split
+DO NOT mint Stable ThirdPartyID / NoteID.
+DO NOT modify existing Klose Stable NoteID numbering.
+DO NOT modify Klose Master/Learner/Release/Publish/Anki.
+DO NOT resume exact-single reconciliation from stale premerge artifacts.
 ```
 
 ---
 
-## 8. NEXT TASK — exact-single sense-confirmation fast lane
-
-当前剩余 reconciliation：
+## 8. After `program` — Stage-B restart sequence
 
 ```text
-7 / 1892 closed
-821 exact-single 尚待 sense confirmation
-1064 no-existing-match 尚待 new-identity review
-2 high-risk rows held: cook#person / speak
+1. resolve program/programme and obtain final Stage-A NextBatch=0 seal
+2. regenerate Stage-B premerge/readiness from the current sealed Stage A
+3. verify all Stage-A checkpoint fingerprints before accepting new premerge state
+4. regenerate candidate classes / counts from current 2038-ish post-dedup Identity Preview
+5. revalidate historical reconciliation decisions against current CandidateFingerprint
+6. only then resume exact-single sense-confirmation fast lane
+7. no Stable NoteID mutation until reconciliation closure + independent Completion Recheck + explicit human gate
 ```
 
-下一步先做 `exact-single` fast lane，但必须保持：
+Stage B 仍坚持：
 
 ```text
 exact MatchKey equality != same-sense decision
 proposal != durable decision
 proposal != merge authorization
-```
-
-推荐机制：
-
-```text
-A. 生成 derived exact-single proposal view
-B. 每行绑定 Stage-A CheckpointFingerprint + CandidateFingerprint
-C. 按 sense relation 分类，而不是只按 MatchKey：
-   - exact/normalized same sense → high-confidence reuse proposal
-   - narrow/broader but compatible → manual confirmation
-   - conflicting/distinct sense → hold / new-identity review
-D. proposal checker 必须保证只覆盖 exact-single current candidates
-E. 不自动写 reconciliation_decisions.csv
-F. 先抽样/审计高置信 proposals，确认规则无 false merge 后再批量 adjudicate
-```
-
-尤其不得把中文词义仅因字符串重叠就视为同一 Identity；应以 learner-relevant sense equivalence 为准。
-
----
-
-## 9. Remaining Stage-B sequence
-
-```text
-1. exact-single proposal + validation
-2. exact-single durable adjudication
-3. no-existing-match new-identity review lane
-4. 处理 held cook#person / speak
-5. 1892 reconciliation closure PASS
-6. read-only proposed Stable NoteID allocation / Source Identity migration plan
-7. independent Completion Recheck
-8. explicit human gate
-9. 才允许正式 Stage-B identity mutation
-10. Learner Review / Release / Publish / Anki 继续独立分层
-```
-
-仍然禁止：
-
-```text
-DO NOT mint Stable ThirdPartyID / NoteID before reconciliation closure + explicit gate.
-DO NOT modify existing Stable NoteID numbering.
-DO NOT modify Klose Master/Learner/Publish/Anki from reconciliation workflow.
-DO NOT auto-merge exact-single by MatchKey alone.
-DO NOT admit learner-quarantined identities into current learner release.
 ```
