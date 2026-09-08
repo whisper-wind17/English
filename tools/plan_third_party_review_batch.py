@@ -24,6 +24,7 @@ DECISIONS = TP / "review" / "identity_decisions.csv"
 OUT = TP / "audit" / "next_batch.json"
 PACKET = TP / "audit" / "selected_review_packet.json"
 STATUS = TP / "audit" / "stage_a_status.json"
+REVIEW_VIEW = TP / "audit" / "selected_review_view.csv"
 PLAN_VERSION = "v5-throughput-delta"
 STATUS_VERSION = "stage-a-status-v1"
 
@@ -50,6 +51,11 @@ LIMITS = {
 
 FAST_ALLOWED_CLASSES = {"semantic-cross-source", "semantic-easy", "semantic-hard"}
 FAST_ACTION = "keep-identity"
+
+REVIEW_VIEW_FIELDS = [
+    "MatchKey", "ReviewMode", "TargetSense", "AddedOccurrenceCount",
+    "AddedSourceIDs", "AddedDefinitions", "AddedNeighborhoodJSON", "FullEvidenceJSON",
+]
 
 
 def read_csv(path: Path, *, required: bool = True) -> list[dict[str, str]]:
@@ -248,6 +254,60 @@ def packet_item(
     }
 
 
+def write_review_view(items: list[dict[str, object]]) -> None:
+    rows: list[dict[str, str]] = []
+    for item in items:
+        mode = str(item.get("ReviewMode", ""))
+        if mode == "delta-evidence":
+            durable = item.get("DurableDecision", {})
+            if not isinstance(durable, dict):
+                durable = {}
+            added = item.get("AddedEvidence", [])
+            if not isinstance(added, list):
+                added = []
+            sources = sorted({
+                str(e.get("SourceID", "")) for e in added
+                if isinstance(e, dict) and e.get("SourceID")
+            })
+            definitions = list(dict.fromkeys(
+                str(e.get("Definition", "")) for e in added
+                if isinstance(e, dict) and e.get("Definition")
+            ))
+            neighborhoods = [
+                {
+                    "SourceOccurrenceKey": e.get("SourceOccurrenceKey", ""),
+                    "Before": e.get("Before", []),
+                    "After": e.get("After", []),
+                }
+                for e in added if isinstance(e, dict)
+            ]
+            rows.append({
+                "MatchKey": str(item.get("MatchKey", "")),
+                "ReviewMode": mode,
+                "TargetSense": str(durable.get("TargetSense", "")),
+                "AddedOccurrenceCount": str(len(added)),
+                "AddedSourceIDs": "|".join(sources),
+                "AddedDefinitions": " | ".join(definitions),
+                "AddedNeighborhoodJSON": json.dumps(neighborhoods, ensure_ascii=False, separators=(",", ":")),
+                "FullEvidenceJSON": "",
+            })
+        else:
+            rows.append({
+                "MatchKey": str(item.get("MatchKey", "")),
+                "ReviewMode": mode,
+                "TargetSense": "",
+                "AddedOccurrenceCount": "",
+                "AddedSourceIDs": "",
+                "AddedDefinitions": "",
+                "AddedNeighborhoodJSON": "",
+                "FullEvidenceJSON": json.dumps(item.get("FullEvidence", []), ensure_ascii=False, separators=(",", ":")),
+            })
+    with REVIEW_VIEW.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=REVIEW_VIEW_FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def packet_fingerprint(items: list[dict[str, object]]) -> str:
     raw = json.dumps(items, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
@@ -411,6 +471,7 @@ def main() -> None:
         "Items": selected_items,
     }
     PACKET.write_text(json.dumps(packet, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_review_view(selected_items)
 
     status = build_status(plan, rows)
     STATUS.write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -429,6 +490,7 @@ def main() -> None:
     if gate_reason:
         print(f"review batch gate reason = {gate_reason}")
     print("selected review packet = generated")
+    print("selected review view = generated")
     print("Stage-A machine checkpoint = generated")
     print("review batch selection = deterministic")
     print("review batch decision truth = derived-only")
