@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v1",
   "CheckpointSemantics": "persisted only after downstream Completion Recheck and Klose isolation pass",
-  "InputCommit": "156d6b075e944af6d76473e910e8dad5a05705a7",
-  "WorkflowRunID": "34222626275",
-  "WorkflowRunNumber": "247",
+  "InputCommit": "fc92a7e40da85da3edb1ec52bef718c199410bc8",
+  "WorkflowRunID": "34225784648",
+  "WorkflowRunNumber": "248",
   "SourceOccurrences": 6005,
   "NormalizedSurfaces": 2161,
   "DurableIdentityDecisions": 2203,
@@ -15,13 +15,20 @@
   "GrammarFormQuarantineGates": 60,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
-    "ReviewLane": "",
-    "SelectedCount": 0,
-    "SelectedMatchKeys": [],
-    "EvidenceWeight": 0,
-    "EffectiveWeightBudget": 0,
-    "ExecutionReady": false,
-    "ReviewBundleFingerprint": "7278429aef9afee09d383ca6b67e30f11b47a835692646aea0642d4696613b8f",
-    "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    "ReviewLane": "split-resolution",
+    "SelectedCount": 6,
+    "SelectedMatchKeys": [
+      "too",
+      "french",
+      "kind",
+      "little",
+      "mouse",
+      "pass"
+    ],
+    "EvidenceWeight": 68,
+    "EffectiveWeightBudget": 70,
+    "ExecutionReady": true,
+    "ReviewBundleFingerprint": "4b94a7478df7f752cc7df6082fa3dda4a40e73cc23810ae4b0d335c2f054acc9",
+    "ReviewPacketFingerprint": "75b254f963b9e6381902097a397b42892285b4351b8693f64b294a806411e527"
   }
 }
