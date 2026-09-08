@@ -209,8 +209,27 @@ def packet_item(
     decisions_by_match: dict[str, list[dict[str, str]]],
     fast_info: dict[str, object] | None,
 ) -> dict[str, object]:
-    base: dict[str, object] = {
+    if lane == "evidence-revalidation" and fast_info:
+        decision = fast_info["Decision"]
+        assert isinstance(decision, dict)
+        return {
+            "MatchKey": row.get("MatchKey", ""),
+            "ReviewMode": "delta-evidence",
+            "BlockerClass": row.get("BlockerClass", ""),
+            "DurableDecision": {k: decision.get(k, "") for k in (
+                "DecisionKey", "MatchKey", "Action", "CanonicalMatchKey", "ObjectType",
+                "TargetSense", "Status", "Confidence",
+            )},
+            "ReviewedOccurrenceCount": len(fast_info["ReviewedOccurrenceKeys"]),
+            "CurrentOccurrenceCount": len(fast_info["CurrentOccurrenceKeys"]),
+            "AddedOccurrenceKeys": fast_info["AddedOccurrenceKeys"],
+            "AddedEvidence": fast_info["AddedEvidence"],
+        }
+
+    full = evidence(row)
+    return {
         "MatchKey": row.get("MatchKey", ""),
+        "ReviewMode": "full-evidence",
         "DisplayForms": row.get("DisplayForms", ""),
         "Definitions": row.get("Definitions", ""),
         "SourceIDs": row.get("SourceIDs", ""),
@@ -223,30 +242,10 @@ def packet_item(
         "CanonicalTargetSense": row.get("CanonicalTargetSense", ""),
         "BlockerClass": row.get("BlockerClass", ""),
         "PolicyRecommendedAction": row.get("PolicyRecommendedAction", ""),
+        "DurableDecisions": decisions_by_match.get(row.get("MatchKey", ""), []),
+        "CurrentOccurrenceKeys": evidence_keys(full),
+        "FullEvidence": full,
     }
-    if lane == "evidence-revalidation" and fast_info:
-        decision = fast_info["Decision"]
-        assert isinstance(decision, dict)
-        base.update({
-            "ReviewMode": "delta-evidence",
-            "DurableDecision": {k: decision.get(k, "") for k in (
-                "DecisionKey", "MatchKey", "Action", "CanonicalMatchKey", "ObjectType",
-                "TargetSense", "Status", "Confidence", "DecisionBasis", "Rationale",
-            )},
-            "ReviewedOccurrenceKeys": fast_info["ReviewedOccurrenceKeys"],
-            "CurrentOccurrenceKeys": fast_info["CurrentOccurrenceKeys"],
-            "AddedOccurrenceKeys": fast_info["AddedOccurrenceKeys"],
-            "AddedEvidence": fast_info["AddedEvidence"],
-        })
-    else:
-        full = evidence(row)
-        base.update({
-            "ReviewMode": "full-evidence",
-            "DurableDecisions": decisions_by_match.get(row.get("MatchKey", ""), []),
-            "CurrentOccurrenceKeys": evidence_keys(full),
-            "FullEvidence": full,
-        })
-    return base
 
 
 def packet_fingerprint(items: list[dict[str, object]]) -> str:
@@ -402,6 +401,7 @@ def main() -> None:
 
     packet = {
         "PlanVersion": PLAN_VERSION,
+        "ReviewPacketVersion": "selected-review-packet-v2",
         "ReviewLane": selected_lane,
         "ReviewMode": plan["ReviewMode"],
         "SelectedMatchKeys": plan["SelectedMatchKeys"],
