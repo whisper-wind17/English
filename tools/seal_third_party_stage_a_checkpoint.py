@@ -2,7 +2,7 @@
 """Seal or verify the validated Third-party Vocabulary Stage-A checkpoint.
 
 The Stage-A planner writes a provisional machine status before the final downstream
-Completion Recheck and Klose isolation steps.  This tool upgrades that status only
+Completion Recheck and Klose isolation steps. This tool upgrades that status only
 after those steps have passed and binds it to the exact durable/derived Stage-A
 content that Stage B is allowed to consume.
 
@@ -22,6 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
 STATUS = TP / "audit" / "stage_a_status.json"
+BUNDLE = TP / "audit" / "review_bundle.csv"
 STATUS_VERSION = "stage-a-status-v2"
 
 # These files are the Stage-A content/truth boundary that Stage-B premerge may
@@ -87,13 +88,19 @@ def checkpoint_fingerprint(fingerprints: dict[str, str]) -> str:
 def current_metrics() -> dict[str, int]:
     surfaces = read_csv(TP / "staging" / "surface_candidates.csv")
     review = read_csv(TP / "staging" / "review_queue.csv")
+    bundle = read_csv(BUNDLE)
+    # Normally review_queue and review_bundle have identical MatchKey closure.
+    # Derived-only targeted identity audits may append review work without turning a
+    # released source surface back into a corpus blocker. Never permit the workload
+    # metric to undercount the real blocker queue.
+    review_workload = max(len(review), len(bundle))
     return {
         "SourceOccurrences": len(read_csv(TP / "staging" / "occurrences.csv")),
         "NormalizedSurfaces": len(surfaces),
         "DurableIdentityDecisions": len(read_csv(TP / "review" / "identity_decisions.csv")),
         "IdentityVocabularyPreview": len(read_csv(TP / "staging" / "unified_vocabulary_preview.csv")),
         "LearnerVocabularyPreview": len(read_csv(TP / "learner" / "learner_vocabulary_preview.csv")),
-        "ReviewBlockers": len(review),
+        "ReviewBlockers": review_workload,
         "EvidenceChangedSurfaces": sum(
             1 for row in review
             if "decision-evidence-changed" in row.get("CandidateSignals", "").split("|")
