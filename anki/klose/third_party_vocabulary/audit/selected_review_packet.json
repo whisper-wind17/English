@@ -1,11 +1,80 @@
 {
   "PlanVersion": "v5-throughput-delta",
   "ReviewPacketVersion": "selected-review-packet-v2",
-  "ReviewLane": "",
+  "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
-  "SelectedMatchKeys": [],
-  "SelectedCount": 0,
-  "ReviewBundleFingerprint": "82ff54d4bc9f27156f2c35b675280cef9c4ffa9af26fddfde12c11c3dbcfd613",
-  "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "Items": []
+  "SelectedMatchKeys": [
+    "program"
+  ],
+  "SelectedCount": 1,
+  "ReviewBundleFingerprint": "1b0a9354e13f3e8eef064fd4340dd6cc187e3794567ee9a56a4e0d788ba3fbd5",
+  "ReviewPacketFingerprint": "f7aa7e8031aee4ed4b04e0eb9118bbd5c2ed480e3224992ff3e0f6f5b8ba4b19",
+  "Items": [
+    {
+      "MatchKey": "program",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "program",
+      "Definitions": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
+      "SourceIDs": "beishida_start1",
+      "SourceBooks": "beishida_start1:5年级下",
+      "CandidateSignals": "orthographic-variant|identity-dedup-audit",
+      "CandidateCanonical": "programme",
+      "CanonicalRelation": "orthographic-variant",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "节目；电视节目",
+      "BlockerClass": "orthographic-identity-audit",
+      "PolicyRecommendedAction": "review-orthographic-reuse",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:program",
+          "MatchKey": "program",
+          "OccurrenceKeys": "[\"beishida_start1|g5-lower|r031|program\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "节目；节目单",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "beishida-start1-source-context-over-dictionary",
+          "Rationale": "The concert music piano and violin neighborhood supports an event program rather than a computer program."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-lower|r031|program"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-lower|r031|program",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "31",
+          "Word": "program",
+          "Definition": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
+          "Before": [
+            "concert",
+            "drum",
+            "flute",
+            "guitar",
+            "kid",
+            "music",
+            "piano",
+            "play the piano"
+          ],
+          "After": [
+            "really",
+            "start",
+            "tonight",
+            "violin",
+            "row",
+            "team",
+            "basketball",
+            "badminton"
+          ]
+        }
+      ]
+    }
+  ]
 }
