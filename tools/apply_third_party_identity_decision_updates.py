@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Merge reviewed decision updates into the durable third-party identity truth.
+"""Merge reviewed decision updates into durable third-party Identity truth.
 
-`review/decision_updates.csv` is a transient inbox, never a second state store.
-`OccurrenceKeys` is the review-evidence boundary: a surface decision records the
-exact SourceOccurrenceKeys covered when it was reviewed.
+Minimal Learner Identity contract:
 
-Durable decisions created before evidence binding used either `*` or a legacy
-pipe-concatenated serialization. Because SourceOccurrenceKey itself contains `|`,
-that legacy representation is ambiguous. This tool performs a one-time migration
-by stamping such durable rows to the currently enabled occurrence set for their
-MatchKey. New inbox rows may use `*`, which is expanded before persistence, or an
-explicit JSON array of occurrence keys.
+- A singleton MatchKey decision owns learner Identity content. Its OccurrenceKeys are
+  provenance/audit metadata, not a semantic-validity boundary. On every workflow run
+  they are deterministically rebound to the current enabled SourceOccurrenceKey set.
+  Adding/removing another textbook occurrence therefore does not re-open an already
+  resolved singleton Identity.
+- A multipart MatchKey uses multiple decision rows to represent distinct learner
+  senses. For multipart rows OccurrenceKeys remain semantic partition truth and are
+  never auto-expanded. Their subsets must stay explicit; source changes can therefore
+  re-open the multipart surface until the partition is complete again.
+
+`review/decision_updates.csv` is a transient inbox, never a second durable state store.
+New inbox rows may use `*`, which is expanded before persistence, or an explicit JSON
+array of occurrence keys.
 """
 from __future__ import annotations
 
@@ -54,7 +59,9 @@ def current_occurrence_keys() -> dict[str, list[str]]:
             raise SystemExit(f"Invalid enabled adapter config: {cfg}")
         for row in read_csv(path):
             if row.get("SourceID") != source_id:
-                raise SystemExit(f"SourceID mismatch in {path}: {row.get('SourceID')} != {source_id}")
+                raise SystemExit(
+                    f"SourceID mismatch in {path}: {row.get('SourceID')} != {source_id}"
+                )
             occ_key = row.get("SourceOccurrenceKey", "")
             match_key = row.get("MatchKey", "")
             if not occ_key or occ_key in seen_occ or not match_key:
@@ -72,8 +79,12 @@ def decode_occurrence_keys(raw: str, *, source: str, decision_key: str) -> list[
     try:
         value = json.loads(raw)
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"{source}: OccurrenceKeys must be '*' or a JSON array for {decision_key}: {exc}") from exc
-    if not isinstance(value, list) or not value or not all(isinstance(x, str) and x for x in value):
+        raise SystemExit(
+            f"{source}: OccurrenceKeys must be '*' or a JSON array for {decision_key}: {exc}"
+        ) from exc
+    if not isinstance(value, list) or not value or not all(
+        isinstance(x, str) and x for x in value
+    ):
         raise SystemExit(f"{source}: invalid OccurrenceKeys JSON array for {decision_key}")
     if len(value) != len(set(value)):
         raise SystemExit(f"{source}: duplicate OccurrenceKeys for {decision_key}")
@@ -87,26 +98,38 @@ def validate(row: dict[str, str], *, source: str) -> None:
     if not row["DecisionKey"] or not row["MatchKey"]:
         raise SystemExit(f"{source}: empty DecisionKey/MatchKey")
     if row["Action"] not in ACTIONS:
-        raise SystemExit(f"{source}: invalid Action {row['Action']} for {row['DecisionKey']}")
+        raise SystemExit(
+            f"{source}: invalid Action {row['Action']} for {row['DecisionKey']}"
+        )
     if row["Status"] not in STATUSES:
-        raise SystemExit(f"{source}: invalid Status {row['Status']} for {row['DecisionKey']}")
+        raise SystemExit(
+            f"{source}: invalid Status {row['Status']} for {row['DecisionKey']}"
+        )
     if not row.get("OccurrenceKeys"):
         raise SystemExit(f"{source}: empty OccurrenceKeys for {row['DecisionKey']}")
     if row["Action"] == "reuse-identity" and not row["CanonicalMatchKey"]:
-        raise SystemExit(f"{source}: reuse-identity lacks CanonicalMatchKey for {row['DecisionKey']}")
+        raise SystemExit(
+            f"{source}: reuse-identity lacks CanonicalMatchKey for {row['DecisionKey']}"
+        )
     if row["Action"] == "route-expression" and row["ObjectType"] != "expression":
-        raise SystemExit(f"{source}: route-expression requires ObjectType=expression for {row['DecisionKey']}")
+        raise SystemExit(
+            f"{source}: route-expression requires ObjectType=expression for {row['DecisionKey']}"
+        )
     if row["Action"] == "source-only" and row["ObjectType"] != "source-only":
-        raise SystemExit(f"{source}: source-only requires ObjectType=source-only for {row['DecisionKey']}")
+        raise SystemExit(
+            f"{source}: source-only requires ObjectType=source-only for {row['DecisionKey']}"
+        )
 
 
-def stamp(
+def normalize_row(
     row: dict[str, str],
     occurrence_map: dict[str, list[str]],
     *,
     source: str,
     allow_legacy_serialization: bool,
+    require_current_subset: bool,
 ) -> tuple[dict[str, str], bool]:
+    """Normalize serialization; semantic binding policy is applied after grouping."""
     normalized = {f: row.get(f, "") for f in FIELDS}
     validate(normalized, source=source)
     key = normalized["MatchKey"]
@@ -120,11 +143,10 @@ def stamp(
         reviewed = current
         migrated_legacy = allow_legacy_serialization
     elif raw.lstrip().startswith("["):
-        reviewed = decode_occurrence_keys(raw, source=source, decision_key=normalized["DecisionKey"])
+        reviewed = decode_occurrence_keys(
+            raw, source=source, decision_key=normalized["DecisionKey"]
+        )
     elif allow_legacy_serialization:
-        # Historical rows were pipe-concatenated, but SourceOccurrenceKey itself
-        # contains pipes. They cannot be parsed safely; stamp them once to the
-        # current evidence set before any new adapter is enabled.
         reviewed = current
         migrated_legacy = True
     else:
@@ -132,8 +154,11 @@ def stamp(
             f"{source}: OccurrenceKeys must be '*' or JSON for {normalized['DecisionKey']}"
         )
 
-    if not set(reviewed) <= set(current):
-        raise SystemExit(f"{source}: OccurrenceKeys reference missing current evidence for {normalized['DecisionKey']}")
+    if require_current_subset and not set(reviewed) <= set(current):
+        raise SystemExit(
+            f"{source}: OccurrenceKeys reference missing current evidence "
+            f"for {normalized['DecisionKey']}"
+        )
     normalized["OccurrenceKeys"] = encode_occurrence_keys(reviewed)
     return normalized, migrated_legacy
 
@@ -149,51 +174,88 @@ def main() -> None:
     by_key: dict[str, dict[str, str]] = {}
     order: list[str] = []
     migrated_legacy = 0
+
     for raw in current:
-        row, migrated = stamp(
+        row, migrated = normalize_row(
             raw,
             occurrence_map,
             source="identity_decisions",
             allow_legacy_serialization=True,
+            require_current_subset=False,
         )
-        key = row["DecisionKey"]
-        if key in by_key:
-            raise SystemExit(f"Duplicate durable DecisionKey: {key}")
-        by_key[key] = row
-        order.append(key)
+        dkey = row["DecisionKey"]
+        if dkey in by_key:
+            raise SystemExit(f"Duplicate durable DecisionKey: {dkey}")
+        by_key[dkey] = row
+        order.append(dkey)
         migrated_legacy += int(migrated)
 
     seen_updates: set[str] = set()
     replaced = 0
     appended = 0
     for raw in updates:
-        row, _ = stamp(
+        row, _ = normalize_row(
             raw,
             occurrence_map,
             source="decision_updates",
             allow_legacy_serialization=False,
+            require_current_subset=True,
         )
-        key = row["DecisionKey"]
-        if key in seen_updates:
-            raise SystemExit(f"Duplicate update DecisionKey: {key}")
-        seen_updates.add(key)
-        if key in by_key:
-            if by_key[key]["MatchKey"] != row["MatchKey"]:
-                raise SystemExit(f"Update changes MatchKey for existing DecisionKey: {key}")
-            by_key[key] = row
+        dkey = row["DecisionKey"]
+        if dkey in seen_updates:
+            raise SystemExit(f"Duplicate update DecisionKey: {dkey}")
+        seen_updates.add(dkey)
+        if dkey in by_key:
+            if by_key[dkey]["MatchKey"] != row["MatchKey"]:
+                raise SystemExit(
+                    f"Update changes MatchKey for existing DecisionKey: {dkey}"
+                )
+            by_key[dkey] = row
             replaced += 1
         else:
-            by_key[key] = row
-            order.append(key)
+            by_key[dkey] = row
+            order.append(dkey)
             appended += 1
 
-    changed = bool(migrated_legacy or updates)
+    decision_keys_by_match: dict[str, list[str]] = defaultdict(list)
+    for dkey in order:
+        decision_keys_by_match[by_key[dkey]["MatchKey"]].append(dkey)
+
+    singleton_rebound = 0
+    multipart_rows_checked = 0
+    for match_key, dkeys in decision_keys_by_match.items():
+        current_keys = occurrence_map.get(match_key, [])
+        if not current_keys:
+            raise SystemExit(f"Decision references missing current surface: {match_key}")
+
+        if len(dkeys) == 1:
+            dkey = dkeys[0]
+            desired = encode_occurrence_keys(current_keys)
+            if by_key[dkey]["OccurrenceKeys"] != desired:
+                by_key[dkey]["OccurrenceKeys"] = desired
+                singleton_rebound += 1
+            continue
+
+        current_set = set(current_keys)
+        for dkey in dkeys:
+            reviewed = decode_occurrence_keys(
+                by_key[dkey]["OccurrenceKeys"],
+                source="identity_decisions",
+                decision_key=dkey,
+            )
+            if not set(reviewed) <= current_set:
+                raise SystemExit(
+                    f"Multipart decision references removed current evidence: {dkey}"
+                )
+            multipart_rows_checked += 1
+
+    changed = bool(migrated_legacy or updates or singleton_rebound)
     if changed:
         with DECISIONS.open("w", encoding="utf-8-sig", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=FIELDS)
-            w.writeheader()
-            for key in order:
-                w.writerow(by_key[key])
+            writer = csv.DictWriter(f, fieldnames=FIELDS)
+            writer.writeheader()
+            for dkey in order:
+                writer.writerow(by_key[dkey])
 
     if UPDATES.exists():
         UPDATES.unlink()
@@ -202,7 +264,11 @@ def main() -> None:
     print(f"decision updates applied = {len(updates)}")
     print(f"replaced = {replaced}")
     print(f"appended = {appended}")
+    print(f"singleton occurrence snapshots auto-rebound = {singleton_rebound}")
+    print(f"multipart decision rows preserved/checked = {multipart_rows_checked}")
     print(f"durable decisions = {len(by_key)}")
+    print("Singleton Identity validity independent of occurrence expansion = yes")
+    print("Multipart OccurrenceKeys remain semantic partition truth = yes")
     print("OccurrenceKeys serialization = JSON array")
     print("durable wildcard/legacy OccurrenceKeys = no")
     print("transient decision inbox removed = yes")
