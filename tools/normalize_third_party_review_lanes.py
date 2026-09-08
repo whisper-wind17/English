@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Normalize Stage-A review lanes and invalidate stale audited defers.
+"""Normalize Stage-A review lanes for learner-first blocker finalization.
 
-The review bundle and defer-context registry are derived-only. A held decision with
-an explicit ``audited-defer`` marker is removed from active review only while the
-context it was audited against remains unchanged. Context includes current source
-evidence, directional canonical state, and the review-policy version.
+The review bundle and defer-context registry are derived-only. Stage-A source evidence
+remains auditable, but lack of textbook sentence context is no longer a terminal reason
+to hide a blocker. During the v4 finalization phase, every remaining held/split surface
+is reactivated and must be resolved to an elementary learner-facing core sense, useful
+phrase, explicit object route, or genuinely necessary semantic split.
 
-Any builder-level ``decision-evidence-changed`` signal is always reactivated before
-defer retirement so new source evidence cannot remain hidden in a zero-scan lane.
-
+Builder-level ``decision-evidence-changed`` signals remain mandatory re-review signals.
 This script never changes identity_decisions.csv, blocker counts, or release state.
 """
 from __future__ import annotations
@@ -23,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
 BUNDLE = TP / "audit" / "review_bundle.csv"
 CONTEXT = TP / "audit" / "defer_context.csv"
-POLICY_VERSION = "v3"
+POLICY_VERSION = "v4-learner-first"
 
 CONTEXT_FIELDS = [
     "MatchKey", "DecisionSignature", "ContextFingerprint", "DeferReasonCode",
@@ -94,15 +93,15 @@ def defer_dependency(row: dict[str, str]) -> str:
 
 
 def reactivation_lane(row: dict[str, str]) -> tuple[str, str]:
+    if row.get("CurrentAction") == "split-required" or row.get("BlockerClass") == "split-resolution":
+        return "split-resolution", "25"
     cls = row.get("BlockerClass", "")
     if cls in {"form-policy", "abbreviation-policy"}:
         return "policy-review", "30"
     if cls == "multiword-object-boundary":
         return "object-boundary", "25"
-    if cls == "split-resolution":
-        return "split-resolution", "25"
     if "reconciliation" in cls:
-        return "source-reconciliation-needed", "15"
+        return "semantic-review", "30"
     return "semantic-review", "30"
 
 
@@ -117,12 +116,9 @@ def main() -> None:
 
     previous = {row["MatchKey"]: row for row in read_csv(CONTEXT) if row.get("MatchKey")}
     next_context: list[dict[str, str]] = []
-    retired: list[str] = []
     reactivated: list[str] = []
     evidence_reactivated: list[str] = []
 
-    # Source occurrence-set changes are builder-level invalidation and must never be
-    # hidden merely because the base scheduler classifies the surface as expensive.
     for row in rows:
         signals = {x for x in row.get("CandidateSignals", "").split("|") if x}
         if "decision-evidence-changed" not in signals:
@@ -134,64 +130,36 @@ def main() -> None:
         row["DeferReason"] = "source evidence changed; explicit re-review required"
         evidence_reactivated.append(row["MatchKey"])
 
+    evidence_set = set(evidence_reactivated)
     for row in rows:
-        if row["MatchKey"] in set(evidence_reactivated):
-            continue
-        if row.get("CurrentStatus") != "held":
-            continue
-        basis = row.get("CurrentDecisionBasis", "").casefold()
-        if "audited-defer" not in basis:
-            continue
-
         key = row["MatchKey"]
-        signature = decision_signature(row)
-        current_context = context_fingerprint(row)
-        reason = defer_reason_code(row)
-        dependency = defer_dependency(row)
-        old = previous.get(key)
+        if key in evidence_set:
+            continue
+        if row.get("CurrentAction") not in {"held", "split-required"} and row.get("CurrentStatus") != "held":
+            continue
 
-        # First v3 migration or an explicit re-review accepts the current context.
-        accepted_context = old is None or old.get("DecisionSignature") != signature
-        stale_context = (
-            old is not None
-            and old.get("DecisionSignature") == signature
-            and old.get("ContextFingerprint") != current_context
+        lane, batch = reactivation_lane(row)
+        row["ReviewLane"] = lane
+        row["RecommendedBatchSize"] = batch
+        row["PolicyRecommendedAction"] = "learner-first-finalize"
+        row["DeferReason"] = (
+            "textbook sentence context unavailable/ambiguous; resolve with elementary "
+            "learner-facing core sense, useful phrase, pedagogically salient form, or necessary split"
         )
+        reactivated.append(key)
 
-        if stale_context:
-            lane, batch = reactivation_lane(row)
-            row["ReviewLane"] = lane
-            row["RecommendedBatchSize"] = batch
-            row["PolicyRecommendedAction"] = "re-review-context-changed"
-            row["DeferReason"] = "audited defer context changed; explicit re-review required"
-            reactivated.append(key)
-            # Keep the previously accepted fingerprint until the durable decision is re-reviewed.
+        basis = row.get("CurrentDecisionBasis", "").casefold()
+        if "audited-defer" in basis:
             next_context.append({
                 "MatchKey": key,
-                "DecisionSignature": old.get("DecisionSignature", signature),
-                "ContextFingerprint": old.get("ContextFingerprint", current_context),
-                "DeferReasonCode": reason,
-                "DeferDependency": dependency,
-                "PolicyVersion": old.get("PolicyVersion", POLICY_VERSION),
+                "DecisionSignature": decision_signature(row),
+                "ContextFingerprint": context_fingerprint(row),
+                "DeferReasonCode": defer_reason_code(row),
+                "DeferDependency": defer_dependency(row),
+                "PolicyVersion": POLICY_VERSION,
             })
-            continue
-
-        row["ReviewLane"] = "deferred-high-ambiguity"
-        row["RecommendedBatchSize"] = "0"
-        row["PolicyRecommendedAction"] = "defer"
-        row["DeferReason"] = "current audited context unchanged; do not rescan"
-        retired.append(key)
-        next_context.append({
-            "MatchKey": key,
-            "DecisionSignature": signature,
-            "ContextFingerprint": current_context if accepted_context or old is None else old.get("ContextFingerprint", current_context),
-            "DeferReasonCode": reason,
-            "DeferDependency": dependency,
-            "PolicyVersion": POLICY_VERSION,
-        })
 
     rows.sort(key=lambda row: (
-        1 if row["ReviewLane"] == "deferred-high-ambiguity" else 0,
         -int(row["ActionabilityScore"]),
         int(row["AuditPriority"]),
         row["MatchKey"],
@@ -216,25 +184,22 @@ def main() -> None:
     if hidden_changed:
         raise SystemExit("Changed source evidence remained hidden: " + ", ".join(hidden_changed[:20]))
 
-    stale_hidden = [
+    hidden_blockers = [
         row["MatchKey"] for row in rows
-        if row.get("CurrentStatus") == "held"
-        and "audited-defer" in row.get("CurrentDecisionBasis", "").casefold()
-        and row["MatchKey"] in set(reactivated)
+        if (row.get("CurrentAction") in {"held", "split-required"} or row.get("CurrentStatus") == "held")
         and row.get("ReviewLane") == "deferred-high-ambiguity"
     ]
-    if stale_hidden:
-        raise SystemExit("Stale audited defer remained hidden: " + ", ".join(stale_hidden[:20]))
+    if hidden_blockers:
+        raise SystemExit("Learner-first blocker remained hidden: " + ", ".join(hidden_blockers[:20]))
 
     counts = Counter(row["ReviewLane"] for row in rows)
     print(f"source-evidence-changed rows reactivated = {len(evidence_reactivated)}")
-    print(f"audited defer rows retired from active lanes = {len(retired)}")
-    print(f"audited defer rows reactivated by context change = {len(reactivated)}")
+    print(f"learner-first blockers reactivated = {len(reactivated)}")
     print("reactivated MatchKeys = " + ("|".join(reactivated) if reactivated else "none"))
     for lane in sorted(counts):
         print(f"normalized review bundle lane {lane} = {counts[lane]}")
     print(f"defer context policy version = {POLICY_VERSION}")
-    print("defer context fingerprint = source+canonical+policy")
+    print("learner-first finalization = active")
     print("review lane normalization = pass")
     print("identity decision truth changed = no")
 
