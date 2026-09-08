@@ -270,6 +270,7 @@ candidate:chameleon,chameleon,chameleon,变色龙,chameleon,1,reviewed
 candidate:change,change,change,改变；变化,change,4,reviewed
 candidate:chase,chase,chase,追逐；追赶,chase,1,reviewed
 candidate:cheap,cheap,cheap,便宜的,cheap,3,reviewed
+candidate:check,check,check,检查；核对,check,2,reviewed
 candidate:cheese,cheese,cheese,奶酪；干酪,cheese,2,reviewed
 candidate:cheetah,cheetah,cheetah,猎豹,cheetah,1,reviewed
 candidate:chemistry,chemistry,chemistry,化学,chemistry,2,reviewed
@@ -329,7 +330,7 @@ candidate:cold#illness,cold#illness,cold,感冒,cold,3,reviewed
 candidate:cold#temperature,cold#temperature,cold,冷的；寒冷的,cold,9,reviewed
 candidate:collect,collect,collect,收集；收集起来,collect,4,reviewed
 candidate:colorful,colorful,colorful,色彩鲜艳的；丰富多彩的,colorful,1,reviewed
-candidate:colour,colour,colour,颜色；给……涂色,colour,7,reviewed
+candidate:colour,colour,colour,颜色；给……涂色,color|colour,9,reviewed
 candidate:come,come,come,来,come,7,reviewed
 candidate:come back,come back,come back,回来；返回,come back,2,reviewed
 candidate:come out of,come out of,come out of,从……出来；出自,come out of,1,reviewed
@@ -441,6 +442,8 @@ candidate:dream#aspiration,dream#aspiration,dream,梦想；愿望,dream,1,review
 candidate:dream#sleep,dream#sleep,dream,梦；睡梦,dream,2,reviewed
 candidate:dress,dress,dress,连衣裙；裙子,dress,11,reviewed
 candidate:drink cold drinks,drink cold drinks,drink cold drinks,喝冷饮,drank cold drinks,1,reviewed
+candidate:drink#noun,drink#noun,drink,饮料,drink,1,reviewed
+candidate:drink#verb,drink#verb,drink,喝；饮用,drink|drinking,13,reviewed
 candidate:drive,drive,drive,驾驶；开车,drive,3,reviewed
 candidate:drive away,drive away,drive away,赶走；驱赶,drive away,1,reviewed
 candidate:driver,driver,driver,司机；驾驶员,driver,6,reviewed
@@ -574,6 +577,8 @@ candidate:firework,firework,firework,烟花；烟火,firework,1,reviewed
 candidate:first,first,first,第一；首先,first,9,reviewed
 candidate:first floor,first floor,first floor,一楼；第一层,first floor,1,reviewed
 candidate:fish and chips,fish and chips,fish and chips,炸鱼薯条,fish and chips,3,reviewed
+candidate:fish#noun,fish#noun,fish,鱼；鱼类,fish,15,reviewed
+candidate:fish#verb,fish#verb,fish,钓鱼；捕鱼,fish,2,reviewed
 candidate:fisherman,fisherman,fisherman,渔夫；渔民,fisherman,1,reviewed
 candidate:fishing,fishing,fishing,钓鱼,fishing,2,reviewed
 candidate:fit,fit,fit,健康的；健壮的,fit,1,reviewed
