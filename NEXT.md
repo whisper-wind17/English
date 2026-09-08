@@ -75,15 +75,15 @@ Reviewed Identity decision 必须绑定 exact JSON `OccurrenceKeys`；source evi
 
 ---
 
-## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #12 CHECKPOINTED
+## 4. Current checkpoint — POLICY REVIEW THROUGH BATCH #13 CHECKPOINTED
 
 ```text
 Source occurrences                 = 6005
 Normalized surfaces                = 2161
 Durable Identity decisions         = 2105
-Identity-level Vocabulary Preview  = 1060
-Review/blocker surfaces            = 899
-Evidence-changed surfaces          = 805
+Identity-level Vocabulary Preview  = 1066
+Review/blocker surfaces            = 893
+Evidence-changed surfaces          = 799
 Multipart resolved                 = 11
 ```
 
@@ -91,19 +91,19 @@ Current learner projection：
 
 ```text
 Grammar-form quarantine gates      = 56
-Learner-stage Vocabulary Preview   = 1048
+Learner-stage Vocabulary Preview   = 1054
 Identity rows suppressed by gate   = 12
-Preview occurrence contributions removed = 40
+Preview occurrence contributions removed = 42
 Explicit decision-bound past-form requirements = 13
 ```
 
 从 grammar-gate baseline 到当前：
 
 ```text
-Identity Preview   985  → 1060   (+75)
-Learner Preview    979  → 1048   (+69)
-Blockers          1010  →  899   (-111)
-Evidence-changed   911  →  805   (-106)
+Identity Preview   985  → 1066   (+81)
+Learner Preview    979  → 1054   (+75)
+Blockers          1010  →  893   (-117)
+Evidence-changed   911  →  799   (-112)
 Multipart            7  →   11   (+4)
 ```
 
@@ -137,8 +137,14 @@ her#possessive   → 她的
 her#object       → 她（宾格）
 PE               → reuse physical education
 No.              → reuse number
+short            → 短的；矮的
 shorts           → lexicalized 短裤，not short morphology
+sometime         → 在某一时候；改天
 sometimes        → lexical frequency adverb，not sometime morphology
+sport            → canonical 运动；体育运动
+sports           → reuse sport
+sleep            → 睡觉；睡眠
+slept            → reuse sleep；learner quarantine
 running          → lexicalized activity 跑步；not generic run inflection
 stairs           → lexicalized plural noun 楼梯
 broken           → lexicalized adjective 破损的/坏掉的，not automatic break reuse
@@ -166,32 +172,28 @@ flies            → split-required / held；canonical fly 已 resolve，但唯�
 #10 hide-and-seek / kilometre / language / librarian / passport / physics / raincoat / sausage / someday / spaceship / speech / string / taikonaut / town / traditional / winner / child / no. / flies
 #11 at / no / broken / candy / don't / fell
 #12 fly / foot / go / leave / paint / shoe
+#13 short / sleep / sock / sometime / sport / story
 ```
 
-### Latest validation — Batch #12
+### Latest validation — Batch #13
 
 ```text
-first run          = 34191550317 / #206 = FAIL at canonical TargetSense consistency only; no bot persist
-batch commit       = ebc56fbf765e4ff085e8d5ea8285680e694e426e
-TargetSense fix    = 086906ec8634bbed94e931126f42298dbac354b9
-corrected run      = 34191620560 / #207 = SUCCESS
-bot persist        = 712fe66...
+run               = 34191932272 / #208 = SUCCESS
+batch commit       = c0039a098baab61a1a01b22432cb6ae8984306d3
+bot persist        = 4d59274169837c6c0cbb914a85fd0db793466505
 ```
-
-第一次失败原因：`fly#verb` 被暂时扩写为“飞；飞行；使（风筝、旗帜等）飞扬”，与既有 scoped reuse `flew → fly#verb` 的 TargetSense `飞；飞行` 不一致。修复策略是保持 canonical learner-facing core sense，不修改 planner 外的 `flew`；Flag Day transitive usage 仅保留为 source evidence / rationale。失败 workflow 未 persist durable workspace。
 
 ```text
 selected active batch closure              = 100%
-Batch decision rows                        = 7
-Touched MatchKeys                          = 6
-keep-identity                              = 7
-fly multipart partition                    = 10 verb + 1 insect, complete/disjoint
+Batch decisions                            = 6
+keep-identity                              = 6
 Third-party Simplified Completion Recheck  = PASS
-Identity Preview TargetSense               = 1060 / 1060
+Identity Preview TargetSense               = 1066 / 1066
 Third-party learner-stage quarantine       = PASS
 past-form leak into learner preview        = NO
 lexicalized participle/adjective over-gating = NO
 homograph decision-scope gate              = ENFORCED
+known morphology decisions preserved       = YES
 canonical blocker bypass                   = NO
 source occurrence closure                  = PASS
 Klose Master/Learner/Publish/Anki          = UNTOUCHED
@@ -199,17 +201,19 @@ Stable ThirdPartyID minted                 = NO
 Final Klose diff executed                  = NO
 ```
 
-Batch #12 delta：
+Batch #13 delta：
 
 ```text
-Blockers          905 → 899   (-6)
-Evidence-changed  811 → 805   (-6)
-Identity Preview 1053 → 1060  (+7)
-Learner Preview  1041 → 1048  (+7)
-Multipart          10 →   11  (+1)
+Blockers          899 → 893   (-6)
+Evidence-changed  805 → 799   (-6)
+Identity Preview 1060 → 1066  (+6)
+Learner Preview  1048 → 1054  (+6)
+Multipart          11 →   11
 ```
 
-Preview 增加 7 而 selected surface 只有 6，是因为 `fly` 一个 MatchKey 完成了两个有效 provisional identities：`fly#verb` 与 `fly#insect`；其余 `foot/go/leave/paint/shoe` 各恢复一个 Identity。`flies` 经 bot persist 后仍是 `split-required / held`，没有被 canonical completion 自动放行。
+`short/shorts`、`sometime/sometimes`、`sport/sports` 三组关系保持原判，没有被 sixth-source revalidation 反向改写；`sleep` 仍是 noun/verb unified elementary concept，`slept` 继续 canonical reuse + learner quarantine。
+
+独立 compare `c0039a0... → 4d59274...` 只包含 Stage-A review/audit/learner/staging 生成物与 transient batch 文件删除；未触碰 source adapter/raw，也未触碰 Klose Master/Learner/Publish/Anki。
 
 ---
 
@@ -242,59 +246,56 @@ source mutation 与 decision mutation 不得混合
 
 ---
 
-## 8. NEXT TASK — POLICY-REVIEW BATCH #13
+## 8. NEXT TASK — POLICY-REVIEW BATCH #14
 
 Current deterministic planner：
 
 ```text
 ReviewLane        = policy-review
-SelectedCount     = 6
-EvidenceWeight    = 49 / 60
+SelectedCount     = 5
+EvidenceWeight    = 57 / 60
 ExecutionReady    = true
-ReviewBundleFingerprint = 9a2c2fc7d626a12b8c063abf5ebef8c1466daa87d3cf4cd00e5eae8167fef9c2
+ReviewBundleFingerprint = 0d10c69531b03500e0b4efbe1554b5b5dd7c329a523ff805314960af1f56db2b
 SelectedMatchKeys =
-  short
-  sleep
-  sock
-  sometime
-  sport
-  story
+  study
+  swim
+  thank
+  vegetable
+  watch
 ```
 
 本批重点：
 
 ```text
-short
-→ height / length / duration 等 core-sense 边界；不得被 lexicalized `shorts` 反向污染。
+study
+→ existing learner-first core 为“学习；读书”；需检查 sixth-source 是否引入 study-room / research 等真实 source sense，而不是 dictionary noise。
 
-sleep
-→ noun / verb 是否仍可保持一个 elementary concept，需按 sixth-source context 复核。
+swim
+→ noun / verb unified activity concept；同时与 swam reuse 有 canonical dependency，TargetSense 不得无意扩张。
 
-sock
-→ concrete clothing noun vs dictionary noise。
+thank
+→ verb / interjection-like textbook presentation 边界；检查是否仍为稳定 gratitude lexical unit。
 
-sometime
-→ 与已冻结 lexical frequency adverb `sometimes` 明确分离；不得 morphology/format 合并。
+vegetable
+→ concrete food noun vs plant/person dictionary noise。
 
-sport
-→ singular activity concept 与已处理 `sports` 的关系必须 learner-first 判断，不能机械 morphology reuse。
-
-story
-→ elementary narrative noun vs broad dictionary extensions；按 exact source context 收窄。
+watch
+→ known multipart/homograph risk：watch#verb 与手表 noun boundary；必须检查 current occurrence partition，不能用一个 TargetSense 粗暴覆盖。
 ```
 
 执行要求：
 
 ```text
-1. 读取 current review_bundle / exact source occurrences / related canonical decisions。
+1. 读取 current review_bundle / exact source occurrences / related canonical/multipart decisions。
 2. 不修改 source/raw/parser/config。
 3. 生成 planner 精确对应的 batch_manifest.json + decision_updates.csv。
-4. 6/6 closure，不 cherry-pick；manifest fingerprint 必须从当前 next_batch.json 直接读取。
+4. 5/5 closure，不 cherry-pick；manifest fingerprint 必须从当前 next_batch.json 直接读取。
 5. apply + rebuild Identity/Learner views。
 6. core Completion Recheck + learner checker + batch recheck 全部 PASS。
 7. 核对 blocker / Identity Preview / Learner Preview / canonical dependency delta。
-8. Klose isolation 必须 PASS。
-9. bot persist 后重新 planner；阶段结束更新 NEXT.md。
+8. watch 若需要 multipart，必须 complete/disjoint；swam 等 scoped reuse 必须保持 canonical TargetSense 一致。
+9. Klose isolation 必须 PASS。
+10. bot persist 后重新 planner；阶段结束更新 NEXT.md。
 ```
 
 `flies` 当前仍是 independently held split-resolution item；除非后续 deterministic planner 明确选择并且 source evidence 足以消除 ambiguity，否则不得在其他 batch 中顺手修改。
