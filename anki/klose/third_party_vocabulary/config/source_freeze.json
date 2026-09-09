@@ -1,0 +1,54 @@
+{
+  "FreezeVersion": "source-freeze-v1",
+  "Status": "frozen",
+  "Scope": "planned third-party primary-school vocabulary adapters for Phase A1",
+  "ExpectedEnabledAdapters": [
+    "beijing_start1",
+    "beishida_start1",
+    "beishida_start3",
+    "cambridge_join_start3",
+    "guangdong_start3",
+    "guangzhou_start3",
+    "hujiao_start3",
+    "jiaoke_eec_start3",
+    "jijiao_start3",
+    "kepu_start3",
+    "luke_54_start3",
+    "minjiao_start3",
+    "niujin_shanghai_start1",
+    "renjiao_start1",
+    "renjiao_start3",
+    "shaanxi_start3",
+    "waiyan_start1",
+    "waiyan_start3",
+    "xiangshao_start3",
+    "yilin_start3"
+  ],
+  "ExpectedSourceOccurrences": 18887,
+  "ExpectedBooks": 178,
+  "ExpectedBlankDefinitions": 13,
+  "SourceAdaptersFingerprint": "fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272",
+  "UnifiedOccurrencesFingerprint": "b025cb4f69b030da3664ab9b1bdd8500cb0166b122392b282a4293567702a7d4",
+  "ClosureEvidence": {
+    "WorkflowRunID": "34303418551",
+    "WorkflowRunNumber": 351,
+    "CheckpointFingerprint": "fe96f22917626ef0ade57f0e92426ddf6d82dc703dab062649338316f555fe17"
+  },
+  "TerminalScopeBoundaries": [
+    {
+      "Source": "仁爱版",
+      "Disposition": "excluded",
+      "Reason": "raw source contains grades 7-9 only; outside the primary-school corpus"
+    },
+    {
+      "Source": "鲁教版五四学制",
+      "Disposition": "excluded",
+      "Reason": "raw source starts at grade 6, which is the middle-school segment in the five-four system"
+    },
+    {
+      "Source": "译林版低年级/牛津小学英语1A-2B",
+      "Disposition": "deferred",
+      "Reason": "edition continuity with the explicit 3-6 grade-3-start sequence is not established; no silent start1 merge"
+    }
+  ]
+}
