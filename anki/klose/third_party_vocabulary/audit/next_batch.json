@@ -1,21 +1,29 @@
 {
   "PlanVersion": "v5-throughput-delta",
-  "ReviewLane": "semantic-review",
+  "ReviewLane": "policy-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "program"
+    "eggs",
+    "flowers",
+    "fruits",
+    "left",
+    "cookies",
+    "birds",
+    "her"
   ],
-  "SelectedCount": 1,
-  "EvidenceWeight": 2,
+  "SelectedCount": 7,
+  "EvidenceWeight": 50,
   "SurfaceCap": 30,
   "WeightBudget": 60,
   "EffectiveWeightBudget": 60,
-  "PackingSkippedMatchKeys": [],
+  "PackingSkippedMatchKeys": [
+    "watch"
+  ],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
-  "ReviewBundleFingerprint": "1b0a9354e13f3e8eef064fd4340dd6cc187e3794567ee9a56a4e0d788ba3fbd5",
-  "ReviewPacketFingerprint": "f7aa7e8031aee4ed4b04e0eb9118bbd5c2ed480e3224992ff3e0f6f5b8ba4b19"
+  "ReviewBundleFingerprint": "c1a6b9a4b6b9f6c5740fdaae0baad3a72436c37ad28c1ce1b1b980687267a782",
+  "ReviewPacketFingerprint": "64284810293dae5d85dcde141cf4674d3e85d8c6b2a20b8f5df21205f57b8f1a"
 }
