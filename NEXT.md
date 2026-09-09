@@ -60,27 +60,25 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#400 / 34341946713 = SUCCESS**
+Latest sealed workflow：**#401 / 34342256091 = SUCCESS**
 
 ```text
-sealed bot head                    = 932aa791397cff66b4b0abe210d82b47cc1929f8
+sealed bot head                    = 15f8e2cf9750adb14749e1d3f2774b213e8f97b4
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3135
-Identity Vocabulary Preview        = 2598
-Learner Vocabulary Preview         = 2575
-Review blockers                    = 752
-Evidence-changed surfaces          = 13
+Durable Identity decisions         = 3140
+Identity Vocabulary Preview        = 2602
+Learner Vocabulary Preview         = 2579
+Review blockers                    = 748
+Evidence-changed surfaces          = 12
 Multipart resolved                 = 9
 Grammar-form quarantine gates      = 87
-CheckpointFingerprint              = d3487d7746e0bc99e0cb27e37717296a03ad93319cc1600b4571e09ae0c7fd49
+CheckpointFingerprint              = bd630e905cfea4ba845e96a7f725911619edba7de264954fd93a0339c27e628c
 ```
 
 Recent validated throughput：
 
 ```text
-#395 — feel / market / match / mobile / movie
-  resolved fail-closed multipart overlap by reusing stable DecisionKeys and canonical senses
 #396 — film / mean / meeting / none / note / officer
   film preserved film#movie / film#photo; meeting kept as lexicalized noun; officer split police + held
 #397 — fish / opposite
@@ -90,7 +88,9 @@ Recent validated throughput：
 #399 — hard / past / pineapple / point
   hard added hard#intense; past fully closed movement / clock / history; weak hard/point contexts held
 #400 — hot / pool / pot / prepare / entrance
-  hot preserved temperature / spicy with weak contexts held; pool/prepare/entrance closed; pot audited-defer due insufficient container evidence
+  hot preserved temperature / spicy with weak contexts held; pool/prepare/entrance closed; pot audited-defer
+#401 — look / rainbow / raise / return / rope
+  look fully partitioned as 17 see + 6 appearance + 3 held; rainbow/raise/return/rope closed
 ```
 
 Compact decision inbox rule：human-authored `Rationale` fields are always CSV-quoted before submission。Each completed batch must pass batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
@@ -105,22 +105,19 @@ Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / 
 PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
-SelectedCount  = 5
-EvidenceWeight = 59
+SelectedCount  = 2
+EvidenceWeight = 60
 ExecutionReady = true
 
-look
-rainbow
-raise
-return
-rope
+orange
+sand
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = d256c97b3e320c439c32727d4c3ecfe7fdb1323de75e5131c7e00fbbde128110
-ReviewPacketFingerprint = 984256a51928fdb02101c0c697237f7d0ce457fac76fb0075ccff08d6ac3097d
+ReviewBundleFingerprint = 13c5d33fe2f337765eb7ebadafd9684e1c983c5269c317fee9886c85b247ea0a
+ReviewPacketFingerprint = dae0ada601c10eeac77fd475fa8829a0e755e08989a94123f8e09266549fd2f6
 ```
 
 Planner contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`；单批大小由 evidence weight 主导。Source mutation 与 decision mutation 不得混合。
