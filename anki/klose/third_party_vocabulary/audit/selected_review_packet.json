@@ -10,23 +10,29 @@
     "relatives",
     "fruits",
     "left",
+    "saw",
     "1st",
-    "cookies",
-    "birds",
-    "her"
+    "can i ...?",
+    "dr",
+    "led",
+    "main course",
+    "prc",
+    "sat",
+    "uh",
+    "who's"
   ],
-  "SelectedCount": 10,
-  "ReviewBundleFingerprint": "5bcef897d7cd5a38eb6af0be08a0fe136a9440af5c45aec4514db259481ce86b",
-  "ReviewPacketFingerprint": "d4820538ce1386258568dabdc971a9c577bb69fe021c1c6942e9ba0e3092689c",
+  "SelectedCount": 16,
+  "ReviewBundleFingerprint": "118c83e8ce7e667456e116c885e1d30fd08b89609db2a3354cec195aab241e12",
+  "ReviewPacketFingerprint": "8b8349b3f7fda741e37521e4492deccd0d1f6bd38ba958d90026b5b6a6ecf6d9",
   "Items": [
     {
       "MatchKey": "heard",
       "ReviewMode": "full-evidence",
       "DisplayForms": "heard",
       "Definitions": "v. 听到(hear的过去式和过去分词);闻知",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:6年级下",
-      "CandidateSignals": "",
+      "SourceIDs": "guangdong_start3|guangzhou_start3",
+      "SourceBooks": "guangdong_start3:6年级下|guangzhou_start3:6年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
       "CandidateCanonical": "hear",
       "CanonicalRelation": "named-past-form",
       "CanonicalAction": "keep-identity",
@@ -36,7 +42,8 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "guangdong_start3|g6-lower|r054|heard"
+        "guangdong_start3|g6-lower|r054|heard",
+        "guangzhou_start3|g6-upper|r055|heard"
       ],
       "FullEvidence": [
         {
@@ -67,6 +74,36 @@
             "climb",
             "mountain",
             "why"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-upper|r055|heard",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "55",
+          "Word": "heard",
+          "Definition": "v. 听到(hear的过去式和过去分词);闻知",
+          "Before": [
+            "health",
+            "matter",
+            "What's the matter?",
+            "ill",
+            "stomachache",
+            "ate",
+            "eat",
+            "hear"
+          ],
+          "After": [
+            "I'm sorry to hear that.",
+            "gave",
+            "give",
+            "check-up",
+            "take",
+            "took",
+            "medicine",
+            "time"
           ]
         }
       ]
@@ -277,8 +314,8 @@
       "ReviewMode": "full-evidence",
       "DisplayForms": "left",
       "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|hujiao_start3:5年级上|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|guangzhou_start3|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "leave",
       "CanonicalRelation": "named-past-form",
@@ -320,6 +357,7 @@
         "beishida_start1|g3-upper|r003|left",
         "beishida_start1|g4-upper|r070|left",
         "beishida_start3|g4-upper|r003|left",
+        "guangzhou_start3|g5-lower|r133|left",
         "hujiao_start3|g5-upper|r113|left",
         "jijiao_start3|g3-upper|r048|left",
         "jijiao_start3|g5-lower|r064|left",
@@ -434,6 +472,36 @@
             "touch",
             "food",
             "parking"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g5-lower|r133|left",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "133",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "way",
+            "lost",
+            "lose",
+            "Excuse me.",
+            "hospital",
+            "straight",
+            "ahead",
+            "right"
+          ],
+          "After": [
+            "miss",
+            "bank",
+            "post office",
+            "train station",
+            "zoo",
+            "restaurant",
+            "police station",
+            "short cut"
           ]
         },
         {
@@ -673,6 +741,302 @@
       ]
     },
     {
+      "MatchKey": "saw",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "saw",
+      "Definitions": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+      "SourceIDs": "beishida_start1|guangzhou_start3|hujiao_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3",
+      "SourceBooks": "beishida_start1:5年级上|guangzhou_start3:6年级上|hujiao_start3:6年级下|jijiao_start3:5年级下|renjiao_start3:6年级下|waiyan_start1:4年级上|waiyan_start3:4年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "see",
+      "CanonicalRelation": "named-past-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "看见；看到",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:saw",
+          "MatchKey": "saw",
+          "OccurrenceKeys": "[\"beishida_start1|g5-upper|r064|saw\",\"jijiao_start3|g5-lower|r012|saw\",\"jijiao_start3|g5-lower|r084|saw\",\"renjiao_start3|g6-lower|r032|saw\",\"waiyan_start1|g4-upper|r034|saw\",\"waiyan_start3|g4-lower|r097|saw\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "saw#see-past",
+          "ObjectType": "vocabulary",
+          "TargetSense": "看见；看到（see 的过去式）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "beishida-start1-see-past-partition-revalidation",
+          "Rationale": "The new Beishida row explicitly places see immediately before saw and say/said after it"
+        },
+        {
+          "DecisionKey": "surface:saw#tool",
+          "MatchKey": "saw",
+          "OccurrenceKeys": "[\"hujiao_start3|g6-lower|r059|saw\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "saw#tool",
+          "ObjectType": "vocabulary",
+          "TargetSense": "锯子",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-production-occurrence-partition",
+          "Rationale": "The Hujiao craft/tool occurrence remains the distinct saw-tool noun partition."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beishida_start1|g5-upper|r064|saw",
+        "guangzhou_start3|g6-upper|r104|saw",
+        "hujiao_start3|g6-lower|r059|saw",
+        "jijiao_start3|g5-lower|r012|saw",
+        "jijiao_start3|g5-lower|r084|saw",
+        "renjiao_start3|g6-lower|r032|saw",
+        "waiyan_start1|g4-upper|r034|saw",
+        "waiyan_start3|g4-lower|r097|saw"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start1|g5-upper|r064|saw",
+          "SourceID": "beishida_start1",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "64",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "tenth",
+            "get",
+            "got",
+            "birthday",
+            "gift",
+            "spring",
+            "March",
+            "see"
+          ],
+          "After": [
+            "say",
+            "said",
+            "calendar",
+            "check",
+            "autumn",
+            "September",
+            "October",
+            "forget"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-upper|r104|saw",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "104",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "come",
+            "no ... at all",
+            "not ... at all",
+            "poor",
+            "last",
+            "year",
+            "met",
+            "meet"
+          ],
+          "After": [
+            "see",
+            "read",
+            "read",
+            "diary",
+            "Disneyland",
+            "Mickey Mouse",
+            "Donald Duck",
+            "a little"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-lower|r059|saw",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "59",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "on the left",
+            "on the right",
+            "all the time",
+            "craft",
+            "crown",
+            "scissors",
+            "tape",
+            "glue"
+          ],
+          "After": [
+            "craftsman",
+            "tool",
+            "easily",
+            "himself",
+            "still",
+            "model house",
+            "a long time ago",
+            "at work"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r012|saw",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "jump",
+            "sing",
+            "dance",
+            "sit",
+            "down",
+            "stand",
+            "up",
+            "see"
+          ],
+          "After": [
+            "look",
+            "look out of",
+            "look at",
+            "boy",
+            "girl",
+            "now",
+            "draw",
+            "picture"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r084|saw",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "84",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "did",
+            "do",
+            "yesterday",
+            "night",
+            "had",
+            "have",
+            "went",
+            "go"
+          ],
+          "After": [
+            "see",
+            "ate",
+            "eat",
+            "photo",
+            "were",
+            "are",
+            "was",
+            "am"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g6-lower|r032|saw",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "32",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "cleaned",
+            "stayed",
+            "washed",
+            "watched",
+            "had",
+            "had a cold",
+            "slept",
+            "read"
+          ],
+          "After": [
+            "last",
+            "yesterday",
+            "before",
+            "drank",
+            "show",
+            "magazine",
+            "better",
+            "faster"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r034|saw",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "34",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "print",
+            "right",
+            "between",
+            "bicycle",
+            "mouse",
+            "beside",
+            "man",
+            "went"
+          ],
+          "After": [
+            "trip",
+            "took",
+            "fifty",
+            "minute",
+            "top",
+            "mountain",
+            "ate",
+            "candies"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r097|saw",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "97",
+          "Word": "saw",
+          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Before": [
+            "computer",
+            "love",
+            "him",
+            "Mrs",
+            "Miss",
+            "sang",
+            "sing",
+            "beautifully"
+          ],
+          "After": [
+            "see",
+            "game",
+            "last",
+            "fun",
+            "went",
+            "go",
+            "there",
+            "ate"
+          ]
+        }
+      ]
+    },
+    {
       "MatchKey": "1st",
       "ReviewMode": "full-evidence",
       "DisplayForms": "1st",
@@ -725,468 +1089,417 @@
       ]
     },
     {
-      "MatchKey": "cookies",
+      "MatchKey": "can i ...?",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "cookies",
-      "Definitions": "n. 饼干",
-      "SourceIDs": "beishida_start3",
-      "SourceBooks": "beishida_start3:3年级下",
-      "CandidateSignals": "morphology",
+      "DisplayForms": "Can I ...?",
+      "Definitions": "abbr. Committee on Non-discrimination and Integrity 不受歧视和人身自主权委员会",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:3年级下",
+      "CandidateSignals": "multiword|punctuated",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "form-policy",
+      "BlockerClass": "abbreviation-policy",
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start3|g3-lower|r077|cookies"
+        "guangzhou_start3|g3-lower|r073|can i ...?"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start3|g3-lower|r077|cookies",
-          "SourceID": "beishida_start3",
+          "SourceOccurrenceKey": "guangzhou_start3|g3-lower|r073|can i ...?",
+          "SourceID": "guangzhou_start3",
           "SourceBook": "3年级下",
           "Grade": "3",
           "Semester": "下",
-          "SourceRow": "77",
-          "Word": "cookies",
-          "Definition": "n. 饼干",
+          "SourceRow": "73",
+          "Word": "Can I ...?",
+          "Definition": "abbr. Committee on Non-discrimination and Integrity 不受歧视和人身自主权委员会",
           "Before": [
-            "listen",
-            "sing",
-            "dance",
-            "draw",
-            "swim",
-            "write",
-            "please",
-            "candy"
+            "want",
+            "banana",
+            "we",
+            "but",
+            "then",
+            "apple",
+            "pear",
+            "can"
           ],
           "After": [
-            "monkey"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "birds",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "birds",
-      "Definitions": "n. [鸟] 鸟类;禽(bird的复数) v. 打鸟;观察研究野鸟;起哄(bird的三单形式)",
-      "SourceIDs": "beishida_start3",
-      "SourceBooks": "beishida_start3:3年级下",
-      "CandidateSignals": "morphology",
-      "CandidateCanonical": "bird",
-      "CanonicalRelation": "plural-form",
-      "CanonicalAction": "keep-identity",
-      "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "鸟",
-      "BlockerClass": "form-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start3|g3-lower|r030|birds"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start3|g3-lower|r030|birds",
-          "SourceID": "beishida_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "30",
-          "Word": "birds",
-          "Definition": "n. [鸟] 鸟类;禽(bird的复数) v. 打鸟;观察研究野鸟;起哄(bird的三单形式)",
-          "Before": [
-            "cabbages",
-            "potatoes",
-            "carrots",
-            "help",
-            "you",
-            "mushrooms",
-            "onions",
-            "how many"
-          ],
-          "After": [
+            "Of course.",
+            "get",
+            "relative",
+            "photo",
             "there",
-            "eggs",
-            "flowers",
-            "one",
-            "two",
-            "three",
-            "five",
-            "four"
+            "there is",
+            "there are",
+            "cousin"
           ]
         }
       ]
     },
     {
-      "MatchKey": "her",
+      "MatchKey": "dr",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "her",
-      "Definitions": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|hujiao_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:2年级上|beishida_start1:2年级上|beishida_start3:3年级上|hujiao_start3:4年级上|jijiao_start3:4年级下|renjiao_start1:2年级上|renjiao_start3:4年级上|waiyan_start1:1年级上|waiyan_start1:2年级下|waiyan_start3:3年级上|waiyan_start3:5年级上",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|morphology|decision-evidence-changed",
+      "DisplayForms": "Dr",
+      "Definitions": "abbr. 速度三角形定位法(dead reckoning);数据记录器(Data Recorder)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级下",
+      "CandidateSignals": "",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
       "CanonicalAction": "",
       "CanonicalStatus": "",
       "CanonicalTargetSense": "",
-      "BlockerClass": "form-policy",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:her",
-          "MatchKey": "her",
-          "OccurrenceKeys": "[\"beijing_start1|g2-upper|r033|her\",\"beishida_start1|g2-upper|r050|her\",\"hujiao_start3|g4-upper|r006|her\",\"jijiao_start3|g4-lower|r012|her\",\"renjiao_start1|g2-upper|r020|her\",\"renjiao_start3|g4-upper|r041|her\",\"waiyan_start1|g1-upper|r139|her\",\"waiyan_start1|g2-lower|r063|her\",\"waiyan_start3|g3-upper|r152|her\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "her#possessive",
-          "ObjectType": "vocabulary",
-          "TargetSense": "她的（形容词性物主代词）",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "beishida-start1-possessive-partition-revalidation",
-          "Rationale": "The Beishida row places her after his and immediately before room/doll/bike/bag/computer/car"
-        },
-        {
-          "DecisionKey": "surface:her#object",
-          "MatchKey": "her",
-          "OccurrenceKeys": "[\"waiyan_start3|g5-upper|r111|her\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "her#object",
-          "ObjectType": "vocabulary",
-          "TargetSense": "她（宾格）",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "source-expansion-functional-split",
-          "Rationale": "The existing Waiyan object-pronoun occurrence remains separate; Beishida adds only possessive evidence."
-        }
-      ],
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beijing_start1|g2-upper|r033|her",
-        "beishida_start1|g2-upper|r050|her",
-        "beishida_start3|g3-upper|r056|her",
-        "hujiao_start3|g4-upper|r006|her",
-        "jijiao_start3|g4-lower|r012|her",
-        "renjiao_start1|g2-upper|r020|her",
-        "renjiao_start3|g4-upper|r041|her",
-        "waiyan_start1|g1-upper|r139|her",
-        "waiyan_start1|g2-lower|r063|her",
-        "waiyan_start3|g3-upper|r152|her",
-        "waiyan_start3|g5-upper|r111|her"
+        "guangzhou_start3|g6-lower|r068|dr"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beijing_start1|g2-upper|r033|her",
-          "SourceID": "beijing_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "33",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "grandma",
-            "grandmother",
-            "grandpa",
-            "grandfather",
-            "or",
-            "is",
-            "eleven",
-            "his"
-          ],
-          "After": [
-            "how many",
-            "pig",
-            "your",
-            "sixteen",
-            "my",
-            "cow",
-            "nineteen",
-            "our"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start1|g2-upper|r050|her",
-          "SourceID": "beishida_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "50",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "grandfather",
-            "aunt",
-            "uncle",
-            "welcome",
-            "mom",
-            "his",
-            "parrot",
-            "dad"
-          ],
-          "After": [
-            "room",
-            "doll",
-            "bike",
-            "bag",
-            "computer",
-            "car"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start3|g3-upper|r056|her",
-          "SourceID": "beishida_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "56",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "grandfather",
-            "sister",
-            "yes",
-            "brother",
-            "me",
-            "aunt",
-            "uncle",
-            "his"
-          ],
-          "After": [
-            "computer",
-            "mom",
-            "bag",
-            "toy",
-            "car",
-            "pencil box",
-            "bike",
-            "for"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "hujiao_start3|g4-upper|r006|her",
-          "SourceID": "hujiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "6",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "meet",
-            "new",
-            "morning",
-            "classmate"
-          ],
-          "After": [
-            "name",
-            "sit",
-            "afternoon",
-            "his",
-            "run",
-            "fast",
-            "fly",
-            "draw"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r012|her",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
+          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r068|dr",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
           "Semester": "下",
-          "SourceRow": "12",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "SourceRow": "68",
+          "Word": "Dr",
+          "Definition": "abbr. 速度三角形定位法(dead reckoning);数据记录器(Data Recorder)",
           "Before": [
-            "hello",
-            "your",
-            "hi",
-            "hello",
-            "name",
-            "friend",
-            "pupil",
-            "his"
+            "forest",
+            "pollute",
+            "made",
+            "make",
+            "be made from",
+            "fur",
+            "sea",
+            "famous"
           ],
           "After": [
-            "pencil",
-            "pencil box",
-            "what",
-            "pen",
-            "ruler",
-            "crayon",
-            "whose",
-            "blackboard"
+            "Doctor",
+            "person",
+            "history",
+            "leader",
+            "free",
+            "inventor",
+            "invent",
+            "bulb"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "led",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "led",
+      "Definitions": "abbr. 发光二极管(light-emitting diode)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-lower|r126|led"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "renjiao_start1|g2-upper|r020|her",
-          "SourceID": "renjiao_start1",
-          "SourceBook": "2年级上",
-          "Grade": "2",
-          "Semester": "上",
-          "SourceRow": "20",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "friend",
-            "woman",
-            "girl",
-            "man",
-            "boy",
-            "look",
-            "his",
-            "name"
-          ],
-          "After": [
-            "or",
-            "big",
-            "tall",
-            "pretty",
-            "thin",
-            "short",
-            "handsome",
-            "new"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g4-upper|r041|her",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "41",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "quiet",
-            "hair",
-            "shoe",
-            "glasses",
-            "his",
-            "or",
-            "right",
-            "hat"
-          ],
-          "After": [
-            "bedroom",
-            "living room",
-            "study",
-            "kitchen",
-            "bathroom",
-            "bed",
-            "phone",
-            "table"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g1-upper|r139|her",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "1年级上",
-          "Grade": "1",
-          "Semester": "上",
-          "SourceRow": "139",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "mother",
-            "grandpa",
-            "grandma",
-            "friend",
-            "his",
-            "car",
-            "sister",
-            "brother"
-          ],
-          "After": []
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r063|her",
-          "SourceID": "waiyan_start1",
-          "SourceBook": "2年级下",
-          "Grade": "2",
+          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r126|led",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
           "Semester": "下",
-          "SourceRow": "63",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "SourceRow": "126",
+          "Word": "led",
+          "Definition": "abbr. 发光二极管(light-emitting diode)",
           "Before": [
-            "catch",
-            "of course",
-            "usually",
-            "us",
-            "ride",
-            "thing",
-            "ill",
-            "cook"
+            "except",
+            "except for",
+            "carry on ...",
+            "carry on with ...",
+            "light",
+            "light up",
+            "brightly",
+            "lead"
           ],
           "After": [
-            "go shopping",
-            "kitchen",
-            "Children's Day",
-            "TV",
-            "play",
-            "say",
-            "poem",
-            "dragon"
+            "brought",
+            "bring",
+            "ever",
+            "abroad",
+            "South Africa",
+            "nature",
+            "choose",
+            "chose"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "main course",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "main course",
+      "Definitions": "abbr. (=mainsail)主要课程;主菜",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:5年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g5-upper|r084|main course"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g3-upper|r152|her",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "152",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
-          "Before": [
-            "farmer",
-            "his",
-            "head",
-            "leg",
-            "foot",
-            "on",
-            "arm",
-            "hand"
-          ],
-          "After": [
-            "nose",
-            "eye",
-            "mouth",
-            "ear"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r111|her",
-          "SourceID": "waiyan_start3",
+          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r084|main course",
+          "SourceID": "guangzhou_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "111",
-          "Word": "her",
-          "Definition": "pron. 她(she的宾格);她的(she的所有格);她(指某个国家;一艘船)",
+          "SourceRow": "84",
+          "Word": "main course",
+          "Definition": "abbr. (=mainsail)主要课程;主菜",
           "Before": [
-            "healthy",
-            "a lot",
-            "useful",
-            "show",
-            "presenter",
-            "blind",
-            "deaf",
-            "hear"
+            "hamburger",
+            "chips",
+            "worry",
+            "starter",
+            "tomato",
+            "egg",
+            "soup",
+            "main"
           ],
           "After": [
-            "fire",
-            "firefighter",
-            "hot dog",
-            "sausage",
-            "kind",
-            "time",
-            "school",
+            "meat",
+            "vegetable",
+            "potato",
+            "dessert",
+            "hope",
+            "everyone",
+            "chocolate",
             "start"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "prc",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "PRC",
+      "Definitions": "abbr. 中华人民共和国(People's Republic of China)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:3年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g3-upper|r153|prc"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r153|prc",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "153",
+          "Word": "PRC",
+          "Definition": "abbr. 中华人民共和国(People's Republic of China)",
+          "Before": [
+            "here",
+            "Here you are.",
+            "pencil",
+            "sorry",
+            "bag",
+            "pen",
+            "book",
+            "eraser"
+          ],
+          "After": [
+            "UK",
+            "USA",
+            "put",
+            "on",
+            "desk",
+            "in",
+            "the",
+            "box"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "sat",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "sat",
+      "Definitions": "abbr. (美国)学业能力倾向测验(Scholastic Aptitude Test,是高中生升入大学必须通过的测验)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-upper|r116|sat"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-upper|r116|sat",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "116",
+          "Word": "sat",
+          "Definition": "abbr. (美国)学业能力倾向测验(Scholastic Aptitude Test,是高中生升入大学必须通过的测验)",
+          "Before": [
+            "diary",
+            "Disneyland",
+            "Mickey Mouse",
+            "Donald Duck",
+            "a little",
+            "later",
+            "felt",
+            "feel"
+          ],
+          "After": [
+            "sit",
+            "until",
+            "better",
+            "surprised",
+            "back then",
+            "polite",
+            "surf",
+            "Internet"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "uh",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "uh",
+      "Definitions": "int. 嗯啊 abbr. 上半部分(upper half)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:5年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g5-upper|r051|uh"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r051|uh",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "51",
+          "Word": "uh",
+          "Definition": "int. 嗯啊 abbr. 上半部分(upper half)",
+          "Before": [
+            "have fun",
+            "have some fun",
+            "cinema",
+            "seldom",
+            "stay",
+            "drink",
+            "coffee",
+            "tea"
+          ],
+          "After": [
+            "cup",
+            "a cup of ...",
+            "milk",
+            "something",
+            "cold",
+            "hot",
+            "coke",
+            "sure"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "who's",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "who's",
+      "Definitions": "abbr. 谁是(who is,who has)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:3年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g3-upper|r092|who's"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r092|who's",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "92",
+          "Word": "who's",
+          "Definition": "abbr. 谁是(who is,who has)",
+          "Before": [
+            "that is",
+            "man",
+            "father",
+            "yes",
+            "he",
+            "he's",
+            "he is",
+            "who"
+          ],
+          "After": [
+            "who is",
+            "boy",
+            "it",
+            "it's",
+            "it is",
+            "me",
+            "brother",
+            "girl"
           ]
         }
       ]
