@@ -2,19 +2,22 @@
 """Build a read-only Third-party Stage-B premerge candidate map.
 
 This tool never mutates Klose identity/release state and never authorizes a merge.
-It deterministically compares reviewed Stage-A provisional identities with the current
-Klose stable Note registry by MatchKey only. Exact MatchKey equality is a candidate
-signal, not a same-sense decision.
+Candidate discovery is deliberately broader than exact MatchKey equality so a later
+`new-stable-identity` review cannot silently duplicate an existing orthographic or
+common spelling variant.
 
-Audited Stage-A defers are carried forward explicitly rather than silently dropped.
-The readiness snapshot is always bound to the current sealed Stage-A checkpoint.
-When Stage A still has an active review batch, the snapshot is persisted as current
-but gated (`ReadyForPremergeReview=false`) instead of leaving an older ready snapshot.
+Discovery order:
+1. exact MatchKey;
+2. conservative space/hyphen-insensitive orthographic key;
+3. explicit common British/American spelling equivalent.
+
+All candidate signals still require Stage-B reconciliation review.
 """
 from __future__ import annotations
 
 import csv
 import json
+import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -49,6 +52,24 @@ DEFER_FIELDS = [
     "CarryForwardStatus", "MergeAuthorized",
 ]
 
+SPELLING_GROUPS = [
+    {"color", "colour"},
+    {"favorite", "favourite"},
+    {"favor", "favour"},
+    {"center", "centre"},
+    {"meter", "metre"},
+    {"liter", "litre"},
+    {"theater", "theatre"},
+    {"program", "programme"},
+    {"gray", "grey"},
+    {"mom", "mum"},
+    {"math", "maths"},
+]
+SPELLING_EQUIVALENTS: dict[str, set[str]] = defaultdict(set)
+for group in SPELLING_GROUPS:
+    for item in group:
+        SPELLING_EQUIVALENTS[item].update(group - {item})
+
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     if not path.exists():
@@ -76,10 +97,22 @@ def read_json(path: Path) -> dict[str, object]:
 
 
 def lookup_key(canonical: str) -> str:
-    # Stage-A multipart provisional keys are MatchKey#variant. Klose does not know
-    # that provisional suffix yet, so premerge candidate discovery uses the source
-    # surface key while preserving the full provisional identity in output.
     return canonical.split("#", 1)[0].casefold().strip()
+
+
+def orthographic_key(key: str) -> str:
+    # Deliberately conservative: only spaces and hyphens are ignored. Periods,
+    # apostrophes and other punctuation remain significant (`a.m.` must not become `am`).
+    return re.sub(r"[\s-]+", "", key.casefold().strip())
+
+
+def unique_matches(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    by_id: dict[str, dict[str, str]] = {}
+    for row in rows:
+        note_id = row.get("NoteID", "")
+        if note_id:
+            by_id[note_id] = row
+    return [by_id[note_id] for note_id in sorted(by_id)]
 
 
 def main() -> None:
@@ -116,11 +149,15 @@ def main() -> None:
         raise SystemExit("Klose active NoteID registry is empty/duplicate across baseline + extensions")
 
     by_match: dict[str, list[dict[str, str]]] = defaultdict(list)
+    by_orthographic: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in active:
         key = row.get("MatchKey", "").strip().casefold()
         if not key:
             raise SystemExit(f"Klose active NoteID lacks MatchKey: {row.get('NoteID', '')}")
         by_match[key].append(row)
+        compact = orthographic_key(key)
+        if compact:
+            by_orthographic[compact].append(row)
 
     learner_ids = {r.get("ProvisionalIdentityKey", "") for r in learner}
     preview_ids = [r.get("ProvisionalIdentityKey", "") for r in preview]
@@ -134,16 +171,35 @@ def main() -> None:
     for row in preview:
         canonical = row.get("CanonicalMatchKey", "").strip()
         lookup = lookup_key(canonical)
-        matches = sorted(by_match.get(lookup, []), key=lambda r: r["NoteID"])
-        if not matches:
-            cls = "no-existing-match"
-            status = "pending-new-identity-review"
-        elif len(matches) == 1:
-            cls = "exact-single"
-            status = "pending-sense-confirmation"
+        exact = unique_matches(by_match.get(lookup, []))
+        matches: list[dict[str, str]]
+        if exact:
+            matches = exact
+            cls = "exact-single" if len(matches) == 1 else "exact-multiple"
+            status = "pending-sense-confirmation" if len(matches) == 1 else "pending-multi-candidate-review"
         else:
-            cls = "exact-multiple"
-            status = "pending-multi-candidate-review"
+            compact = orthographic_key(lookup)
+            orthographic = unique_matches([
+                r for r in by_orthographic.get(compact, [])
+                if r.get("MatchKey", "").strip().casefold() != lookup
+            ]) if compact else []
+            if orthographic:
+                matches = orthographic
+                cls = "orthographic-single" if len(matches) == 1 else "orthographic-multiple"
+                status = "pending-orthographic-review"
+            else:
+                spelling_rows: list[dict[str, str]] = []
+                for alternate in sorted(SPELLING_EQUIVALENTS.get(lookup, set())):
+                    spelling_rows.extend(by_match.get(alternate, []))
+                spelling = unique_matches(spelling_rows)
+                if spelling:
+                    matches = spelling
+                    cls = "spelling-single" if len(matches) == 1 else "spelling-multiple"
+                    status = "pending-spelling-variant-review"
+                else:
+                    matches = []
+                    cls = "no-existing-match"
+                    status = "pending-new-identity-review"
         classes[cls] += 1
         candidate_rows.append({
             "ProvisionalIdentityKey": row.get("ProvisionalIdentityKey", ""),
