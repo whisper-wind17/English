@@ -431,8 +431,21 @@ def main() -> None:
         require("ice-cream" not in preview_keys and "ice cream" in preview_keys,
                 "ice-cream duplicate identity remains in preview")
     if not ({"listening to music", "listen to music"} & stale_surfaces):
-        require("listening to music" not in preview_keys and "listen to music" in preview_keys,
-                "listen-to-music duplicate activity identity remains in preview")
+        listen_base = valid_decision.get("listen to music")
+        listen_base_resolved = bool(
+            listen_base
+            and listen_base.get("Status") == "reviewed"
+            and listen_base.get("Action") == "keep-identity"
+        )
+        if "listen to music" in surface_keys and not listen_base_resolved:
+            require(
+                "listening to music" not in preview_source_matchkeys
+                and "listen to music" not in preview_keys,
+                "listen-to-music unresolved canonical blocker bypass",
+            )
+        else:
+            require("listening to music" not in preview_keys and "listen to music" in preview_keys,
+                    "listen-to-music duplicate activity identity remains in preview")
 
     actions = Counter(r["Action"] for r in decisions)
     print("Third-party Simplified Completion Recheck = pass")
