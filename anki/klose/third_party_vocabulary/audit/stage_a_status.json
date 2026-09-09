@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v2",
   "CheckpointSemantics": "sealed only after Stage-A Completion Recheck, learner gate check, audit-batch recheck, and Klose isolation pass",
-  "InputCommit": "dd865b3116b4b8956a36a7825529c7a3a38057b3",
-  "WorkflowRunID": "34315485697",
-  "WorkflowRunNumber": "365",
+  "InputCommit": "5370e74767d9bb8ea297203ddb8994f312e6f08d",
+  "WorkflowRunID": "34315751691",
+  "WorkflowRunNumber": "366",
   "SourceOccurrences": 18887,
   "NormalizedSurfaces": 3763,
   "DurableIdentityDecisions": 2546,
@@ -16,7 +16,7 @@
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "semantic-review",
-    "SelectedCount": 30,
+    "SelectedCount": 57,
     "SelectedMatchKeys": [
       "flyover",
       "foolish",
@@ -47,17 +47,44 @@
       "harder",
       "hawaii",
       "heaviest",
-      "heeheehee"
+      "heeheehee",
+      "hello!",
+      "heroine",
+      "hi.",
+      "hiding",
+      "horrible",
+      "i'll",
+      "impolite",
+      "indoor",
+      "instead",
+      "intelligent",
+      "introduction",
+      "ipad",
+      "iphone",
+      "ipod",
+      "jet-ski",
+      "jiaozi",
+      "jumped",
+      "kindergarten",
+      "kingfisher",
+      "kiwi",
+      "lawn",
+      "leader",
+      "lemonade",
+      "listened",
+      "lolly",
+      "looked",
+      "lorry"
     ],
-    "EvidenceWeight": 30,
+    "EvidenceWeight": 60,
     "EffectiveWeightBudget": 60,
     "ExecutionReady": true,
     "ReviewBundleFingerprint": "154ce49be8fcbe4c5a9b23969cc9c14d67b447642eeba6e040bc24ab9ec25587",
-    "ReviewPacketFingerprint": "ec3211cb7d1745b7d0c17f6e804629665da4684bac6483e3763ba84c38155bd3"
+    "ReviewPacketFingerprint": "b147e0060be9275e30e132bcd0645a5e362152eac6cef09fa74cb9444d42b7eb"
   },
-  "SealedInputCommit": "dd865b3116b4b8956a36a7825529c7a3a38057b3",
-  "SealedWorkflowRunID": "34315485697",
-  "SealedWorkflowRunNumber": "365",
+  "SealedInputCommit": "5370e74767d9bb8ea297203ddb8994f312e6f08d",
+  "SealedWorkflowRunID": "34315751691",
+  "SealedWorkflowRunNumber": "366",
   "ContentFingerprintAlgorithm": "sha256-raw-bytes-v1",
   "ContentFingerprints": {
     "anki/klose/third_party_vocabulary/config/source_adapters.csv": "fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272",
@@ -69,7 +96,7 @@
     "anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv": "2cc9a26fd6698e56903aebb0991f0bdac9441bffb07541acea5269f7619bd73a",
     "anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv": "99e94b4265a2e8726b95b5c7a03f39b92d48f49b3d70486c150aa5a59007180e",
     "anki/klose/third_party_vocabulary/audit/defer_context.csv": "21628cd6b288cd32eafebb64fdcbdda0c984b7181ad77a0b7278a3ddb519f6ad",
-    "anki/klose/third_party_vocabulary/audit/next_batch.json": "b958272be3f0367b10333028dd20236bd7821fb96595ff0a8c2eabd048d5b8d3"
+    "anki/klose/third_party_vocabulary/audit/next_batch.json": "260f165885caf8924149891bef79c034688acd1032eadc0af74701eb2e9e7980"
   },
-  "CheckpointFingerprint": "a47d977e8b22ed4e88e190008912d71fd51e2992924466c9c107792188b2becd"
+  "CheckpointFingerprint": "541b4f08aa4d2f368b077940b986647a95b8b93d6cfe9c86b580baf48d00b9b4"
 }
