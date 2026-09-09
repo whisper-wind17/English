@@ -202,7 +202,7 @@ Raw XLSX
 - `SourceOccurrenceKey` 在 adapter 内和跨 adapter 均唯一；
 - Source Adapter 不包含 Klose NoteID matching、Identity decision、Learner Admission 或 release state；
 - raw source、adapter tool、config 或任一 enabled `occurrences.csv` 变化都会触发 Stage-A source rebuild；
-- 每次 Stage-A workflow 都重新执行 8 个 edition-specific validator，再执行全局 closure gate。
+- 每次 Stage-A workflow 都重新执行 enabled edition-specific validators，再执行全局 closure gate。
 
 北京版旧的 pre-merge candidate/review 文件仅保留作历史审计；当前 Third-party Stage A 和 Stage B 不消费它们。北京版正式 source adapter 输出只有标准 `occurrences.csv`，不再依赖旧的 Klose pre-merge generator。
 
@@ -211,6 +211,30 @@ Raw XLSX
 Adapter 负责忠实保留原始教材表格，不在这一层“纠正”词义。例如当前外研两套 source 各存在 2 条原始空 `Definition`：均为 contraction / expanded-form 邻域中的源表事实。Generic gate 只要求所有 adapter 共有的不变量；是否允许空 gloss 由 edition-specific checker 决定，不能为了统一格式擅自补写释义。
 
 新增教材只输出标准 occurrence；generic corpus builder 负责合并，不复制 edition-specific semantic pipeline。
+
+### 8.3 Source-first execution — FROZEN
+
+当前多 Adapter 建库阶段采用：
+
+```text
+Phase A1 — Source Adapter Bulk Ingestion
+→ SOURCE FREEZE
+→ Phase A2 — Global Identity Closure
+→ final Stage-A seal
+→ Stage B / Klose reconciliation
+```
+
+完整执行规则见：
+
+```text
+docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
+```
+
+Phase A1 中，每个 Adapter 只要求完成 Source-level Definition of Done：parser、edition-specific checker、global adapter closure、corpus rebuild、Source truth regression check、Klose isolation。**不要求**逐 Adapter 把 semantic review / multipart / audited-defer / orthographic duplicate 清零后才接下一个 Adapter。
+
+只有 Source/Adapter blocker 会阻止继续接入下一个 Adapter。Identity-layer blocker 默认累积到所有计划 Adapter 完成后的 SOURCE FREEZE，再基于最终跨来源 evidence 统一处理。
+
+如果一个看似 semantic 的问题实际暴露 parser/source mapping 错误，则立即升级为 Source blocker，当场修复。
 
 ## 9. Stage B boundary
 
