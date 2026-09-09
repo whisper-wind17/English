@@ -29,9 +29,9 @@ docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
 
 ---
 
-## 2. Current execution phase — Phase A1 Source Adapter Bulk Ingestion
+## 2. Current phase — Phase A1 Source Adapter Bulk Ingestion
 
-当前执行策略已经冻结为：
+冻结执行顺序：
 
 ```text
 Phase A1 — Source Adapter Bulk Ingestion
@@ -43,65 +43,71 @@ Phase A1 — Source Adapter Bulk Ingestion
 
 **当前不要处理 Identity review batch，包括 `program / programme`。**
 
-原因：还有计划中的第三方小学教材 Adapter 未接入。后续 Adapter 会继续增加 occurrence/context；如果现在逐 Adapter 清空 semantic blocker，会造成 multipart / canonicalization / audited-defer 的重复 reopen 和无效 fingerprint churn。
+Phase A1 允许新增 source evidence 持续扩大 pending / evidence-changed / multipart / object-boundary 队列；只有 parser/source mapping 错误才是 Source blocker。
 
 完整规则：`docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md`。
 
 ---
 
-## 3. Existing enabled Adapter baseline — 9 CLOSED
+## 3. Existing enabled Adapter baseline — 11 CLOSED
 
 ```text
-beijing_start1   =  808 occurrences /  734 MatchKeys / 12 books
-beishida_start1  =  925 occurrences /  798 MatchKeys / 12 books
-beishida_start3  =  699 occurrences /  663 MatchKeys /  8 books
-hujiao_start3    = 1111 occurrences / 1067 MatchKeys /  8 books
-jijiao_start3    =  605 occurrences /  510 MatchKeys /  8 books
-renjiao_start1   =  908 occurrences /  802 MatchKeys / 12 books
-renjiao_start3   =  851 occurrences /  818 MatchKeys /  8 books
-waiyan_start1    = 1170 occurrences / 1071 MatchKeys / 12 books
-waiyan_start3    = 1157 occurrences / 1023 MatchKeys /  8 books
----------------------------------------------------------------
-Total            = 8234 source occurrences / 88 books
+beijing_start1    =  808 occurrences /  734 MatchKeys / 12 books
+beishida_start1   =  925 occurrences /  798 MatchKeys / 12 books
+beishida_start3   =  699 occurrences /  663 MatchKeys /  8 books
+guangdong_start3  =  741 occurrences /  665 MatchKeys /  8 books
+guangzhou_start3  = 1268 occurrences / 1212 MatchKeys /  8 books
+hujiao_start3     = 1111 occurrences / 1067 MatchKeys /  8 books
+jijiao_start3     =  605 occurrences /  510 MatchKeys /  8 books
+renjiao_start1    =  908 occurrences /  802 MatchKeys / 12 books
+renjiao_start3    =  851 occurrences /  818 MatchKeys /  8 books
+waiyan_start1     = 1170 occurrences / 1071 MatchKeys / 12 books
+waiyan_start3     = 1157 occurrences / 1023 MatchKeys /  8 books
+----------------------------------------------------------------
+Total             = 10243 source occurrences / 104 books
 ```
 
-`beishida_start3` 已完成 Source-only contract：
+Latest completed adapter: `guangzhou_start3`.
 
 ```text
-8 raw books / 699 occurrences / 663 MatchKeys
-parser                         = PASS
-dedicated edition checker      = PASS
-global adapter closure          = PASS
-Corpus Completion Recheck       = PASS
-Learner quarantine check        = PASS
-Audit-batch Recheck             = PASS
-Klose isolation                 = PASS
-Stage-A seal                    = PASS
-Workflow #303 / 34296011755     = SUCCESS
-CheckpointFingerprint           = a6d072381591e8bd6442a5594a71ef60c92e5e84902de5347781467a2508a5b9
+8 raw books / 1268 occurrences / 1212 MatchKeys
+blank Definition source facts      = 1
+parser                              = PASS
+dedicated edition checker           = PASS
+all dedicated source checkers       = 11 PASS
+global adapter closure              = PASS
+Corpus Completion Recheck           = PASS
+Learner quarantine check            = PASS
+Audit-batch Recheck                 = PASS
+Klose isolation                     = PASS
+Stage-A seal                        = PASS
+Workflow #313 / 34297800000         = SUCCESS
+CheckpointFingerprint               = 259f9332b569152bba265caa88811ab627df18d4af90d368d358e3963ef1886d
 ```
 
-自动生成提交 `3feae046f16c5193bdbdb58773da16fbaf37edef` 只刷新 Third-party Stage-A review/audit/learner/staging 文件；没有修改 Klose Master/Learner/Release/Publish/Anki，也没有改写既有 adapter source facts。
+广州版的 1 条空 `Definition` 是 edition-specific Source Fact，已由专用 checker 冻结，不得为了统一格式人工补写。
+
+自动生成提交 `2a7c0e622b10435818d2a59b8c3ac95ab3bc2c6e` 只刷新 Third-party Stage-A review/audit/learner/staging/source-reference 数据；Klose Master/Learner/Release/Publish/Anki 未修改。
 
 ---
 
-## 4. NEXT TASK — add `guangdong_start3`
+## 4. NEXT TASK — add `jiaoke_eec_start3`
 
-下一步继续 Phase A1，不进入 Identity closure。
+继续 Phase A1，不进入 Identity closure。
 
-repo raw source 已确认 `广东版/` 存在完整三年级起点小学序列：
+repo raw source 已确认 `教科版/` 存在完整 EEC 三年级起点小学序列：
 
 ```text
-广东版三年级起点三年级上 / 下
-广东版三年级起点四年级上 / 下
-广东版三年级起点五年级上 / 下
-广东版三年级起点六年级上 / 下
+教科版EEC三年级起点三年级上 / 下
+教科版EEC三年级起点四年级上 / 下
+教科版EEC三年级起点五年级上 / 下
+教科版EEC三年级起点六年级上 / 下
 ```
 
-共 8 册。Adapter ID：
+共 8 册。下一 Adapter ID：
 
 ```text
-guangdong_start3
+jiaoke_eec_start3
 ```
 
 Per-Adapter Definition of Done：
@@ -109,7 +115,7 @@ Per-Adapter Definition of Done：
 ```text
 1. dedicated parser
 2. dedicated edition-specific checker
-3. books / occurrences / MatchKeys baseline frozen
+3. books / occurrences / MatchKeys baseline frozen from raw XLSX
 4. standard occurrence schema
 5. SourceOccurrenceKey adapter 内唯一 + cross-adapter no collision
 6. SourceID / Grade / Semester / SourceBook / SourceFile / SourceRow 正确
@@ -120,55 +126,40 @@ Per-Adapter Definition of Done：
 11. Klose Master/Learner/Release/Publish/Anki unchanged
 ```
 
-达到以上条件后直接进入下一个计划 Adapter。
-
-### Phase A1 中不要求先清零
-
-以下项目不阻止继续下一个 Adapter：
-
-```text
-semantic / policy review queue
-program / programme
-multipart unresolved
-Vocabulary / Expression boundary
-current-context audited-defer
-orthographic / morphology canonicalization
-Stage-B premerge ReadyForPremergeReview=false
-```
-
-但如果这些问题实际暴露 parser/source mapping 错误，则立即升级为 Source blocker，当场修复。
+达到以上条件后直接枚举并进入下一个完整小学 Adapter。
 
 ---
 
 ## 5. Current Identity state — carry forward, DO NOT close yet
 
-当前 sealed machine state：
+Authoritative sealed machine state：
 
 ```text
-Source occurrences                 = 8234
-Normalized surfaces                = 2405
+Source occurrences                 = 10243
+Normalized surfaces                = 2742
 Durable Identity decisions         = 2411
-Identity Vocabulary Preview        = 1995
-Learner Vocabulary Preview         = 1981
-Review blockers                    = 86
-Evidence-changed surfaces          = 25
-Multipart resolved                 = 13
+Identity Vocabulary Preview        = 1973
+Learner Vocabulary Preview         = 1960
+Review blockers                    = 433
+Evidence-changed surfaces          = 37
+Multipart resolved                 = 3
 Grammar-form quarantine gates      = 61
 ```
 
-当前 planner 选择的是 policy-review batch：
+当前 planner 选择 16 个 policy-review surfaces：
 
 ```text
-eggs / flowers / fruits / left / cookies / birds / her
+heard / eggs / flowers / relatives / fruits / left / saw / 1st /
+can i ...? / dr / led / main course / prc / sat / uh / who's
 ```
 
-这是新增 source evidence 产生的 Identity-layer 工作，**Phase A1 暂不执行**。`program / programme` 同样继续 gated，统一留到 SOURCE FREEZE 后 Phase A2。
+这些都是 Identity-layer 工作，**Phase A1 暂不执行**。`program / programme` 同样继续 gated，统一留到 SOURCE FREEZE 后 Phase A2。
 
 ---
 
 ## 6. SOURCE FREEZE gate
 
-在所有计划第三方小学教材 Adapter 完成前：
+所有计划第三方小学教材 Adapter 完成前：
 
 ```text
 DO NOT declare final Stage-A completion.
@@ -196,7 +187,7 @@ Klose mutation = 0
 
 ## 7. Phase A2 — Global Identity Closure
 
-SOURCE FREEZE 后，对最终 corpus 一次性完成：
+SOURCE FREEZE 后一次性完成：
 
 ```text
 morphology / form canonicalization
@@ -215,9 +206,9 @@ morphology / form canonicalization
 
 ---
 
-## 8. Stage-B state — CURRENT BUT GATED
+## 8. Stage-B state — OLD SNAPSHOT, GATED
 
-`premerge/readiness.json` 仍是前一轮 7535-occurrence snapshot；Phase A1 source ingestion 后不会把它当作当前 authority。当前 Stage-A seal 已是 8234 occurrences，但 Stage B 仍保持 fail-closed：
+`premerge/readiness.json` 仍是旧的 7535-occurrence snapshot，不是当前 Phase-A1 authority。
 
 ```text
 ReadyForPremergeReview     = false
@@ -226,7 +217,7 @@ StableThirdPartyIDMinted   = false
 MergeAuthorizedRows        = 0
 ```
 
-SOURCE FREEZE + Phase A2 final closure 前，不刷新或解释该旧 premerge snapshot 为当前 readiness。
+SOURCE FREEZE + Phase A2 final closure 前，不刷新或解释该旧 snapshot 为当前 readiness。
 
 ---
 
