@@ -60,20 +60,20 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#406 / 34344709279 = SUCCESS**
+Latest sealed workflow：**#407 / 34360581909 = SUCCESS**
 
 ```text
-sealed bot head                    = 70a25d7c15882c4c3c1e37149025909b4786e31d
+sealed bot head                    = e71e03e9b8b0ddf421c711551b4bb8866fcc6ab6
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3169
-Identity Vocabulary Preview        = 2625
-Learner Vocabulary Preview         = 2602
-Review blockers                    = 729
-Evidence-changed surfaces          = 5
-Multipart resolved                 = 12
-Grammar-form quarantine gates      = 87
-CheckpointFingerprint              = 4abfaba846f2e01de859b268ba4589e536f5b7fb2024c2bca6c12707b4ae0335
+Durable Identity decisions         = 3175
+Identity Vocabulary Preview        = 2627
+Learner Vocabulary Preview         = 2604
+Review blockers                    = 727
+Evidence-changed surfaces          = 4
+Multipart resolved                 = 13
+Grammar-form quarantine gates      = 88
+CheckpointFingerprint              = 1c4acaaaca00c1001ad272d96c1edfeb7935aa7e4c675f62e8e74756dd4a1446
 ```
 
 Recent validated throughput：
@@ -89,7 +89,11 @@ Recent validated throughput：
   show revalidated as verb + performance + held; taste added noun flavour identity without sense overlap
 #406 — thin / throat / toe / tour / upstairs / exit
   thin revalidated as slim + object-thin + held; tour travel + held; four singleton identities closed
+#407 — time / used / wake / waste
+  time closed as general + count + held; used reuses use and is learner-quarantined; wake verb + held; waste split into verb + rubbish/waste noun
 ```
+
+Workflow anomaly note：同一 input commit 曾被 GitHub 重复排出 #408。#408 的 batch closure、SOURCE FREEZE、Completion Recheck、learner gate、audit recheck、Klose isolation 与 seal 全部通过，仅在最终 persist 时因 #407 已先写入 `stage_a_status.json` 发生 rebase conflict；**#408 不是有效 checkpoint，authoritative sealed checkpoint 仍是 #407**。
 
 Every completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
 
@@ -106,39 +110,31 @@ PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
 SelectedCount  = 4
-EvidenceWeight = 59
+EvidenceWeight = 60
 ExecutionReady = true
 
-time
-used
-wake
-waste
+water
+wave
+wing
+rock
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 67eeb72e9c6e3d1a316b8dae653cb53f30b5e773a06cef514407df69ec715ee2
-ReviewPacketFingerprint = 3ab809e9054cdd64408d0c5656538506dac018c0fc78bf1982fa8ad0158550df
-```
-
-Current review analysis already established, but **no decision batch has been submitted to `main` and no #407 Validation Gate has run yet**：
-
-```text
-time  = 20 general + 1 count + 3 held
-used  = reuse-identity → use; named past form; add grammar quarantine gate
-wake  = 2 reviewed + 1 held
-waste = 4 verb + 1 rubbish/waste noun
+ReviewBundleFingerprint = 17561cb7771dca48b3d4268416a5550c1e1ae59dfa30012769ca6ccdc0566693
+ReviewPacketFingerprint = 00183cd360d245e057f12ce196bdc9e2b591497edc195a5174c971b8d1fbf151
 ```
 
 Next execution sequence：
 
 ```text
-create transient decision_updates.csv
-+ append grammar gate for used
+read selected_review_packet.json / selected_review_view.csv
+→ establish full-evidence semantic partitions for water / wave / wing / rock
+→ create transient decision_updates.csv
 → pre-main diff/scope check
 → non-force main update
-→ #407 full Stage-A Validation Gate
+→ full Stage-A Validation Gate
 → bot persist
 → independent post-seal diff/state recheck
 ```
