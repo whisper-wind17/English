@@ -69,30 +69,23 @@ Terminal source boundaries：
 译林低年级 / 牛津小学1A–2B = deferred; edition continuity not established
 ```
 
-Source validation：
-
-```text
-workflow #351 / 34303418551 = final 20-adapter union SUCCESS
-workflow #353 / 34303742198 = SOURCE FREEZE establishment SUCCESS
-```
-
 ---
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#362 / 34313782981 = SUCCESS**
+Latest sealed workflow：**#364 / 34314099396 = SUCCESS**
 
 ```text
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 2486
-Identity Vocabulary Preview        = 2014
-Learner Vocabulary Preview         = 1998
-Review blockers                    = 1383
+Durable Identity decisions         = 2516
+Identity Vocabulary Preview        = 2043
+Learner Vocabulary Preview         = 2027
+Review blockers                    = 1353
 Evidence-changed surfaces          = 34
 Multipart resolved                 = 3
-Grammar-form quarantine gates      = 62
-CheckpointFingerprint              = 63307ec86e8f6376098f750674126c0039b12ff1c9719fb61a136c09375fdbad
+Grammar-form quarantine gates      = 63
+CheckpointFingerprint              = a302d4707e3fd16f9c56c4633f76c3be56c9aa76951a76066077b4e54bdfd875
 ```
 
 Recent validated batches：
@@ -100,8 +93,6 @@ Recent validated batches：
 ```text
 light — #359 / 34312798133
   illumination / weight / intensity / ignite + 2 held
-  #358 initially failed because a new held DecisionKey overlapped the old partition;
-  fixed by replacing the stable held DecisionKey rather than appending a synonym row.
 
 mouse — #360 / 34312987272
   animal 8 / computer 2 / held 1
@@ -110,15 +101,20 @@ watch — #361 / 34313132665
   wristwatch noun 11 / viewing verb 11 / held 5
 
 semantic batch — #362 / 34313782981
-  30 selected MatchKeys fully closed
-  program reused reviewed canonical programme for programme/show sense
-  abracadabra / achoo / atishoo / aw routed to Expressions
-  action / album retained as current-context audited-defer rather than guessing a sense
-  numeric ordinals retained as reviewed source-form Vocabulary identities for now
-  aeroplane / airplane retained separately in semantic pass; later orthographic duplicate audit may reconcile them
+  30 selected MatchKeys closed
+  program → reviewed programme identity
+  abracadabra / achoo / atishoo / aw → Expressions
+  action / album → current-context audited-defer
+
+semantic batch — #364 / 34314099396
+  30 selected MatchKeys closed
+  began → begin identity
+  learner quarantine added: past:began
+  baker / blazer / bookworm / beauty / conductor resolved from source context rather than broad dictionary gloss
+  #363 initially failed learner gate because began had no quarantine row; #364 reran the full Validation Gate and passed
 ```
 
-Every validated batch passed：batch closure → apply → corpus build/check → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist。
+Each completed batch passed：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist。
 
 ---
 
@@ -132,43 +128,43 @@ SelectedCount  = 30
 EvidenceWeight = 31
 ExecutionReady = true
 
-baker
-bangkok
-beauty
-began
-blazer
-bookworm
-brazil
-brightly
-britain
-budgie
-builder
-bund
-cactus
-california
-campsite
-cardigan
-cassette
-celebration
-celery
-certainly
-cheaper
-check-up
-checklist
-childish
-chilli
-chimney
-circus
-college
-conductor
-confident
+corn-on-the-cob
+cornflakes
+coughed
+cowboy
+crazy
+cupboard
+cyclist
+danger!
+darling
+departure
+dimsum
+discuss
+doggie
+dolphin
+donkey
+doorbell
+double-decker
+drama
+drummer
+edinburgh
+edison
+egypt
+energy
+england
+environment
+escalator
+fact
+fastest
+fiercely
+fifty-four
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 3b62597925d5fe808b6d5a64773f644af3ece0d61d1b2059e4a0f501d1c10f2f
-ReviewPacketFingerprint = b92dbcff1f35aa63975705bbe9ed23a1406cd534132b0bce3274573fb91348d7
+ReviewBundleFingerprint = 11a4c61d2d3ed8504e50a2977ee573faaf7e48d7d684f80ae7478abc0e0ed083
+ReviewPacketFingerprint = 5e6642ac31d9fb1df5c64065485200e165f489e1322747f89a3116b02131f68f
 ```
 
 Batch contract：
@@ -177,11 +173,11 @@ Batch contract：
 next_batch.json
 → selected-only full evidence
 → decision_updates.csv
-→ submitted MatchKey set == planner selected set
+→ selected set == submitted MatchKey set
 → apply
 → corpus build/check
-→ SOURCE FREEZE check
-→ learner build/check
+→ SOURCE FREEZE
+→ learner gate
 → audit recheck
 → Klose isolation
 → bot persist
