@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v2",
   "CheckpointSemantics": "sealed only after Stage-A Completion Recheck, learner gate check, audit-batch recheck, and Klose isolation pass",
-  "InputCommit": "e590b225e461b08055a5ecd6e7fba95bbf0703f2",
-  "WorkflowRunID": "34416310760",
-  "WorkflowRunNumber": "432",
+  "InputCommit": "3e27276e0fb936f5a66e00b6dd7964eb4ce9fc57",
+  "WorkflowRunID": "34416406740",
+  "WorkflowRunNumber": "435",
   "SourceOccurrences": 18887,
   "NormalizedSurfaces": 3763,
   "DurableIdentityDecisions": 3871,
@@ -26,21 +26,23 @@
     "ReviewBundleFingerprint": "4a1a6444e6d08878abc9413acacc1418e6226351b5ebc30818740f4e815e32d0",
     "ReviewPacketFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
   },
-  "SealedInputCommit": "e590b225e461b08055a5ecd6e7fba95bbf0703f2",
-  "SealedWorkflowRunID": "34416310760",
-  "SealedWorkflowRunNumber": "432",
+  "SealedInputCommit": "3e27276e0fb936f5a66e00b6dd7964eb4ce9fc57",
+  "SealedWorkflowRunID": "34416406740",
+  "SealedWorkflowRunNumber": "435",
   "ContentFingerprintAlgorithm": "sha256-raw-bytes-v1",
   "ContentFingerprints": {
     "anki/klose/third_party_vocabulary/config/source_adapters.csv": "fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272",
     "anki/klose/third_party_vocabulary/review/identity_decisions.csv": "614abc0f9576be6fc3dc4745fe5e533f072fccbf3b766920b5e238e59f78ab98",
     "anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv": "959fb463b4d41503c6424e5295bfdecfd831d9b32f2468a31b351fee4886f6e7",
+    "anki/klose/third_party_vocabulary/learner/content_exclusion_policy.csv": "7b4201f9cd503b059abfa4d4cbc3363c4d3aba2c2ecb0ba6a6f8e6ffd05726fe",
     "anki/klose/third_party_vocabulary/staging/occurrences.csv": "b025cb4f69b030da3664ab9b1bdd8500cb0166b122392b282a4293567702a7d4",
     "anki/klose/third_party_vocabulary/staging/surface_candidates.csv": "e65c73149fcca2b2768ffb61e0e239fb805f4ec922ae44976f6f6a029f852e0f",
     "anki/klose/third_party_vocabulary/staging/review_queue.csv": "0b32d51b11854e6cb105e75b705c56ef8a3086c9de149f8daa325b5e517538ef",
     "anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv": "836a24e97e6a42279571a4e032187dbb35bdb86dddb8cda7f0073be7146098b1",
     "anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv": "91314639b36b2eff99c1fca7262e208a78e6f5579a6972eb5514bc6e61433222",
+    "anki/klose/third_party_vocabulary/learner/content_exclusion_view.csv": "01a27af6b755cea26288cf341f2505f43d5daca815f88812b5eaed9dc325f9dd",
     "anki/klose/third_party_vocabulary/audit/defer_context.csv": "da9dd9ef4386214a35d1bba734e775005668a5ddb90fab63cc8d5bd4f47e9a5a",
     "anki/klose/third_party_vocabulary/audit/next_batch.json": "b6a0bdf1d1c6a71b60269705ad973a76c1462616c0a1f61184a2f78f525bc36a"
   },
-  "CheckpointFingerprint": "e929e897ad757be0beb3939fd9934c56fcca95761160bc17adeb637b206a5bb7"
+  "CheckpointFingerprint": "02bec1239e717f8f9141c38cec2fa16947f9c16a6ec372478db26936c5451b0f"
 }
