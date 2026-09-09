@@ -21,7 +21,7 @@ AGENTS.md
 → anki/klose/third_party_vocabulary/premerge/readiness.json
 ```
 
-动态进度以 repo 当前 machine state 为准；`stage_a_status.json` / `next_batch.json` 高于本文件中的静态快照。
+动态进度以 repo 当前 machine state 为准；`stage_a_status.json` / `next_batch.json` 高于本文件静态快照。
 
 ---
 
@@ -54,56 +54,45 @@ unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b1
 Klose operational mutation           = 0
 ```
 
-Terminal source boundaries：
-
-```text
-仁爱版                     = excluded; grades 7–9 only
-鲁教版五四学制             = excluded; grade 6+ middle-school segment
-译林低年级 / 牛津小学1A–2B = deferred; edition continuity not established
-```
+Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四学制 grade 6+ middle-school segment excluded；译林低年级 / 牛津小学1A–2B deferred pending edition continuity。
 
 ---
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#369 / 34319003085 = SUCCESS**
+Latest sealed workflow：**#376 / 34321902035 = SUCCESS**
 
 ```text
-sealed bot head                    = f96a27cd7ba381096fcbecfd5fd351b0e70d58fa
+sealed bot head                    = dcabfc8668d89ad6228897847405952a01cf14df
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 2719
-Identity Vocabulary Preview        = 2223
-Learner Vocabulary Preview         = 2205
-Review blockers                    = 1150
+Durable Identity decisions         = 2803
+Identity Vocabulary Preview        = 2300
+Learner Vocabulary Preview         = 2281
+Review blockers                    = 1066
 Evidence-changed surfaces          = 34
 Multipart resolved                 = 3
-Grammar-form quarantine gates      = 71
-CheckpointFingerprint              = 6403eaf556dc57fccf3c3f14422b83f86f849373a89c4d554aea9ff4b0e012c8
+Grammar-form quarantine gates      = 74
+CheckpointFingerprint              = 079ed349f8e253d2b86f504bc8ce20f291b11b2d6958f32fa8e4fc948ab7d579
 ```
 
-Recent throughput validation：
+Recent validated throughput：
 
 ```text
-#367 — 57 selected / EvidenceWeight 60
-  jumped/listened → reviewed canonical + learner quarantine
-  looked → look#appearance scoped reuse
-
-#368 — 59 selected / EvidenceWeight 60
-  module → source-only
-  mustn't / ow / Really? → Expressions
-  pencil-case / policemen → reviewed canonical reuse
-  meant / planted → source-form identity + learner quarantine
-
-#369 — 57 selected / EvidenceWeight 60
-  sold → sell; threw → throw + learner quarantine
-  studying → study ing-form reuse
-  Spiderman / starter / trainer resolved by textbook context
+#370 — 18 / weight 60
+  yourselves → yourself reuse; zipper source-gloss noise corrected; cleaner narrowed to 清洁工
+#371 — 15 / weight 60
+  congratulations → Expression; helped → help + learner quarantine
+#374 — 16 / weight 60
+  oops → Expression; longest retained as superlative source-form
+  #372/#373 failed before durable apply because transient CSV quoting was malformed; #374 clean rerun passed all gates
+#375 — 18 / weight 60
+  phew / shh → Expressions; serious / rich narrowed to learner-core sense; shortest/smallest source-form
+#376 — 17 / weight 60
+  visited → visit + learner quarantine; talked kept source-form + learner quarantine; tallest source-form
 ```
 
-Planner throughput contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`。数量 cap 不再重复限流；单批大小由 evidence weight 主导。
-
-Each completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist。
+Compact decision inbox rule：human-authored `Rationale` fields are always CSV-quoted before submission。Each completed batch must pass batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
 
 ---
 
@@ -113,56 +102,59 @@ Each completed batch must pass：batch closure → apply → corpus → SOURCE F
 PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
-SelectedCount  = 18
+SelectedCount  = 39
 EvidenceWeight = 60
 ExecutionReady = true
 
- yourselves
- yucky
- yuk
- zipper
- zongzi
- activity
- aloud
- already
- anyway
- appear
- auntie
- badly
- biggest
- bun
- canteen
- cherry
- cleaner
- aboard
+weak
+weekday
+yeah
+yuan
+zero
+air-conditioned
+alone
+alright
+arctic
+assistant
+autograph
+ax
+bandage
+bar
+barbecue
+battle
+bay
+blink
+block
+blond
+blood
+blunt
+blush
+boss
+bottom
+branch
+bucket
+bulb
+bush
+cage
+calculate
+captain
+cardboard
+carnation
+caterpillar
+chain
+champion
+chance
+chant
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 98f411177e825ddb758f61b8768112c36bd9500b217df53b11eac3d12d7f7649
-ReviewPacketFingerprint = 1938d374674c8d9a4044a299b3afd0b1762c42e64d24bccfa74c5f62ffec3521
+ReviewBundleFingerprint = 47eb0a974d88e1e3b24c7c1393f529019ab633364ee157664f1a4e313e5d007c
+ReviewPacketFingerprint = 8558073565e7adef815e85209174366b56dd4f1e4a4efad083ce90b30aefa1a8
 ```
 
-18 surfaces 已占满 60 weight，说明当前批次进入多 occurrence / 较重 evidence 区；不得为了维持 surface 数量而提高 weight budget。
-
-Batch contract：
-
-```text
-next_batch.json
-→ selected-only full evidence
-→ decision_updates.csv
-→ selected set == submitted MatchKey set
-→ apply
-→ corpus build/check
-→ SOURCE FREEZE
-→ learner gate
-→ audit recheck
-→ Klose isolation
-→ bot persist
-```
-
-Source mutation 与 decision mutation 不得混合。
+Planner contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`；单批大小由 evidence weight 主导。Source mutation 与 decision mutation 不得混合。
 
 ---
 
@@ -185,7 +177,7 @@ morphology / form canonicalization
 → final Stage-A seal
 ```
 
-允许最终保留的 residual blocker 只能是 current-context `audited-defer`；不得为追求 blocker=0 猜 sense partition 或扩大 dictionary sense inventory。
+允许最终 residual blocker 只能是 current-context `audited-defer`；不得为追求 blocker=0 猜 sense partition 或扩大 dictionary sense inventory。
 
 ---
 
