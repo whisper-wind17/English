@@ -103,8 +103,10 @@ def validate_update(
     elif out["Action"] == "new-stable-identity":
         if out["Status"] != "reviewed" or out["ExistingNoteID"]:
             raise SystemExit(f"new-stable-identity status/existing NoteID invalid: {pid}")
-        if candidate_ids:
-            raise SystemExit(f"new-stable-identity bypasses current Klose candidate: {pid}")
+        if candidate_ids and "no-equivalent" not in out["DecisionBasis"].casefold():
+            raise SystemExit(
+                f"new-stable-identity with existing candidates requires explicit no-equivalent sense review: {pid}"
+            )
         if not all(out[field].strip() for field in ("ProposedCanonicalWord", "ProposedMatchKey", "ProposedSense")):
             raise SystemExit(f"new-stable-identity lacks proposed identity fields: {pid}")
     else:
