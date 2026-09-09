@@ -73,17 +73,6 @@ yilin_start3            = 1036 occurrences /  998 MatchKeys /  8 books
 Total                   = 18887 source occurrences / 178 books
 ```
 
-Final adapter `luke_54_start3`:
-
-```text
-6 raw books / 714 occurrences / 681 MatchKeys
-raw schema                            = headerless A=Word / B=Definition (6/6)
-British / American source columns     = absent
-blank Definition source facts         = 2
-grade-6-plus leakage                  = 0
-parser / dedicated checker            = PASS
-```
-
 Edition-specific blank `Definition` source facts total **13**:
 
 ```text
@@ -123,7 +112,7 @@ unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b1
 Klose mutation                       = 0 (independent workflow git-diff gate)
 ```
 
-Terminal scope boundaries are recorded in the contract:
+Terminal scope boundaries：
 
 ```text
 仁爱版                     = excluded; only grades 7-9
@@ -136,28 +125,51 @@ Validation evidence：
 ```text
 Final source-union workflow #351 / 34303418551 = SUCCESS
 SOURCE FREEZE CI workflow #353 / 34303742198   = SUCCESS
-Stage-A CheckpointFingerprint                  = fe96f22917626ef0ade57f0e92426ddf6d82dc703dab062649338316f555fe17
 ```
 
 ---
 
-## 5. Current Phase-A2 Identity state
+## 5. Current Phase-A2 Identity state — CHECKPOINTED after `light`
 
-Authoritative machine state:
+Authoritative machine state from workflow **#359 / 34312798133 = SUCCESS**：
 
 ```text
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 2411
-Identity Vocabulary Preview        = 1966
-Learner Vocabulary Preview         = 1953
-Review blockers                    = 1457
-Evidence-changed surfaces          = 41
-Multipart resolved                 = 0
-Grammar-form quarantine gates      = 61
+Durable Identity decisions         = 2457
+Identity Vocabulary Preview        = 1992
+Learner Vocabulary Preview         = 1976
+Review blockers                    = 1411
+Evidence-changed surfaces          = 36
+Multipart resolved                 = 3
+Grammar-form quarantine gates      = 62
+CheckpointFingerprint              = 39f2fcccca551a49c60f24ff0df1c7f3f057e2df968373f76f6c1c3acbe20e0d
 ```
 
-这些 blocker 是最终 frozen source evidence 上的 Identity-layer 工作，不再因后续 Adapter 接入继续 churn。
+`light` batch closure：
+
+```text
+light#illumination = 灯；光；光线
+light#weight       = 轻的；轻便的
+light#intensity    = 轻微的；少量的（如小雨）
+light#ignite       = 点燃；点着
+held               = beishida_start1:g6-lower + cambridge_join_start3:g3-upper
+```
+
+两条 held occurrence 的当前局部 flat-list / glossary context 不足以安全区分 illumination / weight / intensity / colour-brightness / verb sense，因此继续保留 current-context audited-defer，不猜 partition。
+
+Validation notes：
+
+```text
+first light attempt workflow #358 = FAILED
+reason = new held DecisionKey appended instead of replacing old held row,
+         causing overlapping multipart OccurrenceKeys for Beishida light
+fix    = preserve stable DecisionKey surface:light#unresolved-beishida
+         and expand its occurrence set to Beishida + Cambridge
+workflow #359 = full PASS
+SOURCE FREEZE unchanged
+Klose Master/Learner/Release/Publish/Anki mutation = 0
+```
 
 Minimal Learner Identity 规则继续生效：
 
@@ -174,31 +186,29 @@ Identity resolved
 
 ---
 
-## 6. NEXT TASK — execute Phase A2 review batch
+## 6. NEXT TASK — execute current deterministic Phase-A2 batch
 
-Current deterministic batch：
+Current machine-planned batch：
 
 ```text
 PlanVersion    = v5-throughput-delta
 ReviewLane     = policy-review
 ReviewMode     = full-evidence
-SelectedCount  = 13
+SelectedCount  = 1
 ExecutionReady = true
+EvidenceWeight = 21
 
-heard
-eggs
-flowers
-relatives
-fruits
-left
-1st
-can i ...?
-cd player
-cd-rom
-dr
-ha
-hmm
+mouse
 ```
+
+Fingerprints：
+
+```text
+ReviewBundleFingerprint = c95da8583acc6861956ee5f28c8fa2fd6833ac8bebfe340d30d8118b64b3145f
+ReviewPacketFingerprint = 7f336cab4c9e63fd896f45986c851a6f4f55b74ebc994375753c19426881cc6d
+```
+
+`watch` 当前因 evidence-weight packing 被跳过，不得绕过 planner 顺序手工并入 `mouse` batch。
 
 Batch execution contract：
 
