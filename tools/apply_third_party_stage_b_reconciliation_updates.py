@@ -2,9 +2,9 @@
 """Merge transient reviewed Stage-B reconciliation updates into durable decision truth.
 
 The inbox `reconciliation/decision_updates.csv` is transient. Every update must bind
-the current sealed Stage-A checkpoint and exact current premerge CandidateFingerprint.
-This tool never mutates Klose Master/Learner/Release/Publish/Anki state and never
-sets MutationAuthorized=yes.
+the current sealed Stage-A checkpoint and exact current premerge CandidateFingerprint,
+and an inbox batch must exactly close over the planner-selected batch. This tool never
+mutates Klose Master/Learner/Release/Publish/Anki state and never authorizes mutation.
 """
 from __future__ import annotations
 
@@ -20,6 +20,8 @@ PREMERGE = TP / "premerge"
 RECON = TP / "reconciliation"
 CANDIDATES = PREMERGE / "identity_candidates.csv"
 READINESS = PREMERGE / "readiness.json"
+NEXT = PREMERGE / "reconciliation_next_batch.json"
+SELECTED = PREMERGE / "reconciliation_selected_view.csv"
 DECISIONS = RECON / "reconciliation_decisions.csv"
 UPDATES = RECON / "decision_updates.csv"
 
@@ -99,6 +101,8 @@ def validate_update(
     elif out["Action"] == "new-stable-identity":
         if out["Status"] != "reviewed" or out["ExistingNoteID"]:
             raise SystemExit(f"new-stable-identity status/existing NoteID invalid: {pid}")
+        if candidate_ids:
+            raise SystemExit(f"new-stable-identity bypasses current Klose candidate: {pid}")
         if not all(out[field].strip() for field in ("ProposedCanonicalWord", "ProposedMatchKey", "ProposedSense")):
             raise SystemExit(f"new-stable-identity lacks proposed identity fields: {pid}")
     else:
@@ -122,8 +126,26 @@ def main() -> None:
     if "" in candidate_by_id or len(candidate_by_id) != len(candidates):
         raise SystemExit("Premerge candidate identity is empty/duplicate")
 
+    state = read_json(NEXT)
+    selected_rows = rows(SELECTED)
+    selected_ids = [r.get("ProvisionalIdentityKey", "") for r in selected_rows]
+    if selected_ids != state.get("SelectedProvisionalIdentityKeys", []):
+        raise SystemExit("Stage-B selected view/list drift before decision apply")
+    if len(selected_ids) != len(set(selected_ids)) or any(not x for x in selected_ids):
+        raise SystemExit("Stage-B selected batch has empty/duplicate identity key")
+
     current = rows(DECISIONS)
     updates = rows(UPDATES) if UPDATES.exists() else []
+    if updates:
+        update_ids = [r.get("ProvisionalIdentityKey", "") for r in updates]
+        if len(update_ids) != len(set(update_ids)) or any(not x for x in update_ids):
+            raise SystemExit("Transient Stage-B decision batch has empty/duplicate identity key")
+        if set(update_ids) != set(selected_ids) or len(update_ids) != len(selected_ids):
+            raise SystemExit(
+                f"Transient Stage-B decision batch does not close selected batch: "
+                f"updates={len(update_ids)} selected={len(selected_ids)}"
+            )
+
     by_key: dict[str, dict[str, str]] = {}
     order: list[str] = []
     for row in current:
@@ -162,6 +184,7 @@ def main() -> None:
         UPDATES.unlink()
 
     print(f"Stage-B reconciliation updates applied = {len(updates)}")
+    print(f"selected-batch closure = {'yes' if not updates or len(updates) == len(selected_ids) else 'no'}")
     print(f"replaced = {replaced}")
     print(f"appended = {appended}")
     print(f"durable reconciliation decisions = {len(by_key)}")
