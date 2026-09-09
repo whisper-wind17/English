@@ -4,1297 +4,46 @@
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "program",
-    "20th",
-    "21st",
-    "22nd",
-    "23rd",
-    "2nd",
-    "30th",
-    "31st",
-    "3rd",
-    "4th",
-    "ability",
-    "abracadabra",
-    "achoo",
-    "action",
-    "advertisement",
-    "aeroplane",
-    "airplane",
-    "album",
-    "alphabet",
-    "ambulance",
-    "america",
-    "anyone",
-    "anytime",
-    "area",
-    "argentina",
-    "athlete",
-    "atishoo",
-    "aviary",
-    "aw",
-    "bacon"
+    "baker",
+    "bangkok",
+    "beauty",
+    "began",
+    "blazer",
+    "bookworm",
+    "brazil",
+    "brightly",
+    "britain",
+    "budgie",
+    "builder",
+    "bund",
+    "cactus",
+    "california",
+    "campsite",
+    "cardigan",
+    "cassette",
+    "celebration",
+    "celery",
+    "certainly",
+    "cheaper",
+    "check-up",
+    "checklist",
+    "childish",
+    "chilli",
+    "chimney",
+    "circus",
+    "college",
+    "conductor",
+    "confident"
   ],
   "SelectedCount": 30,
-  "ReviewBundleFingerprint": "cb1406210a980286ca6476c565ac605e9e530961c5dc5127348481fc33634715",
-  "ReviewPacketFingerprint": "0100c4cce39ca7e2e0f495d5eda9464dc42d01327a520bb2da6684808b084bfe",
+  "ReviewBundleFingerprint": "3b62597925d5fe808b6d5a64773f644af3ece0d61d1b2059e4a0f501d1c10f2f",
+  "ReviewPacketFingerprint": "b92dbcff1f35aa63975705bbe9ed23a1406cd534132b0bce3274573fb91348d7",
   "Items": [
     {
-      "MatchKey": "program",
+      "MatchKey": "baker",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "program",
-      "Definitions": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
-      "SourceIDs": "beishida_start1|beishida_start3|minjiao_start3",
-      "SourceBooks": "beishida_start1:5年级下|beishida_start3:6年级下|minjiao_start3:5年级下",
-      "CandidateSignals": "orthographic-variant|identity-dedup-audit",
-      "CandidateCanonical": "programme",
-      "CanonicalRelation": "orthographic-variant",
-      "CanonicalAction": "keep-identity",
-      "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "节目；电视节目",
-      "BlockerClass": "orthographic-identity-audit",
-      "PolicyRecommendedAction": "review-orthographic-reuse",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:program",
-          "MatchKey": "program",
-          "OccurrenceKeys": "[\"beishida_start1|g5-lower|r031|program\",\"beishida_start3|g6-lower|r022|program\",\"minjiao_start3|g5-lower|r080|program\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "",
-          "ObjectType": "vocabulary",
-          "TargetSense": "节目；节目单",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "beishida-start1-source-context-over-dictionary",
-          "Rationale": "The concert music piano and violin neighborhood supports an event program rather than a computer program."
-        }
-      ],
-      "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-lower|r031|program",
-        "beishida_start3|g6-lower|r022|program",
-        "minjiao_start3|g5-lower|r080|program"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start1|g5-lower|r031|program",
-          "SourceID": "beishida_start1",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "31",
-          "Word": "program",
-          "Definition": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
-          "Before": [
-            "concert",
-            "drum",
-            "flute",
-            "guitar",
-            "kid",
-            "music",
-            "piano",
-            "play the piano"
-          ],
-          "After": [
-            "really",
-            "start",
-            "tonight",
-            "violin",
-            "row",
-            "team",
-            "basketball",
-            "badminton"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "beishida_start3|g6-lower|r022|program",
-          "SourceID": "beishida_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "22",
-          "Word": "program",
-          "Definition": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
-          "Before": [
-            "bring",
-            "brought",
-            "weekend",
-            "read",
-            "read",
-            "write",
-            "wrote",
-            "concert"
-          ],
-          "After": [
-            "piano",
-            "drum",
-            "guitar",
-            "flute",
-            "will",
-            "wonderful",
-            "begin",
-            "soon"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "minjiao_start3|g5-lower|r080|program",
-          "SourceID": "minjiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "80",
-          "Word": "program",
-          "Definition": "n. 程序;计划;大纲 vt. 用程序指令;为...制订计划;为...安排节目 vi. 编程序;安排节目;设计电脑程式",
-          "Before": [
-            "third",
-            "drink",
-            "tired",
-            "sad",
-            "cheer up",
-            "only",
-            "fourth",
-            "angry"
-          ],
-          "After": [
-            "building",
-            "floor",
-            "twelfth",
-            "would",
-            "living room",
-            "bridge",
-            "also",
-            "really"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "20th",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "20th",
-      "Definitions": "无",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r043|20th"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r043|20th",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "43",
-          "Word": "20th",
-          "Definition": "无",
-          "Before": [
-            "September",
-            "October",
-            "November",
-            "December",
-            "1st",
-            "2nd",
-            "3rd",
-            "4th"
-          ],
-          "After": [
-            "21st",
-            "22nd",
-            "23rd",
-            "30th",
-            "31st",
-            "birthday",
-            "date",
-            "party"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "21st",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "21st",
-      "Definitions": "无",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r044|21st"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r044|21st",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "44",
-          "Word": "21st",
-          "Definition": "无",
-          "Before": [
-            "October",
-            "November",
-            "December",
-            "1st",
-            "2nd",
-            "3rd",
-            "4th",
-            "20th"
-          ],
-          "After": [
-            "22nd",
-            "23rd",
-            "30th",
-            "31st",
-            "birthday",
-            "date",
-            "party",
-            "grandma"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "22nd",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "22nd",
-      "Definitions": "无",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r045|22nd"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r045|22nd",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "45",
-          "Word": "22nd",
-          "Definition": "无",
-          "Before": [
-            "November",
-            "December",
-            "1st",
-            "2nd",
-            "3rd",
-            "4th",
-            "20th",
-            "21st"
-          ],
-          "After": [
-            "23rd",
-            "30th",
-            "31st",
-            "birthday",
-            "date",
-            "party",
-            "grandma",
-            "bag"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "23rd",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "23rd",
-      "Definitions": "无",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r046|23rd"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r046|23rd",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "46",
-          "Word": "23rd",
-          "Definition": "无",
-          "Before": [
-            "December",
-            "1st",
-            "2nd",
-            "3rd",
-            "4th",
-            "20th",
-            "21st",
-            "22nd"
-          ],
-          "After": [
-            "30th",
-            "31st",
-            "birthday",
-            "date",
-            "party",
-            "grandma",
-            "bag",
-            "map"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "2nd",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "2nd",
-      "Definitions": "第二(second)",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r040|2nd"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r040|2nd",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "40",
-          "Word": "2nd",
-          "Definition": "第二(second)",
-          "Before": [
-            "today",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-            "1st"
-          ],
-          "After": [
-            "3rd",
-            "4th",
-            "20th",
-            "21st",
-            "22nd",
-            "23rd",
-            "30th",
-            "31st"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "30th",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "30th",
-      "Definitions": "无",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r047|30th"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r047|30th",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "47",
-          "Word": "30th",
-          "Definition": "无",
-          "Before": [
-            "1st",
-            "2nd",
-            "3rd",
-            "4th",
-            "20th",
-            "21st",
-            "22nd",
-            "23rd"
-          ],
-          "After": [
-            "31st",
-            "birthday",
-            "date",
-            "party",
-            "grandma",
-            "bag",
-            "map",
-            "pencil case"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "31st",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "31st",
-      "Definitions": "无",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r048|31st"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r048|31st",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "48",
-          "Word": "31st",
-          "Definition": "无",
-          "Before": [
-            "2nd",
-            "3rd",
-            "4th",
-            "20th",
-            "21st",
-            "22nd",
-            "23rd",
-            "30th"
-          ],
-          "After": [
-            "birthday",
-            "date",
-            "party",
-            "grandma",
-            "bag",
-            "map",
-            "pencil case",
-            "picture"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "3rd",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "3rd",
-      "Definitions": "第三(third)",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r041|3rd"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r041|3rd",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "41",
-          "Word": "3rd",
-          "Definition": "第三(third)",
-          "Before": [
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-            "1st",
-            "2nd"
-          ],
-          "After": [
-            "4th",
-            "20th",
-            "21st",
-            "22nd",
-            "23rd",
-            "30th",
-            "31st",
-            "birthday"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "4th",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "4th",
-      "Definitions": "第四(fourth)",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r042|4th"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r042|4th",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "42",
-          "Word": "4th",
-          "Definition": "第四(fourth)",
-          "Before": [
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-            "1st",
-            "2nd",
-            "3rd"
-          ],
-          "After": [
-            "20th",
-            "21st",
-            "22nd",
-            "23rd",
-            "30th",
-            "31st",
-            "birthday",
-            "date"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "ability",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "ability",
-      "Definitions": "n. 能力,能耐;才能",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g5-upper|r018|ability"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r018|ability",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "18",
-          "Word": "ability",
-          "Definition": "n. 能力,能耐;才能",
-          "Before": [
-            "keep",
-            "animal",
-            "every",
-            "during",
-            "coloured",
-            "sky",
-            "place",
-            "drawing"
-          ],
-          "After": [
-            "That's right.",
-            "together",
-            "far",
-            "talk",
-            "talking",
-            "speak",
-            "count",
-            "life"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "abracadabra",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "abracadabra",
-      "Definitions": "n. 咒语;胡言乱语",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:3年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g3-upper|r151|abracadabra"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r151|abracadabra",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "151",
-          "Word": "abracadabra",
-          "Definition": "n. 咒语;胡言乱语",
-          "Before": [
-            "ruler",
-            "schoolbag",
-            "see",
-            "skipping rope",
-            "star",
-            "table",
-            "tomorrow",
-            "TV"
-          ],
-          "After": [
-            "banana",
-            "birthday",
-            "cake",
-            "can",
-            "cap",
-            "card",
-            "catch",
-            "chocolate"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "achoo",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "achoo",
-      "Definitions": "n. 啊嚏",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g5-lower|r166|achoo"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-lower|r166|achoo",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "166",
-          "Word": "achoo",
-          "Definition": "n. 啊嚏",
-          "Before": [
-            "wet",
-            "cloudy",
-            "windy",
-            "kite",
-            "snowman",
-            "ski",
-            "picnic",
-            "model"
-          ],
-          "After": [
-            "slight",
-            "cough",
-            "came",
-            "back",
-            "come back",
-            "around",
-            "planet",
-            "were"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "action",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "action",
-      "Definitions": "n. 行动;活动;功能;战斗;情节",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:3年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g3-upper|r054|action"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r054|action",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "54",
-          "Word": "action",
-          "Definition": "n. 行动;活动;功能;战斗;情节",
-          "Before": [
-            "today",
-            "what",
-            "what's",
-            "what is",
-            "write",
-            "yeah",
-            "you",
-            "your"
-          ],
-          "After": [
-            "apple",
-            "bed",
-            "bye-bye",
-            "cat",
-            "dog",
-            "egg",
-            "go",
-            "me"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "advertisement",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "advertisement",
-      "Definitions": "n. 广告,宣传",
-      "SourceIDs": "niujin_shanghai_start1",
-      "SourceBooks": "niujin_shanghai_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g6-upper|r103|advertisement"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-upper|r103|advertisement",
-          "SourceID": "niujin_shanghai_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "103",
-          "Word": "advertisement",
-          "Definition": "n. 广告,宣传",
-          "Before": [
-            "yesterday",
-            "travel",
-            "about",
-            "minute",
-            "ferry",
-            "hour",
-            "half an hour",
-            "hotel"
-          ],
-          "After": [
-            "board",
-            "a few",
-            "a lot of",
-            "when",
-            "light rail",
-            "department store",
-            "kindergarten",
-            "housing estate"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "aeroplane",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "aeroplane",
-      "Definitions": "n. 飞机(等于airplane)",
-      "SourceIDs": "niujin_shanghai_start1",
-      "SourceBooks": "niujin_shanghai_start1:3年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g3-lower|r002|aeroplane"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g3-lower|r002|aeroplane",
-          "SourceID": "niujin_shanghai_start1",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "2",
-          "Word": "aeroplane",
-          "Definition": "n. 飞机(等于airplane)",
-          "Before": [],
-          "After": [
-            "bus",
-            "ship",
-            "car",
-            "pineapple",
-            "cake",
-            "bread",
-            "glass",
-            "bag"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "airplane",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "airplane",
-      "Definitions": "n. 飞机",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g5-lower|r183|airplane"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-lower|r183|airplane",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "183",
-          "Word": "airplane",
-          "Definition": "n. 飞机",
-          "Before": [
-            "interesting",
-            "thing",
-            "tell",
-            "over",
-            "sore",
-            "throat",
-            "high",
-            "runny nose"
-          ],
-          "After": [
-            "because",
-            "yesterday",
-            "swam",
-            "collect",
-            "shell"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "album",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "album",
-      "Definitions": "n. 相簿;唱片集;集邮簿;签名纪念册",
-      "SourceIDs": "niujin_shanghai_start1",
-      "SourceBooks": "niujin_shanghai_start1:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g6-upper|r057|album"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-upper|r057|album",
-          "SourceID": "niujin_shanghai_start1",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "57",
-          "Word": "album",
-          "Definition": "n. 相簿;唱片集;集邮簿;签名纪念册",
-          "Before": [
-            "market",
-            "space",
-            "museum",
-            "activity",
-            "barbecue",
-            "kite",
-            "sandcastle",
-            "collect"
-          ],
-          "After": [
-            "plan",
-            "shall",
-            "o'clock",
-            "cost",
-            "trip",
-            "secretary",
-            "bank",
-            "clerk"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "alphabet",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "alphabet",
-      "Definitions": "n. 字母表,字母系统;入门,初步 n. Google创建的名为Alphabet的公司,改变Google原有公司架构,旨在使其当下主要业务和长期投资项目间的区别更加清晰。",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g5-lower|r002|alphabet"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "cambridge_join_start3|g5-lower|r002|alphabet",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "2",
-          "Word": "alphabet",
-          "Definition": "n. 字母表,字母系统;入门,初步 n. Google创建的名为Alphabet的公司,改变Google原有公司架构,旨在使其当下主要业务和长期投资项目间的区别更加清晰。",
-          "Before": [],
-          "After": [
-            "enjoy",
-            "everyone",
-            "fun",
-            "head",
-            "hey",
-            "near",
-            "notebook",
-            "ping-pong"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "ambulance",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "ambulance",
-      "Definitions": "n. [车辆][医] 救护车;战时流动医院",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g6-upper|r125|ambulance"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r125|ambulance",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "125",
-          "Word": "ambulance",
-          "Definition": "n. [车辆][医] 救护车;战时流动医院",
-          "Before": [
-            "everywhere",
-            "have got to",
-            "woman",
-            "policewoman",
-            "ask",
-            "book fair",
-            "history",
-            "concert"
-          ],
-          "After": [
-            "get out of",
-            "call",
-            "tour",
-            "over",
-            "a few",
-            "later",
-            "die",
-            "water"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "america",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "America",
-      "Definitions": "n. 美洲(包括北美和南美洲);美国",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:5年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g5-lower|r076|america"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g5-lower|r076|america",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "76",
-          "Word": "America",
-          "Definition": "n. 美洲(包括北美和南美洲);美国",
-          "Before": [
-            "train",
-            "leave",
-            "exciting",
-            "valley",
-            "island",
-            "taxi",
-            "London",
-            "New York"
-          ],
-          "After": [
-            "Hong Kong",
-            "American",
-            "Australian",
-            "trip",
-            "excited",
-            "hotel",
-            "on foot",
-            "the Great Wall"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "anyone",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "anyone",
-      "Definitions": "pron. 任何人;任何一个",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g6-upper|r122|anyone"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r122|anyone",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "122",
-          "Word": "anyone",
-          "Definition": "pron. 任何人;任何一个",
-          "Before": [
-            "stay",
-            "stitch",
-            "swimming",
-            "take care",
-            "understand",
-            "unhappy",
-            "village",
-            "well"
-          ],
-          "After": [
-            "bamboo",
-            "black rhino",
-            "danger",
-            "dig",
-            "dirty",
-            "fur",
-            "grass",
-            "have a look"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "anytime",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "anytime",
-      "Definitions": "adv. 任何时候;无例外地",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g6-upper|r115|anytime"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r115|anytime",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "115",
-          "Word": "anytime",
-          "Definition": "adv. 任何时候;无例外地",
-          "Before": [
-            "as",
-            "safari park",
-            "shall",
-            "Shall we ...?",
-            "be interested in",
-            "jungle",
-            "life",
-            "be afraid of"
-          ],
-          "After": [
-            "missing",
-            "everywhere",
-            "have got to",
-            "woman",
-            "policewoman",
-            "ask",
-            "book fair",
-            "history"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "area",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "area",
-      "Definitions": "n. 区域,地区;面积;范围",
+      "DisplayForms": "baker",
+      "Definitions": "n. 面包师;面包工人;(便携式)烘炉",
       "SourceIDs": "niujin_shanghai_start1",
       "SourceBooks": "niujin_shanghai_start1:6年级下",
       "CandidateSignals": "",
@@ -1307,48 +56,48 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g6-lower|r211|area"
+        "niujin_shanghai_start1|g6-lower|r105|baker"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r211|area",
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r105|baker",
           "SourceID": "niujin_shanghai_start1",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "211",
-          "Word": "area",
-          "Definition": "n. 区域,地区;面积;范围",
+          "SourceRow": "105",
+          "Word": "baker",
+          "Definition": "n. 面包师;面包工人;(便携式)烘炉",
           "Before": [
-            "tap",
-            "running",
-            "waste",
-            "fix",
-            "turn off",
-            "instead of",
-            "forest",
-            "hollow"
+            "back",
+            "centimetre",
+            "weigh",
+            "kilogram",
+            "astronaut",
+            "good-looking",
+            "slim",
+            "reporter"
           ],
           "After": [
-            "provide",
-            "insect",
-            "nest",
-            "build",
-            "wood",
-            "cut down",
-            "furniture",
-            "clay"
+            "singer",
+            "agree",
+            "good at",
+            "be good at",
+            "possibly",
+            "grow",
+            "bakery",
+            "a lot"
           ]
         }
       ]
     },
     {
-      "MatchKey": "argentina",
+      "MatchKey": "bangkok",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "Argentina",
-      "Definitions": "n. 阿根廷(位于拉丁美洲)",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:3年级上",
+      "DisplayForms": "Bangkok",
+      "Definitions": "n. 曼谷(泰国首都)",
+      "SourceIDs": "niujin_shanghai_start1",
+      "SourceBooks": "niujin_shanghai_start1:6年级下",
       "CandidateSignals": "",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -1359,98 +108,146 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g3-upper|r210|argentina"
+        "niujin_shanghai_start1|g6-lower|r006|bangkok"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r210|argentina",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "210",
-          "Word": "Argentina",
-          "Definition": "n. 阿根廷(位于拉丁美洲)",
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r006|bangkok",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "6",
+          "Word": "Bangkok",
+          "Definition": "n. 曼谷(泰国首都)",
           "Before": [
-            "floor",
-            "letter",
-            "next time",
-            "whiteboard",
-            "window",
-            "with",
-            "won't",
-            "along"
+            "Asia",
+            "Japan",
+            "Tokyo",
+            "Thailand"
           ],
           "After": [
-            "Brazil",
-            "cardboard",
-            "croak",
-            "dotted line",
-            "Father Christmas",
-            "favourite",
-            "from",
-            "glue"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "athlete",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "athlete",
-      "Definitions": "n. 运动员,体育家;身强力壮的人",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "semantic-easy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g5-upper|r072|athlete"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "cambridge_join_start3|g5-upper|r072|athlete",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "72",
-          "Word": "athlete",
-          "Definition": "n. 运动员,体育家;身强力壮的人",
-          "Before": [
-            "Puma Ranch",
-            "ring",
-            "shell",
-            "silver",
-            "soft toy",
-            "test",
-            "watch out",
-            "answer"
-          ],
-          "After": [
-            "collect",
-            "cyclist",
-            "end",
-            "go",
+            "north-east",
+            "north-west",
+            "south-east",
+            "south-west",
+            "exhibition",
+            "capital",
             "kilometre",
-            "opera house",
-            "quarter",
-            "say"
+            "information"
           ]
         }
       ]
     },
     {
-      "MatchKey": "atishoo",
+      "MatchKey": "beauty",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "atishoo",
-      "Definitions": "int. 阿嚏(打喷嚏的拟声)",
+      "DisplayForms": "beauty",
+      "Definitions": "n. 美;美丽;美人;美好的东西",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-lower|r159|beauty"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r159|beauty",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "159",
+          "Word": "beauty",
+          "Definition": "n. 美;美丽;美人;美好的东西",
+          "Before": [
+            "New Zealand",
+            "Wellington",
+            "kiwi",
+            "Canada",
+            "Ottawa",
+            "maple",
+            "flag",
+            "natural"
+          ],
+          "After": [
+            "waterfall",
+            "Chinatown",
+            "Toronto",
+            "passport",
+            "book",
+            "ticket",
+            "airport",
+            "land"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "began",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "began",
+      "Definitions": "v. 开始;创建;着手于(begin的过去式)",
+      "SourceIDs": "minjiao_start3",
+      "SourceBooks": "minjiao_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "begin",
+      "CanonicalRelation": "named-past-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "开始",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "minjiao_start3|g6-upper|r010|began"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g6-upper|r010|began",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "10",
+          "Word": "began",
+          "Definition": "v. 开始;创建;着手于(begin的过去式)",
+          "Before": [
+            "Olympic Games",
+            "take place",
+            "Summer Olympics",
+            "Winter Olympics",
+            "ring",
+            "answer",
+            "hold",
+            "something"
+          ],
+          "After": [
+            "begin",
+            "slogan",
+            "world",
+            "dream",
+            "strong",
+            "together",
+            "between",
+            "woman"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "blazer",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "blazer",
+      "Definitions": "n. 燃烧体;宣布者;颜色鲜明的运动上衣",
       "SourceIDs": "cambridge_join_start3",
       "SourceBooks": "cambridge_join_start3:4年级上",
       "CandidateSignals": "",
@@ -1463,48 +260,48 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g4-upper|r200|atishoo"
+        "cambridge_join_start3|g4-upper|r202|blazer"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "cambridge_join_start3|g4-upper|r200|atishoo",
+          "SourceOccurrenceKey": "cambridge_join_start3|g4-upper|r202|blazer",
           "SourceID": "cambridge_join_start3",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "200",
-          "Word": "atishoo",
-          "Definition": "int. 阿嚏(打喷嚏的拟声)",
+          "SourceRow": "202",
+          "Word": "blazer",
+          "Definition": "n. 燃烧体;宣布者;颜色鲜明的运动上衣",
           "Before": [
-            "telephone",
-            "triangle",
             "turn",
             "use",
             "used",
             "watch",
             "way",
-            "around"
+            "around",
+            "atishoo",
+            "Be quiet."
           ],
           "After": [
-            "Be quiet.",
-            "blazer",
             "Bless you!",
             "cardigan",
             "carry",
             "chimney",
             "chorus",
-            "cold"
+            "cold",
+            "cup",
+            "dear"
           ]
         }
       ]
     },
     {
-      "MatchKey": "aviary",
+      "MatchKey": "bookworm",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "aviary",
-      "Definitions": "n. 鸟类饲养场;大型鸟舍",
-      "SourceIDs": "niujin_shanghai_start1",
-      "SourceBooks": "niujin_shanghai_start1:4年级上",
+      "DisplayForms": "bookworm",
+      "Definitions": "n. 书呆子;蠹鱼,蛀书虫",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级下",
       "CandidateSignals": "",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -1515,46 +312,767 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g4-upper|r094|aviary"
+        "cambridge_join_start3|g6-lower|r091|bookworm"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g4-upper|r094|aviary",
-          "SourceID": "niujin_shanghai_start1",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "94",
-          "Word": "aviary",
-          "Definition": "n. 鸟类饲养场;大型鸟舍",
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-lower|r091|bookworm",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "91",
+          "Word": "bookworm",
+          "Definition": "n. 书呆子;蠹鱼,蛀书虫",
           "Before": [
-            "Don't throw stones.",
-            "farm",
-            "rubbish",
-            "visit",
-            "bin",
-            "sketchbook",
-            "cap",
-            "camera"
+            "Nottingham",
+            "shy",
+            "soldier",
+            "the poor",
+            "wise",
+            "woman",
+            "writer",
+            "young"
           ],
           "After": [
-            "fountain",
-            "pond",
-            "far away",
-            "road",
-            "take",
-            "sunny",
-            "rainy",
-            "cloudy"
+            "California",
+            "celebrate",
+            "competition",
+            "heroine",
+            "hood",
+            "joy",
+            "nonsense",
+            "read"
           ]
         }
       ]
     },
     {
-      "MatchKey": "aw",
+      "MatchKey": "brazil",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "aw",
-      "Definitions": "int. 哦!噢!(表示抗议, 厌恶, 讨厌等)",
+      "DisplayForms": "Brazil",
+      "Definitions": "n. 巴西(拉丁美洲国家)",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:3年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g3-upper|r211|brazil"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r211|brazil",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "211",
+          "Word": "Brazil",
+          "Definition": "n. 巴西(拉丁美洲国家)",
+          "Before": [
+            "letter",
+            "next time",
+            "whiteboard",
+            "window",
+            "with",
+            "won't",
+            "along",
+            "Argentina"
+          ],
+          "After": [
+            "cardboard",
+            "croak",
+            "dotted line",
+            "Father Christmas",
+            "favourite",
+            "from",
+            "glue",
+            "Great Britain"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "brightly",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "brightly",
+      "Definitions": "adv. 明亮地;鲜明地;生辉地",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-lower|r124|brightly"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r124|brightly",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "124",
+          "Word": "brightly",
+          "Definition": "adv. 明亮地;鲜明地;生辉地",
+          "Before": [
+            "inside",
+            "dark",
+            "except",
+            "except for",
+            "carry on ...",
+            "carry on with ...",
+            "light",
+            "light up"
+          ],
+          "After": [
+            "lead",
+            "led",
+            "brought",
+            "bring",
+            "ever",
+            "abroad",
+            "South Africa",
+            "nature"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "britain",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Britain",
+      "Definitions": "n. 英国;不列颠",
+      "SourceIDs": "luke_54_start3",
+      "SourceBooks": "luke_54_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "luke_54_start3|g4-lower|r005|britain"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g4-lower|r005|britain",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "5",
+          "Word": "Britain",
+          "Definition": "n. 英国;不列颠",
+          "Before": [
+            "China",
+            "from",
+            "Canada",
+            "the U.S."
+          ],
+          "After": [
+            "Australia",
+            "India",
+            "France",
+            "her",
+            "live",
+            "Ottawa",
+            "London",
+            "famous"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "budgie",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "budgie",
+      "Definitions": "n. 虎皮鹦鹉;相思鹦鹉",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:3年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g3-lower|r023|budgie"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g3-lower|r023|budgie",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "23",
+          "Word": "budgie",
+          "Definition": "n. 虎皮鹦鹉;相思鹦鹉",
+          "Before": [
+            "shake",
+            "stand",
+            "toe",
+            "touch",
+            "up",
+            "animal",
+            "bear",
+            "bird"
+          ],
+          "After": [
+            "eat",
+            "elephant",
+            "fish",
+            "fly",
+            "frog",
+            "giraffe",
+            "hamster",
+            "have got"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "builder",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "builder",
+      "Definitions": "n. 建筑者;建立者",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:4年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g4-upper|r161|builder"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g4-upper|r161|builder",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "161",
+          "Word": "builder",
+          "Definition": "n. 建筑者;建立者",
+          "Before": [
+            "painter",
+            "when",
+            "grow up",
+            "be good at",
+            "sick",
+            "nurse",
+            "cook",
+            "food"
+          ],
+          "After": [
+            "build",
+            "doctor",
+            "policeman",
+            "reporter",
+            "news",
+            "job",
+            "factory",
+            "worker"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "bund",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Bund",
+      "Definitions": "n. 堤岸;码头;同盟",
+      "SourceIDs": "yilin_start3",
+      "SourceBooks": "yilin_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "yilin_start3|g6-upper|r048|bund"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "yilin_start3|g6-upper|r048|bund",
+          "SourceID": "yilin_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "48",
+          "Word": "Bund",
+          "Definition": "n. 堤岸;码头;同盟",
+          "Before": [
+            "know",
+            "What happened?",
+            "climb up",
+            "hold onto",
+            "fly away",
+            "holiday",
+            "National Day",
+            "call"
+          ],
+          "After": [
+            "Shanghai Museum",
+            "star",
+            "Great Wall",
+            "Palace Museum",
+            "Summer Palace",
+            "Tian'anmen Square",
+            "fashion show",
+            "excited"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cactus",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cactus",
+      "Definitions": "n. [园艺] 仙人掌",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:5年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g5-lower|r140|cactus"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-lower|r140|cactus",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "140",
+          "Word": "cactus",
+          "Definition": "n. [园艺] 仙人掌",
+          "Before": [
+            "afraid",
+            "age",
+            "ago",
+            "alone",
+            "bank",
+            "be afraid of",
+            "boot",
+            "born to"
+          ],
+          "After": [
+            "coat",
+            "cowboy hat",
+            "dark",
+            "good at",
+            "ground",
+            "Hands up!",
+            "hero",
+            "horror film"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "california",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "California",
+      "Definitions": "n. 加利福尼亚(美国一个州)",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-lower|r092|california"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-lower|r092|california",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "92",
+          "Word": "California",
+          "Definition": "n. 加利福尼亚(美国一个州)",
+          "Before": [
+            "shy",
+            "soldier",
+            "the poor",
+            "wise",
+            "woman",
+            "writer",
+            "young",
+            "bookworm"
+          ],
+          "After": [
+            "celebrate",
+            "competition",
+            "heroine",
+            "hood",
+            "joy",
+            "nonsense",
+            "read",
+            "rest"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "campsite",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "campsite",
+      "Definitions": "n. 营地",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-upper|r100|campsite"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r100|campsite",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "100",
+          "Word": "campsite",
+          "Definition": "n. 营地",
+          "Before": [
+            "trick or treat",
+            "turkey",
+            "upstairs",
+            "wild",
+            "accident",
+            "bandage",
+            "belt",
+            "bottle"
+          ],
+          "After": [
+            "cut",
+            "deep",
+            "finally",
+            "helmet",
+            "keep",
+            "keep to",
+            "kind",
+            "matter"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cardigan",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cardigan",
+      "Definitions": "n. 羊毛衫,开襟羊毛衫(等于cardigan sweater)",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:4年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g4-upper|r204|cardigan"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g4-upper|r204|cardigan",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "204",
+          "Word": "cardigan",
+          "Definition": "n. 羊毛衫,开襟羊毛衫(等于cardigan sweater)",
+          "Before": [
+            "used",
+            "watch",
+            "way",
+            "around",
+            "atishoo",
+            "Be quiet.",
+            "blazer",
+            "Bless you!"
+          ],
+          "After": [
+            "carry",
+            "chimney",
+            "chorus",
+            "cold",
+            "cup",
+            "dear",
+            "down",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cassette",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cassette",
+      "Definitions": "n. 盒式磁带;暗盒;珠宝箱;片匣",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:5年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g5-upper|r150|cassette"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-upper|r150|cassette",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "150",
+          "Word": "cassette",
+          "Definition": "n. 盒式磁带;暗盒;珠宝箱;片匣",
+          "Before": [
+            "travel",
+            "zoo",
+            "across",
+            "air",
+            "appear",
+            "beach",
+            "blush",
+            "bucket"
+          ],
+          "After": [
+            "fall",
+            "flipper",
+            "golden",
+            "hear",
+            "kick",
+            "laugh",
+            "lollipop",
+            "lolly"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "celebration",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "celebration",
+      "Definitions": "n. 庆典,庆祝会;庆祝;颂扬",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g4-lower|r117|celebration"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g4-lower|r117|celebration",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "117",
+          "Word": "celebration",
+          "Definition": "n. 庆典,庆祝会;庆祝;颂扬",
+          "Before": [
+            "arm",
+            "volleyball",
+            "fast",
+            "water",
+            "bath",
+            "take a bath",
+            "clever",
+            "badminton"
+          ],
+          "After": [
+            "was",
+            "be born ...",
+            "January",
+            "present",
+            "card",
+            "go on",
+            "party",
+            "candle"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "celery",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "celery",
+      "Definitions": "n. [园艺] 芹菜",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-lower|r027|celery"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-lower|r027|celery",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "27",
+          "Word": "celery",
+          "Definition": "n. [园艺] 芹菜",
+          "Before": [
+            "friendly",
+            "koala",
+            "little",
+            "outgoing",
+            "sixth",
+            "Spring Festival",
+            "tail",
+            "active"
+          ],
+          "After": [
+            "cherry",
+            "corn-on-the-cob",
+            "fit",
+            "glass",
+            "habit",
+            "health",
+            "healthy",
+            "kind"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "certainly",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "certainly",
+      "Definitions": "adv. 当然;行(用于回答);必定",
+      "SourceIDs": "kepu_start3",
+      "SourceBooks": "kepu_start3:5年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "kepu_start3|g5-lower|r007|certainly"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "kepu_start3|g5-lower|r007|certainly",
+          "SourceID": "kepu_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "7",
+          "Word": "certainly",
+          "Definition": "adv. 当然;行(用于回答);必定",
+          "Before": [
+            "speak",
+            "afternoon",
+            "put",
+            "question",
+            "number"
+          ],
+          "After": [
+            "learn",
+            "into",
+            "meat",
+            "job",
+            "must",
+            "street",
+            "light",
+            "cousin"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cheaper",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cheaper",
+      "Definitions": "adj. 成本更低,比较便宜的",
       "SourceIDs": "jiaoke_eec_start3",
       "SourceBooks": "jiaoke_eec_start3:5年级上",
       "CandidateSignals": "",
@@ -1567,46 +1085,199 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g5-upper|r044|aw"
+        "jiaoke_eec_start3|g5-upper|r091|cheaper"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-upper|r044|aw",
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-upper|r091|cheaper",
           "SourceID": "jiaoke_eec_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "44",
-          "Word": "aw",
-          "Definition": "int. 哦!噢!(表示抗议, 厌恶, 讨厌等)",
+          "SourceRow": "91",
+          "Word": "cheaper",
+          "Definition": "adj. 成本更低,比较便宜的",
           "Before": [
-            "did",
-            "was",
-            "win",
-            "homework",
-            "do one's homework",
-            "before",
-            "dinner",
-            "wash"
+            "twelfth",
+            "size",
+            "without",
+            "button",
+            "collar",
+            "a lot",
+            "expensive",
+            "only"
           ],
           "After": [
-            "arrive",
-            "went",
-            "borrow",
-            "tennis",
-            "saw",
-            "movie",
-            "museum",
-            "basketball"
+            "jacket",
+            "pocket",
+            "purple",
+            "zipper",
+            "sweater",
+            "smaller",
+            "bigger",
+            "wear"
           ]
         }
       ]
     },
     {
-      "MatchKey": "bacon",
+      "MatchKey": "check-up",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "bacon",
-      "Definitions": "n. 咸肉;腌肉;熏猪肉",
+      "DisplayForms": "check-up",
+      "Definitions": "n. 检查,核对;体格检查",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-upper|r059|check-up"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-upper|r059|check-up",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "59",
+          "Word": "check-up",
+          "Definition": "n. 检查,核对;体格检查",
+          "Before": [
+            "stomachache",
+            "ate",
+            "eat",
+            "hear",
+            "heard",
+            "I'm sorry to hear that.",
+            "gave",
+            "give"
+          ],
+          "After": [
+            "take",
+            "took",
+            "medicine",
+            "time",
+            "toothache",
+            "brush",
+            "twice",
+            "broken"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "checklist",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "checklist",
+      "Definitions": "n. 清单;检查表;备忘录;目录册",
+      "SourceIDs": "niujin_shanghai_start1",
+      "SourceBooks": "niujin_shanghai_start1:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "niujin_shanghai_start1|g6-lower|r045|checklist"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r045|checklist",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "45",
+          "Word": "checklist",
+          "Definition": "n. 清单;检查表;备忘录;目录册",
+          "Before": [
+            "note",
+            "trolley",
+            "passport",
+            "boarding card",
+            "name tag",
+            "bring",
+            "dollar",
+            "address"
+          ],
+          "After": [
+            "festival",
+            "race",
+            "something",
+            "celebrate",
+            "born",
+            "be born",
+            "ago",
+            "country"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "childish",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "childish",
+      "Definitions": "adj. 幼稚的,孩子气的",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:5年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g5-lower|r164|childish"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-lower|r164|childish",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "164",
+          "Word": "childish",
+          "Definition": "adj. 幼稚的,孩子气的",
+          "Before": [
+            "short",
+            "soup",
+            "strong",
+            "swimmer",
+            "thin",
+            "worry",
+            "build",
+            "butter"
+          ],
+          "After": [
+            "daughter",
+            "drink",
+            "quite a lot",
+            "Really?",
+            "sand castle"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "chilli",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "chilli",
+      "Definitions": "n. 红辣椒",
       "SourceIDs": "niujin_shanghai_start1",
       "SourceBooks": "niujin_shanghai_start1:6年级上",
       "CandidateSignals": "",
@@ -1619,37 +1290,297 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g6-upper|r138|bacon"
+        "niujin_shanghai_start1|g6-upper|r154|chilli"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-upper|r138|bacon",
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-upper|r154|chilli",
           "SourceID": "niujin_shanghai_start1",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "138",
-          "Word": "bacon",
-          "Definition": "n. 咸肉;腌肉;熏猪肉",
+          "SourceRow": "154",
+          "Word": "chilli",
+          "Definition": "n. 红辣椒",
           "Before": [
-            "garlic",
-            "noodle",
-            "seafood",
-            "steam",
-            "prawn",
-            "also",
-            "kind",
-            "fry"
+            "hamburger",
+            "fun",
+            "cola",
+            "spicy",
+            "nut",
+            "lemon",
+            "snack",
+            "salty"
           ],
           "After": [
-            "boil",
-            "wing",
-            "stall",
-            "section",
-            "frozen",
-            "packet",
-            "bake",
-            "hamburger"
+            "sour",
+            "bitter",
+            "tasty",
+            "delicious",
+            "spread",
+            "prepare",
+            "enough",
+            "healthy"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "chimney",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "chimney",
+      "Definitions": "n. 烟囱",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:4年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g4-upper|r206|chimney"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g4-upper|r206|chimney",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "206",
+          "Word": "chimney",
+          "Definition": "n. 烟囱",
+          "Before": [
+            "way",
+            "around",
+            "atishoo",
+            "Be quiet.",
+            "blazer",
+            "Bless you!",
+            "cardigan",
+            "carry"
+          ],
+          "After": [
+            "chorus",
+            "cold",
+            "cup",
+            "dear",
+            "down",
+            "end",
+            "enter",
+            "every"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "circus",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "circus",
+      "Definitions": "n. 马戏;马戏团",
+      "SourceIDs": "guangdong_start3",
+      "SourceBooks": "guangdong_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangdong_start3|g6-upper|r072|circus"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g6-upper|r072|circus",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "72",
+          "Word": "circus",
+          "Definition": "n. 马戏;马戏团",
+          "Before": [
+            "tasty",
+            "yucky",
+            "snowy",
+            "spicy",
+            "Canada",
+            "Thailand",
+            "food",
+            "Here comes ..."
+          ],
+          "After": [
+            "week",
+            "month",
+            "planted",
+            "plant",
+            "listened",
+            "listen",
+            "watched",
+            "watch"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "college",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "college",
+      "Definitions": "n. 大学;学院;学会",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-lower|r068|college"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-lower|r068|college",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "68",
+          "Word": "college",
+          "Definition": "n. 大学;学院;学会",
+          "Before": [
+            "strawberry",
+            "tour",
+            "vanilla",
+            "almost",
+            "around",
+            "blind",
+            "brave",
+            "camp"
+          ],
+          "After": [
+            "confident",
+            "dead",
+            "deer",
+            "die",
+            "everything",
+            "fight",
+            "footballer",
+            "forest"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "conductor",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "conductor",
+      "Definitions": "n. 导体;售票员;领导者;管理人",
+      "SourceIDs": "niujin_shanghai_start1",
+      "SourceBooks": "niujin_shanghai_start1:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "niujin_shanghai_start1|g6-lower|r137|conductor"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r137|conductor",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "137",
+          "Word": "conductor",
+          "Definition": "n. 导体;售票员;领导者;管理人",
+          "Before": [
+            "around",
+            "air-conditioned",
+            "canteen",
+            "snowman",
+            "double-decker",
+            "fare",
+            "public",
+            "transportation"
+          ],
+          "After": [
+            "nowadays",
+            "instead",
+            "single-decker",
+            "most",
+            "none",
+            "still",
+            "perhaps",
+            "few"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "confident",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "confident",
+      "Definitions": "adj. 自信的;确信的",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-easy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-lower|r069|confident"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-lower|r069|confident",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "69",
+          "Word": "confident",
+          "Definition": "adj. 自信的;确信的",
+          "Before": [
+            "tour",
+            "vanilla",
+            "almost",
+            "around",
+            "blind",
+            "brave",
+            "camp",
+            "college"
+          ],
+          "After": [
+            "dead",
+            "deer",
+            "die",
+            "everything",
+            "fight",
+            "footballer",
+            "forest",
+            "heart"
           ]
         }
       ]
