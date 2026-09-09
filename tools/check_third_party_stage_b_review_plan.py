@@ -26,19 +26,19 @@ CANDIDATE_FP_FIELDS = [
     "KloseCandidateNoteIDs", "KloseCandidateSenses",
 ]
 LANE_PRIORITY = {
-    "learner-excluded": 0,
-    "exact-multiple": 1,
-    "variant-multiple": 2,
-    "variant-single": 3,
+    "exact-multiple": 0,
+    "variant-multiple": 1,
+    "variant-single": 2,
+    "learner-excluded": 3,
     "exact-single-exact-sense": 4,
     "no-existing-match": 5,
     "exact-single-semantic-review": 6,
 }
 BATCH_CAPS = {
-    "learner-excluded": 300,
     "exact-multiple": 20,
     "variant-multiple": 20,
     "variant-single": 40,
+    "learner-excluded": 300,
     "exact-single-exact-sense": 200,
     "no-existing-match": 300,
     "exact-single-semantic-review": 50,
