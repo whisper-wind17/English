@@ -6,107 +6,94 @@ Last updated: 2026-09-10
 
 所有 Klose 任务固定读取：`AGENTS.md → NEXT.md → 当前任务 docs → source_freeze.json → stage_a_status.json → next_batch.json → premerge/readiness.json`。动态进度以 machine state 为准。
 
+当前任务文档：`docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md`。
+
 ## 2. Current phase
 
 ```text
 Phase A1 Source Adapter Bulk Ingestion = CLOSED
 SOURCE FREEZE                         = ESTABLISHED
-Phase A2 Global Identity Closure      = CURRENT
-Stage B / Klose reconciliation        = GATED
+Phase A2 Global Identity Closure      = CLOSED
+Stage B Identity Reconciliation       = CURRENT (read-only review)
+Stage B mutation / NoteID allocation  = GATED
 ```
 
-SOURCE FREEZE：20 adapters / 18887 occurrences / 3763 surfaces；source fingerprints 未变化；Stage A 不修改 Klose / Anki / Stable NoteID。
+SOURCE FREEZE：20 adapters / 18887 occurrences / 3763 surfaces；source fingerprints 未变化。Stage A 全程未修改 Klose Master/Learner/Release/Publish/Anki。
 
-## 3. Current sealed checkpoint
+## 3. Final Stage-A seal
 
-Latest sealed workflow：**#416 / 34409506307 = SUCCESS**
+Latest/final sealed workflow：**#429 / 34413943452 = SUCCESS**
 
 ```text
-sealed input commit                = b00c259b750e8455445ef35b5ef5c2b76f10f008
-Durable Identity decisions         = 3366
-Identity Vocabulary Preview        = 2674
-Learner Vocabulary Preview         = 2651
-Review blockers                    = 558
+sealed input commit                = 10b013ed8f4893989e6ba8931a5731e06401d6b4
+Durable Identity decisions         = 3871
+Identity Vocabulary Preview        = 2820
+Learner Vocabulary Preview         = 2797
+Review blockers                    = 52
 Evidence-changed surfaces          = 0
 Multipart resolved                 = 15
 Grammar-form quarantine gates      = 88
-CheckpointFingerprint              = 62ac157bf04d14d86a2062cf34dfd19c0ea5fbae922940680ce6c46eed05a767
+NextBatch SelectedCount            = 0
+NextBatch ExecutionReady           = false
+NextBatch GateReason               = no active review batch
+CheckpointFingerprint              = 3a3d8728e96901ce66272422eb81d25bd44e59146c00c15000fa482e09fccecc
 ```
 
-High-throughput history：
+Residual 52 blockers are exactly the current-context audited-defer registry (`defer_context.csv`): overwhelmingly `evidence-insufficient`, plus explicit policy-boundary cases. They are valid holds, not active unprocessed work. Do not guess meanings to force blocker=0.
+
+Final closure evidence:
+- #429 full Stage-A Validation Gate PASS: Completion Recheck / learner gate / audit recheck / Klose isolation / seal / bot persist.
+- Completion Recheck includes duplicate/canonical collision guards; seal verify includes review/defer duplicate-MatchKey checks.
+- independent post-seal diff PASS; bot persist changed only third-party workspace.
+- `NextBatch=0` and no active review batch.
+
+## 4. Stage-B readiness
+
+Readiness workflow：**#6 / 34414390985 = SUCCESS**
+
+Current `premerge/readiness.json`:
 
 ```text
-#413 object-boundary 40: blockers 718 → 678
-#414 object-boundary 40: blockers 678 → 638
-#415 object-boundary 40: blockers 638 → 598
-#416 object-boundary 40: blockers 598 → 558
+StageACheckpointFingerprint = 3a3d8728e96901ce66272422eb81d25bd44e59146c00c15000fa482e09fccecc
+SourceOccurrences           = 18887
+StageAIdentityCandidates    = 2820
+StageALearnerCandidates     = 2797
+AuditedDeferredSurfaces     = 52
+ActiveReviewBatch           = false
+ReadyForPremergeReview      = true
+KloseActiveNoteIDs          = 901
+exact-multiple              = 5
+exact-single                = 781
+no-existing-match           = 2034
+StageBMutationAuthorized    = false
+StableThirdPartyIDMinted    = false
+MergeAuthorizedRows         = 0
 ```
 
-四批均 full Validation Gate + bot persist + independent post-seal recheck PASS；没有 Source/Klose 边界回归。
+Readiness bot persist changed only `anki/klose/third_party_vocabulary/premerge/**`.
 
-## 4. NEXT deterministic batch
+CI fix: `.github/workflows/third-party-stage-b-readiness.yml` now listens to successful `Prepare Third-party Vocabulary Stage A` `workflow_run` and checks out current `main`, preventing readiness from remaining stale after Stage-A bot persist.
+
+## 5. NEXT — Stage-B reconciliation review
+
+Follow `docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md` and keep Stage B read-only.
+
+Execution order:
 
 ```text
-PlanVersion            = v6-semantic-throughput
-ReviewLane             = object-boundary
-SelectedCount          = 40
-EvidenceWeight         = 120 / 120
-PacketBytes            = 16148 / 260000
-ExecutionReady         = true
+verify final Stage-A seal
+→ verify current premerge readiness
+→ inspect/revalidate existing reconciliation_decisions.csv against current Stage-A checkpoint + CandidateFingerprint
+→ resolve all 5 exact-multiple candidates first
+→ process exact-single / no-existing-match reconciliation in deterministic batches
+→ require 100% reconciliation closure or explicit held rows
+→ independent Completion Recheck
+→ only then design a later allocation/migration gate
 ```
 
-```text
-find out about
-fitting room
-for a minute
-for here or to go?
-for now
-for you
-fountain pen
-fried rice
-from door to door
-fun park
-get a haircut
-get along
-get dressed
-get home
-get hurt
-get into
-get out of
-get ready
-get to school
-gift shop
-give ... a big hand
-given name
-go around
-go back
-go back to
-go climbing
-go for it
-go hiking
-go in
-go into
-go off
-go on the internet
-go out to play
-go running
-go sightseeing
-go to college
-go to sleep
-go to the park
-go to the zoo
-go well
-```
+Stage-B decision actions remain only:
+- `reuse-existing`
+- `new-stable-identity`
+- `held`
 
-```text
-ReviewBundleFingerprint = d5af3a3fb5c65670f12a54dbfc3bc5524c58030520c697cf8f2d97aac0617481
-ReviewPacketFingerprint = fb18e3c1540c1ebb654e0f7429000f4d43799318aeacabdc31374550d025958f
-```
-
-Execution rule：stable lexical/proper-name concept → Vocabulary；compositional phrase / construction / phrasal verb / communicative chunk → Expressions。object-boundary lane 不顺手做 alias merge 或 dictionary-sense expansion。
-
-Every batch: closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → seal → bot persist → independent post-seal recheck。
-
-## 5. Completion target
-
-`Vocabulary/Expression boundary → polysemy closure → audited-defer refresh → duplicate audits → Completion Recheck → NextBatch=0 → final Stage-A seal`。允许 residual 仅为 current-context audited-defer，不得猜义。
+Every durable decision must bind current `StageACheckpointFingerprint` and exact `CandidateFingerprint`; `MutationAuthorized=no` throughout this phase. Do not mint StableThirdPartyID/NoteID, do not modify Klose identity/source/learner/release/publish/Anki state.
