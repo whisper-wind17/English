@@ -36,7 +36,7 @@ surface:sentence,sentence,*,keep-identity,sentence,vocabulary,句子,reviewed,hi
 surface:shake,shake,*,keep-identity,shake,vocabulary,摇动；摇晃,reviewed,high,single-source-body-action-context,Movement and body-action context supports shake.
 surface:shelter,shelter,*,keep-identity,shelter,vocabulary,避难所；庇护处,reviewed,high,single-source-safety-context,Inside/outside and hazardous-weather context supports shelter as a protected place.
 surface:shock,shock,*,keep-identity,shock,vocabulary,震惊；惊讶,reviewed,medium,single-source-story-emotion-context,Story context supports shock as a strong surprise or emotional impact.
-surface:shot,shot,*,keep-identity,shot,vocabulary,射门,reviewed,high,source-context-overrides-past-form-signal,Adjacent shoot; goal and win evidence supports the sports noun shot; do not treat this occurrence as the past form of shoot.
+surface:shot,shot,*,keep-identity,shot,vocabulary,射门,reviewed,high,source-context-overrides-morphology-candidate,Adjacent shoot; goal and win evidence supports the sports noun shot; do not treat this occurrence as the past form of shoot.
 surface:side,side,*,keep-identity,side,vocabulary,边；侧面,reviewed,high,single-source-directions-context,Directions context supports side as a side or edge.
 surface:silver,silver,*,keep-identity,silver,vocabulary,银；银色,reviewed,high,single-source-material-colour-context,Jewellery and object context supports silver as the material or colour.
 surface:simple,simple,*,keep-identity,simple,vocabulary,简单的,reviewed,high,single-source-description-context,Elementary descriptive context supports simple.
