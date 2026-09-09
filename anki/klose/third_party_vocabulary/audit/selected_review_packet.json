@@ -10,21 +10,19 @@
     "relatives",
     "fruits",
     "left",
-    "saw",
-    "1st",
-    "can i ...?"
+    "saw"
   ],
-  "SelectedCount": 9,
-  "ReviewBundleFingerprint": "580d7aabc1cd41ad96fadaef403fa1e3b386ea1d943ad9b6f398a4fb7a0cdbac",
-  "ReviewPacketFingerprint": "68d3a6f7a8a7b662664bd4989e12cd27ca9587bd8fa1862b809943135cc3c535",
+  "SelectedCount": 7,
+  "ReviewBundleFingerprint": "f405e47964a4455d75a2ca90b313ecc0c947137b06aac85c04585206112d4481",
+  "ReviewPacketFingerprint": "9904546332734427f531e08807d6904a6480ff1513f5d8af33cfe181d89e9fbd",
   "Items": [
     {
       "MatchKey": "heard",
       "ReviewMode": "full-evidence",
       "DisplayForms": "heard",
       "Definitions": "v. 听到(hear的过去式和过去分词);闻知",
-      "SourceIDs": "guangdong_start3|guangzhou_start3",
-      "SourceBooks": "guangdong_start3:6年级下|guangzhou_start3:6年级上",
+      "SourceIDs": "guangdong_start3|guangzhou_start3|niujin_shanghai_start1",
+      "SourceBooks": "guangdong_start3:6年级下|guangzhou_start3:6年级上|niujin_shanghai_start1:5年级下",
       "CandidateSignals": "cross-source-exact|multiple-occurrences",
       "CandidateCanonical": "hear",
       "CanonicalRelation": "named-past-form",
@@ -36,7 +34,8 @@
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
         "guangdong_start3|g6-lower|r054|heard",
-        "guangzhou_start3|g6-upper|r055|heard"
+        "guangzhou_start3|g6-upper|r055|heard",
+        "niujin_shanghai_start1|g5-lower|r027|heard"
       ],
       "FullEvidence": [
         {
@@ -97,6 +96,36 @@
             "took",
             "medicine",
             "time"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g5-lower|r027|heard",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "27",
+          "Word": "heard",
+          "Definition": "v. 听到(hear的过去式和过去分词);闻知",
+          "Before": [
+            "were",
+            "drill",
+            "lorry",
+            "motorbike",
+            "outside",
+            "sleep",
+            "another",
+            "noise"
+          ],
+          "After": [
+            "sat",
+            "meat",
+            "pork",
+            "beef",
+            "chicken",
+            "fish",
+            "fruit",
+            "vegetable"
           ]
         }
       ]
@@ -1149,110 +1178,6 @@
             "go",
             "there",
             "ate"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "1st",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "1st",
-      "Definitions": "abbr. 第一(first)",
-      "SourceIDs": "guangdong_start3",
-      "SourceBooks": "guangdong_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangdong_start3|g5-upper|r039|1st"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r039|1st",
-          "SourceID": "guangdong_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "39",
-          "Word": "1st",
-          "Definition": "abbr. 第一(first)",
-          "Before": [
-            "beach",
-            "today",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"
-          ],
-          "After": [
-            "2nd",
-            "3rd",
-            "4th",
-            "20th",
-            "21st",
-            "22nd",
-            "23rd",
-            "30th"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "can i ...?",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "Can I ...?",
-      "Definitions": "abbr. Committee on Non-discrimination and Integrity 不受歧视和人身自主权委员会",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:3年级下",
-      "CandidateSignals": "multiword|punctuated",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g3-lower|r073|can i ...?"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g3-lower|r073|can i ...?",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "73",
-          "Word": "Can I ...?",
-          "Definition": "abbr. Committee on Non-discrimination and Integrity 不受歧视和人身自主权委员会",
-          "Before": [
-            "want",
-            "banana",
-            "we",
-            "but",
-            "then",
-            "apple",
-            "pear",
-            "can"
-          ],
-          "After": [
-            "Of course.",
-            "get",
-            "relative",
-            "photo",
-            "there",
-            "there is",
-            "there are",
-            "cousin"
           ]
         }
       ]
