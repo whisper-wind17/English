@@ -7,11 +7,18 @@ on:
       - 'tools/check_third_party_stage_b_reconciliation.py'
       - 'tools/build_third_party_klose_premerge.py'
       - 'tools/check_third_party_klose_premerge.py'
+      - 'tools/plan_third_party_stage_b_reconciliation.py'
+      - 'tools/check_third_party_stage_b_review_plan.py'
+      - 'tools/apply_third_party_stage_b_reconciliation_updates.py'
       - 'tools/seal_third_party_stage_a_checkpoint.py'
       - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
+      - 'anki/klose/third_party_vocabulary/reconciliation/decision_updates.csv'
       - 'anki/klose/third_party_vocabulary/audit/stage_a_status.json'
       - 'anki/klose/third_party_vocabulary/premerge/identity_candidates.csv'
       - 'anki/klose/third_party_vocabulary/premerge/readiness.json'
+      - 'anki/klose/third_party_vocabulary/premerge/reconciliation_review_queue.csv'
+      - 'anki/klose/third_party_vocabulary/premerge/reconciliation_selected_view.csv'
+      - 'anki/klose/third_party_vocabulary/premerge/reconciliation_next_batch.json'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
       - 'anki/klose/master/identity_migrations.csv'
@@ -23,7 +30,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: third-party-stage-b-reconciliation-${{ github.ref }}
@@ -66,9 +73,29 @@ jobs:
           print(f"ready={'true' if ready else 'false'}")
           PY
 
+      - name: Plan current Stage-B reconciliation review
+        if: steps.gate.outputs.ready == 'true'
+        run: python tools/plan_third_party_stage_b_reconciliation.py
+
+      - name: Check current Stage-B review plan
+        if: steps.gate.outputs.ready == 'true'
+        run: python tools/check_third_party_stage_b_review_plan.py
+
+      - name: Apply transient Stage-B reconciliation decisions
+        if: steps.gate.outputs.ready == 'true'
+        run: python tools/apply_third_party_stage_b_reconciliation_updates.py
+
       - name: Check durable Stage-B reconciliation decisions
         if: steps.gate.outputs.ready == 'true'
         run: python tools/check_third_party_stage_b_reconciliation.py
+
+      - name: Re-plan after reviewed decision apply
+        if: steps.gate.outputs.ready == 'true'
+        run: python tools/plan_third_party_stage_b_reconciliation.py
+
+      - name: Check next Stage-B review plan
+        if: steps.gate.outputs.ready == 'true'
+        run: python tools/check_third_party_stage_b_review_plan.py
 
       - name: Report Stage-B reconciliation gate
         if: steps.gate.outputs.ready != 'true'
@@ -76,12 +103,13 @@ jobs:
           echo 'Stage-B reconciliation is gated by current Stage-A review work.'
           echo 'No reconciliation decision validation or mutation is authorized.'
 
-      - name: Assert reconciliation does not mutate Klose state
+      - name: Assert reconciliation scope and Klose isolation
         shell: bash
         run: |
-          unexpected="$(git diff --name-only | grep -Ev '^anki/klose/third_party_vocabulary/premerge/' || true)"
+          git status --short
+          unexpected="$(git diff --name-only | grep -Ev '^anki/klose/third_party_vocabulary/(premerge|reconciliation)/' || true)"
           if [[ -n "$unexpected" ]]; then
-            echo 'Reconciliation validation mutated files outside derived premerge state:'
+            echo 'Stage-B review mutated files outside premerge/reconciliation:'
             echo "$unexpected"
             exit 1
           fi
@@ -90,4 +118,19 @@ jobs:
             anki/klose/learner \
             anki/klose/publish \
             anki/klose/anki
-          echo 'Stage-B reconciliation validation is read-only.'
+          echo 'Klose identity/learner/release/Anki isolation = pass'
+
+      - name: Persist Stage-B review truth and derived plan only
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add -A \
+            anki/klose/third_party_vocabulary/premerge \
+            anki/klose/third_party_vocabulary/reconciliation
+          if git diff --cached --quiet; then
+            echo 'No Stage-B reconciliation review changes.'
+          else
+            git commit -m 'data: refresh third-party Stage-B reconciliation review'
+            git push
+          fi
