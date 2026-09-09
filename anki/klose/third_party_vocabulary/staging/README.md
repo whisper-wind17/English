@@ -19,7 +19,7 @@ Source occurrences        = 18887
 Normalized surfaces       = 3763
 Vocabulary preview        = 1992
 Review/blocker surfaces   = 1410
-Evidence-changed surfaces = 35
+Evidence-changed surfaces = 34
 Multipart resolved        = 3
 ```
 
