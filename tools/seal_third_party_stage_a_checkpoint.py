@@ -27,16 +27,20 @@ STATUS_VERSION = "stage-a-status-v2"
 
 # These files are the Stage-A content/truth boundary that Stage-B premerge may
 # depend on. stage_a_status.json itself is intentionally excluded to avoid a
-# recursive fingerprint.
+# recursive fingerprint. Learner policy is part of the seal even though it does
+# not mutate Identity truth: Stage-B candidates expose LearnerAdmitted and must
+# therefore invalidate when learner admission policy changes.
 CHECKPOINT_FILES = [
     TP / "config" / "source_adapters.csv",
     TP / "review" / "identity_decisions.csv",
     TP / "learner" / "grammar_form_quarantine.csv",
+    TP / "learner" / "content_exclusion_policy.csv",
     TP / "staging" / "occurrences.csv",
     TP / "staging" / "surface_candidates.csv",
     TP / "staging" / "review_queue.csv",
     TP / "staging" / "unified_vocabulary_preview.csv",
     TP / "learner" / "learner_vocabulary_preview.csv",
+    TP / "learner" / "content_exclusion_view.csv",
     TP / "audit" / "defer_context.csv",
     TP / "audit" / "next_batch.json",
 ]
@@ -71,7 +75,7 @@ def sha256_file(path: Path) -> str:
         fail(f"Missing Stage-A checkpoint input: {rel(path)}")
     digest = hashlib.sha256()
     with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+        for chunk in iter(lambda: f.read(1024 * 1024, b"")):
             digest.update(chunk)
     return digest.hexdigest()
 
