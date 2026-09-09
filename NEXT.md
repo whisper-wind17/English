@@ -60,41 +60,38 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#412 / 34408360726 = SUCCESS**
+Latest sealed workflow：**#413 / 34408845906 = SUCCESS**
 
 ```text
-sealed bot head                    = ac775cbb6d8984502094dcee5a578b6a46fe7643
-sealed input commit                = e009ba657a42411b71308c15e921e355667f4c32
+sealed bot head                    = 648f6442ab186a4f8b0c6a154e5b44d88a8d94ff
+sealed input commit                = 5233e73feec456fba4ec8cbef65ab4d1cd1299f0
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3206
-Identity Vocabulary Preview        = 2637
-Learner Vocabulary Preview         = 2614
-Review blockers                    = 718
+Durable Identity decisions         = 3246
+Identity Vocabulary Preview        = 2641
+Learner Vocabulary Preview         = 2618
+Review blockers                    = 678
 Evidence-changed surfaces          = 0
 Multipart resolved                 = 15
 Grammar-form quarantine gates      = 88
-CheckpointFingerprint              = 528a748d1fce9ac8d5a20a4dbbfb91a1da0528b40ba5a3c3f596c509cf23d685
+CheckpointFingerprint              = 9017acabd9050535c4ad738cb479bc93c020cbf2edb6b7902adffcc9a1e8f947
 ```
 
 Recent validated throughput：
 
 ```text
 #409 — v6-semantic-throughput architecture validation
-  semantic budget 120 + independent packet byte budget
-
-#410 — 12-surface semantic-review batch
-  water / wave / wing / yummy / may / rock / rough / smooth / snorkel / trick / miss / like
-  EvidenceChangedSurfaces 4 → 0; ReviewBlockers 727 → 718
-
-#411 — 8-surface split-resolution batch
-  too / french / little / pass / flies / fan / get / line
-  DurableIdentityDecisions 3187 → 3197
-
-#412 — 5-surface split-resolution batch
-  kind / letter / plant / right / sound
-  14 decision rows; reviewed subgroups + explicit held partitions
-  DurableIdentityDecisions 3197 → 3206
+#410 — 12-surface semantic-review batch; ReviewBlockers 727 → 718
+#411 — 8-surface split-resolution batch; DurableIdentityDecisions 3187 → 3197
+#412 — 5-surface split-resolution batch; DurableIdentityDecisions 3197 → 3206
+#413 — 40-surface object-boundary batch
+  36 compositional phrases/constructions → Expressions
+  4 lexical compounds → Vocabulary:
+    100-meter race / alarm clock / american football / art museum
+  DurableIdentityDecisions 3206 → 3246
+  ReviewBlockers 718 → 678
+  IdentityVocabularyPreview 2637 → 2641
+  LearnerVocabularyPreview 2614 → 2618
   full Validation Gate + bot persist + independent post-seal state recheck PASS
 ```
 
@@ -113,7 +110,7 @@ ReviewMode             = full-evidence
 SelectedCount          = 40
 EvidenceWeight         = 120
 EffectiveWeightBudget  = 120
-PacketBytes            = 16917
+PacketBytes            = 15992
 PacketByteBudget       = 260000
 ExecutionReady         = true
 ```
@@ -121,63 +118,63 @@ ExecutionReady         = true
 Selected surfaces：
 
 ```text
-... years old
-100-meter race
-a bar of chocolate
-a bottle of ...
-a bottle of water
-a bowl of
-a bowl of noodles
-a cup of ...
-a hope school
-a loaf of bread
-a packet of biscuits
-a packet of sweets
-a pair of gloves
-a pair of shoes
-a pair of socks
-a piece of cake
-a plate of
-a quarter
-a quarter past seven
-a quarter to ...
-a quarter to eight
-act a play
-after class
-after some time
-agree with
-alarm clock
-all day long
-all right.
-american football
-and so on
-and you?
-any more
-anything else ?
-arrive at
-art museum
-as ... as
-as big as
-as old as
-as tall as
-ask ... for help
+ask the way
+at a time
+at once
+at school
+at table
+at the age of
+at the beginning
+at the end
+at the moment
+ate some cotton candy
+australia day
+australian football
+back then
+be afraid ...
+be born ...
+be called
+be from
+be going to
+be late
+be made from
+be made of
+be poor at
+be quiet.
+be ready to
+beijing opera
+between ... and ...
+black rhino
+bless you!
+blow a kiss
+boarding card
+boarding pass
+book fair
+born to
+borrow a book
+bow and arrow
+bring ... back
+bring about
+brush my teeth
+brush one's teeth
+bumper car
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = d104ee455ca8ebf3b2c21e45f672e4a5b7947996c34a9223e5814eb3855fca3b
-ReviewPacketFingerprint = a67ca393e9d79983b05a6228d8fab6d3c5d399d3fb1f979c1ba982836cd5f424
+ReviewBundleFingerprint = 5271fbde288bdfa9091205d2e8b199e6fb4657ee002e1de0198b2e7f08a655f2
+ReviewPacketFingerprint = 4d61f3f86d558a358f2e59bb4757cf8d1cb7d4654835a173aa4bbd90bce764af
 ```
 
 Execution strategy：
 
 ```text
 object-boundary lane
-→ verify each selected surface is phrase/expression vs atomic vocabulary
-→ batch route true phrases/constructions to Expressions
-→ preserve any genuine lexicalized atomic unit as Vocabulary only with evidence
-→ create transient review/decision_updates.csv
+→ classify lexicalized compounds vs phrase/construction/chunk from textbook evidence
+→ keep genuine stable lexical concepts as Vocabulary
+→ batch route compositional / grammar / collocation / conversational units to Expressions
+→ transient decision_updates.csv
 → deterministic selected-batch closure
 → full Stage-A Validation Gate
 → bot persist
