@@ -18,6 +18,7 @@ on:
       - '1.全国各大教材版本中小学同步/**/*.xlsx'
       - 'anki/klose/source_reference/*_staging/occurrences.csv'
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
+      - 'anki/klose/third_party_vocabulary/config/source_freeze.json'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - 'anki/klose/third_party_vocabulary/review/decision_updates.csv'
       - 'anki/klose/third_party_vocabulary/review/batch_manifest.json'
@@ -155,6 +156,9 @@ jobs:
 
       - name: Build simplified third-party corpus workspace
         run: python tools/build_third_party_corpus.py
+
+      - name: Enforce Third-party SOURCE FREEZE
+        run: python tools/check_third_party_source_freeze.py
 
       - name: Require learner-facing TargetSense in Vocabulary Preview
         run: |
