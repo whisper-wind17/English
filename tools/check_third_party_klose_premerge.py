@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""Validate read-only Third-party → Klose Stage-B premerge readiness artifacts.
-
-A premerge snapshot is valid in two states:
-- ready: Stage A has no active review batch;
-- gated: Stage A still has active review work.
-
-Both states must describe the current sealed Stage-A checkpoint exactly. This avoids
-leaving an older `ReadyForPremergeReview=true` artifact when Stage A changes later.
-"""
+"""Validate read-only Third-party → Klose Stage-B premerge readiness artifacts."""
 from __future__ import annotations
 
 import csv
 import json
+import re
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +24,17 @@ NOTE_EXTENSIONS = BASE / "master" / "note_registry_extensions.csv"
 POLICY_VERSION = "v6-minimal-identity"
 READINESS_VERSION = "third-party-stage-b-readiness-v2"
 SEALED_STATUS_VERSION = "stage-a-status-v2"
+
+SPELLING_GROUPS = [
+    {"color", "colour"}, {"favorite", "favourite"}, {"favor", "favour"},
+    {"center", "centre"}, {"meter", "metre"}, {"liter", "litre"},
+    {"theater", "theatre"}, {"program", "programme"}, {"gray", "grey"},
+    {"mom", "mum"}, {"math", "maths"},
+]
+SPELLING_EQUIVALENTS: dict[str, set[str]] = defaultdict(set)
+for group in SPELLING_GROUPS:
+    for item in group:
+        SPELLING_EQUIVALENTS[item].update(group - {item})
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -51,6 +56,10 @@ def json_obj(path: Path) -> dict[str, object]:
 def require(cond: bool, message: str) -> None:
     if not cond:
         raise SystemExit(message)
+
+
+def orthographic_key(key: str) -> str:
+    return re.sub(r"[\s-]+", "", key.casefold().strip())
 
 
 def main() -> None:
@@ -85,6 +94,13 @@ def main() -> None:
     active_ids = {r.get("NoteID", "") for r in active}
     require(len(active_ids) == len(active) and "" not in active_ids,
             "Klose active NoteID registry is empty/duplicate")
+    active_by_match: dict[str, list[dict[str, str]]] = defaultdict(list)
+    active_by_orthographic: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in active:
+        key = row.get("MatchKey", "").casefold().strip()
+        require(bool(key), f"Active Klose NoteID lacks MatchKey: {row.get('NoteID')}")
+        active_by_match[key].append(row)
+        active_by_orthographic[orthographic_key(key)].append(row)
 
     preview_ids = {r.get("ProvisionalIdentityKey", "") for r in preview}
     candidate_ids = {r.get("ProvisionalIdentityKey", "") for r in candidates}
@@ -95,26 +111,75 @@ def main() -> None:
             "Premerge candidate map does not cover Stage-A Identity Preview exactly")
     require(learner_ids <= preview_ids, "Learner Preview is not subset of Identity Preview")
 
-    allowed_classes = {"no-existing-match", "exact-single", "exact-multiple"}
+    allowed_classes = {
+        "no-existing-match", "exact-single", "exact-multiple",
+        "orthographic-single", "orthographic-multiple",
+        "spelling-single", "spelling-multiple",
+    }
+    class_counts: Counter[str] = Counter()
     for row in candidates:
+        pid = row.get("ProvisionalIdentityKey", "")
         cls = row.get("KloseCandidateClass", "")
+        class_counts[cls] += 1
         require(cls in allowed_classes, f"Invalid KloseCandidateClass: {cls}")
         ids = [x for x in row.get("KloseCandidateNoteIDs", "").split("|") if x]
         require(all(x in active_ids for x in ids),
-                f"Premerge row references non-active/unknown Klose NoteID: {row.get('ProvisionalIdentityKey')}")
+                f"Premerge row references non-active/unknown Klose NoteID: {pid}")
         require(int(row.get("KloseCandidateCount", "-1")) == len(ids),
-                f"Candidate count mismatch: {row.get('ProvisionalIdentityKey')}")
+                f"Candidate count mismatch: {pid}")
         if cls == "no-existing-match":
-            require(not ids, f"no-existing-match unexpectedly has Klose NoteID: {row.get('ProvisionalIdentityKey')}")
-        elif cls == "exact-single":
-            require(len(ids) == 1, f"exact-single must have one Klose NoteID: {row.get('ProvisionalIdentityKey')}")
+            require(not ids, f"no-existing-match unexpectedly has Klose NoteID: {pid}")
+        elif cls.endswith("-single"):
+            require(len(ids) == 1, f"single candidate class must have one Klose NoteID: {pid}: {cls}")
+        elif cls.endswith("-multiple"):
+            require(len(ids) >= 2, f"multiple candidate class must have >=2 Klose NoteIDs: {pid}: {cls}")
+
+        lookup = row.get("LookupMatchKey", "").casefold().strip()
+        exact = active_by_match.get(lookup, [])
+        if cls.startswith("exact-"):
+            require(bool(exact), f"Exact candidate class has no exact current Klose match: {pid}")
+        elif cls.startswith("orthographic-"):
+            require(not exact, f"Orthographic candidate incorrectly bypassed exact match: {pid}")
+            orth = [
+                r for r in active_by_orthographic.get(orthographic_key(lookup), [])
+                if r.get("MatchKey", "").casefold().strip() != lookup
+            ]
+            require(bool(orth), f"Orthographic candidate class has no compact-key match: {pid}")
+        elif cls.startswith("spelling-"):
+            require(not exact, f"Spelling candidate incorrectly bypassed exact match: {pid}")
+            orth = [
+                r for r in active_by_orthographic.get(orthographic_key(lookup), [])
+                if r.get("MatchKey", "").casefold().strip() != lookup
+            ]
+            require(not orth, f"Spelling candidate incorrectly bypassed orthographic match: {pid}")
+            variants = [
+                r for alt in SPELLING_EQUIVALENTS.get(lookup, set())
+                for r in active_by_match.get(alt, [])
+            ]
+            require(bool(variants), f"Spelling candidate class has no configured spelling match: {pid}")
         else:
-            require(len(ids) >= 2, f"exact-multiple must have >=2 Klose NoteIDs: {row.get('ProvisionalIdentityKey')}")
-        expected_admit = "yes" if row.get("ProvisionalIdentityKey", "") in learner_ids else "no"
+            require(not exact, f"no-existing-match missed exact candidate: {pid}")
+            orth = [
+                r for r in active_by_orthographic.get(orthographic_key(lookup), [])
+                if r.get("MatchKey", "").casefold().strip() != lookup
+            ]
+            require(not orth, f"no-existing-match missed orthographic candidate: {pid}")
+            variants = [
+                r for alt in SPELLING_EQUIVALENTS.get(lookup, set())
+                for r in active_by_match.get(alt, [])
+            ]
+            require(not variants, f"no-existing-match missed spelling-equivalent candidate: {pid}")
+
+        expected_admit = "yes" if pid in learner_ids else "no"
         require(row.get("LearnerAdmitted") == expected_admit,
-                f"LearnerAdmitted drift: {row.get('ProvisionalIdentityKey')}")
+                f"LearnerAdmitted drift: {pid}")
         require(row.get("MergeAuthorized", "").casefold() == "no",
-                f"Premerge row unexpectedly authorizes merge: {row.get('ProvisionalIdentityKey')}")
+                f"Premerge row unexpectedly authorizes merge: {pid}")
+
+    recorded_counts = status.get("CandidateClassCounts", {})
+    require(isinstance(recorded_counts, dict), "readiness CandidateClassCounts is not an object")
+    require(recorded_counts == dict(sorted(class_counts.items())),
+            f"readiness CandidateClassCounts drift: recorded={recorded_counts} actual={dict(sorted(class_counts.items()))}")
 
     review_keys = {r.get("MatchKey", "") for r in review}
     deferred_keys = {r.get("MatchKey", "") for r in deferred}
@@ -161,10 +226,13 @@ def main() -> None:
     print(f"Stage-A learner candidates = {len(learner)}")
     print(f"audited deferred carry-forward = {len(review)}")
     print(f"Klose active NoteIDs = {len(active)}")
+    for cls in sorted(class_counts):
+        print(f"premerge candidate {cls} = {class_counts[cls]}")
     print(f"Stage A active review batch = {'yes' if active_plan else 'no'}")
     print(f"Premerge review ready = {'yes' if expected_ready else 'no (gated)'}")
     print("Premerge identity coverage = 100%")
     print("Deferred surface coverage = 100%")
+    print("No-existing-match misses exact/orthographic/spelling candidate = no")
     print("Unknown Klose NoteID references = no")
     print("Stage-B mutation authorized = no")
     print("Merge Authorized = no")
