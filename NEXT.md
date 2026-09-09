@@ -54,27 +54,24 @@ unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b1
 Klose operational mutation           = 0
 ```
 
-Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四学制 grade 6+ middle-school segment excluded；译林低年级 / 牛津小学英语1A–2B deferred pending edition continuity。
-
 ---
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#413 / 34408845906 = SUCCESS**
+Latest sealed workflow：**#414 / 34409080109 = SUCCESS**
 
 ```text
-sealed bot head                    = 648f6442ab186a4f8b0c6a154e5b44d88a8d94ff
-sealed input commit                = 5233e73feec456fba4ec8cbef65ab4d1cd1299f0
+sealed input commit                = 8a998b8530665441113722c6d2132a6083d7e076
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3246
-Identity Vocabulary Preview        = 2641
-Learner Vocabulary Preview         = 2618
-Review blockers                    = 678
+Durable Identity decisions         = 3286
+Identity Vocabulary Preview        = 2650
+Learner Vocabulary Preview         = 2627
+Review blockers                    = 638
 Evidence-changed surfaces          = 0
 Multipart resolved                 = 15
 Grammar-form quarantine gates      = 88
-CheckpointFingerprint              = 9017acabd9050535c4ad738cb479bc93c020cbf2edb6b7902adffcc9a1e8f947
+CheckpointFingerprint              = 5a888061a036d4e97115b1fdba13fea3c2859f9d1fe68d1f2c0461ebdd652226
 ```
 
 Recent validated throughput：
@@ -82,22 +79,15 @@ Recent validated throughput：
 ```text
 #409 — v6-semantic-throughput architecture validation
 #410 — 12-surface semantic-review batch; ReviewBlockers 727 → 718
-#411 — 8-surface split-resolution batch; DurableIdentityDecisions 3187 → 3197
-#412 — 5-surface split-resolution batch; DurableIdentityDecisions 3197 → 3206
-#413 — 40-surface object-boundary batch
-  36 compositional phrases/constructions → Expressions
-  4 lexical compounds → Vocabulary:
-    100-meter race / alarm clock / american football / art museum
-  DurableIdentityDecisions 3206 → 3246
-  ReviewBlockers 718 → 678
-  IdentityVocabularyPreview 2637 → 2641
-  LearnerVocabularyPreview 2614 → 2618
-  full Validation Gate + bot persist + independent post-seal state recheck PASS
+#411 — 8-surface split-resolution batch
+#412 — 5-surface split-resolution batch
+#413 — 40-surface object-boundary batch; ReviewBlockers 718 → 678; 4 Vocabulary + 36 Expressions
+#414 — 40-surface object-boundary batch; ReviewBlockers 678 → 638; 9 Vocabulary + 31 Expressions
 ```
 
-Every completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
+#414 full Validation Gate + bot persist + independent post-seal state recheck PASS；transient `decision_updates.csv` 已清除；Source fingerprints 与 Klose isolation 均保持。
 
-Multipart re-review 必须复用已有稳定 `DecisionKey` / `CanonicalMatchKey`；允许把旧 whole-surface `split-required` 收敛成 reviewed subgroup + current-context held subgroup，但不得猜义。Corpus builder 对 overlap / incomplete partition fail closed。
+Every completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal state recheck。
 
 ---
 
@@ -110,78 +100,60 @@ ReviewMode             = full-evidence
 SelectedCount          = 40
 EvidenceWeight         = 120
 EffectiveWeightBudget  = 120
-PacketBytes            = 15992
+PacketBytes            = 16317
 PacketByteBudget       = 260000
 ExecutionReady         = true
 ```
 
-Selected surfaces：
-
 ```text
-ask the way
-at a time
-at once
-at school
-at table
-at the age of
-at the beginning
-at the end
-at the moment
-ate some cotton candy
-australia day
-australian football
-back then
-be afraid ...
-be born ...
-be called
-be from
-be going to
-be late
-be made from
-be made of
-be poor at
-be quiet.
-be ready to
-beijing opera
-between ... and ...
-black rhino
-bless you!
-blow a kiss
-boarding card
-boarding pass
-book fair
-born to
-borrow a book
-bow and arrow
-bring ... back
-bring about
-brush my teeth
-brush one's teeth
-bumper car
+buy a story book
+buy an ice cream
+buy some gifts
+by myself
+by the way
+call ... friend
+call my friend
+call out
+call up
+can i help you?
+care about
+care for
+carry on with ...
+cat food
+check out
+cheer up
+chewing gum
+children's palace
+children's park
+chinese leaves
+chinese new year
+chinese new year's day
+chinese new year's eve
+chongyang festival
+christmas eve
+clean the windows
+climb the mountain
+climb up
+close to
+come along
+come here
+come over
+come to a stop
+come to an end
+come to school
+come up
+computer lab
+computer studies
+cook the meal
+cowboy hat
 ```
 
-Fingerprints：
-
 ```text
-ReviewBundleFingerprint = 5271fbde288bdfa9091205d2e8b199e6fb4657ee002e1de0198b2e7f08a655f2
-ReviewPacketFingerprint = 4d61f3f86d558a358f2e59bb4757cf8d1cb7d4654835a173aa4bbd90bce764af
+ReviewBundleFingerprint = faf8f831f67ea3a284112e71643d1a18989f7b304b51c2d3138c12af30f44e6f
+ReviewPacketFingerprint = 8896ff58f4939be3f4ff9c8ea6df3da946ca80aec3159581f260eab23b44bc3a
 ```
 
-Execution strategy：
-
-```text
-object-boundary lane
-→ classify lexicalized compounds vs phrase/construction/chunk from textbook evidence
-→ keep genuine stable lexical concepts as Vocabulary
-→ batch route compositional / grammar / collocation / conversational units to Expressions
-→ transient decision_updates.csv
-→ deterministic selected-batch closure
-→ full Stage-A Validation Gate
-→ bot persist
-→ independent post-seal state recheck
-```
-
-Planner contract：v6 以 semantic complexity 为主预算；object-boundary 当前 `WeightBudget=120`、`PacketByteBudget=260000`。Source mutation 与 decision mutation 不得混合。
+Execution strategy：按教材证据区分 lexicalized compound / proper named concept 与 compositional phrase / construction；前者留 Vocabulary，后者批量 route Expressions。不同 identity merge 不在 object-boundary lane 顺手处理。
 
 ---
 
@@ -210,18 +182,7 @@ morphology / form canonicalization
 
 ## 7. Stage-B state — GATED
 
-`premerge/readiness.json` 仍是旧 snapshot，不是当前 Stage-A authority。
-
-```text
-snapshot SourceOccurrences    = 7535
-current Stage-A occurrences   = 18887
-ReadyForPremergeReview        = false
-StageBMutationAuthorized      = false
-StableThirdPartyIDMinted      = false
-MergeAuthorizedRows           = 0
-```
-
-Phase A2 完成并通过 final Stage-A seal 前，不刷新 Stage-B premerge snapshot，不开始 durable reconciliation / Stable NoteID allocation。
+`premerge/readiness.json` 仍是旧 snapshot，不是当前 Stage-A authority。Phase A2 完成并通过 final Stage-A seal 前，不刷新 Stage-B premerge snapshot，不开始 durable reconciliation / Stable NoteID allocation。
 
 ---
 
