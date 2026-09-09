@@ -44,7 +44,7 @@ LIMITS = {
     "policy-review": (30, 60),
     "actionable-semantic": (50, 90),
     "evidence-revalidation": (60, 120),
-    "semantic-review": (30, 60),
+    "semantic-review": (60, 60),
     "split-resolution": (25, 70),
     "object-boundary": (25, 50),
 }
