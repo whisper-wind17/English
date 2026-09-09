@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v2",
   "CheckpointSemantics": "sealed only after Stage-A Completion Recheck, learner gate check, audit-batch recheck, and Klose isolation pass",
-  "InputCommit": "ec558045fff768efd0d4269393add05ae04603dc",
-  "WorkflowRunID": "34360581909",
-  "WorkflowRunNumber": "407",
+  "InputCommit": "f357be80b3ffa808d3793f219ab9f4d720c50093",
+  "WorkflowRunID": "34364204488",
+  "WorkflowRunNumber": "409",
   "SourceOccurrences": 18887,
   "NormalizedSurfaces": 3763,
   "DurableIdentityDecisions": 3175,
@@ -14,24 +14,34 @@
   "MultipartResolved": 13,
   "GrammarFormQuarantineGates": 88,
   "NextBatch": {
-    "PlanVersion": "v5-throughput-delta",
+    "PlanVersion": "v6-semantic-throughput",
     "ReviewLane": "semantic-review",
-    "SelectedCount": 4,
+    "SelectedCount": 12,
     "SelectedMatchKeys": [
       "water",
       "wave",
       "wing",
-      "rock"
+      "yummy",
+      "may",
+      "rock",
+      "rough",
+      "smooth",
+      "snorkel",
+      "trick",
+      "miss",
+      "like"
     ],
-    "EvidenceWeight": 60,
-    "EffectiveWeightBudget": 60,
+    "EvidenceWeight": 91,
+    "EffectiveWeightBudget": 120,
+    "PacketBytes": 58255,
+    "PacketByteBudget": 300000,
     "ExecutionReady": true,
     "ReviewBundleFingerprint": "17561cb7771dca48b3d4268416a5550c1e1ae59dfa30012769ca6ccdc0566693",
-    "ReviewPacketFingerprint": "00183cd360d245e057f12ce196bdc9e2b591497edc195a5174c971b8d1fbf151"
+    "ReviewPacketFingerprint": "3d8685394e8ffd345c6feecc143e53616b4b1fe1708bcfa9c997c1c3386c9465"
   },
-  "SealedInputCommit": "ec558045fff768efd0d4269393add05ae04603dc",
-  "SealedWorkflowRunID": "34360581909",
-  "SealedWorkflowRunNumber": "407",
+  "SealedInputCommit": "f357be80b3ffa808d3793f219ab9f4d720c50093",
+  "SealedWorkflowRunID": "34364204488",
+  "SealedWorkflowRunNumber": "409",
   "ContentFingerprintAlgorithm": "sha256-raw-bytes-v1",
   "ContentFingerprints": {
     "anki/klose/third_party_vocabulary/config/source_adapters.csv": "fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272",
@@ -43,7 +53,7 @@
     "anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv": "43422a5ecc3095803e4fea7b0e0c203d46b5174fb3e9e61c461868e595e76d3f",
     "anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv": "76f3a7c7d08143789a0c3a4de320d301900ca0ace85e1593eaf5b76b15909ef5",
     "anki/klose/third_party_vocabulary/audit/defer_context.csv": "2bd751f55bda7840a5ba36a64b0d378fee7c13d44ce3a14fd44b10d82e021b54",
-    "anki/klose/third_party_vocabulary/audit/next_batch.json": "b87d8e9acf90fb3a18d0166691c897f731455ef365737742255670ad753dd2a4"
+    "anki/klose/third_party_vocabulary/audit/next_batch.json": "eadc51764619a8e8fd7e3d286f87c863f7753859910b14336e485df88ba4c6c5"
   },
-  "CheckpointFingerprint": "1c4acaaaca00c1001ad272d96c1edfeb7935aa7e4c675f62e8e74756dd4a1446"
+  "CheckpointFingerprint": "f4b386b03a3f074360ecf82ac001bd63102bc59ec9f7adcb330166ba61217dd6"
 }

@@ -1,21 +1,14 @@
 {
-  "PlanVersion": "v5-throughput-delta",
+  "PlanVersion": "v6-semantic-throughput",
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
     "water",
     "wave",
     "wing",
-    "rock"
-  ],
-  "SelectedCount": 4,
-  "EvidenceWeight": 60,
-  "SurfaceCap": 60,
-  "WeightBudget": 60,
-  "EffectiveWeightBudget": 60,
-  "PackingSkippedMatchKeys": [
     "yummy",
     "may",
+    "rock",
     "rough",
     "smooth",
     "snorkel",
@@ -23,11 +16,19 @@
     "miss",
     "like"
   ],
+  "SelectedCount": 12,
+  "EvidenceWeight": 91,
+  "SurfaceCap": 30,
+  "WeightBudget": 120,
+  "EffectiveWeightBudget": 120,
+  "PacketBytes": 58255,
+  "PacketByteBudget": 300000,
+  "PackingSkippedMatchKeys": [],
   "OversizedSingleSurface": false,
   "FastRevalidationCandidates": 0,
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
   "ReviewBundleFingerprint": "17561cb7771dca48b3d4268416a5550c1e1ae59dfa30012769ca6ccdc0566693",
-  "ReviewPacketFingerprint": "00183cd360d245e057f12ce196bdc9e2b591497edc195a5174c971b8d1fbf151"
+  "ReviewPacketFingerprint": "3d8685394e8ffd345c6feecc143e53616b4b1fe1708bcfa9c997c1c3386c9465"
 }

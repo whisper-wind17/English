@@ -1,17 +1,27 @@
 {
-  "PlanVersion": "v5-throughput-delta",
-  "ReviewPacketVersion": "selected-review-packet-v2",
+  "PlanVersion": "v6-semantic-throughput",
+  "ReviewPacketVersion": "selected-review-packet-v3",
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
     "water",
     "wave",
     "wing",
-    "rock"
+    "yummy",
+    "may",
+    "rock",
+    "rough",
+    "smooth",
+    "snorkel",
+    "trick",
+    "miss",
+    "like"
   ],
-  "SelectedCount": 4,
+  "SelectedCount": 12,
+  "EvidenceWeight": 91,
+  "PacketBytes": 58255,
   "ReviewBundleFingerprint": "17561cb7771dca48b3d4268416a5550c1e1ae59dfa30012769ca6ccdc0566693",
-  "ReviewPacketFingerprint": "00183cd360d245e057f12ce196bdc9e2b591497edc195a5174c971b8d1fbf151",
+  "ReviewPacketFingerprint": "3d8685394e8ffd345c6feecc143e53616b4b1fe1708bcfa9c997c1c3386c9465",
   "Items": [
     {
       "MatchKey": "water",
@@ -1111,6 +1121,1005 @@
       ]
     },
     {
+      "MatchKey": "yummy",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "yummy",
+      "Definitions": "n. 美味的东西;令人喜爱的东西 adj. 好吃的;美味的;愉快的",
+      "SourceIDs": "cambridge_join_start3|jiaoke_eec_start3|yilin_start3",
+      "SourceBooks": "cambridge_join_start3:3年级上|jiaoke_eec_start3:6年级下|yilin_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g3-upper|r193|yummy",
+        "jiaoke_eec_start3|g6-lower|r071|yummy",
+        "yilin_start3|g5-lower|r101|yummy"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r193|yummy",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "193",
+          "Word": "yummy",
+          "Definition": "n. 美味的东西;令人喜爱的东西 adj. 好吃的;美味的;愉快的",
+          "Before": [
+            "vegetable",
+            "warning",
+            "water",
+            "welcome",
+            "wham",
+            "X-ray",
+            "year",
+            "yoyo"
+          ],
+          "After": [
+            "zebra",
+            "all right",
+            "blackboard",
+            "board",
+            "chair",
+            "classroom",
+            "cut out",
+            "desk"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-lower|r071|yummy",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "71",
+          "Word": "yummy",
+          "Definition": "n. 美味的东西;令人喜爱的东西 adj. 好吃的;美味的;愉快的",
+          "Before": [
+            "address",
+            "road",
+            "phone number",
+            "peach",
+            "dessert",
+            "sunshine",
+            "steak",
+            "central"
+          ],
+          "After": [
+            "kind",
+            "meat",
+            "boil",
+            "taste",
+            "Take your time eating.",
+            "bowl",
+            "any more",
+            "grape"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "yilin_start3|g5-lower|r101|yummy",
+          "SourceID": "yilin_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "101",
+          "Word": "yummy",
+          "Definition": "n. 美味的东西;令人喜爱的东西 adj. 好吃的;美味的;愉快的",
+          "Before": [
+            "smell",
+            "meat",
+            "vegetable",
+            "tomato",
+            "potato",
+            "I can't wait!",
+            "look for",
+            "ready"
+          ],
+          "After": [
+            "love",
+            "bread",
+            "win",
+            "yeah",
+            "angry",
+            "spot",
+            "catch",
+            "drive ... away"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "may",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "May|may",
+      "Definitions": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+      "SourceIDs": "beijing_start1|beishida_start3|cambridge_join_start3|guangdong_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|luke_54_start3|minjiao_start3|niujin_shanghai_start1|renjiao_start1|renjiao_start3|shaanxi_start3|xiangshao_start3|yilin_start3",
+      "SourceBooks": "beijing_start1:3年级上|beijing_start1:3年级下|beishida_start3:6年级上|cambridge_join_start3:4年级上|guangdong_start3:5年级上|guangzhou_start3:3年级上|guangzhou_start3:4年级下|hujiao_start3:4年级下|hujiao_start3:6年级下|jiaoke_eec_start3:4年级下|jiaoke_eec_start3:5年级上|jijiao_start3:4年级下|jijiao_start3:5年级上|kepu_start3:5年级上|kepu_start3:6年级上|luke_54_start3:4年级上|luke_54_start3:5年级上|minjiao_start3:3年级上|minjiao_start3:5年级上|niujin_shanghai_start1:4年级上|renjiao_start1:3年级上|renjiao_start3:5年级下|shaanxi_start3:5年级上|shaanxi_start3:5年级下|xiangshao_start3:5年级下|yilin_start3:4年级下|yilin_start3:5年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "functional-polysemy",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:may",
+          "MatchKey": "may",
+          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r048|may\",\"hujiao_start3|g4-lower|r111|may\",\"jijiao_start3|g4-lower|r040|may\",\"renjiao_start1|g3-upper|r094|may\",\"renjiao_start3|g5-lower|r066|may\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "may#month",
+          "ObjectType": "vocabulary",
+          "TargetSense": "五月",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-month-revalidation",
+          "Rationale": "Capitalized Jijiao May is inside the explicit Jan.-Dec. sequence and joins the calendar-month subgroup."
+        },
+        {
+          "DecisionKey": "surface:may#modal",
+          "MatchKey": "may",
+          "OccurrenceKeys": "[\"beijing_start1|g3-lower|r038|may\",\"hujiao_start3|g6-lower|r090|may\",\"jijiao_start3|g5-upper|r046|may\"]",
+          "Action": "route-expression",
+          "CanonicalMatchKey": "",
+          "ObjectType": "expression",
+          "TargetSense": "可以；可能",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-modal-revalidation",
+          "Rationale": "The second Jijiao form is lowercase may outside the month sequence, in a travel/place clause vocabulary neighborhood. Preserve the established casing-and-function distinction and route it with modal may to Expressions."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r048|may",
+        "beijing_start1|g3-lower|r038|may",
+        "beishida_start3|g6-upper|r072|may",
+        "cambridge_join_start3|g4-upper|r041|may",
+        "guangdong_start3|g5-upper|r023|may",
+        "guangzhou_start3|g3-upper|r143|may",
+        "guangzhou_start3|g4-lower|r146|may",
+        "hujiao_start3|g4-lower|r111|may",
+        "hujiao_start3|g6-lower|r090|may",
+        "jiaoke_eec_start3|g4-lower|r094|may",
+        "jiaoke_eec_start3|g5-upper|r080|may",
+        "jijiao_start3|g4-lower|r040|may",
+        "jijiao_start3|g5-upper|r046|may",
+        "kepu_start3|g5-upper|r016|may",
+        "kepu_start3|g6-upper|r048|may",
+        "luke_54_start3|g4-upper|r091|may",
+        "luke_54_start3|g5-upper|r046|may",
+        "minjiao_start3|g3-upper|r114|may",
+        "minjiao_start3|g5-upper|r054|may",
+        "niujin_shanghai_start1|g4-upper|r112|may",
+        "renjiao_start1|g3-upper|r094|may",
+        "renjiao_start3|g5-lower|r066|may",
+        "shaanxi_start3|g5-upper|r009|may",
+        "shaanxi_start3|g5-lower|r030|may",
+        "xiangshao_start3|g5-lower|r032|may",
+        "yilin_start3|g4-lower|r108|may",
+        "yilin_start3|g5-lower|r119|may"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g3-upper|r048|may",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "48",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "jump",
+            "January",
+            "March",
+            "February",
+            "every",
+            "April",
+            "August",
+            "born"
+          ],
+          "After": [
+            "June",
+            "fifteenth",
+            "fourteenth",
+            "How old ...?",
+            "July",
+            "weather",
+            "like",
+            "sunny"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beijing_start1|g3-lower|r038|may",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "38",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "sweet",
+            "potato",
+            "sweet potato",
+            "food",
+            "best",
+            "great",
+            "apple",
+            "drink"
+          ],
+          "After": [
+            "tea",
+            "sure",
+            "child",
+            "children",
+            "fly",
+            "kite",
+            "song",
+            "voice"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start3|g6-upper|r072|may",
+          "SourceID": "beishida_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "72",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "happy",
+            "sixth",
+            "seventh",
+            "eighth",
+            "ninth",
+            "tenth",
+            "birthday",
+            "June"
+          ],
+          "After": [
+            "September",
+            "November",
+            "July",
+            "spring",
+            "March",
+            "check",
+            "checked",
+            "autumn"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g4-upper|r041|may",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "41",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "cool",
+            "December",
+            "February",
+            "how old",
+            "in",
+            "January",
+            "June",
+            "March"
+          ],
+          "After": [
+            "Nice to meet you.",
+            "November",
+            "October",
+            "remember",
+            "season",
+            "September",
+            "spring",
+            "summer"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r023|may",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "23",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "cold",
+            "weather",
+            "hang glider",
+            "month",
+            "January",
+            "February",
+            "March",
+            "April"
+          ],
+          "After": [
+            "June",
+            "before",
+            "after",
+            "when",
+            "winter holiday",
+            "go ice-skating",
+            "now",
+            "beach"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r143|may",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "143",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "car",
+            "bus",
+            "bike",
+            "boat",
+            "school",
+            "thing",
+            "do",
+            "ruler"
+          ],
+          "After": [
+            "use",
+            "here",
+            "Here you are.",
+            "pencil",
+            "sorry",
+            "bag",
+            "pen",
+            "book"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g4-lower|r146|may",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "146",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "lots of",
+            "dress",
+            "as",
+            "dress up as",
+            "Father Christmas",
+            "July",
+            "summer",
+            "holiday"
+          ],
+          "After": [
+            "Mother's Day",
+            "September",
+            "Teachers' Day",
+            "October",
+            "Halloween",
+            "spring",
+            "festival",
+            "Spring Festival"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g4-lower|r111|may",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "111",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "Sunday",
+            "clock",
+            "play chess",
+            "at the weekend",
+            "late for",
+            "be late for",
+            "China",
+            "talk"
+          ],
+          "After": [
+            "June",
+            "January",
+            "February",
+            "March",
+            "April",
+            "July",
+            "August",
+            "September"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-lower|r090|may",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "90",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "ago",
+            "gatekeeper",
+            "praise",
+            "praise ... for ...",
+            "sign",
+            "middle",
+            "special",
+            "path"
+          ],
+          "After": [
+            "lost",
+            "worry",
+            "follow",
+            "in the middle",
+            "look out",
+            "no smoking",
+            "no swimming",
+            "get lost"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g4-lower|r094|may",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "94",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "post office",
+            "policeman",
+            "ask",
+            "excuse me",
+            "over there",
+            "ah",
+            "see",
+            "clerk"
+          ],
+          "After": [
+            "send",
+            "How long ...?",
+            "take",
+            "about",
+            "bookstore",
+            "restaurant",
+            "hospital",
+            "supermarket"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-upper|r080|may",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "80",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "August",
+            "nineteenth",
+            "twenty-third",
+            "tie",
+            "July",
+            "October",
+            "December",
+            "April"
+          ],
+          "After": [
+            "mother",
+            "February",
+            "twelfth",
+            "size",
+            "without",
+            "button",
+            "collar",
+            "a lot"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-lower|r040|may",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "40",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "behind",
+            "he",
+            "she",
+            "month",
+            "Jan.",
+            "Feb.",
+            "Mar.",
+            "Apr."
+          ],
+          "After": [
+            "Jun.",
+            "Jul.",
+            "Aug.",
+            "Sept.",
+            "Oct.",
+            "Nov.",
+            "Dec.",
+            "rain"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g5-upper|r046|may",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "46",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "of",
+            "star",
+            "here",
+            "beautiful",
+            "love",
+            "travel",
+            "interesting",
+            "place"
+          ],
+          "After": [
+            "young",
+            "come",
+            "great",
+            "call",
+            "slow",
+            "plane",
+            "fast",
+            "train"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "kepu_start3|g5-upper|r016|may",
+          "SourceID": "kepu_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "16",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "week",
+            "classroom",
+            "centre",
+            "ping-pong",
+            "tennis",
+            "play football",
+            "play ping-pong",
+            "have a match"
+          ],
+          "After": [
+            "park",
+            "grass",
+            "thing",
+            "seat",
+            "next time",
+            "TV",
+            "every",
+            "tall"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "kepu_start3|g6-upper|r048|may",
+          "SourceID": "kepu_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "48",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "floor",
+            "fifth",
+            "second",
+            "first",
+            "same",
+            "building",
+            "ground",
+            "April"
+          ],
+          "After": [
+            "year",
+            "dinner",
+            "month",
+            "night",
+            "date",
+            "age",
+            "than",
+            "around"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g4-upper|r091|may",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "91",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "businessman",
+            "cute",
+            "nurse",
+            "hospital",
+            "policeman",
+            "gardener",
+            "park",
+            "speak"
+          ],
+          "After": [
+            "hold on",
+            "call",
+            "do some training",
+            "write",
+            "email",
+            "sure",
+            "everyone",
+            "winner"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g5-upper|r046|may",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "46",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "worry",
+            "saw",
+            "see",
+            "yesterday",
+            "helpful",
+            "party",
+            "when",
+            "March"
+          ],
+          "After": [
+            "April",
+            "October",
+            "present",
+            "open",
+            "wish",
+            "song",
+            "say cheese",
+            "had"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g3-upper|r114|may",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "114",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "which",
+            "the",
+            "Here you are.",
+            "You're welcome.",
+            "pen",
+            "pencil",
+            "zoo",
+            "pencil-box"
+          ],
+          "After": [
+            "use",
+            "sure",
+            "book",
+            "bag",
+            "crayon",
+            "new",
+            "year",
+            "party"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g5-upper|r054|may",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "54",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "cook",
+            "player",
+            "chess",
+            "play chess",
+            "come on",
+            "April",
+            "March",
+            "June"
+          ],
+          "After": [
+            "month",
+            "December",
+            "January",
+            "easy",
+            "remember",
+            "November",
+            "February",
+            "Excuse me."
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g4-upper|r112|may",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "112",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "warm",
+            "hot",
+            "wet",
+            "dry",
+            "January",
+            "February",
+            "March",
+            "April"
+          ],
+          "After": [
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+            "China"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g3-upper|r094|may",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "94",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "socks",
+            "skirt",
+            "dress",
+            "shirt",
+            "January",
+            "February",
+            "March",
+            "April"
+          ],
+          "After": [
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+            "birthday"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r066|may",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "66",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "lovely",
+            "leaf",
+            "fall",
+            "paint",
+            "January",
+            "February",
+            "March",
+            "April"
+          ],
+          "After": [
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+            "few"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "shaanxi_start3|g5-upper|r009|may",
+          "SourceID": "shaanxi_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "9",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "time",
+            "on time",
+            "clock",
+            "wall",
+            "come in",
+            "sit down",
+            "be late",
+            "play computer games"
+          ],
+          "After": [
+            "again",
+            "too",
+            "too many",
+            "make the bed",
+            "sweep",
+            "sweep the floor",
+            "dish",
+            "do the dishes"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "shaanxi_start3|g5-lower|r030|may",
+          "SourceID": "shaanxi_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "30",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "plant",
+            "plant trees",
+            "ride",
+            "ride a bike",
+            "Tree Planting Day",
+            "interesting",
+            "March",
+            "April"
+          ],
+          "After": [
+            "warm",
+            "hot",
+            "go swimming",
+            "cool",
+            "rich",
+            "cold",
+            "begin",
+            "from"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "xiangshao_start3|g5-lower|r032|may",
+          "SourceID": "xiangshao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "32",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "take",
+            "library",
+            "throw",
+            "waste",
+            "floor",
+            "road",
+            "park",
+            "March"
+          ],
+          "After": [
+            "International Children's Day",
+            "June",
+            "month",
+            "year",
+            "January",
+            "February",
+            "April",
+            "July"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "yilin_start3|g4-lower|r108|may",
+          "SourceID": "yilin_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "108",
+          "Word": "may",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "water",
+            "ill",
+            "tired",
+            "Good night.",
+            "dear",
+            "happy",
+            "Mrs",
+            "speak"
+          ],
+          "After": [
+            "come to school",
+            "cold",
+            "fever",
+            "hear",
+            "take care",
+            "I'm fine, thank you.",
+            "See you tomorrow.",
+            "See you."
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "yilin_start3|g5-lower|r119|may",
+          "SourceID": "yilin_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "119",
+          "Word": "May",
+          "Definition": "aux. 可以,能够;可能,也许;祝,愿;会,能",
+          "Before": [
+            "Spring Festival",
+            "January",
+            "February",
+            "call",
+            "Chinese New Year",
+            "get together",
+            "dumpling",
+            "Dragon Boat Festival"
+          ],
+          "After": [
+            "June",
+            "dragon boat race",
+            "place",
+            "rice dumpling",
+            "Mid-Autumn Festival",
+            "September",
+            "October",
+            "moon cake"
+          ]
+        }
+      ]
+    },
+    {
       "MatchKey": "rock",
       "ReviewMode": "full-evidence",
       "DisplayForms": "rock",
@@ -1189,6 +2198,2177 @@
             "sunny",
             "too",
             "tourist"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "rough",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "rough",
+      "Definitions": "n. 艰苦;高低不平的地面;未经加工的材料;粗糙的部分 adj. 粗糙的;粗略的;粗野的;艰苦的;未经加工的 vt. 使粗糙;粗暴对待;草拟 adv. 粗糙地;粗略地;粗暴地 vi. 举止粗野",
+      "SourceIDs": "niujin_shanghai_start1",
+      "SourceBooks": "niujin_shanghai_start1:2年级下|niujin_shanghai_start1:4年级下",
+      "CandidateSignals": "multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-hard",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "niujin_shanghai_start1|g2-lower|r012|rough",
+        "niujin_shanghai_start1|g4-lower|r011|rough"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g2-lower|r012|rough",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "rough",
+          "Definition": "n. 艰苦;高低不平的地面;未经加工的材料;粗糙的部分 adj. 粗糙的;粗略的;粗野的;艰苦的;未经加工的 vt. 使粗糙;粗暴对待;草拟 adv. 粗糙地;粗略地;粗暴地 vi. 举止粗野",
+          "Before": [
+            "pink",
+            "orange",
+            "brown",
+            "black",
+            "watch",
+            "bag",
+            "soft",
+            "hard"
+          ],
+          "After": [
+            "smooth",
+            "train",
+            "bus",
+            "car",
+            "van",
+            "bicycle",
+            "ship",
+            "run"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g4-lower|r011|rough",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "11",
+          "Word": "rough",
+          "Definition": "n. 艰苦;高低不平的地面;未经加工的材料;粗糙的部分 adj. 粗糙的;粗略的;粗野的;艰苦的;未经加工的 vt. 使粗糙;粗暴对待;草拟 adv. 粗糙地;粗略地;粗暴地 vi. 举止粗野",
+          "Before": [
+            "grape",
+            "plum",
+            "cherry",
+            "strawberry",
+            "a glass of",
+            "juice",
+            "hard",
+            "soft"
+          ],
+          "After": [
+            "smooth",
+            "sharp",
+            "blunt",
+            "thick",
+            "thin",
+            "knife",
+            "pencil",
+            "pencil case"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "smooth",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "smooth",
+      "Definitions": "n. 平滑部分;一块平地 adj. 顺利的;光滑的;平稳的 vt. 使光滑;消除(障碍等);使优雅;缓和 adv. 光滑地;平稳地;流畅地 vi. 变平静;变平滑",
+      "SourceIDs": "niujin_shanghai_start1",
+      "SourceBooks": "niujin_shanghai_start1:2年级下|niujin_shanghai_start1:4年级下",
+      "CandidateSignals": "multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-hard",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "niujin_shanghai_start1|g2-lower|r013|smooth",
+        "niujin_shanghai_start1|g4-lower|r012|smooth"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g2-lower|r013|smooth",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "13",
+          "Word": "smooth",
+          "Definition": "n. 平滑部分;一块平地 adj. 顺利的;光滑的;平稳的 vt. 使光滑;消除(障碍等);使优雅;缓和 adv. 光滑地;平稳地;流畅地 vi. 变平静;变平滑",
+          "Before": [
+            "orange",
+            "brown",
+            "black",
+            "watch",
+            "bag",
+            "soft",
+            "hard",
+            "rough"
+          ],
+          "After": [
+            "train",
+            "bus",
+            "car",
+            "van",
+            "bicycle",
+            "ship",
+            "run",
+            "skate"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g4-lower|r012|smooth",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "12",
+          "Word": "smooth",
+          "Definition": "n. 平滑部分;一块平地 adj. 顺利的;光滑的;平稳的 vt. 使光滑;消除(障碍等);使优雅;缓和 adv. 光滑地;平稳地;流畅地 vi. 变平静;变平滑",
+          "Before": [
+            "plum",
+            "cherry",
+            "strawberry",
+            "a glass of",
+            "juice",
+            "hard",
+            "soft",
+            "rough"
+          ],
+          "After": [
+            "sharp",
+            "blunt",
+            "thick",
+            "thin",
+            "knife",
+            "pencil",
+            "pencil case",
+            "hill"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "snorkel",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "snorkel",
+      "Definitions": "n. 通气管;潜艇换气装置 vi. 用水下通气管潜航",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:5年级上|cambridge_join_start3:5年级下",
+      "CandidateSignals": "multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-hard",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g5-upper|r169|snorkel",
+        "cambridge_join_start3|g5-lower|r123|snorkel"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-upper|r169|snorkel",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "169",
+          "Word": "snorkel",
+          "Definition": "n. 通气管;潜艇换气装置 vi. 用水下通气管潜航",
+          "Before": [
+            "meet",
+            "Nintendo",
+            "no problem",
+            "note pad",
+            "pretty",
+            "princess",
+            "recorder",
+            "several"
+          ],
+          "After": [
+            "so",
+            "so that",
+            "sound",
+            "stage",
+            "such",
+            "suddenly",
+            "towel",
+            "trip"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-lower|r123|snorkel",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "123",
+          "Word": "snorkel",
+          "Definition": "n. 通气管;潜艇换气装置 vi. 用水下通气管潜航",
+          "Before": [
+            "island",
+            "jet-ski",
+            "most",
+            "nearby",
+            "pass by",
+            "rain",
+            "rock",
+            "sand"
+          ],
+          "After": [
+            "snorkelling",
+            "starfish",
+            "sun",
+            "sunny",
+            "too",
+            "tourist",
+            "windy",
+            "adventure"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "trick",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "trick",
+      "Definitions": "n. 诡计;恶作剧;窍门;花招;骗局;欺诈 adj. 特技的;欺诈的;有决窍的 vt. 欺骗;哄骗;装饰;打扮 vi. 哄骗;戏弄",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级上|cambridge_join_start3:6年级下",
+      "CandidateSignals": "multiple-occurrences",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-hard",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-upper|r091|trick",
+        "cambridge_join_start3|g6-lower|r104|trick"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r091|trick",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "91",
+          "Word": "trick",
+          "Definition": "n. 诡计;恶作剧;窍门;花招;骗局;欺诈 adj. 特技的;欺诈的;有决窍的 vt. 欺骗;哄骗;装饰;打扮 vi. 哄骗;戏弄",
+          "Before": [
+            "plant",
+            "ring",
+            "strange",
+            "surprise",
+            "sweet potato",
+            "Thanksgiving",
+            "the Mayflower",
+            "treat"
+          ],
+          "After": [
+            "trick or treat",
+            "turkey",
+            "upstairs",
+            "wild",
+            "accident",
+            "bandage",
+            "belt",
+            "bottle"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-lower|r104|trick",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "104",
+          "Word": "trick",
+          "Definition": "n. 诡计;恶作剧;窍门;花招;骗局;欺诈 adj. 特技的;欺诈的;有决窍的 vt. 欺骗;哄骗;装饰;打扮 vi. 哄骗;戏弄",
+          "Before": [
+            "hood",
+            "joy",
+            "nonsense",
+            "read",
+            "rest",
+            "Sherwood Forest",
+            "shock",
+            "Spiderman"
+          ],
+          "After": [
+            "win",
+            "dangerous",
+            "enough",
+            "every now and then",
+            "glad",
+            "ocean",
+            "owl",
+            "robot"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "miss",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Miss|miss",
+      "Definitions": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+      "SourceIDs": "beijing_start1|beishida_start3|cambridge_join_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|luke_54_start3|minjiao_start3|niujin_shanghai_start1|shaanxi_start3|waiyan_start1|waiyan_start3|xiangshao_start3|yilin_start3",
+      "SourceBooks": "beijing_start1:3年级上|beijing_start1:4年级下|beishida_start3:5年级上|cambridge_join_start3:3年级上|cambridge_join_start3:4年级上|guangzhou_start3:3年级上|guangzhou_start3:5年级下|hujiao_start3:3年级上|hujiao_start3:6年级上|jiaoke_eec_start3:3年级上|jiaoke_eec_start3:6年级上|jiaoke_eec_start3:6年级下|jijiao_start3:4年级上|kepu_start3:3年级上|luke_54_start3:3年级上|luke_54_start3:5年级下|minjiao_start3:3年级上|minjiao_start3:6年级下|niujin_shanghai_start1:3年级上|shaanxi_start3:3年级上|waiyan_start1:5年级上|waiyan_start1:6年级上|waiyan_start3:4年级下|waiyan_start3:5年级上|xiangshao_start3:3年级上|yilin_start3:3年级上",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "semantic-cross-source",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:miss",
+          "MatchKey": "miss",
+          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r004|miss\",\"hujiao_start3|g3-upper|r004|miss\",\"jijiao_start3|g4-upper|r016|miss\",\"waiyan_start1|g6-upper|r038|miss\",\"waiyan_start3|g4-lower|r093|miss\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "miss#title",
+          "ObjectType": "vocabulary",
+          "TargetSense": "小姐；女士（称谓）",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "jijiao-start3-multipart-title-revalidation",
+          "Rationale": "The Jijiao source form is capitalized Miss. Despite weak flat-list neighborhood evidence, casing and the elementary title inventory support the personal-title subgroup; do not reinterpret it from the broad dictionary gloss."
+        },
+        {
+          "DecisionKey": "surface:miss#verb",
+          "MatchKey": "miss",
+          "OccurrenceKeys": "[\"beijing_start1|g4-lower|r035|miss\",\"hujiao_start3|g6-upper|r119|miss\",\"waiyan_start1|g5-upper|r065|miss\",\"waiyan_start3|g5-upper|r139|miss\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "miss#verb",
+          "ObjectType": "vocabulary",
+          "TargetSense": "错过；想念",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "multipart-miss-verb-preserved",
+          "Rationale": "Existing lowercase lexical-verb occurrences remain the miss verb subgroup; the new Jijiao source form is capitalized title usage."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r004|miss",
+        "beijing_start1|g4-lower|r035|miss",
+        "beishida_start3|g5-upper|r007|miss",
+        "cambridge_join_start3|g3-upper|r034|miss",
+        "cambridge_join_start3|g4-upper|r177|miss",
+        "guangzhou_start3|g3-upper|r015|miss",
+        "guangzhou_start3|g5-lower|r134|miss",
+        "hujiao_start3|g3-upper|r004|miss",
+        "hujiao_start3|g6-upper|r119|miss",
+        "jiaoke_eec_start3|g3-upper|r042|miss",
+        "jiaoke_eec_start3|g6-upper|r069|miss",
+        "jiaoke_eec_start3|g6-lower|r091|miss",
+        "jijiao_start3|g4-upper|r016|miss",
+        "kepu_start3|g3-upper|r016|miss",
+        "luke_54_start3|g3-upper|r017|miss",
+        "luke_54_start3|g5-lower|r142|miss",
+        "minjiao_start3|g3-upper|r004|miss",
+        "minjiao_start3|g6-lower|r069|miss",
+        "niujin_shanghai_start1|g3-upper|r002|miss",
+        "shaanxi_start3|g3-upper|r004|miss",
+        "waiyan_start1|g5-upper|r065|miss",
+        "waiyan_start1|g6-upper|r038|miss",
+        "waiyan_start3|g4-lower|r093|miss",
+        "waiyan_start3|g5-upper|r139|miss",
+        "xiangshao_start3|g3-upper|r006|miss",
+        "yilin_start3|g3-upper|r004|miss"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g3-upper|r004|miss",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "4",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "boy",
+            "girl"
+          ],
+          "After": [
+            "first",
+            "September",
+            "second",
+            "third",
+            "fourth",
+            "pupil",
+            "hi",
+            "name"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beijing_start1|g4-lower|r035|miss",
+          "SourceID": "beijing_start1",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "35",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "nearby",
+            "grey",
+            "beside",
+            "station",
+            "far",
+            "way",
+            "then",
+            "left"
+          ],
+          "After": [
+            "China",
+            "labour",
+            "wall",
+            "cinema",
+            "museum",
+            "country",
+            "about",
+            "boat"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start3|g5-upper|r007|miss",
+          "SourceID": "beishida_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "7",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "job",
+            "teacher",
+            "doctor",
+            "vet",
+            "juggler"
+          ],
+          "After": [
+            "telephone",
+            "call",
+            "farmer",
+            "policeman",
+            "nurse",
+            "student",
+            "singer",
+            "worker"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r034|miss",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "34",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "kid",
+            "let",
+            "let's",
+            "let us",
+            "listen",
+            "listen to",
+            "look",
+            "mime"
+          ],
+          "After": [
+            "morning",
+            "name",
+            "OK",
+            "play",
+            "read",
+            "ready",
+            "sing",
+            "speak"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g4-upper|r177|miss",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "177",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "from",
+            "full",
+            "have",
+            "helicopter",
+            "here",
+            "in",
+            "line",
+            "London"
+          ],
+          "After": [
+            "month",
+            "name",
+            "other",
+            "page",
+            "paper clip",
+            "parent",
+            "picture",
+            "rectangle"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r015|miss",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "15",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "hello",
+            "hi",
+            "goodbye",
+            "bye",
+            "mum",
+            "afternoon",
+            "evening",
+            "Mr"
+          ],
+          "After": [
+            "dad",
+            "are",
+            "you",
+            "How are you?",
+            "fine",
+            "night",
+            "grandpa",
+            "grandma"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g5-lower|r134|miss",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "134",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "lost",
+            "lose",
+            "Excuse me.",
+            "hospital",
+            "straight",
+            "ahead",
+            "right",
+            "left"
+          ],
+          "After": [
+            "bank",
+            "post office",
+            "train station",
+            "zoo",
+            "restaurant",
+            "police station",
+            "short cut",
+            "were"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g3-upper|r004|miss",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "4",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "hello",
+            "I"
+          ],
+          "After": [
+            "are",
+            "fine",
+            "goodbye",
+            "hi",
+            "Mr",
+            "Mrs",
+            "thank",
+            "you"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g6-upper|r119|miss",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "119",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "hurt",
+            "fresh",
+            "plant",
+            "keep ... alive",
+            "plant trees",
+            "wood",
+            "cool",
+            "match"
+          ],
+          "After": [
+            "have to",
+            "cut ... down",
+            "look for",
+            "Earth",
+            "part",
+            "forest",
+            "land",
+            "ocean"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g3-upper|r042|miss",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "42",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "meet",
+            "how",
+            "fine",
+            "thanks",
+            "this",
+            "friend",
+            "too",
+            "class"
+          ],
+          "After": [
+            "bye",
+            "good-bye",
+            "have",
+            "a",
+            "an",
+            "day",
+            "picture",
+            "listen"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r069|miss",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "69",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "longer",
+            "longest",
+            "yuan",
+            "center",
+            "salesperson",
+            "give",
+            "fun park",
+            "get to"
+          ],
+          "After": [
+            "should",
+            "cross",
+            "park",
+            "ticket office",
+            "right",
+            "adult",
+            "child",
+            "children"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-lower|r091|miss",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "91",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "cup",
+            "tea",
+            "cheese",
+            "vegetable",
+            "filling",
+            "parents",
+            "leave",
+            "left"
+          ],
+          "After": [
+            "everything",
+            "someday",
+            "say good-bye",
+            "other",
+            "keep in touch",
+            "letter",
+            "almost",
+            "zip code"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g4-upper|r016|miss",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "16",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "is",
+            "are",
+            "new",
+            "old",
+            "it",
+            "they",
+            "coat",
+            "cap"
+          ],
+          "After": [
+            "dress",
+            "shoe",
+            "sock",
+            "shorts",
+            "not",
+            "day",
+            "today",
+            "week"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "kepu_start3|g3-upper|r016|miss",
+          "SourceID": "kepu_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "16",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "cat",
+            "dog",
+            "fox",
+            "are",
+            "you",
+            "yes",
+            "Mr",
+            "no"
+          ],
+          "After": [
+            "too",
+            "my",
+            "name",
+            "is",
+            "goodbye",
+            "bye",
+            "what",
+            "your"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g3-upper|r017|miss",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "17",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "are",
+            "you",
+            "fine",
+            "thank",
+            "and",
+            "goodbye",
+            "bye",
+            "afternoon"
+          ],
+          "After": [
+            "nice",
+            "meet",
+            "too",
+            "Mr",
+            "this",
+            "is",
+            "what",
+            "what's"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g5-lower|r142|miss",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "142",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "You'd better ...",
+            "umbrella",
+            "country",
+            "trip",
+            "get ready",
+            "middle school",
+            "life",
+            "term"
+          ],
+          "After": [
+            "more",
+            "exciting"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g3-upper|r004|miss",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "4",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "hello",
+            "I'm",
+            "I am"
+          ],
+          "After": [
+            "hi",
+            "nice",
+            "meet",
+            "you",
+            "too",
+            "a",
+            "an",
+            "apple"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g6-lower|r069|miss",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "69",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "lab",
+            "chemistry",
+            "bottle",
+            "Edison",
+            "inventor",
+            "subject",
+            "history",
+            "geography"
+          ],
+          "After": [
+            "year book",
+            "address",
+            "information",
+            "gave",
+            "give",
+            "leave"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g3-upper|r002|miss",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "2",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [],
+          "After": [
+            "Mr",
+            "Mrs",
+            "stand up",
+            "sit down",
+            "open",
+            "close",
+            "door",
+            "name"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "shaanxi_start3|g3-upper|r004|miss",
+          "SourceID": "shaanxi_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "4",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "hello",
+            "hi",
+            "goodbye"
+          ],
+          "After": [
+            "bye-bye",
+            "I'm",
+            "I am",
+            "what's",
+            "what is",
+            "your",
+            "name",
+            "my"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g5-upper|r065|miss",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "65",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "couldn't",
+            "could not",
+            "often",
+            "around",
+            "start",
+            "line",
+            "half",
+            "past"
+          ],
+          "After": [
+            "study",
+            "open",
+            "wall",
+            "have fun",
+            "break",
+            "nothing",
+            "think",
+            "drank"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g6-upper|r038|miss",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "38",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "light",
+            "pleased",
+            "pretty",
+            "French",
+            "phone",
+            "world",
+            "difficult",
+            "answer"
+          ],
+          "After": [
+            "bamboo",
+            "gave",
+            "its",
+            "almost",
+            "deaf",
+            "frightened",
+            "sh",
+            "roar"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r093|miss",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "93",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "did",
+            "do",
+            "didn't",
+            "did not",
+            "computer",
+            "love",
+            "him",
+            "Mrs"
+          ],
+          "After": [
+            "sang",
+            "sing",
+            "beautifully",
+            "saw",
+            "see",
+            "game",
+            "last",
+            "fun"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g5-upper|r139|miss",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "139",
+          "Word": "miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "bell",
+            "rang",
+            "ring",
+            "into",
+            "feel",
+            "bored",
+            "sad",
+            "woof"
+          ],
+          "After": [
+            "angry",
+            "ill",
+            "told",
+            "better",
+            "farm",
+            "tired",
+            "won",
+            "win"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "xiangshao_start3|g3-upper|r006|miss",
+          "SourceID": "xiangshao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "6",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "hello",
+            "I",
+            "am",
+            "hi"
+          ],
+          "After": [
+            "good",
+            "morning",
+            "class",
+            "goodbye",
+            "afternoon",
+            "what",
+            "is",
+            "your"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "yilin_start3|g3-upper|r004|miss",
+          "SourceID": "yilin_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "4",
+          "Word": "Miss",
+          "Definition": "n. 女士,小姐,年轻未婚女子 vt. 错过,想念,缺(勤)",
+          "Before": [
+            "Hello!",
+            "Good morning."
+          ],
+          "After": [
+            "Hi.",
+            "Good afternoon.",
+            "class",
+            "I",
+            "I'm",
+            "I am",
+            "are",
+            "you"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "like",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "like",
+      "Definitions": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|cambridge_join_start3|guangdong_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|luke_54_start3|minjiao_start3|renjiao_start1|renjiao_start3|shaanxi_start3|waiyan_start1|waiyan_start3|xiangshao_start3|yilin_start3",
+      "SourceBooks": "beijing_start1:3年级上|beijing_start1:6年级上|beishida_start1:1年级下|beishida_start1:3年级下|beishida_start3:4年级下|cambridge_join_start3:3年级上|cambridge_join_start3:3年级下|guangdong_start3:3年级上|guangdong_start3:4年级上|guangdong_start3:4年级下|guangdong_start3:5年级下|guangzhou_start3:3年级下|guangzhou_start3:4年级上|hujiao_start3:3年级下|jiaoke_eec_start3:3年级上|jiaoke_eec_start3:4年级下|jijiao_start3:3年级下|kepu_start3:3年级下|luke_54_start3:3年级上|luke_54_start3:5年级下|minjiao_start3:3年级下|renjiao_start1:1年级上|renjiao_start3:5年级下|shaanxi_start3:3年级下|shaanxi_start3:5年级上|waiyan_start1:1年级下|waiyan_start1:2年级下|waiyan_start3:3年级下|waiyan_start3:6年级下|xiangshao_start3:3年级上|xiangshao_start3:3年级下|yilin_start3:4年级上|yilin_start3:6年级下",
+      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "functional-polysemy",
+      "PolicyRecommendedAction": "re-review-evidence-changed",
+      "DurableDecisions": [
+        {
+          "DecisionKey": "surface:like",
+          "MatchKey": "like",
+          "OccurrenceKeys": "[\"beijing_start1|g6-upper|r052|like\",\"beishida_start1|g3-lower|r004|like\",\"hujiao_start3|g3-lower|r030|like\",\"jijiao_start3|g3-lower|r057|like\",\"renjiao_start1|g1-upper|r052|like\",\"renjiao_start3|g5-lower|r133|like\",\"waiyan_start1|g1-lower|r101|like\",\"waiyan_start3|g3-lower|r024|like\"]",
+          "Action": "keep-identity",
+          "CanonicalMatchKey": "like#preference",
+          "ObjectType": "vocabulary",
+          "TargetSense": "喜欢",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-resolution-audited-defer-current-context",
+          "Rationale": "Known food and preference contexts remain the preference verb subgroup while one Beishida flat-list occurrence is separately unresolved."
+        },
+        {
+          "DecisionKey": "surface:like#weather",
+          "MatchKey": "like",
+          "OccurrenceKeys": "[\"beijing_start1|g3-upper|r055|like\",\"waiyan_start1|g2-lower|r003|like\",\"waiyan_start3|g6-lower|r016|like\"]",
+          "Action": "route-expression",
+          "CanonicalMatchKey": "",
+          "ObjectType": "expression",
+          "TargetSense": "……怎么样；像……",
+          "Status": "reviewed",
+          "Confidence": "high",
+          "DecisionBasis": "split-resolution-audited-defer-current-context",
+          "Rationale": "Known weather and comparative construction occurrences remain routed to Expressions."
+        },
+        {
+          "DecisionKey": "surface:like#unresolved-beishida",
+          "MatchKey": "like",
+          "OccurrenceKeys": "[\"beishida_start1|g1-lower|r017|like\"]",
+          "Action": "held",
+          "CanonicalMatchKey": "",
+          "ObjectType": "vocabulary",
+          "TargetSense": "",
+          "Status": "held",
+          "Confidence": "high",
+          "DecisionBasis": "split-resolution-audited-defer-current-context",
+          "Rationale": "The Beishida Grade 1 alphabetic flat-list occurrence still cannot distinguish preference from comparative or construction use. Preserve the unresolved partition until evidence changes."
+        }
+      ],
+      "CurrentOccurrenceKeys": [
+        "beijing_start1|g3-upper|r055|like",
+        "beijing_start1|g6-upper|r052|like",
+        "beishida_start1|g1-lower|r017|like",
+        "beishida_start1|g3-lower|r004|like",
+        "beishida_start3|g4-lower|r003|like",
+        "cambridge_join_start3|g3-upper|r113|like",
+        "cambridge_join_start3|g3-lower|r032|like",
+        "guangdong_start3|g3-upper|r100|like",
+        "guangdong_start3|g4-upper|r010|like",
+        "guangdong_start3|g4-lower|r043|like",
+        "guangdong_start3|g5-lower|r015|like",
+        "guangzhou_start3|g3-lower|r003|like",
+        "guangzhou_start3|g4-upper|r170|like",
+        "hujiao_start3|g3-lower|r030|like",
+        "jiaoke_eec_start3|g3-upper|r165|like",
+        "jiaoke_eec_start3|g4-lower|r005|like",
+        "jijiao_start3|g3-lower|r057|like",
+        "kepu_start3|g3-lower|r017|like",
+        "luke_54_start3|g3-upper|r098|like",
+        "luke_54_start3|g5-lower|r024|like",
+        "minjiao_start3|g3-lower|r021|like",
+        "renjiao_start1|g1-upper|r052|like",
+        "renjiao_start3|g5-lower|r133|like",
+        "shaanxi_start3|g3-lower|r053|like",
+        "shaanxi_start3|g5-upper|r050|like",
+        "waiyan_start1|g1-lower|r101|like",
+        "waiyan_start1|g2-lower|r003|like",
+        "waiyan_start3|g3-lower|r024|like",
+        "waiyan_start3|g6-lower|r016|like",
+        "xiangshao_start3|g3-upper|r085|like",
+        "xiangshao_start3|g3-lower|r071|like",
+        "yilin_start3|g4-upper|r002|like",
+        "yilin_start3|g6-lower|r084|like"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beijing_start1|g3-upper|r055|like",
+          "SourceID": "beijing_start1",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "55",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "born",
+            "May",
+            "June",
+            "fifteenth",
+            "fourteenth",
+            "How old ...?",
+            "July",
+            "weather"
+          ],
+          "After": [
+            "sunny",
+            "warm",
+            "hot",
+            "cool",
+            "rainy",
+            "can",
+            "windy",
+            "cloudy"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beijing_start1|g6-upper|r052|like",
+          "SourceID": "beijing_start1",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "52",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "world",
+            "tie",
+            "Mr",
+            "goodbye",
+            "singer",
+            "stage",
+            "dress",
+            "sing"
+          ],
+          "After": [
+            "colour",
+            "clothes",
+            "hobby",
+            "tiger",
+            "twelve",
+            "animal",
+            "rat",
+            "rabbit"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start1|g1-lower|r017|like",
+          "SourceID": "beishida_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "17",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "dress",
+            "father",
+            "French fries",
+            "friend",
+            "hamburgers",
+            "heart",
+            "juice",
+            "jump"
+          ],
+          "After": [
+            "lion",
+            "milk",
+            "mother",
+            "mouse",
+            "my",
+            "nest",
+            "net",
+            "noodles"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start1|g3-lower|r004|like",
+          "SourceID": "beishida_start1",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "4",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "restaurant",
+            "menu"
+          ],
+          "After": [
+            "chicken",
+            "noodles",
+            "bread",
+            "fruit",
+            "meat",
+            "vegetables",
+            "dumplings",
+            "hamburgers"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "beishida_start3|g4-lower|r003|like",
+          "SourceID": "beishida_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "3",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "restaurant"
+          ],
+          "After": [
+            "here",
+            "hungry",
+            "chicken",
+            "noodles",
+            "menu",
+            "fried rice",
+            "hamburger",
+            "French fries"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g3-upper|r113|like",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "113",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "door",
+            "green",
+            "grey",
+            "heeheehee",
+            "Help!",
+            "here you are",
+            "house",
+            "light"
+          ],
+          "After": [
+            "milk",
+            "night",
+            "nose",
+            "now",
+            "oh",
+            "open",
+            "orange",
+            "phew"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g3-lower|r032|like",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "32",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "eat",
+            "elephant",
+            "fish",
+            "fly",
+            "frog",
+            "giraffe",
+            "hamster",
+            "have got"
+          ],
+          "After": [
+            "mice",
+            "monkey",
+            "panda",
+            "pet",
+            "sit",
+            "swim",
+            "chicken",
+            "close"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g3-upper|r100|like",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "100",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "let us",
+            "sing",
+            "fly",
+            "swim",
+            "cook",
+            "but",
+            "park",
+            "do"
+          ],
+          "After": [
+            "juice",
+            "cake",
+            "ice cream",
+            "noodle",
+            "ant",
+            "go",
+            "bread",
+            "rice"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g4-upper|r010|like",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "10",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "subject",
+            "English",
+            "Chinese",
+            "music",
+            "art",
+            "math",
+            "P.E.",
+            "science"
+          ],
+          "After": [
+            "and",
+            "play",
+            "study",
+            "paint",
+            "sleep",
+            "write",
+            "run",
+            "read"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g4-lower|r043|like",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "43",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "go to the zoo",
+            "buy an ice cream",
+            "call ... friend",
+            "call my friend",
+            "borrow a book",
+            "watch TV",
+            "listen to a song",
+            "balloon"
+          ],
+          "After": [
+            "come back",
+            "coat",
+            "dress",
+            "sweater",
+            "cap",
+            "shorts",
+            "shirt",
+            "T-shirt"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g5-lower|r015|like",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "15",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "have a party",
+            "write a letter",
+            "meet some friends",
+            "tonight",
+            "tomorrow",
+            "bored",
+            "vacation",
+            "go camping"
+          ],
+          "After": [
+            "take photos",
+            "plan",
+            "love",
+            "ship",
+            "train",
+            "bus",
+            "by",
+            "by ship"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g3-lower|r003|like",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "3",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "colour"
+          ],
+          "After": [
+            "go",
+            "to",
+            "idea",
+            "red",
+            "great",
+            "yellow",
+            "blue",
+            "white"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g4-upper|r170|like",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "170",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "build",
+            "doctor",
+            "policeman",
+            "reporter",
+            "news",
+            "job",
+            "factory",
+            "worker"
+          ],
+          "After": [
+            "his",
+            "writer",
+            "tell",
+            "her",
+            "driver",
+            "drive",
+            "pupil",
+            "women"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "hujiao_start3|g3-lower|r030|like",
+          "SourceID": "hujiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "30",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "car",
+            "hear",
+            "listen",
+            "plane",
+            "ship",
+            "train",
+            "bear",
+            "elephant"
+          ],
+          "After": [
+            "lion",
+            "man",
+            "men",
+            "monkey",
+            "old",
+            "our",
+            "panda",
+            "strong"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g3-upper|r165|like",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "165",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "cool",
+            "smart",
+            "watch",
+            "get",
+            "bird",
+            "window",
+            "violin",
+            "fox"
+          ],
+          "After": [
+            "there",
+            "giraffe",
+            "tall",
+            "cute",
+            "write",
+            "letter",
+            "read",
+            "word"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g4-lower|r005|like",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "5",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "spring",
+            "festival",
+            "Spring Festival"
+          ],
+          "After": [
+            "new",
+            "year",
+            "New Year's Day",
+            "I see.",
+            "beautiful",
+            "dumpling",
+            "yourself",
+            "Help yourself."
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "jijiao_start3|g3-lower|r057|like",
+          "SourceID": "jijiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "57",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "juice",
+            "I",
+            "soup",
+            "noodle",
+            "rice",
+            "chicken",
+            "vegetable",
+            "fruit"
+          ],
+          "After": [
+            "good",
+            "milk",
+            "egg",
+            "bread",
+            "apple",
+            "orange",
+            "eleven",
+            "twelve"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "kepu_start3|g3-lower|r017|like",
+          "SourceID": "kepu_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "17",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "dress",
+            "but",
+            "short",
+            "then",
+            "let",
+            "us",
+            "make",
+            "skirt"
+          ],
+          "After": [
+            "vest",
+            "let's",
+            "let us",
+            "on",
+            "ship",
+            "many",
+            "animal",
+            "elephant"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g3-upper|r098|like",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "98",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "mum",
+            "colour",
+            "red",
+            "green",
+            "yellow",
+            "the",
+            "blue",
+            "white"
+          ],
+          "After": [
+            "black",
+            "orange",
+            "how many",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "luke_54_start3|g5-lower|r024|like",
+          "SourceID": "luke_54_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "24",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "ice fishing",
+            "lake",
+            "got",
+            "get",
+            "lantern",
+            "the Lantern Festival",
+            "parade",
+            "act"
+          ],
+          "After": [
+            "riddle",
+            "prize",
+            "auntie",
+            "aunt",
+            "cross",
+            "street",
+            "stop",
+            "get on"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g3-lower|r021|like",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "21",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "draw",
+            "run",
+            "ride",
+            "bike",
+            "skate",
+            "yes",
+            "can't",
+            "cannot"
+          ],
+          "After": [
+            "rice",
+            "hamburger",
+            "grape",
+            "sweet",
+            "jump",
+            "don't",
+            "do not",
+            "early"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start1|g1-upper|r052|like",
+          "SourceID": "renjiao_start1",
+          "SourceBook": "1年级上",
+          "Grade": "1",
+          "Semester": "上",
+          "SourceRow": "52",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "green",
+            "colour",
+            "apple",
+            "pear",
+            "banana",
+            "orange",
+            "do",
+            "you"
+          ],
+          "After": [
+            "yes",
+            "no"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "renjiao_start3|g5-lower|r133|like",
+          "SourceID": "renjiao_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "133",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "playing",
+            "jumping",
+            "drinking",
+            "sleeping",
+            "each",
+            "other",
+            "each other",
+            "excited"
+          ],
+          "After": [
+            "doing morning exercises",
+            "having ... class",
+            "eating lunch",
+            "reading a book",
+            "listening to music",
+            "keep",
+            "keep to the right",
+            "keep your desk clean"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "shaanxi_start3|g3-lower|r053|like",
+          "SourceID": "shaanxi_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "53",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "skirt",
+            "cap",
+            "sweater",
+            "shoes",
+            "socks",
+            "very much",
+            "her",
+            "his"
+          ],
+          "After": [
+            "candy",
+            "cake",
+            "bread",
+            "cookie",
+            "tea",
+            "grapes",
+            "banana",
+            "can"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "shaanxi_start3|g5-upper|r050|like",
+          "SourceID": "shaanxi_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "50",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "spoon",
+            "cut",
+            "knife",
+            "chopsticks",
+            "use",
+            "fork",
+            "pass",
+            "with"
+          ],
+          "After": [
+            "would",
+            "here",
+            "beef",
+            "him",
+            "give",
+            "way",
+            "supermarket",
+            "beside"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g1-lower|r101|like",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "1年级下",
+          "Grade": "1",
+          "Semester": "下",
+          "SourceRow": "101",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "OK",
+            "sock",
+            "put on",
+            "clothes",
+            "here",
+            "football",
+            "basketball",
+            "ping-pong"
+          ],
+          "After": [
+            "lion",
+            "them",
+            "all",
+            "play",
+            "with",
+            "together",
+            "favourite",
+            "sport"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start1|g2-lower|r003|like",
+          "SourceID": "waiyan_start1",
+          "SourceBook": "2年级下",
+          "Grade": "2",
+          "Semester": "下",
+          "SourceRow": "3",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "weather"
+          ],
+          "After": [
+            "sunny",
+            "windy",
+            "take",
+            "cap",
+            "sofa",
+            "street",
+            "rain",
+            "snow"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g3-lower|r024|like",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "24",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "elephant",
+            "fat",
+            "man",
+            "short",
+            "tall",
+            "small",
+            "thin",
+            "big"
+          ],
+          "After": [
+            "football",
+            "them",
+            "ouch",
+            "basketball",
+            "table tennis",
+            "morning exercises",
+            "ride",
+            "bike"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "waiyan_start3|g6-lower|r016|like",
+          "SourceID": "waiyan_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "16",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "careful",
+            "Be careful!",
+            "later",
+            "to go",
+            "duck",
+            "pond",
+            "cloud",
+            "dry"
+          ],
+          "After": [
+            "look like",
+            "stay",
+            "shine",
+            "cry",
+            "everyone",
+            "fly away",
+            "just",
+            "cow"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "xiangshao_start3|g3-upper|r085|like",
+          "SourceID": "xiangshao_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "85",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "raise",
+            "hand",
+            "leg",
+            "arm",
+            "neck",
+            "body",
+            "foot",
+            "feet"
+          ],
+          "After": [
+            "the",
+            "bird",
+            "monkey",
+            "all right",
+            "lion",
+            "tiger",
+            "panda",
+            "elephant"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "xiangshao_start3|g3-lower|r071|like",
+          "SourceID": "xiangshao_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "71",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "sunny",
+            "rainy",
+            "ice cream",
+            "cold",
+            "warm",
+            "cool",
+            "hot",
+            "weather"
+          ],
+          "After": [
+            "windy",
+            "cloudy",
+            "snowy",
+            "farmer",
+            "postman",
+            "nurse",
+            "teacher",
+            "doctor"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "yilin_start3|g4-upper|r002|like",
+          "SourceID": "yilin_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "2",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [],
+          "After": [
+            "dog",
+            "animal",
+            "cat",
+            "cute",
+            "panda",
+            "fat",
+            "elephant",
+            "horse"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "yilin_start3|g6-lower|r084|like",
+          "SourceID": "yilin_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "84",
+          "Word": "like",
+          "Definition": "vt. 喜欢;想;愿意 vi. 喜欢;希望 prep. 像;如同 adj. 同样的;相似的 n. 爱好;同样的人或物 adv. 可能 conj. 好像",
+          "Before": [
+            "Australian football",
+            "exciting",
+            "Sydney",
+            "welcome",
+            "visitor",
+            "for example",
+            "London",
+            "Oxford"
+          ],
+          "After": [
+            "Big Ben",
+            "London Eye",
+            "Tower Bridge",
+            "What do you think?",
+            "month",
+            "summer holiday",
+            "go back to",
+            "how long"
           ]
         }
       ]
