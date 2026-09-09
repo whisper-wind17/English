@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Validate durable Stage-B identity reconciliation decisions.
+"""Validate current durable Stage-B identity reconciliation decisions.
 
-This checker is intentionally read-only. It binds each durable decision to both
-the sealed Stage-A checkpoint and the exact current premerge candidate row, so a
-change in either source identity state or Klose Stable NoteID context invalidates
-old decisions instead of silently carrying them forward.
+This checker is incremental: every durable row must be valid against the current
+sealed Stage-A checkpoint and current premerge candidate, but full candidate coverage
+is enforced separately by the Stage-B Completion Recheck. No row authorizes mutation.
 """
 from __future__ import annotations
 
@@ -25,7 +24,7 @@ NOTE_REGISTRY = BASE / "master" / "note_registry.csv"
 NOTE_EXTENSIONS = BASE / "master" / "note_registry_extensions.csv"
 
 ALLOWED_ACTIONS = {"reuse-existing", "new-stable-identity", "held"}
-ALLOWED_STATUS = {"reviewed", "held", "pending"}
+ALLOWED_STATUS = {"reviewed", "held"}
 CANDIDATE_FINGERPRINT_FIELDS = [
     "ProvisionalIdentityKey", "CanonicalMatchKey", "LookupMatchKey", "DisplayWord",
     "ThirdPartyTargetSense", "SourceMatchKeys", "SourceOccurrenceCount",
@@ -78,15 +77,18 @@ def main() -> None:
             "Klose active NoteID registry is empty/duplicate")
 
     action_counts: Counter[str] = Counter()
-    status_counts: Counter[str] = Counter()
+    high_risk_total = sum(
+        1 for r in candidates if r.get("KloseCandidateClass", "").endswith("-multiple")
+    )
+    high_risk_decided = 0
+
     for decision in decisions:
         pid = decision["ProvisionalIdentityKey"]
         candidate = candidate_by_id.get(pid)
         require(candidate is not None, f"Reconciliation decision references missing candidate: {pid}")
         require(decision.get("StageACheckpointFingerprint") == checkpoint,
                 f"Reconciliation decision Stage-A checkpoint drift: {pid}")
-        current_candidate_fp = candidate_fingerprint(candidate)
-        require(decision.get("CandidateFingerprint") == current_candidate_fp,
+        require(decision.get("CandidateFingerprint") == candidate_fingerprint(candidate),
                 f"Reconciliation candidate context drift: {pid}")
 
         action = decision.get("Action", "")
@@ -112,6 +114,10 @@ def main() -> None:
         elif action == "new-stable-identity":
             require(status == "reviewed", f"new-stable-identity must be reviewed: {pid}")
             require(not existing, f"new-stable-identity must not bind existing NoteID: {pid}")
+            require(not candidate_ids,
+                    f"new-stable-identity bypasses current Klose candidate: {pid}: {candidate_ids}")
+            require(candidate.get("KloseCandidateClass") == "no-existing-match",
+                    f"new-stable-identity requires no-existing-match candidate class: {pid}")
             require(all(decision.get(field, "").strip() for field in
                         ("ProposedCanonicalWord", "ProposedMatchKey", "ProposedSense")),
                     f"new-stable-identity lacks proposed identity fields: {pid}")
@@ -121,33 +127,23 @@ def main() -> None:
             require(not any(decision.get(field, "").strip() for field in
                             ("ProposedCanonicalWord", "ProposedMatchKey", "ProposedSense")),
                     f"held decision must not pre-authorize a proposed stable identity: {pid}")
+            if decision.get("DecisionBasis") == "current-learner-policy-exclusion":
+                require(candidate.get("LearnerAdmitted", "").casefold() != "yes",
+                        f"Learner-policy held row is currently admitted: {pid}")
 
+        if candidate.get("KloseCandidateClass", "").endswith("-multiple"):
+            high_risk_decided += 1
         action_counts[action] += 1
-        status_counts[status] += 1
 
-    exact_multiple = {
-        r["ProvisionalIdentityKey"] for r in candidates
-        if r.get("KloseCandidateClass") == "exact-multiple"
-    }
-    decided = set(provisional_keys)
-    require(exact_multiple <= decided,
-            f"Exact-multiple reconciliation coverage incomplete: {sorted(exact_multiple - decided)}")
-    high_risk_decisions = [r for r in decisions if r["ProvisionalIdentityKey"] in exact_multiple]
-    require(len(high_risk_decisions) == len(exact_multiple),
-            "Exact-multiple reconciliation decision cardinality drift")
-
-    reviewed_or_held = sum(1 for r in decisions if r.get("Status") in {"reviewed", "held"})
-    require(reviewed_or_held == len(decisions), "Pending reconciliation rows are not allowed in durable reviewed batch")
-
-    print("Third-party Stage-B reconciliation decision check = pass")
+    print("Third-party Stage-B incremental reconciliation check = pass")
     print(f"Stage-A checkpoint fingerprint = {checkpoint}")
     print(f"Premerge candidates = {len(candidates)}")
-    print(f"Durable reconciliation decisions = {len(decisions)}")
-    print(f"Exact-multiple candidates = {len(exact_multiple)}")
-    print("Exact-multiple decision coverage = 100%")
+    print(f"Durable current reconciliation decisions = {len(decisions)}")
+    print(f"High-risk multiple candidates decided = {high_risk_decided} / {high_risk_total}")
     for action in sorted(action_counts):
         print(f"reconciliation action {action} = {action_counts[action]}")
     print(f"overall reconciliation closure = {len(decisions)} / {len(candidates)}")
+    print("All durable decisions current-fingerprint bound = yes")
     print("Stage-B mutation authorized = no")
     print("Stable NoteID minted = no")
 
