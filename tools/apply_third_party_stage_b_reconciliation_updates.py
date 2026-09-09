@@ -3,8 +3,10 @@
 
 The inbox `reconciliation/decision_updates.csv` is transient. Every update must bind
 the current sealed Stage-A checkpoint and exact current premerge CandidateFingerprint,
-and an inbox batch must exactly close over the planner-selected batch. This tool never
-mutates Klose Master/Learner/Release/Publish/Anki state and never authorizes mutation.
+and an inbox batch must exactly close over the planner-selected batch. Durable rows
+whose checkpoint/candidate binding is stale are retired from current truth (Git history
+retains the audit record) rather than silently carried forward. This tool never mutates
+Klose Master/Learner/Release/Publish/Anki state and never authorizes mutation.
 """
 from __future__ import annotations
 
@@ -113,6 +115,20 @@ def validate_update(
     return out
 
 
+def durable_row_is_current(
+    row: dict[str, str], candidate_by_id: dict[str, dict[str, str]], checkpoint: str
+) -> bool:
+    pid = row.get("ProvisionalIdentityKey", "")
+    candidate = candidate_by_id.get(pid)
+    if candidate is None:
+        return False
+    return (
+        row.get("StageACheckpointFingerprint") == checkpoint
+        and row.get("CandidateFingerprint") == candidate_fp(candidate)
+        and row.get("Status") in STATUSES
+    )
+
+
 def main() -> None:
     readiness = read_json(READINESS)
     if readiness.get("ReadyForPremergeReview") is not True:
@@ -148,11 +164,18 @@ def main() -> None:
 
     by_key: dict[str, dict[str, str]] = {}
     order: list[str] = []
-    for row in current:
-        dkey = row.get("DecisionKey", "")
-        if not dkey or dkey in by_key:
-            raise SystemExit(f"Durable reconciliation DecisionKey empty/duplicate: {dkey}")
-        by_key[dkey] = {field: row.get(field, "") for field in FIELDS}
+    stale_retired = 0
+    for raw in current:
+        dkey = raw.get("DecisionKey", "")
+        if not dkey:
+            raise SystemExit("Durable reconciliation DecisionKey empty")
+        if dkey in by_key:
+            raise SystemExit(f"Durable reconciliation DecisionKey duplicate: {dkey}")
+        row = {field: raw.get(field, "") for field in FIELDS}
+        if not durable_row_is_current(row, candidate_by_id, checkpoint):
+            stale_retired += 1
+            continue
+        by_key[dkey] = row
         order.append(dkey)
 
     seen: set[str] = set()
@@ -174,7 +197,7 @@ def main() -> None:
             order.append(dkey)
             appended += 1
 
-    if updates:
+    if updates or stale_retired:
         with DECISIONS.open("w", encoding="utf-8-sig", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=FIELDS)
             writer.writeheader()
@@ -183,11 +206,13 @@ def main() -> None:
     if UPDATES.exists():
         UPDATES.unlink()
 
+    print(f"Stage-B stale durable decisions retired = {stale_retired}")
     print(f"Stage-B reconciliation updates applied = {len(updates)}")
     print(f"selected-batch closure = {'yes' if not updates or len(updates) == len(selected_ids) else 'no'}")
     print(f"replaced = {replaced}")
     print(f"appended = {appended}")
     print(f"durable reconciliation decisions = {len(by_key)}")
+    print("stale decision carry-forward = no")
     print("transient reconciliation inbox removed = yes")
     print("Stage-B mutation authorized = no")
 
