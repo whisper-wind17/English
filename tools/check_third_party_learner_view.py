@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -17,16 +18,44 @@ IDENTITY_PREVIEW = STAGING / "unified_vocabulary_preview.csv"
 GATE = LEARNER / "grammar_form_quarantine.csv"
 LEARNER_PREVIEW = LEARNER / "learner_vocabulary_preview.csv"
 QUARANTINE_VIEW = LEARNER / "grammar_form_quarantine_view.csv"
+CONTENT_POLICY = LEARNER / "content_exclusion_policy.csv"
+CONTENT_VIEW = LEARNER / "content_exclusion_view.csv"
 
 ALLOWED_FORM_TYPES = {"past-form", "past-or-past-participle", "modal-past-form"}
 ALLOWED_SCOPES = {"matchkey", "decision"}
 POLICY_VERSION = "klose-grammar-gate-v1"
+CONTENT_POLICY_VERSION = "klose-content-exclusion-v1"
+CONTENT_POLICY_FIELDS = [
+    "RuleKey", "RuleType", "Value", "ReasonCode", "PolicyVersion", "Rationale",
+]
+CONTENT_VIEW_FIELDS = [
+    "ProvisionalIdentityKey", "CanonicalMatchKey", "DisplayWord", "TargetSense",
+    "MatchedRuleKey", "ReasonCode", "PolicyVersion", "Rationale",
+    "LearnerIdentityRemoved",
+]
 PAST_MARKERS = (
     "过去式", "过去分词", "past tense", "past-tense", "past form", "past-form",
     "past participle", "past-participle", "past/participle", "past or past-participle",
 )
 LEXICALIZED_EXCEPTIONS = {"broken", "frightened", "lost", "worried", "tied", "surprised"}
 NON_PAST_GUARDS = {"goes"}
+
+CARDINAL_WORDS = {
+    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+    "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty",
+    "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million", "billion",
+}
+ORDINAL_WORDS = {
+    "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth",
+    "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth",
+    "seventeenth", "eighteenth", "nineteenth", "twentieth", "thirtieth", "fortieth",
+    "fiftieth", "sixtieth", "seventieth", "eightieth", "ninetieth", "hundredth",
+    "thousandth", "millionth", "billionth",
+}
+NUMBER_WORDS = CARDINAL_WORDS | ORDINAL_WORDS
+NUMBER_FILLERS = {"and", "a"}
+NUMERIC_FORM_RE = re.compile(r"^\d[\d,]*(?:\.\d+)?(?:st|nd|rd|th)?$", re.IGNORECASE)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -63,19 +92,50 @@ def has_past_marker(text: str) -> bool:
 
 
 def decision_explicitly_self_identifies_past_form(decision: dict[str, str]) -> bool:
-    """Return true only for decision metadata that classifies *this* learning unit.
-
-    Source definitions and free-form rationale are deliberately excluded. They can
-    mention morphology of another surface (for example canonical `win` discussing
-    `won`) or dictionary noise (for example noun `ground` mentioning grind forms).
-    TargetSense and DecisionBasis are the narrow, decision-bound fields safe enough
-    for a fail-closed coverage check.
-    """
     if decision.get("Action") not in {"keep-identity", "reuse-identity"}:
         return False
     return has_past_marker(decision.get("TargetSense", "")) or has_past_marker(
         decision.get("DecisionBasis", "")
     )
+
+
+def is_elementary_number_identity(canonical: str) -> bool:
+    text = canonical.casefold().strip()
+    if not text or "#" in text:
+        return False
+    if NUMERIC_FORM_RE.fullmatch(text):
+        return True
+    tokens = [token for token in re.split(r"[\s-]+", text) if token]
+    if not tokens:
+        return False
+    return (
+        any(token in NUMBER_WORDS for token in tokens)
+        and all(token in NUMBER_WORDS or token in NUMBER_FILLERS for token in tokens)
+    )
+
+
+def match_content_rule(
+    row: dict[str, str], rules: list[dict[str, str]]
+) -> dict[str, str] | None:
+    canonical = row.get("CanonicalMatchKey", "").casefold().strip()
+    matched: list[dict[str, str]] = []
+    for rule in rules:
+        rule_type = rule.get("RuleType", "")
+        value = rule.get("Value", "").casefold().strip()
+        if rule_type == "canonical-exact" and canonical == value:
+            matched.append(rule)
+        elif (
+            rule_type == "number-lexeme-class"
+            and value == "cardinal-or-ordinal"
+            and is_elementary_number_identity(canonical)
+        ):
+            matched.append(rule)
+    require(
+        len(matched) <= 1,
+        f"Overlapping content exclusion rules: {row.get('ProvisionalIdentityKey', '')}: "
+        f"{[r.get('RuleKey', '') for r in matched]}",
+    )
+    return matched[0] if matched else None
 
 
 def main() -> None:
@@ -85,6 +145,8 @@ def main() -> None:
     gates = read_csv(GATE)
     learner_preview = read_csv(LEARNER_PREVIEW)
     quarantine = read_csv(QUARANTINE_VIEW)
+    content_policy = read_csv(CONTENT_POLICY)
+    content_view = read_csv(CONTENT_VIEW)
 
     occ_by_match: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in occurrences:
@@ -123,11 +185,6 @@ def main() -> None:
         gate_by_decision[dkey] = gate
         gated_matchkeys.add(key)
 
-    # Fail closed only when durable decision metadata explicitly says that the
-    # decision itself is a past/past-participle learning unit. Broad source glosses
-    # are evidence, not a reliable machine grammar classifier; using them here caused
-    # false positives such as go/hold/party/ground and would silently encode dictionary
-    # noise as learner policy.
     explicit_past_decisions = {
         dkey
         for dkey, decision in decision_by_key.items()
@@ -148,12 +205,74 @@ def main() -> None:
     quarantine_keys = [r.get("GateKey", "") for r in quarantine]
     require(quarantine_keys == gate_keys, "Generated grammar quarantine view does not exactly match gate registry order/set")
 
+    # Independent content-threshold policy validation.
+    require(bool(content_policy), "Learner content exclusion policy is empty")
+    require(list(content_policy[0].keys()) == CONTENT_POLICY_FIELDS, "Content exclusion policy schema drift")
+    policy_keys = [r.get("RuleKey", "") for r in content_policy]
+    require(all(policy_keys) and len(policy_keys) == len(set(policy_keys)), "Content exclusion RuleKey must be unique")
+    require(
+        set(policy_keys) == {"article:a", "article:an", "article:the", "number:elementary"},
+        f"Content exclusion policy set drift: {policy_keys}",
+    )
+    for rule in content_policy:
+        require(rule.get("RuleType") in {"canonical-exact", "number-lexeme-class"},
+                f"Unsupported content exclusion RuleType: {rule.get('RuleKey')}")
+        require(rule.get("PolicyVersion") == CONTENT_POLICY_VERSION,
+                f"Content exclusion policy version drift: {rule.get('RuleKey')}")
+        require(bool(rule.get("ReasonCode", "").strip()) and bool(rule.get("Rationale", "").strip()),
+                f"Content exclusion policy lacks audit metadata: {rule.get('RuleKey')}")
+
+    require(
+        not content_view or list(content_view[0].keys()) == CONTENT_VIEW_FIELDS,
+        "Content exclusion view schema drift",
+    )
+    identity_by_pid = {r.get("ProvisionalIdentityKey", ""): r for r in identity_preview}
+    require(len(identity_by_pid) == len(identity_preview) and "" not in identity_by_pid,
+            "Identity Preview ProvisionalIdentityKey is empty/duplicate")
+    expected_content: dict[str, dict[str, str]] = {}
+    for row in identity_preview:
+        rule = match_content_rule(row, content_policy)
+        if rule is not None:
+            expected_content[row["ProvisionalIdentityKey"]] = rule
+
+    content_pids = [r.get("ProvisionalIdentityKey", "") for r in content_view]
+    require(all(content_pids) and len(content_pids) == len(set(content_pids)),
+            "Content exclusion view ProvisionalIdentityKey is empty/duplicate")
+    require(set(content_pids) == set(expected_content),
+            "Content exclusion view does not exactly close over current policy matches")
+    for row in content_view:
+        pid = row["ProvisionalIdentityKey"]
+        identity = identity_by_pid[pid]
+        rule = expected_content[pid]
+        require(row.get("CanonicalMatchKey") == identity.get("CanonicalMatchKey"),
+                f"Content exclusion canonical drift: {pid}")
+        require(row.get("MatchedRuleKey") == rule.get("RuleKey"),
+                f"Content exclusion rule drift: {pid}")
+        require(row.get("ReasonCode") == rule.get("ReasonCode"),
+                f"Content exclusion reason drift: {pid}")
+        require(row.get("PolicyVersion") == CONTENT_POLICY_VERSION,
+                f"Content exclusion view policy version drift: {pid}")
+        require(row.get("LearnerIdentityRemoved") in {"yes", "already-removed-by-other-gate"},
+                f"Invalid content exclusion removal state: {pid}")
+
     identity_by_canonical = {r.get("CanonicalMatchKey", ""): r for r in identity_preview}
     learner_by_canonical = {r.get("CanonicalMatchKey", ""): r for r in learner_preview}
     require(len(identity_by_canonical) == len(identity_preview), "Identity Preview canonical key is not unique")
     require(len(learner_by_canonical) == len(learner_preview), "Learner Preview canonical key is not unique")
     require(set(learner_by_canonical) <= set(identity_by_canonical), "Learner Preview invented a new identity")
     require(all(r.get("TargetSense", "").strip() for r in learner_preview), "Learner Preview contains empty TargetSense")
+
+    excluded_canonicals = {identity_by_pid[pid]["CanonicalMatchKey"] for pid in expected_content}
+    require(not (excluded_canonicals & set(learner_by_canonical)),
+            f"Content-excluded identity leaked into learner preview: {sorted(excluded_canonicals & set(learner_by_canonical))[:20]}")
+    require({"a", "an", "the"} <= excluded_canonicals,
+            "Required article exclusions a/an/the are not all present at identity level")
+
+    # Adversarial guards: the number classifier must not broaden to ordinary concepts/phrases.
+    for guard in ("number", "phone number", "one day"):
+        if guard in identity_by_canonical:
+            require(guard not in excluded_canonicals,
+                    f"Non-number-learning-unit was over-excluded: {guard}")
 
     for canonical, learner_row in learner_by_canonical.items():
         identity_row = identity_by_canonical[canonical]
@@ -188,24 +307,30 @@ def main() -> None:
                 require(key not in split_matchkeys(learner_by_canonical[canonical].get("SourceMatchKeys", "")),
                         f"Decision-scoped past partition leaked into target learner identity: {gate['GateKey']} -> {canonical}")
 
-    # Core identity truth must still retain resolved form relations. The learner gate
-    # is a presentation/admission filter, not a rewrite of identity_decisions.csv.
     for gate in gates:
         d = decision_by_key[gate["DecisionKey"]]
         require(d.get("Action") in {"keep-identity", "reuse-identity", "source-only"},
                 f"Grammar gate attached to unresolved/non-identity decision: {gate['GateKey']}")
         decode_occurrence_keys(d.get("OccurrenceKeys", ""), d["DecisionKey"])
 
-    print("Third-party learner-stage grammar-form quarantine = pass")
+    article_count = sum(1 for r in content_view if r.get("ReasonCode") == "trivial-function-word")
+    number_count = sum(1 for r in content_view if r.get("ReasonCode") == "trivial-number-word")
+    require(article_count == 3, f"Expected exactly 3 article exclusions, got {article_count}")
+    require(number_count > 0, "No elementary number identities were excluded")
+
+    print("Third-party learner-stage gates = pass")
     print(f"identity-level vocabulary preview = {len(identity_preview)}")
     print(f"learner-stage vocabulary preview = {len(learner_preview)}")
     print(f"grammar-form quarantine gates = {len(gates)}")
     print(f"explicit decision-bound past-form requirements = {len(explicit_past_decisions)}")
+    print(f"content-threshold exclusions = {len(content_view)}")
+    print(f"article exclusions = {article_count}")
+    print(f"number-identity exclusions = {number_count}")
     print("past-form leak into learner preview = no")
-    print("lexicalized participle/adjective over-gating = no")
-    print("homograph decision-scope gate = enforced")
-    print("source-definition heuristic used as identity truth = no")
-    print("identity truth mutated by learner gate = no")
+    print("content-exclusion leak into learner preview = no")
+    print("number classifier over-exclusion guards = pass")
+    print("identity truth mutated by learner gates = no")
+    print("source truth mutated by learner gates = no")
 
 
 if __name__ == "__main__":
