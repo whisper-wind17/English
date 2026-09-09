@@ -16,6 +16,10 @@ on:
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
       - '.github/workflows/third-party-stage-b-readiness.yml'
+  workflow_run:
+    workflows: ['Prepare Third-party Vocabulary Stage A']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -27,10 +31,12 @@ concurrency:
 
 jobs:
   readiness:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 2
 
       - uses: actions/setup-python@v5
