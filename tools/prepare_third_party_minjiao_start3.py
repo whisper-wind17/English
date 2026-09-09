@@ -79,29 +79,27 @@ def read_xlsx_rows(path: Path) -> list[tuple[int, list[str]]]:
 
 def parse_source(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
     rows = read_xlsx_rows(path)
-    header_pos = next((i for i, (_, vals) in enumerate(rows[:10]) if "单词" in vals and "释义" in vals), None)
-    if header_pos is None:
-        raise SystemExit(f"Cannot find vocabulary header containing 单词/释义 in {path.name}; first rows={rows[:10]!r}")
-    header = rows[header_pos][1]
-    word_idx = header.index("单词")
-    definition_idx = header.index("释义")
-    british_idx = header.index("英音") if "英音" in header else None
-    american_idx = header.index("美音") if "美音" in header else None
+    if not rows:
+        raise SystemExit(f"Empty Minjiao worksheet: {path.name}")
     sem_en = "upper" if semester == "上" else "lower"
     out: list[dict[str, str]] = []
-    for row_no, vals in rows[header_pos + 1:]:
-        def get(idx: int | None) -> str:
-            return vals[idx] if idx is not None and idx < len(vals) else ""
-        word = get(word_idx)
-        if not word or word == "单词":
+    for row_no, vals in rows:
+        # Minjiao source contract is headerless: column A=word, column B=definition.
+        if len(vals) > 2 and any(v.strip() for v in vals[2:]):
+            raise SystemExit(f"Unexpected populated column beyond A/B in {path.name} row {row_no}: {vals!r}")
+        word = vals[0].strip() if vals else ""
+        definition = vals[1].strip() if len(vals) > 1 else ""
+        if not word:
+            if definition:
+                raise SystemExit(f"Definition without word in {path.name} row {row_no}")
             continue
         key = match_key(word)
         out.append({
             "SourceOccurrenceKey": f"minjiao_start3|g{grade}-{sem_en}|r{row_no:03d}|{key}",
             "SourceID": "minjiao_start3", "SourceBook": f"{grade}年级{semester}",
             "Grade": str(grade), "Semester": semester, "SourceRow": str(row_no),
-            "Word": word, "MatchKey": key, "British": get(british_idx),
-            "American": get(american_idx), "Definition": get(definition_idx), "SourceFile": path.name,
+            "Word": word, "MatchKey": key, "British": "", "American": "",
+            "Definition": definition, "SourceFile": path.name,
         })
     if not out:
         raise SystemExit(f"No vocabulary occurrences parsed from {path.name}")
@@ -132,6 +130,7 @@ def main() -> None:
     (OUT / "README.md").write_text(
         f"# Minjiao Start3 — Third-party Source Adapter\n\n"
         f"Scope: 闽教版三年级起点 3-6 年级上下册，共 8 册。\n\n"
+        f"Edition schema: headerless two-column XLSX; A=Word, B=Definition; no pronunciation columns.\n\n"
         f"Source occurrences = {len(occurrences)}\n\nDistinct MatchKeys = {distinct}\n\n"
         f"Blank definitions = {blank_defs}\n\nSource facts only; no Identity or Klose mutation.\n",
         encoding="utf-8",
@@ -141,6 +140,7 @@ def main() -> None:
     print(f"source occurrences = {len(occurrences)}")
     print(f"distinct MatchKeys = {distinct}")
     print(f"blank definitions = {blank_defs}")
+    print("source schema = headerless A=Word / B=Definition")
     print("cross-source identity logic executed here = no")
     print("Stable ThirdPartyID minted = no")
     print("Final Klose diff executed = no")
