@@ -60,42 +60,42 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#399 / 34341556186 = SUCCESS**
+Latest sealed workflow：**#400 / 34341946713 = SUCCESS**
 
 ```text
-sealed bot head                    = afeccc8236dda971fc40af8090f77137de6e2186
+sealed bot head                    = 932aa791397cff66b4b0abe210d82b47cc1929f8
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3130
-Identity Vocabulary Preview        = 2595
-Learner Vocabulary Preview         = 2572
-Review blockers                    = 755
-Evidence-changed surfaces          = 14
+Durable Identity decisions         = 3135
+Identity Vocabulary Preview        = 2598
+Learner Vocabulary Preview         = 2575
+Review blockers                    = 752
+Evidence-changed surfaces          = 13
 Multipart resolved                 = 9
 Grammar-form quarantine gates      = 87
-CheckpointFingerprint              = b9fb2c1e5b7b31c24c1e666fc74982ee914eaf4476c615b40076c584378e9f21
+CheckpointFingerprint              = d3487d7746e0bc99e0cb27e37717296a03ad93319cc1600b4571e09ae0c7fd49
 ```
 
 Recent validated throughput：
 
 ```text
 #395 — feel / market / match / mobile / movie
-  resolved pre-seal multipart overlap by reusing stable DecisionKeys and canonical senses
-  match preserved as match#game / match#stick; workflow fully passed after fail-closed #393/#394 attempts
+  resolved fail-closed multipart overlap by reusing stable DecisionKeys and canonical senses
 #396 — film / mean / meeting / none / note / officer
   film preserved film#movie / film#photo; meeting kept as lexicalized noun; officer split police + held
 #397 — fish / opposite
-  fish fully closed as 27 noun + 7 verb occurrences; opposite narrowed to spatial learner sense
+  fish fully closed as 27 noun + 7 verb occurrences
 #398 — floor / outgoing / packet / page / pancake / parade / plum / position
-  floor fully closed as 8 storey + 11 ground; outgoing treated as lexicalized adjective, not outgo morphology
+  floor fully closed as 8 storey + 11 ground; outgoing kept as lexicalized adjective
 #399 — hard / past / pineapple / point
-  hard added reviewed hard#intense weather sense while preserving difficult / physical / effort; two weak hard contexts held
-  past fully closed across movement / clock / history; point preserved verb / score with one weak context held
+  hard added hard#intense; past fully closed movement / clock / history; weak hard/point contexts held
+#400 — hot / pool / pot / prepare / entrance
+  hot preserved temperature / spicy with weak contexts held; pool/prepare/entrance closed; pot audited-defer due insufficient container evidence
 ```
 
 Compact decision inbox rule：human-authored `Rationale` fields are always CSV-quoted before submission。Each completed batch must pass batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
 
-Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / `CanonicalMatchKey` names. Do not create parallel sense names for already-reviewed partitions. #393/#394 demonstrated that the corpus builder intentionally fails closed on overlap.
+Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / `CanonicalMatchKey` names. Do not create parallel sense names for already-reviewed partitions. Corpus builder intentionally fails closed on overlap。
 
 ---
 
@@ -106,21 +106,21 @@ PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
 SelectedCount  = 5
-EvidenceWeight = 60
+EvidenceWeight = 59
 ExecutionReady = true
 
-hot
-pool
-pot
-prepare
-entrance
+look
+rainbow
+raise
+return
+rope
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = fbd11f670ce79f09c3e6479e67b235bacd702dc1fdb6db794a38c2b0ffb8fad1
-ReviewPacketFingerprint = 6447e6b53b4ff29cd36b1bfc84db21622c1f8e02514d2e2ebec99a5d869996ce
+ReviewBundleFingerprint = d256c97b3e320c439c32727d4c3ecfe7fdb1323de75e5131c7e00fbbde128110
+ReviewPacketFingerprint = 984256a51928fdb02101c0c697237f7d0ce457fac76fb0075ccff08d6ac3097d
 ```
 
 Planner contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`；单批大小由 evidence weight 主导。Source mutation 与 decision mutation 不得混合。
