@@ -12,13 +12,11 @@
     "left",
     "saw",
     "1st",
-    "can i ...?",
-    "cm",
-    "dr"
+    "can i ...?"
   ],
-  "SelectedCount": 11,
-  "ReviewBundleFingerprint": "6c6e45853408744051a49f45c693ea4fb4ef5f001144f4b287fc6a2fd71c2db5",
-  "ReviewPacketFingerprint": "64879ff3406a35b735cb06a8f7d8ef6985d3976b17382d6ff0e05443c7f474df",
+  "SelectedCount": 9,
+  "ReviewBundleFingerprint": "580d7aabc1cd41ad96fadaef403fa1e3b386ea1d943ad9b6f398a4fb7a0cdbac",
+  "ReviewPacketFingerprint": "68d3a6f7a8a7b662664bd4989e12cd27ca9587bd8fa1862b809943135cc3c535",
   "Items": [
     {
       "MatchKey": "heard",
@@ -309,8 +307,8 @@
       "ReviewMode": "full-evidence",
       "DisplayForms": "left",
       "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "leave",
       "CanonicalRelation": "named-past-form",
@@ -362,7 +360,8 @@
         "renjiao_start3|g6-upper|r010|left",
         "waiyan_start1|g2-lower|r089|left",
         "waiyan_start1|g6-lower|r020|left",
-        "waiyan_start3|g4-upper|r004|left"
+        "waiyan_start3|g4-upper|r004|left",
+        "xiangshao_start3|g4-upper|r029|left"
       ],
       "FullEvidence": [
         {
@@ -794,6 +793,36 @@
             "excuse me",
             "turn left"
           ]
+        },
+        {
+          "SourceOccurrenceKey": "xiangshao_start3|g4-upper|r029|left",
+          "SourceID": "xiangshao_start3",
+          "SourceBook": "4年级上",
+          "Grade": "4",
+          "Semester": "上",
+          "SourceRow": "29",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "hungry",
+            "dumpling",
+            "milk",
+            "bread",
+            "rice",
+            "biscuit",
+            "turn",
+            "right"
+          ],
+          "After": [
+            "we",
+            "policemen",
+            "policeman",
+            "up",
+            "down",
+            "whose",
+            "wallet",
+            "bag"
+          ]
         }
       ]
     },
@@ -1224,110 +1253,6 @@
             "there is",
             "there are",
             "cousin"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "cm",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "cm",
-      "Definitions": "abbr. 厘米(centimeter);普通格律(common meter);军事法庭(court-martial)",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g6-upper|r090|cm"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r090|cm",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "90",
-          "Word": "cm",
-          "Definition": "abbr. 厘米(centimeter);普通格律(common meter);军事法庭(court-martial)",
-          "Before": [
-            "get lost",
-            "start",
-            "across",
-            "turn",
-            "fruit",
-            "keep",
-            "outside",
-            "early"
-          ],
-          "After": [
-            "centimeter",
-            "than",
-            "taller",
-            "tallest",
-            "enough",
-            "had better",
-            "aboard",
-            "take ... out of ..."
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "dr",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "Dr",
-      "Definitions": "abbr. 速度三角形定位法(dead reckoning);数据记录器(Data Recorder)",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:6年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g6-lower|r068|dr"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r068|dr",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "68",
-          "Word": "Dr",
-          "Definition": "abbr. 速度三角形定位法(dead reckoning);数据记录器(Data Recorder)",
-          "Before": [
-            "forest",
-            "pollute",
-            "made",
-            "make",
-            "be made from",
-            "fur",
-            "sea",
-            "famous"
-          ],
-          "After": [
-            "Doctor",
-            "person",
-            "history",
-            "leader",
-            "free",
-            "inventor",
-            "invent",
-            "bulb"
           ]
         }
       ]
