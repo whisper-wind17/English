@@ -4,18 +4,73 @@
   "ReviewLane": "policy-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
+    "heard",
     "eggs",
     "flowers",
+    "relatives",
     "fruits",
     "left",
+    "1st",
     "cookies",
     "birds",
     "her"
   ],
-  "SelectedCount": 7,
-  "ReviewBundleFingerprint": "c1a6b9a4b6b9f6c5740fdaae0baad3a72436c37ad28c1ce1b1b980687267a782",
-  "ReviewPacketFingerprint": "64284810293dae5d85dcde141cf4674d3e85d8c6b2a20b8f5df21205f57b8f1a",
+  "SelectedCount": 10,
+  "ReviewBundleFingerprint": "5bcef897d7cd5a38eb6af0be08a0fe136a9440af5c45aec4514db259481ce86b",
+  "ReviewPacketFingerprint": "d4820538ce1386258568dabdc971a9c577bb69fe021c1c6942e9ba0e3092689c",
   "Items": [
+    {
+      "MatchKey": "heard",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "heard",
+      "Definitions": "v. 听到(hear的过去式和过去分词);闻知",
+      "SourceIDs": "guangdong_start3",
+      "SourceBooks": "guangdong_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "hear",
+      "CanonicalRelation": "named-past-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "听见；听到",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangdong_start3|g6-lower|r054|heard"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g6-lower|r054|heard",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "54",
+          "Word": "heard",
+          "Definition": "v. 听到(hear的过去式和过去分词);闻知",
+          "Before": [
+            "then",
+            "really",
+            "tired",
+            "scared",
+            "excited",
+            "sad",
+            "stayed",
+            "stay up late"
+          ],
+          "After": [
+            "noise",
+            "got",
+            "kitten",
+            "got a poor grade",
+            "because",
+            "climb",
+            "mountain",
+            "why"
+          ]
+        }
+      ]
+    },
     {
       "MatchKey": "eggs",
       "ReviewMode": "full-evidence",
@@ -116,6 +171,58 @@
             "big",
             "crocodile",
             "small"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "relatives",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "relatives",
+      "Definitions": "n. 亲属;[语] 关系词(relative的复数)",
+      "SourceIDs": "guangdong_start3",
+      "SourceBooks": "guangdong_start3:5年级下",
+      "CandidateSignals": "morphology",
+      "CandidateCanonical": "relative",
+      "CanonicalRelation": "plural-form",
+      "CanonicalAction": "keep-identity",
+      "CanonicalStatus": "reviewed",
+      "CanonicalTargetSense": "亲戚；亲属",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangdong_start3|g5-lower|r035|relatives"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g5-lower|r035|relatives",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "35",
+          "Word": "relatives",
+          "Definition": "n. 亲属;[语] 关系词(relative的复数)",
+          "Before": [
+            "stay in a hotel",
+            "stay with my aunt and uncle",
+            "go sightseeing",
+            "Tibet",
+            "hurray",
+            "wolves",
+            "have a picnic",
+            "visit"
+          ],
+          "After": [
+            "help",
+            "play with friends",
+            "make models",
+            "surf the Internet",
+            "read books",
+            "next",
+            "during",
+            "fruit"
           ]
         }
       ]
@@ -561,6 +668,58 @@
             "street",
             "excuse me",
             "turn left"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "1st",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "1st",
+      "Definitions": "abbr. 第一(first)",
+      "SourceIDs": "guangdong_start3",
+      "SourceBooks": "guangdong_start3:5年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangdong_start3|g5-upper|r039|1st"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r039|1st",
+          "SourceID": "guangdong_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "39",
+          "Word": "1st",
+          "Definition": "abbr. 第一(first)",
+          "Before": [
+            "beach",
+            "today",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "After": [
+            "2nd",
+            "3rd",
+            "4th",
+            "20th",
+            "21st",
+            "22nd",
+            "23rd",
+            "30th"
           ]
         }
       ]
