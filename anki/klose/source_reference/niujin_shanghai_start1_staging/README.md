@@ -1,0 +1,30 @@
+# Oxford Shanghai Start1 — Third-party Source Adapter
+
+Scope:
+
+```text
+牛津上海版 1-6 年级上下册 = 12 primary-school books
+```
+
+Source schema is anchored by the `单词` and `释义` header columns. `英音` / `美音`
+are preserved when present. Grade 7+ files and Oxford high-school module files in the
+same raw directory are explicitly outside this adapter.
+
+Active output:
+
+```text
+occurrences.csv
+```
+
+The adapter only captures source facts. Cross-source comparison, morphology,
+semantic resolution, Vocabulary/Expression routing, and corpus identity logic
+are handled centrally by `tools/build_third_party_corpus.py`.
+
+```text
+Source books       = 12
+Source occurrences = 1186
+Distinct MatchKeys = 974
+Blank definitions  = 0
+```
+
+No cross-source identity state and no Klose final-diff state are stored here.
