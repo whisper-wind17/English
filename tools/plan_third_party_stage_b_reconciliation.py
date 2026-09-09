@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Build a deterministic read-only Stage-B reconciliation review queue and next batch.
 
-V2 separates safe executable proposals from semantic/manual review:
-- learner-excluded -> explicit held (no allocation needed under current learner policy)
-- exact/variant multiple -> manual high-risk review
+V2 separates manual ambiguity from safe executable proposals:
+- exact/variant multiple -> manual high-risk review first
 - orthographic/spelling single -> manual equivalence review
+- learner-excluded -> explicit held (no allocation under current learner policy)
 - exact-single + exact learner-sense equality -> safe reuse proposal
 - no-existing-match after exact/orthographic/spelling discovery -> safe new-identity proposal
 - other exact-single -> semantic review
@@ -44,27 +44,25 @@ QUEUE_FIELDS = [
     "MutationAuthorized",
 ]
 LANE_PRIORITY = {
-    "learner-excluded": 0,
-    "exact-multiple": 1,
-    "variant-multiple": 2,
-    "variant-single": 3,
+    "exact-multiple": 0,
+    "variant-multiple": 1,
+    "variant-single": 2,
+    "learner-excluded": 3,
     "exact-single-exact-sense": 4,
     "no-existing-match": 5,
     "exact-single-semantic-review": 6,
 }
 BATCH_CAPS = {
-    "learner-excluded": 300,
     "exact-multiple": 20,
     "variant-multiple": 20,
     "variant-single": 40,
+    "learner-excluded": 300,
     "exact-single-exact-sense": 200,
     "no-existing-match": 300,
     "exact-single-semantic-review": 50,
 }
 SAFE_EXECUTABLE_LANES = {
-    "learner-excluded",
-    "exact-single-exact-sense",
-    "no-existing-match",
+    "learner-excluded", "exact-single-exact-sense", "no-existing-match",
 }
 
 
@@ -127,7 +125,6 @@ def classify(row: dict[str, str]) -> tuple[str, str, str, str]:
             "learner-excluded", "held", "",
             "identity is outside the current learner-admission policy; close as held without allocation",
         )
-
     cls = row.get("KloseCandidateClass", "")
     if cls == "exact-multiple":
         return "exact-multiple", "", "", "multiple current exact Klose candidates require explicit review"
