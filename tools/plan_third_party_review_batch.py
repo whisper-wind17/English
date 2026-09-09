@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Plan the next deterministic high-throughput Stage-A review batch.
 
-The planner now has a strict additive-evidence fast lane for previously reviewed,
-single-row keep identities. It also emits a selected-only review packet and a
-machine checkpoint so reviewers do not need to rescan large repository CSVs.
+v6 uses semantic-complexity cost rather than raw occurrence count as the primary
+review budget. Repeated source occurrences are provenance, not linear human/model
+review cost under Minimal Learner Identity. A separate packet-byte budget keeps
+full-evidence batches bounded without artificially shrinking surface throughput.
+
 All emitted artifacts are derived-only; identity_decisions.csv remains content truth.
 """
 from __future__ import annotations
@@ -25,7 +27,7 @@ OUT = TP / "audit" / "next_batch.json"
 PACKET = TP / "audit" / "selected_review_packet.json"
 STATUS = TP / "audit" / "stage_a_status.json"
 REVIEW_VIEW = TP / "audit" / "selected_review_view.csv"
-PLAN_VERSION = "v5-throughput-delta"
+PLAN_VERSION = "v6-semantic-throughput"
 STATUS_VERSION = "stage-a-status-v1"
 
 LANE_ORDER = [
@@ -38,15 +40,38 @@ LANE_ORDER = [
     "object-boundary",
 ]
 
+# (surface cap, semantic-complexity budget)
 LIMITS = {
-    "source-reconciliation-needed": (15, 40),
-    "policy-executable": (80, 120),
-    "policy-review": (30, 60),
-    "actionable-semantic": (50, 90),
-    "evidence-revalidation": (60, 120),
-    "semantic-review": (60, 60),
-    "split-resolution": (25, 70),
-    "object-boundary": (25, 50),
+    "source-reconciliation-needed": (12, 60),
+    "policy-executable": (100, 160),
+    "policy-review": (40, 100),
+    "actionable-semantic": (50, 140),
+    "evidence-revalidation": (80, 160),
+    "semantic-review": (30, 120),
+    "split-resolution": (18, 120),
+    "object-boundary": (40, 120),
+}
+
+# Independent context-size guard. This prevents high-throughput packing from
+# producing an unbounded selected_review_packet even when semantic cost is low.
+PACKET_BYTE_LIMITS = {
+    "source-reconciliation-needed": 180_000,
+    "policy-executable": 240_000,
+    "policy-review": 220_000,
+    "actionable-semantic": 300_000,
+    "evidence-revalidation": 220_000,
+    "semantic-review": 300_000,
+    "split-resolution": 300_000,
+    "object-boundary": 260_000,
+}
+
+BLOCKER_COMPLEXITY = {
+    "semantic-easy": 2,
+    "semantic-cross-source": 3,
+    "semantic-hard": 5,
+    "functional-polysemy": 7,
+    "split-resolution": 8,
+    "multiword-object-boundary": 3,
 }
 
 FAST_ALLOWED_CLASSES = {"semantic-cross-source", "semantic-easy", "semantic-hard"}
@@ -150,12 +175,22 @@ def fast_revalidation_info(
     }
 
 
+def bounded_threshold_cost(value: int, thresholds: tuple[int, ...]) -> int:
+    return sum(1 for threshold in thresholds if value >= threshold)
+
+
 def evidence_weight(
     row: dict[str, str],
     *,
     lane: str,
+    decisions_by_match: dict[str, list[dict[str, str]]],
     fast_info: dict[str, object] | None = None,
 ) -> int:
+    """Estimate semantic decision cost, not raw provenance volume.
+
+    Occurrence/source repetition contributes only bounded diversity cost. True
+    polysemy, split state and canonical ambiguity remain expensive.
+    """
     if lane == "evidence-revalidation" and fast_info:
         added = fast_info.get("AddedEvidence", [])
         if not isinstance(added, list):
@@ -164,19 +199,48 @@ def evidence_weight(
             str(item.get("SourceID", ""))
             for item in added if isinstance(item, dict) and item.get("SourceID")
         }
-        payload_len = len(json.dumps(added, ensure_ascii=False, separators=(",", ":")))
-        return max(1, len(added)) + max(0, len(added_sources) - 1) + max(0, math.ceil(payload_len / 4000) - 1)
+        payload_len = len(json.dumps(added, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+        return (
+            1
+            + bounded_threshold_cost(len(added), (4, 12, 30))
+            + bounded_threshold_cost(len(added_sources), (4, 8))
+            + min(2, payload_len // 16_000)
+        )
+
+    blocker_class = row.get("BlockerClass", "")
+    weight = BLOCKER_COMPLEXITY.get(blocker_class, 4)
+
+    current_action = row.get("CurrentAction", "")
+    durable_count = len(decisions_by_match.get(row.get("MatchKey", ""), []))
+    if lane == "split-resolution" or current_action in {"split-required", "multipart-reviewed"}:
+        weight += 4
+    if durable_count > 1:
+        weight += min(6, 2 + durable_count)
+    if row.get("CandidateCanonical", ""):
+        weight += 2
 
     occ = max(1, int(row.get("OccurrenceCount", "1") or 1))
     sources = max(1, len([x for x in row.get("SourceIDs", "").split("|") if x]))
-    weight = 1 + max(0, occ - 1) + max(0, sources - 1)
-    if row.get("ReviewLane") == "split-resolution":
-        weight += 2
-    if row.get("CandidateCanonical", ""):
-        weight += 1
-    evidence_len = len(row.get("OccurrenceEvidenceJSON", ""))
-    weight += max(0, math.ceil(evidence_len / 4000) - 1)
-    return weight
+    # Repeated evidence is useful, but under Minimal Learner Identity it is not
+    # linear review work. Charge only bounded diversity/scale cost.
+    weight += bounded_threshold_cost(occ, (8, 20, 50))
+    weight += bounded_threshold_cost(sources, (4, 8, 16))
+
+    evidence_bytes = len(row.get("OccurrenceEvidenceJSON", "").encode("utf-8"))
+    weight += min(2, evidence_bytes // 16_000)
+    return max(1, weight)
+
+
+def review_payload_bytes(
+    row: dict[str, str],
+    *,
+    lane: str,
+    fast_info: dict[str, object] | None,
+) -> int:
+    if lane == "evidence-revalidation" and fast_info:
+        raw = json.dumps(fast_info.get("AddedEvidence", []), ensure_ascii=False, separators=(",", ":"))
+        return len(raw.encode("utf-8"))
+    return len(row.get("OccurrenceEvidenceJSON", "").encode("utf-8"))
 
 
 def bundle_fingerprint(
@@ -348,6 +412,8 @@ def build_status(plan: dict[str, object], bundle_rows: list[dict[str, str]]) -> 
             "SelectedMatchKeys": plan.get("SelectedMatchKeys", []),
             "EvidenceWeight": plan.get("EvidenceWeight", 0),
             "EffectiveWeightBudget": plan.get("EffectiveWeightBudget", 0),
+            "PacketBytes": plan.get("PacketBytes", 0),
+            "PacketByteBudget": plan.get("PacketByteBudget", 0),
             "ExecutionReady": plan.get("ExecutionReady", False),
             "ReviewBundleFingerprint": plan.get("ReviewBundleFingerprint", ""),
             "ReviewPacketFingerprint": plan.get("ReviewPacketFingerprint", ""),
@@ -392,34 +458,54 @@ def main() -> None:
 
     selected: list[dict[str, str]] = []
     total_weight = 0
+    total_packet_bytes = 0
     surface_cap = 0
     weight_budget = 0
     effective_budget = 0
+    packet_byte_budget = 0
+    effective_packet_byte_budget = 0
     skipped_for_packing: list[str] = []
     oversized_single = False
     if selected_lane:
         surface_cap, weight_budget = LIMITS[selected_lane]
+        packet_byte_budget = PACKET_BYTE_LIMITS[selected_lane]
         effective_budget = weight_budget
-        weighted: list[tuple[dict[str, str], int]] = []
+        effective_packet_byte_budget = packet_byte_budget
+        weighted: list[tuple[dict[str, str], int, int]] = []
         for row in lane_rows:
             info = fast_info_by_key.get(row.get("MatchKey", ""))
-            weighted.append((row, evidence_weight(row, lane=selected_lane, fast_info=info)))
+            weighted.append((
+                row,
+                evidence_weight(
+                    row,
+                    lane=selected_lane,
+                    decisions_by_match=decisions_by_match,
+                    fast_info=info,
+                ),
+                review_payload_bytes(row, lane=selected_lane, fast_info=info),
+            ))
 
-        for row, weight in weighted:
+        for row, weight, packet_bytes in weighted:
             if len(selected) >= surface_cap:
                 break
-            if total_weight + weight > weight_budget:
+            if total_weight + weight > weight_budget or total_packet_bytes + packet_bytes > packet_byte_budget:
                 skipped_for_packing.append(row.get("MatchKey", ""))
                 continue
             selected.append(row)
             total_weight += weight
+            total_packet_bytes += packet_bytes
 
         if not selected and weighted:
-            row, weight = min(weighted, key=lambda item: (item[1], item[0].get("MatchKey", "")))
+            row, weight, packet_bytes = min(
+                weighted,
+                key=lambda item: (item[1], item[2], item[0].get("MatchKey", "")),
+            )
             selected = [row]
             total_weight = weight
-            effective_budget = weight
-            oversized_single = weight > weight_budget
+            total_packet_bytes = packet_bytes
+            effective_budget = max(weight_budget, weight)
+            effective_packet_byte_budget = max(packet_byte_budget, packet_bytes)
+            oversized_single = weight > weight_budget or packet_bytes > packet_byte_budget
             skipped_for_packing = [
                 item[0].get("MatchKey", "") for item in weighted if item[0] is not row
             ]
@@ -447,6 +533,8 @@ def main() -> None:
         "SurfaceCap": surface_cap,
         "WeightBudget": weight_budget,
         "EffectiveWeightBudget": effective_budget,
+        "PacketBytes": total_packet_bytes,
+        "PacketByteBudget": effective_packet_byte_budget,
         "PackingSkippedMatchKeys": skipped_for_packing,
         "OversizedSingleSurface": oversized_single,
         "FastRevalidationCandidates": len(fast_info_by_key),
@@ -461,11 +549,13 @@ def main() -> None:
 
     packet = {
         "PlanVersion": PLAN_VERSION,
-        "ReviewPacketVersion": "selected-review-packet-v2",
+        "ReviewPacketVersion": "selected-review-packet-v3",
         "ReviewLane": selected_lane,
         "ReviewMode": plan["ReviewMode"],
         "SelectedMatchKeys": plan["SelectedMatchKeys"],
         "SelectedCount": plan["SelectedCount"],
+        "EvidenceWeight": plan["EvidenceWeight"],
+        "PacketBytes": plan["PacketBytes"],
         "ReviewBundleFingerprint": plan["ReviewBundleFingerprint"],
         "ReviewPacketFingerprint": review_packet_fp,
         "Items": selected_items,
@@ -480,7 +570,8 @@ def main() -> None:
     print(f"review batch lane = {selected_lane or 'none'}")
     print(f"review batch mode = {plan['ReviewMode']}")
     print(f"review batch selected surfaces = {len(selected)}")
-    print(f"review batch evidence weight = {total_weight} / {effective_budget}")
+    print(f"review batch semantic weight = {total_weight} / {effective_budget}")
+    print(f"review batch packet bytes = {total_packet_bytes} / {effective_packet_byte_budget}")
     print(f"review batch surface cap = {surface_cap}")
     print(f"review batch fast revalidation candidates = {len(fast_info_by_key)}")
     print(f"review batch packing skipped = {len(skipped_for_packing)}")
