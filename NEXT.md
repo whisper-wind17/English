@@ -4,17 +4,12 @@ Last updated: 2026-09-09
 
 ## 1. 启动顺序
 
-所有 Klose 任务先读取：
+所有 Klose 任务固定读取：
 
 ```text
 AGENTS.md
 → NEXT.md
-```
-
-当前 Third-party Vocabulary 继续读取：
-
-```text
-docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
+→ docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
 → docs/THIRD_PARTY_VOCABULARY_MINIMAL_IDENTITY.md
 → docs/THIRD_PARTY_VOCABULARY_CORPUS.md
 → docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
@@ -30,108 +25,64 @@ docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
 
 ---
 
-## 2. Current phase — Phase A2 Global Identity Closure
-
-冻结执行顺序：
+## 2. Current phase
 
 ```text
-Phase A1 — Source Adapter Bulk Ingestion       = CLOSED
-→ SOURCE FREEZE                               = ESTABLISHED
-→ Phase A2 — Global Identity Closure           = CURRENT
+Phase A1 — Source Adapter Bulk Ingestion = CLOSED
+→ SOURCE FREEZE                         = ESTABLISHED
+→ Phase A2 — Global Identity Closure     = CURRENT
 → final Stage-A seal
 → Stage B / Klose reconciliation
 ```
 
-Phase A2 现在可以处理 Identity review；但 **SOURCE FREEZE 后不得静默修改 source_adapters、adapter occurrences 或 raw-source interpretation**。任何确有必要的 Source 修正都必须显式 reopen Source Freeze，重新通过 Source gate 后再回到 A2。
+SOURCE FREEZE 后不得静默修改 source adapters、adapter occurrences 或 raw-source interpretation；确需 Source 修正必须显式 reopen freeze 并重新通过 Source gate。
 
 ---
 
-## 3. SOURCE FREEZE — 20 adapters / CLOSED
+## 3. SOURCE FREEZE — CLOSED
+
+Authoritative contract：
 
 ```text
-beijing_start1          =  808 occurrences /  734 MatchKeys / 12 books
-beishida_start1         =  925 occurrences /  798 MatchKeys / 12 books
-beishida_start3         =  699 occurrences /  663 MatchKeys /  8 books
-cambridge_join_start3   = 1456 occurrences / 1333 MatchKeys /  8 books
-guangdong_start3        =  741 occurrences /  665 MatchKeys /  8 books
-guangzhou_start3        = 1268 occurrences / 1212 MatchKeys /  8 books
-hujiao_start3           = 1111 occurrences / 1067 MatchKeys /  8 books
-jiaoke_eec_start3       = 1093 occurrences / 1033 MatchKeys /  8 books
-jijiao_start3           =  605 occurrences /  510 MatchKeys /  8 books
-kepu_start3             =  772 occurrences /  771 MatchKeys /  8 books
-luke_54_start3          =  714 occurrences /  681 MatchKeys /  6 books
-minjiao_start3          =  772 occurrences /  732 MatchKeys /  8 books
-niujin_shanghai_start1  = 1186 occurrences /  974 MatchKeys / 12 books
-renjiao_start1          =  908 occurrences /  802 MatchKeys / 12 books
-renjiao_start3          =  851 occurrences /  818 MatchKeys /  8 books
-shaanxi_start3          =  917 occurrences /  880 MatchKeys /  8 books
-waiyan_start1           = 1170 occurrences / 1071 MatchKeys / 12 books
-waiyan_start3           = 1157 occurrences / 1023 MatchKeys /  8 books
-xiangshao_start3        =  698 occurrences /  674 MatchKeys /  8 books
-yilin_start3            = 1036 occurrences /  998 MatchKeys /  8 books
----------------------------------------------------------------------
-Total                   = 18887 source occurrences / 178 books
-```
-
-Edition-specific blank `Definition` source facts total **13**:
-
-```text
-cambridge_join_start3=1
-guangzhou_start3=1
-luke_54_start3=2
-minjiao_start3=1
-shaanxi_start3=1
-waiyan_start1=2
-waiyan_start3=2
-yilin_start3=3
-```
-
-这些是冻结 Source Facts，不得手工补写或归一化掉。
-
----
-
-## 4. SOURCE FREEZE machine contract
-
-```text
-contract = anki/klose/third_party_vocabulary/config/source_freeze.json
-checker  = tools/check_third_party_source_freeze.py
-CI step  = Enforce Third-party SOURCE FREEZE
+anki/klose/third_party_vocabulary/config/source_freeze.json
+tools/check_third_party_source_freeze.py
+CI: Enforce Third-party SOURCE FREEZE
 ```
 
 Frozen invariants：
 
 ```text
-planned enabled adapters             = exactly 20
+enabled adapters                     = 20
 source occurrences                   = 18887
 source books                         = 178
-blank Definition facts               = 13
-all adapters dedicated prepare/check = yes
+blank Definition source facts        = 13
 cross-adapter occurrence collision   = 0
+dedicated prepare/check              = 20 / 20
 source_adapters.csv SHA-256           = fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272
 unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b122392b282a4293567702a7d4
-Klose mutation                       = 0 (independent workflow git-diff gate)
+Klose operational mutation           = 0
 ```
 
-Terminal scope boundaries：
+Terminal source boundaries：
 
 ```text
-仁爱版                     = excluded; only grades 7-9
-鲁教版五四学制             = excluded; grade 6+ is middle-school segment
-译林低年级 / 牛津小学1A-2B = deferred; edition continuity with start3 not established
+仁爱版                     = excluded; grades 7–9 only
+鲁教版五四学制             = excluded; grade 6+ middle-school segment
+译林低年级 / 牛津小学1A–2B = deferred; edition continuity not established
 ```
 
-Validation evidence：
+Source validation evidence：
 
 ```text
-Final source-union workflow #351 / 34303418551 = SUCCESS
-SOURCE FREEZE CI workflow #353 / 34303742198   = SUCCESS
+workflow #351 / 34303418551 = final 20-adapter union SUCCESS
+workflow #353 / 34303742198 = SOURCE FREEZE establishment SUCCESS
 ```
 
 ---
 
-## 5. Current Phase-A2 Identity state — CHECKPOINTED after `light`
+## 4. Current Phase-A2 machine checkpoint
 
-Authoritative machine state from workflow **#359 / 34312798133 = SUCCESS**：
+Latest sealed workflow：**#361 / 34313132665 = SUCCESS**
 
 ```text
 Source occurrences                 = 18887
@@ -140,83 +91,97 @@ Durable Identity decisions         = 2457
 Identity Vocabulary Preview        = 1992
 Learner Vocabulary Preview         = 1976
 Review blockers                    = 1411
-Evidence-changed surfaces          = 36
+Evidence-changed surfaces          = 34
 Multipart resolved                 = 3
 Grammar-form quarantine gates      = 62
-CheckpointFingerprint              = 39f2fcccca551a49c60f24ff0df1c7f3f057e2df968373f76f6c1c3acbe20e0d
+CheckpointFingerprint              = 83647a4477acf83b06622337524549de970ee65f9328d5b1b5dc67cfbb061208
 ```
 
-`light` batch closure：
+Recent validated batches：
 
 ```text
-light#illumination = 灯；光；光线
-light#weight       = 轻的；轻便的
-light#intensity    = 轻微的；少量的（如小雨）
-light#ignite       = 点燃；点着
-held               = beishida_start1:g6-lower + cambridge_join_start3:g3-upper
+light — workflow #359 / 34312798133
+  light#illumination = 灯；光；光线
+  light#weight       = 轻的；轻便的
+  light#intensity    = 轻微的；少量的（如小雨）
+  light#ignite       = 点燃；点着
+  held               = Beishida + Cambridge unresolved source rows
+
+mouse — workflow #360 / 34312987272
+  mouse#animal       = 老鼠            (8 occurrences)
+  mouse#computer     = 鼠标；电脑鼠标  (2 occurrences)
+  held               = Beishida flat-list row (1 occurrence)
+
+watch — workflow #361 / 34313132665
+  watch#noun         = 手表            (11 occurrences)
+  watch#verb         = 观看；注视      (11 occurrences)
+  held               = 5 occurrences whose current context does not safely bind noun/verb
 ```
 
-两条 held occurrence 的当前局部 flat-list / glossary context 不足以安全区分 illumination / weight / intensity / colour-brightness / verb sense，因此继续保留 current-context audited-defer，不猜 partition。
+`light` 首次 attempt #358 因 held DecisionKey 被错误追加、造成 multipart occurrence overlap 而失败；修复为复用稳定 DecisionKey 后 #359 全门通过。该 failure mode 已作为后续 multipart update 的检查项：**扩展旧 partition 必须替换旧 DecisionKey，不得另起同义 held row。**
 
-Validation notes：
-
-```text
-first light attempt workflow #358 = FAILED
-reason = new held DecisionKey appended instead of replacing old held row,
-         causing overlapping multipart OccurrenceKeys for Beishida light
-fix    = preserve stable DecisionKey surface:light#unresolved-beishida
-         and expand its occurrence set to Beishida + Cambridge
-workflow #359 = full PASS
-SOURCE FREEZE unchanged
-Klose Master/Learner/Release/Publish/Anki mutation = 0
-```
-
-Minimal Learner Identity 规则继续生效：
-
-```text
-reviewed singleton + additive same-MatchKey evidence
-→ refresh provenance only; no semantic re-review
-
-true learner-relevant polysemy
-→ multipart exact occurrence partition
-
-Identity resolved
-≠ Learner Admission
-```
+每次上述 batch 均通过：apply → corpus build → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist。
 
 ---
 
-## 6. NEXT TASK — execute current deterministic Phase-A2 batch
+## 5. NEXT TASK — current deterministic Phase-A2 batch
 
-Current machine-planned batch：
+Planner 当前已从 `policy-review` 进入 `semantic-review`：
 
 ```text
 PlanVersion    = v5-throughput-delta
-ReviewLane     = policy-review
+ReviewLane     = semantic-review
 ReviewMode     = full-evidence
-SelectedCount  = 1
+SelectedCount  = 30
+EvidenceWeight = 35
 ExecutionReady = true
-EvidenceWeight = 21
 
-mouse
+program
+20th
+21st
+22nd
+23rd
+2nd
+30th
+31st
+3rd
+4th
+ability
+abracadabra
+achoo
+action
+advertisement
+aeroplane
+airplane
+album
+alphabet
+ambulance
+america
+anyone
+anytime
+area
+argentina
+athlete
+atishoo
+aviary
+aw
+bacon
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = c95da8583acc6861956ee5f28c8fa2fd6833ac8bebfe340d30d8118b64b3145f
-ReviewPacketFingerprint = 7f336cab4c9e63fd896f45986c851a6f4f55b74ebc994375753c19426881cc6d
+ReviewBundleFingerprint = cb1406210a980286ca6476c565ac605e9e530961c5dc5127348481fc33634715
+ReviewPacketFingerprint = 0100c4cce39ca7e2e0f495d5eda9464dc42d01327a520bb2da6684808b084bfe
 ```
 
-`watch` 当前因 evidence-weight packing 被跳过，不得绕过 planner 顺序手工并入 `mouse` batch。
-
-Batch execution contract：
+Batch contract：
 
 ```text
 next_batch.json
-→ selected-only review packet/view
+→ selected-only full evidence
 → decision_updates.csv
-→ planner selected set == submitted MatchKey set
+→ submitted MatchKey set == planner selected set
 → apply
 → corpus build/check
 → SOURCE FREEZE check
@@ -230,9 +195,7 @@ Source mutation 与 decision mutation 不得混合。
 
 ---
 
-## 7. Phase A2 completion target
-
-按最终 frozen corpus 统一完成：
+## 6. Phase A2 completion target
 
 ```text
 morphology / form canonicalization
@@ -255,9 +218,9 @@ morphology / form canonicalization
 
 ---
 
-## 8. Stage-B state — OLD SNAPSHOT, GATED
+## 7. Stage-B state — OLD SNAPSHOT, GATED
 
-`premerge/readiness.json` 仍是旧的 7535-occurrence snapshot，不是当前 authority。
+`premerge/readiness.json` 仍是旧 7535-occurrence snapshot，不是当前 authority。
 
 ```text
 ReadyForPremergeReview     = false
@@ -266,11 +229,11 @@ StableThirdPartyIDMinted   = false
 MergeAuthorizedRows        = 0
 ```
 
-只有 Phase A2 完成、final Stage-A seal 验证后，才能刷新 Stage-B premerge snapshot。
+Phase A2 完成并通过 final Stage-A seal 前，不刷新 Stage-B premerge snapshot。
 
 ---
 
-## 9. Frozen boundaries
+## 8. Frozen boundaries
 
 ```text
 Source Fact ≠ Vocabulary Identity ≠ Learner Admission ≠ Anki state
@@ -283,5 +246,5 @@ reconciliation != merge authorization
 - actual textbook evidence > third-party dictionary gloss；
 - Stage A 不 mint Stable ThirdPartyID / NoteID；
 - Stable NoteID 不得重编号、复用或漂移；
-- Stage A / reconciliation workflow 不得修改 Klose Master/Learner/Release/Publish/Anki；
-- reconciliation closure + independent Completion Recheck + explicit human gate 前不得 mint Stable NoteID。
+- Stage A 不得修改 Klose Master/Learner/Release/Publish/Anki；
+- reconciliation closure + Completion Recheck + explicit human gate 前不得 mint Stable NoteID。
