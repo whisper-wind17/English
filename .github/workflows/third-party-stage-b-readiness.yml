@@ -6,6 +6,8 @@ on:
     paths:
       - 'tools/build_third_party_klose_premerge.py'
       - 'tools/check_third_party_klose_premerge.py'
+      - 'tools/plan_third_party_stage_b_reconciliation.py'
+      - 'tools/check_third_party_stage_b_review_plan.py'
       - 'tools/seal_third_party_stage_a_checkpoint.py'
       - 'anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv'
       - 'anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv'
@@ -13,6 +15,7 @@ on:
       - 'anki/klose/third_party_vocabulary/audit/defer_context.csv'
       - 'anki/klose/third_party_vocabulary/audit/next_batch.json'
       - 'anki/klose/third_party_vocabulary/audit/stage_a_status.json'
+      - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
       - '.github/workflows/third-party-stage-b-readiness.yml'
@@ -51,6 +54,12 @@ jobs:
 
       - name: Check Stage-B premerge readiness
         run: python tools/check_third_party_klose_premerge.py
+
+      - name: Plan Stage-B reconciliation review
+        run: python tools/plan_third_party_stage_b_reconciliation.py
+
+      - name: Check Stage-B reconciliation review plan
+        run: python tools/check_third_party_stage_b_review_plan.py
 
       - name: Assert build mutated only premerge derived state
         shell: bash
