@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+"""Materialize only safe Stage-B reconciliation proposals into the transient inbox.
+
+This is a review-truth helper, not a Klose mutation tool. It writes
+`reconciliation/decision_updates.csv` only for planner lanes explicitly marked
+AutoExecutable. If an explicit/manual inbox already exists, it is preserved.
+"""
+from __future__ import annotations
+
+import csv
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+TP = ROOT / "anki" / "klose" / "third_party_vocabulary"
+PREMERGE = TP / "premerge"
+RECON = TP / "reconciliation"
+NEXT = PREMERGE / "reconciliation_next_batch.json"
+SELECTED = PREMERGE / "reconciliation_selected_view.csv"
+UPDATES = RECON / "decision_updates.csv"
+
+FIELDS = [
+    "DecisionKey", "ProvisionalIdentityKey", "StageACheckpointFingerprint",
+    "CandidateFingerprint", "Action", "ExistingNoteID", "ProposedCanonicalWord",
+    "ProposedMatchKey", "ProposedSense", "Status", "Confidence",
+    "MutationAuthorized", "DecisionBasis", "Rationale",
+]
+SAFE_LANES = {"learner-excluded", "exact-single-exact-sense", "no-existing-match"}
+
+
+def rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        raise SystemExit(f"Missing required file: {path}")
+    with path.open("r", encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def obj(path: Path) -> dict[str, object]:
+    if not path.exists():
+        raise SystemExit(f"Missing required JSON: {path}")
+    value = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(value, dict):
+        raise SystemExit(f"Expected JSON object: {path}")
+    return value
+
+
+def main() -> None:
+    state = obj(NEXT)
+    selected = rows(SELECTED)
+    selected_ids = [r.get("ProvisionalIdentityKey", "") for r in selected]
+    if not all(selected_ids) or len(selected_ids) != len(set(selected_ids)):
+        raise SystemExit("Selected Stage-B batch has empty/duplicate identity key")
+    if selected_ids != state.get("SelectedProvisionalIdentityKeys", []):
+        raise SystemExit("Selected Stage-B view/list drift")
+
+    if UPDATES.exists():
+        explicit = rows(UPDATES)
+        print(f"explicit Stage-B reconciliation inbox preserved = {len(explicit)}")
+        print("automatic proposal materialization = skipped")
+        return
+
+    lane = str(state.get("ReviewLane", ""))
+    auto = state.get("AutoExecutable") is True
+    if not selected:
+        print("Stage-B selected batch empty = yes")
+        return
+    if not auto or lane not in SAFE_LANES:
+        print(f"Stage-B selected lane requires explicit review = {lane}")
+        return
+
+    checkpoint = str(state.get("StageACheckpointFingerprint", "")).strip()
+    if not checkpoint:
+        raise SystemExit("Stage-B next batch lacks checkpoint fingerprint")
+
+    updates: list[dict[str, str]] = []
+    for row in selected:
+        pid = row["ProvisionalIdentityKey"]
+        action = row.get("ProposalAction", "")
+        if lane == "learner-excluded":
+            if action != "held" or row.get("LearnerAdmitted", "").casefold() == "yes":
+                raise SystemExit(f"Unsafe learner-excluded proposal: {pid}")
+            updates.append({
+                "DecisionKey": "reconcile:" + pid.removeprefix("candidate:"),
+                "ProvisionalIdentityKey": pid,
+                "StageACheckpointFingerprint": checkpoint,
+                "CandidateFingerprint": row["CandidateFingerprint"],
+                "Action": "held",
+                "ExistingNoteID": "",
+                "ProposedCanonicalWord": "",
+                "ProposedMatchKey": "",
+                "ProposedSense": "",
+                "Status": "held",
+                "Confidence": "high",
+                "MutationAuthorized": "no",
+                "DecisionBasis": "current-learner-policy-exclusion",
+                "Rationale": "Current learner admission excludes this identity. Retain Source/Identity evidence but do not allocate or merge it into the current Klose learning vocabulary; checkpoint changes force re-review if learner policy changes.",
+            })
+        elif lane == "exact-single-exact-sense":
+            existing = row.get("ProposalExistingNoteID", "")
+            if action != "reuse-existing" or not existing:
+                raise SystemExit(f"Unsafe exact-sense reuse proposal: {pid}")
+            updates.append({
+                "DecisionKey": "reconcile:" + pid.removeprefix("candidate:"),
+                "ProvisionalIdentityKey": pid,
+                "StageACheckpointFingerprint": checkpoint,
+                "CandidateFingerprint": row["CandidateFingerprint"],
+                "Action": "reuse-existing",
+                "ExistingNoteID": existing,
+                "ProposedCanonicalWord": "",
+                "ProposedMatchKey": "",
+                "ProposedSense": "",
+                "Status": "reviewed",
+                "Confidence": "high",
+                "MutationAuthorized": "no",
+                "DecisionBasis": "exact-matchkey-and-exact-sense",
+                "Rationale": "One current active Klose candidate has the exact MatchKey and byte-for-byte equal learner TargetSense. This records reconciliation equivalence only; no merge or mutation is authorized.",
+            })
+        elif lane == "no-existing-match":
+            if action != "new-stable-identity" or row.get("KloseCandidateNoteIDs", ""):
+                raise SystemExit(f"Unsafe no-existing-match proposal: {pid}")
+            word = row.get("DisplayWord", "").strip()
+            match_key = row.get("LookupMatchKey", "").strip()
+            sense = row.get("ThirdPartyTargetSense", "").strip()
+            if not word or not match_key or not sense:
+                raise SystemExit(f"New-identity proposal lacks identity fields: {pid}")
+            updates.append({
+                "DecisionKey": "reconcile:" + pid.removeprefix("candidate:"),
+                "ProvisionalIdentityKey": pid,
+                "StageACheckpointFingerprint": checkpoint,
+                "CandidateFingerprint": row["CandidateFingerprint"],
+                "Action": "new-stable-identity",
+                "ExistingNoteID": "",
+                "ProposedCanonicalWord": word,
+                "ProposedMatchKey": match_key,
+                "ProposedSense": sense,
+                "Status": "reviewed",
+                "Confidence": "high",
+                "MutationAuthorized": "no",
+                "DecisionBasis": "no-current-equivalent-candidate-after-variant-scan",
+                "Rationale": "Current premerge discovery found no exact MatchKey, conservative space/hyphen-equivalent, or configured spelling-equivalent active Klose identity. Record a proposed new stable identity only; no NoteID is allocated and no Klose state is mutated.",
+            })
+        else:
+            raise SystemExit(f"Unexpected auto-executable Stage-B lane: {lane}")
+
+    RECON.mkdir(parents=True, exist_ok=True)
+    with UPDATES.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(updates)
+
+    print(f"Stage-B auto proposal lane = {lane}")
+    print(f"Stage-B auto proposals materialized = {len(updates)}")
+    print("MutationAuthorized = no")
+    print("Stable NoteID allocated = no")
+
+
+if __name__ == "__main__":
+    main()
