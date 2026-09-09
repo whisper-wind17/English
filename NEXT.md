@@ -60,100 +60,80 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#410 / 34366294228 = SUCCESS**
+Latest sealed workflow：**#411 / 34407926063 = SUCCESS**
 
 ```text
-sealed bot head                    = ac51be4327ff289e953421ce57937e4823773e00
-sealed input commit                = 5e3f3c462d848489ce7ee3956bae230c628557af
+sealed bot head                    = 3a5eb61359fb9be8eba0af421dc09c14559929a5
+sealed input commit                = c7dfc4a0c94893fd9ee4e508f4cad5d7fb39ded8
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3187
+Durable Identity decisions         = 3197
 Identity Vocabulary Preview        = 2637
 Learner Vocabulary Preview         = 2614
 Review blockers                    = 718
 Evidence-changed surfaces          = 0
 Multipart resolved                 = 15
 Grammar-form quarantine gates      = 88
-CheckpointFingerprint              = 36eea59880e15c495d034209865b59adcb99b1f0231664e3fab83533534ec7b8
+CheckpointFingerprint              = e2d6e2724052e413fe6b63519d80dcb9af3d0e0b53aef33f53230e4fa779d71e
 ```
 
 Recent validated throughput：
 
 ```text
-#402 — orange / sand
-#403 — play / seal / several
-#404 — save / seat / shoot / shower / silly / skateboard / slide / sore / spot / square / sticker
-#405 — show / taste / tasty / term / terrible
-#406 — thin / throat / toe / tour / upstairs / exit
-#407 — time / used / wake / waste
-
 #409 — throughput architecture validation
-  planner upgraded from occurrence-weighted v5 to v6-semantic-throughput
-  semantic complexity budget = 120
-  review packet byte budget = 300000
-  source / learner / Klose isolation gates all PASS
+  v6-semantic-throughput; semantic budget 120 + packet budget 300000
 
-#410 — 12-surface high-throughput semantic batch
+#410 — 12-surface semantic-review batch
   water / wave / wing / yummy / may / rock / rough / smooth / snorkel / trick / miss / like
-  SelectedCount = 12, EvidenceWeight = 91, PacketBytes = 58255
-  EvidenceChangedSurfaces 4 → 0
-  ReviewBlockers 727 → 718
-  MultipartResolved 13 → 15
+  EvidenceChangedSurfaces 4 → 0; ReviewBlockers 727 → 718; MultipartResolved 13 → 15
+
+#411 — 8-surface split-resolution batch
+  too / french / little / pass / flies / fan / get / line
+  SelectedCount = 8, EvidenceWeight = 119, PacketBytes = 48238
+  reviewed evidence-supported subgroups + explicit current-context held partitions
+  DurableIdentityDecisions 3187 → 3197
   full Validation Gate + bot persist + independent post-seal state recheck PASS
 ```
 
-同一 input commit 曾被 GitHub 重复排出 #408。#408 的 validation steps 通过，但最终 persist 与已先写入的 #407 发生 rebase conflict；它不是有效 checkpoint。
-
 Every completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
 
-Multipart re-review 必须复用已有稳定 `DecisionKey` / `CanonicalMatchKey`；允许把旧的 whole-surface `split-required` 收敛成 reviewed subgroup + current-context held subgroup，但不得猜义。Corpus builder 对 overlap / incomplete partition fail closed。
+Multipart re-review 必须复用已有稳定 `DecisionKey` / `CanonicalMatchKey`；允许把旧 whole-surface `split-required` 收敛成 reviewed subgroup + current-context held subgroup，但不得猜义。Corpus builder 对 overlap / incomplete partition fail closed。
 
 ---
 
 ## 5. NEXT TASK — current deterministic Phase-A2 batch
 
-Machine-selected next batch：
-
 ```text
 PlanVersion            = v6-semantic-throughput
 ReviewLane             = split-resolution
 ReviewMode             = full-evidence
-SelectedCount          = 8
-EvidenceWeight         = 119
+SelectedCount          = 5
+EvidenceWeight         = 81
 EffectiveWeightBudget  = 120
-PacketBytes            = 48238
+PacketBytes            = 48883
 PacketByteBudget       = 300000
 ExecutionReady         = true
 
-too
-french
-little
-pass
-flies
-fan
-get
-line
+kind
+letter
+plant
+right
+sound
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = ef1772f4001bb4095ae6af98ce4fe968a2b1858d8c3ebd405347862c403521c1
-ReviewPacketFingerprint = d4eb6664c27197058e34eb378172fa1d4351e0ed0c6eae76352d2d499a33fc48
+ReviewBundleFingerprint = 5858044741fe3a9934cfc43dec26fc3666f1658939d52a4a58e99d7390827a5f
+ReviewPacketFingerprint = b8a9be4cd8c53f7310d39de54b7df3e8c2b0d923ecaa7b8c929878f7b85fa580
 ```
 
-Execution strategy：
+Execution sequence：
 
 ```text
-too / french / little / pass / fan / line
-→ establish only evidence-supported reviewed subgroups
-→ put ambiguous occurrences into explicit current-context held partitions
-
-flies / get
-→ current source window is still insufficient for safe partition
-→ refresh audited split-required defer; do not guess
-
-then:
+read selected_review_packet.json / selected_review_view.csv
+→ establish only evidence-supported disjoint learner subgroups
+→ preserve ambiguous current-context occurrences as held
 → create transient review/decision_updates.csv
 → pre-main partition/diff/scope check
 → non-force main update
@@ -162,7 +142,7 @@ then:
 → independent post-seal diff/state recheck
 ```
 
-Planner contract：v6 以 semantic complexity 为主预算，`WeightBudget=120`，并独立限制 `PacketByteBudget=300000`；lane-specific SurfaceCap 只作表面数量 guard。Source mutation 与 decision mutation 不得混合。
+Planner contract：v6 以 semantic complexity 为主预算，`WeightBudget=120`，并独立限制 `PacketByteBudget=300000`；lane-specific SurfaceCap 只作数量 guard。Source mutation 与 decision mutation 不得混合。
 
 ---
 
