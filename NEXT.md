@@ -49,7 +49,7 @@ Phase A1 允许新增 source evidence 持续扩大 pending / evidence-changed / 
 
 ---
 
-## 3. Existing enabled Adapter baseline — 14 CLOSED
+## 3. Existing enabled Adapter baseline — 15 CLOSED
 
 ```text
 beijing_start1          =  808 occurrences /  734 MatchKeys / 12 books
@@ -60,6 +60,7 @@ guangzhou_start3        = 1268 occurrences / 1212 MatchKeys /  8 books
 hujiao_start3           = 1111 occurrences / 1067 MatchKeys /  8 books
 jiaoke_eec_start3       = 1093 occurrences / 1033 MatchKeys /  8 books
 jijiao_start3           =  605 occurrences /  510 MatchKeys /  8 books
+kepu_start3             =  772 occurrences /  771 MatchKeys /  8 books
 niujin_shanghai_start1  = 1186 occurrences /  974 MatchKeys / 12 books
 renjiao_start1          =  908 occurrences /  802 MatchKeys / 12 books
 renjiao_start3          =  851 occurrences /  818 MatchKeys /  8 books
@@ -67,49 +68,62 @@ waiyan_start1           = 1170 occurrences / 1071 MatchKeys / 12 books
 waiyan_start3           = 1157 occurrences / 1023 MatchKeys /  8 books
 xiangshao_start3        =  698 occurrences /  674 MatchKeys /  8 books
 ---------------------------------------------------------------------
-Total                   = 13220 source occurrences / 132 books
+Total                   = 13992 source occurrences / 140 books
 ```
 
-Latest completed adapter: `niujin_shanghai_start1`.
+Latest completed adapter: `kepu_start3`.
 
 ```text
-12 raw books / 1186 occurrences / 974 MatchKeys
+8 raw books / 772 occurrences / 771 MatchKeys
 blank Definition source facts       = 0
-Grade 7+ / high-school leakage      = 0
 parser                               = PASS
 dedicated edition checker            = PASS
-all dedicated source checkers        = 14 PASS
+all dedicated source checkers        = 15 PASS
 global adapter closure               = PASS
 Corpus Completion Recheck            = PASS
 Learner quarantine check             = PASS
 Audit-batch Recheck                  = PASS
 Klose isolation                      = PASS
 Stage-A seal                         = PASS
-Workflow #325 / 34298864236          = SUCCESS
-CheckpointFingerprint                = 7b0b0fccc380efda6268bd692eefd7134a004315d85131084a43dc3e1adda8a0
+Workflow #329 / 34300588962          = SUCCESS
+CheckpointFingerprint                = c472416003baa95d0227afb881a861258a2005f383b7fef86a9f7ac2045df0e4
 ```
 
 Edition-specific blank `Definition` source facts currently total 5: `guangzhou_start3=1`, `waiyan_start1=2`, `waiyan_start3=2`. These are frozen Source Facts and must not be normalized away manually.
 
 ---
 
-## 4. NEXT TASK — add `kepu_start3`
+## 4. Remaining raw-source inventory before SOURCE FREEZE
+
+明确可接入的完整小学序列：
+
+```text
+cambridge_join_start3   # 剑桥版 JOIN，小学 3–6，上下册，共 8 册
+yilin_start3            # 译林版三年级起点，3–6，上下册，共 8 册
+minjiao_start3          # 闽教版三年级起点，3–6，上下册，共 8 册
+shaanxi_start3          # 陕西版三年级起点，3–6，上下册，共 8 册
+luke_54_start3          # 鲁科版五四学制，小学 3–5，上下册，共 6 册；五年制小学边界
+```
+
+明确不进入当前小学 corpus：
+
+```text
+仁爱版   # raw source 仅七/八/九年级
+鲁教版   # 五四学制六–九年级；六年级起属于该学制初中段
+```
+
+译林版另有一年级/二年级文件及 `牛津小学英语1A/1B/2A/2B`，但 raw repo 中没有与其明确同一 edition/revision 的 3–6 连续命名序列。**不得把这些文件与 `译林版三年级起点` 3–6 静默拼成 start1 adapter**；如未来需要，应先做 edition/source reconciliation。
+
+---
+
+## 5. NEXT TASK — add `cambridge_join_start3`
 
 继续 Phase A1，不进入 Identity closure。
 
-repo raw source 已确认 `科普版/` 存在完整三年级起点小学序列：
+repo raw source `剑桥版/` 已确认 JOIN 小学英语完整 3–6 年级上下册 8 册。下一 Adapter ID：
 
 ```text
-科普版三年级起点三年级上 / 下
-科普版三年级起点四年级上 / 下
-科普版三年级起点五年级上 / 下
-科普版三年级起点六年级上 / 下
-```
-
-共 8 册。下一 Adapter ID：
-
-```text
-kepu_start3
+cambridge_join_start3
 ```
 
 Per-Adapter Definition of Done：
@@ -128,37 +142,31 @@ Per-Adapter Definition of Done：
 11. Klose Master/Learner/Release/Publish/Anki unchanged
 ```
 
-达到以上条件后直接枚举并进入下一个完整小学 Adapter。
+达到以上条件后按 Remaining raw-source inventory 继续下一个 adapter。
 
 ---
 
-## 5. Current Identity state — carry forward, DO NOT close yet
+## 6. Current Identity state — carry forward, DO NOT close yet
 
 Authoritative sealed machine state：
 
 ```text
-Source occurrences                 = 13220
-Normalized surfaces                = 3149
+Source occurrences                 = 13992
+Normalized surfaces                = 3190
 Durable Identity decisions         = 2411
 Identity Vocabulary Preview        = 1969
 Learner Vocabulary Preview         = 1956
-Review blockers                    = 842
+Review blockers                    = 883
 Evidence-changed surfaces          = 40
 Multipart resolved                 = 1
 Grammar-form quarantine gates      = 61
 ```
 
-当前 planner 选择 7 个 policy-review surfaces：
-
-```text
-heard / eggs / flowers / relatives / fruits / left / saw
-```
-
-这些都是 Identity-layer 工作，**Phase A1 暂不执行**。`program / programme` 同样继续 gated，统一留到 SOURCE FREEZE 后 Phase A2。
+当前 planner 选择 21 个 policy-review surfaces；这些均属于 Identity-layer 工作，**Phase A1 暂不执行**。`program / programme` 同样继续 gated，统一留到 SOURCE FREEZE 后 Phase A2。
 
 ---
 
-## 6. SOURCE FREEZE gate
+## 7. SOURCE FREEZE gate
 
 所有计划第三方小学教材 Adapter 完成前：
 
@@ -186,7 +194,7 @@ Klose mutation = 0
 
 ---
 
-## 7. Phase A2 — Global Identity Closure
+## 8. Phase A2 — Global Identity Closure
 
 SOURCE FREEZE 后一次性完成：
 
@@ -207,7 +215,7 @@ morphology / form canonicalization
 
 ---
 
-## 8. Stage-B state — OLD SNAPSHOT, GATED
+## 9. Stage-B state — OLD SNAPSHOT, GATED
 
 `premerge/readiness.json` 仍是旧的 7535-occurrence snapshot，不是当前 Phase-A1 authority。
 
@@ -222,7 +230,7 @@ SOURCE FREEZE + Phase A2 final closure 前，不刷新或解释该旧 snapshot �
 
 ---
 
-## 9. Frozen boundaries
+## 10. Frozen boundaries
 
 ```text
 Source Fact ≠ Vocabulary Identity ≠ Learner Admission ≠ Anki state
