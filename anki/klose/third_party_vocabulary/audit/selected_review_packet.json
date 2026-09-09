@@ -10,11 +10,25 @@
     "relatives",
     "fruits",
     "left",
-    "saw"
+    "1st",
+    "can i ...?",
+    "cm",
+    "dr",
+    "l.a.",
+    "led",
+    "main course",
+    "prc",
+    "u.k.",
+    "u.s.a.",
+    "uh",
+    "umm",
+    "who's",
+    "cookies",
+    "outdoor"
   ],
-  "SelectedCount": 7,
-  "ReviewBundleFingerprint": "f405e47964a4455d75a2ca90b313ecc0c947137b06aac85c04585206112d4481",
-  "ReviewPacketFingerprint": "9904546332734427f531e08807d6904a6480ff1513f5d8af33cfe181d89e9fbd",
+  "SelectedCount": 21,
+  "ReviewBundleFingerprint": "8d436a9b424b8f96ecb8f0be98e8733f573d445b4fd864f0afd99119420cfbbf",
+  "ReviewPacketFingerprint": "314a534544925314a727685fadf1fe9a696273950584220255ce860030b5716a",
   "Items": [
     {
       "MatchKey": "heard",
@@ -336,8 +350,8 @@
       "ReviewMode": "full-evidence",
       "DisplayForms": "left",
       "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "leave",
       "CanonicalRelation": "named-past-form",
@@ -385,6 +399,7 @@
         "jiaoke_eec_start3|g6-lower|r090|left",
         "jijiao_start3|g3-upper|r048|left",
         "jijiao_start3|g5-lower|r064|left",
+        "kepu_start3|g6-lower|r050|left",
         "renjiao_start1|g5-lower|r083|left",
         "renjiao_start3|g6-upper|r010|left",
         "waiyan_start1|g2-lower|r089|left",
@@ -680,6 +695,36 @@
           ]
         },
         {
+          "SourceOccurrenceKey": "kepu_start3|g6-lower|r050|left",
+          "SourceID": "kepu_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "50",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "dead",
+            "quickly",
+            "lose",
+            "try on",
+            "put on",
+            "umbrella",
+            "luck",
+            "library"
+          ],
+          "After": [
+            "end",
+            "surprised",
+            "at the end",
+            "on the right",
+            "next to",
+            "look for",
+            "lovely",
+            "a lot of"
+          ]
+        },
+        {
           "SourceOccurrenceKey": "renjiao_start1|g5-lower|r083|left",
           "SourceID": "renjiao_start1",
           "SourceBook": "5年级下",
@@ -856,328 +901,765 @@
       ]
     },
     {
-      "MatchKey": "saw",
+      "MatchKey": "1st",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "saw",
-      "Definitions": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
-      "SourceIDs": "beishida_start1|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|renjiao_start3|waiyan_start1|waiyan_start3",
-      "SourceBooks": "beishida_start1:5年级上|guangzhou_start3:6年级上|hujiao_start3:6年级下|jiaoke_eec_start3:5年级上|jijiao_start3:5年级下|renjiao_start3:6年级下|waiyan_start1:4年级上|waiyan_start3:4年级下",
-      "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
-      "CandidateCanonical": "see",
-      "CanonicalRelation": "named-past-form",
-      "CanonicalAction": "keep-identity",
-      "CanonicalStatus": "reviewed",
-      "CanonicalTargetSense": "看见；看到",
-      "BlockerClass": "form-policy",
-      "PolicyRecommendedAction": "re-review-evidence-changed",
-      "DurableDecisions": [
-        {
-          "DecisionKey": "surface:saw",
-          "MatchKey": "saw",
-          "OccurrenceKeys": "[\"beishida_start1|g5-upper|r064|saw\",\"jijiao_start3|g5-lower|r012|saw\",\"jijiao_start3|g5-lower|r084|saw\",\"renjiao_start3|g6-lower|r032|saw\",\"waiyan_start1|g4-upper|r034|saw\",\"waiyan_start3|g4-lower|r097|saw\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "saw#see-past",
-          "ObjectType": "vocabulary",
-          "TargetSense": "看见；看到（see 的过去式）",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "beishida-start1-see-past-partition-revalidation",
-          "Rationale": "The new Beishida row explicitly places see immediately before saw and say/said after it"
-        },
-        {
-          "DecisionKey": "surface:saw#tool",
-          "MatchKey": "saw",
-          "OccurrenceKeys": "[\"hujiao_start3|g6-lower|r059|saw\"]",
-          "Action": "keep-identity",
-          "CanonicalMatchKey": "saw#tool",
-          "ObjectType": "vocabulary",
-          "TargetSense": "锯子",
-          "Status": "reviewed",
-          "Confidence": "high",
-          "DecisionBasis": "split-production-occurrence-partition",
-          "Rationale": "The Hujiao craft/tool occurrence remains the distinct saw-tool noun partition."
-        }
-      ],
+      "DisplayForms": "1st",
+      "Definitions": "abbr. 第一(first)",
+      "SourceIDs": "guangdong_start3",
+      "SourceBooks": "guangdong_start3:5年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "beishida_start1|g5-upper|r064|saw",
-        "guangzhou_start3|g6-upper|r104|saw",
-        "hujiao_start3|g6-lower|r059|saw",
-        "jiaoke_eec_start3|g5-upper|r049|saw",
-        "jijiao_start3|g5-lower|r012|saw",
-        "jijiao_start3|g5-lower|r084|saw",
-        "renjiao_start3|g6-lower|r032|saw",
-        "waiyan_start1|g4-upper|r034|saw",
-        "waiyan_start3|g4-lower|r097|saw"
+        "guangdong_start3|g5-upper|r039|1st"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "beishida_start1|g5-upper|r064|saw",
-          "SourceID": "beishida_start1",
+          "SourceOccurrenceKey": "guangdong_start3|g5-upper|r039|1st",
+          "SourceID": "guangdong_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "64",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "SourceRow": "39",
+          "Word": "1st",
+          "Definition": "abbr. 第一(first)",
           "Before": [
-            "tenth",
-            "get",
-            "got",
-            "birthday",
-            "gift",
-            "spring",
-            "March",
-            "see"
-          ],
-          "After": [
-            "say",
-            "said",
-            "calendar",
-            "check",
-            "autumn",
+            "beach",
+            "today",
+            "July",
+            "August",
             "September",
             "October",
-            "forget"
+            "November",
+            "December"
+          ],
+          "After": [
+            "2nd",
+            "3rd",
+            "4th",
+            "20th",
+            "21st",
+            "22nd",
+            "23rd",
+            "30th"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "can i ...?",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Can I ...?",
+      "Definitions": "abbr. Committee on Non-discrimination and Integrity 不受歧视和人身自主权委员会",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:3年级下",
+      "CandidateSignals": "multiword|punctuated",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g3-lower|r073|can i ...?"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "guangzhou_start3|g6-upper|r104|saw",
+          "SourceOccurrenceKey": "guangzhou_start3|g3-lower|r073|can i ...?",
           "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "73",
+          "Word": "Can I ...?",
+          "Definition": "abbr. Committee on Non-discrimination and Integrity 不受歧视和人身自主权委员会",
+          "Before": [
+            "want",
+            "banana",
+            "we",
+            "but",
+            "then",
+            "apple",
+            "pear",
+            "can"
+          ],
+          "After": [
+            "Of course.",
+            "get",
+            "relative",
+            "photo",
+            "there",
+            "there is",
+            "there are",
+            "cousin"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cm",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cm",
+      "Definitions": "abbr. 厘米(centimeter);普通格律(common meter);军事法庭(court-martial)",
+      "SourceIDs": "jiaoke_eec_start3",
+      "SourceBooks": "jiaoke_eec_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jiaoke_eec_start3|g6-upper|r090|cm"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r090|cm",
+          "SourceID": "jiaoke_eec_start3",
           "SourceBook": "6年级上",
           "Grade": "6",
           "Semester": "上",
-          "SourceRow": "104",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "SourceRow": "90",
+          "Word": "cm",
+          "Definition": "abbr. 厘米(centimeter);普通格律(common meter);军事法庭(court-martial)",
           "Before": [
-            "come",
-            "no ... at all",
-            "not ... at all",
-            "poor",
-            "last",
-            "year",
-            "met",
-            "meet"
+            "get lost",
+            "start",
+            "across",
+            "turn",
+            "fruit",
+            "keep",
+            "outside",
+            "early"
           ],
           "After": [
-            "see",
-            "read",
-            "read",
-            "diary",
-            "Disneyland",
-            "Mickey Mouse",
-            "Donald Duck",
-            "a little"
+            "centimeter",
+            "than",
+            "taller",
+            "tallest",
+            "enough",
+            "had better",
+            "aboard",
+            "take ... out of ..."
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "dr",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "Dr",
+      "Definitions": "abbr. 速度三角形定位法(dead reckoning);数据记录器(Data Recorder)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-lower|r068|dr"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "hujiao_start3|g6-lower|r059|saw",
-          "SourceID": "hujiao_start3",
+          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r068|dr",
+          "SourceID": "guangzhou_start3",
           "SourceBook": "6年级下",
           "Grade": "6",
           "Semester": "下",
-          "SourceRow": "59",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "SourceRow": "68",
+          "Word": "Dr",
+          "Definition": "abbr. 速度三角形定位法(dead reckoning);数据记录器(Data Recorder)",
           "Before": [
-            "on the left",
-            "on the right",
-            "all the time",
-            "craft",
-            "crown",
-            "scissors",
-            "tape",
-            "glue"
+            "forest",
+            "pollute",
+            "made",
+            "make",
+            "be made from",
+            "fur",
+            "sea",
+            "famous"
           ],
           "After": [
-            "craftsman",
-            "tool",
-            "easily",
-            "himself",
-            "still",
-            "model house",
-            "a long time ago",
-            "at work"
+            "Doctor",
+            "person",
+            "history",
+            "leader",
+            "free",
+            "inventor",
+            "invent",
+            "bulb"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "l.a.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "L.A.",
+      "Definitions": "abbr. Los Angeles 洛杉矶",
+      "SourceIDs": "jiaoke_eec_start3",
+      "SourceBooks": "jiaoke_eec_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jiaoke_eec_start3|g6-upper|r039|l.a."
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-upper|r049|saw",
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r039|l.a.",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "39",
+          "Word": "L.A.",
+          "Definition": "abbr. Los Angeles 洛杉矶",
+          "Before": [
+            "San Francisco",
+            "U.K.",
+            "London",
+            "north",
+            "south",
+            "scientist",
+            "Thomas Edison",
+            "art"
+          ],
+          "After": [
+            "New York",
+            "Picasso",
+            "Seattle",
+            "introduce",
+            "capital",
+            "tomato",
+            "potato",
+            "horse"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "led",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "led",
+      "Definitions": "abbr. 发光二极管(light-emitting diode)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:6年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g6-lower|r126|led"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r126|led",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "126",
+          "Word": "led",
+          "Definition": "abbr. 发光二极管(light-emitting diode)",
+          "Before": [
+            "except",
+            "except for",
+            "carry on ...",
+            "carry on with ...",
+            "light",
+            "light up",
+            "brightly",
+            "lead"
+          ],
+          "After": [
+            "brought",
+            "bring",
+            "ever",
+            "abroad",
+            "South Africa",
+            "nature",
+            "choose",
+            "chose"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "main course",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "main course",
+      "Definitions": "abbr. (=mainsail)主要课程;主菜",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:5年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g5-upper|r084|main course"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r084|main course",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "84",
+          "Word": "main course",
+          "Definition": "abbr. (=mainsail)主要课程;主菜",
+          "Before": [
+            "hamburger",
+            "chips",
+            "worry",
+            "starter",
+            "tomato",
+            "egg",
+            "soup",
+            "main"
+          ],
+          "After": [
+            "meat",
+            "vegetable",
+            "potato",
+            "dessert",
+            "hope",
+            "everyone",
+            "chocolate",
+            "start"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "prc",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "PRC",
+      "Definitions": "abbr. 中华人民共和国(People's Republic of China)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:3年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g3-upper|r153|prc"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r153|prc",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "153",
+          "Word": "PRC",
+          "Definition": "abbr. 中华人民共和国(People's Republic of China)",
+          "Before": [
+            "here",
+            "Here you are.",
+            "pencil",
+            "sorry",
+            "bag",
+            "pen",
+            "book",
+            "eraser"
+          ],
+          "After": [
+            "UK",
+            "USA",
+            "put",
+            "on",
+            "desk",
+            "in",
+            "the",
+            "box"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "u.k.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "U.K.",
+      "Definitions": "英国, 联合王国 [经] 英国",
+      "SourceIDs": "jiaoke_eec_start3",
+      "SourceBooks": "jiaoke_eec_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jiaoke_eec_start3|g6-upper|r032|u.k."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r032|u.k.",
+          "SourceID": "jiaoke_eec_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "32",
+          "Word": "U.K.",
+          "Definition": "英国, 联合王国 [经] 英国",
+          "Before": [
+            "difficult",
+            "be good at",
+            "calculate",
+            "favourite",
+            "subject",
+            "P.E.",
+            "player",
+            "San Francisco"
+          ],
+          "After": [
+            "London",
+            "north",
+            "south",
+            "scientist",
+            "Thomas Edison",
+            "art",
+            "L.A.",
+            "New York"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "u.s.a.",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "U.S.A.",
+      "Definitions": "美国",
+      "SourceIDs": "jiaoke_eec_start3",
+      "SourceBooks": "jiaoke_eec_start3:5年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jiaoke_eec_start3|g5-upper|r006|u.s.a."
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-upper|r006|u.s.a.",
           "SourceID": "jiaoke_eec_start3",
           "SourceBook": "5年级上",
           "Grade": "5",
           "Semester": "上",
-          "SourceRow": "49",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "SourceRow": "6",
+          "Word": "U.S.A.",
+          "Definition": "美国",
           "Before": [
-            "before",
-            "dinner",
-            "wash",
-            "aw",
-            "arrive",
-            "went",
-            "borrow",
-            "tennis"
+            "given name",
+            "twins",
+            "China",
+            "American"
           ],
           "After": [
-            "movie",
-            "museum",
-            "basketball",
-            "date",
-            "father",
-            "November",
-            "fifteenth",
-            "sixth"
+            "Australia",
+            "family name",
+            "Canada",
+            "Japan",
+            "Russia",
+            "near",
+            "live",
+            "a little"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "uh",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "uh",
+      "Definitions": "int. 嗯啊 abbr. 上半部分(upper half)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:5年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g5-upper|r051|uh"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r012|saw",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "5年级下",
+          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r051|uh",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "5年级上",
           "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "12",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "Semester": "上",
+          "SourceRow": "51",
+          "Word": "uh",
+          "Definition": "int. 嗯啊 abbr. 上半部分(upper half)",
           "Before": [
-            "jump",
-            "sing",
-            "dance",
-            "sit",
-            "down",
-            "stand",
-            "up",
-            "see"
+            "have fun",
+            "have some fun",
+            "cinema",
+            "seldom",
+            "stay",
+            "drink",
+            "coffee",
+            "tea"
           ],
           "After": [
-            "look",
-            "look out of",
-            "look at",
-            "boy",
-            "girl",
-            "now",
-            "draw",
-            "picture"
+            "cup",
+            "a cup of ...",
+            "milk",
+            "something",
+            "cold",
+            "hot",
+            "coke",
+            "sure"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "umm",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "umm",
+      "Definitions": "abbr. 统一建模方法(Unified Modeling Methodology)",
+      "SourceIDs": "jiaoke_eec_start3",
+      "SourceBooks": "jiaoke_eec_start3:4年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "jiaoke_eec_start3|g4-upper|r005|umm"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "jijiao_start3|g5-lower|r084|saw",
-          "SourceID": "jijiao_start3",
-          "SourceBook": "5年级下",
-          "Grade": "5",
-          "Semester": "下",
-          "SourceRow": "84",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
-          "Before": [
-            "did",
-            "do",
-            "yesterday",
-            "night",
-            "had",
-            "have",
-            "went",
-            "go"
-          ],
-          "After": [
-            "see",
-            "ate",
-            "eat",
-            "photo",
-            "were",
-            "are",
-            "was",
-            "am"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "renjiao_start3|g6-lower|r032|saw",
-          "SourceID": "renjiao_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "32",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
-          "Before": [
-            "cleaned",
-            "stayed",
-            "washed",
-            "watched",
-            "had",
-            "had a cold",
-            "slept",
-            "read"
-          ],
-          "After": [
-            "last",
-            "yesterday",
-            "before",
-            "drank",
-            "show",
-            "magazine",
-            "better",
-            "faster"
-          ]
-        },
-        {
-          "SourceOccurrenceKey": "waiyan_start1|g4-upper|r034|saw",
-          "SourceID": "waiyan_start1",
+          "SourceOccurrenceKey": "jiaoke_eec_start3|g4-upper|r005|umm",
+          "SourceID": "jiaoke_eec_start3",
           "SourceBook": "4年级上",
           "Grade": "4",
           "Semester": "上",
-          "SourceRow": "34",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "SourceRow": "5",
+          "Word": "umm",
+          "Definition": "abbr. 统一建模方法(Unified Modeling Methodology)",
           "Before": [
-            "print",
-            "right",
-            "between",
-            "bicycle",
-            "mouse",
-            "beside",
-            "man",
-            "went"
+            "breakfast",
+            "egg",
+            "try"
           ],
           "After": [
-            "trip",
-            "took",
-            "fifty",
-            "minute",
-            "top",
-            "mountain",
-            "ate",
-            "candies"
+            "pass",
+            "jam",
+            "salad",
+            "lunch",
+            "Mrs.",
+            "teacher",
+            "student",
+            "Mr."
           ]
-        },
+        }
+      ]
+    },
+    {
+      "MatchKey": "who's",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "who's",
+      "Definitions": "abbr. 谁是(who is,who has)",
+      "SourceIDs": "guangzhou_start3",
+      "SourceBooks": "guangzhou_start3:3年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "guangzhou_start3|g3-upper|r092|who's"
+      ],
+      "FullEvidence": [
         {
-          "SourceOccurrenceKey": "waiyan_start3|g4-lower|r097|saw",
-          "SourceID": "waiyan_start3",
-          "SourceBook": "4年级下",
-          "Grade": "4",
-          "Semester": "下",
-          "SourceRow": "97",
-          "Word": "saw",
-          "Definition": "n. 锯子;谚语 v. see的过去式 vi. 锯;用锯;将某物锯成小块 vt. 看见;明白,了解;锯;锯成;锯开",
+          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r092|who's",
+          "SourceID": "guangzhou_start3",
+          "SourceBook": "3年级上",
+          "Grade": "3",
+          "Semester": "上",
+          "SourceRow": "92",
+          "Word": "who's",
+          "Definition": "abbr. 谁是(who is,who has)",
           "Before": [
-            "computer",
-            "love",
-            "him",
-            "Mrs",
-            "Miss",
-            "sang",
-            "sing",
-            "beautifully"
+            "that is",
+            "man",
+            "father",
+            "yes",
+            "he",
+            "he's",
+            "he is",
+            "who"
           ],
           "After": [
-            "see",
-            "game",
-            "last",
-            "fun",
-            "went",
-            "go",
-            "there",
-            "ate"
+            "who is",
+            "boy",
+            "it",
+            "it's",
+            "it is",
+            "me",
+            "brother",
+            "girl"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cookies",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "cookies",
+      "Definitions": "n. 饼干",
+      "SourceIDs": "beishida_start3",
+      "SourceBooks": "beishida_start3:3年级下",
+      "CandidateSignals": "morphology",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "beishida_start3|g3-lower|r077|cookies"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "beishida_start3|g3-lower|r077|cookies",
+          "SourceID": "beishida_start3",
+          "SourceBook": "3年级下",
+          "Grade": "3",
+          "Semester": "下",
+          "SourceRow": "77",
+          "Word": "cookies",
+          "Definition": "n. 饼干",
+          "Before": [
+            "listen",
+            "sing",
+            "dance",
+            "draw",
+            "swim",
+            "write",
+            "please",
+            "candy"
+          ],
+          "After": [
+            "monkey"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "outdoor",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "outdoor",
+      "Definitions": "adj. 户外的;露天的;野外的(等于out-of-door)",
+      "SourceIDs": "niujin_shanghai_start1",
+      "SourceBooks": "niujin_shanghai_start1:6年级下",
+      "CandidateSignals": "morphology",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "form-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "niujin_shanghai_start1|g6-lower|r071|outdoor"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r071|outdoor",
+          "SourceID": "niujin_shanghai_start1",
+          "SourceBook": "6年级下",
+          "Grade": "6",
+          "Semester": "下",
+          "SourceRow": "71",
+          "Word": "outdoor",
+          "Definition": "adj. 户外的;露天的;野外的(等于out-of-door)",
+          "Before": [
+            "lunar",
+            "remember",
+            "without",
+            "moon cake",
+            "pudding",
+            "would rather",
+            "send",
+            "indoor"
+          ],
+          "After": [
+            "really",
+            "forget",
+            "puzzle",
+            "playground",
+            "piano",
+            "model",
+            "health",
+            "problem"
           ]
         }
       ]
