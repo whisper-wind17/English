@@ -60,40 +60,38 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#401 / 34342256091 = SUCCESS**
+Latest sealed workflow：**#406 / 34344709279 = SUCCESS**
 
 ```text
-sealed bot head                    = 15f8e2cf9750adb14749e1d3f2774b213e8f97b4
+sealed bot head                    = 70a25d7c15882c4c3c1e37149025909b4786e31d
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3140
-Identity Vocabulary Preview        = 2602
-Learner Vocabulary Preview         = 2579
-Review blockers                    = 748
-Evidence-changed surfaces          = 12
-Multipart resolved                 = 9
+Durable Identity decisions         = 3169
+Identity Vocabulary Preview        = 2625
+Learner Vocabulary Preview         = 2602
+Review blockers                    = 729
+Evidence-changed surfaces          = 5
+Multipart resolved                 = 12
 Grammar-form quarantine gates      = 87
-CheckpointFingerprint              = bd630e905cfea4ba845e96a7f725911619edba7de264954fd93a0339c27e628c
+CheckpointFingerprint              = 4abfaba846f2e01de859b268ba4589e536f5b7fb2024c2bca6c12707b4ae0335
 ```
 
 Recent validated throughput：
 
 ```text
-#396 — film / mean / meeting / none / note / officer
-  film preserved film#movie / film#photo; meeting kept as lexicalized noun; officer split police + held
-#397 — fish / opposite
-  fish fully closed as 27 noun + 7 verb occurrences
-#398 — floor / outgoing / packet / page / pancake / parade / plum / position
-  floor fully closed as 8 storey + 11 ground; outgoing kept as lexicalized adjective
-#399 — hard / past / pineapple / point
-  hard added hard#intense; past fully closed movement / clock / history; weak hard/point contexts held
-#400 — hot / pool / pot / prepare / entrance
-  hot preserved temperature / spicy with weak contexts held; pool/prepare/entrance closed; pot audited-defer
-#401 — look / rainbow / raise / return / rope
-  look fully partitioned as 17 see + 6 appearance + 3 held; rainbow/raise/return/rope closed
+#402 — orange / sand
+  orange closed as fruit + color + 2 current-context held; sand closed as 沙/沙子
+#403 — play / seal / several
+  play closed as general + instrument + theatre + held; new play#theatre learner sense
+#404 — save / seat / shoot / shower / silly / skateboard / slide / sore / spot / square / sticker
+  save/square revalidated; shoot#sports and slide#movement added; spot kept audited-defer
+#405 — show / taste / tasty / term / terrible
+  show revalidated as verb + performance + held; taste added noun flavour identity without sense overlap
+#406 — thin / throat / toe / tour / upstairs / exit
+  thin revalidated as slim + object-thin + held; tour travel + held; four singleton identities closed
 ```
 
-Compact decision inbox rule：human-authored `Rationale` fields are always CSV-quoted before submission。Each completed batch must pass batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
+Every completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
 
 Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / `CanonicalMatchKey` names. Do not create parallel sense names for already-reviewed partitions. Corpus builder intentionally fails closed on overlap。
 
@@ -101,23 +99,48 @@ Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / 
 
 ## 5. NEXT TASK — current deterministic Phase-A2 batch
 
+Machine-selected next batch：
+
 ```text
 PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
-SelectedCount  = 2
-EvidenceWeight = 60
+SelectedCount  = 4
+EvidenceWeight = 59
 ExecutionReady = true
 
-orange
-sand
+time
+used
+wake
+waste
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 13c5d33fe2f337765eb7ebadafd9684e1c983c5269c317fee9886c85b247ea0a
-ReviewPacketFingerprint = dae0ada601c10eeac77fd475fa8829a0e755e08989a94123f8e09266549fd2f6
+ReviewBundleFingerprint = 67eeb72e9c6e3d1a316b8dae653cb53f30b5e773a06cef514407df69ec715ee2
+ReviewPacketFingerprint = 3ab809e9054cdd64408d0c5656538506dac018c0fc78bf1982fa8ad0158550df
+```
+
+Current review analysis already established, but **no decision batch has been submitted to `main` and no #407 Validation Gate has run yet**：
+
+```text
+time  = 20 general + 1 count + 3 held
+used  = reuse-identity → use; named past form; add grammar quarantine gate
+wake  = 2 reviewed + 1 held
+waste = 4 verb + 1 rubbish/waste noun
+```
+
+Next execution sequence：
+
+```text
+create transient decision_updates.csv
++ append grammar gate for used
+→ pre-main diff/scope check
+→ non-force main update
+→ #407 full Stage-A Validation Gate
+→ bot persist
+→ independent post-seal diff/state recheck
 ```
 
 Planner contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`；单批大小由 evidence weight 主导。Source mutation 与 decision mutation 不得混合。
@@ -152,13 +175,15 @@ morphology / form canonicalization
 `premerge/readiness.json` 仍是旧 snapshot，不是当前 Stage-A authority。
 
 ```text
-ReadyForPremergeReview     = false
-StageBMutationAuthorized   = false
-StableThirdPartyIDMinted   = false
-MergeAuthorizedRows        = 0
+snapshot SourceOccurrences    = 7535   # stale historical Stage-B snapshot
+current Stage-A occurrences   = 18887
+ReadyForPremergeReview        = false
+StageBMutationAuthorized      = false
+StableThirdPartyIDMinted      = false
+MergeAuthorizedRows           = 0
 ```
 
-Phase A2 完成并通过 final Stage-A seal 前，不刷新 Stage-B premerge snapshot。
+Phase A2 完成并通过 final Stage-A seal 前，不刷新 Stage-B premerge snapshot，不开始 durable reconciliation / Stable NoteID allocation。
 
 ---
 
