@@ -46,6 +46,7 @@ EXPECTED_SOURCE_COUNTS = {
     "beishida_start3": 699,
     "guangdong_start3": 741,
     "guangzhou_start3": 1268,
+    "jiaoke_eec_start3": 1093,
     "renjiao_start1": 908,
     "renjiao_start3": 851,
     "hujiao_start3": 1111,
