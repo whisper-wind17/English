@@ -18,7 +18,7 @@ SELECTED = PREMERGE / "reconciliation_selected_view.csv"
 NEXT = PREMERGE / "reconciliation_next_batch.json"
 DECISIONS = TP / "reconciliation" / "reconciliation_decisions.csv"
 
-PLAN_VERSION = "stage-b-reconciliation-v1"
+PLAN_VERSION = "stage-b-reconciliation-v2"
 CANDIDATE_FP_FIELDS = [
     "ProvisionalIdentityKey", "CanonicalMatchKey", "LookupMatchKey", "DisplayWord",
     "ThirdPartyTargetSense", "SourceMatchKeys", "SourceOccurrenceCount",
@@ -26,17 +26,24 @@ CANDIDATE_FP_FIELDS = [
     "KloseCandidateNoteIDs", "KloseCandidateSenses",
 ]
 LANE_PRIORITY = {
-    "exact-multiple": 0,
-    "exact-single-exact-sense": 1,
-    "exact-single-semantic-review": 2,
-    "no-existing-match": 3,
+    "learner-excluded": 0,
+    "exact-multiple": 1,
+    "variant-multiple": 2,
+    "variant-single": 3,
+    "exact-single-exact-sense": 4,
+    "no-existing-match": 5,
+    "exact-single-semantic-review": 6,
 }
 BATCH_CAPS = {
+    "learner-excluded": 300,
     "exact-multiple": 20,
-    "exact-single-exact-sense": 120,
-    "exact-single-semantic-review": 40,
-    "no-existing-match": 40,
+    "variant-multiple": 20,
+    "variant-single": 40,
+    "exact-single-exact-sense": 200,
+    "no-existing-match": 300,
+    "exact-single-semantic-review": 50,
 }
+SAFE_EXECUTABLE_LANES = {"learner-excluded", "exact-single-exact-sense", "no-existing-match"}
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -87,19 +94,27 @@ def valid_decisions(candidate_by_id: dict[str, dict[str, str]], checkpoint: str)
     return out
 
 
-def expected_lane(c: dict[str, str]) -> str:
-    cls = c.get("KloseCandidateClass", "")
+def expected(row: dict[str, str]) -> tuple[str, str, str]:
+    if row.get("LearnerAdmitted", "").casefold() != "yes":
+        return "learner-excluded", "held", ""
+    cls = row.get("KloseCandidateClass", "")
     if cls == "exact-multiple":
-        return "exact-multiple"
+        return "exact-multiple", "", ""
+    if cls in {"orthographic-multiple", "spelling-multiple"}:
+        return "variant-multiple", "", ""
+    if cls in {"orthographic-single", "spelling-single"}:
+        return "variant-single", "", ""
     if cls == "exact-single":
-        third = c.get("ThirdPartyTargetSense", "").strip()
-        klose = c.get("KloseCandidateSenses", "").strip()
+        ids = [x for x in row.get("KloseCandidateNoteIDs", "").split("|") if x]
+        require(len(ids) == 1, f"Exact-single cardinality drift: {row.get('ProvisionalIdentityKey')}")
+        third = row.get("ThirdPartyTargetSense", "").strip()
+        klose = row.get("KloseCandidateSenses", "").strip()
         if third and third == klose:
-            return "exact-single-exact-sense"
-        return "exact-single-semantic-review"
+            return "exact-single-exact-sense", "reuse-existing", ids[0]
+        return "exact-single-semantic-review", "", ""
     if cls == "no-existing-match":
-        return "no-existing-match"
-    raise SystemExit(f"Unknown candidate class: {c.get('ProvisionalIdentityKey')}: {cls}")
+        return "no-existing-match", "new-stable-identity", ""
+    raise SystemExit(f"Unknown candidate class: {row.get('ProvisionalIdentityKey')}: {cls}")
 
 
 def main() -> None:
@@ -124,20 +139,25 @@ def main() -> None:
     counts: Counter[str] = Counter()
     for row in queue:
         pid = row["ProvisionalIdentityKey"]
-        c = candidate_by_id[pid]
-        require(row.get("CandidateFingerprint") == fp(c), f"Candidate fingerprint drift: {pid}")
-        lane = expected_lane(c)
-        require(row.get("ReviewLane") == lane, f"Review lane drift: {pid}: {row.get('ReviewLane')} != {lane}")
+        candidate = candidate_by_id[pid]
+        require(row.get("CandidateFingerprint") == fp(candidate), f"Candidate fingerprint drift: {pid}")
+        lane, action, existing = expected(candidate)
+        require(row.get("ReviewLane") == lane,
+                f"Review lane drift: {pid}: {row.get('ReviewLane')} != {lane}")
         require(row.get("MutationAuthorized") == "no", f"Review proposal authorizes mutation: {pid}")
-        if lane == "exact-single-exact-sense":
-            ids = [x for x in c.get("KloseCandidateNoteIDs", "").split("|") if x]
-            require(len(ids) == 1, f"Exact-single cardinality drift: {pid}")
-            require(row.get("ProposalAction") == "reuse-existing"
-                    and row.get("ProposalExistingNoteID") == ids[0],
-                    f"Strict sense-equality proposal drift: {pid}")
-        else:
-            require(not row.get("ProposalAction") and not row.get("ProposalExistingNoteID"),
-                    f"Non-strict lane unexpectedly auto-proposes action: {pid}")
+        require(row.get("ProposalAction", "") == action,
+                f"ProposalAction drift: {pid}: {row.get('ProposalAction')} != {action}")
+        require(row.get("ProposalExistingNoteID", "") == existing,
+                f"ProposalExistingNoteID drift: {pid}")
+        if action == "reuse-existing":
+            require(existing in candidate.get("KloseCandidateNoteIDs", "").split("|"),
+                    f"Reuse proposal is outside candidate context: {pid}")
+        if action == "new-stable-identity":
+            require(candidate.get("KloseCandidateClass") == "no-existing-match",
+                    f"New-identity proposal bypasses existing candidate: {pid}")
+        if action == "held":
+            require(candidate.get("LearnerAdmitted", "").casefold() != "yes",
+                    f"Auto-held proposal is not learner-excluded: {pid}")
         counts[lane] += 1
 
     expected_order = sorted(queue, key=lambda r: (LANE_PRIORITY[r["ReviewLane"]], r["ProvisionalIdentityKey"]))
@@ -173,6 +193,8 @@ def main() -> None:
             "Selected identity list drift")
     require(int(state.get("SelectedCount", -1)) == len(expected_selected), "Selected count drift")
     require(state.get("ExecutionReady") is bool(expected_selected), "ExecutionReady drift")
+    expected_auto = active_lane in SAFE_EXECUTABLE_LANES and bool(expected_selected)
+    require(state.get("AutoExecutable") is expected_auto, "AutoExecutable drift")
 
     print("Third-party Stage-B reconciliation review plan = pass")
     print(f"Stage-A checkpoint = {checkpoint}")
@@ -183,7 +205,9 @@ def main() -> None:
         print(f"review lane {lane} = {counts[lane]}")
     print(f"selected lane = {active_lane or 'none'}")
     print(f"selected count = {len(expected_selected)}")
+    print(f"auto executable = {'yes' if expected_auto else 'no'}")
     print("Exact MatchKey alone auto-authorizes reuse = no")
+    print("No candidate match auto-authorizes Klose mutation = no")
     print("Stage-B mutation authorized = no")
 
 
