@@ -47,12 +47,13 @@ EXPECTED_SOURCE_COUNTS = {
     "guangdong_start3": 741,
     "guangzhou_start3": 1268,
     "jiaoke_eec_start3": 1093,
+    "jijiao_start3": 605,
+    "niujin_shanghai_start1": 1186,
     "renjiao_start1": 908,
     "renjiao_start3": 851,
     "hujiao_start3": 1111,
     "waiyan_start1": 1170,
     "waiyan_start3": 1157,
-    "jijiao_start3": 605,
     "xiangshao_start3": 698,
 }
 ACTIONS = {
