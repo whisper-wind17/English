@@ -16,13 +16,11 @@
     "cd-rom",
     "dr",
     "ha",
-    "hmm",
-    "ict",
-    "l.a."
+    "hmm"
   ],
-  "SelectedCount": 15,
-  "ReviewBundleFingerprint": "6eafe8ccc137d322a8fb234c826c3b8f82a3e54431f01c919fe03cc1d09824af",
-  "ReviewPacketFingerprint": "59afbc9ae241d8898b03d090809ee241ca8c3d83ddbcf180b91f28a148d1bd51",
+  "SelectedCount": 13,
+  "ReviewBundleFingerprint": "744ccb6eea222af96e0b4f103da5f5f0977bcd60026c6cb397d7c999e7710179",
+  "ReviewPacketFingerprint": "9fbac688dd92e01c16d6332c099a1a4f54894200c3fe434a7f632824e290721f",
   "Items": [
     {
       "MatchKey": "heard",
@@ -344,8 +342,8 @@
       "ReviewMode": "full-evidence",
       "DisplayForms": "left",
       "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|cambridge_join_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|minjiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|cambridge_join_start3:5年级下|cambridge_join_start3:6年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|minjiao_start3:5年级上|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|cambridge_join_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|minjiao_start3|renjiao_start1|renjiao_start3|shaanxi_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|cambridge_join_start3:5年级下|cambridge_join_start3:6年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|minjiao_start3:5年级上|renjiao_start1:5年级下|renjiao_start3:6年级上|shaanxi_start3:4年级下|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "leave",
       "CanonicalRelation": "named-past-form",
@@ -399,6 +397,7 @@
         "minjiao_start3|g5-upper|r077|left",
         "renjiao_start1|g5-lower|r083|left",
         "renjiao_start3|g6-upper|r010|left",
+        "shaanxi_start3|g4-lower|r095|left",
         "waiyan_start1|g2-lower|r089|left",
         "waiyan_start1|g6-lower|r020|left",
         "waiyan_start3|g4-upper|r004|left",
@@ -870,6 +869,36 @@
           ]
         },
         {
+          "SourceOccurrenceKey": "shaanxi_start3|g4-lower|r095|left",
+          "SourceID": "shaanxi_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "95",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "how old",
+            "know",
+            "then",
+            "careful",
+            "stop",
+            "wait",
+            "right",
+            "turn right"
+          ],
+          "After": [
+            "turn left",
+            "traffic",
+            "traffic lights",
+            "cross",
+            "street",
+            "cross the street",
+            "can",
+            "now"
+          ]
+        },
+        {
           "SourceOccurrenceKey": "waiyan_start1|g2-lower|r089|left",
           "SourceID": "waiyan_start1",
           "SourceBook": "2年级下",
@@ -1336,110 +1365,6 @@
             "music",
             "over",
             "PE"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "ict",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "ICT",
-      "Definitions": "abbr. 结缔组织炎症(Inflammation of Connective Tissue);粘土工艺学会(Ins-titute of Clay Technology);计算机技术研究所(Institute of Computer Technology);集成电路测试仪器(Integrated Circuit Tester);集成电路计算机遥测技术(Integrated Computer Telemetry);国际计算机与制表机公司(International Computers and Tabulators Company)",
-      "SourceIDs": "cambridge_join_start3",
-      "SourceBooks": "cambridge_join_start3:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "cambridge_join_start3|g6-upper|r025|ict"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r025|ict",
-          "SourceID": "cambridge_join_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "25",
-          "Word": "ICT",
-          "Definition": "abbr. 结缔组织炎症(Inflammation of Connective Tissue);粘土工艺学会(Ins-titute of Clay Technology);计算机技术研究所(Institute of Computer Technology);集成电路测试仪器(Integrated Circuit Tester);集成电路计算机遥测技术(Integrated Computer Telemetry);国际计算机与制表机公司(International Computers and Tabulators Company)",
-          "Before": [
-            "act",
-            "by",
-            "dialogue",
-            "drama",
-            "fan",
-            "French",
-            "geography",
-            "history"
-          ],
-          "After": [
-            "language",
-            "nice",
-            "play",
-            "pop",
-            "south",
-            "around",
-            "at the moment",
-            "building"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "l.a.",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "L.A.",
-      "Definitions": "abbr. Los Angeles 洛杉矶",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:6年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g6-upper|r039|l.a."
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r039|l.a.",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "39",
-          "Word": "L.A.",
-          "Definition": "abbr. Los Angeles 洛杉矶",
-          "Before": [
-            "San Francisco",
-            "U.K.",
-            "London",
-            "north",
-            "south",
-            "scientist",
-            "Thomas Edison",
-            "art"
-          ],
-          "After": [
-            "New York",
-            "Picasso",
-            "Seattle",
-            "introduce",
-            "capital",
-            "tomato",
-            "potato",
-            "horse"
           ]
         }
       ]
