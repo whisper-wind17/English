@@ -14,13 +14,13 @@ config/source_adapters.csv
 ```
 
 ```text
-Enabled adapters          = 15
-Source occurrences        = 13992
-Normalized surfaces       = 3190
-Vocabulary preview        = 1969
-Review/blocker surfaces   = 882
-Evidence-changed surfaces = 40
-Multipart resolved        = 1
+Enabled adapters          = 16
+Source occurrences        = 15448
+Normalized surfaces       = 3471
+Vocabulary preview        = 1967
+Review/blocker surfaces   = 1164
+Evidence-changed surfaces = 41
+Multipart resolved        = 0
 ```
 
 Each durable decision is bound to the exact Source Occurrences it reviewed via an

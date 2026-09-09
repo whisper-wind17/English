@@ -12,23 +12,20 @@
     "left",
     "1st",
     "can i ...?",
-    "cm",
+    "cd player",
+    "cd-rom",
     "dr",
+    "hmm",
+    "ict",
     "l.a.",
     "led",
     "main course",
     "prc",
-    "u.k.",
-    "u.s.a.",
-    "uh",
-    "umm",
-    "who's",
-    "cookies",
-    "outdoor"
+    "u.k."
   ],
-  "SelectedCount": 21,
-  "ReviewBundleFingerprint": "8d436a9b424b8f96ecb8f0be98e8733f573d445b4fd864f0afd99119420cfbbf",
-  "ReviewPacketFingerprint": "314a534544925314a727685fadf1fe9a696273950584220255ce860030b5716a",
+  "SelectedCount": 18,
+  "ReviewBundleFingerprint": "d565268cf3ba20e8ed5909d94b8ea90414d716468db514ac792c0a838f41f088",
+  "ReviewPacketFingerprint": "4945729ecd36e00384463b33a775268714ed13d761f55dd969fa4a476072b946",
   "Items": [
     {
       "MatchKey": "heard",
@@ -350,8 +347,8 @@
       "ReviewMode": "full-evidence",
       "DisplayForms": "left",
       "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|cambridge_join_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|cambridge_join_start3:5年级下|cambridge_join_start3:6年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "leave",
       "CanonicalRelation": "named-past-form",
@@ -393,6 +390,8 @@
         "beishida_start1|g3-upper|r003|left",
         "beishida_start1|g4-upper|r070|left",
         "beishida_start3|g4-upper|r003|left",
+        "cambridge_join_start3|g5-lower|r085|left",
+        "cambridge_join_start3|g6-upper|r008|left",
         "guangzhou_start3|g5-lower|r133|left",
         "hujiao_start3|g5-upper|r113|left",
         "jiaoke_eec_start3|g5-lower|r127|left",
@@ -512,6 +511,64 @@
             "touch",
             "food",
             "parking"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-lower|r085|left",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "85",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "ahead",
+            "beside",
+            "bus stop",
+            "church",
+            "excuse me",
+            "hospital",
+            "just",
+            "late"
+          ],
+          "After": [
+            "museum",
+            "neighbour",
+            "next",
+            "next to",
+            "on",
+            "opposite",
+            "past",
+            "police station"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r008|left",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "8",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "cinema",
+            "cry out",
+            "exercise",
+            "few",
+            "get along",
+            "grade"
+          ],
+          "After": [
+            "plan",
+            "spend",
+            "supermarket",
+            "That's all right.",
+            "That's OK.",
+            "trip",
+            "turn on",
+            "will"
           ]
         },
         {
@@ -1005,12 +1062,64 @@
       ]
     },
     {
-      "MatchKey": "cm",
+      "MatchKey": "cd player",
       "ReviewMode": "full-evidence",
-      "DisplayForms": "cm",
-      "Definitions": "abbr. 厘米(centimeter);普通格律(common meter);军事法庭(court-martial)",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:6年级上",
+      "DisplayForms": "CD player",
+      "Definitions": "abbr. (=compact disc player)激光唱机",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级上",
+      "CandidateSignals": "multiword",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-upper|r152|cd player"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r152|cd player",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "152",
+          "Word": "CD player",
+          "Definition": "abbr. (=compact disc player)激光唱机",
+          "Before": [
+            "sweet",
+            "web",
+            "work",
+            "American",
+            "band",
+            "bookshop",
+            "camera",
+            "CD"
+          ],
+          "After": [
+            "chicken",
+            "club",
+            "cute",
+            "dream",
+            "each other",
+            "feed",
+            "forever",
+            "grown-up"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "cd-rom",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "CD-ROM",
+      "Definitions": "abbr. 只读光盘驱动器(Compact Disc Read - Only Memory)",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:5年级下",
       "CandidateSignals": "",
       "CandidateCanonical": "",
       "CanonicalRelation": "",
@@ -1021,37 +1130,37 @@
       "PolicyRecommendedAction": "learner-first-finalize",
       "DurableDecisions": [],
       "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g6-upper|r090|cm"
+        "cambridge_join_start3|g5-lower|r017|cd-rom"
       ],
       "FullEvidence": [
         {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g6-upper|r090|cm",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "6年级上",
-          "Grade": "6",
-          "Semester": "上",
-          "SourceRow": "90",
-          "Word": "cm",
-          "Definition": "abbr. 厘米(centimeter);普通格律(common meter);军事法庭(court-martial)",
+          "SourceOccurrenceKey": "cambridge_join_start3|g5-lower|r017|cd-rom",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "5年级下",
+          "Grade": "5",
+          "Semester": "下",
+          "SourceRow": "17",
+          "Word": "CD-ROM",
+          "Definition": "abbr. 只读光盘驱动器(Compact Disc Read - Only Memory)",
           "Before": [
-            "get lost",
-            "start",
-            "across",
-            "turn",
-            "fruit",
-            "keep",
-            "outside",
-            "early"
+            "notebook",
+            "ping-pong",
+            "school",
+            "shake hands",
+            "until",
+            "ask",
+            "before",
+            "call"
           ],
           "After": [
-            "centimeter",
-            "than",
-            "taller",
-            "tallest",
-            "enough",
-            "had better",
-            "aboard",
-            "take ... out of ..."
+            "do shopping",
+            "Easter",
+            "Easter Bunny",
+            "get",
+            "ill",
+            "mobile phone",
+            "moment",
+            "over there"
           ]
         }
       ]
@@ -1104,6 +1213,110 @@
             "inventor",
             "invent",
             "bulb"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "hmm",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "hmm",
+      "Definitions": "abbr. 隐马尔可夫模型(Hidden Markov Model);Hardware Maintenance Manual;Hyundai Merchant Marine",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:4年级下",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g4-lower|r040|hmm"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g4-lower|r040|hmm",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "4年级下",
+          "Grade": "4",
+          "Semester": "下",
+          "SourceRow": "40",
+          "Word": "hmm",
+          "Definition": "abbr. 隐马尔可夫模型(Hidden Markov Model);Hardware Maintenance Manual;Hyundai Merchant Marine",
+          "Before": [
+            "Chinese",
+            "Chinese leaves",
+            "classmate",
+            "cucumber",
+            "family name",
+            "fruit",
+            "grape",
+            "group"
+          ],
+          "After": [
+            "hour",
+            "L. A. Lakers",
+            "later",
+            "maths",
+            "message",
+            "music",
+            "over",
+            "PE"
+          ]
+        }
+      ]
+    },
+    {
+      "MatchKey": "ict",
+      "ReviewMode": "full-evidence",
+      "DisplayForms": "ICT",
+      "Definitions": "abbr. 结缔组织炎症(Inflammation of Connective Tissue);粘土工艺学会(Ins-titute of Clay Technology);计算机技术研究所(Institute of Computer Technology);集成电路测试仪器(Integrated Circuit Tester);集成电路计算机遥测技术(Integrated Computer Telemetry);国际计算机与制表机公司(International Computers and Tabulators Company)",
+      "SourceIDs": "cambridge_join_start3",
+      "SourceBooks": "cambridge_join_start3:6年级上",
+      "CandidateSignals": "",
+      "CandidateCanonical": "",
+      "CanonicalRelation": "",
+      "CanonicalAction": "",
+      "CanonicalStatus": "",
+      "CanonicalTargetSense": "",
+      "BlockerClass": "abbreviation-policy",
+      "PolicyRecommendedAction": "learner-first-finalize",
+      "DurableDecisions": [],
+      "CurrentOccurrenceKeys": [
+        "cambridge_join_start3|g6-upper|r025|ict"
+      ],
+      "FullEvidence": [
+        {
+          "SourceOccurrenceKey": "cambridge_join_start3|g6-upper|r025|ict",
+          "SourceID": "cambridge_join_start3",
+          "SourceBook": "6年级上",
+          "Grade": "6",
+          "Semester": "上",
+          "SourceRow": "25",
+          "Word": "ICT",
+          "Definition": "abbr. 结缔组织炎症(Inflammation of Connective Tissue);粘土工艺学会(Ins-titute of Clay Technology);计算机技术研究所(Institute of Computer Technology);集成电路测试仪器(Integrated Circuit Tester);集成电路计算机遥测技术(Integrated Computer Telemetry);国际计算机与制表机公司(International Computers and Tabulators Company)",
+          "Before": [
+            "act",
+            "by",
+            "dialogue",
+            "drama",
+            "fan",
+            "French",
+            "geography",
+            "history"
+          ],
+          "After": [
+            "language",
+            "nice",
+            "play",
+            "pop",
+            "south",
+            "around",
+            "at the moment",
+            "building"
           ]
         }
       ]
@@ -1364,302 +1577,6 @@
             "art",
             "L.A.",
             "New York"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "u.s.a.",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "U.S.A.",
-      "Definitions": "美国",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g5-upper|r006|u.s.a."
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g5-upper|r006|u.s.a.",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "6",
-          "Word": "U.S.A.",
-          "Definition": "美国",
-          "Before": [
-            "given name",
-            "twins",
-            "China",
-            "American"
-          ],
-          "After": [
-            "Australia",
-            "family name",
-            "Canada",
-            "Japan",
-            "Russia",
-            "near",
-            "live",
-            "a little"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "uh",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "uh",
-      "Definitions": "int. 嗯啊 abbr. 上半部分(upper half)",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:5年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g5-upper|r051|uh"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r051|uh",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "51",
-          "Word": "uh",
-          "Definition": "int. 嗯啊 abbr. 上半部分(upper half)",
-          "Before": [
-            "have fun",
-            "have some fun",
-            "cinema",
-            "seldom",
-            "stay",
-            "drink",
-            "coffee",
-            "tea"
-          ],
-          "After": [
-            "cup",
-            "a cup of ...",
-            "milk",
-            "something",
-            "cold",
-            "hot",
-            "coke",
-            "sure"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "umm",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "umm",
-      "Definitions": "abbr. 统一建模方法(Unified Modeling Methodology)",
-      "SourceIDs": "jiaoke_eec_start3",
-      "SourceBooks": "jiaoke_eec_start3:4年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "jiaoke_eec_start3|g4-upper|r005|umm"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "jiaoke_eec_start3|g4-upper|r005|umm",
-          "SourceID": "jiaoke_eec_start3",
-          "SourceBook": "4年级上",
-          "Grade": "4",
-          "Semester": "上",
-          "SourceRow": "5",
-          "Word": "umm",
-          "Definition": "abbr. 统一建模方法(Unified Modeling Methodology)",
-          "Before": [
-            "breakfast",
-            "egg",
-            "try"
-          ],
-          "After": [
-            "pass",
-            "jam",
-            "salad",
-            "lunch",
-            "Mrs.",
-            "teacher",
-            "student",
-            "Mr."
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "who's",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "who's",
-      "Definitions": "abbr. 谁是(who is,who has)",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:3年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g3-upper|r092|who's"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r092|who's",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "92",
-          "Word": "who's",
-          "Definition": "abbr. 谁是(who is,who has)",
-          "Before": [
-            "that is",
-            "man",
-            "father",
-            "yes",
-            "he",
-            "he's",
-            "he is",
-            "who"
-          ],
-          "After": [
-            "who is",
-            "boy",
-            "it",
-            "it's",
-            "it is",
-            "me",
-            "brother",
-            "girl"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "cookies",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "cookies",
-      "Definitions": "n. 饼干",
-      "SourceIDs": "beishida_start3",
-      "SourceBooks": "beishida_start3:3年级下",
-      "CandidateSignals": "morphology",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "form-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "beishida_start3|g3-lower|r077|cookies"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "beishida_start3|g3-lower|r077|cookies",
-          "SourceID": "beishida_start3",
-          "SourceBook": "3年级下",
-          "Grade": "3",
-          "Semester": "下",
-          "SourceRow": "77",
-          "Word": "cookies",
-          "Definition": "n. 饼干",
-          "Before": [
-            "listen",
-            "sing",
-            "dance",
-            "draw",
-            "swim",
-            "write",
-            "please",
-            "candy"
-          ],
-          "After": [
-            "monkey"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "outdoor",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "outdoor",
-      "Definitions": "adj. 户外的;露天的;野外的(等于out-of-door)",
-      "SourceIDs": "niujin_shanghai_start1",
-      "SourceBooks": "niujin_shanghai_start1:6年级下",
-      "CandidateSignals": "morphology",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "form-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "niujin_shanghai_start1|g6-lower|r071|outdoor"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "niujin_shanghai_start1|g6-lower|r071|outdoor",
-          "SourceID": "niujin_shanghai_start1",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "71",
-          "Word": "outdoor",
-          "Definition": "adj. 户外的;露天的;野外的(等于out-of-door)",
-          "Before": [
-            "lunar",
-            "remember",
-            "without",
-            "moon cake",
-            "pudding",
-            "would rather",
-            "send",
-            "indoor"
-          ],
-          "After": [
-            "really",
-            "forget",
-            "puzzle",
-            "playground",
-            "piano",
-            "model",
-            "health",
-            "problem"
           ]
         }
       ]
