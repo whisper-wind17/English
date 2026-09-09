@@ -18,14 +18,11 @@
     "ha",
     "hmm",
     "ict",
-    "l.a.",
-    "led",
-    "main course",
-    "prc"
+    "l.a."
   ],
-  "SelectedCount": 18,
-  "ReviewBundleFingerprint": "86d402e49200784cd192bfa0e23e44e806f7803f5ed0fefff8626f33afbda4f8",
-  "ReviewPacketFingerprint": "4108563a7dfcb7ecf30692b5ce07dc9000f5075aca68fb688c62b52f416eb03d",
+  "SelectedCount": 15,
+  "ReviewBundleFingerprint": "6eafe8ccc137d322a8fb234c826c3b8f82a3e54431f01c919fe03cc1d09824af",
+  "ReviewPacketFingerprint": "59afbc9ae241d8898b03d090809ee241ca8c3d83ddbcf180b91f28a148d1bd51",
   "Items": [
     {
       "MatchKey": "heard",
@@ -347,8 +344,8 @@
       "ReviewMode": "full-evidence",
       "DisplayForms": "left",
       "Definitions": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
-      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|cambridge_join_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
-      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|cambridge_join_start3:5年级下|cambridge_join_start3:6年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
+      "SourceIDs": "beijing_start1|beishida_start1|beishida_start3|cambridge_join_start3|guangzhou_start3|hujiao_start3|jiaoke_eec_start3|jijiao_start3|kepu_start3|minjiao_start3|renjiao_start1|renjiao_start3|waiyan_start1|waiyan_start3|xiangshao_start3",
+      "SourceBooks": "beijing_start1:4年级下|beishida_start1:3年级上|beishida_start1:4年级上|beishida_start3:4年级上|cambridge_join_start3:5年级下|cambridge_join_start3:6年级上|guangzhou_start3:5年级下|hujiao_start3:5年级上|jiaoke_eec_start3:5年级下|jiaoke_eec_start3:6年级下|jijiao_start3:3年级上|jijiao_start3:5年级下|kepu_start3:6年级下|minjiao_start3:5年级上|renjiao_start1:5年级下|renjiao_start3:6年级上|waiyan_start1:2年级下|waiyan_start1:6年级下|waiyan_start3:4年级上|xiangshao_start3:4年级上",
       "CandidateSignals": "cross-source-exact|multiple-occurrences|decision-evidence-changed",
       "CandidateCanonical": "leave",
       "CanonicalRelation": "named-past-form",
@@ -399,6 +396,7 @@
         "jijiao_start3|g3-upper|r048|left",
         "jijiao_start3|g5-lower|r064|left",
         "kepu_start3|g6-lower|r050|left",
+        "minjiao_start3|g5-upper|r077|left",
         "renjiao_start1|g5-lower|r083|left",
         "renjiao_start3|g6-upper|r010|left",
         "waiyan_start1|g2-lower|r089|left",
@@ -779,6 +777,36 @@
             "look for",
             "lovely",
             "a lot of"
+          ]
+        },
+        {
+          "SourceOccurrenceKey": "minjiao_start3|g5-upper|r077|left",
+          "SourceID": "minjiao_start3",
+          "SourceBook": "5年级上",
+          "Grade": "5",
+          "Semester": "上",
+          "SourceRow": "77",
+          "Word": "left",
+          "Definition": "adj. 左边的;左派的;剩下的 adv. 在左面 n. 左边;左派;激进分子 v. 离开(leave的过去式)",
+          "Before": [
+            "man",
+            "men",
+            "You're welcome.",
+            "hospital",
+            "nearby",
+            "go straight",
+            "turn",
+            "right"
+          ],
+          "After": [
+            "bus stop",
+            "speak",
+            "wait",
+            "minute",
+            "page",
+            "write",
+            "word",
+            "sorry"
           ]
         },
         {
@@ -1412,162 +1440,6 @@
             "tomato",
             "potato",
             "horse"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "led",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "led",
-      "Definitions": "abbr. 发光二极管(light-emitting diode)",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:6年级下",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g6-lower|r126|led"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g6-lower|r126|led",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "6年级下",
-          "Grade": "6",
-          "Semester": "下",
-          "SourceRow": "126",
-          "Word": "led",
-          "Definition": "abbr. 发光二极管(light-emitting diode)",
-          "Before": [
-            "except",
-            "except for",
-            "carry on ...",
-            "carry on with ...",
-            "light",
-            "light up",
-            "brightly",
-            "lead"
-          ],
-          "After": [
-            "brought",
-            "bring",
-            "ever",
-            "abroad",
-            "South Africa",
-            "nature",
-            "choose",
-            "chose"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "main course",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "main course",
-      "Definitions": "abbr. (=mainsail)主要课程;主菜",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:5年级上",
-      "CandidateSignals": "multiword",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g5-upper|r084|main course"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g5-upper|r084|main course",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "5年级上",
-          "Grade": "5",
-          "Semester": "上",
-          "SourceRow": "84",
-          "Word": "main course",
-          "Definition": "abbr. (=mainsail)主要课程;主菜",
-          "Before": [
-            "hamburger",
-            "chips",
-            "worry",
-            "starter",
-            "tomato",
-            "egg",
-            "soup",
-            "main"
-          ],
-          "After": [
-            "meat",
-            "vegetable",
-            "potato",
-            "dessert",
-            "hope",
-            "everyone",
-            "chocolate",
-            "start"
-          ]
-        }
-      ]
-    },
-    {
-      "MatchKey": "prc",
-      "ReviewMode": "full-evidence",
-      "DisplayForms": "PRC",
-      "Definitions": "abbr. 中华人民共和国(People's Republic of China)",
-      "SourceIDs": "guangzhou_start3",
-      "SourceBooks": "guangzhou_start3:3年级上",
-      "CandidateSignals": "",
-      "CandidateCanonical": "",
-      "CanonicalRelation": "",
-      "CanonicalAction": "",
-      "CanonicalStatus": "",
-      "CanonicalTargetSense": "",
-      "BlockerClass": "abbreviation-policy",
-      "PolicyRecommendedAction": "learner-first-finalize",
-      "DurableDecisions": [],
-      "CurrentOccurrenceKeys": [
-        "guangzhou_start3|g3-upper|r153|prc"
-      ],
-      "FullEvidence": [
-        {
-          "SourceOccurrenceKey": "guangzhou_start3|g3-upper|r153|prc",
-          "SourceID": "guangzhou_start3",
-          "SourceBook": "3年级上",
-          "Grade": "3",
-          "Semester": "上",
-          "SourceRow": "153",
-          "Word": "PRC",
-          "Definition": "abbr. 中华人民共和国(People's Republic of China)",
-          "Before": [
-            "here",
-            "Here you are.",
-            "pencil",
-            "sorry",
-            "bag",
-            "pen",
-            "book",
-            "eraser"
-          ],
-          "After": [
-            "UK",
-            "USA",
-            "put",
-            "on",
-            "desk",
-            "in",
-            "the",
-            "box"
           ]
         }
       ]
