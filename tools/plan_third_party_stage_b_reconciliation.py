@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Build a deterministic read-only Stage-B reconciliation review queue and next batch.
 
-This planner never writes durable reconciliation decisions and never authorizes Klose
-identity mutation. V1 intentionally uses a narrow automatic proposal rule:
+V2 separates safe executable proposals from semantic/manual review:
+- learner-excluded -> explicit held (no allocation needed under current learner policy)
+- exact/variant multiple -> manual high-risk review
+- orthographic/spelling single -> manual equivalence review
+- exact-single + exact learner-sense equality -> safe reuse proposal
+- no-existing-match after exact/orthographic/spelling discovery -> safe new-identity proposal
+- other exact-single -> semantic review
 
-- exact-multiple: manual high-risk review
-- exact-single + byte-for-byte learner sense equality after strip: propose reuse-existing
-- other exact-single: semantic review
-- no-existing-match: identity review (no automatic new-identity proposal)
-
-Exact MatchKey equality alone is never treated as a same-sense decision.
+All actions remain reconciliation decisions only; MutationAuthorized is always no.
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ QUEUE = PREMERGE / "reconciliation_review_queue.csv"
 SELECTED = PREMERGE / "reconciliation_selected_view.csv"
 NEXT = PREMERGE / "reconciliation_next_batch.json"
 
-PLAN_VERSION = "stage-b-reconciliation-v1"
+PLAN_VERSION = "stage-b-reconciliation-v2"
 CANDIDATE_FP_FIELDS = [
     "ProvisionalIdentityKey", "CanonicalMatchKey", "LookupMatchKey", "DisplayWord",
     "ThirdPartyTargetSense", "SourceMatchKeys", "SourceOccurrenceCount",
@@ -44,16 +44,27 @@ QUEUE_FIELDS = [
     "MutationAuthorized",
 ]
 LANE_PRIORITY = {
-    "exact-multiple": 0,
-    "exact-single-exact-sense": 1,
-    "exact-single-semantic-review": 2,
-    "no-existing-match": 3,
+    "learner-excluded": 0,
+    "exact-multiple": 1,
+    "variant-multiple": 2,
+    "variant-single": 3,
+    "exact-single-exact-sense": 4,
+    "no-existing-match": 5,
+    "exact-single-semantic-review": 6,
 }
 BATCH_CAPS = {
+    "learner-excluded": 300,
     "exact-multiple": 20,
-    "exact-single-exact-sense": 120,
-    "exact-single-semantic-review": 40,
-    "no-existing-match": 40,
+    "variant-multiple": 20,
+    "variant-single": 40,
+    "exact-single-exact-sense": 200,
+    "no-existing-match": 300,
+    "exact-single-semantic-review": 50,
+}
+SAFE_EXECUTABLE_LANES = {
+    "learner-excluded",
+    "exact-single-exact-sense",
+    "no-existing-match",
 }
 
 
@@ -111,9 +122,19 @@ def valid_decision_ids(
 
 
 def classify(row: dict[str, str]) -> tuple[str, str, str, str]:
+    if row.get("LearnerAdmitted", "").casefold() != "yes":
+        return (
+            "learner-excluded", "held", "",
+            "identity is outside the current learner-admission policy; close as held without allocation",
+        )
+
     cls = row.get("KloseCandidateClass", "")
     if cls == "exact-multiple":
-        return "exact-multiple", "", "", "multiple current Klose candidates require explicit review"
+        return "exact-multiple", "", "", "multiple current exact Klose candidates require explicit review"
+    if cls in {"orthographic-multiple", "spelling-multiple"}:
+        return "variant-multiple", "", "", "multiple orthographic/spelling-equivalent Klose candidates require review"
+    if cls in {"orthographic-single", "spelling-single"}:
+        return "variant-single", "", "", "single orthographic/spelling candidate requires sense-equivalence review"
     if cls == "exact-single":
         ids = [x for x in row.get("KloseCandidateNoteIDs", "").split("|") if x]
         if len(ids) != 1:
@@ -123,16 +144,16 @@ def classify(row: dict[str, str]) -> tuple[str, str, str, str]:
         if third and third == klose:
             return (
                 "exact-single-exact-sense", "reuse-existing", ids[0],
-                "exact MatchKey candidate plus exact learner-sense equality; review before persistence",
+                "one exact MatchKey candidate plus byte-for-byte learner-sense equality",
             )
         return (
             "exact-single-semantic-review", "", "",
-            "single MatchKey candidate but learner senses are not exactly equal",
+            "single exact MatchKey candidate but learner senses are not exactly equal",
         )
     if cls == "no-existing-match":
         return (
-            "no-existing-match", "", "",
-            "no exact MatchKey candidate; search identity/orthographic equivalence before proposing new identity",
+            "no-existing-match", "new-stable-identity", "",
+            "validated premerge found no exact, space/hyphen-equivalent, or configured spelling-equivalent Klose identity",
         )
     raise SystemExit(f"Unknown KloseCandidateClass: {cls}: {row.get('ProvisionalIdentityKey')}")
 
@@ -200,6 +221,7 @@ def main() -> None:
         "SelectedCount": len(selected_rows),
         "SelectedProvisionalIdentityKeys": [r["ProvisionalIdentityKey"] for r in selected_rows],
         "ExecutionReady": bool(selected_rows),
+        "AutoExecutable": active_lane in SAFE_EXECUTABLE_LANES and bool(selected_rows),
         "MutationAuthorized": False,
         "ReviewQueueFingerprint": sha256(QUEUE),
         "SelectedViewFingerprint": sha256(SELECTED),
@@ -214,6 +236,7 @@ def main() -> None:
         print(f"review lane {lane} = {lane_counts[lane]}")
     print(f"next lane = {active_lane or 'none'}")
     print(f"selected = {len(selected_rows)}")
+    print(f"auto executable = {'yes' if next_state['AutoExecutable'] else 'no'}")
     print("Stage-B mutation authorized = no")
 
 
