@@ -1,47 +1,48 @@
 {
   "StatusVersion": "stage-a-status-v2",
   "CheckpointSemantics": "sealed only after Stage-A Completion Recheck, learner gate check, audit-batch recheck, and Klose isolation pass",
-  "InputCommit": "d7aae7ba209f7c5b8969d9ca5560e8cc985296e4",
-  "WorkflowRunID": "34331395653",
-  "WorkflowRunNumber": "386",
+  "InputCommit": "d538bc878b28b3d72f7865c140be2c6a94c2a068",
+  "WorkflowRunID": "34331742702",
+  "WorkflowRunNumber": "387",
   "SourceOccurrences": 18887,
   "NormalizedSurfaces": 3763,
-  "DurableIdentityDecisions": 3082,
+  "DurableIdentityDecisions": 3084,
   "IdentityVocabularyPreview": 2558,
   "LearnerVocabularyPreview": 2535,
   "ReviewBlockers": 789,
-  "EvidenceChangedSurfaces": 31,
+  "EvidenceChangedSurfaces": 29,
   "MultipartResolved": 5,
   "GrammarFormQuarantineGates": 86,
   "NextBatch": {
     "PlanVersion": "v5-throughput-delta",
     "ReviewLane": "semantic-review",
-    "SelectedCount": 2,
+    "SelectedCount": 3,
     "SelectedMatchKeys": [
-      "chinese",
-      "drop"
+      "cold",
+      "enter",
+      "design"
     ],
     "EvidenceWeight": 60,
     "EffectiveWeightBudget": 60,
     "ExecutionReady": true,
-    "ReviewBundleFingerprint": "33ea3111b14d01f30a6c20e4cb2ae5f929e6ac148b8fe79b3a434c383dcfed2d",
-    "ReviewPacketFingerprint": "76514465f7018ff6c74a26ac84e1ca5e21357d070c7eea3853af4942cbcee380"
+    "ReviewBundleFingerprint": "5de00c48929ba362d0292357c6e3b7946464700fe4776bf441de133f6f06ee65",
+    "ReviewPacketFingerprint": "fcf8a01b4baa91a75dc08a39c7d430e92fb2719a2750f4f71f10465cefbbfff9"
   },
-  "SealedInputCommit": "d7aae7ba209f7c5b8969d9ca5560e8cc985296e4",
-  "SealedWorkflowRunID": "34331395653",
-  "SealedWorkflowRunNumber": "386",
+  "SealedInputCommit": "d538bc878b28b3d72f7865c140be2c6a94c2a068",
+  "SealedWorkflowRunID": "34331742702",
+  "SealedWorkflowRunNumber": "387",
   "ContentFingerprintAlgorithm": "sha256-raw-bytes-v1",
   "ContentFingerprints": {
     "anki/klose/third_party_vocabulary/config/source_adapters.csv": "fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272",
-    "anki/klose/third_party_vocabulary/review/identity_decisions.csv": "1165f7edce9857c33bfba9e7e3a1c2eaf7329b5602ffee9397ed43ee26d396b6",
+    "anki/klose/third_party_vocabulary/review/identity_decisions.csv": "cbd7faf1fb3230a72f9c5ce12a28b63fcf2566cefe2e1ce2ac72e286a438630c",
     "anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv": "079686f5aa10accb9dc8c035c66da7ac5cc20db74fb34ed3d748ae3ceb6522f8",
     "anki/klose/third_party_vocabulary/staging/occurrences.csv": "b025cb4f69b030da3664ab9b1bdd8500cb0166b122392b282a4293567702a7d4",
-    "anki/klose/third_party_vocabulary/staging/surface_candidates.csv": "7626d7b05028c04c2b8692bc150b48316de447a9e67ad4e4a584b7eeafde448e",
-    "anki/klose/third_party_vocabulary/staging/review_queue.csv": "aebf22770f6aaccc518ee7e6cd979cdd256f3ad7e8aa71e1d08e77f6dd747288",
+    "anki/klose/third_party_vocabulary/staging/surface_candidates.csv": "7dad5b239f6a18603517b0ee4b7a32664ba208270164b55aa664d7437024b95b",
+    "anki/klose/third_party_vocabulary/staging/review_queue.csv": "7d78c261ce389db66f13cfaf839327bd4dfdf3f47de0c2dfb5e47967f1ee7a9e",
     "anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv": "fa0d1eccbbcfa881167302d465a82677d1b68abede2f0594af9e738d78d6e32c",
     "anki/klose/third_party_vocabulary/learner/learner_vocabulary_preview.csv": "c6e416647e36806e8a4a97dcff5ff74d87298ec24d5e416f43910bfe6e27d830",
-    "anki/klose/third_party_vocabulary/audit/defer_context.csv": "9da94d6e4c4090f261e55f65e167d34fd8727102104d518b1aa007fa89f267a7",
-    "anki/klose/third_party_vocabulary/audit/next_batch.json": "7e0a25bc0dc896c6acf824520956d91ce1a5e84d8d3bc848a08432dd70568deb"
+    "anki/klose/third_party_vocabulary/audit/defer_context.csv": "38af158d41c0db895ce760fbf6148203d4c017da37a4e18377ce0c34c9949481",
+    "anki/klose/third_party_vocabulary/audit/next_batch.json": "f5be4ac41ecf379b18a9fa36f52cfdf0aa75f067aff56ae5af6ac39036656f8a"
   },
-  "CheckpointFingerprint": "477368a313a2d6d1c4c257f93e01f4d82858261e5c3908204ff6d60c909929df"
+  "CheckpointFingerprint": "8614708848d5107e04c532aa417aad49a20bb6311b584c64110c1e972a214f51"
 }
