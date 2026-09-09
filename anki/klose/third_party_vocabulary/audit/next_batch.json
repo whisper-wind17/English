@@ -3,20 +3,9 @@
   "ReviewLane": "semantic-review",
   "ReviewMode": "full-evidence",
   "SelectedMatchKeys": [
-    "play",
-    "seal",
-    "several"
-  ],
-  "SelectedCount": 3,
-  "EvidenceWeight": 60,
-  "SurfaceCap": 60,
-  "WeightBudget": 60,
-  "EffectiveWeightBudget": 60,
-  "PackingSkippedMatchKeys": [
     "save",
     "seat",
     "shoot",
-    "show",
     "shower",
     "silly",
     "skateboard",
@@ -24,7 +13,15 @@
     "sore",
     "spot",
     "square",
-    "sticker",
+    "sticker"
+  ],
+  "SelectedCount": 11,
+  "EvidenceWeight": 60,
+  "SurfaceCap": 60,
+  "WeightBudget": 60,
+  "EffectiveWeightBudget": 60,
+  "PackingSkippedMatchKeys": [
+    "show",
     "taste",
     "tasty",
     "term",
@@ -57,6 +54,6 @@
   "SkippedGuardedPolicyRows": 0,
   "ExecutionReady": true,
   "GateReason": "",
-  "ReviewBundleFingerprint": "d920cf02cfababcd23776479ccb91b1a76fbc855729fbf794478e315c8578451",
-  "ReviewPacketFingerprint": "6dca48b4e535141e0d2b3cbd7bbd934ca5ced8aebd3e795fdb873c09f8b969ae"
+  "ReviewBundleFingerprint": "ea98a185039ade0db44e4f3b7aa743623d0a4cae7ec8bb3013a8bdbbfab9f249",
+  "ReviewPacketFingerprint": "1dae7b3579d2a87d11d325f59e772d85a65d843f3a5d3ed044f0f6628a89e72f"
 }
