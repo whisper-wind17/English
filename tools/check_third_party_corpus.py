@@ -57,6 +57,7 @@ EXPECTED_SOURCE_COUNTS = {
     "waiyan_start1": 1170,
     "waiyan_start3": 1157,
     "xiangshao_start3": 698,
+    "yilin_start3": 1036,
 }
 ACTIONS = {
     "keep-identity", "reuse-identity", "split-required", "held",
