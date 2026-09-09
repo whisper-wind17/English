@@ -1,6 +1,6 @@
 # NEXT — Klose Learning
 
-Last updated: 2026-09-09
+Last updated: 2026-09-10
 
 ## 1. 启动顺序
 
@@ -60,44 +60,53 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#407 / 34360581909 = SUCCESS**
+Latest sealed workflow：**#410 / 34366294228 = SUCCESS**
 
 ```text
-sealed bot head                    = e71e03e9b8b0ddf421c711551b4bb8866fcc6ab6
+sealed bot head                    = ac51be4327ff289e953421ce57937e4823773e00
+sealed input commit                = 5e3f3c462d848489ce7ee3956bae230c628557af
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3175
-Identity Vocabulary Preview        = 2627
-Learner Vocabulary Preview         = 2604
-Review blockers                    = 727
-Evidence-changed surfaces          = 4
-Multipart resolved                 = 13
+Durable Identity decisions         = 3187
+Identity Vocabulary Preview        = 2637
+Learner Vocabulary Preview         = 2614
+Review blockers                    = 718
+Evidence-changed surfaces          = 0
+Multipart resolved                 = 15
 Grammar-form quarantine gates      = 88
-CheckpointFingerprint              = 1c4acaaaca00c1001ad272d96c1edfeb7935aa7e4c675f62e8e74756dd4a1446
+CheckpointFingerprint              = 36eea59880e15c495d034209865b59adcb99b1f0231664e3fab83533534ec7b8
 ```
 
 Recent validated throughput：
 
 ```text
 #402 — orange / sand
-  orange closed as fruit + color + 2 current-context held; sand closed as 沙/沙子
 #403 — play / seal / several
-  play closed as general + instrument + theatre + held; new play#theatre learner sense
 #404 — save / seat / shoot / shower / silly / skateboard / slide / sore / spot / square / sticker
-  save/square revalidated; shoot#sports and slide#movement added; spot kept audited-defer
 #405 — show / taste / tasty / term / terrible
-  show revalidated as verb + performance + held; taste added noun flavour identity without sense overlap
 #406 — thin / throat / toe / tour / upstairs / exit
-  thin revalidated as slim + object-thin + held; tour travel + held; four singleton identities closed
 #407 — time / used / wake / waste
-  time closed as general + count + held; used reuses use and is learner-quarantined; wake verb + held; waste split into verb + rubbish/waste noun
+
+#409 — throughput architecture validation
+  planner upgraded from occurrence-weighted v5 to v6-semantic-throughput
+  semantic complexity budget = 120
+  review packet byte budget = 300000
+  source / learner / Klose isolation gates all PASS
+
+#410 — 12-surface high-throughput semantic batch
+  water / wave / wing / yummy / may / rock / rough / smooth / snorkel / trick / miss / like
+  SelectedCount = 12, EvidenceWeight = 91, PacketBytes = 58255
+  EvidenceChangedSurfaces 4 → 0
+  ReviewBlockers 727 → 718
+  MultipartResolved 13 → 15
+  full Validation Gate + bot persist + independent post-seal state recheck PASS
 ```
 
-Workflow anomaly note：同一 input commit 曾被 GitHub 重复排出 #408。#408 的 batch closure、SOURCE FREEZE、Completion Recheck、learner gate、audit recheck、Klose isolation 与 seal 全部通过，仅在最终 persist 时因 #407 已先写入 `stage_a_status.json` 发生 rebase conflict；**#408 不是有效 checkpoint，authoritative sealed checkpoint 仍是 #407**。
+同一 input commit 曾被 GitHub 重复排出 #408。#408 的 validation steps 通过，但最终 persist 与已先写入的 #407 发生 rebase conflict；它不是有效 checkpoint。
 
 Every completed batch must pass：batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
 
-Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / `CanonicalMatchKey` names. Do not create parallel sense names for already-reviewed partitions. Corpus builder intentionally fails closed on overlap。
+Multipart re-review 必须复用已有稳定 `DecisionKey` / `CanonicalMatchKey`；允许把旧的 whole-surface `split-required` 收敛成 reviewed subgroup + current-context held subgroup，但不得猜义。Corpus builder 对 overlap / incomplete partition fail closed。
 
 ---
 
@@ -106,40 +115,54 @@ Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / 
 Machine-selected next batch：
 
 ```text
-PlanVersion    = v5-throughput-delta
-ReviewLane     = semantic-review
-ReviewMode     = full-evidence
-SelectedCount  = 4
-EvidenceWeight = 60
-ExecutionReady = true
+PlanVersion            = v6-semantic-throughput
+ReviewLane             = split-resolution
+ReviewMode             = full-evidence
+SelectedCount          = 8
+EvidenceWeight         = 119
+EffectiveWeightBudget  = 120
+PacketBytes            = 48238
+PacketByteBudget       = 300000
+ExecutionReady         = true
 
-water
-wave
-wing
-rock
+too
+french
+little
+pass
+flies
+fan
+get
+line
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 17561cb7771dca48b3d4268416a5550c1e1ae59dfa30012769ca6ccdc0566693
-ReviewPacketFingerprint = 00183cd360d245e057f12ce196bdc9e2b591497edc195a5174c971b8d1fbf151
+ReviewBundleFingerprint = ef1772f4001bb4095ae6af98ce4fe968a2b1858d8c3ebd405347862c403521c1
+ReviewPacketFingerprint = d4eb6664c27197058e34eb378172fa1d4351e0ed0c6eae76352d2d499a33fc48
 ```
 
-Next execution sequence：
+Execution strategy：
 
 ```text
-read selected_review_packet.json / selected_review_view.csv
-→ establish full-evidence semantic partitions for water / wave / wing / rock
-→ create transient decision_updates.csv
-→ pre-main diff/scope check
+too / french / little / pass / fan / line
+→ establish only evidence-supported reviewed subgroups
+→ put ambiguous occurrences into explicit current-context held partitions
+
+flies / get
+→ current source window is still insufficient for safe partition
+→ refresh audited split-required defer; do not guess
+
+then:
+→ create transient review/decision_updates.csv
+→ pre-main partition/diff/scope check
 → non-force main update
 → full Stage-A Validation Gate
 → bot persist
 → independent post-seal diff/state recheck
 ```
 
-Planner contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`；单批大小由 evidence weight 主导。Source mutation 与 decision mutation 不得混合。
+Planner contract：v6 以 semantic complexity 为主预算，`WeightBudget=120`，并独立限制 `PacketByteBudget=300000`；lane-specific SurfaceCap 只作表面数量 guard。Source mutation 与 decision mutation 不得混合。
 
 ---
 
@@ -171,7 +194,7 @@ morphology / form canonicalization
 `premerge/readiness.json` 仍是旧 snapshot，不是当前 Stage-A authority。
 
 ```text
-snapshot SourceOccurrences    = 7535   # stale historical Stage-B snapshot
+snapshot SourceOccurrences    = 7535
 current Stage-A occurrences   = 18887
 ReadyForPremergeReview        = false
 StageBMutationAuthorized      = false
