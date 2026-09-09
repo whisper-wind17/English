@@ -9,7 +9,9 @@ on:
       - 'tools/check_third_party_klose_premerge.py'
       - 'tools/plan_third_party_stage_b_reconciliation.py'
       - 'tools/check_third_party_stage_b_review_plan.py'
+      - 'tools/propose_third_party_stage_b_decision_updates.py'
       - 'tools/apply_third_party_stage_b_reconciliation_updates.py'
+      - 'tools/check_third_party_stage_b_completion.py'
       - 'tools/seal_third_party_stage_a_checkpoint.py'
       - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
       - 'anki/klose/third_party_vocabulary/reconciliation/decision_updates.csv'
@@ -66,11 +68,8 @@ jobs:
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           from pathlib import Path
-
-          path = Path('anki/klose/third_party_vocabulary/premerge/readiness.json')
-          status = json.loads(path.read_text(encoding='utf-8-sig'))
-          ready = status.get('ReadyForPremergeReview') is True
-          print(f"ready={'true' if ready else 'false'}")
+          status = json.loads(Path('anki/klose/third_party_vocabulary/premerge/readiness.json').read_text(encoding='utf-8-sig'))
+          print(f"ready={'true' if status.get('ReadyForPremergeReview') is True else 'false'}")
           PY
 
       - name: Plan current Stage-B reconciliation review
@@ -81,21 +80,56 @@ jobs:
         if: steps.gate.outputs.ready == 'true'
         run: python tools/check_third_party_stage_b_review_plan.py
 
-      - name: Apply transient Stage-B reconciliation decisions
+      - name: Materialize safe proposal or preserve explicit reviewed batch
+        if: steps.gate.outputs.ready == 'true'
+        run: python tools/propose_third_party_stage_b_decision_updates.py
+
+      - name: Apply current Stage-B reconciliation batch
         if: steps.gate.outputs.ready == 'true'
         run: python tools/apply_third_party_stage_b_reconciliation_updates.py
 
-      - name: Check durable Stage-B reconciliation decisions
+      - name: Check current durable Stage-B decisions
         if: steps.gate.outputs.ready == 'true'
         run: python tools/check_third_party_stage_b_reconciliation.py
 
-      - name: Re-plan after reviewed decision apply
+      - name: Drain deterministic safe Stage-B lanes
         if: steps.gate.outputs.ready == 'true'
-        run: python tools/plan_third_party_stage_b_reconciliation.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          for iteration in $(seq 1 20); do
+            python tools/plan_third_party_stage_b_reconciliation.py
+            python tools/check_third_party_stage_b_review_plan.py
+            auto="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          state = json.loads(Path('anki/klose/third_party_vocabulary/premerge/reconciliation_next_batch.json').read_text(encoding='utf-8-sig'))
+          print('true' if state.get('AutoExecutable') is True else 'false')
+          PY
+          )"
+            if [[ "$auto" != "true" ]]; then
+              echo "Safe Stage-B drain stopped at explicit-review lane."
+              break
+            fi
+            python tools/propose_third_party_stage_b_decision_updates.py
+            if [[ ! -f anki/klose/third_party_vocabulary/reconciliation/decision_updates.csv ]]; then
+              echo 'AutoExecutable lane did not materialize a decision inbox.'
+              exit 1
+            fi
+            python tools/apply_third_party_stage_b_reconciliation_updates.py
+            python tools/check_third_party_stage_b_reconciliation.py
+          done
+          python tools/plan_third_party_stage_b_reconciliation.py
+          python tools/check_third_party_stage_b_review_plan.py
 
-      - name: Check next Stage-B review plan
+      - name: Stage-B completion recheck
         if: steps.gate.outputs.ready == 'true'
-        run: python tools/check_third_party_stage_b_review_plan.py
+        run: |
+          if [[ -f tools/check_third_party_stage_b_completion.py ]]; then
+            python tools/check_third_party_stage_b_completion.py --allow-incomplete
+          else
+            echo 'Stage-B completion checker not installed yet.'
+          fi
 
       - name: Report Stage-B reconciliation gate
         if: steps.gate.outputs.ready != 'true'
