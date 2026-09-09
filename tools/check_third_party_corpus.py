@@ -54,6 +54,7 @@ EXPECTED_SOURCE_COUNTS = {
     "niujin_shanghai_start1": 1186,
     "renjiao_start1": 908,
     "renjiao_start3": 851,
+    "shaanxi_start3": 917,
     "hujiao_start3": 1111,
     "waiyan_start1": 1170,
     "waiyan_start3": 1157,
