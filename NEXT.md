@@ -41,16 +41,6 @@ SOURCE FREEZE 后不得静默修改 source adapters、adapter occurrences 或 ra
 
 ## 3. SOURCE FREEZE — CLOSED
 
-Authoritative contract：
-
-```text
-anki/klose/third_party_vocabulary/config/source_freeze.json
-tools/check_third_party_source_freeze.py
-CI: Enforce Third-party SOURCE FREEZE
-```
-
-Frozen invariants：
-
 ```text
 enabled adapters                     = 20
 source occurrences                   = 18887
@@ -63,6 +53,14 @@ unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b1
 Klose operational mutation           = 0
 ```
 
+Contract / checker：
+
+```text
+anki/klose/third_party_vocabulary/config/source_freeze.json
+tools/check_third_party_source_freeze.py
+CI: Enforce Third-party SOURCE FREEZE
+```
+
 Terminal source boundaries：
 
 ```text
@@ -71,7 +69,7 @@ Terminal source boundaries：
 译林低年级 / 牛津小学1A–2B = deferred; edition continuity not established
 ```
 
-Source validation evidence：
+Source validation：
 
 ```text
 workflow #351 / 34303418551 = final 20-adapter union SUCCESS
@@ -82,97 +80,95 @@ workflow #353 / 34303742198 = SOURCE FREEZE establishment SUCCESS
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#361 / 34313132665 = SUCCESS**
+Latest sealed workflow：**#362 / 34313782981 = SUCCESS**
 
 ```text
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 2457
-Identity Vocabulary Preview        = 1992
-Learner Vocabulary Preview         = 1976
-Review blockers                    = 1411
+Durable Identity decisions         = 2486
+Identity Vocabulary Preview        = 2014
+Learner Vocabulary Preview         = 1998
+Review blockers                    = 1383
 Evidence-changed surfaces          = 34
 Multipart resolved                 = 3
 Grammar-form quarantine gates      = 62
-CheckpointFingerprint              = 83647a4477acf83b06622337524549de970ee65f9328d5b1b5dc67cfbb061208
+CheckpointFingerprint              = 63307ec86e8f6376098f750674126c0039b12ff1c9719fb61a136c09375fdbad
 ```
 
 Recent validated batches：
 
 ```text
-light — workflow #359 / 34312798133
-  light#illumination = 灯；光；光线
-  light#weight       = 轻的；轻便的
-  light#intensity    = 轻微的；少量的（如小雨）
-  light#ignite       = 点燃；点着
-  held               = Beishida + Cambridge unresolved source rows
+light — #359 / 34312798133
+  illumination / weight / intensity / ignite + 2 held
+  #358 initially failed because a new held DecisionKey overlapped the old partition;
+  fixed by replacing the stable held DecisionKey rather than appending a synonym row.
 
-mouse — workflow #360 / 34312987272
-  mouse#animal       = 老鼠            (8 occurrences)
-  mouse#computer     = 鼠标；电脑鼠标  (2 occurrences)
-  held               = Beishida flat-list row (1 occurrence)
+mouse — #360 / 34312987272
+  animal 8 / computer 2 / held 1
 
-watch — workflow #361 / 34313132665
-  watch#noun         = 手表            (11 occurrences)
-  watch#verb         = 观看；注视      (11 occurrences)
-  held               = 5 occurrences whose current context does not safely bind noun/verb
+watch — #361 / 34313132665
+  wristwatch noun 11 / viewing verb 11 / held 5
+
+semantic batch — #362 / 34313782981
+  30 selected MatchKeys fully closed
+  program reused reviewed canonical programme for programme/show sense
+  abracadabra / achoo / atishoo / aw routed to Expressions
+  action / album retained as current-context audited-defer rather than guessing a sense
+  numeric ordinals retained as reviewed source-form Vocabulary identities for now
+  aeroplane / airplane retained separately in semantic pass; later orthographic duplicate audit may reconcile them
 ```
 
-`light` 首次 attempt #358 因 held DecisionKey 被错误追加、造成 multipart occurrence overlap 而失败；修复为复用稳定 DecisionKey 后 #359 全门通过。该 failure mode 已作为后续 multipart update 的检查项：**扩展旧 partition 必须替换旧 DecisionKey，不得另起同义 held row。**
-
-每次上述 batch 均通过：apply → corpus build → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist。
+Every validated batch passed：batch closure → apply → corpus build/check → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist。
 
 ---
 
 ## 5. NEXT TASK — current deterministic Phase-A2 batch
-
-Planner 当前已从 `policy-review` 进入 `semantic-review`：
 
 ```text
 PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
 SelectedCount  = 30
-EvidenceWeight = 35
+EvidenceWeight = 31
 ExecutionReady = true
 
-program
-20th
-21st
-22nd
-23rd
-2nd
-30th
-31st
-3rd
-4th
-ability
-abracadabra
-achoo
-action
-advertisement
-aeroplane
-airplane
-album
-alphabet
-ambulance
-america
-anyone
-anytime
-area
-argentina
-athlete
-atishoo
-aviary
-aw
-bacon
+baker
+bangkok
+beauty
+began
+blazer
+bookworm
+brazil
+brightly
+britain
+budgie
+builder
+bund
+cactus
+california
+campsite
+cardigan
+cassette
+celebration
+celery
+certainly
+cheaper
+check-up
+checklist
+childish
+chilli
+chimney
+circus
+college
+conductor
+confident
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = cb1406210a980286ca6476c565ac605e9e530961c5dc5127348481fc33634715
-ReviewPacketFingerprint = 0100c4cce39ca7e2e0f495d5eda9464dc42d01327a520bb2da6684808b084bfe
+ReviewBundleFingerprint = 3b62597925d5fe808b6d5a64773f644af3ece0d61d1b2059e4a0f501d1c10f2f
+ReviewPacketFingerprint = b92dbcff1f35aa63975705bbe9ed23a1406cd534132b0bce3274573fb91348d7
 ```
 
 Batch contract：
