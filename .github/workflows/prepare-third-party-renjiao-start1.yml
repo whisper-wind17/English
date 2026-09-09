@@ -23,6 +23,7 @@ on:
       - 'anki/klose/third_party_vocabulary/review/decision_updates.csv'
       - 'anki/klose/third_party_vocabulary/review/batch_manifest.json'
       - 'anki/klose/third_party_vocabulary/learner/grammar_form_quarantine.csv'
+      - 'anki/klose/third_party_vocabulary/learner/content_exclusion_policy.csv'
       - '.github/workflows/prepare-third-party-renjiao-start1.yml'
   workflow_dispatch:
 
@@ -181,7 +182,7 @@ jobs:
       - name: Build learner-stage vocabulary view
         run: python tools/build_third_party_learner_view.py
 
-      - name: Check learner-stage grammar-form quarantine
+      - name: Check learner-stage admission gates
         run: python tools/check_third_party_learner_view.py
 
       - name: Build high-throughput blocker review bundle
