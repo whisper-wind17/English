@@ -1,9 +1,9 @@
 {
   "StatusVersion": "stage-a-status-v2",
   "CheckpointSemantics": "sealed only after Stage-A Completion Recheck, learner gate check, audit-batch recheck, and Klose isolation pass",
-  "InputCommit": "50cc8671b155b46f54d4bd5997930335c51fa568",
-  "WorkflowRunID": "34301164159",
-  "WorkflowRunNumber": "334",
+  "InputCommit": "5b010c509e74ee6850810f531884f21fc278d87c",
+  "WorkflowRunID": "34301231514",
+  "WorkflowRunNumber": "335",
   "SourceOccurrences": 15448,
   "NormalizedSurfaces": 3471,
   "DurableIdentityDecisions": 2411,
@@ -43,9 +43,9 @@
     "ReviewBundleFingerprint": "d565268cf3ba20e8ed5909d94b8ea90414d716468db514ac792c0a838f41f088",
     "ReviewPacketFingerprint": "4945729ecd36e00384463b33a775268714ed13d761f55dd969fa4a476072b946"
   },
-  "SealedInputCommit": "50cc8671b155b46f54d4bd5997930335c51fa568",
-  "SealedWorkflowRunID": "34301164159",
-  "SealedWorkflowRunNumber": "334",
+  "SealedInputCommit": "5b010c509e74ee6850810f531884f21fc278d87c",
+  "SealedWorkflowRunID": "34301231514",
+  "SealedWorkflowRunNumber": "335",
   "ContentFingerprintAlgorithm": "sha256-raw-bytes-v1",
   "ContentFingerprints": {
     "anki/klose/third_party_vocabulary/config/source_adapters.csv": "d0ba56cf1270cfe6366e538dd2b49dd08eb61e274a72e0807344eee2b9e19b22",
