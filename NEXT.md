@@ -47,7 +47,7 @@ Phase A1 允许新增 source evidence 持续扩大 pending / evidence-changed / 
 
 ---
 
-## 3. Existing enabled Adapter baseline — 16 CLOSED
+## 3. Existing enabled Adapter baseline — 17 CLOSED
 
 ```text
 beijing_start1          =  808 occurrences /  734 MatchKeys / 12 books
@@ -66,36 +66,36 @@ renjiao_start3          =  851 occurrences /  818 MatchKeys /  8 books
 waiyan_start1           = 1170 occurrences / 1071 MatchKeys / 12 books
 waiyan_start3           = 1157 occurrences / 1023 MatchKeys /  8 books
 xiangshao_start3        =  698 occurrences /  674 MatchKeys /  8 books
+yilin_start3            = 1036 occurrences /  998 MatchKeys /  8 books
 ---------------------------------------------------------------------
-Total                   = 15448 source occurrences / 148 books
+Total                   = 16484 source occurrences / 156 books
 ```
 
-Latest completed adapter: `cambridge_join_start3`.
+Latest completed adapter: `yilin_start3`.
 
 ```text
-8 raw books / 1456 occurrences / 1333 MatchKeys
-blank Definition source facts       = 1
+8 raw books / 1036 occurrences / 998 MatchKeys
+blank Definition source facts       = 3
 parser                               = PASS
 dedicated edition checker            = PASS
-all dedicated source checkers        = 16 PASS
+all dedicated source checkers        = 17 PASS
 global adapter closure               = PASS
 Corpus Completion Recheck            = PASS
 Learner quarantine check             = PASS
 Audit-batch Recheck                  = PASS
 Klose isolation                      = PASS
 Stage-A seal                         = PASS
-Workflow #333 / 34301045752          = SUCCESS
-CheckpointFingerprint                = c6271bc1bcf69b24c05dc6f97c940790e34d5a84ae7efb6ec7f4b4545f1ed2eb
+Workflow #337 / 34301469674          = SUCCESS
+CheckpointFingerprint                = 388c4649dbd966b328fd73d18c89d41b0ec566566832a9fa198ddfc66f78e264
 ```
 
-Edition-specific blank `Definition` source facts currently total 6: `cambridge_join_start3=1`, `guangzhou_start3=1`, `waiyan_start1=2`, `waiyan_start3=2`. These are frozen Source Facts and must not be normalized away manually.
+Edition-specific blank `Definition` source facts currently total 9: `cambridge_join_start3=1`, `guangzhou_start3=1`, `waiyan_start1=2`, `waiyan_start3=2`, `yilin_start3=3`. These are frozen Source Facts and must not be normalized away manually.
 
 ---
 
 ## 4. Remaining raw-source inventory before SOURCE FREEZE
 
 ```text
-yilin_start3            # 译林版三年级起点，3–6，上下册，共 8 册
 minjiao_start3          # 闽教版三年级起点，3–6，上下册，共 8 册
 shaanxi_start3          # 陕西版三年级起点，3–6，上下册，共 8 册
 luke_54_start3          # 鲁科版五四学制，小学 3–5，上下册，共 6 册；五年制小学边界
@@ -112,15 +112,15 @@ luke_54_start3          # 鲁科版五四学制，小学 3–5，上下册，共
 
 ---
 
-## 5. NEXT TASK — add `yilin_start3`
+## 5. NEXT TASK — add `minjiao_start3`
 
 只接入明确命名的 8 册：
 
 ```text
-译林版三年级起点三年级上 / 下
-译林版三年级起点四年级上 / 下
-译林版三年级起点五年级上 / 下
-译林版三年级起点六年级上 / 下
+闽教版三年级起点三年级上 / 下
+闽教版三年级起点四年级上 / 下
+闽教版三年级起点五年级上 / 下
+闽教版三年级起点六年级上 / 下
 ```
 
 Per-Adapter Definition of Done：
@@ -144,12 +144,12 @@ Per-Adapter Definition of Done：
 ## 6. Current Identity state — carry forward, DO NOT close yet
 
 ```text
-Source occurrences                 = 15448
-Normalized surfaces                = 3471
+Source occurrences                 = 16484
+Normalized surfaces                = 3616
 Durable Identity decisions         = 2411
 Identity Vocabulary Preview        = 1967
 Learner Vocabulary Preview         = 1954
-Review blockers                    = 1165
+Review blockers                    = 1310
 Evidence-changed surfaces          = 41
 Multipart resolved                 = 0
 Grammar-form quarantine gates      = 61
