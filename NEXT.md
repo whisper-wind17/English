@@ -60,39 +60,42 @@ Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四�
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#376 / 34321902035 = SUCCESS**
+Latest sealed workflow：**#399 / 34341556186 = SUCCESS**
 
 ```text
-sealed bot head                    = dcabfc8668d89ad6228897847405952a01cf14df
+sealed bot head                    = afeccc8236dda971fc40af8090f77137de6e2186
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 2803
-Identity Vocabulary Preview        = 2300
-Learner Vocabulary Preview         = 2281
-Review blockers                    = 1066
-Evidence-changed surfaces          = 34
-Multipart resolved                 = 3
-Grammar-form quarantine gates      = 74
-CheckpointFingerprint              = 079ed349f8e253d2b86f504bc8ce20f291b11b2d6958f32fa8e4fc948ab7d579
+Durable Identity decisions         = 3130
+Identity Vocabulary Preview        = 2595
+Learner Vocabulary Preview         = 2572
+Review blockers                    = 755
+Evidence-changed surfaces          = 14
+Multipart resolved                 = 9
+Grammar-form quarantine gates      = 87
+CheckpointFingerprint              = b9fb2c1e5b7b31c24c1e666fc74982ee914eaf4476c615b40076c584378e9f21
 ```
 
 Recent validated throughput：
 
 ```text
-#370 — 18 / weight 60
-  yourselves → yourself reuse; zipper source-gloss noise corrected; cleaner narrowed to 清洁工
-#371 — 15 / weight 60
-  congratulations → Expression; helped → help + learner quarantine
-#374 — 16 / weight 60
-  oops → Expression; longest retained as superlative source-form
-  #372/#373 failed before durable apply because transient CSV quoting was malformed; #374 clean rerun passed all gates
-#375 — 18 / weight 60
-  phew / shh → Expressions; serious / rich narrowed to learner-core sense; shortest/smallest source-form
-#376 — 17 / weight 60
-  visited → visit + learner quarantine; talked kept source-form + learner quarantine; tallest source-form
+#395 — feel / market / match / mobile / movie
+  resolved pre-seal multipart overlap by reusing stable DecisionKeys and canonical senses
+  match preserved as match#game / match#stick; workflow fully passed after fail-closed #393/#394 attempts
+#396 — film / mean / meeting / none / note / officer
+  film preserved film#movie / film#photo; meeting kept as lexicalized noun; officer split police + held
+#397 — fish / opposite
+  fish fully closed as 27 noun + 7 verb occurrences; opposite narrowed to spatial learner sense
+#398 — floor / outgoing / packet / page / pancake / parade / plum / position
+  floor fully closed as 8 storey + 11 ground; outgoing treated as lexicalized adjective, not outgo morphology
+#399 — hard / past / pineapple / point
+  hard added reviewed hard#intense weather sense while preserving difficult / physical / effort; two weak hard contexts held
+  past fully closed across movement / clock / history; point preserved verb / score with one weak context held
 ```
 
 Compact decision inbox rule：human-authored `Rationale` fields are always CSV-quoted before submission。Each completed batch must pass batch closure → apply → corpus → SOURCE FREEZE → Completion Recheck → learner gate → audit recheck → Klose isolation → Stage-A seal → bot persist → independent post-seal diff/state recheck。
+
+Multipart evidence-changed re-review must reuse existing stable `DecisionKey` / `CanonicalMatchKey` names. Do not create parallel sense names for already-reviewed partitions. #393/#394 demonstrated that the corpus builder intentionally fails closed on overlap.
 
 ---
 
@@ -102,56 +105,22 @@ Compact decision inbox rule：human-authored `Rationale` fields are always CSV-q
 PlanVersion    = v5-throughput-delta
 ReviewLane     = semantic-review
 ReviewMode     = full-evidence
-SelectedCount  = 39
+SelectedCount  = 5
 EvidenceWeight = 60
 ExecutionReady = true
 
-weak
-weekday
-yeah
-yuan
-zero
-air-conditioned
-alone
-alright
-arctic
-assistant
-autograph
-ax
-bandage
-bar
-barbecue
-battle
-bay
-blink
-block
-blond
-blood
-blunt
-blush
-boss
-bottom
-branch
-bucket
-bulb
-bush
-cage
-calculate
-captain
-cardboard
-carnation
-caterpillar
-chain
-champion
-chance
-chant
+hot
+pool
+pot
+prepare
+entrance
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 47eb0a974d88e1e3b24c7c1393f529019ab633364ee157664f1a4e313e5d007c
-ReviewPacketFingerprint = 8558073565e7adef815e85209174366b56dd4f1e4a4efad083ce90b30aefa1a8
+ReviewBundleFingerprint = fbd11f670ce79f09c3e6479e67b235bacd702dc1fdb6db794a38c2b0ffb8fad1
+ReviewPacketFingerprint = 6447e6b53b4ff29cd36b1bfc84db21622c1f8e02514d2e2ebec99a5d869996ce
 ```
 
 Planner contract：`semantic-review SurfaceCap = 60`，`EvidenceWeightBudget = 60`；单批大小由 evidence weight 主导。Source mutation 与 decision mutation 不得混合。
