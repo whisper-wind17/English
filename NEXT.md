@@ -54,44 +54,47 @@ unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b1
 Klose operational mutation           = 0
 ```
 
-Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四学制 grade 6+ middle-school segment excluded；译林低年级 / 牛津小学1A–2B deferred pending edition continuity。
+Terminal source boundaries：仁爱版 grades 7–9 excluded；鲁教版五四学制 grade 6+ middle-school segment excluded；译林低年级 / 牛津小学英语1A–2B deferred pending edition continuity。
 
 ---
 
 ## 4. Current Phase-A2 machine checkpoint
 
-Latest sealed workflow：**#411 / 34407926063 = SUCCESS**
+Latest sealed workflow：**#412 / 34408360726 = SUCCESS**
 
 ```text
-sealed bot head                    = 3a5eb61359fb9be8eba0af421dc09c14559929a5
-sealed input commit                = c7dfc4a0c94893fd9ee4e508f4cad5d7fb39ded8
+sealed bot head                    = ac775cbb6d8984502094dcee5a578b6a46fe7643
+sealed input commit                = e009ba657a42411b71308c15e921e355667f4c32
 Source occurrences                 = 18887
 Normalized surfaces                = 3763
-Durable Identity decisions         = 3197
+Durable Identity decisions         = 3206
 Identity Vocabulary Preview        = 2637
 Learner Vocabulary Preview         = 2614
 Review blockers                    = 718
 Evidence-changed surfaces          = 0
 Multipart resolved                 = 15
 Grammar-form quarantine gates      = 88
-CheckpointFingerprint              = e2d6e2724052e413fe6b63519d80dcb9af3d0e0b53aef33f53230e4fa779d71e
+CheckpointFingerprint              = 528a748d1fce9ac8d5a20a4dbbfb91a1da0528b40ba5a3c3f596c509cf23d685
 ```
 
 Recent validated throughput：
 
 ```text
-#409 — throughput architecture validation
-  v6-semantic-throughput; semantic budget 120 + packet budget 300000
+#409 — v6-semantic-throughput architecture validation
+  semantic budget 120 + independent packet byte budget
 
 #410 — 12-surface semantic-review batch
   water / wave / wing / yummy / may / rock / rough / smooth / snorkel / trick / miss / like
-  EvidenceChangedSurfaces 4 → 0; ReviewBlockers 727 → 718; MultipartResolved 13 → 15
+  EvidenceChangedSurfaces 4 → 0; ReviewBlockers 727 → 718
 
 #411 — 8-surface split-resolution batch
   too / french / little / pass / flies / fan / get / line
-  SelectedCount = 8, EvidenceWeight = 119, PacketBytes = 48238
-  reviewed evidence-supported subgroups + explicit current-context held partitions
   DurableIdentityDecisions 3187 → 3197
+
+#412 — 5-surface split-resolution batch
+  kind / letter / plant / right / sound
+  14 decision rows; reviewed subgroups + explicit held partitions
+  DurableIdentityDecisions 3197 → 3206
   full Validation Gate + bot persist + independent post-seal state recheck PASS
 ```
 
@@ -105,44 +108,83 @@ Multipart re-review 必须复用已有稳定 `DecisionKey` / `CanonicalMatchKey`
 
 ```text
 PlanVersion            = v6-semantic-throughput
-ReviewLane             = split-resolution
+ReviewLane             = object-boundary
 ReviewMode             = full-evidence
-SelectedCount          = 5
-EvidenceWeight         = 81
+SelectedCount          = 40
+EvidenceWeight         = 120
 EffectiveWeightBudget  = 120
-PacketBytes            = 48883
-PacketByteBudget       = 300000
+PacketBytes            = 16917
+PacketByteBudget       = 260000
 ExecutionReady         = true
+```
 
-kind
-letter
-plant
-right
-sound
+Selected surfaces：
+
+```text
+... years old
+100-meter race
+a bar of chocolate
+a bottle of ...
+a bottle of water
+a bowl of
+a bowl of noodles
+a cup of ...
+a hope school
+a loaf of bread
+a packet of biscuits
+a packet of sweets
+a pair of gloves
+a pair of shoes
+a pair of socks
+a piece of cake
+a plate of
+a quarter
+a quarter past seven
+a quarter to ...
+a quarter to eight
+act a play
+after class
+after some time
+agree with
+alarm clock
+all day long
+all right.
+american football
+and so on
+and you?
+any more
+anything else ?
+arrive at
+art museum
+as ... as
+as big as
+as old as
+as tall as
+ask ... for help
 ```
 
 Fingerprints：
 
 ```text
-ReviewBundleFingerprint = 5858044741fe3a9934cfc43dec26fc3666f1658939d52a4a58e99d7390827a5f
-ReviewPacketFingerprint = b8a9be4cd8c53f7310d39de54b7df3e8c2b0d923ecaa7b8c929878f7b85fa580
+ReviewBundleFingerprint = d104ee455ca8ebf3b2c21e45f672e4a5b7947996c34a9223e5814eb3855fca3b
+ReviewPacketFingerprint = a67ca393e9d79983b05a6228d8fab6d3c5d399d3fb1f979c1ba982836cd5f424
 ```
 
-Execution sequence：
+Execution strategy：
 
 ```text
-read selected_review_packet.json / selected_review_view.csv
-→ establish only evidence-supported disjoint learner subgroups
-→ preserve ambiguous current-context occurrences as held
+object-boundary lane
+→ verify each selected surface is phrase/expression vs atomic vocabulary
+→ batch route true phrases/constructions to Expressions
+→ preserve any genuine lexicalized atomic unit as Vocabulary only with evidence
 → create transient review/decision_updates.csv
-→ pre-main partition/diff/scope check
-→ non-force main update
+→ deterministic selected-batch closure
 → full Stage-A Validation Gate
 → bot persist
-→ independent post-seal diff/state recheck
+→ independent post-seal state recheck
 ```
 
-Planner contract：v6 以 semantic complexity 为主预算，`WeightBudget=120`，并独立限制 `PacketByteBudget=300000`；lane-specific SurfaceCap 只作数量 guard。Source mutation 与 decision mutation 不得混合。
+Planner contract：v6 以 semantic complexity 为主预算；object-boundary 当前 `WeightBudget=120`、`PacketByteBudget=260000`。Source mutation 与 decision mutation 不得混合。
 
 ---
 
