@@ -81,7 +81,7 @@ def parse_source(path: Path, grade: int, semester: str) -> list[dict[str, str]]:
     rows = read_xlsx_rows(path)
     header_pos = next((i for i, (_, vals) in enumerate(rows[:10]) if "单词" in vals and "释义" in vals), None)
     if header_pos is None:
-        raise SystemExit(f"Cannot find vocabulary header containing 单词/释义 in {path.name}")
+        raise SystemExit(f"Cannot find vocabulary header containing 单词/释义 in {path.name}; first rows={rows[:10]!r}")
     header = rows[header_pos][1]
     word_idx = header.index("单词")
     definition_idx = header.index("释义")
