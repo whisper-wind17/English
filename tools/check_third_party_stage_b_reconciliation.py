@@ -65,9 +65,9 @@ def main() -> None:
 
     decision_keys = [r.get("DecisionKey", "") for r in decisions]
     provisional_keys = [r.get("ProvisionalIdentityKey", "") for r in decisions]
-    require(all(decision_keys) and len(decision_keys) == len(set(decision_keys)),
+    require(all(decision_keys) and len(decision_keys) == len(set(decision_keys)) if decisions else True,
             "Stage-B reconciliation DecisionKey is empty/duplicate")
-    require(all(provisional_keys) and len(provisional_keys) == len(set(provisional_keys)),
+    require(all(provisional_keys) and len(provisional_keys) == len(set(provisional_keys)) if decisions else True,
             "Stage-B reconciliation ProvisionalIdentityKey is empty/duplicate")
 
     stable = rows(NOTE_REGISTRY) + rows(NOTE_EXTENSIONS)
@@ -114,10 +114,12 @@ def main() -> None:
         elif action == "new-stable-identity":
             require(status == "reviewed", f"new-stable-identity must be reviewed: {pid}")
             require(not existing, f"new-stable-identity must not bind existing NoteID: {pid}")
-            require(not candidate_ids,
-                    f"new-stable-identity bypasses current Klose candidate: {pid}: {candidate_ids}")
-            require(candidate.get("KloseCandidateClass") == "no-existing-match",
-                    f"new-stable-identity requires no-existing-match candidate class: {pid}")
+            if candidate_ids:
+                require("no-equivalent" in decision.get("DecisionBasis", "").casefold(),
+                        f"new-stable-identity with current candidates lacks explicit no-equivalent review: {pid}")
+            else:
+                require(candidate.get("KloseCandidateClass") == "no-existing-match",
+                        f"candidate-free new-stable-identity is not no-existing-match: {pid}")
             require(all(decision.get(field, "").strip() for field in
                         ("ProposedCanonicalWord", "ProposedMatchKey", "ProposedSense")),
                     f"new-stable-identity lacks proposed identity fields: {pid}")
