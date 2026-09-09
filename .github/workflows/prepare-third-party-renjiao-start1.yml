@@ -9,6 +9,7 @@ on:
       - 'tools/prepare_third_party_beishida_start1.py'
       - 'tools/check_third_party_beishida_start1.py'
       - 'tools/prepare_third_party_beishida_start3.py'
+      - 'tools/check_third_party_beishida_start3.py'
       - 'tools/prepare_third_party_jijiao_start3.py'
       - 'tools/check_third_party_jijiao_start3.py'
       - 'tools/prepare_third_party_renjiao_start1.py'
@@ -132,6 +133,9 @@ jobs:
       - name: Parse Beishida start3 source adapter
         if: steps.scope.outputs.source_changed == 'true'
         run: python tools/prepare_third_party_beishida_start3.py
+
+      - name: Validate Beishida start3 source adapter
+        run: python tools/check_third_party_beishida_start3.py
 
       - name: Parse Jijiao start3 source adapter
         if: steps.scope.outputs.source_changed == 'true'
