@@ -20,6 +20,7 @@ docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
 → docs/THIRD_PARTY_VOCABULARY_REVIEW_POLICY.md
 → docs/SOURCE_RECONCILIATION.md
 → docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
+→ anki/klose/third_party_vocabulary/config/source_freeze.json
 → anki/klose/third_party_vocabulary/audit/stage_a_status.json
 → anki/klose/third_party_vocabulary/audit/next_batch.json
 → anki/klose/third_party_vocabulary/premerge/readiness.json
@@ -29,25 +30,23 @@ docs/THIRD_PARTY_SOURCE_FIRST_EXECUTION.md
 
 ---
 
-## 2. Current phase — Phase A1 Source Adapter Bulk Ingestion
+## 2. Current phase — Phase A2 Global Identity Closure
 
 冻结执行顺序：
 
 ```text
-Phase A1 — Source Adapter Bulk Ingestion
-→ SOURCE FREEZE
-→ Phase A2 — Global Identity Closure
+Phase A1 — Source Adapter Bulk Ingestion       = CLOSED
+→ SOURCE FREEZE                               = ESTABLISHED
+→ Phase A2 — Global Identity Closure           = CURRENT
 → final Stage-A seal
 → Stage B / Klose reconciliation
 ```
 
-**当前不要处理 Identity review batch，包括 `program / programme`。**
-
-Phase A1 允许新增 source evidence 持续扩大 pending / evidence-changed / multipart / object-boundary 队列；只有 parser/source mapping 错误才是 Source blocker。
+Phase A2 现在可以处理 Identity review；但 **SOURCE FREEZE 后不得静默修改 source_adapters、adapter occurrences 或 raw-source interpretation**。任何确有必要的 Source 修正都必须显式 reopen Source Freeze，重新通过 Source gate 后再回到 A2。
 
 ---
 
-## 3. Existing enabled Adapter baseline — 19 CLOSED
+## 3. SOURCE FREEZE — 20 adapters / CLOSED
 
 ```text
 beijing_start1          =  808 occurrences /  734 MatchKeys / 12 books
@@ -60,6 +59,7 @@ hujiao_start3           = 1111 occurrences / 1067 MatchKeys /  8 books
 jiaoke_eec_start3       = 1093 occurrences / 1033 MatchKeys /  8 books
 jijiao_start3           =  605 occurrences /  510 MatchKeys /  8 books
 kepu_start3             =  772 occurrences /  771 MatchKeys /  8 books
+luke_54_start3          =  714 occurrences /  681 MatchKeys /  6 books
 minjiao_start3          =  772 occurrences /  732 MatchKeys /  8 books
 niujin_shanghai_start1  = 1186 occurrences /  974 MatchKeys / 12 books
 renjiao_start1          =  908 occurrences /  802 MatchKeys / 12 books
@@ -70,129 +70,159 @@ waiyan_start3           = 1157 occurrences / 1023 MatchKeys /  8 books
 xiangshao_start3        =  698 occurrences /  674 MatchKeys /  8 books
 yilin_start3            = 1036 occurrences /  998 MatchKeys /  8 books
 ---------------------------------------------------------------------
-Total                   = 18173 source occurrences / 172 books
+Total                   = 18887 source occurrences / 178 books
 ```
 
-Latest completed adapter: `shaanxi_start3`.
+Final adapter `luke_54_start3`:
 
 ```text
-8 raw books / 917 occurrences / 880 MatchKeys
-raw schema                            = headerless A=Word / B=Definition (8/8 books)
-British / American source columns     = absent; adapter fields must remain blank
-blank Definition source facts         = 1
-parser                                = PASS
-dedicated edition checker             = PASS
-all dedicated source checkers         = 19 PASS
-global adapter closure                = PASS
-Corpus Completion Recheck             = PASS
-Learner quarantine check              = PASS
-Audit-batch Recheck                   = PASS
-Klose isolation                       = PASS
-Stage-A seal                          = PASS
-Workflow #347 / 34303021054           = SUCCESS
-CheckpointFingerprint                 = 531247b6164729759253f4697dfc2dc40115e1170b801f859619ba615e0f2e7e
+6 raw books / 714 occurrences / 681 MatchKeys
+raw schema                            = headerless A=Word / B=Definition (6/6)
+British / American source columns     = absent
+blank Definition source facts         = 2
+grade-6-plus leakage                  = 0
+parser / dedicated checker            = PASS
 ```
 
-Edition-specific blank `Definition` source facts currently total 11: `cambridge_join_start3=1`, `guangzhou_start3=1`, `minjiao_start3=1`, `shaanxi_start3=1`, `waiyan_start1=2`, `waiyan_start3=2`, `yilin_start3=3`. These are frozen Source Facts and must not be normalized away manually.
+Edition-specific blank `Definition` source facts total **13**:
+
+```text
+cambridge_join_start3=1
+guangzhou_start3=1
+luke_54_start3=2
+minjiao_start3=1
+shaanxi_start3=1
+waiyan_start1=2
+waiyan_start3=2
+yilin_start3=3
+```
+
+这些是冻结 Source Facts，不得手工补写或归一化掉。
 
 ---
 
-## 4. Remaining raw-source inventory before SOURCE FREEZE
+## 4. SOURCE FREEZE machine contract
 
 ```text
-luke_54_start3          # 鲁科版五四学制，小学 3–5，上下册，共 6 册；五年制小学边界
+contract = anki/klose/third_party_vocabulary/config/source_freeze.json
+checker  = tools/check_third_party_source_freeze.py
+CI step  = Enforce Third-party SOURCE FREEZE
 ```
 
-明确不进入当前小学 corpus：
+Frozen invariants：
 
 ```text
-仁爱版   # raw source 仅七/八/九年级
-鲁教版   # 五四学制六–九年级；六年级起属于该学制初中段
+planned enabled adapters             = exactly 20
+source occurrences                   = 18887
+source books                         = 178
+blank Definition facts               = 13
+all adapters dedicated prepare/check = yes
+cross-adapter occurrence collision   = 0
+source_adapters.csv SHA-256           = fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272
+unified occurrences SHA-256           = b025cb4f69b030da3664ab9b1bdd8500cb0166b122392b282a4293567702a7d4
+Klose mutation                       = 0 (independent workflow git-diff gate)
 ```
 
-译林版另有一年级/二年级及 `牛津小学英语1A/1B/2A/2B`，但没有与其明确同一 edition/revision 的 3–6 连续命名序列。**不得与 `译林版三年级起点` 静默拼成 start1 adapter**；如未来需要，先做 edition/source reconciliation。
-
----
-
-## 5. NEXT TASK — add `luke_54_start3`
-
-只接入鲁科版五四学制小学段明确命名的 6 册：
+Terminal scope boundaries are recorded in the contract:
 
 ```text
-鲁科版五四学制三年级上册 / 下册
-鲁科版五四学制四年级上册 / 下册
-鲁科版五四学制五年级上册 / 下册
+仁爱版                     = excluded; only grades 7-9
+鲁教版五四学制             = excluded; grade 6+ is middle-school segment
+译林低年级 / 牛津小学1A-2B = deferred; edition continuity with start3 not established
 ```
 
-五四学制小学止于五年级；六年级及以上不得进入该小学 adapter。
-
-Per-Adapter Definition of Done：
+Validation evidence：
 
 ```text
-1. dedicated parser
-2. dedicated edition-specific checker
-3. books / occurrences / MatchKeys baseline frozen from raw XLSX
-4. standard occurrence schema
-5. SourceOccurrenceKey adapter 内唯一 + cross-adapter no collision
-6. SourceID / Grade / Semester / SourceBook / SourceFile / SourceRow 正确
-7. source_adapters.csv enable
-8. global adapter closure PASS
-9. corpus rebuild + Completion Recheck PASS
-10. existing Source Fact no unexpected drift
-11. Klose Master/Learner/Release/Publish/Anki unchanged
+Final source-union workflow #351 / 34303418551 = SUCCESS
+SOURCE FREEZE CI workflow #353 / 34303742198   = SUCCESS
+Stage-A CheckpointFingerprint                  = fe96f22917626ef0ade57f0e92426ddf6d82dc703dab062649338316f555fe17
 ```
 
 ---
 
-## 6. Current Identity state — carry forward, DO NOT close yet
+## 5. Current Phase-A2 Identity state
+
+Authoritative machine state:
 
 ```text
-Source occurrences                 = 18173
-Normalized surfaces                = 3733
+Source occurrences                 = 18887
+Normalized surfaces                = 3763
 Durable Identity decisions         = 2411
 Identity Vocabulary Preview        = 1966
 Learner Vocabulary Preview         = 1953
-Review blockers                    = 1427
+Review blockers                    = 1457
 Evidence-changed surfaces          = 41
 Multipart resolved                 = 0
 Grammar-form quarantine gates      = 61
 ```
 
-这些变化来自新增 Source evidence；Phase A1 暂不处理 Identity review，也不处理 `program / programme`。
+这些 blocker 是最终 frozen source evidence 上的 Identity-layer 工作，不再因后续 Adapter 接入继续 churn。
+
+Minimal Learner Identity 规则继续生效：
+
+```text
+reviewed singleton + additive same-MatchKey evidence
+→ refresh provenance only; no semantic re-review
+
+true learner-relevant polysemy
+→ multipart exact occurrence partition
+
+Identity resolved
+≠ Learner Admission
+```
 
 ---
 
-## 7. SOURCE FREEZE gate
+## 6. NEXT TASK — execute Phase A2 review batch
 
-所有计划第三方小学教材 Adapter 完成前：
-
-```text
-DO NOT declare final Stage-A completion.
-DO NOT require NextBatch=0 as Phase-A1 exit condition.
-DO NOT begin final Identity closure.
-DO NOT begin Stage-B reconciliation.
-DO NOT mint Stable ThirdPartyID / NoteID.
-DO NOT modify Klose Master/Learner/Release/Publish/Anki.
-```
-
-所有计划 Adapter 完成后，先建立 SOURCE FREEZE：
+Current deterministic batch：
 
 ```text
-all planned adapters terminal
-source union deterministic
-all enabled adapters have dedicated prepare/check
-cross-adapter occurrence collision = 0
-unexpected Source Fact drift = 0
-Klose mutation = 0
+PlanVersion    = v5-throughput-delta
+ReviewLane     = policy-review
+ReviewMode     = full-evidence
+SelectedCount  = 13
+ExecutionReady = true
+
+heard
+eggs
+flowers
+relatives
+fruits
+left
+1st
+can i ...?
+cd player
+cd-rom
+dr
+ha
+hmm
 ```
 
-随后才进入 Phase A2。
+Batch execution contract：
+
+```text
+next_batch.json
+→ selected-only review packet/view
+→ decision_updates.csv
+→ planner selected set == submitted MatchKey set
+→ apply
+→ corpus build/check
+→ SOURCE FREEZE check
+→ learner build/check
+→ audit recheck
+→ Klose isolation
+→ bot persist
+```
+
+Source mutation 与 decision mutation 不得混合。
 
 ---
 
-## 8. Phase A2 — Global Identity Closure
+## 7. Phase A2 completion target
 
-SOURCE FREEZE 后一次性完成：
+按最终 frozen corpus 统一完成：
 
 ```text
 morphology / form canonicalization
@@ -201,19 +231,23 @@ morphology / form canonicalization
 → Vocabulary / Expression / source-only boundary
 → learner-relevant polysemy partition
 → evidence-changed re-review
-→ audited-defer refresh / retirement
+→ audited-defer retirement / refresh
 → targeted duplicate audits
 → learner quarantine check
 → Completion Recheck
-→ NextBatch = 0
+→ EvidenceChangedSurfaces = 0
+→ NextBatch SelectedCount = 0
+→ ExecutionReady = false
 → final Stage-A seal
 ```
 
+允许最终保留的 residual blocker 只能是 current-context `audited-defer`；不得为追求 blocker=0 猜 sense partition 或扩大 dictionary sense inventory。
+
 ---
 
-## 9. Stage-B state — OLD SNAPSHOT, GATED
+## 8. Stage-B state — OLD SNAPSHOT, GATED
 
-`premerge/readiness.json` 仍是旧的 7535-occurrence snapshot，不是当前 Phase-A1 authority。
+`premerge/readiness.json` 仍是旧的 7535-occurrence snapshot，不是当前 authority。
 
 ```text
 ReadyForPremergeReview     = false
@@ -222,11 +256,11 @@ StableThirdPartyIDMinted   = false
 MergeAuthorizedRows        = 0
 ```
 
-SOURCE FREEZE + Phase A2 final closure 前，不刷新或解释该旧 snapshot 为当前 readiness。
+只有 Phase A2 完成、final Stage-A seal 验证后，才能刷新 Stage-B premerge snapshot。
 
 ---
 
-## 10. Frozen boundaries
+## 9. Frozen boundaries
 
 ```text
 Source Fact ≠ Vocabulary Identity ≠ Learner Admission ≠ Anki state
@@ -237,6 +271,7 @@ reconciliation != merge authorization
 ```
 
 - actual textbook evidence > third-party dictionary gloss；
+- Stage A 不 mint Stable ThirdPartyID / NoteID；
 - Stable NoteID 不得重编号、复用或漂移；
 - Stage A / reconciliation workflow 不得修改 Klose Master/Learner/Release/Publish/Anki；
 - reconciliation closure + independent Completion Recheck + explicit human gate 前不得 mint Stable NoteID。
