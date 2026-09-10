@@ -4,148 +4,179 @@ Last updated: 2026-09-10
 
 ## 1. Current task
 
-当前主任务：**Grade 5 Lower / Grade 6 Lower revised-textbook source blocker resolution**。
+当前主任务：**完成 Grade 5–6 current Vocabulary 的正式 Release，并生成可导入 Anki 的最终 Vocabulary artifact。**
 
 启动顺序：
 
 ```text
 AGENTS.md
 → NEXT.md
+→ docs/KLOSE_VOCABULARY_SYSTEM.md
+→ docs/LEARNER_REVIEW_REGISTRY.md
 → docs/GRADE5_6_ACTUAL_TEXTBOOK_INTAKE.md
 → docs/SOURCE_RECONCILIATION.md
-→ docs/KLOSE_VOCABULARY_SYSTEM.md / docs/EXPRESSIONS_SYSTEM.md
-→ anki/klose/source_reference/grade5_6_source_provenance.json
-→ anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv
-→ anki/klose/review/grade5_6_reconciliation/ durable reconciliation truth
+→ anki/klose/learner/grade5_6_learning_scope.json
+→ anki/klose/master/build_stats.csv
+→ anki/klose/master/release_registry*.csv
+→ tools/check_klose_release_ready.py
 ```
 
-## 2. Current state
+## 2. Decision reconciliation
+
+Grade 5–6 Source provenance 与 Klose Learning Scope 必须分开理解。
+
+Source provenance 仍保持：
 
 ```text
-Grade 5–6 actual-textbook Source materialization     = CLOSED / VALIDATED
-Vocabulary source occurrences                        = 509
-Useful Expressions source occurrences                = 153
-Grade 5 Lower Proverbs                               = 6
-Morphology source occurrences                        = 58
-
-Grade 5–6 SourceID provenance                        = CLOSED / VALIDATED / CHECKPOINTED
-Canonical SourceID                                   = renjiao_start3
-SourceIdentityPending                                = false
-Source provenance rows                               = 726
-Source provenance fingerprint                        = 5e4a90e6d8d46769c71ded160ea2310f5e655a8de926a96724366e975d621df4
-
-Book-level SourceEdition:
-  Grade 5 Upper                                      = 2024-revision / verified-current-revision
-  Grade 5 Lower                                      = pre-2024-revision / allocation-held
-  Grade 6 Upper                                      = 2024-revision / verified-current-revision
-  Grade 6 Lower                                      = pre-2024-revision / allocation-held
-
-Grade 5–6 Vocabulary reconciliation                  = CLOSED / VALIDATED / CHECKPOINTED
-  provisional learning units                         = 504
-  reuse-existing                                     = 148
-  new-stable-identity proposals                      = 301 rows / 293 future identity groups
-  morphology-only                                    = 45
-  held                                               = 10
-  pending review                                     = 0
-  stale decisions after provenance resolution        = 0
-  Stable NoteID allocation                           = 0
-
-Grade 5–6 Expressions reconciliation                 = CLOSED / VALIDATED / CHECKPOINTED
-  source occurrences reviewed                        = 153 / 153
-  mapped                                             = 138
-  source-only                                        = 15
-  existing Stable KE groups reused                   = 8
-  new-stable-identity proposal groups                = 110
-  pending review                                     = 0
-  stale decisions after provenance resolution        = 0
-  Stable ExpressionID allocation                     = 0
-
-StableIDAllocationAllowed                            = false
-Klose Publish / Anki update                          = NOT STARTED
+Grade 5 Upper  = 2024-revision / verified-current-revision
+Grade 5 Lower  = pre-2024-revision / verified-legacy-source-current-revision-mismatch
+Grade 6 Upper  = 2024-revision / verified-current-revision
+Grade 6 Lower  = pre-2024-revision / verified-legacy-source-hold-for-klose-future-edition
 ```
 
-`2024-revision` / `pre-2024-revision` 表示 revision lineage，不表示具体物理印刷年份。
+这些状态继续作为 Source Fact / audit truth，不得静默改写或删除。
 
-Grade 3–4 既有 `rj_start1 / klose-current` 保持 historical legacy alias；当前不原地改写其 stable source mapping，统一命名若未来需要必须单独做 source-identity migration。
-
-## 3. Provenance blockers
-
-当前两个 blocker 都已结构化进入 Source provenance state：
+但在旧 provenance checkpoint 之后，用户已显式接受四册 captured Grade 5–6 vocabulary 作为 Klose 当前学习范围：
 
 ```text
-Grade 5 Lower:
-  captured source = pre-2024 revision
-  current revised PEP lower volume differs from captured source
-  → preserve captured source, but do not allocate Stable IDs from it
-
-Grade 6 Lower:
-  captured source = pre-2024 revision
-  Klose future revised lower-volume source is not yet confirmed
-  → preserve captured source, allocation held
+anki/klose/learner/grade5_6_learning_scope.json
+DecisionBasis                         = explicit-user-current-learning-scope
+ScopeStatus                           = accepted
+SourceProvenanceAffectsLearningAdmission = false
+StableIdentityAllocationAuthorized    = true
+Books                                 = 5上 / 5下 / 6上 / 6下 all Accepted
+origin commit                         = 86610816dfe0d2658d0d16acd102e61b458a67c5
 ```
 
-因此 provenance identity 已经解决，但 **Grade 5–6 全集的 Stable-ID allocation gate 尚未打开**。
+因此旧 NEXT 中“5下/6下 provenance blocker 阻止 Learning Admission / Stable allocation”的策略已被后续显式学习范围决策覆盖。SourceEdition 仍是真实来源属性，但不再作为这个已接受 learning scope 的 admission blocker。
+
+## 3. Vocabulary current state
+
+```text
+Grade 5–6 source occurrences                        = 509
+reconciled provisional learning units               = 504
+mapped lexical source occurrences                   = 454
+morphology-only / held occurrences                  = 45 / 10
+
+Stable Vocabulary registry                          = 1189 active Notes
+Grade 5–6 current new Stable Notes                  = 288
+Grade 5–6 current reused Stable Notes               = 144
+Grade 5–6 current unique Notes                      = 432
+
+Klose LearnerLevel                                  = 4
+Learning Admission allowed                         = 627
+Learning Admission held                            = 345
+allowed but unreleased                              = 334
+LearningOrder count / max                          = 627 / 627
+
+existing released Notes                             = 638
+learner review scope (released ∪ allowed)           = 972
+model-reviewed                                      = 972
+human-reviewed                                      = 0
+pending                                             = 0
+```
+
+Grade 5–6 new learner presentation / lexical facts 已完成；288 个新 Notes 已进行全量 model semantic review。审校中发现并修正 `grandparent / then / judge / run / off` 五条 learner presentation 问题，修正后通过完整 Vocabulary Build、Grade 5–6 current merge checker 与 learner-content gate。
+
+正式 review approval 已完成：
+
+```text
+approval manifest = anki/klose/learner/review_approvals/grade5-6-current-v1-model-reviewed.csv
+approval status   = model-reviewed
+review scope      = 972
+pending           = 0
+approval merge    = 4e74a910951fd4ed1fe8fc158eeb0632e8145f2c
+post-merge rebuild= 4d403d174867888872204da3f710dcdf43aaf973
+```
+
+`Build Valid` / `Content Releasable` 已验证；**334 个 current allowed-but-unreleased Notes 尚未写入 Release registry，因此完整 Grade 5–6 current Vocabulary Release 仍未完成。**
 
 ## 4. Validation evidence
 
+最近关键验证：
+
 ```text
-provenance resolver initial run       = 34458225677 / PASS
-provenance sanitation run             = 34458793594 / PASS
-Vocabulary reconciliation rebind      = 34458460099 / PASS
-Expression reconciliation rebind      = 34458480619 / PASS
-final integrated completion           = 34458855247 / PASS
-final actual-source gate              = 34458855268 / PASS
+PR #10  pre-release learner guardrails              = PASS / merged
+PR #11  semantic review fixes                       = PASS / merged
+PR #12  343 pending review approval                 = PASS / merged
+main Build after approval                           = 34488523042 / PASS
+Grade 5–6 Reconciliation Completion after approval = 34488523006 / PASS
 
-independent Vocabulary result:
-  candidates=504, decisions=504, pending=0, stale=0
-  stable_registry=901, stable_id_allocation=0
-
-independent Expressions result:
-  source=153, decisions=153, mapped=138, source_only=15, stale=0
-  new_groups=110, reused_stable_groups=8
-  stable_registry=66, stable_id_allocation=0
+current durable review state:
+  learner_review_registry_current = 972
+  learner_model_reviewed_current  = 972
+  learner_review_pending_current  = 0
 ```
 
-Source provenance 与 semantic CandidateFingerprint 已分离：provenance change 会独立生成 `SourceProvenanceFingerprint` 并进入 completion gate，不会把单纯 provenance 修正误判为 target-sense / communicative-function 变化。
-
-本轮最终 diff scope 已独立确认：只修改 Source、Grade 5–6 reconciliation status、相关 tools/workflows/docs；未修改 Klose Master / Learner / Release / Publish / Anki state。
+当前 `tools/check_klose_grade5_6_current_merge.py` 与 `grade5_6_learning_scope.json` 一致：Source provenance 是 audit metadata，不作为已显式接受 learning scope 的 Learning Admission gate。
 
 ## 5. Immediate next work
 
 ```text
-1. Resolve Grade 5 Lower revised actual-textbook evidence
-   - do not silently replace the captured legacy source
-   - materialize revised source as a distinct revision lineage
-   - reconcile only the affected Grade 5 Lower source/candidates
+1. Derive exact Vocabulary release delta
+   target = Learning Admission allowed ∩ unreleased
+   expected = 334 Notes
+   - derive from durable registries; do not hard-code identity guesses
+   - require current fingerprint approval for every target Note
+   - preserve all existing ReleaseOrder / NoteID history
 
-2. Keep Grade 6 Lower legacy source held
-   - wait for reliable evidence of the actual revised lower volume Klose will use
-   - do not mint Stable IDs from the current legacy capture
+2. Execute scoped Release allocation
+   - append only the missing allowed Notes to release_registry_extensions.csv
+   - never duplicate/reorder the existing 638 released Notes
+   - use a guarded durable tool/checker rather than hand-edit generated publish files
+   - no Source / Identity mutation
 
-3. After lower-volume source scope is closed
-   - recompute provenance fingerprint
-   - re-run Vocabulary / Expressions reconciliation closure
-   - confirm stale=0
-   - then design/execute Stable NoteID / ExpressionID allocation gate
+3. Validate and merge
+   - full Vocabulary Build
+   - persistent-state check
+   - Grade 5–6 current merge checker
+   - release-ready checker
+   - diff-scope / release-order regression
+
+4. After main rebuild
+   - expect released universe = 972 only if checker-derived delta confirms 334
+   - verify study.csv / anki-import.csv are generated from Release truth
+   - perform Anki preflight; Anki itself remains unchanged until explicit import/sync action
+
+5. Only after Vocabulary Release is CHECKPOINTED
+   - continue Grade 5–6 Expressions as an independent identity/release lane
 ```
 
-下一阶段仍不是 Publish / Anki 更新。
-
 ## 6. Mutation boundary
+
+当前允许：
+
+```text
+Vocabulary Release registry extension for checker-derived allowed ∩ unreleased Notes
+Release tooling/checker changes needed for this transition
+regenerated derived Master/Learner/Publish produced by the normal Build
+NEXT.md checkpoints
+```
 
 当前禁止：
 
 ```text
+manual edit of generated publish files
+renumber/reuse of Stable NoteIDs
+rewriting existing 638 ReleaseOrder/history
+silent deletion/rewrite of Grade 5 Lower / Grade 6 Lower provenance evidence
 third-party merge/allocation
-Stable ID allocation from Grade 5 Lower / Grade 6 Lower legacy captured source
-silent overwrite/delete of legacy source evidence
-Klose Learner / Release mutation
-publish regeneration for Grade 5–6
-Anki update
+ExpressionID allocation mixed into the Vocabulary release change
+claiming Anki Updated before an actual Anki import/sync occurs
 ```
 
-已确认的 Grade 5 Upper / Grade 6 Upper provenance 可继续作为未来 allocation input，但在全集 allocation gate 设计完成前仍不单独 mint Stable IDs。
+## 7. Expressions / third-party hold
 
-## 7. Third-party corpus — hold
+Grade 5–6 Expressions reconciliation remains independently CLOSED / VALIDATED / CHECKPOINTED:
+
+```text
+source occurrences reviewed              = 153 / 153
+mapped                                   = 138
+source-only                              = 15
+existing Stable KE groups reused         = 8
+new stable proposal groups               = 110
+pending / stale                          = 0 / 0
+Stable ExpressionID allocation           = not yet executed in current release lane
+```
 
 第三方词库继续独立冻结：Stage A/B CLOSED，`2820` Vocabulary identities / `2794` learner candidates；实际 merge/allocation 未启动，显式 content exclusion 仍仅 `a / an / the`。详细历史见 `docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md`。
