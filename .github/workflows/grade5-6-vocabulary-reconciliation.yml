@@ -7,6 +7,9 @@ on:
       - 'tools/build_grade5_6_vocabulary_reconciliation.py'
       - 'tools/apply_grade5_6_vocabulary_review.py'
       - 'tools/prepare_grade5_6_vocabulary_review.py'
+      - 'tools/grade5_6_source_state.py'
+      - 'tools/sync_grade5_6_reconciliation_provenance.py'
+      - 'anki/klose/source_reference/grade5_6_source_provenance.json'
       - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
       - 'anki/klose/master/note_registry.csv'
@@ -43,6 +46,8 @@ jobs:
         run: python tools/apply_grade5_6_vocabulary_review.py
       - name: Seed deterministic decisions and next batch
         run: python tools/prepare_grade5_6_vocabulary_review.py
+      - name: Bind reconciliation status to current Source provenance
+        run: python tools/sync_grade5_6_reconciliation_provenance.py vocabulary
       - name: Verify Stable Klose state
         env:
           KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
