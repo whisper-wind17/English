@@ -1,0 +1,57 @@
+name: Grade 5-6 Reconciliation Completion
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/check_grade5_6_vocabulary_reconciliation_completion.py'
+      - 'tools/check_grade5_6_expression_reconciliation_completion.py'
+      - 'tools/check_klose_persistent_state.py'
+      - 'tools/check_klose_expression_persistent_state.py'
+      - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_source_candidates.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_source_decisions.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_identity_groups.csv'
+      - 'anki/klose/master/**'
+      - 'anki/klose/expressions/master/**'
+      - '.github/workflows/grade5-6-reconciliation-completion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  completion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          sparse-checkout: |
+            tools
+            anki/klose/source_reference
+            anki/klose/master
+            anki/klose/expressions/master
+            anki/klose/review/grade5_6_reconciliation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independent Vocabulary reconciliation recheck
+        run: python tools/check_grade5_6_vocabulary_reconciliation_completion.py
+      - name: Independent Expression reconciliation recheck
+        run: python tools/check_grade5_6_expression_reconciliation_completion.py
+      - name: Verify Stable Vocabulary persistent state
+        env:
+          KLOSE_BASE_COMMIT: HEAD^
+        run: python tools/check_klose_persistent_state.py
+      - name: Verify Stable Expression persistent state
+        env:
+          KLOSE_BASE_COMMIT: HEAD^
+        run: python tools/check_klose_expression_persistent_state.py
