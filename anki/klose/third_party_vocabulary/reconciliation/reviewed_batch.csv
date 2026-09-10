@@ -1,6 +1,0 @@
-ProvisionalIdentityKey,Action,ExistingNoteID,ProposedCanonicalWord,ProposedMatchKey,ProposedSense,Confidence,DecisionBasis,Rationale
-candidate:can,reuse-existing,KV000074,,,,high,explicit-semantic-equivalence,第三方目标义为能会可以，与 KV000074 完全对应；KV000885 为金属罐义，不属于同一 learning unit。
-candidate:free,reuse-existing,KV000502,,,,high,explicit-semantic-equivalence,第三方目标义为空闲有空，与 KV000502 对应；KV000876 为免费义，应保持分离。
-candidate:milk,reuse-existing,KV000088,,,,high,explicit-semantic-equivalence,第三方目标义为牛奶名词，与 KV000088 对应；KV000890 为挤奶动词义。
-candidate:over,new-stable-identity,,over,over,在……上方；在……上面,high,explicit-no-equivalent-homograph-review,现有两个 Klose over 分别为对面远端和结束义，均不等价于第三方空间上方义；仅提出未来独立 identity，不分配 NoteID。
-candidate:speak,held,,,,,medium,multiple-overlapping-existing-senses,第三方义同时覆盖说讲语言和一般说话发言，横跨两个现有 Klose identity；当前不安全选择单一 NoteID，保持 held。

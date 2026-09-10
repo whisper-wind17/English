@@ -2,29 +2,28 @@
   "PlanVersion": "stage-b-reconciliation-v2",
   "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
   "CandidateCount": 2820,
-  "ValidDurableDecisionCount": 0,
-  "ReviewQueueCount": 2820,
+  "ValidDurableDecisionCount": 5,
+  "ReviewQueueCount": 2815,
   "LaneCounts": {
-    "exact-multiple": 5,
     "exact-single-exact-sense": 416,
     "exact-single-semantic-review": 360,
     "learner-excluded": 26,
     "no-existing-match": 2008,
     "variant-single": 5
   },
-  "ReviewLane": "exact-multiple",
-  "BatchCap": 20,
+  "ReviewLane": "variant-single",
+  "BatchCap": 40,
   "SelectedCount": 5,
   "SelectedProvisionalIdentityKeys": [
-    "candidate:can",
-    "candidate:free",
-    "candidate:milk",
-    "candidate:over",
-    "candidate:speak"
+    "candidate:ice cream",
+    "candidate:pencil-box",
+    "candidate:school bag",
+    "candidate:stomach ache",
+    "candidate:theater"
   ],
   "ExecutionReady": true,
   "AutoExecutable": false,
   "MutationAuthorized": false,
-  "ReviewQueueFingerprint": "6bd7fd334b61c019504f755910c29687e3b4df6cfd16811e73fec5c1ebcc9b7f",
-  "SelectedViewFingerprint": "2b68ef254c05b254577230a0ee9d3cf2327d0701d74c74612c5d8505ef540f75"
+  "ReviewQueueFingerprint": "6641192759b3026fa995abe8be4d46d0e54592b24eb07d79b613606632cb22ab",
+  "SelectedViewFingerprint": "19db9e6b44dfbb8a938403a14f7f894cc6f662559b036c6f9bd09486c3c3d997"
 }
