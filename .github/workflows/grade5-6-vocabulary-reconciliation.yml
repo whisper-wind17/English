@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/build_grade5_6_vocabulary_reconciliation.py'
+      - 'tools/prepare_grade5_6_vocabulary_review.py'
       - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
       - 'anki/klose/master/note_registry.csv'
@@ -31,6 +32,8 @@ jobs:
           python-version: '3.12'
       - name: Build review candidates
         run: python tools/build_grade5_6_vocabulary_reconciliation.py
+      - name: Seed deterministic decisions and next batch
+        run: python tools/prepare_grade5_6_vocabulary_review.py
       - name: Verify Stable Klose state
         env:
           KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
@@ -44,16 +47,16 @@ jobs:
             echo "$bad"
             exit 1
           fi
-      - name: Persist derived review plan
+      - name: Persist derived review state
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add anki/klose/review/grade5_6_reconciliation
           if git diff --cached --quiet; then
-            echo 'No reconciliation plan changes.'
+            echo 'No reconciliation review changes.'
             exit 0
           fi
-          git commit -m 'data: build Grade 5-6 vocabulary reconciliation plan'
+          git commit -m 'data: refresh Grade 5-6 vocabulary reconciliation review'
           git pull --rebase origin main
           git push origin HEAD:main
