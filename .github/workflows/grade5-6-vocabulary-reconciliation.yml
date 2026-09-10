@@ -28,10 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # event.before is the immediately preceding user/bot-visible checkpoint;
-          # two commits are sufficient for the persistent-state baseline check and
-          # avoid fetching the repository's full review history on every 50-row batch.
           fetch-depth: 2
+          sparse-checkout: |
+            tools
+            anki/klose/source_reference
+            anki/klose/master
+            anki/klose/review/grade5_6_reconciliation
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
