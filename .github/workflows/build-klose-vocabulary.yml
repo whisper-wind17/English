@@ -148,6 +148,14 @@ jobs:
             echo 'No upstream review-state changes.'
           else
             git commit -m 'data: persist Klose build-valid review state'
+            remaining="$(git diff --name-only)"
+            bad="$(printf '%s\n' "$remaining" | grep -v '^anki/klose/publish/' || true)"
+            if [ -n "$bad" ]; then
+              echo 'Unexpected unstaged mutation after upstream-state commit:'
+              echo "$bad"
+              exit 1
+            fi
+            git restore --worktree anki/klose/publish
             git pull --rebase origin main
             git push
           fi
