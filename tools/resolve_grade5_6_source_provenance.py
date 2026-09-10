@@ -55,6 +55,11 @@ def add_status(status: str, marker: str) -> str:
     return ";".join(parts)
 
 
+def clean_manifest_notes(notes: str) -> list[str]:
+    stale = {"source identity pending confirmation", "source identity pending-confirmation"}
+    return [p.strip() for p in (notes or "").split(";") if p.strip() and p.strip().casefold() not in stale]
+
+
 def resolve_source_file(path: Path, config: dict) -> tuple[int, int]:
     fields, rows = read_csv(path)
     if not rows:
@@ -118,10 +123,11 @@ def resolve_manifest(config: dict) -> tuple[int, int]:
                 if book["StableIDAllocationEligible"]
                 else "materialized-source-provenance-resolved-held"
             )
-            prior = row.get("Notes", "").strip()
+            parts = clean_manifest_notes(row.get("Notes", ""))
             marker = f"provenance={book['ProvenanceStatus']}"
-            if marker not in prior:
-                row["Notes"] = (prior + "; " + marker).strip("; ")
+            if marker not in parts:
+                parts.append(marker)
+            row["Notes"] = "; ".join(parts)
         if row != old:
             changed += 1
     write_csv(MANIFEST, fields, rows)
