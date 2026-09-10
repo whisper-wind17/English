@@ -1,0 +1,32 @@
+name: Check Grade 5-6 Learner Content
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/check_grade5_6_new_learner_content.py'
+      - 'anki/klose/master/note_registry_extensions.csv'
+      - 'anki/klose/learner/grade5_6_content_batch_*.csv'
+      - 'anki/人教版一年级起点/master/vocabulary_master.csv'
+      - '.github/workflows/check-grade5-6-learner-content.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            anki/klose/master
+            anki/klose/learner
+            anki/人教版一年级起点/master
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Grade 5-6 learner content
+        run: python tools/check_grade5_6_new_learner_content.py
