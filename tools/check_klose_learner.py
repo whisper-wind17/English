@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Flag learner examples that use explicitly later auxiliary vocabulary.
 
-Source Grade is only a difficulty signal; it is not LearnerLevel. The target Note's
-own lexical item is excluded from the auxiliary-vocabulary check so a Grade-5/6
-source word can still be learned with LearnerLevel=4 presentation.
+The review scope is the union of released Notes and explicitly admitted current
+Notes, so learner difficulty is checked before release as well as after release.
+Source Grade is only a difficulty signal; it is not LearnerLevel. The target
+Note's own lexical item is excluded from the auxiliary-vocabulary check so a
+Grade-5/6 source word can still be learned with LearnerLevel=4 presentation.
 """
 from __future__ import annotations
 
@@ -16,6 +18,7 @@ BASE = ROOT / "anki" / "klose"
 MASTER = BASE / "master" / "vocabulary_master.csv"
 OCCURRENCES = BASE / "master" / "source_occurrences.csv"
 LEARNER = BASE / "learner" / "current.csv"
+ADMISSION = BASE / "learner" / "learning_admission.csv"
 REPORT = BASE / "review" / "future_vocab_review.csv"
 SOURCE_ID = "rj_start1"
 
@@ -86,7 +89,22 @@ def main() -> None:
     master = read_csv(MASTER)
     occ = read_csv(OCCURRENCES)
     learner = read_csv(LEARNER)
+    admission = read_csv(ADMISSION)
     learner_by_id = {r["NoteID"]: r for r in learner}
+    master_ids = {r["NoteID"] for r in master}
+
+    released_ids = {r["NoteID"] for r in master if r.get("Released") == "yes"}
+    allowed_ids = {
+        r.get("NoteID", "").strip()
+        for r in admission
+        if r.get("LearnerProfile", "").strip() == "klose"
+        and r.get("LearnerLevel", "").strip() == "4"
+        and r.get("Status", "").strip() == "allowed"
+    }
+    unknown = allowed_ids - master_ids
+    if unknown:
+        raise SystemExit(f"Learning admission references unknown NoteIDs: {sorted(unknown)[:10]}")
+    check_ids = released_ids | allowed_ids
 
     first_grade_by_id: dict[str, int] = {}
     for row in occ:
@@ -106,7 +124,7 @@ def main() -> None:
 
     review: list[dict[str, str]] = []
     for row in master:
-        if row["Released"] != "yes":
+        if row["NoteID"] not in check_ids:
             continue
         lr = learner_by_id[row["NoteID"]]
         level = int(lr["LearnerLevel"])
@@ -134,7 +152,10 @@ def main() -> None:
             })
 
     write_csv(REPORT, ["NoteID", "Word", "LearnerLevel", "ExampleSentence", "FutureVocabulary"], review)
-    print(f"Klose auxiliary-vocabulary review items: {len(review)}")
+    print(
+        f"Klose auxiliary-vocabulary review scope: released={len(released_ids)}, "
+        f"allowed={len(allowed_ids)}, union={len(check_ids)}, items={len(review)}"
+    )
     for row in review:
         print(f"{row['NoteID']} | {row['Word']} | {row['FutureVocabulary']} | {row['ExampleSentence']}")
     if review:

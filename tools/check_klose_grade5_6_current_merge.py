@@ -201,12 +201,15 @@ def main() -> None:
     for nid in new_ids:
         if master_by_id[nid].get("Released", "").strip() != "no":
             fail(f"new Grade 5-6 Note was prematurely released: {nid}")
-        if learner_by_id[nid].get("PresentationStatus", "").strip() != "grade5-6-current-pending":
-            fail(f"new Grade 5-6 Note lacks pending learner presentation state: {nid}")
+        learner = learner_by_id[nid]
+        if learner.get("PresentationStatus", "").strip() != "grade5-6-content-ready":
+            fail(f"new Grade 5-6 Note is not in content-ready learner state: {nid}")
+        if not learner.get("ExampleSentence", "").strip() or not learner.get("ExampleTranslation", "").strip():
+            fail(f"new Grade 5-6 Note has incomplete learner content: {nid}")
 
     review_ids = {r.get("NoteID", "").strip() for r in read_csv(LEARNER_REVIEW)}
-    if review_ids != new_ids:
-        fail(f"learner review queue must equal active new Grade 5-6 Notes: queue={len(review_ids)} new={len(new_ids)}")
+    if review_ids:
+        fail(f"resolved Grade 5-6 content-gap queue must be empty, got {len(review_ids)} rows")
 
     release_ids: set[str] = set()
     for path in (RELEASE, RELEASE_EXT):
@@ -258,26 +261,33 @@ def main() -> None:
         elif row.get("Stage", "").strip() != "stage::grade5-6-current":
             fail(f"Grade 5-6 current Note has wrong stage: {nid}")
 
-    # Narrow IPA facts for reused/current released Notes, including reviewed dedup
-    # survivors, must be present without requiring identity or learner-content rewrite.
-    reuse_fact_ids = {r.get("NoteID", "").strip() for r in read_csv(REUSE_FACTS)}
+    # Narrow IPA facts for reused/current Notes, including reviewed dedup survivors,
+    # are upstream truth. During PR validation the generated Master may still reflect
+    # the base commit, so validate effective values from Master overlaid by this file.
+    reuse_fact_rows = read_csv(REUSE_FACTS)
+    reuse_fact_by_id = {r.get("NoteID", "").strip(): r for r in reuse_fact_rows}
+    if "" in reuse_fact_by_id or len(reuse_fact_by_id) != len(reuse_fact_rows):
+        fail("invalid/duplicate Grade 5-6 reuse fact override NoteID")
     expected_reuse_fact_ids = {
         "KV000158", "KV000193", "KV000195", "KV000303", "KV000307",
-        "KV000327", "KV000359", "KV000483", "KV000500",
+        "KV000327", "KV000359", "KV000483", "KV000500", "KV000572",
+        "KV000600", "KV000792",
     }
-    if reuse_fact_ids != expected_reuse_fact_ids:
-        fail(f"unexpected Grade 5-6 reuse fact override set: {sorted(reuse_fact_ids)}")
-    for nid in reuse_fact_ids:
-        if not master_by_id[nid].get("British", "").strip() or not master_by_id[nid].get("American", "").strip():
-            fail(f"Grade 5-6 reused/current Note still lacks IPA: {nid}")
+    if set(reuse_fact_by_id) != expected_reuse_fact_ids:
+        fail(f"unexpected Grade 5-6 reuse fact override set: {sorted(reuse_fact_by_id)}")
+    for nid, override in reuse_fact_by_id.items():
+        british = override.get("British", "").strip() or master_by_id[nid].get("British", "").strip()
+        american = override.get("American", "").strip() or master_by_id[nid].get("American", "").strip()
+        if not british or not american:
+            fail(f"Grade 5-6 reused/current Note still lacks effective IPA: {nid}")
 
     print(
         "Klose Grade 5-6 current Vocabulary merge OK: "
         f"stable_registry={len(registry_ids)}, new_stable={len(new_ids)}, "
         f"mapped_occurrences={len(g56_mapping_keys)}, skipped_occurrences={len(skipped)}, "
         f"grade5_6_unique={len(g56_coords)}, grade4_unique={len(g4_coords)}, "
-        f"current_curriculum={len(expected_current)}, learner_pending={len(review_ids)}, "
-        "released_unchanged=638, publish_not_authorized"
+        f"current_curriculum={len(expected_current)}, learner_content_ready={len(new_ids)}, "
+        f"learner_review_queue={len(review_ids)}, released_unchanged=638, publish_not_authorized"
     )
 
 
