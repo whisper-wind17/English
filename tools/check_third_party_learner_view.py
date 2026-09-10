@@ -211,7 +211,7 @@ def main() -> None:
     policy_keys = [r.get("RuleKey", "") for r in content_policy]
     require(all(policy_keys) and len(policy_keys) == len(set(policy_keys)), "Content exclusion RuleKey must be unique")
     require(
-        set(policy_keys) == {"article:a", "article:an", "article:the", "number:elementary"},
+        set(policy_keys) == {"article:a", "article:an", "article:the"},
         f"Content exclusion policy set drift: {policy_keys}",
     )
     for rule in content_policy:
@@ -268,7 +268,18 @@ def main() -> None:
     require({"a", "an", "the"} <= excluded_canonicals,
             "Required article exclusions a/an/the are not all present at identity level")
 
-    # Adversarial guards: the number classifier must not broaden to ordinary concepts/phrases.
+    # Current learner policy admits elementary cardinal/ordinal identities. The classifier is
+    # retained only as an independent adversarial detector, not as an exclusion rule.
+    number_identity_canonicals = {
+        canonical for canonical in identity_by_canonical if is_elementary_number_identity(canonical)
+    }
+    require(not (number_identity_canonicals & excluded_canonicals),
+            f"Admitted number identity was content-excluded: {sorted(number_identity_canonicals & excluded_canonicals)[:20]}")
+    missing_number_admissions = sorted(number_identity_canonicals - set(learner_by_canonical))
+    require(not missing_number_admissions,
+            f"Elementary number identities missing from learner preview: {missing_number_admissions[:20]}")
+
+    # Adversarial guards: ordinary concepts/phrases containing number-like tokens stay distinct.
     for guard in ("number", "phone number", "one day"):
         if guard in identity_by_canonical:
             require(guard not in excluded_canonicals,
@@ -316,7 +327,7 @@ def main() -> None:
     article_count = sum(1 for r in content_view if r.get("ReasonCode") == "trivial-function-word")
     number_count = sum(1 for r in content_view if r.get("ReasonCode") == "trivial-number-word")
     require(article_count == 3, f"Expected exactly 3 article exclusions, got {article_count}")
-    require(number_count > 0, "No elementary number identities were excluded")
+    require(number_count == 0, f"Elementary number identities must be admitted, but {number_count} remain excluded")
 
     print("Third-party learner-stage gates = pass")
     print(f"identity-level vocabulary preview = {len(identity_preview)}")
@@ -326,9 +337,10 @@ def main() -> None:
     print(f"content-threshold exclusions = {len(content_view)}")
     print(f"article exclusions = {article_count}")
     print(f"number-identity exclusions = {number_count}")
+    print(f"number identities admitted = {len(number_identity_canonicals)}")
     print("past-form leak into learner preview = no")
     print("content-exclusion leak into learner preview = no")
-    print("number classifier over-exclusion guards = pass")
+    print("number learner admission = pass")
     print("identity truth mutated by learner gates = no")
     print("source truth mutated by learner gates = no")
 
