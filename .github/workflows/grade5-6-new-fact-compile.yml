@@ -1,0 +1,57 @@
+name: Grade 5-6 New Fact Compile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/compile_grade5_6_new_facts.py'
+      - 'anki/klose/master/note_registry_extensions.csv'
+      - 'anki/klose/review/grade5_6_lexical_facts/**'
+      - '.github/workflows/grade5-6-new-fact-compile.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grade5-6-new-fact-compile
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            tools
+            anki/klose/master
+            anki/klose/review/grade5_6_lexical_facts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile reviewed facts
+        run: python tools/compile_grade5_6_new_facts.py
+      - name: Enforce fact-only diff scope
+        shell: bash
+        run: |
+          bad="$(git diff --name-only | grep -Ev '^anki/klose/master/grade5_6_new_fact_overrides.csv$' || true)"
+          if [ -n "$bad" ]; then
+            echo 'Unexpected mutation outside Grade 5-6 new fact layer:'
+            echo "$bad"
+            exit 1
+          fi
+      - name: Persist compiled fact layer
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add anki/klose/master/grade5_6_new_fact_overrides.csv
+          if git diff --cached --quiet; then
+            echo 'Compiled fact layer unchanged.'
+            exit 0
+          fi
+          git commit -m 'data: compile Grade 5-6 new-note facts'
+          git pull --rebase origin main
+          git push origin HEAD:main
