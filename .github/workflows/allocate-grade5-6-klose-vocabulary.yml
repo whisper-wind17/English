@@ -1,0 +1,66 @@
+name: Allocate Grade 5-6 Klose Vocabulary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/allocate_klose_grade5_6_vocabulary.py'
+      - 'anki/klose/learner/grade5_6_learning_scope.json'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
+      - '.github/workflows/allocate-grade5-6-klose-vocabulary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: allocate-grade5-6-klose-vocabulary
+  cancel-in-progress: false
+
+jobs:
+  allocate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            tools
+            anki/klose
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify persistent state before allocation
+        env:
+          KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
+        run: python tools/check_klose_persistent_state.py
+      - name: Allocate Grade 5-6 Stable Vocabulary identities
+        run: python tools/allocate_klose_grade5_6_vocabulary.py
+      - name: Verify append-only persistent identity state
+        env:
+          KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
+        run: python tools/check_klose_persistent_state.py
+      - name: Enforce persistent-allocation diff scope
+        shell: bash
+        run: |
+          bad="$(git diff --name-only | grep -Ev '^(anki/klose/master/note_registry_extensions.csv|anki/klose/master/source_identity_extensions.csv)$' || true)"
+          if [ -n "$bad" ]; then
+            echo 'Unexpected mutation outside Grade 5-6 persistent identity allocation:'
+            echo "$bad"
+            exit 1
+          fi
+      - name: Persist Stable identity allocation
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add anki/klose/master/note_registry_extensions.csv anki/klose/master/source_identity_extensions.csv
+          if git diff --cached --quiet; then
+            echo 'No new Grade 5-6 Stable identities to allocate.'
+            exit 0
+          fi
+          git commit -m 'data: allocate Grade 5-6 Klose Vocabulary identities'
+          git pull --rebase origin main
+          git push origin HEAD:main
