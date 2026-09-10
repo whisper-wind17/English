@@ -1,0 +1,47 @@
+name: Run Klose Vocabulary Review Approval
+
+on:
+  push:
+    branches: [work/klose-vocab-review-approval-20260910]
+    paths:
+      - '.github/workflows/_run-klose-vocab-review-approval.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Approve exactly current pending review rows
+        run: |
+          python tools/approve_klose_learner_review.py \
+            --batch-id grade5-6-current-v1-model-reviewed \
+            --profile klose \
+            --level 4 \
+            --expected-count 343 \
+            --reviewer-type model \
+            --review-note 'Full model semantic review of 288 active Grade 5-6 new Notes plus 55 focused reused/fingerprint-invalidated Notes; review corrections validated by learner-content, auxiliary-vocabulary, current-merge and full Vocabulary gates.' \
+            --confirm-all-current \
+            --pending-only
+      - name: Commit immutable approval result
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add \
+            anki/klose/learner/review_approvals/grade5-6-current-v1-model-reviewed.csv \
+            anki/klose/learner/presentation_review_registry.csv \
+            anki/klose/master/build_stats.csv
+          test -n "$(git diff --cached --name-only)"
+          bad="$(git diff --name-only | grep -v '^anki/klose/learner/review_approvals/grade5-6-current-v1-model-reviewed.csv$' | grep -v '^anki/klose/learner/presentation_review_registry.csv$' | grep -v '^anki/klose/master/build_stats.csv$' || true)"
+          if [ -n "$bad" ]; then
+            echo 'Unexpected approval mutation:'
+            echo "$bad"
+            exit 1
+          fi
+          git commit -m 'review: approve Grade 5-6 current vocabulary presentation'
+          git push origin HEAD:work/klose-vocab-review-approval-20260910
