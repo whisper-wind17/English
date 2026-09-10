@@ -29,7 +29,7 @@ REPL = {
 "KV001089": ("We discuss it.", "我们讨论它。"),
 "KV001114": ("There is a cloud.", "有一朵云。"),
 "KV001139": ("What type is it?", "它是什么类型？"),
-"KV001143": ("The clock runs.", "这个钟在运转。"),
+"KV001143": ("It runs.", "它在运转。"),
 "KV001170": ("We camp here.", "我们在这里野营。"),
 "KV001172": ("We fish here.", "我们在这里钓鱼。"),
 "KV001176": ("The hat is off my head.", "帽子从我头上掉下来了。"),
