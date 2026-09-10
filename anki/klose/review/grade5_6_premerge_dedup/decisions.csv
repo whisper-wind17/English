@@ -1,0 +1,39 @@
+CandidateID,NewNoteID,OtherNoteID,NewMatchKey,OtherMatchKey,NewSense,OtherSense,Decision,MergeIntoNoteID,Rationale
+G56D0001,KV001029,KV000193,eating lunch,eat lunch,（正在）吃午饭,吃午饭,merge-new-into-existing,KV000193,Progressive surface is morphology/context only; existing base lexical phrase is the same learning unit.
+G56D0002,KV001171,KV000500,went camping,go camping,（尤指在假日）野营,去露营,merge-new-into-existing,KV000500,Past-tense surface is morphology only; allocation origin already resolves to go camping.
+G56D0003,KV001173,KV000359,went fishing,go fishing,去钓鱼,去钓鱼,merge-new-into-existing,KV000359,Past-tense surface is morphology only; identical target activity.
+G56D0004,KV000967,KV000729,worry,worried,担心；担忧；发愁,担心的,keep-distinct,,Verb worry and adjective worried are distinct lexical learning units.
+G56D0005,KV001022,KV000098,yours,your,你（们）的,你的；你们的,keep-distinct,,Possessive pronoun yours and possessive determiner your have different grammatical functions.
+G56D0006,KV001023,KV000117,hers,her,她的,她的,keep-distinct,,Possessive pronoun hers and determiner her are different production units despite overlapping Chinese gloss.
+G56D0007,KV001024,KV000368,theirs,their,他们的；她们的；它们的,他们的；她们的；它们的,keep-distinct,,Possessive pronoun theirs and determiner their have different grammatical functions.
+G56D0008,KV001025,KV000300,ours,our,我们的,我们的,keep-distinct,,Possessive pronoun ours and determiner our have different grammatical functions.
+G56D0009,KV001075,KV000488,sing,singing,（过去式 sang）唱（歌）；演唱,唱歌,keep-distinct,,Current source teaches base verb sing; legacy singing is an activity-form learning item and is already stable.
+G56D0010,KV001084,KV000732,exciting,excited,令人激动的,兴奋的；激动的,keep-distinct,,Cause-state adjective exciting differs semantically from experiencer-state adjective excited.
+G56D0011,KV001143,KV000344,run,running,（使）运转,跑步,keep-distinct,,Operate sense of run differs from physical-running activity.
+G56D0012,KV000974,KV000326,clean my room,cleaning the room,打扫我的房间,正在打扫房间,covered-by-other-merge,KV000572,Incoming phrase is merged to canonical base-form clean the room; do not create a second migration target.
+G56D0013,KV000974,KV000572,clean my room,clean the room,打扫我的房间,打扫房间,merge-new-into-existing,KV000572,Possessive determiner variation does not create a new lexical phrase identity.
+G56D0014,KV001030,KV000307,reading a book,read books,（正在）看书,读书；看书,merge-new-into-existing,KV000307,Number/progressive variation is contextual morphology; target activity is reading books.
+G56D0015,KV001063,KV000678,terracotta warriors,the terracotta army,兵马俑,兵马俑,keep-distinct,,Different established English lexical realizations for the same referent remain separate vocabulary forms.
+G56D0016,KV000913,KV000471,star,star,歌唱（或表演）明星,星星,keep-distinct,,Same surface but distinct celebrity and celestial senses.
+G56D0017,KV000938,KV000839,then,then,那么；因此；既然如此,然后；那时,keep-distinct,,Discourse-consequence and temporal/sequential senses are distinct.
+G56D0018,KV000977,KV000872,take,take,学习；上（课）,买下,keep-distinct,,Course-taking and purchasing senses are distinct.
+G56D0019,KV000985,KV000813,play,play,戏剧；剧本,玩耍,keep-distinct,,Noun drama/script and verb play are distinct lexical identities.
+G56D0020,KV000993,KV000811,best,best,最；最高程度地,最好的,keep-distinct,,Adverbial superlative and adjectival best are kept as separate target learning units.
+G56D0021,KV000995,KV000365,paint,paint,用颜料绘画,油漆；给……刷漆,keep-distinct,,Artistic painting and coating-with-paint are distinct target senses.
+G56D0022,KV001014,KV000937,show,show,展览,（电视或广播）节目,keep-distinct,,Exhibition/event sense differs from broadcast-program sense.
+G56D0023,KV001028,KV000051,like,like,像……那样,喜欢,keep-distinct,,Similarity/preposition sense differs from preference verb.
+G56D0024,KV001039,KV000937,show,show,给人看,（电视或广播）节目,keep-distinct,,Display verb differs from broadcast-program noun.
+G56D0025,KV001039,KV001014,show,show,给人看,展览,keep-distinct,,Display verb differs from exhibition/event noun.
+G56D0026,KV001055,KV000872,take,take,（过去式 took）（某个动作；和名词连用代替某个动词）,买下,keep-distinct,,Light-verb action use differs from purchase sense.
+G56D0027,KV001055,KV000977,take,take,（过去式 took）（某个动作；和名词连用代替某个动词）,学习；上（课）,keep-distinct,,General light-verb action use differs from course-taking sense.
+G56D0028,KV001067,KV000095,dress,dress,穿衣服,连衣裙,keep-distinct,,Verb dress and noun dress are distinct.
+G56D0029,KV001085,KV000176,cold,cold,感冒,寒冷的,keep-distinct,,Illness noun and temperature adjective are distinct.
+G56D0030,KV001095,KV000270,may,may,也许；可能,五月,keep-distinct,,Modal may and proper-name month May are distinct.
+G56D0031,KV001134,KV000188,time,time,次；回,时间；时刻,keep-distinct,,Occurrence-count and temporal-duration senses are distinct.
+G56D0032,KV001141,KV000062,light,light,照亮,灯,keep-distinct,,Verb illuminate and noun lamp/light are distinct.
+G56D0033,KV001142,KV000175,cool,cool,（使）变凉；冷却,凉爽的,keep-distinct,,Causative verb and adjective are distinct.
+G56D0034,KV001143,KV000334,run,run,（使）运转,跑；奔跑,keep-distinct,,Operate and physical-movement senses are distinct.
+G56D0035,KV001158,KV000781,top,top,（位置、级别或程度）最高的,顶部；顶端,keep-distinct,,Adjective highest and noun top are distinct.
+G56D0036,KV001172,KV000080,fish,fish,钓鱼；捕鱼,鱼；鱼肉,keep-distinct,,Verb fish and noun fish are distinct.
+G56D0037,KV001193,KV000963,trip,trip,绊倒,（尤指短程往返的）旅行，旅游，出行,keep-distinct,,Verb stumble and noun journey are distinct.
+G56D0038,KV001194,KV000476,dream,dream,梦,梦想,keep-distinct,,Sleep dream and aspiration senses are distinct.
