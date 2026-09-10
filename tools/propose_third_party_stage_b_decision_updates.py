@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
-"""Materialize only safe Stage-B reconciliation proposals into the transient inbox.
+"""Materialize reviewed/safe Stage-B reconciliation proposals into the transient inbox.
 
-This is a review-truth helper, not a Klose mutation tool. It writes
-`reconciliation/decision_updates.csv` only for planner lanes explicitly marked
-AutoExecutable. If an explicit/manual inbox already exists, it is preserved.
+This is a review-truth helper, not a Klose mutation tool. Two inputs are supported:
+
+1. `reconciliation/reviewed_batch.csv` — compact transient HUMAN/MODEL adjudication for
+   the exact current selected batch. The tool binds every row to the current sealed
+   Stage-A checkpoint and exact current CandidateFingerprint before materializing
+   `decision_updates.csv`. The compact file is removed only in the workflow worktree;
+   if downstream validation fails, the committed input remains available for retry.
+2. Planner lanes explicitly marked AutoExecutable.
+
+If a full explicit `decision_updates.csv` already exists, it is preserved for backward
+compatibility. No path here allocates a Stable NoteID or authorizes Klose mutation.
 """
 from __future__ import annotations
 
@@ -18,6 +26,7 @@ RECON = TP / "reconciliation"
 NEXT = PREMERGE / "reconciliation_next_batch.json"
 SELECTED = PREMERGE / "reconciliation_selected_view.csv"
 UPDATES = RECON / "decision_updates.csv"
+REVIEWED_BATCH = RECON / "reviewed_batch.csv"
 
 FIELDS = [
     "DecisionKey", "ProvisionalIdentityKey", "StageACheckpointFingerprint",
@@ -25,7 +34,13 @@ FIELDS = [
     "ProposedMatchKey", "ProposedSense", "Status", "Confidence",
     "MutationAuthorized", "DecisionBasis", "Rationale",
 ]
+REVIEW_FIELDS = [
+    "ProvisionalIdentityKey", "Action", "ExistingNoteID", "ProposedCanonicalWord",
+    "ProposedMatchKey", "ProposedSense", "Confidence", "DecisionBasis", "Rationale",
+]
 SAFE_LANES = {"learner-excluded", "exact-single-exact-sense", "no-existing-match"}
+ACTIONS = {"reuse-existing", "new-stable-identity", "held"}
+CONFIDENCE = {"high", "medium", "low"}
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -44,6 +59,104 @@ def obj(path: Path) -> dict[str, object]:
     return value
 
 
+def write_updates(updates: list[dict[str, str]]) -> None:
+    RECON.mkdir(parents=True, exist_ok=True)
+    with UPDATES.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(updates)
+
+
+def materialize_reviewed_batch(
+    state: dict[str, object], selected: list[dict[str, str]], selected_ids: list[str]
+) -> None:
+    reviewed = rows(REVIEWED_BATCH)
+    if not reviewed:
+        raise SystemExit("Compact reviewed Stage-B batch is empty")
+    if set(reviewed[0]) != set(REVIEW_FIELDS):
+        missing = [x for x in REVIEW_FIELDS if x not in reviewed[0]]
+        extra = [x for x in reviewed[0] if x not in REVIEW_FIELDS]
+        raise SystemExit(f"Compact reviewed batch schema drift: missing={missing} extra={extra}")
+
+    reviewed_ids = [r.get("ProvisionalIdentityKey", "") for r in reviewed]
+    if reviewed_ids != selected_ids:
+        raise SystemExit(
+            "Compact reviewed Stage-B batch must exactly match current selected batch order/closure"
+        )
+    if len(reviewed_ids) != len(set(reviewed_ids)) or any(not x for x in reviewed_ids):
+        raise SystemExit("Compact reviewed Stage-B batch has empty/duplicate identity key")
+
+    checkpoint = str(state.get("StageACheckpointFingerprint", "")).strip()
+    if not checkpoint:
+        raise SystemExit("Stage-B next batch lacks checkpoint fingerprint")
+    selected_by_id = {r["ProvisionalIdentityKey"]: r for r in selected}
+
+    updates: list[dict[str, str]] = []
+    for adjudication in reviewed:
+        pid = adjudication["ProvisionalIdentityKey"]
+        candidate = selected_by_id[pid]
+        action = adjudication.get("Action", "")
+        existing = adjudication.get("ExistingNoteID", "").strip()
+        proposed_word = adjudication.get("ProposedCanonicalWord", "").strip()
+        proposed_match = adjudication.get("ProposedMatchKey", "").strip()
+        proposed_sense = adjudication.get("ProposedSense", "").strip()
+        confidence = adjudication.get("Confidence", "").strip().casefold()
+        basis = adjudication.get("DecisionBasis", "").strip()
+        rationale = adjudication.get("Rationale", "").strip()
+        candidate_ids = [x for x in candidate.get("KloseCandidateNoteIDs", "").split("|") if x]
+
+        if action not in ACTIONS:
+            raise SystemExit(f"Compact reviewed batch invalid Action: {pid}: {action}")
+        if confidence not in CONFIDENCE:
+            raise SystemExit(f"Compact reviewed batch invalid Confidence: {pid}: {confidence}")
+        if not basis or not rationale:
+            raise SystemExit(f"Compact reviewed batch lacks basis/rationale: {pid}")
+
+        if action == "reuse-existing":
+            if not existing or existing not in candidate_ids:
+                raise SystemExit(f"Compact reuse NoteID not in current candidate context: {pid}")
+            if proposed_word or proposed_match or proposed_sense:
+                raise SystemExit(f"Compact reuse unexpectedly proposes identity fields: {pid}")
+            status = "reviewed"
+        elif action == "new-stable-identity":
+            if existing or not (proposed_word and proposed_match and proposed_sense):
+                raise SystemExit(f"Compact new identity fields invalid: {pid}")
+            if candidate_ids and "no-equivalent" not in basis.casefold():
+                raise SystemExit(
+                    f"Compact new identity with existing candidates requires explicit no-equivalent review: {pid}"
+                )
+            status = "reviewed"
+        else:
+            if existing or proposed_word or proposed_match or proposed_sense:
+                raise SystemExit(f"Compact held row pre-authorizes an identity: {pid}")
+            status = "held"
+
+        updates.append({
+            "DecisionKey": "reconcile:" + pid.removeprefix("candidate:"),
+            "ProvisionalIdentityKey": pid,
+            "StageACheckpointFingerprint": checkpoint,
+            "CandidateFingerprint": candidate["CandidateFingerprint"],
+            "Action": action,
+            "ExistingNoteID": existing,
+            "ProposedCanonicalWord": proposed_word,
+            "ProposedMatchKey": proposed_match,
+            "ProposedSense": proposed_sense,
+            "Status": status,
+            "Confidence": confidence,
+            "MutationAuthorized": "no",
+            "DecisionBasis": basis,
+            "Rationale": rationale,
+        })
+
+    write_updates(updates)
+    REVIEWED_BATCH.unlink()
+    print(f"compact reviewed Stage-B batch materialized = {len(updates)}")
+    print("current CandidateFingerprint binding = yes")
+    print("selected-batch closure = yes")
+    print("MutationAuthorized = no")
+    print("Stable NoteID allocated = no")
+
+
 def main() -> None:
     state = obj(NEXT)
     selected = rows(SELECTED)
@@ -57,6 +170,10 @@ def main() -> None:
         explicit = rows(UPDATES)
         print(f"explicit Stage-B reconciliation inbox preserved = {len(explicit)}")
         print("automatic proposal materialization = skipped")
+        return
+
+    if REVIEWED_BATCH.exists():
+        materialize_reviewed_batch(state, selected, selected_ids)
         return
 
     lane = str(state.get("ReviewLane", ""))
@@ -142,12 +259,7 @@ def main() -> None:
         else:
             raise SystemExit(f"Unexpected auto-executable Stage-B lane: {lane}")
 
-    RECON.mkdir(parents=True, exist_ok=True)
-    with UPDATES.open("w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDS)
-        writer.writeheader()
-        writer.writerows(updates)
-
+    write_updates(updates)
     print(f"Stage-B auto proposal lane = {lane}")
     print(f"Stage-B auto proposals materialized = {len(updates)}")
     print("MutationAuthorized = no")
