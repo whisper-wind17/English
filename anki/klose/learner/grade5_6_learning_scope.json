@@ -1,0 +1,17 @@
+{
+  "SchemaVersion": 1,
+  "ScopeID": "klose-grade5-6-current",
+  "LearnerProfile": "klose",
+  "LearnerLevel": 4,
+  "ScopeStatus": "accepted",
+  "DecisionBasis": "explicit-user-current-learning-scope",
+  "SourceProvenanceAffectsLearningAdmission": false,
+  "StableIdentityAllocationAuthorized": true,
+  "Books": {
+    "5上": {"Accepted": true, "CurriculumRank": 1},
+    "5下": {"Accepted": true, "CurriculumRank": 2},
+    "6上": {"Accepted": true, "CurriculumRank": 3},
+    "6下": {"Accepted": true, "CurriculumRank": 4}
+  },
+  "Policy": "The four captured Grade 5-6 volumes are Klose's current Grade 5-6 vocabulary scope. SourceID and SourceEdition remain audit metadata only and do not block identity allocation or learning admission. Vocabulary semantic/object boundaries remain enforced independently."
+}
