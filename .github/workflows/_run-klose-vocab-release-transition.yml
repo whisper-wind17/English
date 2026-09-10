@@ -1,0 +1,105 @@
+name: Run Klose Vocabulary Release Transition
+
+on:
+  push:
+    branches: [work/klose-vocab-release-20260910]
+    paths:
+      - '.github/workflows/_run-klose-vocab-release-transition.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Patch scoped release consumers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('tools/apply_klose_actual_grade4.py')
+          s = p.read_text(encoding='utf-8')
+          old = '    release_ext_rows = read_csv(RELEASE_EXTENSIONS)\n'
+          new = '    release_ext_rows = [\n        r for r in read_csv(RELEASE_EXTENSIONS)\n        if r.get("ReleaseReason", "").strip() == "actual-grade4-klose-current"\n    ]\n'
+          if s.count(old) != 1:
+              raise SystemExit('Grade4 release-extension patch anchor drifted')
+          p.write_text(s.replace(old, new), encoding='utf-8')
+
+          p = Path('tools/check_klose_grade5_6_current_merge.py')
+          s = p.read_text(encoding='utf-8')
+          old = '''    new_ids = set(allocations.values())
+    for nid in new_ids:
+        if master_by_id[nid].get("Released", "").strip() != "no":
+            fail(f"new Grade 5-6 Note was prematurely released: {nid}")
+        learner = learner_by_id[nid]
+'''
+          new = '''    new_ids = set(allocations.values())
+    for nid in new_ids:
+        learner = learner_by_id[nid]
+'''
+          if s.count(old) != 1:
+              raise SystemExit('Current-merge new-note release patch anchor drifted')
+          s = s.replace(old, new)
+
+          old = '''    if len(release_ids) != 638:
+        fail(f"unexpected existing released set: {len(release_ids)}")
+    if new_ids & release_ids:
+        fail("new Grade 5-6 Notes leaked into Release registry")
+'''
+          new = '''    if not release_ids <= registry_ids:
+        fail("Release registry references Notes outside the active Stable registry")
+'''
+          if s.count(old) != 1:
+              raise SystemExit('Current-merge fixed-release-count patch anchor drifted')
+          s = s.replace(old, new)
+
+          old = '        f"learner_review_queue={len(review_ids)}, released_unchanged=638, publish_not_authorized"\n'
+          new = '        f"learner_review_queue={len(review_ids)}, released={len(release_ids)}, release_state_separate"\n'
+          if s.count(old) != 1:
+              raise SystemExit('Current-merge output patch anchor drifted')
+          p.write_text(s.replace(old, new), encoding='utf-8')
+          PY
+
+      - name: Allocate exact reviewed release delta
+        run: |
+          python tools/release_klose_allowed_vocabulary.py \
+            --expected-count 334 \
+            --released-at 2026-09-10 \
+            --reason grade5-6-current-reviewed-v1 \
+            --apply
+
+      - name: Verify append-only release result
+        run: |
+          git fetch origin main
+          export KLOSE_BASE_COMMIT="$(git merge-base HEAD origin/main)"
+          python tools/check_klose_release_history.py
+          python tools/release_klose_allowed_vocabulary.py \
+            --expected-count 0 \
+            --released-at 2026-09-10 \
+            --reason grade5-6-current-reviewed-v1
+          python -m py_compile \
+            tools/release_klose_allowed_vocabulary.py \
+            tools/apply_klose_release_extensions.py \
+            tools/check_klose_release_history.py \
+            tools/apply_klose_actual_grade4.py \
+            tools/check_klose_grade5_6_current_merge.py
+
+      - name: Commit durable release transition
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add \
+            tools/apply_klose_actual_grade4.py \
+            tools/check_klose_grade5_6_current_merge.py \
+            anki/klose/master/release_registry_extensions.csv
+          git diff --cached --check
+          git commit -m 'release: allocate reviewed Grade 5-6 vocabulary'
+          git push
