@@ -1,5 +1,7 @@
 # Anki 一次性迁移：增加 PromptHint，不重建 Card
 
+> **Historical migration scope.** 本文中的 `638 / 221 / 417` 是 Grade-4 初始迁移时的 snapshot，不是当前 Release 真源。2026-09-10 及之后的正式同步必须先读 `docs/ANKI_CURRENT_RELEASE_IMPORT.md`；如果这里只是为了补 `PromptHint` 字段，只执行 schema/template migration，不执行本文旧的 count/suspension reset。
+
 本 SOP 只处理当前 `Klose Vocabulary` Note Type 增加 `PromptHint` 字段和对应 Recognition 正面模板。
 
 目标：
@@ -177,13 +179,13 @@ Tags              -> Tags
 
 `UserMemo` 不映射。
 
-导入后的目标：
+本文创建时的历史目标为：
 
 ```text
 Total Notes / Cards = 638
 ```
 
-其中原 518 NoteID 应原地更新，新增 120 个 NoteID 创建新 Notes。
+这一数字只用于该次历史 migration 回放；当前同步必须使用最新 Release artifact 与 `docs/ANKI_CURRENT_RELEASE_IMPORT.md` 中的目标值。
 
 ## 7. 验证 PromptHint
 
@@ -218,20 +220,9 @@ over
 
 普通词仍只显示 Word。
 
-## 8. 重置当前学习范围
+## 8. 历史 Grade-4 active-set reset
 
-当前 Klose 尚未产生真实 Review History，因此本次可以按明确 Learning Admission 做一次初始 active-set reset：
-
-```text
-1. Browser 选中 Klose Vocabulary 全部 638 Cards
-2. Suspend 全部
-3. 搜索：tag:learning::klose::grade4
-4. 结果必须 = 221 Cards
-5. 选中这 221 Cards
-6. Toggle Suspend -> Unsuspend
-```
-
-最终：
+以下 `638 / 221 / 417` 只记录当时尚未产生真实 Review History 时的一次性初始化流程，**不得作为当前 release 的默认同步动作**：
 
 ```text
 Total Cards       = 638
@@ -239,19 +230,18 @@ Unsuspended       = 221
 Suspended / held  = 417
 ```
 
-如果 `tag:learning::klose::grade4` 不是 221，不要继续学习，先回 repo / import mapping 排查。
+进入真实学习后，长期规则改为只对 `is:new` Cards materialize 当前 Learning Admission；不得批量改 Learning/Review Cards 的 suspension / Due。当前流程见 `docs/ANKI_CURRENT_RELEASE_IMPORT.md`。
 
 ## 9. 完成标准
+
+本 migration 自身只要求：
 
 ```text
 Note Type         = 原 Klose Vocabulary
 Card Type         = 原 Recognition
 Stable NoteID     = preserved
-Card count        = 638
 PromptHint nonempty = 4
-Current Grade-4   = 221 unsuspended
-Held library      = 417 suspended
 FSRS history      = preserved
 ```
 
-完成后，PromptHint 不再是“一次性迁移字段”，而成为长期 Note Type contract 的正常可选字段。未来新增同形异义 active Notes，只改 Learner Presentation + review + release，不再修改 Note Type schema。
+当前 release 的 Notes/Cards 数量、admission/suspension 和 LearningOrder 验收，以最新 `ANKI_CURRENT_RELEASE_IMPORT.md` 为准。
