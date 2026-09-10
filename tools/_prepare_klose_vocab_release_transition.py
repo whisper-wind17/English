@@ -6,6 +6,7 @@ import os
 import subprocess
 from pathlib import Path
 
+# This helper exists only to materialize the guarded transition and is deleted before PR.
 ROOT = Path(__file__).resolve().parents[1]
 RELEASE_EXT = Path("anki/klose/master/release_registry_extensions.csv")
 
