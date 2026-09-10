@@ -1,0 +1,60 @@
+name: Grade 5-6 Lexical Fact Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/build_grade5_6_lexical_fact_backfill.py'
+      - 'anki/klose/master/note_registry_extensions.csv'
+      - 'anki/klose/source_reference/**'
+      - 'anki/人教版一年级起点/master/vocabulary_master.csv'
+      - '.github/workflows/grade5-6-lexical-fact-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grade5-6-lexical-fact-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            tools
+            anki/klose/master
+            anki/klose/source_reference
+            anki/klose/review/grade5_6_lexical_facts
+            anki/人教版一年级起点/master
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build conservative IPA coverage
+        run: python tools/build_grade5_6_lexical_fact_backfill.py
+      - name: Enforce audit-only diff scope
+        shell: bash
+        run: |
+          bad="$(git diff --name-only | grep -Ev '^anki/klose/review/grade5_6_lexical_facts/(ipa_candidates.csv|ipa_unresolved.csv|status.json)$' || true)"
+          if [ -n "$bad" ]; then
+            echo 'Unexpected mutation outside Grade 5-6 lexical-fact review:'
+            echo "$bad"
+            exit 1
+          fi
+      - name: Persist audit output
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add anki/klose/review/grade5_6_lexical_facts
+          if git diff --cached --quiet; then
+            echo 'Lexical-fact audit unchanged.'
+            exit 0
+          fi
+          git commit -m 'data: build Grade 5-6 lexical fact audit'
+          git pull --rebase origin main
+          git push origin HEAD:main
