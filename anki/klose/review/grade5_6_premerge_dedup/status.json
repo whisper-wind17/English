@@ -1,6 +1,7 @@
 {
   "BaselineStableIdentities": 901,
   "AllocatedGrade56Identities": 293,
+  "ActiveGrade56NewIdentities": 288,
   "CartesianPairsAvoided": 306733,
   "CandidatePairs": 38,
   "NewVsExisting": 33,
@@ -12,7 +13,14 @@
     "proper-name-same-gloss-overlap": 1,
     "same-surface": 23
   },
-  "PendingReview": 38,
+  "ReviewedPairs": 38,
+  "DecisionCounts": {
+    "covered-by-other-merge": 1,
+    "keep-distinct": 32,
+    "merge-new-into-existing": 5
+  },
+  "StaleDecisionPairs": 0,
+  "PendingReview": 0,
   "MasterMutation": false,
   "ReleaseMutation": false,
   "AnkiMutation": false
