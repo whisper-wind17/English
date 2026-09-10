@@ -4,7 +4,7 @@ Last updated: 2026-09-10
 
 ## 1. Current task
 
-当前主任务：**Grade 5–6 Klose 实际教材 Source materialization**。
+当前主任务：**Grade 5–6 Klose 实际教材 → Klose Stable Identity reconciliation**。
 
 启动顺序：
 
@@ -13,36 +13,34 @@ AGENTS.md
 → NEXT.md
 → docs/GRADE5_6_ACTUAL_TEXTBOOK_INTAKE.md
 → docs/KLOSE_VOCABULARY_SYSTEM.md / docs/EXPRESSIONS_SYSTEM.md
-→ anki/klose/source_reference/ relevant truth
+→ anki/klose/source_reference/ actual Grade 5–6 source
+→ anki/klose/master/ current stable identity truth
 ```
 
 ## 2. Current state
 
 ```text
-Grade 5 Upper  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
-Grade 5 Lower  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
-Grade 5 Lower  Appendix Proverbs (6)                 = RECEIVED / NOT MATERIALIZED
-Grade 6 Upper  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
-Grade 6 Lower  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
+Grade 5–6 actual-textbook Source materialization     = CLOSED / VALIDATED
+Vocabulary source occurrences                        = 509
+Useful Expressions source occurrences                = 153
+Grade 5 Lower Proverbs                               = 6
+Morphology source occurrences                        = 58
+SourceID / SourceEdition                             = PENDING CONFIRMATION
 
-Grade 5–6 intake manifest                            = MATERIALIZED
-Morphology observed mappings                         = 43 MATERIALIZED / SOURCE TRACE PENDING
-  verb_past                                          = 29
-  comparative                                        = 14
-Grade 5–6 exact Vocabulary / Expressions / Proverbs = NOT MATERIALIZED
-Grade 5–6 → Klose Stable Identity reconciliation    = NOT STARTED
+Grade 5–6 → Klose Stable Identity reconciliation    = CURRENT / NOT STARTED
 Grade 5–6 NoteID / ExpressionID allocation          = NOT STARTED
 Klose Publish / Anki update                         = NOT STARTED
 ```
 
-当前新增 Source-layer artifacts：
+Source Completion evidence:
 
 ```text
-anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv
-anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv
+source-completion workflow PASS
+existing Klose build workflow PASS
+existing build result: No generated changes
 ```
 
-43 个 morphology 映射来自此前已提交 checkpoint 中对用户真实教材图片的观察记录；其中 `read → read /red/` 的读音事实已保留。由于当前可访问上下文没有上一段对话中的原始图片 bytes，Semester / Unit / Page / SourceEntry 仍为空，状态统一为 `observed-mapping-pending-source-trace`。这不是 Source Completion PASS。
+Source artifacts are under `anki/klose/source_reference/`. Morphology is occurrence-level and source-traceable; the obsolete pending-trace morphology table has been retired.
 
 ## 3. Hard decisions
 
@@ -50,7 +48,8 @@ anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv
 - Vocabulary 按明确 target sense 建 identity；同词异义不可字符串合并。
 - Useful Expressions 原句是 Source Fact，`1 source sentence != 1 Expression card`；后续按 `CanonicalForm + CommunicativeFunction` resolution。
 - Grade 5 Lower 的 6 条 Proverbs 单独作为 Proverb Source。
-- Grade 6 的过去式、比较级等进入独立 **Morphology Registry**；词形变化本身不 mint Vocabulary NoteID。
+- Grade 6 过去式、比较级、显式 `-ing` / plural morphology 单独保存在 Morphology Registry；词形变化本身不 mint Vocabulary NoteID。
+- `SourceID / SourceEdition` 未确认时不得猜测；可做 reconciliation review，但 stable source-identity allocation 前必须保持该 provenance blocker 显式可见。
 - Stable NoteID / ExpressionID 与已有 Anki FSRS / Review History 必须保持稳定。
 
 详细 schema、边界、Completion Gate 与 reconciliation SOP：`docs/GRADE5_6_ACTUAL_TEXTBOOK_INTAKE.md`。
@@ -58,14 +57,14 @@ anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv
 ## 4. Immediate next work
 
 ```text
-1. Re-acquire readable Grade 5–6 actual textbook image evidence in the active context/repo
-2. Materialize exact Vocabulary / Useful Expressions / 6 Proverbs rows
-3. Resolve the 43 morphology mappings to Semester / Unit / Page / SourceEntry
-4. Run independent Source Completion Recheck
-5. Only after 1–4 PASS: direct reconciliation against Klose existing Vocabulary / Expressions
+1. Build Grade 5–6 Vocabulary reconciliation candidates against current Klose Stable NoteIDs
+2. Build Grade 5–6 Expression candidates against current Stable ExpressionIDs
+3. Review same-surface / same-function / homograph / morphology edge cases
+4. Close all reconciliation decisions as reuse / new-proposal / held
+5. Run independent reconciliation Completion Recheck
 ```
 
-Source Completion Recheck 至少确认四册/Units/对象类型覆盖完整、教材 metadata 可追溯、代表性 image-to-row spot check 通过，且没有第三方数据混入。
+本阶段只产生 reconciliation truth / proposal，不分配新 Stable NoteID / ExpressionID。
 
 ## 5. Mutation boundary
 
@@ -75,11 +74,11 @@ Source Completion Recheck 至少确认四册/Units/对象类型覆盖完整、�
 third-party merge/allocation
 Grade 5–6 Stable NoteID / ExpressionID allocation
 Klose Master / Learner / Release mutation
-publish regeneration for this task
+publish regeneration for Grade 5–6
 Anki update
 ```
 
-当前 DoD 仍是 **Grade 5–6 actual Source + Morphology 结构化并通过独立完整性验证**，不是合入或发布。
+当前 DoD 是 **Grade 5–6 Vocabulary / Expressions direct Klose reconciliation closure**，不是合入或发布。
 
 ## 6. Third-party corpus — hold
 
