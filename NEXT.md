@@ -4,150 +4,288 @@ Last updated: 2026-09-10
 
 ## 1. 启动顺序
 
-所有 Klose 任务固定读取：`AGENTS.md → NEXT.md → 当前任务 docs → source_freeze.json → stage_a_status.json → next_batch.json → premerge/readiness.json → premerge/reconciliation_next_batch.json`。动态进度以 machine state 为准。
+所有 Klose 任务固定读取：
 
-当前任务文档：`docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md`（Stage-B read-only reconciliation 已闭合，作为规则与历史审计参考）。
+```text
+AGENTS.md
+→ NEXT.md
+→ 当前任务 docs
+→ 与任务相关的 anki/klose/ 真源与 machine state
+```
+
+当前主任务：**Klose Grade 5–6 真实教材 Source intake / identity merge preparation**。
+
+当前规则文档：
+
+```text
+docs/KLOSE_VOCABULARY_SYSTEM.md
+docs/EXPRESSIONS_SYSTEM.md
+anki/klose/source_reference/README.md
+```
+
+第三方词库 Stage-B 已闭合，`docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md` 仅作为独立历史/审计参考，不是当前 Grade 5–6 真实教材 intake 的输入链。
+
+---
 
 ## 2. Current phase
 
 ```text
-Phase A1 Source Adapter Bulk Ingestion = CLOSED
-SOURCE FREEZE                         = ESTABLISHED
-Phase A2 Global Identity Closure      = CLOSED
-Stage B Identity Reconciliation       = CLOSED (read-only premerge work complete)
-Merge / Stable NoteID allocation      = GATED / WAITING FOR USER
-Klose learning vocabulary mutation    = NOT STARTED
+Third-party Phase A1 Source Ingestion      = CLOSED
+Third-party Phase A2 Identity Closure      = CLOSED
+Third-party Stage B Reconciliation         = CLOSED
+Third-party actual merge/allocation        = GATED / NOT STARTED
+
+Grade 5–6 Klose actual textbook capture   = MATERIALS RECEIVED IN CURRENT CONVERSATION
+Grade 5–6 structured source materialize   = NOT STARTED
+Grade 5–6 → existing Klose reconciliation = NOT STARTED
+Grade 5–6 Stable NoteID / ExpressionID add = NOT STARTED
+Klose Publish / Anki update                = NOT STARTED
 ```
 
-用户明确要求：**暂不合并第三方词库进入 Klose 当前学习词库。** 在收到新的显式合并指令前，不得 mint StableThirdPartyID/NoteID，不得修改 Klose Master/Learner/Release/Publish/Anki。
-
-SOURCE FREEZE：20 adapters / 18887 occurrences / 3763 normalized surfaces；source fingerprints 未变化。
-
-## 3. Final Stage-A seal — cardinal / ordinal admitted
-
-Current sealed Stage-A machine state：
+第三方词库当前 machine checkpoint 保持不变：
 
 ```text
-Stage-A workflow                   = #443 / 34425589766 = SUCCESS
 Stage-A checkpoint                 = c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd
-Source occurrences                 = 18887
-Normalized surfaces                = 3763
-Durable Identity decisions         = 3871
 Identity Vocabulary Preview        = 2820
 Learner Vocabulary Preview         = 2794
-Review blockers                    = 52
-Evidence-changed surfaces          = 0
-Multipart resolved                 = 15
-Grammar-form quarantine gates      = 88
-NextBatch SelectedCount            = 0
-NextBatch ExecutionReady           = false
+Stage-B durable decisions          = 2820 / 2820
+Stage-B review queue               = 0
+Stage-B mutation authorized        = false
 ```
 
-### Learner content policy
+第三方 learner content policy 当前只显式排除 `a / an / the`；71 个 cardinal / ordinal number units 已重新 admitted。
 
-Current explicit content exclusion is only:
+---
+
+## 3. Grade 5–6 Klose actual textbook materials received
+
+用户已在当前对话提供 Klose 实际使用教材的图片资料，覆盖：
 
 ```text
-a / an / the                       = 3 identities excluded
-cardinal / ordinal number units    = ADMITTED
+Grade 5 Upper
+  Vocabulary          = received
+  Useful Expressions  = received
+
+Grade 5 Lower
+  Vocabulary          = received
+  Useful Expressions  = received
+  Appendix Proverbs   = received (6 proverbs; separate Source Object)
+
+Grade 6 Upper
+  Vocabulary          = received
+  Useful Expressions  = received
+
+Grade 6 Lower
+  Vocabulary          = received
+  Useful Expressions  = received
 ```
 
-用户于 2026-09-10 明确要求将此前排除的 **71 个基数词/序数词重新加入第三方 learner vocabulary**。该政策已通过完整 Stage-A learner gate / Completion Recheck / seal。
+这些图片目前是**用户提供的真实教材证据**；尚未结构化写入 `anki/klose/source_reference/` CSV，因此不能把 `received` 误写成 `repo source materialized`。
 
-`learner/content_exclusion_policy.csv` 现在仅包含 `article:a / article:an / article:the`；`content_exclusion_view.csv` 也只剩这 3 条。数字 classifier 仍作为 adversarial guard：用于确认 elementary cardinal/ordinal identities 必须进入 learner preview，而不是作为 exclusion rule；`number`、`phone number`、`one day` 等独立 lexical/expression units 继续不受误判。
-
-当前 Identity Preview 2820，Learner Preview 2794，因此总 learner-excluded identities = 26；其中 3 条来自当前 content policy，其余 23 条来自既有其他 learner gates。不要把这些与 52 个 Stage-A audited-defer surface 混为一谈。
-
-Residual 52 Stage-A blockers 均为 current-context audited-defer，属于显式有效 hold，不是 active unprocessed work；不得为追求 blocker=0 猜义。
-
-## 4. Stage-B final reconciliation checkpoint
-
-Learner policy 改变导致 Stage-A checkpoint 从旧的 `02bec123...` 变为 `c6083db4...`，因此旧的 2820 条 reconciliation decisions 按规则全部失效；本轮重新在当前 checkpoint 下闭合。
-
-Final reconciliation workflow：**#68 / 34426580726 = SUCCESS**
-
-Final bot persist commit：`7a6ca633fb00e8eb4ffcb5484ede62d149925c1e`
-
-Current machine state：
+正式落库时必须保留教材事实：
 
 ```text
-StageACheckpointFingerprint        = c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd
-CandidateCount                     = 2820
-ValidDurableDecisionCount          = 2820
-ReviewQueueCount                   = 0
-SelectedCount                      = 0
-ReviewLane                         = <none>
-ExecutionReady                     = false
-AutoExecutable                     = false
-StageBMutationAuthorized           = false
-StableThirdPartyIDMinted           = false
-MergeAuthorizedRows                = 0
+SourceID / SourceEdition
+Grade
+Semester
+Unit
+Order
+Starred (若教材有 *)
+Raw Entry / Raw Expression
+Meaning / Translation
+Page
+SourceStatus
 ```
 
-Final durable action distribution：
+SourceID / SourceEdition 若仅凭当前图片无法可靠确定，不得猜测；先标待确认或沿既有可证明的教材 source identity 规则处理。
+
+---
+
+## 4. User-confirmed integration policy — IMPORTANT
+
+用户明确要求：
+
+> Grade 5 / Grade 6 真实教材词汇与 Expressions **不要先与第三方词库做匹配处理**。
+
+固定处理链：
 
 ```text
-reuse-existing                     = 719
-new-stable-identity proposal       = 2021
-held                               = 80
-TOTAL                              = 2820
+Klose actual Grade 5–6 textbook Source
+→ structure / verify actual textbook occurrences
+→ resolve Vocabulary / Expression / Morphology boundaries
+→ directly reconcile against Klose existing Stable Vocabulary / Expressions
+→ reuse existing stable IDs where same learning unit
+→ allocate new IDs only for genuinely new learning units
+→ learner presentation / admission / review
+→ release / generated publish
+→ Anki update only after explicit release gate
 ```
 
-Interpretation：
-- `reuse-existing` 只确认第三方 identity 与某个现有 Klose Stable NoteID 属于同一 learning unit；未修改 NoteID。
-- `new-stable-identity` 只是未来 allocation proposal；**没有分配 NoteID**。
-- `held` 是完整 reconciliation 结果，表示当前不能安全一对一合并，或现有 identity boundary 需要后续治理；不是遗漏。
-- 当前 26 个 learner-excluded identities 在 Stage B 保持 held，不进入 allocation。
-
-### Checkpoint-change revalidation
-
-为避免 learner-policy 小改动后机械重审全部 2820 条，同时又不能静默继承旧判断，Stage-B 增加了 exact historical revalidation：
+禁止改写为：
 
 ```text
-same ProvisionalIdentityKey
-+ byte-for-byte identical CandidateFingerprint
-+ historical MutationAuthorized=no
-→ 可把历史 decision 重新绑定当前 Stage-A checkpoint
+actual textbook
+→ third-party vocabulary reconciliation
+→ Klose
 ```
 
-只要 CandidateFingerprint 有任何变化，就必须进入显式 review。本次数词重新 admitted 后，发生变化的 number identities按当前 candidate evidence重新审核，其余语义未变化的历史 decision 通过上述规则重签。该机制不授权 merge，也不分配 NoteID。
+第三方 2820 Vocabulary Identity 保持独立冻结状态，除非用户未来单独明确要求启动第三方 merge/allocation。
 
-## 5. Final validation evidence
+正式与 Klose 现有词库 reconciliation 时仍必须保护 Stable NoteID / ExpressionID：
 
-Stage-B #68 Completion Recheck：
+- existing exact learning unit → reuse stable ID；
+- same surface but different target sense → separate identity；
+- genuinely new unit → append new stable ID；
+- existing Anki FSRS / Review History 不得因新教材来源而重建或丢失；
+- 不允许简单按字符串 append 造成重复卡。
+
+---
+
+## 5. Learning-object boundaries for Grade 5–6
+
+### Vocabulary
+
+普通教材词条进入 Vocabulary Source；一个 Vocabulary Note 仍对应一个明确 learning unit / target sense。
+
+### Useful Expressions
+
+教材 Useful Expressions 完整保存为 Source Occurrence，但：
 
 ```text
-reconciliation closure             = 2820 / 2820
-review queue                        = 0
-selected review batch              = 0
-high-risk multiple coverage        = 5 / 5
-all decisions current-fingerprint  = yes
-learner-excluded held              = 26
-Stable NoteID minted               = no
-Stage-B mutation authorized        = no
-Merge authorized                   = no
-Klose identity/learner/release/Anki isolation = pass
+1 source sentence != 1 Expression card
 ```
 
-独立 post-persist recheck：
-- `stage_a_status.json` = 2820 Identity / 2794 Learner / checkpoint `c6083db4...`；
-- `content_exclusion_view.csv` = exactly `a / an / the`；
-- `reconciliation_next_batch.json` = 2820 decisions / queue 0 / selected 0；
-- queue 与 selected-view 均只有 header；
-- final bot persist diff 仅修改 `third_party_vocabulary/premerge/**`、`third_party_vocabulary/reconciliation/**` 并删除 transient `reviewed_batch.csv`；
-- 未修改 `anki/klose/master/**`、`anki/klose/learner/**`、`anki/klose/publish/**`、`anki/klose/anki/**`。
+后续按 `CanonicalForm + CommunicativeFunction` 与 Klose 现有 Stable ExpressionID 做 identity resolution；只把高迁移、值得主动产出的表达进入学习系统。
 
-## 6. HOLD POINT — wait before merge
+### Proverbs
 
-合并前工作再次闭合。**下一步不是自动合并。** 在用户明确要求开始 merge / allocation 之前，保持：
+Grade 5 Lower Appendix 5 的 6 条 Proverbs 单独保存为 `Proverb Source`，不与 Unit Useful Expressions 混为同一 Source Object。后续独立判断是否值得进入 Expressions learner set，不因教材列出而自动 release。
+
+### Morphology Registry — NEW REQUIRED LAYER
+
+从 Grade 6 开始，教材系统出现动词过去式、形容词比较级等 inflection。用户要求先单独存放；当前设计决定为统一 **Morphology Registry**，而不是把每个词形创建为普通 Vocabulary Note。
+
+至少支持：
 
 ```text
-Stage B reconciliation truth       = frozen/current
-Stable NoteID allocation           = prohibited
+Lemma | FormType | InflectedForm | IPA | Grade | Semester | Unit | Page
+```
+
+当前已观察的典型类型：
+
+```text
+verb past:
+  be → was
+  go → went
+  see → saw
+  eat → ate
+  take → took
+  run → ran
+  read → read /red/
+  make → made
+  sing → sang
+  wear → wore
+  wake → woke
+  begin → began
+  win → won
+  clean → cleaned
+  stay → stayed
+  wash → washed
+  watch → watched
+  have → had
+  sleep → slept
+  drink → drank
+  ride → rode
+  hurt → hurt
+  buy → bought
+  fall → fell
+  can → could
+  lick → licked
+  laugh → laughed
+  think → thought
+  feel → felt
+
+adjective/adverb comparative:
+  young → younger
+  old → older
+  tall → taller
+  short → shorter
+  long → longer
+  thin → thinner
+  heavy → heavier
+  big → bigger
+  small → smaller
+  strong → stronger
+  smart → smarter
+  low → lower
+  well → better
+  fast → faster
+```
+
+规则：
+
+```text
+Source occurrence retains the exact textbook form.
+Inflected form is linked to lemma through Morphology Registry.
+Morphology alone does not mint a new Vocabulary NoteID.
+Future morphology training may consume this registry as a separate learning object.
+```
+
+---
+
+## 6. Next execution task
+
+下一步不是第三方 merge，也不是直接修改 Klose Master。
+
+按以下顺序执行：
+
+```text
+1. Materialize Grade 5–6 actual textbook evidence
+   - transcribe all received Vocabulary / Useful Expressions / Proverbs
+   - preserve Grade / Semester / Unit / page / starred / raw meaning
+   - build an explicit completeness manifest for all four books
+
+2. Build Morphology Registry
+   - extract past / comparative and other explicit textbook inflections
+   - retain irregular pronunciation facts such as read → read /red/
+   - verify no morphology form is silently treated as an independent Vocabulary identity
+
+3. Independent source completion recheck
+   - all 4 books covered
+   - Unit coverage complete
+   - Vocabulary / Expressions / Proverbs counts and source rows closed
+   - representative image-to-row spot checks
+   - no third-party source mixed into this dataset
+
+4. Direct Klose reconciliation
+   - actual textbook Vocabulary ↔ existing Klose Stable NoteIDs
+   - actual textbook Expressions ↔ existing Klose Stable ExpressionIDs
+   - sense-aware / function-aware, not string-only
+   - produce reviewed reuse/new/held decisions before mutation
+
+5. Only after reconciliation closure
+   - append genuinely new stable IDs
+   - build Learner Presentation / Admission / Review
+   - regenerate publish deterministically
+   - protect existing Anki FSRS / Review History
+```
+
+Do not start step 4 until step 1–3 have passed an independent Completion Recheck.
+
+---
+
+## 7. Current mutation boundary
+
+Until the Grade 5–6 actual textbook source has been materialized and independently checked:
+
+```text
+Third-party merge/allocation       = prohibited
+Grade 5–6 NoteID allocation        = prohibited
+Grade 5–6 ExpressionID allocation  = prohibited
 Klose Master mutation              = prohibited
 Klose Learner/Release mutation     = prohibited
-Publish regeneration for merge     = prohibited
+Publish regeneration for this task = prohibited
 Anki update                        = prohibited
 ```
 
-未来若用户明确启动合并，必须先设计并审核新的 allocation/migration gate，消费当前 100% reconciliation decision set；仍需保护 Stable NoteID 和既有 Anki FSRS / Review History，且不能把 `held` 或 current learner-excluded identities 静默带入学习词库。
+The immediate next work is **source materialization and completeness verification**, not learning-state mutation.
