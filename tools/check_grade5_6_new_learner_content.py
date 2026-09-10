@@ -57,7 +57,7 @@ HIGH_RISK_CUES = {
     "KV001134": {"times"},
     "KV001141": {"light"},
     "KV001142": {"cools"},
-    "KV001143": {"runs", "fan"},
+    "KV001143": {"runs"},
     "KV001158": {"top"},
     "KV001170": {"camp"},
     "KV001172": {"fish"},
