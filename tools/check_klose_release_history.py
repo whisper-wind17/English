@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Protect append-only Klose Vocabulary Release history across Git changes."""
+"""Protect byte- and row-level append-only Klose Vocabulary Release history."""
 from __future__ import annotations
 
 import csv
@@ -23,17 +23,18 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def read_csv_text(text: str) -> list[dict[str, str]]:
-    return list(csv.DictReader(io.StringIO(text.lstrip("\ufeff"))))
+def read_csv_bytes(data: bytes) -> list[dict[str, str]]:
+    text = data.decode("utf-8-sig")
+    return list(csv.DictReader(io.StringIO(text, newline="")))
 
 
-def git_rows(ref: str, path: Path) -> list[dict[str, str]] | None:
+def git_bytes(ref: str, path: Path) -> bytes | None:
     rel = path.relative_to(ROOT).as_posix()
     proc = subprocess.run(
-        ["git", "show", f"{ref}:{rel}"], cwd=ROOT, text=True,
-        capture_output=True, encoding="utf-8",
+        ["git", "show", f"{ref}:{rel}"], cwd=ROOT,
+        capture_output=True,
     )
-    return read_csv_text(proc.stdout) if proc.returncode == 0 else None
+    return proc.stdout if proc.returncode == 0 else None
 
 
 def normalized(rows: list[dict[str, str]]) -> list[tuple[str, str, str]]:
@@ -56,6 +57,8 @@ def main() -> None:
         if not path.exists():
             raise SystemExit(f"Missing Release registry: {path.relative_to(ROOT)}")
 
+    legacy_bytes = RELEASE.read_bytes()
+    ext_bytes = RELEASE_EXT.read_bytes()
     legacy = normalized(read_csv(RELEASE))
     ext = normalized(read_csv(RELEASE_EXT))
     all_ids = [row[0] for row in legacy + ext]
@@ -63,18 +66,21 @@ def main() -> None:
         raise SystemExit("Duplicate Release NoteID across legacy and extension registries")
 
     ref = os.environ.get("KLOSE_BASE_COMMIT", "").strip() or "HEAD^"
-    old_legacy_rows = git_rows(ref, RELEASE)
-    old_ext_rows = git_rows(ref, RELEASE_EXT)
-    if old_legacy_rows is None:
+    old_legacy_bytes = git_bytes(ref, RELEASE)
+    old_ext_bytes = git_bytes(ref, RELEASE_EXT)
+    if old_legacy_bytes is None:
         print(f"Release-history warning: Git baseline {ref!r} unavailable; historical comparison skipped")
         return
-    old_legacy = normalized(old_legacy_rows)
-    old_ext = normalized(old_ext_rows or [])
+    old_ext_bytes = old_ext_bytes or b""
+    old_legacy = normalized(read_csv_bytes(old_legacy_bytes))
+    old_ext = normalized(read_csv_bytes(old_ext_bytes)) if old_ext_bytes else []
 
-    if legacy != old_legacy:
-        raise SystemExit("Legacy release_registry.csv is immutable and must not change")
+    if legacy_bytes != old_legacy_bytes or legacy != old_legacy:
+        raise SystemExit("Legacy release_registry.csv is byte-level immutable")
+    if not ext_bytes.startswith(old_ext_bytes):
+        raise SystemExit("release_registry_extensions.csv must preserve historical bytes exactly and append only")
     if len(ext) < len(old_ext) or ext[: len(old_ext)] != old_ext:
-        raise SystemExit("release_registry_extensions.csv must preserve every historical row and append only")
+        raise SystemExit("release_registry_extensions.csv historical rows changed")
 
     appended = ext[len(old_ext):]
     old_ids = {row[0] for row in old_legacy + old_ext}
@@ -84,7 +90,7 @@ def main() -> None:
 
     print(
         f"Vocabulary Release history OK: legacy={len(legacy)}, extension_before={len(old_ext)}, "
-        f"extension_now={len(ext)}, appended={len(appended)}, total={len(all_ids)}"
+        f"extension_now={len(ext)}, appended={len(appended)}, total={len(all_ids)}, byte_prefix=exact"
     )
 
 
