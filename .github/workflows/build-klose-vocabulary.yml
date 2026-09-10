@@ -8,6 +8,7 @@ on:
       - 'tools/apply_klose_actual_grade4.py'
       - 'tools/apply_klose_actual_grade4_reuse_facts.py'
       - 'tools/apply_klose_grade5_6_current.py'
+      - 'tools/apply_klose_grade5_6_reuse_facts.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
@@ -36,6 +37,7 @@ on:
       - 'anki/klose/master/note_registry_extensions.csv'
       - 'anki/klose/master/actual_grade4_fact_overrides.csv'
       - 'anki/klose/master/actual_grade4_reuse_fact_overrides.csv'
+      - 'anki/klose/master/grade5_6_reuse_fact_overrides.csv'
       - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/source_identity_extensions.csv'
       - 'anki/klose/master/source_reconciliation_registry.csv'
@@ -95,6 +97,9 @@ jobs:
 
       - name: Overlay accepted Klose Grade 5-6 vocabulary scope
         run: python tools/apply_klose_grade5_6_current.py
+
+      - name: Fill Grade 5-6 reused-note lexical fact gaps
+        run: python tools/apply_klose_grade5_6_reuse_facts.py
 
       - name: Build explicit allowed/held learning admission
         run: python tools/build_klose_learning_admission.py
