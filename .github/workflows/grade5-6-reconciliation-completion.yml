@@ -9,6 +9,7 @@ on:
       - 'tools/grade5_6_source_state.py'
       - 'tools/check_grade5_6_vocabulary_reconciliation_completion.py'
       - 'tools/check_grade5_6_expression_reconciliation_completion.py'
+      - 'tools/check_grade5_6_premerge_dedup.py'
       - 'tools/check_klose_persistent_state.py'
       - 'tools/check_klose_expression_persistent_state.py'
       - 'anki/klose/source_reference/grade5_6_source_provenance.json'
@@ -27,6 +28,7 @@ on:
       - 'anki/klose/review/grade5_6_reconciliation/expression_source_decisions.csv'
       - 'anki/klose/review/grade5_6_reconciliation/expression_identity_groups.csv'
       - 'anki/klose/review/grade5_6_reconciliation/expression_status.json'
+      - 'anki/klose/review/grade5_6_premerge_dedup/**'
       - 'anki/klose/master/**'
       - 'anki/klose/expressions/master/**'
       - '.github/workflows/grade5-6-reconciliation-completion.yml'
@@ -48,11 +50,14 @@ jobs:
             anki/klose/master
             anki/klose/expressions/master
             anki/klose/review/grade5_6_reconciliation
+            anki/klose/review/grade5_6_premerge_dedup
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Validate resolved Grade 5-6 actual Source
         run: python tools/check_grade5_6_actual_textbook_source.py
+      - name: Verify Grade 5-6 premerge dedup closure
+        run: python tools/check_grade5_6_premerge_dedup.py
       - name: Independent Vocabulary reconciliation recheck
         run: python tools/check_grade5_6_vocabulary_reconciliation_completion.py
       - name: Independent Expression reconciliation recheck
