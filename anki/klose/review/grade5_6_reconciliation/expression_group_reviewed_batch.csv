@@ -1,0 +1,24 @@
+IdentityGroup,Decision,ExpressionID,CanonicalForm,FunctionKey,ExpressionType,SlotSchema,DecisionBasis,Rationale
+new::state-superlative-in-place,new-stable-identity,,That's the [superlative adjective] [noun] [place phrase].,state_superlative_identification,slot_frame,superlative_adjective|noun|place_phrase,model-reviewed-current-evidence,用最高级指出某范围内最突出的对象
+new::state-comparison-than,new-stable-identity,,[Subject] is/are [comparative adjective] than [target].,state_comparison,slot_frame,subject|comparative_adjective|target,model-reviewed-current-evidence,用比较级说明两个对象在某属性上的差异；兼容单复数主语
+new::ask-height,new-stable-identity,,How tall are you?,ask_height,fixed,,model-reviewed-current-evidence,询问身高的高频固定表达
+new::state-height,new-stable-identity,,I'm [height].,state_height,slot_frame,height,model-reviewed-current-evidence,回答自己身高的简洁 production frame
+new::ask-size,new-stable-identity,,What size are your [items]?,ask_item_size,slot_frame,items,model-reviewed-current-evidence,询问鞋服等物品尺码的高频表达
+new::state-item-size,new-stable-identity,,[Items] are size [size].,state_item_size,slot_frame,items|size,model-reviewed-current-evidence,说明鞋服等物品尺码的通用回答框架
+new::ask-weight,new-stable-identity,,How heavy are you?,ask_weight,fixed,,model-reviewed-current-evidence,询问体重的教材核心表达
+new::state-weight,new-stable-identity,,I'm [weight].,state_weight,slot_frame,weight,model-reviewed-current-evidence,回答自己体重的简洁 production frame
+new::ask-past-anything-else,new-stable-identity,,Did you do anything else?,ask_additional_past_yes_no,fixed,,model-reviewed-current-evidence,以是非问句追问过去是否还做了别的事情
+new::ask-what-happened,new-stable-identity,,What happened?,ask_what_happened,fixed,,model-reviewed-current-evidence,询问发生了什么的高频固定表达
+new::check-all-right,new-stable-identity,,Are you all right?,check_wellbeing,fixed,,model-reviewed-current-evidence,看到异常时确认对方是否安好的高频关切表达
+new::reassure-ok-now,new-stable-identity,,I'm OK now.,reassure_wellbeing,fixed,,model-reviewed-current-evidence,说明自己现在已经没事的常用回应
+new::describe-looks-like,new-stable-identity,,It looks like [thing].,describe_resemblance,slot_frame,thing,model-reviewed-current-evidence,表达某物看起来像另一对象的高迁移句型
+new::ask-past-transport,new-stable-identity,,How did you go [place]?,ask_past_transport,slot_frame,place,model-reviewed-current-evidence,询问过去采用什么方式去某地
+new::state-past-transport,new-stable-identity,,We went [place] by [transport].,state_past_transport,slot_frame,place|transport,model-reviewed-current-evidence,说明过去前往某地所用交通方式
+new::respond-sounds-great,new-stable-identity,,Sounds great!,respond_positive_news,fixed,,model-reviewed-current-evidence,对计划或经历作积极回应的高频固定表达
+new::state-past-nonexistence-singular,new-stable-identity,,There was no [singular noun] [place/time].,state_past_nonexistence_singular,slot_frame,singular_noun|place_time,model-reviewed-current-evidence,说明过去某处没有某个单数事物
+new::request-tell-about,new-stable-identity,,"Tell [person] about [topic], please.",request_information_about,slot_frame,person|topic,model-reviewed-current-evidence,礼貌请求对方介绍某个主题
+new::ask-how-know,new-stable-identity,,How do you know that?,ask_evidence_source,fixed,,model-reviewed-current-evidence,追问信息来源或判断依据的高迁移表达
+new::state-past-nonexistence-plural,new-stable-identity,,There were no [things] [place/time].,state_past_nonexistence_plural,slot_frame,things|place_time,model-reviewed-current-evidence,说明过去某处没有某些事物
+new::contrast-before-now,new-stable-identity,,"Before, [clause]. Now, [clause].",describe_change_over_time,discourse_frame,before_clause|now_clause,model-reviewed-current-evidence,对比过去与现在状态的高迁移 discourse frame
+new::explain-past-inability,new-stable-identity,,"I was [adjective], so I couldn't [verb phrase].",explain_past_inability,discourse_frame,adjective|verb_phrase,model-reviewed-current-evidence,用过去状态解释当时不能做某事的因果表达
+new::state-now-routine,new-stable-identity,,"Now, I [verb phrase] [frequency].",state_current_change,slot_frame,verb_phrase|frequency,model-reviewed-current-evidence,在过去现在对比中说明当前新的日常行为
