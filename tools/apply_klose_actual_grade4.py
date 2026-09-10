@@ -109,7 +109,15 @@ def main() -> None:
 
     actual = read_csv(ACTUAL)
     registry_ext = read_csv(REGISTRY_EXTENSIONS)
-    registry_ext_by_id = {r["NoteID"].strip(): r for r in registry_ext}
+    # Extension registry is shared by multiple source scopes. Grade-4 overlay must
+    # consume only the identities it owns instead of assuming every extension row
+    # belongs to Grade 4.
+    registry_ext_by_id = {
+        r["NoteID"].strip(): r
+        for r in registry_ext
+        if r.get("CreatedSource", "").strip() == SOURCE_ID
+        and r.get("PrimaryOriginKey", "").strip().startswith(f"{SOURCE_ID}|{SOURCE_EDITION}|grade4-")
+    }
     source_mappings = {
         r["SourceItemKey"].strip(): r
         for r in read_csv(SOURCE_IDENTITY_EXTENSIONS)
@@ -196,7 +204,6 @@ def main() -> None:
                 f"fact={fact['Word']!r} identity={reg['CanonicalWord']!r}"
             )
 
-    # Add actual-textbook provenance to reused Notes and mark release extensions.
     for nid, sources in note_sources.items():
         if nid not in master_by_id:
             continue
@@ -216,8 +223,6 @@ def main() -> None:
             master["Released"] = "yes"
             master["Tags"] = add_tags(master.get("Tags", ""), "learner::klose::released")
 
-    # Append genuinely new identities using committed fact curation. Textbook
-    # meaning remains preserved separately as MeaningRaw/source occurrence fact.
     for nid in new_notes:
         reg = registry_ext_by_id[nid]
         fact = fact_by_id[nid]
@@ -266,8 +271,6 @@ def main() -> None:
         learner_rows.append(learner)
         learner_by_id[nid] = learner
 
-    # Actual source occurrences are first-class provenance. Extend the physical
-    # occurrence schema with Edition/Page while keeping legacy rows compatible.
     occurrence_fields = [
         "NoteID", "SourceID", "SourceEdition", "SourceBook", "Grade", "Semester",
         "Unit", "SourceWord", "SourceFile", "SourceRow", "Page",
@@ -289,8 +292,6 @@ def main() -> None:
             "Page": source["Page"].strip(),
         })
 
-    # New Notes require learner content before release readiness. This queue is
-    # resolved only by the separate learner override layer.
     review_by_id = {r.get("NoteID", "").strip(): r for r in review_rows}
     for nid in new_notes:
         if nid in review_by_id:
@@ -320,11 +321,7 @@ def main() -> None:
     write_csv(MASTER, master_fields, master_rows)
     write_csv(LEARNER, learner_fields, learner_rows)
     write_csv(OCCURRENCES, occurrence_fields, occurrence_rows)
-    write_csv(
-        LEARNER_REVIEW,
-        ["NoteID", "Word", "FirstGrade", "ExampleSentence", "Reason"],
-        review_rows,
-    )
+    write_csv(LEARNER_REVIEW, ["NoteID", "Word", "FirstGrade", "ExampleSentence", "Reason"], review_rows)
 
     released_after = {r["NoteID"] for r in master_rows if r.get("Released") == "yes"}
     upsert_metric(stats, "actual_grade4_occurrences", len(actual))
