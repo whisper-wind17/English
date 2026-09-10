@@ -19,6 +19,7 @@ on:
       - 'anki/klose/review/learner_review.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_status.json'
       - 'anki/klose/review/grade5_6_premerge_dedup/**'
       - '.github/workflows/check-grade5-6-klose-current-merge.yml'
   pull_request:
@@ -53,5 +54,5 @@ jobs:
         run: python tools/check_klose_persistent_state.py
       - name: Verify Grade 5-6 premerge dedup closure
         run: python tools/check_grade5_6_premerge_dedup.py
-      - name: Independently verify Grade 5-6 current Vocabulary merge
+      - name: Independently verify dedup-aware Grade 5-6 current Vocabulary merge
         run: python tools/check_klose_grade5_6_current_merge.py
