@@ -1,0 +1,11 @@
+Grade,Semester,ObjectType,EvidenceStatus,MaterializationStatus,ExpectedRows,MaterializedRows,SourceID,SourceEdition,Notes
+5,上,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+5,上,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+5,下,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+5,下,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+5,下,Proverbs,received,not-materialized,6,0,,,appendix proverbs; keep separate from Useful Expressions
+6,上,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+6,上,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+6,下,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+6,下,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
+6,待追踪,Morphology,observed-in-received-evidence,partial-pending-source-trace,43,43,,,43 mappings recovered from committed checkpoint; Semester/Unit/Page/source-row trace still unresolved
