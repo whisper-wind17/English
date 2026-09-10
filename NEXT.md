@@ -1,6 +1,6 @@
 # NEXT — Klose Learning
 
-Last updated: 2026-09-10
+Last updated: 2026-09-11
 
 ## 1. Current task
 
@@ -85,6 +85,38 @@ Anki Updated                                        = false / DEVICE IMPORT NOT 
 ```
 
 Grade 5–6 new learner presentation / lexical facts 已完成；288 个新 Notes 已进行全量 model semantic review。审校中发现并修正 `grandparent / then / judge / run / off` 五条 learner presentation 问题。
+
+### 3.1 Grade 5–6 Learner Presentation policy — FROZEN FOR CURRENT RELEASE
+
+Grade 5 / 6 是 **Source Grade**；Klose 当前学习这些词时仍使用：
+
+```text
+LearnerProfile = klose
+LearnerLevel   = 4
+```
+
+因此：
+
+```text
+Source Grade 5/6 ≠ LearnerLevel 5/6
+```
+
+五、六年级来源词汇的 learner presentation 必须按 Klose 当前四年级理解能力生成；目标词本身可以高于四年级，但释义和例句的 surrounding language 应尽量保持在 LearnerLevel 4。
+
+本次 288 个 Grade 5–6 新 Stable Notes 的 learner-content gate 已验证：
+
+```text
+active new Notes             = 288
+bilingual examples           = 288 / 288
+unique English examples      = 288 / 288
+maximum example length       = 14 tokens
+high-risk sense cues checked = 24
+later auxiliary vocabulary   = 0
+```
+
+其中 target lexical item 本身不作为“later auxiliary vocabulary”违规项；检查重点是避免为了学习一个 Grade 5/6 目标词，又在例句中额外引入 Klose 尚未掌握的 Grade 5/6 实词。
+
+Grade 5–6 reused Notes 进入 current learning scope 后同样按 `LearnerLevel=4` 处理；此前已有 11 条 reused learner examples 因辅助词难度过高而被降阶。未来如果提高 LearnerLevel，只升级 Learner Presentation 并重新 review；不得因为 Source Grade 更高而自动提高 LearnerLevel，也不得改变 Stable NoteID / Anki Review History。
 
 正式 review approval：
 
