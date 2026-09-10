@@ -1,0 +1,26 @@
+name: Audit Vocabulary Pending Review
+on:
+  push:
+    branches: [work/klose-vocab-pending-review-20260910]
+    paths:
+      - 'tools/_audit_vocab_pending_review.py'
+      - '.github/workflows/_audit-vocab-pending-review.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build focused audit
+        run: python tools/_audit_vocab_pending_review.py
+      - name: Persist audit on work branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add anki/klose/review/vocabulary_pending_focus_audit.csv
+          git commit -m 'audit: materialize focused vocabulary pending review'
+          git push origin HEAD:work/klose-vocab-pending-review-20260910
