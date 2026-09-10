@@ -35,8 +35,6 @@ jobs:
 
       - name: Validate pre-release review scope
         run: |
-          cp anki/klose/learner/presentation_review_registry.csv /tmp/presentation_review_registry.csv
-          cp anki/klose/master/build_stats.csv /tmp/build_stats.csv
           output="$(python tools/sync_klose_learner_review_registry.py)"
           echo "$output"
           echo "$output" | grep -q 'required=972'
@@ -46,8 +44,10 @@ jobs:
       - name: Ensure approval CLI supports pending-only
         run: python tools/approve_klose_learner_review.py --help | grep -q -- '--pending-only'
 
-      - name: Remove one-shot patch machinery
-        run: rm tools/_patch_vocab_release_review_gate.py .github/workflows/_patch-vocab-release-review-gate.yml
+      - name: Remove transient runtime and patch machinery
+        run: |
+          find tools -type d -name __pycache__ -prune -exec rm -rf {} +
+          rm tools/_patch_vocab_release_review_gate.py .github/workflows/_patch-vocab-release-review-gate.yml
 
       - name: Commit patched durable tools
         run: |
