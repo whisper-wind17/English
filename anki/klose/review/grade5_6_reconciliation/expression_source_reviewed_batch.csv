@@ -1,0 +1,41 @@
+SourceOccurrenceKey,CandidateFingerprint,Disposition,IdentityGroups,DecisionBasis,Rationale
+grade5-upper-u01-o001,01b44d40aaa48bda0f04c4821e567c07c5f2c5e85b66dd24d3cd40128a74d061,mapped,new::ask-person-description,model-reviewed-current-evidence,询问人物特征；自动匹配 KE000045 属字符串假阳性
+grade5-upper-u01-o002,f66866126828eba3823e3ab7eec7b737944c43fe351add7948716e77b3d3bcf2,mapped,KE000027,model-reviewed-current-evidence,与现有描述人物两个特征句型完全同功能同实现
+grade5-upper-u01-o003,aa6145c74b1a257e765f273b7a24789f25739100bc5c441b98c2e89b3c5eefe8,mapped,new::ask-good-at,model-reviewed-current-evidence,询问擅长某项活动的可迁移句型
+grade5-upper-u01-o004,2da5e4f78ae459867102067f973d0ca6fb4be6866e16afa2ccf1e7a1c12e4f38,source-only,,model-reviewed-current-evidence,依赖上一问句的椭圆回应且迁移价值低；保留 Source 不建独立 identity
+grade5-upper-u01-o005,f9cb0085ea573eea1ad62040c4a88a8ac2f0704880199fc15ed6e7c2417742a1,mapped,new::ask-contribution,model-reviewed-current-evidence,询问某人能为活动或目标做什么
+grade5-upper-u01-o006,2533be8ac398d0c4724ae449e38fad0b725482b13cc29c0d00ceb978c742bd92,mapped,new::state-ability-i-can,model-reviewed-current-evidence,表达自己能做某事；不是数量陈述 KE000058
+grade5-upper-u01-o007,4bc29f525faa514e69ff2d253bf61d5060caee4b046b18b5e90a5f85ff8f4ecf,mapped,new::ask-ability-can-you,model-reviewed-current-evidence,本句询问能力而非礼貌请求
+grade5-upper-u01-o008,b6352046301fa20a3ec8d14638b76d320903b5156b45dadc0f25f133e21ba41a,mapped,new::respond-inability-cannot,model-reviewed-current-evidence,能力问句的高频否定短答
+grade5-upper-u02-o001,b4ef6c20035eb210836eeadc38779782a9007ec6fb8ac38eca1bf6c0d7a93667,mapped,new::describe-look|new::ask-problem-whats-matter,model-reviewed-current-evidence,一条 Source 含观察对方状态与询问问题两个可独立迁移 production units
+grade5-upper-u02-o002,e0585a98cf59df82ca1cf0cfad29fa76fddb47ba014f784756f44598bb834c37,mapped,new::state-topic-about,model-reviewed-current-evidence,说明谈论主题；自动 StablePatternMatches 为通配正则假阳性
+grade5-upper-u02-o003,3b80ba3ccaf8743367295e827e0da145ff6bb84300ffae3ab091cd4951d35971,mapped,new::state-deadline-obligation,model-reviewed-current-evidence,表达在截止时间前必须完成某事
+grade5-upper-u02-o004,974650b67a025c9b181f5d920048aff7b71771908140b6b5f963724ba96b4123,source-only,,model-reviewed-current-evidence,负问句强依赖当前争议语境；agree with each other 更适合作 Vocabulary lexical phrase
+grade5-upper-u02-o005,cf90499a107765198f7a94fa021fba74d0096b7b6b29e176f8887a945d1d4d83,mapped,new::suggest-why-not,model-reviewed-current-evidence,Why not 构式是高迁移建议表达
+grade5-upper-u02-o006,a1c71ed48ad7bc1f874f519e52855eeccb288a1145f4b9ed078c4be6c1139c22,mapped,new::state-importance-to,model-reviewed-current-evidence,说明某行动重要性的可迁移句型
+grade5-upper-u02-o007,e6ec6528c657b2f79b965abaabcc2a689bd8cf86cbbf5e613a0f1cffc9024b37,mapped,new::state-need-to,model-reviewed-current-evidence,提取 I need to [verb phrase]；称呼部分仅为 Source 上下文
+grade5-upper-u03-o001,8e03fe7e97132ce2f0e2bb22de580253609c3979673665939a2453fab10f4cdd,mapped,new::ask-favourite,model-reviewed-current-evidence,询问最喜欢的类别对象；不是 What's [demonstrative] 的物体识别
+grade5-upper-u03-o002,d7f31db7399f816e92d9e786d960860dd888f3430061a0a151edcebedff2c9ab,mapped,new::ask-school-schedule,model-reviewed-current-evidence,询问某天课程安排的教材核心句型
+grade5-upper-u03-o003,f2c5d04584344067545c18f6fee432294c51f6deb697e397f472d7cff9d4fe4c,source-only,,model-reviewed-current-evidence,回答中的 I have [subjects] 脱离问句后与一般拥有义混淆；不单独建立低辨识度 identity
+grade5-upper-u03-o004,2caf7ead5deeed79cf62c95afe52f4529af1e20f98d7d3f737998e9da67147aa,mapped,new::ask-routine,model-reviewed-current-evidence,询问某时段通常做什么的高迁移日常表达
+grade5-upper-u03-o005,c40c643d20df18106b5ffab0dce9b62a2256cde9cd9117904c3a031be32b08d7,mapped,new::state-often-routine|new::state-sometimes-routine,model-reviewed-current-evidence,一条 Source 含 often 与 Sometimes 两个频率表达模式
+grade5-upper-u03-o006,002c42d32231ce6aa05454c2c445425c28af5371e7641f402fdcce061551011a,mapped,new::ask-both-times,model-reviewed-current-evidence,询问活动是否在两个时间都发生并承载 both...and 结构
+grade5-upper-u03-o007,a83867d28fb7171c01ac3dcd27571ab888500278ea1b9262f164af8d596acc4c,mapped,new::respond-present-simple-yes,model-reviewed-current-evidence,一般现在时 Does 问句的高频肯定短答
+grade5-upper-u04-o001,eaef9c0d10df0762a5b770bb6a61d9fdba76ff70e8101cb0eaf691cfd1e15bb4,mapped,new::ask-method-how-can,model-reviewed-current-evidence,询问如何达到目标或采取行动
+grade5-upper-u04-o002,7218bb9db2f752e2918b0c2d34d92013686f6d1c249aa963ebe6bc0fd765a6d8,mapped,new::give-advice-should,model-reviewed-current-evidence,We should 是给出正向建议的基础句型
+grade5-upper-u04-o003,fe0490ce4991cf5e3dcd2e3db28a5902f3c16667ab6ec125e4e11e5f0669aaec,mapped,KE000006,model-reviewed-current-evidence,Can I [verb phrase]? 与现有请求许可 identity 同功能同实现
+grade5-upper-u04-o004,2aa8b4e33180747346c8cd6ef52e7d93c9dbfa9ad64bf8d3102e843d39a82de7,mapped,new::give-advice-should-not,model-reviewed-current-evidence,You shouldn't 是给出负向建议的基础句型
+grade5-upper-u05-o001,35e6577327d5071d407735a9030b93b12cd5432146de67b9db9958469c23bffa,mapped,new::ask-would-like-to,model-reviewed-current-evidence,询问对方想做什么；与 Would you like [thing]? 的是非问句不同
+grade5-upper-u05-o002,ab1c48146749724951b139987a1d101d769e4c7eb25e972d674ba3660380fb6e,mapped,KE000050,model-reviewed-current-evidence,I'd like [thing] 与现有礼貌表达想要某物同一 realization；please 为可省略礼貌成分
+grade5-upper-u05-o003,2ec1bd709ad84f164ad04bbc8bea94ceec8f80ed9e6de5d720cb03c86b0cd23c,mapped,KE000009,model-reviewed-current-evidence,Would you like [thing]? 与现有 offer_or_ask_want identity 完全一致
+grade5-upper-u05-o004,79ecbd1e06045daf4f0174622b0b6fca57bcef80cabfbe6f0e4bd2929b6fc7a9,mapped,new::accept-offer-yes-please,model-reviewed-current-evidence,礼貌接受提议的高频固定回应
+grade5-upper-u05-o005,c26801f809669ee6a9cd12457a13bade06d8abc1dc3938f761be4e530cd8da2d,mapped,new::ask-origin-thing,model-reviewed-current-evidence,询问物品来源；与人物来源 Where are you from 功能不同
+grade5-upper-u05-o006,51434c536db9954ed758ec005de67cab49e34ce035af54eabbb30e2225e7efc6,source-only,,model-reviewed-current-evidence,单独地名回答是当前对话内容而非可复用 production pattern
+grade5-upper-u06-o001,202b64fbb3a846284255c01050cf2f79156a6cd71fa34843ec2ef1fd1f274258,mapped,KE000014,model-reviewed-current-evidence,There are [plural noun] 的存在陈述与现有 identity 一致；also 与地点为扩展信息
+grade5-upper-u06-o002,6ca811ecb4f366be7148ce6348ce4cacbd142cb12c370bf0d9c869b573bc0c4e,mapped,new::ask-existence-singular,model-reviewed-current-evidence,询问某处是否存在单数事物
+grade5-upper-u06-o003,0e8300ff6db583d4eff69645b6b0d6aef024fc383a5ea416c027df75a52e3d5a,mapped,new::confirm-existence-singular,model-reviewed-current-evidence,单数存在问句的高频肯定短答
+grade5-upper-u06-o004,913502098ac2075fc31187b5f5c72248b803c67a1e1046cb7e089c77211da594,mapped,new::ask-existence-plural,model-reviewed-current-evidence,询问某处是否存在复数事物
+grade5-upper-u06-o005,8b949cb6737f5fb35783b7451b7c76ae3163491b3e125e36173e85141facbf75,mapped,new::confirm-existence-plural,model-reviewed-current-evidence,复数存在问句的高频肯定短答
+grade5-upper-u06-o006,616151472228ca1d0aa95d7f361a7a552b3e8ee01a34eb9377738105a315bc85,mapped,new::state-future-existence,model-reviewed-current-evidence,There will be 用于表达未来存在或发生的可迁移结构
+grade5-lower-u01-o001,7466890a192ddbda7668f1a8682c0b4329412cc687f6b15e273c48806b1440a1,mapped,new::ask-time-routine,model-reviewed-current-evidence,When do you [verb phrase]? 用于询问日常活动发生时间
+grade5-lower-u01-o002,5e027758163fe3067d85f0e1225be734157e653a99df1a6f2e968c950ecba258,mapped,new::state-routine-time,model-reviewed-current-evidence,提取在具体时间发生某活动的通用陈述模式
