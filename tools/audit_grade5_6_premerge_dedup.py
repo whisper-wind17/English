@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Audit allocated Grade 5-6 Vocabulary identities for pre-merge duplicates.
 
-This is a review-only, non-mutating audit.  It compares Grade 5-6 allocated
+This is a review-only, non-mutating audit. It compares Grade 5-6 allocated
 identities against the pre-existing Klose Stable Vocabulary registry and against
-other Grade 5-6 allocated identities.  Candidate generation is intentionally
+other Grade 5-6 allocated identities. Candidate generation is intentionally
 form-aware rather than meaning-only: synonyms such as gift/present are different
 learning units and must not be merged merely because their Chinese glosses match.
 
@@ -27,6 +27,7 @@ BASE = ROOT / "anki" / "klose"
 MASTER = BASE / "master"
 OUT_DIR = BASE / "review" / "grade5_6_premerge_dedup"
 CANDIDATES = OUT_DIR / "candidates.csv"
+DECISIONS = OUT_DIR / "decisions.csv"
 STATUS = OUT_DIR / "status.json"
 
 REGISTRIES = [MASTER / "note_registry.csv", MASTER / "note_registry_extensions.csv"]
@@ -38,6 +39,9 @@ FIELDS = [
     "OtherWord", "OtherMatchKey", "OtherSense", "OtherCreatedSource",
     "Signals", "RiskScore", "ReviewStatus", "Decision", "MergeIntoNoteID", "Rationale",
 ]
+DECISION_EVIDENCE_FIELDS = (
+    "NewNoteID", "OtherNoteID", "NewMatchKey", "OtherMatchKey", "NewSense", "OtherSense"
+)
 
 IRREGULAR = {
     "went": "go", "gone": "go",
@@ -97,10 +101,7 @@ def words(value: str) -> list[str]:
 
 
 def orth_key(value: str) -> str:
-    out = []
-    for token in words(value):
-        out.append(UK_US.get(token, token))
-    return " ".join(out)
+    return " ".join(UK_US.get(token, token) for token in words(value))
 
 
 def lemma_token(token: str) -> str:
@@ -113,7 +114,6 @@ def lemma_token(token: str) -> str:
         stem = token[:-3]
         if len(stem) >= 3 and stem[-1] == stem[-2] and stem[-1] not in "lsz":
             stem = stem[:-1]
-        # dancing -> dance; making -> make, while reading/eating remain read/eat.
         if stem.endswith(("anc", "ak", "ik", "ov", "us")):
             stem += "e"
         return stem
@@ -138,8 +138,7 @@ def lemma_key(value: str) -> str:
 
 
 def phrase_skeleton(value: str) -> str:
-    toks = [lemma_token(t) for t in words(value) if t not in DROP_TOKENS]
-    return " ".join(toks)
+    return " ".join(lemma_token(t) for t in words(value) if t not in DROP_TOKENS)
 
 
 def origin_surface(row: dict[str, str]) -> str:
@@ -152,7 +151,6 @@ def origin_surface(row: dict[str, str]) -> str:
 
 
 def properish(value: str) -> bool:
-    # Multi-token title/place candidates only; this is candidate generation, not a merge decision.
     toks = words(value)
     return len(toks) >= 2 and any(c.isupper() for c in value)
 
@@ -201,6 +199,26 @@ def risk_signals(left: dict[str, str], right: dict[str, str]) -> tuple[list[str]
             score = max(score, 80)
 
     return signals, score
+
+
+def decision_closure(candidates: list[dict[str, str]]) -> tuple[int, Counter[str], int]:
+    if not DECISIONS.exists():
+        return 0, Counter(), 0
+    decisions = read_csv(DECISIONS)
+    by_id = {r.get("CandidateID", "").strip(): r for r in decisions}
+    reviewed = 0
+    stale = 0
+    counts: Counter[str] = Counter()
+    for cand in candidates:
+        dec = by_id.get(cand["CandidateID"])
+        if dec is None or not dec.get("Decision", "").strip():
+            continue
+        if any(cand.get(f, "").strip() != dec.get(f, "").strip() for f in DECISION_EVIDENCE_FIELDS):
+            stale += 1
+            continue
+        reviewed += 1
+        counts[dec["Decision"].strip()] += 1
+    return reviewed, counts, stale
 
 
 def main() -> None:
@@ -258,12 +276,10 @@ def main() -> None:
     for left in incoming:
         for right in baseline:
             add_pair("new-vs-existing", left, right)
-
     for i, left in enumerate(incoming):
         for right in incoming[:i]:
             add_pair("new-vs-new", left, right)
 
-    # Deterministic highest-risk-first review order.
     out.sort(key=lambda r: (-int(r["RiskScore"]), r["NewNoteID"], r["OtherNoteID"]))
     for i, row in enumerate(out, 1):
         row["CandidateID"] = f"G56D{i:04d}"
@@ -274,15 +290,24 @@ def main() -> None:
         w.writeheader()
         w.writerows(out)
 
+    reviewed, decision_counts, stale_decisions = decision_closure(out)
+    pending = len(out) - reviewed
     status = {
         "BaselineStableIdentities": len(baseline),
         "AllocatedGrade56Identities": len(incoming),
+        "ActiveGrade56NewIdentities": sum(
+            r.get("CreatedSource", "").strip() == GRADE56_SOURCE and r.get("Status", "").strip() == "active"
+            for r in registry
+        ),
         "CartesianPairsAvoided": len(incoming) * len(baseline) + (len(incoming) * (len(incoming) - 1) // 2) - len(out),
         "CandidatePairs": len(out),
         "NewVsExisting": sum(r["Scope"] == "new-vs-existing" for r in out),
         "NewVsNew": sum(r["Scope"] == "new-vs-new" for r in out),
         "SignalCounts": dict(sorted(signal_counts.items())),
-        "PendingReview": len(out),
+        "ReviewedPairs": reviewed,
+        "DecisionCounts": dict(sorted(decision_counts.items())),
+        "StaleDecisionPairs": stale_decisions,
+        "PendingReview": pending,
         "MasterMutation": False,
         "ReleaseMutation": False,
         "AnkiMutation": False,
