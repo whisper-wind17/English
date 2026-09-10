@@ -9,6 +9,9 @@ on:
       - 'tools/apply_klose_actual_grade4_reuse_facts.py'
       - 'tools/apply_klose_grade5_6_current.py'
       - 'tools/apply_klose_grade5_6_reuse_facts.py'
+      - 'tools/apply_klose_grade5_6_new_facts.py'
+      - 'tools/apply_klose_grade5_6_learner.py'
+      - 'tools/check_grade5_6_new_learner_content.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
@@ -26,6 +29,7 @@ on:
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
       - 'anki/klose/learner/grade5_6_learning_scope.json'
+      - 'anki/klose/learner/grade5_6_content_batch_*.csv'
       - 'anki/klose/learner/grade4_*overrides.csv'
       - 'anki/klose/learner/grade4_full_review_*.csv'
       - 'anki/klose/learner/actual_grade4_overrides.csv'
@@ -39,6 +43,7 @@ on:
       - 'anki/klose/master/actual_grade4_fact_overrides.csv'
       - 'anki/klose/master/actual_grade4_reuse_fact_overrides.csv'
       - 'anki/klose/master/grade5_6_reuse_fact_overrides.csv'
+      - 'anki/klose/master/grade5_6_new_fact_overrides.csv'
       - 'anki/klose/master/source_identity_map.csv'
       - 'anki/klose/master/source_identity_extensions.csv'
       - 'anki/klose/master/source_reconciliation_registry.csv'
@@ -46,6 +51,7 @@ on:
       - 'anki/klose/master/release_registry.csv'
       - 'anki/klose/master/release_registry_extensions.csv'
       - 'anki/klose/review/grade5_6_premerge_dedup/**'
+      - 'anki/klose/review/grade5_6_lexical_facts/**'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -107,8 +113,17 @@ jobs:
       - name: Fill Grade 5-6 reused-note lexical fact gaps
         run: python tools/apply_klose_grade5_6_reuse_facts.py
 
+      - name: Apply Grade 5-6 new-note lexical facts
+        run: python tools/apply_klose_grade5_6_new_facts.py
+
+      - name: Validate Grade 5-6 learner content
+        run: python tools/check_grade5_6_new_learner_content.py
+
       - name: Build explicit allowed/held learning admission
         run: python tools/build_klose_learning_admission.py
+
+      - name: Apply Grade 5-6 learner presentation
+        run: python tools/apply_klose_grade5_6_learner.py
 
       - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
