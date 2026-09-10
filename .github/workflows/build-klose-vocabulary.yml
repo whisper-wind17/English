@@ -11,6 +11,9 @@ on:
       - 'tools/apply_klose_grade5_6_reuse_facts.py'
       - 'tools/apply_klose_grade5_6_new_facts.py'
       - 'tools/apply_klose_grade5_6_learner.py'
+      - 'tools/apply_klose_release_extensions.py'
+      - 'tools/release_klose_allowed_vocabulary.py'
+      - 'tools/check_klose_release_history.py'
       - 'tools/check_grade5_6_new_learner_content.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
@@ -90,6 +93,9 @@ jobs:
       - name: Protect persistent identity and release state
         run: python tools/check_klose_persistent_state.py
 
+      - name: Protect byte-exact append-only release history
+        run: python tools/check_klose_release_history.py
+
       - name: Verify Grade 5-6 premerge dedup closure
         run: python tools/check_grade5_6_premerge_dedup.py
 
@@ -116,6 +122,9 @@ jobs:
 
       - name: Apply Grade 5-6 new-note lexical facts
         run: python tools/apply_klose_grade5_6_new_facts.py
+
+      - name: Materialize committed Vocabulary Release truth
+        run: python tools/apply_klose_release_extensions.py
 
       - name: Validate Grade 5-6 learner content
         run: python tools/check_grade5_6_new_learner_content.py
