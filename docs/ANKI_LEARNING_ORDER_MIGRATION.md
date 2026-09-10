@@ -1,8 +1,10 @@
 # Anki 一次性迁移：LearningOrder → New Card Position
 
-本 SOP 处理当前 Grade-4 Vocabulary 的学习顺序迁移。
+> **Historical migration scope.** 本文中的 `638 / 221 / 417` 是 Grade-4 初始迁移时的 snapshot，不是当前 Release 真源。2026-09-10 及之后的同步先读 `docs/ANKI_CURRENT_RELEASE_IMPORT.md`。如果这里只是补 `LearningOrder` 字段，只执行 schema migration；进入真实学习后，只对仍为 `is:new` 的 current allowed Cards 做 Reposition，不要求固定 221 张。
 
-目标不是修改 Stable NoteID，也不是让 GitHub 接管 Anki 的 Due / FSRS，而是把 repo 中明确的 curriculum order 一次性 materialize 为 Anki 的 New Card Position。
+本 SOP 处理当时 Grade-4 Vocabulary 的学习顺序迁移。
+
+目标不是修改 Stable NoteID，也不是让 GitHub 接管 Anki 的 Due / FSRS，而是把 repo 中明确的 curriculum order materialize 为 Anki 的 New Card Position。
 
 ## 1. 两种“顺序”必须区分
 
@@ -22,9 +24,7 @@ New Card Position / New #
 000001 .. 999999
 ```
 
-这样未来扩展到数千/数万学习单元时不需要再做 3 位 → 4 位 → 5 位迁移，并保证 Anki 文本排序与数值排序一致。
-
-当前 Grade-4：
+本文创建时的 Grade-4 snapshot：
 
 ```text
 allowed Notes  = 221
@@ -33,30 +33,11 @@ held Notes     = 417
 LearningOrder  = blank
 ```
 
-顺序规则：
-
-```text
-四年级上 Unit 1 -> Unit 6
--> 四年级下 Unit 1 -> Unit 6
--> Unit 内按教材 Order
-```
-
-前 8 个应为：
-
-```text
-000001 PE
-000002 job
-000003 doctor
-000004 farmer
-000005 nurse
-000006 office worker
-000007 factory worker
-000008 busy
-```
+这些计数仅用于历史 migration 回放；当前值以 `anki/klose/learner/learning_admission.csv`、`build_stats.csv` 和当前 release-import SOP 为准。
 
 ## 2. 为什么不能只保留当前 New #
 
-现有 638 Cards 由历史 release 演进而来。即使当前 221 张 active Cards 正确，原 New # 仍可能继承旧 Note 创建顺序，因此第一天出现 `there / chair / desk ...`，而不是教材 Unit 1 顺序。
+历史 release 由多次来源演进而来。即使 active Cards 范围正确，原 New # 仍可能继承 Note 创建顺序，而不是教材 curriculum order。
 
 仅在 Anki 手工 Reposition 可以解决一次，但 repo 无法解释或重建教学顺序。因此需要显式 `LearningOrder`。
 
@@ -112,72 +93,47 @@ Note Type       = Klose Vocabulary
 Existing Notes  = Update
 Match scope     = Note Type
 Identity        = NoteID
-```
-
-新增 mapping：
-
-```text
-LearningOrder -> LearningOrder
-```
-
-`UserMemo` 仍映射为 Nothing。
-
-预期：
-
-```text
-Total Cards = 638
-221 active Notes have LearningOrder 000001..000221
-417 held Notes have blank LearningOrder
+LearningOrder   -> LearningOrder
+UserMemo        -> Nothing / 不映射
 ```
 
 这次导入只更新 Note 字段，不应改变 Card identity / FSRS / Review History。
 
+当前 Release 的 expected total 和 LearningOrder range 不从本文历史数字推导，必须读取 `docs/ANKI_CURRENT_RELEASE_IMPORT.md`。
+
 ## 5. Reposition 前置条件
 
-本次只对尚未开始真实 Review History 的 current Grade-4 New Cards执行初始化排序。
+只对当前仍未进入真实 Review History 的 current allowed New Cards执行排序。
 
-Browser 搜索：
-
-```text
-tag:learning::klose::grade4 -is:suspended is:new
-```
-
-必须得到：
+目标集合必须满足：
 
 ```text
-221 Cards
+current Learning Admission = allowed
+AND is:new
+AND not suspended
 ```
 
-如果不是 221，停止并排查，不要继续 Reposition。
+如果某些 current Cards 已经进入 Learning / Review，它们不再属于本次 Reposition scope；因此目标数量可以小于 repo 的 total allowed count。
+
+禁止为了匹配旧 snapshot 的固定数量而重排已学习 Cards。
 
 ## 6. 按 LearningOrder 排序
 
-在 Browser 中显示 `LearningOrder` 列，并按升序排序。
+在 Browser 中显示 `LearningOrder` 列并按升序排序。
 
-因为值固定 6 位零填充：
-
-```text
-000001, 000002, ... 000009, 000010, ... 000221
-```
-
-文本排序与数值排序都会得到同一顺序。
-
-最上面的 8 张必须是：
+由于值固定为 6 位零填充：
 
 ```text
-PE
-job
-doctor
-farmer
-nurse
-office worker
-factory worker
-busy
+000001, 000002, ... 000009, 000010, ...
 ```
+
+文本排序与数值排序一致。
+
+排序应与当前 repo curriculum truth 相符；不要用 NoteID、SourceGrade 或创建时间代替 LearningOrder。
 
 ## 7. Materialize 到 New #
 
-保持上述 221 张按 `LearningOrder` 升序显示，全选：
+保持目标 New Cards 按 `LearningOrder` 升序显示，全选：
 
 ```text
 Ctrl+A
@@ -194,54 +150,28 @@ Randomize      = OFF
 Shift existing = ON
 ```
 
-执行后，这 221 张 current Grade-4 New Cards 应对应：
-
-```text
-LearningOrder 000001 -> New #1
-LearningOrder 000002 -> New #2
-...
-LearningOrder 000221 -> New #221
-```
-
-未选中的 held New Cards 会被移到后续位置；它们本身处于 Suspended，不影响当前学习。
+这一步只调整 New Card Position。未被选择的 held New Cards 可留在后续位置并保持 suspended；Learning/Review Cards 不受影响。
 
 ## 8. 验收
 
-仍搜索：
+验收不再依赖历史固定 `221` 数量，而验证以下 invariants：
 
 ```text
-tag:learning::klose::grade4 -is:suspended is:new
+目标集合全部仍为 is:new
+目标集合全部属于 current allowed
+LearningOrder 非空且严格递增
+New # 顺序与 LearningOrder 一致
+held New Cards 不进入 current New queue
+已有 Learning / Review Cards 的 Due / Interval / Reviews 不变
 ```
 
-按 `Due / New #` 升序后，前 8 张必须是：
-
-```text
-PE
-job
-doctor
-farmer
-nurse
-office worker
-factory worker
-busy
-```
-
-同时确认：
-
-```text
-Total Cards = 638
-Unsuspended = 221
-Suspended   = 417
-```
+当前 release 的总 Notes/Cards、allowed/held 数量和 LearningOrder max，以最新 `docs/ANKI_CURRENT_RELEASE_IMPORT.md` 为准。
 
 ## 9. 长期规则
 
-`LearningOrder` 是教学计划元数据，不进入 learner content fingerprint。
-
-未来：
-
-- 修改词义 / IPA / Example / PromptHint -> 需要内容 re-review；
-- 修改 LearningOrder -> 不需要重新审校内容，但必须通过 Admission / Release Gate；
-- LearningOrder 的正式存储格式固定为 6 位 `000001..999999`，不得随词库规模改变位宽；
-- 已经进入真实 Learning / Review 的 Card，不因为后续 curriculum order 变化而重排其 FSRS / Due；
-- LearningOrder 主要用于尚未学习的新卡准入和初始化 sequencing。
+- 修改词义 / IPA / Example / PromptHint → 需要内容 re-review；
+- 修改 LearningOrder → 不需要内容 re-review，但必须通过 Admission / Release Gate；
+- LearningOrder 固定为 6 位 `000001..999999`，不得随词库规模改变位宽；
+- 已进入真实 Learning / Review 的 Card，不因 curriculum order 变化而重排 FSRS / Due；
+- LearningOrder 主要用于尚未学习新卡的 admission 与 sequencing；
+- GitHub 保存 curriculum intent，Anki 保存真实 memory state。
