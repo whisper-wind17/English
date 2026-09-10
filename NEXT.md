@@ -19,20 +19,30 @@ AGENTS.md
 ## 2. Current state
 
 ```text
-Grade 5 Upper  Vocabulary + Useful Expressions       = RECEIVED
-Grade 5 Lower  Vocabulary + Useful Expressions       = RECEIVED
-Grade 5 Lower  Appendix Proverbs (6)                 = RECEIVED
-Grade 6 Upper  Vocabulary + Useful Expressions       = RECEIVED
-Grade 6 Lower  Vocabulary + Useful Expressions       = RECEIVED
+Grade 5 Upper  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
+Grade 5 Lower  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
+Grade 5 Lower  Appendix Proverbs (6)                 = RECEIVED / NOT MATERIALIZED
+Grade 6 Upper  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
+Grade 6 Lower  Vocabulary + Useful Expressions       = RECEIVED / NOT MATERIALIZED
 
-Grade 5–6 structured repo source                     = NOT STARTED
-Morphology Registry                                  = NOT STARTED
-Grade 5–6 → Klose Stable Identity reconciliation     = NOT STARTED
-Grade 5–6 NoteID / ExpressionID allocation           = NOT STARTED
-Klose Publish / Anki update                          = NOT STARTED
+Grade 5–6 intake manifest                            = MATERIALIZED
+Morphology observed mappings                         = 43 MATERIALIZED / SOURCE TRACE PENDING
+  verb_past                                          = 29
+  comparative                                        = 14
+Grade 5–6 exact Vocabulary / Expressions / Proverbs = NOT MATERIALIZED
+Grade 5–6 → Klose Stable Identity reconciliation    = NOT STARTED
+Grade 5–6 NoteID / ExpressionID allocation          = NOT STARTED
+Klose Publish / Anki update                         = NOT STARTED
 ```
 
-“RECEIVED”只表示用户已在当前对话提供真实教材图片；尚未结构化写入 `anki/klose/source_reference/`。
+当前新增 Source-layer artifacts：
+
+```text
+anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv
+anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv
+```
+
+43 个 morphology 映射来自此前已提交 checkpoint 中对用户真实教材图片的观察记录；其中 `read → read /red/` 的读音事实已保留。由于当前可访问上下文没有上一段对话中的原始图片 bytes，Semester / Unit / Page / SourceEntry 仍为空，状态统一为 `observed-mapping-pending-source-trace`。这不是 Source Completion PASS。
 
 ## 3. Hard decisions
 
@@ -48,10 +58,11 @@ Klose Publish / Anki update                          = NOT STARTED
 ## 4. Immediate next work
 
 ```text
-1. Materialize all received Grade 5–6 Vocabulary / Useful Expressions / Proverbs
-2. Build Morphology Registry from explicit textbook inflections
-3. Run independent Source Completion Recheck
-4. Only after 1–3 PASS: direct reconciliation against Klose existing Vocabulary / Expressions
+1. Re-acquire readable Grade 5–6 actual textbook image evidence in the active context/repo
+2. Materialize exact Vocabulary / Useful Expressions / 6 Proverbs rows
+3. Resolve the 43 morphology mappings to Semester / Unit / Page / SourceEntry
+4. Run independent Source Completion Recheck
+5. Only after 1–4 PASS: direct reconciliation against Klose existing Vocabulary / Expressions
 ```
 
 Source Completion Recheck 至少确认四册/Units/对象类型覆盖完整、教材 metadata 可追溯、代表性 image-to-row spot check 通过，且没有第三方数据混入。
@@ -68,7 +79,7 @@ publish regeneration for this task
 Anki update
 ```
 
-当前 DoD 是 **Grade 5–6 actual Source + Morphology 结构化并通过独立完整性验证**，不是合入或发布。
+当前 DoD 仍是 **Grade 5–6 actual Source + Morphology 结构化并通过独立完整性验证**，不是合入或发布。
 
 ## 6. Third-party corpus — hold
 
