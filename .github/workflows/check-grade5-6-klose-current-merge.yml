@@ -37,6 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 2
           sparse-checkout: |
             tools
             anki/klose
@@ -44,6 +45,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify persistent Stable state
+        env:
+          KLOSE_BASE_COMMIT: HEAD^
         run: python tools/check_klose_persistent_state.py
       - name: Independently verify Grade 5-6 current Vocabulary merge
         run: python tools/check_klose_grade5_6_current_merge.py
