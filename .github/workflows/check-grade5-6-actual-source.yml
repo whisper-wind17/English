@@ -1,0 +1,45 @@
+name: Check Grade 5-6 Actual Textbook Source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
+      - 'anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv'
+      - 'anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv'
+      - 'tools/check_grade5_6_actual_textbook_source.py'
+      - '.github/workflows/check-grade5-6-actual-source.yml'
+  pull_request:
+    paths:
+      - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
+      - 'anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv'
+      - 'anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv'
+      - 'tools/check_grade5_6_actual_textbook_source.py'
+      - '.github/workflows/check-grade5-6-actual-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-completion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Grade 5-6 actual textbook source
+        run: python tools/check_grade5_6_actual_textbook_source.py
