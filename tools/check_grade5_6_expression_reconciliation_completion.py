@@ -4,7 +4,7 @@
 This checker rebuilds source occurrence keys/fingerprints from the four source files
 instead of trusting expression_status.json or the planner output. It validates full
 coverage, decision/group contracts, representative semantic boundaries, transient
-cleanup, and absence of Stable ExpressionID allocation.
+cleanup, absence of Stable ExpressionID allocation, and current Source provenance.
 """
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
+
+from grade5_6_source_state import source_provenance_state
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
@@ -70,7 +72,6 @@ def split_groups(value: str) -> list[str]:
 
 
 def main() -> None:
-    # Rebuild source truth independently from the four actual-textbook files.
     expected: dict[str, dict[str, str]] = {}
     for path in SOURCES:
         for src in read_csv(path):
@@ -204,7 +205,6 @@ def main() -> None:
     if SOURCE_INBOX.exists() or GROUP_INBOX.exists():
         fail("transient Expression review inbox still exists")
 
-    # High-risk semantic/boundary regressions.
     expected_examples = {
         "grade5-upper-u01-o001": ("mapped", {"new::ask-person-description"}),
         "grade5-upper-u01-o002": ("mapped", {"KE000027"}),
@@ -229,7 +229,6 @@ def main() -> None:
                 f"want={(want_disposition, want_groups)}"
             )
 
-    # Shared future groups must actually accumulate cross-occurrence evidence.
     for group, minimum in {
         "new::ask-event-time": 4,
         "new::ask-past-activity": 4,
@@ -241,6 +240,14 @@ def main() -> None:
         uses = sum(group in split_groups(r.get("IdentityGroups", "")) for r in decision_rows)
         if uses < minimum:
             fail(f"shared future identity unexpectedly under-linked: {group} uses={uses} < {minimum}")
+
+    provenance = source_provenance_state()
+    if provenance["ResolutionState"] != "applied" or provenance["SourceIdentityPending"]:
+        fail(f"Source provenance is not fully resolved: {provenance}")
+    if not provenance["SourceProvenanceBlockers"]:
+        fail("expected lower-volume provenance blockers are missing")
+    if provenance["StableIDAllocationAllowed"]:
+        fail("provenance unexpectedly authorizes Stable ID allocation")
 
     status = json.loads(STATUS.read_text(encoding="utf-8"))
     checks = {
@@ -257,7 +264,13 @@ def main() -> None:
         "StableExpressionRegistry": 66,
         "StableExpressionIDAllocated": False,
         "MasterLearnerReleasePublishMutationAuthorized": False,
-        "SourceIdentityPending": True,
+        "SourceIdentityPending": False,
+        "SourceProvenanceFingerprint": provenance["SourceProvenanceFingerprint"],
+        "SourceProvenanceRows": provenance["SourceProvenanceRows"],
+        "SourceProvenanceBlockers": provenance["SourceProvenanceBlockers"],
+        "SourceProvenanceResolutionState": "applied",
+        "CanonicalSourceID": "renjiao_start3",
+        "StableIDAllocationAllowed": False,
     }
     for field, want in checks.items():
         if status.get(field) != want:
@@ -268,7 +281,7 @@ def main() -> None:
         f"source=153, decisions=153, mapped={disposition_counts['mapped']}, "
         f"source_only={disposition_counts['source-only']}, new_groups={len(referenced_new)}, "
         f"reused_stable_groups={len(referenced_stable)}, stable_registry={len(stable_ids)}, "
-        "pending=0, transient_inbox=absent, stable_id_allocation=0"
+        f"pending=0, stale=0, provenance={provenance['SourceProvenanceFingerprint'][:12]}, allocation=blocked"
     )
 
 
