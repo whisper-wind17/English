@@ -2,13 +2,13 @@
 
 ## Purpose
 
-Stage A produces reviewed provisional learner identities. Stage B reconciles each provisional identity against the existing Klose Stable NoteID registry before any identity mutation, release, or Anki update.
+Stage A produces reviewed provisional Vocabulary identities. Stage B reconciles each provisional identity against the existing Klose Stable NoteID registry **before any identity mutation, release, or Anki update**.
 
 This layer is intentionally separate from `premerge/identity_candidates.csv`:
 
 ```text
-premerge candidate map = derived matching evidence
-reconciliation_decisions.csv = durable reviewed decision truth
+premerge candidate map          = derived matching evidence
+reconciliation_decisions.csv    = durable reviewed decision truth
 ```
 
 Exact MatchKey equality is never sufficient to authorize reuse.
@@ -20,23 +20,13 @@ Every reconciliation decision binds to both:
 1. `StageACheckpointFingerprint` — the sealed `stage-a-status-v2` content boundary.
 2. `CandidateFingerprint` — the exact current premerge row, including current Klose candidate NoteIDs and senses.
 
-If either Stage-A identity truth or the Klose Stable NoteID context changes, the old decision must fail validation and be re-reviewed.
+If either Stage-A identity truth or the Klose Stable NoteID context changes, the old decision must fail validation and be re-reviewed. Stale decisions are not silently carried forward.
 
-## Premerge snapshot states
+## Premerge snapshot contract
 
-`premerge/readiness.json` is derived state, but it must always describe the **current sealed Stage A**, including when Stage A is not yet ready for reconciliation.
+`premerge/readiness.json` is derived state and must describe the current sealed Stage A.
 
-Current contract is `third-party-stage-b-readiness-v2`:
-
-```text
-StageAStatusVersion
-StageACheckpointFingerprint
-SourceOccurrences
-ActiveReviewBatch
-ReadyForPremergeReview
-```
-
-Two valid states exist:
+Current contract: `third-party-stage-b-readiness-v2`.
 
 ```text
 READY
@@ -48,27 +38,19 @@ CURRENT BUT GATED
   ReadyForPremergeReview  = false
 ```
 
-A gated snapshot is not stale. It is a current read-only description of the present Stage-A/Klose candidate relation, but Stage-B durable reconciliation validation must not run until the gate becomes ready.
+The builder/checker fails if source occurrence count, Stage-A checkpoint, Identity Preview coverage, audited-defer carry-forward, Klose candidate references, or readiness state drifts.
 
-The builder/checker must fail if:
+No previous `Ready=true` snapshot remains authoritative after Stage A changes.
 
-- `SourceOccurrences` differs from the sealed Stage-A source union;
-- the snapshot does not bind the current `StageACheckpointFingerprint`;
-- candidate coverage differs from the current Identity Preview;
-- deferred carry-forward differs from the current Stage-A review queue;
-- `ReadyForPremergeReview` does not reflect the current Stage-A review batch state.
-
-No previous `Ready=true` snapshot may remain authoritative after Stage A changes.
-
-## Actions
+## Reconciliation actions
 
 ### `reuse-existing`
 
 The provisional identity is equivalent to one current active Klose Stable NoteID.
 
 Requirements:
-- exactly one `ExistingNoteID` is selected;
-- selected NoteID is active and present in the current candidate row;
+- exactly one current `ExistingNoteID` selected;
+- selected NoteID appears in the current candidate context;
 - no proposed new identity fields;
 - `Status=reviewed`;
 - `MutationAuthorized=no`.
@@ -79,108 +61,161 @@ No existing Klose identity is equivalent to the provisional learner identity.
 
 Requirements:
 - `ExistingNoteID` empty;
-- `ProposedCanonicalWord`, `ProposedMatchKey`, `ProposedSense` present;
+- proposed canonical word / MatchKey / sense present;
 - `Status=reviewed`;
-- this is only a reviewed allocation candidate — no NoteID is minted here;
+- records a future allocation candidate only;
+- **does not mint a StableThirdPartyID/NoteID**;
 - `MutationAuthorized=no`.
+
+A same-MatchKey Klose candidate does not prohibit this action when explicit semantic review establishes a distinct homograph/learning unit; the decision basis must make the non-equivalence explicit.
 
 ### `held`
 
-Current evidence does not permit a safe one-to-one reconciliation, or the existing Klose identity boundary itself requires cleanup first.
+Current evidence does not permit safe one-to-one reconciliation, or the existing Klose identity boundary itself requires cleanup first.
 
 Requirements:
-- no existing NoteID selected;
+- no ExistingNoteID selected;
 - no proposed new identity;
 - `Status=held`;
 - explicit rationale;
 - `MutationAuthorized=no`.
 
-## Learner Admission remains independent
+`held` is a complete Stage-B reconciliation result, not missing work.
 
-Stage-B Identity reconciliation covers all Stage-A provisional identities, including identities currently excluded by the learner grammar gate.
+## Learner Admission remains independent
 
 ```text
 Identity reconciled != learner admitted != released != scheduled in Anki
 ```
 
-The current learner-quarantined identities may be reconciled at the identity layer, but cannot enter the current learner release unless the learner-stage gate changes separately.
+Stage B covers all Stage-A provisional identities. Identities excluded by learner policy are retained at Source/Identity layers but are `held` in current Stage B with no ExistingNoteID and no allocation proposal.
+
+Current user-requested content exclusion policy removes from learner admission:
+
+```text
+a / an / the                    = 3
+cardinal / ordinal number units = 71
+TOTAL                            = 74
+```
+
+The exclusion does not delete Source Facts or Vocabulary Identity. Other existing learner gates bring total current learner-excluded identities to 97. Current Identity Preview remains 2820; Learner Preview is 2723.
 
 ## Audited Stage-A defers
 
-Current Stage A carries 20 v6 audited-defer surfaces. They are not provisional Identity candidates and must not appear in `reconciliation_decisions.csv`:
+Final Stage A carries 52 current-context audited-defer surfaces. These are explicit valid holds caused primarily by insufficient current source context or policy-boundary ambiguity. They are not active unprocessed work and are not forced into Identity Preview merely to reduce blocker count.
+
+The exact current set is machine-owned in:
 
 ```text
-fan / feel / flies / french / get / kind / letter / light / like / line /
-little / mouse / pass / plant / put up / right / sound / square / too / watch
+anki/klose/third_party_vocabulary/audit/defer_context.csv
+anki/klose/third_party_vocabulary/premerge/audited_deferred.csv
 ```
 
-They remain explicit carry-forward exceptions in `premerge/audited_deferred.csv` until source/canonical/policy context changes. Do not force occurrence partition merely to reduce the blocker count.
-
-## Current gated snapshot — 2026-09-09
-
-Current Stage-A content boundary:
+## Final Stage-A boundary used by Stage B
 
 ```text
-StageACheckpointFingerprint = eadb2d5163ff3193cc735b834a20dcec393df51f8d9d48867f93b5532060a556
-SourceOccurrences           = 7535
-StageAIdentityCandidates    = 2039
-StageALearnerCandidates     = 2024
-AuditedDeferredSurfaces     = 20
+StageACheckpointFingerprint = 02bec1239e717f8f9141c38cec2fa16947f9c16a6ec372478db26936c5451b0f
+SourceOccurrences           = 18887
+StageAIdentityCandidates    = 2820
+StageALearnerCandidates     = 2723
+AuditedDeferredSurfaces     = 52
 KloseActiveNoteIDs          = 901
-exact-multiple              = 7
-exact-single                = 811
-no-existing-match           = 1221
-ActiveReviewBatch           = true
-ReadyForPremergeReview      = false
+exact-multiple              = 5
+exact-single                = 781
+no-existing-match           = 2029
+orthographic-single         = 4
+spelling-single             = 1
+ActiveReviewBatch           = false
+ReadyForPremergeReview      = true
+StageBMutationAuthorized    = false
+StableThirdPartyIDMinted    = false
+MergeAuthorizedRows         = 0
 ```
 
-The active Stage-A review batch is the targeted orthographic audit for `program / programme`. Therefore Stage-B durable reconciliation remains gated even though the premerge snapshot itself is current and fully validated.
+Orthographic/spelling candidate discovery explicitly catches conservative equivalence such as space/hyphen variants and configured spelling variants before a `no-existing-match` candidate can be treated as a future new identity.
 
-Validation:
+## Deterministic review pipeline
+
+Stage B uses the same durable/derived/transient separation as Stage A:
 
 ```text
-Stage-B readiness workflow #5 / 34292245929 = SUCCESS
-reconciliation workflow #5 / 34292266672 = SUCCESS
-reconciliation decision validation = SKIPPED BY GATE
-Klose isolation = PASS
+identity_candidates.csv                   derived candidate evidence
+→ reconciliation_review_queue.csv         derived unresolved set
+→ reconciliation_selected_view.csv        deterministic current batch
+→ reviewed_batch.csv / decision_updates   transient reviewed input
+→ reconciliation_decisions.csv            durable review truth
+→ Completion Recheck
 ```
 
-## Mutation boundary
+Safe deterministic lanes may materialize reviewed proposals only when the equivalence rule itself is sufficient, for example exact MatchKey + exact learner sense, or when there is no exact/orthographic/spelling candidate and the output is only a non-authorizing future identity proposal.
 
-This reconciliation layer does not:
+Semantic mismatch, multiple candidates, mixed existing Klose senses, and variant ambiguity remain explicit-review cases.
+
+## Final Stage-B closure — 2026-09-10
+
+Final reconciliation workflow:
+
+```text
+workflow run number = #56
+workflow run id     = 34420414777
+result              = SUCCESS
+bot persist commit  = 5b6936852a48abc3df337ada35666d357c5e9dd4
+```
+
+Final machine state:
+
+```text
+CandidateCount                     = 2820
+ValidDurableDecisionCount          = 2820
+ReviewQueueCount                   = 0
+SelectedCount                      = 0
+ReviewLane                         = <none>
+ExecutionReady                     = false
+AutoExecutable                     = false
+```
+
+Final durable action distribution:
+
+```text
+reuse-existing                     = 692
+new-stable-identity proposal       = 1977
+held                               = 151
+TOTAL                              = 2820
+```
+
+Completion Recheck confirms:
+
+```text
+reconciliation coverage            = 100%
+high-risk multiple candidates      = 5 / 5 decided
+learner-excluded identities        = 97 / 97 held
+all durable rows current-fingerprint bound = yes
+review queue                        = 0
+selected batch                      = 0
+Stable NoteID minted                = no
+Stage-B mutation authorized         = no
+Merge authorized                    = no
+Klose identity/learner/release/Anki isolation = pass
+```
+
+Independent post-persist diff recheck found only third-party `premerge/**` / `reconciliation/**` review-state changes for the final batch. Across the current Stage-B review sequence, no Klose Master/Learner/Publish/Anki state was changed.
+
+## HOLD POINT / mutation boundary
+
+Stage-B read-only reconciliation is **CLOSED**. Per current user instruction, actual merge/allocation is intentionally not started.
+
+Until a future explicit user instruction opens a new allocation/migration phase, this layer does not:
 
 - append or modify `note_registry*.csv`;
 - write `source_identity*.csv`;
 - allocate Stable NoteIDs;
-- modify learner/release/publish files;
-- modify Anki or review history.
+- modify Klose learner/release/publish files;
+- modify Anki or review history;
+- turn `held` decisions into automatic merges;
+- admit learner-excluded identities.
 
-A later allocation/migration plan must consume a **100% closed reconciliation decision set**, run an independent Completion Recheck, and remain read-only until explicit Stage-B mutation gating is approved.
+A later allocation/migration plan must consume this 100% closed reconciliation set, explicitly define treatment of `held` and proposed-new identities, protect stable NoteIDs and existing FSRS/review history, and pass its own independent Completion Recheck before any mutation is authorized.
 
-## Historical high-risk adjudication
+## Historical note
 
-The prior exact-multiple review covered:
-
-```text
-can
-cook#person
-cook#verb
-free
-milk
-over
-speak
-```
-
-Historical reviewed results:
-
-```text
-can          -> reuse KV000074 (modal)
-cook#person  -> held; KV000424 still has legacy mixed noun/verb SenseLabel
-cook#verb    -> reuse KV000805 (actual-textbook distinct verb identity)
-free         -> reuse KV000502 (空闲的)
-milk         -> reuse KV000088 (牛奶)
-over         -> new-stable-identity candidate (在……上方；在……上面)
-speak        -> held; provisional broad sense overlaps KV000705 and KV000901
-```
-
-These historical decisions are review evidence only until revalidated against the current Stage-A checkpoint and current candidate fingerprints. No row authorizes merge or NoteID allocation.
+The earlier 2026-09-09 snapshot (`eadb2d...`, 7535 source occurrences, 2039 identities, 20 audited defers) was a **historical gated checkpoint**, not the current state. Historical high-risk adjudications were revalidated against the final Stage-A checkpoint; Git history retains the older evidence for auditability.
