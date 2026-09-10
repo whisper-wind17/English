@@ -7,6 +7,9 @@ on:
       - 'tools/prepare_grade5_6_expression_reconciliation.py'
       - 'tools/apply_grade5_6_expression_review.py'
       - 'tools/check_klose_expression_persistent_state.py'
+      - 'tools/grade5_6_source_state.py'
+      - 'tools/sync_grade5_6_reconciliation_provenance.py'
+      - 'anki/klose/source_reference/grade5_6_source_provenance.json'
       - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
@@ -49,6 +52,8 @@ jobs:
         run: python tools/apply_grade5_6_expression_review.py
       - name: Rebuild Expression review state
         run: python tools/prepare_grade5_6_expression_reconciliation.py
+      - name: Bind reconciliation status to current Source provenance
+        run: python tools/sync_grade5_6_reconciliation_provenance.py expression
       - name: Verify Stable Klose Expression state
         env:
           KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
