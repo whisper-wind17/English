@@ -1,0 +1,27 @@
+IdentityGroup,Decision,ExpressionID,CanonicalForm,FunctionKey,ExpressionType,SlotSchema,DecisionBasis,Rationale
+new::respond-past-yes,new-stable-identity,,"Yes, [subject pronoun] did.",confirm_past_action,slot_frame,subject_pronoun,model-reviewed-current-evidence,一般过去时是非问句的高频肯定短答
+new::state-past-destination-time,new-stable-identity,,[Subject] went to [place/event] [past time].,state_past_destination_time,slot_frame,subject|place_event|past_time,model-reviewed-current-evidence,说明过去某时去了某地或活动的通用叙述框架
+new::ask-past-like-about,new-stable-identity,,What did you like about [thing]?,ask_past_preference_detail,slot_frame,thing,model-reviewed-current-evidence,询问过去经历中喜欢某对象的哪一点
+new::state-past-liked,new-stable-identity,,I liked [thing/activity].,state_past_preference,slot_frame,thing_activity,model-reviewed-current-evidence,表达过去喜欢的事物或活动
+new::ask-feeling,new-stable-identity,,How do you feel?,ask_current_feeling,fixed,,model-reviewed-current-evidence,询问对方当前身体或情绪感受的高频表达
+new::state-feeling,new-stable-identity,,I feel [adjective].,state_current_feeling,slot_frame,adjective,model-reviewed-current-evidence,表达自己当前身体或情绪状态
+new::state-pain,new-stable-identity,,My [body part] hurts.,state_body_pain,slot_frame,body_part,model-reviewed-current-evidence,描述身体某部位疼痛的高迁移健康表达
+new::state-symptom-have,new-stable-identity,,I have [symptom].,state_health_symptom,slot_frame,symptom,model-reviewed-current-evidence,说明自己具有某个症状的健康场景句型
+new::express-empathy-sorry-hear,new-stable-identity,,I'm sorry to hear that.,express_empathy,fixed,,model-reviewed-current-evidence,听到对方不适或坏消息后表达同情的高频固定语
+new::give-advice-maybe-should,new-stable-identity,,Maybe you should [verb phrase].,give_soft_advice,slot_frame,verb_phrase,model-reviewed-current-evidence,用 Maybe you should 缓和地提出建议
+new::state-collective-need,new-stable-identity,,We need to [verb phrase].,state_collective_need,slot_frame,verb_phrase,model-reviewed-current-evidence,表达共同需要采取的行动；与 I need to 的说话者立场不同
+new::give-negative-instruction,new-stable-identity,,Don't [verb phrase].,give_negative_instruction,slot_frame,verb_phrase,model-reviewed-current-evidence,一般性否定祈使或建议；不同于带 please 的礼貌 prohibition identity
+new::ask-future-plan-how,new-stable-identity,,How are you going to [verb phrase]?,ask_future_plan_method,slot_frame,verb_phrase,model-reviewed-current-evidence,询问对方打算如何做某事的 going-to 句型
+new::state-future-going-to,new-stable-identity,,I'm going to [verb phrase].,state_future_plan_going_to,slot_frame,verb_phrase,model-reviewed-current-evidence,表达个人近期计划或打算的核心 going-to frame
+new::state-want-to,new-stable-identity,,I want to [verb phrase].,state_desired_action,slot_frame,verb_phrase,model-reviewed-current-evidence,表达自己想做某事的基础 production frame
+new::ask-additional-future,new-stable-identity,,What else are you going to [verb]?,ask_additional_future_action,slot_frame,verb,model-reviewed-current-evidence,追问对方还打算做或买什么
+new::ask-visible-objects,new-stable-identity,,What can you see [place phrase]?,ask_visible_objects,slot_frame,place_phrase,model-reviewed-current-evidence,询问在某处能看到什么的高迁移感知表达
+new::state-visible-objects,new-stable-identity,,We can see [things].,state_visible_objects,slot_frame,things,model-reviewed-current-evidence,说明在当前环境中能看到哪些事物；区别于提出行动建议的 We can
+new::ask-existence-uncountable,new-stable-identity,,Is there any [uncountable noun] [place phrase]?,ask_existence_uncountable,slot_frame,uncountable_noun|place_phrase,model-reviewed-current-evidence,询问某处是否存在不可数事物
+new::state-existence-uncountable,new-stable-identity,,There is [uncountable noun] [place phrase].,state_existence_uncountable,slot_frame,uncountable_noun|place_phrase,model-reviewed-current-evidence,说明某处存在不可数事物
+new::respond-dont-think-so,new-stable-identity,,I don't think so.,express_negative_belief,fixed,,model-reviewed-current-evidence,表达认为前述说法不成立的高频固定回应
+new::report-they-say,new-stable-identity,,They say [clause].,report_hearsay,discourse_frame,clause,model-reviewed-current-evidence,转述他人或一般说法的简洁 discourse frame
+new::ask-knowledge-about,new-stable-identity,,What do you know about [thing]?,ask_knowledge,slot_frame,thing,model-reviewed-current-evidence,询问对某主题已经知道些什么
+new::ask-additional-knowledge,new-stable-identity,,What else do you want to know about [thing]?,ask_additional_knowledge,slot_frame,thing,model-reviewed-current-evidence,追问还想了解某主题的哪些内容
+new::classify-types-of,new-stable-identity,,[Items] are types of [category].,classify_examples,discourse_frame,items|category,model-reviewed-current-evidence,用于把多个例子归入某一类别的基础说明框架
+new::ask-what-should-we-do,new-stable-identity,,What should we do?,ask_recommended_action,fixed,,model-reviewed-current-evidence,面对问题时询问应该采取什么行动的高频表达
