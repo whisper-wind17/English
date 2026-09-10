@@ -65,6 +65,39 @@ grade5-upper-u06-o003,0e8300ff6db583d4eff69645b6b0d6aef024fc383a5ea416c027df75a5
 grade5-upper-u06-o004,913502098ac2075fc31187b5f5c72248b803c67a1e1046cb7e089c77211da594,mapped,new::ask-existence-plural,model-reviewed-current-evidence,询问某处是否存在复数事物
 grade5-upper-u06-o005,8b949cb6737f5fb35783b7451b7c76ae3163491b3e125e36173e85141facbf75,mapped,new::confirm-existence-plural,model-reviewed-current-evidence,复数存在问句的高频肯定短答
 grade5-upper-u06-o006,616151472228ca1d0aa95d7f361a7a552b3e8ee01a34eb9377738105a315bc85,mapped,new::state-future-existence,model-reviewed-current-evidence,There will be 用于表达未来存在或发生的可迁移结构
+grade6-lower-u01-o001,bd3d2791962bce3c47b8ac8d8653f33e762c5fb19accbefa0ff724aa2f405bae,mapped,new::state-superlative-in-place,model-reviewed-current-evidence,用最高级指出某范围内最突出的对象；不是数量陈述 KE000058
+grade6-lower-u01-o002,4679aedd87b57fced9d9b474d689bc561132ddcad8235f1b665f4e81fd42970a,mapped,new::state-comparison-than,model-reviewed-current-evidence,表达比较级差异；自动位置类匹配均属字符串通配假阳性
+grade6-lower-u01-o003,adca68b155df7f3f908ace1da45065c1abc9cf6900782a2728309957a42ef291,mapped,new::ask-height,model-reviewed-current-evidence,询问身高的高频固定表达
+grade6-lower-u01-o004,4328323a398971758a211f9e34afda4510eaf82904431c83550c69a408aea3f1,mapped,new::state-height,model-reviewed-current-evidence,用数值回答自己的身高
+grade6-lower-u01-o005,1769cc2f0b415aefe4eb68097fe2b3bc393db638b335744550ae8e9eb9da9991,mapped,new::ask-size,model-reviewed-current-evidence,询问鞋服等物品尺码的高频句型；称呼不影响 identity
+grade6-lower-u01-o006,52b384e8dba43ff1b15ccec50b9fa6e1df395c1f3cd85dae5feb8ab1c2dc0ec5,mapped,new::state-comparison-than|new::state-item-size,model-reviewed-current-evidence,一条 Source 含比较级陈述以及物品尺码回答两个可迁移 production units
+grade6-lower-u01-o007,48d89b8ba6c3f4e180b9e08f1deb236957b5dbb9fd843033a543585453a6889c,mapped,new::ask-weight,model-reviewed-current-evidence,询问体重的教材核心表达
+grade6-lower-u01-o008,523513f7203fcb0dcf9c6d26a6100b660ea04a7c0dd84b3903f4b34c17609db3,mapped,new::state-weight,model-reviewed-current-evidence,用数值回答自己的体重
+grade6-lower-u02-o001,d750d176d662d188550e43fce9eecf5345ee2a42b70ceaf883152fd5c8046999,mapped,new::ask-past-experience,model-reviewed-current-evidence,与六上 How was your weekend 完全同一 past-experience future identity
+grade6-lower-u02-o002,fea4a2b36cd55cbd1f5ddc2c78df27e014b9fd1c54bd60179e94ab2fe806bb85,mapped,new::state-past-evaluation,model-reviewed-current-evidence,It was [adjective] 是过去经历评价 frame；thank you 为附加礼貌成分
+grade6-lower-u02-o003,9dedf0be5bc4b789b047cb06e45aa7990f1dd0c23ef2be492f1e6f43087d2891,mapped,new::ask-past-activity,model-reviewed-current-evidence,与已定义 What did you do? future identity 完全一致
+grade6-lower-u02-o004,cc6a53310c2d99b03ae00496bb70e6cf28f1236ab826752e4b35ff339b661d22,source-only,,model-reviewed-current-evidence,两句均是具体过去叙事且主语时间结构不同；不为普通组合句额外 mint identity
+grade6-lower-u02-o005,85ee397c5f80bb87d123ff3fcdf7f823d642c145f7de9c819a09ccc02e6620f0,mapped,new::ask-past-anything-else,model-reviewed-current-evidence,以是非问句追问过去是否还做了其他事情
+grade6-lower-u02-o006,7a5dccc021e8f43567cbfcacd4a814e355e8c21a80959847ae7a0957e03ee6f6,source-only,,model-reviewed-current-evidence,Yes 后直接展开具体过去动作而非辅助动词短答；其余是普通叙事组合句
+grade6-lower-u02-o007,25acc45e166ec60ed1f9e2c8733a01c83e636479944d3698c7138ff96fa86991,mapped,new::state-want-to,model-reviewed-current-evidence,I want to [verb phrase] 与六上已定义 desired-action future group 同一实现
+grade6-lower-u02-o008,a4dfa6d7bc1abb0b261c77de9267ccc8ea0a0ac9b7ba16e6c110ff582aad51b5,mapped,new::ask-past-activity|new::ask-past-yesno,model-reviewed-current-evidence,一条 Source 含过去活动 wh-question 与过去行为 yes-no question 两个 production units
+grade6-lower-u02-o009,1d4f849f365d2b174baa64e6997f0941193ffce1a7dc8b17d31cb05b352ef463,source-only,,model-reviewed-current-evidence,No 后并非 didn't 短答而是具体病情与过去叙事；不强行套入既有 response frame
+grade6-lower-u03-o001,d53e1091002aeca8e8437eeb419e6610148565d7d5b6a8382f798e234edc9449,mapped,new::ask-what-happened,model-reviewed-current-evidence,询问发生了什么的高频固定表达
+grade6-lower-u03-o002,32d70e0f9f890d2360d946a289eefea24a70902f92b617bcf6b4efd85a289425,mapped,new::check-all-right,model-reviewed-current-evidence,看到异常时确认对方是否安好的高频关切表达
+grade6-lower-u03-o003,a4c2b51813ce6007be6e10ef1adc87285938662f92d2a722be251345c8422883,mapped,new::reassure-ok-now,model-reviewed-current-evidence,说明自己现在已经没事的常用回应
+grade6-lower-u03-o004,e8829fd71529e9af448e8047a1002ad057188335e82ccb889ef0c98fb6bea4a7,mapped,new::ask-past-destination,model-reviewed-current-evidence,Where did you go 与已定义 past-destination future group 同一核心实现；时间 slot 可由上下文给出
+grade6-lower-u03-o005,250125ebd7c06767b4636ea378350686cb0429e8107c59143354fc44540acad4,mapped,new::describe-looks-like,model-reviewed-current-evidence,It looks like [thing] 是表达外观相似的高迁移句型
+grade6-lower-u03-o006,92ab7e1b6da7b15443b1c72fc48436c8b0850ce5bcc43c9b669a2f6d2cfc1406,mapped,new::ask-past-yesno,model-reviewed-current-evidence,Did you go to Turpan 是 Did you [verb phrase]? 的直接实例
+grade6-lower-u03-o007,1c35e12554381e9b481039bc68ccede4d1053320c009bfe060a1ebadb0e876c9,mapped,new::respond-past-yes,model-reviewed-current-evidence,与六上 Yes we did 相同的一般过去时肯定短答 identity
+grade6-lower-u03-o008,162928b55d18ab7bbc61d3b8372761f963d9c69f8a156840e41f1655ec4bb070,mapped,new::ask-past-transport,model-reviewed-current-evidence,询问过去采用什么交通方式去某地
+grade6-lower-u03-o009,c87c7f60ab997486eae760d422d891a52b8144a7466a2f8650f647e3896a7f00,mapped,new::state-past-transport,model-reviewed-current-evidence,说明过去前往某地所用交通方式；there 为 place slot
+grade6-lower-u03-o010,420230b9972a4801fe1c25d6cc5d997997fd60aa4683df58696a1027fc1e6d2a,mapped,new::respond-sounds-great,model-reviewed-current-evidence,对经历或计划作积极回应的高频固定表达
+grade6-lower-u04-o001,086f4a500c0a3d4dee0320417328a746431ad73dad83863e49c3e4451dfc3c0c,mapped,new::state-past-nonexistence-singular,model-reviewed-current-evidence,说明过去某处没有某个单数事物
+grade6-lower-u04-o002,bcd5ac6a55d0b6b19767769b07be87bd821b561ac9b47ff393d291fe40ed96b9,mapped,new::request-tell-about,model-reviewed-current-evidence,Tell [person] about [topic] please 是礼貌请求对方介绍某主题的可迁移 frame
+grade6-lower-u04-o003,5f053b3f97ee012c8107256da310dfa025591b1f445ade222a3b935e8b101ab5,mapped,new::ask-how-know,model-reviewed-current-evidence,追问信息来源或判断依据的高迁移表达
+grade6-lower-u04-o004,891d7e23630b921e094138e155d87891d91edf77b33e3b5e338170fff885c69e,mapped,new::state-past-nonexistence-plural,model-reviewed-current-evidence,说明过去某处没有某些事物；computers or Internet 作为 things slot
+grade6-lower-u04-o005,10b47fd3e81d19329d55ae4f34564cee5a6e575c99706e500cc7504a6a4f8d90,mapped,new::contrast-before-now,model-reviewed-current-evidence,Before [clause] / Now [clause] 是描述随时间变化的直接 discourse frame
+grade6-lower-u04-o006,2801cf6c069ec0cb7dafab38806d6ba567cf31a766e72151e78f535bd70a8e4e,mapped,new::explain-past-inability|new::state-now-routine,model-reviewed-current-evidence,一条 Source 含过去状态解释能力限制及 Now 引出的当前日常行为两个可迁移 production frames
 grade6-upper-u01-o001,6626ca6d857ebbcce420306cdfe370d3d1b7c8db052eb17d69c8bead984528ca,mapped,new::ask-past-experience,model-reviewed-current-evidence,询问过去周末整体经历感受
 grade6-upper-u01-o002,7616796dfeee040868ec21c18260f67d0604b9c148fbc251b93b2efd6bc0e7be,mapped,new::state-past-evaluation,model-reviewed-current-evidence,提取 It was [adjective] 对过去经历作总体评价；具体爬长城叙事保留在 Source
 grade6-upper-u01-o003,26472c1757518b59adc9e4625ac6d0204955f235608a39e73f7212cd8b044de5,mapped,new::ask-past-activity,model-reviewed-current-evidence,What did you do? 是一般过去时询问活动的核心问句；称呼不影响 identity
