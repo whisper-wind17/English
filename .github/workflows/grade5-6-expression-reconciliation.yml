@@ -15,8 +15,9 @@ on:
       - 'anki/klose/expressions/master/expression_occurrences.csv'
       - 'anki/klose/expressions/master/source_expression_map.csv'
       - 'anki/klose/expressions/master/release_registry.csv'
+      # A reviewed source batch is the atomic trigger. Optional new-group definitions
+      # are committed first and consumed together when the source batch arrives.
       - 'anki/klose/review/grade5_6_reconciliation/expression_source_reviewed_batch.csv'
-      - 'anki/klose/review/grade5_6_reconciliation/expression_group_reviewed_batch.csv'
       - '.github/workflows/grade5-6-expression-reconciliation.yml'
   workflow_dispatch:
 
