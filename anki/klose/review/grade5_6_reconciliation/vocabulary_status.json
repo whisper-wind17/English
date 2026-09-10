@@ -8,23 +8,23 @@
     "no-exact-match": 296,
     "orthographic-variant": 1
   },
-  "ValidDecisionCount": 100,
+  "ValidDecisionCount": 150,
   "DecisionCounts": {
+    "held": 3,
     "morphology-only": 45,
-    "reuse-existing": 55
+    "new-stable-identity": 23,
+    "reuse-existing": 79
   },
   "DecisionBasisCounts": {
+    "model-reviewed-current-evidence": 50,
     "policy-deterministic": 45,
     "policy-deterministic-exact-sense": 55
   },
-  "ProposedNewIdentityGroups": 0,
-  "PendingReview": 404,
+  "ProposedNewIdentityGroups": 16,
+  "PendingReview": 354,
   "NextBatchCount": 50,
   "NextBatchClasses": {
-    "exact-multiple": 1,
-    "exact-single": 28,
-    "no-exact-match": 20,
-    "orthographic-variant": 1
+    "exact-single": 50
   },
   "StaleDecisionRowsIgnored": 0,
   "SeededThisRun": {},
