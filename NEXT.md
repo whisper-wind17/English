@@ -4,16 +4,16 @@ Last updated: 2026-09-10
 
 ## 1. Current task
 
-当前主任务：**Grade 5–6 current Vocabulary 的 GitHub Release 已完成并 CHECKPOINT；下一步是 Anki preflight / 正式导入确认。**
+当前主任务：**Grade 5–6 current Vocabulary 的 GitHub Release 与 Anki preflight 已完成并 CHECKPOINT；等待在既有 Anki Desktop Collection 中执行正式 972-note import / sync，并回写实际设备状态。**
 
 启动顺序：
 
 ```text
 AGENTS.md
 → NEXT.md
+→ docs/ANKI_CURRENT_RELEASE_IMPORT.md
+→ docs/ANKI_SYNC_WORKFLOW.md
 → docs/KLOSE_VOCABULARY_SYSTEM.md
-→ docs/LEARNER_REVIEW_REGISTRY.md
-→ docs/ANKI_MIGRATION.md
 → anki/klose/master/build_stats.csv
 → anki/klose/learner/learning_admission.csv
 → anki/klose/learner/presentation_review_registry.csv
@@ -80,7 +80,8 @@ pending                                             = 0
 publish/study.csv                                   = 972 Notes
 publish/anki-import.csv                             = 972 Notes
 GitHub Vocabulary Release                           = IMPLEMENTED / VALIDATED / CHECKPOINTED
-Anki Updated                                        = false / NOT YET CONFIRMED
+Anki preflight                                      = PASS / CHECKPOINTED
+Anki Updated                                        = false / DEVICE IMPORT NOT YET OBSERVED
 ```
 
 Grade 5–6 new learner presentation / lexical facts 已完成；288 个新 Notes 已进行全量 model semantic review。审校中发现并修正 `grandparent / then / judge / run / off` 五条 learner presentation 问题。
@@ -175,39 +176,110 @@ Release-ready:
 
 post-merge generated diff 只修改 derived Master / Publish / build_stats；`study.csv` 与 `anki-import.csv` 均只新增 334 条 release-visible Notes，没有 Source / Stable Identity / Learning Admission 再分配。
 
-## 5. Immediate next work
+## 5. Anki preflight — PASS / CHECKPOINTED
+
+正式 artifact 已验证：
 
 ```text
-1. Anki preflight
-   - use only anki/klose/publish/anki-import.csv
-   - confirm Note Type = Klose Vocabulary
-   - confirm deck = Klose-English::Vocabulary
-   - import as Update Existing Notes, not a new Note Type/deck migration
-   - verify NoteID remains the stable match/update key
-   - do not reset scheduling / FSRS / review history
-
-2. Formal Anki update
-   - perform the actual Anki Desktop import/sync only through the established migration/import procedure
-   - after import, verify existing reviewed cards retained scheduling/history
-   - verify newly released Notes entered the intended learning deck/state
-   - only after observed evidence may `Anki Updated` change to true
-
-3. Checkpoint Anki state
-   - record import/sync result and any exception in NEXT.md
-   - GitHub Release and Anki FSRS state remain separate truth domains
-
-4. After Vocabulary Anki update is closed
-   - continue Grade 5–6 Expressions as an independent identity/release lane
+file                     = anki/klose/publish/anki-import.csv
+encoding                 = UTF-8 without BOM
+#separator               = Comma
+#notetype                = Klose Vocabulary
+#deck                    = Klose-English::Vocabulary
+#tags column             = 14
+first data field         = NoteID
+rows                     = 972
+study data equality      = exact / release gate PASS
+LearningOrder max        = 000627
+PromptHint nonempty      = 4
 ```
 
-## 6. Mutation boundary
+Anki Note Type 长期契约：
+
+```text
+NoteID
+CanonicalWord
+Word
+PromptHint
+British
+American
+MeaningPrimary
+ExampleSentence
+ExampleTranslation
+LearnerLevel
+LearningOrder
+Sources
+SourceBooks
+UserMemo
+```
+
+当前 release-specific SOP 已建立并合入：
+
+```text
+docs/ANKI_CURRENT_RELEASE_IMPORT.md
+PR #14 merge = 14c88ad3b4fb93f07d40cde4eed9e03c191f8c5f
+```
+
+同步 SOP 已从历史固定 `638 / 221 / 417` reset 模式修正为 state-aware 模式：进入真实学习后，只对 current allowed `is:new` Cards materialize admission / New Card Position；不得批量覆盖 Learning/Review Cards 的 suspension / Due / FSRS state。
+
+已知最后一次明确设备侧 checkpoint：最初 `518 Notes / 518 Cards` 的 NoteID-first `Klose Vocabulary` 导入已完成。后续是否已经在设备上执行过 638-note Grade-4 Release、PromptHint schema migration、LearningOrder schema migration，当前 repo 没有足够的 observed device evidence，因此正式 972-note import 前必须先检查现有 Note Type fields，而不能假定或重跑迁移。
+
+当前执行环境没有可直接操作 Anki Desktop/AnkiWeb 的连接能力；插件目录也没有 Anki 集成。因此 `Anki Updated` 必须保持 false，直到实际 Desktop import / sync 被用户执行并观察验收。
+
+## 6. Immediate next work
+
+```text
+1. On Anki Desktop, inspect existing Klose Vocabulary Note Type
+   - NoteID must remain field #1
+   - verify PromptHint exists at #4
+   - verify LearningOrder exists after LearnerLevel
+   - if missing, add/reposition in the existing Note Type only
+   - do not create a second Note Type / Card Type
+
+2. Back up Collection / Deck
+
+3. Import the formal 972-note artifact
+   - only anki/klose/publish/anki-import.csv
+   - Note Type = Klose Vocabulary
+   - Deck = Klose-English::Vocabulary
+   - Existing Notes = Update
+   - Match scope = Note Type
+   - Identity = NoteID
+   - Tags -> Tags
+   - UserMemo -> Nothing / do not map
+
+4. Validate existing memory state
+   - sample 3–5 existing NoteIDs
+   - Reviews / Due / Interval preserved
+   - no duplicate Note Type / Cards
+   - final stable Notes/Cards target = 972 / 972
+
+5. Materialize only future New-card admission/order
+   - current allowed tags = learning::klose::grade4 OR learning::klose::grade5-6
+   - allowed + is:new -> future New queue
+   - held + is:new -> suspended
+   - Learning/Review Cards -> do not bulk reset suspension or Due
+   - sort remaining allowed New Cards by LearningOrder and Reposition
+
+6. Desktop -> AnkiWeb -> iPad sync and spot-check
+
+7. After observed success
+   - update NEXT.md: Anki Updated = true
+   - record actual post-import counts / exceptions
+   - then continue Grade 5–6 Expressions as an independent lane
+```
+
+## 7. Mutation boundary
 
 当前允许：
 
 ```text
-Anki preflight / formal import verification
+Anki Desktop schema inspection
+one-time in-place PromptHint / LearningOrder field addition if actually missing
+formal 972-note import using existing Klose Vocabulary Note Type
+state-aware New-card suspension / Reposition
+Desktop / AnkiWeb / iPad sync
 NEXT.md checkpoint of observed Anki state
-Vocabulary bug fixes only if validation finds a concrete defect
 ```
 
 当前禁止：
@@ -216,14 +288,16 @@ Vocabulary bug fixes only if validation finds a concrete defect
 manual edit of generated publish files
 renumber/reuse of Stable NoteIDs
 rewrite/removal of historical Release rows
+new/duplicate Klose Vocabulary Note Type or Card Type
+bulk resetting Learning/Review Cards to match repo curriculum
+changing FSRS / Review History / Due from GitHub-side content operations
 silent deletion/rewrite of Grade 5 Lower / Grade 6 Lower provenance evidence
 third-party merge/allocation
 ExpressionID allocation mixed into Vocabulary Anki update
-claiming Anki Updated before an actual import/sync is observed
-changing FSRS/review history from GitHub-side content operations
+claiming Anki Updated before actual import/sync is observed
 ```
 
-## 7. Expressions / third-party hold
+## 8. Expressions / third-party hold
 
 Grade 5–6 Expressions reconciliation remains independently CLOSED / VALIDATED / CHECKPOINTED:
 
