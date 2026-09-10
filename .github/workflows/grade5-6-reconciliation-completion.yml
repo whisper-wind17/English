@@ -4,21 +4,29 @@ on:
   push:
     branches: [main]
     paths:
+      - 'tools/check_grade5_6_actual_textbook_source.py'
+      - 'tools/check_grade5_6_actual_textbook_source_resolved.py'
+      - 'tools/grade5_6_source_state.py'
       - 'tools/check_grade5_6_vocabulary_reconciliation_completion.py'
       - 'tools/check_grade5_6_expression_reconciliation_completion.py'
       - 'tools/check_klose_persistent_state.py'
       - 'tools/check_klose_expression_persistent_state.py'
+      - 'anki/klose/source_reference/grade5_6_source_provenance.json'
+      - 'anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-6-vocabulary.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_status.json'
       - 'anki/klose/review/grade5_6_reconciliation/expression_source_candidates.csv'
       - 'anki/klose/review/grade5_6_reconciliation/expression_source_decisions.csv'
       - 'anki/klose/review/grade5_6_reconciliation/expression_identity_groups.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_status.json'
       - 'anki/klose/master/**'
       - 'anki/klose/expressions/master/**'
       - '.github/workflows/grade5-6-reconciliation-completion.yml'
@@ -43,6 +51,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate resolved Grade 5-6 actual Source
+        run: python tools/check_grade5_6_actual_textbook_source.py
       - name: Independent Vocabulary reconciliation recheck
         run: python tools/check_grade5_6_vocabulary_reconciliation_completion.py
       - name: Independent Expression reconciliation recheck
