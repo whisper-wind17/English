@@ -262,18 +262,24 @@ def main() -> None:
             fail(f"Grade 5-6 current Note has wrong stage: {nid}")
 
     # Narrow IPA facts for reused/current Notes, including reviewed dedup survivors,
-    # must be present without requiring identity or release-state rewrite.
-    reuse_fact_ids = {r.get("NoteID", "").strip() for r in read_csv(REUSE_FACTS)}
+    # are upstream truth. During PR validation the generated Master may still reflect
+    # the base commit, so validate effective values from Master overlaid by this file.
+    reuse_fact_rows = read_csv(REUSE_FACTS)
+    reuse_fact_by_id = {r.get("NoteID", "").strip(): r for r in reuse_fact_rows}
+    if "" in reuse_fact_by_id or len(reuse_fact_by_id) != len(reuse_fact_rows):
+        fail("invalid/duplicate Grade 5-6 reuse fact override NoteID")
     expected_reuse_fact_ids = {
         "KV000158", "KV000193", "KV000195", "KV000303", "KV000307",
         "KV000327", "KV000359", "KV000483", "KV000500", "KV000572",
         "KV000600", "KV000792",
     }
-    if reuse_fact_ids != expected_reuse_fact_ids:
-        fail(f"unexpected Grade 5-6 reuse fact override set: {sorted(reuse_fact_ids)}")
-    for nid in reuse_fact_ids:
-        if not master_by_id[nid].get("British", "").strip() or not master_by_id[nid].get("American", "").strip():
-            fail(f"Grade 5-6 reused/current Note still lacks IPA: {nid}")
+    if set(reuse_fact_by_id) != expected_reuse_fact_ids:
+        fail(f"unexpected Grade 5-6 reuse fact override set: {sorted(reuse_fact_by_id)}")
+    for nid, override in reuse_fact_by_id.items():
+        british = override.get("British", "").strip() or master_by_id[nid].get("British", "").strip()
+        american = override.get("American", "").strip() or master_by_id[nid].get("American", "").strip()
+        if not british or not american:
+            fail(f"Grade 5-6 reused/current Note still lacks effective IPA: {nid}")
 
     print(
         "Klose Grade 5-6 current Vocabulary merge OK: "
