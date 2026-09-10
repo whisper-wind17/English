@@ -7,6 +7,7 @@ on:
       - 'tools/build_klose_vocabulary.py'
       - 'tools/apply_klose_actual_grade4.py'
       - 'tools/apply_klose_actual_grade4_reuse_facts.py'
+      - 'tools/apply_klose_grade5_6_current.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
@@ -22,7 +23,7 @@ on:
       - 'tools/approve_klose_learner_review.py'
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
-      - 'anki/klose/anki/**'
+      - 'anki/klose/learner/grade5_6_learning_scope.json'
       - 'anki/klose/learner/grade4_*overrides.csv'
       - 'anki/klose/learner/grade4_full_review_*.csv'
       - 'anki/klose/learner/actual_grade4_overrides.csv'
@@ -92,6 +93,9 @@ jobs:
       - name: Apply actual Grade-4 forms to reused identities
         run: python tools/apply_klose_actual_grade4_reuse_facts.py
 
+      - name: Overlay accepted Klose Grade 5-6 vocabulary scope
+        run: python tools/apply_klose_grade5_6_current.py
+
       - name: Build explicit allowed/held learning admission
         run: python tools/build_klose_learning_admission.py
 
@@ -139,6 +143,7 @@ jobs:
             echo 'No upstream review-state changes.'
           else
             git commit -m 'data: persist Klose build-valid review state'
+            git pull --rebase origin main
             git push
           fi
 
@@ -152,5 +157,6 @@ jobs:
             echo 'No generated changes.'
           else
             git commit -m 'data: rebuild Klose vocabulary base'
+            git pull --rebase origin main
             git push
           fi
