@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Apply validated Grade 5-6 learner presentation to active new Vocabulary Notes.
+"""Apply validated Grade 5-6 learner presentation to current Vocabulary Notes.
 
-This is a learner-layer transition only. It updates bilingual examples and removes
-resolved content-gap queue rows. It does not change identity, source mapping,
-learning admission, release registries, generated publish files, or Anki state.
+Active new Grade 5-6 Notes use the complete learner-content batches. Existing
+Stable Notes reused by the Grade 5-6 curriculum may receive narrowly reviewed
+learner guardrail overrides when their inherited examples are too difficult.
+This is a learner-layer transition only: no identity, admission, release or Anki
+state is changed here.
 """
 from __future__ import annotations
 
@@ -13,8 +15,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
 REG = BASE / "master" / "note_registry_extensions.csv"
+DECISIONS = BASE / "review" / "grade5_6_reconciliation" / "vocabulary_decisions.csv"
 LEARNER = BASE / "learner" / "current.csv"
 REVIEW = BASE / "review" / "learner_review.csv"
+REUSE_OVERRIDES = BASE / "learner" / "grade5_6_reuse_overrides.csv"
 BATCHES = [
     BASE / "learner" / "grade5_6_content_batch_a.csv",
     BASE / "learner" / "grade5_6_content_batch_b.csv",
@@ -59,11 +63,30 @@ def main() -> None:
             f"rows={len(content_rows)} unique={len(content)} active={len(active)}"
         )
 
+    reused = {
+        r.get("DecisionNoteID", "").strip()
+        for r in read_csv(DECISIONS)
+        if r.get("Decision", "").strip() == "reuse-existing"
+    }
+    reuse_rows = read_csv(REUSE_OVERRIDES)
+    reuse_content: dict[str, dict[str, str]] = {}
+    for row in reuse_rows:
+        nid = row.get("NoteID", "").strip()
+        if not nid or nid in reuse_content:
+            raise SystemExit(f"Invalid/duplicate Grade 5-6 reuse learner override: {nid!r}")
+        if nid not in reused or nid in active:
+            raise SystemExit(f"Reuse learner override is not an existing reviewed reuse Note: {nid}")
+        if row.get("ContentStatus", "").strip() != "model-curated" or row.get("ContentSource", "").strip() != "grade5-6-reuse-review-v1":
+            raise SystemExit(f"Invalid Grade 5-6 reuse learner provenance for {nid}")
+        if not row.get("ExampleSentence", "").strip() or not row.get("ExampleTranslation", "").strip():
+            raise SystemExit(f"Incomplete Grade 5-6 reuse learner override for {nid}")
+        reuse_content[nid] = row
+
     learner_rows = read_csv(LEARNER)
     learner_fields = list(learner_rows[0].keys())
     learner_by_id = {r["NoteID"].strip(): r for r in learner_rows}
-    if len(learner_by_id) != len(learner_rows) or not active <= set(learner_by_id):
-        raise SystemExit("Learner current state does not uniquely cover all active Grade 5-6 new IDs")
+    if len(learner_by_id) != len(learner_rows) or not (active | set(reuse_content)) <= set(learner_by_id):
+        raise SystemExit("Learner current state does not uniquely cover Grade 5-6 presentation scope")
 
     for nid in active:
         target = learner_by_id[nid]
@@ -82,6 +105,15 @@ def main() -> None:
         target["ExampleTranslation"] = translation
         target["PresentationStatus"] = "grade5-6-content-ready"
         target["PresentationSource"] = "klose:grade5-6-learner-content-v1"
+
+    for nid, src in reuse_content.items():
+        target = learner_by_id[nid]
+        if target.get("LearnerProfile", "").strip() != "klose" or target.get("LearnerLevel", "").strip() != "4":
+            raise SystemExit(f"Unexpected reused learner profile/level for {nid}")
+        target["ExampleSentence"] = src["ExampleSentence"].strip()
+        target["ExampleTranslation"] = src["ExampleTranslation"].strip()
+        target["PresentationStatus"] = "grade5-6-content-ready"
+        target["PresentationSource"] = "klose:grade5-6-reuse-review-v1"
 
     learner_rows.sort(key=lambda r: note_num(r["NoteID"]))
     write_csv(LEARNER, learner_fields, learner_rows)
@@ -102,7 +134,10 @@ def main() -> None:
         )
     remaining = [r for r in review_rows if r.get("NoteID", "").strip() not in active]
     write_csv(REVIEW, review_fields, remaining)
-    print(f"Applied Grade 5-6 learner presentation: content_ready={len(active)}, content_gap_removed={len(gap_ids)}")
+    print(
+        f"Applied Grade 5-6 learner presentation: new_content_ready={len(active)}, "
+        f"reuse_guardrails={len(reuse_content)}, content_gap_removed={len(gap_ids)}"
+    )
 
 
 if __name__ == "__main__":
