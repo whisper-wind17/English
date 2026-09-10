@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
 """Apply learner presentation overrides and rebuild publish views.
 
-Identity/source facts remain untouched. Once learning_admission.csv contains
-current-profile rows, every released Note must have an explicit learning state:
-`allowed` means it belongs to the current learning set; `held` means it remains
-in long-lived study but is not currently learned. Both states keep exactly one
-stage tag. Only allowed Notes receive a `learning::...` tag and a deterministic
-LearningOrder for curriculum sequencing in Anki.
-
-The old Grade-4 staging logic remains only as a compatibility fallback while the
-explicit admission registry is empty.
+Learning admission may include current-curriculum Stable Notes that are not released
+yet. Release remains a separate quality gate. Released Notes must always have an
+explicit admission state once the admission registry is populated.
 """
 from __future__ import annotations
 
@@ -39,7 +33,6 @@ OVERRIDE_FILES = [
 REVIEW = BASE / "review" / "learner_review.csv"
 PUBLISH = BASE / "publish"
 SOURCE_ID = "rj_start1"
-
 LEGACY_STAGE_GRADE4_NEW = "stage::grade4-new"
 LEGACY_STAGE_GRADE4_REVIEW = "stage::grade4-review"
 LEGACY_STAGE_LOWER_BACKFILL = "stage::lower-grade-backfill"
@@ -53,18 +46,11 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(rows)
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
+        writer.writeheader(); writer.writerows(rows)
 
 
-def write_anki_import(
-    path: Path,
-    fields: list[str],
-    rows: list[dict[str, str]],
-    note_type: str,
-    deck: str,
-) -> None:
+def write_anki_import(path: Path, fields: list[str], rows: list[dict[str, str]], note_type: str, deck: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
         f.write("#separator:Comma\n")
@@ -73,13 +59,7 @@ def write_anki_import(
         f.write(f"#deck:{deck}\n")
         f.write(f"#tags column:{fields.index('Tags') + 1}\n")
         f.write("#columns:" + ",".join(fields) + "\n")
-        writer = csv.DictWriter(
-            f,
-            fieldnames=fields,
-            extrasaction="ignore",
-            lineterminator="\n",
-        )
-        writer.writerows(rows)
+        csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n").writerows(rows)
 
 
 def note_num(note_id: str) -> int:
@@ -89,7 +69,7 @@ def note_num(note_id: str) -> int:
 def source_grades(occurrence_rows: list[dict[str, str]]) -> dict[str, set[int]]:
     grades_by_id: dict[str, set[int]] = defaultdict(set)
     for occ in occurrence_rows:
-        if occ["SourceID"] == SOURCE_ID and occ["Grade"].isdigit():
+        if occ.get("SourceID") == SOURCE_ID and occ.get("Grade", "").isdigit():
             grades_by_id[occ["NoteID"]].add(int(occ["Grade"]))
     return grades_by_id
 
@@ -107,11 +87,7 @@ def legacy_onboarding_stage(grades: set[int]) -> str:
     return ""
 
 
-def load_explicit_admission(
-    profile: str,
-    level: str,
-    valid_ids: set[str],
-) -> dict[str, dict[str, str]]:
+def load_explicit_admission(profile: str, level: str, valid_ids: set[str]) -> dict[str, dict[str, str]]:
     if not ADMISSION.exists():
         return {}
     result: dict[str, dict[str, str]] = {}
@@ -134,15 +110,11 @@ def load_explicit_admission(
             if not learning_tag.startswith("learning::"):
                 raise SystemExit(f"Allowed learning admission requires LearningTag for {nid}")
             if not is_valid_learning_order(learning_order):
-                raise SystemExit(
-                    f"Allowed learning admission requires six-digit LearningOrder for {nid}: {learning_order!r}"
-                )
+                raise SystemExit(f"Allowed learning admission requires six-digit LearningOrder for {nid}: {learning_order!r}")
             allowed_orders.append(int(learning_order))
         else:
-            if learning_tag:
-                raise SystemExit(f"Held learning admission must not have LearningTag for {nid}: {learning_tag!r}")
-            if learning_order:
-                raise SystemExit(f"Held learning admission must not have LearningOrder for {nid}: {learning_order!r}")
+            if learning_tag or learning_order:
+                raise SystemExit(f"Held learning admission must have blank LearningTag/LearningOrder for {nid}")
         if nid in result:
             raise SystemExit(f"Duplicate learning admission for {nid}")
         result[nid] = {
@@ -158,14 +130,14 @@ def load_explicit_admission(
 
 
 def with_stage(tags: str, stage: str) -> str:
-    parts = [x for x in tags.split() if not x.startswith("stage::")]
+    parts = [x for x in (tags or "").split() if not x.startswith("stage::")]
     if stage:
         parts.append(stage)
     return " ".join(sorted(set(parts)))
 
 
 def with_learning_tag(tags: str, learning_tag: str) -> str:
-    parts = [x for x in tags.split() if not x.startswith("learning::")]
+    parts = [x for x in (tags or "").split() if not x.startswith("learning::")]
     if learning_tag:
         parts.append(learning_tag)
     return " ".join(sorted(set(parts)))
@@ -195,9 +167,11 @@ def main() -> None:
     learner_rows = read_csv(LEARNER)
     occurrence_rows = read_csv(OCCURRENCES)
     review_rows = read_csv(REVIEW)
-
     learner_by_id = {r["NoteID"]: r for r in learner_rows}
     master_ids = {r["NoteID"] for r in master_rows}
+    if master_ids - set(learner_by_id):
+        missing = sorted(master_ids - set(learner_by_id), key=note_num)
+        raise SystemExit(f"Master Notes are missing learner rows: {missing[:10]}")
     explicit_admission = load_explicit_admission(learner_profile, learner_level, master_ids)
     resolved_ids: set[str] = set()
     applied_rows = 0
@@ -224,10 +198,7 @@ def main() -> None:
             applied_rows += 1
 
     learner_rows.sort(key=lambda r: note_num(r["NoteID"]))
-    learner_fields = [
-        "NoteID", "LearnerProfile", "LearnerLevel", "ExampleSentence",
-        "ExampleTranslation", "PresentationStatus", "PresentationSource",
-    ]
+    learner_fields = ["NoteID", "LearnerProfile", "LearnerLevel", "ExampleSentence", "ExampleTranslation", "PresentationStatus", "PresentationSource"]
     write_csv(LEARNER, learner_fields, learner_rows)
 
     review_rows = [r for r in review_rows if r["NoteID"] not in resolved_ids]
@@ -243,28 +214,27 @@ def main() -> None:
     released_ids = {r["NoteID"] for r in master_rows if r["Released"] == "yes"}
 
     if explicit_admission:
-        missing = sorted(released_ids - set(explicit_admission))
-        extra = sorted(set(explicit_admission) - released_ids)
-        if missing or extra:
+        missing = sorted(released_ids - set(explicit_admission), key=note_num)
+        if missing:
             raise SystemExit(
-                "Explicit learning admission must cover exactly the current released set with allowed/held states; "
-                f"missing={missing[:10]} extra={extra[:10]}"
+                "Explicit learning admission must cover every released Note; "
+                f"missing={missing[:10]}"
             )
 
     for master in master_rows:
-        learner = learner_by_id[master["NoteID"]]
+        nid = master["NoteID"]
+        learner = learner_by_id[nid]
         row = {**master, **learner}
         row["LearningOrder"] = ""
-        if master["Released"] == "yes":
-            if explicit_admission:
-                admission = explicit_admission[master["NoteID"]]
-                row["Tags"] = with_stage(row.get("Tags", ""), admission["Stage"])
-                row["Tags"] = with_learning_tag(row["Tags"], admission["LearningTag"])
-                row["LearningOrder"] = admission["LearningOrder"]
-            else:
-                stage = legacy_onboarding_stage(grades_by_id.get(master["NoteID"], set()))
-                row["Tags"] = with_stage(row.get("Tags", ""), stage)
-                row["Tags"] = with_learning_tag(row["Tags"], "")
+        admission = explicit_admission.get(nid) if explicit_admission else None
+        if admission is not None:
+            row["Tags"] = with_stage(row.get("Tags", ""), admission["Stage"])
+            row["Tags"] = with_learning_tag(row["Tags"], admission["LearningTag"])
+            row["LearningOrder"] = admission["LearningOrder"]
+        elif master["Released"] == "yes":
+            stage = legacy_onboarding_stage(grades_by_id.get(nid, set()))
+            row["Tags"] = with_stage(row.get("Tags", ""), stage)
+            row["Tags"] = with_learning_tag(row["Tags"], "")
         else:
             row["Tags"] = with_stage(row.get("Tags", ""), "")
             row["Tags"] = with_learning_tag(row["Tags"], "")
@@ -274,13 +244,7 @@ def main() -> None:
     write_csv(PUBLISH / "all.csv", publish_fields, publish_rows)
     study_rows = [r for r in publish_rows if r["Released"] == "yes"]
     write_csv(PUBLISH / "study.csv", publish_fields, study_rows)
-    write_anki_import(
-        PUBLISH / "anki-import.csv",
-        publish_fields,
-        study_rows,
-        note_type=note_type,
-        deck=main_deck,
-    )
+    write_anki_import(PUBLISH / "anki-import.csv", publish_fields, study_rows, note_type, main_deck)
 
     migration_fields = ["Word"] + [f for f in publish_fields if f != "Word"]
     write_csv(PUBLISH / "migration" / "word-first-all.csv", migration_fields, publish_rows)
@@ -297,7 +261,6 @@ def main() -> None:
             raise SystemExit(f"Released note must have exactly one stage: {row['NoteID']}")
         stage_rows[stages[0]].append(row)
 
-    # Keep legacy convenience files while the initial migration fallback exists.
     write_csv(PUBLISH / "onboarding" / "grade4-new.csv", publish_fields, stage_rows[LEGACY_STAGE_GRADE4_NEW])
     write_csv(PUBLISH / "onboarding" / "grade4-review.csv", publish_fields, stage_rows[LEGACY_STAGE_GRADE4_REVIEW])
     write_csv(PUBLISH / "onboarding" / "lower-grade-backfill.csv", publish_fields, stage_rows[LEGACY_STAGE_LOWER_BACKFILL])
@@ -308,8 +271,10 @@ def main() -> None:
     if explicit_admission:
         allowed = sum(1 for row in explicit_admission.values() if row["Status"] == "allowed")
         held = sum(1 for row in explicit_admission.values() if row["Status"] == "held")
+        unreleased_allowed = sum(1 for nid, row in explicit_admission.items() if row["Status"] == "allowed" and nid not in released_ids)
         upsert_metric(stats, "learning_admission_allowed", allowed)
         upsert_metric(stats, "learning_admission_held", held)
+        upsert_metric(stats, "learning_admission_allowed_unreleased", unreleased_allowed)
         upsert_metric(stats, "learning_order_count", allowed)
         upsert_metric(stats, "learning_order_max", allowed)
     for stage, rows in sorted(stage_rows.items()):
@@ -322,8 +287,10 @@ def main() -> None:
     if explicit_admission:
         allowed = sum(1 for row in explicit_admission.values() if row["Status"] == "allowed")
         held = sum(1 for row in explicit_admission.values() if row["Status"] == "held")
+        unreleased_allowed = sum(1 for nid, row in explicit_admission.items() if row["Status"] == "allowed" and nid not in released_ids)
         print(
             f"Learning admission mode: explicit; allowed={allowed}; held={held}; "
+            f"unreleased_allowed={unreleased_allowed}; "
             f"learning_order={format_learning_order(1)}..{format_learning_order(allowed)}"
         )
     else:
