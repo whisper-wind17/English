@@ -2,7 +2,8 @@
 """Independent completion recheck for Grade 5–6 Vocabulary reconciliation.
 
 This is read-only. It derives closure from candidates + durable decisions + current
-Stable registries, then cross-checks the generated status snapshot. It does not
+Stable registries, cross-checks the generated status snapshot, and independently
+binds that semantic closure to the current Source provenance fingerprint. It does not
 allocate NoteIDs or mutate learner/release/publish/Anki state.
 """
 from __future__ import annotations
@@ -12,6 +13,8 @@ import hashlib
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
+
+from grade5_6_source_state import source_provenance_state
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
@@ -116,7 +119,6 @@ def main() -> None:
     if len(new_groups) != 293:
         fail(f"unexpected proposed new identity groups: {len(new_groups)} != 293")
 
-    # Executable regressions for the highest-risk semantic/boundary decisions.
     def find(entry: str, meaning: str) -> dict[str, str]:
         matches = [r for r in candidates if r.get("Entry") == entry and r.get("Meaning") == meaning]
         if len(matches) != 1:
@@ -149,7 +151,6 @@ def main() -> None:
         if got != want:
             fail(f"representative decision drift: {entry!r} got={got} want={want}")
 
-    # Shared future identities must remain intentionally grouped.
     shared_expectations = [
         ("bamboo", "new::bamboo::plant"),
         ("do morning exercises", "new::do morning exercises::routine"),
@@ -179,11 +180,32 @@ def main() -> None:
     if status.get("StaleDecisionRowsIgnored") != 0:
         fail("status reports stale decision rows")
 
+    provenance = source_provenance_state()
+    if provenance["ResolutionState"] != "applied" or provenance["SourceIdentityPending"]:
+        fail(f"Source provenance is not fully resolved: {provenance}")
+    if not provenance["SourceProvenanceBlockers"]:
+        fail("expected lower-volume provenance blockers are missing")
+    if provenance["StableIDAllocationAllowed"]:
+        fail("provenance unexpectedly authorizes Stable ID allocation")
+    provenance_checks = {
+        "SourceIdentityPending": False,
+        "SourceProvenanceFingerprint": provenance["SourceProvenanceFingerprint"],
+        "SourceProvenanceRows": provenance["SourceProvenanceRows"],
+        "SourceProvenanceBlockers": provenance["SourceProvenanceBlockers"],
+        "SourceProvenanceResolutionState": "applied",
+        "CanonicalSourceID": "renjiao_start3",
+        "StableIDAllocationAllowed": False,
+    }
+    for field, expected in provenance_checks.items():
+        if status.get(field) != expected:
+            fail(f"provenance status mismatch {field}: {status.get(field)!r} != {expected!r}")
+
     print(
         "Grade 5–6 Vocabulary reconciliation completion OK: "
         f"candidates={len(candidates)}, decisions={len(decisions)}, "
         f"counts={dict(sorted(counts.items()))}, new_groups={len(new_groups)}, "
-        f"stable_registry={len(stable_ids)}, pending=0, transient_inbox=absent, stable_id_allocation=0"
+        f"stable_registry={len(stable_ids)}, pending=0, stale=0, "
+        f"provenance={provenance['SourceProvenanceFingerprint'][:12]}, allocation=blocked"
     )
 
 
