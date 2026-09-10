@@ -6,6 +6,7 @@ on:
       - work/klose-vocab-release-20260910
     paths:
       - .github/workflows/_run-klose-vocab-release-transition.yml
+      - tools/_prepare_klose_vocab_release_transition.py
 
 permissions:
   contents: write
