@@ -258,10 +258,14 @@ def main() -> None:
         elif row.get("Stage", "").strip() != "stage::grade5-6-current":
             fail(f"Grade 5-6 current Note has wrong stage: {nid}")
 
-    # Narrow IPA facts added for five reused/current released Notes must be present,
-    # without requiring any identity or learner-content rewrite.
+    # Narrow IPA facts for reused/current released Notes, including reviewed dedup
+    # survivors, must be present without requiring identity or learner-content rewrite.
     reuse_fact_ids = {r.get("NoteID", "").strip() for r in read_csv(REUSE_FACTS)}
-    if reuse_fact_ids != {"KV000158", "KV000195", "KV000303", "KV000327", "KV000483"}:
+    expected_reuse_fact_ids = {
+        "KV000158", "KV000193", "KV000195", "KV000303", "KV000307",
+        "KV000327", "KV000359", "KV000483", "KV000500",
+    }
+    if reuse_fact_ids != expected_reuse_fact_ids:
         fail(f"unexpected Grade 5-6 reuse fact override set: {sorted(reuse_fact_ids)}")
     for nid in reuse_fact_ids:
         if not master_by_id[nid].get("British", "").strip() or not master_by_id[nid].get("American", "").strip():

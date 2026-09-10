@@ -12,15 +12,16 @@
   "DecisionCounts": {
     "held": 10,
     "morphology-only": 45,
-    "new-stable-identity": 301,
-    "reuse-existing": 148
+    "new-stable-identity": 296,
+    "reuse-existing": 153
   },
   "DecisionBasisCounts": {
-    "model-reviewed-current-evidence": 404,
+    "model-reviewed-current-evidence": 399,
     "policy-deterministic": 45,
-    "policy-deterministic-exact-sense": 55
+    "policy-deterministic-exact-sense": 55,
+    "premerge-dedup-reviewed": 5
   },
-  "ProposedNewIdentityGroups": 293,
+  "ProposedNewIdentityGroups": 288,
   "PendingReview": 0,
   "NextBatchCount": 0,
   "NextBatchClasses": {},

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Independent completion recheck for Grade 5–6 Vocabulary reconciliation.
 
-Reconciliation truth remains immutable after Stable-ID allocation: decisions keep
-new:: proposal groups and never embed newly allocated NoteIDs. Post-reconciliation
-allocation is verified separately against the accepted Klose Grade 5-6 learning
-scope. Source provenance is audit metadata and does not gate that learning scope.
+Reconciliation truth remains fingerprint-bound to source evidence. A later reviewed
+pre-merge dedup may rebind a proposed new identity to an older Stable NoteID without
+changing source evidence. Remaining new:: groups stay proposal-only; active Stable
+allocation is verified separately against the accepted Klose Grade 5-6 learning scope.
 """
 from __future__ import annotations
 
@@ -114,15 +114,15 @@ def main() -> None:
     if len(candidates) != 504:
         fail(f"unexpected provisional learning units: {len(candidates)} != 504")
     expected_counts = {
-        "reuse-existing": 148,
-        "new-stable-identity": 301,
+        "reuse-existing": 153,
+        "new-stable-identity": 296,
         "morphology-only": 45,
         "held": 10,
     }
     if dict(counts) != expected_counts:
         fail(f"decision counts changed: {dict(counts)} != {expected_counts}")
-    if len(new_groups) != 293:
-        fail(f"unexpected proposed new identity groups: {len(new_groups)} != 293")
+    if len(new_groups) != 288:
+        fail(f"unexpected proposed new identity groups after reviewed dedup: {len(new_groups)} != 288")
 
     # Post-reconciliation allocation is a separate state transition. Verify it
     # one-to-one without rewriting the reconciliation decisions themselves.
@@ -131,13 +131,15 @@ def main() -> None:
         origin = row.get("PrimaryOriginKey", "").strip()
         if not origin.startswith(G56_ORIGIN_PREFIX):
             continue
+        if row.get("Status", "").strip() != "active":
+            continue
         group = origin[len(G56_ORIGIN_PREFIX):]
         nid = row.get("NoteID", "").strip()
         if group in allocations or nid not in stable_ids:
             fail(f"invalid/duplicate Grade 5-6 allocation: {origin!r}")
         allocations[group] = nid
-    if set(allocations) != set(new_groups) or len(set(allocations.values())) != 293:
-        fail("post-reconciliation Stable allocation does not match the 293 reviewed new groups")
+    if set(allocations) != set(new_groups) or len(set(allocations.values())) != len(new_groups):
+        fail("post-reconciliation active Stable allocation does not match reviewed post-dedup new groups")
 
     def find(entry: str, meaning: str) -> dict[str, str]:
         matches = [r for r in candidates if r.get("Entry") == entry and r.get("Meaning") == meaning]
