@@ -1,0 +1,41 @@
+SourceOccurrenceKey,CandidateFingerprint,Disposition,IdentityGroups,DecisionBasis,Rationale
+grade5-lower-u01-o003,75967889d75f00af17be61c1709db936a94acfc709e33714ac9a056e41f847e0,mapped,new::ask-routine,model-reviewed-current-evidence,与首批 What do you usually do [time phrase]? 同一日常活动询问；usually 只是可省频率修饰不改变 identity
+grade5-lower-u01-o004,62a6be2f74a659fd22022afe50449d804492a9c31e448ca61ed4412f592238a4,mapped,new::state-often-routine,model-reviewed-current-evidence,I often [verb phrase] 与首批 future group 同一实现；并列动作仍属于同一 slot
+grade5-lower-u02-o001,9cc1300f4fec65374b6e569566d114a7e2690934302c58fbfd138b75e4221ace,mapped,new::ask-favourite-choice,model-reviewed-current-evidence,Which ... do you like best 询问最喜欢对象；best 为语义核心不能降为一般 like
+grade5-lower-u02-o002,bfadbfea231419a5028888606da2f34ac6214643dffeaf0d05ecfe80ed73920b,source-only,,model-reviewed-current-evidence,单词级答案 Summer 仅承载当前问答内容；不形成独立 Expression identity
+grade5-lower-u02-o003,af06c171729ea5b0468a57fef33d16ebc58ba5a65fdf7a479ae7afdd4f4319f2,mapped,new::ask-reason-why,model-reviewed-current-evidence,Why? 是可独立迁移的高频追问原因表达
+grade5-lower-u02-o004,65a9672260951a341c203ee868f4919528e47f18cc0a8613ce557d56d66435bf,mapped,new::give-reason-because,model-reviewed-current-evidence,提取 Because [clause] 作为回答原因的 discourse frame
+grade5-lower-u03-o001,d33744d1d7213bb4039491d4c3cff906ed0ac6226ef2b17f5f6a288d4277a011,mapped,new::ask-event-time,model-reviewed-current-evidence,When is [event]? 询问事件时间的通用句型
+grade5-lower-u03-o002,099be76c84663cf2f7360968fe4325cda55d73760bc6913a987bbf5ba78dff33,mapped,new::state-month-time,model-reviewed-current-evidence,It's in [month] 说明事件月份；自动匹配位置型 KE 属 function 假阳性
+grade5-lower-u03-o003,b12c195773450dce591ae3049b137ae8f416c8b6a6d2d594368ac83f570583dc,mapped,new::ask-event-time,model-reviewed-current-evidence,trip this year 仍是 When is [event]? 的直接实例
+grade5-lower-u03-o004,dd6f1700398c792debe4894667ec8847e718650b1beda5fc1dcfcd72fa611b5c,mapped,new::state-month-time|new::state-future-plan-will,model-reviewed-current-evidence,一条 Source 含月份回答和 We'll [verb phrase] 两个可迁移 production units
+grade5-lower-u04-o001,5af02954e6440bf234975d245207798807a951c2d1522ce5f746a99d2ed74418,mapped,new::ask-event-time,model-reviewed-current-evidence,art show 是通用 event slot 实例
+grade5-lower-u04-o002,7a374db71d3ef7d542e76373a02c2c5ffecd946ed044f3a92ad706b70edd4aac,mapped,new::state-date,model-reviewed-current-evidence,It's on [date] 说明事件具体日期
+grade5-lower-u04-o003,67e8a8053aaebaf282527dcb329c6ba5e32d077369d15e4f8bfa1f37b5ab85fb,mapped,new::ask-event-time,model-reviewed-current-evidence,birthday 可直接作为 event slot；无需为生日问句另造同功能 identity
+grade5-lower-u04-o004,5e9805e9c390fe4250888eb20b3bad7b7f8eab4a66678b6f20da65d409999699,mapped,new::state-birthday-date,model-reviewed-current-evidence,主动说明自己的生日日期是稳定社交表达
+grade5-lower-u05-o001,bfd7f6a988f0bb770dc052ccbfe0662bf7e7b59a0ca6dcfd7447fca18fef27ce,mapped,new::state-own-ownership,model-reviewed-current-evidence,[Thing] is mine 表达自己的所属关系；不是进行时或数量陈述
+grade5-lower-u05-o002,601cc1e4b8bc5877418dd68ce736e68fa6ab023297ac59825cf3ffbfe3e7e950,mapped,new::ask-plural-ownership,model-reviewed-current-evidence,询问一组物品是否都属于说话双方
+grade5-lower-u05-o003,f88087e5e6cdcf82b07ecbcd8fabd54ba12d7a59596140302c132c8a61205006,mapped,new::ask-ownership-whose-it,model-reviewed-current-evidence,Whose is it? 在名词已知时独立询问所属；与现有 Whose [noun] is this 实现不同
+grade5-lower-u05-o004,32efe22d304b60334ba71432e24a87776061f8c2fc15b93c13e86aa30561b713,mapped,KE000018,model-reviewed-current-evidence,It's [person]'s. 与现有 state_ownership identity 完全一致
+grade5-lower-u05-o005,3ee963c010ac4b4df567b09455ee6d08d90ae6ce87de9ed8d3c731030e753329,mapped,new::ask-current-action-yesno,model-reviewed-current-evidence,Is [subject] [verb-ing]? 询问正在发生的动作
+grade5-lower-u05-o006,2a8f8e472182e8f385b4e75aaed488dd57984e0d2cd8ff35d9eec98dd00b83d4,mapped,new::respond-current-action-no|KE000016,model-reviewed-current-evidence,一条 Source 含现在进行时否定短答及 He's [verb-ing] 当前动作陈述
+grade5-lower-u06-o001,c3f323d93d433e3756617cabd2b32f504fa1e98cf44f4a7577e292e2226c1b3e,mapped,new::ask-current-action-plural,model-reviewed-current-evidence,询问多个主体正在做什么
+grade5-lower-u06-o002,d4fa0c7f1b272bfe92287e4f5367fba06b0507bb5c7d22d0ae777ad4138ce172,mapped,new::state-current-action-plural,model-reviewed-current-evidence,They're [verb-ing] 描述多个主体当前动作；现有 KE000016 使用 singular is realization
+grade5-lower-u06-o003,1c6963e9829e6cca3179fcdad101a5262dd2ac2b859d9153cb55777e8582e4b5,mapped,new::ask-current-action-singular,model-reviewed-current-evidence,What's [subject] doing? 归一为 What is [subject] doing 的单数当前动作询问
+grade5-lower-u06-o004,f6a75a5ac06cade3628e766d71cab8c2347e5443ae8dd3f76765a4fac791dd50,mapped,KE000016,model-reviewed-current-evidence,It's [verb-ing] 与现有描述单一主体当前动作 identity 同功能同实现
+grade5-lower-u06-o005,deb20d1c649a1d593ec45b63da8aa13b9f516b7fa92d86f4087ddb3c7b5f42b8,mapped,new::instruct-talk-quietly,model-reviewed-current-evidence,Shh 为语境提示；Talk quietly 是可主动使用的行为指令
+grade5-lower-u06-o006,42dba415b23c0806e05d81db973c9dbd2f0b8f816a1c7383d3bf77a77f920099,mapped,new::instruct-keep-state,model-reviewed-current-evidence,Keep [thing] [adjective] 是保持状态的可迁移指令结构
+grade6-upper-u01-o001,6626ca6d857ebbcce420306cdfe370d3d1b7c8db052eb17d69c8bead984528ca,mapped,new::ask-past-experience,model-reviewed-current-evidence,询问过去周末整体经历感受
+grade6-upper-u01-o002,7616796dfeee040868ec21c18260f67d0604b9c148fbc251b93b2efd6bc0e7be,mapped,new::state-past-evaluation,model-reviewed-current-evidence,提取 It was [adjective] 对过去经历作总体评价；具体爬长城叙事保留在 Source
+grade6-upper-u01-o003,26472c1757518b59adc9e4625ac6d0204955f235608a39e73f7212cd8b044de5,mapped,new::ask-past-activity,model-reviewed-current-evidence,What did you do? 是一般过去时询问活动的核心问句；称呼不影响 identity
+grade6-upper-u01-o004,36ae6efa5c94b449f142e9646522faeeaa1fcfcfd3f7a6a9051ea0b3976484ee,mapped,new::state-past-activity,model-reviewed-current-evidence,叙述自己在明确过去时间做过某事的通用 frame
+grade6-upper-u01-o005,ffb3f999e339364c8089e1de10e7f07e2b4594360ae9dd272cf1b24e91765f52,mapped,new::ask-past-destination,model-reviewed-current-evidence,询问过去某一时段去了哪里
+grade6-upper-u01-o006,a0f55066ee6bc7e0c60d09f46bee5936a0c1f41fe1ba72896257d4b6acd16a65,mapped,new::state-past-trip-with,model-reviewed-current-evidence,说明过去去了哪里以及和谁同行
+grade6-upper-u01-o007,dc3b2897c39ebd7b039785826c8d3f30af69d672ebd6d43f1e6c4680beb68d72,mapped,new::ask-past-activity,model-reviewed-current-evidence,there 是上下文地点副词；核心仍为 What did you do
+grade6-upper-u01-o008,a211af992897e30815a5c0829793187d0597c4e6bfeca7502780cd3248fb32de,mapped,new::state-went-to-action,model-reviewed-current-evidence,We went to [verb phrase] 叙述过去去做某事
+grade6-upper-u01-o009,304cf158852dc38ea665b1ec2fecbe5a4cdbe629d7e33bbae035080e12cf4da7,mapped,new::ask-additional-past-activity,model-reviewed-current-evidence,What else did you do? 用于继续追问过去活动
+grade6-upper-u02-o001,6ad64fd6efad47bc44829adc9369087e691077c5a44d055e30e3317a4a911cca,mapped,new::ask-past-experience,model-reviewed-current-evidence,Mid-Autumn Festival holiday 与 weekend 同为 event/time slot
+grade6-upper-u02-o002,4757a0826317e7c3e16dc04a80a280e98156326cbd18cf6405b3062a3bd0bd22,mapped,new::state-past-evaluation,model-reviewed-current-evidence,It was great 是过去经历评价 frame 的直接实例
+grade6-upper-u02-o003,752fa291befeaba8a07d601c5c144cbd70d30a209cc734deddc54657452ab5b9,mapped,new::ask-past-yesno,model-reviewed-current-evidence,Did you [verb phrase]? 是过去行为的是非询问核心句型
+grade6-upper-u02-o004,f0bf67934a8e1bacd67bed557473c86bf5362f37ef8a72c2319d616f70591831,mapped,new::respond-past-no,model-reviewed-current-evidence,一般过去时是非问句的高频否定短答
+grade6-upper-u02-o005,e663e7e026c1a095b4f1ef193b7135f9e8a987f21bac9324f1f47bee6d25745b,mapped,new::ask-past-yesno,model-reviewed-current-evidence,Did you eat mooncakes 是 Did you [verb phrase]? 的直接实例
