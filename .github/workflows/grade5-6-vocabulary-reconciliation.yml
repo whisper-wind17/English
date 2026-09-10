@@ -28,7 +28,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          # event.before is the immediately preceding user/bot-visible checkpoint;
+          # two commits are sufficient for the persistent-state baseline check and
+          # avoid fetching the repository's full review history on every 50-row batch.
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
