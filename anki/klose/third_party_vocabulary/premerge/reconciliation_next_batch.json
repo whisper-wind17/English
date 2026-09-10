@@ -1,17 +1,30 @@
 {
   "PlanVersion": "stage-b-reconciliation-v2",
-  "StageACheckpointFingerprint": "02bec1239e717f8f9141c38cec2fa16947f9c16a6ec372478db26936c5451b0f",
+  "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
   "CandidateCount": 2820,
-  "ValidDurableDecisionCount": 2820,
-  "ReviewQueueCount": 0,
-  "LaneCounts": {},
-  "ReviewLane": "",
-  "BatchCap": 0,
-  "SelectedCount": 0,
-  "SelectedProvisionalIdentityKeys": [],
-  "ExecutionReady": false,
+  "ValidDurableDecisionCount": 0,
+  "ReviewQueueCount": 2820,
+  "LaneCounts": {
+    "exact-multiple": 5,
+    "exact-single-exact-sense": 416,
+    "exact-single-semantic-review": 360,
+    "learner-excluded": 26,
+    "no-existing-match": 2008,
+    "variant-single": 5
+  },
+  "ReviewLane": "exact-multiple",
+  "BatchCap": 20,
+  "SelectedCount": 5,
+  "SelectedProvisionalIdentityKeys": [
+    "candidate:can",
+    "candidate:free",
+    "candidate:milk",
+    "candidate:over",
+    "candidate:speak"
+  ],
+  "ExecutionReady": true,
   "AutoExecutable": false,
   "MutationAuthorized": false,
-  "ReviewQueueFingerprint": "ad189f3d6f88047d8215565de422cd1991af5aa9be74b347b13e80470f507bb2",
-  "SelectedViewFingerprint": "ad189f3d6f88047d8215565de422cd1991af5aa9be74b347b13e80470f507bb2"
+  "ReviewQueueFingerprint": "6bd7fd334b61c019504f755910c29687e3b4df6cfd16811e73fec5c1ebcc9b7f",
+  "SelectedViewFingerprint": "2b68ef254c05b254577230a0ee9d3cf2327d0701d74c74612c5d8505ef540f75"
 }
