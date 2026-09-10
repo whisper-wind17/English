@@ -1,2 +1,7 @@
-﻿MigrationID,NoteID,MigrationType,Reason,Status
-MIG-20260905-G4-SPEAK-SENSE,KV000901,source-occurrence-sense-split,Actual Grade 4 speak=说话；发言 differs from legacy language-speaking sense KV000705,approved
+﻿MigrationID,NoteID,TargetNoteID,MigrationType,Reason,Status
+MIG-20260905-G4-SPEAK-SENSE,KV000901,,source-occurrence-sense-split,Actual Grade 4 speak=说话；发言 differs from legacy language-speaking sense KV000705,approved
+MIG-20260910-G56-DEDUP-KV000974,KV000974,KV000572,identity-merge-dedup,Grade 5-6 premerge dedup: reviewed identity is equivalent to older Stable Note KV000572.,approved
+MIG-20260910-G56-DEDUP-KV001029,KV001029,KV000193,identity-merge-dedup,Grade 5-6 premerge dedup: reviewed identity is equivalent to older Stable Note KV000193.,approved
+MIG-20260910-G56-DEDUP-KV001030,KV001030,KV000307,identity-merge-dedup,Grade 5-6 premerge dedup: reviewed identity is equivalent to older Stable Note KV000307.,approved
+MIG-20260910-G56-DEDUP-KV001171,KV001171,KV000500,identity-merge-dedup,Grade 5-6 premerge dedup: reviewed identity is equivalent to older Stable Note KV000500.,approved
+MIG-20260910-G56-DEDUP-KV001173,KV001173,KV000359,identity-merge-dedup,Grade 5-6 premerge dedup: reviewed identity is equivalent to older Stable Note KV000359.,approved

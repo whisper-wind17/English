@@ -32,6 +32,7 @@ SOURCE_EXTENSIONS = BASE / "source_identity_extensions.csv"
 MIGRATIONS = BASE / "identity_migrations.csv"
 NOTE_RE = re.compile(r"KV(\d{6})$")
 IDENTITY_FIELDS = ("CanonicalWord", "MatchKey", "SenseLabel", "PrimaryOriginKey")
+VALID_REGISTRY_STATUSES = {"active", "merged"}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -130,6 +131,9 @@ def main() -> None:
     for row in registry:
         nid = row.get("NoteID", "").strip()
         origin = row.get("PrimaryOriginKey", "").strip()
+        status = row.get("Status", "").strip()
+        if status not in VALID_REGISTRY_STATUSES:
+            raise SystemExit(f"Invalid registry status: {nid}->{status!r}")
         if not NOTE_RE.fullmatch(nid):
             raise SystemExit(f"Invalid registry NoteID: {nid!r}")
         if nid in ids:
@@ -153,7 +157,28 @@ def main() -> None:
             raise SystemExit("note_registry_extensions.csv must append after the legacy registry")
 
     registry_ids = set(ids)
+    registry_by_id = {r["NoteID"].strip(): r for r in registry}
     check_git_stability(registry)
+
+    migration_rows = read_csv(MIGRATIONS)
+    merge_targets: dict[str, str] = {}
+    for row in migration_rows:
+        if row.get("MigrationType", "").strip() != "identity-merge-dedup" or row.get("Status", "").strip() != "approved":
+            continue
+        source = row.get("NoteID", "").strip()
+        target = row.get("TargetNoteID", "").strip()
+        if not source or not target or source == target or source in merge_targets:
+            raise SystemExit(f"Invalid/duplicate approved identity merge migration: {source}->{target}")
+        if source not in registry_ids or target not in registry_ids:
+            raise SystemExit(f"Identity merge migration references unknown NoteID: {source}->{target}")
+        if registry_by_id[target].get("Status", "").strip() != "active":
+            raise SystemExit(f"Identity merge survivor is not active: {source}->{target}")
+        merge_targets[source] = target
+    merged_ids = {nid for nid, row in registry_by_id.items() if row.get("Status", "").strip() == "merged"}
+    if merged_ids != set(merge_targets):
+        raise SystemExit(
+            f"Merged registry identities must equal approved dedup migrations: merged={sorted(merged_ids)} migrations={sorted(merge_targets)}"
+        )
 
     source_map = read_csv(SOURCE_MAP)
     map_keys: set[tuple[str, str]] = set()
@@ -167,6 +192,8 @@ def main() -> None:
             raise SystemExit(f"Invalid/duplicate legacy SourceIdentity key: {key}")
         if nid not in registry_ids:
             raise SystemExit(f"Source identity references unknown NoteID: {nid}")
+        if registry_by_id[nid].get("Status", "").strip() != "active":
+            raise SystemExit(f"Legacy Source identity references non-active NoteID: {nid}")
         if status != "confirmed":
             raise SystemExit(f"Unconfirmed persistent SourceIdentity row: {key}")
         map_keys.add(key)
@@ -185,6 +212,8 @@ def main() -> None:
             raise SystemExit(f"Invalid/duplicate SourceIdentity extension key: {key}")
         if nid not in registry_ids:
             raise SystemExit(f"Source identity extension references unknown NoteID: {nid}")
+        if registry_by_id[nid].get("Status", "").strip() != "active":
+            raise SystemExit(f"Source identity extension references non-active NoteID: {nid}")
         if status not in {"confirmed", "pending"}:
             raise SystemExit(f"Invalid SourceIdentity extension status: {key} -> {status!r}")
         extension_keys.add(key)

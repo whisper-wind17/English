@@ -119,10 +119,11 @@ def main() -> None:
     reg_by_id = {r["NoteID"].strip(): r for r in reg_ext}
     for row in reg_ext:
         origin = row.get("PrimaryOriginKey", "").strip()
-        if origin.startswith(ORIGIN_PREFIX):
-            group_to_id[origin[len(ORIGIN_PREFIX):]] = row["NoteID"].strip()
-    if len(group_to_id) != 293:
-        raise SystemExit(f"Expected 293 allocated Grade 5-6 groups before overlay, got {len(group_to_id)}")
+        if origin.startswith(ORIGIN_PREFIX) and row.get("Status", "").strip() == "active":
+            group = origin[len(ORIGIN_PREFIX):]
+            if group in group_to_id:
+                raise SystemExit(f"Duplicate active Grade 5-6 allocation group: {group}")
+            group_to_id[group] = row["NoteID"].strip()
 
     source_mappings = {
         (r.get("SourceID", "").strip(), r.get("SourceEdition", "").strip(), r.get("SourceItemKey", "").strip()): r

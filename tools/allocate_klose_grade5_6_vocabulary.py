@@ -150,13 +150,15 @@ def main() -> None:
         else:
             raise SystemExit(f"Unexpected reconciliation decision: {key}->{decision!r}")
 
-    if len(group_candidates) != 293:
-        raise SystemExit(f"Expected 293 new identity groups, got {len(group_candidates)}")
+    if not group_candidates:
+        raise SystemExit("No reviewed new identity groups remain for Grade 5-6 allocation")
 
     existing_group_alloc: dict[str, str] = {}
     for row in ext:
         origin = row.get("PrimaryOriginKey", "").strip()
         if not origin.startswith(ORIGIN_PREFIX):
+            continue
+        if row.get("Status", "").strip() != "active":
             continue
         group = origin[len(ORIGIN_PREFIX):]
         nid = row.get("NoteID", "").strip()

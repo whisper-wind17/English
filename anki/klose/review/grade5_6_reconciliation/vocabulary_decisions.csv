@@ -1,4 +1,4 @@
-ProvisionalIdentityKey,CandidateFingerprint,Decision,DecisionNoteID,DecisionIdentityGroup,DecisionBasis,Rationale
+﻿ProvisionalIdentityKey,CandidateFingerprint,Decision,DecisionNoteID,DecisionIdentityGroup,DecisionBasis,Rationale
 G56V0001,97a7dbdd944068e67c9a5c62798f5ca6d50e68764b90f1ee1f416f87b1f7d515,new-stable-identity,,new::a-few::small-number,model-reviewed-current-evidence,a few 是稳定数量短语学习单元；当前无等价 Stable Note
 G56V0002,ce23f5c7aab2781959595dec41ec9d0a123dfbfc1eaf93605069a0b42fdbed34,new-stable-identity,,new::a-m::before-noon,model-reviewed-current-evidence,a.m. 是稳定时间缩写学习单元
 G56V0003,caa42cef5aa276361c2f4fb0353c59f1bc53c7175c302a3ce31197006116552f,new-stable-identity,,new::act::perform-role,model-reviewed-current-evidence,扮演是稳定 act 动词义且当前无等价 Stable Note
@@ -64,7 +64,7 @@ G56V0062,3e0e79fdca10961e73e85c04fdd8912a7184af9ac1da6ee81e1012591c7e447f,new-st
 G56V0063,27c1a0c86909bc0d1d4f3982ac9ac5b54af1db33a704492f9284835f791b5774,new-stable-identity,,new::chess::game,model-reviewed-current-evidence,国际象棋为独立游戏名词；当前无 Stable identity。
 G56V0064,74da5bad2ccaf5a8c50fd94fd5d55f1a71da3c5f08dc9ec5f89e820975e4fa61,reuse-existing,KV000141,KV000141,policy-deterministic-exact-sense,Same MatchKey and normalized textbook target sense exactly equals the single current Stable Note sense.
 G56V0065,9ba7217cb10afe1d28b4d5104b2f71a2152dff58b4ee769452ca3c8dc37bdbc8,new-stable-identity,,new::clay::material,model-reviewed-current-evidence,黏土和陶土为独立材料名词；当前无 Stable identity。
-G56V0066,267a647c8f79b4977e953051e3f327add5106d65fc528a76d2adcaed6bc9acbc,new-stable-identity,,new::clean my room::chore-phrase,model-reviewed-current-evidence,教材把 clean my room 作为词汇短语；它训练稳定动作搭配而非交际功能；保留为 Vocabulary proposal。
+G56V0066,267a647c8f79b4977e953051e3f327add5106d65fc528a76d2adcaed6bc9acbc,reuse-existing,KV000572,KV000572,premerge-dedup-reviewed,Possessive determiner variation does not create a new lexical phrase identity.
 G56V0067,fd6ec34379d877632ce7820db998af0027b9fe2384a067ce3f0b074ed03606db,morphology-only,,,policy-deterministic,Textbook explicitly marks this source entry as an inflected form; keep the learning relation in Morphology Registry and do not mint a Vocabulary identity for the inflection alone.
 G56V0068,88c4e0f3b24e837e4028c98734ae4184b2f6b94e2fd05cc5dbca88400c27e52e,reuse-existing,KV000519,KV000519,model-reviewed-current-evidence,聪明聪颖与现有聪明的同义
 G56V0069,ec07d335ab1eb09eb5d2c79a10b9d97c777d5fc20274c1e0811e7bbea6f29dbf,new-stable-identity,,new::climb::ascend,model-reviewed-current-evidence,攀登和爬为独立动词义；当前无 Stable identity。
@@ -114,7 +114,7 @@ G56V0112,b4c999983d3e75f20be1b61c0a5cb2330bfbd9c7aa0ccf1ea0a717d8531b8e4a,new-st
 G56V0113,2f89e48439ecd9054fd9a433a2ca13b95cbd03e96f3f52d37bdb1785c9e455ac,reuse-existing,KV000191,KV000191,policy-deterministic-exact-sense,Same MatchKey and normalized textbook target sense exactly equals the single current Stable Note sense.
 G56V0114,c6c5a735e383e584c23d81773427ebee0b4958792d795e5bfb949894fb55af6e,reuse-existing,KV000195,KV000195,policy-deterministic-exact-sense,Same MatchKey and normalized textbook target sense exactly equals the single current Stable Note sense.
 G56V0115,4a4f487b480421eb87198ec4634125b70eebd0aa1400aeb68b0fb79e8752211c,morphology-only,,,policy-deterministic,Textbook explicitly marks this source entry as an inflected form; keep the learning relation in Morphology Registry and do not mint a Vocabulary identity for the inflection alone.
-G56V0116,1589415ee9524d8c835c86e9b4e53f84ca6dba1d109704dfb507e26f64ed6f4f,new-stable-identity,,new::eat lunch::meal-action,model-reviewed-current-evidence,eating lunch 是稳定餐饮动作搭配的进行形式；保留 phrase identity；与泛义 eat 分开。
+G56V0116,1589415ee9524d8c835c86e9b4e53f84ca6dba1d109704dfb507e26f64ed6f4f,reuse-existing,KV000193,KV000193,premerge-dedup-reviewed,Progressive surface is morphology/context only; existing base lexical phrase is the same learning unit.
 G56V0117,4b810eb765ae228579fb856343fc7a58c5b9d83ff172037a4295cb64a0d89190,new-stable-identity,,new::eiffel tower::landmark,model-reviewed-current-evidence,Eiffel Tower 是稳定专名和地标概念；当前无 Stable identity。
 G56V0118,bfe808a83257492620719026b727016b591c9680e3fcc99bdcc8891e6117120a,new-stable-identity,,new::electricity::electricity,model-reviewed-current-evidence,电为独立名词概念；当前无 Stable identity。
 G56V0119,5f0960deddbeda9ee931eb1b14672fbdb46dfc24421b211a55f73f70b7727eb3,new-stable-identity,,new::else::other-additional,model-reviewed-current-evidence,其他别的与另外其他属于同一 else 核心义域
@@ -326,7 +326,7 @@ G56V0324,b24201a99b39317405944c7cee60837746aed7baeab2ead9abf34edd6779317f,reuse-
 G56V0325,df5fa796baf3cf308d27f2b155ab0b8b84a871c1f9a39eb5e58fba1f53b2e012,new-stable-identity,,new::raincoat::clothing,model-reviewed-current-evidence,雨衣为独立服装名词；当前无 Stable identity。
 G56V0326,e29181af4ebe2e2326533895c5de3fd27fb6d379c1fb9ab467afe11e3b03d666,morphology-only,,,policy-deterministic,Textbook explicitly marks this source entry as an inflected form; keep the learning relation in Morphology Registry and do not mint a Vocabulary identity for the inflection alone.
 G56V0327,2c6076d48bf5abe003befc90875884c3de107d7dfc2054f68a0aff9e99622d2d,morphology-only,,,policy-deterministic,Textbook explicitly marks this source entry as an inflected form; keep the learning relation in Morphology Registry and do not mint a Vocabulary identity for the inflection alone.
-G56V0328,5617b042a0935a54823942ade7b8a04b23b63f272b5fc12935c656023733737c,new-stable-identity,,new::read a book::activity-phrase,model-reviewed-current-evidence,reading a book 是 read a book 活动搭配的进行形式；future identity 归一到基础短语而不为 -ing surface 单独建 Note。
+G56V0328,5617b042a0935a54823942ade7b8a04b23b63f272b5fc12935c656023733737c,reuse-existing,KV000307,KV000307,premerge-dedup-reviewed,Number/progressive variation is contextual morphology; target activity is reading books.
 G56V0329,48f8ddcf382cac503d3031b8b87b82a34cb16178521acc7daf9dad10172ad488,new-stable-identity,,new::reduce::reduce,model-reviewed-current-evidence,减少为独立动词义；当前无 Stable identity。
 G56V0330,2865113affebfd61796be2ccdec3276d633fc0c69ddadfb476071aa3df8c50a1,new-stable-identity,,new::resource::resource,model-reviewed-current-evidence,资源为独立名词义；当前无 Stable identity。
 G56V0331,68255ec91f475073c9c387875f444e54b1467500b3c3ed81be8fb9990f750065,new-stable-identity,,new::rest::rest-relax,model-reviewed-current-evidence,休息和放松为稳定动词或名词核心义；当前无 Stable identity。
@@ -479,8 +479,8 @@ G56V0477,ac9afde45a625ee57168c73c91925c441a8454545aaeba9f2d12648bcc49dd2e,reuse-
 G56V0478,abd746678797d24a6089c786a6ca19516d5e322a434f0b67709cad4937560704,reuse-existing,KV000203,KV000203,policy-deterministic-exact-sense,Same MatchKey and normalized textbook target sense exactly equals the single current Stable Note sense.
 G56V0479,0d4ea2b11b3db62a584e1af786703b5f0ca0f0dc98419bd84c77a00d6171da71,new-stable-identity,,new::weekend::weekend,model-reviewed-current-evidence,周末为独立时间名词；当前无 Stable identity。
 G56V0480,f515323b47e85076c88e761e0fd137cfad58c9e6941084ff589113edd3bef968,morphology-only,,,policy-deterministic,Textbook explicitly marks this source entry as an inflected form; keep the learning relation in Morphology Registry and do not mint a Vocabulary identity for the inflection alone.
-G56V0481,f1de7dfa2a14372c77ad3708b0d3311ada78beb616d981b5c717114c77665e7a,new-stable-identity,,new::go camping::activity-phrase,model-reviewed-current-evidence,went camping 是 go camping 的过去时 realization；future identity 归一到基础活动短语；过去时由 morphology 承载。
-G56V0482,29f8388384556be3f7c5fd3bcf56c49af3ca380ac95065d70a21f0cbef68ad3a,new-stable-identity,,new::go fishing::activity-phrase,model-reviewed-current-evidence,went fishing 是 go fishing 的过去时 realization；future identity 归一到基础活动短语；过去时由 morphology 承载。
+G56V0481,f1de7dfa2a14372c77ad3708b0d3311ada78beb616d981b5c717114c77665e7a,reuse-existing,KV000500,KV000500,premerge-dedup-reviewed,Past-tense surface is morphology only; allocation origin already resolves to go camping.
+G56V0482,29f8388384556be3f7c5fd3bcf56c49af3ca380ac95065d70a21f0cbef68ad3a,reuse-existing,KV000359,KV000359,premerge-dedup-reviewed,Past-tense surface is morphology only; identical target activity.
 G56V0483,2f2cf49fccdaf5409cb896eb4d14e421af77931551784aeefad600846a31aa64,reuse-existing,KV000197,KV000197,model-reviewed-current-evidence,什么时候何时与现有什么时候同义
 G56V0484,f63bd0f11ba447da56479ebf812b14a2f02e70919fde8084a94ca01cda78bb8d,reuse-existing,KV000836,KV000836,model-reviewed-current-evidence,哪一个属于现有哪一个/哪一些同一疑问限定词义
 G56V0485,2d48161e6c7398dd03c6f438fe8912a8f9c4d704f04e98e36fad21472f29984b,reuse-existing,KV000552,KV000552,policy-deterministic-exact-sense,Same MatchKey and normalized textbook target sense exactly equals the single current Stable Note sense.

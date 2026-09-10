@@ -210,7 +210,11 @@ def main() -> None:
 
     registry = [r for p in REGISTRIES for r in read_csv(p)]
     active = [r for r in registry if r.get("Status", "").strip() == "active"]
-    incoming = [r for r in active if r.get("CreatedSource", "").strip() == GRADE56_SOURCE]
+    incoming = [
+        r for r in registry
+        if r.get("CreatedSource", "").strip() == GRADE56_SOURCE
+        and r.get("Status", "").strip() in {"active", "merged"}
+    ]
     baseline = [r for r in active if r.get("CreatedSource", "").strip() != GRADE56_SOURCE]
 
     if len(incoming) != 293:

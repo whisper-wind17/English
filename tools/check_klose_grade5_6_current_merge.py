@@ -84,8 +84,8 @@ def main() -> None:
         fail("candidate/decision key closure failed")
     decision_counts = Counter(r.get("Decision", "").strip() for r in decisions)
     expected_decisions = Counter({
-        "reuse-existing": 148,
-        "new-stable-identity": 301,
+        "reuse-existing": 153,
+        "new-stable-identity": 296,
         "morphology-only": 45,
         "held": 10,
     })
@@ -96,7 +96,7 @@ def main() -> None:
         r.get("DecisionIdentityGroup", "").strip()
         for r in decisions if r.get("Decision", "").strip() == "new-stable-identity"
     }
-    if len(new_groups) != 293 or any(not g.startswith("new::") for g in new_groups):
+    if len(new_groups) != 288 or any(not g.startswith("new::") for g in new_groups):
         fail(f"unexpected new identity-group closure: {len(new_groups)}")
 
     registry_rows = [
@@ -104,7 +104,7 @@ def main() -> None:
         if r.get("Status", "").strip() == "active"
     ]
     registry_ids = {r.get("NoteID", "").strip() for r in registry_rows}
-    if len(registry_rows) != len(registry_ids) or len(registry_ids) != 1194:
+    if len(registry_rows) != len(registry_ids) or len(registry_ids) != 1189:
         fail(f"unexpected Stable registry state: rows={len(registry_rows)} unique={len(registry_ids)}")
 
     allocations: dict[str, str] = {}
@@ -112,13 +112,24 @@ def main() -> None:
         origin = row.get("PrimaryOriginKey", "").strip()
         if not origin.startswith(G56_ORIGIN_PREFIX):
             continue
+        if row.get("Status", "").strip() != "active":
+            continue
         group = origin[len(G56_ORIGIN_PREFIX):]
         nid = row.get("NoteID", "").strip()
         if group in allocations or nid not in registry_ids:
             fail(f"invalid/duplicate Grade 5-6 Stable allocation: {origin}")
         allocations[group] = nid
-    if set(allocations) != new_groups or len(set(allocations.values())) != 293:
-        fail("293 reviewed new groups are not in one-to-one Stable allocation")
+    if set(allocations) != new_groups or len(set(allocations.values())) != len(new_groups):
+        fail("reviewed new groups are not in one-to-one active Stable allocation")
+
+    expected_g56_note_ids: set[str] = set()
+    for cid, cand in cand_by_id.items():
+        dec = dec_by_id[cid]
+        decision = dec.get("Decision", "").strip()
+        if decision == "reuse-existing":
+            expected_g56_note_ids.add(dec.get("DecisionNoteID", "").strip())
+        elif decision == "new-stable-identity":
+            expected_g56_note_ids.add(allocations[dec.get("DecisionIdentityGroup", "").strip()])
 
     # Source identity mappings are the authoritative admitted lexical occurrence set.
     g4_coords: dict[str, tuple[int, int, int, int, int]] = {}
@@ -150,8 +161,10 @@ def main() -> None:
 
     if len(g56_mapping_keys) != 454:
         fail(f"expected 454 mapped Grade 5-6 lexical occurrences, got {len(g56_mapping_keys)}")
-    if len(g56_coords) != 432:
-        fail(f"expected 432 unique Grade 5-6 current NoteIDs, got {len(g56_coords)}")
+    if set(g56_coords) != expected_g56_note_ids:
+        fail(
+            f"Grade 5-6 unique NoteID closure drifted: mapped={len(g56_coords)} expected={len(expected_g56_note_ids)}"
+        )
     if len(g4_coords) != 221:
         fail(f"expected 221 actual Grade-4 current NoteIDs, got {len(g4_coords)}")
 
@@ -177,8 +190,8 @@ def main() -> None:
     learner_rows = read_csv(LEARNER_CURRENT)
     master_by_id = {r.get("NoteID", "").strip(): r for r in master_rows}
     learner_by_id = {r.get("NoteID", "").strip(): r for r in learner_rows}
-    if len(master_by_id) != 1194 or len(master_by_id) != len(master_rows):
-        fail(f"derived Vocabulary Master is not 1194 unique Notes: {len(master_rows)}")
+    if len(master_by_id) != len(registry_ids) or len(master_by_id) != len(master_rows):
+        fail(f"derived Vocabulary Master does not match active Stable registry: {len(master_rows)}")
     if set(master_by_id) != registry_ids:
         fail("derived Vocabulary Master does not cover the current Stable registry exactly")
     if set(learner_by_id) != registry_ids:
@@ -193,7 +206,7 @@ def main() -> None:
 
     review_ids = {r.get("NoteID", "").strip() for r in read_csv(LEARNER_REVIEW)}
     if review_ids != new_ids:
-        fail(f"learner review queue must equal the 293 new Grade 5-6 Notes: queue={len(review_ids)} new={len(new_ids)}")
+        fail(f"learner review queue must equal active new Grade 5-6 Notes: queue={len(review_ids)} new={len(new_ids)}")
 
     release_ids: set[str] = set()
     for path in (RELEASE, RELEASE_EXT):
@@ -213,8 +226,8 @@ def main() -> None:
     for nid, c in g56_coords.items():
         earliest[nid] = min(earliest.get(nid, c), c)
     expected_current = set(earliest)
-    if len(expected_current) != 627:
-        fail(f"unexpected total current curriculum size: {len(expected_current)}")
+    if not expected_current:
+        fail("derived current curriculum is empty")
     expected_order = {
         nid: f"{index:06d}"
         for index, (nid, _) in enumerate(sorted(earliest.items(), key=lambda item: item[1]), start=1)
@@ -256,9 +269,11 @@ def main() -> None:
 
     print(
         "Klose Grade 5-6 current Vocabulary merge OK: "
-        "stable_registry=1194, new_stable=293, mapped_occurrences=454, skipped_occurrences=55, "
-        "grade5_6_unique=432, grade4_unique=221, current_curriculum=627, "
-        "learner_pending=293, released_unchanged=638, publish_not_authorized"
+        f"stable_registry={len(registry_ids)}, new_stable={len(new_ids)}, "
+        f"mapped_occurrences={len(g56_mapping_keys)}, skipped_occurrences={len(skipped)}, "
+        f"grade5_6_unique={len(g56_coords)}, grade4_unique={len(g4_coords)}, "
+        f"current_curriculum={len(expected_current)}, learner_pending={len(review_ids)}, "
+        "released_unchanged=638, publish_not_authorized"
     )
 
 
