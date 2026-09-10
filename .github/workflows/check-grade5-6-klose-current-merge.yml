@@ -1,0 +1,49 @@
+name: Check Grade 5-6 Klose Current Merge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/check_klose_grade5_6_current_merge.py'
+      - 'anki/klose/learner/grade5_6_learning_scope.json'
+      - 'anki/klose/learner/current.csv'
+      - 'anki/klose/learner/learning_admission.csv'
+      - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/note_registry_extensions.csv'
+      - 'anki/klose/master/source_identity_extensions.csv'
+      - 'anki/klose/master/vocabulary_master.csv'
+      - 'anki/klose/master/release_registry.csv'
+      - 'anki/klose/master/release_registry_extensions.csv'
+      - 'anki/klose/master/grade5_6_reuse_fact_overrides.csv'
+      - 'anki/klose/review/learner_review.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
+      - '.github/workflows/check-grade5-6-klose-current-merge.yml'
+  pull_request:
+    paths:
+      - 'tools/check_klose_grade5_6_current_merge.py'
+      - 'anki/klose/learner/**'
+      - 'anki/klose/master/**'
+      - 'anki/klose/review/**'
+      - '.github/workflows/check-grade5-6-klose-current-merge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  completion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            anki/klose
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify persistent Stable state
+        run: python tools/check_klose_persistent_state.py
+      - name: Independently verify Grade 5-6 current Vocabulary merge
+        run: python tools/check_klose_grade5_6_current_merge.py
