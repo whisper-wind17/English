@@ -12,8 +12,10 @@ on:
       - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
       - 'anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv'
+      - 'anki/klose/source_reference/grade5_6_source_provenance.json'
       - 'anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv'
       - 'tools/check_grade5_6_actual_textbook_source.py'
+      - 'tools/check_grade5_6_actual_textbook_source_resolved.py'
       - '.github/workflows/check-grade5-6-actual-source.yml'
   pull_request:
     paths:
@@ -25,8 +27,10 @@ on:
       - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-6-morphology.csv'
       - 'anki/klose/source_reference/grade5_6_actual_textbook_manifest.csv'
+      - 'anki/klose/source_reference/grade5_6_source_provenance.json'
       - 'anki/klose/source_reference/klose-grade6-morphology-pending-trace.csv'
       - 'tools/check_grade5_6_actual_textbook_source.py'
+      - 'tools/check_grade5_6_actual_textbook_source_resolved.py'
       - '.github/workflows/check-grade5-6-actual-source.yml'
   workflow_dispatch:
 
