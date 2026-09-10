@@ -93,7 +93,7 @@ jobs:
         if: steps.gate.outputs.ready == 'true'
         run: python tools/check_third_party_stage_b_reconciliation.py
 
-      - name: Drain deterministic safe Stage-B lanes
+      - name: Drain safe and exact-history Stage-B lanes
         if: steps.gate.outputs.ready == 'true'
         shell: bash
         run: |
@@ -101,21 +101,22 @@ jobs:
           for iteration in $(seq 1 20); do
             python tools/plan_third_party_stage_b_reconciliation.py
             python tools/check_third_party_stage_b_review_plan.py
-            auto="$(python - <<'PY'
+            selected="$(python - <<'PY'
           import json
           from pathlib import Path
           state = json.loads(Path('anki/klose/third_party_vocabulary/premerge/reconciliation_next_batch.json').read_text(encoding='utf-8-sig'))
-          print('true' if state.get('AutoExecutable') is True else 'false')
+          print(int(state.get('SelectedCount', 0)))
           PY
           )"
-            if [[ "$auto" != "true" ]]; then
-              echo "Safe Stage-B drain stopped at explicit-review lane."
+            if [[ "$selected" == "0" ]]; then
+              echo 'Stage-B drain reached empty selected batch.'
               break
             fi
+            rm -f anki/klose/third_party_vocabulary/reconciliation/decision_updates.csv
             python tools/propose_third_party_stage_b_decision_updates.py
             if [[ ! -f anki/klose/third_party_vocabulary/reconciliation/decision_updates.csv ]]; then
-              echo 'AutoExecutable lane did not materialize a decision inbox.'
-              exit 1
+              echo 'Stage-B drain stopped at current-evidence-changed explicit review.'
+              break
             fi
             python tools/apply_third_party_stage_b_reconciliation_updates.py
             python tools/check_third_party_stage_b_reconciliation.py
