@@ -1,11 +1,11 @@
 Grade,Semester,ObjectType,EvidenceStatus,MaterializationStatus,ExpectedRows,MaterializedRows,SourceID,SourceEdition,Notes
-5,上,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-5,上,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-5,下,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-5,下,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-5,下,Proverbs,received,not-materialized,6,0,,,appendix proverbs; keep separate from Useful Expressions
-6,上,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-6,上,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-6,下,Vocabulary,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-6,下,Useful Expressions,received,not-materialized,,0,,,actual textbook images received; exact rows not yet persisted
-6,待追踪,Morphology,observed-in-received-evidence,partial-pending-source-trace,43,43,,,43 mappings recovered from committed checkpoint; Semester/Unit/Page/source-row trace still unresolved
+5,上,Vocabulary,received,materialized-source-identity-pending,119,119,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID; source identity pending confirmation
+5,上,Useful Expressions,received,materialized-source-identity-pending,38,38,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID; page not printed in supplied summary image
+5,下,Vocabulary,received,materialized-source-identity-pending,156,156,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID; source identity pending confirmation
+5,下,Useful Expressions,received,materialized-source-identity-pending,28,28,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID
+5,下,Proverbs,received,materialized-source-identity-pending,6,6,pending-confirmation,pending-confirmation,Appendix 5 proverbs persisted as separate Source Object
+6,上,Vocabulary,received,materialized-source-identity-pending,144,144,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID; source identity pending confirmation
+6,上,Useful Expressions,received,materialized-source-identity-pending,54,54,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID; page not printed in supplied summary image
+6,下,Vocabulary,received,materialized-source-identity-pending,90,90,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID
+6,下,Useful Expressions,received,materialized-source-identity-pending,33,33,pending-confirmation,pending-confirmation,exact rows persisted with EvidenceFileID
+5-6,all,Morphology,received,materialized-source-identity-pending,58,58,pending-confirmation,pending-confirmation,58 source occurrences; 43 prior unique mappings expanded to occurrence-level trace incl past/comparative/present_participle/plural
