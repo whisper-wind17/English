@@ -21,6 +21,7 @@ on:
       - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
+      - 'anki/klose/learner/grade5_6_learning_scope.json'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_status.json'
@@ -47,6 +48,7 @@ jobs:
           sparse-checkout: |
             tools
             anki/klose/source_reference
+            anki/klose/learner/grade5_6_learning_scope.json
             anki/klose/master
             anki/klose/expressions/master
             anki/klose/review/grade5_6_reconciliation
