@@ -126,7 +126,7 @@ def main() -> None:
     expected_examples = [
         ("may", "也许；可能", "new-stable-identity", "", "new::may::possibility-modal"),
         ("run", "（使）运转", "new-stable-identity", "", "new::run::operate"),
-        ("star", "歌唱（或表演）明星", "new-stable-identity", "", "new::star::performer"),
+        ("star", "歌唱（或表演）明星", "new-stable-identity", "", "new::star::performer-celebrity"),
         ("first (1st)", "第一（的）", "reuse-existing", "KV000279", "KV000279"),
         ("fifth (5th)", "第五（的）", "reuse-existing", "KV000602", "KV000602"),
         ("second (2nd)", "第二（的）", "reuse-existing", "KV000296", "KV000296"),
@@ -156,7 +156,6 @@ def main() -> None:
     ]
     for entry, group in shared_expectations:
         matching_keys = [r["ProvisionalIdentityKey"] for r in candidates if r.get("Entry") == entry]
-        # For inflected variants (e.g. doing morning exercises), the paired key is checked below.
         if entry == "do morning exercises":
             matching_keys += [r["ProvisionalIdentityKey"] for r in candidates if r.get("Entry") == "doing morning exercises"]
         if not matching_keys or any(decision_by_key[k].get("DecisionIdentityGroup", "").strip() != group for k in matching_keys):
