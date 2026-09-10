@@ -38,6 +38,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add tools/apply_klose_actual_grade4.py tools/check_klose_grade5_6_current_merge.py anki/klose/master/release_registry_extensions.csv
-          git diff --cached --check
+          git diff --cached --check -- tools/apply_klose_actual_grade4.py tools/check_klose_grade5_6_current_merge.py
           git commit -m 'release: allocate reviewed Grade 5-6 vocabulary'
           git push
