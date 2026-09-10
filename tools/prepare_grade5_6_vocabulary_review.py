@@ -19,7 +19,7 @@ STATUS = DIR / "vocabulary_status.json"
 
 DECISION_FIELDS = [
     "ProvisionalIdentityKey", "CandidateFingerprint", "Decision", "DecisionNoteID",
-    "DecisionBasis", "Rationale",
+    "DecisionIdentityGroup", "DecisionBasis", "Rationale",
 ]
 BATCH_FIELDS = [
     "ProvisionalIdentityKey", "CandidateFingerprint", "Entry", "Meaning", "MatchKey",
@@ -73,6 +73,37 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         w.writeheader(); w.writerows(rows)
 
 
+def validate_decision(row: dict[str, str], key: str) -> dict[str, str]:
+    decision = row.get("Decision", "").strip()
+    note_id = row.get("DecisionNoteID", "").strip()
+    group = row.get("DecisionIdentityGroup", "").strip()
+    if decision not in VALID_DECISIONS:
+        raise SystemExit(f"Invalid decision for {key}")
+    if decision == "reuse-existing":
+        if not note_id:
+            raise SystemExit(f"reuse-existing lacks NoteID: {key}")
+        if group and group != note_id:
+            raise SystemExit(f"reuse-existing identity group must equal NoteID: {key}")
+        group = note_id
+    elif decision == "new-stable-identity":
+        if note_id:
+            raise SystemExit(f"new-stable-identity cannot carry NoteID: {key}")
+        if not group.startswith("new::"):
+            raise SystemExit(f"new-stable-identity requires new:: identity group: {key}")
+    else:
+        if note_id or group:
+            raise SystemExit(f"{decision} cannot carry NoteID/identity group: {key}")
+    return {
+        "ProvisionalIdentityKey": key,
+        "CandidateFingerprint": row.get("CandidateFingerprint", "").strip(),
+        "Decision": decision,
+        "DecisionNoteID": note_id,
+        "DecisionIdentityGroup": group,
+        "DecisionBasis": row.get("DecisionBasis", "").strip(),
+        "Rationale": row.get("Rationale", "").strip(),
+    }
+
+
 def main() -> None:
     candidates = read_csv(CANDIDATES)
     if not candidates:
@@ -83,23 +114,17 @@ def main() -> None:
 
     existing: dict[str, dict[str, str]] = {}
     stale: list[str] = []
-    for row in read_csv(DECISIONS):
-        key = row.get("ProvisionalIdentityKey", "").strip()
+    for raw in read_csv(DECISIONS):
+        key = raw.get("ProvisionalIdentityKey", "").strip()
         if key not in by_key:
             stale.append(key or "<blank>")
             continue
-        if row.get("Decision", "").strip() not in VALID_DECISIONS:
-            raise SystemExit(f"Invalid decision for {key}")
-        if row.get("CandidateFingerprint", "").strip() != fingerprint(by_key[key]):
+        if raw.get("CandidateFingerprint", "").strip() != fingerprint(by_key[key]):
             stale.append(key)
             continue
         if key in existing:
             raise SystemExit(f"Duplicate decision key: {key}")
-        if row["Decision"].strip() == "reuse-existing" and not row.get("DecisionNoteID", "").strip():
-            raise SystemExit(f"reuse-existing lacks NoteID: {key}")
-        if row["Decision"].strip() != "reuse-existing" and row.get("DecisionNoteID", "").strip():
-            raise SystemExit(f"Only reuse-existing may carry DecisionNoteID: {key}")
-        existing[key] = {f: row.get(f, "") for f in DECISION_FIELDS}
+        existing[key] = validate_decision(raw, key)
 
     seeded = Counter()
     for key, cand in by_key.items():
@@ -112,6 +137,7 @@ def main() -> None:
                 "CandidateFingerprint": fp,
                 "Decision": "morphology-only",
                 "DecisionNoteID": "",
+                "DecisionIdentityGroup": "",
                 "DecisionBasis": "policy-deterministic",
                 "Rationale": "Textbook explicitly marks this source entry as an inflected form; keep the learning relation in Morphology Registry and do not mint a Vocabulary identity for the inflection alone.",
             }
@@ -127,6 +153,7 @@ def main() -> None:
                         "CandidateFingerprint": fp,
                         "Decision": "reuse-existing",
                         "DecisionNoteID": note_id,
+                        "DecisionIdentityGroup": note_id,
                         "DecisionBasis": "policy-deterministic-exact-sense",
                         "Rationale": "Same MatchKey and normalized textbook target sense exactly equals the single current Stable Note sense.",
                     }
@@ -159,6 +186,7 @@ def main() -> None:
     class_counts = Counter(r["CandidateClass"] for r in candidates)
     decision_counts = Counter(r["Decision"] for r in decision_rows)
     basis_counts = Counter(r["DecisionBasis"] for r in decision_rows)
+    new_groups = {r["DecisionIdentityGroup"] for r in decision_rows if r["Decision"] == "new-stable-identity"}
     status = {
         "SourceOccurrences": 509,
         "ProvisionalLearningUnits": len(candidates),
@@ -166,6 +194,7 @@ def main() -> None:
         "ValidDecisionCount": len(decision_rows),
         "DecisionCounts": dict(sorted(decision_counts.items())),
         "DecisionBasisCounts": dict(sorted(basis_counts.items())),
+        "ProposedNewIdentityGroups": len(new_groups),
         "PendingReview": len(pending),
         "NextBatchCount": len(selected),
         "NextBatchClasses": dict(sorted(Counter(r["CandidateClass"] for r in selected).items())),
