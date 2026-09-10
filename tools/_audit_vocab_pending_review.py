@@ -22,7 +22,11 @@ def main():
     admission={r['NoteID']:r for r in read(ADMISSION) if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4'}
     review={r['NoteID']:r for r in read(REVIEW) if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4'}
     ext={r['NoteID']:r for r in read(REGISTRY)}
-    pending={nid for nid,r in review.items() if r.get('ReviewStatus')=='pending'}
+    released={nid for nid,m in master.items() if m.get('Released')=='yes'}
+    allowed={nid for nid,a in admission.items() if a.get('Status')=='allowed'}
+    required=released|allowed
+    historical_pending=sorted(nid for nid,r in review.items() if r.get('ReviewStatus')=='pending' and nid not in required)
+    pending={nid for nid in required if review.get(nid,{}).get('ReviewStatus')=='pending'}
     rows=[]
     counts={}
     for nid in sorted(pending):
@@ -46,7 +50,7 @@ def main():
     OUT.parent.mkdir(parents=True,exist_ok=True)
     with OUT.open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=FIELDS);w.writeheader();w.writerows(rows)
-    print(f'pending_total={len(pending)} classes={counts} focus_rows={len(rows)}')
-    if len(pending)!=343 or counts.get('grade5-6-new-active')!=288 or len(rows)!=55:
+    print(f'required={len(required)} pending_required={len(pending)} historical_pending={historical_pending} classes={counts} focus_rows={len(rows)}')
+    if len(required)!=972 or len(pending)!=343 or len(historical_pending)!=2 or counts.get('grade5-6-new-active')!=288 or len(rows)!=55:
         raise SystemExit('Unexpected pending decomposition')
 if __name__=='__main__':main()
