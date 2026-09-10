@@ -4,12 +4,13 @@
 Release is deliberately separate from Learning Admission. This tool performs one
 explicit transition: `allowed ∩ unreleased -> released`, guarded by the current
 learner-presentation fingerprint and an expected-count assertion. Existing release
-rows are never rewritten or reordered.
+bytes/rows are never rewritten or reordered.
 """
 from __future__ import annotations
 
 import argparse
 import csv
+import io
 import json
 import re
 from pathlib import Path
@@ -41,11 +42,23 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
-    with path.open("w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=RELEASE_FIELDS, extrasaction="ignore", lineterminator="\n")
-        w.writeheader()
-        w.writerows(rows)
+def append_csv_rows(path: Path, rows: list[dict[str, str]]) -> None:
+    """Append CSV records without changing one byte of historical content."""
+    raw = path.read_bytes()
+    newline = "\r\n" if b"\r\n" in raw else "\n"
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(
+        buffer,
+        fieldnames=RELEASE_FIELDS,
+        extrasaction="ignore",
+        lineterminator=newline,
+    )
+    writer.writerows(rows)
+    payload = buffer.getvalue().encode("utf-8")
+    if raw and not raw.endswith(b"\n"):
+        payload = newline.encode("ascii") + payload
+    with path.open("ab") as f:
+        f.write(payload)
 
 
 def main() -> None:
@@ -162,7 +175,7 @@ def main() -> None:
         {"NoteID": nid, "ReleasedAt": args.released_at, "ReleaseReason": args.reason.strip()}
         for nid in target_ordered
     ]
-    write_csv(RELEASE_EXT, extension_release_rows + appended)
+    append_csv_rows(RELEASE_EXT, appended)
     print(f"Appended {len(appended)} immutable release-extension rows to {RELEASE_EXT.relative_to(ROOT)}")
 
 
