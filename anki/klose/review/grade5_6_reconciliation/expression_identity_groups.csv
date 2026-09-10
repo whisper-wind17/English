@@ -1,16 +1,29 @@
 IdentityGroup,Decision,ExpressionID,CanonicalForm,FunctionKey,ExpressionType,SlotSchema,DecisionBasis,Rationale
 new::accept-offer-yes-please,new-stable-identity,,"Yes, please.",accept_offer_politely,fixed,,model-reviewed-current-evidence,礼貌接受提议或提供的高频固定回应
 new::ask-ability-can-you,new-stable-identity,,Can you [verb phrase]?,ask_ability,slot_frame,verb_phrase,model-reviewed-current-evidence,本句询问能力而非请求许可或礼貌请求
+new::ask-additional-past-activity,new-stable-identity,,What else did you do?,ask_additional_past_activity,fixed,,model-reviewed-current-evidence,追问过去还做了什么的高频表达
 new::ask-both-times,new-stable-identity,,Does [person] [verb phrase] on both [time 1] and [time 2]?,ask_activity_both_times,slot_frame,person|verb_phrase|time1|time2,model-reviewed-current-evidence,询问某活动是否在两个时间都发生并承载 both...and 结构
 new::ask-contribution,new-stable-identity,,What can [person] do for [target]?,ask_contribution_action,slot_frame,person|target,model-reviewed-current-evidence,询问某人能为活动或对象做什么；现有 KE000028 固定为 we+person 帮助语境
+new::ask-current-action-plural,new-stable-identity,,What are [subjects] doing?,ask_current_action_plural,slot_frame,subjects,model-reviewed-current-evidence,询问多个主体正在做什么
+new::ask-current-action-singular,new-stable-identity,,What is [subject] doing?,ask_current_action_singular,slot_frame,subject,model-reviewed-current-evidence,询问单个主体正在做什么
+new::ask-current-action-yesno,new-stable-identity,,Is [subject] [verb-ing]?,ask_current_action_yes_no,slot_frame,subject|verb_ing,model-reviewed-current-evidence,询问某主体是否正在做某事
+new::ask-event-time,new-stable-identity,,When is [event]?,ask_event_time,slot_frame,event,model-reviewed-current-evidence,询问聚会行程展览生日等事件时间的通用句型
 new::ask-existence-plural,new-stable-identity,,Are there any [plural noun] [place phrase]?,ask_existence_plural,slot_frame,plural_noun|place_phrase,model-reviewed-current-evidence,询问某处是否存在复数事物
 new::ask-existence-singular,new-stable-identity,,Is there a/an [singular noun] [place phrase]?,ask_existence_singular,slot_frame,singular_noun|place_phrase,model-reviewed-current-evidence,询问某处是否存在单数事物
 new::ask-favourite,new-stable-identity,,What's your favourite [category]?,ask_favourite,slot_frame,category,model-reviewed-current-evidence,直接询问某类别中最喜欢的对象；与 Which ... do you like 实现不同
+new::ask-favourite-choice,new-stable-identity,,Which [category] do you like best?,ask_favourite_choice,slot_frame,category,model-reviewed-current-evidence,询问某类别中最喜欢哪个对象；best 使其区别于一般 like 询问
 new::ask-good-at,new-stable-identity,,Is [person] good at [activity]?,ask_skill_good_at,slot_frame,person|activity,model-reviewed-current-evidence,询问某人是否擅长某活动的可迁移句型
 new::ask-method-how-can,new-stable-identity,,How can we [verb phrase]?,ask_method,slot_frame,verb_phrase,model-reviewed-current-evidence,询问如何实现目标或采取行动的高迁移表达
 new::ask-origin-thing,new-stable-identity,,Where does [thing] come from?,ask_thing_origin,slot_frame,thing,model-reviewed-current-evidence,询问物品或事物来源；不同于 Where are you from 的人物来源
+new::ask-ownership-whose-it,new-stable-identity,,Whose is it?,ask_ownership_pronoun,fixed,,model-reviewed-current-evidence,名词已知时询问所属的固定实现；区别于 Whose [noun] is this
+new::ask-past-activity,new-stable-identity,,What did you do?,ask_past_activity,fixed,,model-reviewed-current-evidence,询问过去做过什么的核心问句；地点副词可作为上下文扩展
+new::ask-past-destination,new-stable-identity,,Where did you go [past time]?,ask_past_destination,slot_frame,past_time,model-reviewed-current-evidence,询问过去某时去了哪里
+new::ask-past-experience,new-stable-identity,,How was your [event/time]?,ask_past_experience,slot_frame,event_time,model-reviewed-current-evidence,询问周末假期等过去经历整体感受的高迁移表达
+new::ask-past-yesno,new-stable-identity,,Did you [verb phrase]?,ask_past_yes_no,slot_frame,verb_phrase,model-reviewed-current-evidence,一般过去时询问是否做过某事的核心句型
 new::ask-person-description,new-stable-identity,,What's [person] like?,ask_person_description,slot_frame,person,model-reviewed-current-evidence,询问人物整体特征的高迁移表达；不同于询问物体是什么
+new::ask-plural-ownership,new-stable-identity,,Are these all [possessive pronoun]?,ask_plural_ownership,slot_frame,possessive_pronoun,model-reviewed-current-evidence,询问一组物品是否都属于某人的句型
 new::ask-problem-whats-matter,new-stable-identity,,What's the matter?,ask_problem,fixed,,model-reviewed-current-evidence,询问对方出了什么情况的高频固定表达
+new::ask-reason-why,new-stable-identity,,Why?,ask_reason,fixed,,model-reviewed-current-evidence,高频独立追问原因的固定表达
 new::ask-routine,new-stable-identity,,What do you usually do [time phrase]?,ask_routine,slot_frame,time_phrase,model-reviewed-current-evidence,询问某时段通常做什么的高迁移日常表达
 new::ask-school-schedule,new-stable-identity,,What do you have on [day]?,ask_school_schedule,slot_frame,day,model-reviewed-current-evidence,询问某天课程安排的教材核心表达
 new::ask-time-routine,new-stable-identity,,When do you [verb phrase]?,ask_routine_time,slot_frame,verb_phrase,model-reviewed-current-evidence,询问日常活动发生时间的高迁移句型
@@ -20,15 +33,30 @@ new::confirm-existence-singular,new-stable-identity,,"Yes, there is.",confirm_ex
 new::describe-look,new-stable-identity,,You look [adjective].,describe_observed_state,slot_frame,adjective,model-reviewed-current-evidence,根据对方外观或状态作观察描述的高迁移表达
 new::give-advice-should,new-stable-identity,,We should [verb phrase].,give_advice,slot_frame,verb_phrase,model-reviewed-current-evidence,提出正向建议的基础句型
 new::give-advice-should-not,new-stable-identity,,You shouldn't [verb phrase].,give_negative_advice,slot_frame,verb_phrase,model-reviewed-current-evidence,提出不应做某事的基础负向建议句型
+new::give-reason-because,new-stable-identity,,Because [clause].,give_reason,discourse_frame,clause,model-reviewed-current-evidence,回答 Why 时给出原因的高迁移 discourse frame
+new::instruct-keep-state,new-stable-identity,,Keep [thing] [adjective].,instruct_maintain_state,slot_frame,thing|adjective,model-reviewed-current-evidence,要求把某物保持在某种状态的可迁移句型
+new::instruct-talk-quietly,new-stable-identity,,Talk quietly.,request_quiet_speech,fixed,,model-reviewed-current-evidence,课堂或公共场合要求小声说话的简洁指令
+new::respond-current-action-no,new-stable-identity,,"No, [subject pronoun] isn't.",deny_current_action,slot_frame,subject_pronoun,model-reviewed-current-evidence,现在进行时是非问句的高频否定短答
 new::respond-inability-cannot,new-stable-identity,,"No, I can't.",respond_inability,fixed,,model-reviewed-current-evidence,对能力询问的高频否定回应
+new::respond-past-no,new-stable-identity,,"No, [subject pronoun] didn't.",deny_past_action,slot_frame,subject_pronoun,model-reviewed-current-evidence,一般过去时是非问句的高频否定短答
 new::respond-present-simple-yes,new-stable-identity,,"Yes, [subject pronoun] does.",confirm_present_simple,slot_frame,subject_pronoun,model-reviewed-current-evidence,一般现在时 Does 问句的高频肯定短答
 new::state-ability-i-can,new-stable-identity,,I can [verb phrase].,state_own_ability,slot_frame,verb_phrase,model-reviewed-current-evidence,表达自己能做什么的基础主动产出句型
+new::state-birthday-date,new-stable-identity,,My birthday is on [date].,state_birthday_date,slot_frame,date,model-reviewed-current-evidence,主动说明自己生日日期的高频社交表达
+new::state-current-action-plural,new-stable-identity,,[Subjects] are [verb-ing].,describe_current_action_plural,slot_frame,subjects|verb_ing,model-reviewed-current-evidence,描述多个主体正在进行的动作
+new::state-date,new-stable-identity,,It's on [date].,state_event_date,slot_frame,date,model-reviewed-current-evidence,说明事件具体日期的常用回答框架
 new::state-deadline-obligation,new-stable-identity,,We have to [verb phrase] by [time].,state_deadline_obligation,slot_frame,verb_phrase|time,model-reviewed-current-evidence,表达必须在截止时间前完成某事
 new::state-future-existence,new-stable-identity,,There will be [noun phrase] [time/place].,state_future_existence,slot_frame,noun_phrase|time_place,model-reviewed-current-evidence,表达未来某时或某地将出现某事物
+new::state-future-plan-will,new-stable-identity,,We'll [verb phrase].,state_future_plan,slot_frame,verb_phrase,model-reviewed-current-evidence,表达共同未来计划的简洁高迁移句型
 new::state-importance-to,new-stable-identity,,It's important to [verb phrase].,state_importance,slot_frame,verb_phrase,model-reviewed-current-evidence,说明某行动重要性的高迁移句型
+new::state-month-time,new-stable-identity,,It's in [month].,state_event_month,slot_frame,month,model-reviewed-current-evidence,说明事件发生月份的常用回答框架
 new::state-need-to,new-stable-identity,,I need to [verb phrase].,state_need,slot_frame,verb_phrase,model-reviewed-current-evidence,表达自己需要做某事的基础句型
 new::state-often-routine,new-stable-identity,,I often [verb phrase].,state_frequent_routine,slot_frame,verb_phrase,model-reviewed-current-evidence,表达经常性活动并训练频率副词位置
+new::state-own-ownership,new-stable-identity,,[Thing] is mine.,state_own_ownership,slot_frame,thing,model-reviewed-current-evidence,说明某物属于自己的可迁移表达
+new::state-past-activity,new-stable-identity,,I [past verb phrase] [past time].,state_past_activity,slot_frame,past_verb_phrase|past_time,model-reviewed-current-evidence,叙述自己在某过去时间做了什么的通用 production frame
+new::state-past-evaluation,new-stable-identity,,It was [adjective]!,state_past_evaluation,slot_frame,adjective,model-reviewed-current-evidence,简洁评价刚谈到的过去经历
+new::state-past-trip-with,new-stable-identity,,I went to [place] with [people].,state_past_trip,slot_frame,place|people,model-reviewed-current-evidence,说明过去旅行目的地及同行人的高迁移句型
 new::state-routine-time,new-stable-identity,,[Subject] [verb phrase] at [time].,state_routine_time,slot_frame,subject|verb_phrase|time,model-reviewed-current-evidence,说明日常活动具体发生时间的通用句型
 new::state-sometimes-routine,new-stable-identity,,Sometimes I [verb phrase].,state_occasional_routine,slot_frame,verb_phrase,model-reviewed-current-evidence,表达偶尔性活动的高迁移句型
 new::state-topic-about,new-stable-identity,,It's about [topic].,state_topic,slot_frame,topic,model-reviewed-current-evidence,说明事情主题或内容的可迁移表达
+new::state-went-to-action,new-stable-identity,,We went to [verb phrase].,state_past_purpose_action,slot_frame,verb_phrase,model-reviewed-current-evidence,叙述过去去做某事的常用框架
 new::suggest-why-not,new-stable-identity,,Why not [verb phrase]?,suggest_action,slot_frame,verb_phrase,model-reviewed-current-evidence,提出建议的高频简洁构式
