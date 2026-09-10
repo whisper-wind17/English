@@ -20,6 +20,7 @@ BASE = ROOT / "anki" / "klose"
 MASTER = BASE / "master" / "vocabulary_master.csv"
 LEARNER = BASE / "learner" / "current.csv"
 REGISTRY = BASE / "learner" / "presentation_review_registry.csv"
+ADMISSION = BASE / "learner" / "learning_admission.csv"
 STATS = BASE / "master" / "build_stats.csv"
 APPROVAL_DIR = BASE / "learner" / "review_approvals"
 REPORTS = [
@@ -67,13 +68,18 @@ def main() -> None:
     p.add_argument("--reviewer-type", choices=["model", "human"], required=True)
     p.add_argument("--review-note", required=True)
     p.add_argument("--confirm-all-current", action="store_true")
+    p.add_argument(
+        "--pending-only",
+        action="store_true",
+        help="Approve only currently pending rows in the released-or-admitted review scope.",
+    )
     args = p.parse_args()
     if not args.confirm_all_current:
         raise SystemExit("Refusing approval without --confirm-all-current")
     if not args.batch_id.replace("-", "").replace("_", "").isalnum():
         raise SystemExit("batch-id may contain only letters, digits, '-' and '_'")
 
-    for path in (MASTER, LEARNER, REGISTRY, STATS, *REPORTS):
+    for path in (MASTER, LEARNER, REGISTRY, ADMISSION, STATS, *REPORTS):
         if not path.exists():
             raise SystemExit(f"Missing input: {path.relative_to(ROOT)}")
     for report in REPORTS:
@@ -94,20 +100,27 @@ def main() -> None:
         (r["LearnerProfile"], r["LearnerLevel"], r["NoteID"]): r for r in registry_rows
     }
 
-    current_ids = sorted(
+    released_ids = {
         r["NoteID"] for r in master_rows
         if r.get("Released") == "yes"
         and r["NoteID"] in learner_by_id
         and learner_by_id[r["NoteID"]].get("LearnerProfile") == args.profile
         and learner_by_id[r["NoteID"]].get("LearnerLevel") == str(args.level)
-    )
-    if len(current_ids) != args.expected_count:
-        raise SystemExit(f"Expected {args.expected_count} current notes, found {len(current_ids)}")
+    }
+    allowed_ids = {
+        r.get("NoteID", "").strip()
+        for r in read_csv(ADMISSION)
+        if r.get("LearnerProfile", "").strip() == args.profile
+        and r.get("LearnerLevel", "").strip() == str(args.level)
+        and r.get("Status", "").strip() == "allowed"
+    }
+    required_ids = sorted(released_ids | allowed_ids)
+    if not required_ids:
+        raise SystemExit("No released-or-admitted learner presentations found for approval")
 
-    reviewed_at = date.today().isoformat()
-    status = "human-reviewed" if args.reviewer_type == "human" else "model-reviewed"
-    approval_rows: list[dict[str, str]] = []
-    for nid in current_ids:
+    for nid in required_ids:
+        if nid not in master_by_id or nid not in learner_by_id:
+            raise SystemExit(f"Review scope references missing Master/Learner row: {nid}")
         key = (args.profile, str(args.level), nid)
         if key not in registry_by_key:
             raise SystemExit(f"Missing registry row: {key}")
@@ -115,6 +128,28 @@ def main() -> None:
         current_fp = fingerprint(master_by_id[nid], learner_by_id[nid])
         if row.get("ContentFingerprint", "") != current_fp:
             raise SystemExit(f"Registry fingerprint does not match current content: {nid}")
+
+    selected_ids = required_ids
+    if args.pending_only:
+        selected_ids = [
+            nid for nid in required_ids
+            if registry_by_key[(args.profile, str(args.level), nid)].get("ReviewStatus") == "pending"
+        ]
+    if len(selected_ids) != args.expected_count:
+        raise SystemExit(
+            f"Expected {args.expected_count} selected review rows, found {len(selected_ids)} "
+            f"(required_scope={len(required_ids)}, pending_only={args.pending_only})"
+        )
+    if not selected_ids:
+        raise SystemExit("Refusing to create an empty approval batch")
+
+    reviewed_at = date.today().isoformat()
+    status = "human-reviewed" if args.reviewer_type == "human" else "model-reviewed"
+    approval_rows: list[dict[str, str]] = []
+    for nid in selected_ids:
+        key = (args.profile, str(args.level), nid)
+        row = registry_by_key[key]
+        current_fp = fingerprint(master_by_id[nid], learner_by_id[nid])
         row["ReviewStatus"] = status
         row["ReviewedAt"] = reviewed_at
         row["ReviewerType"] = args.reviewer_type
@@ -136,21 +171,21 @@ def main() -> None:
     write_csv(approval_path, APPROVAL_FIELDS, approval_rows)
 
     stats = read_csv(STATS)
-    current_rows = [registry_by_key[(args.profile, str(args.level), nid)] for nid in current_ids]
-    model_count = sum(r["ReviewStatus"] == "model-reviewed" for r in current_rows)
-    human_count = sum(r["ReviewStatus"] == "human-reviewed" for r in current_rows)
-    pending_count = sum(r["ReviewStatus"] == "pending" for r in current_rows)
-    upsert_metric(stats, "learner_review_registry_current", len(current_rows))
+    required_rows = [registry_by_key[(args.profile, str(args.level), nid)] for nid in required_ids]
+    model_count = sum(r["ReviewStatus"] == "model-reviewed" for r in required_rows)
+    human_count = sum(r["ReviewStatus"] == "human-reviewed" for r in required_rows)
+    pending_count = sum(r["ReviewStatus"] == "pending" for r in required_rows)
+    upsert_metric(stats, "learner_review_registry_current", len(required_rows))
     upsert_metric(stats, "learner_model_reviewed_current", model_count)
     upsert_metric(stats, "learner_human_reviewed_current", human_count)
     upsert_metric(stats, "learner_review_pending_current", pending_count)
     write_csv(STATS, ["Metric", "Value"], stats)
 
     print(
-        f"Approved learner review batch {args.batch_id}: count={len(current_ids)}, "
-        f"status={status}, pending={pending_count}, manifest={approval_path.relative_to(ROOT)}"
+        f"Approved learner review batch {args.batch_id}: selected={len(selected_ids)}, "
+        f"required_scope={len(required_ids)}, status={status}, pending={pending_count}, "
+        f"manifest={approval_path.relative_to(ROOT)}"
     )
-
 
 if __name__ == "__main__":
     main()

@@ -28,6 +28,7 @@ REGISTRY = BASE / "learner" / "presentation_review_registry.csv"
 ADMISSION = BASE / "learner" / "learning_admission.csv"
 RECONCILIATION = BASE / "master" / "source_reconciliation_registry.csv"
 SOURCE_IDENTITY_EXTENSIONS = BASE / "master" / "source_identity_extensions.csv"
+G56_SCOPE = BASE / "learner" / "grade5_6_learning_scope.json"
 STUDY = BASE / "publish" / "study.csv"
 ANKI_IMPORT = BASE / "publish" / "anki-import.csv"
 REPORTS = [
@@ -48,10 +49,13 @@ ALLOWED_REQUIRED_FIELDS = REQUIRED_FIELDS
 HELD_REQUIRED_FIELDS = tuple(
     field for field in REQUIRED_FIELDS if field not in {"British", "American", "LearningOrder"}
 )
-CURRENT_LEARNING_TAG = "learning::klose::grade4"
-CURRENT_STAGE = "stage::grade4-current"
+GRADE4_LEARNING_TAG = "learning::klose::grade4"
+GRADE4_STAGE = "stage::grade4-current"
+G56_LEARNING_TAG = "learning::klose::grade5-6"
+G56_STAGE = "stage::grade5-6-current"
 HELD_STAGE = "stage::library"
 GRADE4_KEY_RE = re.compile(r"^grade4-(upper|lower)-u(\d+)-o(\d+)\|")
+G56_KEY_RE = re.compile(r"^grade([56])-(upper|lower)-u(\d+)-o(\d+)\|")
 SEMESTER_RANK = {"upper": 0, "lower": 1}
 
 
@@ -104,35 +108,67 @@ def assert_reconciliation_ready() -> None:
         )
 
 
-def actual_grade4_ordered_note_ids() -> list[str]:
-    items: list[tuple[tuple[int, int, int], str]] = []
-    seen_coordinates: set[tuple[int, int, int]] = set()
-    seen_note_ids: set[str] = set()
+def current_curriculum_ordered_note_ids() -> tuple[list[str], dict[str, tuple[str, str]]]:
+    """Independently derive current curriculum order and expected stage/tag.
+
+    Grade-4 current source remains first. Accepted Grade-5/6 source follows in
+    textbook order. A Stable Note recurring in multiple books appears once at its
+    earliest accepted occurrence. If a Note is already in Grade-4 current, the
+    Grade-4 stage/tag wins even when it recurs in Grade 5/6.
+    """
+    scope = json.loads(G56_SCOPE.read_text(encoding="utf-8"))
+    if scope.get("ScopeStatus") != "accepted" or scope.get("StableIdentityAllocationAuthorized") is not True:
+        raise SystemExit("Release blocked: Grade 5-6 current learning scope is not accepted")
+    accepted_books = {k for k, v in scope.get("Books", {}).items() if v.get("Accepted") is True}
+    if accepted_books != {"5上", "5下", "6上", "6下"}:
+        raise SystemExit(f"Release blocked: Grade 5-6 current scope is incomplete: {sorted(accepted_books)}")
+
+    first_coord: dict[str, tuple[int, int, int, int, int]] = {}
+    expected_state: dict[str, tuple[str, str]] = {}
+    seen_coordinates: set[tuple[int, int, int, int]] = set()
     for row in read_csv(SOURCE_IDENTITY_EXTENSIONS):
-        if not (
-            row.get("SourceID", "").strip() == "rj_start1"
-            and row.get("SourceEdition", "").strip() == "klose-current"
-            and row.get("Status", "").strip() == "confirmed"
-            and row.get("SourceItemKey", "").strip().startswith("grade4-")
-        ):
+        if row.get("Status", "").strip() != "confirmed":
             continue
         key = row.get("SourceItemKey", "").strip()
-        match = GRADE4_KEY_RE.match(key)
-        if match is None:
-            raise SystemExit(f"Release blocked: invalid Grade-4 SourceItemKey for LearningOrder: {key!r}")
-        semester, unit_text, order_text = match.groups()
-        coordinate = (SEMESTER_RANK[semester], int(unit_text), int(order_text))
-        if coordinate in seen_coordinates:
-            raise SystemExit(f"Release blocked: duplicate Grade-4 curriculum coordinate: {coordinate}")
-        seen_coordinates.add(coordinate)
         nid = row.get("NoteID", "").strip()
-        if not nid or nid in seen_note_ids:
-            raise SystemExit(f"Release blocked: invalid/duplicate active Grade-4 NoteID for ordering: {nid!r}")
-        seen_note_ids.add(nid)
-        items.append((coordinate, nid))
-    items.sort(key=lambda item: item[0])
-    return [nid for _, nid in items]
+        if not nid:
+            raise SystemExit("Release blocked: confirmed source identity has blank NoteID")
 
+        m4 = GRADE4_KEY_RE.match(key)
+        if (
+            m4 is not None
+            and row.get("SourceID", "").strip() == "rj_start1"
+            and row.get("SourceEdition", "").strip() == "klose-current"
+        ):
+            semester, unit_text, order_text = m4.groups()
+            coordinate = (4, SEMESTER_RANK[semester], int(unit_text), int(order_text))
+            if coordinate in seen_coordinates:
+                raise SystemExit(f"Release blocked: duplicate current curriculum coordinate: {coordinate}")
+            seen_coordinates.add(coordinate)
+            full_coord = (*coordinate, int(nid[2:]))
+            first_coord[nid] = min(first_coord.get(nid, full_coord), full_coord)
+            expected_state[nid] = (GRADE4_STAGE, GRADE4_LEARNING_TAG)
+            continue
+
+        m56 = G56_KEY_RE.match(key)
+        if m56 is None:
+            continue
+        grade_text, semester, unit_text, order_text = m56.groups()
+        book = grade_text + ("上" if semester == "upper" else "下")
+        if book not in accepted_books:
+            continue
+        coordinate = (int(grade_text), SEMESTER_RANK[semester], int(unit_text), int(order_text))
+        if coordinate in seen_coordinates:
+            raise SystemExit(f"Release blocked: duplicate current curriculum coordinate: {coordinate}")
+        seen_coordinates.add(coordinate)
+        full_coord = (*coordinate, int(nid[2:]))
+        first_coord[nid] = min(first_coord.get(nid, full_coord), full_coord)
+        expected_state.setdefault(nid, (G56_STAGE, G56_LEARNING_TAG))
+
+    if not first_coord:
+        raise SystemExit("Release blocked: current curriculum identity set is empty")
+    ordered = [nid for nid, _ in sorted(first_coord.items(), key=lambda item: item[1])]
+    return ordered, expected_state
 
 def load_and_validate_admission(
     learner_profile: str,
@@ -147,6 +183,10 @@ def load_and_validate_admission(
     if not rows:
         raise SystemExit("Release blocked: explicit learning admission is empty")
 
+    expected_ordered, expected_state = current_curriculum_ordered_note_ids()
+    expected_allowed = set(expected_ordered)
+    expected_universe = released_ids | expected_allowed
+
     by_id: dict[str, dict[str, str]] = {}
     for row in rows:
         nid = row.get("NoteID", "").strip()
@@ -159,15 +199,22 @@ def load_and_validate_admission(
         if status not in {"allowed", "held"}:
             raise SystemExit(f"Release blocked: invalid learning admission status: {nid}={status!r}")
         if status == "allowed":
-            if stage != CURRENT_STAGE or tag != CURRENT_LEARNING_TAG:
+            expected = expected_state.get(nid)
+            if expected is None:
+                raise SystemExit(f"Release blocked: allowed Note is outside current curriculum: {nid}")
+            expected_stage, expected_tag = expected
+            if stage != expected_stage or tag != expected_tag:
                 raise SystemExit(
-                    f"Release blocked: current learning Note has wrong stage/tag: {nid} stage={stage!r} tag={tag!r}"
+                    "Release blocked: current learning Note has wrong stage/tag: "
+                    f"{nid} stage={stage!r}->{expected_stage!r} tag={tag!r}->{expected_tag!r}"
                 )
             if not is_valid_learning_order(learning_order):
                 raise SystemExit(
                     f"Release blocked: allowed Note has invalid six-digit LearningOrder: {nid}={learning_order!r}"
                 )
         else:
+            if nid in expected_allowed:
+                raise SystemExit(f"Release blocked: current curriculum Note cannot be held: {nid}")
             if stage != HELD_STAGE or tag:
                 raise SystemExit(
                     f"Release blocked: held Note has wrong stage/tag: {nid} stage={stage!r} tag={tag!r}"
@@ -177,22 +224,20 @@ def load_and_validate_admission(
         by_id[nid] = row
 
     ids = set(by_id)
-    missing = sorted(released_ids - ids)
-    extra = sorted(ids - released_ids)
+    missing = sorted(expected_universe - ids)
+    extra = sorted(ids - expected_universe)
     if missing or extra:
         raise SystemExit(
-            "Release blocked: explicit learning admission must cover exactly released study; "
+            "Release blocked: explicit learning admission must cover released library union current curriculum; "
             f"missing={missing[:10]} extra={extra[:10]}"
         )
 
-    expected_ordered = actual_grade4_ordered_note_ids()
-    expected_allowed = set(expected_ordered)
     allowed = {nid for nid, row in by_id.items() if row.get("Status", "").strip() == "allowed"}
     if allowed != expected_allowed:
         missing = sorted(expected_allowed - allowed)
         extra = sorted(allowed - expected_allowed)
         raise SystemExit(
-            "Release blocked: allowed learning set does not equal confirmed actual Grade-4 identity set; "
+            "Release blocked: allowed learning set does not equal current curriculum identity set; "
             f"missing={missing[:10]} extra={extra[:10]}"
         )
 
@@ -210,16 +255,15 @@ def load_and_validate_admission(
     ]
     if bad_order:
         raise SystemExit(
-            "Release blocked: LearningOrder does not match actual textbook order; "
+            "Release blocked: LearningOrder does not match current textbook curriculum order; "
             f"count={len(bad_order)} examples={bad_order[:10]}"
         )
     return by_id
 
-
 def main() -> None:
     required = (
         PROFILE, MASTER, LEARNER, REGISTRY, ADMISSION, RECONCILIATION,
-        SOURCE_IDENTITY_EXTENSIONS, STUDY, ANKI_IMPORT, *REPORTS,
+        SOURCE_IDENTITY_EXTENSIONS, G56_SCOPE, STUDY, ANKI_IMPORT, *REPORTS,
     )
     for path in required:
         if not path.exists():

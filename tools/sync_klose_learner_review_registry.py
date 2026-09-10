@@ -18,6 +18,7 @@ BASE = ROOT / "anki" / "klose"
 LEARNER = BASE / "learner" / "current.csv"
 MASTER = BASE / "master" / "vocabulary_master.csv"
 REGISTRY = BASE / "learner" / "presentation_review_registry.csv"
+ADMISSION = BASE / "learner" / "learning_admission.csv"
 STATS = BASE / "master" / "build_stats.csv"
 
 FIELDS = [
@@ -56,6 +57,28 @@ def main() -> None:
     learner_by_id = {r["NoteID"]: r for r in learner}
     if released - set(learner_by_id):
         raise SystemExit("Released notes are missing learner presentations")
+    if not ADMISSION.exists():
+        raise SystemExit("Learning admission is required before review-registry sync")
+
+    review_keys: set[tuple[str, str, str]] = set()
+    for nid in released:
+        cur = learner_by_id[nid]
+        review_keys.add((cur["LearnerProfile"], cur["LearnerLevel"], nid))
+
+    allowed_count = 0
+    for row in read_csv(ADMISSION):
+        if row.get("Status", "").strip() != "allowed":
+            continue
+        allowed_count += 1
+        nid = row.get("NoteID", "").strip()
+        profile = row.get("LearnerProfile", "").strip()
+        level = row.get("LearnerLevel", "").strip()
+        if nid not in master_by_id or nid not in learner_by_id:
+            raise SystemExit(f"Allowed learning admission lacks Master/Learner row: {nid}")
+        cur = learner_by_id[nid]
+        if cur.get("LearnerProfile", "").strip() != profile or cur.get("LearnerLevel", "").strip() != level:
+            raise SystemExit(f"Allowed admission profile/level mismatch for {nid}")
+        review_keys.add((profile, level, nid))
 
     existing = read_csv(REGISTRY) if REGISTRY.exists() else []
     by_key: dict[tuple[str, str, str], dict[str, str]] = {}
@@ -70,12 +93,10 @@ def main() -> None:
     added = 0
     invalidated = 0
     missing_fingerprint_invalidated = 0
-    for nid in sorted(released):
+    for profile, level, nid in sorted(review_keys, key=lambda k: (k[0], int(k[1]), k[2])):
         cur = learner_by_id[nid]
-        profile = cur["LearnerProfile"]
-        level = cur["LearnerLevel"]
-        key = (profile, level, nid)
         current_fp = fingerprint(master_by_id[nid], cur)
+        key = (profile, level, nid)
         if key not in by_key:
             row = {
                 "LearnerProfile": profile,
@@ -85,7 +106,7 @@ def main() -> None:
                 "ReviewStatus": "pending",
                 "ReviewedAt": "",
                 "ReviewerType": "",
-                "ReviewNote": "awaiting explicit learner-level review",
+                "ReviewNote": "awaiting explicit learner-level review before release",
             }
             existing.append(row)
             by_key[key] = row
@@ -112,28 +133,23 @@ def main() -> None:
     existing.sort(key=lambda r: (r["LearnerProfile"], int(r["LearnerLevel"]), r["NoteID"]))
     write_csv(REGISTRY, FIELDS, existing)
 
-    current_keys = {
-        (learner_by_id[nid]["LearnerProfile"], learner_by_id[nid]["LearnerLevel"], nid)
-        for nid in released
-    }
-    current_rows = [by_key[k] for k in current_keys]
-    model_reviewed = sum(r["ReviewStatus"] == "model-reviewed" for r in current_rows)
-    human_reviewed = sum(r["ReviewStatus"] == "human-reviewed" for r in current_rows)
-    pending = sum(r["ReviewStatus"] == "pending" for r in current_rows)
+    required_rows = [by_key[k] for k in review_keys]
+    model_reviewed = sum(r["ReviewStatus"] == "model-reviewed" for r in required_rows)
+    human_reviewed = sum(r["ReviewStatus"] == "human-reviewed" for r in required_rows)
+    pending = sum(r["ReviewStatus"] == "pending" for r in required_rows)
 
     stats = read_csv(STATS)
-    upsert_metric(stats, "learner_review_registry_current", len(current_rows))
+    upsert_metric(stats, "learner_review_registry_current", len(required_rows))
     upsert_metric(stats, "learner_model_reviewed_current", model_reviewed)
     upsert_metric(stats, "learner_human_reviewed_current", human_reviewed)
     upsert_metric(stats, "learner_review_pending_current", pending)
     write_csv(STATS, ["Metric", "Value"], stats)
     print(
         "Learner review registry: "
-        f"current={len(current_rows)}, model={model_reviewed}, human={human_reviewed}, "
-        f"pending={pending}, added={added}, invalidated={invalidated}, "
-        f"missing_fingerprint_invalidated={missing_fingerprint_invalidated}"
+        f"required={len(required_rows)}, released={len(released)}, admitted_allowed={allowed_count}, "
+        f"model={model_reviewed}, human={human_reviewed}, pending={pending}, added={added}, "
+        f"invalidated={invalidated}, missing_fingerprint_invalidated={missing_fingerprint_invalidated}"
     )
-
 
 if __name__ == "__main__":
     main()
