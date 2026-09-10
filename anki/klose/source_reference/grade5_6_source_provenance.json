@@ -1,0 +1,63 @@
+{
+  "SchemaVersion": 1,
+  "CanonicalSourceID": "renjiao_start3",
+  "ResolutionState": "planned",
+  "SourceEditionSemantics": "revision-lineage-not-physical-printing",
+  "Books": {
+    "5上": {
+      "SourceEdition": "2024-revision",
+      "ProvenanceStatus": "verified-current-revision",
+      "StableIDAllocationEligible": true,
+      "Evidence": [
+        "https://www.pep.com.cn/xw/zt/hd/12/xjcjs/xx/202409/t20240920_1995564.html",
+        "https://www.pep.com.cn/zslth/yyptzy/xypep/5s/"
+      ],
+      "Rationale": "User-image content matches the revised PEP Grade 5 upper volume; SourceID family is PEP three-year-start."
+    },
+    "5下": {
+      "SourceEdition": "pre-2024-revision",
+      "ProvenanceStatus": "verified-legacy-source-current-revision-mismatch",
+      "StableIDAllocationEligible": false,
+      "Evidence": [
+        "https://www.pep.com.cn/xw/zt/hd/12/xjcjs/xx/202409/t20240920_1995564.html",
+        "https://www.pep.com.cn/zslth/yyptzy/xypep/5x/",
+        "https://www.pep.com.cn/zslth/yyptypzj/xypep/5x/"
+      ],
+      "Rationale": "User-image content is the legacy My day / seasons / months lineage, while the revised PEP Grade 5 lower volume starts with Following the rules. Keep the captured source, but do not treat it as Klose's future current-revision learning source."
+    },
+    "6上": {
+      "SourceEdition": "2024-revision",
+      "ProvenanceStatus": "verified-current-revision",
+      "StableIDAllocationEligible": true,
+      "Evidence": [
+        "https://www.pep.com.cn/xw/zt/hd/12/xjcjs/xx/202409/t20240920_1995564.html",
+        "https://www.pep.com.cn/zslth/yyptzy/xypep/6s/"
+      ],
+      "Rationale": "User-image content matches the revised PEP Grade 6 upper volume beginning with Amazing places."
+    },
+    "6下": {
+      "SourceEdition": "pre-2024-revision",
+      "ProvenanceStatus": "verified-legacy-source-hold-for-klose-future-edition",
+      "StableIDAllocationEligible": false,
+      "Evidence": [
+        "https://www.pep.com.cn/xw/zt/hd/12/xjcjs/xx/202409/t20240920_1995564.html",
+        "https://www.pep.com.cn/zslth/yyptypzj/xypep/6x/"
+      ],
+      "Rationale": "User-image content is the legacy comparatives / Last weekend / Where did you go / Then and now lineage. Preserve it as source evidence, but hold Stable-ID allocation until Klose's future Grade 6 lower revision is confirmed."
+    }
+  },
+  "Blockers": [
+    "5下: captured source is pre-2024 revision and conflicts with the revised PEP Grade 5 lower volume",
+    "6下: captured source is pre-2024 revision; Klose future Grade 6 lower revision is not yet confirmed"
+  ],
+  "StableIDAllocationAllowed": false,
+  "LegacyAliases": [
+    {
+      "SourceID": "rj_start1",
+      "SourceEdition": "klose-current",
+      "Scope": "existing Grade 3-4 actual-textbook provenance",
+      "Status": "migration-deferred",
+      "Rationale": "Existing stable source mappings and build tooling depend on this historical label; do not rewrite it as part of the Grade 5-6 provenance task."
+    }
+  ]
+}
