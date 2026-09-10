@@ -157,7 +157,10 @@ def main() -> None:
 
     released_before = {nid for nid, row in master_by_id.items() if row.get("Released") == "yes"}
     actual_note_ids = set(note_sources)
-    release_ext_rows = read_csv(RELEASE_EXTENSIONS)
+    release_ext_rows = [
+        r for r in read_csv(RELEASE_EXTENSIONS)
+        if r.get("ReleaseReason", "").strip() == "actual-grade4-klose-current"
+    ]
     release_ext_ids = {r["NoteID"].strip() for r in release_ext_rows}
     expected_release_extensions = actual_note_ids - released_before
     if release_ext_ids != expected_release_extensions:
