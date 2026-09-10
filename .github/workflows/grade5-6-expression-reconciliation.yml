@@ -1,0 +1,76 @@
+name: Grade 5-6 Expression Reconciliation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/prepare_grade5_6_expression_reconciliation.py'
+      - 'tools/apply_grade5_6_expression_review.py'
+      - 'tools/check_klose_expression_persistent_state.py'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - 'anki/klose/expressions/master/expression_registry.csv'
+      - 'anki/klose/expressions/master/expression_occurrences.csv'
+      - 'anki/klose/expressions/master/source_expression_map.csv'
+      - 'anki/klose/expressions/master/release_registry.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_source_reviewed_batch.csv'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_group_reviewed_batch.csv'
+      - '.github/workflows/grade5-6-expression-reconciliation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grade5-6-expression-reconciliation
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          sparse-checkout: |
+            tools
+            anki/klose/source_reference
+            anki/klose/expressions/master
+            anki/klose/review/grade5_6_reconciliation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build Expression review candidates
+        run: python tools/prepare_grade5_6_expression_reconciliation.py
+      - name: Apply transient reviewed batch
+        run: python tools/apply_grade5_6_expression_review.py
+      - name: Rebuild Expression review state
+        run: python tools/prepare_grade5_6_expression_reconciliation.py
+      - name: Verify Stable Klose Expression state
+        env:
+          KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
+        run: python tools/check_klose_expression_persistent_state.py
+      - name: Enforce review-only diff scope
+        shell: bash
+        run: |
+          bad="$(git diff --name-only | grep -v '^anki/klose/review/grade5_6_reconciliation/' || true)"
+          if [ -n "$bad" ]; then
+            echo "Unexpected mutation outside Grade 5-6 reconciliation review scope:"
+            echo "$bad"
+            exit 1
+          fi
+      - name: Persist derived Expression review state
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add -A anki/klose/review/grade5_6_reconciliation
+          if git diff --cached --quiet; then
+            echo 'No Expression reconciliation review changes.'
+            exit 0
+          fi
+          git commit -m 'data: refresh Grade 5-6 expression reconciliation review'
+          git pull --rebase origin main
+          git push origin HEAD:main
