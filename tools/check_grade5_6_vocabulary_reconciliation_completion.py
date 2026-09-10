@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Independent completion recheck for Grade 5–6 Vocabulary reconciliation.
 
-This is read-only. It derives closure from candidates + durable decisions + current
-Stable registries, cross-checks the generated status snapshot, and independently
-binds that semantic closure to the current Source provenance fingerprint. It does not
-allocate NoteIDs or mutate learner/release/publish/Anki state.
+Reconciliation truth remains immutable after Stable-ID allocation: decisions keep
+new:: proposal groups and never embed newly allocated NoteIDs. Post-reconciliation
+allocation is verified separately against the accepted Klose Grade 5-6 learning
+scope. Source provenance is audit metadata and does not gate that learning scope.
 """
 from __future__ import annotations
 
@@ -24,7 +24,10 @@ DECISIONS = DIR / "vocabulary_decisions.csv"
 NEXT_BATCH = DIR / "vocabulary_next_batch.csv"
 INBOX = DIR / "vocabulary_reviewed_batch.csv"
 STATUS = DIR / "vocabulary_status.json"
-REGISTRIES = [BASE / "master" / "note_registry.csv", BASE / "master" / "note_registry_extensions.csv"]
+REGISTRY = BASE / "master" / "note_registry.csv"
+REGISTRY_EXT = BASE / "master" / "note_registry_extensions.csv"
+SCOPE = BASE / "learner" / "grade5_6_learning_scope.json"
+G56_ORIGIN_PREFIX = "klose-grade5-6-current|"
 
 EVIDENCE_FIELDS = [
     "ProvisionalIdentityKey", "OccurrenceKeys", "OccurrenceCount", "GradeSemesters",
@@ -71,13 +74,13 @@ def main() -> None:
         extra = sorted(set(decision_by_key) - set(by_key))
         fail(f"candidate/decision coverage mismatch missing={missing[:10]} extra={extra[:10]}")
 
-    stable_ids = {
-        r.get("NoteID", "").strip()
-        for path in REGISTRIES for r in read_csv(path)
+    stable_rows = [
+        r for path in (REGISTRY, REGISTRY_EXT) for r in read_csv(path)
         if r.get("Status", "").strip() == "active"
-    }
-    if len(stable_ids) != 901:
-        fail(f"unexpected Stable Vocabulary registry size: {len(stable_ids)} != 901")
+    ]
+    stable_ids = {r.get("NoteID", "").strip() for r in stable_rows}
+    if len(stable_ids) != len(stable_rows) or len(stable_ids) < 901:
+        fail(f"invalid current Stable Vocabulary registry: rows={len(stable_rows)} unique={len(stable_ids)}")
 
     counts: Counter[str] = Counter()
     new_groups: defaultdict[str, list[str]] = defaultdict(list)
@@ -96,6 +99,8 @@ def main() -> None:
             if note_id not in stable_ids or group != note_id:
                 fail(f"invalid reuse-existing contract: {key} -> note={note_id!r} group={group!r}")
         elif decision == "new-stable-identity":
+            # Reconciliation stays proposal-only even after allocation. The durable
+            # allocation is linked through PrimaryOriginKey in the extension registry.
             if note_id or not group.startswith("new::"):
                 fail(f"invalid new-stable-identity contract: {key}")
             new_groups[group].append(key)
@@ -118,6 +123,21 @@ def main() -> None:
         fail(f"decision counts changed: {dict(counts)} != {expected_counts}")
     if len(new_groups) != 293:
         fail(f"unexpected proposed new identity groups: {len(new_groups)} != 293")
+
+    # Post-reconciliation allocation is a separate state transition. Verify it
+    # one-to-one without rewriting the reconciliation decisions themselves.
+    allocations: dict[str, str] = {}
+    for row in read_csv(REGISTRY_EXT):
+        origin = row.get("PrimaryOriginKey", "").strip()
+        if not origin.startswith(G56_ORIGIN_PREFIX):
+            continue
+        group = origin[len(G56_ORIGIN_PREFIX):]
+        nid = row.get("NoteID", "").strip()
+        if group in allocations or nid not in stable_ids:
+            fail(f"invalid/duplicate Grade 5-6 allocation: {origin!r}")
+        allocations[group] = nid
+    if set(allocations) != set(new_groups) or len(set(allocations.values())) != 293:
+        fail("post-reconciliation Stable allocation does not match the 293 reviewed new groups")
 
     def find(entry: str, meaning: str) -> dict[str, str]:
         matches = [r for r in candidates if r.get("Entry") == entry and r.get("Meaning") == meaning]
@@ -163,6 +183,9 @@ def main() -> None:
             fail(f"shared identity group drift: {entry!r} -> {group!r}")
 
     status = json.loads(STATUS.read_text(encoding="utf-8"))
+    # This status file is a reconciliation-phase snapshot. StableNoteIDAllocated=false
+    # means the reconciliation workflow itself did not allocate IDs; allocation is
+    # now separately verified above and by check_klose_grade5_6_current_merge.py.
     status_checks = {
         "ProvisionalLearningUnits": len(candidates),
         "ValidDecisionCount": len(decisions),
@@ -183,29 +206,36 @@ def main() -> None:
     provenance = source_provenance_state()
     if provenance["ResolutionState"] != "applied" or provenance["SourceIdentityPending"]:
         fail(f"Source provenance is not fully resolved: {provenance}")
-    if not provenance["SourceProvenanceBlockers"]:
-        fail("expected lower-volume provenance blockers are missing")
-    if provenance["StableIDAllocationAllowed"]:
-        fail("provenance unexpectedly authorizes Stable ID allocation")
     provenance_checks = {
         "SourceIdentityPending": False,
         "SourceProvenanceFingerprint": provenance["SourceProvenanceFingerprint"],
         "SourceProvenanceRows": provenance["SourceProvenanceRows"],
         "SourceProvenanceBlockers": provenance["SourceProvenanceBlockers"],
         "SourceProvenanceResolutionState": "applied",
-        "CanonicalSourceID": "renjiao_start3",
-        "StableIDAllocationAllowed": False,
+        "CanonicalSourceID": provenance["CanonicalSourceID"],
+        "StableIDAllocationAllowed": provenance["StableIDAllocationAllowed"],
     }
     for field, expected in provenance_checks.items():
         if status.get(field) != expected:
             fail(f"provenance status mismatch {field}: {status.get(field)!r} != {expected!r}")
 
+    scope = json.loads(SCOPE.read_text(encoding="utf-8"))
+    if scope.get("ScopeStatus") != "accepted":
+        fail("Klose Grade 5-6 current learning scope is not accepted")
+    if scope.get("SourceProvenanceAffectsLearningAdmission") is not False:
+        fail("Source provenance is incorrectly gating Klose learning admission")
+    if scope.get("StableIdentityAllocationAuthorized") is not True:
+        fail("current learning scope does not authorize Stable identity allocation")
+    books = scope.get("Books", {})
+    if set(books) != {"5上", "5下", "6上", "6下"} or not all(v.get("Accepted") is True for v in books.values()):
+        fail("not all four Grade 5-6 books are accepted into Klose current learning scope")
+
     print(
         "Grade 5–6 Vocabulary reconciliation completion OK: "
         f"candidates={len(candidates)}, decisions={len(decisions)}, "
         f"counts={dict(sorted(counts.items()))}, new_groups={len(new_groups)}, "
-        f"stable_registry={len(stable_ids)}, pending=0, stale=0, "
-        f"provenance={provenance['SourceProvenanceFingerprint'][:12]}, allocation=blocked"
+        f"stable_registry={len(stable_ids)}, allocated_groups={len(allocations)}, "
+        "pending=0, stale=0, learning_scope=accepted, provenance=audit-only"
     )
 
 
