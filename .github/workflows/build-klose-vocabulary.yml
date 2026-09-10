@@ -21,6 +21,7 @@ on:
       - 'tools/check_klose_release_ready.py'
       - 'tools/check_klose_persistent_state.py'
       - 'tools/check_klose_actual_grade4_identity.py'
+      - 'tools/check_grade5_6_premerge_dedup.py'
       - 'tools/approve_klose_learner_review.py'
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
@@ -44,6 +45,7 @@ on:
       - 'anki/klose/master/identity_migrations.csv'
       - 'anki/klose/master/release_registry.csv'
       - 'anki/klose/master/release_registry_extensions.csv'
+      - 'anki/klose/review/grade5_6_premerge_dedup/**'
       - 'anki/人教版一年级起点/master/vocabulary_master.csv'
       - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -51,6 +53,7 @@ on:
     branches: [main]
     paths:
       - 'tools/**klose**.py'
+      - 'tools/**grade5_6**.py'
       - 'anki/klose/**'
       - 'anki/人教版一年级起点/master/**'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -79,6 +82,9 @@ jobs:
 
       - name: Protect persistent identity and release state
         run: python tools/check_klose_persistent_state.py
+
+      - name: Verify Grade 5-6 premerge dedup closure
+        run: python tools/check_grade5_6_premerge_dedup.py
 
       - name: Validate actual Grade-4 identity coverage
         run: python tools/check_klose_actual_grade4_identity.py
