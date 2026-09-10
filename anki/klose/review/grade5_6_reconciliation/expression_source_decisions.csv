@@ -1,4 +1,6 @@
 SourceOccurrenceKey,CandidateFingerprint,Disposition,IdentityGroups,DecisionBasis,Rationale
+grade5-lower-u01-o001,7466890a192ddbda7668f1a8682c0b4329412cc687f6b15e273c48806b1440a1,mapped,new::ask-time-routine,model-reviewed-current-evidence,When do you [verb phrase]? 用于询问日常活动发生时间
+grade5-lower-u01-o002,5e027758163fe3067d85f0e1225be734157e653a99df1a6f2e968c950ecba258,mapped,new::state-routine-time,model-reviewed-current-evidence,提取在具体时间发生某活动的通用陈述模式
 grade5-upper-u01-o001,01b44d40aaa48bda0f04c4821e567c07c5f2c5e85b66dd24d3cd40128a74d061,mapped,new::ask-person-description,model-reviewed-current-evidence,询问人物特征；自动匹配 KE000045 属字符串假阳性
 grade5-upper-u01-o002,f66866126828eba3823e3ab7eec7b737944c43fe351add7948716e77b3d3bcf2,mapped,KE000027,model-reviewed-current-evidence,与现有描述人物两个特征句型完全同功能同实现
 grade5-upper-u01-o003,aa6145c74b1a257e765f273b7a24789f25739100bc5c441b98c2e89b3c5eefe8,mapped,new::ask-good-at,model-reviewed-current-evidence,询问擅长某项活动的可迁移句型
@@ -37,5 +39,3 @@ grade5-upper-u06-o003,0e8300ff6db583d4eff69645b6b0d6aef024fc383a5ea416c027df75a5
 grade5-upper-u06-o004,913502098ac2075fc31187b5f5c72248b803c67a1e1046cb7e089c77211da594,mapped,new::ask-existence-plural,model-reviewed-current-evidence,询问某处是否存在复数事物
 grade5-upper-u06-o005,8b949cb6737f5fb35783b7451b7c76ae3163491b3e125e36173e85141facbf75,mapped,new::confirm-existence-plural,model-reviewed-current-evidence,复数存在问句的高频肯定短答
 grade5-upper-u06-o006,616151472228ca1d0aa95d7f361a7a552b3e8ee01a34eb9377738105a315bc85,mapped,new::state-future-existence,model-reviewed-current-evidence,There will be 用于表达未来存在或发生的可迁移结构
-grade5-lower-u01-o001,7466890a192ddbda7668f1a8682c0b4329412cc687f6b15e273c48806b1440a1,mapped,new::ask-time-routine,model-reviewed-current-evidence,When do you [verb phrase]? 用于询问日常活动发生时间
-grade5-lower-u01-o002,5e027758163fe3067d85f0e1225be734157e653a99df1a6f2e968c950ecba258,mapped,new::state-routine-time,model-reviewed-current-evidence,提取在具体时间发生某活动的通用陈述模式
