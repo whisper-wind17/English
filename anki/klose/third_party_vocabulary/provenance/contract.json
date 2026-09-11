@@ -1,0 +1,70 @@
+{
+  "ContractVersion": "third-party-source-provenance-v1",
+  "ContractStatus": "checkpoint-candidate",
+  "SourceClassification": {
+    "ThirdPartyAdapters": "external-evidence-provenance",
+    "MasterSourceIdentityMap": "verified-textbook-source-fact-only"
+  },
+  "SourceFreeze": {
+    "FreezeVersion": "source-freeze-v1",
+    "EnabledAdapters": 20,
+    "SourceOccurrences": 18887,
+    "SourceAdaptersFingerprint": "fdf79e5f48ed77d543dc05f3d347c3ce03d406e4884c89a426fdac8fa20e8272",
+    "UnifiedOccurrencesFingerprint": "b025cb4f69b030da3664ab9b1bdd8500cb0166b122392b282a4293567702a7d4"
+  },
+  "EvidenceIdentity": {
+    "OccurrencePrimaryKey": "SourceOccurrenceKey",
+    "SnapshotBinding": "UnifiedOccurrencesFingerprint",
+    "EditionStatus": "unverified",
+    "EditionFactPresent": false
+  },
+  "EditionPolicy": {
+    "SyntheticSourceEditionAllowed": false,
+    "UnknownEditionSentinelAllowedInMaster": false,
+    "InferEditionFromFilename": false,
+    "InferEditionFromGrade": false,
+    "InferEditionFromThirdPartyLabel": false,
+    "MasterPromotionRequiresVerifiedEditionEvidence": true
+  },
+  "StableIdentityPolicy": {
+    "ExternalEvidenceMaySupportStableIdentityAllocation": true,
+    "StableIdentityAllocationImpliesTextbookProvenance": false,
+    "PlannedPrimaryOriginKey": "third-party-vocabulary|<ProvisionalIdentityKey>",
+    "PlannedCreatedSource": "third-party-vocabulary",
+    "PlannedCreatedSourceBook": "external-evidence-corpus"
+  },
+  "FutureEvidenceBinding": {
+    "Path": "anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv",
+    "GeneratedOnlyAfterAuthorizedAllocation": true,
+    "Fields": [
+      "NoteID",
+      "ProvisionalIdentityKey",
+      "SourceOccurrenceKey",
+      "SourceID",
+      "SourceBook",
+      "Grade",
+      "Semester",
+      "SourceRow",
+      "SourceSnapshotFingerprint",
+      "EvidenceStatus"
+    ],
+    "EvidenceStatusValue": "external-unverified-edition"
+  },
+  "MasterPromotion": {
+    "CurrentAuthorized": false,
+    "TargetPath": "anki/klose/master/source_identity_extensions.csv",
+    "RequiredFacts": [
+      "SourceID",
+      "verified SourceEdition or Revision",
+      "SourceItemKey",
+      "NoteID",
+      "Decision"
+    ],
+    "PreserveExternalEvidenceAfterPromotion": true
+  },
+  "CurrentMutationGates": {
+    "MasterSourceMappingMutationAuthorized": false,
+    "StableNoteIDAllocationAuthorized": false,
+    "AnkiMutationAuthorized": false
+  }
+}
