@@ -2,10 +2,10 @@
 """Flag learner examples that use explicitly later auxiliary vocabulary.
 
 The review scope is the union of released Notes and explicitly admitted current
-Notes, so learner difficulty is checked before release as well as after release.
-Source Grade is only a difficulty signal; it is not LearnerLevel. The target
-Note's own lexical item is excluded from the auxiliary-vocabulary check so a
-Grade-5/6 source word can still be learned with LearnerLevel=4 presentation.
+Notes. Explicit Learning Admission is the learner-suitability truth: a lexical
+item already admitted for the same learner level is valid auxiliary vocabulary
+regardless of its Source Grade. Source Grade is used only as a fallback difficulty
+signal for auxiliary vocabulary that is not explicitly admitted.
 """
 from __future__ import annotations
 
@@ -79,6 +79,7 @@ def lemmas(token: str) -> set[str]:
         "wrote": "write", "written": "write", "made": "make", "came": "come", "got": "get", "gave": "give", "given": "give",
         "ran": "run", "won": "win", "felt": "feel", "left": "leave", "met": "meet", "spent": "spend", "began": "begin",
         "became": "become", "kept": "keep", "heard": "hear", "wore": "wear", "chosen": "choose", "chose": "choose",
+        "brought": "bring", "said": "say", "slept": "sleep", "born": "bear",
     }
     if token in irregular:
         out.add(irregular[token])
@@ -91,20 +92,28 @@ def main() -> None:
     learner = read_csv(LEARNER)
     admission = read_csv(ADMISSION)
     learner_by_id = {r["NoteID"]: r for r in learner}
-    master_ids = {r["NoteID"] for r in master}
+    master_by_id = {r["NoteID"]: r for r in master}
+    master_ids = set(master_by_id)
 
     released_ids = {r["NoteID"] for r in master if r.get("Released") == "yes"}
-    allowed_ids = {
-        r.get("NoteID", "").strip()
-        for r in admission
+    allowed_rows = [
+        r for r in admission
         if r.get("LearnerProfile", "").strip() == "klose"
         and r.get("LearnerLevel", "").strip() == "4"
         and r.get("Status", "").strip() == "allowed"
-    }
+    ]
+    allowed_ids = {r.get("NoteID", "").strip() for r in allowed_rows}
     unknown = allowed_ids - master_ids
     if unknown:
         raise SystemExit(f"Learning admission references unknown NoteIDs: {sorted(unknown)[:10]}")
     check_ids = released_ids | allowed_ids
+
+    # Explicit admission is the primary learner-level suitability truth.
+    admitted_lemmas: set[str] = set()
+    for nid in allowed_ids:
+        row = master_by_id[nid]
+        for token in tokens(row.get("CanonicalWord", "")) + tokens(row.get("Word", "")):
+            admitted_lemmas.update(lemmas(token))
 
     first_grade_by_id: dict[str, int] = {}
     for row in occ:
@@ -139,6 +148,8 @@ def main() -> None:
             token_lemmas = lemmas(token)
             if token_lemmas & target_lemmas:
                 continue
+            if token_lemmas & admitted_lemmas:
+                continue
             matched = [earliest[x] for x in token_lemmas if x in earliest]
             if matched and min(matched) > level:
                 future[token] = min(matched)
@@ -154,12 +165,12 @@ def main() -> None:
     write_csv(REPORT, ["NoteID", "Word", "LearnerLevel", "ExampleSentence", "FutureVocabulary"], review)
     print(
         f"Klose auxiliary-vocabulary review scope: released={len(released_ids)}, "
-        f"allowed={len(allowed_ids)}, union={len(check_ids)}, items={len(review)}"
+        f"allowed={len(allowed_ids)}, union={len(check_ids)}, admitted_lemmas={len(admitted_lemmas)}, items={len(review)}"
     )
     for row in review:
         print(f"{row['NoteID']} | {row['Word']} | {row['FutureVocabulary']} | {row['ExampleSentence']}")
     if review:
-        raise SystemExit("Learner examples contain explicitly later auxiliary vocabulary")
+        raise SystemExit("Learner examples contain unadmitted explicitly later auxiliary vocabulary")
 
 
 if __name__ == "__main__":
