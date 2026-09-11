@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
 TP = BASE / "third_party_vocabulary"
 PLAN = TP / "allocation" / "plan.json"
+REGISTRY = BASE / "master" / "note_registry.csv"
 REGISTRY_EXT = BASE / "master" / "note_registry_extensions.csv"
 NOTE_RE = re.compile(r"^KV(\d{6})$")
 
@@ -59,22 +60,25 @@ def main() -> None:
     sim = Path(args.simulation_dir).expanduser().resolve()
     plan = obj(PLAN)
 
+    legacy_fields, legacy = rows(REGISTRY)
     ext_fields, current_ext = rows(REGISTRY_EXT)
     append_fields, append_rows = rows(dry / "registry_append.csv")
     dry_binding_fields, dry_bindings = rows(dry / "stable_evidence_bindings.csv")
     sim_ext_fields, sim_ext = rows(sim / "note_registry_extensions.csv")
     sim_binding_fields, sim_bindings = rows(sim / "stable_evidence_bindings.csv")
-    require(ext_fields == append_fields == sim_ext_fields == REGISTRY_FIELDS, "Simulated registry schema drift")
+    require(legacy_fields == ext_fields == append_fields == sim_ext_fields == REGISTRY_FIELDS, "Simulated registry schema drift")
     require(dry_binding_fields == sim_binding_fields == BINDING_FIELDS, "Simulated evidence binding schema drift")
 
     expected_ext = list(current_ext) + list(append_rows)
     expected_ext.sort(key=lambda r: note_num(r["NoteID"]))
     require(sim_ext == expected_ext, "Simulated registry extension is not exact current + append set")
 
-    current_ids = {r["NoteID"] for r in current_ext}
+    legacy_ids = {r["NoteID"] for r in legacy}
+    current_ext_ids = {r["NoteID"] for r in current_ext}
+    require(not (legacy_ids & current_ext_ids), "Legacy and extension registry NoteID sets overlap")
     append_ids = [r["NoteID"] for r in append_rows]
     require(len(append_ids) == len(set(append_ids)), "Dry-run append NoteID duplicate")
-    require(not (current_ids & set(append_ids)), "Dry-run append collides with current extension NoteIDs")
+    require(not ((legacy_ids | current_ext_ids) & set(append_ids)), "Dry-run append collides with current Stable NoteIDs")
 
     origin_rows = [r for r in append_rows if r["PrimaryOriginKey"].startswith("third-party-vocabulary|candidate:")]
     require(len(origin_rows) == len(append_rows), "Simulated append contains non-third-party origin")
@@ -94,11 +98,12 @@ def main() -> None:
     require(all(r["EvidenceStatus"] == "external-unverified-edition" for r in sim_bindings), "Simulated evidence status drift")
 
     bound_note_ids = {r["NoteID"] for r in sim_bindings}
-    simulated_ids = {r["NoteID"] for r in sim_ext}
-    require(bound_note_ids <= simulated_ids, "Evidence binding references NoteID outside simulated stable registry")
+    simulated_full_ids = legacy_ids | {r["NoteID"] for r in sim_ext}
+    require(bound_note_ids <= simulated_full_ids, "Evidence binding references NoteID outside simulated full Stable registry")
 
     print("Third-party allocation simulation validation = pass")
     print(f"simulated new Stable rows = {len(append_rows)}")
+    print(f"simulated full Stable NoteIDs = {len(simulated_full_ids)}")
     print(f"simulated NoteID range = {range_plan['First']}..{range_plan['Last']} / NOT RESERVED")
     print(f"simulated external evidence bindings = {len(sim_bindings)}")
     print("Master textbook source mapping mutation = no")
