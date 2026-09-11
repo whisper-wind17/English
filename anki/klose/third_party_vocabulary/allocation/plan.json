@@ -80,6 +80,20 @@
     "RepositoryMutation": false,
     "ActualAllocationExecuted": false
   },
+  "PostMutationTransactionGate": {
+    "Status": "validated-checkpointed",
+    "WorkflowRunID": "34596833236",
+    "Checker": "tools/validate_third_party_allocation_post_mutation.py",
+    "TransactionDesign": "isolated-authorized-clone-apply-recheck-commit-recheck-no-push",
+    "HistoricalExtensionRowsUnchanged": 392,
+    "ExactNewStableRows": 1821,
+    "PostAllocationFullStableRows": 3015,
+    "ExactExternalEvidenceBindings": 15791,
+    "HeldIdentitiesAllocated": false,
+    "AllowedMutationPathCount": 2,
+    "MasterLearnerReleasePublishAnkiMutation": false,
+    "RemotePushDuringValidation": false
+  },
   "MutationGates": {
     "ActualMutationAuthorized": false,
     "StableNoteIDAllocationAuthorized": false,
@@ -99,13 +113,14 @@
     "ProvenanceContractValidationRunID": "34585155788",
     "AllocationDryRunValidationRunID": "34587553210",
     "GuardedMutatorValidationRunID": "34588197818",
-    "AuthorizationAwareControlPlaneValidationRunID": "34588814219"
+    "AuthorizationAwareControlPlaneValidationRunID": "34588814219",
+    "PostMutationTransactionGateValidationRunID": "34596833236"
   },
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
     "authorization manifest and allocation mutation gates deliberately transition from closed to authorized against the exact current truth boundary",
     "current allocation/provenance/dry-run validation PASS on latest main immediately before apply",
     "actual apply remains restricted to note_registry_extensions.csv plus stable_evidence_bindings.csv and must fail closed on any truth-boundary conflict",
-    "post-mutation independent Completion Recheck must pass before any Learner, Release, Publish or Anki work begins"
+    "post-mutation independent Completion Recheck must pass before commit and again after the allocation commit before any Learner, Release, Publish or Anki work begins"
   ]
 }
