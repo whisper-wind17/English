@@ -2,6 +2,13 @@
   "AuthorizationVersion": "third-party-allocation-authorization-v1",
   "Authorized": false,
   "Scope": "stable-vocabulary-identity-and-external-evidence-binding-only",
+  "StandingDirective": {
+    "Status": "active",
+    "AppliesUntil": "third-party-vocabulary-is-ready-for-final-Anki-merge",
+    "ContinueAdvancesExactlyOnePipelineStep": true,
+    "ContinueMayAuthorizeNextRequiredMutationStep": true,
+    "DirectiveEvidence": "2026-09-11 user directive: before the vocabulary set is ready to merge into Klose's current Anki, saying '继续' authorizes execution of the next pipeline step."
+  },
   "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
   "TruthBoundary": {
     "StageBDecisionBlobSHA": "295f4c5dc76b4cc7b22b6a0f5319fe4f26f06fc0",
