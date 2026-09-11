@@ -9,11 +9,26 @@
     "ContinueMayAuthorizeNextRequiredMutationStep": true,
     "DirectiveEvidence": "2026-09-11 user directive: before the vocabulary set is ready to merge into Klose's current Anki, saying '继续' authorizes execution of the next pipeline step."
   },
-  "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
-  "TruthBoundary": {
+  "LastConsumedAuthorization": {
+    "Step": "actual-third-party-stable-identity-allocation",
+    "UserInstruction": "继续处理",
+    "ExecutionRequest": "anki/klose/third_party_vocabulary/allocation/execution_request.json",
+    "ExecutionReceipt": "anki/klose/third_party_vocabulary/allocation/execution_receipt.json",
+    "ExecutionWorkflowRunID": "34608158097",
+    "AllocationCommitSHA": "fe0d1f04c2eae1cf5d492673dd79aef302691d39",
+    "ConsumedAt": "2026-09-11T14:06:40Z"
+  },
+  "PreAllocationTruthBoundary": {
     "StageBDecisionBlobSHA": "295f4c5dc76b4cc7b22b6a0f5319fe4f26f06fc0",
     "NoteRegistryBlobSHA": "061a2e7ffc6d3449a1835244e32b8bdb3b0b3fdf",
     "NoteRegistryExtensionsBlobSHA": "5129cb01a7191a6f874f40afcaa65fb4c6d9541b"
+  },
+  "PostAllocationState": {
+    "Status": "executed-validated-checkpointed",
+    "MaxNoteID": "KV003015",
+    "PersistentRegistryRows": 3015,
+    "ActiveStableNoteIDs": 3010,
+    "ExternalEvidenceBindings": 15791
   },
   "AllowedMutationPaths": [
     "anki/klose/master/note_registry_extensions.csv",
