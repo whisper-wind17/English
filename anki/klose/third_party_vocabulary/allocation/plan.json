@@ -69,6 +69,7 @@
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
     "current allocation/provenance validation PASS against exact Stage-B, source-freeze and registry boundaries",
+    "validated provenance contract remains current against the exact frozen external-evidence corpus",
     "append-only allocator plus external-evidence binding implementation validated on current truth boundary",
     "independent completion recheck proving stable identity, source-map, release and Anki isolation"
   ]
