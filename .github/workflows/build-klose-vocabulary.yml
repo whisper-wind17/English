@@ -15,6 +15,8 @@ on:
       - 'tools/release_klose_allowed_vocabulary.py'
       - 'tools/check_klose_release_history.py'
       - 'tools/check_grade5_6_new_learner_content.py'
+      - 'tools/check_third_party_learner_content.py'
+      - 'tools/apply_third_party_stable_learner.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
@@ -31,6 +33,9 @@ on:
       - 'tools/approve_klose_learner_review.py'
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
+      - 'anki/klose/third_party_vocabulary/learner/content_reviewed/**'
+      - 'anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv'
+      - 'anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv'
       - 'anki/klose/learner/grade5_6_learning_scope.json'
       - 'anki/klose/learner/grade5_6_content_batch_*.csv'
       - 'anki/klose/learner/grade5_6_reuse_overrides.csv'
@@ -64,6 +69,7 @@ on:
     paths:
       - 'tools/**klose**.py'
       - 'tools/**grade5_6**.py'
+      - 'tools/**third_party**.py'
       - 'anki/klose/**'
       - 'anki/人教版一年级起点/master/**'
       - '.github/workflows/build-klose-vocabulary.yml'
@@ -105,6 +111,9 @@ jobs:
       - name: Audit reused Grade-4 identities
         run: python tools/audit_klose_actual_grade4_reuse.py
 
+      - name: Validate third-party learner content
+        run: python tools/check_third_party_learner_content.py
+
       - name: Build legacy vocabulary inventory
         run: python tools/build_klose_vocabulary.py
 
@@ -140,6 +149,9 @@ jobs:
 
       - name: Apply actual Grade-4 reused learner presentations
         run: python tools/apply_klose_actual_grade4_reuse_learner.py
+
+      - name: Materialize third-party Stable learner and admission state
+        run: python tools/apply_third_party_stable_learner.py
 
       - name: Apply homograph PromptHint presentation
         run: python tools/apply_klose_prompt_hints.py
