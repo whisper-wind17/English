@@ -1,0 +1,37 @@
+{
+  "PlanVersion": "third-party-stable-learner-prep-v1",
+  "Status": "prepared-pending-content-review-and-materialization",
+  "LearnerProfile": "klose",
+  "LearnerLevel": 4,
+  "InputTruth": {
+    "AllocationCommitSHA": "fe0d1f04c2eae1cf5d492673dd79aef302691d39",
+    "ActiveStableNoteIDs": 3010,
+    "StageAIdentityCandidates": 2820,
+    "StageALearnerCandidates": 2794,
+    "StableEvidenceBindings": 15791
+  },
+  "Scope": {
+    "ResolvedLearnerProvisionalIdentities": 2724,
+    "LearnerAdmittedButStageBHeld": 70,
+    "UniqueStableLearnerNotes": 2720,
+    "NewStablePresentationCandidates": 1821,
+    "ReuseActions": 903,
+    "DuplicateReuseContributions": 4
+  },
+  "PresentationPolicy": {
+    "ReuseExisting": "preserve-existing-learner-presentation",
+    "NewStable": "prepare-content-candidate-only; examples remain pending",
+    "MeaningPrimary": "Stable SenseLabel",
+    "Pronunciation": "most-frequent external evidence candidate; conflicts explicitly flagged",
+    "OfficialLearnerCurrentMutated": false
+  },
+  "AdmissionPolicy": {
+    "ProposedStatusForResolvedLearnerScope": "allowed",
+    "ExistingAllowedOrder": "preserve-exactly",
+    "NewOrder": "append after current allowed order; distinct-source count desc, occurrence count desc, token count asc, MatchKey lexical, NoteID",
+    "SourceGradeUsedForAdmissionOrOrdering": false,
+    "ImmediateAnkiSchedulingImplied": false,
+    "CanonicalLearningAdmissionMutated": false
+  },
+  "NextRequiredStep": "generate-and-review-learnerlevel4-content-then-materialize-presentation-and-admission"
+}
