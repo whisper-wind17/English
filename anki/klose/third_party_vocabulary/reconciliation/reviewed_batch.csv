@@ -1,0 +1,13 @@
+ProvisionalIdentityKey,Action,ExistingNoteID,ProposedCanonicalWord,ProposedMatchKey,ProposedSense,Confidence,DecisionBasis,Rationale
+candidate:cool,reuse-existing,KV000175,,,,high,semantic-equivalent-current-klose-sense,Third-party adjective sense matches KV000175 while KV001142 is the cooling verb sense.
+candidate:dress,reuse-existing,KV000095,,,,high,semantic-equivalent-current-klose-sense,Third-party noun sense matches KV000095 while KV001067 is the dressing verb sense.
+candidate:fish#noun,reuse-existing,KV000080,,,,high,semantic-equivalent-current-klose-sense,Third-party noun sense matches KV000080 while KV001172 is the fishing verb sense.
+candidate:fish#verb,reuse-existing,KV001172,,,,high,semantic-equivalent-current-klose-sense,Third-party verb sense matches KV001172 while KV000080 is the fish noun sense.
+candidate:may#month,reuse-existing,KV000270,,,,high,semantic-equivalent-current-klose-sense,Third-party month sense matches KV000270 while KV001095 is the possibility sense.
+candidate:paint,held,,,,,medium,mixed-sense-boundary-requires-resolution,Stage-A target combines painting activity and paint material while current Klose candidates split activity and coating semantics so no safe one-to-one identity mapping exists.
+candidate:run,reuse-existing,KV000334,,,,high,semantic-equivalent-current-klose-sense,Third-party locomotion sense matches KV000334 while KV001143 is the operate or run machinery sense.
+candidate:star,reuse-existing,KV000471,,,,high,semantic-equivalent-current-klose-sense,Third-party celestial-object sense matches KV000471 while KV000913 is the performer or celebrity sense.
+candidate:take,new-stable-identity,,take,take,拿；取；带走,high,explicit-no-equivalent-current-klose-candidates,Current Klose candidates cover buy and take a course and light-verb action while none represents the core take or carry-away sense.
+candidate:then,reuse-existing,KV000839,,,,high,semantic-equivalent-current-klose-sense,Third-party temporal sense matches KV000839 while KV000938 is the therefore or in-that-case discourse use.
+candidate:top,reuse-existing,KV000781,,,,high,semantic-equivalent-current-klose-sense,Third-party noun top or end sense matches KV000781 while KV001158 is adjectival highest.
+candidate:trip,reuse-existing,KV000963,,,,high,semantic-equivalent-current-klose-sense,Third-party journey sense matches KV000963 while KV001193 is the stumble verb sense.
