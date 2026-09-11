@@ -43,9 +43,16 @@ def require(ok: bool, message: str) -> None:
         raise SystemExit(message)
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(ROOT.resolve()))
+    except ValueError:
+        return str(path.resolve())
+
+
 def read_obj(path: Path) -> dict[str, object]:
     value = json.loads(path.read_text(encoding="utf-8-sig"))
-    require(isinstance(value, dict), f"Expected JSON object: {path.relative_to(ROOT)}")
+    require(isinstance(value, dict), f"Expected JSON object: {display_path(path)}")
     return value
 
 
