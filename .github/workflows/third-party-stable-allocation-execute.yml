@@ -110,7 +110,7 @@ jobs:
             --dry-run-dir "$RUNNER_TEMP/allocation-dry-run" \
             --base-ref "${{ steps.auth.outputs.authorization_base }}"
           git diff --check
-          changed="$(git diff --name-only | sort)"
+          changed="$(git status --short | sed -E 's/^.. //' | sort)"
           expected="$(printf '%s\n' \
             'anki/klose/master/note_registry_extensions.csv' \
             'anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv' | sort)"
