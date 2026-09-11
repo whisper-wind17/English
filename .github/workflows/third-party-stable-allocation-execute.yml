@@ -1,10 +1,7 @@
 name: Third-party Stable Allocation Execute
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'anki/klose/third_party_vocabulary/allocation/execution_request.json'
+  workflow_dispatch:
 
 permissions:
   contents: write
