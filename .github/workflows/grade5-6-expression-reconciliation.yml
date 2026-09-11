@@ -7,6 +7,7 @@ on:
       - 'tools/prepare_grade5_6_expression_reconciliation.py'
       - 'tools/apply_grade5_6_expression_review.py'
       - 'tools/check_klose_expression_persistent_state.py'
+      - 'tools/check_klose_expressions_release_ready.py'
       - 'tools/grade5_6_source_state.py'
       - 'tools/sync_grade5_6_reconciliation_provenance.py'
       - 'anki/klose/source_reference/grade5_6_source_provenance.json'
@@ -14,12 +15,8 @@ on:
       - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
-      - 'anki/klose/expressions/master/expression_registry.csv'
-      - 'anki/klose/expressions/master/expression_occurrences.csv'
-      - 'anki/klose/expressions/master/source_expression_map.csv'
-      - 'anki/klose/expressions/master/release_registry.csv'
-      # A reviewed source batch is the atomic trigger. Optional new-group definitions
-      # are committed first and consumed together when the source batch arrives.
+      - 'anki/klose/expressions/**'
+      # A reviewed source batch is the atomic trigger before Stable allocation.
       - 'anki/klose/review/grade5_6_reconciliation/expression_source_reviewed_batch.csv'
       - '.github/workflows/grade5-6-expression-reconciliation.yml'
   workflow_dispatch:
@@ -41,24 +38,54 @@ jobs:
           sparse-checkout: |
             tools
             anki/klose/source_reference
-            anki/klose/expressions/master
+            anki/klose/expressions
             anki/klose/review/grade5_6_reconciliation
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Detect Expression lifecycle phase
+        id: lifecycle
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f anki/klose/expressions/master/grade5_6_identity_allocation.csv ]]; then
+            echo 'phase=release' >> "$GITHUB_OUTPUT"
+            echo 'Grade 5-6 Expressions are post-allocation; reconciliation truth is frozen.'
+          else
+            echo 'phase=reconciliation' >> "$GITHUB_OUTPUT"
+            echo 'Grade 5-6 Expressions are pre-allocation; reconciliation workflow is active.'
+          fi
+
+      - name: Validate post-allocation Expression release state
+        if: steps.lifecycle.outputs.phase == 'release'
+        run: python tools/check_klose_expressions_release_ready.py
+
       - name: Build Expression review candidates
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         run: python tools/prepare_grade5_6_expression_reconciliation.py
+
       - name: Apply transient reviewed batch
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         run: python tools/apply_grade5_6_expression_review.py
+
       - name: Rebuild Expression review state
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         run: python tools/prepare_grade5_6_expression_reconciliation.py
+
       - name: Bind reconciliation status to current Source provenance
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         run: python tools/sync_grade5_6_reconciliation_provenance.py expression
+
       - name: Verify Stable Klose Expression state
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         env:
           KLOSE_BASE_COMMIT: ${{ github.event.before || 'HEAD^' }}
         run: python tools/check_klose_expression_persistent_state.py
+
       - name: Enforce review-only diff scope
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         shell: bash
         run: |
           bad="$(git diff --name-only | grep -v '^anki/klose/review/grade5_6_reconciliation/' || true)"
@@ -67,9 +94,12 @@ jobs:
             echo "$bad"
             exit 1
           fi
+
       - name: Persist derived Expression review state
+        if: steps.lifecycle.outputs.phase == 'reconciliation'
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add -A anki/klose/review/grade5_6_reconciliation
