@@ -1,0 +1,106 @@
+name: Third-party Stable Learner Preparation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/build_third_party_stable_learner_prep.py'
+      - 'tools/check_third_party_stable_learner_prep.py'
+      - '.github/workflows/third-party-stable-learner-prep.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: third-party-stable-learner-prep
+  cancel-in-progress: false
+
+jobs:
+  build-validate-persist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Capture protected-layer baseline
+        id: baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          for p in \
+            anki/klose/learner/current.csv \
+            anki/klose/learner/learning_admission.csv \
+            anki/klose/learner/presentation_review_registry.csv \
+            anki/klose/master/release_extensions.csv \
+            anki/klose/publish/study.csv \
+            anki/klose/publish/anki-import.csv; do
+            printf '%s %s\n' "$(git hash-object "$p")" "$p"
+          done > "$RUNNER_TEMP/protected-before.txt"
+          cat "$RUNNER_TEMP/protected-before.txt"
+
+      - name: Build stable learner preparation
+        run: python tools/build_third_party_stable_learner_prep.py
+
+      - name: Independently validate preparation
+        run: python tools/check_third_party_stable_learner_prep.py
+
+      - name: Assert protected learner/release/publish layers unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          for p in \
+            anki/klose/learner/current.csv \
+            anki/klose/learner/learning_admission.csv \
+            anki/klose/learner/presentation_review_registry.csv \
+            anki/klose/master/release_extensions.csv \
+            anki/klose/publish/study.csv \
+            anki/klose/publish/anki-import.csv; do
+            printf '%s %s\n' "$(git hash-object "$p")" "$p"
+          done > "$RUNNER_TEMP/protected-after.txt"
+          diff -u "$RUNNER_TEMP/protected-before.txt" "$RUNNER_TEMP/protected-after.txt"
+
+      - name: Validate exact generated diff scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git status --short | sed -E 's/^.. //' | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/third_party_vocabulary/learner/stable_learner_plan.json' \
+            'anki/klose/third_party_vocabulary/learner/stable_learner_scope.csv' \
+            'anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv' \
+            'anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv' | sort)"
+          test "$changed" = "$expected"
+          git diff --check
+
+      - name: Persist validated preparation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'klose-learner-prep-bot'
+          git config user.email 'klose-learner-prep-bot@users.noreply.github.com'
+          git add \
+            anki/klose/third_party_vocabulary/learner/stable_learner_plan.json \
+            anki/klose/third_party_vocabulary/learner/stable_learner_scope.csv \
+            anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv \
+            anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv
+          staged="$(git diff --cached --name-only | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/third_party_vocabulary/learner/stable_learner_plan.json' \
+            'anki/klose/third_party_vocabulary/learner/stable_learner_scope.csv' \
+            'anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv' \
+            'anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv' | sort)"
+          test "$staged" = "$expected"
+          git commit -m 'data: prepare third-party Stable learner integration'
+          git fetch origin main
+          test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)" || {
+            echo 'main changed during learner-prep transaction; refusing stale push'
+            exit 1
+          }
+          git push origin HEAD:main
