@@ -6,6 +6,7 @@ on:
       - 'work/klose-grade5-6-expressions-20260911'
     paths:
       - 'tools/materialize_klose_grade5_6_expressions.py'
+      - 'tools/refine_klose_grade5_6_expression_presentations.py'
       - 'tools/build_klose_expressions.py'
       - 'tools/check_klose_expressions_release_ready.py'
       - 'tools/klose_expression_review_fingerprint.py'
@@ -20,6 +21,7 @@ on:
     branches: [main]
     paths:
       - 'tools/materialize_klose_grade5_6_expressions.py'
+      - 'tools/refine_klose_grade5_6_expression_presentations.py'
       - 'tools/build_klose_expressions.py'
       - 'tools/check_klose_expressions_release_ready.py'
       - 'tools/klose_expression_review_fingerprint.py'
@@ -59,6 +61,9 @@ jobs:
       - name: Materialize accepted Grade 5-6 Expression scope
         run: python tools/materialize_klose_grade5_6_expressions.py
 
+      - name: Refine learner-facing Grade 5-6 presentations
+        run: python tools/refine_klose_grade5_6_expression_presentations.py
+
       - name: Build deterministic Expression publish artifacts
         run: python tools/build_klose_expressions.py
 
@@ -71,6 +76,7 @@ jobs:
           set -euo pipefail
           before="$(git diff -- . ':!.github' | sha256sum | awk '{print $1}')"
           python tools/materialize_klose_grade5_6_expressions.py
+          python tools/refine_klose_grade5_6_expression_presentations.py
           python tools/build_klose_expressions.py
           python tools/check_klose_expressions_release_ready.py
           after="$(git diff -- . ':!.github' | sha256sum | awk '{print $1}')"
@@ -105,10 +111,11 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No generated Expression release changes.'
           else
-            git commit -m 'data: release Grade 5-6 Klose Expressions'
+            git commit -m 'data: refine Grade 5-6 Klose Expressions'
             git fetch origin "${GITHUB_REF_NAME}"
             git rebase "origin/${GITHUB_REF_NAME}"
             python tools/materialize_klose_grade5_6_expressions.py
+            python tools/refine_klose_grade5_6_expression_presentations.py
             python tools/build_klose_expressions.py
             python tools/check_klose_expressions_release_ready.py
             if ! git diff --quiet; then
