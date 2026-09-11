@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate and protect existing Klose Expressions persistent master state."""
+"""Validate and protect existing Klose Expressions persistent master state.
+
+This checker is used by reconciliation workflows as a read-only boundary: it does
+not forbid the registry from having grown in an earlier completed release, but it
+forbids the current reconciliation run from mutating any persistent master file.
+"""
 from __future__ import annotations
 
 import csv
@@ -50,8 +55,11 @@ def main() -> None:
             raise SystemExit(f"Incomplete Expression identity: {eid}")
         registry[eid] = row
 
-    if len(registry) != 66:
-        raise SystemExit(f"Unexpected Stable Expression registry size: {len(registry)} != 66")
+    if len(registry) < 66:
+        raise SystemExit(f"Stable Expression registry lost historical identities: {len(registry)} < 66")
+    expected_ids = {f"KE{i:06d}" for i in range(1, len(registry) + 1)}
+    if set(registry) != expected_ids:
+        raise SystemExit("Stable Expression registry IDs must remain contiguous append-only KE000001..current-max")
 
     occurrences: set[str] = set()
     for row in read_csv(OCCURRENCES):
