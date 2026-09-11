@@ -1,0 +1,72 @@
+name: Third-party Learner Content Review Inputs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/prepare_third_party_learner_content_batches.py'
+      - '.github/workflows/third-party-learner-content-batches.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: third-party-learner-content-review-inputs
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build compact review inputs
+        run: python tools/prepare_third_party_learner_content_batches.py
+      - name: Validate exact coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root = Path('anki/klose/third_party_vocabulary/learner/content_review_inputs')
+          manifest = json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          assert manifest['CandidateCount'] == 1821
+          assert manifest['BatchCount'] == 19
+          rows = []
+          for item in manifest['Batches']:
+              with (root/item['File']).open('r', encoding='utf-8-sig', newline='') as f:
+                  batch = list(csv.DictReader(f))
+              assert len(batch) == item['Count']
+              assert batch[0]['NoteID'] == item['FirstNoteID']
+              assert batch[-1]['NoteID'] == item['LastNoteID']
+              rows.extend(batch)
+          assert len(rows) == 1821
+          assert [r['NoteID'] for r in rows] == [f'KV{i:06d}' for i in range(1195, 3016)]
+          assert all(r['CanonicalWord'].strip() and r['SenseLabel'].strip() for r in rows)
+          PY
+      - name: Persist review inputs if changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- anki/klose/third_party_vocabulary/learner/content_review_inputs && \
+             test -f anki/klose/third_party_vocabulary/learner/content_review_inputs/manifest.json; then
+            echo 'Content review inputs already deterministic.'
+            exit 0
+          fi
+          git config user.name 'klose-content-prep-bot'
+          git config user.email 'klose-content-prep-bot@users.noreply.github.com'
+          git add anki/klose/third_party_vocabulary/learner/content_review_inputs
+          git commit -m 'data: prepare third-party learner content review inputs'
+          git fetch origin main
+          test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)" || {
+            echo 'main changed during review-input transaction; refusing stale push'
+            exit 1
+          }
+          git push origin HEAD:main
