@@ -1,0 +1,51 @@
+ProvisionalIdentityKey,Action,ExistingNoteID,ProposedCanonicalWord,ProposedMatchKey,ProposedSense,Confidence,DecisionBasis,Rationale
+candidate:paris,reuse-existing,KV001061,,,,high,semantic-equivalent-current-klose-sense,巴黎法国首都与现有巴黎为同一专名实体。
+candidate:part,new-stable-identity,,part,part,部分；一部分,high,explicit-no-equivalent-current-klose-candidate,现有 KV001182 是角色义，第三方目标是整体的一部分，核心义项不同。
+candidate:pink,reuse-existing,KV000994,,,,high,semantic-equivalent-current-klose-sense,粉红色与粉色为同一颜色概念。
+candidate:player,reuse-existing,KV000903,,,,high,semantic-equivalent-current-klose-sense,运动员选手与运动员参赛选手等价。
+candidate:project,reuse-existing,KV000915,,,,medium,semantic-equivalent-current-klose-sense,项目课题计划与现有项目方案在当前学习语境下共享计划性项目这一核心义。
+candidate:pull,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时含一般拉动和拔出，现有 KV000951 仅明确拔出抽出；泛化拉动不能被该现有 identity 完整覆盖。
+candidate:question,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时含问题名词和提问行为，现有 KV001132 仅明确问题名词，不能安全一对一复用。
+candidate:quick,reuse-existing,KV001147,,,,high,semantic-equivalent-current-klose-sense,快的迅速的仅释义顺序不同。
+candidate:rest,reuse-existing,KV000939,,,,high,semantic-equivalent-current-klose-sense,休息休息时间与休息放松共享同一休息核心义。
+candidate:reuse,reuse-existing,KV001154,,,,high,semantic-equivalent-current-klose-sense,再使用重复利用与再次使用重复使用等价。
+candidate:riddle,reuse-existing,KV001003,,,,high,semantic-equivalent-current-klose-sense,谜语与谜谜语等价。
+candidate:river,reuse-existing,KV000958,,,,high,semantic-equivalent-current-klose-sense,河河流与河江属于同一自然水道概念。
+candidate:root,reuse-existing,KV000953,,,,medium,semantic-equivalent-current-klose-sense,根根部与现有根根茎在当前基础植物词汇中共享植物地下根部核心概念。
+candidate:rope,reuse-existing,KV000908,,,,high,semantic-equivalent-current-klose-sense,绳子绳索与绳粗绳属于同一绳索物体义。
+candidate:round,reuse-existing,KV000956,,,,high,semantic-equivalent-current-klose-sense,圆的圆形的与圆形环形球形共享圆形外形核心义。
+candidate:runny nose,reuse-existing,KV001086,,,,high,semantic-equivalent-current-klose-sense,流鼻涕流鼻水与现有流鼻涕等价。
+candidate:sale,reuse-existing,KV001106,,,,high,semantic-equivalent-current-klose-sense,出售特价销售与现有特价销售出售完全覆盖同一 sale 名词范围。
+candidate:see,reuse-existing,KV001051,,,,high,semantic-equivalent-current-klose-sense,看见看到与现有看见等价，过去式提示不改变义项。
+candidate:seed,reuse-existing,KV000950,,,,high,semantic-equivalent-current-klose-sense,种子与种子籽等价。
+candidate:sell,reuse-existing,KV001109,,,,high,semantic-equivalent-current-klose-sense,卖出售与出售售卖等价。
+candidate:shadow,reuse-existing,KV001165,,,,high,semantic-equivalent-current-klose-sense,影子阴影与阴影影子仅顺序不同。
+candidate:shower,reuse-existing,KV001148,,,,medium,semantic-equivalent-current-klose-sense,淋浴洗澡与现有淋浴在该词条中指同一淋浴活动。
+candidate:side,reuse-existing,KV001160,,,,high,semantic-equivalent-current-klose-sense,边侧面与一面一边属于同一侧边空间义。
+candidate:sing,reuse-existing,KV001075,,,,high,semantic-equivalent-current-klose-sense,唱唱歌与唱歌演唱等价，过去式提示不改变义项。
+candidate:sky,reuse-existing,KV001112,,,,high,semantic-equivalent-current-klose-sense,天空与天天空等价。
+candidate:soil,reuse-existing,KV001122,,,,high,semantic-equivalent-current-klose-sense,土壤泥土与现有土壤属于同一地表土质概念。
+candidate:spaceship,reuse-existing,KV001127,,,,high,semantic-equivalent-current-klose-sense,宇宙飞船与现有宇宙飞船完全等价。
+candidate:spanish,held,,,,,medium,mixed-pos-boundary-requires-resolution,第三方目标同时包含西班牙的形容词、西班牙人名词和西班牙语名词，现有 KV001045 仅覆盖形容词义。
+candidate:start,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时含开始和出发，现有 KV000926 只明确开始；出发是另一核心动作义。
+candidate:still,reuse-existing,KV001018,,,,high,semantic-equivalent-current-klose-sense,仍然还是与仍然依旧还是等价。
+candidate:taikonaut,reuse-existing,KV001129,,,,high,semantic-equivalent-current-klose-sense,中国太空人与中国航天员为同一概念。
+candidate:take a dancing class,reuse-existing,KV000978,,,,high,semantic-equivalent-current-klose-sense,上舞蹈课参加舞蹈课与现有上舞蹈课等价。
+candidate:take care of,reuse-existing,KV000940,,,,high,semantic-equivalent-current-klose-sense,照顾与爱护照顾共享同一照料义。
+candidate:take turns,reuse-existing,KV001036,,,,high,semantic-equivalent-current-klose-sense,轮流依次与按顺序来属于同一轮流执行义。
+candidate:team,reuse-existing,KV000902,,,,high,semantic-equivalent-current-klose-sense,队团队与运动队或一起工作的组都属于同一协作群体义。
+candidate:than,reuse-existing,KV001163,,,,high,semantic-equivalent-current-klose-sense,比用于比较结构与现有比为同一比较连接义。
+candidate:ticket,reuse-existing,KV001107,,,,high,semantic-equivalent-current-klose-sense,票票券与现有票等价。
+candidate:till,reuse-existing,KV001179,,,,high,semantic-equivalent-current-klose-sense,直到直到为止与现有直到等价。
+candidate:tooth,reuse-existing,KV000943,,,,high,semantic-equivalent-current-klose-sense,牙齿与牙齿等价。
+candidate:turn,new-stable-identity,,turn,turn,转；转动,high,explicit-no-equivalent-current-klose-candidate,现有 KV001035 是轮到的顺序义，第三方目标是旋转转动动作义，核心义项不同。
+candidate:twice,reuse-existing,KV000944,,,,high,semantic-equivalent-current-klose-sense,两次与两次两遍等价。
+candidate:unhappy,reuse-existing,KV001094,,,,high,semantic-equivalent-current-klose-sense,不高兴不快乐与不快乐难过属于同一负面情绪义。
+candidate:useful,reuse-existing,KV001159,,,,high,semantic-equivalent-current-klose-sense,有用的与有用有益的属于同一效用义。
+candidate:village,reuse-existing,KV001052,,,,high,semantic-equivalent-current-klose-sense,村庄与村庄村镇属于同一乡村聚落义。
+candidate:visit,reuse-existing,KV000931,,,,high,semantic-equivalent-current-klose-sense,参观访问与看望拜访参观共享 visit 的到访核心义。
+candidate:way,new-stable-identity,,way,way,路；道路；方向,high,explicit-no-equivalent-current-klose-candidate,现有 KV000957 是方法手段途径方式义，第三方目标是道路或方向的空间路径义。
+candidate:wind,reuse-existing,KV000962,,,,high,semantic-equivalent-current-klose-sense,风与风气流属于同一自然空气流动义。
+candidate:winner,reuse-existing,KV001082,,,,high,semantic-equivalent-current-klose-sense,胜利者与获胜的人或队成功者属于同一获胜者概念。
+candidate:world,reuse-existing,KV000955,,,,high,semantic-equivalent-current-klose-sense,世界与现有世界地球天下在基础词汇层面共享 world 的世界概念。
+candidate:worry,reuse-existing,KV000967,,,,high,semantic-equivalent-current-klose-sense,担心发愁与担心担忧发愁等价。
