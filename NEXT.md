@@ -19,6 +19,7 @@ Third-party provenance contract       = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Third-party allocation plan           = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Third-party allocation dry run        = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Guarded allocation mutator            = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Post-mutation transaction gate        = IMPLEMENTED / VALIDATED / CHECKPOINTED
 
 Actual third-party allocation         = NOT AUTHORIZED / NOT STARTED
 Actual third-party merge              = NOT AUTHORIZED / NOT STARTED
@@ -50,6 +51,7 @@ Actual third-party merge              = NOT AUTHORIZED / NOT STARTED
 AGENTS.md
 → NEXT.md
 → docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md
+→ docs/THIRD_PARTY_ALLOCATION_TRANSACTION_GATE.md
 → docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md
 → docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
 → docs/KLOSE_VOCABULARY_SYSTEM.md
@@ -289,12 +291,18 @@ exact occurrence ownership
 
 ---
 
-## 8. Guarded mutation-capable allocator — CHECKPOINTED / UNAUTHORIZED
+## 8. Guarded allocator + transaction gate — CHECKPOINTED / UNAUTHORIZED
 
 执行工具：
 
 ```text
 tools/apply_third_party_allocation.py
+```
+
+独立 post-mutation checker：
+
+```text
+tools/validate_third_party_allocation_post_mutation.py
 ```
 
 授权真源：
@@ -343,24 +351,35 @@ anki/klose/expressions/
 Validation evidence：
 
 ```text
-guarded mutator + recovery/idempotency        = 34588197818 / PASS
-authorization-aware control-plane validation  = 34588814219 / PASS
-final plan checkpoint revalidation             = 34589018187 / PASS
+guarded mutator + recovery/idempotency             = 34588197818 / PASS
+authorization-aware control-plane validation       = 34588814219 / PASS
+plan checkpoint revalidation                       = 34589018187 / PASS
+post-mutation transaction gate                     = 34596833236 / PASS
+final integrated transaction checkpoint validation = 34596997031 / PASS
 ```
 
 验证覆盖：
 
 ```text
-unauthorized direct --apply rejected           = PASS
-simulation initial new Stable rows             = 1821
-simulated extension rows                       = 2213
-simulated full Stable NoteIDs                  = 3015
-simulated evidence bindings                    = 15791
+unauthorized direct --apply rejected               = PASS
+simulation initial new Stable rows                 = 1821
+simulated extension rows                           = 2213
+simulated full Stable NoteIDs                      = 3015
+simulated evidence bindings                        = 15791
+registry-written / bindings-missing recovery       = PASS
+idempotent retry new Stable rows                   = 0
 
-registry-written / bindings-missing interruption recovery = PASS
-retry new Stable rows after interruption                  = 0
-idempotent full-state retry new Stable rows               = 0
-repository mutation during validation                     = no
+isolated authorized actual --apply                 = PASS
+historical extension rows unchanged                = 392
+exact new Stable rows                              = 1821
+post-allocation full Stable rows                   = 3015
+exact external evidence bindings                   = 15791
+held identities allocated                          = no
+pre-commit persistent-state / Completion Recheck   = PASS
+allocation commit contains exactly two paths       = PASS
+post-commit persistent-state / Completion Recheck  = PASS
+remote push during validation                      = no
+main repository mutation during validation         = no
 ```
 
 控制面支持两个显式状态：
@@ -377,7 +396,9 @@ authorized-pending-apply
   Master / Learner / Release / Publish / Anki gates remain false
 ```
 
-`Third-party Allocation Plan Validation` workflow 在两种状态下都 **只验证，不自动执行 `--apply`**。
+`Third-party Allocation Plan Validation` workflow 在两种状态下都不会对 checked-out main 自动执行 actual `--apply`。真实 transaction 机制已在 repo 外 isolated clone 中完整演练并形成 local allocation commit，但没有 remote push。
+
+详细 transaction contract：`docs/THIRD_PARTY_ALLOCATION_TRANSACTION_GATE.md`。
 
 ---
 
@@ -388,7 +409,7 @@ authorized-pending-apply
 技术准备已经到：
 
 ```text
-mutation-ready
+mutation-ready + transaction-gated
 ```
 
 但业务状态仍是：
@@ -436,11 +457,14 @@ PublishMutationAuthorized             = false
 AnkiMutationAuthorized                = false
 ```
 
-7. authorization-aware validation 必须 PASS；该 workflow 仍不得自动 apply；
+7. authorization-aware validation 必须 PASS；validation workflow 仍不得自动 apply；
 8. 单独执行 actual allocator；
-9. mutation diff 只能包含授权的两个文件；
-10. actual mutation 后立即执行独立 Completion Recheck；
-11. CHECKPOINTED 后才能开始 Learner Presentation / Admission / Review / Release 的下一生命周期。
+9. 运行 `check_klose_persistent_state.py` + 独立 post-mutation Completion Recheck；
+10. mutation diff / staged files 必须精确等于两个授权文件；
+11. 形成 allocation commit；
+12. 再次针对 authorization baseline 执行 persistent-state + post-commit Completion Recheck；
+13. 只有 commit gate 全部 PASS 后才允许 remote persistence；
+14. allocation CHECKPOINTED 后才能开始 Learner Presentation / Admission / Review / Release 的下一生命周期。
 
 ---
 
