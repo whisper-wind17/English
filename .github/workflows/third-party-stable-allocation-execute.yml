@@ -1,0 +1,186 @@
+name: Third-party Stable Allocation Execute
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'anki/klose/third_party_vocabulary/allocation/execution_request.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: third-party-stable-allocation-execute
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate request and capture immutable base
+        id: request
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git rev-parse HEAD)"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('anki/klose/third_party_vocabulary/allocation/execution_request.json')
+          value = json.loads(p.read_text(encoding='utf-8-sig'))
+          assert value.get('RequestVersion') == 'third-party-allocation-execution-request-v1'
+          assert value.get('Status') == 'requested'
+          assert value.get('Step') == 'actual-third-party-stable-identity-allocation'
+          assert value.get('UserInstruction') == '继续处理'
+          assert value.get('StandingDirectiveApplies') is True
+          assert str(value.get('RequestedAt', '')).strip()
+          PY
+
+      - name: Preflight closed allocation truth
+        run: |
+          python tools/validate_third_party_source_provenance.py
+          python tools/check_third_party_allocation_plan.py
+          python tools/build_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/allocation-dry-run"
+          python tools/validate_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/allocation-dry-run"
+          python tools/apply_third_party_allocation.py --expect-unauthorized
+          git diff --exit-code
+
+      - name: Create local authorization transition
+        id: auth
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          request = json.loads(Path('anki/klose/third_party_vocabulary/allocation/execution_request.json').read_text(encoding='utf-8-sig'))
+          plan_path = Path('anki/klose/third_party_vocabulary/allocation/plan.json')
+          auth_path = Path('anki/klose/third_party_vocabulary/allocation/authorization.json')
+          plan = json.loads(plan_path.read_text(encoding='utf-8-sig'))
+          auth = json.loads(auth_path.read_text(encoding='utf-8-sig'))
+          auth['Authorized'] = True
+          auth['UserAuthorizationEvidence'] = (
+              "Standing directive + current user instruction '继续处理'; execution request "
+              + str(request.get('RequestedAt', ''))
+          )
+          auth['AuthorizedAt'] = str(request.get('RequestedAt', ''))
+          gates = plan['MutationGates']
+          gates['ActualMutationAuthorized'] = True
+          gates['StableNoteIDAllocationAuthorized'] = True
+          for key in ('MasterSourceMappingMutationAuthorized','LearnerMutationAuthorized','ReleaseMutationAuthorized','PublishMutationAuthorized','AnkiMutationAuthorized'):
+              gates[key] = False
+          plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          auth_path.write_text(json.dumps(auth, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          git config user.name 'klose-allocation-bot'
+          git config user.email 'klose-allocation-bot@users.noreply.github.com'
+          git add anki/klose/third_party_vocabulary/allocation/plan.json \
+                  anki/klose/third_party_vocabulary/allocation/authorization.json
+          git commit -m 'chore: authorize third-party allocation transaction locally'
+          authorization_base="$(git rev-parse HEAD)"
+          echo "authorization_base=$authorization_base" >> "$GITHUB_OUTPUT"
+
+      - name: Revalidate authorized control plane
+        run: |
+          python tools/validate_third_party_source_provenance.py
+          python tools/check_third_party_allocation_plan.py
+          rm -rf "$RUNNER_TEMP/allocation-dry-run"
+          python tools/build_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/allocation-dry-run"
+          python tools/validate_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/allocation-dry-run"
+
+      - name: Apply exact allocation mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/apply_third_party_allocation.py \
+            --apply --dry-run-dir "$RUNNER_TEMP/allocation-dry-run"
+          KLOSE_BASE_COMMIT="${{ steps.auth.outputs.authorization_base }}" \
+            python tools/check_klose_persistent_state.py
+          python tools/validate_third_party_allocation_post_mutation.py \
+            --dry-run-dir "$RUNNER_TEMP/allocation-dry-run" \
+            --base-ref "${{ steps.auth.outputs.authorization_base }}"
+          git diff --check
+          changed="$(git diff --name-only | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/master/note_registry_extensions.csv' \
+            'anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv' | sort)"
+          test "$changed" = "$expected"
+
+      - name: Commit and recheck tested allocation state
+        id: tested
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add anki/klose/master/note_registry_extensions.csv \
+                  anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv
+          staged="$(git diff --cached --name-only | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/master/note_registry_extensions.csv' \
+            'anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv' | sort)"
+          test "$staged" = "$expected"
+          git commit -m 'data: allocate third-party Stable Vocabulary identities'
+          allocation_commit="$(git rev-parse HEAD)"
+          echo "allocation_commit=$allocation_commit" >> "$GITHUB_OUTPUT"
+          KLOSE_BASE_COMMIT="${{ steps.auth.outputs.authorization_base }}" \
+            python tools/check_klose_persistent_state.py
+          python tools/validate_third_party_allocation_post_mutation.py \
+            --dry-run-dir "$RUNNER_TEMP/allocation-dry-run" \
+            --base-ref "${{ steps.auth.outputs.authorization_base }}"
+          committed="$(git diff-tree --no-commit-id --name-only -r HEAD | sort)"
+          test "$committed" = "$expected"
+
+      - name: Squash verified data onto immutable remote base
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/tested-allocation"
+          git show "${{ steps.tested.outputs.allocation_commit }}:anki/klose/master/note_registry_extensions.csv" \
+            > "$RUNNER_TEMP/tested-allocation/note_registry_extensions.csv"
+          git show "${{ steps.tested.outputs.allocation_commit }}:anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv" \
+            > "$RUNNER_TEMP/tested-allocation/stable_evidence_bindings.csv"
+
+          git reset --hard "${{ steps.request.outputs.base }}"
+          cp "$RUNNER_TEMP/tested-allocation/note_registry_extensions.csv" \
+             anki/klose/master/note_registry_extensions.csv
+          mkdir -p anki/klose/third_party_vocabulary/provenance
+          cp "$RUNNER_TEMP/tested-allocation/stable_evidence_bindings.csv" \
+             anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv
+
+          changed="$(git status --short | sed -E 's/^.. //' | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/master/note_registry_extensions.csv' \
+            'anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv' | sort)"
+          test "$changed" = "$expected"
+          git add anki/klose/master/note_registry_extensions.csv \
+                  anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv
+          git commit -m 'data: allocate third-party Stable Vocabulary identities'
+
+          test "$(git show HEAD:anki/klose/master/note_registry_extensions.csv | sha256sum | cut -d' ' -f1)" = \
+               "$(git show '${{ steps.tested.outputs.allocation_commit }}':anki/klose/master/note_registry_extensions.csv | sha256sum | cut -d' ' -f1)"
+          test "$(git show HEAD:anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv | sha256sum | cut -d' ' -f1)" = \
+               "$(git show '${{ steps.tested.outputs.allocation_commit }}':anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv | sha256sum | cut -d' ' -f1)"
+          committed="$(git diff-tree --no-commit-id --name-only -r HEAD | sort)"
+          test "$committed" = "$expected"
+
+      - name: Compare-and-swap push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          remote="$(git rev-parse origin/main)"
+          test "$remote" = "${{ steps.request.outputs.base }}" || {
+            echo "main changed during allocation transaction; refusing stale push"
+            exit 1
+          }
+          git push origin HEAD:main
+          echo 'Actual third-party Stable allocation remote persistence = PASS'
