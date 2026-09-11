@@ -235,7 +235,7 @@ Even though Stage A currently has 2794 learner candidates, that state does not a
 
 ## 7. Current gate
 
-This planning stage authorizes only read-only validation and plan/document changes.
+The planning layer itself is now VALIDATED / CHECKPOINTED, but it authorizes only read-only validation and plan/document changes.
 
 ```text
 ActualMutationAuthorized               = false
@@ -247,4 +247,36 @@ PublishMutationAuthorized              = false
 AnkiMutationAuthorized                 = false
 ```
 
-Before any of these can become true, the plan must pass its Validation Gate and be CHECKPOINTED, the provenance blocker must be resolved, the actual allocator must itself be implemented/validated, and the user must explicitly authorize mutation.
+The provenance blocker remains active. Before any mutation gate can become true, the provenance contract must be resolved, the actual allocator must itself be implemented/validated, and the user must explicitly authorize mutation.
+
+---
+
+## 8. Validation checkpoint
+
+Allocation-plan validation:
+
+```text
+initial plan validation run = 34584336799 / PASS
+post-fix final validation   = 34584612888 / PASS
+```
+
+Independent validation confirmed:
+
+```text
+registry persistent rows         = 1194
+registry active NoteIDs          = 1189
+registry max NoteID              = KV001194
+Stage-B closure                  = 2820 / 2820
+reuse-existing                   = 903
+new-stable-identity proposals    = 1821
+held                             = 96
+learner-excluded held            = 26
+hypothetical append range        = KV001195..KV003015 / NOT RESERVED
+enabled third-party adapters     = 20
+SourceEdition present            = no
+master provenance promotion      = not authorized
+allocation / learner / release / publish / Anki mutation = not authorized
+validation workspace mutation    = no
+```
+
+Adversarial diff-scope review found that the pre-existing Stage-A workflow path filter `tools/check_third_party_*.py` also matched the new allocation-plan checker and caused a metadata-only Stage-A reseal. No Stage-A content fingerprint changed, but the trigger was unnecessarily broad. Commit `b8883e1b4d801567ae46decf503ea9a168cdd807` excludes `tools/check_third_party_allocation_plan.py` from the Stage-A trigger. Stage-A was then fully revalidated by run `34584514294`, which passed and persisted only refreshed seal metadata in commit `fd9ca00301b683e8741fbd20a39c91ea35dfbb8a`.
