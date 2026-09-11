@@ -65,8 +65,11 @@
   "MutatorReadiness": {
     "Status": "validated-mutation-ready-unauthorized",
     "WorkflowRunID": "34588197818",
+    "AuthorizationAwareControlPlaneValidationRunID": "34588814219",
     "AuthorizationManifest": "anki/klose/third_party_vocabulary/allocation/authorization.json",
     "AuthorizationGateClosed": true,
+    "AuthorizedPendingApplyStateSupported": true,
+    "ValidationWorkflowAutoApplies": false,
     "DirectUnauthorizedApplyRejected": true,
     "SimulationRegistryExtensionRows": 2213,
     "SimulationFullStableNoteIDs": 3015,
@@ -95,7 +98,8 @@
     "FinalPlanValidationRunID": "34584719664",
     "ProvenanceContractValidationRunID": "34585155788",
     "AllocationDryRunValidationRunID": "34587553210",
-    "GuardedMutatorValidationRunID": "34588197818"
+    "GuardedMutatorValidationRunID": "34588197818",
+    "AuthorizationAwareControlPlaneValidationRunID": "34588814219"
   },
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
