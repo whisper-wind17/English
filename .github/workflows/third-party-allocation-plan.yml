@@ -8,9 +8,12 @@ on:
       - 'tools/validate_third_party_source_provenance.py'
       - 'tools/build_third_party_allocation_dry_run.py'
       - 'tools/validate_third_party_allocation_dry_run.py'
+      - 'tools/apply_third_party_allocation.py'
+      - 'tools/validate_third_party_allocation_simulation.py'
       - 'docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md'
       - 'docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md'
       - 'anki/klose/third_party_vocabulary/allocation/plan.json'
+      - 'anki/klose/third_party_vocabulary/allocation/authorization.json'
       - 'anki/klose/third_party_vocabulary/provenance/contract.json'
       - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
@@ -68,8 +71,37 @@ jobs:
       - name: Independently validate allocation dry run
         run: python tools/validate_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
 
+      - name: Assert actual allocation authorization gate is closed
+        run: python tools/apply_third_party_allocation.py --expect-unauthorized
+
+      - name: Simulate guarded allocation outside repository
+        run: >-
+          python tools/apply_third_party_allocation.py
+          --simulate
+          --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+          --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
+      - name: Independently validate simulated post-allocation state
+        run: >-
+          python tools/validate_third_party_allocation_simulation.py
+          --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+          --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
+      - name: Re-run simulation to prove idempotent retry
+        run: >-
+          python tools/apply_third_party_allocation.py
+          --simulate
+          --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+          --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
+      - name: Revalidate idempotent simulated state
+        run: >-
+          python tools/validate_third_party_allocation_simulation.py
+          --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+          --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
       - name: Assert validation is read-only
         run: |
           git status --short
           git diff --exit-code
-          echo 'Allocation/provenance/dry-run validation mutation = no'
+          echo 'Allocation/provenance/dry-run/mutator simulation mutation = no'
