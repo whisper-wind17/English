@@ -4,18 +4,22 @@ Last updated: 2026-09-11
 
 ## 1. Current checkpoint
 
-Grade 5–6 current Vocabulary 与 Grade 5–6 Expressions 均已完成 GitHub Release、Anki Desktop 导入、New Card Position materialization 与设备同步，并已 **CHECKPOINTED**。
+Grade 5–6 Vocabulary、Grade 5–6 Expressions 与第三方 Vocabulary sense-aware Stage-B reconciliation 均已完成当前阶段，并已 **CHECKPOINTED**。
 
 ```text
-Vocabulary GitHub Release   = IMPLEMENTED / VALIDATED / CHECKPOINTED
-Vocabulary Anki Updated     = true / DEVICE IMPORT + SYNC USER-CONFIRMED
+Vocabulary GitHub Release       = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Vocabulary Anki Updated         = true / DEVICE IMPORT + SYNC USER-CONFIRMED
 
-Expressions GitHub Release  = IMPLEMENTED / VALIDATED / CHECKPOINTED
-Expressions Release Gate    = PASS
-Expressions Anki Updated    = true / DEVICE IMPORT + SYNC USER-CONFIRMED
+Expressions GitHub Release      = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Expressions Release Gate        = PASS
+Expressions Anki Updated        = true / DEVICE IMPORT + SYNC USER-CONFIRMED
+
+Third-party Stage-B             = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Third-party reconciliation      = 2820 / 2820
+Third-party merge/allocation    = NOT AUTHORIZED / NOT STARTED
 ```
 
-下一主任务切换为 **第三方 Vocabulary 去重 / sense-aware identity reconciliation**。第三方数据仍不得直接 merge / allocation；先与当前 Stable Vocabulary 做去重和 identity 判断。
+第三方 Stage-B 已重新针对当前 **1189 个 active Stable Vocabulary NoteIDs** 完成 reconciliation。下一主任务只能是 **third-party allocation / migration plan**：先定义 903 个 reuse、1821 个 future-new proposal 与 96 个 held 的后续处理和 mutation gate；在用户明确授权实际 merge/allocation 之前，不写 Klose Stable Registry、不改变 972-note 当前 release、不修改 Anki。
 
 启动顺序：
 
@@ -25,7 +29,7 @@ AGENTS.md
 → docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
 → docs/KLOSE_VOCABULARY_SYSTEM.md
 → current Stable Vocabulary registries
-→ frozen third-party Stage A/B artifacts
+→ closed third-party Stage A/B reconciliation truth
 ```
 
 ---
@@ -292,49 +296,86 @@ Expressions Anki Updated      = true
 
 ---
 
-## 6. Immediate next work — third-party Vocabulary dedup / reconciliation
+## 6. Third-party Vocabulary Stage-B — CHECKPOINTED
 
-第三方词库当前仍冻结：
-
-```text
-Stage A/B                = CLOSED
-Vocabulary identities   = 2820
-learner candidates      = 2794
-actual merge/allocation = not started
-explicit exclusions     = a / an / the
-```
-
-下一阶段不是直接把 2820 条第三方 identity 加入 Klose，而是先与当前 Stable Vocabulary 做 **sense-aware dedup / identity reconciliation**。
-
-目标至少区分：
+Stage A 保持 sealed：
 
 ```text
-1. exact same learning unit / same sense
-   → reuse existing Stable NoteID
-
-2. same surface word but different target sense
-   → do not dedup by spelling alone; evaluate as separate learning unit
-
-3. morphology / inflection / trivial variant
-   → map or hold according to Vocabulary identity rules
-
-4. genuinely new learning unit
-   → only become allocation candidates after reconciliation closes
-
-5. low-value / unsuitable / excluded item
-   → remain held / excluded; do not allocate
+StageACheckpointFingerprint = c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd
+source occurrences          = 18887
+Vocabulary identities       = 2820
+learner candidates          = 2794
+audited deferred surfaces   = 52
+explicit exclusions         = a / an / the
 ```
 
-执行前必须重新读取：
+Grade 5–6 Vocabulary allocation 后 Stable active Notes 从 901 增至 1189。旧 Stage-B snapshot 没有自动刷新，原因是 Stable allocation 由 `GITHUB_TOKEN` bot commit 产生，普通 `push` workflow 不会递归触发。已修复 Stage-B readiness lifecycle：增加 Stable Vocabulary allocation/build 的 `workflow_run` 触发。
 
 ```text
-docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
-docs/KLOSE_VOCABULARY_SYSTEM.md
-current anki/klose/master registries
-third-party frozen Stage A/B outputs
+lifecycle fix commit        = 36d420ee127c8cb7be680f58e621a08e68faa706
+refreshed premerge commit   = 6452c351c65d3cbf4f75986b6ad469d13c3978a7
+Klose active NoteIDs        = 1189
+changed CandidateFingerprint rows = 218
+unchanged historical decisions    = 2602
 ```
 
-先产出 reconciliation statistics / reviewed decisions / unresolved queue；在该阶段正式 CLOSED / VALIDATED / CHECKPOINTED 之前，不进行 Stable NoteID allocation，不改变当前 972-note Anki release。
+当前 premerge candidate distribution：
+
+```text
+exact-multiple        = 17
+exact-single          = 974
+no-existing-match     = 1822
+orthographic-single   = 6
+spelling-single       = 1
+TOTAL                 = 2820
+```
+
+218 个 stale decisions 全部先失效，再按当前 evidence 重审；没有利用旧 901-NoteID 边界强行 carry-forward。最终 Stage-B：
+
+```text
+reconciliation workflow run = #75 / 34581146513 / PASS
+bot persist commit           = 153dfabd258eafc039d8545c1ffd1e77f1a362ca
+
+ValidDurableDecisionCount    = 2820
+ReviewQueueCount             = 0
+SelectedCount                = 0
+reuse-existing               = 903
+new-stable-identity proposal = 1821
+held                         = 96
+high-risk multiple decided   = 17 / 17
+learner-excluded held        = 26 / 26
+```
+
+Completion Recheck：
+
+```text
+all durable rows current-fingerprint bound = yes
+Stable NoteID minted                       = no
+Stage-B mutation authorized                = no
+Merge authorized                           = no
+Klose identity/learner/release/Anki isolation = pass
+```
+
+典型 sense-aware 决策：`take=拿/取/带走`、`heavy=重的`、`turn=转动`、`way=道路/方向` 不因同拼写而复用错误的现有 sense；`paint / email / Spanish / open` 等 Stage-A 混合义项保持 `held`。详细真源见 `docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md`。
+
+### Immediate next work — allocation / migration plan only
+
+Stage-B read-only reconciliation 已 CLOSED，但 actual merge/allocation **尚未授权**。下一阶段若继续，应先形成可验证的 allocation/migration plan，至少定义：
+
+```text
+903 reuse-existing
+→ 如何写 provenance / source mapping，且不改 Stable NoteID identity
+
+1821 new-stable-identity proposals
+→ 哪些允许进入 allocation candidate set
+→ append-only NoteID allocation order / rollback / idempotency
+→ Learner Admission 与 identity allocation 继续分离
+
+96 held
+→ 保持 held；不得自动 allocation / merge
+```
+
+计划还必须明确 mutation scope、stable identity diff、release isolation、rollback/retry、未来 Learner Presentation / review / admission / release 的独立 gate。在 plan VALIDATED / CHECKPOINTED 且用户明确授权实际 mutation 前，不执行 Stable NoteID allocation。
 
 ---
 
@@ -343,9 +384,10 @@ third-party frozen Stage A/B outputs
 当前允许：
 
 ```text
-third-party Vocabulary dedup / sense-aware reconciliation artifacts
-review queue / reconciliation decision state
-NEXT.md 后续 checkpoint
+third-party allocation / migration plan design
+read-only validation / statistics / adversarial review
+third-party reconciliation documentation / audit state
+NEXT.md checkpoint
 未来基于真实学习反馈修改 Learner Presentation（需 fingerprint re-review）
 正常的未来 Vocabulary / Expressions incremental release（只有明确新 release 时）
 ```
@@ -353,7 +395,8 @@ NEXT.md 后续 checkpoint
 当前禁止：
 
 ```text
-直接 merge / allocate third-party Vocabulary before reconciliation closes
+actual third-party Stable NoteID allocation / merge without explicit authorization
+turning held rows into automatic allocation or reuse
 surface-word-only dedup when senses differ
 manual edit of generated publish files
 renumber/reuse of Stable NoteIDs / ExpressionIDs
