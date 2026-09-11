@@ -1,0 +1,63 @@
+{
+  "PlanVersion": "third-party-allocation-migration-plan-v1",
+  "PlanStatus": "checkpoint-candidate-plan-only",
+  "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
+  "TruthBoundary": {
+    "StageBDecisionBlobSHA": "295f4c5dc76b4cc7b22b6a0f5319fe4f26f06fc0",
+    "IdentityCandidateBlobSHA": "71c4001aa0435b48597546b63b5064d81dc09873",
+    "NoteRegistryBlobSHA": "061a2e7ffc6d3449a1835244e32b8bdb3b0b3fdf",
+    "NoteRegistryExtensionsBlobSHA": "5129cb01a7191a6f874f40afcaa65fb4c6d9541b"
+  },
+  "RegistryBaseline": {
+    "PersistentRows": 1194,
+    "ActiveNoteIDs": 1189,
+    "MaxNoteID": "KV001194"
+  },
+  "Reconciliation": {
+    "CandidateCount": 2820,
+    "reuse-existing": 903,
+    "new-stable-identity": 1821,
+    "held": 96,
+    "LearnerExcludedHeld": 26,
+    "ReviewQueueCount": 0,
+    "SelectedCount": 0
+  },
+  "HypotheticalAppendRange": {
+    "First": "KV001195",
+    "Last": "KV003015",
+    "Count": 1821,
+    "Reserved": false
+  },
+  "AllocationContract": {
+    "ReuseExistingMutation": "no-registry-mutation",
+    "NewIdentityMutation": "append-only-after-explicit-authorization",
+    "HeldMutation": "none",
+    "AllocationOrder": "ProvisionalIdentityKey-lexical",
+    "RetryOriginKey": "third-party-vocabulary|<ProvisionalIdentityKey>",
+    "LearnerAdmissionIndependent": true,
+    "ReleaseIndependent": true,
+    "AnkiIndependent": true
+  },
+  "SourceProvenance": {
+    "EnabledAdapters": 20,
+    "CurrentAdapterOccurrenceSchemaHasSourceEdition": false,
+    "MasterSourceMappingPromotionAuthorized": false,
+    "Policy": "Do not invent textbook SourceEdition. Before master provenance mutation, establish an explicit auditable edition/unknown-edition contract for third-party adapter occurrences."
+  },
+  "MutationGates": {
+    "ActualMutationAuthorized": false,
+    "StableNoteIDAllocationAuthorized": false,
+    "MasterSourceMappingMutationAuthorized": false,
+    "LearnerMutationAuthorized": false,
+    "ReleaseMutationAuthorized": false,
+    "PublishMutationAuthorized": false,
+    "AnkiMutationAuthorized": false
+  },
+  "RequiredBeforeMutation": [
+    "explicit user authorization for actual allocation/merge",
+    "current allocation-plan checker PASS against exact Stage-B and registry blobs",
+    "third-party SourceEdition/provenance contract resolved without claiming an unverified textbook edition",
+    "append-only allocator and source-binding implementation validated on current truth boundary",
+    "independent completion recheck proving stable identity, release and Anki isolation"
+  ]
+}
