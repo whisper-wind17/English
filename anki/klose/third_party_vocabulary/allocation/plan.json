@@ -49,7 +49,7 @@
     "Policy": "Third-party adapter rows are external evidence. Stable identity may use that evidence without claiming textbook provenance; Master source mapping requires independently verified SourceEdition/Revision."
   },
   "DryRunValidation": {
-    "Status": "validated",
+    "Status": "validated-checkpointed",
     "WorkflowRunID": "34587553210",
     "IdentityActions": 2820,
     "ReuseExisting": 903,
@@ -61,6 +61,21 @@
     "ExternalEvidenceBindings": 15791,
     "HeldSourceOccurrences": 993,
     "RepositoryMutation": false
+  },
+  "MutatorReadiness": {
+    "Status": "validated-mutation-ready-unauthorized",
+    "WorkflowRunID": "34588197818",
+    "AuthorizationManifest": "anki/klose/third_party_vocabulary/allocation/authorization.json",
+    "AuthorizationGateClosed": true,
+    "DirectUnauthorizedApplyRejected": true,
+    "SimulationRegistryExtensionRows": 2213,
+    "SimulationFullStableNoteIDs": 3015,
+    "SimulationNewStableRows": 1821,
+    "SimulationExternalEvidenceBindings": 15791,
+    "InterruptedRegistryOnlyStateRecovered": true,
+    "IdempotentRetryNewRows": 0,
+    "RepositoryMutation": false,
+    "ActualAllocationExecuted": false
   },
   "MutationGates": {
     "ActualMutationAuthorized": false,
@@ -79,13 +94,14 @@
     "StageAContentFingerprintChanged": false,
     "FinalPlanValidationRunID": "34584719664",
     "ProvenanceContractValidationRunID": "34585155788",
-    "AllocationDryRunValidationRunID": "34587553210"
+    "AllocationDryRunValidationRunID": "34587553210",
+    "GuardedMutatorValidationRunID": "34588197818"
   },
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
-    "current allocation/provenance validation PASS against exact Stage-B, source-freeze and registry boundaries",
-    "validated provenance contract remains current against the exact frozen external-evidence corpus",
-    "mutation-capable append-only allocator is guarded by explicit authorization and independently validated without repo mutation",
-    "independent completion recheck proving stable identity, source-map, release and Anki isolation"
+    "authorization manifest and allocation mutation gates deliberately transition from closed to authorized against the exact current truth boundary",
+    "current allocation/provenance/dry-run validation PASS on latest main immediately before apply",
+    "actual apply remains restricted to note_registry_extensions.csv plus stable_evidence_bindings.csv and must fail closed on any truth-boundary conflict",
+    "post-mutation independent Completion Recheck must pass before any Learner, Release, Publish or Anki work begins"
   ]
 }
