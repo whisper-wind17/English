@@ -12,6 +12,7 @@ ADMISSION=K/'learner'/'learning_admission.csv'
 CAND=TP/'stable_presentation_candidates.csv'
 PLAN=TP/'stable_learning_admission_plan.csv'
 REVIEWED=TP/'content_reviewed'
+CORRECTIONS=TP/'content_corrections.csv'
 
 MASTER_FIELDS=['NoteID','CanonicalWord','MatchKey','SenseLabel','Word','British','American','MeaningPrimary','MeaningRaw','FirstSource','FirstSourceBook','FirstGrade','FirstSemester','Sources','SourceBooks','Released','Tags']
 LEARNER_FIELDS=['NoteID','LearnerProfile','LearnerLevel','PromptHint','ExampleSentence','ExampleTranslation','PresentationStatus','PresentationSource']
@@ -29,8 +30,15 @@ def main():
     if len(candidates)!=1821: raise SystemExit(f'Expected 1821 candidates, got {len(candidates)}')
     reviewed=[]
     for p in sorted(REVIEWED.glob('batch_*.csv')): reviewed.extend(read_csv(p))
-    content={r['NoteID']:r for r in reviewed}
+    content={r['NoteID']:dict(r) for r in reviewed}
     if len(content)!=1821: raise SystemExit(f'Expected 1821 reviewed content rows, got {len(content)}')
+    corrections=read_csv(CORRECTIONS)
+    if len(corrections)!=14 or len({r['NoteID'] for r in corrections})!=14: raise SystemExit('Expected 14 unique content corrections')
+    for c in corrections:
+        nid=c['NoteID'].strip()
+        if nid not in content: raise SystemExit(f'Content correction outside reviewed scope: {nid}')
+        content[nid]['ExampleSentence']=c['ExampleSentence'].strip()
+        content[nid]['ExampleTranslation']=c['ExampleTranslation'].strip()
 
     master=read_csv(MASTER); master_by={r['NoteID']:r for r in master}
     learner=read_csv(LEARNER); learner_by={r['NoteID']:r for r in learner}
@@ -77,6 +85,6 @@ def main():
     learner.sort(key=lambda r:int(r['NoteID'][2:]))
     admission.sort(key=lambda r:(r['LearnerProfile'],int(r['LearnerLevel']),int(r['NoteID'][2:])))
     write_csv(MASTER,MASTER_FIELDS,master); write_csv(LEARNER,LEARNER_FIELDS,learner); write_csv(ADMISSION,ADMISSION_FIELDS,admission)
-    print(f'Third-party Stable learner materialized: master_added={added_master} learner_added={added_learner} admission_new={new_adm} admission_promoted={changed_adm} plan={len(plan)}')
+    print(f'Third-party Stable learner materialized: master_added={added_master} learner_added={added_learner} corrections={len(corrections)} admission_new={new_adm} admission_promoted={changed_adm} plan={len(plan)}')
 
 if __name__=='__main__': main()
