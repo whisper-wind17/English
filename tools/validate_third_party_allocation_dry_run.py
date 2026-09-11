@@ -83,6 +83,7 @@ def safe_output_dir(raw: str) -> Path:
 
 
 def expected_occurrence_map() -> tuple[dict[str, list[str]], dict[str, dict[str, str]], dict[str, dict[str, str]]]:
+    """Independently reconstruct Stage-A Preview materialization and exact occurrence ownership."""
     _, occ_rows = rows(OCCURRENCES)
     occ_by = {r["SourceOccurrenceKey"]: r for r in occ_rows}
     require(len(occ_by) == len(occ_rows), "Current source occurrence keys are not unique")
@@ -95,48 +96,103 @@ def expected_occurrence_map() -> tuple[dict[str, list[str]], dict[str, dict[str,
     for row in decision_rows:
         groups[row["MatchKey"]].append(row)
 
-    mapping: dict[str, set[str]] = defaultdict(set)
-    assigned: dict[str, str] = {}
+    valid_single: dict[str, dict[str, str]] = {}
+    valid_multipart: dict[str, list[dict[str, str]]] = {}
     for match_key, group in groups.items():
         current = current_by_match.get(match_key, set())
         if not current:
             continue
         covered: set[str] = set()
-        parts: list[tuple[dict[str, str], list[str]]] = []
-        valid = True
+        overlap = False
         for row in group:
-            keys = decode_keys(row)
-            keyset = set(keys)
+            keyset = set(decode_keys(row))
             if not keyset <= current or covered & keyset:
-                valid = False
+                overlap = True
             covered.update(keyset)
-            parts.append((row, keys))
-        valid = valid and covered == current and all(
-            row.get("Status") == "reviewed" and row.get("Action") in RESOLVED_STAGE_A
-            for row, _ in parts
+        resolved = (
+            not overlap
+            and covered == current
+            and all(row.get("Status") == "reviewed" and row.get("Action") in RESOLVED_STAGE_A for row in group)
         )
-        if not valid:
+        if not resolved:
             continue
-        multipart = len(parts) > 1
-        for row, keys in parts:
+        if len(group) == 1:
+            valid_single[match_key] = group[0]
+        else:
+            valid_multipart[match_key] = group
+
+    multipart_keep: dict[str, tuple[str, dict[str, str]]] = {}
+    for base_key, group in valid_multipart.items():
+        for row in group:
+            if row.get("Action") != "keep-identity":
+                continue
+            canonical = row.get("CanonicalMatchKey", "").strip()
+            require(bool(canonical) and canonical.startswith(base_key + "#"), f"Invalid multipart keep canonical: {row.get('DecisionKey')}")
+            require(canonical not in multipart_keep, f"Duplicate multipart keep canonical: {canonical}")
+            multipart_keep[canonical] = (base_key, row)
+
+    mapping: dict[str, set[str]] = defaultdict(set)
+    assigned: dict[str, str] = {}
+
+    def assign(pid: str, keys: list[str], decision_key: str) -> None:
+        for key in keys:
+            previous = assigned.get(key)
+            require(previous in {None, pid}, f"Occurrence assigned to multiple identities: {key}: {previous} vs {pid} ({decision_key})")
+            assigned[key] = pid
+            mapping[pid].add(key)
+
+    for match_key, row in valid_single.items():
+        action = row.get("Action")
+        if action not in {"keep-identity", "reuse-identity"}:
+            continue
+        keys = decode_keys(row)
+        if action == "keep-identity":
+            assign(f"candidate:{match_key}", keys, row.get("DecisionKey", ""))
+            continue
+
+        canonical = row.get("CanonicalMatchKey", "").strip()
+        require(bool(canonical), f"reuse-identity lacks canonical key: {row.get('DecisionKey')}")
+        if "#" in canonical:
+            target = multipart_keep.get(canonical)
+            if target is None:
+                base = canonical.split("#", 1)[0]
+                if base in current_by_match and base not in valid_multipart:
+                    continue
+                raise SystemExit(f"Scoped reuse target is not a resolved multipart keep subgroup: {row.get('DecisionKey')} -> {canonical}")
+            assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
+            continue
+
+        if canonical in current_by_match:
+            canonical_row = valid_single.get(canonical)
+            if not canonical_row or canonical_row.get("Status") != "reviewed" or canonical_row.get("Action") != "keep-identity":
+                continue
+        assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
+
+    for base_key, group in valid_multipart.items():
+        for row in group:
             action = row.get("Action")
             if action not in {"keep-identity", "reuse-identity"}:
                 continue
-            if action == "reuse-identity" or multipart:
-                canonical = row.get("CanonicalMatchKey", "").strip()
-            else:
-                canonical = match_key
-            require(bool(canonical), f"Current Stage-A resolved decision lacks canonical key: {row.get('DecisionKey')}")
-            pid = f"candidate:{canonical}"
-            for key in keys:
-                previous = assigned.get(key)
-                require(previous in {None, pid}, f"Occurrence assigned to multiple identities: {key}")
-                assigned[key] = pid
-                mapping[pid].add(key)
+            keys = decode_keys(row)
+            canonical = row.get("CanonicalMatchKey", "").strip()
+            require(bool(canonical), f"Multipart vocabulary decision lacks canonical key: {row.get('DecisionKey')}")
+            if action == "reuse-identity" and canonical in current_by_match:
+                canonical_row = valid_single.get(canonical)
+                require(
+                    bool(canonical_row)
+                    and canonical_row.get("Status") == "reviewed"
+                    and canonical_row.get("Action") == "keep-identity",
+                    f"Multipart reuse bypasses canonical blocker: {row.get('DecisionKey')} -> {canonical}",
+                )
+            assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
 
     _, preview_rows = rows(PREVIEW)
     preview = {r["ProvisionalIdentityKey"]: r for r in preview_rows}
-    require(set(mapping) == set(preview), "Independent Stage-A occurrence mapping does not close Preview")
+    require(len(preview) == len(preview_rows), "Current Stage-A Preview identity duplicate")
+    if set(mapping) != set(preview):
+        missing = sorted(set(preview) - set(mapping))
+        extra = sorted(set(mapping) - set(preview))
+        raise SystemExit(f"Independent Stage-A occurrence mapping does not close Preview: missing={missing[:20]} extra={extra[:20]}")
     for pid, row in preview.items():
         require(len(mapping[pid]) == int(row["SourceOccurrenceCount"]), f"Preview occurrence count drift: {pid}")
     return {pid: sorted(keys) for pid, keys in mapping.items()}, occ_by, preview
