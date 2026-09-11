@@ -5,14 +5,20 @@ on:
     branches: [main]
     paths:
       - 'tools/check_third_party_allocation_plan.py'
+      - 'tools/validate_third_party_source_provenance.py'
       - 'docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md'
+      - 'docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md'
       - 'anki/klose/third_party_vocabulary/allocation/plan.json'
+      - 'anki/klose/third_party_vocabulary/provenance/contract.json'
       - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
       - 'anki/klose/third_party_vocabulary/premerge/identity_candidates.csv'
       - 'anki/klose/third_party_vocabulary/premerge/readiness.json'
       - 'anki/klose/third_party_vocabulary/premerge/reconciliation_next_batch.json'
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
+      - 'anki/klose/third_party_vocabulary/config/source_freeze.json'
+      - 'anki/klose/third_party_vocabulary/staging/occurrences.csv'
       - 'anki/klose/source_reference/*_staging/occurrences.csv'
+      - 'anki/klose/master/source_identity_extensions.csv'
       - 'anki/klose/master/note_registry.csv'
       - 'anki/klose/master/note_registry_extensions.csv'
       - '.github/workflows/third-party-allocation-plan.yml'
@@ -46,6 +52,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Validate third-party source provenance contract
+        run: python tools/validate_third_party_source_provenance.py
+
       - name: Validate allocation/migration plan against current truth
         run: python tools/check_third_party_allocation_plan.py
 
@@ -53,4 +62,4 @@ jobs:
         run: |
           git status --short
           git diff --exit-code
-          echo 'Allocation plan validation mutation = no'
+          echo 'Allocation/provenance validation mutation = no'
