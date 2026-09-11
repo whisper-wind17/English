@@ -1,0 +1,24 @@
+{
+  "AuthorizationVersion": "third-party-allocation-authorization-v1",
+  "Authorized": false,
+  "Scope": "stable-vocabulary-identity-and-external-evidence-binding-only",
+  "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
+  "TruthBoundary": {
+    "StageBDecisionBlobSHA": "295f4c5dc76b4cc7b22b6a0f5319fe4f26f06fc0",
+    "NoteRegistryBlobSHA": "061a2e7ffc6d3449a1835244e32b8bdb3b0b3fdf",
+    "NoteRegistryExtensionsBlobSHA": "5129cb01a7191a6f874f40afcaa65fb4c6d9541b"
+  },
+  "AllowedMutationPaths": [
+    "anki/klose/master/note_registry_extensions.csv",
+    "anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv"
+  ],
+  "ForbiddenMutationLayers": [
+    "anki/klose/master/source_identity_extensions.csv",
+    "anki/klose/learner",
+    "anki/klose/publish",
+    "anki/klose/anki",
+    "anki/klose/expressions"
+  ],
+  "UserAuthorizationEvidence": "",
+  "AuthorizedAt": ""
+}
