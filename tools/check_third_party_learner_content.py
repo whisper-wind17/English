@@ -8,15 +8,41 @@ BASE=ROOT/'anki'/'klose'/'third_party_vocabulary'/'learner'
 CAND=BASE/'stable_presentation_candidates.csv'
 REVIEWED=BASE/'content_reviewed'
 TOKEN_RE=re.compile(r"[A-Za-z0-9]+")
+IRREGULAR={
+    'am':'be','is':'be','are':'be','was':'be','were':'be','been':'be',
+    'has':'have','had':'have','came':'come','fell':'fall','flew':'fly','ran':'run','said':'say',
+    'went':'go','gone':'go','gave':'give','given':'give','took':'take','taken':'take','wrote':'write','written':'write',
+    'bought':'buy','brought':'bring','saw':'see','seen':'see','made':'make','did':'do','done':'do','ate':'eat','eaten':'eat',
+    'won':'win','lost':'lose','left':'leave','held':'hold','kept':'keep','found':'find','thought':'think','caught':'catch',
+}
 
 def read_csv(p):
     with p.open('r',encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
 
 def toks(s): return TOKEN_RE.findall((s or '').casefold())
 
-def contains_subseq(hay, needle):
-    if not needle: return False
-    return any(hay[i:i+len(needle)]==needle for i in range(0,len(hay)-len(needle)+1))
+def lemmas(t):
+    out={t}
+    if t in IRREGULAR: out.add(IRREGULAR[t])
+    if len(t)>4 and t.endswith('ies'): out.add(t[:-3]+'y')
+    if len(t)>4 and t.endswith('ing'):
+        stem=t[:-3]; out.update({stem,stem+'e'})
+        if len(stem)>2 and stem[-1]==stem[-2]: out.add(stem[:-1])
+    if len(t)>3 and t.endswith('ed'):
+        stem=t[:-2]; out.update({stem,stem+'e'})
+        if len(stem)>2 and stem[-1]==stem[-2]: out.add(stem[:-1])
+    if len(t)>3 and t.endswith('es'): out.update({t[:-2],t[:-1]})
+    if len(t)>2 and t.endswith('s'): out.add(t[:-1])
+    return out
+
+def target_matches(sentence_tokens, target_tokens):
+    if not target_tokens: return False
+    n=len(target_tokens)
+    for i in range(0,len(sentence_tokens)-n+1):
+        window=sentence_tokens[i:i+n]
+        if all(lemmas(a)&lemmas(b) for a,b in zip(window,target_tokens)):
+            return True
+    return False
 
 def main():
     candidates=read_csv(CAND)
@@ -43,7 +69,7 @@ def main():
         cand=expected.get(nid)
         if cand is None: errors.append(f'{nid}: not a presentation candidate'); continue
         target=toks(cand.get('CanonicalWord',''))
-        if not contains_subseq(toks(sent),target): errors.append(f'{nid}: target form missing from example: {cand.get("CanonicalWord")}')
+        if not target_matches(toks(sent),target): errors.append(f'{nid}: target form missing from example: {cand.get("CanonicalWord")}')
     missing=sorted(set(expected)-set(by)); extra=sorted(set(by)-set(expected))
     if missing or extra: errors.append(f'coverage mismatch missing={len(missing)} extra={len(extra)} examples={(missing+extra)[:20]}')
     if len(rows)!=1821: errors.append(f'expected 1821 reviewed rows, got {len(rows)}')
