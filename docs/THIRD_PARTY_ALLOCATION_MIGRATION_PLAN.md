@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Stage-B reconciliation is closed against the current Klose Stable Vocabulary boundary. Allocation/migration planning and the third-party source provenance contract are both CHECKPOINTED, but **actual Stable NoteID allocation / merge remains unauthorized**.
+Stage-B reconciliation、allocation/migration plan、third-party source provenance contract、mutation-disabled dry run 与 guarded allocator simulation 均已完成当前阶段验证。**Actual Stable NoteID allocation / merge 仍未授权、未执行。**
 
 Current authoritative boundary:
 
@@ -23,14 +23,19 @@ Machine contracts：
 
 ```text
 anki/klose/third_party_vocabulary/allocation/plan.json
+anki/klose/third_party_vocabulary/allocation/authorization.json
 anki/klose/third_party_vocabulary/provenance/contract.json
 ```
 
-Validation entries：
+Validation / execution entries：
 
 ```text
 tools/check_third_party_allocation_plan.py
 tools/validate_third_party_source_provenance.py
+tools/build_third_party_allocation_dry_run.py
+tools/validate_third_party_allocation_dry_run.py
+tools/apply_third_party_allocation.py
+tools/validate_third_party_allocation_simulation.py
 ```
 
 ---
@@ -47,7 +52,7 @@ note_registry.csv Git blob SHA
 note_registry_extensions.csv Git blob SHA
 ```
 
-任何 Stage A、Stage-B decision 或 Stable Registry 变化都会令 plan stale。即使 max NoteID 没变，只要 registry blob 变化也必须重新验证。
+任何 Stage A、Stage-B decision 或 Stable Registry 变化都会令 plan / authorization stale。即使 max NoteID 没变，只要 registry blob 变化也必须重新验证。
 
 当前没有预留任何 NoteID。
 
@@ -70,7 +75,7 @@ ExistingNoteID           = Stage-B reviewed NoteID
 
 这些是 reviewed future allocation proposals，不是已分配 identity。
 
-若在当前 frozen registry 上获得用户显式 mutation 授权，理论 append-only 区间为：
+若当前 frozen registry 获得用户显式 mutation 授权，当前 hypothetical append-only 区间为：
 
 ```text
 current max        = KV001194
@@ -80,7 +85,7 @@ count              = 1821
 reserved           = false
 ```
 
-任何 Stable Registry 变化都使该区间失效。实际 allocator 必须从执行时 committed max 重新计算，禁止 force-push 预计算区间。
+任何 Stable Registry 变化都使该区间失效。实际 allocator 必须先验证 exact committed truth boundary，禁止把该区间当作永久预留号段。
 
 Allocation order 只用于确定性，不具有教学含义：
 
@@ -96,7 +101,7 @@ MatchKey      <- ProposedMatchKey
 SenseLabel    <- ProposedSense
 ```
 
-planned stable retry origin：
+stable retry origin：
 
 ```text
 third-party-vocabulary|<ProvisionalIdentityKey>
@@ -121,9 +126,7 @@ held -> no Master source promotion
 
 ## 3. Provenance architecture — CHECKPOINTED
 
-此前 SourceEdition 是 allocation plan 的 blocker，因为 20 个 third-party adapter occurrence 没有 `SourceEdition`，而 Master source mapping 需要 `SourceID + SourceEdition + SourceItemKey`。
-
-该 blocker 已通过 `docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md` 解决，方式不是制造 `unknown/unverified` 假 edition，而是明确区分：
+20 个 third-party adapter occurrence 当前没有 `SourceEdition`。系统不制造 `unknown / unverified` 假 edition，而是明确区分：
 
 ```text
 External Evidence Provenance
@@ -144,7 +147,7 @@ EditionStatus = unverified
 Stable Identity Allocation implies verified textbook provenance = false
 ```
 
-未来新 Stable identity 的 planned origin 为：
+未来新 Stable identity 的 origin：
 
 ```text
 PrimaryOriginKey  = third-party-vocabulary|<ProvisionalIdentityKey>
@@ -154,18 +157,20 @@ CreatedSourceBook = external-evidence-corpus
 
 这表示 identity 创建来源是冻结的 third-party evidence corpus，不声称某一教材 revision。
 
-因此 **missing SourceEdition 不再阻止 Stable Identity allocation 本身**。它继续严格阻止：
+因此 missing SourceEdition 不阻止 Stable Identity allocation 本身，但继续严格阻止：
 
 ```text
 unverified third-party occurrence
 → anki/klose/master/source_identity_extensions.csv
 ```
 
-只有后续拿到可验证 SourceEdition / Revision evidence，才能增加 Master Textbook Source Fact；external evidence 仍保留，不被删除。
+只有后续拿到可验证 SourceEdition / Revision evidence，才能增加 Master Textbook Source Fact；external evidence 仍保留，不删除。
+
+详细契约：`docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md`。
 
 ---
 
-## 4. Future external-evidence binding
+## 4. External-evidence binding
 
 实际 allocation 被授权并完成后，third-party evidence 与 NoteID 的关系写入独立层：
 
@@ -173,7 +178,7 @@ unverified third-party occurrence
 anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv
 ```
 
-planned schema：
+schema：
 
 ```text
 NoteID
@@ -195,11 +200,156 @@ EvidenceStatus = external-unverified-edition
 SourceSnapshotFingerprint = frozen unified-occurrences fingerprint
 ```
 
-该文件目前必须不存在；plan 阶段不得提前制造 NoteID binding。
+该文件当前仍不存在；在 actual allocation 未授权前不得提前产生 repo truth binding。
+
+当前 dry run 精确得到：
+
+```text
+external evidence bindings = 15791
+held source occurrences     = 993
+```
+
+15791 只覆盖 Stage-B `reuse-existing + new-stable-identity`；96 个 held 对应的 993 个 source occurrences 不绑定 NoteID。
 
 ---
 
-## 5. Future authorized mutation transaction
+## 5. Mutation-disabled dry run — VALIDATED / CHECKPOINTED
+
+Dry-run builder：
+
+```text
+tools/build_third_party_allocation_dry_run.py
+```
+
+只允许输出到 repo 外目录；repo-local output 会 fail closed。
+
+独立 validator：
+
+```text
+tools/validate_third_party_allocation_dry_run.py
+```
+
+它不读取 builder 的内部中间状态，而是独立重建 Stage-A canonical eligibility，包括：
+
+```text
+valid single decision
+resolved multipart
+#variant scoped reuse
+canonical blocker precedence
+exact occurrence ownership
+```
+
+这一点很重要：durable reviewed alias 不等于当前一定 materialize 到 Vocabulary Preview。曾发现 13 个 alias / multipart subgroup 若只按 `reviewed` 判断会被错误多算；最终 builder 和 independent validator 都严格复刻 Stage-A Preview eligibility 后闭合。
+
+Validation run：
+
+```text
+34587553210 / PASS
+```
+
+结果：
+
+```text
+identity actions                  = 2820
+reuse-existing                    = 903
+hypothetical new identities       = 1821
+held                              = 96
+hypothetical registry append      = 1821
+hypothetical NoteID range         = KV001195..KV003015 / NOT RESERVED
+external evidence bindings        = 15791
+held source occurrences           = 993
+repository mutation               = no
+```
+
+---
+
+## 6. Guarded mutation-capable allocator — VALIDATED / UNAUTHORIZED
+
+Mutator：
+
+```text
+tools/apply_third_party_allocation.py
+```
+
+默认 repository authorization：
+
+```text
+anki/klose/third_party_vocabulary/allocation/authorization.json
+Authorized = false
+```
+
+同时 allocation plan 当前 mutation gates 全部为 false。
+
+实际 `--apply` 只有在 **authorization manifest + plan mutation gates** 同时显式进入 authorized state，且 exact truth blobs 仍匹配时才可能继续。当前直接执行 `--apply` 会被拒绝。
+
+Actual apply 的硬编码 write scope 只有：
+
+```text
+anki/klose/master/note_registry_extensions.csv
+anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv
+```
+
+它不会写：
+
+```text
+anki/klose/master/source_identity_extensions.csv
+anki/klose/learner/
+anki/klose/publish/
+anki/klose/anki/
+anki/klose/expressions/
+```
+
+### Simulation evidence
+
+Guarded mutator 已在 repo 外临时目录完成完整模拟：
+
+```text
+validation run                    = 34588197818 / PASS
+simulated new Stable rows         = 1821
+simulated extension rows          = 2213
+simulated full Stable NoteIDs     = 3015
+simulated evidence bindings       = 15791
+hypothetical range                = KV001195..KV003015 / NOT RESERVED
+repository mutation               = no
+```
+
+### Fail-closed authorization
+
+CI 直接调用 unauthorized `--apply`，必须返回失败；该 adversarial path 已 PASS。
+
+### Interrupted transaction recovery
+
+模拟：
+
+```text
+registry append 已存在
+stable_evidence_bindings.csv 缺失
+```
+
+然后 retry 同一 mutator。结果：
+
+```text
+existing 1821 Stable origins recognized
+new registry rows on retry = 0
+missing evidence bindings  = restored to 15791
+final simulated state      = exact expected state
+```
+
+### Idempotent retry
+
+完整状态再次执行 simulation：
+
+```text
+new registry rows = 0
+extension rows    = 2213
+bindings          = 15791
+```
+
+说明 current origin-key based retry 在一致状态下是幂等的；任何 origin/NoteID/identity field 冲突都会 fail closed。
+
+---
+
+## 7. Future authorized mutation transaction
 
 用户未来明确授权 actual allocation/merge 后，执行前必须重新做 preflight：
 
@@ -213,6 +363,7 @@ registry active count / max == current plan baseline
 all 903 reuse NoteIDs still active
 all 1821 new proposals still valid against current registry
 all 96 held still held
+authorization manifest explicitly enabled with user evidence
 ```
 
 然后 transaction 只做 identity + external evidence binding：
@@ -220,11 +371,11 @@ all 96 held still held
 ```text
 903 reuse-existing
   -> no Stable Registry row change
-  -> build external evidence bindings
+  -> write external evidence bindings
 
 1821 new-stable-identity
   -> append-only NoteID allocation
-  -> build external evidence bindings
+  -> write external evidence bindings
 
 96 held
   -> no mutation
@@ -239,28 +390,23 @@ all 96 held still held
 - 更新 Anki；
 - 把 unverified evidence 写进 Master textbook source map。
 
----
-
-## 6. Retry, rollback and concurrency
-
-Allocator 必须对 committed state 幂等。
-
-成功 commit 后 rerun 应通过 stable origin key 识别已有 allocation 并产生零新增 NoteID。partial/conflicting state 必须 fail closed，不能另分配一个 NoteID。
-
-Git commit 是 transaction boundary。commit 前必须：
-
-- 在内存中构建全部 registry/evidence-binding changes；
-- 运行 persistent state checker、allocation checker、provenance checker；
-- 证明既有 NoteID identity byte-for-byte stable；
-- 证明 diff 只落在授权 identity/evidence files。
-
-错误 allocation 的 rollback 不能复用 NoteID；应通过 status/migration history 修正并保留 audit trail。
-
-并发 Stable Registry 变化会使 plan stale；执行时必须基于最新 main 重新 preflight。
+Actual mutation 后必须立即做独立 Completion Recheck，再进入任何 learner/release 工作。
 
 ---
 
-## 7. Learner / release / Anki separation
+## 8. Retry, recovery, rollback and concurrency
+
+Allocator 对 committed state 使用 append-only + stable origin key 幂等策略。
+
+成功后 rerun 应识别已有 allocation 并产生零新增 NoteID；registry-only partial state 可以通过 retry 补齐 evidence binding。冲突状态必须 fail closed，不能另分配一个 NoteID。
+
+错误 allocation 的 rollback **不能删除后重用 NoteID**。如实际 mutation 后发现内容错误，应通过 status / explicit identity migration 修正并保留 audit trail。
+
+并发 Stable Registry 变化会改变 registry blob，从而使 plan + authorization stale；apply 会在写入前拒绝旧 truth boundary。
+
+---
+
+## 9. Learner / release / Anki separation
 
 Stable identity allocation 不等于 Klose 开始学习。
 
@@ -283,47 +429,35 @@ Stage A 有 2794 learner candidates 也不代表 2794 条自动进入 release。
 
 ---
 
-## 8. Validation checkpoint and current gate
+## 10. Validation checkpoint and current gate
 
-Allocation plan validation：
+Validation evidence：
 
 ```text
 initial plan validation               = 34584336799 / PASS
 post-fix final plan validation         = 34584719664 / PASS
+provenance contract validation         = 34585155788 / PASS
+allocation dry-run validation          = 34587553210 / PASS
+guarded mutator + state-transition     = 34588197818 / PASS
 ```
 
-Provenance contract validation：
+最终 current pre-mutation state：
 
 ```text
-allocation/provenance validation      = 34585155788 / PASS
+allocation plan                       = CHECKPOINTED
+provenance contract                   = CHECKPOINTED
+dry-run allocator                     = VALIDATED / CHECKPOINTED
+guarded mutation-capable allocator    = VALIDATED / CHECKPOINTED
+actual allocation                     = NOT AUTHORIZED / NOT STARTED
+Stable registry current active Notes  = 1189
+current max NoteID                    = KV001194
+current Vocabulary release            = 972
+Master textbook mapping mutation      = none
+Learner / Release / Publish mutation  = none
+Anki mutation                         = none
 ```
 
-验证确认：
-
-```text
-registry persistent rows              = 1194
-registry active NoteIDs               = 1189
-registry max NoteID                   = KV001194
-Stage-B closure                       = 2820 / 2820
-reuse / new / held                    = 903 / 1821 / 96
-hypothetical append range             = KV001195..KV003015 / NOT RESERVED
-external-evidence adapters            = 20
-external-evidence occurrences         = 18887
-SourceEdition present in adapters     = no
-unverified occurrence in Master map   = no
-Master provenance promotion           = not authorized
-validation workspace mutation         = no
-```
-
-此前 Stage-A workflow 的 `tools/check_third_party_*.py` 过宽触发 allocation checker，造成 metadata-only reseal。已由 `b8883e1b4d801567ae46decf503ea9a168cdd807` 排除 allocation checker；完整 Stage-A recheck `34584514294` PASS，content fingerprint 未变化。
-
-当前 planning/provenance layer 已：
-
-```text
-IMPLEMENTED / VALIDATED / CHECKPOINTED
-```
-
-但 actual mutation gates 全部保持 false：
+Actual mutation gates 保持：
 
 ```text
 ActualMutationAuthorized               = false
@@ -335,9 +469,4 @@ PublishMutationAuthorized              = false
 AnkiMutationAuthorized                 = false
 ```
 
-当前剩余实际 allocation blocker：
-
-1. append-only allocator + `stable_evidence_bindings.csv` generator 尚未 IMPLEMENTED / VALIDATED；
-2. 用户尚未显式授权 actual allocation / merge。
-
-因此下一阶段可以继续 **实现 dry-run / mutation-disabled allocator 和 evidence-binding generator**，但不得执行 Stable Registry mutation。
+因此当前技术准备已收敛到 mutation-ready 状态。**剩余硬 blocker 是用户对 actual third-party Stable NoteID allocation / merge 的明确授权。** 在该授权出现前，不修改 Stable Registry。
