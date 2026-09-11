@@ -2,7 +2,7 @@
 
 ## Purpose
 
-本 gate 只解决 future **actual third-party Stable Vocabulary allocation** 的事务安全，不授权任何当前 mutation。
+本 gate 解决 future **actual third-party Stable Vocabulary allocation** 的事务安全，并定义当前用户授权语义。
 
 当前状态：
 
@@ -15,13 +15,21 @@ actual evidence bindings          = 0
 current max NoteID                = KV001194
 ```
 
-普通“继续 / 继续处理 / 下一步”不构成授权。
+项目目标是把第三方 Vocabulary 全部处理到 **只剩最终合入 Klose 当前 Anki** 的状态。在达到该目标之前，用户已给出 standing directive：
+
+```text
+用户说“继续”
+→ 授权执行当前流水线的下一步动作
+→ 每次只推进一个受 gate 保护的 pipeline step
+```
+
+因此，在该目标未完成前，`继续` 可以触发下一个必要 mutation step，包括 Stable NoteID allocation；不再要求额外重复“授权执行……”措辞。所有机器 gate、truth-boundary、Completion Recheck 仍必须照常通过。
 
 ---
 
 ## 1. Authorized transaction scope
 
-未来用户显式授权后，allocation transaction 只允许改变：
+allocation transaction 只允许改变：
 
 ```text
 anki/klose/master/note_registry_extensions.csv
@@ -53,7 +61,7 @@ Stable baseline                 = 1194 persistent / 1189 active
 current max NoteID              = KV001194
 truth-boundary blobs            = exact current committed blobs
 provenance contract             = current
-allocation authorization        = explicit user evidence + timestamp
+allocation authorization        = standing directive + current “继续” evidence, or equivalent explicit authorization
 authorized gates                = Actual + StableNoteID only
 Master/Learner/Release/Publish/Anki gates = false
 ```
@@ -97,7 +105,7 @@ KLOSE_BASE_COMMIT=<authorization-base> python tools/check_klose_persistent_state
 验证顺序固定：
 
 ```text
-explicit authorization transition
+standing-directive/current-step authorization transition
 → provenance / plan validation
 → dry-run build + independent validation
 → actual allocator writes working tree
@@ -120,7 +128,7 @@ explicit authorization transition
 
 ## 5. Isolated transaction validation
 
-`Third-party Allocation Plan Validation` workflow 在 repo 外 isolated local clone 中完整演练未来真实 transaction：
+`Third-party Allocation Plan Validation` workflow 在 repo 外 isolated local clone 中完整演练真实 transaction：
 
 ```text
 local authorization transition
@@ -155,11 +163,11 @@ Master/Learner/Release/Publish/Anki = unchanged
 remote push                         = no
 ```
 
-这证明当前 transaction mechanism 已可验证，但不表示用户已授权，也不表示 actual allocation 已发生。
+这证明 transaction mechanism 已可验证；当前 repo truth 仍未执行 actual allocation。
 
 ---
 
-## 6. Current HOLD POINT
+## 6. Current next-step semantics
 
 当前仍保持：
 
@@ -170,4 +178,10 @@ note_registry_extensions max     = KV001194
 stable_evidence_bindings.csv     = absent
 ```
 
-只有用户语义明确授权“执行第三方 Vocabulary Stable NoteID allocation / merge”后，才允许把 authorization control plane 切到 `authorized-pending-apply`。
+但不再设置人工 HOLD POINT。只要项目尚未达到“只剩最终 Anki 合入”的状态，用户下一次说：
+
+```text
+继续
+```
+
+就应把它作为当前下一 pipeline step 的授权证据，执行 preflight → authorization transition → 当前下一步动作，并在该步骤完成后再次 CHECKPOINT。
