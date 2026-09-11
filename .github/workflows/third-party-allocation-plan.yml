@@ -1,0 +1,56 @@
+name: Third-party Allocation Plan Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/check_third_party_allocation_plan.py'
+      - 'docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md'
+      - 'anki/klose/third_party_vocabulary/allocation/plan.json'
+      - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
+      - 'anki/klose/third_party_vocabulary/premerge/identity_candidates.csv'
+      - 'anki/klose/third_party_vocabulary/premerge/readiness.json'
+      - 'anki/klose/third_party_vocabulary/premerge/reconciliation_next_batch.json'
+      - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
+      - 'anki/klose/source_reference/*_staging/occurrences.csv'
+      - 'anki/klose/master/note_registry.csv'
+      - 'anki/klose/master/note_registry_extensions.csv'
+      - '.github/workflows/third-party-allocation-plan.yml'
+  workflow_run:
+    workflows:
+      - 'Third-party Stage-B Identity Reconciliation'
+      - 'Allocate Grade 5-6 Klose Vocabulary'
+      - 'Build Klose Vocabulary'
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: third-party-allocation-plan-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate-plan:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate allocation/migration plan against current truth
+        run: python tools/check_third_party_allocation_plan.py
+
+      - name: Assert validation is read-only
+        run: |
+          git status --short
+          git diff --exit-code
+          echo 'Allocation plan validation mutation = no'
