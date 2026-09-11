@@ -1,6 +1,6 @@
 {
   "PlanVersion": "third-party-allocation-migration-plan-v1",
-  "PlanStatus": "checkpoint-candidate-plan-only",
+  "PlanStatus": "validated-checkpointed-plan-only",
   "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
   "TruthBoundary": {
     "StageBDecisionBlobSHA": "295f4c5dc76b4cc7b22b6a0f5319fe4f26f06fc0",
@@ -52,6 +52,13 @@
     "ReleaseMutationAuthorized": false,
     "PublishMutationAuthorized": false,
     "AnkiMutationAuthorized": false
+  },
+  "ValidationEvidence": {
+    "InitialPlanValidationRunID": "34584336799",
+    "StageAIsolationFixCommit": "b8883e1b4d801567ae46decf503ea9a168cdd807",
+    "PostFixStageARecheckRunID": "34584514294",
+    "PostFixStageAStatusCommit": "fd9ca00301b683e8741fbd20a39c91ea35dfbb8a",
+    "StageAContentFingerprintChanged": false
   },
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
