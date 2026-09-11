@@ -158,9 +158,24 @@ def stage_a_occurrence_map() -> tuple[dict[str, list[str]], dict[str, dict[str, 
     _, preview_rows = read_csv(PREVIEW)
     preview_by_pid = {r.get("ProvisionalIdentityKey", ""): r for r in preview_rows}
     require(len(preview_by_pid) == len(preview_rows) and all(preview_by_pid), "Stage-A preview identities are empty/duplicate")
-    require(set(mapping) == set(preview_by_pid), "Stage-A exact occurrence mapping does not close current Vocabulary Preview")
-    for pid, row in preview_by_pid.items():
-        require(len(mapping[pid]) == int(row.get("SourceOccurrenceCount", "0")), f"Stage-A occurrence count mismatch: {pid}")
+    mapping_keys = set(mapping)
+    preview_keys = set(preview_by_pid)
+    if mapping_keys != preview_keys:
+        missing = sorted(preview_keys - mapping_keys)
+        extra = sorted(mapping_keys - preview_keys)
+        print(f"Stage-A mapping identities = {len(mapping_keys)}")
+        print(f"Stage-A preview identities = {len(preview_keys)}")
+        print(f"Stage-A mapping missing identities ({len(missing)}) = {missing[:50]}")
+        print(f"Stage-A mapping extra identities ({len(extra)}) = {extra[:50]}")
+        raise SystemExit("Stage-A exact occurrence mapping does not close current Vocabulary Preview")
+    count_mismatches = [
+        (pid, len(mapping[pid]), int(row.get("SourceOccurrenceCount", "0")))
+        for pid, row in preview_by_pid.items()
+        if len(mapping[pid]) != int(row.get("SourceOccurrenceCount", "0"))
+    ]
+    if count_mismatches:
+        print(f"Stage-A occurrence count mismatches ({len(count_mismatches)}) = {count_mismatches[:50]}")
+        raise SystemExit("Stage-A occurrence counts do not close current Vocabulary Preview")
     return {pid: sorted(keys) for pid, keys in mapping.items()}, occ_by_key, preview_by_pid
 
 
