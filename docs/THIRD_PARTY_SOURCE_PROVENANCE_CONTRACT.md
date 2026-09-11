@@ -249,3 +249,37 @@ StableNoteID allocation 之所以仍为 false，是因为：
 - future evidence binding schema 变化。
 
 如果未来 adapter 正式补入真实 `SourceEdition` 字段，本 v1 contract 应主动失败，要求重新设计，而不能静默继续把这些数据当作 unverified evidence。
+
+---
+
+## 8. Validation checkpoint
+
+本契约已经完成机器验证：
+
+```text
+validation workflow run = 34585155788 / PASS
+validation job          = 103217537427 / PASS
+```
+
+验证确认：
+
+```text
+external-evidence adapters               = 20
+external-evidence occurrences            = 18887
+source-freeze fingerprints               = current
+SourceEdition fact in adapters           = no
+synthetic/unknown SourceEdition in Master = forbidden
+external evidence may support Stable identity = yes
+Stable identity implies textbook provenance   = no
+unverified occurrence promoted to Master map  = no
+Master source mapping mutation authorized     = no
+Stable NoteID allocation authorized           = no
+Anki mutation authorized                      = no
+validation workspace mutation                 = no
+```
+
+因此 provenance contract 当前状态为：
+
+```text
+IMPLEMENTED / VALIDATED / CHECKPOINTED
+```
