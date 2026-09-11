@@ -6,14 +6,18 @@ on:
     paths:
       - 'tools/check_third_party_allocation_plan.py'
       - 'tools/validate_third_party_source_provenance.py'
+      - 'tools/build_third_party_allocation_dry_run.py'
+      - 'tools/validate_third_party_allocation_dry_run.py'
       - 'docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md'
       - 'docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md'
       - 'anki/klose/third_party_vocabulary/allocation/plan.json'
       - 'anki/klose/third_party_vocabulary/provenance/contract.json'
       - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
+      - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - 'anki/klose/third_party_vocabulary/premerge/identity_candidates.csv'
       - 'anki/klose/third_party_vocabulary/premerge/readiness.json'
       - 'anki/klose/third_party_vocabulary/premerge/reconciliation_next_batch.json'
+      - 'anki/klose/third_party_vocabulary/staging/unified_vocabulary_preview.csv'
       - 'anki/klose/third_party_vocabulary/config/source_adapters.csv'
       - 'anki/klose/third_party_vocabulary/config/source_freeze.json'
       - 'anki/klose/third_party_vocabulary/staging/occurrences.csv'
@@ -58,8 +62,14 @@ jobs:
       - name: Validate allocation/migration plan against current truth
         run: python tools/check_third_party_allocation_plan.py
 
+      - name: Build mutation-disabled allocation dry run
+        run: python tools/build_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+
+      - name: Independently validate allocation dry run
+        run: python tools/validate_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+
       - name: Assert validation is read-only
         run: |
           git status --short
           git diff --exit-code
-          echo 'Allocation/provenance validation mutation = no'
+          echo 'Allocation/provenance/dry-run validation mutation = no'
