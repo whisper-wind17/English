@@ -39,10 +39,14 @@
     "AnkiIndependent": true
   },
   "SourceProvenance": {
+    "ContractVersion": "third-party-source-provenance-v1",
+    "ContractStatus": "validated-checkpointed",
     "EnabledAdapters": 20,
     "CurrentAdapterOccurrenceSchemaHasSourceEdition": false,
+    "ExternalEvidenceMaySupportStableIdentityAllocation": true,
+    "StableIdentityAllocationImpliesTextbookProvenance": false,
     "MasterSourceMappingPromotionAuthorized": false,
-    "Policy": "Do not invent textbook SourceEdition. Before master provenance mutation, establish an explicit auditable edition/unknown-edition contract for third-party adapter occurrences."
+    "Policy": "Third-party adapter rows are external evidence. Stable identity may use that evidence without claiming textbook provenance; Master source mapping requires independently verified SourceEdition/Revision."
   },
   "MutationGates": {
     "ActualMutationAuthorized": false,
@@ -58,13 +62,14 @@
     "StageAIsolationFixCommit": "b8883e1b4d801567ae46decf503ea9a168cdd807",
     "PostFixStageARecheckRunID": "34584514294",
     "PostFixStageAStatusCommit": "fd9ca00301b683e8741fbd20a39c91ea35dfbb8a",
-    "StageAContentFingerprintChanged": false
+    "StageAContentFingerprintChanged": false,
+    "FinalPlanValidationRunID": "34584719664",
+    "ProvenanceContractValidationRunID": "34585155788"
   },
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
-    "current allocation-plan checker PASS against exact Stage-B and registry blobs",
-    "third-party SourceEdition/provenance contract resolved without claiming an unverified textbook edition",
-    "append-only allocator and source-binding implementation validated on current truth boundary",
-    "independent completion recheck proving stable identity, release and Anki isolation"
+    "current allocation/provenance validation PASS against exact Stage-B, source-freeze and registry boundaries",
+    "append-only allocator plus external-evidence binding implementation validated on current truth boundary",
+    "independent completion recheck proving stable identity, source-map, release and Anki isolation"
   ]
 }
