@@ -1,14 +1,14 @@
 {
   "PlanVersion": "third-party-allocation-migration-plan-v1",
-  "PlanStatus": "validated-checkpointed-plan-only",
+  "PlanStatus": "executed-checkpointed",
   "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
-  "TruthBoundary": {
+  "PreAllocationTruthBoundary": {
     "StageBDecisionBlobSHA": "295f4c5dc76b4cc7b22b6a0f5319fe4f26f06fc0",
     "IdentityCandidateBlobSHA": "71c4001aa0435b48597546b63b5064d81dc09873",
     "NoteRegistryBlobSHA": "061a2e7ffc6d3449a1835244e32b8bdb3b0b3fdf",
     "NoteRegistryExtensionsBlobSHA": "5129cb01a7191a6f874f40afcaa65fb4c6d9541b"
   },
-  "RegistryBaseline": {
+  "PreAllocationRegistryBaseline": {
     "PersistentRows": 1194,
     "ActiveNoteIDs": 1189,
     "MaxNoteID": "KV001194"
@@ -22,11 +22,31 @@
     "ReviewQueueCount": 0,
     "SelectedCount": 0
   },
-  "HypotheticalAppendRange": {
+  "ExecutedAllocation": {
+    "Status": "executed-validated-checkpointed",
+    "ExecutionReceipt": "anki/klose/third_party_vocabulary/allocation/execution_receipt.json",
+    "ExecutionWorkflowRunID": "34608158097",
+    "AllocationCommitSHA": "fe0d1f04c2eae1cf5d492673dd79aef302691d39",
+    "PersistentRows": 3015,
+    "ActiveNoteIDs": 3010,
+    "NewStableRows": 1821,
+    "FirstNewNoteID": "KV001195",
+    "LastNewNoteID": "KV003015",
+    "MaxNoteID": "KV003015",
+    "ExternalEvidenceBindings": 15791,
+    "HeldIdentitiesAllocated": false,
+    "MasterSourceMappingMutation": false,
+    "LearnerMutation": false,
+    "ReleaseMutation": false,
+    "PublishMutation": false,
+    "AnkiMutation": false
+  },
+  "HistoricalHypotheticalAppendRange": {
     "First": "KV001195",
     "Last": "KV003015",
     "Count": 1821,
-    "Reserved": false
+    "Reserved": false,
+    "ConsumedByAllocationCommit": "fe0d1f04c2eae1cf5d492673dd79aef302691d39"
   },
   "AllocationContract": {
     "ReuseExistingMutation": "no-registry-mutation",
@@ -50,8 +70,8 @@
     "MasterSourceMappingPromotionAuthorized": false,
     "Policy": "Third-party adapter rows are external evidence. Stable identity may use that evidence without claiming textbook provenance; Master source mapping requires independently verified SourceEdition/Revision."
   },
-  "DryRunValidation": {
-    "Status": "validated-checkpointed",
+  "HistoricalDryRunValidation": {
+    "Status": "validated-checkpointed-consumed",
     "WorkflowRunID": "34587553210",
     "IdentityActions": 2820,
     "ReuseExisting": 903,
@@ -65,28 +85,27 @@
     "RepositoryMutation": false
   },
   "MutatorReadiness": {
-    "Status": "validated-mutation-ready-unauthorized",
-    "WorkflowRunID": "34588197818",
+    "Status": "executed-validated-checkpointed",
+    "GuardedMutatorValidationRunID": "34588197818",
     "AuthorizationAwareControlPlaneValidationRunID": "34588814219",
+    "PostMutationTransactionGateValidationRunID": "34596833236",
+    "ActualExecutionWorkflowRunID": "34608158097",
+    "CommittedStateValidationWorkflowRunID": "34608453454",
     "AuthorizationManifest": "anki/klose/third_party_vocabulary/allocation/authorization.json",
     "AuthorizationGateClosed": true,
-    "AuthorizedPendingApplyStateSupported": true,
     "ValidationWorkflowAutoApplies": false,
     "DirectUnauthorizedApplyRejected": true,
-    "SimulationRegistryExtensionRows": 2213,
-    "SimulationFullStableNoteIDs": 3015,
-    "SimulationNewStableRows": 1821,
-    "SimulationExternalEvidenceBindings": 15791,
     "InterruptedRegistryOnlyStateRecovered": true,
     "IdempotentRetryNewRows": 0,
-    "RepositoryMutation": false,
-    "ActualAllocationExecuted": false
+    "ActualAllocationExecuted": true
   },
   "PostMutationTransactionGate": {
-    "Status": "validated-checkpointed",
-    "WorkflowRunID": "34596833236",
-    "Checker": "tools/validate_third_party_allocation_post_mutation.py",
-    "TransactionDesign": "isolated-authorized-clone-apply-recheck-commit-recheck-no-push",
+    "Status": "executed-validated-checkpointed",
+    "DesignValidationRunID": "34596833236",
+    "ActualExecutionRunID": "34608158097",
+    "CommittedStateValidationRunID": "34608453454",
+    "PostMutationChecker": "tools/validate_third_party_allocation_post_mutation.py",
+    "CommittedStateChecker": "tools/validate_third_party_allocation_committed_state.py",
     "HistoricalExtensionRowsUnchanged": 392,
     "ExactNewStableRows": 1821,
     "PostAllocationFullStableRows": 3015,
@@ -94,7 +113,7 @@
     "HeldIdentitiesAllocated": false,
     "AllowedMutationPathCount": 2,
     "MasterLearnerReleasePublishAnkiMutation": false,
-    "RemotePushDuringValidation": false
+    "CompareAndSwapPush": "PASS"
   },
   "MutationGates": {
     "ActualMutationAuthorized": false,
@@ -107,22 +126,20 @@
   },
   "ValidationEvidence": {
     "InitialPlanValidationRunID": "34584336799",
-    "StageAIsolationFixCommit": "b8883e1b4d801567ae46decf503ea9a168cdd807",
-    "PostFixStageARecheckRunID": "34584514294",
-    "PostFixStageAStatusCommit": "fd9ca00301b683e8741fbd20a39c91ea35dfbb8a",
-    "StageAContentFingerprintChanged": false,
-    "FinalPlanValidationRunID": "34584719664",
     "ProvenanceContractValidationRunID": "34585155788",
     "AllocationDryRunValidationRunID": "34587553210",
     "GuardedMutatorValidationRunID": "34588197818",
     "AuthorizationAwareControlPlaneValidationRunID": "34588814219",
-    "PostMutationTransactionGateValidationRunID": "34596833236"
+    "PostMutationTransactionGateValidationRunID": "34596833236",
+    "ActualExecutionWorkflowRunID": "34608158097",
+    "ActualAllocationCommitSHA": "fe0d1f04c2eae1cf5d492673dd79aef302691d39",
+    "CommittedStateValidationRunID": "34608453454"
   },
-  "RequiredBeforeMutation": [
-    "user authorization for the next mutation step, satisfied either by equivalent explicit wording or by '继续' under the active standing directive before Anki-ready",
-    "authorization manifest and allocation mutation gates deliberately transition from closed to authorized against the exact current truth boundary",
-    "current allocation/provenance/dry-run validation PASS on latest main immediately before apply",
-    "actual apply remains restricted to note_registry_extensions.csv plus stable_evidence_bindings.csv and must fail closed on any truth-boundary conflict",
-    "post-mutation independent Completion Recheck must pass before commit and again after the allocation commit before any Learner, Release, Publish or Anki work begins"
-  ]
+  "NextPipelineStep": {
+    "Step": "third-party-learner-presentation-and-admission-preparation",
+    "Trigger": "next user 继续 under active standing directive",
+    "LearnerLevel": 4,
+    "StableIdentityAllocationComplete": true,
+    "DoNotModifyAnkiYet": true
+  }
 }
