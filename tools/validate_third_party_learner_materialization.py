@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent Completion Recheck for third-party learner/admission materialization."""
+"""Independent Completion Recheck for committed third-party learner/admission materialization."""
 from __future__ import annotations
 import csv, io
 from pathlib import Path
