@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the read-only third-party Vocabulary allocation/migration plan.
+"""Validate the third-party Vocabulary allocation/migration control plane.
 
-This checker deliberately authorizes no mutation. It binds the plan to the exact
-closed Stage-B decision set and current Klose Stable Vocabulary registry, verifies
-action semantics, computes the hypothetical append-only NoteID range, and keeps
-SourceEdition/provenance uncertainty explicit.
+The checker binds the plan and authorization manifest to the exact closed Stage-B
+truth and current Klose Stable Vocabulary registry. It supports two explicit gate
+states: closed (current default) and authorized-pending-apply. Validation never
+performs allocation.
 """
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose"
 TP = BASE / "third_party_vocabulary"
 PLAN = TP / "allocation" / "plan.json"
+AUTH = TP / "allocation" / "authorization.json"
 DECISIONS = TP / "reconciliation" / "reconciliation_decisions.csv"
 CANDIDATES = TP / "premerge" / "identity_candidates.csv"
 READINESS = TP / "premerge" / "readiness.json"
@@ -27,6 +28,27 @@ ADAPTERS = TP / "config" / "source_adapters.csv"
 REGISTRY = BASE / "master" / "note_registry.csv"
 REGISTRY_EXT = BASE / "master" / "note_registry_extensions.csv"
 NOTE_RE = re.compile(r"^KV(\d{6})$")
+
+EXPECTED_ALLOWED_PATHS = [
+    "anki/klose/master/note_registry_extensions.csv",
+    "anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv",
+]
+EXPECTED_FORBIDDEN_LAYERS = [
+    "anki/klose/master/source_identity_extensions.csv",
+    "anki/klose/learner",
+    "anki/klose/publish",
+    "anki/klose/anki",
+    "anki/klose/expressions",
+]
+AUTHORIZED_GATES = {
+    "ActualMutationAuthorized": True,
+    "StableNoteIDAllocationAuthorized": True,
+    "MasterSourceMappingMutationAuthorized": False,
+    "LearnerMutationAuthorized": False,
+    "ReleaseMutationAuthorized": False,
+    "PublishMutationAuthorized": False,
+    "AnkiMutationAuthorized": False,
+}
 
 
 def rows(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -65,11 +87,16 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     plan = obj(PLAN)
+    auth = obj(AUTH)
     readiness = obj(READINESS)
     next_batch = obj(NEXT_BATCH)
 
     require(plan.get("PlanVersion") == "third-party-allocation-migration-plan-v1", "Unexpected allocation plan version")
     require(plan.get("PlanStatus") in {"checkpoint-candidate-plan-only", "validated-checkpointed-plan-only"}, "Unexpected allocation plan status")
+    require(auth.get("AuthorizationVersion") == "third-party-allocation-authorization-v1", "Unexpected allocation authorization version")
+    require(auth.get("Scope") == "stable-vocabulary-identity-and-external-evidence-binding-only", "Allocation authorization scope drift")
+    require(auth.get("AllowedMutationPaths") == EXPECTED_ALLOWED_PATHS, "Allocation allowed mutation paths drift")
+    require(auth.get("ForbiddenMutationLayers") == EXPECTED_FORBIDDEN_LAYERS, "Allocation forbidden mutation layers drift")
 
     reg_fields, legacy = rows(REGISTRY)
     ext_fields, ext = rows(REGISTRY_EXT)
@@ -81,7 +108,9 @@ def main() -> None:
     max_id = max(ids, key=note_num)
 
     truth = plan.get("TruthBoundary")
+    auth_truth = auth.get("TruthBoundary")
     require(isinstance(truth, dict), "Plan TruthBoundary missing")
+    require(isinstance(auth_truth, dict), "Authorization TruthBoundary missing")
     expected_blobs = {
         "StageBDecisionBlobSHA": DECISIONS,
         "IdentityCandidateBlobSHA": CANDIDATES,
@@ -91,6 +120,8 @@ def main() -> None:
     for key, path in expected_blobs.items():
         actual = git_blob_sha(path)
         require(truth.get(key) == actual, f"Plan truth boundary stale: {key}: plan={truth.get(key)} current={actual}")
+        if key != "IdentityCandidateBlobSHA":
+            require(auth_truth.get(key) == actual, f"Authorization truth boundary stale: {key}: auth={auth_truth.get(key)} current={actual}")
 
     baseline = plan.get("RegistryBaseline")
     require(isinstance(baseline, dict), "RegistryBaseline missing")
@@ -100,6 +131,7 @@ def main() -> None:
 
     checkpoint = str(readiness.get("StageACheckpointFingerprint", ""))
     require(checkpoint and plan.get("StageACheckpointFingerprint") == checkpoint, "Stage-A checkpoint drift")
+    require(auth.get("StageACheckpointFingerprint") == checkpoint, "Authorization Stage-A checkpoint drift")
     require(readiness.get("KloseActiveNoteIDs") == len(active_ids), "Premerge readiness active-NoteID count is stale")
     require(readiness.get("StageBMutationAuthorized") is False, "Premerge unexpectedly authorizes Stage-B mutation")
     require(readiness.get("StableThirdPartyIDMinted") is False, "Premerge unexpectedly reports minted third-party identity")
@@ -174,7 +206,7 @@ def main() -> None:
     last = f"KV{note_num(max_id) + new_count:06d}"
     require(append_range.get("First") == first and append_range.get("Last") == last, "Hypothetical append range drift")
     require(append_range.get("Count") == new_count, "Hypothetical append count drift")
-    require(append_range.get("Reserved") is False, "Plan must not reserve NoteIDs before mutation authorization")
+    require(append_range.get("Reserved") is False, "Plan must not reserve NoteIDs before actual mutation")
 
     contract = plan.get("AllocationContract")
     require(isinstance(contract, dict), "AllocationContract missing")
@@ -200,15 +232,28 @@ def main() -> None:
     require(provenance.get("EnabledAdapters") == len(enabled), "Enabled adapter count drift")
     require(provenance.get("CurrentAdapterOccurrenceSchemaHasSourceEdition") is edition_present, "SourceEdition schema status drift")
     require(edition_present is False, "Third-party source adapters now carry SourceEdition; allocation provenance plan must be redesigned")
-    require(provenance.get("MasterSourceMappingPromotionAuthorized") is False, "Master source mapping must remain blocked until provenance contract is explicit")
+    require(provenance.get("MasterSourceMappingPromotionAuthorized") is False, "Master source mapping must remain blocked")
 
     gates = plan.get("MutationGates")
     require(isinstance(gates, dict) and gates, "MutationGates missing")
-    require(all(value is False for value in gates.values()), "Allocation plan must not authorize any mutation gate")
+    authorized = auth.get("Authorized") is True
+    user_evidence = str(auth.get("UserAuthorizationEvidence", "")).strip()
+    authorized_at = str(auth.get("AuthorizedAt", "")).strip()
+    if authorized:
+        require(gates == AUTHORIZED_GATES, "Authorized allocation gate set is not exact")
+        require(bool(user_evidence), "Authorized allocation lacks user authorization evidence")
+        require(bool(authorized_at), "Authorized allocation lacks AuthorizedAt")
+        gate_state = "authorized-pending-apply"
+    else:
+        require(all(value is False for value in gates.values()), "Closed allocation state must keep all mutation gates false")
+        require(not user_evidence and not authorized_at, "Closed authorization state carries stale authorization evidence")
+        gate_state = "closed"
+
     required = plan.get("RequiredBeforeMutation")
     require(isinstance(required, list) and len(required) >= 5, "RequiredBeforeMutation contract incomplete")
 
     print("Third-party allocation/migration plan check = pass")
+    print(f"allocation gate state = {gate_state}")
     print(f"Stage-A checkpoint = {checkpoint}")
     print(f"registry persistent rows = {len(registry)}")
     print(f"registry active NoteIDs = {len(active_ids)}")
@@ -222,7 +267,7 @@ def main() -> None:
     print(f"enabled third-party source adapters = {len(enabled)}")
     print("third-party SourceEdition field present = no")
     print("master provenance promotion authorized = no")
-    print("Stable NoteID allocation authorized = no")
+    print(f"Stable NoteID allocation authorized = {'yes' if authorized else 'no'}")
     print("Learner/release/publish/Anki mutation authorized = no")
 
 
