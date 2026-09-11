@@ -12,7 +12,7 @@ candidate:4th,4th,4th,4th,第四；4日,4th,1,yes,no-existing-match,0,,,pending-
 candidate:a,a,a,a,一个；一（用于辅音音素前）,a,19,no,exact-single,1,KV000008,一；一个,pending-sense-confirmation,no
 candidate:a bit,a bit,a bit,a bit,有点儿；稍微,a bit,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:a box of crayons,a box of crayons,a box of crayons,a box of crayons,一盒蜡笔,a box of crayons,1,yes,exact-single,1,KV000559,一盒蜡笔,pending-sense-confirmation,no
-candidate:a few,a few,a few,a few,几个；少数几个,a few,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:a few,a few,a few,a few,几个；少数几个,a few,7,yes,exact-single,1,KV000997,一些,pending-sense-confirmation,no
 candidate:a knife and fork,a knife and fork,a knife and fork,a knife and fork,一副刀叉,a knife and fork,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:a liter of milk,a liter of milk,a liter of milk,a liter of milk,一升牛奶,a liter of milk,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:a little,a little,a little,a little,一点；少量,a little,8,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -22,7 +22,7 @@ candidate:a lot of,a lot of,a lot of,a lot of,许多；大量,a lot of,11,yes,ex
 candidate:a pair of,a pair of,a pair of,a pair of,一双；一对,a pair of,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:a pair of scissors,a pair of scissors,a pair of scissors,a pair of scissors,一把剪刀；一副剪刀,a pair of scissors,1,yes,exact-single,1,KV000557,一把剪刀,pending-sense-confirmation,no
 candidate:a piece of,a piece of,a piece of,a piece of,一块；一片；一件,a piece of,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:a.m.,a.m.,a.m.,a.m.,上午；午前,a.m.,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:a.m.,a.m.,a.m.,a.m.,上午；午前,a.m.,3,yes,exact-single,1,KV000981,午前；上午,pending-sense-confirmation,no
 candidate:ability,ability,ability,ability,能力；才能,ability,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:able,able,able,able,能,able,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:aboard,aboard,aboard,aboard,在船上；在飞机上；在火车上,aboard,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -33,27 +33,27 @@ candidate:absent,absent,absent,absent,缺席的；不在的,absent,1,yes,no-exis
 candidate:accident,accident,accident,accident,事故；意外,accident,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:across,across,across,across,穿过；横过,across,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:across from,across from,across from,across from,在……正对面,across from,2,yes,exact-single,1,KV000440,在……对面,pending-sense-confirmation,no
-candidate:act,act,act,act,表演；演戏,act,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:act,act,act,act,表演；演戏,act,3,yes,exact-single,1,KV001004,扮演,pending-sense-confirmation,no
 candidate:active,active,active,active,积极的；活跃的,active,5,yes,exact-single,1,KV000525,活跃的；积极的,pending-sense-confirmation,no
 candidate:activity,activity,activity,activity,活动,activity,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:actor,actor,actor,actor,男演员,actor,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:add,add,add,add,加入；添加,add,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:add,add,add,add,加入；添加,add,1,yes,exact-single,1,KV001096,补充说；增加,pending-sense-confirmation,no
 candidate:address,address,address,address,地址,address,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:adult,adult,adult,adult,成年人；成人,adult,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:adventure,adventure,adventure,adventure,冒险；冒险经历,adventure,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:advertisement,advertisement,advertisement,advertisement,广告；宣传,advertisement,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:advice,advice,advice,advice,建议；忠告,advice,3,yes,exact-single,1,KV000592,建议,pending-sense-confirmation,no
 candidate:aeroplane,aeroplane,aeroplane,aeroplane,飞机,aeroplane,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:afraid,afraid,afraid,afraid,害怕的；担心的,afraid,15,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:afraid,afraid,afraid,afraid,害怕的；担心的,afraid,15,yes,exact-single,1,KV000921,担心；害怕,pending-sense-confirmation,no
 candidate:afraid of,afraid of,afraid of,afraid of,害怕……；担心……,afraid of|be afraid of,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:africa,africa,africa,Africa,非洲,africa,3,yes,exact-single,1,KV000725,非洲,pending-sense-confirmation,no
-candidate:after,after,after,after,在……之后；以后,after,16,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:after,after,after,after,在……之后；以后,after,16,yes,exact-single,1,KV000979,在（时间）后,pending-sense-confirmation,no
 candidate:after school,after school,after school,after school,放学后,after school,4,yes,exact-single,1,KV000302,放学后,pending-sense-confirmation,no
 candidate:afternoon,afternoon,afternoon,afternoon,下午,afternoon,19,yes,exact-single,1,KV000231,下午,pending-sense-confirmation,no
 candidate:again,again,again,again,再；又；再一次,again,15,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:age,age,age,age,年龄,age,6,yes,exact-single,1,KV000213,年龄,pending-sense-confirmation,no
-candidate:ago,ago,ago,ago,以前；……之前,ago,13,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:agree,agree,agree,agree,同意；赞同,agree,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ago,ago,ago,ago,以前；……之前,ago,13,yes,exact-single,1,KV001185,以前,pending-sense-confirmation,no
+candidate:agree,agree,agree,agree,同意；赞同,agree,3,yes,exact-single,1,KV000917,同意；赞成,pending-sense-confirmation,no
 candidate:ahead,ahead,ahead,ahead,向前；在前面,ahead,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:air,air,air,air,空气,air,9,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:air-conditioned,air-conditioned,air-conditioned,air-conditioned,有空调的,air-conditioned,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -90,12 +90,12 @@ candidate:and,and,and,and,和；与；而且,and,20,yes,exact-single,1,KV000085,
 candidate:angry,angry,angry,angry,生气的；愤怒的,angry,18,yes,exact-single,1,KV000730,生气的,pending-sense-confirmation,no
 candidate:animal,animal,animal,animal,动物,animal,17,yes,exact-single,1,KV000542,动物,pending-sense-confirmation,no
 candidate:ankle,ankle,ankle,ankle,脚踝；踝关节,ankle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:another,another,another,another,另一个；又一个,another,9,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:answer,answer,answer,answer,回答；答案,answer,12,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:another,another,another,another,另一个；又一个,another,9,yes,exact-single,1,KV001092,另一个；不同的（人或事物）,pending-sense-confirmation,no
+candidate:answer,answer,answer,answer,回答；答案,answer,12,yes,exact-single,1,KV000929,答复；回答,pending-sense-confirmation,no
 candidate:ant,ant,ant,ant,蚂蚁,ant,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:any,any,any,any,任何；一些（用于疑问或否定）,any,19,yes,exact-single,1,KV000881,任何的；任一的,pending-sense-confirmation,no
 candidate:anyone,anyone,anyone,anyone,任何人；无论谁,anyone,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:anything,anything,anything,anything,任何事；任何东西,anything,9,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:anything,anything,anything,anything,任何事；任何东西,anything,9,yes,exact-single,1,KV001040,任何事物,pending-sense-confirmation,no
 candidate:anytime,anytime,anytime,anytime,任何时候；随时,anytime,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:anyway,anyway,anyway,anyway,无论如何；总之,anyway,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:anywhere,anywhere,anywhere,anywhere,任何地方；无论哪里,anywhere,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -116,13 +116,13 @@ candidate:art gallery,art gallery,art gallery,art gallery,美术馆；艺术画�
 candidate:art museum,art museum,art museum,art museum,美术馆,art museum,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:art room,art room,art room,art room,美术教室,art room,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:artist,artist,artist,artist,艺术家；美术家,artist,5,yes,exact-single,1,KV000741,艺术家,pending-sense-confirmation,no
-candidate:as,as,as,as,作为；当作,as,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:as,as,as,as,作为；当作,as,6,yes,exact-single,1,KV001071,作为,pending-sense-confirmation,no
 candidate:as well,as well,as well,as well,也；还,as well,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:asia,asia,asia,Asia,亚洲,asia,3,yes,exact-single,1,KV000726,亚洲,pending-sense-confirmation,no
-candidate:ask,ask,ask,ask,问；询问,ask,18,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ask,ask,ask,ask,问；询问,ask,18,yes,exact-single,1,KV000923,问；询问,pending-sense-confirmation,no
 candidate:asleep,asleep,asleep,asleep,睡着的,asleep,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:assistant,assistant,assistant,assistant,助手；助理,assistant,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:astronaut,astronaut,astronaut,astronaut,宇航员；航天员,astronaut,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:astronaut,astronaut,astronaut,astronaut,宇航员；航天员,astronaut,5,yes,exact-single,1,KV001126,航天员；宇航员,pending-sense-confirmation,no
 candidate:at,at,at,at,在；于；向（用于地点、时间或目标）,at,17,yes,exact-single,1,KV000199,在……时刻,pending-sense-confirmation,no
 candidate:at all,at all,at all,at all,根本；完全（用于否定或疑问）,at all,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:at first,at first,at first,at first,起初；一开始,at first,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -165,7 +165,7 @@ candidate:baker,baker,baker,baker,面包师；面包工人,baker,1,yes,no-existi
 candidate:bakery,bakery,bakery,bakery,面包店,bakery,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ball,ball,ball,ball,球,ball,22,yes,exact-single,1,KV000069,球,pending-sense-confirmation,no
 candidate:balloon,balloon,balloon,balloon,气球,balloon,11,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:bamboo,bamboo,bamboo,bamboo,竹子,bamboo,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:bamboo,bamboo,bamboo,bamboo,竹子,bamboo,6,yes,exact-single,1,KV001037,竹子,pending-sense-confirmation,no
 candidate:banana,banana,banana,banana,香蕉,banana,23,yes,exact-single,1,KV000047,香蕉,pending-sense-confirmation,no
 candidate:band,band,band,band,乐队,band,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bandage,bandage,bandage,bandage,绷带；用绷带包扎,bandage,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -175,7 +175,7 @@ candidate:bar,bar,bar,bar,条；棒；块（食品）,bar,1,yes,no-existing-matc
 candidate:barbecue,barbecue,barbecue,barbecue,烧烤；烧烤野餐,barbecue,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bark,bark,bark,bark,吠叫；狗叫,bark,3,yes,exact-single,1,KV000531,狗叫；吠,pending-sense-confirmation,no
 candidate:baseball,baseball,baseball,baseball,棒球；棒球运动,baseball,6,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:basket,basket,basket,basket,篮子,basket,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:basket,basket,basket,basket,篮子,basket,7,yes,exact-single,1,KV001181,篮；筐,pending-sense-confirmation,no
 candidate:basketball,basketball,basketball,basketball,篮球；篮球运动,basketball,18,yes,exact-single,1,KV000345,篮球,pending-sense-confirmation,no
 candidate:bath,bath,bath,bath,洗澡；沐浴,bath,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bathroom,bathroom,bathroom,bathroom,浴室；洗手间,bathroom,14,yes,exact-single,1,KV000338,浴室；卫生间,pending-sense-confirmation,no
@@ -191,7 +191,7 @@ candidate:be good at,be good at,be good at,be good at,擅长……,be good at,8,
 candidate:be interested in,be interested in,be interested in,be interested in,对……感兴趣,be interested in,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:be late for,be late for,be late for,be late for,……迟到；迟到,be late for,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:be weak in,be weak in,be weak in,be weak in,不擅长……；在……方面较弱,be weak in,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:beach,beach,beach,beach,海滩；沙滩,beach,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:beach,beach,beach,beach,海滩；沙滩,beach,10,yes,exact-single,1,KV001180,海滩；沙滩,pending-sense-confirmation,no
 candidate:bean,bean,bean,bean,豆；豆子,bean,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:beans,beans,beans,beans,豆子；豆类,beans,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bear,bear,bear,bear,熊,bear,16,yes,exact-single,1,KV000073,熊,pending-sense-confirmation,no
@@ -200,15 +200,15 @@ candidate:beautifully,beautifully,beautifully,beautifully,漂亮地；优美地,
 candidate:beauty,beauty,beauty,beauty,美；美丽；美景,beauty,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:beaver,beaver,beaver,beaver,河狸；海狸,beaver,1,yes,exact-single,1,KV000788,海狸,pending-sense-confirmation,no
 candidate:because,because,because,because,因为,because,14,yes,exact-single,1,KV000737,因为,pending-sense-confirmation,no
-candidate:become,become,become,become,成为；变得,became|become,11,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:become,become,become,become,成为；变得,became|become,11,yes,exact-single,1,KV001166,开始变得；变成,pending-sense-confirmation,no
 candidate:bed,bed,bed,bed,床,bed,22,yes,exact-single,1,KV000063,床,pending-sense-confirmation,no
 candidate:bedroom,bedroom,bedroom,bedroom,卧室,bedroom,17,yes,exact-single,1,KV000336,卧室,pending-sense-confirmation,no
 candidate:bedtime,bedtime,bedtime,bedtime,就寝时间；睡觉时间,bedtime,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bee,bee,bee,bee,蜜蜂,bee,8,yes,exact-single,1,KV000549,蜜蜂,pending-sense-confirmation,no
-candidate:beef,beef,beef,beef,牛肉,beef,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:beef,beef,beef,beef,牛肉,beef,5,yes,exact-single,1,KV000946,牛肉,pending-sense-confirmation,no
 candidate:beep,beep,beep,beep,哔哔声；发出哔哔声,beep,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:before,before,before,before,在……之前；以前,before,19,yes,exact-single,1,KV000456,在……之前,pending-sense-confirmation,no
-candidate:begin,begin,begin,begin,开始,began|begin,15,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:begin,begin,begin,begin,开始,began|begin,15,yes,exact-single,1,KV001081,（过去式 began）开始,pending-sense-confirmation,no
 candidate:behind,behind,behind,behind,在……后面；在后面,behind,19,yes,exact-single,1,KV000067,在……后面,pending-sense-confirmation,no
 candidate:beijing opera,beijing opera,beijing opera,Beijing Opera,京剧,beijing opera,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:believe,believe,believe,believe,相信；认为,believe,5,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -256,7 +256,7 @@ candidate:body,body,body,body,身体,body,20,yes,exact-single,1,KV000215,身体,
 candidate:boil,boil,boil,boil,煮沸；烧开,boil,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bone,bone,bone,bone,骨头；骨骼,bone,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:book,book,book,book,书；书本,book,25,yes,exact-single,1,KV000001,书；书本,pending-sense-confirmation,no
-candidate:book fair,book fair,book fair,book fair,书展,book fair,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:book fair,book fair,book fair,book fair,书展,book fair,1,yes,exact-single,1,KV001073,书市,pending-sense-confirmation,no
 candidate:bookshelf,bookshelf,bookshelf,bookshelf,书架,bookshelf,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bookshop,bookshop,bookshop,bookshop,书店,bookshop,6,yes,exact-single,1,KV000127,书店,pending-sense-confirmation,no
 candidate:bookstore,bookstore,bookstore,bookstore,书店,bookstore,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -266,8 +266,8 @@ candidate:bored,bored,bored,bored,感到无聊的；厌倦的,bored,8,yes,no-exi
 candidate:boring,boring,boring,boring,无聊的；令人厌烦的,boring,7,yes,exact-single,1,KV000640,无聊的；乏味的,pending-sense-confirmation,no
 candidate:borrow,borrow,borrow,borrow,借；借入,borrow,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:boss,boss,boss,boss,老板；上司,boss,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:both,both,both,both,两者都；两个都,both,8,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:bottle,bottle,bottle,bottle,瓶子,bottle,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:both,both,both,both,两者都；两个都,both,8,yes,exact-single,1,KV000919,两者,pending-sense-confirmation,no
+candidate:bottle,bottle,bottle,bottle,瓶子,bottle,13,yes,exact-single,1,KV001157,瓶子,pending-sense-confirmation,no
 candidate:bottom,bottom,bottom,bottom,底部；底端,bottom,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bow and arrow,bow and arrow,bow and arrow,bow and arrow,弓箭,bow and arrow,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:bowl,bowl,bowl,bowl,碗,bowl,5,yes,exact-single,1,KV000896,碗,pending-sense-confirmation,no
@@ -292,7 +292,7 @@ candidate:broken,broken,broken,broken,破损的；坏掉的,broken,6,yes,exact-s
 candidate:broom,broom,broom,broom,扫帚,broom,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:brother,brother,brother,brother,兄弟；哥哥；弟弟,brother,24,yes,exact-single,1,KV000101,兄弟；哥哥；弟弟,pending-sense-confirmation,no
 candidate:brown,brown,brown,brown,棕色；棕色的,brown,20,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:brush,brush,brush,brush,画笔；毛笔,brush,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:brush,brush,brush,brush,画笔；毛笔,brush,7,yes,exact-single,1,KV000942,（用刷子）刷净；刷亮；刷平顺,pending-sense-confirmation,no
 candidate:bucket,bucket,bucket,bucket,水桶；桶,bucket,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:budgie,budgie,budgie,budgie,虎皮鹦鹉,budgie,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:build,build,build,build,建造；建设,build,8,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -320,7 +320,7 @@ candidate:button#clothing,button#clothing,button,button,纽扣,button,2,yes,no-e
 candidate:button#control,button#control,button,button,按钮,button,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:buy,buy,buy,buy,买；购买,bought|buy,27,yes,exact-single,1,KV000242,买；购买,pending-sense-confirmation,no
 candidate:buy toys,buy toys,buy toys,buy toys,买玩具,buy toys,1,yes,exact-single,1,KV000463,买玩具,pending-sense-confirmation,no
-candidate:by,by,by,by,用；乘（表示方式或手段）,by,19,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:by,by,by,by,用；乘（表示方式或手段）,by,19,yes,exact-single,1,KV001007,在……之前,pending-sense-confirmation,no
 candidate:by bike,by bike,by bike,by bike,骑自行车；乘自行车,by bike,5,yes,exact-single,1,KV000380,骑自行车,pending-sense-confirmation,no
 candidate:by boat,by boat,by boat,by boat,乘船,by boat,1,yes,exact-single,1,KV000376,乘小船；乘船,pending-sense-confirmation,no
 candidate:by bus,by bus,by bus,by bus,乘公共汽车；坐公交车,by bus,5,yes,exact-single,1,KV000375,乘公交车,pending-sense-confirmation,no
@@ -343,12 +343,12 @@ candidate:calendar,calendar,calendar,calendar,日历,calendar,3,yes,no-existing-
 candidate:california,california,california,California,加利福尼亚州,california,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:call,call,call,call,打电话；呼叫,call|called,24,yes,exact-single,1,KV000578,打电话；呼叫,pending-sense-confirmation,no
 candidate:camera,camera,camera,camera,照相机；相机,camera,11,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:camp,camp,camp,camp,露营；营地,camp,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:camp,camp,camp,camp,露营；营地,camp,4,yes,exact-single,1,KV001170,野营,pending-sense-confirmation,no
 candidate:campfire,campfire,campfire,campfire,营火；篝火,campfire,2,yes,exact-single,1,KV000516,篝火；营火,pending-sense-confirmation,no
 candidate:campsite,campsite,campsite,campsite,露营地；营地,campsite,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:can,can,can,can,能；会；可以,can,26,yes,exact-multiple,2,KV000074|KV000885,能；会；可以|金属罐,pending-multi-candidate-review,no
 candidate:canada,canada,canada,Canada,加拿大,canada,12,yes,exact-single,1,KV000507,加拿大,pending-sense-confirmation,no
-candidate:canadian,canadian,canadian,Canadian,加拿大的；加拿大人,canadian,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:canadian,canadian,canadian,Canadian,加拿大的；加拿大人,canadian,1,yes,exact-single,1,KV001044,加拿大的,pending-sense-confirmation,no
 candidate:canberra,canberra,canberra,Canberra,堪培拉,canberra,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:candle,candle,candle,candle,蜡烛,candle,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:candy,candy,candy,candy,糖果,candies|candy,15,yes,exact-single,1,KV000580,糖果,pending-sense-confirmation,no
@@ -377,7 +377,7 @@ candidate:cat,cat,cat,cat,猫,cat,22,yes,exact-single,1,KV000022,猫,pending-sen
 candidate:cat food,cat food,cat food,cat food,猫粮,cat food,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:catch,catch,catch,catch,接住；抓住,catch,14,yes,exact-single,1,KV000496,抓住；捕捉,pending-sense-confirmation,no
 candidate:caterpillar,caterpillar,caterpillar,caterpillar,毛毛虫,caterpillar,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cave,cave,cave,cave,洞穴,cave,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:cave,cave,cave,cave,洞穴,cave,2,yes,exact-single,1,KV000988,山洞；洞穴,pending-sense-confirmation,no
 candidate:cd,cd,cd,CD,光盘；激光唱片,cd,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cd player,cd player,cd player,CD player,CD 播放器,cd player,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cd-rom,cd-rom,cd-rom,CD-ROM,只读光盘（CD-ROM）,cd-rom,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -387,29 +387,29 @@ candidate:celery,celery,celery,celery,芹菜,celery,1,yes,no-existing-match,0,,,
 candidate:cent,cent,cent,cent,分（货币单位）,cent,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:centimetre,centimetre,centimetre,centimetre,厘米；公分,centimeter|centimetre|cm,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:central,central,central,central,中心的；中央的,central,2,yes,exact-single,1,KV000473,中心的；中央的,pending-sense-confirmation,no
-candidate:centre,centre,centre,centre,中心；中央,center|centre,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:centre,centre,centre,centre,中心；中央,center|centre,7,yes,exact-single,1,KV000916,中心,pending-sense-confirmation,no
 candidate:certainly,certainly,certainly,certainly,当然；肯定地,certainly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:chain,chain,chain,chain,链条；链子,chain,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:chair,chair,chair,chair,椅子,chair,23,yes,exact-single,1,KV000054,椅子,pending-sense-confirmation,no
 candidate:chameleon,chameleon,chameleon,chameleon,变色龙,chameleon,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:champion,champion,champion,champion,冠军,champion,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:chance,chance,chance,chance,机会,chance,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:change,change,change,change,改变；变化,change,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:change,change,change,change,改变；变化,change,8,yes,exact-single,1,KV001146,（使）不同；改变,pending-sense-confirmation,no
 candidate:chant,chant,chant,chant,吟唱；反复地唱,chant,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:chase,chase,chase,chase,追逐；追赶,chase,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:chat,chat,chat,chat,聊天；闲聊,chat,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cheap,cheap,cheap,cheap,便宜的,cheap,7,yes,exact-single,1,KV000873,便宜的,pending-sense-confirmation,no
 candidate:cheaper,cheaper,cheaper,cheaper,更便宜的；价格更低的,cheaper,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:check,check,check,check,检查；核对,check|checked,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:check,check,check,check,检查；核对,check|checked,7,yes,exact-single,1,KV000941,查看；查明,pending-sense-confirmation,no
 candidate:check-up,check-up,check-up,check-up,检查；体检,check-up,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:checklist,checklist,checklist,checklist,清单；检查表,checklist,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cheer,cheer,cheer,cheer,欢呼；加油,cheer,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:cheer,cheer,cheer,cheer,欢呼；加油,cheer,2,yes,exact-single,1,KV001072,欢呼；加油,pending-sense-confirmation,no
 candidate:cheer for,cheer for,cheer for,cheer for,为……加油；为……喝彩,cheer for,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cheese,cheese,cheese,cheese,奶酪；干酪,cheese,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cheetah,cheetah,cheetah,cheetah,猎豹,cheetah,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:cheetah,cheetah,cheetah,cheetah,猎豹,cheetah,1,yes,exact-single,1,KV001192,猎豹,pending-sense-confirmation,no
 candidate:chemistry,chemistry,chemistry,chemistry,化学,chemistry,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cherry,cherry,cherry,cherry,樱桃,cherry,4,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:chess,chess,chess,chess,国际象棋；棋,chess,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:chess,chess,chess,chess,国际象棋；棋,chess,6,yes,exact-single,1,KV000910,国际象棋,pending-sense-confirmation,no
 candidate:chewing gum,chewing gum,chewing gum,chewing gum,口香糖,chewing gum,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:chick,chick,chick,chick,小鸡；雏鸡,chick,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:child,child,child,child,孩子；儿童,child,13,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -454,7 +454,7 @@ candidate:clapping game,clapping game,clapping game,clapping game,拍手游戏,c
 candidate:class,class,class,class,班级；课；课堂,class,26,yes,exact-single,1,KV000211,班；班级,pending-sense-confirmation,no
 candidate:classmate,classmate,classmate,classmate,同班同学,classmate,12,yes,exact-single,1,KV000108,同班同学,pending-sense-confirmation,no
 candidate:classroom,classroom,classroom,classroom,教室,classroom,21,yes,exact-single,1,KV000292,教室,pending-sense-confirmation,no
-candidate:clay,clay,clay,clay,黏土；陶土,clay,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:clay,clay,clay,clay,黏土；陶土,clay,2,yes,exact-single,1,KV001050,黏土；陶土,pending-sense-confirmation,no
 candidate:clean,clean,clean,clean,干净的；清洁；打扫,clean,27,yes,exact-single,1,KV000806,打扫；干净的,pending-sense-confirmation,no
 candidate:clean my room,clean my room,clean my room,clean my room,打扫我的房间,clean my room,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:clean the room,clean the room,clean the room,clean the room,打扫房间,clean the room,1,yes,exact-single,1,KV000572,打扫房间,pending-sense-confirmation,no
@@ -462,21 +462,21 @@ candidate:cleaner,cleaner,cleaner,cleaner,清洁工,cleaner,2,yes,exact-single,1
 candidate:clear,clear,clear,clear,清楚的；清晰的,clear,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:clerk,clerk,clerk,clerk,职员；办事员,clerk,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:clever,clever,clever,clever,聪明的；机灵的,clever,16,yes,exact-single,1,KV000519,聪明的,pending-sense-confirmation,no
-candidate:climb,climb,climb,climb,爬；攀登,climb|climbing,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:climb,climb,climb,climb,爬；攀登,climb|climbing,13,yes,exact-single,1,KV001046,攀登；爬,pending-sense-confirmation,no
 candidate:climb a hill,climb a hill,climb a hill,climb a hill,爬山；爬小山,climb a hill,1,yes,exact-single,1,KV000356,爬山；爬小山,pending-sense-confirmation,no
 candidate:climb trees,climb trees,climb trees,climb trees,爬树,climb trees,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:clock,clock,clock,clock,钟；时钟,clock,18,yes,exact-single,1,KV000704,时钟；钟,pending-sense-confirmation,no
-candidate:close,close,close,close,关闭；关上,close,20,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cloth,cloth,cloth,cloth,布；布料,cloth,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:close,close,close,close,关闭；关上,close,20,yes,exact-single,1,KV000965,关；关闭；闭上,pending-sense-confirmation,no
+candidate:cloth,cloth,cloth,cloth,布；布料,cloth,1,yes,exact-single,1,KV001130,（一块）布；织物,pending-sense-confirmation,no
 candidate:clothes,clothes,clothes,clothes,衣服；服装,clothes,17,yes,exact-single,1,KV000869,衣服；服装,pending-sense-confirmation,no
-candidate:cloud,cloud,cloud,cloud,云,cloud,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:cloud,cloud,cloud,cloud,云,cloud,13,yes,exact-single,1,KV001114,云,pending-sense-confirmation,no
 candidate:cloudy,cloudy,cloudy,cloudy,多云的；阴天的,cloudy,21,yes,exact-single,1,KV000161,多云的,pending-sense-confirmation,no
 candidate:clown,clown,clown,clown,小丑,clown,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:club,club,club,club,俱乐部；社团,club,9,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:coach,coach,coach,coach,教练,coach,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:coal,coal,coal,coal,煤；煤炭,coal,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:coat,coat,coat,coat,外套；大衣,coat,22,yes,exact-single,1,KV000255,外套,pending-sense-confirmation,no
-candidate:coconut,coconut,coconut,coconut,椰子,coconut,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:coconut,coconut,coconut,coconut,椰子,coconut,1,yes,exact-single,1,KV000949,椰子,pending-sense-confirmation,no
 candidate:cocoon,cocoon,cocoon,cocoon,茧,cocoon,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:coffee,coffee,coffee,coffee,咖啡,coffee,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:coin,coin,coin,coin,硬币,coin,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -509,11 +509,11 @@ candidate:computer studies,computer studies,computer studies,computer studies,�
 candidate:concert,concert,concert,concert,音乐会,concert,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:conductor,conductor,conductor,conductor,售票员,conductor,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:confident,confident,confident,confident,自信的；有信心的,confident,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:contest,contest,contest,contest,比赛；竞赛,contest,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:contest,contest,contest,contest,比赛；竞赛,contest,2,yes,exact-single,1,KV000999,比赛；竞赛,pending-sense-confirmation,no
 candidate:cookbook,cookbook,cookbook,cookbook,食谱；烹饪书,cookbook,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cooked,cooked,cooked,cooked,做饭；烹饪,cooked,1,no,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cookie,cookie,cookie,cookie,饼干,cookie|cookies,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cool,cool,cool,cool,凉爽的；凉的,cool,30,yes,exact-single,1,KV000175,凉爽的,pending-sense-confirmation,no
+candidate:cool,cool,cool,cool,凉爽的；凉的,cool,30,yes,exact-multiple,2,KV000175|KV001142,凉爽的|（使）变凉；冷却,pending-multi-candidate-review,no
 candidate:corn,corn,corn,corn,玉米,corn,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:corn-on-the-cob,corn-on-the-cob,corn-on-the-cob,corn-on-the-cob,玉米棒；玉米棒子,corn-on-the-cob,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:corner,corner,corner,corner,拐角；街角,corner,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -522,7 +522,7 @@ candidate:cornflakes,cornflakes,cornflakes,cornflakes,玉米片,cornflakes,1,yes
 candidate:correct,correct,correct,correct,正确的；对的,correct,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cost,cost,cost,cost,费用；花费,cost,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cotton,cotton,cotton,cotton,棉；棉花,cotton,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cough,cough,cough,cough,咳嗽；咳嗽声,cough|coughed,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:cough,cough,cough,cough,咳嗽；咳嗽声,cough|coughed,10,yes,exact-single,1,KV001088,咳嗽,pending-sense-confirmation,no
 candidate:could,could,could,could,能；可以（can 的过去式或较委婉形式）,could,6,no,no-existing-match,0,,,pending-new-identity-review,no
 candidate:count,count,count,count,数；计数,count,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:count to ten,count to ten,count to ten,count to ten,数到十,count to ten,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -562,7 +562,7 @@ candidate:cut#verb,cut#verb,cut,cut,切；割,cut,8,yes,no-existing-match,0,,,pe
 candidate:cute,cute,cute,cute,可爱的,cute,13,yes,exact-single,1,KV000517,可爱的,pending-sense-confirmation,no
 candidate:cycle,cycle,cycle,cycle,骑自行车,cycle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cycle helmet,cycle helmet,cycle helmet,cycle helmet,骑行头盔,cycle helmet,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:cycling,cycling,cycling,cycling,骑自行车；骑行运动,cycling,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:cycling,cycling,cycling,cycling,骑自行车；骑行运动,cycling,1,yes,exact-single,1,KV001186,骑自行车运动（或活动）,pending-sense-confirmation,no
 candidate:cycling shoes,cycling shoes,cycling shoes,cycling shoes,骑行鞋；自行车运动鞋,cycling shoes,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:cyclist,cyclist,cyclist,cyclist,骑自行车的人,cyclist,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dad,dad,dad,dad,爸爸,dad,16,yes,exact-single,1,KV000409,爸爸,pending-sense-confirmation,no
@@ -600,24 +600,24 @@ candidate:dessert,dessert,dessert,dessert,甜点；餐后甜点,dessert,2,yes,no
 candidate:detective,detective,detective,detective,侦探,detective,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dialogue,dialogue,dialogue,dialogue,对话,dialogue,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:diamond,diamond,diamond,diamond,钻石；金刚石,diamond,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:diary,diary,diary,diary,日记；日记本,diary,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:diary,diary,diary,diary,日记；日记本,diary,5,yes,exact-single,1,KV001017,日记,pending-sense-confirmation,no
 candidate:dice,dice,dice,dice,骰子,dice,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dictionary,dictionary,dictionary,dictionary,字典；词典,dictionary,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:die,die,die,die,死；死亡,die,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:diet,diet,diet,diet,饮食；日常饮食,diet,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:diet,diet,diet,diet,饮食；日常饮食,diet,3,yes,exact-single,1,KV001090,日常饮食,pending-sense-confirmation,no
 candidate:different,different,different,different,不同的,different,12,yes,exact-single,1,KV000493,不同的,pending-sense-confirmation,no
 candidate:difficult,difficult,difficult,difficult,困难的；难的,difficult,14,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dig,dig,dig,dig,挖；掘,dig,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:digital,digital,digital,digital,数字的,digital,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dimsum,dimsum,dimsum,dimsum,中式点心；点心,dimsum,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:dining hall,dining hall,dining hall,dining hall,餐厅；饭厅,dining hall,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:dining hall,dining hall,dining hall,dining hall,餐厅；饭厅,dining hall,2,yes,exact-single,1,KV001183,饭厅,pending-sense-confirmation,no
 candidate:dining room,dining room,dining room,dining room,餐厅；饭厅,dining room,7,yes,exact-single,1,KV000339,餐厅；饭厅,pending-sense-confirmation,no
 candidate:dinner,dinner,dinner,dinner,晚餐；正餐,dinner,19,yes,exact-single,1,KV000865,正餐,pending-sense-confirmation,no
-candidate:dinosaur,dinosaur,dinosaur,dinosaur,恐龙,dinosaur,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:dinosaur,dinosaur,dinosaur,dinosaur,恐龙,dinosaur,4,yes,exact-single,1,KV001161,恐龙,pending-sense-confirmation,no
 candidate:direction,direction,direction,direction,方向,direction,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dirty,dirty,dirty,dirty,脏的；肮脏的,dirty,16,yes,exact-single,1,KV000367,脏的,pending-sense-confirmation,no
 candidate:disappear,disappear,disappear,disappear,消失,disappear,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:discuss,discuss,discuss,discuss,讨论,discuss,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:discuss,discuss,discuss,discuss,讨论,discuss,1,yes,exact-single,1,KV001089,讨论；商量,pending-sense-confirmation,no
 candidate:disneyland,disneyland,disneyland,Disneyland,迪士尼乐园,disneyland,3,yes,exact-single,1,KV000515,迪士尼乐园,pending-sense-confirmation,no
 candidate:display,display,display,display,展示；陈列,display,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dizzy,dizzy,dizzy,dizzy,头晕的；眩晕的,dizzy,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -627,7 +627,7 @@ candidate:do exercise,do exercise,do exercise,do exercise,锻炼；做运动,do 
 candidate:do homework,do homework,do homework,do homework,做作业,do homework,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:do jigsaw puzzles,do jigsaw puzzles,do jigsaw puzzles,do jigsaw puzzles,拼拼图；做拼图,doing jigsaw puzzles,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:do kung fu,do kung fu,do kung fu,do kung fu,练功夫；做中国功夫,do kung fu,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:do morning exercises,do morning exercises,do morning exercises,do morning exercises,做早操；晨练,do morning exercises|doing morning exercises,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:do morning exercises,do morning exercises,do morning exercises,do morning exercises,做早操；晨练,do morning exercises|doing morning exercises,3,yes,exact-single,1,KV000973,做早操,pending-sense-confirmation,no
 candidate:do the housework,do the housework,do the housework,do the housework,做家务,do the housework,1,yes,exact-single,1,KV000501,做家务,pending-sense-confirmation,no
 candidate:doctor,doctor,doctor,doctor,医生,doctor|dr|dr.,24,yes,exact-single,1,KV000425,医生,pending-sense-confirmation,no
 candidate:dog,dog,dog,dog,狗,dog,23,yes,exact-single,1,KV000018,狗,pending-sense-confirmation,no
@@ -658,17 +658,17 @@ candidate:draw,draw,draw,draw,画；绘画,draw|drew,23,yes,no-existing-match,0,
 candidate:draw cartoons,draw cartoons,draw cartoons,draw cartoons,画卡通；画漫画,draw cartoons,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:draw pictures,draw pictures,draw pictures,draw pictures,画画；画图,draw pictures,2,yes,exact-single,1,KV000304,画画,pending-sense-confirmation,no
 candidate:drawing,drawing,drawing,drawing,绘画；图画,drawing,4,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:dress,dress,dress,dress,连衣裙；裙子,dress,23,yes,exact-single,1,KV000095,连衣裙,pending-sense-confirmation,no
+candidate:dress,dress,dress,dress,连衣裙；裙子,dress,23,yes,exact-multiple,2,KV000095|KV001067,连衣裙|穿衣服,pending-multi-candidate-review,no
 candidate:dressed,dressed,dressed,dressed,穿好衣服的；打扮好的,dressed,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:drill,drill,drill,drill,电钻；钻孔机,drill,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:drink cold drinks,drink cold drinks,drink cold drinks,drink cold drinks,喝冷饮,drank cold drinks,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dripping,dripping,dripping,dripping,滴水的；滴着水的,dripping,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:drive,drive,drive,drive,驾驶；开车,drive|drove,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:drive,drive,drive,drive,驾驶；开车,drive|drove,10,yes,exact-single,1,KV001153,驾驶；开车,pending-sense-confirmation,no
 candidate:drive away,drive away,drive away,drive away,赶走；驱赶,drive away,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:driver,driver,driver,driver,司机；驾驶员,driver,16,yes,exact-single,1,KV000823,司机,pending-sense-confirmation,no
 candidate:drum,drum,drum,drum,鼓,drum,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:drummer,drummer,drummer,drummer,鼓手,drummer,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:dry,dry,dry,dry,干的；干燥的,dry,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:dry,dry,dry,dry,干的；干燥的,dry,8,yes,exact-single,1,KV001054,干的,pending-sense-confirmation,no
 candidate:duckling,duckling,duckling,duckling,小鸭子,duckling,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:dumpling,dumpling,dumpling,dumpling,饺子,dumpling|dumplings,12,yes,exact-single,1,KV000755,饺子,pending-sense-confirmation,no
 candidate:dunvegan castle,dunvegan castle,dunvegan castle,Dunvegan Castle,Dunvegan Castle（城堡名）,dunvegan castle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -678,9 +678,9 @@ candidate:dvd,dvd,dvd,DVD,DVD；数字光盘,dvd,3,yes,no-existing-match,0,,,pen
 candidate:e-book,e-book,e-book,e-book,电子书,e-book,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:e-card,e-card,e-card,e-card,电子贺卡,e-card,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:e-friend,e-friend,e-friend,e-friend,网友；网上朋友,e-friend,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:e-mail,e-mail,e-mail,e-mail,电子邮件；发电子邮件,e-mail,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:each,each,each,each,每个；各自,each,6,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:each other,each other,each other,each other,彼此；互相,each other,9,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:e-mail,e-mail,e-mail,e-mail,电子邮件；发电子邮件,e-mail,1,yes,orthographic-single,1,KV001093,电子邮件,pending-orthographic-review,no
+candidate:each,each,each,each,每个；各自,each,6,yes,exact-single,1,KV001026,每一；各个,pending-sense-confirmation,no
+candidate:each other,each other,each other,each other,彼此；互相,each other,9,yes,exact-single,1,KV001027,相互,pending-sense-confirmation,no
 candidate:ear,ear,ear,ear,耳朵,ear,23,yes,exact-single,1,KV000011,耳朵,pending-sense-confirmation,no
 candidate:early,early,early,early,早；早的,early,17,yes,exact-single,1,KV000581,早；早地,pending-sense-confirmation,no
 candidate:earth,earth,earth,earth,地球,earth,15,yes,exact-single,1,KV000391,地球,pending-sense-confirmation,no
@@ -688,8 +688,8 @@ candidate:easily,easily,easily,easily,容易地；轻易地,easily,3,yes,no-exis
 candidate:east,east,east,east,东；东方,east,9,yes,exact-single,1,KV000684,东；东方,pending-sense-confirmation,no
 candidate:easter,easter,easter,Easter,复活节,easter,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:easter bunny,easter bunny,easter bunny,Easter Bunny,复活节兔子,easter bunny,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:easy,easy,easy,easy,容易的,easy,19,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:eat,eat,eat,eat,吃,ate|eat|eating,38,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:easy,easy,easy,easy,容易的,easy,19,yes,exact-single,1,KV000912,容易的；轻易的,pending-sense-confirmation,no
+candidate:eat,eat,eat,eat,吃,ate|eat|eating,38,yes,exact-single,1,KV001053,（过去式 ate）吃,pending-sense-confirmation,no
 candidate:eat breakfast,eat breakfast,eat breakfast,eat breakfast,吃早餐；吃早饭,eat breakfast,2,yes,exact-single,1,KV000191,吃早饭,pending-sense-confirmation,no
 candidate:eat dinner,eat dinner,eat dinner,eat dinner,吃晚餐；吃晚饭,eat dinner,2,yes,exact-single,1,KV000195,吃晚饭,pending-sense-confirmation,no
 candidate:eat lunch,eat lunch,eat lunch,eat lunch,吃午饭,eat lunch,1,yes,exact-single,1,KV000193,吃午饭,pending-sense-confirmation,no
@@ -711,12 +711,12 @@ candidate:elementary school,elementary school,elementary school,elementary schoo
 candidate:elephant,elephant,elephant,elephant,大象,elephant,20,yes,exact-single,1,KV000543,大象,pending-sense-confirmation,no
 candidate:eleven,eleven,eleven,eleven,十一,eleven,19,yes,exact-single,1,KV000179,十一；十一个,pending-sense-confirmation,no
 candidate:eleventh,eleventh,eleventh,eleventh,第十一,eleventh,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:else,else,else,else,别的；其他的；另外,else,7,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:email,email,email,email,电子邮件；发电子邮件,email,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:else,else,else,else,别的；其他的；另外,else,7,yes,exact-single,1,KV000934,其他的；别的,pending-sense-confirmation,no
+candidate:email,email,email,email,电子邮件；发电子邮件,email,13,yes,exact-single,1,KV001093,电子邮件,pending-sense-confirmation,no
 candidate:emergency,emergency,emergency,emergency,紧急情况；突发事件,emergency,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:emperor,emperor,emperor,emperor,皇帝,emperor,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:end,end,end,end,结束；末尾；尽头,end,8,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:energy,energy,energy,energy,能源；能量,energy,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:energy,energy,energy,energy,能源；能量,energy,1,yes,exact-single,1,KV001140,能源,pending-sense-confirmation,no
 candidate:engineer,engineer,engineer,engineer,工程师,engineer,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:england,england,england,England,英格兰,england,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:english,english,english,English,英语；英文,english,20,yes,exact-single,1,KV000283,英语,pending-sense-confirmation,no
@@ -724,7 +724,7 @@ candidate:english book,english book,english book,English book,英语书；英文
 candidate:english class,english class,english class,English class,英语课,english class,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:english-chinese dictionary,english-chinese dictionary,english-chinese dictionary,English-Chinese dictionary,英汉词典,english-chinese dictionary,1,yes,exact-single,1,KV000798,英汉词典,pending-sense-confirmation,no
 candidate:enjoy,enjoy,enjoy,enjoy,喜欢；享受,enjoy,13,yes,exact-single,1,KV000395,喜欢；享受,pending-sense-confirmation,no
-candidate:enough,enough,enough,enough,足够；充足,enough,11,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:enough,enough,enough,enough,足够；充足,enough,11,yes,exact-single,1,KV000935,足够的；充足的；充分的,pending-sense-confirmation,no
 candidate:enter,enter,enter,enter,进入；进去,enter,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:entrance,entrance,entrance,entrance,入口；入口处,entrance,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:entry,entry,entry,entry,报名；参赛登记,entry,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -736,7 +736,7 @@ candidate:especially,especially,especially,especially,尤其；特别,especially
 candidate:eve,eve,eve,eve,前夕,eve,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:even,even,even,even,甚至；连……都,even,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:evening,evening,evening,evening,晚上；傍晚,evening,16,yes,exact-single,1,KV000366,晚上,pending-sense-confirmation,no
-candidate:ever,ever,ever,ever,曾经；在任何时候,ever,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ever,ever,ever,ever,曾经；在任何时候,ever,2,yes,exact-single,1,KV001083,（进行比较时用于加强语气）以往任何时候,pending-sense-confirmation,no
 candidate:every,every,every,every,每一；每个,every,16,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:every day,every day,every day,every day,每天,every day,4,yes,exact-single,1,KV000198,每天,pending-sense-confirmation,no
 candidate:every year,every year,every year,every year,每年,every year,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -747,11 +747,11 @@ candidate:everywhere,everywhere,everywhere,everywhere,到处；各处,everywhere
 candidate:example,example,example,example,例子；示例,example,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:except,except,except,except,除了……以外,except,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:excited,excited,excited,excited,兴奋的；激动的,excited,14,yes,exact-single,1,KV000732,兴奋的；激动的,pending-sense-confirmation,no
-candidate:exciting,exciting,exciting,exciting,令人兴奋的；令人激动的,exciting,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:exciting,exciting,exciting,exciting,令人兴奋的；令人激动的,exciting,8,yes,exact-single,1,KV001084,令人激动的,pending-sense-confirmation,no
 candidate:excuse,excuse,excuse,excuse,借口；理由,excuse,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:exercise,exercise,exercise,exercise,锻炼；运动,exercise,18,yes,exact-single,1,KV000582,锻炼；运动,pending-sense-confirmation,no
 candidate:exercise book,exercise book,exercise book,exercise book,练习本,exercise book,1,yes,exact-single,1,KV000555,练习本,pending-sense-confirmation,no
-candidate:exhibition,exhibition,exhibition,exhibition,展览；展览会,exhibition,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:exhibition,exhibition,exhibition,exhibition,展览；展览会,exhibition,2,yes,exact-single,1,KV001041,展览,pending-sense-confirmation,no
 candidate:exit,exit,exit,exit,出口,exit,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:expensive,expensive,expensive,expensive,昂贵的；贵的,expensive,8,yes,exact-single,1,KV000871,昂贵的；价格高的,pending-sense-confirmation,no
 candidate:experience,experience,experience,experience,经历；体验,experience,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -797,10 +797,10 @@ candidate:feed the fish,feed the fish,feed the fish,feed the fish,喂鱼,feeding
 candidate:feeling,feeling,feeling,feeling,感觉；感受,feeling,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:feet,feet,feet,feet,脚；足（foot 的复数）,feet,9,yes,exact-single,1,KV000222,脚（foot的复数）,pending-sense-confirmation,no
 candidate:ferry,ferry,ferry,ferry,渡船,ferry,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:festival,festival,festival,festival,节日,festival,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:festival,festival,festival,festival,节日,festival,10,yes,exact-single,1,KV001015,节日,pending-sense-confirmation,no
 candidate:fete,fete,fete,fete,游乐会；庆祝会,fete,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:fever,fever,fever,fever,发烧；发热,fever,13,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:few,few,few,few,少数；很少,few,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:fever,fever,fever,fever,发烧；发热,fever,13,yes,exact-single,1,KV001087,发烧；发热,pending-sense-confirmation,no
+candidate:few,few,few,few,少数；很少,few,4,yes,exact-single,1,KV000996,不多；很少,pending-sense-confirmation,no
 candidate:field,field,field,field,田地；田野,field,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fiercely,fiercely,fiercely,fiercely,猛烈地；激烈地,fiercely,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fifteen,fifteen,fifteen,fifteen,十五,fifteen,18,yes,exact-single,1,KV000187,十五；十五个,pending-sense-confirmation,no
@@ -815,10 +815,10 @@ candidate:filling,filling,filling,filling,馅料,filling,1,yes,no-existing-match
 candidate:finally,finally,finally,finally,最后；终于,finally,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:find,find,find,find,找到；发现,find|found,26,yes,exact-single,1,KV000405,找到；发现,pending-sense-confirmation,no
 candidate:find out,find out,find out,find out,查明；弄清；发现,find out,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:fine,fine,fine,fine,好的；健康的；不错的,fine,19,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:fine,fine,fine,fine,好的；健康的；不错的,fine,19,yes,exact-single,1,KV000968,晴朗的,pending-sense-confirmation,no
 candidate:finger,finger,finger,finger,手指,finger,7,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:finish,finish,finish,finish,完成；结束,finish,10,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:fire,fire,fire,fire,火；火灾,fire,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:finish,finish,finish,finish,完成；结束,finish,10,yes,exact-single,1,KV000918,完成；做好,pending-sense-confirmation,no
+candidate:fire,fire,fire,fire,火；火灾,fire,5,yes,exact-single,1,KV000971,火；火灾,pending-sense-confirmation,no
 candidate:firecracker,firecracker,firecracker,firecracker,鞭炮；爆竹,firecracker,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:firefighter,firefighter,firefighter,firefighter,消防队员,firefighter,4,yes,exact-single,1,KV000822,消防队员,pending-sense-confirmation,no
 candidate:fireman,fireman,fireman,fireman,消防员,fireman,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -826,8 +826,8 @@ candidate:firework,firework,firework,firework,烟花；烟火,firework|fireworks
 candidate:first,first,first,first,第一；首先,1st|first,25,yes,exact-single,1,KV000279,第一；首先,pending-sense-confirmation,no
 candidate:first floor,first floor,first floor,first floor,一楼；第一层,first floor,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fish and chips,fish and chips,fish and chips,fish and chips,炸鱼薯条,fish and chips,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:fish#noun,fish#noun,fish,fish,鱼；鱼类,fish,27,yes,exact-single,1,KV000080,鱼；鱼肉,pending-sense-confirmation,no
-candidate:fish#verb,fish#verb,fish,fish,钓鱼；捕鱼,fish,7,yes,exact-single,1,KV000080,鱼；鱼肉,pending-sense-confirmation,no
+candidate:fish#noun,fish#noun,fish,fish,鱼；鱼类,fish,27,yes,exact-multiple,2,KV000080|KV001172,鱼；鱼肉|钓鱼；捕鱼,pending-multi-candidate-review,no
+candidate:fish#verb,fish#verb,fish,fish,钓鱼；捕鱼,fish,7,yes,exact-multiple,2,KV000080|KV001172,鱼；鱼肉|钓鱼；捕鱼,pending-multi-candidate-review,no
 candidate:fisherman,fisherman,fisherman,fisherman,渔夫；渔民,fisherman,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fishing,fishing,fishing,fishing,钓鱼,fishing,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fit,fit,fit,fit,健康的；健壮的,fit,5,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -847,14 +847,14 @@ candidate:flour,flour,flour,flour,面粉,flour,2,yes,no-existing-match,0,,,pendi
 candidate:flower,flower,flower,flower,花,flower|flowers,21,yes,exact-single,1,KV000137,花,pending-sense-confirmation,no
 candidate:flower shop,flower shop,flower shop,flower shop,花店,flower shop,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:flower show,flower show,flower show,flower show,花展,flower show,1,yes,exact-single,1,KV000626,花展,pending-sense-confirmation,no
-candidate:flu,flu,flu,flu,流感,flu,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:flu,flu,flu,flu,流感,flu,1,yes,exact-single,1,KV000933,流行性感冒；流感,pending-sense-confirmation,no
 candidate:flute,flute,flute,flute,长笛,flute,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fly a kite,fly a kite,fly a kite,fly a kite,放风筝,fly a kite,3,yes,exact-single,1,KV000154,放风筝,pending-sense-confirmation,no
 candidate:fly away,fly away,fly away,fly away,飞走；飞离,fly away,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fly#insect,fly#insect,fly,fly,苍蝇,fly,3,yes,exact-single,1,KV000831,操纵（飞行器等）；飞,pending-sense-confirmation,no
 candidate:fly#verb,fly#verb,fly,fly,飞；飞行,fly|flew,31,yes,exact-single,1,KV000831,操纵（飞行器等）；飞,pending-sense-confirmation,no
 candidate:flyover,flyover,flyover,flyover,立交桥；天桥,flyover,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:fog,fog,fog,fog,雾,fog,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:fog,fog,fog,fog,雾,fog,1,yes,exact-single,1,KV000969,雾,pending-sense-confirmation,no
 candidate:foggy,foggy,foggy,foggy,有雾的；多雾的,foggy,2,yes,exact-single,1,KV000690,有雾的,pending-sense-confirmation,no
 candidate:fold,fold,fold,fold,折叠；折起来,fold,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:follow,follow,follow,follow,跟随；遵循,follow,5,yes,exact-single,1,KV000861,听从；遵循,pending-sense-confirmation,no
@@ -898,7 +898,7 @@ candidate:friendship,friendship,friendship,friendship,友谊；友情,friendship
 candidate:frightened,frightened,frightened,frightened,害怕的；受惊的,frightened,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:frog,frog,frog,frog,青蛙,frog,6,yes,exact-single,1,KV000797,青蛙,pending-sense-confirmation,no
 candidate:from,from,from,from,从；来自,from,16,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:front,front,front,front,前面；前部,front,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:front,front,front,front,前面；前部,front,4,yes,exact-single,1,KV000911,前部,pending-sense-confirmation,no
 candidate:frozen,frozen,frozen,frozen,冷冻的；冰冻的,frozen,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:fruit,fruit,fruit,fruit,水果,fruit|fruits,22,yes,exact-single,1,KV000235,水果,pending-sense-confirmation,no
 candidate:fry,fry,fry,fry,油炸；油煎,fry,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -906,7 +906,7 @@ candidate:full,full,full,full,饱的；吃饱的,full,11,yes,no-existing-match,0
 candidate:fun,fun,fun,fun,乐趣；有趣的事,fun,17,yes,exact-single,1,KV000362,乐趣；有趣,pending-sense-confirmation,no
 candidate:fun park,fun park,fun park,fun park,游乐园,fun park,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:funny,funny,funny,funny,有趣的；好笑的；滑稽的,funny,14,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:fur,fur,fur,fur,毛皮；软毛,fur,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:fur,fur,fur,fur,毛皮；软毛,fur,4,yes,exact-single,1,KV001020,（某些动物的）浓密的软毛,pending-sense-confirmation,no
 candidate:furniture,furniture,furniture,furniture,家具,furniture,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:future,future,future,future,未来；将来,future,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:game,game,game,game,游戏；比赛,game,14,yes,exact-single,1,KV000814,游戏,pending-sense-confirmation,no
@@ -933,7 +933,7 @@ candidate:get up,get up,get up,get up,起床；起身,get up,19,yes,exact-single
 candidate:get well,get well,get well,get well,康复；恢复健康,get well,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ghost,ghost,ghost,ghost,鬼；幽灵,ghost,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:giant,giant,giant,giant,巨人；巨大的生物,giant,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:gift,gift,gift,gift,礼物,gift,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:gift,gift,gift,gift,礼物,gift,10,yes,exact-single,1,KV001175,礼物,pending-sense-confirmation,no
 candidate:gift shop,gift shop,gift shop,gift shop,礼品店,gift shop,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ginger,ginger,ginger,ginger,姜；生姜,ginger,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:giraffe,giraffe,giraffe,giraffe,长颈鹿,giraffe,8,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -952,19 +952,19 @@ candidate:go,go,go,go,去；走,go|goes|gone|went,40,yes,exact-single,1,KV000133
 candidate:go away,go away,go away,go away,离开；走开,go away,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:go boating,go boating,go boating,go boating,去划船；乘船游玩,go boating,4,yes,exact-single,1,KV000465,去划船,pending-sense-confirmation,no
 candidate:go camping,go camping,go camping,go camping,去露营,go camping,3,yes,exact-single,1,KV000500,去露营,pending-sense-confirmation,no
-candidate:go cycling,go cycling,go cycling,go cycling,去骑自行车,go cycling,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:go cycling,go cycling,go cycling,go cycling,去骑自行车,go cycling,2,yes,exact-single,1,KV001187,去骑自行车,pending-sense-confirmation,no
 candidate:go down,go down,go down,go down,下去；向下走,go down,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:go fishing,go fishing,go fishing,go fishing,去钓鱼,go fishing,8,yes,exact-single,1,KV000359,去钓鱼,pending-sense-confirmation,no
 candidate:go for a picnic,go for a picnic,go for a picnic,go for a picnic,去野餐,go for a picnic,1,yes,exact-single,1,KV000497,去野餐,pending-sense-confirmation,no
-candidate:go for a walk,go for a walk,go for a walk,go for a walk,去散步,go for a walk,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:go for a walk,go for a walk,go for a walk,go for a walk,去散步,go for a walk,3,yes,exact-single,1,KV000975,散步,pending-sense-confirmation,no
 candidate:go home,go home,go home,go home,回家,go home,8,yes,exact-single,1,KV000194,回家,pending-sense-confirmation,no
-candidate:go on a picnic,go on a picnic,go on a picnic,go on a picnic,去野餐,go on a picnic,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:go on a picnic,go on a picnic,go on a picnic,go on a picnic,去野餐,go on a picnic,2,yes,exact-single,1,KV000991,去野餐,pending-sense-confirmation,no
 candidate:go on a trip,go on a trip,go on a trip,go on a trip,去旅行,go on a trip,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:go out,go out,go out,go out,出去；外出,go out,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:go shopping,go shopping,go shopping,go shopping,去购物,go shopping,12,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:go shopping,go shopping,go shopping,go shopping,去购物,go shopping,12,yes,exact-single,1,KV000976,去买东西；购物,pending-sense-confirmation,no
 candidate:go skating,go skating,go skating,go skating,去滑冰,go skating,5,yes,exact-single,1,KV000499,去滑冰,pending-sense-confirmation,no
 candidate:go straight,go straight,go straight,go straight,直走,go straight,4,yes,exact-single,1,KV000449,直走,pending-sense-confirmation,no
-candidate:go swimming,go swimming,go swimming,go swimming,去游泳,go swimming,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:go swimming,go swimming,go swimming,go swimming,去游泳,go swimming,10,yes,exact-single,1,KV000989,去游泳,pending-sense-confirmation,no
 candidate:go to a drawing club,go to a drawing club,go to a drawing club,go to a drawing club,去绘画社团；参加绘画社团,go to a drawing club,1,yes,exact-single,1,KV000355,参加绘画俱乐部,pending-sense-confirmation,no
 candidate:go to a movie,go to a movie,go to a movie,go to a movie,去看电影,go to a movie,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:go to bed,go to bed,go to bed,go to bed,上床睡觉,go to bed,15,yes,exact-single,1,KV000196,上床睡觉,pending-sense-confirmation,no
@@ -995,7 +995,7 @@ candidate:grandfather,grandfather,grandfather,grandfather,祖父；外祖父,gra
 candidate:grandma,grandma,grandma,grandma,奶奶；外婆,grandma,15,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:grandmother,grandmother,grandmother,grandmother,祖母；外祖母,grandmother,16,yes,exact-single,1,KV000103,奶奶；外婆,pending-sense-confirmation,no
 candidate:grandpa,grandpa,grandpa,grandpa,爷爷；外公,grandpa,13,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:grandparent,grandparent,grandparent,grandparent,祖父母；外祖父母,grandparent,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:grandparent,grandparent,grandparent,grandparent,祖父母；外祖父母,grandparent,10,yes,exact-single,1,KV000932,祖父；祖母；外祖父；外祖母,pending-sense-confirmation,no
 candidate:grandson,grandson,grandson,grandson,孙子；外孙,grandson,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:granny,granny,granny,granny,奶奶；外婆,granny,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:grape,grape,grape,grape,葡萄,grape|grapes,11,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1022,13 +1022,13 @@ candidate:guide,guide,guide,guide,指南；指南书,guide,2,yes,no-existing-mat
 candidate:guitar,guitar,guitar,guitar,吉他,guitar,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:gun,gun,gun,gun,枪；枪支,gun,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:guy,guy,guy,guy,家伙；人,guy,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:gym,gym,gym,gym,体育馆；健身房,gym,9,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:gym,gym,gym,gym,体育馆；健身房,gym,9,yes,exact-single,1,KV001184,体育馆,pending-sense-confirmation,no
 candidate:habit,habit,habit,habit,习惯,habit,7,yes,exact-single,1,KV000782,习惯,pending-sense-confirmation,no
 candidate:had,had,had,had,有；拥有（have 的过去式）,had,11,no,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hair,hair,hair,hair,头发；毛发,hair,23,yes,exact-single,1,KV000217,头发,pending-sense-confirmation,no
 candidate:hairpin,hairpin,hairpin,hairpin,发夹,hairpin,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:half,half,half,half,一半；半,half,12,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:hall,hall,hall,hall,大厅；礼堂,hall,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:half,half,half,half,一半；半,half,12,yes,exact-single,1,KV001104,一半,pending-sense-confirmation,no
+candidate:hall,hall,hall,hall,大厅；礼堂,hall,6,yes,exact-single,1,KV001162,大厅,pending-sense-confirmation,no
 candidate:halloween,halloween,halloween,Halloween,万圣节前夕,halloween,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ham,ham,ham,ham,火腿,ham,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hamburger,hamburger,hamburger,hamburger,汉堡包,hamburger|hamburgers,19,yes,exact-single,1,KV000410,汉堡包,pending-sense-confirmation,no
@@ -1043,7 +1043,7 @@ candidate:happily,happily,happily,happily,快乐地；高兴地,happily,8,yes,no
 candidate:happiness,happiness,happiness,happiness,幸福；快乐,happiness,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:happy,happy,happy,happy,高兴的；快乐的,happy,22,yes,exact-single,1,KV000152,快乐的；高兴的,pending-sense-confirmation,no
 candidate:harbour,harbour,harbour,harbour,海港；港口,harbour,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:hard-working,hard-working,hard-working,hard-working,勤奋的；勤劳的,hard-working,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:hard-working,hard-working,hard-working,hard-working,勤奋的；勤劳的,hard-working,2,yes,exact-single,1,KV000905,工作努力的；辛勤的,pending-sense-confirmation,no
 candidate:harder,harder,harder,harder,更难的；更困难的,harder,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hardly,hardly,hardly,hardly,"几乎不,简直不",hardly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hardly ever,hardly ever,hardly ever,hardly ever,几乎从不；很少,hardly ever,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1056,7 +1056,7 @@ candidate:have a cold,have a cold,have a cold,have a cold,感冒；患感冒,hav
 candidate:have a fever,have a fever,have a fever,have a fever,发烧,have a fever,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:have a good time,have a good time,have a good time,have a good time,玩得开心；过得愉快,have a good time,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:have a headache,have a headache,have a headache,have a headache,头痛；头疼,have a headache,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:have a look,have a look,have a look,have a look,看一看,have a look,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:have a look,have a look,have a look,have a look,看一看,have a look,6,yes,exact-single,1,KV001042,看一看,pending-sense-confirmation,no
 candidate:have a meeting,have a meeting,have a meeting,have a meeting,开会,have a meeting,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:have a party,have a party,have a party,have a party,举行聚会；开派对,have a party,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:have a picnic,have a picnic,have a picnic,have a picnic,去野餐；举行野餐,have a picnic,4,yes,exact-single,1,KV000613,去野餐；举行野餐,pending-sense-confirmation,no
@@ -1079,7 +1079,7 @@ candidate:hear,hear,hear,hear,听见；听到,hear|heard,20,yes,exact-single,1,K
 candidate:heart,heart,heart,heart,心；心脏,heart,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:heat,heat,heat,heat,热；热量；高温,heat,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:heaviest,heaviest,heaviest,heaviest,最重的,heaviest,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:heavy,heavy,heavy,heavy,重的；沉重的,heavier|heavy,20,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:heavy,heavy,heavy,heavy,重的；沉重的,heavier|heavy,20,yes,exact-single,1,KV000964,程度大的；严重的,pending-sense-confirmation,no
 candidate:height,height,height,height,身高；高度,height,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:helicopter,helicopter,helicopter,helicopter,直升机,helicopter,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hello,hello,hello,hello,你好；喂,hello,20,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1090,7 +1090,7 @@ candidate:hen,hen,hen,hen,母鸡,hen,7,yes,no-existing-match,0,,,pending-new-ide
 candidate:here,here,here,here,这里；在这里,here,18,yes,exact-single,1,KV000149,这里,pending-sense-confirmation,no
 candidate:hero,hero,hero,hero,英雄；主人公,hero,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:heroine,heroine,heroine,heroine,女主角；女英雄,heroine,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:hers,hers,hers,hers,她的；她的东西,hers,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:hers,hers,hers,hers,她的；她的东西,hers,4,yes,exact-single,1,KV001023,她的,pending-sense-confirmation,no
 candidate:herself,herself,herself,herself,她自己（反身代词）,herself,3,yes,exact-single,1,KV000898,她自己,pending-sense-confirmation,no
 candidate:hi,hi,hi,hi,嗨；你好,hi,18,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hide,hide,hide,hide,躲藏；隐藏,hide,5,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1100,7 +1100,7 @@ candidate:high,high,high,high,高的,high,20,yes,no-existing-match,0,,,pending-n
 candidate:high jump,high jump,high jump,high jump,跳高,high jump,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hiking,hiking,hiking,hiking,徒步旅行,hiking,4,yes,exact-single,1,KV000709,徒步旅行,pending-sense-confirmation,no
 candidate:hill,hill,hill,hill,小山；山丘,hill,12,yes,exact-single,1,KV000140,小山,pending-sense-confirmation,no
-candidate:him,him,him,him,他,him,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:him,him,him,him,他,him,13,yes,exact-single,1,KV000904,他,pending-sense-confirmation,no
 candidate:himself,himself,himself,himself,他自己,himself,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hippo,hippo,hippo,hippo,河马,hippo,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:his,his,his,his,他的,his,21,yes,exact-single,1,KV000115,他的,pending-sense-confirmation,no
@@ -1129,7 +1129,7 @@ candidate:hospital,hospital,hospital,hospital,医院,hospital,21,yes,exact-singl
 candidate:hot dog,hot dog,hot dog,hot dog,热狗,hot dog,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:hot pot,hot pot,hot pot,hot pot,火锅,hot pot,1,yes,exact-single,1,KV000802,火锅,pending-sense-confirmation,no
 candidate:hotel,hotel,hotel,hotel,旅馆；酒店,hotel,10,yes,exact-single,1,KV000461,酒店；旅馆,pending-sense-confirmation,no
-candidate:hour,hour,hour,hour,小时；钟头,hour,12,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:hour,hour,hour,hour,小时；钟头,hour,12,yes,exact-single,1,KV000945,小时,pending-sense-confirmation,no
 candidate:house,house,house,house,房子；住宅,house,19,yes,exact-single,1,KV000369,房子；住宅,pending-sense-confirmation,no
 candidate:housework,housework,housework,housework,家务,housework,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:housing estate,housing estate,housing estate,housing estate,住宅区,housing estate,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1151,12 +1151,12 @@ candidate:ice cream,ice cream,ice cream,ice cream,冰淇淋,ice cream|ice-cream,
 candidate:ice fishing,ice fishing,ice fishing,ice fishing,冰钓,ice fishing,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ice hockey,ice hockey,ice hockey,ice hockey,冰球运动,ice hockey,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ice lantern,ice lantern,ice lantern,ice lantern,冰灯,ice lantern,1,yes,exact-single,1,KV000756,冰灯,pending-sense-confirmation,no
-candidate:ice skate,ice skate,ice skate,ice skate,冰鞋；溜冰鞋,ice skate,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:ice-skate,ice-skate,ice-skate,ice-skate,滑冰；溜冰,ice-skate,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ice skate,ice skate,ice skate,ice skate,冰鞋；溜冰鞋,ice skate,1,yes,orthographic-single,1,KV001188,滑冰,pending-orthographic-review,no
+candidate:ice-skate,ice-skate,ice-skate,ice-skate,滑冰；溜冰,ice-skate,3,yes,exact-single,1,KV001188,滑冰,pending-sense-confirmation,no
 candidate:iced tea,iced tea,iced tea,iced tea,冰茶；冰镇茶,iced tea,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ict,ict,ict,ICT,信息与通信技术（ICT）,ict,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:idea,idea,idea,idea,想法；主意,idea,20,yes,exact-single,1,KV000783,想法；主意,pending-sense-confirmation,no
-candidate:if,if,if,if,如果；假如,if,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:if,if,if,if,如果；假如,if,3,yes,exact-single,1,KV000936,如果；假若；倘若,pending-sense-confirmation,no
 candidate:ill,ill,ill,ill,生病的；不舒服的,ill,13,yes,exact-single,1,KV000733,生病的,pending-sense-confirmation,no
 candidate:illness,illness,illness,illness,病,illness,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:immediately,immediately,immediately,immediately,立即；马上,immediately,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1185,7 +1185,7 @@ candidate:intelligent,intelligent,intelligent,intelligent,聪明的；有智慧�
 candidate:interested,interested,interested,interested,感兴趣的,interested,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:interesting,interesting,interesting,interesting,有趣的；令人感兴趣的,interesting,18,yes,exact-single,1,KV000350,有趣的,pending-sense-confirmation,no
 candidate:international children's day,international children's day,international children's day,International Children's Day,国际儿童节,international children's day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:internet,internet,internet,Internet,互联网；因特网,internet,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:internet,internet,internet,Internet,互联网；因特网,internet,8,yes,exact-single,1,KV001190,互联网,pending-sense-confirmation,no
 candidate:interview,interview,interview,interview,采访；面试,interview,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:interviewer,interviewer,interviewer,interviewer,采访者；采访人,interviewer,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:into,into,into,into,进入；到……里面,into,10,yes,exact-single,1,KV000671,进入；到……里面,pending-sense-confirmation,no
@@ -1201,11 +1201,11 @@ candidate:iphone,iphone,iphone,iPhone,iPhone（苹果手机）,iphone,1,yes,no-e
 candidate:ipod,ipod,ipod,iPod,iPod（苹果音乐播放器）,ipod,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:iron,iron,iron,iron,熨；熨烫,iron,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:is,is,is,is,是；处于（be 的第三人称单数）,is,26,yes,exact-single,1,KV000016,是,pending-sense-confirmation,no
-candidate:island,island,island,island,岛；岛屿,island,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:island,island,island,island,岛；岛屿,island,7,yes,exact-single,1,KV000987,岛,pending-sense-confirmation,no
 candidate:it,it,it,it,它；这件事/这个东西,it,21,yes,exact-single,1,KV000024,它,pending-sense-confirmation,no
 candidate:italian,italian,italian,Italian,意大利的,italian,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:italy,italy,italy,Italy,意大利,italy,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:its,its,its,its,它的,its,12,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:its,its,its,its,它的,its,12,yes,exact-single,1,KV001038,它的,pending-sense-confirmation,no
 candidate:jack-o'-lantern,jack-o'-lantern,jack-o'-lantern,jack-o'-lantern,南瓜灯；杰克灯,jack-o'-lantern,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:jacket,jacket,jacket,jacket,夹克；短外套,jacket,15,yes,exact-single,1,KV000258,夹克衫,pending-sense-confirmation,no
 candidate:jam,jam,jam,jam,果酱,jam,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1229,7 +1229,7 @@ candidate:juggle,juggle,juggle,juggle,玩杂耍,juggle,1,yes,no-existing-match,0
 candidate:juggler,juggler,juggler,juggler,杂耍演员；玩杂耍的人,juggler,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:juice,juice,juice,juice,果汁；汁,juice,23,yes,exact-single,1,KV000086,果汁,pending-sense-confirmation,no
 candidate:july,july,july,July,七月,jul.|july,19,yes,exact-single,1,KV000272,七月,pending-sense-confirmation,no
-candidate:jump,jump,jump,jump,跳；跳跃,jump|jumped|jumping,19,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:jump,jump,jump,jump,跳；跳跃,jump|jumped|jumping,19,yes,exact-single,1,KV000907,跳；跃,pending-sense-confirmation,no
 candidate:june,june,june,June,六月,jun.|june,19,yes,exact-single,1,KV000271,六月,pending-sense-confirmation,no
 candidate:jungle,jungle,jungle,jungle,丛林；密林,jungle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:junior high school,junior high school,junior high school,junior high school,初中；初级中学,junior high school,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1237,7 +1237,7 @@ candidate:junk food,junk food,junk food,junk food,垃圾食品,junk food,1,yes,n
 candidate:just,just,just,just,只是；仅仅,just,10,yes,exact-single,1,KV000437,只是；仅仅,pending-sense-confirmation,no
 candidate:kangaroo,kangaroo,kangaroo,kangaroo,袋鼠,kangaroo,6,yes,exact-single,1,KV000701,袋鼠,pending-sense-confirmation,no
 candidate:karate,karate,karate,karate,空手道,karate,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:keep,keep,keep,keep,保持；保留,keep,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:keep,keep,keep,keep,保持；保留,keep,13,yes,exact-single,1,KV001031,保持某种状态,pending-sense-confirmation,no
 candidate:keep on,keep on,keep on,keep on,继续；坚持,keep on,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:keep quiet,keep quiet,keep quiet,keep quiet,保持安静,keep quiet,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:key,key,key,key,钥匙,key,10,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1245,15 +1245,15 @@ candidate:keyboard,keyboard,keyboard,keyboard,键盘,keyboard,1,yes,no-existing-
 candidate:kick,kick,kick,kick,踢,kick,4,yes,exact-single,1,KV000229,踢,pending-sense-confirmation,no
 candidate:kid,kid,kid,kid,小孩；孩子,kid,16,yes,exact-single,1,KV000864,小孩,pending-sense-confirmation,no
 candidate:kill,kill,kill,kill,杀死；杀害,kill,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:kilogram,kilogram,kilogram,kilogram,千克；公斤,kilo|kilogram,7,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:kilometre,kilometre,kilometre,kilometre,[计量] 公里,kilometre,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:kilogram,kilogram,kilogram,kilogram,千克；公斤,kilo|kilogram,7,yes,exact-single,1,KV001164,千克；公斤,pending-sense-confirmation,no
+candidate:kilometre,kilometre,kilometre,kilometre,[计量] 公里,kilometre,4,yes,exact-single,1,KV001047,千米；公里,pending-sense-confirmation,no
 candidate:kindergarten,kindergarten,kindergarten,kindergarten,幼儿园,kindergarten,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:king,king,king,king,国王,king,6,yes,exact-single,1,KV000472,国王,pending-sense-confirmation,no
 candidate:kingfisher,kingfisher,kingfisher,kingfisher,翠鸟,kingfisher,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:kiss,kiss,kiss,kiss,亲吻；吻,kiss,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:kitchen,kitchen,kitchen,kitchen,厨房,kitchen,21,yes,exact-single,1,KV000341,厨房,pending-sense-confirmation,no
 candidate:kite,kite,kite,kite,风筝,kite,21,yes,exact-single,1,KV000832,风筝,pending-sense-confirmation,no
-candidate:kitten,kitten,kitten,kitten,小猫,kitten,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:kitten,kitten,kitten,kitten,小猫,kitten,3,yes,exact-single,1,KV001016,小猫,pending-sense-confirmation,no
 candidate:kiwi,kiwi,kiwi,kiwi,几维鸟,kiwi,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:knee,knee,knee,knee,膝盖,knee,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:knife,knife,knife,knife,刀；小刀,knife,10,yes,exact-single,1,KV000397,刀,pending-sense-confirmation,no
@@ -1267,24 +1267,24 @@ candidate:l. a. lakers,l. a. lakers,l. a. lakers,L. A. Lakers,洛杉矶湖人队
 candidate:l.a.,l.a.,l.a.,L.A.,洛杉矶,l.a.,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lab,lab,lab,lab,实验室,lab,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:labor day,labor day,labor day,Labor Day,劳动节,labor day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:labour,labour,labour,labour,劳动,labour,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:labour day,labour day,labour day,Labour Day,劳动节,labour day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:labour,labour,labour,labour,劳动,labour,1,yes,exact-single,1,KV001000,劳动,pending-sense-confirmation,no
+candidate:labour day,labour day,labour day,Labour Day,劳动节,labour day,1,yes,exact-single,1,KV001001,劳动节,pending-sense-confirmation,no
 candidate:ladder,ladder,ladder,ladder,梯子,ladder,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lady,lady,lady,lady,女士；夫人,lady,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ladybird,ladybird,ladybird,ladybird,瓢虫,ladybird,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lake,lake,lake,lake,湖；湖泊,lake,20,yes,exact-single,1,KV000139,湖,pending-sense-confirmation,no
 candidate:lake ontario,lake ontario,lake ontario,Lake Ontario,安大略湖,lake ontario,1,yes,exact-single,1,KV000777,安大略湖,pending-sense-confirmation,no
-candidate:lamp,lamp,lamp,lamp,灯；台灯,lamp,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:lamp,lamp,lamp,lamp,灯；台灯,lamp,5,yes,exact-single,1,KV001169,台灯,pending-sense-confirmation,no
 candidate:land,land,land,land,陆地；土地,land,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:language,language,language,language,语言,language,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lantern,lantern,lantern,lantern,灯笼,lantern,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:large,large,large,large,大的；大型的,large,4,yes,exact-single,1,KV000877,大型号的,pending-sense-confirmation,no
-candidate:last,last,last,last,最后的；上一个的,last,16,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:last,last,last,last,最后的；上一个的,last,16,yes,exact-single,1,KV000983,上一个的；刚过去的,pending-sense-confirmation,no
 candidate:last night,last night,last night,last night,昨晚；昨天晚上,last night,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:late,late,late,late,晚的；迟的；迟到的,late,20,yes,exact-single,1,KV000353,迟到的；晚的,pending-sense-confirmation,no
-candidate:later,later,later,later,后来；稍后；以后,later,9,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:later,later,later,later,后来；稍后；以后,later,9,yes,exact-single,1,KV001079,随后；后来,pending-sense-confirmation,no
 candidate:latest,latest,latest,latest,最新的；最近的,latest,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:laugh,laugh,laugh,laugh,笑；大笑,laugh|laughed,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:laugh,laugh,laugh,laugh,笑；大笑,laugh|laughed,10,yes,exact-single,1,KV000924,笑,pending-sense-confirmation,no
 candidate:laugh at,laugh at,laugh at,laugh at,嘲笑；因……发笑,laugh at,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lawn,lawn,lawn,lawn,草坪,lawn,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lazy,lazy,lazy,lazy,懒惰的；懒洋洋的,lazy,3,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1302,7 +1302,7 @@ candidate:lemon,lemon,lemon,lemon,柠檬,lemon,6,yes,no-existing-match,0,,,pendi
 candidate:lemonade,lemonade,lemonade,lemonade,柠檬水,lemonade,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:leopard,leopard,leopard,leopard,豹；豹子,leopard,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:less,less,less,less,更少；较少,less,2,yes,exact-single,1,KV000784,更少的；较少,pending-sense-confirmation,no
-candidate:lesson,lesson,lesson,lesson,课；课程,lesson,16,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:lesson,lesson,lesson,lesson,课；课程,lesson,16,yes,exact-single,1,KV000928,课；一节课,pending-sense-confirmation,no
 candidate:let,let,let,let,让；允许,let,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:librarian,librarian,librarian,librarian,图书馆员,librarian,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:library,library,library,library,图书馆,library,21,yes,exact-single,1,KV000293,图书馆,pending-sense-confirmation,no
@@ -1341,20 +1341,20 @@ candidate:look at,look at,look at,look at,看；看着,look at,11,yes,no-existin
 candidate:look for,look for,look for,look for,寻找；找,look for,13,yes,exact-single,1,KV000251,寻找,pending-sense-confirmation,no
 candidate:look forward to,look forward to,look forward to,look forward to,期待；盼望,look forward to,2,yes,exact-single,1,KV000265,期待；盼望,pending-sense-confirmation,no
 candidate:look like,look like,look like,look like,看起来像；像,look like,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:look up,look up,look up,look up,查找；查阅,look up,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:look up,look up,look up,look up,查找；查阅,look up,1,yes,exact-single,1,KV001189,（在词典中或通过电脑）查阅,pending-sense-confirmation,no
 candidate:lorry,lorry,lorry,lorry,卡车；货车,lorry,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:los angeles,los angeles,los angeles,Los Angeles,洛杉矶,los angeles,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lose,lose,lose,lose,丢失；失去,lose,9,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lost,lost,lost,lost,迷路的；丢失的,lost,13,yes,exact-single,1,KV000317,丢失的；迷路的,pending-sense-confirmation,no
 candidate:lots of,lots of,lots of,lots of,许多；很多,lots of,7,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:lotus,lotus,lotus,lotus,莲花；荷花,lotus,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:lotus,lotus,lotus,lotus,莲花；荷花,lotus,1,yes,exact-single,1,KV000954,莲属植物,pending-sense-confirmation,no
 candidate:loud,loud,loud,loud,大声的；响亮的,loud,4,yes,exact-single,1,KV000856,说话太大声的；吵闹的,pending-sense-confirmation,no
 candidate:loudly,loudly,loudly,loudly,大声地；响亮地,loudly,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:love,love,love,love,爱；喜爱；喜欢,love,20,yes,exact-single,1,KV000563,喜爱；爱,pending-sense-confirmation,no
 candidate:lovely,lovely,lovely,lovely,可爱的；美好的,lovely,15,yes,exact-single,1,KV000553,可爱的；讨人喜欢的,pending-sense-confirmation,no
 candidate:lower,lower,lower,lower,更低的；较低的,lower,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:luck,luck,luck,luck,运气；幸运,luck,6,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:lucky,lucky,lucky,lucky,幸运的,lucky,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:lucky,lucky,lucky,lucky,幸运的,lucky,6,yes,exact-single,1,KV001103,幸运的,pending-sense-confirmation,no
 candidate:lucky money,lucky money,lucky money,lucky money,压岁钱,lucky money,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lunar,lunar,lunar,lunar,农历的；阴历的,lunar,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:lunch,lunch,lunch,lunch,午餐；午饭,lunch,17,yes,exact-single,1,KV000866,午餐,pending-sense-confirmation,no
@@ -1362,14 +1362,14 @@ candidate:lunch box,lunch box,lunch box,lunch box,饭盒,lunch box,1,yes,no-exis
 candidate:lunchtime,lunchtime,lunchtime,lunchtime,午餐时间,lunchtime,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:machine,machine,machine,machine,机器,machine,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:made,made,made,made,制作；做（make 的过去式）,made,8,no,no-existing-match,0,,,pending-new-identity-review,no
-candidate:magazine,magazine,magazine,magazine,杂志,magazine,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:magazine,magazine,magazine,magazine,杂志,magazine,5,yes,exact-single,1,KV001168,杂志,pending-sense-confirmation,no
 candidate:magic,magic,magic,magic,魔法；魔术,magic,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:magician,magician,magician,magician,魔术师,magician,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mail,mail,mail,mail,邮件；邮寄,mail,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mail a present,mail a present,mail a present,mail a present,邮寄礼物,mail a present,1,yes,exact-single,1,KV000621,邮寄礼物,pending-sense-confirmation,no
 candidate:main,main,main,main,主要的；最重要的,main,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:main course,main course,main course,main course,主菜,main course,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:make,make,make,make,制作；做,make|making,27,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:make,make,make,make,制作；做,make|making,27,yes,exact-single,1,KV001074,（过去式 made）做；使出现,pending-sense-confirmation,no
 candidate:make a card,make a card,make a card,make a card,制作卡片,make a card,2,yes,exact-single,1,KV000624,制作卡片,pending-sense-confirmation,no
 candidate:make a model plane,make a model plane,make a model plane,make a model plane,制作模型飞机,make a model plane,2,yes,exact-single,1,KV000156,做飞机模型,pending-sense-confirmation,no
 candidate:make a phone call,make a phone call,make a phone call,make a phone call,打电话,make a phone call,2,yes,exact-single,1,KV000619,打电话,pending-sense-confirmation,no
@@ -1397,16 +1397,16 @@ candidate:maple leaves,maple leaves,maple leaves,maple leaves,枫叶,maple leave
 candidate:march,march,march,March,三月,mar.|march,17,yes,exact-single,1,KV000268,三月,pending-sense-confirmation,no
 candidate:mark,mark,mark,mark,分数；成绩,mark,1,yes,exact-single,1,KV000591,分数；成绩,pending-sense-confirmation,no
 candidate:marker,marker,marker,marker,马克笔；记号笔,marker,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:market,market,market,market,市场；集市,market,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:market,market,market,market,市场；集市,market,3,yes,exact-single,1,KV001156,集市；市场,pending-sense-confirmation,no
 candidate:mascot,mascot,mascot,mascot,吉祥物,mascot,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mask,mask,mask,mask,面具,mask,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:master,master,master,master,掌握；精通,master,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:material,material,material,material,材料；原料,material,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:maths,maths,maths,maths,数学,math|maths,19,yes,exact-single,1,KV000287,数学；数学课,pending-sense-confirmation,no
 candidate:maths book,maths book,maths book,maths book,数学书,maths book,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:matter,matter,matter,matter,事情；问题,matter,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:matter,matter,matter,matter,事情；问题,matter,6,yes,exact-single,1,KV000914,事情；问题,pending-sense-confirmation,no
 candidate:may day,may day,may day,May Day,五一劳动节,may day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:may#month,may#month,may,May,五月,may,17,yes,exact-single,1,KV000270,五月,pending-sense-confirmation,no
+candidate:may#month,may#month,may,May,五月,may,17,yes,exact-multiple,2,KV000270|KV001095,五月|也许；可能,pending-multi-candidate-review,no
 candidate:maybe,maybe,maybe,maybe,也许；可能；大概,maybe,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:me,me,me,me,我（宾格）,me,18,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:meal,meal,meal,meal,一餐；一顿饭,meal,6,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1467,8 +1467,8 @@ candidate:money,money,money,money,钱；货币,money,10,yes,exact-single,1,KV000
 candidate:monkey,monkey,monkey,monkey,猴子,monkey,24,yes,exact-single,1,KV000021,猴子,pending-sense-confirmation,no
 candidate:monkey king,monkey king,monkey king,Monkey King,孙悟空；美猴王,monkey king,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:monster,monster,monster,monster,怪物,monster,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:month,month,month,month,月；一个月,month,14,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:moon,moon,moon,moon,月亮；月球,moon,17,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:month,month,month,month,月；一个月,month,14,yes,exact-single,1,KV001128,月；月份,pending-sense-confirmation,no
+candidate:moon,moon,moon,moon,月亮；月球,moon,17,yes,exact-single,1,KV001115,月球；月亮；卫星,pending-sense-confirmation,no
 candidate:moon cake,moon cake,moon cake,moon cake,月饼,moon cake,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mooncake,mooncake,mooncake,mooncake,月饼,mooncake,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:moose,moose,moose,moose,驼鹿,moose,1,yes,exact-single,1,KV000790,驼鹿,pending-sense-confirmation,no
@@ -1484,18 +1484,18 @@ candidate:mother's day,mother's day,mother's day,Mother's Day,母亲节,mother's
 candidate:motorbike,motorbike,motorbike,motorbike,摩托车,motorbike,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:motorcycle,motorcycle,motorcycle,motorcycle,摩托车,motorcycle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mount taishan,mount taishan,mount taishan,Mount Taishan,泰山,mount taishan,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:mountain,mountain,mountain,mountain,山；山脉,mountain,15,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:mountain,mountain,mountain,mountain,山；山脉,mountain,15,yes,exact-single,1,KV000961,高山；山岳,pending-sense-confirmation,no
 candidate:mountain climbing,mountain climbing,mountain climbing,mountain climbing,登山；爬山,mountain climbing,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mouth,mouth,mouth,mouth,嘴；口,mouth,23,yes,exact-single,1,KV000014,嘴；口,pending-sense-confirmation,no
-candidate:move,move,move,move,移动；搬动；搬家,move,9,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:move,move,move,move,移动；搬动；搬家,move,9,yes,exact-single,1,KV000925,搬家；移动,pending-sense-confirmation,no
 candidate:movie,movie,movie,movie,电影,movie,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:movie theater,movie theater,movie theater,movie theater,电影院,movie theater,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:mr,mr,mr,Mr,先生,mr|mr.,15,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:mrs,mrs,mrs,Mrs,太太；夫人,mrs|mrs.,16,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:mrs,mrs,mrs,Mrs,太太；夫人,mrs|mrs.,16,yes,exact-single,1,KV000948,（用于女子的姓氏或姓名前）太太，夫人,pending-sense-confirmation,no
 candidate:ms,ms,ms,Ms,女士,ms|ms.,12,yes,exact-single,1,KV000828,女士,pending-sense-confirmation,no
 candidate:much,much,much,much,许多；很多,much,10,yes,exact-single,1,KV000321,很；非常,pending-sense-confirmation,no
 candidate:mud,mud,mud,mud,泥；泥巴,mud,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:mule,mule,mule,mule,骡子,mule,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:mule,mule,mule,mule,骡子,mule,1,yes,exact-single,1,KV001177,骡子,pending-sense-confirmation,no
 candidate:mum,mum,mum,mum,妈妈,mum,11,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:munich,munich,munich,Munich,慕尼黑,munich,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:museum,museum,museum,museum,博物馆,museum,19,yes,exact-single,1,KV000475,博物馆,pending-sense-confirmation,no
@@ -1511,12 +1511,12 @@ candidate:myself,myself,myself,myself,我自己；我本人,myself,6,yes,exact-s
 candidate:nail,nail,nail,nail,指甲,nail,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:name,name,name,name,名字；姓名；命名,name,21,yes,exact-single,1,KV000116,名字,pending-sense-confirmation,no
 candidate:name tag,name tag,name tag,name tag,名牌；姓名牌,name tag,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:national,national,national,national,国家的；全国性的,national,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:national,national,national,national,国家的；全国性的,national,5,yes,exact-single,1,KV001002,国家的,pending-sense-confirmation,no
 candidate:national day,national day,national day,National Day,国庆节；国庆日,national day,6,yes,exact-single,1,KV000600,国庆节,pending-sense-confirmation,no
 candidate:national flag,national flag,national flag,national flag,国旗,national flag,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:native american,native american,native american,Native American,美洲原住民,native american,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:natural,natural,natural,natural,自然的；天然的,natural,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:nature,nature,nature,nature,自然；大自然,nature,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:nature,nature,nature,nature,自然；大自然,nature,3,yes,exact-single,1,KV000959,自然界；大自然,pending-sense-confirmation,no
 candidate:nature shows,nature shows,nature shows,nature shows,自然类节目,nature shows,1,yes,exact-single,1,KV000570,自然节目,pending-sense-confirmation,no
 candidate:naughty,naughty,naughty,naughty,淘气的；顽皮的,naughty,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:near,near,near,near,在……附近；近的,near,21,yes,exact-single,1,KV000066,在……附近,pending-sense-confirmation,no
@@ -1524,7 +1524,7 @@ candidate:nearby,nearby,nearby,nearby,在附近；附近的,nearby,5,yes,no-exis
 candidate:nearly,nearly,nearly,nearly,"差不多,几乎",nearly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:neck,neck,neck,neck,脖子；颈部,neck,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:necklace,necklace,necklace,necklace,项链,necklace,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:need,need,need,need,需要,need,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:need,need,need,need,需要,need,13,yes,exact-single,1,KV000984,需要,pending-sense-confirmation,no
 candidate:neighbour,neighbour,neighbour,neighbour,邻居,neighbor|neighbour,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:neighbourhood,neighbourhood,neighbourhood,neighbourhood,社区；街区,neighborhood|neighbourhood,3,yes,exact-single,1,KV000451,街区；社区,pending-sense-confirmation,no
 candidate:neither,neither,neither,neither,两者都不,neither,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1539,7 +1539,7 @@ candidate:new south wales,new south wales,new south wales,New South Wales,新南
 candidate:new year,new year,new year,New Year,新年,new year,3,yes,exact-single,1,KV000146,新年,pending-sense-confirmation,no
 candidate:new year's day,new year's day,new year's day,New Year's Day,元旦；新年第一天,new year's day,3,yes,exact-single,1,KV000594,元旦,pending-sense-confirmation,no
 candidate:new york,new york,new york,New York,纽约,new york,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:new zealand,new zealand,new zealand,New Zealand,新西兰,new zealand,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:new zealand,new zealand,new zealand,New Zealand,新西兰,new zealand,1,yes,exact-single,1,KV001059,新西兰,pending-sense-confirmation,no
 candidate:news,news,news,news,新闻；消息,news,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:news shows,news shows,news shows,news shows,新闻节目,news shows,1,yes,exact-single,1,KV000569,新闻节目,pending-sense-confirmation,no
 candidate:newspaper,newspaper,newspaper,newspaper,报纸,newspaper,6,yes,exact-single,1,KV000848,报纸,pending-sense-confirmation,no
@@ -1549,7 +1549,7 @@ candidate:next to,next to,next to,next to,紧邻；在……旁边,next to,14,ye
 candidate:next week,next week,next week,next week,下周；下星期,next week,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:nice,nice,nice,nice,好的；友善的；令人愉快的,nice,22,yes,exact-single,1,KV000538,友好的；好的,pending-sense-confirmation,no
 candidate:niece,niece,niece,niece,侄女；外甥女,niece,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:night,night,night,night,夜晚；晚上,night,16,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:night,night,night,night,夜晚；晚上,night,16,yes,exact-single,1,KV000930,夜；夜晚,pending-sense-confirmation,no
 candidate:nine,nine,nine,nine,九,nine,22,yes,exact-single,1,KV000033,九；九个,pending-sense-confirmation,no
 candidate:nineteen,nineteen,nineteen,nineteen,十九,nineteen,15,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:nineteenth,nineteenth,nineteenth,nineteenth,第十九,nineteenth,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1562,7 +1562,7 @@ candidate:no smoking,no smoking,no smoking,no smoking,禁止吸烟,no smoking,1,
 candidate:no swimming,no swimming,no swimming,no swimming,禁止游泳,no swimming,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:nobody,nobody,nobody,nobody,没有人；无人,nobody,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:nod,nod,nod,nod,点头,nod,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:noise,noise,noise,noise,噪音；响声,noise,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:noise,noise,noise,noise,噪音；响声,noise,7,yes,exact-single,1,KV001019,声音；响声；噪音,pending-sense-confirmation,no
 candidate:noisy,noisy,noisy,noisy,吵闹的；嘈杂的,noisy,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:none,none,none,none,没有一个；没有任何人或东西,none,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:nonsense,nonsense,nonsense,nonsense,胡说；废话,nonsense,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1579,8 +1579,8 @@ candidate:not,not,not,not,不；没有（否定词）,not,14,yes,no-existing-mat
 candidate:note,note,note,note,笔记；便条,note,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:note pad,note pad,note pad,note pad,记事本,note pad,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:notebook,notebook,notebook,notebook,笔记本,notebook,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:nothing,nothing,nothing,nothing,没有什么；没有东西,nothing,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:notice,notice,notice,notice,通知；告示,notice,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:nothing,nothing,nothing,nothing,没有什么；没有东西,nothing,5,yes,exact-single,1,KV001191,没有什么,pending-sense-confirmation,no
+candidate:notice,notice,notice,notice,通知；告示,notice,1,yes,exact-single,1,KV001077,通知,pending-sense-confirmation,no
 candidate:noticeboard,noticeboard,noticeboard,noticeboard,布告栏；公告栏,noticeboard,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:nottingham,nottingham,nottingham,Nottingham,诺丁汉,nottingham,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:november,november,november,November,十一月,nov.|november,17,yes,exact-single,1,KV000276,十一月,pending-sense-confirmation,no
@@ -1592,12 +1592,12 @@ candidate:nut,nut,nut,nut,坚果,nut,6,yes,no-existing-match,0,,,pending-new-ide
 candidate:o'clock,o'clock,o'clock,o'clock,……点钟,o'clock,15,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:object,object,object,object,物体；物品,object,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:occupation,occupation,occupation,occupation,职业,occupation,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:ocean,ocean,ocean,ocean,海洋,ocean,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ocean,ocean,ocean,ocean,海洋,ocean,4,yes,exact-single,1,KV001119,大海；海洋,pending-sense-confirmation,no
 candidate:ocean park,ocean park,ocean park,Ocean Park,海洋公园,ocean park,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:october,october,october,October,十月,oct.|october,19,yes,exact-single,1,KV000275,十月,pending-sense-confirmation,no
 candidate:octopus,octopus,octopus,octopus,章鱼,octopus,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:of,of,of,of,……的；属于……的,of,6,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:off,off,off,off,离开；脱离,off,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:off,off,off,off,离开；脱离,off,2,yes,exact-single,1,KV001176,从（某处）落下,pending-sense-confirmation,no
 candidate:office,office,office,office,办公室,office,11,yes,exact-single,1,KV000614,办公室,pending-sense-confirmation,no
 candidate:office building,office building,office building,office building,办公楼,office building,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:office worker,office worker,office worker,office worker,办公室职员,office worker,1,yes,exact-single,1,KV000803,公司职员,pending-sense-confirmation,no
@@ -1627,7 +1627,7 @@ candidate:one day,one day,one day,one day,有一天；某一天,one day,2,yes,no
 candidate:onion,onion,onion,onion,洋葱,onion|onions,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:online,online,online,online,在线的；在线地,online,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:only,only,only,only,只；仅仅；唯一的,only,15,yes,exact-single,1,KV000560,只；仅仅,pending-sense-confirmation,no
-candidate:open,open,open,open,打开；开着的；开放的,open,21,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:open,open,open,open,打开；开着的；开放的,open,21,yes,exact-single,1,KV001021,开着的,pending-sense-confirmation,no
 candidate:open day,open day,open day,open day,开放日,open day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:opera,opera,opera,opera,歌剧；歌剧院,opera,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:opera house,opera house,opera house,opera house,歌剧院,opera house,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1636,10 +1636,10 @@ candidate:or,or,or,or,或者；还是,or,16,yes,exact-single,1,KV000118,或者,p
 candidate:orchard,orchard,orchard,orchard,果园,orchard,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:order,order,order,order,顺序；次序,order,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ostrich,ostrich,ostrich,ostrich,鸵鸟,ostrich,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:other,other,other,other,其他的；另外的,other,11,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:other,other,other,other,其他的；另外的,other,11,yes,exact-single,1,KV001013,其他,pending-sense-confirmation,no
 candidate:ottawa,ottawa,ottawa,Ottawa,渥太华（加拿大首都）,ottawa,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:our,our,our,our,我们的,our,19,yes,exact-single,1,KV000300,我们的,pending-sense-confirmation,no
-candidate:ours,ours,ours,ours,我们的；我们的东西,ours,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ours,ours,ours,ours,我们的；我们的东西,ours,2,yes,exact-single,1,KV001025,我们的,pending-sense-confirmation,no
 candidate:out,out,out,out,向外；出去,out,10,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:out of,out of,out of,out of,从……出来；离开,out of,1,yes,exact-single,1,KV000670,从……出来,pending-sense-confirmation,no
 candidate:outdoor,outdoor,outdoor,outdoor,户外的；室外的,outdoor,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1651,16 +1651,16 @@ candidate:over,over,over,over,在……上方；在……上面,over,12,yes,exac
 candidate:over here,over here,over here,over here,在这里；这边,over here,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:over there,over there,over there,over there,在那边；在那里,over there,11,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:owl,owl,owl,owl,猫头鹰,owl,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:own,own,own,own,自己的；拥有,own,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:own,own,own,own,自己的；拥有,own,3,yes,exact-single,1,KV001155,自己的,pending-sense-confirmation,no
 candidate:ox,ox,ox,ox,牛；公牛,ox,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:oxford,oxford,oxford,Oxford,牛津（英国城市）,oxford,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:p.m.,p.m.,p.m.,p.m.,下午；午后,p.m.,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:p.m.,p.m.,p.m.,p.m.,下午；午后,p.m.,3,yes,exact-single,1,KV000982,午后；下午,pending-sense-confirmation,no
 candidate:pack,pack,pack,pack,打包；收拾,pack,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:packet,packet,packet,packet,小包；一包,packet,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pad,pad,pad,pad,护垫；护具,pad,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:page,page,page,page,页；页面,page,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pain,pain,pain,pain,疼痛；痛,pain,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:paint,paint,paint,paint,画；绘画；颜料,paint|painted|paints,20,yes,exact-single,1,KV000365,油漆；给……刷漆,pending-sense-confirmation,no
+candidate:paint,paint,paint,paint,画；绘画；颜料,paint|painted|paints,20,yes,exact-multiple,2,KV000365|KV000995,油漆；给……刷漆|用颜料绘画,pending-multi-candidate-review,no
 candidate:paintbrush,paintbrush,paintbrush,paintbrush,画笔,paintbrush,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:painter,painter,painter,painter,画家；油漆工,painter,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:painting,painting,painting,painting,画；绘画作品,painting,6,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1676,13 +1676,13 @@ candidate:paper,paper,paper,paper,纸；纸张,paper,12,yes,exact-single,1,KV000
 candidate:paper clip,paper clip,paper clip,paper clip,回形针,paper clip,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:paper cutting,paper cutting,paper cutting,paper cutting,剪纸；剪纸艺术,paper cutting,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:parade,parade,parade,parade,游行,parade,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:parent,parent,parent,parent,父亲或母亲；家长,parent|parents,19,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:parent,parent,parent,parent,父亲或母亲；家长,parent|parents,19,yes,exact-single,1,KV000922,父亲；母亲,pending-sense-confirmation,no
 candidate:parents' day,parents' day,parents' day,Parents' Day,家长日,parents' day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:paris,paris,paris,Paris,巴黎（法国首都）,paris,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:paris,paris,paris,Paris,巴黎（法国首都）,paris,2,yes,exact-single,1,KV001061,巴黎,pending-sense-confirmation,no
 candidate:park,park,park,park,公园,park,24,yes,exact-single,1,KV000131,公园,pending-sense-confirmation,no
 candidate:parking,parking,parking,parking,停车,parking,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:parrot,parrot,parrot,parrot,鹦鹉,parrot,5,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:part,part,part,part,部分；一部分,part,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:part,part,part,part,部分；一部分,part,4,yes,exact-single,1,KV001182,角色,pending-sense-confirmation,no
 candidate:participate,participate,participate,participate,参加；参与,participate,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:partner,partner,partner,partner,伙伴；搭档,partner,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:party,party,party,party,聚会；派对,party,22,yes,exact-single,1,KV000280,聚会；派对,pending-sense-confirmation,no
@@ -1736,13 +1736,13 @@ candidate:photographer,photographer,photographer,photographer,摄影师,photogra
 candidate:physical education,physical education,physical education,physical education,体育；体育课,p.e.|pe|physical education,22,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:physics,physics,physics,physics,物理学,physics,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pianist,pianist,pianist,pianist,钢琴家；钢琴演奏者,pianist,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:piano,piano,piano,piano,钢琴,piano,11,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:piano,piano,piano,piano,钢琴,piano,11,yes,exact-single,1,KV000909,钢琴,pending-sense-confirmation,no
 candidate:picasso,picasso,picasso,Picasso,毕加索,picasso,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pick,pick,pick,pick,挑选；选择,pick,11,yes,exact-single,1,KV000889,采；摘,pending-sense-confirmation,no
-candidate:pick apples,pick apples,pick apples,pick apples,摘苹果,pick apples,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:pick apples,pick apples,pick apples,pick apples,摘苹果,pick apples,1,yes,exact-single,1,KV000992,摘苹果,pending-sense-confirmation,no
 candidate:pick fruit,pick fruit,pick fruit,pick fruit,摘水果,pick fruit,1,yes,exact-single,1,KV000357,摘水果,pending-sense-confirmation,no
 candidate:pick up,pick up,pick up,pick up,捡起；拾起,pick up,7,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:picnic,picnic,picnic,picnic,野餐,picnic,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:picnic,picnic,picnic,picnic,野餐,picnic,10,yes,exact-single,1,KV000990,野餐,pending-sense-confirmation,no
 candidate:picture,picture,picture,picture,图片；图画；照片,picture,18,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pie,pie,pie,pie,馅饼；派,pie,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:piece,piece,piece,piece,块；片；件,piece,5,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1752,7 +1752,7 @@ candidate:pillow,pillow,pillow,pillow,枕头,pillow,1,yes,no-existing-match,0,,,
 candidate:pilot,pilot,pilot,pilot,飞行员,pilot,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pineapple,pineapple,pineapple,pineapple,菠萝；凤梨,pineapple,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ping-pong,ping-pong,ping-pong,ping-pong,乒乓球,ping-pong,6,yes,exact-single,1,KV000348,乒乓球,pending-sense-confirmation,no
-candidate:pink,pink,pink,pink,粉红色；粉红色的,pink,12,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:pink,pink,pink,pink,粉红色；粉红色的,pink,12,yes,exact-single,1,KV000994,粉色；粉色的,pending-sense-confirmation,no
 candidate:pirate,pirate,pirate,pirate,海盗,pirate,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pity,pity,pity,pity,遗憾；可惜,pity,1,yes,exact-single,1,KV000762,遗憾；可惜,pending-sense-confirmation,no
 candidate:pizza,pizza,pizza,pizza,比萨饼；披萨,pizza,7,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1761,7 +1761,7 @@ candidate:place of interest,place of interest,place of interest,place of interes
 candidate:places of interest,places of interest,places of interest,places of interest,名胜；景点,places of interest,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:plan,plan,plan,plan,计划；打算,plan|planned,12,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:plane,plane,plane,plane,飞机,plane,19,yes,exact-single,1,KV000068,飞机,pending-sense-confirmation,no
-candidate:planet,planet,planet,planet,行星,planet,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:planet,planet,planet,planet,行星,planet,3,yes,exact-single,1,KV001111,行星,pending-sense-confirmation,no
 candidate:plant trees,plant trees,plant trees,plant trees,植树；种树,plant trees,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:planted,planted,planted,planted,种植了；栽种了（plant 的过去式/过去分词）,planted,1,no,no-existing-match,0,,,pending-new-identity-review,no
 candidate:plaster,plaster,plaster,plaster,膏药；创可贴,plaster,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1783,7 +1783,7 @@ candidate:play the violin,play the violin,play the violin,play the violin,拉小
 candidate:play volleyball,play volleyball,play volleyball,play volleyball,打排球,play volleyball,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:play with fire,play with fire,play with fire,play with fire,玩火,play with fire,1,yes,exact-single,1,KV000414,玩火,pending-sense-confirmation,no
 candidate:played,played,played,played,玩；演奏；参加比赛,played,1,no,no-existing-match,0,,,pending-new-identity-review,no
-candidate:player,player,player,player,运动员；选手,player,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:player,player,player,player,运动员；选手,player,5,yes,exact-single,1,KV000903,运动员；参赛选手,pending-sense-confirmation,no
 candidate:playground,playground,playground,playground,操场；游乐场,playground,19,yes,exact-single,1,KV000295,操场,pending-sense-confirmation,no
 candidate:playtime,playtime,playtime,playtime,游戏时间；玩耍时间,playtime,1,yes,exact-single,1,KV000189,游戏时间；课间活动时间,pending-sense-confirmation,no
 candidate:please,please,please,please,请,please,21,yes,exact-single,1,KV000404,请,pending-sense-confirmation,no
@@ -1853,7 +1853,7 @@ candidate:prize,prize,prize,prize,奖品；奖赏,prize,6,yes,exact-single,1,KV0
 candidate:probably,probably,probably,probably,大概；很可能,probably,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:problem,problem,problem,problem,问题；难题,problem,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:programme,programme,programme,programme,节目；电视节目,program|programme,6,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:project,project,project,project,项目；课题；计划,project,4,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:project,project,project,project,项目；课题；计划,project,4,yes,exact-single,1,KV000915,项目；方案,pending-sense-confirmation,no
 candidate:promise,promise,promise,promise,承诺；许诺,promise,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:protect,protect,protect,protect,保护,protect,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:protein,protein,protein,protein,蛋白质,protein,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1864,7 +1864,7 @@ candidate:public,public,public,public,公共的；公用的,public,1,yes,no-exis
 candidate:public library,public library,public library,public library,公共图书馆,public library,1,yes,exact-single,1,KV000775,公共图书馆,pending-sense-confirmation,no
 candidate:pudding,pudding,pudding,pudding,布丁,pudding,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:puddle,puddle,puddle,puddle,水坑；水洼,puddle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:pull,pull,pull,pull,拉；拔,pull|pulled,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:pull,pull,pull,pull,拉；拔,pull|pulled,3,yes,exact-single,1,KV000951,拔出；抽出,pending-sense-confirmation,no
 candidate:puma ranch,puma ranch,puma ranch,Puma Ranch,Puma Ranch（地名/场景名）,puma ranch,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:pupil,pupil,pupil,pupil,学生；小学生,pupil,16,yes,exact-single,1,KV000768,小学生；学生,pending-sense-confirmation,no
 candidate:puppy,puppy,puppy,puppy,小狗；幼犬,puppy,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1881,8 +1881,8 @@ candidate:quack,quack,quack,quack,嘎嘎叫；鸭叫声,quack,2,yes,no-existing-
 candidate:quarter,quarter,quarter,quarter,四分之一；一刻钟（15分钟）,quarter,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:queen,queen,queen,queen,女王；王后,queen,9,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:queen's park,queen's park,queen's park,Queen's Park,女王公园,queen's park,1,yes,exact-single,1,KV000773,皇后公园,pending-sense-confirmation,no
-candidate:question,question,question,question,问题；提问,question,7,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:quick,quick,quick,quick,快的；迅速的,quick,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:question,question,question,question,问题；提问,question,7,yes,exact-single,1,KV001132,问题,pending-sense-confirmation,no
+candidate:quick,quick,quick,quick,快的；迅速的,quick,3,yes,exact-single,1,KV001147,迅速的；快的,pending-sense-confirmation,no
 candidate:quickly,quickly,quickly,quickly,很快地；迅速地,quickly,12,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:quiet,quiet,quiet,quiet,安静的；安静,quiet,12,yes,exact-single,1,KV000522,安静的；文静的,pending-sense-confirmation,no
 candidate:quietly,quietly,quietly,quietly,安静地；悄悄地,quietly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1900,7 +1900,7 @@ candidate:railway station,railway station,railway station,railway station,火车
 candidate:rain,rain,rain,rain,雨；下雨,rain,18,yes,exact-single,1,KV000829,下雨；雨,pending-sense-confirmation,no
 candidate:rain boots,rain boots,rain boots,rain boots,雨鞋,rain boots,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rainbow,rainbow,rainbow,rainbow,彩虹,rainbow,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:raincoat,raincoat,raincoat,raincoat,雨衣,raincoat,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:raincoat,raincoat,raincoat,raincoat,雨衣,raincoat,8,yes,exact-single,1,KV000966,雨衣,pending-sense-confirmation,no
 candidate:rainy,rainy,rainy,rainy,下雨的；多雨的,rainy,14,yes,exact-single,1,KV000160,下雨的；多雨的,pending-sense-confirmation,no
 candidate:raise,raise,raise,raise,举起；升起,raise,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rang,rang,rang,rang,响了；鸣响了（ring 的过去式）,rang,1,no,no-existing-match,0,,,pending-new-identity-review,no
@@ -1928,31 +1928,31 @@ candidate:report,report,report,report,报告；汇报,report,5,yes,no-existing-m
 candidate:reporter,reporter,reporter,reporter,记者,reporter,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:reptile,reptile,reptile,reptile,爬行动物,reptile,1,yes,exact-single,1,KV000712,爬行动物,pending-sense-confirmation,no
 candidate:research,research,research,research,研究；调查,research,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:rest,rest,rest,rest,休息；休息时间,rest,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:rest,rest,rest,rest,休息；休息时间,rest,8,yes,exact-single,1,KV000939,休息；放松,pending-sense-confirmation,no
 candidate:restaurant,restaurant,restaurant,restaurant,餐馆；饭店,restaurant,15,yes,exact-single,1,KV000443,餐馆；饭店,pending-sense-confirmation,no
 candidate:restroom,restroom,restroom,restroom,洗手间；厕所,restroom,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:return,return,return,return,返回；回来,return,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:reunion,reunion,reunion,reunion,团聚；团圆,reunion,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:reuse,reuse,reuse,reuse,再使用；重复利用,reuse,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:reuse,reuse,reuse,reuse,再使用；重复利用,reuse,3,yes,exact-single,1,KV001154,再次使用；重复使用,pending-sense-confirmation,no
 candidate:rhino,rhino,rhino,rhino,犀牛,rhino,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rice,rice,rice,rice,米饭；大米,rice,23,yes,exact-single,1,KV000077,米饭,pending-sense-confirmation,no
 candidate:rice cake,rice cake,rice cake,rice cake,米糕；年糕,rice cake,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rice dumpling,rice dumpling,rice dumpling,rice dumpling,粽子,rice dumpling,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rich,rich,rich,rich,富有的,rich,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:riddle,riddle,riddle,riddle,谜语,riddle,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:riddle,riddle,riddle,riddle,谜语,riddle,1,yes,exact-single,1,KV001003,谜；谜语,pending-sense-confirmation,no
 candidate:ride,ride,ride,ride,骑；乘坐,ride|rode,20,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ride a bike,ride a bike,ride a bike,ride a bike,骑自行车,ride a bike,3,yes,exact-single,1,KV000155,骑自行车,pending-sense-confirmation,no
 candidate:rider,rider,rider,rider,骑手；骑车的人,rider,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:right away,right away,right away,right away,立刻；马上,right away,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ring,ring,ring,ring,（电话、铃等）响；铃声,ring,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rise,rise,rise,rise,升起；上升,rise,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:river,river,river,river,河；河流,river,17,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:river,river,river,river,河；河流,river,17,yes,exact-single,1,KV000958,河；江,pending-sense-confirmation,no
 candidate:riverbank,riverbank,riverbank,riverbank,河岸；河堤,riverbank,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:road,road,road,road,路；道路；公路,road,8,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:roar,roar,roar,roar,吼叫；咆哮,roar,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:roast turkey,roast turkey,roast turkey,roast turkey,烤火鸡,roast turkey,1,yes,exact-single,1,KV000793,烤火鸡,pending-sense-confirmation,no
 candidate:robber,robber,robber,robber,强盗；盗贼,robber,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:robot,robot,robot,robot,机器人,robot,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:robot,robot,robot,robot,机器人,robot,13,yes,exact-single,1,KV000906,机器人,pending-sense-confirmation,no
 candidate:rock,rock,rock,rock,岩石；石头,rock,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rock'n'roll,rock'n'roll,rock'n'roll,rock'n'roll,摇滚乐,rock'n'roll,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:role,role,role,role,角色,role,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -1964,11 +1964,11 @@ candidate:romantic,romantic,romantic,romantic,浪漫的；爱情的,romantic,1,y
 candidate:rome,rome,rome,Rome,罗马,rome,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:roof,roof,roof,roof,屋顶,roof,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:room,room,room,room,房间,room,16,yes,exact-single,1,KV000299,房间,pending-sense-confirmation,no
-candidate:root,root,root,root,根；根部,root,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:rope,rope,rope,rope,绳子；绳索,rope,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:root,root,root,root,根；根部,root,1,yes,exact-single,1,KV000953,根；根茎,pending-sense-confirmation,no
+candidate:rope,rope,rope,rope,绳子；绳索,rope,2,yes,exact-single,1,KV000908,绳；粗绳,pending-sense-confirmation,no
 candidate:rose,rose,rose,rose,玫瑰；玫瑰花,rose,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rough,rough,rough,rough,粗糙的；不平的,rough,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:round,round,round,round,圆的；圆形的,round,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:round,round,round,round,圆的；圆形的,round,7,yes,exact-single,1,KV000956,圆形的；环形的；球形的,pending-sense-confirmation,no
 candidate:routine,routine,routine,routine,日常安排；日常事务,routine,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:row,row,row,row,划船,row,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:row a boat,row a boat,row a boat,row a boat,划船,row a boat|rowed a boat,3,yes,exact-single,1,KV000482,划船,pending-sense-confirmation,no
@@ -1977,14 +1977,14 @@ candidate:rubbish,rubbish,rubbish,rubbish,垃圾；废物,rubbish,3,yes,no-exist
 candidate:rubbish bin,rubbish bin,rubbish bin,rubbish bin,垃圾桶；垃圾箱,rubbish bin,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:rule,rule,rule,rule,规则；规定,rule,6,yes,exact-single,1,KV000842,规则；规章,pending-sense-confirmation,no
 candidate:ruler,ruler,ruler,ruler,尺子；直尺,ruler,21,yes,exact-single,1,KV000002,尺子,pending-sense-confirmation,no
-candidate:run,run,run,run,跑；奔跑,ran|run,30,yes,exact-single,1,KV000334,跑；奔跑,pending-sense-confirmation,no
+candidate:run,run,run,run,跑；奔跑,ran|run,30,yes,exact-multiple,2,KV000334|KV001143,跑；奔跑|（使）运转,pending-multi-candidate-review,no
 candidate:run a race,run a race,run a race,run a race,赛跑；参加赛跑,run a race,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:run away,run away,run away,run away,逃跑；跑开,run away,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:run down the stairs,run down the stairs,run down the stairs,run down the stairs,跑下楼梯,run down the stairs,1,yes,exact-single,1,KV000416,跑下楼梯,pending-sense-confirmation,no
 candidate:runner,runner,runner,runner,跑步者；赛跑运动员,runner,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:running,running,running,running,跑步；跑步活动,running,3,yes,exact-single,1,KV000344,跑步,pending-sense-confirmation,no
 candidate:running race,running race,running race,running race,赛跑；赛跑比赛,running race,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:runny nose,runny nose,runny nose,runny nose,流鼻涕；流鼻水,runny nose,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:runny nose,runny nose,runny nose,runny nose,流鼻涕；流鼻水,runny nose,1,yes,exact-single,1,KV001086,流鼻涕,pending-sense-confirmation,no
 candidate:russia,russia,russia,Russia,俄罗斯,russia,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sack,sack,sack,sack,大袋子；麻袋,sack,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sad,sad,sad,sad,难过的；悲伤的,sad,23,yes,exact-single,1,KV000653,难过的；伤心的,pending-sense-confirmation,no
@@ -1995,7 +1995,7 @@ candidate:safely,safely,safely,safely,安全地,safely,1,yes,no-existing-match,0
 candidate:safety,safety,safety,safety,安全,safety,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:safety rule,safety rule,safety rule,safety rule,安全规则,safety rule,1,yes,exact-single,1,KV000422,安全规则,pending-sense-confirmation,no
 candidate:salad,salad,salad,salad,沙拉；色拉,salad,7,yes,exact-single,1,KV000899,蔬菜沙拉,pending-sense-confirmation,no
-candidate:sale,sale,sale,sale,出售；特价销售,sale,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:sale,sale,sale,sale,出售；特价销售,sale,2,yes,exact-single,1,KV001106,特价销售；出售,pending-sense-confirmation,no
 candidate:sales assistant,sales assistant,sales assistant,sales assistant,售货员；销售助理,sales assistant,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:salesperson,salesperson,salesperson,salesperson,售货员；销售人员,salesperson,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:saleswoman,saleswoman,saleswoman,saleswoman,女售货员；女销售员,saleswoman,1,yes,exact-single,1,KV000562,女售货员,pending-sense-confirmation,no
@@ -2053,15 +2053,15 @@ candidate:second floor,second floor,second floor,second floor,二楼,second floo
 candidate:secret,secret,secret,secret,秘密；秘密的,secret,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:secretary,secretary,secretary,secretary,秘书,secretary,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:section,section,section,section,部分；区域,section,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:see,see,see,see,看见；看到,see,26,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:see,see,see,see,看见；看到,see,26,yes,exact-single,1,KV001051,（过去式 saw）看见,pending-sense-confirmation,no
 candidate:see a doctor,see a doctor,see a doctor,see a doctor,看医生；就医,see a doctor,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:see a film,see a film,see a film,see a film,看电影,see a film,5,yes,exact-single,1,KV000464,看电影,pending-sense-confirmation,no
 candidate:see the world,see the world,see the world,see the world,看看世界；见世面,see the world,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:seed,seed,seed,seed,种子,seed,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:seed,seed,seed,seed,种子,seed,5,yes,exact-single,1,KV000950,种子；籽,pending-sense-confirmation,no
 candidate:seek,seek,seek,seek,寻找；寻求,seek,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:seesaw,seesaw,seesaw,seesaw,跷跷板,seesaw,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:seldom,seldom,seldom,seldom,很少；不常,seldom,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:sell,sell,sell,sell,卖；出售,sell|sold,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:sell,sell,sell,sell,卖；出售,sell|sold,8,yes,exact-single,1,KV001109,出售；售卖,pending-sense-confirmation,no
 candidate:send,send,send,send,发送；寄送,send|sent,15,yes,exact-single,1,KV000452,发送；寄,pending-sense-confirmation,no
 candidate:send a short message,send a short message,send a short message,send a short message,发短消息,send a short message,1,yes,exact-single,1,KV000620,发送短信,pending-sense-confirmation,no
 candidate:send an email,send an email,send an email,send an email,发电子邮件,send an email,1,yes,exact-single,1,KV000617,发送电子邮件,pending-sense-confirmation,no
@@ -2074,7 +2074,7 @@ candidate:seventeenth,seventeenth,seventeenth,seventeenth,第十七,seventeenth,
 candidate:seventh,seventh,seventh,seventh,第七,seventh,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:seventy,seventy,seventy,seventy,七十,seventy,12,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:several,several,several,several,几个；数个,several,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:shadow,shadow,shadow,shadow,影子；阴影,shadow,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:shadow,shadow,shadow,shadow,影子；阴影,shadow,3,yes,exact-single,1,KV001165,阴影；影子,pending-sense-confirmation,no
 candidate:shake,shake,shake,shake,摇动；摇晃,shake,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:shall,shall,shall,shall,shall 情态动词（用于将来/提议等）,shall,12,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:shanghai museum,shanghai museum,shanghai museum,Shanghai Museum,上海博物馆,shanghai museum,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2112,10 +2112,10 @@ candidate:should,should,should,should,应该；应当,should,15,yes,exact-single
 candidate:shoulder,shoulder,shoulder,shoulder,肩膀,shoulder,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:shout,shout,shout,shout,喊叫；大声喊,shout,9,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:show ... around,show ... around,show ... around,show ... around,带……参观；领……四处看看,show ... around,2,yes,exact-single,1,KV000772,带……参观,pending-sense-confirmation,no
-candidate:shower,shower,shower,shower,淋浴；洗澡,shower,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:shower,shower,shower,shower,淋浴；洗澡,shower,2,yes,exact-single,1,KV001148,淋浴,pending-sense-confirmation,no
 candidate:shy,shy,shy,shy,害羞的；腼腆的,shy,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sick,sick,sick,sick,生病的；不舒服的,sick,9,yes,exact-single,1,KV000434,生病的,pending-sense-confirmation,no
-candidate:side,side,side,side,边；侧面,side,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:side,side,side,side,边；侧面,side,1,yes,exact-single,1,KV001160,一面；一边,pending-sense-confirmation,no
 candidate:sidewalk,sidewalk,sidewalk,sidewalk,人行道,sidewalk,1,yes,exact-single,1,KV000417,人行道,pending-sense-confirmation,no
 candidate:sign,sign,sign,sign,标志；标牌；指示牌,sign,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:signature,signature,signature,signature,签名；署名,signature,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2123,7 +2123,7 @@ candidate:silk,silk,silk,silk,丝绸；蚕丝,silk,2,yes,exact-single,1,KV000692
 candidate:silly,silly,silly,silly,傻的；愚蠢的,silly,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:silver,silver,silver,silver,银；银色,silver,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:simple,simple,simple,simple,简单的,simple,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:sing,sing,sing,sing,唱；唱歌,sing,21,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:sing,sing,sing,sing,唱；唱歌,sing,21,yes,exact-single,1,KV001075,（过去式 sang）唱（歌）；演唱,pending-sense-confirmation,no
 candidate:sing english songs,sing english songs,sing english songs,sing English songs,唱英文歌,sing english songs,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sing songs,sing songs,sing songs,sing songs,唱歌,sing songs,2,yes,exact-single,1,KV000306,唱歌,pending-sense-confirmation,no
 candidate:singapore,singapore,singapore,Singapore,新加坡,singapore,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2152,7 +2152,7 @@ candidate:skin,skin,skin,skin,皮肤；外皮,skin,1,yes,no-existing-match,0,,,p
 candidate:skip,skip,skip,skip,跳；跳绳,skip,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:skipping rope,skipping rope,skipping rope,skipping rope,跳绳,skipping rope,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:skirt,skirt,skirt,skirt,裙子,skirt,22,yes,exact-single,1,KV000094,短裙；裙子,pending-sense-confirmation,no
-candidate:sky,sky,sky,sky,天空,sky,15,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:sky,sky,sky,sky,天空,sky,15,yes,exact-single,1,KV001112,天；天空,pending-sense-confirmation,no
 candidate:sled,sled,sled,sled,雪橇,sled,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sleep,sleep,sleep,sleep,睡觉；睡眠,sleep|sleeping|slept,24,yes,exact-single,1,KV000857,睡觉,pending-sense-confirmation,no
 candidate:sleepy,sleepy,sleepy,sleepy,困倦的；想睡的,sleepy,3,yes,exact-single,1,KV000589,困倦的；想睡的,pending-sense-confirmation,no
@@ -2197,7 +2197,7 @@ candidate:sofa,sofa,sofa,sofa,沙发,sofa,10,yes,exact-single,1,KV000343,沙发,
 candidate:soft,soft,soft,soft,软的；柔软的,soft,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:soft toy,soft toy,soft toy,soft toy,软体玩具,soft toy,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:softly,softly,softly,softly,轻轻地；柔和地,softly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:soil,soil,soil,soil,土壤；泥土,soil,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:soil,soil,soil,soil,土壤；泥土,soil,1,yes,exact-single,1,KV001122,土壤,pending-sense-confirmation,no
 candidate:soldier,soldier,soldier,soldier,士兵；军人,soldier,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:some,some,some,some,一些；有些,some,18,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:some time,some time,some time,some time,一段时间,some time,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2222,12 +2222,12 @@ candidate:south pole,south pole,south pole,South Pole,南极,south pole,1,yes,no
 candidate:south-east,south-east,south-east,south-east,东南；东南方,south-east|southeast,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:south-west,south-west,south-west,south-west,西南；西南方,south-west|southwest,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:soya milk,soya milk,soya milk,soya milk,豆浆,soya milk,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:space,space,space,space,太空；空间,space,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:space,space,space,space,太空；空间,space,8,yes,exact-single,1,KV001116,太空；空间,pending-sense-confirmation,no
 candidate:spacecraft,spacecraft,spacecraft,spacecraft,航天器；宇宙飞船,spacecraft,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:spaceship,spaceship,spaceship,spaceship,[航] 宇宙飞船,spaceship,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:spaceship,spaceship,spaceship,spaceship,[航] 宇宙飞船,spaceship,7,yes,exact-single,1,KV001127,宇宙飞船,pending-sense-confirmation,no
 candidate:spaghetti,spaghetti,spaghetti,spaghetti,意大利面；细面条,spaghetti,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:spain,spain,spain,Spain,西班牙,spain,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:spanish,spanish,spanish,Spanish,西班牙的；西班牙人；西班牙语,spanish,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:spain,spain,spain,Spain,西班牙,spain,1,yes,exact-single,1,KV000980,西班牙,pending-sense-confirmation,no
+candidate:spanish,spanish,spanish,Spanish,西班牙的；西班牙人；西班牙语,spanish,1,yes,exact-single,1,KV001045,西班牙的,pending-sense-confirmation,no
 candidate:speak,speak,speak,speak,说；讲；讲某种语言,speak|spoke,21,yes,exact-multiple,2,KV000705|KV000901,说；讲（某种语言）|说话；发言,pending-multi-candidate-review,no
 candidate:speak english,speak english,speak english,speak English,说英语；讲英语,speak english,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:special,special,special,special,特别的；特殊的,special,9,yes,exact-single,1,KV000616,特别的；特殊的,pending-sense-confirmation,no
@@ -2243,7 +2243,7 @@ candidate:sport,sport,sport,sport,运动；体育运动,sport|sports,15,yes,exac
 candidate:sport-lover,sport-lover,sport-lover,sport-lover,体育爱好者,sport-lover,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sports centre,sports centre,sports centre,sports centre,体育中心,sports centre,1,yes,exact-single,1,KV000460,体育中心,pending-sense-confirmation,no
 candidate:sports day,sports day,sports day,Sports Day,学校运动会；运动日,sports day,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:sports meet,sports meet,sports meet,sports meet,运动会,sports meet,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:sports meet,sports meet,sports meet,sports meet,运动会,sports meet,1,yes,exact-single,1,KV000998,运动会,pending-sense-confirmation,no
 candidate:sports meeting,sports meeting,sports meeting,sports meeting,运动会,sports meeting,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sports shoes,sports shoes,sports shoes,sports shoes,运动鞋,sports shoes,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sports star,sports star,sports star,sports star,体育明星；运动明星,sports star,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2260,9 +2260,9 @@ candidate:stall,stall,stall,stall,摊位；货摊,stall,1,yes,no-existing-match,
 candidate:stamp,stamp,stamp,stamp,邮票,stamp,9,yes,exact-single,1,KV000495,邮票,pending-sense-confirmation,no
 candidate:stand,stand,stand,stand,站；站立,stand,11,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:stand in line,stand in line,stand in line,stand in line,排队；站成一排,stand in line,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:star,star,star,star,星；星星,star,22,yes,exact-single,1,KV000471,星星,pending-sense-confirmation,no
+candidate:star,star,star,star,星；星星,star,22,yes,exact-multiple,2,KV000471|KV000913,星星|歌唱（或表演）明星,pending-multi-candidate-review,no
 candidate:starfish,starfish,starfish,starfish,海星,starfish,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:start,start,start,start,开始；出发,start,13,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:start,start,start,start,开始；出发,start,13,yes,exact-single,1,KV000926,开始,pending-sense-confirmation,no
 candidate:starter,starter,starter,starter,开胃菜；第一道菜,starter,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:station,station,station,station,车站,station,7,yes,exact-single,1,KV000467,车站,pending-sense-confirmation,no
 candidate:stay,stay,stay,stay,停留；待,stay|stayed,21,yes,exact-single,1,KV000470,停留；待,pending-sense-confirmation,no
@@ -2273,7 +2273,7 @@ candidate:steam,steam,steam,steam,蒸；蒸汽,steam,1,yes,no-existing-match,0,,
 candidate:step,step,step,step,步；脚步,step,2,yes,exact-single,1,KV000364,步；台阶,pending-sense-confirmation,no
 candidate:stick,stick,stick,stick,粘；贴；粘住,stick,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:sticker,sticker,sticker,sticker,贴纸；贴画,sticker,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:still,still,still,still,仍然；还是,still,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:still,still,still,still,仍然；还是,still,10,yes,exact-single,1,KV001018,仍然；依旧；还是,pending-sense-confirmation,no
 candidate:stitch,stitch,stitch,stitch,缝；缝针,stitch,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:stocking,stocking,stocking,stocking,长袜；圣诞袜,stocking,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:stomach,stomach,stomach,stomach,胃；肚子,stomach,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2338,7 +2338,7 @@ candidate:sure,sure,sure,sure,确信的；确定的,sure,15,yes,exact-single,1,K
 candidate:surf,surf,surf,surf,浏览网络；上网,surf,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:surprise,surprise,surprise,surprise,惊喜；惊讶,surprise,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:surprised,surprised,surprised,surprised,惊讶的,surprised,4,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:sushi,sushi,sushi,sushi,寿司,sushi,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:sushi,sushi,sushi,sushi,寿司,sushi,3,yes,exact-single,1,KV001043,寿司,pending-sense-confirmation,no
 candidate:swan,swan,swan,swan,天鹅,swan,3,yes,exact-single,1,KV000795,天鹅,pending-sense-confirmation,no
 candidate:sweater,sweater,sweater,sweater,毛衣；针织衫,sweater,21,yes,exact-single,1,KV000257,毛衣,pending-sense-confirmation,no
 candidate:sweatpants,sweatpants,sweatpants,sweatpants,运动裤；宽松长运动裤,sweatpants,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2362,25 +2362,25 @@ candidate:sydney opera house,sydney opera house,sydney opera house,Sydney Opera 
 candidate:t-shirt,t-shirt,t-shirt,T-shirt,T恤,t-shirt,17,yes,exact-single,1,KV000093,T恤衫,pending-sense-confirmation,no
 candidate:table,table,table,table,桌子,table,15,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:table tennis,table tennis,table tennis,table tennis,乒乓球,table tennis,8,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:taikonaut,taikonaut,taikonaut,taikonaut,中国太空人,taikonaut,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:taikonaut,taikonaut,taikonaut,taikonaut,中国太空人,taikonaut,2,yes,exact-single,1,KV001129,中国航天员,pending-sense-confirmation,no
 candidate:tail,tail,tail,tail,尾巴,tail,8,yes,exact-single,1,KV000252,尾巴,pending-sense-confirmation,no
 candidate:taipei,taipei,taipei,Taipei,台北,taipei,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:take,take,take,take,拿；取；带走,take,36,yes,exact-single,1,KV000872,买下,pending-sense-confirmation,no
-candidate:take a dancing class,take a dancing class,take a dancing class,take a dancing class,上舞蹈课；参加舞蹈课,take a dancing class,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:take,take,take,take,拿；取；带走,take,36,yes,exact-multiple,3,KV000872|KV000977|KV001055,买下|学习；上（课）|（过去式 took）（某个动作；和名词连用代替某个动词）,pending-multi-candidate-review,no
+candidate:take a dancing class,take a dancing class,take a dancing class,take a dancing class,上舞蹈课；参加舞蹈课,take a dancing class,1,yes,exact-single,1,KV000978,上舞蹈课,pending-sense-confirmation,no
 candidate:take a deep breath,take a deep breath,take a deep breath,take a deep breath,深呼吸；做一次深呼吸,take a deep breath,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take a photo,take a photo,take a photo,take a photo,拍照,take a photo,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take a picture,take a picture,take a picture,take a picture,拍照；照相,take a picture,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take a trip,take a trip,take a trip,take a trip,旅行；去旅行,take a trip,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take a walk,take a walk,take a walk,take a walk,散步,take a walk,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take away,take away,take away,take away,拿走；带走,take away,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:take care of,take care of,take care of,take care of,照顾,take care of,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:take care of,take care of,take care of,take care of,照顾,take care of,5,yes,exact-single,1,KV000940,爱护；照顾,pending-sense-confirmation,no
 candidate:take down,take down,take down,take down,取下；拿下,take down,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take off,take off,take off,take off,脱下；摘下,take off,5,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take out the rubbish,take out the rubbish,take out the rubbish,take out the rubbish,倒垃圾；把垃圾拿出去,take out the rubbish,1,yes,exact-single,1,KV000574,倒垃圾；把垃圾拿出去,pending-sense-confirmation,no
 candidate:take part in,take part in,take part in,take part in,参加,take part in,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:take photos,take photos,take photos,take photos,拍照,take photos,7,yes,exact-single,1,KV000474,拍照,pending-sense-confirmation,no
 candidate:take pictures,take pictures,take pictures,take pictures,拍照；照相,take pictures,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:take turns,take turns,take turns,take turns,轮流；依次,take turns,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:take turns,take turns,take turns,take turns,轮流；依次,take turns,1,yes,exact-single,1,KV001036,按顺序来,pending-sense-confirmation,no
 candidate:talent,talent,talent,talent,才能；天赋,talent,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:talent show,talent show,talent show,talent show,才艺表演；选秀节目,talent show,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:talk,talk,talk,talk,说话；交谈,talk|talking,16,yes,exact-single,1,KV000527,交谈；说话,pending-sense-confirmation,no
@@ -2407,7 +2407,7 @@ candidate:teacher's office,teacher's office,teacher's office,teacher's office,�
 candidate:teachers' day,teachers' day,teachers' day,Teachers' Day,教师节,teachers' day,4,yes,exact-single,1,KV000599,教师节,pending-sense-confirmation,no
 candidate:teachers' office,teachers' office,teachers' office,teachers' office,教师办公室,teachers' office,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:teachers' room,teachers' room,teachers' room,teachers' room,教师办公室；教师休息室,teachers' room,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:team,team,team,team,队；团队,team,8,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:team,team,team,team,队；团队,team,8,yes,exact-single,1,KV000902,（游戏或运动的）队；（一起工作的）组，班,pending-sense-confirmation,no
 candidate:teddy bear,teddy bear,teddy bear,teddy bear,泰迪熊；玩具熊,teddy bear,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:teeth,teeth,teeth,teeth,牙齿（tooth 的复数）,teeth,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:telephone,telephone,telephone,telephone,电话；电话机,telephone,8,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2425,7 +2425,7 @@ candidate:terrible,terrible,terrible,terrible,糟糕的；可怕的,terrible,3,y
 candidate:test,test,test,test,测试；考试,test,5,yes,exact-single,1,KV000738,考试；测试,pending-sense-confirmation,no
 candidate:textbook,textbook,textbook,textbook,课本；教科书,textbook,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:thailand,thailand,thailand,Thailand,泰国,thailand,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:than,than,than,than,比；用于比较结构,than,9,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:than,than,than,than,比；用于比较结构,than,9,yes,exact-single,1,KV001163,比,pending-sense-confirmation,no
 candidate:thank,thank,thank,thank,感谢,thank,12,yes,exact-single,1,KV000151,感谢；谢谢,pending-sense-confirmation,no
 candidate:thanks,thanks,thanks,thanks,谢谢；感谢,thanks,7,yes,exact-single,1,KV000091,谢谢,pending-sense-confirmation,no
 candidate:thanksgiving,thanksgiving,thanksgiving,Thanksgiving,感恩节,thanksgiving,7,yes,exact-single,1,KV000792,感恩节,pending-sense-confirmation,no
@@ -2467,10 +2467,10 @@ candidate:the yangtze river,the yangtze river,the yangtze river,the Yangtze Rive
 candidate:theater,theater,theater,theater,剧院；电影院,theater,1,yes,spelling-single,1,KV000393,剧院,pending-spelling-variant-review,no
 candidate:theatre,theatre,theatre,theatre,剧院；戏院,theatre,6,yes,exact-single,1,KV000393,剧院,pending-sense-confirmation,no
 candidate:their,their,their,their,他们的；她们的；它们的,their,16,yes,exact-single,1,KV000368,他们的；她们的；它们的,pending-sense-confirmation,no
-candidate:theirs,theirs,theirs,theirs,他们的；她们的；它们的,theirs,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:theirs,theirs,theirs,theirs,他们的；她们的；它们的,theirs,3,yes,exact-single,1,KV001024,他们的；她们的；它们的,pending-sense-confirmation,no
 candidate:them,them,them,them,他们；她们；它们,them,17,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:themselves,themselves,themselves,themselves,他们自己；她们自己；它们自己,themselves,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:then,then,then,then,然后；那时,then,23,yes,exact-single,1,KV000839,然后；那时,pending-sense-confirmation,no
+candidate:then,then,then,then,然后；那时,then,23,yes,exact-multiple,2,KV000839|KV000938,然后；那时|那么；因此；既然如此,pending-multi-candidate-review,no
 candidate:there,there,there,there,那里；在那里,there,20,yes,exact-single,1,KV000038,那里；有（there be）,pending-sense-confirmation,no
 candidate:these,these,these,these,这些,these,19,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:they,they,they,they,他们；她们；它们,they,19,yes,exact-single,1,KV000301,他们；她们；它们,pending-sense-confirmation,no
@@ -2491,7 +2491,7 @@ candidate:this,this,this,this,这；这个,this,19,yes,exact-single,1,KV000015,�
 candidate:thomas edison,thomas edison,thomas edison,Thomas Edison,托马斯·爱迪生,thomas edison,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:those,those,those,those,那些,those,16,yes,exact-single,1,KV000870,那些,pending-sense-confirmation,no
 candidate:thought,thought,thought,thought,想；认为（think 的过去式）,thought,4,no,no-existing-match,0,,,pending-new-identity-review,no
-candidate:thousand,thousand,thousand,thousand,一千,thousand,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:thousand,thousand,thousand,thousand,一千,thousand,5,yes,exact-single,1,KV001049,一千,pending-sense-confirmation,no
 candidate:three,three,three,three,三,three,22,yes,exact-single,1,KV000027,三；三个,pending-sense-confirmation,no
 candidate:three times a week,three times a week,three times a week,three times a week,每周三次,three times a week,1,yes,exact-single,1,KV000506,每周三次,pending-sense-confirmation,no
 candidate:throat,throat,throat,throat,喉咙；嗓子,throat,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2503,7 +2503,7 @@ candidate:thursday,thursday,thursday,Thursday,星期四,thursday,21,yes,exact-si
 candidate:tian'anmen square,tian'anmen square,tian'anmen square,Tian'anmen Square,天安门广场,tian'anmen square,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tibet,tibet,tibet,Tibet,西藏,tibet,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tick tock,tick tock,tick tock,tick tock,滴答声；滴答,tick tock,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:ticket,ticket,ticket,ticket,票；票券,ticket,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:ticket,ticket,ticket,ticket,票；票券,ticket,10,yes,exact-single,1,KV001107,票,pending-sense-confirmation,no
 candidate:ticket office,ticket office,ticket office,ticket office,售票处,ticket office,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tidy,tidy,tidy,tidy,整洁的,tidy,7,yes,exact-single,1,KV000844,整洁的；整齐的；使整洁；整理,pending-sense-confirmation,no
 candidate:tidy the desk,tidy the desk,tidy the desk,tidy the desk,整理书桌,tidy the desk,1,yes,exact-single,1,KV000576,整理书桌,pending-sense-confirmation,no
@@ -2512,7 +2512,7 @@ candidate:tie,tie,tie,tie,领带,tie,4,yes,no-existing-match,0,,,pending-new-ide
 candidate:tied,tied,tied,tied,系住的；绑好的,tied,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tiger,tiger,tiger,tiger,老虎,tiger,25,yes,exact-single,1,KV000020,老虎,pending-sense-confirmation,no
 candidate:tightly,tightly,tightly,tightly,紧紧地；牢牢地,tightly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:till,till,till,till,直到；直到……为止,till,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:till,till,till,till,直到；直到……为止,till,2,yes,exact-single,1,KV001179,直到,pending-sense-confirmation,no
 candidate:timetable,timetable,timetable,timetable,时间表；课程表,timetable,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:timing,timing,timing,timing,时机；时间安排,timing,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tin can,tin can,tin can,tin can,铁皮罐；金属罐,tin can,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2535,10 +2535,10 @@ candidate:tonight,tonight,tonight,tonight,今晚,tonight,6,yes,no-existing-match
 candidate:too much,too much,too much,too much,太多；过多,too much,5,yes,exact-single,1,KV000579,太多,pending-sense-confirmation,no
 candidate:took,took,took,took,拿；取（take 的过去式）,took,13,no,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tool,tool,tool,tool,工具,tool,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:tooth,tooth,tooth,tooth,牙齿,tooth,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:tooth,tooth,tooth,tooth,牙齿,tooth,6,yes,exact-single,1,KV000943,牙；齿,pending-sense-confirmation,no
 candidate:toothache,toothache,toothache,toothache,牙痛,toothache,11,yes,exact-single,1,KV000587,牙痛,pending-sense-confirmation,no
 candidate:toothless,toothless,toothless,toothless,无牙的,toothless,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:top,top,top,top,顶部；顶端,top,5,yes,exact-single,1,KV000781,顶部；顶端,pending-sense-confirmation,no
+candidate:top,top,top,top,顶部；顶端,top,5,yes,exact-multiple,2,KV000781|KV001158,顶部；顶端|（位置、级别或程度）最高的,pending-multi-candidate-review,no
 candidate:topic,topic,topic,topic,主题；题目,topic,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:toronto,toronto,toronto,Toronto,多伦多,toronto,2,yes,exact-single,1,KV000696,多伦多,pending-sense-confirmation,no
 candidate:tortoise,tortoise,tortoise,tortoise,乌龟；陆龟,tortoise,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2574,7 +2574,7 @@ candidate:tree,tree,tree,tree,树,tree,20,yes,exact-single,1,KV000136,树,pendin
 candidate:tree planting day,tree planting day,tree planting day,Tree Planting Day,植树节,tree planting day,3,yes,exact-single,1,KV000595,植树节,pending-sense-confirmation,no
 candidate:triangle,triangle,triangle,triangle,三角形,triangle,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:trick,trick,trick,trick,把戏；花招；恶作剧,trick,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:trip,trip,trip,trip,旅行；出行,trip,14,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:trip,trip,trip,trip,旅行；出行,trip,14,yes,exact-multiple,2,KV000963|KV001193,（尤指短程往返的）旅行，旅游，出行|绊倒,pending-multi-candidate-review,no
 candidate:trolley,trolley,trolley,trolley,手推车；行李车,trolley,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:trouble,trouble,trouble,trouble,麻烦；困难,trouble,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:trousers,trousers,trousers,trousers,长裤；裤子,trousers,17,yes,exact-single,1,KV000260,裤子；长裤,pending-sense-confirmation,no
@@ -2589,14 +2589,14 @@ candidate:tuesday,tuesday,tuesday,Tuesday,星期二,tuesday,21,yes,exact-single,
 candidate:tummy,tummy,tummy,tummy,肚子；胃,tummy,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:tunnel,tunnel,tunnel,tunnel,隧道,tunnel,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:turkey,turkey,turkey,Turkey,土耳其,turkey,6,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:turn,turn,turn,turn,转；转动,turn,21,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:turn,turn,turn,turn,转；转动,turn,21,yes,exact-single,1,KV001035,顺序,pending-sense-confirmation,no
 candidate:turn around,turn around,turn around,turn around,转身；掉头,turn around,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:turn back,turn back,turn back,turn back,返回；往回走,turn back,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:turn left,turn left,turn left,turn left,向左转,turn left,6,yes,exact-single,1,KV000447,向左转,pending-sense-confirmation,no
 candidate:turn off,turn off,turn off,turn off,关闭；关掉,turn off,6,yes,exact-single,1,KV000843,关掉,pending-sense-confirmation,no
 candidate:turn on,turn on,turn on,turn on,打开；开启（电器、灯等）,turn on,6,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:turn right,turn right,turn right,turn right,向右转,turn right,6,yes,exact-single,1,KV000448,向右转,pending-sense-confirmation,no
-candidate:turpan,turpan,turpan,Turpan,吐鲁番,turpan,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:turpan,turpan,turpan,Turpan,吐鲁番,turpan,1,yes,exact-single,1,KV001178,吐鲁番,pending-sense-confirmation,no
 candidate:turtle,turtle,turtle,turtle,龟；海龟,turtle,3,yes,exact-single,1,KV000248,乌龟,pending-sense-confirmation,no
 candidate:tusk,tusk,tusk,tusk,长牙；象牙,tusk,1,yes,exact-single,1,KV000724,象牙；长牙,pending-sense-confirmation,no
 candidate:tv,tv,tv,TV,电视,television|tv,21,yes,exact-single,1,KV000852,电视,pending-sense-confirmation,no
@@ -2611,13 +2611,13 @@ candidate:twenty-first,twenty-first,twenty-first,twenty-first,第二十一,twent
 candidate:twenty-one,twenty-one,twenty-one,twenty-one,二十一,twenty-one,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:twenty-second,twenty-second,twenty-second,twenty-second,第二十二,twenty-second,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:twenty-third,twenty-third,twenty-third,twenty-third,第二十三,twenty-third,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:twice,twice,twice,twice,两次,twice,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:twice,twice,twice,twice,两次,twice,6,yes,exact-single,1,KV000944,两次；两遍,pending-sense-confirmation,no
 candidate:twice a week,twice a week,twice a week,twice a week,每周两次,twice a week,1,yes,exact-single,1,KV000505,每周两次,pending-sense-confirmation,no
 candidate:twin,twin,twin,twin,双胞胎之一；双胞胎,twin,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:twin towers,twin towers,twin towers,twin towers,双子塔；双塔,twin towers,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:twins,twins,twins,twins,双胞胎,twins,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:two,two,two,two,二；两个,two,23,yes,exact-single,1,KV000026,二；两个,pending-sense-confirmation,no
-candidate:type,type,type,type,类型；种类,type,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:type,type,type,type,类型；种类,type,2,yes,exact-single,1,KV001139,类型；种类,pending-sense-confirmation,no
 candidate:typhoon,typhoon,typhoon,typhoon,台风,typhoon,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ufo,ufo,ufo,UFO,不明飞行物；UFO,ufo,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:ugly,ugly,ugly,ugly,丑陋的,ugly,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2627,7 +2627,7 @@ candidate:uncle,uncle,uncle,uncle,叔叔；伯伯；舅舅等男性长辈,uncle,
 candidate:under,under,under,under,在……下面,under,19,yes,exact-single,1,KV000058,在……下面,pending-sense-confirmation,no
 candidate:underground,underground,underground,underground,地铁,underground,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:understand,understand,understand,understand,理解；懂得,understand,8,yes,exact-single,1,KV000846,懂；理解,pending-sense-confirmation,no
-candidate:unhappy,unhappy,unhappy,unhappy,不高兴的；不快乐的,unhappy,3,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:unhappy,unhappy,unhappy,unhappy,不高兴的；不快乐的,unhappy,3,yes,exact-single,1,KV001094,不快乐的；难过的,pending-sense-confirmation,no
 candidate:unhealthy,unhealthy,unhealthy,unhealthy,不健康的,unhealthy,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:uniform,uniform,uniform,uniform,制服；校服,uniform,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:university,university,university,university,大学,university,2,yes,exact-single,1,KV000751,大学,pending-sense-confirmation,no
@@ -2639,7 +2639,7 @@ candidate:upstairs,upstairs,upstairs,upstairs,楼上；在楼上；上楼,upstai
 candidate:us,us,us,US,我们,us,13,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:usa,usa,usa,USA,美国；美利坚合众国,u.s.a.|usa,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:use,use,use,use,使用,use|used,16,yes,exact-single,1,KV000403,使用,pending-sense-confirmation,no
-candidate:useful,useful,useful,useful,有用的,useful,6,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:useful,useful,useful,useful,有用的,useful,6,yes,exact-single,1,KV001159,有用的；有益的,pending-sense-confirmation,no
 candidate:usually,usually,usually,usually,通常；经常,usually,16,yes,exact-single,1,KV000374,通常,pending-sense-confirmation,no
 candidate:vacation,vacation,vacation,vacation,假期；休假,vacation,8,yes,exact-single,1,KV000679,假期,pending-sense-confirmation,no
 candidate:valley,valley,valley,valley,山谷；谷地,valley,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2651,12 +2651,12 @@ candidate:very,very,very,very,非常；很,very,14,yes,no-existing-match,0,,,pen
 candidate:very much,very much,very much,very much,非常；很,very much,7,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:vest,vest,vest,vest,背心；马甲,vest,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:vet,vet,vet,vet,兽医,vet,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:video,video,video,video,视频；录像,video,2,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:video,video,video,video,视频；录像,video,2,yes,exact-single,1,KV001097,视频；录像,pending-sense-confirmation,no
 candidate:video game,video game,video game,video game,电子游戏；电子游戏机游戏,video game,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:village,village,village,village,村庄,village,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:village,village,village,village,村庄,village,10,yes,exact-single,1,KV001052,村庄；村镇,pending-sense-confirmation,no
 candidate:violin,violin,violin,violin,小提琴,violin,12,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:violinist,violinist,violinist,violinist,小提琴家；小提琴演奏者,violinist,2,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:visit,visit,visit,visit,参观；访问,visit|visited,21,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:visit,visit,visit,visit,参观；访问,visit|visited,21,yes,exact-single,1,KV000931,看望；拜访；参观,pending-sense-confirmation,no
 candidate:visit one's grandparents,visit one's grandparents,visit one's grandparents,visit one's grandparents,看望祖父母；外祖父母,visit one's grandparents,1,yes,exact-single,1,KV000354,看望祖父母或外祖父母,pending-sense-confirmation,no
 candidate:visit the mogao caves,visit the mogao caves,visit the mogao caves,visit the Mogao Caves,参观莫高窟,visit the mogao caves,1,yes,exact-single,1,KV000480,参观莫高窟,pending-sense-confirmation,no
 candidate:visitor,visitor,visitor,visitor,参观者；访客,visitor,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2691,9 +2691,9 @@ candidate:watch tv,watch tv,watch tv,watch TV,看电视,watch tv|watched tv|watc
 candidate:watches,watches,watches,watches,手表（watch 的复数）,watches,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:water bottle,water bottle,water bottle,water bottle,水瓶；水杯,water bottle,2,yes,exact-single,1,KV000318,水瓶；水壶,pending-sense-confirmation,no
 candidate:water the plants,water the plants,water the plants,water the plants,给植物浇水,watering the plants,1,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:waterfall,waterfall,waterfall,waterfall,瀑布,waterfall,1,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:waterfall,waterfall,waterfall,waterfall,瀑布,waterfall,1,yes,exact-single,1,KV000960,瀑布,pending-sense-confirmation,no
 candidate:watermelon,watermelon,watermelon,watermelon,西瓜,watermelon,9,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:way,way,way,way,路；道路；方向,way,16,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:way,way,way,way,路；道路；方向,way,16,yes,exact-single,1,KV000957,方法；手段；途径；方式,pending-sense-confirmation,no
 candidate:we,we,we,we,我们,we,18,yes,exact-single,1,KV000290,我们,pending-sense-confirmation,no
 candidate:we will,we will,we will,we will,我们将会；我们会,we will|we'll,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:weak,weak,weak,weak,虚弱的；弱小的,weak,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2706,7 +2706,7 @@ candidate:website,website,website,website,网站,website,1,yes,no-existing-match
 candidate:wednesday,wednesday,wednesday,Wednesday,星期三,wednesday,21,yes,exact-single,1,KV000203,星期三,pending-sense-confirmation,no
 candidate:week,week,week,week,星期；周,week,17,yes,exact-single,1,KV000263,星期；周,pending-sense-confirmation,no
 candidate:weekday,weekday,weekday,weekday,工作日；平日,weekday,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:weekend,weekend,weekend,weekend,周末,weekend,14,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:weekend,weekend,weekend,weekend,周末,weekend,14,yes,exact-single,1,KV000927,周末,pending-sense-confirmation,no
 candidate:weigh,weigh,weigh,weigh,称重量；重……,weigh,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:weight,weight,weight,weight,重量；体重,weight,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:welcome,welcome,welcome,welcome,欢迎,welcome,18,yes,exact-single,1,KV000322,欢迎；不客气,pending-sense-confirmation,no
@@ -2741,14 +2741,14 @@ candidate:wild geese,wild geese,wild geese,wild geese,大雁；雁（wild goose 
 candidate:wild goose,wild goose,wild goose,wild goose,雁；大雁,wild goose,2,yes,exact-single,1,KV000796,大雁；野雁,pending-sense-confirmation,no
 candidate:will,will,will,will,将；会（表示将来）,will,15,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:win,win,win,win,赢；获胜,win|won,23,yes,exact-single,1,KV000734,赢；获胜,pending-sense-confirmation,no
-candidate:wind,wind,wind,wind,风,wind,5,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:wind,wind,wind,wind,风,wind,5,yes,exact-single,1,KV000962,风；气流,pending-sense-confirmation,no
 candidate:wind-bell,wind-bell,wind-bell,wind-bell,风铃,wind-bell,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:windmill,windmill,windmill,windmill,风车,windmill,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:window,window,window,window,窗户,window,23,yes,exact-single,1,KV000845,窗,pending-sense-confirmation,no
 candidate:windsurf,windsurf,windsurf,windsurf,玩帆板；风帆冲浪,windsurf,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:windy,windy,windy,windy,有风的；多风的,windy,21,yes,exact-single,1,KV000163,有风的；多风的,pending-sense-confirmation,no
 candidate:wing,wing,wing,wing,翅膀；翼,wing,3,yes,no-existing-match,0,,,pending-new-identity-review,no
-candidate:winner,winner,winner,winner,胜利者,winner,7,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:winner,winner,winner,winner,胜利者,winner,7,yes,exact-single,1,KV001082,获胜的人（或队）；成功者,pending-sense-confirmation,no
 candidate:winter,winter,winter,winter,冬天；冬季,winter,20,yes,exact-single,1,KV000172,冬天,pending-sense-confirmation,no
 candidate:winter holiday,winter holiday,winter holiday,winter holiday,寒假,winter holiday,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:winter olympics,winter olympics,winter olympics,Winter Olympics,冬季奥运会,winter olympics,1,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2774,11 +2774,11 @@ candidate:word book,word book,word book,word book,单词本；词汇本,word boo
 candidate:work,work,work,work,工作,work,22,yes,exact-single,1,KV000859,做（某事）；工作,pending-sense-confirmation,no
 candidate:work out,work out,work out,work out,锻炼；健身,work out,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:worker,worker,worker,worker,工人；劳动者,worker,17,yes,exact-single,1,KV000430,工人,pending-sense-confirmation,no
-candidate:world,world,world,world,世界,world,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:world,world,world,world,世界,world,10,yes,exact-single,1,KV000955,世界；地球；天下,pending-sense-confirmation,no
 candidate:world car free day,world car free day,world car free day,World Car Free Day,世界无车日,world car free day,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:world cup,world cup,world cup,World Cup,世界杯,world cup,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:worried,worried,worried,worried,担心的；焦虑的,worried,6,yes,exact-single,1,KV000729,担心的,pending-sense-confirmation,no
-candidate:worry,worry,worry,worry,担心；发愁,worry,18,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:worry,worry,worry,worry,担心；发愁,worry,18,yes,exact-single,1,KV000967,担心；担忧；发愁,pending-sense-confirmation,no
 candidate:would,would,would,would,会；将会（用于假设或过去将来）,would,6,no,no-existing-match,0,,,pending-new-identity-review,no
 candidate:would like,would like,would like,would like,想要,would like,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:wow,wow,wow,wow,哇；呀（表示惊讶或赞叹）,wow,9,yes,exact-single,1,KV000167,哇；呀,pending-sense-confirmation,no
@@ -2788,14 +2788,14 @@ candidate:wrist,wrist,wrist,wrist,手腕；腕关节,wrist,1,yes,no-existing-mat
 candidate:write,write,write,write,写；书写,write|writing|wrote,29,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:write a letter,write a letter,write a letter,write a letter,写信,write a letter,2,yes,exact-single,1,KV000618,写信,pending-sense-confirmation,no
 candidate:writer,writer,writer,writer,作家；作者,writer,8,yes,exact-single,1,KV000744,作家,pending-sense-confirmation,no
-candidate:wrong,wrong,wrong,wrong,错误的；不对的,wrong,15,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:wrong,wrong,wrong,wrong,错误的；不对的,wrong,15,yes,exact-single,1,KV000920,错误的,pending-sense-confirmation,no
 candidate:x-ray,x-ray,x-ray,X-ray,X光；X光片,x-ray,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:yard,yard,yard,yard,院子；庭院,yard,3,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:year,year,year,year,年,year,20,yes,exact-single,1,KV000208,年；岁,pending-sense-confirmation,no
 candidate:year book,year book,year book,year book,年鉴,year book,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:yellow,yellow,yellow,yellow,黄色；黄色的,yellow,22,yes,exact-single,1,KV000040,黄色；黄色的,pending-sense-confirmation,no
 candidate:yes,yes,yes,yes,是；是的,yes,18,yes,exact-single,1,KV000052,是的；对,pending-sense-confirmation,no
-candidate:yesterday,yesterday,yesterday,yesterday,昨天,yesterday,18,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:yesterday,yesterday,yesterday,yesterday,昨天,yesterday,18,yes,exact-single,1,KV001076,昨天,pending-sense-confirmation,no
 candidate:yet,yet,yet,yet,还；尚,yet,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:yo-yo,yo-yo,yo-yo,yo-yo,溜溜球；悠悠球,yo-yo,2,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:yogurt,yogurt,yogurt,yogurt,酸奶,yogurt,2,yes,no-existing-match,0,,,pending-new-identity-review,no
@@ -2803,7 +2803,7 @@ candidate:you,you,you,you,你；你们,you,17,yes,exact-single,1,KV000050,你；
 candidate:young,young,young,young,年轻的；年幼的,young|younger,24,yes,exact-single,1,KV000539,年轻的,pending-sense-confirmation,no
 candidate:youngest,youngest,youngest,youngest,最年轻的；年龄最小的,youngest,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:your,your,your,your,你的；你们的,your,20,yes,exact-single,1,KV000098,你的；你们的,pending-sense-confirmation,no
-candidate:yours,yours,yours,yours,你的；你们的,yours,10,yes,no-existing-match,0,,,pending-new-identity-review,no
+candidate:yours,yours,yours,yours,你的；你们的,yours,10,yes,exact-single,1,KV001022,你（们）的,pending-sense-confirmation,no
 candidate:yourself,yourself,yourself,yourself,你自己,yourself|yourselves,4,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:yoyo,yoyo,yoyo,yoyo,悠悠球,yoyo,1,yes,no-existing-match,0,,,pending-new-identity-review,no
 candidate:yuan,yuan,yuan,yuan,元（人民币货币单位）,yuan,4,yes,no-existing-match,0,,,pending-new-identity-review,no
