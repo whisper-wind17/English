@@ -10,6 +10,7 @@ on:
       - 'tools/validate_third_party_allocation_dry_run.py'
       - 'tools/apply_third_party_allocation.py'
       - 'tools/validate_third_party_allocation_simulation.py'
+      - 'tools/validate_third_party_allocation_post_mutation.py'
       - 'docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md'
       - 'docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md'
       - 'anki/klose/third_party_vocabulary/allocation/plan.json'
@@ -104,7 +105,7 @@ jobs:
         if: steps.auth.outputs.authorized == 'true'
         run: |
           echo 'Allocation control plane = authorized-pending-apply'
-          echo 'This validation workflow never invokes --apply.'
+          echo 'This validation workflow never invokes --apply in the checked-out repository.'
 
       - name: Simulate guarded allocation outside repository
         run: >-
@@ -153,6 +154,67 @@ jobs:
           python tools/validate_third_party_allocation_simulation.py
           --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
           --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
+      - name: Exercise authorized apply and commit transaction in isolated clone
+        shell: bash
+        run: |
+          set -euo pipefail
+          tx="$RUNNER_TEMP/third-party-allocation-transaction"
+          dry="$RUNNER_TEMP/third-party-allocation-transaction-dry-run"
+          git clone --quiet "$GITHUB_WORKSPACE" "$tx"
+          cd "$tx"
+          git config user.name 'allocation-transaction-test'
+          git config user.email 'allocation-transaction-test@example.invalid'
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan_path = Path('anki/klose/third_party_vocabulary/allocation/plan.json')
+          auth_path = Path('anki/klose/third_party_vocabulary/allocation/authorization.json')
+          plan = json.loads(plan_path.read_text(encoding='utf-8-sig'))
+          auth = json.loads(auth_path.read_text(encoding='utf-8-sig'))
+          plan['MutationGates']['ActualMutationAuthorized'] = True
+          plan['MutationGates']['StableNoteIDAllocationAuthorized'] = True
+          for key in ('MasterSourceMappingMutationAuthorized', 'LearnerMutationAuthorized', 'ReleaseMutationAuthorized', 'PublishMutationAuthorized', 'AnkiMutationAuthorized'):
+              plan['MutationGates'][key] = False
+          auth['Authorized'] = True
+          auth['UserAuthorizationEvidence'] = 'CI isolated transaction test only; no repository authorization'
+          auth['AuthorizedAt'] = '2026-09-11T00:00:00Z'
+          plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          auth_path.write_text(json.dumps(auth, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+          git add anki/klose/third_party_vocabulary/allocation/plan.json \
+                  anki/klose/third_party_vocabulary/allocation/authorization.json
+          git commit --quiet -m 'test: isolated allocation authorization transition'
+          authorization_base="$(git rev-parse HEAD)"
+
+          python tools/validate_third_party_source_provenance.py
+          python tools/check_third_party_allocation_plan.py
+          python tools/build_third_party_allocation_dry_run.py --output-dir "$dry"
+          python tools/validate_third_party_allocation_dry_run.py --output-dir "$dry"
+          python tools/apply_third_party_allocation.py --apply --dry-run-dir "$dry"
+          KLOSE_BASE_COMMIT="$authorization_base" python tools/check_klose_persistent_state.py
+          python tools/validate_third_party_allocation_post_mutation.py \
+            --dry-run-dir "$dry" --base-ref "$authorization_base"
+          git diff --check
+
+          git add anki/klose/master/note_registry_extensions.csv \
+                  anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv
+          staged="$(git diff --cached --name-only | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/master/note_registry_extensions.csv' \
+            'anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv' | sort)"
+          test "$staged" = "$expected"
+          git commit --quiet -m 'test: isolated third-party Stable allocation transaction'
+
+          KLOSE_BASE_COMMIT="$authorization_base" python tools/check_klose_persistent_state.py
+          python tools/validate_third_party_allocation_post_mutation.py \
+            --dry-run-dir "$dry" --base-ref "$authorization_base"
+          committed="$(git diff-tree --no-commit-id --name-only -r HEAD | sort)"
+          test "$committed" = "$expected"
+          echo 'Isolated authorized allocation transaction + commit gate = pass'
+          echo 'Remote push = no'
 
       - name: Assert validation is read-only
         run: |
