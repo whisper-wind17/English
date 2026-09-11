@@ -62,8 +62,19 @@ jobs:
       - name: Validate third-party source provenance contract
         run: python tools/validate_third_party_source_provenance.py
 
-      - name: Validate allocation/migration plan against current truth
+      - name: Validate allocation/migration control plane against current truth
         run: python tools/check_third_party_allocation_plan.py
+
+      - name: Read allocation authorization state
+        id: auth
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          value = json.loads(Path('anki/klose/third_party_vocabulary/allocation/authorization.json').read_text(encoding='utf-8-sig'))
+          print(f"authorized={'true' if value.get('Authorized') is True else 'false'}")
+          PY
 
       - name: Build mutation-disabled allocation dry run
         run: python tools/build_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
@@ -72,9 +83,11 @@ jobs:
         run: python tools/validate_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
 
       - name: Assert actual allocation authorization gate is closed
+        if: steps.auth.outputs.authorized == 'false'
         run: python tools/apply_third_party_allocation.py --expect-unauthorized
 
       - name: Assert direct apply command fails closed
+        if: steps.auth.outputs.authorized == 'false'
         shell: bash
         run: |
           set -euo pipefail
@@ -86,6 +99,12 @@ jobs:
           fi
           echo 'Unauthorized --apply = correctly rejected'
           git diff --exit-code
+
+      - name: Confirm authorized state does not auto-apply
+        if: steps.auth.outputs.authorized == 'true'
+        run: |
+          echo 'Allocation control plane = authorized-pending-apply'
+          echo 'This validation workflow never invokes --apply.'
 
       - name: Simulate guarded allocation outside repository
         run: >-
@@ -139,4 +158,4 @@ jobs:
         run: |
           git status --short
           git diff --exit-code
-          echo 'Allocation/provenance/dry-run/mutator simulation mutation = no'
+          echo 'Allocation control-plane validation mutation = no'
