@@ -2,21 +2,16 @@
   "PlanVersion": "stage-b-reconciliation-v2",
   "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
   "CandidateCount": 2820,
-  "ValidDurableDecisionCount": 2818,
-  "ReviewQueueCount": 2,
-  "LaneCounts": {
-    "exact-single-semantic-review": 2
-  },
-  "ReviewLane": "exact-single-semantic-review",
-  "BatchCap": 50,
-  "SelectedCount": 2,
-  "SelectedProvisionalIdentityKeys": [
-    "candidate:wrong",
-    "candidate:yours"
-  ],
-  "ExecutionReady": true,
+  "ValidDurableDecisionCount": 2820,
+  "ReviewQueueCount": 0,
+  "LaneCounts": {},
+  "ReviewLane": "",
+  "BatchCap": 0,
+  "SelectedCount": 0,
+  "SelectedProvisionalIdentityKeys": [],
+  "ExecutionReady": false,
   "AutoExecutable": false,
   "MutationAuthorized": false,
-  "ReviewQueueFingerprint": "7086cb583584bdc5ee5eca4b144c3d754be4ff1da37e1ece569390113d00feed",
-  "SelectedViewFingerprint": "7086cb583584bdc5ee5eca4b144c3d754be4ff1da37e1ece569390113d00feed"
+  "ReviewQueueFingerprint": "ad189f3d6f88047d8215565de422cd1991af5aa9be74b347b13e80470f507bb2",
+  "SelectedViewFingerprint": "ad189f3d6f88047d8215565de422cd1991af5aa9be74b347b13e80470f507bb2"
 }
