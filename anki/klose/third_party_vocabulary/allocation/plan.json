@@ -36,7 +36,9 @@
     "RetryOriginKey": "third-party-vocabulary|<ProvisionalIdentityKey>",
     "LearnerAdmissionIndependent": true,
     "ReleaseIndependent": true,
-    "AnkiIndependent": true
+    "AnkiIndependent": true,
+    "PipelineGoal": "complete all third-party Vocabulary processing until ready for final merge into Klose current Anki",
+    "ContinueTriggerPolicy": "while that goal is incomplete, a user '继续' authorizes exactly the next pipeline step"
   },
   "SourceProvenance": {
     "ContractVersion": "third-party-source-provenance-v1",
@@ -117,7 +119,7 @@
     "PostMutationTransactionGateValidationRunID": "34596833236"
   },
   "RequiredBeforeMutation": [
-    "explicit user authorization for actual allocation/merge",
+    "user authorization for the next mutation step, satisfied either by equivalent explicit wording or by '继续' under the active standing directive before Anki-ready",
     "authorization manifest and allocation mutation gates deliberately transition from closed to authorized against the exact current truth boundary",
     "current allocation/provenance/dry-run validation PASS on latest main immediately before apply",
     "actual apply remains restricted to note_registry_extensions.csv plus stable_evidence_bindings.csv and must fail closed on any truth-boundary conflict",
