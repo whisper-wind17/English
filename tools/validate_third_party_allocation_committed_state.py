@@ -3,7 +3,10 @@
 
 This checker is for the post-execution lifecycle. It validates the recorded allocation
 commit, exact two-path scope, append-only Stable identity result, evidence bindings,
-and Stage-B action closure without reusing the pre-allocation plan as current truth.
+and the Stage-B action closure that authorized that allocation. Later lifecycle
+metadata refreshes may rewrite the current reconciliation artifact, so allocation
+correspondence is bound to the decision snapshot at the allocation commit rather
+than requiring that historical decision file to remain byte-identical forever.
 """
 from __future__ import annotations
 
@@ -96,6 +99,7 @@ def main() -> None:
     ext_rel = REGISTRY_EXT.relative_to(ROOT).as_posix()
     legacy_rel = REGISTRY.relative_to(ROOT).as_posix()
     evidence_rel = EVIDENCE.relative_to(ROOT).as_posix()
+    decisions_rel = DECISIONS.relative_to(ROOT).as_posix()
 
     base_ext_fields, base_ext = read_csv_text(git_show(base_commit, ext_rel))
     post_ext_fields, post_ext = read_csv_text(git_show(allocation_commit, ext_rel))
@@ -140,18 +144,22 @@ def main() -> None:
     require(all(r.get("NoteID") in active for r in evidence), "Evidence binding references non-active/unknown NoteID")
     require(all(r.get("EvidenceStatus") == "external-unverified-edition" for r in evidence), "EvidenceStatus drift")
 
-    _, decisions = read_csv(DECISIONS)
+    # Allocation is bound to the Stage-B closure that existed when allocation was
+    # committed. Current reconciliation metadata is validated by the Stage-B
+    # lifecycle checker and may legitimately be resealed later without changing
+    # the historical authorization basis.
+    _, decisions = read_csv_text(git_show(allocation_commit, decisions_rel))
     by_pid = {r.get("ProvisionalIdentityKey", ""): r for r in decisions}
-    require(len(by_pid) == 2820 and all(by_pid), "Stage-B decision closure drift")
+    require(len(by_pid) == 2820 and all(by_pid), "Historical Stage-B decision closure drift")
     reuse = {pid for pid, r in by_pid.items() if r.get("Action") == "reuse-existing"}
     new = {pid for pid, r in by_pid.items() if r.get("Action") == "new-stable-identity"}
     held = {pid for pid, r in by_pid.items() if r.get("Action") == "held"}
-    require((len(reuse), len(new), len(held)) == (903, 1821, 96), "Stage-B action distribution drift")
+    require((len(reuse), len(new), len(held)) == (903, 1821, 96), "Historical Stage-B action distribution drift")
 
     appended_pids = {r["PrimaryOriginKey"].split("third-party-vocabulary|", 1)[1] for r in appended}
-    require(appended_pids == new, "Allocated Stable origins do not exactly match Stage-B new identities")
+    require(appended_pids == new, "Allocated Stable origins do not exactly match historical Stage-B new identities")
     bound_pids = {r.get("ProvisionalIdentityKey", "") for r in evidence}
-    require(held.isdisjoint(bound_pids), "Held Stage-B identity has evidence binding")
+    require(held.isdisjoint(bound_pids), "Held historical Stage-B identity has evidence binding")
     require(bound_pids == reuse | new, "Evidence binding identity coverage drift")
 
     post_truth = receipt.get("PostAllocationTruth")
@@ -178,6 +186,7 @@ def main() -> None:
     print("Third-party committed allocation state = PASS")
     print(f"allocation commit = {allocation_commit}")
     print("allocation commit paths = exactly 2")
+    print("historical Stage-B closure = reuse 903 / new 1821 / held 96")
     print("historical extension rows unchanged = 392")
     print("new Stable rows = 1821 / KV001195..KV003015")
     print("persistent Stable rows = 3015")
