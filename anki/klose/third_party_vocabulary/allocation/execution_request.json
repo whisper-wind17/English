@@ -1,0 +1,19 @@
+{
+  "RequestVersion": "third-party-allocation-execution-request-v1",
+  "Status": "requested",
+  "Step": "actual-third-party-stable-identity-allocation",
+  "UserInstruction": "继续处理",
+  "StandingDirectiveApplies": true,
+  "RequestedAt": "2026-09-11T13:04:00Z",
+  "ExpectedMutationScope": [
+    "anki/klose/master/note_registry_extensions.csv",
+    "anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv"
+  ],
+  "ForbiddenSameStepLayers": [
+    "anki/klose/master/source_identity_extensions.csv",
+    "anki/klose/learner",
+    "anki/klose/publish",
+    "anki/klose/anki",
+    "anki/klose/expressions"
+  ]
+}
