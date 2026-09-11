@@ -100,6 +100,7 @@ def safe_output_dir(raw: str) -> Path:
 
 
 def stage_a_occurrence_map() -> tuple[dict[str, list[str]], dict[str, dict[str, str]], dict[str, dict[str, str]]]:
+    """Reproduce Stage-A Preview eligibility, then bind each materialized identity to exact occurrences."""
     _, occurrence_rows = read_csv(OCCURRENCES)
     occ_by_key = {r.get("SourceOccurrenceKey", ""): r for r in occurrence_rows}
     require(len(occ_by_key) == len(occurrence_rows) and all(occ_by_key), "Unified occurrence keys are empty/duplicate")
@@ -112,14 +113,13 @@ def stage_a_occurrence_map() -> tuple[dict[str, list[str]], dict[str, dict[str, 
     for row in decision_rows:
         groups[row.get("MatchKey", "")].append(row)
 
-    mapping: dict[str, set[str]] = defaultdict(set)
-    assigned_occurrence: dict[str, str] = {}
+    valid_decision: dict[str, dict[str, str]] = {}
+    resolved_multipart: dict[str, list[dict[str, str]]] = {}
     for match_key, rows in groups.items():
         current = current_by_match.get(match_key, set())
         if not current:
             continue
         covered: set[str] = set()
-        parts: list[tuple[dict[str, str], list[str]]] = []
         overlap = False
         for row in rows:
             keys = occurrence_keys(row)
@@ -128,32 +128,94 @@ def stage_a_occurrence_map() -> tuple[dict[str, list[str]], dict[str, dict[str, 
             if covered & set(keys):
                 overlap = True
             covered.update(keys)
-            parts.append((row, keys))
         resolved = (
             not overlap
             and covered == current
-            and all(r.get("Status") == "reviewed" and r.get("Action") in RESOLVED_STAGE_A_ACTIONS for r, _ in parts)
+            and all(r.get("Status") == "reviewed" and r.get("Action") in RESOLVED_STAGE_A_ACTIONS for r in rows)
         )
         if not resolved:
             continue
-        multipart = len(parts) > 1
-        for row, keys in parts:
+        if len(rows) == 1:
+            valid_decision[match_key] = rows[0]
+        else:
+            resolved_multipart[match_key] = rows
+
+    multipart_keep_index: dict[str, tuple[str, dict[str, str]]] = {}
+    for base_key, rows in resolved_multipart.items():
+        for row in rows:
+            if row.get("Action") != "keep-identity":
+                continue
+            canonical = row.get("CanonicalMatchKey", "").strip()
+            require(bool(canonical) and canonical.startswith(base_key + "#"), f"Invalid multipart keep canonical: {row.get('DecisionKey')}")
+            require(canonical not in multipart_keep_index, f"Duplicate multipart keep canonical: {canonical}")
+            multipart_keep_index[canonical] = (base_key, row)
+
+    mapping: dict[str, set[str]] = defaultdict(set)
+    assigned_occurrence: dict[str, str] = {}
+
+    def assign(pid: str, keys: list[str], decision_key: str) -> None:
+        for key in keys:
+            previous = assigned_occurrence.get(key)
+            require(previous in {None, pid}, f"Source occurrence maps to multiple provisional identities: {key}: {previous} vs {pid} ({decision_key})")
+            assigned_occurrence[key] = pid
+            mapping[pid].add(key)
+
+    # Mirror build_third_party_corpus.py single-decision canonical eligibility.
+    for match_key, row in valid_decision.items():
+        action = row.get("Action")
+        if action not in {"keep-identity", "reuse-identity"}:
+            continue
+        keys = occurrence_keys(row)
+        if action == "keep-identity":
+            assign(f"candidate:{match_key}", keys, row.get("DecisionKey", ""))
+            continue
+
+        canonical = row.get("CanonicalMatchKey", "").strip()
+        require(bool(canonical), f"reuse-identity lacks CanonicalMatchKey: {row.get('DecisionKey')}")
+        if "#" in canonical:
+            target = multipart_keep_index.get(canonical)
+            if target is None:
+                base_key = canonical.split("#", 1)[0]
+                if base_key in current_by_match and base_key not in resolved_multipart:
+                    # Current Stage-A Preview deliberately suppresses aliases whose
+                    # canonical multipart target is blocked or no longer resolved.
+                    continue
+                raise SystemExit(f"Scoped reuse target is not a resolved multipart keep subgroup: {row.get('DecisionKey')} -> {canonical}")
+            assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
+            continue
+
+        if canonical in current_by_match:
+            canonical_d = valid_decision.get(canonical)
+            if not canonical_d or canonical_d.get("Status") != "reviewed" or canonical_d.get("Action") != "keep-identity":
+                # Canonical blocker precedence: reviewed alias is not materialized
+                # until the canonical surface itself is a valid keep identity.
+                continue
+        assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
+
+    # Mirror resolved multipart materialization.
+    for base_key, rows in resolved_multipart.items():
+        for row in rows:
             action = row.get("Action")
             if action not in {"keep-identity", "reuse-identity"}:
                 continue
-            if action == "reuse-identity":
+            keys = occurrence_keys(row)
+            if action == "keep-identity":
                 canonical = row.get("CanonicalMatchKey", "").strip()
-            elif multipart:
-                canonical = row.get("CanonicalMatchKey", "").strip()
-            else:
-                canonical = match_key
-            require(bool(canonical), f"Resolved Stage-A vocabulary decision lacks canonical key: {row.get('DecisionKey')}")
-            pid = f"candidate:{canonical}"
-            for key in keys:
-                previous = assigned_occurrence.get(key)
-                require(previous in {None, pid}, f"Source occurrence maps to multiple provisional identities: {key}: {previous} vs {pid}")
-                assigned_occurrence[key] = pid
-                mapping[pid].add(key)
+                require(bool(canonical), f"Multipart keep lacks canonical: {row.get('DecisionKey')}")
+                assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
+                continue
+
+            canonical = row.get("CanonicalMatchKey", "").strip()
+            require(bool(canonical), f"Multipart reuse lacks canonical: {row.get('DecisionKey')}")
+            if canonical in current_by_match:
+                canonical_d = valid_decision.get(canonical)
+                require(
+                    bool(canonical_d)
+                    and canonical_d.get("Status") == "reviewed"
+                    and canonical_d.get("Action") == "keep-identity",
+                    f"Multipart reuse bypasses canonical blocker: {row.get('DecisionKey')} -> {canonical}",
+                )
+            assign(f"candidate:{canonical}", keys, row.get("DecisionKey", ""))
 
     _, preview_rows = read_csv(PREVIEW)
     preview_by_pid = {r.get("ProvisionalIdentityKey", ""): r for r in preview_rows}
