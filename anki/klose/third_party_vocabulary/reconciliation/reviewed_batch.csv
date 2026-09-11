@@ -1,0 +1,51 @@
+ProvisionalIdentityKey,Action,ExistingNoteID,ProposedCanonicalWord,ProposedMatchKey,ProposedSense,Confidence,DecisionBasis,Rationale
+candidate:fine,new-stable-identity,,fine,fine,好的；健康的；不错的,high,explicit-no-equivalent-current-klose-candidate,现有 KV000968 是天气晴朗义，第三方目标是状态良好或健康义，核心义项不同。
+candidate:finish,reuse-existing,KV000918,,,,high,semantic-equivalent-current-klose-sense,完成结束与现有完成做好属于同一完成动作义。
+candidate:flu,reuse-existing,KV000933,,,,high,semantic-equivalent-current-klose-sense,流感与流行性感冒流感等价。
+candidate:front,reuse-existing,KV000911,,,,high,semantic-equivalent-current-klose-sense,前面前部与现有前部属于同一空间位置义。
+candidate:fur,reuse-existing,KV001020,,,,high,semantic-equivalent-current-klose-sense,毛皮软毛与动物浓密软毛共享 fur 的基本毛被义。
+candidate:go for a walk,reuse-existing,KV000975,,,,high,semantic-equivalent-current-klose-sense,去散步与散步为同一活动短语义。
+candidate:go shopping,reuse-existing,KV000976,,,,high,semantic-equivalent-current-klose-sense,去购物与去买东西购物等价。
+candidate:grandparent,reuse-existing,KV000932,,,,high,semantic-equivalent-current-klose-sense,祖父母外祖父母与现有四种祖辈称谓属于同一 grandparent 概念。
+candidate:gym,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时写体育馆和健身房，而现有 KV001184 明确为体育馆；两类场所不能安全视为一个 target sense。
+candidate:half,reuse-existing,KV001104,,,,high,semantic-equivalent-current-klose-sense,一半半与现有一半等价。
+candidate:hall,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时含大厅和礼堂，而现有 KV001162 仅明确大厅；礼堂可对应 auditorium，边界不宜强并。
+candidate:hard-working,reuse-existing,KV000905,,,,high,semantic-equivalent-current-klose-sense,勤奋勤劳与工作努力辛勤属于同一品质义。
+candidate:heavy,new-stable-identity,,heavy,heavy,重的；沉重的,high,explicit-no-equivalent-current-klose-candidate,现有 KV000964 是程度大或严重义，第三方目标是物理重量大义，核心义项不同。
+candidate:hers,reuse-existing,KV001023,,,,high,semantic-equivalent-current-klose-sense,她的东西是物主代词 hers 的展开解释，与现有她的同一语法义。
+candidate:hour,reuse-existing,KV000945,,,,high,semantic-equivalent-current-klose-sense,小时钟头与现有小时等价。
+candidate:ice-skate,reuse-existing,KV001188,,,,high,semantic-equivalent-current-klose-sense,滑冰溜冰与现有滑冰动词义等价。
+candidate:if,reuse-existing,KV000936,,,,high,semantic-equivalent-current-klose-sense,如果假如与如果假若倘若等价。
+candidate:internet,reuse-existing,KV001190,,,,high,semantic-equivalent-current-klose-sense,互联网因特网与现有互联网等价。
+candidate:island,reuse-existing,KV000987,,,,high,semantic-equivalent-current-klose-sense,岛岛屿与现有岛等价。
+candidate:jump,reuse-existing,KV000907,,,,high,semantic-equivalent-current-klose-sense,跳跳跃与跳跃等价。
+candidate:keep,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时含保持状态和保留持有，现有 KV001031 仅明确保持某种状态，不能据拼写合并另一核心义。
+candidate:kilometre,reuse-existing,KV001047,,,,high,semantic-equivalent-current-klose-sense,公里与千米公里完全等价。
+candidate:lamp,reuse-existing,KV001169,,,,medium,semantic-equivalent-current-klose-sense,灯台灯与现有台灯共享 lamp 的照明器具基本义，第三方只是更泛化表述。
+candidate:last,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方同时含最后的和上一个的，现有 KV000983 仅覆盖上一个或刚过去的，final 与 previous 不能混成一个 identity。
+candidate:later,reuse-existing,KV001079,,,,high,semantic-equivalent-current-klose-sense,后来稍后以后与随后后来共享后续时间义。
+candidate:laugh,reuse-existing,KV000924,,,,high,semantic-equivalent-current-klose-sense,笑大笑与现有笑为同一动作义。
+candidate:lesson,reuse-existing,KV000928,,,,medium,semantic-equivalent-current-klose-sense,课课程与课一节课在当前小学语境下属于同一 lesson 教学单元义。
+candidate:look up,reuse-existing,KV001189,,,,high,semantic-equivalent-current-klose-sense,查找查阅与在词典或电脑中查阅属于同一查询义。
+candidate:lotus,reuse-existing,KV000954,,,,medium,semantic-equivalent-current-klose-sense,莲花荷花与现有莲属植物在当前基础词汇层面指同一 lotus 植物概念。
+candidate:make,reuse-existing,KV001074,,,,medium,semantic-equivalent-current-klose-sense,制作做与现有做使出现共享 make 的制作产生核心义。
+candidate:market,reuse-existing,KV001156,,,,high,semantic-equivalent-current-klose-sense,市场集市仅释义顺序不同。
+candidate:month,reuse-existing,KV001128,,,,high,semantic-equivalent-current-klose-sense,月一个月与月月份属于同一时间单位义。
+candidate:moon,reuse-existing,KV001115,,,,high,semantic-equivalent-current-klose-sense,月亮月球与现有月球月亮共享同一天体基本义。
+candidate:mountain,held,,,,,medium,mixed-sense-boundary-requires-resolution,第三方目标同时写单个山和山脉，而现有 KV000961 明确单个高山山岳；山脉是 mountain range，边界不宜强并。
+candidate:move,reuse-existing,KV000925,,,,high,semantic-equivalent-current-klose-sense,移动搬动搬家与现有搬家移动覆盖同一 move 基本动作范围。
+candidate:mrs,reuse-existing,KV000948,,,,high,semantic-equivalent-current-klose-sense,太太夫人与现有用于姓名前的太太夫人为同一称谓义。
+candidate:national,reuse-existing,KV001002,,,,medium,semantic-equivalent-current-klose-sense,国家的全国性的与现有国家的共享 national 的国家范围义。
+candidate:nature,reuse-existing,KV000959,,,,high,semantic-equivalent-current-klose-sense,自然大自然与自然界大自然等价。
+candidate:night,reuse-existing,KV000930,,,,high,semantic-equivalent-current-klose-sense,夜晚晚上与夜夜晚属于同一夜间时间义。
+candidate:noise,reuse-existing,KV001019,,,,high,semantic-equivalent-current-klose-sense,噪音响声包含在现有声音响声噪音同一 noise 声响义范围内。
+candidate:nothing,reuse-existing,KV001191,,,,high,semantic-equivalent-current-klose-sense,没有什么没有东西与现有没有什么等价。
+candidate:notice,reuse-existing,KV001077,,,,medium,semantic-equivalent-current-klose-sense,通知告示与现有通知在 notice 名词的告知信息义上属于同一学习单元。
+candidate:ocean,reuse-existing,KV001119,,,,high,semantic-equivalent-current-klose-sense,海洋与大海海洋等价。
+candidate:off,reuse-existing,KV001176,,,,medium,semantic-equivalent-current-klose-sense,离开脱离与现有从某处落下中的 off 都表达从表面或位置分离的核心关系义。
+candidate:open,held,,,,,medium,mixed-pos-boundary-requires-resolution,第三方目标同时含打开动词和开着开放形容词，现有 KV001021 只明确开着的形容词义。
+candidate:other,reuse-existing,KV001013,,,,high,semantic-equivalent-current-klose-sense,其他的另外的与现有其他属于同一 other 选择范围义。
+candidate:ours,reuse-existing,KV001025,,,,high,semantic-equivalent-current-klose-sense,我们的东西是 ours 的展开解释，与现有我们的同一物主代词义。
+candidate:own,held,,,,,medium,mixed-pos-boundary-requires-resolution,第三方同时含自己的形容词义和拥有动词义，现有 KV001155 仅覆盖自己的。
+candidate:p.m.,reuse-existing,KV000982,,,,high,semantic-equivalent-current-klose-sense,下午午后与午后下午仅顺序不同。
+candidate:parent,reuse-existing,KV000922,,,,high,semantic-equivalent-current-klose-sense,父亲或母亲家长与现有父亲母亲属于同一 parent 基本亲属义。
