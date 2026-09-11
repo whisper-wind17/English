@@ -1,6 +1,6 @@
 {
   "RequestVersion": "third-party-allocation-execution-request-v1",
-  "Status": "requested",
+  "Status": "completed",
   "Step": "actual-third-party-stable-identity-allocation",
   "UserInstruction": "继续处理",
   "StandingDirectiveApplies": true,
@@ -8,6 +8,10 @@
   "RetryAttempt": 2,
   "PreviousRunID": "34608014656",
   "RetryReason": "fixed diff-scope check to include untracked stable_evidence_bindings.csv; previous run passed actual apply and Completion Recheck but did not push",
+  "CompletedByExecutionWorkflowRunID": "34608158097",
+  "CompletedByAllocationCommitSHA": "fe0d1f04c2eae1cf5d492673dd79aef302691d39",
+  "CompletedByReceipt": "anki/klose/third_party_vocabulary/allocation/execution_receipt.json",
+  "CompletedAt": "2026-09-11T14:06:40Z",
   "ExpectedMutationScope": [
     "anki/klose/master/note_registry_extensions.csv",
     "anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv"
