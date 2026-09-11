@@ -11,11 +11,14 @@ on:
       - 'tools/apply_third_party_allocation.py'
       - 'tools/validate_third_party_allocation_simulation.py'
       - 'tools/validate_third_party_allocation_post_mutation.py'
+      - 'tools/validate_third_party_allocation_committed_state.py'
       - 'docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md'
       - 'docs/THIRD_PARTY_SOURCE_PROVENANCE_CONTRACT.md'
       - 'anki/klose/third_party_vocabulary/allocation/plan.json'
       - 'anki/klose/third_party_vocabulary/allocation/authorization.json'
+      - 'anki/klose/third_party_vocabulary/allocation/execution_receipt.json'
       - 'anki/klose/third_party_vocabulary/provenance/contract.json'
+      - 'anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv'
       - 'anki/klose/third_party_vocabulary/reconciliation/reconciliation_decisions.csv'
       - 'anki/klose/third_party_vocabulary/review/identity_decisions.csv'
       - 'anki/klose/third_party_vocabulary/premerge/identity_candidates.csv'
@@ -60,13 +63,55 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Detect allocation lifecycle state
+        id: lifecycle
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          p = Path('anki/klose/third_party_vocabulary/allocation/execution_receipt.json')
+          executed = False
+          if p.exists():
+              value = json.loads(p.read_text(encoding='utf-8-sig'))
+              executed = value.get('Status') == 'executed-validated'
+          print(f"executed={'true' if executed else 'false'}")
+          PY
+
+      - name: Validate durable committed allocation state
+        if: steps.lifecycle.outputs.executed == 'true'
+        run: python tools/validate_third_party_allocation_committed_state.py
+
+      - name: Recheck persistent Stable identity invariants after allocation
+        if: steps.lifecycle.outputs.executed == 'true'
+        shell: bash
+        run: |
+          base="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          value = json.loads(Path('anki/klose/third_party_vocabulary/allocation/execution_receipt.json').read_text(encoding='utf-8-sig'))
+          print(value['AllocationBaseCommitSHA'])
+          PY
+          )"
+          KLOSE_BASE_COMMIT="$base" python tools/check_klose_persistent_state.py
+
+      - name: Assert committed-state validation is read-only
+        if: steps.lifecycle.outputs.executed == 'true'
+        run: |
+          git status --short
+          git diff --exit-code
+          echo 'Committed allocation validation mutation = no'
+
       - name: Validate third-party source provenance contract
+        if: steps.lifecycle.outputs.executed != 'true'
         run: python tools/validate_third_party_source_provenance.py
 
       - name: Validate allocation/migration control plane against current truth
+        if: steps.lifecycle.outputs.executed != 'true'
         run: python tools/check_third_party_allocation_plan.py
 
       - name: Read allocation authorization state
+        if: steps.lifecycle.outputs.executed != 'true'
         id: auth
         shell: bash
         run: |
@@ -78,17 +123,19 @@ jobs:
           PY
 
       - name: Build mutation-disabled allocation dry run
+        if: steps.lifecycle.outputs.executed != 'true'
         run: python tools/build_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
 
       - name: Independently validate allocation dry run
+        if: steps.lifecycle.outputs.executed != 'true'
         run: python tools/validate_third_party_allocation_dry_run.py --output-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
 
       - name: Assert actual allocation authorization gate is closed
-        if: steps.auth.outputs.authorized == 'false'
+        if: steps.lifecycle.outputs.executed != 'true' && steps.auth.outputs.authorized == 'false'
         run: python tools/apply_third_party_allocation.py --expect-unauthorized
 
       - name: Assert direct apply command fails closed
-        if: steps.auth.outputs.authorized == 'false'
+        if: steps.lifecycle.outputs.executed != 'true' && steps.auth.outputs.authorized == 'false'
         shell: bash
         run: |
           set -euo pipefail
@@ -102,12 +149,13 @@ jobs:
           git diff --exit-code
 
       - name: Confirm authorized state does not auto-apply
-        if: steps.auth.outputs.authorized == 'true'
+        if: steps.lifecycle.outputs.executed != 'true' && steps.auth.outputs.authorized == 'true'
         run: |
           echo 'Allocation control plane = authorized-pending-apply'
           echo 'This validation workflow never invokes --apply in the checked-out repository.'
 
       - name: Simulate guarded allocation outside repository
+        if: steps.lifecycle.outputs.executed != 'true'
         run: >-
           python tools/apply_third_party_allocation.py
           --simulate
@@ -115,12 +163,14 @@ jobs:
           --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Independently validate simulated post-allocation state
+        if: steps.lifecycle.outputs.executed != 'true'
         run: >-
           python tools/validate_third_party_allocation_simulation.py
           --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
           --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Simulate interrupted transaction after registry append
+        if: steps.lifecycle.outputs.executed != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -130,6 +180,7 @@ jobs:
           echo 'Simulated partial state = registry written / evidence bindings absent'
 
       - name: Retry simulation to recover interrupted transaction
+        if: steps.lifecycle.outputs.executed != 'true'
         run: >-
           python tools/apply_third_party_allocation.py
           --simulate
@@ -137,12 +188,14 @@ jobs:
           --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Validate recovered simulated state
+        if: steps.lifecycle.outputs.executed != 'true'
         run: >-
           python tools/validate_third_party_allocation_simulation.py
           --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
           --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Re-run simulation to prove idempotent retry
+        if: steps.lifecycle.outputs.executed != 'true'
         run: >-
           python tools/apply_third_party_allocation.py
           --simulate
@@ -150,12 +203,14 @@ jobs:
           --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Revalidate idempotent simulated state
+        if: steps.lifecycle.outputs.executed != 'true'
         run: >-
           python tools/validate_third_party_allocation_simulation.py
           --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
           --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Exercise authorized apply and commit transaction in isolated clone
+        if: steps.lifecycle.outputs.executed != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -216,7 +271,8 @@ jobs:
           echo 'Isolated authorized allocation transaction + commit gate = pass'
           echo 'Remote push = no'
 
-      - name: Assert validation is read-only
+      - name: Assert pre-execution validation is read-only
+        if: steps.lifecycle.outputs.executed != 'true'
         run: |
           git status --short
           git diff --exit-code
