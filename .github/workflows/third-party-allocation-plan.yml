@@ -74,6 +74,19 @@ jobs:
       - name: Assert actual allocation authorization gate is closed
         run: python tools/apply_third_party_allocation.py --expect-unauthorized
 
+      - name: Assert direct apply command fails closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if python tools/apply_third_party_allocation.py \
+              --apply \
+              --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"; then
+            echo 'Unauthorized --apply unexpectedly succeeded.'
+            exit 1
+          fi
+          echo 'Unauthorized --apply = correctly rejected'
+          git diff --exit-code
+
       - name: Simulate guarded allocation outside repository
         run: >-
           python tools/apply_third_party_allocation.py
@@ -82,6 +95,28 @@ jobs:
           --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
 
       - name: Independently validate simulated post-allocation state
+        run: >-
+          python tools/validate_third_party_allocation_simulation.py
+          --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+          --simulation-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
+      - name: Simulate interrupted transaction after registry append
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm "$RUNNER_TEMP/third-party-allocation-simulation/stable_evidence_bindings.csv"
+          test -f "$RUNNER_TEMP/third-party-allocation-simulation/note_registry_extensions.csv"
+          test ! -f "$RUNNER_TEMP/third-party-allocation-simulation/stable_evidence_bindings.csv"
+          echo 'Simulated partial state = registry written / evidence bindings absent'
+
+      - name: Retry simulation to recover interrupted transaction
+        run: >-
+          python tools/apply_third_party_allocation.py
+          --simulate
+          --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
+          --output-dir "$RUNNER_TEMP/third-party-allocation-simulation"
+
+      - name: Validate recovered simulated state
         run: >-
           python tools/validate_third_party_allocation_simulation.py
           --dry-run-dir "$RUNNER_TEMP/third-party-allocation-dry-run"
