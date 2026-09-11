@@ -5,8 +5,12 @@ on:
     branches: [main]
     paths:
       - 'tools/prepare_third_party_*.py'
-      - 'tools/check_third_party_*.py'
-      - '!tools/check_third_party_allocation_plan.py'
+      - 'tools/check_third_party_*_start1.py'
+      - 'tools/check_third_party_batch_manifest.py'
+      - 'tools/check_third_party_source_adapters.py'
+      - 'tools/check_third_party_source_freeze.py'
+      - 'tools/check_third_party_corpus.py'
+      - 'tools/check_third_party_learner_view.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_learner_view.py'
@@ -69,7 +73,7 @@ jobs:
                   source_changed=true
                   break
                   ;;
-                tools/check_third_party_*.py)
+                tools/check_third_party_*_start1.py)
                   adapter_id="${path#tools/check_third_party_}"
                   adapter_id="${adapter_id%.py}"
                   if [[ -f "tools/prepare_third_party_${adapter_id}.py" ]]; then
