@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'tools/prepare_third_party_learner_content_batches.py'
+      - 'tools/build_third_party_learner_content_batches.py'
       - '.github/workflows/third-party-learner-content-batches.yml'
   workflow_dispatch:
 
@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Build compact review inputs
-        run: python tools/prepare_third_party_learner_content_batches.py
+        run: python tools/build_third_party_learner_content_batches.py
       - name: Validate exact coverage
         shell: bash
         run: |
