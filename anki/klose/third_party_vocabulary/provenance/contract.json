@@ -1,6 +1,6 @@
 {
   "ContractVersion": "third-party-source-provenance-v1",
-  "ContractStatus": "checkpoint-candidate",
+  "ContractStatus": "validated-checkpointed",
   "SourceClassification": {
     "ThirdPartyAdapters": "external-evidence-provenance",
     "MasterSourceIdentityMap": "verified-textbook-source-fact-only"
@@ -66,5 +66,11 @@
     "MasterSourceMappingMutationAuthorized": false,
     "StableNoteIDAllocationAuthorized": false,
     "AnkiMutationAuthorized": false
+  },
+  "ValidationEvidence": {
+    "ValidationRunID": "34585155788",
+    "ValidationJobID": "103217537427",
+    "Result": "PASS",
+    "ValidationMutation": false
   }
 }
