@@ -1,0 +1,50 @@
+{
+  "ReceiptVersion": "third-party-allocation-execution-receipt-v1",
+  "Status": "executed-validated",
+  "Step": "actual-third-party-stable-identity-allocation",
+  "ExecutionWorkflowRunID": "34608158097",
+  "PreviousFailedRunID": "34608014656",
+  "RequestCommitSHA": "79ba4ff425734f3a20864936af8d18599f872d6e",
+  "AllocationBaseCommitSHA": "79ba4ff425734f3a20864936af8d18599f872d6e",
+  "AllocationCommitSHA": "fe0d1f04c2eae1cf5d492673dd79aef302691d39",
+  "ExecutedAt": "2026-09-11T14:06:40Z",
+  "PreAllocationTruth": {
+    "PersistentRegistryRows": 1194,
+    "ActiveStableNoteIDs": 1189,
+    "MaxNoteID": "KV001194",
+    "NoteRegistryBlobSHA": "061a2e7ffc6d3449a1835244e32b8bdb3b0b3fdf",
+    "NoteRegistryExtensionsBlobSHA": "5129cb01a7191a6f874f40afcaa65fb4c6d9541b"
+  },
+  "PostAllocationTruth": {
+    "PersistentRegistryRows": 3015,
+    "ActiveStableNoteIDs": 3010,
+    "MaxNoteID": "KV003015",
+    "NewStableRows": 1821,
+    "NewFirstNoteID": "KV001195",
+    "NewLastNoteID": "KV003015",
+    "NoteRegistryExtensionsBlobSHA": "a885d0b232a14cef8d3538bdeafd543d7f481d08",
+    "StableEvidenceBindings": 15791,
+    "StableEvidenceBindingsBlobSHA": "895f47ded3f1230b94e84db1dd8f26dffa229950"
+  },
+  "StageBActions": {
+    "reuse-existing": 903,
+    "new-stable-identity": 1821,
+    "held": 96
+  },
+  "Validation": {
+    "ClosedPreflight": "PASS",
+    "AuthorizedControlPlaneRecheck": "PASS",
+    "PersistentStatePreCommit": "PASS",
+    "PostMutationCompletionRecheck": "PASS",
+    "PersistentStatePostCommit": "PASS",
+    "PostCommitCompletionRecheck": "PASS",
+    "CommitPathScopeExact": true,
+    "CompareAndSwapPush": "PASS",
+    "HeldIdentitiesAllocated": false,
+    "MasterLearnerReleasePublishAnkiMutation": false
+  },
+  "AllowedAllocationCommitPaths": [
+    "anki/klose/master/note_registry_extensions.csv",
+    "anki/klose/third_party_vocabulary/provenance/stable_evidence_bindings.csv"
+  ]
+}
