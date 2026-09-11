@@ -16,6 +16,7 @@ on:
       - 'tools/check_klose_release_history.py'
       - 'tools/check_grade5_6_new_learner_content.py'
       - 'tools/check_third_party_learner_content.py'
+      - 'tools/validate_third_party_learner_materialization.py'
       - 'tools/apply_third_party_stable_learner.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
@@ -34,6 +35,7 @@ on:
       - 'anki/klose/config/**'
       - 'anki/klose/source_reference/**'
       - 'anki/klose/third_party_vocabulary/learner/content_reviewed/**'
+      - 'anki/klose/third_party_vocabulary/learner/content_corrections.csv'
       - 'anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv'
       - 'anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv'
       - 'anki/klose/learner/grade5_6_learning_scope.json'
@@ -159,10 +161,15 @@ jobs:
       - name: Sync learner review registry
         run: python tools/sync_klose_learner_review_registry.py
 
-      - name: Reject explicitly later auxiliary vocabulary in examples
+      - name: Reject unadmitted later auxiliary vocabulary in examples
         run: python tools/check_klose_learner.py
 
-      - name: Diagnose current vs held release completeness
+      - name: Independent third-party learner materialization recheck
+        run: python tools/validate_third_party_learner_materialization.py
+
+      - id: completeness
+        name: Diagnose current vs held release completeness
+        continue-on-error: true
         run: python tools/diagnose_klose_release_completeness.py
 
       - id: release
@@ -171,7 +178,7 @@ jobs:
         run: python tools/check_klose_release_ready.py
 
       - name: Report non-releasable development state
-        if: steps.release.outcome != 'success'
+        if: steps.release.outcome != 'success' || steps.completeness.outcome != 'success'
         run: echo 'Build Valid; Content Releasable = false. Persisting reviewable upstream state only; publish remains blocked.'
 
       - name: Persist build-valid upstream state
@@ -204,7 +211,7 @@ jobs:
           fi
 
       - name: Commit releasable generated data
-        if: github.event_name == 'push' && steps.release.outcome == 'success'
+        if: github.event_name == 'push' && steps.release.outcome == 'success' && steps.completeness.outcome == 'success'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
