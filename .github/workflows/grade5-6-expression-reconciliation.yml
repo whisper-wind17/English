@@ -19,13 +19,30 @@ on:
       # A reviewed source batch is the atomic trigger before Stable allocation.
       - 'anki/klose/review/grade5_6_reconciliation/expression_source_reviewed_batch.csv'
       - '.github/workflows/grade5-6-expression-reconciliation.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/prepare_grade5_6_expression_reconciliation.py'
+      - 'tools/apply_grade5_6_expression_review.py'
+      - 'tools/check_klose_expression_persistent_state.py'
+      - 'tools/check_klose_expressions_release_ready.py'
+      - 'tools/grade5_6_source_state.py'
+      - 'tools/sync_grade5_6_reconciliation_provenance.py'
+      - 'anki/klose/source_reference/grade5_6_source_provenance.json'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - 'anki/klose/expressions/**'
+      - 'anki/klose/review/grade5_6_reconciliation/expression_source_reviewed_batch.csv'
+      - '.github/workflows/grade5-6-expression-reconciliation.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: grade5-6-expression-reconciliation
+  group: grade5-6-expression-reconciliation-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -88,15 +105,16 @@ jobs:
         if: steps.lifecycle.outputs.phase == 'reconciliation'
         shell: bash
         run: |
+          set -euo pipefail
           bad="$(git diff --name-only | grep -v '^anki/klose/review/grade5_6_reconciliation/' || true)"
-          if [ -n "$bad" ]; then
+          if [[ -n "$bad" ]]; then
             echo "Unexpected mutation outside Grade 5-6 reconciliation review scope:"
             echo "$bad"
             exit 1
           fi
 
       - name: Persist derived Expression review state
-        if: steps.lifecycle.outputs.phase == 'reconciliation'
+        if: github.event_name == 'push' && steps.lifecycle.outputs.phase == 'reconciliation'
         shell: bash
         run: |
           set -euo pipefail
