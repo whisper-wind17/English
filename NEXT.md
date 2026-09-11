@@ -4,7 +4,7 @@ Last updated: 2026-09-11
 
 ## 1. Current checkpoint
 
-Grade 5–6 Vocabulary、Grade 5–6 Expressions 与第三方 Vocabulary sense-aware Stage-B reconciliation 均已完成当前阶段，并已 **CHECKPOINTED**。
+Grade 5–6 Vocabulary、Grade 5–6 Expressions、第三方 Vocabulary Stage-B reconciliation，以及第三方 allocation / migration plan 均已完成当前阶段，并已 **CHECKPOINTED**。
 
 ```text
 Vocabulary GitHub Release       = IMPLEMENTED / VALIDATED / CHECKPOINTED
@@ -16,16 +16,20 @@ Expressions Anki Updated        = true / DEVICE IMPORT + SYNC USER-CONFIRMED
 
 Third-party Stage-B             = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Third-party reconciliation      = 2820 / 2820
+
+Third-party allocation plan     = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Third-party merge/allocation    = NOT AUTHORIZED / NOT STARTED
 ```
 
-第三方 Stage-B 已重新针对当前 **1189 个 active Stable Vocabulary NoteIDs** 完成 reconciliation。下一主任务只能是 **third-party allocation / migration plan**：先定义 903 个 reuse、1821 个 future-new proposal 与 96 个 held 的后续处理和 mutation gate；在用户明确授权实际 merge/allocation 之前，不写 Klose Stable Registry、不改变 972-note 当前 release、不修改 Anki。
+第三方 allocation/migration plan 已绑定当前 **1189 个 active Stable Vocabulary NoteIDs** 与闭合的 2820 条 Stage-B decision。当前唯一下一主任务是 **third-party Source provenance / SourceEdition contract design**：20 个第三方 adapter occurrence 当前没有 `SourceEdition`，因此不得伪造教材版本写入 Master provenance。`MasterSourceMappingMutationAuthorized=false`，实际 Stable NoteID allocation 也继续保持未授权。
 
 启动顺序：
 
 ```text
 AGENTS.md
 → NEXT.md
+→ docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md
+→ docs/SOURCE_RECONCILIATION.md
 → docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md
 → docs/KLOSE_VOCABULARY_SYSTEM.md
 → current Stable Vocabulary registries
@@ -358,35 +362,87 @@ Klose identity/learner/release/Anki isolation = pass
 
 典型 sense-aware 决策：`take=拿/取/带走`、`heavy=重的`、`turn=转动`、`way=道路/方向` 不因同拼写而复用错误的现有 sense；`paint / email / Spanish / open` 等 Stage-A 混合义项保持 `held`。详细真源见 `docs/THIRD_PARTY_STAGE_B_RECONCILIATION.md`。
 
-### Immediate next work — allocation / migration plan only
+---
 
-Stage-B read-only reconciliation 已 CLOSED，但 actual merge/allocation **尚未授权**。下一阶段若继续，应先形成可验证的 allocation/migration plan，至少定义：
+## 7. Third-party allocation / migration plan — CHECKPOINTED
+
+计划真源：
 
 ```text
-903 reuse-existing
-→ 如何写 provenance / source mapping，且不改 Stable NoteID identity
-
-1821 new-stable-identity proposals
-→ 哪些允许进入 allocation candidate set
-→ append-only NoteID allocation order / rollback / idempotency
-→ Learner Admission 与 identity allocation 继续分离
-
-96 held
-→ 保持 held；不得自动 allocation / merge
+docs/THIRD_PARTY_ALLOCATION_MIGRATION_PLAN.md
+anki/klose/third_party_vocabulary/allocation/plan.json
+tools/check_third_party_allocation_plan.py
+.github/workflows/third-party-allocation-plan.yml
 ```
 
-计划还必须明确 mutation scope、stable identity diff、release isolation、rollback/retry、未来 Learner Presentation / review / admission / release 的独立 gate。在 plan VALIDATED / CHECKPOINTED 且用户明确授权实际 mutation 前，不执行 Stable NoteID allocation。
+计划已绑定当前 Stage-B 与 Stable Registry 的 exact Git blob SHA。当前 baseline：
+
+```text
+persistent registry rows      = 1194
+active Stable NoteIDs         = 1189
+max NoteID                    = KV001194
+reuse-existing                = 903
+new-stable-identity proposal  = 1821
+held                          = 96
+```
+
+1821 个 proposal 若未来在同一冻结 registry 上被明确授权执行，理论 append-only 区间为：
+
+```text
+KV001195..KV003015
+```
+
+该区间 **NOT RESERVED**；任何 Stable Registry 变化都会令 plan stale，并要求重新计算。903 个 reuse 不得改 Stable Registry，96 个 held 不得 allocation / merge。
+
+Validation evidence：
+
+```text
+initial allocation-plan validation        = 34584336799 / PASS
+Stage-A trigger isolation fix             = b8883e1b4d801567ae46decf503ea9a168cdd807
+post-fix full Stage-A recheck             = 34584514294 / PASS
+post-fix Stage-A seal metadata commit     = fd9ca00301b683e8741fbd20a39c91ea35dfbb8a
+final plan validation after doc checkpoint = 34584719664 / PASS
+```
+
+独立 adversarial recheck 曾发现：Stage-A workflow 的 `tools/check_third_party_*.py` 路径过宽，会把 allocation-plan checker 误当作 Stage-A input，导致无内容变化时重复 reseal metadata。已加入 `!tools/check_third_party_allocation_plan.py` 排除；修复后完整 Stage-A 验证通过，Stage-A content fingerprint 与 checkpoint `c6083...` 均未变化。
+
+### Current blocker — Source provenance / SourceEdition
+
+20 个第三方 source adapter 的标准 occurrence schema 当前不包含 `SourceEdition`，而 Master source mapping 以：
+
+```text
+SourceID + SourceEdition + SourceItemKey + NoteID
+```
+
+为 provenance identity。因此不得根据文件名、年级或第三方整理数据猜测 `2024-revision / pre-2024-revision / klose-current`。
+
+下一主任务只做 **third-party Source provenance / SourceEdition contract design**，需要决定：
+
+```text
+A. 从可验证 source evidence 补真实 SourceEdition / Revision
+或
+B. 在 source model 中显式建模 unknown / unverified edition，且语义不能冒充教材版本事实
+```
+
+在此 contract VALIDATED / CHECKPOINTED 前：
+
+```text
+MasterSourceMappingMutationAuthorized = false
+StableNoteIDAllocationAuthorized      = false
+```
+
+即使 provenance contract 之后完成，实际 allocator 仍需独立 IMPLEMENTED / VALIDATED，并且用户必须显式授权实际 mutation 后才可执行。
 
 ---
 
-## 7. Mutation boundary
+## 8. Mutation boundary
 
 当前允许：
 
 ```text
-third-party allocation / migration plan design
-read-only validation / statistics / adversarial review
-third-party reconciliation documentation / audit state
+third-party Source provenance / SourceEdition contract design
+read-only allocation plan validation / statistics / adversarial review
+third-party reconciliation / allocation-plan documentation / audit state
 NEXT.md checkpoint
 未来基于真实学习反馈修改 Learner Presentation（需 fingerprint re-review）
 正常的未来 Vocabulary / Expressions incremental release（只有明确新 release 时）
@@ -396,6 +452,8 @@ NEXT.md checkpoint
 
 ```text
 actual third-party Stable NoteID allocation / merge without explicit authorization
+master third-party source mapping mutation before SourceEdition contract closes
+inventing SourceEdition / Revision from filename, grade, or third-party organizer labels
 turning held rows into automatic allocation or reuse
 surface-word-only dedup when senses differ
 manual edit of generated publish files
@@ -407,4 +465,16 @@ bulk resetting Learning/Review Cards to match repo curriculum
 changing FSRS / Review History / Due from GitHub-side content operations
 silent deletion/rewrite of Grade 5 Lower / Grade 6 Lower provenance evidence
 automatically mixing ExpressionID operations into Vocabulary updates
+```
+
+Current allocation mutation gates：
+
+```text
+ActualMutationAuthorized              = false
+StableNoteIDAllocationAuthorized      = false
+MasterSourceMappingMutationAuthorized = false
+LearnerMutationAuthorized             = false
+ReleaseMutationAuthorized             = false
+PublishMutationAuthorized             = false
+AnkiMutationAuthorized                = false
 ```
