@@ -9,6 +9,7 @@ on:
       - 'tools/grade5_6_source_state.py'
       - 'tools/check_grade5_6_vocabulary_reconciliation_completion.py'
       - 'tools/check_grade5_6_expression_reconciliation_completion.py'
+      - 'tools/check_klose_expressions_release_ready.py'
       - 'tools/check_grade5_6_premerge_dedup.py'
       - 'tools/check_klose_persistent_state.py'
       - 'tools/check_klose_expression_persistent_state.py'
@@ -22,6 +23,7 @@ on:
       - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
       - 'anki/klose/source_reference/klose-actual-grade5-lower-proverbs.csv'
       - 'anki/klose/learner/grade5_6_learning_scope.json'
+      - 'anki/klose/expressions/**'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_candidates.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_decisions.csv'
       - 'anki/klose/review/grade5_6_reconciliation/vocabulary_status.json'
@@ -31,7 +33,6 @@ on:
       - 'anki/klose/review/grade5_6_reconciliation/expression_status.json'
       - 'anki/klose/review/grade5_6_premerge_dedup/**'
       - 'anki/klose/master/**'
-      - 'anki/klose/expressions/master/**'
       - '.github/workflows/grade5-6-reconciliation-completion.yml'
   workflow_dispatch:
 
@@ -50,7 +51,7 @@ jobs:
             anki/klose/source_reference
             anki/klose/learner/grade5_6_learning_scope.json
             anki/klose/master
-            anki/klose/expressions/master
+            anki/klose/expressions
             anki/klose/review/grade5_6_reconciliation
             anki/klose/review/grade5_6_premerge_dedup
       - uses: actions/setup-python@v5
@@ -62,13 +63,26 @@ jobs:
         run: python tools/check_grade5_6_premerge_dedup.py
       - name: Independent Vocabulary reconciliation recheck
         run: python tools/check_grade5_6_vocabulary_reconciliation_completion.py
-      - name: Independent Expression reconciliation recheck
-        run: python tools/check_grade5_6_expression_reconciliation_completion.py
+      - name: Validate Expression reconciliation or downstream release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f anki/klose/expressions/master/grade5_6_identity_allocation.csv ]]; then
+            echo 'Grade 5-6 Expressions have crossed the downstream allocation boundary; validating the final release state.'
+            python tools/check_klose_expressions_release_ready.py
+          else
+            python tools/check_grade5_6_expression_reconciliation_completion.py
+          fi
       - name: Verify Stable Vocabulary persistent state
         env:
           KLOSE_BASE_COMMIT: HEAD^
         run: python tools/check_klose_persistent_state.py
-      - name: Verify Stable Expression persistent state
-        env:
-          KLOSE_BASE_COMMIT: HEAD^
-        run: python tools/check_klose_expression_persistent_state.py
+      - name: Verify pre-allocation Stable Expression persistent state
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f anki/klose/expressions/master/grade5_6_identity_allocation.csv ]]; then
+            echo 'Post-allocation Expression state is protected by the final release gate above.'
+          else
+            KLOSE_BASE_COMMIT=HEAD^ python tools/check_klose_expression_persistent_state.py
+          fi

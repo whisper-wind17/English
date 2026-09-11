@@ -104,3 +104,154 @@ EO000100,KE000063,confirmed,教材原句支持该 canonical pattern / communicat
 EO000101,KE000064,confirmed,教材原句支持该 canonical pattern / communicative function
 EO000102,KE000065,confirmed,教材原句支持该 canonical pattern / communicative function
 EO000103,KE000066,confirmed,教材原句支持该 canonical pattern / communicative function
+EO000104,KE000067,confirmed,Grade 5-6 closed reconciliation: 询问人物特征；自动匹配 KE000045 属字符串假阳性
+EO000105,KE000027,confirmed,Grade 5-6 closed reconciliation: 与现有描述人物两个特征句型完全同功能同实现
+EO000106,KE000068,confirmed,Grade 5-6 closed reconciliation: 询问擅长某项活动的可迁移句型
+EO000108,KE000069,confirmed,Grade 5-6 closed reconciliation: 询问某人能为活动或目标做什么
+EO000109,KE000070,confirmed,Grade 5-6 closed reconciliation: 表达自己能做某事；不是数量陈述 KE000058
+EO000110,KE000071,confirmed,Grade 5-6 closed reconciliation: 本句询问能力而非礼貌请求
+EO000111,KE000072,confirmed,Grade 5-6 closed reconciliation: 能力问句的高频否定短答
+EO000112,KE000073,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含观察对方状态与询问问题两个可独立迁移 production units
+EO000112,KE000074,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含观察对方状态与询问问题两个可独立迁移 production units
+EO000113,KE000075,confirmed,Grade 5-6 closed reconciliation: 说明谈论主题；自动 StablePatternMatches 为通配正则假阳性
+EO000114,KE000076,confirmed,Grade 5-6 closed reconciliation: 表达在截止时间前必须完成某事
+EO000116,KE000077,confirmed,Grade 5-6 closed reconciliation: Why not 构式是高迁移建议表达
+EO000117,KE000078,confirmed,Grade 5-6 closed reconciliation: 说明某行动重要性的可迁移句型
+EO000118,KE000079,confirmed,Grade 5-6 closed reconciliation: 提取 I need to [verb phrase]；称呼部分仅为 Source 上下文
+EO000119,KE000080,confirmed,Grade 5-6 closed reconciliation: 询问最喜欢的类别对象；不是 What's [demonstrative] 的物体识别
+EO000120,KE000081,confirmed,Grade 5-6 closed reconciliation: 询问某天课程安排的教材核心句型
+EO000122,KE000082,confirmed,Grade 5-6 closed reconciliation: 询问某时段通常做什么的高迁移日常表达
+EO000123,KE000083,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含 often 与 Sometimes 两个频率表达模式
+EO000123,KE000084,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含 often 与 Sometimes 两个频率表达模式
+EO000124,KE000085,confirmed,Grade 5-6 closed reconciliation: 询问活动是否在两个时间都发生并承载 both...and 结构
+EO000125,KE000086,confirmed,Grade 5-6 closed reconciliation: 一般现在时 Does 问句的高频肯定短答
+EO000126,KE000087,confirmed,Grade 5-6 closed reconciliation: 询问如何达到目标或采取行动
+EO000127,KE000088,confirmed,Grade 5-6 closed reconciliation: We should 是给出正向建议的基础句型
+EO000128,KE000006,confirmed,Grade 5-6 closed reconciliation: Can I [verb phrase]? 与现有请求许可 identity 同功能同实现
+EO000129,KE000089,confirmed,Grade 5-6 closed reconciliation: You shouldn't 是给出负向建议的基础句型
+EO000130,KE000090,confirmed,Grade 5-6 closed reconciliation: 询问对方想做什么；与 Would you like [thing]? 的是非问句不同
+EO000131,KE000050,confirmed,Grade 5-6 closed reconciliation: I'd like [thing] 与现有礼貌表达想要某物同一 realization；please 为可省略礼貌成分
+EO000132,KE000009,confirmed,Grade 5-6 closed reconciliation: Would you like [thing]? 与现有 offer_or_ask_want identity 完全一致
+EO000133,KE000091,confirmed,Grade 5-6 closed reconciliation: 礼貌接受提议的高频固定回应
+EO000134,KE000092,confirmed,Grade 5-6 closed reconciliation: 询问物品来源；与人物来源 Where are you from 功能不同
+EO000136,KE000014,confirmed,Grade 5-6 closed reconciliation: There are [plural noun] 的存在陈述与现有 identity 一致；also 与地点为扩展信息
+EO000137,KE000093,confirmed,Grade 5-6 closed reconciliation: 询问某处是否存在单数事物
+EO000138,KE000094,confirmed,Grade 5-6 closed reconciliation: 单数存在问句的高频肯定短答
+EO000139,KE000095,confirmed,Grade 5-6 closed reconciliation: 询问某处是否存在复数事物
+EO000140,KE000096,confirmed,Grade 5-6 closed reconciliation: 复数存在问句的高频肯定短答
+EO000141,KE000097,confirmed,Grade 5-6 closed reconciliation: There will be 用于表达未来存在或发生的可迁移结构
+EO000142,KE000098,confirmed,Grade 5-6 closed reconciliation: When do you [verb phrase]? 用于询问日常活动发生时间
+EO000143,KE000099,confirmed,Grade 5-6 closed reconciliation: 提取在具体时间发生某活动的通用陈述模式
+EO000144,KE000082,confirmed,Grade 5-6 closed reconciliation: 与首批 What do you usually do [time phrase]? 同一日常活动询问；usually 只是可省频率修饰不改变 identity
+EO000145,KE000083,confirmed,Grade 5-6 closed reconciliation: I often [verb phrase] 与首批 future group 同一实现；并列动作仍属于同一 slot
+EO000146,KE000100,confirmed,Grade 5-6 closed reconciliation: Which ... do you like best 询问最喜欢对象；best 为语义核心不能降为一般 like
+EO000148,KE000101,confirmed,Grade 5-6 closed reconciliation: Why? 是可独立迁移的高频追问原因表达
+EO000149,KE000102,confirmed,Grade 5-6 closed reconciliation: 提取 Because [clause] 作为回答原因的 discourse frame
+EO000150,KE000103,confirmed,Grade 5-6 closed reconciliation: When is [event]? 询问事件时间的通用句型
+EO000151,KE000104,confirmed,Grade 5-6 closed reconciliation: It's in [month] 说明事件月份；自动匹配位置型 KE 属 function 假阳性
+EO000152,KE000103,confirmed,Grade 5-6 closed reconciliation: trip this year 仍是 When is [event]? 的直接实例
+EO000153,KE000104,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含月份回答和 We'll [verb phrase] 两个可迁移 production units
+EO000153,KE000105,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含月份回答和 We'll [verb phrase] 两个可迁移 production units
+EO000154,KE000103,confirmed,Grade 5-6 closed reconciliation: art show 是通用 event slot 实例
+EO000155,KE000106,confirmed,Grade 5-6 closed reconciliation: It's on [date] 说明事件具体日期
+EO000156,KE000103,confirmed,Grade 5-6 closed reconciliation: birthday 可直接作为 event slot；无需为生日问句另造同功能 identity
+EO000157,KE000107,confirmed,Grade 5-6 closed reconciliation: 主动说明自己的生日日期是稳定社交表达
+EO000158,KE000108,confirmed,Grade 5-6 closed reconciliation: [Thing] is mine 表达自己的所属关系；不是进行时或数量陈述
+EO000159,KE000109,confirmed,Grade 5-6 closed reconciliation: 询问一组物品是否都属于说话双方
+EO000160,KE000110,confirmed,Grade 5-6 closed reconciliation: Whose is it? 在名词已知时独立询问所属；与现有 Whose [noun] is this 实现不同
+EO000161,KE000018,confirmed,Grade 5-6 closed reconciliation: It's [person]'s. 与现有 state_ownership identity 完全一致
+EO000162,KE000111,confirmed,Grade 5-6 closed reconciliation: Is [subject] [verb-ing]? 询问正在发生的动作
+EO000163,KE000016,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含现在进行时否定短答及 He's [verb-ing] 当前动作陈述
+EO000163,KE000112,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含现在进行时否定短答及 He's [verb-ing] 当前动作陈述
+EO000164,KE000113,confirmed,Grade 5-6 closed reconciliation: 询问多个主体正在做什么
+EO000165,KE000114,confirmed,Grade 5-6 closed reconciliation: They're [verb-ing] 描述多个主体当前动作；现有 KE000016 使用 singular is realization
+EO000166,KE000115,confirmed,Grade 5-6 closed reconciliation: What's [subject] doing? 归一为 What is [subject] doing 的单数当前动作询问
+EO000167,KE000016,confirmed,Grade 5-6 closed reconciliation: It's [verb-ing] 与现有描述单一主体当前动作 identity 同功能同实现
+EO000168,KE000116,confirmed,Grade 5-6 closed reconciliation: Shh 为语境提示；Talk quietly 是可主动使用的行为指令
+EO000169,KE000117,confirmed,Grade 5-6 closed reconciliation: Keep [thing] [adjective] 是保持状态的可迁移指令结构
+EO000170,KE000118,confirmed,Grade 5-6 closed reconciliation: 询问过去周末整体经历感受
+EO000171,KE000119,confirmed,Grade 5-6 closed reconciliation: 提取 It was [adjective] 对过去经历作总体评价；具体爬长城叙事保留在 Source
+EO000172,KE000120,confirmed,Grade 5-6 closed reconciliation: What did you do? 是一般过去时询问活动的核心问句；称呼不影响 identity
+EO000173,KE000121,confirmed,Grade 5-6 closed reconciliation: 叙述自己在明确过去时间做过某事的通用 frame
+EO000174,KE000122,confirmed,Grade 5-6 closed reconciliation: 询问过去某一时段去了哪里
+EO000175,KE000123,confirmed,Grade 5-6 closed reconciliation: 说明过去去了哪里以及和谁同行
+EO000176,KE000120,confirmed,Grade 5-6 closed reconciliation: there 是上下文地点副词；核心仍为 What did you do
+EO000177,KE000124,confirmed,Grade 5-6 closed reconciliation: We went to [verb phrase] 叙述过去去做某事
+EO000178,KE000125,confirmed,Grade 5-6 closed reconciliation: What else did you do? 用于继续追问过去活动
+EO000179,KE000118,confirmed,Grade 5-6 closed reconciliation: Mid-Autumn Festival holiday 与 weekend 同为 event/time slot
+EO000180,KE000119,confirmed,Grade 5-6 closed reconciliation: It was great 是过去经历评价 frame 的直接实例
+EO000181,KE000126,confirmed,Grade 5-6 closed reconciliation: Did you [verb phrase]? 是过去行为的是非询问核心句型
+EO000182,KE000127,confirmed,Grade 5-6 closed reconciliation: 一般过去时是非问句的高频否定短答
+EO000183,KE000126,confirmed,Grade 5-6 closed reconciliation: Did you eat mooncakes 是 Did you [verb phrase]? 的直接实例
+EO000184,KE000128,confirmed,Grade 5-6 closed reconciliation: 一般过去时是非问句的高频肯定短答
+EO000185,KE000129,confirmed,Grade 5-6 closed reconciliation: 说明过去某时和某人去某活动；归入过去目的地/活动+时间叙述框架
+EO000186,KE000130,confirmed,Grade 5-6 closed reconciliation: 询问过去经历中喜欢某对象哪一点
+EO000187,KE000131,confirmed,Grade 5-6 closed reconciliation: I liked [thing/activity] 表达过去偏好；watching the runners 为 activity slot
+EO000188,KE000120,confirmed,Grade 5-6 closed reconciliation: last weekend 为时间扩展；核心仍是 What did you do
+EO000189,KE000132,confirmed,Grade 5-6 closed reconciliation: 询问当前身体或情绪感受
+EO000190,KE000133,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含感受描述身体部位疼痛及症状陈述三个可迁移 production units
+EO000190,KE000134,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含感受描述身体部位疼痛及症状陈述三个可迁移 production units
+EO000190,KE000135,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含感受描述身体部位疼痛及症状陈述三个可迁移 production units
+EO000191,KE000136,confirmed,Grade 5-6 closed reconciliation: 一条 Source 同时表达同情与缓和建议两个独立交际功能
+EO000191,KE000137,confirmed,Grade 5-6 closed reconciliation: 一条 Source 同时表达同情与缓和建议两个独立交际功能
+EO000192,KE000087,confirmed,Grade 5-6 closed reconciliation: How can we [verb phrase] 与首批 ask_method future group 同一实现
+EO000193,KE000088,confirmed,Grade 5-6 closed reconciliation: We need to 与 We should 分别承载共同需要和建议两个 production frames
+EO000193,KE000138,confirmed,Grade 5-6 closed reconciliation: We need to 与 We should 分别承载共同需要和建议两个 production frames
+EO000195,KE000139,confirmed,Grade 5-6 closed reconciliation: Don't [verb phrase] 是可迁移否定祈使；区别于现有带 please 的礼貌 prohibition
+EO000198,KE000140,confirmed,Grade 5-6 closed reconciliation: How are you going to [verb phrase]? 询问未来计划方式
+EO000199,KE000141,confirmed,Grade 5-6 closed reconciliation: I'm going to [verb phrase] 是表达近期计划的核心 frame
+EO000200,KE000142,confirmed,Grade 5-6 closed reconciliation: I want to [verb phrase] 表达自己想做某事；also 不改变 identity
+EO000201,KE000143,confirmed,Grade 5-6 closed reconciliation: What else are you going to [verb]? 用于追问额外未来计划
+EO000202,KE000141,confirmed,Grade 5-6 closed reconciliation: I'm going to buy ... for Grandpa 仍是同一 going-to future plan frame
+EO000203,KE000142,confirmed,Grade 5-6 closed reconciliation: I also want to [verb phrase] 与已定义 desire-action frame 同一 identity
+EO000204,KE000144,confirmed,Grade 5-6 closed reconciliation: 询问在某处能看到哪些事物
+EO000205,KE000145,confirmed,Grade 5-6 closed reconciliation: We can see [things] 是感知结果陈述；不同于 KE000029 的行动建议功能
+EO000206,KE000145,confirmed,Grade 5-6 closed reconciliation: At night 为时间扩展；核心仍是 We can see [things]
+EO000207,KE000146,confirmed,Grade 5-6 closed reconciliation: water 为不可数名词；不能机械塞入 a/an singular existence frame
+EO000208,KE000094,confirmed,Grade 5-6 closed reconciliation: 包含存在问句肯定短答以及 There is soil 的不可数存在陈述
+EO000208,KE000147,confirmed,Grade 5-6 closed reconciliation: 包含存在问句肯定短答以及 There is soil 的不可数存在陈述
+EO000209,KE000095,confirmed,Grade 5-6 closed reconciliation: Are there any [plural noun] 与已定义复数存在询问同一 frame；地点由上下文提供
+EO000210,KE000148,confirmed,Grade 5-6 closed reconciliation: 提取 I don't think so 固定回应与 They say [clause] 转述框架；不继续嵌套拆 clause 内部语法
+EO000210,KE000149,confirmed,Grade 5-6 closed reconciliation: 提取 I don't think so 固定回应与 They say [clause] 转述框架；不继续嵌套拆 clause 内部语法
+EO000213,KE000150,confirmed,Grade 5-6 closed reconciliation: 询问对某主题已经知道些什么
+EO000215,KE000151,confirmed,Grade 5-6 closed reconciliation: 追问关于同一主题还想了解什么
+EO000216,KE000092,confirmed,Grade 5-6 closed reconciliation: Where does [thing] come from 与 Grade 5 coconut occurrence 同一 future identity
+EO000217,KE000152,confirmed,Grade 5-6 closed reconciliation: [Items] are types of [category] 是可迁移的基础分类说明 frame
+EO000219,KE000153,confirmed,Grade 5-6 closed reconciliation: 面对问题时询问应采取什么行动的高迁移固定表达
+EO000220,KE000087,confirmed,Grade 5-6 closed reconciliation: How can we [verb phrase] 与已定义 ask_method future group 同一实现
+EO000221,KE000029,confirmed,Grade 5-6 closed reconciliation: We can [verb phrase] 在此用于提出可采取的节能行动；与现有 suggest_possible_action 完全一致
+EO000222,KE000029,confirmed,Grade 5-6 closed reconciliation: We can also [verb phrase] 仍是现有行动建议 frame；also 不改变 identity
+EO000223,KE000088,confirmed,Grade 5-6 closed reconciliation: We should [verb phrase] 与首批正向建议 future group 同一实现
+EO000224,KE000154,confirmed,Grade 5-6 closed reconciliation: 用最高级指出某范围内最突出的对象；不是数量陈述 KE000058
+EO000225,KE000155,confirmed,Grade 5-6 closed reconciliation: 表达比较级差异；自动位置类匹配均属字符串通配假阳性
+EO000226,KE000156,confirmed,Grade 5-6 closed reconciliation: 询问身高的高频固定表达
+EO000227,KE000157,confirmed,Grade 5-6 closed reconciliation: 用数值回答自己的身高
+EO000228,KE000158,confirmed,Grade 5-6 closed reconciliation: 询问鞋服等物品尺码的高频句型；称呼不影响 identity
+EO000229,KE000155,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含比较级陈述以及物品尺码回答两个可迁移 production units
+EO000229,KE000159,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含比较级陈述以及物品尺码回答两个可迁移 production units
+EO000230,KE000160,confirmed,Grade 5-6 closed reconciliation: 询问体重的教材核心表达
+EO000231,KE000161,confirmed,Grade 5-6 closed reconciliation: 用数值回答自己的体重
+EO000232,KE000118,confirmed,Grade 5-6 closed reconciliation: 与六上 How was your weekend 完全同一 past-experience future identity
+EO000233,KE000119,confirmed,Grade 5-6 closed reconciliation: It was [adjective] 是过去经历评价 frame；thank you 为附加礼貌成分
+EO000234,KE000120,confirmed,Grade 5-6 closed reconciliation: 与已定义 What did you do? future identity 完全一致
+EO000236,KE000162,confirmed,Grade 5-6 closed reconciliation: 以是非问句追问过去是否还做了其他事情
+EO000238,KE000142,confirmed,Grade 5-6 closed reconciliation: I want to [verb phrase] 与六上已定义 desired-action future group 同一实现
+EO000239,KE000120,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含过去活动 wh-question 与过去行为 yes-no question 两个 production units
+EO000239,KE000126,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含过去活动 wh-question 与过去行为 yes-no question 两个 production units
+EO000241,KE000163,confirmed,Grade 5-6 closed reconciliation: 询问发生了什么的高频固定表达
+EO000242,KE000164,confirmed,Grade 5-6 closed reconciliation: 看到异常时确认对方是否安好的高频关切表达
+EO000243,KE000165,confirmed,Grade 5-6 closed reconciliation: 说明自己现在已经没事的常用回应
+EO000244,KE000122,confirmed,Grade 5-6 closed reconciliation: Where did you go 与已定义 past-destination future group 同一核心实现；时间 slot 可由上下文给出
+EO000245,KE000166,confirmed,Grade 5-6 closed reconciliation: It looks like [thing] 是表达外观相似的高迁移句型
+EO000246,KE000126,confirmed,Grade 5-6 closed reconciliation: Did you go to Turpan 是 Did you [verb phrase]? 的直接实例
+EO000247,KE000128,confirmed,Grade 5-6 closed reconciliation: 与六上 Yes we did 相同的一般过去时肯定短答 identity
+EO000248,KE000167,confirmed,Grade 5-6 closed reconciliation: 询问过去采用什么交通方式去某地
+EO000249,KE000168,confirmed,Grade 5-6 closed reconciliation: 说明过去前往某地所用交通方式；there 为 place slot
+EO000250,KE000169,confirmed,Grade 5-6 closed reconciliation: 对经历或计划作积极回应的高频固定表达
+EO000251,KE000170,confirmed,Grade 5-6 closed reconciliation: 说明过去某处没有某个单数事物
+EO000252,KE000171,confirmed,Grade 5-6 closed reconciliation: Tell [person] about [topic] please 是礼貌请求对方介绍某主题的可迁移 frame
+EO000253,KE000172,confirmed,Grade 5-6 closed reconciliation: 追问信息来源或判断依据的高迁移表达
+EO000254,KE000173,confirmed,Grade 5-6 closed reconciliation: 说明过去某处没有某些事物；computers or Internet 作为 things slot
+EO000255,KE000174,confirmed,Grade 5-6 closed reconciliation: Before [clause] / Now [clause] 是描述随时间变化的直接 discourse frame
+EO000256,KE000175,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含过去状态解释能力限制及 Now 引出的当前日常行为两个可迁移 production frames
+EO000256,KE000176,confirmed,Grade 5-6 closed reconciliation: 一条 Source 含过去状态解释能力限制及 Now 引出的当前日常行为两个可迁移 production frames

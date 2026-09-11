@@ -1,0 +1,111 @@
+IdentityGroup,ExpressionID,CanonicalForm,FunctionKey,ExpressionType,SlotSchema,AllocatedFromOccurrence,AllocationBasis,Status
+new::ask-person-description,KE000067,What's [person] like?,ask_person_description,slot_frame,person,EO000104,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-good-at,KE000068,Is [person] good at [activity]?,ask_skill_good_at,slot_frame,person|activity,EO000106,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-contribution,KE000069,What can [person] do for [target]?,ask_contribution_action,slot_frame,person|target,EO000108,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-ability-i-can,KE000070,I can [verb phrase].,state_own_ability,slot_frame,verb_phrase,EO000109,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-ability-can-you,KE000071,Can you [verb phrase]?,ask_ability,slot_frame,verb_phrase,EO000110,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-inability-cannot,KE000072,"No, I can't.",respond_inability,fixed,,EO000111,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-problem-whats-matter,KE000073,What's the matter?,ask_problem,fixed,,EO000112,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::describe-look,KE000074,You look [adjective].,describe_observed_state,slot_frame,adjective,EO000112,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-topic-about,KE000075,It's about [topic].,state_topic,slot_frame,topic,EO000113,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-deadline-obligation,KE000076,We have to [verb phrase] by [time].,state_deadline_obligation,slot_frame,verb_phrase|time,EO000114,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::suggest-why-not,KE000077,Why not [verb phrase]?,suggest_action,slot_frame,verb_phrase,EO000116,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-importance-to,KE000078,It's important to [verb phrase].,state_importance,slot_frame,verb_phrase,EO000117,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-need-to,KE000079,I need to [verb phrase].,state_need,slot_frame,verb_phrase,EO000118,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-favourite,KE000080,What's your favourite [category]?,ask_favourite,slot_frame,category,EO000119,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-school-schedule,KE000081,What do you have on [day]?,ask_school_schedule,slot_frame,day,EO000120,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-routine,KE000082,What do you usually do [time phrase]?,ask_routine,slot_frame,time_phrase,EO000122,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-often-routine,KE000083,I often [verb phrase].,state_frequent_routine,slot_frame,verb_phrase,EO000123,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-sometimes-routine,KE000084,Sometimes I [verb phrase].,state_occasional_routine,slot_frame,verb_phrase,EO000123,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-both-times,KE000085,Does [person] [verb phrase] on both [time 1] and [time 2]?,ask_activity_both_times,slot_frame,person|verb_phrase|time1|time2,EO000124,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-present-simple-yes,KE000086,"Yes, [subject pronoun] does.",confirm_present_simple,slot_frame,subject_pronoun,EO000125,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-method-how-can,KE000087,How can we [verb phrase]?,ask_method,slot_frame,verb_phrase,EO000126,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::give-advice-should,KE000088,We should [verb phrase].,give_advice,slot_frame,verb_phrase,EO000127,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::give-advice-should-not,KE000089,You shouldn't [verb phrase].,give_negative_advice,slot_frame,verb_phrase,EO000129,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-would-like-to,KE000090,What would you like to [verb]?,ask_desired_action,slot_frame,verb,EO000130,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::accept-offer-yes-please,KE000091,"Yes, please.",accept_offer_politely,fixed,,EO000133,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-origin-thing,KE000092,Where does [thing] come from?,ask_thing_origin,slot_frame,thing,EO000134,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-existence-singular,KE000093,Is there a/an [singular noun] [place phrase]?,ask_existence_singular,slot_frame,singular_noun|place_phrase,EO000137,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::confirm-existence-singular,KE000094,"Yes, there is.",confirm_existence_singular,fixed,,EO000138,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-existence-plural,KE000095,Are there any [plural noun] [place phrase]?,ask_existence_plural,slot_frame,plural_noun|place_phrase,EO000139,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::confirm-existence-plural,KE000096,"Yes, there are.",confirm_existence_plural,fixed,,EO000140,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-future-existence,KE000097,There will be [noun phrase] [time/place].,state_future_existence,slot_frame,noun_phrase|time_place,EO000141,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-time-routine,KE000098,When do you [verb phrase]?,ask_routine_time,slot_frame,verb_phrase,EO000142,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-routine-time,KE000099,[Subject] [verb phrase] at [time].,state_routine_time,slot_frame,subject|verb_phrase|time,EO000143,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-favourite-choice,KE000100,Which [category] do you like best?,ask_favourite_choice,slot_frame,category,EO000146,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-reason-why,KE000101,Why?,ask_reason,fixed,,EO000148,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::give-reason-because,KE000102,Because [clause].,give_reason,discourse_frame,clause,EO000149,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-event-time,KE000103,When is [event]?,ask_event_time,slot_frame,event,EO000150,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-month-time,KE000104,It's in [month].,state_event_month,slot_frame,month,EO000151,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-future-plan-will,KE000105,We'll [verb phrase].,state_future_plan,slot_frame,verb_phrase,EO000153,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-date,KE000106,It's on [date].,state_event_date,slot_frame,date,EO000155,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-birthday-date,KE000107,My birthday is on [date].,state_birthday_date,slot_frame,date,EO000157,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-own-ownership,KE000108,[Thing] is mine.,state_own_ownership,slot_frame,thing,EO000158,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-plural-ownership,KE000109,Are these all [possessive pronoun]?,ask_plural_ownership,slot_frame,possessive_pronoun,EO000159,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-ownership-whose-it,KE000110,Whose is it?,ask_ownership_pronoun,fixed,,EO000160,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-current-action-yesno,KE000111,Is [subject] [verb-ing]?,ask_current_action_yes_no,slot_frame,subject|verb_ing,EO000162,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-current-action-no,KE000112,"No, [subject pronoun] isn't.",deny_current_action,slot_frame,subject_pronoun,EO000163,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-current-action-plural,KE000113,What are [subjects] doing?,ask_current_action_plural,slot_frame,subjects,EO000164,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-current-action-plural,KE000114,[Subjects] are [verb-ing].,describe_current_action_plural,slot_frame,subjects|verb_ing,EO000165,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-current-action-singular,KE000115,What is [subject] doing?,ask_current_action_singular,slot_frame,subject,EO000166,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::instruct-talk-quietly,KE000116,Talk quietly.,request_quiet_speech,fixed,,EO000168,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::instruct-keep-state,KE000117,Keep [thing] [adjective].,instruct_maintain_state,slot_frame,thing|adjective,EO000169,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-experience,KE000118,How was your [event/time]?,ask_past_experience,slot_frame,event_time,EO000170,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-evaluation,KE000119,It was [adjective]!,state_past_evaluation,slot_frame,adjective,EO000171,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-activity,KE000120,What did you do?,ask_past_activity,fixed,,EO000172,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-activity,KE000121,I [past verb phrase] [past time].,state_past_activity,slot_frame,past_verb_phrase|past_time,EO000173,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-destination,KE000122,Where did you go [past time]?,ask_past_destination,slot_frame,past_time,EO000174,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-trip-with,KE000123,I went to [place] with [people].,state_past_trip,slot_frame,place|people,EO000175,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-went-to-action,KE000124,We went to [verb phrase].,state_past_purpose_action,slot_frame,verb_phrase,EO000177,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-additional-past-activity,KE000125,What else did you do?,ask_additional_past_activity,fixed,,EO000178,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-yesno,KE000126,Did you [verb phrase]?,ask_past_yes_no,slot_frame,verb_phrase,EO000181,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-past-no,KE000127,"No, [subject pronoun] didn't.",deny_past_action,slot_frame,subject_pronoun,EO000182,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-past-yes,KE000128,"Yes, [subject pronoun] did.",confirm_past_action,slot_frame,subject_pronoun,EO000184,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-destination-time,KE000129,[Subject] went to [place/event] [past time].,state_past_destination_time,slot_frame,subject|place_event|past_time,EO000185,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-like-about,KE000130,What did you like about [thing]?,ask_past_preference_detail,slot_frame,thing,EO000186,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-liked,KE000131,I liked [thing/activity].,state_past_preference,slot_frame,thing_activity,EO000187,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-feeling,KE000132,How do you feel?,ask_current_feeling,fixed,,EO000189,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-feeling,KE000133,I feel [adjective].,state_current_feeling,slot_frame,adjective,EO000190,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-pain,KE000134,My [body part] hurts.,state_body_pain,slot_frame,body_part,EO000190,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-symptom-have,KE000135,I have [symptom].,state_health_symptom,slot_frame,symptom,EO000190,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::express-empathy-sorry-hear,KE000136,I'm sorry to hear that.,express_empathy,fixed,,EO000191,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::give-advice-maybe-should,KE000137,Maybe you should [verb phrase].,give_soft_advice,slot_frame,verb_phrase,EO000191,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-collective-need,KE000138,We need to [verb phrase].,state_collective_need,slot_frame,verb_phrase,EO000193,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::give-negative-instruction,KE000139,Don't [verb phrase].,give_negative_instruction,slot_frame,verb_phrase,EO000195,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-future-plan-how,KE000140,How are you going to [verb phrase]?,ask_future_plan_method,slot_frame,verb_phrase,EO000198,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-future-going-to,KE000141,I'm going to [verb phrase].,state_future_plan_going_to,slot_frame,verb_phrase,EO000199,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-want-to,KE000142,I want to [verb phrase].,state_desired_action,slot_frame,verb_phrase,EO000200,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-additional-future,KE000143,What else are you going to [verb]?,ask_additional_future_action,slot_frame,verb,EO000201,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-visible-objects,KE000144,What can you see [place phrase]?,ask_visible_objects,slot_frame,place_phrase,EO000204,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-visible-objects,KE000145,We can see [things].,state_visible_objects,slot_frame,things,EO000205,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-existence-uncountable,KE000146,Is there any [uncountable noun] [place phrase]?,ask_existence_uncountable,slot_frame,uncountable_noun|place_phrase,EO000207,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-existence-uncountable,KE000147,There is [uncountable noun] [place phrase].,state_existence_uncountable,slot_frame,uncountable_noun|place_phrase,EO000208,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::report-they-say,KE000148,They say [clause].,report_hearsay,discourse_frame,clause,EO000210,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-dont-think-so,KE000149,I don't think so.,express_negative_belief,fixed,,EO000210,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-knowledge-about,KE000150,What do you know about [thing]?,ask_knowledge,slot_frame,thing,EO000213,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-additional-knowledge,KE000151,What else do you want to know about [thing]?,ask_additional_knowledge,slot_frame,thing,EO000215,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::classify-types-of,KE000152,[Items] are types of [category].,classify_examples,discourse_frame,items|category,EO000217,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-what-should-we-do,KE000153,What should we do?,ask_recommended_action,fixed,,EO000219,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-superlative-in-place,KE000154,That's the [superlative adjective] [noun] [place phrase].,state_superlative_identification,slot_frame,superlative_adjective|noun|place_phrase,EO000224,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-comparison-than,KE000155,[Subject] is/are [comparative adjective] than [target].,state_comparison,slot_frame,subject|comparative_adjective|target,EO000225,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-height,KE000156,How tall are you?,ask_height,fixed,,EO000226,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-height,KE000157,I'm [height].,state_height,slot_frame,height,EO000227,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-size,KE000158,What size are your [items]?,ask_item_size,slot_frame,items,EO000228,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-item-size,KE000159,[Items] are size [size].,state_item_size,slot_frame,items|size,EO000229,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-weight,KE000160,How heavy are you?,ask_weight,fixed,,EO000230,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-weight,KE000161,I'm [weight].,state_weight,slot_frame,weight,EO000231,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-anything-else,KE000162,Did you do anything else?,ask_additional_past_yes_no,fixed,,EO000236,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-what-happened,KE000163,What happened?,ask_what_happened,fixed,,EO000241,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::check-all-right,KE000164,Are you all right?,check_wellbeing,fixed,,EO000242,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::reassure-ok-now,KE000165,I'm OK now.,reassure_wellbeing,fixed,,EO000243,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::describe-looks-like,KE000166,It looks like [thing].,describe_resemblance,slot_frame,thing,EO000245,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-past-transport,KE000167,How did you go [place]?,ask_past_transport,slot_frame,place,EO000248,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-transport,KE000168,We went [place] by [transport].,state_past_transport,slot_frame,place|transport,EO000249,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::respond-sounds-great,KE000169,Sounds great!,respond_positive_news,fixed,,EO000250,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-nonexistence-singular,KE000170,There was no [singular noun] [place/time].,state_past_nonexistence_singular,slot_frame,singular_noun|place_time,EO000251,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::request-tell-about,KE000171,"Tell [person] about [topic], please.",request_information_about,slot_frame,person|topic,EO000252,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::ask-how-know,KE000172,How do you know that?,ask_evidence_source,fixed,,EO000253,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-past-nonexistence-plural,KE000173,There were no [things] [place/time].,state_past_nonexistence_plural,slot_frame,things|place_time,EO000254,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::contrast-before-now,KE000174,"Before, [clause]. Now, [clause].",describe_change_over_time,discourse_frame,before_clause|now_clause,EO000255,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::explain-past-inability,KE000175,"I was [adjective], so I couldn't [verb phrase].",explain_past_inability,discourse_frame,adjective|verb_phrase,EO000256,closed-grade5-6-reconciliation+explicit-user-learning-scope,active
+new::state-now-routine,KE000176,"Now, I [verb phrase] [frequency].",state_current_change,slot_frame,verb_phrase|frequency,EO000256,closed-grade5-6-reconciliation+explicit-user-learning-scope,active

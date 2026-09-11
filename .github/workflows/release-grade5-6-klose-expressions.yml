@@ -1,0 +1,127 @@
+name: Release Grade 5-6 Klose Expressions
+
+on:
+  push:
+    branches:
+      - 'work/klose-grade5-6-expressions-20260911'
+    paths:
+      - 'tools/materialize_klose_grade5_6_expressions.py'
+      - 'tools/refine_klose_grade5_6_expression_presentations.py'
+      - 'tools/build_klose_expressions.py'
+      - 'tools/check_klose_expressions_release_ready.py'
+      - 'tools/klose_expression_review_fingerprint.py'
+      - 'anki/klose/expressions/**'
+      - 'anki/klose/review/grade5_6_reconciliation/**'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - '.github/workflows/release-grade5-6-klose-expressions.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/materialize_klose_grade5_6_expressions.py'
+      - 'tools/refine_klose_grade5_6_expression_presentations.py'
+      - 'tools/build_klose_expressions.py'
+      - 'tools/check_klose_expressions_release_ready.py'
+      - 'tools/klose_expression_review_fingerprint.py'
+      - 'anki/klose/expressions/**'
+      - 'anki/klose/review/grade5_6_reconciliation/**'
+      - 'anki/klose/source_reference/klose-actual-grade5-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade5-lower-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-upper-expressions.csv'
+      - 'anki/klose/source_reference/klose-actual-grade6-lower-expressions.csv'
+      - '.github/workflows/release-grade5-6-klose-expressions.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-grade5-6-klose-expressions-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            tools
+            anki/klose/expressions
+            anki/klose/review/grade5_6_reconciliation
+            anki/klose/source_reference
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Materialize accepted Grade 5-6 Expression scope
+        run: python tools/materialize_klose_grade5_6_expressions.py
+
+      - name: Refine learner-facing Grade 5-6 presentations
+        run: python tools/refine_klose_grade5_6_expression_presentations.py
+
+      - name: Build deterministic Expression publish artifacts
+        run: python tools/build_klose_expressions.py
+
+      - name: Validate final Expression release state
+        run: python tools/check_klose_expressions_release_ready.py
+
+      - name: Verify materialization/build idempotence
+        shell: bash
+        run: |
+          set -euo pipefail
+          before="$(git diff -- . ':!.github' | sha256sum | awk '{print $1}')"
+          python tools/materialize_klose_grade5_6_expressions.py
+          python tools/refine_klose_grade5_6_expression_presentations.py
+          python tools/build_klose_expressions.py
+          python tools/check_klose_expressions_release_ready.py
+          after="$(git diff -- . ':!.github' | sha256sum | awk '{print $1}')"
+          if [[ "$before" != "$after" ]]; then
+            echo "Grade 5-6 Expression materialization is not idempotent: $before -> $after"
+            exit 1
+          fi
+
+      - name: Assert Vocabulary and reconciliation truth are untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad="$(git diff --name-only | grep -Ev '^anki/klose/expressions/(master|learner|publish)/' || true)"
+          if [[ -n "$bad" ]]; then
+            echo 'Unexpected mutation outside the Expressions downstream release boundary:'
+            echo "$bad"
+            exit 1
+          fi
+          echo 'Vocabulary / reconciliation mutation = none'
+
+      - name: Persist generated Grade 5-6 Expression release state
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add \
+            anki/klose/expressions/master \
+            anki/klose/expressions/learner \
+            anki/klose/expressions/publish
+          if git diff --cached --quiet; then
+            echo 'No generated Expression release changes.'
+          else
+            git commit -m 'data: refine Grade 5-6 Klose Expressions'
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+            python tools/materialize_klose_grade5_6_expressions.py
+            python tools/refine_klose_grade5_6_expression_presentations.py
+            python tools/build_klose_expressions.py
+            python tools/check_klose_expressions_release_ready.py
+            if ! git diff --quiet; then
+              echo 'Rebase changed final derived state; refusing to push stale release.'
+              git diff --name-only
+              exit 1
+            fi
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi

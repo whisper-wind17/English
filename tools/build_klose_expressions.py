@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Deterministically build Klose Expressions study.csv and anki-import.csv.
 
-Only Expressions whose current learner presentation is explicitly approved are
-publishable. Model-reviewed drafts stay upstream and never leak into Anki.
+Publishable learner presentations must be current-fingerprint reviewed and explicitly
+release-ready. `approved` preserves the user-confirmed baseline; `model-reviewed`
+is a distinct review state used by the current Grade 5-6 release. Draft/pending
+presentations remain upstream and never leak into Anki.
 """
 from __future__ import annotations
 
@@ -42,6 +44,7 @@ NOTE_TYPE = "Klose Expression"
 DECK = "Klose-English::Expressions"
 ID_RE = re.compile(r"^KE\d{6}$")
 ORDER_RE = re.compile(r"^\d{6}$")
+PUBLISHABLE_REVIEW_STATUSES = {"approved", "model-reviewed"}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -129,20 +132,26 @@ def main() -> None:
         if not ORDER_RE.fullmatch(order):
             raise SystemExit(f"Allowed Expression has invalid LearningOrder: {eid}={order!r}")
 
-        if rev.get("ReviewStatus", "").strip() != "approved":
+        review_status = rev.get("ReviewStatus", "").strip()
+        if review_status not in PUBLISHABLE_REVIEW_STATUSES:
             continue
         if rev.get("FingerprintVersion", "").strip() != VERSION:
             raise SystemExit(f"Unsupported fingerprint version: {eid}")
         if rev.get("Fingerprint", "").strip() != fingerprint(cur):
-            raise SystemExit(f"Approved learner presentation fingerprint is stale: {eid}")
-        if rel.get("PresentationStatus", "").strip() != "approved":
-            raise SystemExit(f"Release registry presentation status drift: {eid}")
+            raise SystemExit(f"Reviewed learner presentation fingerprint is stale: {eid}")
+        if rel.get("PresentationStatus", "").strip() != review_status:
+            raise SystemExit(
+                f"Release registry presentation status drift: {eid}: "
+                f"release={rel.get('PresentationStatus','')!r} review={review_status!r}"
+            )
         if rel.get("AdmissionStatus", "").strip() != "allowed":
             raise SystemExit(f"Release registry admission status drift: {eid}")
+        if rel.get("PublishStatus", "").strip() != "generated" or rel.get("ReleaseStatus", "").strip() != "ready":
+            raise SystemExit(f"Reviewed Expression is not explicitly release-ready: {eid}")
 
         missing = [field for field in REQUIRED_PRESENTATION if not cur.get(field, "").strip()]
         if missing:
-            raise SystemExit(f"Approved Expression missing learner fields: {eid}:{','.join(missing)}")
+            raise SystemExit(f"Reviewed Expression missing learner fields: {eid}:{','.join(missing)}")
 
         sources, source_books = source_metadata(eid, occurrences, mapped)
         publish_rows.append({
@@ -181,10 +190,11 @@ def main() -> None:
     ANKI_IMPORT.parent.mkdir(parents=True, exist_ok=True)
     ANKI_IMPORT.write_text("\n".join(headers) + "\n" + buffer.getvalue(), encoding="utf-8")
 
-    print(
-        f"Built Klose Expressions: approved={len(publish_rows)} "
-        f"drafts={sum(1 for row in reviews.values() if row.get('ReviewStatus','').strip() != 'approved')}"
+    drafts = sum(
+        1 for row in reviews.values()
+        if row.get("ReviewStatus", "").strip() not in PUBLISHABLE_REVIEW_STATUSES
     )
+    print(f"Built Klose Expressions: publishable={len(publish_rows)} drafts={drafts}")
 
 
 if __name__ == "__main__":

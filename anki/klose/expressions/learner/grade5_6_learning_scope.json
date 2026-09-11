@@ -1,0 +1,17 @@
+{
+  "SchemaVersion": 1,
+  "ScopeID": "klose-grade5-6-expressions-current",
+  "LearnerProfile": "klose",
+  "LearnerLevel": 4,
+  "ScopeStatus": "accepted",
+  "DecisionBasis": "explicit-user-current-learning-scope",
+  "SourceProvenanceAffectsLearningAdmission": false,
+  "StableIdentityAllocationAuthorized": true,
+  "Books": {
+    "5上": {"Accepted": true, "CurriculumRank": 1},
+    "5下": {"Accepted": true, "CurriculumRank": 2},
+    "6上": {"Accepted": true, "CurriculumRank": 3},
+    "6下": {"Accepted": true, "CurriculumRank": 4}
+  },
+  "Policy": "The four captured Grade 5-6 Expression sources are explicitly accepted as Klose's current learning scope. SourceID, SourceEdition and provenance blockers remain audit truth and are not rewritten. The accepted learning scope authorizes downstream Stable ExpressionID allocation, learner presentation, admission and release only after the closed reconciliation decisions pass an independent recheck."
+}

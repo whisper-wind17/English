@@ -65,3 +65,113 @@ KE000063,You're welcome.,respond_thanks,fixed,,active,EC0059,EO000100
 KE000064,No problem.,reassure_no_problem,fixed,,active,EC0060,EO000101
 KE000065,After you!,yield_precedence,fixed,,active,EC0063,EO000102
 KE000066,Me too.,agree_same,fixed,,active,EC0064,EO000103
+KE000067,What's [person] like?,ask_person_description,slot_frame,person,active,new::ask-person-description,EO000104
+KE000068,Is [person] good at [activity]?,ask_skill_good_at,slot_frame,person|activity,active,new::ask-good-at,EO000106
+KE000069,What can [person] do for [target]?,ask_contribution_action,slot_frame,person|target,active,new::ask-contribution,EO000108
+KE000070,I can [verb phrase].,state_own_ability,slot_frame,verb_phrase,active,new::state-ability-i-can,EO000109
+KE000071,Can you [verb phrase]?,ask_ability,slot_frame,verb_phrase,active,new::ask-ability-can-you,EO000110
+KE000072,"No, I can't.",respond_inability,fixed,,active,new::respond-inability-cannot,EO000111
+KE000073,What's the matter?,ask_problem,fixed,,active,new::ask-problem-whats-matter,EO000112
+KE000074,You look [adjective].,describe_observed_state,slot_frame,adjective,active,new::describe-look,EO000112
+KE000075,It's about [topic].,state_topic,slot_frame,topic,active,new::state-topic-about,EO000113
+KE000076,We have to [verb phrase] by [time].,state_deadline_obligation,slot_frame,verb_phrase|time,active,new::state-deadline-obligation,EO000114
+KE000077,Why not [verb phrase]?,suggest_action,slot_frame,verb_phrase,active,new::suggest-why-not,EO000116
+KE000078,It's important to [verb phrase].,state_importance,slot_frame,verb_phrase,active,new::state-importance-to,EO000117
+KE000079,I need to [verb phrase].,state_need,slot_frame,verb_phrase,active,new::state-need-to,EO000118
+KE000080,What's your favourite [category]?,ask_favourite,slot_frame,category,active,new::ask-favourite,EO000119
+KE000081,What do you have on [day]?,ask_school_schedule,slot_frame,day,active,new::ask-school-schedule,EO000120
+KE000082,What do you usually do [time phrase]?,ask_routine,slot_frame,time_phrase,active,new::ask-routine,EO000122
+KE000083,I often [verb phrase].,state_frequent_routine,slot_frame,verb_phrase,active,new::state-often-routine,EO000123
+KE000084,Sometimes I [verb phrase].,state_occasional_routine,slot_frame,verb_phrase,active,new::state-sometimes-routine,EO000123
+KE000085,Does [person] [verb phrase] on both [time 1] and [time 2]?,ask_activity_both_times,slot_frame,person|verb_phrase|time1|time2,active,new::ask-both-times,EO000124
+KE000086,"Yes, [subject pronoun] does.",confirm_present_simple,slot_frame,subject_pronoun,active,new::respond-present-simple-yes,EO000125
+KE000087,How can we [verb phrase]?,ask_method,slot_frame,verb_phrase,active,new::ask-method-how-can,EO000126
+KE000088,We should [verb phrase].,give_advice,slot_frame,verb_phrase,active,new::give-advice-should,EO000127
+KE000089,You shouldn't [verb phrase].,give_negative_advice,slot_frame,verb_phrase,active,new::give-advice-should-not,EO000129
+KE000090,What would you like to [verb]?,ask_desired_action,slot_frame,verb,active,new::ask-would-like-to,EO000130
+KE000091,"Yes, please.",accept_offer_politely,fixed,,active,new::accept-offer-yes-please,EO000133
+KE000092,Where does [thing] come from?,ask_thing_origin,slot_frame,thing,active,new::ask-origin-thing,EO000134
+KE000093,Is there a/an [singular noun] [place phrase]?,ask_existence_singular,slot_frame,singular_noun|place_phrase,active,new::ask-existence-singular,EO000137
+KE000094,"Yes, there is.",confirm_existence_singular,fixed,,active,new::confirm-existence-singular,EO000138
+KE000095,Are there any [plural noun] [place phrase]?,ask_existence_plural,slot_frame,plural_noun|place_phrase,active,new::ask-existence-plural,EO000139
+KE000096,"Yes, there are.",confirm_existence_plural,fixed,,active,new::confirm-existence-plural,EO000140
+KE000097,There will be [noun phrase] [time/place].,state_future_existence,slot_frame,noun_phrase|time_place,active,new::state-future-existence,EO000141
+KE000098,When do you [verb phrase]?,ask_routine_time,slot_frame,verb_phrase,active,new::ask-time-routine,EO000142
+KE000099,[Subject] [verb phrase] at [time].,state_routine_time,slot_frame,subject|verb_phrase|time,active,new::state-routine-time,EO000143
+KE000100,Which [category] do you like best?,ask_favourite_choice,slot_frame,category,active,new::ask-favourite-choice,EO000146
+KE000101,Why?,ask_reason,fixed,,active,new::ask-reason-why,EO000148
+KE000102,Because [clause].,give_reason,discourse_frame,clause,active,new::give-reason-because,EO000149
+KE000103,When is [event]?,ask_event_time,slot_frame,event,active,new::ask-event-time,EO000150
+KE000104,It's in [month].,state_event_month,slot_frame,month,active,new::state-month-time,EO000151
+KE000105,We'll [verb phrase].,state_future_plan,slot_frame,verb_phrase,active,new::state-future-plan-will,EO000153
+KE000106,It's on [date].,state_event_date,slot_frame,date,active,new::state-date,EO000155
+KE000107,My birthday is on [date].,state_birthday_date,slot_frame,date,active,new::state-birthday-date,EO000157
+KE000108,[Thing] is mine.,state_own_ownership,slot_frame,thing,active,new::state-own-ownership,EO000158
+KE000109,Are these all [possessive pronoun]?,ask_plural_ownership,slot_frame,possessive_pronoun,active,new::ask-plural-ownership,EO000159
+KE000110,Whose is it?,ask_ownership_pronoun,fixed,,active,new::ask-ownership-whose-it,EO000160
+KE000111,Is [subject] [verb-ing]?,ask_current_action_yes_no,slot_frame,subject|verb_ing,active,new::ask-current-action-yesno,EO000162
+KE000112,"No, [subject pronoun] isn't.",deny_current_action,slot_frame,subject_pronoun,active,new::respond-current-action-no,EO000163
+KE000113,What are [subjects] doing?,ask_current_action_plural,slot_frame,subjects,active,new::ask-current-action-plural,EO000164
+KE000114,[Subjects] are [verb-ing].,describe_current_action_plural,slot_frame,subjects|verb_ing,active,new::state-current-action-plural,EO000165
+KE000115,What is [subject] doing?,ask_current_action_singular,slot_frame,subject,active,new::ask-current-action-singular,EO000166
+KE000116,Talk quietly.,request_quiet_speech,fixed,,active,new::instruct-talk-quietly,EO000168
+KE000117,Keep [thing] [adjective].,instruct_maintain_state,slot_frame,thing|adjective,active,new::instruct-keep-state,EO000169
+KE000118,How was your [event/time]?,ask_past_experience,slot_frame,event_time,active,new::ask-past-experience,EO000170
+KE000119,It was [adjective]!,state_past_evaluation,slot_frame,adjective,active,new::state-past-evaluation,EO000171
+KE000120,What did you do?,ask_past_activity,fixed,,active,new::ask-past-activity,EO000172
+KE000121,I [past verb phrase] [past time].,state_past_activity,slot_frame,past_verb_phrase|past_time,active,new::state-past-activity,EO000173
+KE000122,Where did you go [past time]?,ask_past_destination,slot_frame,past_time,active,new::ask-past-destination,EO000174
+KE000123,I went to [place] with [people].,state_past_trip,slot_frame,place|people,active,new::state-past-trip-with,EO000175
+KE000124,We went to [verb phrase].,state_past_purpose_action,slot_frame,verb_phrase,active,new::state-went-to-action,EO000177
+KE000125,What else did you do?,ask_additional_past_activity,fixed,,active,new::ask-additional-past-activity,EO000178
+KE000126,Did you [verb phrase]?,ask_past_yes_no,slot_frame,verb_phrase,active,new::ask-past-yesno,EO000181
+KE000127,"No, [subject pronoun] didn't.",deny_past_action,slot_frame,subject_pronoun,active,new::respond-past-no,EO000182
+KE000128,"Yes, [subject pronoun] did.",confirm_past_action,slot_frame,subject_pronoun,active,new::respond-past-yes,EO000184
+KE000129,[Subject] went to [place/event] [past time].,state_past_destination_time,slot_frame,subject|place_event|past_time,active,new::state-past-destination-time,EO000185
+KE000130,What did you like about [thing]?,ask_past_preference_detail,slot_frame,thing,active,new::ask-past-like-about,EO000186
+KE000131,I liked [thing/activity].,state_past_preference,slot_frame,thing_activity,active,new::state-past-liked,EO000187
+KE000132,How do you feel?,ask_current_feeling,fixed,,active,new::ask-feeling,EO000189
+KE000133,I feel [adjective].,state_current_feeling,slot_frame,adjective,active,new::state-feeling,EO000190
+KE000134,My [body part] hurts.,state_body_pain,slot_frame,body_part,active,new::state-pain,EO000190
+KE000135,I have [symptom].,state_health_symptom,slot_frame,symptom,active,new::state-symptom-have,EO000190
+KE000136,I'm sorry to hear that.,express_empathy,fixed,,active,new::express-empathy-sorry-hear,EO000191
+KE000137,Maybe you should [verb phrase].,give_soft_advice,slot_frame,verb_phrase,active,new::give-advice-maybe-should,EO000191
+KE000138,We need to [verb phrase].,state_collective_need,slot_frame,verb_phrase,active,new::state-collective-need,EO000193
+KE000139,Don't [verb phrase].,give_negative_instruction,slot_frame,verb_phrase,active,new::give-negative-instruction,EO000195
+KE000140,How are you going to [verb phrase]?,ask_future_plan_method,slot_frame,verb_phrase,active,new::ask-future-plan-how,EO000198
+KE000141,I'm going to [verb phrase].,state_future_plan_going_to,slot_frame,verb_phrase,active,new::state-future-going-to,EO000199
+KE000142,I want to [verb phrase].,state_desired_action,slot_frame,verb_phrase,active,new::state-want-to,EO000200
+KE000143,What else are you going to [verb]?,ask_additional_future_action,slot_frame,verb,active,new::ask-additional-future,EO000201
+KE000144,What can you see [place phrase]?,ask_visible_objects,slot_frame,place_phrase,active,new::ask-visible-objects,EO000204
+KE000145,We can see [things].,state_visible_objects,slot_frame,things,active,new::state-visible-objects,EO000205
+KE000146,Is there any [uncountable noun] [place phrase]?,ask_existence_uncountable,slot_frame,uncountable_noun|place_phrase,active,new::ask-existence-uncountable,EO000207
+KE000147,There is [uncountable noun] [place phrase].,state_existence_uncountable,slot_frame,uncountable_noun|place_phrase,active,new::state-existence-uncountable,EO000208
+KE000148,They say [clause].,report_hearsay,discourse_frame,clause,active,new::report-they-say,EO000210
+KE000149,I don't think so.,express_negative_belief,fixed,,active,new::respond-dont-think-so,EO000210
+KE000150,What do you know about [thing]?,ask_knowledge,slot_frame,thing,active,new::ask-knowledge-about,EO000213
+KE000151,What else do you want to know about [thing]?,ask_additional_knowledge,slot_frame,thing,active,new::ask-additional-knowledge,EO000215
+KE000152,[Items] are types of [category].,classify_examples,discourse_frame,items|category,active,new::classify-types-of,EO000217
+KE000153,What should we do?,ask_recommended_action,fixed,,active,new::ask-what-should-we-do,EO000219
+KE000154,That's the [superlative adjective] [noun] [place phrase].,state_superlative_identification,slot_frame,superlative_adjective|noun|place_phrase,active,new::state-superlative-in-place,EO000224
+KE000155,[Subject] is/are [comparative adjective] than [target].,state_comparison,slot_frame,subject|comparative_adjective|target,active,new::state-comparison-than,EO000225
+KE000156,How tall are you?,ask_height,fixed,,active,new::ask-height,EO000226
+KE000157,I'm [height].,state_height,slot_frame,height,active,new::state-height,EO000227
+KE000158,What size are your [items]?,ask_item_size,slot_frame,items,active,new::ask-size,EO000228
+KE000159,[Items] are size [size].,state_item_size,slot_frame,items|size,active,new::state-item-size,EO000229
+KE000160,How heavy are you?,ask_weight,fixed,,active,new::ask-weight,EO000230
+KE000161,I'm [weight].,state_weight,slot_frame,weight,active,new::state-weight,EO000231
+KE000162,Did you do anything else?,ask_additional_past_yes_no,fixed,,active,new::ask-past-anything-else,EO000236
+KE000163,What happened?,ask_what_happened,fixed,,active,new::ask-what-happened,EO000241
+KE000164,Are you all right?,check_wellbeing,fixed,,active,new::check-all-right,EO000242
+KE000165,I'm OK now.,reassure_wellbeing,fixed,,active,new::reassure-ok-now,EO000243
+KE000166,It looks like [thing].,describe_resemblance,slot_frame,thing,active,new::describe-looks-like,EO000245
+KE000167,How did you go [place]?,ask_past_transport,slot_frame,place,active,new::ask-past-transport,EO000248
+KE000168,We went [place] by [transport].,state_past_transport,slot_frame,place|transport,active,new::state-past-transport,EO000249
+KE000169,Sounds great!,respond_positive_news,fixed,,active,new::respond-sounds-great,EO000250
+KE000170,There was no [singular noun] [place/time].,state_past_nonexistence_singular,slot_frame,singular_noun|place_time,active,new::state-past-nonexistence-singular,EO000251
+KE000171,"Tell [person] about [topic], please.",request_information_about,slot_frame,person|topic,active,new::request-tell-about,EO000252
+KE000172,How do you know that?,ask_evidence_source,fixed,,active,new::ask-how-know,EO000253
+KE000173,There were no [things] [place/time].,state_past_nonexistence_plural,slot_frame,things|place_time,active,new::state-past-nonexistence-plural,EO000254
+KE000174,"Before, [clause]. Now, [clause].",describe_change_over_time,discourse_frame,before_clause|now_clause,active,new::contrast-before-now,EO000255
+KE000175,"I was [adjective], so I couldn't [verb phrase].",explain_past_inability,discourse_frame,adjective|verb_phrase,active,new::explain-past-inability,EO000256
+KE000176,"Now, I [verb phrase] [frequency].",state_current_change,slot_frame,verb_phrase|frequency,active,new::state-now-routine,EO000256
