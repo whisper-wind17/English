@@ -2,34 +2,23 @@
   "PlanVersion": "stage-b-reconciliation-v2",
   "StageACheckpointFingerprint": "c6083db4da4437a77fa9b9723ffb510bd11e6ecc34f8184e8bc8d578ce4659cd",
   "CandidateCount": 2820,
-  "ValidDurableDecisionCount": 2602,
-  "ReviewQueueCount": 218,
+  "ValidDurableDecisionCount": 2614,
+  "ReviewQueueCount": 206,
   "LaneCounts": {
-    "exact-multiple": 12,
     "exact-single-exact-sense": 52,
     "exact-single-semantic-review": 152,
     "variant-single": 2
   },
-  "ReviewLane": "exact-multiple",
-  "BatchCap": 20,
-  "SelectedCount": 12,
+  "ReviewLane": "variant-single",
+  "BatchCap": 40,
+  "SelectedCount": 2,
   "SelectedProvisionalIdentityKeys": [
-    "candidate:cool",
-    "candidate:dress",
-    "candidate:fish#noun",
-    "candidate:fish#verb",
-    "candidate:may#month",
-    "candidate:paint",
-    "candidate:run",
-    "candidate:star",
-    "candidate:take",
-    "candidate:then",
-    "candidate:top",
-    "candidate:trip"
+    "candidate:e-mail",
+    "candidate:ice skate"
   ],
   "ExecutionReady": true,
   "AutoExecutable": false,
   "MutationAuthorized": false,
-  "ReviewQueueFingerprint": "fc5edb92f0117cf30bc488e9564cedb0dd445854fe6f3d3775151cf84dc854ea",
-  "SelectedViewFingerprint": "22a2530e489c88faef740c9d4f4a82919b739b7dd4f53dd08097b7c3a4de296d"
+  "ReviewQueueFingerprint": "2a39a5531fc6b1a6fe3545df3d8df04320436b07568ce50420a3ab794dea6fc5",
+  "SelectedViewFingerprint": "836a9cfb0894d491a285019b668265798a8f263d065a1938a03db0df166b87d2"
 }
