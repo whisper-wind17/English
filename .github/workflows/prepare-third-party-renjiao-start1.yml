@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/prepare_third_party_*.py'
       - 'tools/check_third_party_*.py'
+      - '!tools/check_third_party_allocation_plan.py'
       - 'tools/apply_third_party_identity_decision_updates.py'
       - 'tools/build_third_party_corpus.py'
       - 'tools/build_third_party_learner_view.py'
