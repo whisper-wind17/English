@@ -4,17 +4,30 @@ Last updated: 2026-09-11
 
 ## 1. Current task
 
-Grade 5–6 current Vocabulary 的 GitHub Release、Anki preflight、972-note Desktop import、Learning Admission materialization、LearningOrder Reposition 与设备同步均已完成并 **CHECKPOINTED**。
+Grade 5–6 current Vocabulary 已完成 GitHub Release、972-note Desktop import、Learning Admission / LearningOrder materialization 与设备同步，并已 **CHECKPOINTED**。
 
-当前 Vocabulary lane 状态：
+Grade 5–6 Expressions 的 GitHub identity / learner / review / release lane 也已完成并 **CHECKPOINTED**；当前尚未完成的是 Anki Desktop 实际导入与设备同步。
+
+当前状态：
 
 ```text
-GitHub Vocabulary Release = IMPLEMENTED / VALIDATED / CHECKPOINTED
-Anki preflight            = PASS / CHECKPOINTED
-Anki Updated              = true / DEVICE IMPORT + SYNC USER-CONFIRMED
+Vocabulary GitHub Release   = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Vocabulary Anki Updated     = true / DEVICE IMPORT + SYNC USER-CONFIRMED
+
+Expressions GitHub Release  = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Expressions Release Gate    = PASS
+Expressions Anki Updated    = false / DESKTOP IMPORT PENDING
 ```
 
-下一主任务恢复为 **Grade 5–6 Expressions 独立 lane**；不得把 ExpressionID allocation / release 与 Vocabulary 或第三方词库 merge 混在一起。
+当前主任务因此切换为：
+
+```text
+Grade 5–6 Expressions Anki Desktop import
+→ validate existing/new card state
+→ only materialize New # for still-new cards if needed
+→ Desktop -> AnkiWeb -> device sync
+→ final Expressions Anki checkpoint
+```
 
 启动顺序：
 
@@ -22,23 +35,18 @@ Anki Updated              = true / DEVICE IMPORT + SYNC USER-CONFIRMED
 AGENTS.md
 → NEXT.md
 → docs/EXPRESSIONS_SYSTEM.md
-→ Grade 5–6 Expressions reconciliation / review artifacts
-→ relevant anki/klose/ Expressions registries and tools
+→ anki/klose/expressions/anki/README.md
+→ anki/klose/expressions/publish/anki-import.csv
+→ docs/ANKI_SYNC_WORKFLOW.md
 ```
 
-Vocabulary / Anki 后续同步继续遵守：
-
-```text
-docs/ANKI_CURRENT_RELEASE_IMPORT.md
-docs/ANKI_SYNC_WORKFLOW.md
-docs/KLOSE_VOCABULARY_SYSTEM.md
-```
+不得重新执行 Grade 5–6 Expression identity allocation，也不得用 GitHub curriculum 重建已经进入 FSRS 的现有 Expression Cards。
 
 ## 2. Decision reconciliation
 
 Grade 5–6 Source provenance 与 Klose Learning Scope 必须分开理解。
 
-Source provenance 仍保持：
+Source provenance 继续保持：
 
 ```text
 Grade 5 Upper  = 2024-revision / verified-current-revision
@@ -49,19 +57,36 @@ Grade 6 Lower  = pre-2024-revision / verified-legacy-source-hold-for-klose-futur
 
 这些状态继续作为 Source Fact / audit truth，不得静默改写或删除。
 
-用户已显式接受四册 captured Grade 5–6 vocabulary 作为 Klose 当前学习范围：
+用户已显式接受 captured Grade 5–6 学习范围。Vocabulary 与 Expressions 均允许在独立 learning-scope contract 下进入当前学习，但 SourceEdition 仍只描述真实来源版本，不因 Learning Admission 而改写。
+
+Vocabulary scope：
 
 ```text
 anki/klose/learner/grade5_6_learning_scope.json
-DecisionBasis                             = explicit-user-current-learning-scope
-ScopeStatus                               = accepted
-SourceProvenanceAffectsLearningAdmission  = false
-StableIdentityAllocationAuthorized        = true
-Books                                     = 5上 / 5下 / 6上 / 6下 all Accepted
-origin commit                             = 86610816dfe0d2658d0d16acd102e61b458a67c5
+LearnerProfile                           = klose
+LearnerLevel                             = 4
+ScopeStatus                              = accepted
+SourceProvenanceAffectsLearningAdmission = false
+StableIdentityAllocationAuthorized       = true
 ```
 
-因此 SourceEdition 继续描述真实来源版本，但不阻塞该已接受 learning scope 的 Stable Identity / Learning Admission / Release。
+Expressions scope：
+
+```text
+anki/klose/expressions/learner/grade5_6_learning_scope.json
+LearnerProfile                           = klose
+LearnerLevel                             = 4
+ScopeStatus                              = accepted
+SourceProvenanceAffectsLearningAdmission = false
+StableIdentityAllocationAuthorized       = true
+```
+
+因此继续坚持：
+
+```text
+Source Grade 5/6 ≠ LearnerLevel 5/6
+Klose current LearnerLevel = 4
+```
 
 ## 3. Vocabulary current state — CHECKPOINTED
 
@@ -84,7 +109,7 @@ allowed but unreleased                              = 0
 LearningOrder count / max                          = 627 / 627
 
 released Vocabulary Notes                           = 972
-learner review scope (released ∪ allowed)           = 972
+learner review scope                                = 972
 model-reviewed                                      = 972
 human-reviewed                                      = 0
 pending                                             = 0
@@ -97,15 +122,7 @@ Grade 5–6 new learner presentation / lexical facts 已完成；288 个新 Note
 
 ### 3.1 Grade 5–6 Learner Presentation policy — FROZEN FOR CURRENT RELEASE
 
-Grade 5 / 6 是 **Source Grade**；Klose 当前学习这些词时仍使用：
-
-```text
-LearnerProfile = klose
-LearnerLevel   = 4
-Source Grade 5/6 ≠ LearnerLevel 5/6
-```
-
-五、六年级来源词汇的 learner presentation 必须按 Klose 当前四年级理解能力生成；目标词本身可以高于四年级，但释义和例句的 surrounding language 应尽量保持在 LearnerLevel 4。
+五、六年级来源词汇按 Klose 当前四年级理解能力生成 learner presentation。目标词本身可以高于四年级，但释义和例句 surrounding language 应尽量保持在 LearnerLevel 4。
 
 本次 288 个 Grade 5–6 新 Stable Notes 的 learner-content gate 已验证：
 
@@ -120,7 +137,7 @@ later auxiliary vocabulary   = 0
 
 Grade 5–6 reused Notes 进入 current learning scope 后同样按 `LearnerLevel=4` 处理；此前已有 11 条 reused learner examples 因辅助词难度过高而被降阶。未来如果提高 LearnerLevel，只升级 Learner Presentation 并重新 review；不得改变 Stable NoteID / Anki Review History。
 
-正式 review / release checkpoint：
+正式 Vocabulary review / release checkpoint：
 
 ```text
 approval manifest      = anki/klose/learner/review_approvals/grade5-6-current-v1-model-reviewed.csv
@@ -135,7 +152,7 @@ Release registry 是长期发布真源；`study.csv` / `anki-import.csv` 由正�
 
 ## 4. GitHub validation evidence
 
-PR #13 与 main post-merge 已完成独立验证：
+### 4.1 Vocabulary
 
 ```text
 PR #13 Build Klose Vocabulary                    = 34494566746 / PASS
@@ -145,27 +162,54 @@ main Grade 5–6 Current Merge                     = 34494909931 / PASS
 main Grade 5–6 Reconciliation Completion         = 34494909937 / PASS
 ```
 
-关键 repo state：
+### 4.2 Expressions
+
+Grade 5–6 Expressions reconciliation 在 allocation 前已独立 CLOSED / VALIDATED。正式 release 后：
 
 ```text
-released              = 972
-current learning      = 627
-  grade4              = 221
-  grade5_6            = 432
-  grade5_6_only       = 406
-held                  = 345
-LearningOrder         = 000001..000627
-review pending        = 0
-allowed unreleased    = 0
+PR #15 merge commit                             = b3c8037d1fa9a85eb1454407fba743d4deed2a4e
+branch release validation                       = 34568735308 / PASS
+PR #15 pull-request release validation          = 34568924344 / PASS
+PR #15 pull-request Vocabulary regression       = 34568924302 / PASS
+main Grade 5–6 Reconciliation Completion        = 34568969377 / PASS
 ```
 
-90 个 held legacy Notes 仍缺 British/American IPA；这些 Notes 不在当前 admitted learning set，因此是 library debt，不阻塞 current Vocabulary Release。
+PR #15 merge 后旧 `Grade 5-6 Expression Reconciliation` workflow 仍假定 Stable Expression registry 固定为 66，因此历史 run `34568969362` 以 `176 != 66` 失败。该失败是 workflow lifecycle transition 缺陷，不是 release data failure。
 
-## 5. Anki device checkpoint — 2026-09-11 / CHECKPOINTED
+生命周期修复：
 
-### 5.1 Existing Note Type / import contract observed
+```text
+PR #16                                       = Fix Grade 5-6 Expression lifecycle after release
+PR #16 head                                  = f89642daeb1ac6871a2f6502ef6e0b641838de9f
+PR #16 validation                            = 34574349941 / PASS
+PR #16 merge                                 = 0524d76751152693818ea4c67629c38d28b5bd72
+main post-hotfix lifecycle validation         = 34574396182 / PASS
+```
 
-现有 `Klose Vocabulary` Note Type 已实际检查，字段为：
+post-allocation workflow 现在明确：
+
+```text
+phase = release
+reconciliation truth = frozen
+pre-allocation planner / mutation steps = skipped
+final check_klose_expressions_release_ready.py = PASS
+```
+
+最终 main release gate：
+
+```text
+publishable Expressions   = 176
+baseline existing KE      = 66
+Grade 5–6 new KE          = 110
+reused Stable KE groups   = 8
+source-only occurrences   = 15
+review status             = approved 66 + model-reviewed 110
+LearningOrder             = 000001..000176
+```
+
+## 5. Vocabulary Anki device checkpoint — CHECKPOINTED
+
+现有 `Klose Vocabulary` Note Type 实际字段：
 
 ```text
 1  NoteID
@@ -184,7 +228,7 @@ allowed unreleased    = 0
 14 UserMemo
 ```
 
-正式 `anki/klose/publish/anki-import.csv` 以如下配置导入：
+正式导入契约：
 
 ```text
 Note Type       = Klose Vocabulary
@@ -192,13 +236,10 @@ Deck            = Klose-English::Vocabulary
 Existing Notes  = Update
 Match scope     = Note Type
 Identity        = NoteID
-Tags            = Tags
 UserMemo        = Nothing / not mapped
 ```
 
-### 5.2 Actual import result
-
-Anki Desktop 实际导入结果：
+实际 Vocabulary import：
 
 ```text
 notes found in file            = 972
@@ -208,153 +249,134 @@ existing notes updated         = 98
 final Notes / Cards            = 972 / 972
 ```
 
-`539 + 98 = 637` 个 NoteID 在导入前已存在。当前 release 相对 638-note Grade-4 release 的正式增量为 334，因此设备上额外缺失了 1 个历史 Note；本次导入中确认该历史缺失 Note 为：
+设备侧最终：
 
 ```text
-NoteID        = KV000433
-CanonicalWord = job
-LearningOrder = 000002
-Added         = 2026-09-11
-Reviews       = 0
-Lapses        = 0
-Card Type     = Recognition
+25 already Learning / Review
+602 current New unsuspended
+345 held New suspended
+LearningOrder materialized only for current is:new Cards
+Desktop -> AnkiWeb sync = completed
+Device sync              = completed
+Anki Updated             = true
 ```
 
-它此前未形成 Review History，因此本次补入不涉及 FSRS history 恢复或覆盖。
+未批量修改已经进入 Learning / Review 的 Cards；没有用 GitHub curriculum 重置其 Due / FSRS state。
 
-### 5.3 Actual learning-state materialization
+## 6. Expressions GitHub release — CHECKPOINTED
 
-导入后实测：
-
-```text
-Total Cards                         = 972
-is:new                              = 947
-already Learning / Review           = 25
-
-Grade-4 current is:new              = 196
-Grade-5/6 current is:new            = 406
-current-tag overlap in is:new       = 0
-current New total                   = 602
-
-initial suspended New               = 417
-of which Grade-5/6 current          = 72
-held New                            = 345
-```
-
-仅对 `Grade-5/6 current AND is:new AND suspended` 的 72 张执行 Unsuspend；操作后：
-
-```text
-current New unsuspended             = 602
-held New suspended                  = 345
-```
-
-数量闭合：
-
-```text
-25 already learned + 602 current New = 627 current learning
-627 current + 345 held               = 972 released
-```
-
-未批量修改已经进入 Learning / Review 的 25 张 Cards；没有用 GitHub curriculum 重置其 Due / FSRS state。
-
-### 5.4 LearningOrder -> New Card Position
-
-仅选择：
-
-```text
-deck:"Klose-English::Vocabulary" is:new -is:suspended
-```
-
-共 602 张 current New Cards。Browser Sort Field 使用 `LearningOrder`，升序后起始序列实测为：
-
-```text
-000002
-000027
-000028
-000029
-...
-```
-
-这与 25 张 current Cards 已离开 New 状态一致。
-
-执行 Reposition：
-
-```text
-Start position = 1
-Step           = 1
-Randomize      = OFF
-Shift existing = ON
-```
-
-执行后 current New Cards 按 `LearningOrder` materialize 为连续 `New #1..#602`；345 张 held New Cards 继续 suspended。
-
-### 5.5 Sync
-
-用户已确认完成同步。当前 checkpoint 记录：
-
-```text
-Desktop import / validation   = completed
-Desktop -> AnkiWeb sync       = user-confirmed completed
-device sync                   = user-confirmed completed
-Anki Updated                  = true
-```
-
-本轮没有创建第二个 Note Type / Card Type，没有重建 Stable NoteID，没有从 repo 覆盖 FSRS / Review History / Due。
-
-## 6. Immediate next work
-
-Vocabulary 当前 release 已完成，不再重复执行 972-note import / suspension reset / Reposition。
-
-下一任务进入 **Grade 5–6 Expressions 独立 lane**：
-
-```text
-1. 读取 docs/EXPRESSIONS_SYSTEM.md 与已完成 reconciliation artifacts
-2. 对 110 个 new stable proposal groups 做 Stable ExpressionID allocation 前 recheck
-3. 保留 8 个 existing Stable KE groups reuse
-4. 不把 source-only / non-card material 机械转成 Cards
-5. 完成 learner presentation / review / admission / release gate
-6. 只有 Expressions release 独立通过后，才进入其 Anki import/sync
-```
-
-若在此之前用户显式切换到第三方词库任务，则先从冻结的 Stage A/B 状态继续，仍不得直接 merge/allocation；必须先按现有 Stable Vocabulary 做 dedup / identity reconciliation。
-
-## 7. Mutation boundary
-
-当前允许：
-
-```text
-Grade 5–6 Expressions 独立 identity / learner / review / release 工作
-NEXT.md 后续 checkpoint
-正常的未来 Vocabulary incremental sync（有新 release 时）
-```
-
-当前禁止：
-
-```text
-manual edit of generated publish files
-renumber/reuse of Stable NoteIDs / ExpressionIDs
-rewrite/removal of historical Release rows
-new/duplicate Klose Vocabulary Note Type or Card Type
-bulk resetting Learning/Review Cards to match repo curriculum
-changing FSRS / Review History / Due from GitHub-side content operations
-silent deletion/rewrite of Grade 5 Lower / Grade 6 Lower provenance evidence
-third-party merge/allocation before dedup / identity reconciliation
-automatically mixing ExpressionID allocation into Vocabulary updates
-```
-
-## 8. Expressions / third-party hold
-
-Grade 5–6 Expressions reconciliation remains independently CLOSED / VALIDATED / CHECKPOINTED:
+Grade 5–6 Expressions 已完成从 reconciliation 到正式 Stable identity / learner / release 的状态迁移：
 
 ```text
 source occurrences reviewed              = 153 / 153
 mapped                                   = 138
 source-only                              = 15
 existing Stable KE groups reused         = 8
-new stable proposal groups               = 110
-pending / stale                          = 0 / 0
-Stable ExpressionID allocation           = not yet executed in current release lane
+new Stable Expressions allocated         = 110
+new ExpressionID range                   = KE000067..KE000176
+Stable Expression registry total         = 176
+pending / stale reconciliation           = 0 / 0
 ```
+
+110 个新 Expressions 均为 append-only allocation；原有 `KE000001..KE000066` 未重编号、未复用、未删除。
+
+Learner Presentation：
+
+```text
+LearnerProfile             = klose
+LearnerLevel               = 4
+Front policy               = Stage A intent/situation + English minimal cue
+new learner rows           = 110
+concrete textbook Targets  = 110 / 110
+unresolved target slots    = 0
+learner-facing meta jargon = 0
+```
+
+第二遍独立内容审查曾发现自动 presentation 中的 slot 截取和教学元语言问题，包括称呼语进入 slot、小数身高被截断等；修复后重新执行完整 release gate 并通过。
+
+当前正式生成文件：
+
+```text
+anki/klose/expressions/publish/study.csv       = 176 Expressions
+anki/klose/expressions/publish/anki-import.csv = 176 Expressions
+```
+
+禁止手工编辑这两个 generated 文件。
+
+## 7. Immediate next work — Expressions Anki import
+
+下一步只进入 Anki Desktop operational lane，不再重新做 identity / reconciliation。
+
+正式导入文件：
+
+```text
+anki/klose/expressions/publish/anki-import.csv
+```
+
+现有长期契约：
+
+```text
+Note Type = Klose Expression
+Deck      = Klose-English::Expressions
+Card Type = Production
+Identity  = ExpressionID
+1 Note    = 1 Card
+```
+
+导入必须使用现有 Note Type 原地 Update Existing Notes。预期文件结构：
+
+```text
+notes in release = 176
+existing baseline = 66
+new Grade 5–6     = 110
+```
+
+这是 repo 预期，不得在用户实际导入前写成 Anki 实测结果。
+
+正式操作顺序：
+
+```text
+1. Desktop sync，确保当前 Anki 状态已先同步到本机
+2. 检查现有 Klose Expression Note Type / Deck 仍存在
+3. 导入 expressions/publish/anki-import.csv
+4. Existing Notes = Update；以 ExpressionID 作为稳定 identity
+5. 核对实际 imported / updated / unchanged / total counts
+6. 核对哪些 Cards 已进入 Learning / Review，哪些仍 is:new
+7. 只对仍为 is:new 的新增/当前 Cards 按 LearningOrder 初始化 New #；不得改已学习 Cards
+8. Desktop -> AnkiWeb sync
+9. iPad/device sync
+10. 用户确认后再把 Expressions Anki Updated=true 写入 NEXT.md
+```
+
+现有 66 张 Expression Cards 的 FSRS / Review History / Due / Interval / Card State 只能以 Anki 为真源。即使 learner presentation 被更新，也不得删除重建这些 Cards。
+
+## 8. Mutation boundary
+
+当前允许：
+
+```text
+Expressions Anki Desktop import / validation / sync
+NEXT.md 的 Anki checkpoint 更新
+未来基于真实学习反馈修改 Learner Presentation（需 fingerprint re-review）
+正常的未来 Vocabulary incremental sync（仅有新 release 时）
+```
+
+当前禁止：
+
+```text
+rerun / renumber Grade 5–6 Expression Stable allocation
+manual edit of generated publish files
+renumber/reuse of Stable NoteIDs / ExpressionIDs
+rewrite/removal of historical Release rows
+new/duplicate Klose Vocabulary or Klose Expression Note Type
+bulk resetting Learning/Review Cards to match repo curriculum
+changing FSRS / Review History / Due from GitHub-side content operations
+silent deletion/rewrite of Grade 5 Lower / Grade 6 Lower provenance evidence
+third-party merge/allocation before dedup / identity reconciliation
+automatically mixing ExpressionID operations into Vocabulary updates
+```
+
+## 9. Third-party hold
 
 第三方词库继续独立冻结：
 
