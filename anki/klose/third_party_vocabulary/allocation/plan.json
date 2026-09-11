@@ -48,6 +48,20 @@
     "MasterSourceMappingPromotionAuthorized": false,
     "Policy": "Third-party adapter rows are external evidence. Stable identity may use that evidence without claiming textbook provenance; Master source mapping requires independently verified SourceEdition/Revision."
   },
+  "DryRunValidation": {
+    "Status": "validated",
+    "WorkflowRunID": "34587553210",
+    "IdentityActions": 2820,
+    "ReuseExisting": 903,
+    "HypotheticalNewIdentities": 1821,
+    "Held": 96,
+    "HypotheticalRegistryAppends": 1821,
+    "HypotheticalFirstNoteID": "KV001195",
+    "HypotheticalLastNoteID": "KV003015",
+    "ExternalEvidenceBindings": 15791,
+    "HeldSourceOccurrences": 993,
+    "RepositoryMutation": false
+  },
   "MutationGates": {
     "ActualMutationAuthorized": false,
     "StableNoteIDAllocationAuthorized": false,
@@ -64,13 +78,14 @@
     "PostFixStageAStatusCommit": "fd9ca00301b683e8741fbd20a39c91ea35dfbb8a",
     "StageAContentFingerprintChanged": false,
     "FinalPlanValidationRunID": "34584719664",
-    "ProvenanceContractValidationRunID": "34585155788"
+    "ProvenanceContractValidationRunID": "34585155788",
+    "AllocationDryRunValidationRunID": "34587553210"
   },
   "RequiredBeforeMutation": [
     "explicit user authorization for actual allocation/merge",
     "current allocation/provenance validation PASS against exact Stage-B, source-freeze and registry boundaries",
     "validated provenance contract remains current against the exact frozen external-evidence corpus",
-    "append-only allocator plus external-evidence binding implementation validated on current truth boundary",
+    "mutation-capable append-only allocator is guarded by explicit authorization and independently validated without repo mutation",
     "independent completion recheck proving stable identity, source-map, release and Anki isolation"
   ]
 }
