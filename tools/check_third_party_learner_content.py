@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 BASE=ROOT/'anki'/'klose'/'third_party_vocabulary'/'learner'
 CAND=BASE/'stable_presentation_candidates.csv'
 REVIEWED=BASE/'content_reviewed'
+CORRECTIONS=BASE/'content_corrections.csv'
 TOKEN_RE=re.compile(r"[A-Za-z0-9]+")
 IRREGULAR={
     'am':'be','is':'be','are':'be','was':'be','were':'be','been':'be',
@@ -15,6 +16,7 @@ IRREGULAR={
     'bought':'buy','brought':'bring','saw':'see','seen':'see','made':'make','did':'do','done':'do','ate':'eat','eaten':'eat',
     'won':'win','lost':'lose','left':'leave','held':'hold','kept':'keep','found':'find','thought':'think','caught':'catch',
 }
+REFLEXIVES={'oneself','myself','yourself','himself','herself','itself','ourselves','yourselves','themselves'}
 
 def read_csv(p):
     with p.open('r',encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
@@ -22,6 +24,7 @@ def read_csv(p):
 def toks(s): return TOKEN_RE.findall((s or '').casefold())
 
 def lemmas(t):
+    if t in REFLEXIVES: return {'oneself'}
     out={t}
     if t in IRREGULAR: out.add(IRREGULAR[t])
     if len(t)>4 and t.endswith('ies'): out.add(t[:-3]+'y')
@@ -51,13 +54,19 @@ def main():
     files=sorted(REVIEWED.glob('batch_*.csv'))
     if len(files)!=19: raise SystemExit(f'Expected 19 reviewed batches, got {len(files)}')
     for p in files: rows.extend(read_csv(p))
-    by={}
+    by={r['NoteID'].strip():dict(r) for r in rows}
+    corrections=read_csv(CORRECTIONS)
+    if len(corrections)!=14 or len({r['NoteID'] for r in corrections})!=14:
+        raise SystemExit('Expected exactly 14 unique content corrections')
+    for c in corrections:
+        nid=c['NoteID'].strip()
+        if nid not in by: raise SystemExit(f'Correction points outside reviewed content: {nid}')
+        by[nid]['ExampleSentence']=c['ExampleSentence'].strip()
+        by[nid]['ExampleTranslation']=c['ExampleTranslation'].strip()
+
     errors=[]
     duplicate_examples={}
-    for r in rows:
-        nid=r.get('NoteID','').strip()
-        if not nid or nid in by: errors.append(f'{nid}: duplicate/blank NoteID'); continue
-        by[nid]=r
+    for nid,r in by.items():
         sent=r.get('ExampleSentence','').strip(); trans=r.get('ExampleTranslation','').strip()
         if not sent or not trans: errors.append(f'{nid}: blank bilingual example'); continue
         if r.get('ContentStatus','').strip()!='model-curated' or r.get('ContentSource','').strip()!='third-party-learner-content-v1':
@@ -72,11 +81,11 @@ def main():
         if not target_matches(toks(sent),target): errors.append(f'{nid}: target form missing from example: {cand.get("CanonicalWord")}')
     missing=sorted(set(expected)-set(by)); extra=sorted(set(by)-set(expected))
     if missing or extra: errors.append(f'coverage mismatch missing={len(missing)} extra={len(extra)} examples={(missing+extra)[:20]}')
-    if len(rows)!=1821: errors.append(f'expected 1821 reviewed rows, got {len(rows)}')
+    if len(rows)!=1821 or len(by)!=1821: errors.append(f'expected 1821 reviewed rows, got rows={len(rows)} unique={len(by)}')
     if errors:
         print('\n'.join(errors[:100])); raise SystemExit(f'Third-party learner content failed: {len(errors)} errors')
     conflicts=sum(r.get('BritishEvidenceStatus')=='conflicting-evidence' or r.get('AmericanEvidenceStatus')=='conflicting-evidence' for r in candidates)
     ipa_missing=sum(not r.get('BritishCandidate','').strip() or not r.get('AmericanCandidate','').strip() for r in candidates)
-    print(f'Third-party learner content OK: rows={len(rows)} unique_examples={len(duplicate_examples)} pronunciation_conflict_rows={conflicts} pronunciation_missing_rows={ipa_missing}')
+    print(f'Third-party learner content OK: rows={len(by)} corrections={len(corrections)} unique_examples={len(duplicate_examples)} pronunciation_conflict_rows={conflicts} pronunciation_missing_rows={ipa_missing}')
 
 if __name__=='__main__': main()
