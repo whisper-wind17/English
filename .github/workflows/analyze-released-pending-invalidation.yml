@@ -1,10 +1,11 @@
-name: Analyze Released Pending Invalidations
+name: Analyze Pending Learner Review
 
 on:
   push:
     branches: [main]
     paths:
       - 'tools/analyze_klose_released_pending_invalidation.py'
+      - 'tools/analyze_third_party_pending_learner_review.py'
       - '.github/workflows/analyze-released-pending-invalidation.yml'
   workflow_dispatch:
 
@@ -23,25 +24,29 @@ jobs:
           python-version: '3.12'
       - name: Analyze released pending review invalidations
         run: python tools/analyze_klose_released_pending_invalidation.py
+      - name: Classify pending learner semantic risk
+        run: python tools/analyze_third_party_pending_learner_review.py
       - name: Assert canonical state untouched
         run: |
           git diff --exit-code -- anki/klose/master anki/klose/learner anki/klose/publish anki/klose/anki
-      - name: Persist audit artifact only
+      - name: Persist audit artifacts only
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+whisper-wind17@users.noreply.github.com'
           git add \
             anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation.csv \
-            anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation.json
+            anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation.json \
+            anki/klose/third_party_vocabulary/review_preparation/learner_semantic_high_risk.csv \
+            anki/klose/third_party_vocabulary/review_preparation/learner_semantic_review_summary.json
           changed="$(git diff --cached --name-only)"
-          bad="$(printf '%s\n' "$changed" | grep -Ev '^anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation\.(csv|json)$' || true)"
+          bad="$(printf '%s\n' "$changed" | grep -Ev '^anki/klose/third_party_vocabulary/review_preparation/(released_pending_after_pronunciation\.(csv|json)|learner_semantic_high_risk\.csv|learner_semantic_review_summary\.json)$' || true)"
           if [ -n "$bad" ]; then
             echo "$bad"; exit 1
           fi
           if git diff --cached --quiet; then
             echo 'No audit artifact changes.'
           else
-            git commit -m 'audit: record released review invalidations'
+            git commit -m 'audit: refresh pending learner review analysis'
             git pull --rebase origin main
             git push origin HEAD:main
           fi
