@@ -16,6 +16,7 @@ on:
       - 'tools/check_klose_release_history.py'
       - 'tools/check_grade5_6_new_learner_content.py'
       - 'tools/check_third_party_learner_content.py'
+      - 'tools/check_third_party_release_committed_state.py'
       - 'tools/validate_third_party_learner_materialization.py'
       - 'tools/apply_third_party_stable_learner.py'
       - 'tools/apply_third_party_reviewed_pronunciations.py'
@@ -183,6 +184,9 @@ jobs:
 
       - name: Independent third-party learner materialization recheck
         run: python tools/validate_third_party_learner_materialization.py
+
+      - name: Protect committed third-party release checkpoint
+        run: python tools/check_third_party_release_committed_state.py
 
       - id: completeness
         name: Diagnose current vs held release completeness
