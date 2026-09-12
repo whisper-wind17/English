@@ -18,6 +18,9 @@ on:
       - 'tools/check_third_party_learner_content.py'
       - 'tools/validate_third_party_learner_materialization.py'
       - 'tools/apply_third_party_stable_learner.py'
+      - 'tools/apply_third_party_reviewed_pronunciations.py'
+      - 'tools/validate_third_party_pronunciation_materialization.py'
+      - 'tools/klose_release_curriculum.py'
       - 'tools/build_klose_learning_admission.py'
       - 'tools/apply_klose_learner_overrides.py'
       - 'tools/apply_klose_actual_grade4_reuse_learner.py'
@@ -38,6 +41,7 @@ on:
       - 'anki/klose/third_party_vocabulary/learner/content_corrections.csv'
       - 'anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv'
       - 'anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv'
+      - 'anki/klose/third_party_vocabulary/pronunciation/reviewed_pronunciations.csv'
       - 'anki/klose/learner/grade5_6_learning_scope.json'
       - 'anki/klose/learner/grade5_6_content_batch_*.csv'
       - 'anki/klose/learner/grade5_6_reuse_overrides.csv'
@@ -134,9 +138,6 @@ jobs:
       - name: Apply Grade 5-6 new-note lexical facts
         run: python tools/apply_klose_grade5_6_new_facts.py
 
-      - name: Materialize committed Vocabulary Release truth
-        run: python tools/apply_klose_release_extensions.py
-
       - name: Validate Grade 5-6 learner content
         run: python tools/check_grade5_6_new_learner_content.py
 
@@ -154,6 +155,18 @@ jobs:
 
       - name: Materialize third-party Stable learner and admission state
         run: python tools/apply_third_party_stable_learner.py
+
+      - name: Materialize reviewed third-party pronunciations
+        run: python tools/apply_third_party_reviewed_pronunciations.py
+
+      - name: Materialize committed Vocabulary Release truth after all Master overlays
+        run: python tools/apply_klose_release_extensions.py
+
+      - name: Rebuild deterministic publish views from complete upstream state
+        run: python tools/apply_klose_learner_overrides.py
+
+      - name: Validate reviewed pronunciation materialization
+        run: python tools/validate_third_party_pronunciation_materialization.py
 
       - name: Apply homograph PromptHint presentation
         run: python tools/apply_klose_prompt_hints.py
