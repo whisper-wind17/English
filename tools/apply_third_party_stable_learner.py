@@ -33,7 +33,7 @@ def main():
     content={r['NoteID']:dict(r) for r in reviewed}
     if len(content)!=1821: raise SystemExit(f'Expected 1821 reviewed content rows, got {len(content)}')
     corrections=read_csv(CORRECTIONS)
-    if len(corrections)!=14 or len({r['NoteID'] for r in corrections})!=14: raise SystemExit('Expected 14 unique content corrections')
+    if len(corrections)!=16 or len({r['NoteID'] for r in corrections})!=16: raise SystemExit('Expected 16 unique content corrections')
     for c in corrections:
         nid=c['NoteID'].strip()
         if nid not in content: raise SystemExit(f'Content correction outside reviewed scope: {nid}')
