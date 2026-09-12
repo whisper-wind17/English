@@ -16,6 +16,7 @@ BASE = ROOT / 'anki' / 'klose'
 PREP = BASE / 'third_party_vocabulary' / 'review_preparation'
 PACKETS = PREP / 'pronunciation_review_packets'
 OUT = PREP / 'pronunciation_high_risk.csv'
+BATCH_DIR = PREP / 'pronunciation_high_risk_batches'
 MASTER = BASE / 'master' / 'vocabulary_master.csv'
 
 FIELDS = [
@@ -28,6 +29,7 @@ KNOWN_HETERONYMS = {
     'subject','survey','suspect','tear','use','wind','wound'
 }
 NARROW_MARKERS = {'ɾ':'flap-allophone','ʔ':'glottal-allophone'}
+BATCH_SIZE=50
 
 
 def read_csv(path: Path):
@@ -36,6 +38,7 @@ def read_csv(path: Path):
 
 
 def write_csv(path: Path, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open('w', encoding='utf-8-sig', newline='') as f:
         w=csv.DictWriter(f,fieldnames=FIELDS,extrasaction='ignore',lineterminator='\n'); w.writeheader(); w.writerows(rows)
 
@@ -71,7 +74,11 @@ def main():
 
     high.sort(key=lambda r:int(r['NoteID'][2:]))
     write_csv(OUT,high)
-    print(f'Pronunciation review classification: total={len(rows)} high_risk={len(high)} low_risk={len(rows)-len(high)}')
+    BATCH_DIR.mkdir(parents=True,exist_ok=True)
+    for old in BATCH_DIR.glob('batch_*.csv'): old.unlink()
+    for i in range(0,len(high),BATCH_SIZE):
+        write_csv(BATCH_DIR/f'batch_{i//BATCH_SIZE+1:02d}.csv',high[i:i+BATCH_SIZE])
+    print(f'Pronunciation review classification: total={len(rows)} high_risk={len(high)} low_risk={len(rows)-len(high)} high_risk_batches={(len(high)+BATCH_SIZE-1)//BATCH_SIZE}')
     print('High-risk reasons:', dict(reasons_count))
     print('High-risk released=',sum(r.get('ReleaseState')=='released' for r in high),'unreleased=',sum(r.get('ReleaseState')=='unreleased' for r in high))
 
