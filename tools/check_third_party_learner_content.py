@@ -56,8 +56,8 @@ def main():
     for p in files: rows.extend(read_csv(p))
     by={r['NoteID'].strip():dict(r) for r in rows}
     corrections=read_csv(CORRECTIONS)
-    if len(corrections)!=14 or len({r['NoteID'] for r in corrections})!=14:
-        raise SystemExit('Expected exactly 14 unique content corrections')
+    if len(corrections)!=16 or len({r['NoteID'] for r in corrections})!=16:
+        raise SystemExit('Expected exactly 16 unique content corrections')
     for c in corrections:
         nid=c['NoteID'].strip()
         if nid not in by: raise SystemExit(f'Correction points outside reviewed content: {nid}')
