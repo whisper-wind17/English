@@ -22,14 +22,14 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Verify pre-release persistent state
+      - name: Verify pre-release persistent and learner state
         run: |
           KLOSE_BASE_COMMIT=HEAD^ python tools/check_klose_persistent_state.py
           KLOSE_BASE_COMMIT=HEAD^ python tools/check_klose_release_history.py
           python tools/check_third_party_learner_content.py
           python tools/validate_third_party_pronunciation_materialization.py
           python tools/check_klose_learner.py
-          python tools/check_klose_release_ready.py
+          echo 'Pre-release publish may be intentionally frozen while review/release is gated; final release_ready runs after canonical rebuild.'
 
       - name: Dry-run exact reviewed release delta
         run: |
