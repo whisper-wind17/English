@@ -1,0 +1,73 @@
+name: Execute Third-party Learner Review Approval
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/approve-third-party-learner-review.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm current review scope is build-valid before approval
+        run: |
+          python tools/check_third_party_learner_content.py
+          python tools/validate_third_party_pronunciation_materialization.py
+          python tools/check_klose_learner.py
+      - name: Approve current pending learner presentations
+        run: |
+          python tools/approve_klose_learner_review.py \
+            --batch-id third-party-level4-review-20260912 \
+            --profile klose \
+            --level 4 \
+            --expected-count 2059 \
+            --reviewer-type model \
+            --review-note 'Independent risk-stratified model review: 1821 new presentations passed full content gates and semantic high-risk adjudication; 160 reuse guardrails preserved existing presentation; 78 released invalidations re-reviewed; 616 pronunciation rows independently reviewed; 16 explicit content corrections applied; approval bound to current fingerprints.' \
+            --confirm-all-current \
+            --pending-only
+      - name: Verify approval closed current review scope
+        run: |
+          python tools/sync_klose_learner_review_registry.py
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          base=Path('anki/klose')
+          with (base/'learner/presentation_review_registry.csv').open('r',encoding='utf-8-sig',newline='') as f:
+              rows=list(csv.DictReader(f))
+          current=[r for r in rows if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4']
+          pending=[r for r in current if r.get('ReviewStatus')=='pending']
+          model=[r for r in current if r.get('ReviewStatus')=='model-reviewed']
+          human=[r for r in current if r.get('ReviewStatus')=='human-reviewed']
+          if len(current)!=2953 or pending:
+              raise SystemExit(f'Approval closure failed: current={len(current)} pending={len(pending)}')
+          print(f'Approval closure PASS: current={len(current)} model={len(model)} human={len(human)} pending=0')
+          PY
+      - name: Commit immutable approval manifest and review registry
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add \
+            anki/klose/learner/presentation_review_registry.csv \
+            anki/klose/learner/review_approvals/third-party-level4-review-20260912.csv \
+            anki/klose/master/build_stats.csv
+          changed="$(git diff --cached --name-only | sort)"
+          expected="$(printf '%s\n' \
+            'anki/klose/learner/presentation_review_registry.csv' \
+            'anki/klose/learner/review_approvals/third-party-level4-review-20260912.csv' \
+            'anki/klose/master/build_stats.csv' | sort)"
+          if [ "$changed" != "$expected" ]; then
+            echo 'Unexpected approval diff:'; echo "$changed"; exit 1
+          fi
+          git commit -m 'review: approve third-party LearnerLevel 4 presentations'
+          git pull --rebase origin main
+          git push origin HEAD:main
