@@ -244,6 +244,9 @@ class IsolatedStateTransitions(unittest.TestCase):
         self.command('check_third_party_learner_content.py')
         self.assertGreater(len(read(self.base / 'third_party_vocabulary/learner/content_corrections.csv')), 16)
 
+    def test_textbook_check_accepts_later_third_party_scope(self):
+        self.command('check_klose_grade5_6_current_merge.py')
+
     def test_admission_does_not_prove_support_and_observed_difficulty_blocks(self):
         support = self.base / 'feedback/learning_support.csv'
         report = self.base / 'review/future_vocab_review.csv'

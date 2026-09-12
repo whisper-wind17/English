@@ -4,7 +4,7 @@
 
 ## 当前检查点
 
-七项整改已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`。完整 pipeline、内置重复重建和 15 项隔离回归通过；独立身份/来源/历史发布对账通过。逐项前后对比与证据见 [整改记录](docs/MAINTENANCE_20260912.md)。
+七项整改已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`。完整 pipeline、内置重复重建和 16 项隔离回归通过；独立身份/来源/历史发布对账通过。逐项前后对比与证据见 [整改记录](docs/MAINTENANCE_20260912.md)。
 
 当前发布数量、allowed/held、LearningOrder、审核分布、artifact SHA-256 和模板指纹统一读取 [current.json](anki/klose/releases/current.json)。历史一次性交易保存在 [releases/history](anki/klose/releases/history/)。
 

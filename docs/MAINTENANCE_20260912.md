@@ -42,7 +42,7 @@
 
 ## 最终验证与边界
 
-完整 `python tools/klose_pipeline.py all --baseline a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb` 通过，内置重复构建字节漂移为零。`python -m unittest discover -s tests -v` 的 15 项回归通过；故障注入使用隔离数据副本，并校验没有修改正式源文件。
+完整 `python tools/klose_pipeline.py all --baseline a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb` 通过，内置重复构建字节漂移为零。`python -m unittest discover -s tests -v` 的 16 项回归通过；故障注入使用隔离数据副本，并校验没有修改正式源文件。
 
 独立 diff 核对：11 个关键身份、来源与历史发布文件和审计基线字节一致；Vocabulary/Expressions ID 集合无增删。Vocabulary 仅两条例句/翻译、一条释义、一处展示大小写、必要提示与五条新卡准入变化；Expressions 仅两条呈现内容变化。发布 manifest 中两个正式 artifact SHA-256 均与文件一致。
 
@@ -51,3 +51,5 @@
 当前发布范围内 review pending=0、歧义题面=0、已观察支撑词 blocker=0。仍有 18 条 held-library 音标缺口，继续保留；2,866 条例句包含未评估支撑词，属于后续抽查线索，不能解释成已经发现 2,866 条不合格例句。
 
 最新可导入内容与设备当前内容是两个状态。Vocabulary 上一版和 Expressions 原版的用户同步确认仅保存为历史；本次两份更新包均等待实际设备导入/同步确认。学习效果也尚未观察，下一步按 [当前导入 SOP](ANKI_CURRENT_RELEASE_IMPORT.md) 与 [反馈流程](LEARNING_FEEDBACK.md) 执行。
+
+云端交叉验证补充：修正旧 Grade 5–6 completion checker 将全仓固定为 1,189 个 active ID、准入仅等于早期教材集合的问题。保留已接受教材的来源、映射、去重和内容闭合核验；全仓准入交给当前策略验证，并把该独立检查加入统一 pipeline。

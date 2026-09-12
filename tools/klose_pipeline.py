@@ -25,7 +25,8 @@ VOCABULARY = [
     "apply_klose_current_policy.py", "apply_klose_learner_overrides.py",
     "validate_third_party_pronunciation_materialization.py", "apply_klose_prompt_hints.py",
     "sync_klose_learner_review_registry.py", "check_klose_learner.py",
-    "validate_third_party_learner_materialization.py", "check_third_party_release_committed_state.py",
+    "validate_third_party_learner_materialization.py", "check_klose_grade5_6_current_merge.py",
+    "check_third_party_release_committed_state.py",
 ]
 EXPRESSIONS = ["klose_expression_review_state.py", "build_klose_expressions.py"]
 RELEASE = ["check_klose_release_ready.py", "check_klose_expressions_release_ready.py", "check_klose_feedback.py"]
