@@ -1,12 +1,21 @@
 #!/usr/bin/env python3
-"""Independent Completion Recheck for committed third-party learner/admission materialization."""
+"""Independent Completion Recheck for third-party learner/admission materialization.
+
+The checker is lifecycle-aware: it validates the same Stable learner truth before
+and after review/release transitions instead of hard-coding `pending` or the old
+972-note release snapshot.
+"""
 from __future__ import annotations
 import csv, io
 from pathlib import Path
 
+from klose_review_fingerprint import fingerprint
+
 ROOT=Path(__file__).resolve().parents[1]
 K=ROOT/'anki'/'klose'
 TP=K/'third_party_vocabulary'/'learner'
+PRON=K/'third_party_vocabulary'/'pronunciation'/'reviewed_pronunciations.csv'
+VALID_REVIEW={'pending','model-reviewed','human-reviewed'}
 
 def read_csv(p):
     with p.open('r',encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
@@ -40,36 +49,54 @@ def main():
     admission=read_csv(K/'learner'/'learning_admission.csv'); ab={(r['LearnerProfile'],r['LearnerLevel'],r['NoteID']):r for r in admission}
     review=read_csv(K/'learner'/'presentation_review_registry.csv'); rb={(r['LearnerProfile'],r['LearnerLevel'],r['NoteID']):r for r in review}
     content=reviewed_content()
+    pron_rows=read_csv(PRON) if PRON.exists() else []
+    pron={r['NoteID'].strip():r for r in pron_rows}
+    release_rows=read_csv(K/'master'/'release_registry.csv')+read_csv(K/'master'/'release_registry_extensions.csv')
+    release_ids={r['NoteID'].strip() for r in release_rows}
     errors=[]
 
+    if pron_rows and (len(pron_rows)!=616 or len(pron)!=616): errors.append(f'reviewed pronunciation closure rows={len(pron_rows)} unique={len(pron)}')
     missing_master=sorted(new_ids-set(mb)); missing_learner=sorted(new_ids-set(lb))
     if missing_master: errors.append(f'new Stable Master rows missing={len(missing_master)}')
     if missing_learner: errors.append(f'new Stable learner rows missing={len(missing_learner)}')
-    pronunciation_conflict=pronunciation_missing=ipa_debt=0
+    pronunciation_conflict=pronunciation_missing=ipa_debt=review_pending=reviewed_count=0
     for nid in sorted(new_ids):
         c=cand[nid]; m=mb.get(nid); l=lb.get(nid)
         if m is None or l is None: continue
         if m.get('FirstSource')!='third-party-vocabulary' or m.get('FirstSourceBook')!='external-evidence-corpus': errors.append(f'{nid}: bad external provenance inventory')
         if m.get('FirstGrade','').strip() or m.get('FirstSemester','').strip(): errors.append(f'{nid}: invented Source Grade/Semester')
-        if m.get('Released')!='no': errors.append(f'{nid}: prematurely released')
+        expected_released='yes' if nid in release_ids else 'no'
+        if m.get('Released')!=expected_released: errors.append(f'{nid}: release bit drift {m.get("Released")}->{expected_released}')
         if 'provenance::external-unverified-edition' not in m.get('Tags','').split(): errors.append(f'{nid}: missing external provenance tag')
-        debt=False
-        for side,status_field,cand_field in [('British','BritishEvidenceStatus','BritishCandidate'),('American','AmericanEvidenceStatus','AmericanCandidate')]:
-            status=c.get(status_field,'').strip(); candidate=c.get(cand_field,'').strip(); actual=m.get(side,'').strip()
-            if status=='consistent':
-                if actual!=candidate: errors.append(f'{nid}: {side} candidate drift')
-            else:
-                if actual: errors.append(f'{nid}: unsafe {side} pronunciation promoted from {status}')
-                debt=True
+
+        if nid in pron:
+            for side in ('British','American'):
+                if m.get(side,'').strip()!=pron[nid].get(side,'').strip(): errors.append(f'{nid}: {side} reviewed pronunciation drift')
+        else:
+            for side,status_field,cand_field in [('British','BritishEvidenceStatus','BritishCandidate'),('American','AmericanEvidenceStatus','AmericanCandidate')]:
+                status=c.get(status_field,'').strip(); candidate=c.get(cand_field,'').strip(); actual=m.get(side,'').strip()
+                if status=='consistent':
+                    if actual!=candidate: errors.append(f'{nid}: {side} candidate drift')
+                elif actual:
+                    errors.append(f'{nid}: unsafe {side} pronunciation promoted without reviewed evidence')
         if 'conflicting-evidence' in {c.get('BritishEvidenceStatus'),c.get('AmericanEvidenceStatus')}: pronunciation_conflict+=1
         if not c.get('BritishCandidate','').strip() or not c.get('AmericanCandidate','').strip(): pronunciation_missing+=1
-        if debt: ipa_debt+=1
+        if not m.get('British','').strip() or not m.get('American','').strip(): ipa_debt+=1
+
         cr=content[nid]
         if l.get('LearnerProfile')!='klose' or l.get('LearnerLevel')!='4': errors.append(f'{nid}: learner profile/level drift')
         if l.get('ExampleSentence')!=cr.get('ExampleSentence') or l.get('ExampleTranslation')!=cr.get('ExampleTranslation'): errors.append(f'{nid}: reviewed content drift')
-        if l.get('PresentationStatus')!='model-curated-pending-review' or l.get('PresentationSource')!='third-party-learner-content-v1': errors.append(f'{nid}: presentation lifecycle drift')
+        if l.get('PresentationSource')!='third-party-learner-content-v1': errors.append(f'{nid}: presentation source drift')
         rr=rb.get(('klose','4',nid))
-        if rr is None or not rr.get('ContentFingerprint','').strip() or rr.get('ReviewStatus')!='pending': errors.append(f'{nid}: new presentation must be fingerprint-bound pending')
+        if rr is None or not rr.get('ContentFingerprint','').strip():
+            errors.append(f'{nid}: missing fingerprint-bound review row')
+        else:
+            current_fp=fingerprint(m,l)
+            if rr.get('ContentFingerprint')!=current_fp: errors.append(f'{nid}: stale review fingerprint')
+            status=rr.get('ReviewStatus','')
+            if status not in VALID_REVIEW: errors.append(f'{nid}: invalid review status {status!r}')
+            elif status=='pending': review_pending+=1
+            else: reviewed_count+=1
 
     plan=read_csv(TP/'stable_learning_admission_plan.csv')
     if len(plan)!=2720: errors.append(f'admission plan count={len(plan)}')
@@ -92,14 +119,15 @@ def main():
     source_ext=read_csv(K/'master'/'source_identity_extensions.csv')
     leaked=sorted(new_ids & {r.get('NoteID','').strip() for r in source_ext})
     if leaked: errors.append(f'unverified third-party IDs leaked into textbook source map={len(leaked)}')
-    if len(read_csv(K/'master'/'release_registry.csv'))+len(read_csv(K/'master'/'release_registry_extensions.csv'))!=972: errors.append('release registry count changed from 972')
+    released_master={r['NoteID'] for r in master if r.get('Released')=='yes'}
+    if released_master!=release_ids: errors.append(f'Master Released set != release registry: master={len(released_master)} registry={len(release_ids)}')
     study_count=len(read_csv(K/'publish'/'study.csv'))
     anki_count=anki_data_count(K/'publish'/'anki-import.csv')
-    if study_count!=972 or anki_count!=972: errors.append(f'publish changed prematurely study={study_count} anki={anki_count}')
+    if study_count!=len(release_ids) or anki_count!=len(release_ids): errors.append(f'publish/release count drift release={len(release_ids)} study={study_count} anki={anki_count}')
 
     if errors:
         for e in errors[:100]: print(e)
         raise SystemExit(f'Third-party learner materialization failed: {len(errors)} errors')
-    print(f'Third-party learner materialization OK: master_new=1821 learner_new=1821 plan=2720 preserve={preserve} new_or_promoted={mutated} allowed_total={len(allowed)} review_new_pending=1821 pronunciation_conflict_rows={pronunciation_conflict} pronunciation_missing_candidate_rows={pronunciation_missing} pronunciation_debt_rows={ipa_debt} release=972 publish=972 textbook_source_leak=0')
+    print(f'Third-party learner materialization OK: master_new=1821 learner_new=1821 plan=2720 preserve={preserve} new_or_promoted={mutated} allowed_total={len(allowed)} review_new_pending={review_pending} review_new_approved={reviewed_count} pronunciation_conflict_rows={pronunciation_conflict} pronunciation_missing_candidate_rows={pronunciation_missing} pronunciation_debt_rows={ipa_debt} release={len(release_ids)} publish={study_count} textbook_source_leak=0')
 
 if __name__=='__main__': main()
