@@ -1,0 +1,47 @@
+name: Analyze Released Pending Invalidations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/analyze_klose_released_pending_invalidation.py'
+      - '.github/workflows/analyze-released-pending-invalidation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Analyze released pending review invalidations
+        run: python tools/analyze_klose_released_pending_invalidation.py
+      - name: Assert canonical state untouched
+        run: |
+          git diff --exit-code -- anki/klose/master anki/klose/learner anki/klose/publish anki/klose/anki
+      - name: Persist audit artifact only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add \
+            anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation.csv \
+            anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation.json
+          changed="$(git diff --cached --name-only)"
+          bad="$(printf '%s\n' "$changed" | grep -Ev '^anki/klose/third_party_vocabulary/review_preparation/released_pending_after_pronunciation\.(csv|json)$' || true)"
+          if [ -n "$bad" ]; then
+            echo "$bad"; exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo 'No audit artifact changes.'
+          else
+            git commit -m 'audit: record released review invalidations'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
