@@ -1,6 +1,6 @@
 # NEXT — Klose Learning
 
-更新：2026-09-12。本轮：全面体检后的七项维护整改。
+更新：2026-09-12。本轮：七项维护整改及 Desktop 导入 / AnkiWeb 同步收尾。
 
 ## 当前检查点
 
@@ -12,15 +12,24 @@
 
 ## 设备与学习状态
 
-[设备凭据](anki/klose/releases/device_receipts.json) 保留上一版 Vocabulary 与 Expressions 的用户导入/同步确认；它们不代表本次内容已更新。当前包等待设备实际导入和同步，repo 不操作 Collection。
+本次会话中用户已确认完成以下操作，对应发布 `35b833e58397e5f0f4df36e65e63bbf7aaffe3561f0e68c80de51ce2898bfaad`：
 
-学习试点状态为 `awaiting-observation`；没有虚构开始日期、记忆效果或学习成绩。填写方式见 [学习反馈](docs/LEARNING_FEEDBACK.md)。
+- 导入前已导出 Collection 备份。
+- Vocabulary：2,953 条，更新 2,246 条、未变 707 条，无新增或错误提示。
+- Expressions：176 条，更新 5 条、未变 171 条，无新增或错误提示。相对设备旧内容的额外 3 条更新未还原字段差异，不将其解释为本轮新增内容修正。
+- 五条重复目标 KV001461、KV001481、KV001808、KV002569、KV002636 均仍为 New，已暂停；追加 `-is:suspended` 后搜索结果为零。
+- 2,864 张未暂停的 Vocabulary 新卡按 LearningOrder 升序完成 Reposition；Start=1、Step=1、Randomize=OFF、Shift existing=ON。002889 是 LearningOrder 最大值，不是本次新卡数量。
+- 已抽查 KV000075 sure 和 KE000147 的更新内容；用户确认旧复习记录仍在。
+- 用户确认 Desktop 已同步至 AnkiWeb。本次桌面导入流程已结束。
+
+iPad 未实际确认同步或抽查，不记为已验收；Due/Interval、UserMemo 和模板的完整验收也不由复习记录仍在这一确认推定。[结构化设备凭据](anki/klose/releases/device_receipts.json) 仍为上一版历史记录，本次确认暂记录于本检查点，尚未回填该文件。
+
+学习试点状态仍为 `awaiting-observation`；没有记录实际学习周、学习效果或成绩。填写方式见 [学习反馈](docs/LEARNING_FEEDBACK.md)。
 
 ## 下一步
 
-1. 按 [当前导入 SOP](docs/ANKI_CURRENT_RELEASE_IMPORT.md) 更新两类卡；核对旧 Review History、Due、UserMemo 与稳定 ID。
-2. 仅调整仍为 New 的卡的准入和顺序；五条重复目标的 hold 不重置已学习卡。
-3. 用户确认 Desktop / iPad 同步后，记录确切 release_id 的设备凭据。
-4. 从首个有记录的学习周开始收集反馈，再据证据调整每日新增、例句支撑或准入。
+1. 将本检查点已确认的 Desktop / AnkiWeb 结果回填结构化设备凭据，保留历史，并明确 iPad 未验收。
+2. 待用户实际确认 iPad 同步与抽查后补记设备验收；不重复要求 Desktop 导入。
+3. 从首个有记录的学习周开始收集反馈，再据证据调整每日新增、例句支撑或准入。
 
-后续代码任务使用 [统一变更流程](docs/CHANGE_WORKFLOW.md)。本次整改前的完整 NEXT 已归档至 [历史检查点](docs/archive/checkpoints/2026-09-12-before-maintenance/NEXT.md)。
+本轮代码整改无未完成项。后续代码任务使用 [统一变更流程](docs/CHANGE_WORKFLOW.md)。本次整改前的完整 NEXT 已归档至 [历史检查点](docs/archive/checkpoints/2026-09-12-before-maintenance/NEXT.md)。
