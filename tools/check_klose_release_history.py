@@ -9,6 +9,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from klose_git_history import baseline_commit
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose" / "master"
 RELEASE = BASE / "release_registry.csv"
@@ -65,12 +67,11 @@ def main() -> None:
     if len(all_ids) != len(set(all_ids)):
         raise SystemExit("Duplicate Release NoteID across legacy and extension registries")
 
-    ref = os.environ.get("KLOSE_BASE_COMMIT", "").strip() or "HEAD^"
+    ref = baseline_commit()
     old_legacy_bytes = git_bytes(ref, RELEASE)
     old_ext_bytes = git_bytes(ref, RELEASE_EXT)
     if old_legacy_bytes is None:
-        print(f"Release-history warning: Git baseline {ref!r} unavailable; historical comparison skipped")
-        return
+        raise SystemExit(f"Historical release state unavailable at baseline {ref}")
     old_ext_bytes = old_ext_bytes or b""
     old_legacy = normalized(read_csv_bytes(old_legacy_bytes))
     old_ext = normalized(read_csv_bytes(old_ext_bytes)) if old_ext_bytes else []

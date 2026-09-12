@@ -1,5 +1,7 @@
 # Anki 一次性迁移：LearningOrder → New Card Position
 
+> 历史一次性初始化或字段迁移文档。当前更新以 [当前导入 SOP](ANKI_CURRENT_RELEASE_IMPORT.md) 和发布清单为准；下文固定计数、全量 suspension/reset 步骤只适用于当时尚未学习的初始化条件。已有学习历史不得重复执行。
+
 > **Historical migration scope.** 本文中的 `638 / 221 / 417` 是 Grade-4 初始迁移时的 snapshot，不是当前 Release 真源。2026-09-10 及之后的同步先读 `docs/ANKI_CURRENT_RELEASE_IMPORT.md`。如果这里只是补 `LearningOrder` 字段，只执行 schema migration；进入真实学习后，只对仍为 `is:new` 的 current allowed Cards 做 Reposition，不要求固定 221 张。
 
 本 SOP 处理当时 Grade-4 Vocabulary 的学习顺序迁移。

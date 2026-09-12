@@ -1,5 +1,7 @@
 # Anki 一次性迁移：增加 PromptHint，不重建 Card
 
+> 历史一次性初始化或字段迁移文档。当前更新以 [当前导入 SOP](ANKI_CURRENT_RELEASE_IMPORT.md) 和发布清单为准；下文固定计数、全量 suspension/reset 步骤只适用于当时尚未学习的初始化条件。已有学习历史不得重复执行。
+
 > **Historical migration scope.** 本文中的 `638 / 221 / 417` 是 Grade-4 初始迁移时的 snapshot，不是当前 Release 真源。2026-09-10 及之后的正式同步必须先读 `docs/ANKI_CURRENT_RELEASE_IMPORT.md`；如果这里只是为了补 `PromptHint` 字段，只执行 schema/template migration，不执行本文旧的 count/suspension reset。
 
 本 SOP 只处理当前 `Klose Vocabulary` Note Type 增加 `PromptHint` 字段和对应 Recognition 正面模板。

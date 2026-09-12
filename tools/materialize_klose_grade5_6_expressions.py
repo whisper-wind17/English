@@ -4,7 +4,7 @@
 This is the downstream boundary after the closed reconciliation lane. It preserves
 all existing KE/EO identities, allocates stable IDs only for the 110 reviewed
 `new::` groups, keeps the 8 reviewed KE reuses, preserves all 15 source-only
-occurrences without cards, and builds LearnerLevel-4 model-reviewed presentations.
+occurrences without cards, and builds LearnerLevel-4 pending presentations; explicit independent approval is required.
 """
 from __future__ import annotations
 
@@ -454,18 +454,18 @@ def main() -> None:
             "ExpressionID": alloc["ExpressionID"],
             "FingerprintVersion": VERSION,
             "Fingerprint": fingerprint(cur),
-            "ReviewStatus": "model-reviewed",
-            "ReviewBasis": "model-reviewed-grade5-6-current-learning-scope-v1",
-            "ReviewedAt": "2026-09-11",
+            "ReviewStatus": "pending",
+            "ReviewBasis": "generated candidate; independent review required",
+            "ReviewedAt": "",
         })
         generated_release.append({
             "ExpressionID": alloc["ExpressionID"],
             "IdentityStatus": "active",
-            "PresentationStatus": "model-reviewed",
+            "PresentationStatus": "pending",
             "AdmissionStatus": "allowed",
-            "PublishStatus": "generated",
-            "ReleaseStatus": "ready",
-            "Notes": "Grade 5-6 current scope; model-reviewed learner presentation; append after existing Expression baseline",
+            "PublishStatus": "blocked",
+            "ReleaseStatus": "blocked",
+            "Notes": "Grade 5-6 current scope; generated presentation requires independent review",
         })
 
     baseline_current = [r for r in read_csv(CURRENT) if r.get("ExpressionID", "").strip() not in allocated_ids]
@@ -473,8 +473,12 @@ def main() -> None:
     baseline_release = [r for r in read_csv(RELEASE) if r.get("ExpressionID", "").strip() not in allocated_ids]
     write_csv(CURRENT, CURRENT_FIELDS, baseline_current + generated_current)
     write_csv(ADMISSION, ADMISSION_FIELDS, baseline_admission + generated_admission)
-    write_csv(REVIEWS, REVIEW_FIELDS, baseline_reviews + generated_reviews)
+    existing_reviews = {r["ExpressionID"]: r for r in read_csv(REVIEWS)}
+    # Preserve receipts unchanged; final sync detects any changed fingerprint.
+    write_csv(REVIEWS, REVIEW_FIELDS, baseline_reviews + [existing_reviews.get(r["ExpressionID"], r) for r in generated_reviews])
     write_csv(RELEASE, RELEASE_FIELDS, baseline_release + generated_release)
+    from klose_expression_review_state import synchronize
+    synchronize()
 
     print(
         "Materialized Grade 5-6 Expressions: "

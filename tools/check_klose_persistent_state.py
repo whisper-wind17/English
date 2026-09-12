@@ -21,6 +21,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from klose_git_history import baseline_commit, permits_identity_change
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "anki" / "klose" / "master"
 REGISTRY = BASE / "note_registry.csv"
@@ -31,7 +33,7 @@ SOURCE_MAP = BASE / "source_identity_map.csv"
 SOURCE_EXTENSIONS = BASE / "source_identity_extensions.csv"
 MIGRATIONS = BASE / "identity_migrations.csv"
 NOTE_RE = re.compile(r"KV(\d{6})$")
-IDENTITY_FIELDS = ("CanonicalWord", "MatchKey", "SenseLabel", "PrimaryOriginKey")
+IDENTITY_FIELDS = ("CanonicalWord", "MatchKey", "SenseLabel", "PrimaryOriginKey", "Status")
 VALID_REGISTRY_STATUSES = {"active", "merged"}
 
 
@@ -45,7 +47,7 @@ def read_csv_text(text: str) -> list[dict[str, str]]:
 
 
 def baseline_ref() -> str:
-    return os.environ.get("KLOSE_BASE_COMMIT", "").strip() or "HEAD^"
+    return baseline_commit()
 
 
 def git_csv_at(ref: str, path: Path, *, required: bool) -> list[dict[str, str]] | None:
@@ -64,26 +66,16 @@ def git_csv_at(ref: str, path: Path, *, required: bool) -> list[dict[str, str]] 
     return []
 
 
-def approved_migration_ids() -> set[str]:
-    approved: set[str] = set()
-    for row in read_csv(MIGRATIONS):
-        if row.get("Status", "").strip() == "approved":
-            nid = row.get("NoteID", "").strip()
-            if nid:
-                approved.add(nid)
-    return approved
-
-
 def check_git_stability(registry: list[dict[str, str]]) -> None:
     ref = baseline_ref()
     legacy = git_csv_at(ref, REGISTRY, required=True)
     if legacy is None:
-        print(f"Persistent-state warning: Git baseline {ref!r} unavailable; historical identity check skipped")
-        return
+        raise SystemExit(f"Historical identity state unavailable at baseline {ref}")
     extensions = git_csv_at(ref, REGISTRY_EXTENSIONS, required=False) or []
     baseline = legacy + extensions
     current = {r["NoteID"].strip(): r for r in registry}
-    allowed = approved_migration_ids()
+    migrations = read_csv(MIGRATIONS)
+    historical_migrations = git_csv_at(ref, MIGRATIONS, required=False) or []
     removed: list[str] = []
     changed: list[str] = []
     for old in baseline:
@@ -95,7 +87,7 @@ def check_git_stability(registry: list[dict[str, str]]) -> None:
             removed.append(nid)
             continue
         if any(old.get(f, "").strip() != cur.get(f, "").strip() for f in IDENTITY_FIELDS):
-            if nid not in allowed:
+            if not permits_identity_change(nid, old, cur, IDENTITY_FIELDS, migrations, ref, historical_migrations):
                 changed.append(nid)
     if removed or changed:
         raise SystemExit(

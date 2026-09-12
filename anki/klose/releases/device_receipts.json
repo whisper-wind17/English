@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "historical_confirmations": [
+    {"domain": "vocabulary", "rows": 972, "status": "user-confirmed-import-and-sync", "evidence": "NEXT.md at a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb", "artifact_sha256": null},
+    {"domain": "expressions", "rows": 176, "status": "user-confirmed-import-and-sync", "evidence": "NEXT.md at a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb", "artifact_sha256": null}
+  ],
+  "current_release": {"status": "awaiting-device-import-and-sync", "confirmed_release_id": null, "confirmed_at": null},
+  "rule": "Only a real device receipt may confirm the exact current release_id; equal note counts do not prove equal content. Historical artifact hashes were not recorded and are not inferred."
+}

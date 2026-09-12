@@ -265,7 +265,14 @@ def main() -> None:
         and learner_by_id[r["NoteID"]].get("LearnerProfile") == learner_profile
         and learner_by_id[r["NoteID"]].get("LearnerLevel") == learner_level
     }
+    committed_release_ids = {r["NoteID"] for name in ("release_registry.csv", "release_registry_extensions.csv") for r in read_csv(BASE / "master" / name)}
+    if released_ids != committed_release_ids:
+        raise SystemExit("Release blocked: derived Released set differs from committed registries")
     admission_by_id = load_and_validate_admission(learner_profile, learner_level, released_ids)
+    if {nid for nid, row in admission_by_id.items() if row["Status"] == "allowed"} - released_ids:
+        raise SystemExit("Release blocked: admitted vocabulary has not been released")
+    from check_klose_fronts import validate_fronts
+    validate_fronts(master_rows, learner_rows, list(admission_by_id.values()))
 
     study_ids = [r["NoteID"] for r in study_rows]
     if len(study_ids) != len(set(study_ids)):
@@ -337,6 +344,16 @@ def main() -> None:
             f"Release blocked: {len(bad_learning_state)} study rows have invalid stage/learning tags; examples={bad_learning_state[:10]}"
         )
 
+    receipt_fields = ("LearnerProfile", "LearnerLevel", "NoteID", "ContentFingerprint", "ReviewStatus", "ReviewedAt", "ReviewerType", "ReviewNote")
+    receipt_keys = set()
+    for path in sorted((BASE / "learner/review_approvals").glob("*.csv")):
+        for receipt in read_csv(path):
+            status = receipt.get("ReviewStatus")
+            if status not in {"model-reviewed", "human-reviewed"} or receipt.get("ReviewerType") != ("model" if status == "model-reviewed" else "human"):
+                raise SystemExit(f"Invalid explicit Vocabulary approval: {path.name}")
+            if not receipt.get("ReviewedAt") or not receipt.get("ReviewNote", "").strip():
+                raise SystemExit(f"Missing Vocabulary approval evidence: {path.name}")
+            receipt_keys.add(tuple(receipt.get(f, "") for f in receipt_fields))
     pending: list[str] = []
     stale: list[str] = []
     missing: list[str] = []
@@ -346,7 +363,7 @@ def main() -> None:
         if row is None:
             missing.append(nid)
             continue
-        if row.get("ReviewStatus") not in {"model-reviewed", "human-reviewed"}:
+        if row.get("ReviewStatus") not in {"model-reviewed", "human-reviewed"} or tuple(row.get(f, "") for f in receipt_fields) not in receipt_keys:
             pending.append(nid)
         expected_fp = fingerprint(master_by_id[nid], learner_by_id[nid])
         if row.get("ContentFingerprint") != expected_fp:

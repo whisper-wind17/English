@@ -175,8 +175,6 @@ def main() -> None:
         fail("invalid or empty Expression Registry")
     if set(release) != ids or set(current) != ids or set(admission) != ids or set(reviews) != ids:
         fail("Registry/Release/Learner/Admission/Review identity coverage mismatch")
-    if len(ids) != 176:
-        fail(f"expected 176 active Expression identities after Grade 5-6 release, got {len(ids)}")
 
     # Baseline candidates remain resolved exactly as before.
     resolution_pairs: set[tuple[str, str]] = set()
@@ -193,7 +191,7 @@ def main() -> None:
     if resolved_candidates != set(candidates):
         fail("baseline candidate identity resolution coverage mismatch")
 
-    if set(allocation) != set(groups) or len(allocation) != 110:
+    if not groups or set(allocation) != set(groups):
         fail(f"Grade 5-6 stable allocation coverage mismatch: allocation={len(allocation)} groups={len(groups)}")
     allocated_ids: set[str] = set()
     for group_key, alloc in allocation.items():
@@ -212,13 +210,13 @@ def main() -> None:
             fail(f"allocated identity provenance drift: {group_key}->{eid}")
         if identity.get("CreatedFromOccurrence", "").strip() != alloc.get("AllocatedFromOccurrence", "").strip():
             fail(f"allocated identity first occurrence drift: {group_key}->{eid}")
-    if len(allocated_ids) != 110:
-        fail("Grade 5-6 allocated identity count is not 110")
-    expected_new_ids = {f"KE{i:06d}" for i in range(67, 177)}
+    baseline_ids = ids - allocated_ids
+    baseline_max = max(int(eid[2:]) for eid in baseline_ids)
+    expected_new_ids = {f"KE{i:06d}" for i in range(baseline_max + 1, baseline_max + len(allocation) + 1)}
     if allocated_ids != expected_new_ids:
-        fail(f"Grade 5-6 IDs must append KE000067..KE000176; actual range={min(allocated_ids)}..{max(allocated_ids)}")
+        fail("allocated identities must append contiguously after the baseline")
 
-    # Exact source-provenance and reconciliation mapping check for all 153 source rows.
+    # Exact source-provenance and reconciliation mapping check for every reconciled source row.
     current_source: dict[str, dict[str, str]] = {}
     for path in SOURCE_FILES:
         for row in read_csv(path):
@@ -226,8 +224,8 @@ def main() -> None:
             if key in current_source:
                 fail(f"duplicate current Grade 5-6 source key: {key}")
             current_source[key] = row
-    if len(current_source) != 153 or set(provenance) != set(current_source):
-        fail("Grade 5-6 occurrence provenance does not exactly cover 153 current source rows")
+    if not current_source or set(provenance) != set(current_source):
+        fail("Grade 5-6 occurrence provenance does not exactly cover current source rows")
     occurrence_key_by_id: dict[str, str] = {}
     for key, prov in provenance.items():
         oid = prov.get("OccurrenceID", "").strip()
@@ -305,7 +303,7 @@ def main() -> None:
                 f"materialized source mapping differs from reviewed decision: {key} "
                 f"actual={sorted(mapping_by_occurrence.get(oid,set()))} expected={sorted(expected)}"
             )
-    if (mapped_count, source_only_count, len(reused_ids)) != (138, 15, 8):
+    if mapped_count + source_only_count != len(current_source):
         fail(f"Grade 5-6 source closure drift: mapped={mapped_count} source_only={source_only_count} reused={len(reused_ids)}")
 
     allowed_orders: list[str] = []
@@ -314,6 +312,8 @@ def main() -> None:
     review_counts: defaultdict[str, int] = defaultdict(int)
     stage_counts: defaultdict[str, int] = defaultdict(int)
 
+    from klose_expression_review_state import approval_keys, has_approval
+    receipt_keys = approval_keys()
     for eid in sorted(ids):
         identity = registry[eid]
         rel = release[eid]
@@ -333,8 +333,19 @@ def main() -> None:
         if identity.get("CreatedFromOccurrence", "").strip() not in mapped.get(eid, []):
             fail(f"CreatedFromOccurrence is not confirmed-mapped: {eid}")
 
-        if adm.get("Status", "").strip() != "allowed":
-            fail(f"current Expression is not admitted: {eid}")
+        status = adm.get("Status", "").strip()
+        if status not in {"allowed", "held"}:
+            fail(f"invalid Expression admission: {eid}")
+        if any(row.get("LearnerProfile") != cur.get("LearnerProfile") or row.get("LearnerLevel") != cur.get("LearnerLevel") for row in (adm, rev)):
+            fail(f"admission/review learner scope mismatch: {eid}")
+        if status == "held":
+            if adm.get("LearningOrder", "").strip() or not adm.get("Reason", "").strip():
+                fail(f"held Expression needs blank order and explicit reason: {eid}")
+            if rel.get("AdmissionStatus") != "held" or rel.get("PublishStatus") != "blocked" or rel.get("ReleaseStatus") != "blocked":
+                fail(f"held Expression must remain blocked: {eid}")
+            if rev.get("FingerprintVersion") != VERSION or rev.get("Fingerprint") != fingerprint(cur):
+                fail(f"held Expression review sync is stale: {eid}")
+            continue
         if cur.get("LearnerProfile", "").strip() != "klose" or cur.get("LearnerLevel", "").strip() != "4":
             fail(f"learner profile/level drift: {eid}")
         stage = adm.get("Stage", "").strip()
@@ -361,7 +372,7 @@ def main() -> None:
             fail(f"stale/unsupported learner presentation review: {eid}")
         review_status = rev.get("ReviewStatus", "").strip()
         review_counts[review_status] += 1
-        if review_status not in PUBLISHABLE_REVIEW_STATUSES:
+        if review_status not in PUBLISHABLE_REVIEW_STATUSES or not has_approval(rev, receipt_keys):
             fail(f"current admitted Expression is not release-reviewed: {eid}={review_status!r}")
         if rel.get("PresentationStatus", "").strip() != review_status:
             fail(f"release presentation/review status mismatch: {eid}")
@@ -391,23 +402,17 @@ def main() -> None:
 
     if len(allowed_orders) != len(set(allowed_orders)):
         fail("duplicate LearningOrder")
-    expected_orders = [f"{i:06d}" for i in range(1, len(ids) + 1)]
+    expected_orders = [f"{i:06d}" for i in range(1, len(allowed_orders) + 1)]
     if sorted(allowed_orders) != expected_orders:
-        fail("LearningOrder must remain continuous 000001..000176")
+        fail("LearningOrder must remain unique and continuous from 000001")
     ranks = [STAGE_RANK[stage] for _, stage in sorted(ordered_stages)]
     if ranks != sorted(ranks):
         fail("LearningOrder stage blocks must remain Grade4 -> Grade3 -> Grade5-6")
-    if stage_counts["stage::grade5-6-expression"] != 110:
-        fail(f"Grade 5-6 admission count is not 110: {stage_counts['stage::grade5-6-expression']}")
-    if review_counts["model-reviewed"] != 110:
-        fail(f"Grade 5-6 model-reviewed count is not 110: {review_counts['model-reviewed']}")
 
     expected_publish.sort(key=lambda row: row["LearningOrder"])
     study_rows = read_csv(STUDY)
     if study_rows != expected_publish:
         fail("study.csv is not exactly derivable from current reviewed upstream state")
-    if len(study_rows) != 176:
-        fail(f"expected 176 publishable Expressions, got {len(study_rows)}")
 
     headers, anki_rows = read_anki_import(ANKI_IMPORT)
     expected_headers = {
@@ -424,9 +429,9 @@ def main() -> None:
 
     print(
         "Expression Release Gate PASS: "
-        f"publishable={len(study_rows)} baseline=66 grade5_6_new=110 reused={len(reused_ids)} "
+        f"publishable={len(study_rows)} baseline={len(baseline_ids)} grade5_6_new={len(allocated_ids)} reused={len(reused_ids)} "
         f"source_only={source_only_count} review_counts={dict(sorted(review_counts.items()))} "
-        f"learning_order=000001..{len(ids):06d}"
+        f"learning_order=000001..{len(allowed_orders):06d}"
     )
 
 
