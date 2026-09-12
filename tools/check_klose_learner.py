@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Flag learner examples that use explicitly later auxiliary vocabulary.
+"""Report observed support blockers and unassessed example vocabulary.
 
-The review scope is the union of released Notes and explicitly admitted current
-Notes. Explicit Learning Admission is the learner-suitability truth: a lexical
-item already admitted for the same learner level is valid auxiliary vocabulary
-regardless of its Source Grade. Source Grade is used only as a fallback difficulty
-signal for auxiliary vocabulary that is not explicitly admitted.
+Admission describes curriculum eligibility, never observed mastery. Unknown support
+is advisory until actual learning evidence establishes a difficulty. Function words
+are a presentation scaffold, not a claim that the learner has mastered them.
 """
 from __future__ import annotations
 
@@ -88,89 +86,45 @@ def lemmas(token: str) -> set[str]:
 
 def main() -> None:
     master = read_csv(MASTER)
-    occ = read_csv(OCCURRENCES)
-    learner = read_csv(LEARNER)
-    admission = read_csv(ADMISSION)
-    learner_by_id = {r["NoteID"]: r for r in learner}
-    master_by_id = {r["NoteID"]: r for r in master}
-    master_ids = set(master_by_id)
-
-    released_ids = {r["NoteID"] for r in master if r.get("Released") == "yes"}
-    allowed_rows = [
-        r for r in admission
-        if r.get("LearnerProfile", "").strip() == "klose"
-        and r.get("LearnerLevel", "").strip() == "4"
-        and r.get("Status", "").strip() == "allowed"
-    ]
-    allowed_ids = {r.get("NoteID", "").strip() for r in allowed_rows}
-    unknown = allowed_ids - master_ids
-    if unknown:
-        raise SystemExit(f"Learning admission references unknown NoteIDs: {sorted(unknown)[:10]}")
-    check_ids = released_ids | allowed_ids
-
-    # Explicit admission is the primary learner-level suitability truth.
-    admitted_lemmas: set[str] = set()
-    for nid in allowed_ids:
-        row = master_by_id[nid]
-        for token in tokens(row.get("CanonicalWord", "")) + tokens(row.get("Word", "")):
-            admitted_lemmas.update(lemmas(token))
-
-    first_grade_by_id: dict[str, int] = {}
-    for row in occ:
-        if row["SourceID"] != SOURCE_ID or not row["Grade"].isdigit():
-            continue
-        grade = int(row["Grade"])
-        first_grade_by_id[row["NoteID"]] = min(grade, first_grade_by_id.get(row["NoteID"], grade))
-
-    earliest: dict[str, int] = {}
+    learner = {r["NoteID"]: r for r in read_csv(LEARNER)}
+    admitted = {r["NoteID"] for r in read_csv(ADMISSION) if r.get("Status") == "allowed"}
+    scope = admitted | {r["NoteID"] for r in master if r.get("Released") == "yes"}
+    decisions = read_csv(BASE / "feedback" / "learning_support.csv")
+    support = {}
+    for row in decisions:
+        token = row.get("Token", "").strip().casefold()
+        if not token or token in support or row.get("Status") not in {"supported", "needs-support"}:
+            raise SystemExit(f"Invalid/duplicate learning-support decision: {token!r}")
+        if not row.get("Evidence", "").strip() or not row.get("ObservedAt", "").strip():
+            raise SystemExit(f"Learning-support decision needs actual evidence: {token}")
+        support[token] = row["Status"]
+    supported = set().union(*(lemmas(t) for t, status in support.items() if status == "supported")) if support else set()
+    needs_support = {t for t, status in support.items() if status == "needs-support"}
+    blockers, unassessed = [], []
     for row in master:
-        grade = first_grade_by_id.get(row["NoteID"])
-        if grade is None:
+        nid = row["NoteID"]
+        if nid not in scope:
             continue
-        for token in tokens(row["CanonicalWord"]):
-            for lemma in lemmas(token):
-                earliest[lemma] = min(grade, earliest.get(lemma, grade))
-
-    review: list[dict[str, str]] = []
-    for row in master:
-        if row["NoteID"] not in check_ids:
-            continue
-        lr = learner_by_id[row["NoteID"]]
-        level = int(lr["LearnerLevel"])
-        target_lemmas: set[str] = set()
-        for token in tokens(row.get("CanonicalWord", "")) + tokens(row.get("Word", "")):
-            target_lemmas.update(lemmas(token))
-
-        future: dict[str, int] = {}
-        for token in tokens(lr["ExampleSentence"]):
-            if token in FUNCTION_WORDS:
+        cur = learner[nid]
+        target = set().union(*(lemmas(t) for t in tokens(row["Word"])))
+        unknown, difficult = set(), set()
+        for token in tokens(cur["ExampleSentence"]):
+            forms = lemmas(token)
+            if forms & target:
                 continue
-            token_lemmas = lemmas(token)
-            if token_lemmas & target_lemmas:
-                continue
-            if token_lemmas & admitted_lemmas:
-                continue
-            matched = [earliest[x] for x in token_lemmas if x in earliest]
-            if matched and min(matched) > level:
-                future[token] = min(matched)
-        if future:
-            review.append({
-                "NoteID": row["NoteID"],
-                "Word": row["Word"],
-                "LearnerLevel": lr["LearnerLevel"],
-                "ExampleSentence": lr["ExampleSentence"],
-                "FutureVocabulary": " ".join(f"{k}->G{v}" for k, v in sorted(future.items())),
-            })
-
-    write_csv(REPORT, ["NoteID", "Word", "LearnerLevel", "ExampleSentence", "FutureVocabulary"], review)
-    print(
-        f"Klose auxiliary-vocabulary review scope: released={len(released_ids)}, "
-        f"allowed={len(allowed_ids)}, union={len(check_ids)}, admitted_lemmas={len(admitted_lemmas)}, items={len(review)}"
-    )
-    for row in review:
-        print(f"{row['NoteID']} | {row['Word']} | {row['FutureVocabulary']} | {row['ExampleSentence']}")
-    if review:
-        raise SystemExit("Learner examples contain unadmitted explicitly later auxiliary vocabulary")
+            # Explicit observed difficulties override generic function-word scaffolding.
+            if forms & needs_support:
+                difficult.add(token)
+            elif token not in FUNCTION_WORDS and not forms & supported:
+                unknown.add(token)
+        if difficult and nid in admitted:
+            blockers.append({"NoteID": nid, "Word": row["Word"], "LearnerLevel": cur["LearnerLevel"], "ExampleSentence": cur["ExampleSentence"], "FutureVocabulary": " ".join(sorted(difficult))})
+        if unknown:
+            unassessed.append({"NoteID": nid, "Word": row["Word"], "UnassessedVocabulary": " ".join(sorted(unknown)), "SupportStatus": "unassessed", "AdmissionIsMastery": "false"})
+    write_csv(REPORT, ["NoteID", "Word", "LearnerLevel", "ExampleSentence", "FutureVocabulary"], blockers)
+    write_csv(BASE / "review" / "example_support_review.csv", ["NoteID", "Word", "UnassessedVocabulary", "SupportStatus", "AdmissionIsMastery"], unassessed)
+    print(f"Example support: scope={len(scope)} observed_decisions={len(support)} blockers={len(blockers)} unassessed_examples={len(unassessed)}; allowed does not imply mastered")
+    # Release gate consumes the blocker report; generating a review queue is build-valid.
 
 
 if __name__ == "__main__":

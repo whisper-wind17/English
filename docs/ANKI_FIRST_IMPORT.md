@@ -1,5 +1,7 @@
 # Klose Vocabulary：第一次正式导入 Anki
 
+> 历史一次性初始化或字段迁移文档。当前更新以 [当前导入 SOP](ANKI_CURRENT_RELEASE_IMPORT.md) 和发布清单为准；下文固定计数、全量 suspension/reset 步骤只适用于当时尚未学习的初始化条件。已有学习历史不得重复执行。
+
 本文定义 **NoteID-first 新系统第一次导入的操作契约**。逐步实操记录见：
 
 ```text

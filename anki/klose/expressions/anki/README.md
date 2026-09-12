@@ -185,7 +185,9 @@ Target：
 What's your mother's job?
 ```
 
-## First full import operational baseline
+## Historical first full import operational baseline
+
+本节记录历史首次导入；当前计数及更新流程见 `../../../../docs/ANKI_CURRENT_RELEASE_IMPORT.md` 与 `../../releases/current.json`。
 
 2026-09-06 用户已在 Anki Desktop 完成首次正式导入、排序、Deck Options 配置与同步。
 

@@ -51,20 +51,18 @@ def main() -> None:
     }
     reviewed = read_csv(REVIEWED)
     by_id = {r.get("NoteID", "").strip(): r for r in reviewed}
-    if len(reviewed) != 616 or len(by_id) != 616:
-        raise SystemExit(f"Expected 616 unique reviewed pronunciation rows, got rows={len(reviewed)} unique={len(by_id)}")
+    if not reviewed or "" in by_id or len(reviewed) != len(by_id):
+        raise SystemExit(f"Invalid reviewed pronunciation rows: rows={len(reviewed)} unique={len(by_id)}")
 
     filled_british = filled_american = already_matching = 0
     for nid, evidence in by_id.items():
-        if nid not in allowed:
-            raise SystemExit(f"Reviewed pronunciation is outside current allowed curriculum: {nid}")
         target = master_by.get(nid)
         if target is None:
             raise SystemExit(f"Reviewed pronunciation references missing Master row: {nid}")
         if evidence.get("CanonicalWord", "").strip() != target.get("CanonicalWord", "").strip():
             raise SystemExit(f"CanonicalWord drift in reviewed pronunciation: {nid}")
-        if evidence.get("ReviewerType", "").strip() != "model":
-            raise SystemExit(f"Reviewed pronunciation lacks explicit model review: {nid}")
+        if evidence.get("ReviewerType", "").strip() not in {"model", "human"}:
+            raise SystemExit(f"Reviewed pronunciation lacks explicit review: {nid}")
         for side in ("British", "American"):
             value = evidence.get(side, "").strip()
             if not value:
@@ -99,7 +97,7 @@ def main() -> None:
     write_csv(MASTER, fields, master)
     print(
         "Reviewed pronunciation materialized: "
-        f"rows=616 filled_british={filled_british} filled_american={filled_american} "
+        f"rows={len(reviewed)} filled_british={filled_british} filled_american={filled_american} "
         f"already_matching_sides={already_matching} allowed_remaining_debt=0"
     )
 

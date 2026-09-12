@@ -27,13 +27,13 @@ def write_csv(p, fields, rows):
 
 def main():
     candidates=read_csv(CAND)
-    if len(candidates)!=1821: raise SystemExit(f'Expected 1821 candidates, got {len(candidates)}')
+    if not candidates or len({r['NoteID'] for r in candidates})!=len(candidates): raise SystemExit('Empty/duplicate candidates')
     reviewed=[]
     for p in sorted(REVIEWED.glob('batch_*.csv')): reviewed.extend(read_csv(p))
     content={r['NoteID']:dict(r) for r in reviewed}
-    if len(content)!=1821: raise SystemExit(f'Expected 1821 reviewed content rows, got {len(content)}')
+    if len(content)!=len(reviewed) or set(content)!={r['NoteID'] for r in candidates}: raise SystemExit('Reviewed content coverage/uniqueness mismatch')
     corrections=read_csv(CORRECTIONS)
-    if len(corrections)!=16 or len({r['NoteID'] for r in corrections})!=16: raise SystemExit('Expected 16 unique content corrections')
+    if len({r['NoteID'] for r in corrections})!=len(corrections): raise SystemExit('Duplicate content correction NoteIDs')
     for c in corrections:
         nid=c['NoteID'].strip()
         if nid not in content: raise SystemExit(f'Content correction outside reviewed scope: {nid}')
@@ -65,7 +65,7 @@ def main():
         learner.append(l); learner_by[nid]=l; added_learner+=1
 
     plan=read_csv(PLAN)
-    if len(plan)!=2720: raise SystemExit(f'Expected 2720 admission plan rows, got {len(plan)}')
+    if not plan or len({r['NoteID'] for r in plan})!=len(plan): raise SystemExit('Empty/duplicate admission plan')
     changed_adm=0; new_adm=0
     for p in plan:
         key=(p['LearnerProfile'].strip(),p['LearnerLevel'].strip(),p['NoteID'].strip())

@@ -4,243 +4,76 @@ on:
   push:
     branches: [main]
     paths:
-      - 'tools/build_klose_vocabulary.py'
-      - 'tools/apply_klose_actual_grade4.py'
-      - 'tools/apply_klose_actual_grade4_reuse_facts.py'
-      - 'tools/apply_klose_grade5_6_current.py'
-      - 'tools/apply_klose_grade5_6_reuse_facts.py'
-      - 'tools/apply_klose_grade5_6_new_facts.py'
-      - 'tools/apply_klose_grade5_6_learner.py'
-      - 'tools/apply_klose_release_extensions.py'
-      - 'tools/release_klose_allowed_vocabulary.py'
-      - 'tools/check_klose_release_history.py'
-      - 'tools/check_grade5_6_new_learner_content.py'
-      - 'tools/check_third_party_learner_content.py'
-      - 'tools/check_third_party_release_committed_state.py'
-      - 'tools/validate_third_party_learner_materialization.py'
-      - 'tools/apply_third_party_stable_learner.py'
-      - 'tools/apply_third_party_reviewed_pronunciations.py'
-      - 'tools/validate_third_party_pronunciation_materialization.py'
-      - 'tools/klose_release_curriculum.py'
-      - 'tools/build_klose_learning_admission.py'
-      - 'tools/apply_klose_learner_overrides.py'
-      - 'tools/apply_klose_actual_grade4_reuse_learner.py'
-      - 'tools/apply_klose_prompt_hints.py'
-      - 'tools/klose_review_fingerprint.py'
-      - 'tools/audit_klose_actual_grade4_reuse.py'
-      - 'tools/sync_klose_learner_review_registry.py'
-      - 'tools/diagnose_klose_release_completeness.py'
-      - 'tools/check_klose_learner.py'
-      - 'tools/check_klose_release_ready.py'
-      - 'tools/check_klose_persistent_state.py'
-      - 'tools/check_klose_actual_grade4_identity.py'
-      - 'tools/check_grade5_6_premerge_dedup.py'
-      - 'tools/approve_klose_learner_review.py'
-      - 'anki/klose/config/**'
-      - 'anki/klose/source_reference/**'
-      - 'anki/klose/third_party_vocabulary/learner/content_reviewed/**'
-      - 'anki/klose/third_party_vocabulary/learner/content_corrections.csv'
-      - 'anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv'
-      - 'anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv'
-      - 'anki/klose/third_party_vocabulary/pronunciation/reviewed_pronunciations.csv'
-      - 'anki/klose/learner/grade5_6_learning_scope.json'
-      - 'anki/klose/learner/grade5_6_content_batch_*.csv'
-      - 'anki/klose/learner/grade5_6_reuse_overrides.csv'
-      - 'anki/klose/learner/grade4_*overrides.csv'
-      - 'anki/klose/learner/grade4_full_review_*.csv'
-      - 'anki/klose/learner/actual_grade4_overrides.csv'
-      - 'anki/klose/learner/actual_grade4_reuse_overrides.csv'
-      - 'anki/klose/learner/prompt_hint_overrides.csv'
-      - 'anki/klose/learner/learning_admission.csv'
-      - 'anki/klose/learner/presentation_review_registry.csv'
-      - 'anki/klose/learner/review_approvals/**'
-      - 'anki/klose/master/note_registry.csv'
-      - 'anki/klose/master/note_registry_extensions.csv'
-      - 'anki/klose/master/actual_grade4_fact_overrides.csv'
-      - 'anki/klose/master/actual_grade4_reuse_fact_overrides.csv'
-      - 'anki/klose/master/grade5_6_reuse_fact_overrides.csv'
-      - 'anki/klose/master/grade5_6_new_fact_overrides.csv'
-      - 'anki/klose/master/source_identity_map.csv'
-      - 'anki/klose/master/source_identity_extensions.csv'
-      - 'anki/klose/master/source_reconciliation_registry.csv'
-      - 'anki/klose/master/identity_migrations.csv'
-      - 'anki/klose/master/release_registry.csv'
-      - 'anki/klose/master/release_registry_extensions.csv'
-      - 'anki/klose/review/grade5_6_premerge_dedup/**'
-      - 'anki/klose/review/grade5_6_lexical_facts/**'
-      - 'anki/人教版一年级起点/master/vocabulary_master.csv'
-      - 'anki/人教版一年级起点/master/vocabulary_occurrences.csv'
+      - 'tools/**'
+      - 'tests/**'
+      - 'anki/klose/**'
+      - 'anki/人教版一年级起点/master/**'
       - '.github/workflows/build-klose-vocabulary.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'tools/**klose**.py'
-      - 'tools/**grade5_6**.py'
-      - 'tools/**third_party**.py'
+      - 'tools/**'
+      - 'tests/**'
       - 'anki/klose/**'
       - 'anki/人教版一年级起点/master/**'
       - '.github/workflows/build-klose-vocabulary.yml'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: klose-pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  KLOSE_BASE_COMMIT: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD^' }}
 
 jobs:
-  build:
+  build-valid:
+    name: Build Valid
     runs-on: ubuntu-latest
-    env:
-      KLOSE_BASE_COMMIT: ${{ github.event.pull_request.base.sha || github.event.before }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          sparse-checkout: |
-            tools
-            anki/klose
-            anki/人教版一年级起点/master
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Build current upstream state
+        run: python tools/klose_pipeline.py build --report "$RUNNER_TEMP/klose-build.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-status
+          path: ${{ runner.temp }}/klose-build.json
 
-      - name: Protect persistent identity and release state
-        run: python tools/check_klose_persistent_state.py
-
-      - name: Protect byte-exact append-only release history
-        run: python tools/check_klose_release_history.py
-
-      - name: Verify Grade 5-6 premerge dedup closure
-        run: python tools/check_grade5_6_premerge_dedup.py
-
-      - name: Validate actual Grade-4 identity coverage
-        run: python tools/check_klose_actual_grade4_identity.py
-
-      - name: Audit reused Grade-4 identities
-        run: python tools/audit_klose_actual_grade4_reuse.py
-
-      - name: Validate third-party learner content
-        run: python tools/check_third_party_learner_content.py
-
-      - name: Build legacy vocabulary inventory
-        run: python tools/build_klose_vocabulary.py
-
-      - name: Overlay actual Klose Grade-4 source
-        run: python tools/apply_klose_actual_grade4.py
-
-      - name: Apply actual Grade-4 forms to reused identities
-        run: python tools/apply_klose_actual_grade4_reuse_facts.py
-
-      - name: Overlay accepted Klose Grade 5-6 vocabulary scope
-        run: python tools/apply_klose_grade5_6_current.py
-
-      - name: Fill Grade 5-6 reused-note lexical fact gaps
-        run: python tools/apply_klose_grade5_6_reuse_facts.py
-
-      - name: Apply Grade 5-6 new-note lexical facts
-        run: python tools/apply_klose_grade5_6_new_facts.py
-
-      - name: Validate Grade 5-6 learner content
-        run: python tools/check_grade5_6_new_learner_content.py
-
-      - name: Build explicit allowed/held learning admission
-        run: python tools/build_klose_learning_admission.py
-
-      - name: Apply Grade 5-6 learner presentation
-        run: python tools/apply_klose_grade5_6_learner.py
-
-      # Once third-party Notes are part of committed Release truth, the baseline
-      # admission builder legitimately sees those Stable IDs before the derived
-      # Master/Learner overlay exists. Materialize that overlay before any
-      # admission consumer validates NoteID coverage.
-      - name: Materialize third-party Stable learner and admission state
-        run: python tools/apply_third_party_stable_learner.py
-
-      - name: Apply learner presentation and learning admission
-        run: python tools/apply_klose_learner_overrides.py
-
-      - name: Apply actual Grade-4 reused learner presentations
-        run: python tools/apply_klose_actual_grade4_reuse_learner.py
-
-      - name: Materialize reviewed third-party pronunciations
-        run: python tools/apply_third_party_reviewed_pronunciations.py
-
-      - name: Materialize committed Vocabulary Release truth after all Master overlays
-        run: python tools/apply_klose_release_extensions.py
-
-      - name: Rebuild deterministic publish views from complete upstream state
-        run: python tools/apply_klose_learner_overrides.py
-
-      - name: Validate reviewed pronunciation materialization
-        run: python tools/validate_third_party_pronunciation_materialization.py
-
-      - name: Apply homograph PromptHint presentation
-        run: python tools/apply_klose_prompt_hints.py
-
-      - name: Sync learner review registry
-        run: python tools/sync_klose_learner_review_registry.py
-
-      - name: Reject unadmitted later auxiliary vocabulary in examples
-        run: python tools/check_klose_learner.py
-
-      - name: Independent third-party learner materialization recheck
-        run: python tools/validate_third_party_learner_materialization.py
-
-      - name: Protect committed third-party release checkpoint
-        run: python tools/check_third_party_release_committed_state.py
-
-      - id: completeness
-        name: Diagnose current vs held release completeness
-        continue-on-error: true
-        run: python tools/diagnose_klose_release_completeness.py
-
-      - id: release
-        name: Verify content release readiness
-        continue-on-error: true
-        run: python tools/check_klose_release_ready.py
-
-      - name: Report non-releasable development state
-        if: steps.release.outcome != 'success' || steps.completeness.outcome != 'success'
-        run: echo 'Build Valid; Content Releasable = false. Persisting reviewable upstream state only; publish remains blocked.'
-
-      - name: Persist build-valid upstream state
-        if: github.event_name == 'push' && steps.release.outcome != 'success'
+  release-ready:
+    name: Release Ready
+    needs: build-valid
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate complete release at the checked-out commit
+        run: python tools/klose_pipeline.py all --report "$RUNNER_TEMP/klose-release.json"
+      - name: Regression and adversarial state checks
+        run: python -m unittest discover -s tests -v
+      - name: Validate and persist on main, fast-forward only
+        if: github.event_name == 'push'
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
-          git add \
-            anki/klose/master/vocabulary_master.csv \
-            anki/klose/master/source_occurrences.csv \
-            anki/klose/master/build_stats.csv \
-            anki/klose/learner/current.csv \
-            anki/klose/learner/learning_admission.csv \
-            anki/klose/learner/presentation_review_registry.csv \
-            anki/klose/review
-          if git diff --cached --quiet; then
-            echo 'No upstream review-state changes.'
-          else
-            git commit -m 'data: persist Klose build-valid review state'
-            remaining="$(git diff --name-only)"
-            bad="$(printf '%s\n' "$remaining" | grep -v '^anki/klose/publish/' || true)"
-            if [ -n "$bad" ]; then
-              echo 'Unexpected unstaged mutation after upstream-state commit:'
-              echo "$bad"
-              exit 1
-            fi
-            git restore --worktree anki/klose/publish
-            git pull --rebase origin main
-            git push
-          fi
-
-      - name: Commit releasable generated data
-        if: github.event_name == 'push' && steps.release.outcome == 'success' && steps.completeness.outcome == 'success'
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
-          git add anki/klose/master anki/klose/learner anki/klose/publish anki/klose/review
-          if git diff --cached --quiet; then
-            echo 'No generated changes.'
-          else
-            git commit -m 'data: rebuild Klose vocabulary base'
-            git pull --rebase origin main
-            git push
-          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python tools/klose_pipeline.py all --persist --report "$RUNNER_TEMP/klose-release.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-status
+          path: ${{ runner.temp }}/klose-release.json

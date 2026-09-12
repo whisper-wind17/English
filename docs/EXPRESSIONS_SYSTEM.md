@@ -2,7 +2,9 @@
 
 本文定义 Klose 从小学延续到高中、大学的长期 Expressions 学习系统。目标不是保存教材句子，而是把高价值英语表达稳定转化为可主动调用的语言能力。
 
-动态状态和当前 pilot 以根目录 `NEXT.md` 为准。
+动态状态以根目录 `NEXT.md` 和 `releases/current.json` 为准。真实 pilot 观察见 [学习反馈](LEARNING_FEEDBACK.md)。
+
+日常维护以 `expressions/learner/current.csv` 为持久呈现输入，统一运行 `klose_pipeline.py`；内容变更先失效为 pending，再由独立审核 CSV 显式批准。日常 CI 不重跑一次性 materialize/refine，也不自动审批。历史 identity、审核凭据受 Git 基线保护；详见 [变更流程](CHANGE_WORKFLOW.md)。
 
 ---
 
@@ -406,7 +408,7 @@ TTS
 
 正面优先使用场景 / intent / slot cue，避免长期形成机械的“完整中文句子 → 英文翻译”通路。Front 语言按第 6 节的 Stage A → B → C 演进，但 Card 训练方向始终保持 intent / situation → English production。
 
-具体字段、模板和 tag contract 在 pilot implementation 时冻结。
+具体字段和模板已实现，见 `anki/klose/expressions/anki/README.md`。
 
 ---
 
@@ -497,7 +499,7 @@ Front 语言是否可以从 Stage A 向 Stage B / C 演进，也应依据真实�
 
 ## 12. Current design decision
 
-Phase B 先采用小规模 one-month pilot：
+表达卡工程链已实现；学习效果采用小规模 one-month pilot，实际开始时间须由学习记录确认：
 
 ```text
 freeze identity/release contract

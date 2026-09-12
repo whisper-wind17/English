@@ -13,6 +13,8 @@ docs/ANKI_SYNC_WORKFLOW.md
 docs/ANKI_MIGRATION.md
 ```
 
+当前操作入口为 [统一变更流程](CHANGE_WORKFLOW.md)。准入与掌握程度分离；当前数量统一读取 `anki/klose/releases/current.json`，学习效果来自 `feedback/`。
+
 ## 1. 五个必须分离的维度
 
 ### 1.1 Source Fact
@@ -98,6 +100,7 @@ Raw Source / Actual Textbook Reference
 → Identity Registry + Source Identity Map + Source Occurrences
 → Vocabulary Master
 → Learner Presentation
+→ Learning Admission + LearningOrder
 → Learner Review Registry
 → Release Registry
 → study.csv            # generated internal snapshot
@@ -227,14 +230,7 @@ Review 唯一键：
 LearnerProfile + LearnerLevel + NoteID
 ```
 
-`ContentFingerprint` 至少绑定：
-
-```text
-MeaningPrimary
-ExampleSentence
-ExampleTranslation
-LearnerLevel
-```
+`ContentFingerprint` 绑定 CanonicalWord、SenseLabel、Word、British、American、MeaningPrimary、ExampleSentence、ExampleTranslation、LearnerProfile、LearnerLevel，以及非空 PromptHint。空提示兼容原 v2；变更须匹配新的显式审核凭据。
 
 受审内容变化后，旧 approval 必须失效为 `pending`。详细机制见 `docs/LEARNER_REVIEW_REGISTRY.md`。
 

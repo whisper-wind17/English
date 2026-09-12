@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "device_state_source": "anki/klose/releases/device_receipts.json",
+  "learning_effectiveness": "see anki/klose/feedback; release validation does not prove learning outcomes",
+  "vocabulary": {
+    "artifact": "anki/klose/publish/anki-import.csv",
+    "sha256": "54b23f2e9eff40580ed38ee17def763dfdf8b65f83102d17d0bc4a4f43da52a7",
+    "rows": 2953,
+    "allowed": 2889,
+    "held": 64,
+    "learning_order_max": "002889",
+    "review_counts": {
+      "model-reviewed": 2953
+    },
+    "prompt_hint_nonempty": 81,
+    "note_type": "Klose Vocabulary",
+    "deck": "Klose-English::Vocabulary",
+    "columns": [
+      "NoteID",
+      "CanonicalWord",
+      "Word",
+      "PromptHint",
+      "British",
+      "American",
+      "MeaningPrimary",
+      "ExampleSentence",
+      "ExampleTranslation",
+      "LearnerLevel",
+      "LearningOrder",
+      "Sources",
+      "SourceBooks",
+      "Tags"
+    ],
+    "template_sha256": {
+      "card_back.html": "991e4f8309e76b2d71c887a9b58517f5947ebac5f24419ce80f1236bd4626875",
+      "card_front.html": "335564fe5a6c4b8c468aabfad98b9bdb1a7d416658575d0700b65f5c51c0e88e",
+      "styling.css": "8779744b931ebc6bc9b2b4d3110edbd93478dffc4b7682e1ccb1b970d4c25a74"
+    }
+  },
+  "expressions": {
+    "artifact": "anki/klose/expressions/publish/anki-import.csv",
+    "sha256": "c3689469faa43dee4ac513f7b28d09e2e256a7dabedde2ce7a36d5ffad14f17a",
+    "rows": 176,
+    "allowed": 176,
+    "held": 0,
+    "learning_order_max": "000176",
+    "review_counts": {
+      "approved": 66,
+      "model-reviewed": 110
+    },
+    "prompt_hint_nonempty": 138,
+    "note_type": "Klose Expression",
+    "deck": "Klose-English::Expressions",
+    "columns": [
+      "ExpressionID",
+      "FunctionLabel",
+      "Prompt",
+      "PromptHint",
+      "Target",
+      "Pattern",
+      "MeaningUsage",
+      "Examples",
+      "LearnerLevel",
+      "LearningOrder",
+      "Sources",
+      "SourceBooks"
+    ],
+    "template_sha256": {
+      "card_back.html": "4e89180fc4f0940ba839d1c981395448927505e42bd4122118f1a37ed35a2c7a",
+      "card_front.html": "1d9fc571e12d5e40dfe1e5551ad012ba1e687b929c29d5ce419987c97866a9f3",
+      "styling.css": "29c835c4bfc465c1c6694606e3ec6b28a9c48f7321532195bb5ebdeabfea0210"
+    }
+  },
+  "release_id": "35b833e58397e5f0f4df36e65e63bbf7aaffe3561f0e68c80de51ce2898bfaad"
+}

@@ -52,12 +52,12 @@ def main():
     expected={r['NoteID']:r for r in candidates}
     rows=[]
     files=sorted(REVIEWED.glob('batch_*.csv'))
-    if len(files)!=19: raise SystemExit(f'Expected 19 reviewed batches, got {len(files)}')
+    if not files: raise SystemExit('Missing reviewed content batches')
     for p in files: rows.extend(read_csv(p))
     by={r['NoteID'].strip():dict(r) for r in rows}
     corrections=read_csv(CORRECTIONS)
-    if len(corrections)!=16 or len({r['NoteID'] for r in corrections})!=16:
-        raise SystemExit('Expected exactly 16 unique content corrections')
+    if len({r['NoteID'] for r in corrections})!=len(corrections):
+        raise SystemExit('Duplicate content correction NoteIDs')
     for c in corrections:
         nid=c['NoteID'].strip()
         if nid not in by: raise SystemExit(f'Correction points outside reviewed content: {nid}')
@@ -81,7 +81,7 @@ def main():
         if not target_matches(toks(sent),target): errors.append(f'{nid}: target form missing from example: {cand.get("CanonicalWord")}')
     missing=sorted(set(expected)-set(by)); extra=sorted(set(by)-set(expected))
     if missing or extra: errors.append(f'coverage mismatch missing={len(missing)} extra={len(extra)} examples={(missing+extra)[:20]}')
-    if len(rows)!=1821 or len(by)!=1821: errors.append(f'expected 1821 reviewed rows, got rows={len(rows)} unique={len(by)}')
+    if len(expected)!=len(candidates) or len(rows)!=len(by): errors.append('Duplicate candidate or reviewed NoteID')
     if errors:
         print('\n'.join(errors[:100])); raise SystemExit(f'Third-party learner content failed: {len(errors)} errors')
     conflicts=sum(r.get('BritishEvidenceStatus')=='conflicting-evidence' or r.get('AmericanEvidenceStatus')=='conflicting-evidence' for r in candidates)

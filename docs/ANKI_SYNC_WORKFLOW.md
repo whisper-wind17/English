@@ -1,6 +1,6 @@
 # Klose Vocabulary：长期 Anki 同步流程
 
-本文定义 repo 与 Anki 之间长期、可重复执行的同步契约。具体某次 Release 的设备侧导入步骤，以对应 release-import SOP 为准；当前 2026-09-10 的 972-note Release 见：
+本文定义 repo 与 Anki 之间长期、可重复执行的同步契约。具体某次 Release 的设备侧导入步骤，以对应 release-import SOP 为准；当前 Release 见：
 
 ```text
 docs/ANKI_CURRENT_RELEASE_IMPORT.md
@@ -110,7 +110,7 @@ sync review registry
 
 ### Step 3：重新构建
 
-正常 CI 包括：
+本地和 CI 统一执行 `python tools/klose_pipeline.py all`；主要阶段包括：
 
 ```text
 check persistent state
@@ -235,7 +235,7 @@ Learning / Review -> 不因 curriculum/source release 批量改 suspension / Due
 
 也就是说，长期同步只 materialize **未来尚未学习 Cards 的准入**；已经形成的 Anki memory state 不由 GitHub 回滚。
 
-当前具体 tags / counts 必须从最新 `learning_admission.csv`、`build_stats.csv` 和 release-import SOP 读取，不在长期 SOP 中写死历史数字。
+当前具体 tags / counts 必须从最新 `learning_admission.csv` 和 `releases/current.json` 读取，不在长期 SOP 中写死历史数字。
 
 ### Step 8：LearningOrder → New Card Position
 

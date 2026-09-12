@@ -2,7 +2,7 @@
 """Refine Grade 5-6 Expression learner presentation for LearnerLevel 4.
 
 Identity/reconciliation is already frozen. This tool changes only learner-facing
-presentation and the bound review fingerprint. It removes teaching/meta jargon,
+presentation. Changed fingerprints are invalidated by the independent review sync. It removes teaching/meta jargon,
 uses a concrete textbook utterance as Target, and keeps the reusable canonical
 form separately in Pattern.
 """
@@ -245,8 +245,8 @@ def concrete_target(canonical: str, slot_schema: str, raws: list[str]) -> tuple[
 def main() -> None:
     allocation_rows = read_csv(ALLOCATION)
     allocated_ids = {r.get("ExpressionID", "").strip() for r in allocation_rows}
-    if len(allocated_ids) != 110:
-        fail(f"expected 110 allocated Grade 5-6 identities, got {len(allocated_ids)}")
+    if not allocated_ids or len(allocated_ids) != len(allocation_rows):
+        fail("empty/duplicate Grade 5-6 allocation")
 
     registry = {r["ExpressionID"].strip(): r for r in read_csv(REGISTRY)}
     occurrences = {r["OccurrenceID"].strip(): r for r in read_csv(OCCURRENCES)}
@@ -288,13 +288,7 @@ def main() -> None:
             "MeaningUsage": usage,
             "ContextNote": "",
         })
-        review_by_id[eid].update({
-            "FingerprintVersion": VERSION,
-            "Fingerprint": fingerprint(cur),
-            "ReviewStatus": "model-reviewed",
-            "ReviewBasis": "model-reviewed-grade5-6-learner-presentation-v3",
-            "ReviewedAt": "2026-09-11",
-        })
+
 
     problems: list[str] = []
     targets: set[str] = set()
@@ -317,8 +311,9 @@ def main() -> None:
         fail(f"learner-facing quality gate failed: {problems[:20]}")
 
     write_csv(CURRENT, CURRENT_FIELDS, current_rows)
-    write_csv(REVIEWS, REVIEW_FIELDS, reviews)
-    print("Refined Grade 5-6 Expression presentations: rows=110 concrete_targets=110 unresolved_slots=0 meta_jargon=0")
+    from klose_expression_review_state import synchronize
+    synchronize()
+    print(f"Refined Grade 5-6 Expression presentations: rows={len(allocated_ids)} concrete_targets={len(allocated_ids)} unresolved_slots=0 meta_jargon=0")
 
 
 if __name__ == "__main__":

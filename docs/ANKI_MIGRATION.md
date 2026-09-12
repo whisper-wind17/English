@@ -1,5 +1,7 @@
 # Anki 一次性迁移：Word-first → NoteID-first
 
+> 历史一次性初始化或字段迁移文档。当前更新以 [当前导入 SOP](ANKI_CURRENT_RELEASE_IMPORT.md) 和发布清单为准；下文固定计数、全量 suspension/reset 步骤只适用于当时尚未学习的初始化条件。已有学习历史不得重复执行。
+
 本文只处理旧版人教版 CSV 已经导入 Anki 时的兼容问题。迁移完成后的长期同步统一使用 `anki/klose/publish/anki-import.csv`；详细 SOP 见 `docs/ANKI_SYNC_WORKFLOW.md`。
 
 如果设备已经完成 NoteID-first 迁移、当前只需要扩展字段，不要重跑本文：

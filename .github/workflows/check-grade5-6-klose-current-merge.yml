@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
           sparse-checkout: |
             tools
             anki/klose
@@ -50,7 +50,7 @@ jobs:
           python-version: '3.12'
       - name: Verify persistent Stable state
         env:
-          KLOSE_BASE_COMMIT: HEAD^
+          KLOSE_BASE_COMMIT: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD^' }}
         run: python tools/check_klose_persistent_state.py
       - name: Verify Grade 5-6 premerge dedup closure
         run: python tools/check_grade5_6_premerge_dedup.py

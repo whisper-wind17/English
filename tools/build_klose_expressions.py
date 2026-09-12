@@ -110,6 +110,8 @@ def main() -> None:
             raise SystemExit(f"Source map references unknown ExpressionID: {eid}")
         mapped[eid].append(oid)
 
+    from klose_expression_review_state import approval_keys, has_approval
+    receipt_keys = approval_keys()
     publish_rows: list[dict[str, str]] = []
     for eid, identity in registry.items():
         if not ID_RE.fullmatch(eid):
@@ -133,7 +135,7 @@ def main() -> None:
             raise SystemExit(f"Allowed Expression has invalid LearningOrder: {eid}={order!r}")
 
         review_status = rev.get("ReviewStatus", "").strip()
-        if review_status not in PUBLISHABLE_REVIEW_STATUSES:
+        if review_status not in PUBLISHABLE_REVIEW_STATUSES or not has_approval(rev, receipt_keys):
             continue
         if rev.get("FingerprintVersion", "").strip() != VERSION:
             raise SystemExit(f"Unsupported fingerprint version: {eid}")

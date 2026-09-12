@@ -197,6 +197,17 @@ def main() -> None:
             resolved_ids.add(nid)
             applied_rows += 1
 
+    adjustments = read_csv(BASE / "learner" / "presentation_adjustments.csv")
+    for adjustment in adjustments:
+        nid = adjustment["NoteID"]
+        if adjustment.get("ExampleSentence", "").strip():
+            if nid not in learner_by_id or not adjustment.get("ExampleTranslation", "").strip():
+                raise SystemExit(f"Incomplete current presentation adjustment: {nid}")
+            learner_by_id[nid]["ExampleSentence"] = adjustment["ExampleSentence"].strip()
+            learner_by_id[nid]["ExampleTranslation"] = adjustment["ExampleTranslation"].strip()
+            learner_by_id[nid]["PresentationSource"] = "klose:presentation-adjustments"
+            resolved_ids.add(nid)
+
     learner_rows.sort(key=lambda r: note_num(r["NoteID"]))
     learner_fields = ["NoteID", "LearnerProfile", "LearnerLevel", "ExampleSentence", "ExampleTranslation", "PresentationStatus", "PresentationSource"]
     write_csv(LEARNER, learner_fields, learner_rows)

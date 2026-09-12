@@ -35,7 +35,7 @@ UserMemo
 000001 .. 999999
 ```
 
-当前 Grade-4 allowed Notes 使用 `000001..000221`；417 个 held Notes 的 `LearningOrder` 必须为空。固定 6 位是长期存储/发布契约，避免词库扩大后从 3 位迁移到 4/5 位；同时保证 Anki 按文本排序与数值排序得到相同次序。
+当前 allowed 数量和最大序号读取 `../releases/current.json`；held Notes 的 `LearningOrder` 必须为空。固定 6 位是长期存储/发布契约，避免词库扩大后从 3 位迁移到 4/5 位；同时保证 Anki 按文本排序与数值排序得到相同次序。
 
 它用于在 Anki 中把尚未学习的 New Cards 按真实教材顺序一次性 Reposition；实际 `New # / Due / Review History` 仍由 Anki 管理。
 
@@ -43,14 +43,7 @@ UserMemo
 
 `PromptHint` 属于 Learner Presentation，只用于正面存在真实 target-sense 歧义时做最小消歧。普通 Note 必须留空，不把释义提前泄露到问题面。
 
-当前 Grade-4 active set 使用：
-
-```text
-KV000424  cook  -> n.
-KV000805  cook  -> v.
-KV000816  over  -> 位置
-KV000863  over  -> 结束
-```
+当前提示从 `../learner/prompt_hint_overrides.csv` 生成；所有 allowed 同词题面必须能区分目标义项（包含大小写归一后的同形词）。
 
 `PromptHint` 不改变 Stable NoteID / Card identity / FSRS history；非空值属于 release-visible presentation，变更后必须重新 review。
 

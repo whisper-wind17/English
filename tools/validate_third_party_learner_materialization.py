@@ -41,8 +41,7 @@ def main():
     candidates=read_csv(TP/'stable_presentation_candidates.csv')
     cand={r['NoteID']:r for r in candidates}
     new_ids=set(cand)
-    expected_ids={f'KV{i:06d}' for i in range(1195,3016)}
-    if new_ids!=expected_ids or len(candidates)!=1821: raise SystemExit('Third-party candidate Stable ID set drift')
+    if not new_ids or len(new_ids)!=len(candidates): raise SystemExit('Duplicate/empty candidate Stable IDs')
 
     master=read_csv(K/'master'/'vocabulary_master.csv'); mb={r['NoteID']:r for r in master}
     learner=read_csv(K/'learner'/'current.csv'); lb={r['NoteID']:r for r in learner}
@@ -55,7 +54,7 @@ def main():
     release_ids={r['NoteID'].strip() for r in release_rows}
     errors=[]
 
-    if pron_rows and (len(pron_rows)!=616 or len(pron)!=616): errors.append(f'reviewed pronunciation closure rows={len(pron_rows)} unique={len(pron)}')
+    if len(pron_rows)!=len(pron): errors.append(f'reviewed pronunciation closure rows={len(pron_rows)} unique={len(pron)}')
     missing_master=sorted(new_ids-set(mb)); missing_learner=sorted(new_ids-set(lb))
     if missing_master: errors.append(f'new Stable Master rows missing={len(missing_master)}')
     if missing_learner: errors.append(f'new Stable learner rows missing={len(missing_learner)}')
@@ -99,18 +98,10 @@ def main():
             else: reviewed_count+=1
 
     plan=read_csv(TP/'stable_learning_admission_plan.csv')
-    if len(plan)!=2720: errors.append(f'admission plan count={len(plan)}')
-    preserve=mutated=0
-    for p in plan:
-        key=(p['LearnerProfile'].strip(),p['LearnerLevel'].strip(),p['NoteID'].strip()); a=ab.get(key)
-        if a is None: errors.append(f'{key[2]}: canonical admission missing'); continue
-        if a.get('Status')!='allowed' or a.get('LearningOrder')!=p.get('ProposedLearningOrder'): errors.append(f'{key[2]}: admission/order drift')
-        if p.get('AdmissionAction')=='preserve-allowed':
-            preserve+=1
-            if a.get('LearningOrder')!=p.get('CurrentLearningOrder'): errors.append(f'{key[2]}: preserved order changed')
-        else:
-            mutated+=1
-            if a.get('Stage')!='stage::third-party-primary' or a.get('LearningTag')!=p.get('ProposedLearningTag'): errors.append(f'{key[2]}: third-party admission metadata drift')
+    from check_klose_release_ready import load_and_validate_admission
+    load_and_validate_admission('klose', '4', release_ids)
+    preserve=sum(p.get('AdmissionAction')=='preserve-allowed' for p in plan)
+    mutated=len(plan)-preserve
     allowed=[r for r in admission if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4' and r.get('Status')=='allowed']
     orders=[r.get('LearningOrder','') for r in allowed]
     expected_orders=[f'{i:06d}' for i in range(1,len(allowed)+1)]
@@ -128,6 +119,6 @@ def main():
     if errors:
         for e in errors[:100]: print(e)
         raise SystemExit(f'Third-party learner materialization failed: {len(errors)} errors')
-    print(f'Third-party learner materialization OK: master_new=1821 learner_new=1821 plan=2720 preserve={preserve} new_or_promoted={mutated} allowed_total={len(allowed)} review_new_pending={review_pending} review_new_approved={reviewed_count} pronunciation_conflict_rows={pronunciation_conflict} pronunciation_missing_candidate_rows={pronunciation_missing} pronunciation_debt_rows={ipa_debt} release={len(release_ids)} publish={study_count} textbook_source_leak=0')
+    print(f'Third-party learner materialization OK: master_new={len(new_ids)} learner_new={len(new_ids)} plan={len(plan)} preserve={preserve} new_or_promoted={mutated} allowed_total={len(allowed)} review_new_pending={review_pending} review_new_approved={reviewed_count} pronunciation_conflict_rows={pronunciation_conflict} pronunciation_missing_candidate_rows={pronunciation_missing} pronunciation_debt_rows={ipa_debt} release={len(release_ids)} publish={study_count} textbook_source_leak=0')
 
 if __name__=='__main__': main()
