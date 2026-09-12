@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Classify current pending learner review scope into semantic-risk lanes.
 
-This is an audit aid, not an approval tool. It consumes current fingerprint-bound
-review state and emits a compact high-risk view for explicit model adjudication.
+This is an audit aid, not an approval tool. It derives current truth rather than
+freezing an old pending count, and explicitly reports rows that became pending
+after the original 1981-row preparation snapshot.
 """
 from __future__ import annotations
 
@@ -17,6 +18,7 @@ LEARNER=BASE/'learner'/'current.csv'
 REGISTRY=BASE/'learner'/'presentation_review_registry.csv'
 PRON=BASE/'third_party_vocabulary'/'pronunciation'/'reviewed_pronunciations.csv'
 OUTDIR=BASE/'third_party_vocabulary'/'review_preparation'
+PREP_PACKETS=OUTDIR/'learner_review_packets'
 OUT=OUTDIR/'learner_semantic_high_risk.csv'
 SUMMARY=OUTDIR/'learner_semantic_review_summary.json'
 PROFILE='klose'; LEVEL='4'
@@ -32,6 +34,10 @@ def main():
     mb={r['NoteID'].strip():r for r in master_rows}; lb={r['NoteID'].strip():r for r in learner_rows}
     pending={r['NoteID'].strip():r for r in registry_rows if r.get('LearnerProfile','').strip()==PROFILE and r.get('LearnerLevel','').strip()==LEVEL and r.get('ReviewStatus','').strip()=='pending'}
     pron={r['NoteID'].strip() for r in read_csv(PRON)}
+    prep_rows=[]
+    for p in sorted(PREP_PACKETS.glob('batch_*.csv')): prep_rows.extend(read_csv(p))
+    prep_ids={r.get('NoteID','').strip() for r in prep_rows}
+    if len(prep_rows)!=1981 or len(prep_ids)!=1981: raise SystemExit(f'Preparation snapshot drift rows={len(prep_rows)} unique={len(prep_ids)}')
     surfaces=defaultdict(list)
     for r in master_rows: surfaces[r.get('CanonicalWord','').strip().casefold()].append(r)
     high=[]; lane_counts=Counter(); reason_counts=Counter()
@@ -48,21 +54,33 @@ def main():
         if any(ch in sense+meaning for ch in '（）()'): reasons.append('sense-note-parenthetical')
         if len(TOKEN_RE.findall(sent))>10: reasons.append('long-example')
         if sense.count('；')+sense.count(';')>=2: reasons.append('multi-meaning-label')
-        if not is_new and not released: lane='reuse-guardrail'
-        elif released: lane='released-invalidated'
+        if released: lane='released-invalidated'
+        elif not is_new: lane='reuse-guardrail'
         elif reasons: lane='new-high-risk'
         else: lane='new-low-risk'
         lane_counts[lane]+=1; reason_counts.update(reasons)
         if lane in {'released-invalidated','reuse-guardrail','new-high-risk'}:
             item={'NoteID':nid,'ReviewLane':lane,'RiskReasons':' '.join(reasons),'CanonicalWord':word,'SenseLabel':sense,'MeaningPrimary':meaning,'ExampleSentence':sent,'ExampleTranslation':l.get('ExampleTranslation','').strip(),'PresentationStatus':l.get('PresentationStatus','').strip(),'PresentationSource':l.get('PresentationSource','').strip()}
             high.append(item)
+    additional=sorted(set(pending)-prep_ids,key=lambda x:int(x[2:]))
+    additional_unreleased=[nid for nid in additional if mb[nid].get('Released','').strip()!='yes']
     OUTDIR.mkdir(parents=True,exist_ok=True)
     with OUT.open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=FIELDS,lineterminator='\n');w.writeheader();w.writerows(high)
-    summary={'PendingTotal':len(pending),'LaneCounts':dict(lane_counts),'RiskReasonCounts':dict(reason_counts),'ReviewedPronunciationPendingOverlap':len(set(pending)&pron),'ExplicitSemanticReviewRows':len(high)}
+    summary={
+        'PendingTotal':len(pending),
+        'PreparationPendingSnapshot':len(prep_ids),
+        'AdditionalPendingSincePreparation':len(additional),
+        'AdditionalPendingNoteIDs':additional,
+        'AdditionalUnreleasedPendingNoteIDs':additional_unreleased,
+        'LaneCounts':dict(lane_counts),
+        'RiskReasonCounts':dict(reason_counts),
+        'ReviewedPronunciationPendingOverlap':len(set(pending)&pron),
+        'ExplicitSemanticReviewRows':len(high),
+    }
     SUMMARY.write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(summary,ensure_ascii=False,indent=2))
-    if len(pending)!=2059: raise SystemExit(f'Expected 2059 current pending rows, got {len(pending)}')
-    if lane_counts['released-invalidated']!=78 or lane_counts['reuse-guardrail']!=160: raise SystemExit(f'Known review lane drift: {dict(lane_counts)}')
+    if lane_counts['released-invalidated']!=78: raise SystemExit(f'Released invalidation drift: {dict(lane_counts)}')
+    if len(additional)!=len(pending)-len(prep_ids): raise SystemExit('Pending delta arithmetic drift')
 
 if __name__=='__main__':main()
