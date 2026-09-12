@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/build_third_party_review_preparation.py'
       - 'tools/check_third_party_review_preparation.py'
+      - 'tools/analyze_third_party_pronunciation_review.py'
       - '.github/workflows/third-party-review-preparation.yml'
   workflow_dispatch:
 
@@ -35,6 +36,9 @@ jobs:
 
       - name: Independent packet Completion Recheck
         run: python tools/check_third_party_review_preparation.py
+
+      - name: Classify pronunciation high-risk review lane
+        run: python tools/analyze_third_party_pronunciation_review.py
 
       - name: Assert canonical state is untouched
         run: |
