@@ -23,7 +23,6 @@ on:
     workflows:
       - 'Prepare Third-party Vocabulary Stage A'
       - 'Allocate Grade 5-6 Klose Vocabulary'
-      - 'Build Klose Vocabulary'
     types: [completed]
     branches: [main]
   workflow_dispatch:
