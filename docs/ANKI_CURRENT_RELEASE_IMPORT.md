@@ -6,17 +6,17 @@
 
 ## 1. 当前 Release snapshot
 
-2026-09-10 checkpoint：
+2026-09-12 checkpoint：
 
 ```text
-Stable active Vocabulary Notes = 1189
-Released Notes                 = 972
-Current Learning allowed       = 627
-Held library                   = 345
+Stable active Vocabulary Notes = 3010
+Released Notes                 = 2953
+Current Learning allowed       = 2894
+Held library                   = 59
 Allowed but unreleased         = 0
 Review pending                 = 0
 LearnerLevel                   = 4
-LearningOrder                  = 000001..000627
+LearningOrder                  = 000001..002894
 ```
 
 正式导入文件只有：
@@ -30,7 +30,7 @@ anki/klose/publish/anki-import.csv
 ```text
 Note Type = Klose Vocabulary
 Deck      = Klose-English::Vocabulary
-Rows      = 972
+Rows      = 2953
 Identity  = NoteID
 ```
 
@@ -66,7 +66,7 @@ docs/ANKI_PROMPTHINT_MIGRATION.md
 docs/ANKI_LEARNING_ORDER_MIGRATION.md
 ```
 
-这两个文档中的 `638 / 221 / 417` 是当时 Grade-4 一次性迁移 snapshot；**不要把这些旧计数用于当前 972-note Release 的验收或 suspension reset**。
+这两个文档中的 `638 / 221 / 417` 是当时 Grade-4 一次性迁移 snapshot；**不要把这些旧计数用于当前 2953-note Release 的验收或 suspension reset**。
 
 ## 3. 备份
 
@@ -82,7 +82,7 @@ Due / Interval
 UserMemo
 ```
 
-## 4. 导入 972-note 正式包
+## 4. 导入 2953-note 正式包
 
 导入：
 
@@ -123,13 +123,15 @@ Tags               -> Tags
 
 不要选择“忽略已有 Notes”，也不要创建新的 `Klose Vocabulary (2)` 一类 Note Type。
 
-导入完成后的稳定目标是：
+如果设备已经完成上一版 972-note Release，同步本次文件的预期是：
 
 ```text
-Klose Vocabulary Notes / Cards = 972 / 972
+已有 Note 原地更新 = 972
+新增 Note           = 1981
+最终 Notes / Cards  = 2953 / 2953
 ```
 
-如果设备此前只同步到最初 518-note Release，本次会有更多新增；如果已经同步到 638-note Grade-4 Release，则主要新增当前 334-note Release delta。**不要用“新增了多少条”作为唯一正确性判断，最终 Stable NoteID universe 才是判断依据。**
+如果设备落后于 972-note Release，新增数量会更大。**不要用“新增了多少条”作为唯一正确性判断，最终 Stable NoteID universe 和旧 Card 是否原地保留才是判断依据。**
 
 ## 5. 先验证旧 Card 没有被重建
 
@@ -149,8 +151,8 @@ Card Type 仍只有 Recognition
 repo 当前 admission truth：
 
 ```text
-allowed = 627
-held    = 345
+allowed = 2894
+held    = 59
 ```
 
 当前 allowed Notes 由 system-managed learning tags 标识：
@@ -158,6 +160,15 @@ held    = 345
 ```text
 learning::klose::grade4
 learning::klose::grade5-6
+learning::klose::third-party-primary
+```
+
+相对上一版 972-note Release：
+
+```text
+1981 个新 release Notes          -> 全部属于当前 allowed scope
+286 个既有 released Notes        -> 从 held 提升为 allowed
+59 个既有 released library Notes -> 继续 held
 ```
 
 ### 已经产生真实学习历史时
@@ -172,23 +183,23 @@ held    + is:new  -> 应保持 suspended
 Learning / Review -> 不因 curriculum release 批量改 suspension / Due
 ```
 
-这保证 GitHub 只决定未来学习准入，不覆盖 Anki 已形成的记忆状态。
+这意味着那 286 个 held→allowed 的既有 Note，也只在 Card 仍是 `is:new` 时解除 suspension；如果某张 Card 已经进入 Learning / Review，不用 repo admission 去重置它的真实调度状态。
 
 ### Collection 尚未开始真实学习时
 
-只有在确认所有目标 Cards 都仍是未学习 New Card、没有 Review History 的一次性初始化窗口，才可以按当前 627/345 admission 全量 materialize suspension。
+只有在确认所有目标 Cards 都仍是未学习 New Card、没有 Review History 的一次性初始化窗口，才可以按当前 `2894 / 59` admission 全量 materialize suspension。
 
-不要再使用旧 Grade-4 snapshot 的 `221 / 417` 作为当前目标。
+不要再使用旧 Grade-4 snapshot 的 `221 / 417` 或上一版的 `627 / 345` 作为当前目标。
 
 ## 7. LearningOrder：只排序仍未学习的 allowed New Cards
 
 `LearningOrder` 当前为：
 
 ```text
-000001..000627
+000001..002894
 ```
 
-它是 GitHub curriculum order，不是 FSRS Due。
+它是 GitHub curriculum/admission order，不是 FSRS Due。
 
 仅选择：
 
@@ -208,19 +219,20 @@ Randomize      = OFF
 Shift existing = ON
 ```
 
-如果已有部分 current Cards 已经进入 Learning / Review，那么本次可 reposition 的 New Card 数量自然会小于 627；这是正常状态，**不要为了凑到 627 去重排已学习 Cards**。
+如果已有部分 current Cards 已经进入 Learning / Review，那么本次可 reposition 的 New Card 数量自然会小于 2894；这是正常状态，**不要为了凑到 2894 去重排已学习 Cards**。
 
 ## 8. 导入后的检查
 
 至少确认：
 
 ```text
-Total Notes / Cards              = 972 / 972
+Total Notes / Cards              = 2953 / 2953
 Note Type                        = Klose Vocabulary
 Card Type                        = Recognition only
 Review pending in repo           = 0
 PromptHint nonempty              = 4
-LearningOrder maximum            = 000627
+LearningOrder maximum            = 002894
+allowed / held                   = 2894 / 59
 existing Review History          = preserved
 existing Due / Interval          = preserved
 new/day / FSRS deck options      = unchanged by CSV import
@@ -235,7 +247,12 @@ KV000816 over -> 位置
 KV000863 over -> 结束
 ```
 
-再抽查 Grade 5–6 新 Note，确认 Word / IPA / Meaning / Example / Translation / LearningOrder 均已出现。
+再抽查：
+
+- 一张此前已学习旧卡：Review History / Due / Interval 必须保留；
+- 一张 Grade 5–6 Note：原有 learner presentation 必须仍在；
+- 一张新第三方 Stable Note：Word / IPA / Meaning / Example / Translation / LearningOrder 应完整；
+- 一张原 held→allowed 的既有 Note：若仍为 New，应已进入 allowed New scope。
 
 ## 9. Sync 到 iPad
 
@@ -254,18 +271,18 @@ Note Type = Klose Vocabulary
 Card Type = Recognition
 ```
 
-同步完成后，再抽查一张旧卡和一张 Grade 5–6 新卡。
+同步完成后，再抽查一张旧卡和一张本轮新 release 卡。
 
 ## 10. 完成标准
 
 只有同时满足以下条件，才把 repo 中 `Anki Updated` 记为 true：
 
 ```text
-972-note anki-import.csv 已实际导入
+2953-note anki-import.csv 已实际导入
 已有 NoteID 原地更新，没有批量 duplicate Notes
 旧 Card Review History / FSRS / Due 保留
-新 release Notes 已创建
-New Card admission/suspension 与当前 policy 一致
+1981 个新 release Notes 已创建
+New Card admission/suspension 与当前 2894 / 59 policy 一致
 仍为 New 的 current Cards 按 LearningOrder 排序
 Desktop 已同步到 AnkiWeb
 iPad 已同步并抽查通过
