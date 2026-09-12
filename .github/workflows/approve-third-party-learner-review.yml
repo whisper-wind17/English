@@ -35,22 +35,32 @@ jobs:
             --review-note 'Independent risk-stratified model review: 1821 new presentations passed full content gates and semantic high-risk adjudication; 160 reuse guardrails preserved existing presentation; 78 released invalidations re-reviewed; 616 pronunciation rows independently reviewed; 16 explicit content corrections applied; approval bound to current fingerprints.' \
             --confirm-all-current \
             --pending-only
-      - name: Verify approval closed current review scope
+      - name: Verify approval closed required review scope
         run: |
           python tools/sync_klose_learner_review_registry.py
           python - <<'PY'
           import csv
           from pathlib import Path
           base=Path('anki/klose')
-          with (base/'learner/presentation_review_registry.csv').open('r',encoding='utf-8-sig',newline='') as f:
-              rows=list(csv.DictReader(f))
-          current=[r for r in rows if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4']
-          pending=[r for r in current if r.get('ReviewStatus')=='pending']
-          model=[r for r in current if r.get('ReviewStatus')=='model-reviewed']
-          human=[r for r in current if r.get('ReviewStatus')=='human-reviewed']
-          if len(current)!=2953 or pending:
-              raise SystemExit(f'Approval closure failed: current={len(current)} pending={len(pending)}')
-          print(f'Approval closure PASS: current={len(current)} model={len(model)} human={len(human)} pending=0')
+          def read(path):
+              with path.open('r',encoding='utf-8-sig',newline='') as f:
+                  return list(csv.DictReader(f))
+          master=read(base/'master/vocabulary_master.csv')
+          learner={r['NoteID']:r for r in read(base/'learner/current.csv')}
+          admission=read(base/'learner/learning_admission.csv')
+          registry=read(base/'learner/presentation_review_registry.csv')
+          released={r['NoteID'] for r in master if r.get('Released')=='yes' and r['NoteID'] in learner and learner[r['NoteID']].get('LearnerProfile')=='klose' and learner[r['NoteID']].get('LearnerLevel')=='4'}
+          allowed={r['NoteID'] for r in admission if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4' and r.get('Status')=='allowed'}
+          required=released|allowed
+          by={(r.get('LearnerProfile'),r.get('LearnerLevel'),r.get('NoteID')):r for r in registry}
+          required_rows=[by.get(('klose','4',nid)) for nid in sorted(required)]
+          missing=[nid for nid,row in zip(sorted(required),required_rows) if row is None]
+          pending=[row['NoteID'] for row in required_rows if row is not None and row.get('ReviewStatus')=='pending']
+          unreviewed=[row['NoteID'] for row in required_rows if row is not None and row.get('ReviewStatus') not in {'model-reviewed','human-reviewed'}]
+          historical=[r for r in registry if r.get('LearnerProfile')=='klose' and r.get('LearnerLevel')=='4' and r.get('NoteID') not in required]
+          if len(required)!=2953 or missing or pending or unreviewed:
+              raise SystemExit(f'Approval closure failed: required={len(required)} missing={len(missing)} pending={len(pending)} unreviewed={len(unreviewed)}')
+          print(f'Approval closure PASS: required={len(required)} pending=0 historical_out_of_scope={len(historical)}')
           PY
       - name: Commit immutable approval manifest and review registry
         run: |
