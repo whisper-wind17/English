@@ -147,14 +147,18 @@ jobs:
       - name: Apply Grade 5-6 learner presentation
         run: python tools/apply_klose_grade5_6_learner.py
 
+      # Once third-party Notes are part of committed Release truth, the baseline
+      # admission builder legitimately sees those Stable IDs before the derived
+      # Master/Learner overlay exists. Materialize that overlay before any
+      # admission consumer validates NoteID coverage.
+      - name: Materialize third-party Stable learner and admission state
+        run: python tools/apply_third_party_stable_learner.py
+
       - name: Apply learner presentation and learning admission
         run: python tools/apply_klose_learner_overrides.py
 
       - name: Apply actual Grade-4 reused learner presentations
         run: python tools/apply_klose_actual_grade4_reuse_learner.py
-
-      - name: Materialize third-party Stable learner and admission state
-        run: python tools/apply_third_party_stable_learner.py
 
       - name: Materialize reviewed third-party pronunciations
         run: python tools/apply_third_party_reviewed_pronunciations.py
