@@ -1,0 +1,54 @@
+name: Build Reviewed Third-party Pronunciations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/build_third_party_reviewed_pronunciations.py'
+      - 'tools/check_third_party_reviewed_pronunciations.py'
+      - 'anki/klose/third_party_vocabulary/pronunciation/review_overrides.csv'
+      - '.github/workflows/third-party-pronunciation-review.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build reviewed pronunciation evidence
+        run: python tools/build_third_party_reviewed_pronunciations.py
+      - name: Independent pronunciation Completion Recheck
+        run: python tools/check_third_party_reviewed_pronunciations.py
+      - name: Assert canonical state is untouched
+        run: |
+          git diff --exit-code -- \
+            anki/klose/master \
+            anki/klose/learner \
+            anki/klose/publish \
+            anki/klose/anki
+      - name: Persist reviewed pronunciation evidence only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+whisper-wind17@users.noreply.github.com'
+          git add anki/klose/third_party_vocabulary/pronunciation/reviewed_pronunciations.csv
+          changed="$(git diff --cached --name-only)"
+          if [ "$changed" != 'anki/klose/third_party_vocabulary/pronunciation/reviewed_pronunciations.csv' ]; then
+            echo 'Unexpected pronunciation review diff:'
+            echo "$changed"
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo 'No reviewed pronunciation changes.'
+          else
+            git commit -m 'data: record reviewed third-party pronunciations'
+            git pull --rebase origin main
+            git push
+          fi
