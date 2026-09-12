@@ -1,0 +1,25 @@
+name: Validate Third-party Release Curriculum Contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/klose_release_curriculum.py'
+      - '.github/workflows/third-party-release-contract-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate combined curriculum derivation
+        run: python tools/klose_release_curriculum.py
+      - name: Assert validation is read-only
+        run: git diff --exit-code
