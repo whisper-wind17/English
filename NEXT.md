@@ -6,7 +6,7 @@ Last updated: 2026-09-12
 
 ```text
 Grade 5–6 Vocabulary GitHub Release              = IMPLEMENTED / VALIDATED / CHECKPOINTED
-Vocabulary Anki Updated                          = true / DEVICE IMPORT + SYNC USER-CONFIRMED
+Vocabulary Anki Updated (previous 972 release)    = true / DEVICE IMPORT + SYNC USER-CONFIRMED
 Grade 5–6 Expressions GitHub Release             = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Expressions Anki Updated                         = true / DEVICE IMPORT + SYNC USER-CONFIRMED
 
@@ -17,289 +17,254 @@ Stable learner scope / admission preparation     = IMPLEMENTED / VALIDATED / CHE
 LearnerLevel=4 content generation + content gate = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Official third-party learner materialization     = IMPLEMENTED / VALIDATED / CHECKPOINTED
 Third-party Learning Admission materialization   = IMPLEMENTED / VALIDATED / CHECKPOINTED
-Fingerprint-bound review registry sync           = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Fingerprint-bound review approval                = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Third-party pronunciation resolution             = IMPLEMENTED / VALIDATED / CHECKPOINTED
+Third-party Release / Publish                    = IMPLEMENTED / VALIDATED / CHECKPOINTED
 
-Third-party review approval                      = NOT STARTED / pending=1981
-Third-party pronunciation debt resolution        = NOT STARTED / debt=484 new Stable rows
-Third-party Release / Publish                    = NOT READY / NOT STARTED
-Third-party Anki merge                           = NOT READY / NOT STARTED
+Current 2953-note Vocabulary Anki merge           = NOT STARTED
 ```
 
-总目标：
+总目标已经达到自动流水线停止点：
 
 ```text
-完成第三方 Vocabulary 的 Source / Identity / Learner / Review / Release 全部前置处理
-→ 生成可正式合入 Klose 当前 Vocabulary Anki 的发布状态
-→ 到“只剩最终 Anki 合入”时停止自动推进并给出设备侧合入动作
+第三方 Vocabulary Source / Identity / Learner / Review / Release 前置处理完成
+→ 当前正式 publish 已生成并通过 Release Gate
+→ 现在只剩最终设备侧 Anki 合入
 ```
 
-用户 standing directive：在达到最终 Anki 合入前，`继续` / `继续处理` = 授权执行当前流水线下一步；每一步仍必须经过 truth-boundary / diff-scope / Completion Recheck / `IMPLEMENTED → VALIDATED → CHECKPOINTED`。
+按 standing directive，**到此停止自动推进**。不得从 GitHub 自动修改 Anki Collection；下一步必须由用户在 Anki Desktop 上按正式 SOP 导入并同步。
 
 ---
 
-## 2. Startup order
+## 2. Startup order for next conversation
 
 ```text
 AGENTS.md
 → NEXT.md
-→ anki/klose/third_party_vocabulary/allocation/execution_receipt.json
-→ anki/klose/third_party_vocabulary/learner/stable_learner_plan.json
-→ anki/klose/third_party_vocabulary/learner/stable_learner_scope.csv
-→ anki/klose/third_party_vocabulary/learner/stable_presentation_candidates.csv
-→ anki/klose/third_party_vocabulary/learner/stable_learning_admission_plan.csv
-→ anki/klose/third_party_vocabulary/learner/content_corrections.csv
-→ anki/klose/learner/current.csv
+→ docs/ANKI_CURRENT_RELEASE_IMPORT.md
+→ docs/ANKI_SYNC_WORKFLOW.md
+→ anki/klose/publish/anki-import.csv
 → anki/klose/learner/learning_admission.csv
-→ anki/klose/learner/presentation_review_registry.csv
-→ docs/LEARNER_REVIEW_REGISTRY.md
-→ docs/KLOSE_VOCABULARY_SYSTEM.md
-→ relevant review/release tools
 ```
 
-`stable_learner_plan.json` 是 preparation snapshot；当前 lifecycle 状态以本文件和 canonical learner/admission/review state 为准。
+GitHub 管当前发布内容；Anki 继续作为 FSRS / Review History / Due / Interval / Card State 真源。
 
 ---
 
-## 3. Stable / allocation truth
+## 3. Stable / learner truth
 
 ```text
-allocation commit                 = fe0d1f04c2eae1cf5d492673dd79aef302691d39
-allocation execution run          = 34608158097 / PASS
 persistent Stable rows            = 3015
 active Stable NoteIDs             = 3010
 current max NoteID                = KV003015
 third-party Stable rows           = 1821 / KV001195..KV003015
-external evidence bindings        = 15791
-held identities allocated/bound   = 0
+resolved third-party learner scope= 2720
+current allowed                   = 2894
+current held                      = 59
+LearningOrder                     = 000001..002894 / unique / continuous
 ```
 
-Historical Stage-B closure：
-
-```text
-reuse-existing                    = 903
-new-stable-identity               = 1821
-held                              = 96
-TOTAL                             = 2820
-```
-
-Allocation committed-state checker is bound to the Stage-B decision snapshot at the allocation commit, not to mutable downstream reconciliation metadata. Final allocation-plan validation：`34656494168 / PASS`.
+Source Grade 与 LearnerLevel 仍独立；第三方 learner admission 不制造 Source Grade / SourceEdition。
 
 ---
 
-## 4. LearnerLevel=4 content — CHECKPOINTED
-
-Durable content：
+## 4. Review / pronunciation — CHECKPOINTED
 
 ```text
-anki/klose/third_party_vocabulary/learner/content_reviewed/batch_01.csv ... batch_19.csv
-anki/klose/third_party_vocabulary/learner/content_corrections.csv
+review required                   = 2953
+model-reviewed                    = 2953
+human-reviewed                    = 0
+pending                           = 0
 ```
+
+Pronunciation：
 
 ```text
-new Stable learner contents       = 1821 / 1821
-review batches                    = 19
-content provenance                = model-curated / third-party-learner-content-v1
-correction overlay                = 14 duplicate-example corrections
-unique English examples           = 1821
-blank bilingual examples          = 0
-content gate                      = PASS
+reviewed pronunciation rows       = 616
+allowed pronunciation debt        = 0
+released-library held IPA debt    = 18
 ```
 
-`tools/check_third_party_learner_content.py` checks exact coverage, bilingual completeness, provenance, sentence length, lemma-aware target use, reflexive equivalence and duplicate closure. Meaning remains bound to Stable `SenseLabel / MeaningPrimary`; third-party dictionary gloss is evidence, not learner truth.
+18 条 held-library IPA 缺口不属于当前 allowed learning blocker；未通过审计的冲突/缺失 IPA 没有被凭空发明。
 
 ---
 
-## 5. Official Master / Learner materialization — CHECKPOINTED
+## 5. Release / Publish — CHECKPOINTED
 
-Canonical upstream commit：
-
-```text
-5fd84a98cdf2c7c911f22986320b47bf12ba0b1b
-```
-
-It changed exactly：
+Release transaction：
 
 ```text
-anki/klose/master/build_stats.csv
-anki/klose/master/vocabulary_master.csv
-anki/klose/learner/current.csv
-anki/klose/learner/learning_admission.csv
-anki/klose/learner/presentation_review_registry.csv
+release commit                    = 9c7beb510122202a523725c03b6a873291321025
+ReleasedAt                        = 2026-09-12
+ReleaseReason                     = third-party-primary-reviewed-v1
+append-only rows                  = 1981
+historical byte prefix            = exact
 ```
 
-New third-party derived Master rows：
+Current release：
 
 ```text
-rows                               = 1821
-FirstSource                        = third-party-vocabulary
-FirstSourceBook                    = external-evidence-corpus
-FirstGrade / FirstSemester         = blank
-Released                           = no
-provenance tag                     = external-unverified-edition
-textbook source-map leakage        = 0
+legacy release                    = 518
+release extensions                = 2435
+TOTAL released                    = 2953
+allowed ∩ unreleased              = 0
 ```
 
-New learner rows：
+Generated publish：
 
 ```text
-rows                               = 1821
-LearnerProfile / LearnerLevel      = klose / 4
-PresentationStatus                 = model-curated-pending-review
-PresentationSource                 = third-party-learner-content-v1
+anki/klose/publish/study.csv       = 2953 rows
+anki/klose/publish/anki-import.csv = 2953 rows
+Note Type                          = Klose Vocabulary
+Deck                               = Klose-English::Vocabulary
+Identity                           = NoteID
+PromptHint nonempty                = 4
 ```
 
-903 `reuse-existing` identities preserve existing learner presentation; third-party gloss never overwrites it.
+Generated data commit：
+
+```text
+b434bf9c3588fddd170ce690b56f5a3c137a2d92
+```
 
 ---
 
-## 6. Learning Admission / LearningOrder — CHECKPOINTED
+## 6. Blocking incident and permanent fix
+
+Post-release rebuild initially failed at：
 
 ```text
-resolved third-party learner scope = 2720 unique Stable NoteIDs
-existing allowed preserved         = 453
-new / held→allowed                 = 2267
-  admission new rows               = 1981
-  held → allowed                   = 286
-current allowed total              = 2894
-review-scope released∪allowed      = 2953
-LearningOrder                      = unique / continuous
+Learning admission references unknown NoteID: KV001195
 ```
 
-Existing 453 LearningOrder values remain exact. New/promoted rows use `stage::third-party-primary` and append deterministically.
-
-`tools/check_klose_learner.py` now enforces the correct invariant：
+Root cause was lifecycle ordering, not bad identity/release data：
 
 ```text
-explicit Learning Admission = learner-suitability truth
-Source Grade                 = fallback difficulty signal only
-Source Grade ≠ LearnerLevel
+build_klose_learning_admission.py
+→ sees committed 2953 release IDs
+→ baseline derived Master still lacks 1821 third-party rows
+→ old workflow ran apply_klose_learner_overrides.py too early
+→ unknown NoteID fail-closed
 ```
 
-Final auxiliary gate：released=972 / allowed=2894 / union=2953 / admitted lemmas=2608 / unadmitted later auxiliaries=0.
+Permanent fix：
+
+```text
+Build admission
+→ Grade 5–6 learner presentation
+→ materialize third-party Stable Master/Learner + admission overlay
+→ only then run first learner/admission consumer
+```
+
+The unknown-NoteID validation was preserved; no gate was weakened.
+
+Workflow fix commit：
+
+```text
+a1c24281a54e12aee152bc8fbef23ce3e85c9478
+```
+
+One-shot release/rebuild workflows were removed after use.
 
 ---
 
-## 7. Review / pronunciation state
+## 7. Validation / Completion Recheck
 
-Review registry：
-
-```text
-required keys                       = 2953
-model-reviewed existing             = 972
-human-reviewed                      = 0
-pending                             = 1981
-```
-
-Pending = 1821 new third-party presentations + 160 reused Stable Notes newly entering allowed scope. `model-curated` is not approval; release approval must remain fingerprint-bound.
-
-Pronunciation promotion policy：only external evidence status `consistent` may populate IPA. Conflict/missing remains blank.
+Release transaction：
 
 ```text
-new Stable conflicting-evidence rows        = 36
-new Stable missing one/both IPA candidates  = 448
-new Stable pronunciation debt rows          = 484
-newly-promoted existing allowed IPA debt    = 72
-released-library held IPA debt              = 18
+34668245756 / PASS
 ```
 
-Never invent IPA merely to satisfy release.
+The first post-release canonical rebuild exposed the ordering bug and correctly failed closed：
+
+```text
+34668334029 / FAIL / expected during bug discovery
+```
+
+Integrated fix + full rebuild：
+
+```text
+34669232739 / PASS
+release ready                      = PASS
+released                           = 2953
+allowed / held                     = 2894 / 59
+pending reviews                    = 0
+allowed IPA debt                   = 0
+study / anki-import                = 2953 / 2953
+textbook source leakage            = 0
+```
+
+Independent Completion Recheck：
+
+```text
+34669381139 / PASS
+```
+
+It additionally proved：
+
+```text
+third-party committed release checker = PASS
+2720 learner-plan IDs all released
+1821 new Stable IDs all released
+1981 transaction rows exactly equal plan IDs not previously released
+admission/order checkpoint preserved
+review approval checkpoint preserved
+release_ready PASS
+idempotent rebuild produced no generated commit / no drift
+```
+
+Durable checker：
+
+```text
+tools/check_third_party_release_committed_state.py
+```
+
+Final validation/checkpoint code state before this NEXT update：
+
+```text
+0af78797c04f46699497badb623f59c88f670892
+```
 
 ---
 
-## 8. Validation / idempotency evidence
+## 8. Immediate next step — FINAL ANKI MERGE
+
+**Do not auto-execute.** Follow：
 
 ```text
-strict content gate first fail-closed        = 34655727376
-lemma-aware pre-correction fail-closed       = 34655780334
-integrated materialization                   = 34656169853 / PASS as Build Valid
-final Stage-A isolation recheck              = 34656411036 / PASS
-final Stage-B readiness                      = 34656441086 / PASS
-final Stage-B reconciliation                 = 34656464762 / PASS
-final allocation committed-state             = 34656494168 / PASS
-committed-state idempotency rebuild          = 34656582893 / PASS
+docs/ANKI_CURRENT_RELEASE_IMPORT.md
 ```
 
-Idempotency rebuild `34656582893` confirmed：
+Current device transition, assuming the previously confirmed 972-note release is already on Anki：
 
 ```text
-Persistent registry / release       = 3015 / 972
-Third-party content                 = 1821 / unique examples 1821
-Master/Learner new rows             = 1821 / 1821
-Admission plan preserve/new         = 453 / 2267
-Allowed total                       = 2894
-Review required/model/pending       = 2953 / 972 / 1981
-Auxiliary vocabulary blockers       = 0
-Pronunciation debt new Stable       = 484
-Textbook source leakage             = 0
-Publish study / anki-import         = 972 / 972
-Canonical upstream rebuild          = No upstream review-state changes
+Existing Notes updated in place    = 972
+New Notes created                  = 1981
+Final Vocabulary Notes / Cards     = 2953 / 2953
 ```
 
-Release diagnostics intentionally remain blocked because expanded third-party curriculum is not yet release-ready; generated publish and Anki were not changed.
+Critical device-side rules：
+
+```text
+use the existing Note Type: Klose Vocabulary
+import only anki/klose/publish/anki-import.csv
+Existing Notes = Update
+identity = NoteID
+never create a second Note Type
+never delete/recreate existing Cards
+preserve Review History / FSRS / Due / Interval / UserMemo
+only materialize suspension/admission for Cards that are still is:new
+allowed / held target = 2894 / 59
+only reposition still-New allowed Cards by LearningOrder
+Desktop -> AnkiWeb -> iPad sync after validation
+```
+
+Only after the user confirms successful Desktop import, old-card history preservation, suspension/order materialization and AnkiWeb/iPad sync may `Vocabulary Anki Updated (current 2953 release)` become true.
 
 ---
 
-## 9. Lifecycle isolation + diff-scope cleanup
-
-During implementation, broad Stage-A triggers initially caused downstream learner checker changes to reseal Stage A and cascade Stage-B/premerge regeneration. This was treated as an out-of-scope side effect, not accepted as learner-stage truth.
-
-Fixes：
-
-1. learner content builder renamed out of `prepare_third_party_*` source-adapter namespace;
-2. Stage-A push paths no longer generically match every `tools/check_third_party_*.py`;
-3. allocation committed-state checker now validates the historical Stage-B snapshot at the allocation commit;
-4. after validation, all accidental Stage-A status / premerge / reconciliation mutations were restored byte-exact to the step-start checkpoint `bac19a8d3279d16e976c01dcae9a04fa6be564b0` by one atomic self-deleting transaction.
-
-Restore evidence：
-
-```text
-restore run                         = 34656726278 / PASS
-restore commit                      = 661e7ac4398e6322be7e3b1b4917a12565e57114
-temporary restore workflow          = self-deleted
-```
-
-Final diff from `bac19a8d...` confirms **no net mutation** to：
-
-```text
-Stage-A status
-premerge / reconciliation decision artifacts
-note_registry / note_registry_extensions
-source_identity_extensions.csv
-release_registry / release_registry_extensions
-publish/study.csv
-publish/anki-import.csv
-anki/ learning-state files
-Expressions
-```
-
-The learner step therefore changed only learner content/tooling, canonical derived Master/Learner/Admission/Review state, workflow isolation logic and checkpoint documentation.
-
----
-
-## 10. Immediate next pipeline step
-
-```text
-THIRD-PARTY REVIEW APPROVAL
-+ PRONUNCIATION DEBT RESOLUTION
-→ RELEASE PREPARATION
-```
-
-Next `继续` / `继续处理` directly executes：
-
-1. independently model-review current 1981 fingerprint-bound pending keys;
-2. review 1821 new presentations for meaning/example/translation/target-sense/age appropriateness;
-3. review 160 reused newly-admitted Notes as guardrails only; do not overwrite existing presentation from third-party evidence;
-4. build and resolve pronunciation debt queue: 484 new Stable rows + promoted existing allowed IPA debt;
-5. pronunciation must come from auditable evidence; unresolved Notes cannot release;
-6. bind approval to current content fingerprint;
-7. extend release curriculum contract to explicitly understand `stage::third-party-primary` without inventing Source Grade/Edition;
-8. rerun completeness / review / source / identity / publish-derivation gates;
-9. write Release registry / generated publish only for rows that pass all gates;
-10. do not execute final device-side Anki merge yet; stop when Publish + Release Gate are ready.
-
----
-
-## 11. Permanent boundaries
+## 9. Permanent boundaries
 
 ```text
 no unverified third-party occurrence → textbook source map
@@ -319,17 +284,14 @@ Current authoritative state：
 ```text
 Stable max NoteID                    = KV003015
 persistent / active Stable Notes     = 3015 / 3010
-third-party Stable rows              = 1821
-third-party learner content          = 1821 / CHECKPOINTED
-resolved third-party learner scope   = 2720
-current allowed                      = 2894
-current review scope                 = 2953
-review pending                       = 1981
-new Stable pronunciation debt        = 484
-current Vocabulary release           = 972
-publish/study.csv                    = 972
-publish/anki-import.csv              = 972
+current Vocabulary release           = 2953
+current allowed / held               = 2894 / 59
+review pending                       = 0
+allowed pronunciation debt           = 0
+publish/study.csv                    = 2953
+publish/anki-import.csv              = 2953
+current 2953-note Anki merge         = NOT STARTED
 Anki FSRS / review state changed     = no
-next step                            = review approval + pronunciation debt resolution + release preparation
-execution trigger                    = next user “继续” / “继续处理”
+next step                            = FINAL DEVICE-SIDE ANKI MERGE
+execution trigger                    = explicit user device-side action / confirmation
 ```
