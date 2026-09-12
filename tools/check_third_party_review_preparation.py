@@ -109,13 +109,18 @@ def main() -> None:
     if counts["PendingReviewRows"] != 1981: fail(f"Expected 1981 pending review rows, got {counts['PendingReviewRows']}")
     if counts["PendingNewThirdPartyStable"] != 1821 or counts["PendingReusedExistingStable"] != 160:
         fail(f"Pending origin split drift: {counts}")
-    if counts["PronunciationDebtRows"] != 556:
-        fail(f"Expected 556 allowed pronunciation debt rows, got {counts['PronunciationDebtRows']}")
+    if counts["PronunciationDebtRows"] != 616:
+        fail(f"Expected 616 allowed pronunciation debt rows, got {counts['PronunciationDebtRows']}")
+    if counts["PronunciationDebtNewThirdPartyStable"] != 484 or counts["PronunciationDebtReusedExistingStable"] != 132:
+        fail(f"Pronunciation origin split drift: {counts}")
+    if counts["PronunciationDebtReleased"] != 72 or counts["PronunciationDebtUnreleased"] != 544:
+        fail(f"Pronunciation release-state split drift: {counts}")
 
     print(
         "Third-party review preparation = PASS: "
         f"pending={counts['PendingReviewRows']} new={counts['PendingNewThirdPartyStable']} reuse={counts['PendingReusedExistingStable']} "
-        f"pron_debt={counts['PronunciationDebtRows']} released_debt={counts['PronunciationDebtReleased']} "
+        f"pron_debt={counts['PronunciationDebtRows']} pron_new={counts['PronunciationDebtNewThirdPartyStable']} "
+        f"pron_reuse={counts['PronunciationDebtReusedExistingStable']} released_debt={counts['PronunciationDebtReleased']} "
         f"unreleased_debt={counts['PronunciationDebtUnreleased']}"
     )
 
