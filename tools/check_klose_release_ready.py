@@ -109,66 +109,9 @@ def assert_reconciliation_ready() -> None:
 
 
 def current_curriculum_ordered_note_ids() -> tuple[list[str], dict[str, tuple[str, str]]]:
-    """Independently derive current curriculum order and expected stage/tag.
-
-    Grade-4 current source remains first. Accepted Grade-5/6 source follows in
-    textbook order. A Stable Note recurring in multiple books appears once at its
-    earliest accepted occurrence. If a Note is already in Grade-4 current, the
-    Grade-4 stage/tag wins even when it recurs in Grade 5/6.
-    """
-    scope = json.loads(G56_SCOPE.read_text(encoding="utf-8"))
-    if scope.get("ScopeStatus") != "accepted" or scope.get("StableIdentityAllocationAuthorized") is not True:
-        raise SystemExit("Release blocked: Grade 5-6 current learning scope is not accepted")
-    accepted_books = {k for k, v in scope.get("Books", {}).items() if v.get("Accepted") is True}
-    if accepted_books != {"5上", "5下", "6上", "6下"}:
-        raise SystemExit(f"Release blocked: Grade 5-6 current scope is incomplete: {sorted(accepted_books)}")
-
-    first_coord: dict[str, tuple[int, int, int, int, int]] = {}
-    expected_state: dict[str, tuple[str, str]] = {}
-    seen_coordinates: set[tuple[int, int, int, int]] = set()
-    for row in read_csv(SOURCE_IDENTITY_EXTENSIONS):
-        if row.get("Status", "").strip() != "confirmed":
-            continue
-        key = row.get("SourceItemKey", "").strip()
-        nid = row.get("NoteID", "").strip()
-        if not nid:
-            raise SystemExit("Release blocked: confirmed source identity has blank NoteID")
-
-        m4 = GRADE4_KEY_RE.match(key)
-        if (
-            m4 is not None
-            and row.get("SourceID", "").strip() == "rj_start1"
-            and row.get("SourceEdition", "").strip() == "klose-current"
-        ):
-            semester, unit_text, order_text = m4.groups()
-            coordinate = (4, SEMESTER_RANK[semester], int(unit_text), int(order_text))
-            if coordinate in seen_coordinates:
-                raise SystemExit(f"Release blocked: duplicate current curriculum coordinate: {coordinate}")
-            seen_coordinates.add(coordinate)
-            full_coord = (*coordinate, int(nid[2:]))
-            first_coord[nid] = min(first_coord.get(nid, full_coord), full_coord)
-            expected_state[nid] = (GRADE4_STAGE, GRADE4_LEARNING_TAG)
-            continue
-
-        m56 = G56_KEY_RE.match(key)
-        if m56 is None:
-            continue
-        grade_text, semester, unit_text, order_text = m56.groups()
-        book = grade_text + ("上" if semester == "upper" else "下")
-        if book not in accepted_books:
-            continue
-        coordinate = (int(grade_text), SEMESTER_RANK[semester], int(unit_text), int(order_text))
-        if coordinate in seen_coordinates:
-            raise SystemExit(f"Release blocked: duplicate current curriculum coordinate: {coordinate}")
-        seen_coordinates.add(coordinate)
-        full_coord = (*coordinate, int(nid[2:]))
-        first_coord[nid] = min(first_coord.get(nid, full_coord), full_coord)
-        expected_state.setdefault(nid, (G56_STAGE, G56_LEARNING_TAG))
-
-    if not first_coord:
-        raise SystemExit("Release blocked: current curriculum identity set is empty")
-    ordered = [nid for nid, _ in sorted(first_coord.items(), key=lambda item: item[1])]
-    return ordered, expected_state
+    """Derive textbook + explicit third-party curriculum without inventing source facts."""
+    from klose_release_curriculum import current_curriculum_ordered_note_ids as derive_release_curriculum
+    return derive_release_curriculum()
 
 def load_and_validate_admission(
     learner_profile: str,
