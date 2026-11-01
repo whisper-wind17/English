@@ -15,6 +15,7 @@ PROTECT = ["check_klose_persistent_state.py", "check_klose_release_history.py", 
 VOCABULARY = [
     "check_grade5_6_premerge_dedup.py", "check_klose_actual_grade4_identity.py",
     "audit_klose_actual_grade4_reuse.py", "check_third_party_learner_content.py",
+    "check_klose_nce1_source.py", "prepare_klose_nce1_reconciliation.py",
     "build_klose_vocabulary.py", "apply_klose_actual_grade4.py",
     "apply_klose_actual_grade4_reuse_facts.py", "apply_klose_grade5_6_current.py",
     "apply_klose_grade5_6_reuse_facts.py", "apply_klose_grade5_6_new_facts.py",
