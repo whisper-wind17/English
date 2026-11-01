@@ -1,0 +1,29 @@
+{
+  "SchemaVersion": 1,
+  "LearnerProfile": "klose",
+  "LearnerLevel": 4,
+  "Segments": {
+    "grade4": {
+      "Rank": 10,
+      "Status": "active"
+    },
+    "new_concept_english_1": {
+      "Rank": 20,
+      "Status": "identity-gated",
+      "SourceEdition": "2022-smart-isbn-9787521336702"
+    },
+    "grade5": {
+      "Rank": 30,
+      "Status": "active"
+    },
+    "grade6": {
+      "Rank": 40,
+      "Status": "active"
+    },
+    "third_party": {
+      "Rank": 90,
+      "Status": "active"
+    }
+  },
+  "Policy": "LearningOrder uses curriculum segment rank; only confirmed Stable identities participate. Existing Learning/Review cards remain governed by Anki FSRS."
+}
