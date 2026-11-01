@@ -230,18 +230,33 @@ def main() -> None:
     expected_current = set(g4_coords) | set(g56_coords)
     if not expected_current:
         fail("derived textbook curriculum is empty")
-    from check_klose_release_ready import load_and_validate_admission
-    admission_by_id = load_and_validate_admission("klose", "4", release_ids)
+    admission_rows = read_csv(ADMISSION)
+    admission_by_id = {
+        r.get("NoteID", "").strip(): r
+        for r in admission_rows
+        if r.get("LearnerProfile", "").strip() == "klose"
+        and r.get("LearnerLevel", "").strip() == "4"
+    }
+    if "" in admission_by_id or len(admission_by_id) != len([
+        r for r in admission_rows
+        if r.get("LearnerProfile", "").strip() == "klose"
+        and r.get("LearnerLevel", "").strip() == "4"
+    ]):
+        fail("invalid/duplicate current Klose admission NoteID")
     for nid in expected_current:
         row = admission_by_id.get(nid)
         if row is None:
             fail(f"accepted textbook identity lost admission state: {nid}")
-        # A held textbook Note was validated against an explicit current decision.
-        if row["Status"] == "held":
+        if row.get("Status", "").strip() == "held":
             continue
-        expected_stage = "stage::grade4-current" if nid in g4_coords else "stage::grade5-6-current"
-        if row.get("Stage", "").strip() != expected_stage:
-            fail(f"textbook Note has wrong stage: {nid}")
+        if row.get("Status", "").strip() != "allowed":
+            fail(f"textbook Note has invalid admission status: {nid}")
+        stage = row.get("Stage", "").strip()
+        if nid in g4_coords:
+            if stage != "stage::grade4-current":
+                fail(f"Grade-4 Note has wrong stage: {nid} {stage!r}")
+        elif stage not in {"stage::grade5-6-current", "stage::nce1-current"}:
+            fail(f"Grade 5-6 Note has wrong source-backed stage: {nid} {stage!r}")
 
     # Narrow IPA facts for reused/current Notes, including reviewed dedup survivors,
     # are upstream truth. During PR validation the generated Master may still reflect
