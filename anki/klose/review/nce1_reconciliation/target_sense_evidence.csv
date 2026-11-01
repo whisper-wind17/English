@@ -1,301 +1,907 @@
-SourceItemKey,CurriculumOrder,LessonStart,LessonEnd,Entry,TargetPOS,TargetMeaning,TargetUsage,TargetPhonetic,EvidenceSource,MatchStatus
-nce1-o0001|excuse,0001,1,1,excuse,v.,原谅,用于请求原谅或引起他人注意时使用,/ɪkˈskjuːz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0002|me,0002,1,1,me,pron.,我（宾格）,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0003|yes,0003,1,1,yes,adv.,是的,用于肯定回答,/jes/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0004|is,0004,1,1,is,v.,be动词现在时第三人称单数,be动词的第三人称单数形式,/ɪz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0005|this,0005,1,1,this,pron.,这,指代近处的人或事物,/ðɪs/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0006|your,0006,1,1,your,possessive adjective,你的，你们的,表示所属关系,/jɔːr/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0007|handbag,0007,1,1,handbag,n.,（女用）手提包,指较小的手提包，通常用于装个人物品,/ˈhændbæɡ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0008|pardon,0008,1,1,pardon,int.,原谅，请再说一遍,用于没听清楚对方说话时，请求重复,/ˈpɑːrdən/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0009|it,0009,1,1,it,pron.,它,指代前面提到的单数事物,/ɪt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0010|thank-you,0010,1,1,thank you,,感谢你（们）,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0011|very-much,0011,1,1,very much,,非常地,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0012|pen,0012,2,2,pen,n.,钢笔,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0013|pencil,0013,2,2,pencil,n.,铅笔,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0014|book,0014,2,2,book,n.,书,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0015|watch,0015,2,2,watch,n.,手表,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0016|coat,0016,2,2,coat,n.,上衣，外衣,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0017|dress,0017,2,2,dress,n.,连衣裙,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0018|skirt,0018,2,2,skirt,n.,裙子,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0019|shirt,0019,2,2,shirt,n.,衬衣,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0020|car,0020,2,2,car,n.,小汽车,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0021|house,0021,2,2,house,n.,房子,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0022|umbrella,0022,3,3,umbrella,n.,伞,可数名词，复数为umbrellas,/ʌmˈbrelə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0023|please,0023,3,3,please,int.,请,用于礼貌请求,/pliːz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0024|here,0024,3,3,here,adv.,这里,表示地点，指代说话人所在的位置,/hɪə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0025|my,0025,3,3,my,possessive adjective,我的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0026|ticket,0026,3,3,ticket,n.,票,可数名词，复数为tickets,/ˈtɪkɪt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0027|number,0027,3,3,number,n.,号码,可数名词，复数为numbers,/ˈnʌmbə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0028|five,0028,3,3,five,num.,五,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0029|sorry,0029,3,3,sorry,adj.,对不起的,用于道歉或表示遗憾,/ˈsɒri/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0030|sir,0030,3,3,sir,n.,先生,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0031|cloakroom,0031,3,3,cloakroom,n.,衣帽存放处,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0032|suit,0032,4,4,suit,n.,一套衣服,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0033|school,0033,4,4,school,n.,学校,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0034|teacher,0034,4,4,teacher,n.,老师,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0035|son,0035,4,4,son,n.,儿子,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0036|daughter,0036,4,4,daughter,n.,女儿,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0037|mr,0037,5,5,Mr.,,先生,Mister的缩写，用于姓之前,/ˈmɪstə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0038|good,0038,5,5,good,adj.,好的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0039|morning,0039,5,5,morning,n.,早晨,通常指从午夜到中午的时间段,/ˈmɔːnɪŋ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0040|miss,0040,5,5,Miss,,小姐,对未婚女性的称呼，用于姓或姓名之前,/mɪs/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0041|new,0041,5,5,new,adj.,新的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0042|student,0042,5,5,student,n.,学生,指正在学习的人，可指任何年龄段的学习者,/ˈstjuːdənt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0043|french,0043,5,5,French,adj.,法国（人）的,作形容词表示国籍，作名词指法国人或法语,/frentʃ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0044|german,0044,5,5,German,adj.,德国（人）的,作形容词表示国籍，作名词指德国人或德语,/ˈdʒɜːmən/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0045|nice,0045,5,5,nice,adj.,美好的,形容人、事物或体验令人愉悦,/naɪs/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0046|meet,0046,5,5,meet,v.,结识,指第一次见面或认识某人,/miːt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0047|japanese,0047,5,5,Japanese,adj.,日本（人）的,单复数同形Japanese，指一个人时用a Japanese,/ˌdʒæpəˈniːz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0048|south-korean,0048,5,5,South Korean,adj.,韩国（人）的,作形容词表示国籍，作名词指韩国人或韩语,/kəˈriən/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0049|chinese,0049,5,5,Chinese,adj.,中国（人）的,单复数同形Chinese，指一个人时用a Chinese,/ˌtʃaɪˈniːz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0050|too,0050,5,5,too,adv.,也,用于肯定句句末，表示“同样”之意,/tuː/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0051|make,0051,6,6,make,n.,（产品的）牌子，品牌,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0052|swedish,0052,6,6,Swedish,adj.,瑞典的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0053|english,0053,6,6,English,adj.,英国的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0054|american,0054,6,6,American,adj.,美国的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0055|volvo,0055,6,6,Volvo,n.,沃尔沃,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0056|peugeot,0056,6,6,Peugeot,n.,标致,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0057|mercedes,0057,6,6,Mercedes,n.,梅赛德斯,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0058|toyota,0058,6,6,Toyota,n.,丰田,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0059|mini,0059,6,6,Mini,n.,迷你,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0060|ford,0060,6,6,Ford,n.,福特,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0061|i,0061,7,7,I,pron.,我,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0062|am,0062,7,7,am,v.,be动词现在时第一人称单数,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0063|are,0063,7,7,are,v.,be动词现在时复数,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0064|name,0064,7,7,name,n.,名字,用于询问或介绍姓名,/neɪm/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0065|what,0065,7,7,what,det. & pron.,什么,用于特殊疑问句开头,/wɒt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0066|nationality,0066,7,7,nationality,n.,国籍,询问对方的国籍时使用What nationality are you?,/ˌnæʃəˈnæləti/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0067|italian,0067,7,7,Italian,adj.,意大利（人）的,可作形容词或名词使用,/ɪˈtæliən/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0068|job,0068,7,7,job,n.,工作,询问职业时常用What's your job?,/dʒɒb/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0069|keyboard,0069,7,7,keyboard,n.,电脑键盘,keyboard operator键盘操作员,/ˈkiːbɔːd/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0070|operator,0070,7,7,operator,n.,操作人员,操作机器或设备的人员,/ˈɒpəreɪtə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0071|engineer,0071,7,7,engineer,n.,工程师,职业名称的一种,/ˌendʒɪˈnɪə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0072|policeman,0072,8,8,policeman,n.,警察,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0073|policewoman,0073,8,8,policewoman,n.,女警察,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0074|taxi-driver,0074,8,8,taxi driver,n.,出租汽车司机,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0075|air-hostess,0075,8,8,air hostess,n.,空中小姐,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0076|postman,0076,8,8,postman,n.,邮递员,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0077|nurse,0077,8,8,nurse,n.,护士,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0078|mechanic,0078,8,8,mechanic,n.,机械师,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0079|hairdresser,0079,8,8,hairdresser,n.,理发师,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0080|housewife,0080,8,8,housewife,n.,家庭妇女,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0081|milkman,0081,8,8,milkman,n.,送牛奶的人,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0082|hello,0082,9,9,hello,int.,喂（表示问候）,打招呼用语,/həˈləʊ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0083|hi,0083,9,9,hi,int.,喂，嗨,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0084|how,0084,9,9,how,adv.,怎样,用于询问方式、状态等,/haʊ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0085|today,0085,9,9,today,adv.,今天,指说话时的当天,/təˈdeɪ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0086|well,0086,9,9,well,adj.,身体好的,用于描述身体状况,/wel/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0087|fine,0087,9,9,fine,adj.,美好的,口语中表示身体状况好,/faɪn/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0088|thanks,0088,9,9,thanks,int.,谢谢,表示感谢的名词复数形式,/θæŋks/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0089|goodbye,0089,9,9,goodbye,int.,再见,告别时使用的用语,/ɡʊdˈbaɪ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0090|see,0090,9,9,see,v.,见,表示视觉上的看见,/siː/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0091|fat,0091,10,10,fat,adj.,胖的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0092|woman,0092,10,10,woman,n.,女人,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0093|thin,0093,10,10,thin,adj.,瘦的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0094|tall,0094,10,10,tall,adj.,高的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0095|short,0095,10,10,short,adj.,矮的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0096|dirty,0096,10,10,dirty,adj.,脏的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0097|clean,0097,10,10,clean,adj.,干净的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0098|hot,0098,10,10,hot,adj.,热的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0099|cold,0099,10,10,cold,adj.,冷的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0100|old,0100,10,10,old,adj.,老的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0101|young,0101,10,10,young,adj.,年轻的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0102|busy,0102,10,10,busy,adj.,忙的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0103|lazy,0103,10,10,lazy,adj.,懒的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0104|whose,0104,11,11,whose,pron.,谁的,用于询问某物属于谁，是who的所有格形式,/huːz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0105|blue,0105,11,11,blue,adj.,蓝色的,描述颜色,/bluː/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0106|perhaps,0106,11,11,perhaps,adv.,大概,表示不确定或可能性,/pəˈhæps/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0107|white,0107,11,11,white,adj.,白色的,描述颜色,/waɪt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0108|catch,0108,11,11,catch,v.,抓住,指接住扔过来的东西,/kætʃ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0109|father,0109,12,12,father,n.,父亲,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0110|mother,0110,12,12,mother,n.,母亲,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0111|blouse,0111,12,12,blouse,n.,女衬衫,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0112|sister,0112,12,12,sister,n.,姐，妹,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0113|tie,0113,12,12,tie,n.,领带,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0114|brother,0114,12,12,brother,n.,兄，弟,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0115|his,0115,12,12,his,possessive adjective,他的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0116|her,0116,12,12,her,possessive adjective,她的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0117|colour,0117,13,13,colour,n.,颜色,英式拼写，美式为color,/ˈkʌlə/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0118|green,0118,13,13,green,adj.,绿色的,描述颜色,/ɡriːn/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0119|come,0119,13,13,come,v.,来,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0120|upstairs,0120,13,13,upstairs,adv.,往楼上,表示向楼上或位于楼上的位置,/ˌʌpˈsteəz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0121|smart,0121,13,13,smart,adj.,漂亮的，时髦的,用于形容衣着漂亮或外表整洁,/smɑːt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0122|hat,0122,13,13,hat,n.,帽子,区别于cap（无檐帽）,/hæt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0123|same,0123,13,13,same,adj.,相同的,常与the连用：the same,/seɪm/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0124|lovely,0124,13,13,lovely,adj.,可爱的，秀美动人的,用于表达对某人或某物的喜爱,/ˈlʌvli/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0125|case,0125,14,14,case,n.,箱子,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0126|carpet,0126,14,14,carpet,n.,地毯,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0127|dog,0127,14,14,dog,n.,狗,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0128|customs,0128,15,15,customs,n.,海关,政府设在边境检查货物和证件的机构,/ˈkʌstəmz/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0129|officer,0129,15,15,officer,n.,官员,在海关或军队中担任职务的人,/ˈɒfɪsə(r)/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0130|girl,0130,15,15,girl,n.,女孩，姑娘,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0131|danish,0131,15,15,Danish,adj.,丹麦（人）的,表示丹麦国籍或语言,/ˈdeɪnɪʃ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0132|friend,0132,15,15,friend,n.,朋友,认识并关系好的人,/frend/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0133|norwegian,0133,15,15,Norwegian,adj.,挪威（人）的,表示挪威国籍或语言,/nɔːˈwiːdʒən/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0134|passport,0134,15,15,passport,n.,护照,出国时证明身份的官方文件,/ˈpɑːspɔːt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0135|brown,0135,15,15,brown,adj.,棕色的,描述颜色,/braʊn/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0136|tourist,0136,15,15,tourist,n.,旅游者,以观光为目的的人,/ˈtʊərɪst/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0137|russian,0137,16,16,Russian,adj.,俄罗斯（人）的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0138|dutch,0138,16,16,Dutch,adj.,荷兰（人）的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0139|these,0139,16,16,these,pron.,这些（this 的复数）,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0140|red,0140,16,16,red,adj.,红色的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0141|grey,0141,16,16,grey,adj.,灰色的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0142|yellow,0142,16,16,yellow,adj.,黄色的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0143|black,0143,16,16,black,adj.,黑色的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0144|orange,0144,16,16,orange,adj.,橘黄色的,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0145|employee,0145,17,17,employee,n.,雇员,指在一家公司或组织工作的人,/ɪmˈplɔɪiː/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0146|hard-working,0146,17,17,hard-working,adj.,勤奋的,形容人工作勤奋认真,/hɑːd ˈwɜːkɪŋ/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0147|sales-rep,0147,17,17,sales rep,n.,推销员,,,klose-actual-textbook-photo + LiDuoMiao lesson notes,actual-only
-nce1-o0148|man,0148,17,17,man,n.,男人,成年男性的称呼，复数是men,/mæn/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0149|office,0149,17,17,office,n.,办公室,工作的地方,/ˈɒfɪs/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0150|assistant,0150,17,17,assistant,n.,助手,帮助别人工作的人,/əˈsɪstənt/,klose-actual-textbook-photo + LiDuoMiao lesson notes,matched
-nce1-o0151|matter,0151,19,20,matter,noun,事情；问题,常用于What's the matter?固定句型中,/ˈmætə/,LiDuoMiao lesson notes,matched
-nce1-o0152|children,0152,19,20,children,noun,孩子们（child的复数）,child的复数形式，指两个或以上的孩子,/ˈtʃɪldrən/,LiDuoMiao lesson notes,matched
-nce1-o0153|tired,0153,19,20,tired,adjective,疲倦的；困乏的,描述身体或精神上感到疲惫的状态,/ˈtaɪəd/,LiDuoMiao lesson notes,matched
-nce1-o0154|boy,0154,19,20,boy,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0155|thirsty,0155,19,20,thirsty,adjective,口渴的；渴的,描述需要喝水的身体状态,/ˈθɜːsti/,LiDuoMiao lesson notes,matched
-nce1-o0156|mum,0156,19,20,Mum,noun,妈妈（非正式）,英式英语中对母亲的称呼，美式英语用mom,/mʌm/,LiDuoMiao lesson notes,matched
-nce1-o0157|sit-down,0157,19,20,sit down,verb phrase,坐下,祈使句中常用，命令或请求他人坐下,/sɪt daʊn/,LiDuoMiao lesson notes,matched
-nce1-o0158|right,0158,19,20,right,adjective,好的；正确的,在Are you all right?中表示身体状况/感觉如何,/raɪt/,LiDuoMiao lesson notes,matched
-nce1-o0159|ice-cream,0159,19,20,ice cream,noun,冰淇淋,可数名词，复数形式为ice creams,/aɪs kriːm/,LiDuoMiao lesson notes,matched
-nce1-o0160|big,0160,19,20,big,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0161|small,0161,19,20,small,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0162|open,0162,19,20,open,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0163|shut,0163,19,20,shut,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0164|light,0164,19,20,light,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0165|heavy,0165,19,20,heavy,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0166|long,0166,19,20,long,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0167|shoe,0167,19,20,shoe,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0168|grandfather,0168,19,20,grandfather,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0169|grandmother,0169,19,20,grandmother,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0170|give,0170,21,22,give,verb,给；给予,give me + 名词，表示给我某物,/ɡɪv/,LiDuoMiao lesson notes,matched
-nce1-o0171|one,0171,21,22,one,pronoun,一个；一个人；一件事,代替前面提到的人或物，避免重复,/wʌn/,LiDuoMiao lesson notes,matched
-nce1-o0172|which,0172,21,22,which,determiner/pronoun,哪一个；哪一些,用于提问，要求从特定范围内选择,/wɪtʃ/,LiDuoMiao lesson notes,matched
-nce1-o0173|empty,0173,21,22,empty,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0174|full,0174,21,22,full,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0175|large,0175,21,22,large,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0176|little,0176,21,22,little,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0177|sharp,0177,21,22,sharp,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0178|small,0178,21,22,small,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0179|big,0179,21,22,big,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0180|blunt,0180,21,22,blunt,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0181|box,0181,21,22,box,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0182|glass,0182,21,22,glass,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0183|cup,0183,21,22,cup,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0184|bottle,0184,21,22,bottle,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0185|tin,0185,21,22,tin,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0186|knife,0186,21,22,knife,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0187|fork,0187,21,22,fork,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0188|spoon,0188,21,22,spoon,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0189|on,0189,23,24,on,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0190|shelf,0190,23,24,shelf,noun,架子；搁板,复数形式为shelves,/ʃelf/,LiDuoMiao lesson notes,matched
-nce1-o0191|desk,0191,23,24,desk,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0192|table,0192,23,24,table,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0193|plate,0193,23,24,plate,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0194|cupboard,0194,23,24,cupboard,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0195|cigarette,0195,23,24,cigarette,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0196|television,0196,23,24,television,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0197|floor,0197,23,24,floor,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0198|dressing-table,0198,23,24,dressing table,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0199|magazine,0199,23,24,magazine,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0200|bed,0200,23,24,bed,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0201|newspaper,0201,23,24,newspaper,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0202|stereo,0202,23,24,stereo,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0203|mrs,0203,25,26,Mrs.,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0204|kitchen,0204,25,26,kitchen,noun,厨房,家庭中做饭的房间,/ˈkɪtʃɪn/,LiDuoMiao lesson notes,matched
-nce1-o0205|refrigerator,0205,25,26,refrigerator,noun,冰箱,冷藏食物的电器设备，也可用fridge,/rɪˈfrɪdʒəreɪtə/,LiDuoMiao lesson notes,matched
-nce1-o0206|right,0206,25,26,right,noun,右边,右侧方位，与left相对,/raɪt/,LiDuoMiao lesson notes,matched
-nce1-o0207|electric,0207,25,26,electric,adjective,电动的,由电驱动的，与电力有关的,/ɪˈlektrɪk/,LiDuoMiao lesson notes,matched
-nce1-o0208|left,0208,25,26,left,noun,左边,左侧方位，与right相对,/left/,LiDuoMiao lesson notes,matched
-nce1-o0209|cooker,0209,25,26,cooker,noun,炉灶,烹饪用的炉子或灶具,/ˈkʊkə/,LiDuoMiao lesson notes,matched
-nce1-o0210|middle,0210,25,26,middle,noun,中间,表示中心位置或时间的中点,/ˈmɪdl/,LiDuoMiao lesson notes,matched
-nce1-o0211|of,0211,25,26,of,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0212|room,0212,25,26,room,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0213|cup,0213,25,26,cup,noun,杯子,用于喝水的容器，通常有把手,/kʌp/,LiDuoMiao lesson notes,matched
-nce1-o0214|where,0214,25,26,where,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0215|in,0215,25,26,in,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0216|living-room,0216,27,28,living room,noun,客厅，起居室,指家庭用于接待客人和休闲的房间,/ˈlɪvɪŋ ruːm/,LiDuoMiao lesson notes,matched
-nce1-o0217|near,0217,27,28,near,preposition,在...附近，靠近,表示位置接近于某个地点或物品,/nɪə/,LiDuoMiao lesson notes,matched
-nce1-o0218|window,0218,27,28,window,noun,窗户,建筑物中用于通风和采光的开口,/ˈwɪndəʊ/,LiDuoMiao lesson notes,matched
-nce1-o0219|armchair,0219,27,28,armchair,noun,扶手椅,带有两侧扶手的椅子,/ˈɑːmtʃeə/,LiDuoMiao lesson notes,matched
-nce1-o0220|door,0220,27,28,door,noun,门,用于进出房间或建筑的开口,/dɔː/,LiDuoMiao lesson notes,matched
-nce1-o0221|picture,0221,27,28,picture,noun,图片，画，照片,展示图像的视觉作品,/ˈpɪktʃə/,LiDuoMiao lesson notes,matched
-nce1-o0222|wall,0222,27,28,wall,noun,墙，墙壁,建筑物的垂直分隔结构,/wɔːl/,LiDuoMiao lesson notes,matched
-nce1-o0223|trousers,0223,27,28,trousers,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0224|shut,0224,29,30,shut,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0225|bedroom,0225,29,30,bedroom,noun,卧室,指供人睡觉的房间,/ˈbedruːm/,LiDuoMiao lesson notes,matched
-nce1-o0226|untidy,0226,29,30,untidy,adjective,不整洁的，凌乱的,形容房间或物品没有整理干净,/ʌnˈtaɪdi/,LiDuoMiao lesson notes,matched
-nce1-o0227|must,0227,29,30,must,modal verb,必须，应当,表示义务或命令，用于给指令,/mʌst/,LiDuoMiao lesson notes,matched
-nce1-o0228|open,0228,29,30,open,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0229|air,0229,29,30,air,verb,通风，晾干,打开窗户让空气流通,/eə/,LiDuoMiao lesson notes,matched
-nce1-o0230|put,0230,29,30,put,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0231|clothes,0231,29,30,clothes,noun,衣服，服装,复数名词，指各种衣物,/kləʊðz/,LiDuoMiao lesson notes,matched
-nce1-o0232|wardrobe,0232,29,30,wardrobe,noun,衣柜，衣橱,用于存放衣服的家具,/ˈwɔːdrəʊb/,LiDuoMiao lesson notes,matched
-nce1-o0233|dust,0233,29,30,dust,verb,拂去灰尘,用布擦拭去除灰尘,/dʌst/,LiDuoMiao lesson notes,matched
-nce1-o0234|sweep,0234,29,30,sweep,verb,扫地，扫除,用扫帚清理地面,/swiːp/,LiDuoMiao lesson notes,matched
-nce1-o0235|empty,0235,29,30,empty,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0236|read,0236,29,30,read,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0237|sharpen,0237,29,30,sharpen,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0238|put-on,0238,29,30,put on,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0239|take-off,0239,29,30,take off,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0240|turn-on,0240,29,30,turn on,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0241|turn-off,0241,29,30,turn off,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0242|garden,0242,31,32,garden,n.,花园，庭院,指种植花草树木的地方，也可指菜园,/ˈɡɑːdn/,LiDuoMiao lesson notes,matched
-nce1-o0243|under,0243,31,32,under,prep.,在...下面,表示位置关系，指在某物的正下方,/ˈʌndə/,LiDuoMiao lesson notes,matched
-nce1-o0244|tree,0244,31,32,tree,n.,树，树木,指木本植物，通常有树干和树枝,/triː/,LiDuoMiao lesson notes,matched
-nce1-o0245|climb,0245,31,32,climb,v.,爬，攀爬,指用手脚向上移动，也可用于攀登阶梯等,/klaɪm/,LiDuoMiao lesson notes,matched
-nce1-o0246|who,0246,31,32,who,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0247|run,0247,31,32,run,v.,跑，奔跑,指用脚快速移动，也可用于机器运转等,/rʌn/,LiDuoMiao lesson notes,matched
-nce1-o0248|grass,0248,31,32,grass,n.,草，草地,指户外的草坪或草原,/ɡrɑːs/,LiDuoMiao lesson notes,matched
-nce1-o0249|after,0249,31,32,after,prep.,在...之后；追逐,表示时间顺序或空间位置；run after表示追赶,/ˈɑːftə/,LiDuoMiao lesson notes,matched
-nce1-o0250|across,0250,31,32,across,prep.,穿过，横穿,表示从一边到另一边的动作,/əˈkrɒs/,LiDuoMiao lesson notes,matched
-nce1-o0251|cat,0251,31,32,cat,n.,猫,指家养的猫科动物,/kæt/,LiDuoMiao lesson notes,matched
-nce1-o0252|type,0252,31,32,type,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0253|letter,0253,31,32,letter,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0254|basket,0254,31,32,basket,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0255|eat,0255,31,32,eat,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0256|bone,0256,31,32,bone,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0257|clean,0257,31,32,clean,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0258|tooth,0258,31,32,tooth,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0259|cook,0259,31,32,cook,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0260|milk,0260,31,32,milk,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0261|meal,0261,31,32,meal,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0262|drink,0262,31,32,drink,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0263|tap,0263,31,32,tap,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0264|day,0264,33,34,day,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0265|cloud,0265,33,34,cloud,n.,云,常用复数形式 clouds,/klaʊd/,LiDuoMiao lesson notes,matched
-nce1-o0266|sky,0266,33,34,sky,n.,天空,常与介词 in 搭配使用,/skaɪ/,LiDuoMiao lesson notes,matched
-nce1-o0267|sun,0267,33,34,sun,n.,太阳,与定冠词 the 连用，表示独一无二的事物,/sʌn/,LiDuoMiao lesson notes,matched
-nce1-o0268|shine,0268,33,34,shine,v.,照耀,现在分词为 shining,/ʃaɪn/,LiDuoMiao lesson notes,matched
-nce1-o0269|with,0269,33,34,with,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0270|family,0270,33,34,family,n.,家庭,可指数个家庭成员,/ˈfæməli/,LiDuoMiao lesson notes,matched
-nce1-o0271|walk,0271,33,34,walk,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0272|over,0272,33,34,over,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0273|bridge,0273,33,34,bridge,n.,桥,可数名词,/brɪdʒ/,LiDuoMiao lesson notes,matched
-nce1-o0274|boat,0274,33,34,boat,n.,小船,一般指较小的船,/bəʊt/,LiDuoMiao lesson notes,matched
-nce1-o0275|river,0275,33,34,river,n.,河,可数名词,/ˈrɪvə(r)/,LiDuoMiao lesson notes,matched
-nce1-o0276|ship,0276,33,34,ship,n.,轮船,一般指大的轮船,/ʃɪp/,LiDuoMiao lesson notes,matched
-nce1-o0277|aeroplane,0277,33,34,aeroplane,n.,飞机,英式英语，美式英语为 airplane,/ˈeərəpleɪn/,LiDuoMiao lesson notes,matched
-nce1-o0278|fly,0278,33,34,fly,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0279|sleep,0279,33,34,sleep,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0280|shave,0280,33,34,shave,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0281|cry,0281,33,34,cry,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0282|wash,0282,33,34,wash,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0283|wait,0283,33,34,wait,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0284|jump,0284,33,34,jump,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0285|photograph,0285,35,36,photograph,noun,照片；相片,简写为photo,/ˈfəʊtəɡrɑːf/,LiDuoMiao lesson notes,matched
-nce1-o0286|village,0286,35,36,village,noun,村庄；乡村,指小于城镇的居民点,/ˈvɪlɪdʒ/,LiDuoMiao lesson notes,matched
-nce1-o0287|valley,0287,35,36,valley,noun,山谷；峡谷,指两山之间的低洼地带,/ˈvæli/,LiDuoMiao lesson notes,matched
-nce1-o0288|between,0288,35,36,between,preposition,在...之间,用于两者之间的事物,/bɪˈtwiːn/,LiDuoMiao lesson notes,matched
-nce1-o0289|hill,0289,35,36,hill,noun,小山；丘陵,指较小的山或高地，复数形式为hills,/hɪl/,LiDuoMiao lesson notes,matched
-nce1-o0290|another,0290,35,36,another,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0291|wife,0291,35,36,wife,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0292|along,0292,35,36,along,preposition,沿着；顺着,表示沿着某条线或边缘移动,/əˈlɒŋ/,LiDuoMiao lesson notes,matched
-nce1-o0293|bank,0293,35,36,bank,noun,河岸；堤岸,指河流两侧的陆地,/bæŋk/,LiDuoMiao lesson notes,matched
-nce1-o0294|water,0294,35,36,water,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0295|swim,0295,35,36,swim,verb,游泳；游过,指在水中移动的动作，现在分词为swimming,/swɪm/,LiDuoMiao lesson notes,matched
-nce1-o0296|building,0296,35,36,building,noun,建筑物；楼房,指任何有顶盖和墙壁的结构,/ˈbɪldɪŋ/,LiDuoMiao lesson notes,matched
-nce1-o0297|park,0297,35,36,park,noun,公园,指供公众休闲的绿地场所,/pɑːk/,LiDuoMiao lesson notes,matched
-nce1-o0298|into,0298,35,36,into,,,,,LiDuoMiao lesson notes,unmatched
-nce1-o0299|beside,0299,35,36,beside,preposition,在...旁边；在...附近,表示两物的相邻位置关系,/bɪˈsaɪd/,LiDuoMiao lesson notes,matched
-nce1-o0300|off,0300,35,36,off,,,,,LiDuoMiao lesson notes,unmatched
+SourceItemKey,CurriculumOrder,LessonStart,LessonEnd,Entry,TargetPOS,TargetMeaning,TargetPhonetic,EvidenceSource,MatchStatus
+nce1-o0001|excuse,0001,1,1,excuse,v.,原谅,ik'skju:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0002|me,0002,1,1,me,pron.,我（宾格）,mi,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0003|yes,0003,1,1,yes,adv.,是的,jes,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0004|is,0004,1,1,is,v.,be动词现在时第三人称单数,əz,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0005|this,0005,1,1,this,pron.,这,ðis,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0006|your,0006,1,1,your,possessive adjective,你的，你们的,jɔ:r,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0007|handbag,0007,1,1,handbag,n.,（女用）手提包,'hændbæg,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0008|pardon,0008,1,1,pardon,int.,原谅，请再说一遍,'pɑ:dən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0009|it,0009,1,1,it,pron.,它,it,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0010|thank you,0010,1,1,thank you,,感谢你（们）,θæŋk juː,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0011|very much,0011,1,1,very much,,非常地,'veri mʌtʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0012|pen,0012,2,2,pen,n.,钢笔,pen,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0013|pencil,0013,2,2,pencil,n.,铅笔,'pensl,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0014|book,0014,2,2,book,n.,书,buk,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0015|watch,0015,2,2,watch,n.,手表,wɔtʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0016|coat,0016,2,2,coat,n.,上衣，外衣,kəut,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0017|dress,0017,2,2,dress,n.,连衣裙,dres,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0018|skirt,0018,2,2,skirt,n.,裙子,skə:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0019|shirt,0019,2,2,shirt,n.,衬衣,ʃə:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0020|car,0020,2,2,car,n.,小汽车,kɑ:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0021|house,0021,2,2,house,n.,房子,haus,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0022|umbrella,0022,3,3,umbrella,n.,伞,ʌm'brelə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0023|please,0023,3,3,please,int.,请,pli:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0024|here,0024,3,3,here,adv.,这里,hiə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0025|my,0025,3,3,my,possessive adjective,我的,mai,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0026|ticket,0026,3,3,ticket,n.,票,'tikit,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0027|number,0027,3,3,number,n.,号码,'nʌmbə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0028|five,0028,3,3,five,num.,五,faiv,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0029|sorry,0029,3,3,sorry,adj.,对不起的,'sɔri,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0030|sir,0030,3,3,sir,n.,先生,sə:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0031|cloakroom,0031,3,3,cloakroom,n.,衣帽存放处,'kləukru:m,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0032|suit,0032,4,4,suit,n.,一套衣服,sju:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0033|school,0033,4,4,school,n.,学校,sku:l,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0034|teacher,0034,4,4,teacher,n.,老师,'ti:tʃə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0035|son,0035,4,4,son,n.,儿子,sʌn,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0036|daughter,0036,4,4,daughter,n.,女儿,'dɔ:tə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0037|mr,0037,5,5,Mr.,,先生,'mistə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0038|good,0038,5,5,good,adj.,好的,gud,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0039|morning,0039,5,5,morning,n.,早晨,'mɔ:niŋ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0040|miss,0040,5,5,Miss,,小姐,mis,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0041|new,0041,5,5,new,adj.,新的,nju:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0042|student,0042,5,5,student,n.,学生,'stju:dənt,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0043|french,0043,5,5,French,adj.,法国（人）的,frentʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0044|german,0044,5,5,German,adj.,德国（人）的,'dʒə:mən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0045|nice,0045,5,5,nice,adj.,美好的,'nais,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0046|meet,0046,5,5,meet,v.,结识,mi:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0047|japanese,0047,5,5,Japanese,adj.,日本（人）的,ˌdʒæpə'ni:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0048|south korean,0048,5,5,South Korean,adj.,韩国（人）的,kə'riən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0049|chinese,0049,5,5,Chinese,adj.,中国（人）的,ˌtʃai'ni:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0050|too,0050,5,5,too,adv.,也,tu:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0051|make,0051,6,6,make,n.,（产品的）牌子，品牌,meik,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0052|swedish,0052,6,6,Swedish,adj.,瑞典的,'swi:diʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0053|english,0053,6,6,English,adj.,英国的,'iŋgliʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0054|american,0054,6,6,American,adj.,美国的,ə'merikən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0055|volvo,0055,6,6,Volvo,n.,沃尔沃,'vɔlvəʊ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0056|peugeot,0056,6,6,Peugeot,n.,标致,ˈpɜːʒəʊ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0057|mercedes,0057,6,6,Mercedes,n.,梅赛德斯,'mə:sidi:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0058|toyota,0058,6,6,Toyota,n.,丰田,'təʊjəʊtə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0059|mini,0059,6,6,Mini,n.,迷你,'mini,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0060|ford,0060,6,6,Ford,n.,福特,fɔ:d,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0061|i,0061,7,7,I,pron.,我,aɪ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0062|am,0062,7,7,am,v.,be动词现在时第一人称单数,æm,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0063|are,0063,7,7,are,v.,be动词现在时复数,ɑ:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0064|name,0064,7,7,name,n.,名字,'neim,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0065|what,0065,7,7,what,det. & pron.,什么,wɑ:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0066|nationality,0066,7,7,nationality,n.,国籍,ˌnæʃə'næliti,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0067|italian,0067,7,7,Italian,adj.,意大利（人）的,i'tæliən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0068|job,0068,7,7,job,n.,工作,dʒɔb,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0069|keyboard,0069,7,7,keyboard,n.,电脑键盘,'ki:bɔ:d,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0070|operator,0070,7,7,operator,n.,操作人员,'ɔpəreitə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0071|engineer,0071,7,7,engineer,n.,工程师,ˌendʒi'niə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0072|policeman,0072,8,8,policeman,n.,警察,pə'li:smən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0073|policewoman,0073,8,8,policewoman,n.,女警察,wumən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0074|taxi driver,0074,8,8,taxi driver,n.,出租汽车司机,ˈtæksi ˈdraɪvə(r),klose-actual-textbook-photo,verified-actual+helper
+nce1-o0075|air hostess,0075,8,8,air hostess,n.,空中小姐,eə(r) ˈhəʊstəs,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0076|postman,0076,8,8,postman,n.,邮递员,'pəustmən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0077|nurse,0077,8,8,nurse,n.,护士,nə:s,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0078|mechanic,0078,8,8,mechanic,n.,机械师,mi'kænik,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0079|hairdresser,0079,8,8,hairdresser,n.,理发师,'heəˌdresə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0080|housewife,0080,8,8,housewife,n.,家庭妇女,'hauswaif,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0081|milkman,0081,8,8,milkman,n.,送牛奶的人,'milkmən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0082|hello,0082,9,9,hello,int.,喂（表示问候）,hə'ləu,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0083|hi,0083,9,9,hi,int.,喂，嗨,hai,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0084|how,0084,9,9,how,adv.,怎样,hau,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0085|today,0085,9,9,today,adv.,今天,tə'dei,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0086|well,0086,9,9,well,adj.,身体好的,well,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0087|fine,0087,9,9,fine,adj.,美好的,fain,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0088|thanks,0088,9,9,thanks,int.,谢谢,θæŋks,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0089|goodbye,0089,9,9,goodbye,int.,再见,ˌgud'bai,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0090|see,0090,9,9,see,v.,见,si:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0091|fat,0091,10,10,fat,adj.,胖的,fæt,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0092|woman,0092,10,10,woman,n.,女人,'wumən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0093|thin,0093,10,10,thin,adj.,瘦的,θin,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0094|tall,0094,10,10,tall,adj.,高的,tɔ:l,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0095|short,0095,10,10,short,adj.,矮的,ʃɔ:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0096|dirty,0096,10,10,dirty,adj.,脏的,'də:ti,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0097|clean,0097,10,10,clean,adj.,干净的,kli:n,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0098|hot,0098,10,10,hot,adj.,热的,hɔt,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0099|cold,0099,10,10,cold,adj.,冷的,kəuld,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0100|old,0100,10,10,old,adj.,老的,əuld,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0101|young,0101,10,10,young,adj.,年轻的,jʌŋ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0102|busy,0102,10,10,busy,adj.,忙的,'bizi,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0103|lazy,0103,10,10,lazy,adj.,懒的,'leizi,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0104|whose,0104,11,11,whose,pron.,谁的,hu:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0105|blue,0105,11,11,blue,adj.,蓝色的,blu:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0106|perhaps,0106,11,11,perhaps,adv.,大概,pə'hæps,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0107|white,0107,11,11,white,adj.,白色的,wait,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0108|catch,0108,11,11,catch,v.,抓住,kætʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0109|father,0109,12,12,father,n.,父亲,'fɑ:ðə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0110|mother,0110,12,12,mother,n.,母亲,'mʌðə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0111|blouse,0111,12,12,blouse,n.,女衬衫,blauz,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0112|sister,0112,12,12,sister,n.,姐，妹,sistə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0113|tie,0113,12,12,tie,n.,领带,tai,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0114|brother,0114,12,12,brother,n.,兄，弟,'brʌðə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0115|his,0115,12,12,his,possessive adjective,他的,hiz,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0116|her,0116,12,12,her,possessive adjective,她的,hə:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0117|colour,0117,13,13,colour,n.,颜色,'kʌlə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0118|green,0118,13,13,green,adj.,绿色的,gri:n,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0119|come,0119,13,13,come,v.,来,kʌm,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0120|upstairs,0120,13,13,upstairs,adv.,往楼上,ˌʌp'steəz,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0121|smart,0121,13,13,smart,adj.,漂亮的，时髦的,smɑ:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0122|hat,0122,13,13,hat,n.,帽子,hæt,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0123|same,0123,13,13,same,adj.,相同的,seim,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0124|lovely,0124,13,13,lovely,adj.,可爱的，秀美动人的,'lʌvli,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0125|case,0125,14,14,case,n.,箱子,keis,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0126|carpet,0126,14,14,carpet,n.,地毯,'kɑ:pit,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0127|dog,0127,14,14,dog,n.,狗,dɔg,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0128|customs,0128,15,15,customs,n.,海关,'kʌstəmz,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0129|officer,0129,15,15,officer,n.,官员,'ɔfisə,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0130|girl,0130,15,15,girl,n.,女孩，姑娘,gə:l,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0131|danish,0131,15,15,Danish,adj.,丹麦（人）的,'deiniʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0132|friend,0132,15,15,friend,n.,朋友,frend,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0133|norwegian,0133,15,15,Norwegian,adj.,挪威（人）的,nɔ:'wi:dʒən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0134|passport,0134,15,15,passport,n.,护照,'pɑ:spɔ:t,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0135|brown,0135,15,15,brown,adj.,棕色的,braun,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0136|tourist,0136,15,15,tourist,n.,旅游者,'tuərist,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0137|russian,0137,16,16,Russian,adj.,俄罗斯（人）的,'rʌʃən,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0138|dutch,0138,16,16,Dutch,adj.,荷兰（人）的,dʌtʃ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0139|these,0139,16,16,these,pron.,这些（this 的复数）,ði:z,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0140|red,0140,16,16,red,adj.,红色的,red,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0141|grey,0141,16,16,grey,adj.,灰色的,grei,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0142|yellow,0142,16,16,yellow,adj.,黄色的,'jeləu,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0143|black,0143,16,16,black,adj.,黑色的,blæk,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0144|orange,0144,16,16,orange,adj.,橘黄色的,'ɔrindʒ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0145|employee,0145,17,17,employee,n.,雇员,im'plɔi-i:,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0146|hard working,0146,17,17,hard-working,adj.,勤奋的,'hɑ:dwə:kiŋ,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0147|sales rep,0147,17,17,sales rep,n.,推销员,seɪlz reps,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0148|man,0148,17,17,man,n.,男人,mæn,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0149|office,0149,17,17,office,n.,办公室,'ɔfis,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0150|assistant,0150,17,17,assistant,n.,助手,ə'sistənt,klose-actual-textbook-photo,verified-actual+helper
+nce1-o0151|matter,0151,19,20,matter,,事情,'mætə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0152|children,0152,19,20,children,,孩子们(child的复数),'tʃildrən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0153|tired,0153,19,20,tired,,累，疲乏,'taiəd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0154|boy,0154,19,20,boy,,男孩,bɔi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0155|thirsty,0155,19,20,thirsty,,渴,'θə:sti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0156|mum,0156,19,20,Mum,,妈妈(儿语),'mʌm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0157|sit down,0157,19,20,sit down,,坐下,ˌsit'daun,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0158|right,0158,19,20,right,,好，可以,rait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0159|ice cream,0159,19,20,ice cream,,冰淇淋,ˌais'kri:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0160|big,0160,19,20,big,,大的,big,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0161|small,0161,19,20,small,,小的,smɔ:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0162|open,0162,19,20,open,,开着的,'əupən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0163|shut,0163,19,20,shut,,关着的,ʃʌt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0164|light,0164,19,20,light,,轻的,lait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0165|heavy,0165,19,20,heavy,,重的,'hevi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0166|long,0166,19,20,long,,长的,lɔŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0167|shoe,0167,19,20,shoe,,鞋子,ʃu:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0168|grandfather,0168,19,20,grandfather,,祖父，外祖父,'grændˌfɑ:ðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0169|grandmother,0169,19,20,grandmother,,祖母，外祖母,'grænˌmʌðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0170|give,0170,21,22,give,,给,giv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0171|one,0171,21,22,one,,一个,wʌn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0172|which,0172,21,22,which,,哪一个,witʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0173|empty,0173,21,22,empty,,空的,'empti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0174|full,0174,21,22,full,,满的,fʊl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0175|large,0175,21,22,large,,大的,lɑ:dʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0176|little,0176,21,22,little,,小的,'litl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0177|sharp,0177,21,22,sharp,,尖的，锋利的,ʃɑ:p,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0178|small,0178,21,22,small,,小的,smɔ:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0179|big,0179,21,22,big,,大的,big,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0180|blunt,0180,21,22,blunt,,钝的,blʌnt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0181|box,0181,21,22,box,,盒子，箱子,bɔks,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0182|glass,0182,21,22,glass,,杯子,glɑ:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0183|cup,0183,21,22,cup,,茶杯,kʌp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0184|bottle,0184,21,22,bottle,,瓶子,'bɔtl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0185|tin,0185,21,22,tin,,罐头,tin,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0186|knife,0186,21,22,knife,,刀子,naif,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0187|fork,0187,21,22,fork,,叉子,fɔ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0188|spoon,0188,21,22,spoon,,勺子,spuːn,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0189|on,0189,23,24,on,,在…之上,ɔn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0190|shelf,0190,23,24,shelf,,架子，搁板,ʃelf,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0191|desk,0191,23,24,desk,,课桌,desk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0192|table,0192,23,24,table,,桌子,'teibəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0193|plate,0193,23,24,plate,,盘子,pleit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0194|cupboard,0194,23,24,cupboard,,食橱,'kʌbəd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0195|cigarette,0195,23,24,cigarette,,香烟,ˌsigə'ret,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0196|television,0196,23,24,television,,"电视机,/'teliˌviʒən",ˌteli'viʒən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0197|floor,0197,23,24,floor,,地板,flɔ:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0198|dressing table,0198,23,24,dressing table,,梳妆台,ˈdresɪŋ teɪbl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0199|magazine,0199,23,24,magazine,,杂志,ˌmægə'zi:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0200|bed,0200,23,24,bed,,床,bed,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0201|newspaper,0201,23,24,newspaper,,报纸,'nju:sˌpeipə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0202|stereo,0202,23,24,stereo,,"立体声音响,/'steriəu",'stiər-,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0203|mrs,0203,25,26,Mrs.,,夫人,'misiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0204|kitchen,0204,25,26,kitchen,,厨房,'kitʃin,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0205|refrigerator,0205,25,26,refrigerator,,电冰箱,ri'fridʒəreitə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0206|right,0206,25,26,right,,右边,rait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0207|electric,0207,25,26,electric,,带电的，可通电的,i'lektrik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0208|left,0208,25,26,left,,左边,left,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0209|cooker,0209,25,26,cooker,,炉子，炊具,'kukə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0210|middle,0210,25,26,middle,,中间,'midl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0211|of,0211,25,26,of,,"属于…的,/əv,ə",ɔv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0212|room,0212,25,26,room,,房间,ru:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0213|cup,0213,25,26,cup,,杯子,kʌp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0214|where,0214,25,26,where,,在哪里,weə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0215|in,0215,25,26,in,,在…里,in,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0216|living room,0216,27,28,living room,,客厅,'liviŋ ru:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0217|near,0217,27,28,near,,靠近,niə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0218|window,0218,27,28,window,,窗户,'windəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0219|armchair,0219,27,28,armchair,,手扶椅,'ɑ:mtʃeə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0220|door,0220,27,28,door,,门,dɔ:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0221|picture,0221,27,28,picture,,图画,'piktʃə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0222|wall,0222,27,28,wall,,墙,wɔ:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0223|trousers,0223,27,28,trousers,,〔复数〕长裤,'trauzəz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0224|shut,0224,29,30,shut,,关门,ʃʌt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0225|bedroom,0225,29,30,bedroom,,"卧室,/'bedrum",-ru:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0226|untidy,0226,29,30,untidy,,乱，不整齐,ˌʌn'taidi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0227|must,0227,29,30,must,,必须，应该,mʌst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0228|open,0228,29,30,open,,打开,'əupən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0229|air,0229,29,30,air,,使…通风，换换空气,eə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0230|put,0230,29,30,put,,放置,put,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0231|clothes,0231,29,30,clothes,,衣服,kləuðz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0232|wardrobe,0232,29,30,wardrobe,,大衣柜,'wɔ:drəub,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0233|dust,0233,29,30,dust,,掸掉灰尘,dʌst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0234|sweep,0234,29,30,sweep,,扫,swi:p,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0235|empty,0235,29,30,empty,,倒空，使…变空,'empti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0236|read,0236,29,30,read,,读,ri:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0237|sharpen,0237,29,30,sharpen,,削尖，使锋利,'ʃɑ:pən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0238|put on,0238,29,30,put on,,穿上,ˌput'ɔn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0239|take off,0239,29,30,take off,,脱掉,teɪk ɒf,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0240|turn on,0240,29,30,turn on,,开(电灯),tə:n ɔn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0241|turn off,0241,29,30,turn off,,关(电灯),tɜːn ɒf,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0242|garden,0242,31,32,garden,,花园,'gɑ:dn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0243|under,0243,31,32,under,,在…之下,'ʌndə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0244|tree,0244,31,32,tree,,树,tri:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0245|climb,0245,31,32,climb,,爬，攀登,klaim,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0246|who,0246,31,32,who,,谁,hu:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0247|run,0247,31,32,run,,跑,rʌn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0248|grass,0248,31,32,grass,,草，草地,grɑ:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0249|after,0249,31,32,after,,在…之后,'ɑ:ftə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0250|across,0250,31,32,across,,横过；穿过,əˈkrɒs,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0251|cat,0251,31,32,cat,,猫,kæt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0252|type,0252,31,32,type,,打字,taip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0253|letter,0253,31,32,letter,,信,'letə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0254|basket,0254,31,32,basket,,篮子,'bɑ:skit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0255|eat,0255,31,32,eat,,吃,i:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0256|bone,0256,31,32,bone,,骨头,bəun,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0257|clean,0257,31,32,clean,,清洗,kli:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0258|tooth,0258,31,32,tooth,,牙齿,tu:θ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0259|cook,0259,31,32,cook,,做(饭菜),kuk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0260|milk,0260,31,32,milk,,牛奶,milk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0261|meal,0261,31,32,meal,,饭，一顿饭,mi:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0262|drink,0262,31,32,drink,,喝,driŋk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0263|tap,0263,31,32,tap,,(水)龙头,tæp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0264|day,0264,33,34,day,,日子,dei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0265|cloud,0265,33,34,cloud,,云,klaud,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0266|sky,0266,33,34,sky,,天空,skai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0267|sun,0267,33,34,sun,,太阳,sʌn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0268|shine,0268,33,34,shine,,照耀,ʃain,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0269|with,0269,33,34,with,,"和…在一起,/wið",wiθ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0270|family,0270,33,34,family,,家庭(成员),'fæməli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0271|walk,0271,33,34,walk,,走路，步行,wɔ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0272|over,0272,33,34,over,,跨越，在…之上,'əuvə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0273|bridge,0273,33,34,bridge,,桥,bridʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0274|boat,0274,33,34,boat,,船,bəut,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0275|river,0275,33,34,river,,河,'rivə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0276|ship,0276,33,34,ship,,轮船,ʃip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0277|aeroplane,0277,33,34,aeroplane,,飞机,'eərəplein,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0278|fly,0278,33,34,fly,,飞,flai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0279|sleep,0279,33,34,sleep,,睡觉,sli:p,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0280|shave,0280,33,34,shave,,刮脸,ʃeiv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0281|cry,0281,33,34,cry,,哭，喊,krai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0282|wash,0282,33,34,wash,,洗,wɔʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0283|wait,0283,33,34,wait,,等,weit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0284|jump,0284,33,34,jump,,跳,dʒʌmp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0285|photograph,0285,35,36,photograph,,照片,'fəutəgrɑ:f,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0286|village,0286,35,36,village,,村庄,'vilidʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0287|valley,0287,35,36,valley,,山谷,'væli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0288|between,0288,35,36,between,,在…之间,bi'twi:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0289|hill,0289,35,36,hill,,小山,hil,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0290|another,0290,35,36,another,,另一个,ə'nʌðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0291|wife,0291,35,36,wife,,妻子,waif,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0292|along,0292,35,36,along,,沿着,ə'lɔŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0293|bank,0293,35,36,bank,,河岸,bæŋk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0294|water,0294,35,36,water,,水,'wɔ:tə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0295|swim,0295,35,36,swim,,游泳,swim,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0296|building,0296,35,36,building,,大楼，建筑物,'bildiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0297|park,0297,35,36,park,,公园,pɑ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0298|into,0298,35,36,into,,"进入,/'intu",'intə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0299|beside,0299,35,36,beside,,在…旁,bi'said,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0300|off,0300,35,36,off,,离开,ɔf,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0301|work,0301,37,38,work,,工作,wə:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0302|hard,0302,37,38,hard,,努力地,'hɑ:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0303|make,0303,37,38,make,,做,meik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0304|bookcase,0304,37,38,bookcase,,书橱，书架,'buk-keis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0305|hammer,0305,37,38,hammer,,锤子,'hæmə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0306|paint,0306,37,38,paint,,上漆，涂,peint,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0307|pink,0307,37,38,pink,,粉红色,piŋk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0308|favourite,0308,37,38,favourite,,最喜欢的,'feivərit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0309|homework,0309,37,38,homework,,作业,'həumwə:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0310|listen,0310,37,38,listen,,听,'lisən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0311|dish,0311,37,38,dish,,盘子，碟子,diʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0312|front,0312,39,40,front,,前面,frʌnt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0313|in front of,0313,39,40,in front of,,在…之前,ɪn frʌnt ɒv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0314|careful,0314,39,40,careful,,小心的，仔细的,'keəful,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0315|vase,0315,39,40,vase,,"花瓶,/vɑ:z,veis",veiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0316|drop,0316,39,40,drop,,掉下,drɔp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0317|flower,0317,39,40,flower,,花,'flauə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0318|show,0318,39,40,show,,给…看,ʃəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0319|send,0319,39,40,send,,送给,send,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0320|take,0320,39,40,take,,带给,teik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0321|cheese,0321,41,42,cheese,,乳酪，干酪,tʃi:z,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0322|bread,0322,41,42,bread,,面包,bred,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0323|soap,0323,41,42,soap,,肥皂,səup,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0324|chocolate,0324,41,42,chocolate,,巧克力,'tʃɔklit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0325|sugar,0325,41,42,sugar,,糖,'ʃugə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0326|coffee,0326,41,42,coffee,,咖啡,'kɔfi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0327|tea,0327,41,42,tea,,茶,ti:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0328|tobacco,0328,41,42,tobacco,,烟草，烟丝,tə'bækəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0329|bird,0329,41,42,bird,,鸟,bə:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0330|any,0330,41,42,any,,一些,'eni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0331|some,0331,41,42,some,,一些,sʌm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0332|of course,0332,43,44,of course,,当然,əv'kɔ:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0333|kettle,0333,43,44,kettle,,水壶,'ketl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0334|behind,0334,43,44,behind,,在…后面,bi'haind,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0335|teapot,0335,43,44,teapot,,茶壶,'ti:pɔt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0336|now,0336,43,44,now,,现在，此刻,nau,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0337|find,0337,43,44,find,,找到,faind,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0338|boil,0338,43,44,boil,,沸腾，开,bɔil,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0339|can,0339,45,46,can,,能够,kæn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0340|boss,0340,45,46,boss,,老板，上司,bɔs,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0341|minute,0341,45,46,minute,,"分(钟),/'minit",mai'nju:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0342|ask,0342,45,46,ask,,请求，要求,ɑ:sk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0343|handwriting,0343,45,46,handwriting,,书写,'hændˌraitiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0344|terrible,0344,45,46,terrible,,糟糕的，可怕的,'terəbəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0345|lift,0345,45,46,lift,,拿起，搬起，举起,lift,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0346|cake,0346,45,46,cake,,饼，蛋糕,keik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0347|biscuit,0347,45,46,biscuit,,饼干,'biskit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0348|like,0348,47,48,like,,喜欢，想要,laik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0349|want,0349,47,48,want,,"想,/wɔnt",wɑ:nt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0350|fresh,0350,47,48,fresh,,新鲜的,freʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0351|egg,0351,47,48,egg,,鸡蛋,eg,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0352|butter,0352,47,48,butter,,黄油,'bʌtə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0353|pure,0353,47,48,pure,,纯净的,pjuə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0354|honey,0354,47,48,honey,,蜂蜜,'hʌni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0355|ripe,0355,47,48,ripe,,成熟的,raip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0356|banana,0356,47,48,banana,,香蕉,bə'nɑ:nə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0357|jam,0357,47,48,jam,,果酱,dʒæm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0358|sweet,0358,47,48,sweet,,甜的,swi:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0359|orange,0359,47,48,orange,,橙,'ɔrindʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0360|scotch whisky,0360,47,48,Scotch whisky,,苏格兰威士忌,skɒtʃ ˈwɪski,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0361|choice,0361,47,48,choice,,上等的，精选的,tʃɔis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0362|apple,0362,47,48,apple,,苹果,'æpəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0363|wine,0363,47,48,wine,,酒，果酒,wain,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0364|beer,0364,47,48,beer,,啤酒,biə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0365|blackboard,0365,47,48,blackboard,,黑板,'blækbɔ:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0366|butcher,0366,49,50,butcher,,卖肉的,'butʃə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0367|meat,0367,49,50,meat,,食用肉,mi:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0368|beef,0368,49,50,beef,,牛肉,bi:f,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0369|lamb,0369,49,50,lamb,,羔羊肉,læm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0370|husband,0370,49,50,husband,,丈夫,'hʌzbənd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0371|steak,0371,49,50,steak,,牛排,steik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0372|mince,0372,49,50,mince,,肉馅，绞肉,mins,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0373|chicken,0373,49,50,chicken,,鸡,'tʃikin,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0374|tell,0374,49,50,tell,,告诉,tel,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0375|truth,0375,49,50,truth,,实情,tru:θ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0376|either,0376,49,50,either,,也(用于否定句),'aiðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0377|tomato,0377,49,50,tomato,,西红柿,tə'mɑ:təu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0378|potato,0378,49,50,potato,,土豆,pə'teitəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0379|cabbage,0379,49,50,cabbage,,卷心菜,'kæbidʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0380|lettuce,0380,49,50,lettuce,,莴苣,'letis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0381|pea,0381,49,50,pea,,豌豆,pi:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0382|bean,0382,49,50,bean,,豆角,bi:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0383|pear,0383,49,50,pear,,梨,peə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0384|grape,0384,49,50,grape,,葡萄,greip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0385|peach,0385,49,50,peach,,桃,pi:tʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0386|greece,0386,51,52,Greece,,希腊,gri:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0387|climate,0387,51,52,climate,,气候,'klaimit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0388|country,0388,51,52,country,,国家,'kʌntri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0389|pleasant,0389,51,52,pleasant,,宜人的,'plezənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0390|weather,0390,51,52,weather,,天气,'weðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0391|spring,0391,51,52,spring,,春季,spriŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0392|windy,0392,51,52,windy,,有风的,'windi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0393|warm,0393,51,52,warm,,温暖的,wɔ:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0394|rain,0394,51,52,rain,,下雨,rein,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0395|sometimes,0395,51,52,sometimes,,有时,'sʌmtaimz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0396|summer,0396,51,52,summer,,夏天,'sʌmə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0397|autumn,0397,51,52,autumn,,秋天,'ɔ:təm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0398|winter,0398,51,52,winter,,冬天,'wintə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0399|snow,0399,51,52,snow,,下雪,snəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0400|january,0400,51,52,January,,1月,'dʒænjuəri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0401|february,0401,51,52,February,,2月,'februəri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0402|march,0402,51,52,March,,3月,mɑ:tʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0403|april,0403,51,52,April,,4月,'eiprəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0404|may,0404,51,52,May,,5月,mei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0405|june,0405,51,52,June,,6月,dʒu:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0406|july,0406,51,52,July,,7月,dʒu'lai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0407|august,0407,51,52,August,,8月,'ɔ:gəst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0408|september,0408,51,52,September,,9月,sep'tembə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0409|october,0409,51,52,October,,10月,ɔk'təubə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0410|november,0410,51,52,November,,11月,nəu'vembə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0411|december,0411,51,52,December,,12月,di'sembə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0412|the us,0412,51,52,the U.S.,,美国,ðə ˌjuː ˈes,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0413|brazil,0413,51,52,Brazil,,巴西,brə'zil,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0414|holland,0414,51,52,Holland,,荷兰,'hɔlənd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0415|england,0415,51,52,England,,英国,'iŋglənd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0416|france,0416,51,52,France,,法国,'fræns,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0417|germany,0417,51,52,Germany,,德国,'dʒə:məni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0418|italy,0418,51,52,Italy,,意大利,'itəli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0419|norway,0419,51,52,Norway,,挪威,'nɔ:wei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0420|russia,0420,51,52,Russia,,俄罗斯,'rʌʃə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0421|spain,0421,51,52,Spain,,西班牙,spein,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0422|sweden,0422,51,52,Sweden,,瑞典,'swi:dn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0423|mild,0423,53,54,mild,,温和的，温暖的,maild,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0424|always,0424,53,54,always,,总是,'ɔ:lweiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0425|north,0425,53,54,north,,北方,nɔ:θ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0426|east,0426,53,54,east,,东方,i:st,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0427|wet,0427,53,54,wet,,潮湿的,wet,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0428|west,0428,53,54,west,,西方,west,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0429|south,0429,53,54,south,,南方,sauθ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0430|season,0430,53,54,season,,季节,'si:zən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0431|best,0431,53,54,best,,最,best,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0432|night,0432,53,54,night,,夜晚,nait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0433|rise,0433,53,54,rise,,升起,raiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0434|early,0434,53,54,early,,早,'ə:li,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0435|set,0435,53,54,set,,(太阳)落下去,set,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0436|late,0436,53,54,late,,晚，迟,leit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0437|interesting,0437,53,54,interesting,,有趣的，有意思的,'intristiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0438|subject,0438,53,54,subject,,话题,'sʌbdʒikt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0439|conversation,0439,53,54,conversation,,谈话,ˌkɔnvə'seiʃən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0440|australia,0440,53,54,Australia,,澳大利亚,ɔ'streiliə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0441|australian,0441,53,54,Australian,,澳大利亚人,ɔ'streiliən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0442|austria,0442,53,54,Austria,,奥地利,'ɔstriə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0443|austrian,0443,53,54,Austrian,,奥地利人,'ɔstriən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0444|canada,0444,53,54,Canada,,加拿大,'kænədə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0445|canadian,0445,53,54,Canadian,,加拿大人,kə'neidiən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0446|china,0446,53,54,China,,中国,'tʃainə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0447|finland,0447,53,54,Finland,,芬兰,'finlənd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0448|finnish,0448,53,54,Finnish,,芬兰人,'finiʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0449|india,0449,53,54,India,,印度,'indiə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0450|indian,0450,53,54,Indian,,印度人,'indiən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0451|japan,0451,53,54,Japan,,日本,dʒə'pæn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0452|nigeria,0452,53,54,Nigeria,,尼日利亚,nai'dʒiəriə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0453|nigerian,0453,53,54,Nigerian,,尼日利亚人,nai'dʒiəriən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0454|turkey,0454,53,54,Turkey,,土耳其,'tə:ki,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0455|turkish,0455,53,54,Turkish,,土耳其人,'tə:kiʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0456|korea,0456,53,54,Korea,,"韩国,/kə'riə",kɔ(:)'riə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0457|polish,0457,53,54,Polish,,波兰人,'pəuliʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0458|poland,0458,53,54,Poland,,波兰,'pəulənd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0459|thai,0459,53,54,Thai,,泰国人,tai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0460|thailand,0460,53,54,Thailand,,泰国,'tailænd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0461|live,0461,55,56,live,,住，生活,liv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0462|stay,0462,55,56,stay,,呆在，停留,stei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0463|home,0463,55,56,home,,家,həum,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0464|housework,0464,55,56,housework,,家务,'hauswə:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0465|lunch,0465,55,56,lunch,,午饭,lʌntʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0466|afternoon,0466,55,56,afternoon,,下午,ˌɑ:ftə'nu:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0467|usually,0467,55,56,usually,,"通常,/'ju:ʒuəli",'ju:ʒəli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0468|together,0468,55,56,together,,一起,tə'geðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0469|evening,0469,55,56,evening,,晚上,'i:vniŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0470|arrive,0470,55,56,arrive,,到达,ə'raiv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0471|night,0471,55,56,night,,夜间,nait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0472|o'clock,0472,57,58,o'clock,,点钟,ə'klɔk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0473|shop,0473,57,58,shop,,商店,ʃɔp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0474|moment,0474,57,58,moment,,片刻，瞬间,'məumənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0475|envelope,0475,59,60,envelope,,信封,'envələup,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0476|writing paper,0476,59,60,writing paper,,信纸,ˈraɪtɪŋ ˈpeɪpə(r),legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0477|shop assistant,0477,59,60,shop assistant,,售货员,ʃɒp əˈsɪstənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0478|size,0478,59,60,size,,尺寸，尺码，大小,saiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0479|pad,0479,59,60,pad,,信笺簿,pæd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0480|glue,0480,59,60,glue,,胶水,glu:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0481|chalk,0481,59,60,chalk,,粉笔,tʃɔ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0482|change,0482,59,60,change,,零钱，找给的钱,tʃeindʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0483|feel,0483,61,62,feel,,感觉,fi:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0484|look,0484,61,62,look,,看(起来),luk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0485|must,0485,61,62,must,,必须,mʌst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0486|call,0486,61,62,call,,叫，请,kɔ:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0487|doctor,0487,61,62,doctor,,医生,'dɔktə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0488|telephone,0488,61,62,telephone,,电话,'telifəun,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0489|remember,0489,61,62,remember,,记得，记住,ri'membə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0490|mouth,0490,61,62,mouth,,嘴,mauθ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0491|tongue,0491,61,62,tongue,,舌头,tʌŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0492|bad,0492,61,62,bad,,坏的，严重的,bæd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0493|cold,0493,61,62,cold,,感冒,kəuld,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0494|news,0494,61,62,news,,消息,nju:z,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0495|headache,0495,61,62,headache,,头痛,'hedeik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0496|aspirin,0496,61,62,aspirin,,阿斯匹林,'æspərin,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0497|earache,0497,61,62,earache,,耳痛,'iəreik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0498|toothache,0498,61,62,toothache,,牙痛,'tu:θeik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0499|dentist,0499,61,62,dentist,,牙医,'dentist,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0500|stomach ache,0500,61,62,stomach ache,,胃痛,ˈstʌmək eɪk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0501|medicine,0501,61,62,medicine,,药,'medsən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0502|temperature,0502,61,62,temperature,,温度,'tempərətʃə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0503|flu,0503,61,62,flu,,流行性感冒,flu:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0504|measles,0504,61,62,measles,,麻疹,'mi:zəlz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0505|mumps,0505,61,62,mumps,,腮腺炎,mumps,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0506|better,0506,63,64,better,,形容词well的比较级,'betə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0507|certainly,0507,63,64,certainly,,当然,'sə:tənli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0508|get up,0508,63,64,get up,,起床,get ʌp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0509|yet,0509,63,64,yet,,还，仍,jet,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0510|rich,0510,63,64,rich,,油腻的,ritʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0511|food,0511,63,64,food,,食物,fu:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0512|remain,0512,63,64,remain,,保持，继续,ri'mein,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0513|play,0513,63,64,play,,玩,plei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0514|match,0514,63,64,match,,火柴,mætʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0515|talk,0515,63,64,talk,,谈话,tɔ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0516|library,0516,63,64,library,,图书馆,'laibrəri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0517|drive,0517,63,64,drive,,开车,draiv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0518|so,0518,63,64,so,,如此地,səu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0519|quickly,0519,63,64,quickly,,快地,'kwikli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0520|lean out of,0520,63,64,lean out of,,身体探出,liːn aʊt ɒv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0521|break,0521,63,64,break,,打破,breik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0522|noise,0522,63,64,noise,,喧闹声,nɔɪz,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0523|dad,0523,65,66,Dad,,爸(儿语),dæd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0524|key,0524,65,66,key,,钥匙,ki:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0525|baby,0525,65,66,baby,,婴儿,'beibi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0526|hear,0526,65,66,hear,,听见,hiə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0527|enjoy,0527,65,66,enjoy,,玩得快活,in'dʒɔi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0528|yourself,0528,65,66,yourself,,你自己,jə'self,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0529|ourselves,0529,65,66,ourselves,,我们自己,auə'selvz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0530|mum,0530,65,66,mum,,妈妈（儿语）,mʌm,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0531|myself,0531,65,66,myself,,我自己,mai'self,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0532|themselves,0532,65,66,themselves,,他们自己,ðəm'selvz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0533|himself,0533,65,66,himself,,他自己,him'self,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0534|herself,0534,65,66,herself,,她自己,hə:'self,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0535|greengrocer,0535,67,68,greengrocer,,蔬菜水果零售商,'gri:nˌgrəusə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0536|absent,0536,67,68,absent,,"缺席的,/'æbsənt",əb'sent,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0537|monday,0537,67,68,Monday,,星期一,'mʌndi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0538|tuesday,0538,67,68,Tuesday,,"星期二,/'tju:zdi:",'tu:z-,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0539|wednesday,0539,67,68,Wednesday,,星期三,'wenzdi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0540|thursday,0540,67,68,Thursday,,星期四,'θə:zdi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0541|keep,0541,67,68,keep,,(身体健康)处于(状况),ki:p,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0542|spend,0542,67,68,spend,,度过,spend,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0543|weekend,0543,67,68,weekend,,"周末,/'wi:kend",ˌwi:k'end,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0544|friday,0544,67,68,Friday,,星期五,'fraidi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0545|saturday,0545,67,68,Saturday,,星期六,'sætədi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0546|sunday,0546,67,68,Sunday,,星期日,'sʌndi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0547|country,0547,67,68,country,,乡村,'kʌntri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0548|lucky,0548,67,68,lucky,,幸运的,'lʌki,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0549|church,0549,67,68,church,,教堂,tʃə:tʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0550|dairy,0550,67,68,dairy,,乳品店,'deəri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0551|baker,0551,67,68,baker,,面包师傅,'beikə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0552|grocer,0552,67,68,grocer,,食品杂货商,'grəusə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0553|year,0553,69,70,year,,"年,/jiə",jə:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0554|race,0554,69,70,race,,比赛,reis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0555|town,0555,69,70,town,,城镇,town,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0556|crowd,0556,69,70,crowd,,人群,kraud,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0557|stand,0557,69,70,stand,,站立,stand,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0558|exciting,0558,69,70,exciting,,使人激动的,ik'saitiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0559|just,0559,69,70,just,,正好，恰好,dʒʌst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0560|finish,0560,69,70,finish,,结尾，结束,'finiʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0561|winner,0561,69,70,winner,,获胜者,'winə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0562|behind,0562,69,70,behind,,在…之后,bi'haind,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0563|way,0563,69,70,way,,路途,wei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0564|stationer,0564,69,70,stationer,,文具商；文具店,ˈsteɪʃənə,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0565|denmark,0565,69,70,Denmark,,丹麦,ˈdenmɑːk,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0566|awful,0566,71,72,awful,,让人讨厌的，坏的,'ɔ:ful,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0567|telephone,0567,71,72,telephone,,打电话,'telifəun,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0568|time,0568,71,72,time,,次(数),time,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0569|answer,0569,71,72,answer,,接(电话),'ɑ:nsə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0570|last,0570,71,72,last,,最后的，前一次的,lɑ:st,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0571|phone,0571,71,72,phone,,电话(=telephone),fəun,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0572|again,0572,71,72,again,,又一次地,ə'gein,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0573|say,0573,71,72,say,,说,sei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0574|week,0574,73,74,week,,周,wi:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0575|london,0575,73,74,London,,伦敦,'lʌndən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0576|suddenly,0576,73,74,suddenly,,突然地,'sʌdnli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0577|bus stop,0577,73,74,bus stop,,公共汽车车站,ˈbʌs stɒp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0578|smile,0578,73,74,smile,,微笑,smail,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0579|pleasantly,0579,73,74,pleasantly,,愉快地,'plezntli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0580|understand,0580,73,74,understand,,懂，明白,ˌʌndə'stænd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0581|speak,0581,73,74,speak,,讲，说,spi:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0582|hand,0582,73,74,hand,,手,hand,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0583|pocket,0583,73,74,pocket,,衣袋,'pɔkit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0584|phrasebook,0584,73,74,phrasebook,,短语手册，常用语手册,ˈfreɪzbʊk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0585|phrase,0585,73,74,phrase,,短语,freiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0586|slowly,0586,73,74,slowly,,缓慢地,'sləuli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0587|hurriedly,0587,73,74,hurriedly,,匆忙地,'hʌridli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0588|cut,0588,73,74,cut,,割，切,kʌt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0589|thirstily,0589,73,74,thirstily,,口渴地,'θə:stili,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0590|go,0590,73,74,go,,走,gəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0591|greet,0591,73,74,greet,,问候，打招呼,gri:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0592|ago,0592,75,76,ago,,以前,ə'gəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0593|buy,0593,75,76,buy,,买,buy,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0594|pair,0594,75,76,pair,,双，对,peə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0595|fashion,0595,75,76,fashion,,(服装的)流行式样,'fæʃən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0596|uncomfortable,0596,75,76,uncomfortable,,不舒服的,ʌn'kʌmftəbəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0597|wear,0597,75,76,wear,,穿着,weə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0598|appointment,0598,77,78,appointment,,约会，预约,ə'pɔintmənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0599|urgent,0599,77,78,urgent,,紧急的，急迫的,'ə:dʒənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0600|till,0600,77,78,till,,直到…为止,til,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0601|shopping,0601,79,80,shopping,,购物,'ʃɔpiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0602|list,0602,79,80,list,,单子,list,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0603|vegetable,0603,79,80,vegetable,,蔬菜,'vedʒtəbəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0604|need,0604,79,80,need,,需要,ni:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0605|hope,0605,79,80,hope,,希望,həup,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0606|thing,0606,79,80,thing,,事情,θiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0607|money,0607,79,80,money,,钱,'mʌni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0608|groceries,0608,79,80,groceries,,食品杂货,'grəusəriz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0609|fruit,0609,79,80,fruit,,水果,fru:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0610|stationery,0610,79,80,stationery,,"文具,/'steiʃənəri",-neri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0611|newsagent,0611,79,80,newsagent,,报刊零售人,'nju:zˌeidʒənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0612|chemist,0612,79,80,chemist,,化剂师，化学家,'kemist,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0613|bath,0613,81,82,bath,,洗澡,bɑ:θ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0614|nearly,0614,81,82,nearly,,几乎，将近,'niəli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0615|ready,0615,81,82,ready,,准备好的，完好的,'redi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0616|dinner,0616,81,82,dinner,,正餐，晚餐,'dinə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0617|restaurant,0617,81,82,restaurant,,饭馆，餐馆,'restərɔnt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0618|roast,0618,81,82,roast,,烤的,rəust,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0619|breakfast,0619,81,82,breakfast,,早饭,'brekfəst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0620|haircut,0620,81,82,haircut,,理发,'heəkʌt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0621|party,0621,81,82,party,,聚会,'pɑ:ti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0622|holiday,0622,81,82,holiday,,假日,'hɔlidi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0623|mess,0623,83,84,mess,,杂乱，凌乱,mess,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0624|pack,0624,83,84,pack,,包装，打包，装箱,pæk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0625|suitcase,0625,83,84,suitcase,,"手提箱,/'su:tkeis",'sju:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0626|leave,0626,83,84,leave,,离开,li:v,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0627|already,0627,83,84,already,,已经,ɔ:l'redi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0628|paris,0628,85,86,Paris,,巴黎,'pæris,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0629|cinema,0629,85,86,cinema,,电影院,'sinimə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0630|film,0630,85,86,film,,电影,film,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0631|beautiful,0631,85,86,beautiful,,漂亮的,'bju:tifəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0632|city,0632,85,86,city,,城市,'siti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0633|never,0633,85,86,never,,从来没有,'nevə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0634|ever,0634,85,86,ever,,在任何时候,'evə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0635|attendant,0635,87,88,attendant,,接待员,ə'tendənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0636|bring,0636,87,88,bring,,带来，送来,briŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0637|garage,0637,87,88,garage,,车库，汽车修理厂,'gærɑ:ʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0638|crash,0638,87,88,crash,,碰撞,kræʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0639|lamp post,0639,87,88,lamp-post,,灯杆,læmp pəust,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0640|repair,0640,87,88,repair,,修理,ri'peə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0641|try,0641,87,88,try,,努力，设法,trai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0642|believe,0642,89,90,believe,,相信，认为,bi'li:v,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0643|may,0643,89,90,may,,(用于请求许可)可以,mei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0644|how long,0644,89,90,how long,,多长,haʊ lɒŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0645|since,0645,89,90,since,,自从,sins,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0646|why,0646,89,90,why,,为什么,why,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0647|sell,0647,89,90,sell,,卖，出售,sell,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0648|because,0648,89,90,because,,因为,bi'kɔz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0649|retire,0649,89,90,retire,,退休,ri'taiə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0650|cost,0650,89,90,cost,,花费,kɔst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0651|pound,0651,89,90,pound,,英镑,pound,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0652|worth,0652,89,90,worth,,值…钱,wə:θ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0653|penny,0653,89,90,penny,,便士,'peni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0654|still,0654,91,92,still,,还，仍旧,still,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0655|move,0655,91,92,move,,搬家,mu:v,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0656|miss,0656,91,92,miss,,想念，思念,mis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0657|neighbour,0657,91,92,neighbour,,邻居,'neibə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0658|person,0658,91,92,person,,人,'pə:sn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0659|people,0659,91,92,people,,人们,'pi:pl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0660|poor,0660,91,92,poor,,可怜的,puə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0661|pilot,0661,93,94,pilot,,飞行员,'pailət,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0662|return,0662,93,94,return,,返回,ri'tə:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0663|new york,0663,93,94,New York,,纽约,'nju: 'jɔ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0664|tokyo,0664,93,94,Tokyo,,东京,'təukjəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0665|madrid,0665,93,94,Madrid,,马德里,mə'drid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0666|fly,0666,93,94,fly,,飞行,flai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0667|athens,0667,93,94,Athens,,雅典,'æθinz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0668|berlin,0668,93,94,Berlin,,柏林,bə:'lin,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0669|bombay,0669,93,94,Bombay,,孟买,bɔm'bei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0670|geneva,0670,93,94,Geneva,,日内瓦,dʒi'ni:və,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0671|moscow,0671,93,94,Moscow,,莫斯科,'mɔskəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0672|rome,0672,93,94,Rome,,罗马,rəum,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0673|seoul,0673,93,94,Seoul,,汉城,səul,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0674|stockholm,0674,93,94,Stockholm,,斯德哥尔摩,'stɔkhoum,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0675|sydney,0675,93,94,Sydney,,悉尼,'sidni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0676|return,0676,95,96,return,,往返,ri'tə:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0677|train,0677,95,96,train,,火车,trein,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0678|platform,0678,95,96,platform,,站台,'plætfɔ:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0679|plenty,0679,95,96,plenty,,大量,'plenti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0680|bar,0680,95,96,bar,,酒吧,bɑ:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0681|station,0681,95,96,station,,车站，火车站,'steiʃən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0682|porter,0682,95,96,porter,,搬运工,ˈpɔːtə,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0683|catch,0683,95,96,catch,,赶上,kætʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0684|miss,0684,95,96,miss,,错过,mis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0685|leave,0685,97,98,leave,,遗留,li:v,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0686|describe,0686,97,98,describe,,描述,di'skraib,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0687|zip,0687,97,98,zip,,拉链,zip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0688|label,0688,97,98,label,,标签,'leibəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0689|handle,0689,97,98,handle,,提手，把手,'hændl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0690|address,0690,97,98,address,,地址,ə'dres,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0691|pence,0691,97,98,pence,,penny的复数形式,pens,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0692|belong,0692,97,98,belong,,属于,bi'lɔŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0693|ow,0693,99,100,ow,,哎哟,au,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0694|slip,0694,99,100,slip,,滑倒，滑了一脚,slip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0695|fall,0695,99,100,fall,,落下，跌倒,fɔ:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0696|downstairs,0696,99,100,downstairs,,下楼,ˌdaun'steəz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0697|hurt,0697,99,100,hurt,,伤，伤害，疼痛,hə:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0698|back,0698,99,100,back,,背,back,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0699|stand up,0699,99,100,stand up,,起立，站起来,stænd ʌp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0700|help,0700,99,100,help,,帮助,help,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0701|at once,0701,99,100,at once,,立即,ət 'wʌns,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0702|sure,0702,99,100,sure,,一定的，确信的,ʃuə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0703|x ray,0703,99,100,X-ray,,X光透视,'eksrei,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0704|licence,0704,99,100,licence,,执照,ˈlaɪsəns,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0705|scotland,0705,101,102,Scotland,,苏格兰(英国),'skɔtlənd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0706|card,0706,101,102,card,,明信片,kɑ:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0707|youth,0707,101,102,youth,,青年,ju:θ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0708|hostel,0708,101,102,hostel,,招待所，旅馆,'hɔstəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0709|association,0709,101,102,association,,协会,əˌsəusi'eiʃən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0710|soon,0710,101,102,soon,,不久,su:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0711|write,0711,101,102,write,,写,rait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0712|exam,0712,103,104,exam,,考试,ig'zæm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0713|pass,0713,103,104,pass,,及格，通过,pɑ:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0714|mathematics,0714,103,104,mathematics,,数学,ˌmæθə'mætiks,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0715|question,0715,103,104,question,,问题,'kwestʃən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0716|easy,0716,103,104,easy,,容易的,'i:zi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0717|enough,0717,103,104,enough,,足够地,i'nʌf,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0718|paper,0718,103,104,paper,,考卷,'peipə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0719|fail,0719,103,104,fail,,未及格，失败,feil,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0720|answer,0720,103,104,answer,,回答,'ɑ:nsə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0721|mark,0721,103,104,mark,,分数,mɑ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0722|rest,0722,103,104,rest,,其他的东西,rest,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0723|difficult,0723,103,104,difficult,,困难的,'difikəlt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0724|hate,0724,103,104,hate,,讨厌,hate,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0725|low,0725,103,104,low,,低的；低的，矮的,low,legacy NCE1 lesson vocabulary helper,duplicate-helper-same-pair
+nce1-o0726|cheer,0726,103,104,cheer,,振作，振奋,tʃiə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0727|guy,0727,103,104,guy,,家伙，人,gai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0728|top,0728,103,104,top,,上方，顶部,tɔp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0729|clever,0729,103,104,clever,,聪明的,'klevə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0730|stupid,0730,103,104,stupid,,笨的,'stju:pid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0731|cheap,0731,103,104,cheap,,便宜的,tʃi:p,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0732|expensive,0732,103,104,expensive,,贵的,ik'spensiv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0733|fresh,0733,103,104,fresh,,新鲜的,freʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0734|stale,0734,103,104,stale,,变馊的,steil,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0735|loud,0735,103,104,loud,,大声的,laud,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0736|high,0736,103,104,high,,高的,hai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0737|hard,0737,103,104,hard,,硬的,'hɑ:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0738|sweet,0738,103,104,sweet,,甜的,swi:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0739|soft,0739,103,104,soft,,软的,sɔft,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0740|sour,0740,103,104,sour,,酸的,sauə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0741|low,0741,103,104,low,,低的；低的，矮的,low,legacy NCE1 lesson vocabulary helper,duplicate-helper-same-pair
+nce1-o0742|spell,0742,105,106,spell,,拼写,spell,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0743|intelligent,0743,105,106,intelligent,,聪明的，有智慧的,in'telidʒənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0744|mistake,0744,105,106,mistake,,错误,mis'teik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0745|present,0745,105,106,present,,"礼物,/pri'zent",'prezənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0746|dictionary,0746,105,106,dictionary,,词典,'dikʃənəri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0747|carry,0747,105,106,carry,,携带,'kæri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0748|keep,0748,105,106,keep,,保持；保留,kiːp,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0749|correct,0749,105,106,correct,,改正，纠正,kə'rekt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0750|madam,0750,107,108,madam,,夫人，女士(对妇女的尊称),'mædəm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0751|smart,0751,107,108,smart,,漂亮的；时髦的,smɑːt,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0752|as well,0752,107,108,as well,,同样,æz wel,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0753|suit,0753,107,108,suit,,"适于,/su:t",sju:t,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0754|pretty,0754,107,108,pretty,,漂亮的,'priti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0755|idea,0755,109,110,idea,,主意,ai'diə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0756|a little,0756,109,110,a little,,少许,ə ˈlɪtl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0757|teaspoonful,0757,109,110,teaspoonful,,一满茶匙,'ti:spu:nful,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0758|less,0758,109,110,less,,校少的，更小的,les,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0759|a few,0759,109,110,a few,,几个,ə fjuː,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0760|pity,0760,109,110,pity,,遗憾,'piti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0761|instead,0761,109,110,instead,,代替,in'sted,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0762|advice,0762,109,110,advice,,建议，忠告,əd'vais,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0763|most,0763,109,110,most,,最多的,məust,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0764|least,0764,109,110,least,,最小的，最少的,li:st,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0765|best,0765,109,110,best,,最好的,best,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0766|worse,0766,109,110,worse,,更坏的,wə:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0767|worst,0767,109,110,worst,,最坏的,wə:st,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0768|model,0768,111,112,model,,型号，式样,'mɔdl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0769|afford,0769,111,112,afford,,付得起(钱),ə'fɔ:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0770|deposit,0770,111,112,deposit,,预付定金,di'pɔzit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0771|instalment,0771,111,112,instalment,,分期付款,in'stɔ:lmənt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0772|price,0772,111,112,price,,价格,prais,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0773|millionaire,0773,111,112,millionaire,,百万富翁,ˌmiljə'neə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0774|conductor,0774,113,114,conductor,,售票员,kən'dʌktə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0775|fare,0775,113,114,fare,,车费，车票,feə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0776|change,0776,113,114,change,,兑换(钱),tʃeindʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0777|note,0777,113,114,note,,纸币,nəut,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0778|passenger,0778,113,114,passenger,,乘客,'pæsindʒə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0779|none,0779,113,114,none,,没有任何东西,nʌn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0780|neither,0780,113,114,neither,,"也不,/'naiðə",'ni:ðə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0781|get off,0781,113,114,get off,,下车,ɡet ɒf,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0782|tramp,0782,113,114,tramp,,流浪汉,træmp,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0783|except,0783,113,114,except,,除…外,ik'sept,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0784|anyone,0784,115,116,anyone,,任何人,'eniwʌn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0785|knock,0785,115,116,knock,,敲，打,nɔk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0786|everything,0786,115,116,everything,,一切事物,'evriθiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0787|quiet,0787,115,116,quiet,,宁静的，安静的,'kwaiət,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0788|impossible,0788,115,116,impossible,,不可能的,im'pɔsəbəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0789|invite,0789,115,116,invite,,邀请,in'vait,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0790|anything,0790,115,116,anything,,任何东西,'eniθiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0791|nothing,0791,115,116,nothing,,什么也没有,'nʌθiŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0792|lemonade,0792,115,116,lemonade,,柠檬水,ˌlemə'neid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0793|joke,0793,115,116,joke,,开玩笑,dʒəuk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0794|asleep,0794,115,116,asleep,,睡觉，睡着(用作表语),ə'sli:p,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0795|glasses,0795,115,116,glasses,,眼镜,'gla:siz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0796|dining room,0796,117,118,dining room,,饭厅,ˈdaɪnɪŋ ruːm,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0797|coin,0797,117,118,coin,,硬币,kɔin,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0798|mouth,0798,117,118,mouth,,嘴,mauθ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0799|swallow,0799,117,118,swallow,,吞下,swɔləu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0800|later,0800,117,118,later,,后来,'leitə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0801|toilet,0801,117,118,toilet,,厕所，盥洗室,'tɔilit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0802|ring,0802,117,118,ring,,响,riŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0803|story,0803,119,120,story,,故事,'stɔ:ri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0804|happen,0804,119,120,happen,,发生,'hæpən,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0805|thief,0805,119,120,thief,,贼,θi:f,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0806|enter,0806,119,120,enter,,进入,'entə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0807|dark,0807,119,120,dark,,黑暗的,dɑ:k,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0808|torch,0808,119,120,torch,,手电筒,tɔ:tʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0809|voice,0809,119,120,voice,,(说话的)声音,vɔis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0810|parrot,0810,119,120,parrot,,鹦鹉,'pærət,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0811|exercise book,0811,119,120,exercise book,,练习本,ˈeksəsaɪz bʊk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0812|customer,0812,121,122,customer,,顾客,'kʌstəmə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0813|forget,0813,121,122,forget,,忘记,fə'get,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0814|manager,0814,121,122,manager,,经理,'mænidʒə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0815|serve,0815,121,122,serve,,照应，服务，接待,sə:v,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0816|counter,0816,121,122,counter,,柜台,'kauntə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0817|recognize,0817,121,122,recognize,,认识,'rekəgnaiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0818|road,0818,121,122,road,,路,rəud,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0819|during,0819,123,124,during,,在…期间,'djuəriŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0820|trip,0820,123,124,trip,,旅行,trip,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0821|travel,0821,123,124,travel,,旅行,'trævəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0822|offer,0822,123,124,offer,,提供,'ɔfə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0823|job,0823,123,124,job,,工作,dʒɔb,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0824|guess,0824,123,124,guess,,猜,ges,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0825|grow,0825,123,124,grow,,长，让…生长,grəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0826|beard,0826,123,124,beard,,(下巴上的)胡子，络腮胡子,biəd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0827|kitten,0827,123,124,kitten,,小猫,'kitn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0828|water,0828,125,126,water,,浇水,'wɔ:tə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0829|terribly,0829,125,126,terribly,,非常,'terəbli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0830|dry,0830,125,126,dry,,干燥的，干的,drai,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0831|nuisance,0831,125,126,nuisance,,讨厌的东西或人,'nju:səns,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0832|mean,0832,125,126,mean,,意味着，意思是,mi:n,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0833|surprise,0833,125,126,surprise,,惊奇，意外的事,sə'praiz,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0834|immediately,0834,125,126,immediately,,立即地,i'mi:diətli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0835|famous,0835,127,128,famous,,著名的,'feiməs,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0836|actress,0836,127,128,actress,,女演员,'æktris,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0837|at least,0837,127,128,at least,,至少,æt liːst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0838|actor,0838,127,128,actor,,男演员,'æktə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0839|read,0839,127,128,read,,通过阅读得知,ri:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0840|wave,0840,129,130,wave,,招手,weiv,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0841|track,0841,129,130,track,,跑道,træk,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0842|mile,0842,129,130,mile,,英里,mail,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0843|overtake,0843,129,130,overtake,,从后面超越，超车,ˌəuvə'teik,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0844|speed limit,0844,129,130,speed limit,,限速,spiːd ˈlɪmɪt,legacy NCE1 lesson vocabulary helper,manual-gap-resolution
+nce1-o0845|dream,0845,129,130,dream,,做梦，思想不集中,dri:m,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0846|sign,0846,129,130,sign,,标记，牌子,sain,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0847|driving licence,0847,129,130,driving licence,,驾驶执照,ˈdraɪvɪŋ laɪsns,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0848|charge,0848,129,130,charge,,罚款,tʃɑ:dʒ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0849|darling,0849,129,130,darling,,亲爱的(用作表示称呼),'dɑ:liŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0850|egypt,0850,131,132,Egypt,,埃及,'i:dʒipt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0851|abroad,0851,131,132,abroad,,国外,ə'brɔ:d,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0852|worry,0852,131,132,worry,,担忧,'wʌri,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0853|reporter,0853,133,134,reporter,,记者,ri'pɔ:tə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0854|sensational,0854,133,134,sensational,,爆炸性的，耸人听闻的,sen'seiʃənəl,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0855|mink coat,0855,133,134,mink coat,,貂皮大衣,'miŋk-kəut,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0856|future,0856,135,136,future,,未来的,'fju:tʃə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0857|get married,0857,135,136,get married,,结婚,ɡet ˈmærid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0858|hotel,0858,135,136,hotel,,饭店,həu'tel,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0859|latest,0859,135,136,latest,,最新的,'leitist,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0860|introduce,0860,135,136,introduce,,介绍,'intrə'dju:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0861|football,0861,137,138,football,,足球,'futbɔ:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0862|pool,0862,137,138,pool,,赌注,pu:l,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0863|win,0863,137,138,win,,赢,win,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0864|world,0864,137,138,world,,世界,wə:ld,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0865|poor,0865,137,138,poor,,贫穷的,puə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0866|depend,0866,137,138,depend,,依靠,di'pend,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0867|extra,0867,139,140,extra,,额外的,'ekstrə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0868|overseas,0868,139,140,overseas,,海外的，国外的,ˌəuvə'si:z,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0869|engineering,0869,139,140,engineering,,工程,ˌendʒi'niəriŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0870|company,0870,139,140,company,,公司,'kʌmpəni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0871|line,0871,139,140,line,,线路,line,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0872|excited,0872,141,142,excited,,兴奋的,ik'saitid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0873|get on,0873,141,142,get on,,登上,ɡet ɒn,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0874|middle aged,0874,141,142,middle-aged,,中年的,'midl'eidʒid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0875|opposite,0875,141,142,opposite,,在…对面,'ɔpəzit,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0876|curiously,0876,141,142,curiously,,好奇地,'kjuəriəsli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0877|funny,0877,141,142,funny,,可笑的，滑稽的,'fʌni,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0878|powder,0878,141,142,powder,,香粉,'paudə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0879|compact,0879,141,142,compact,,带镜的化妆盒,'kɔmpækt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0880|kindly,0880,141,142,kindly,,和蔼地,'kaindli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0881|ugly,0881,141,142,ugly,,丑陋的,'ʌgli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0882|amused,0882,141,142,amused,,有趣的,ə'mju:zd,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0883|smile,0883,141,142,smile,,微笑,smail,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0884|embarrassed,0884,141,142,embarrassed,,尴尬的，窘迫的,im'bærəst,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0885|worried,0885,141,142,worried,,担心，担忧,'wʌrid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0886|regularly,0886,141,142,regularly,,经常地，定期地,'regjuləli,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0887|surround,0887,143,144,surround,,包围,sə'raund,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0888|wood,0888,143,144,wood,,树林,wud,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0889|beauty spot,0889,143,144,beauty spot,,风景点,ˈbjuːti spɒt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0890|hundred,0890,143,144,hundred,,百,'hʌndrid,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0891|city,0891,143,144,city,,城市,'siti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0892|through,0892,143,144,through,,穿过,θru:,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0893|visitor,0893,143,144,visitor,,参观者，游客，来访者,'vizitə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0894|tidy,0894,143,144,tidy,,整齐的,'taidi,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0895|litter,0895,143,144,litter,,杂乱的东西,'litə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0896|litter basket,0896,143,144,litter basket,,废物筐,ˈlɪtə ˈbɑːskɪt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0897|place,0897,143,144,place,,放,pleis,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0898|throw,0898,143,144,throw,,扔，抛,θrəu,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0899|rubbish,0899,143,144,rubbish,,垃圾,'rʌbiʃ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0900|count,0900,143,144,count,,数，点,kaunt,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0901|cover,0901,143,144,cover,,覆盖,'kʌvə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0902|piece,0902,143,144,piece,,碎片,pi:s,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0903|tyre,0903,143,144,tyre,,轮胎,'taiə,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0904|rusty,0904,143,144,rusty,,生锈的,'rʌsti,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0905|among,0905,143,144,among,,在…之间,ə'mʌŋ,legacy NCE1 lesson vocabulary helper,matched-helper
+nce1-o0906|prosecute,0906,143,144,prosecute,,依法处置,'prɔsikju:t,legacy NCE1 lesson vocabulary helper,matched-helper
