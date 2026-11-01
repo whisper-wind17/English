@@ -1,35 +1,61 @@
 # NEXT — Klose Learning
 
-更新：2026-09-12。本轮：七项维护整改及 Desktop 导入 / AnkiWeb 同步收尾。
+更新：2026-11-01。本轮：New Concept English 1 Source / Reconciliation / Curriculum 接入。
 
 ## 当前检查点
 
-七项整改已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`。完整 pipeline、内置重复重建和 16 项隔离回归通过；独立身份/来源/历史发布对账通过。逐项前后对比与证据见 [整改记录](docs/MAINTENANCE_20260912.md)。
+NCE1 接入 Phase A 已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`，任务文档见 [NCE1 Integration](docs/NCE1_INTEGRATION.md)。
 
-当前发布数量、allowed/held、LearningOrder、审核分布、artifact SHA-256 和模板指纹统一读取 [current.json](anki/klose/releases/current.json)。历史一次性交易保存在 [releases/history](anki/klose/releases/history/)。
+Klose 实际教材已锁定为外研社《新概念英语 1：英语初阶（智慧版）》，`SourceID=new_concept_english_1`，`SourceEdition=2022-smart-isbn-9787521336702`，ISBN `9787521336702`。当前 source reference 共 906 条 occurrence：
 
-本轮保留全部稳定 ID、来源事实与历史发布记录。重复目标通过 Admission 暂缓新增；题面消歧和例句修正属于 Presentation。模型审校不冒充人工确认。
+- Lesson 1–17：150 条来自 Klose 实物教材照片，`verified-actual`；
+- Lesson 19–144：756 条基于仓库既有《新概念英语第一册（新版）》数据、旧新版顺序基线、外研社版本说明及抽样核验，显式标记 `baseline-reconciled`；
+- 已知 `South Korean / Italian / Daewoo / Fiat` 等 Edition delta 已单独记录，不把旧版数据冒充智慧版逐页实物事实。
+
+NCE1 source/reconciliation gate 已进入统一 pipeline。课程段顺序已经显式建模为：
+
+```text
+Grade 4 Upper
+→ Grade 4 Lower
+→ New Concept English 1
+→ Grade 5 Upper
+→ Grade 5 Lower
+→ Grade 6 Upper
+→ Grade 6 Lower
+→ Third-party vocabulary
+```
+
+同一 Stable Note 在多个来源重复出现时取最早 curriculum coordinate；已进入 Anki Learning/Review 的卡不因新顺序改写 FSRS / Due。
+
+Phase A 验证证据：完整 `klose_pipeline.py all` 通过；内置重复重建 `byte drift=0`；19 项回归通过；新增测试验证 NCE1 必须位于 Grade 4 与 Grade 5 之间，并验证 NCE1 与 Grade 5 重复 NoteID 只保留更早 curriculum position。
+
+当前正式 Vocabulary / Expressions 发布内容和设备学习状态没有因 Phase A 改变。当前发布数量、allowed/held、LearningOrder、审核分布、artifact SHA-256 和模板指纹仍统一读取 [current.json](anki/klose/releases/current.json)。
+
+## NCE1 尚未完成的学习层工作
+
+906 条 Source occurrence 不能直接等同于 906 张卡。下一阶段必须完成 sense-aware identity reconciliation：
+
+1. 对 exact-single / multi-sense / new-candidate 逐项确认 target sense；
+2. 相同 learning unit 复用 Stable NoteID；真正新义项才 append 新 NoteID；
+3. 区分 Vocabulary 与可迁移 Expression，不把教材 `New words and expressions` 机械一行一张 Vocabulary Card；
+4. 建立 durable Source Identity / occurrence provenance；
+5. 新 Note 生成 LearnerLevel=4 的 Meaning / IPA / Example / Translation，并走显式 review；
+6. 只有 confirmed identity + review 通过的 NCE1 learning units 才进入 Admission / Release；
+7. 正式发布后，只对仍为 New 的 Anki Cards 按新 LearningOrder Reposition。
+
+在这些 gate 完成前，不把 NCE1 解释为已经进入当前 Anki 学习队列。
 
 ## 设备与学习状态
 
-本次会话中用户已确认完成以下操作，对应发布 `35b833e58397e5f0f4df36e65e63bbf7aaffe3561f0e68c80de51ce2898bfaad`：
+上一正式发布对应 release `35b833e58397e5f0f4df36e65e63bbf7aaffe3561f0e68c80de51ce2898bfaad`：
 
-- 导入前已导出 Collection 备份。
-- Vocabulary：2,953 条，更新 2,246 条、未变 707 条，无新增或错误提示。
-- Expressions：176 条，更新 5 条、未变 171 条，无新增或错误提示。相对设备旧内容的额外 3 条更新未还原字段差异，不将其解释为本轮新增内容修正。
-- 五条重复目标 KV001461、KV001481、KV001808、KV002569、KV002636 均仍为 New，已暂停；追加 `-is:suspended` 后搜索结果为零。
-- 2,864 张未暂停的 Vocabulary 新卡按 LearningOrder 升序完成 Reposition；Start=1、Step=1、Randomize=OFF、Shift existing=ON。002889 是 LearningOrder 最大值，不是本次新卡数量。
-- 已抽查 KV000075 sure 和 KE000147 的更新内容；用户确认旧复习记录仍在。
-- 用户确认 Desktop 已同步至 AnkiWeb。本次桌面导入流程已结束。
-
-iPad 未实际确认同步或抽查，不记为已验收；Due/Interval、UserMemo 和模板的完整验收也不由复习记录仍在这一确认推定。[结构化设备凭据](anki/klose/releases/device_receipts.json) 仍为上一版历史记录，本次确认暂记录于本检查点，尚未回填该文件。
-
-学习试点状态仍为 `awaiting-observation`；没有记录实际学习周、学习效果或成绩。填写方式见 [学习反馈](docs/LEARNING_FEEDBACK.md)。
+- Vocabulary：2,953 条；用户已确认 Desktop 导入并同步 AnkiWeb。
+- Expressions：176 条；用户已确认 Desktop 导入并同步 AnkiWeb。
+- 五条重复目标 KV001461、KV001481、KV001808、KV002569、KV002636 仍按 Admission held / New 卡暂停。
+- 2,864 张未暂停 Vocabulary New Cards 已按当时 LearningOrder 完成 Reposition。
+- iPad 未实际确认同步或抽查，不记为已验收。
+- 学习试点仍为 `awaiting-observation`，没有记录实际学习周、学习效果或成绩。
 
 ## 下一步
 
-1. 将本检查点已确认的 Desktop / AnkiWeb 结果回填结构化设备凭据，保留历史，并明确 iPad 未验收。
-2. 待用户实际确认 iPad 同步与抽查后补记设备验收；不重复要求 Desktop 导入。
-3. 从首个有记录的学习周开始收集反馈，再据证据调整每日新增、例句支撑或准入。
-
-本轮代码整改无未完成项。后续代码任务使用 [统一变更流程](docs/CHANGE_WORKFLOW.md)。本次整改前的完整 NEXT 已归档至 [历史检查点](docs/archive/checkpoints/2026-09-12-before-maintenance/NEXT.md)。
+优先完成 NCE1 identity reconciliation 与 Learner Presentation / Review，达到正式 Learning Admission / Release gate 后再生成新的 Anki 导入包和 New-card Reposition 范围。设备历史确认与学习反馈继续按既有 SOP 保留，不重复执行旧版全量迁移。
