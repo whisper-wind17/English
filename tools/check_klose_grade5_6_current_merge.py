@@ -190,12 +190,18 @@ def main() -> None:
     learner_rows = read_csv(LEARNER_CURRENT)
     master_by_id = {r.get("NoteID", "").strip(): r for r in master_rows}
     learner_by_id = {r.get("NoteID", "").strip(): r for r in learner_rows}
-    if len(master_by_id) != len(registry_ids) or len(master_by_id) != len(master_rows):
-        fail(f"derived Vocabulary Master does not match active Stable registry: {len(master_rows)}")
-    if set(master_by_id) != registry_ids:
-        fail("derived Vocabulary Master does not cover the current Stable registry exactly")
-    if set(learner_by_id) != registry_ids:
-        fail("learner/current does not cover the current Stable registry exactly")
+    if "" in master_by_id or len(master_by_id) != len(master_rows):
+        fail("derived Vocabulary Master has blank/duplicate NoteID")
+    if "" in learner_by_id or len(learner_by_id) != len(learner_rows):
+        fail("learner/current has blank/duplicate NoteID")
+    # This checker owns the Grade 4 + Grade 5/6 transaction, not later source
+    # allocations such as NCE1. A PR may append new Stable identities before the
+    # generated Master is rebuilt, so require the transaction-owned subset here.
+    required_textbook_ids = set(g4_coords) | set(g56_coords)
+    if not required_textbook_ids <= set(master_by_id):
+        fail("derived Vocabulary Master lost Grade 4/5/6 transaction identities")
+    if not required_textbook_ids <= set(learner_by_id):
+        fail("learner/current lost Grade 4/5/6 transaction identities")
 
     new_ids = set(allocations.values())
     for nid in new_ids:
