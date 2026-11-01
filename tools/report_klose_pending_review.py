@@ -20,5 +20,4 @@ def main():
     print(f"PENDING_REVIEW_COUNT\t{len(pending)}")
     for r in pending:
         print(f"PENDING_REVIEW\t{r['NoteID']}\t{r['ContentFingerprint']}")
-
-if __name__=="__main__": main()
+    if pending:\n        raise SystemExit(23)\n\nif __name__=="__main__": main()\n
