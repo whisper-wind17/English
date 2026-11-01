@@ -67,7 +67,7 @@ def normalize(value: str) -> str:
     return re.sub(r"\\s+", " ", (value or "").strip()).casefold()
 
 
-def read_xlsx_lexicon(path: Path = DEFAULT_XLSX) -> dict[str, dict[str, str]]:
+def read_xlsx_lexicon(path: Path = DEFAULT_XLSX) -> dict[str, list[dict[str, str]]]:
     rows = read_first_sheet(path)
     if not rows:
         raise ValueError("NCE1 XLSX is empty")
@@ -75,21 +75,19 @@ def read_xlsx_lexicon(path: Path = DEFAULT_XLSX) -> dict[str, dict[str, str]]:
     required = ["单词", "英音", "美音", "释义"]
     if header[:4] != required:
         raise ValueError(f"Unexpected NCE1 XLSX header: {header}")
-    out: dict[str, dict[str, str]] = {}
+    out: dict[str, list[dict[str, str]]] = {}
     for values in rows[1:]:
         values = values + [""] * (4 - len(values))
         word, british, american, definition = values[:4]
         key = normalize(word)
         if not key:
             continue
-        if key in out:
-            raise ValueError(f"Duplicate NCE1 XLSX word: {word}")
-        out[key] = {
+        out.setdefault(key, []).append({
             "Word": word,
             "British": british.strip("[] "),
             "American": american.strip("[] "),
             "DefinitionRaw": definition,
-        }
+        })
     return out
 
 
