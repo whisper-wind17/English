@@ -89,14 +89,17 @@ def main() -> None:
     for src in source:
         entry = src["Entry"].strip()
         exact = by_surface.get(norm(entry), [])
-        lex = None
+        lex_rows: list[dict[str, str]] = []
         for candidate in lexicon_candidates(entry):
             if candidate in lexicon:
-                lex = lexicon[candidate]
+                lex_rows = lexicon[candidate]
                 break
-        if lex is None:
-            lex = {"Word": "", "British": "", "American": "", "DefinitionRaw": ""}
+        if not lex_rows:
             lexicon_missing.append(entry)
+        lex_word = " || ".join(dict.fromkeys(r["Word"] for r in lex_rows))
+        british = " || ".join(dict.fromkeys(r["British"] for r in lex_rows if r["British"]))
+        american = " || ".join(dict.fromkeys(r["American"] for r in lex_rows if r["American"]))
+        definitions = " ||| ".join(dict.fromkeys(r["DefinitionRaw"].replace("\\r\\n", "\\n") for r in lex_rows if r["DefinitionRaw"]))
 
         actual = src.get("SourceStatus", "") == "verified-actual"
         if len(exact) == 0:
@@ -115,10 +118,10 @@ def main() -> None:
             "PartOfSpeech": src.get("PartOfSpeech", ""),
             "Meaning": src.get("Meaning", ""),
             "SourceStatus": src.get("SourceStatus", ""),
-            "LexiconWord": lex["Word"],
-            "British": lex["British"],
-            "American": lex["American"],
-            "DefinitionRaw": lex["DefinitionRaw"].replace("\r\n", "\n"),
+            "LexiconWord": lex_word,
+            "British": british,
+            "American": american,
+            "DefinitionRaw": definitions,
             "ExactCandidateNoteIDs": " || ".join(r["NoteID"].strip() for r in exact),
             "ExactCandidateSenses": " || ".join(r["SenseLabel"].strip() for r in exact),
             "ResolutionLane": lane,
@@ -131,7 +134,8 @@ def main() -> None:
         "candidate_rows": len(rows),
         "unique_source_surfaces": len({norm(r["Entry"]) for r in source}),
         "lanes": dict(sorted(lanes.items())),
-        "xlsx_lexicon_entries": len(lexicon),
+        "xlsx_lexicon_unique_surfaces": len(lexicon),
+        "xlsx_lexicon_rows": sum(len(v) for v in lexicon.values()),
         "xlsx_lexicon_missing_occurrences": len(lexicon_missing),
         "xlsx_lexicon_missing_unique": sorted(set(lexicon_missing), key=norm),
         "decision_state": "prepared-not-allocated",
@@ -140,7 +144,8 @@ def main() -> None:
     print(
         "NCE1 reconciliation prepared: "
         f"source={len(source)}, unique={status['unique_source_surfaces']}, "
-        f"lexicon={len(lexicon)}, missing_lexicon={len(set(lexicon_missing))}, lanes={dict(sorted(lanes.items()))}"
+        f"lexicon_rows={sum(len(v) for v in lexicon.values())}, lexicon_surfaces={len(lexicon)}, "
+        f"missing_lexicon={len(set(lexicon_missing))}, lanes={dict(sorted(lanes.items()))}"
     )
 
 
