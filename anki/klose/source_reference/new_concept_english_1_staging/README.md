@@ -15,3 +15,8 @@ Klose 实际教材：外研社《新概念英语 1：英语初阶（智慧版）
 3. 已知差异显式记录，不把 1997 基线静默冒充为 2022 智慧版逐页实物事实。
 
 本目录只保存 Source Fact / reconciliation input；Stable NoteID、Learner Presentation、Admission 和 Anki 发布仍走正式 pipeline。
+
+
+## Phase A checkpoint
+
+2026-11-01：Source / reconciliation / curriculum architecture 已通过完整 pipeline、deterministic rebuild 和回归验证。当前 source 已纳入统一 gate，但尚未分配 NCE1 Stable NoteID，也未进入当前 Anki Learning Admission / Release。后续以 `docs/NCE1_INTEGRATION.md` 与根目录 `NEXT.md` 为准。
