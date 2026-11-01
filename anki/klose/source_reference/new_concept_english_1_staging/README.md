@@ -5,7 +5,7 @@
 当前状态：
 
 - 已转录 Lesson 1–17 的 “New words and expressions”；
-- 共 149 条 occurrence；
+- 共 150 条 occurrence；
 - Lesson 18 本轮未收到可转录图片，尚未录入；
 - 保留教材中的词/短语、词性和中文释义；
 - 当前版本/版次尚未确认，因此 `SourceEdition=unresolved`；
