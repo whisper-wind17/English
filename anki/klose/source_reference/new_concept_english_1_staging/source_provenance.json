@@ -1,0 +1,29 @@
+{
+  "SchemaVersion": 1,
+  "SourceID": "new_concept_english_1",
+  "SourceEdition": "2022-smart-isbn-9787521336702",
+  "Book": "外研社《新概念英语1：英语初阶（智慧版）》",
+  "ISBN": "9787521336702",
+  "PhysicalEditionEvidence": "user-provided cover and Lesson 1-17 vocabulary photos",
+  "OfficialEvidence": [
+    "https://www.fltrp.com/c/2022-10-20/514394.shtml",
+    "https://www.fltrp.com/c/2022-08-18/513412.shtml"
+  ],
+  "Baseline": {
+    "RepositoryPath": "8.新概念英语/新概念英语第一册（新版）.xlsx",
+    "BlobSHA": "a600f31738cc5f0eeca3789bb775fe641ed5ed74",
+    "LessonOrderReference": "busiyiworld/maimemo-export exported/list/新概念英语第一册（新版）.txt"
+  },
+  "Reconciliation": {
+    "ActualPhotoRows": 150,
+    "BaselineRowsFromLesson19Onward": 756,
+    "TotalOccurrenceRows": 906,
+    "KnownSmartEditionDeltas": [
+      "Korean -> South Korean in photographed Lesson 5",
+      "Italian occurs in photographed Lesson 7 rather than the legacy Lesson 5-6 grouping",
+      "Daewoo and Fiat present in legacy Lesson 5-6 list but absent from photographed Smart Edition Lesson 6"
+    ],
+    "ResidualRisk": "Lessons 19-144 are reconstructed from the 1997 New Edition baseline under FLTRP's statement that Smart Edition retains original content, with spot checks; they are not page-by-page photo verified."
+  },
+  "Status": "accepted-with-explicit-baseline-provenance"
+}

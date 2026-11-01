@@ -1,17 +1,22 @@
-# New Concept English 1 — source capture staging
+# New Concept English 1 — Klose source reference
 
-本目录保存用户实际使用的《新概念英语 1》教材照片转录结果，属于 Source Reference / reconciliation input，不是 Vocabulary Master 或 Anki 发布文件。
+Klose 实际教材：外研社《新概念英语 1：英语初阶（智慧版）》，ISBN 9787521336702。
 
-当前状态：
+正式 source-reference 输入：
 
-- 已转录 Lesson 1–17 的 “New words and expressions”；
-- 共 150 条 occurrence；
-- Lesson 18 本轮未收到可转录图片，尚未录入；
-- 保留教材中的词/短语、词性和中文释义；
-- 当前版本/版次尚未确认，因此 `SourceEdition=unresolved`；
-- 暂不做 Stable NoteID 分配、identity merge、Learner Presentation、Learning Admission 或 publish；
-- 后续收到更多课次照片时继续追加，再统一做版本确认与 sense-aware reconciliation。
+- `vocabulary-smart-2022.csv`：906 条按课程顺序排列的 occurrence。
+- `source_provenance.json`：教材版本、证据、旧新版基线及已知智慧版差异。
+- `vocabulary.csv`：Lesson 1–17 的历史实物照片转录，保留作核验证据。
 
-数据文件：
+证据分层：
 
-`vocabulary.csv`
+1. Lesson 1–17：Klose 实物教材照片，`verified-actual`。
+2. Lesson 19–144：1997 新版顺序基线 + 外研社“智慧版保留原书全部内容”声明 + 抽样核验，`baseline-reconciled`。
+3. 已知差异显式记录，不把 1997 基线静默冒充为 2022 智慧版逐页实物事实。
+
+本目录只保存 Source Fact / reconciliation input；Stable NoteID、Learner Presentation、Admission 和 Anki 发布仍走正式 pipeline。
+
+
+## Phase A checkpoint
+
+2026-11-01：Source / reconciliation / curriculum architecture 已通过完整 pipeline、deterministic rebuild 和回归验证。当前 source 已纳入统一 gate，但尚未分配 NCE1 Stable NoteID，也未进入当前 Anki Learning Admission / Release。后续以 `docs/NCE1_INTEGRATION.md` 与根目录 `NEXT.md` 为准。
