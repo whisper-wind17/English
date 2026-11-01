@@ -4,20 +4,26 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
-REGISTRY=ROOT/"anki"/"klose"/"learner"/"presentation_review_registry.csv"
+ROOT = Path(__file__).resolve().parents[1]
+REGISTRY = ROOT / "anki" / "klose" / "learner" / "presentation_review_registry.csv"
 
-def main():
-    with REGISTRY.open("r",encoding="utf-8-sig",newline="") as f:
-        rows=list(csv.DictReader(f))
-    pending=[
-        r for r in rows
-        if r.get("LearnerProfile","").strip()=="klose"
-        and r.get("LearnerLevel","").strip()=="4"
-        and r.get("ReviewStatus","").strip()=="pending"
+
+def main() -> None:
+    with REGISTRY.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    pending = [
+        row for row in rows
+        if row.get("LearnerProfile", "").strip() == "klose"
+        and row.get("LearnerLevel", "").strip() == "4"
+        and row.get("ReviewStatus", "").strip() == "pending"
     ]
-    pending.sort(key=lambda r:int(r["NoteID"][2:]))
+    pending.sort(key=lambda row: int(row["NoteID"][2:]))
     print(f"PENDING_REVIEW_COUNT\t{len(pending)}")
-    for r in pending:
-        print(f"PENDING_REVIEW\t{r['NoteID']}\t{r['ContentFingerprint']}")
-    if pending:\n        raise SystemExit(23)\n\nif __name__=="__main__": main()\n
+    for row in pending:
+        print(f"PENDING_REVIEW\t{row['NoteID']}\t{row['ContentFingerprint']}")
+    if pending:
+        raise SystemExit(23)
+
+
+if __name__ == "__main__":
+    main()
