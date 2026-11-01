@@ -24,6 +24,7 @@ REGISTRY = MASTER / "note_registry.csv"
 REGISTRY_EXTENSIONS = MASTER / "note_registry_extensions.csv"
 SOURCE_IDENTITIES = MASTER / "source_identity_extensions.csv"
 G56_SCOPE = LEARNER / "grade5_6_learning_scope.json"
+CURRICULUM = BASE / "config" / "curriculum_segments.json"
 OUT = LEARNER / "learning_admission.csv"
 
 FIELDS = ["LearnerProfile", "LearnerLevel", "NoteID", "Stage", "Status", "LearningTag", "LearningOrder", "Reason"]
@@ -56,7 +57,7 @@ def note_num(note_id: str) -> int:
     return int(note_id[2:])
 
 
-def current_scope() -> tuple[list[str], set[str], set[str]]:
+def current_scope() -> tuple[list[str], set[str], set[str], set[str]]:
     scope = json.loads(G56_SCOPE.read_text(encoding="utf-8"))
     if scope.get("ScopeStatus") != "accepted" or scope.get("StableIdentityAllocationAuthorized") is not True:
         raise SystemExit("Grade 5-6 current learning scope is not accepted")
@@ -64,16 +65,32 @@ def current_scope() -> tuple[list[str], set[str], set[str]]:
     if accepted_books != {"5上", "5下", "6上", "6下"}:
         raise SystemExit(f"Grade 5-6 current scope is incomplete: {sorted(accepted_books)}")
 
-    # One Note may recur in later books. Curriculum position is its earliest accepted
-    # occurrence; this prevents repeated source occurrences from creating duplicate New cards.
+    curriculum = json.loads(CURRICULUM.read_text(encoding="utf-8"))
+    segments = curriculum.get("Segments", {})
+    required_segments = {"grade4", "new_concept_english_1", "grade5", "grade6", "third_party"}
+    if set(segments) != required_segments:
+        raise SystemExit(f"Curriculum segments mismatch: {sorted(segments)}")
+    ranks = {name: int(data["Rank"]) for name, data in segments.items()}
+    if len(set(ranks.values())) != len(ranks):
+        raise SystemExit("Curriculum segment ranks must be unique")
+    if not (ranks["grade4"] < ranks["new_concept_english_1"] < ranks["grade5"] < ranks["grade6"] < ranks["third_party"]):
+        raise SystemExit("Curriculum order must be Grade4 -> NCE1 -> Grade5 -> Grade6 -> third-party")
+    nce_cfg = segments["new_concept_english_1"]
+    if nce_cfg.get("SourceEdition") != NCE_SOURCE_EDITION:
+        raise SystemExit("NCE1 curriculum SourceEdition drift")
+
+    # One Note may recur in later sources. Its earliest curriculum coordinate wins,
+    # so a Grade-4 word is not relearned in NCE1 and an NCE1 word is not repeated in Grade 5/6.
     first_coord: dict[str, tuple[int, int, int, int, int]] = {}
     grade4_ids: set[str] = set()
+    nce_ids: set[str] = set()
     g56_ids: set[str] = set()
     for row in read_csv(SOURCE_IDENTITIES):
         if row.get("Status", "").strip() != "confirmed":
             continue
         key = row.get("SourceItemKey", "").strip()
         nid = row.get("NoteID", "").strip()
+
         m4 = GRADE4_RE.match(key)
         if (
             m4 is not None
@@ -82,9 +99,22 @@ def current_scope() -> tuple[list[str], set[str], set[str]]:
         ):
             sem, unit, order = m4.groups()
             grade4_ids.add(nid)
-            c = (4, SEM_RANK[sem], int(unit), int(order), note_num(nid))
+            c = (ranks["grade4"], SEM_RANK[sem], int(unit), int(order), note_num(nid))
             first_coord[nid] = min(first_coord.get(nid, c), c)
             continue
+
+        mn = NCE_RE.match(key)
+        if (
+            mn is not None
+            and row.get("SourceID", "").strip() == NCE_SOURCE_ID
+            and row.get("SourceEdition", "").strip() == NCE_SOURCE_EDITION
+        ):
+            order = int(mn.group(1))
+            nce_ids.add(nid)
+            c = (ranks["new_concept_english_1"], 0, 0, order, note_num(nid))
+            first_coord[nid] = min(first_coord.get(nid, c), c)
+            continue
+
         m56 = G56_RE.match(key)
         if m56 is not None:
             grade, sem, unit, order = m56.groups()
@@ -92,7 +122,8 @@ def current_scope() -> tuple[list[str], set[str], set[str]]:
             if book not in accepted_books:
                 continue
             g56_ids.add(nid)
-            c = (int(grade), SEM_RANK[sem], int(unit), int(order), note_num(nid))
+            segment = "grade5" if grade == "5" else "grade6"
+            c = (ranks[segment], SEM_RANK[sem], int(unit), int(order), note_num(nid))
             first_coord[nid] = min(first_coord.get(nid, c), c)
 
     if not grade4_ids:
@@ -100,11 +131,11 @@ def current_scope() -> tuple[list[str], set[str], set[str]]:
     if not g56_ids:
         raise SystemExit("Accepted Grade 5-6 current identity set is empty")
     ordered = [nid for nid, _ in sorted(first_coord.items(), key=lambda item: item[1])]
-    return ordered, grade4_ids, g56_ids
+    return ordered, grade4_ids, nce_ids, g56_ids
 
 
 def main() -> None:
-    for path in (LEGACY_RELEASES, RELEASE_EXTENSIONS, REGISTRY, REGISTRY_EXTENSIONS, SOURCE_IDENTITIES, G56_SCOPE):
+    for path in (LEGACY_RELEASES, RELEASE_EXTENSIONS, REGISTRY, REGISTRY_EXTENSIONS, SOURCE_IDENTITIES, G56_SCOPE, CURRICULUM):
         if not path.exists():
             raise SystemExit(f"Missing learning-admission input: {path.relative_to(ROOT)}")
 
@@ -124,7 +155,7 @@ def main() -> None:
     if not released.issubset(registry_ids):
         raise SystemExit("Release registries reference unknown Stable NoteIDs")
 
-    ordered_current, grade4_ids, g56_ids = current_scope()
+    ordered_current, grade4_ids, nce_ids, g56_ids = current_scope()
     current = set(ordered_current)
     if not current.issubset(registry_ids):
         missing = sorted(current - registry_ids, key=note_num)
@@ -135,18 +166,22 @@ def main() -> None:
     rows: list[dict[str, str]] = []
     for nid in sorted(universe, key=note_num):
         if nid in current:
-            # Grade-4 identity wins only when the same Stable Note is already part of
-            # current Grade-4 curriculum; otherwise it enters through Grade 5-6.
-            from_grade4 = nid in grade4_ids
+            # Earliest curriculum segment wins for identities repeated by later sources.
+            if nid in grade4_ids:
+                stage, tag, reason = GRADE4_STAGE, GRADE4_TAG, "actual-grade4-current"
+            elif nid in nce_ids:
+                stage, tag, reason = NCE_STAGE, NCE_TAG, "accepted-nce1-current"
+            else:
+                stage, tag, reason = G56_STAGE, G56_TAG, "accepted-grade5-6-current"
             rows.append({
                 "LearnerProfile": PROFILE,
                 "LearnerLevel": LEVEL,
                 "NoteID": nid,
-                "Stage": GRADE4_STAGE if from_grade4 else G56_STAGE,
+                "Stage": stage,
                 "Status": "allowed",
-                "LearningTag": GRADE4_TAG if from_grade4 else G56_TAG,
+                "LearningTag": tag,
                 "LearningOrder": order_by_id[nid],
-                "Reason": "actual-grade4-current" if from_grade4 else "accepted-grade5-6-current",
+                "Reason": reason,
             })
         else:
             rows.append({
@@ -166,7 +201,7 @@ def main() -> None:
     print(
         "Learning admission built: "
         f"registry={len(registry_ids)}, released={len(released)}, current={len(current)}, "
-        f"grade4={len(grade4_ids)}, grade5_6={len(g56_ids)}, grade5_6_only={len(current_g56_only)}, "
+        f"grade4={len(grade4_ids)}, nce1={len(nce_ids)}, grade5_6={len(g56_ids)}, grade5_6_only={len(current_g56_only)}, "
         f"current_unreleased={len(new_unreleased)}, library_held={len(released-current)}, "
         f"learning_order={format_learning_order(1)}..{format_learning_order(len(current))}"
     )
