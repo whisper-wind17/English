@@ -35,7 +35,12 @@ GRADE4_STAGE = "stage::grade4-current"
 GRADE4_TAG = "learning::klose::grade4"
 G56_STAGE = "stage::grade5-6-current"
 G56_TAG = "learning::klose::grade5-6"
+NCE_STAGE = "stage::nce1-current"
+NCE_TAG = "learning::klose::nce1"
+NCE_SOURCE_ID = "new_concept_english_1"
+NCE_SOURCE_EDITION = "2022-smart-isbn-9787521336702"
 GRADE4_RE = re.compile(r"^grade4-(upper|lower)-u(\d+)-o(\d+)\|")
+NCE_RE = re.compile(r"^nce1-o(\d+)\|")
 G56_RE = re.compile(r"^grade([56])-(upper|lower)-u(\d+)-o(\d+)\|")
 SEM_RANK = {"upper": 0, "lower": 1}
 
@@ -197,7 +202,7 @@ def main() -> None:
 
     write_csv(OUT, rows)
     new_unreleased = current - released
-    current_g56_only = g56_ids - grade4_ids
+    current_g56_only = g56_ids - grade4_ids - nce_ids
     print(
         "Learning admission built: "
         f"registry={len(registry_ids)}, released={len(released)}, current={len(current)}, "
