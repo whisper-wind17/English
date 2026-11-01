@@ -190,12 +190,18 @@ def main() -> None:
     learner_rows = read_csv(LEARNER_CURRENT)
     master_by_id = {r.get("NoteID", "").strip(): r for r in master_rows}
     learner_by_id = {r.get("NoteID", "").strip(): r for r in learner_rows}
-    if len(master_by_id) != len(registry_ids) or len(master_by_id) != len(master_rows):
-        fail(f"derived Vocabulary Master does not match active Stable registry: {len(master_rows)}")
-    if set(master_by_id) != registry_ids:
-        fail("derived Vocabulary Master does not cover the current Stable registry exactly")
-    if set(learner_by_id) != registry_ids:
-        fail("learner/current does not cover the current Stable registry exactly")
+    if "" in master_by_id or len(master_by_id) != len(master_rows):
+        fail("derived Vocabulary Master has blank/duplicate NoteID")
+    if "" in learner_by_id or len(learner_by_id) != len(learner_rows):
+        fail("learner/current has blank/duplicate NoteID")
+    # This checker owns the Grade 4 + Grade 5/6 transaction, not later source
+    # allocations such as NCE1. A PR may append new Stable identities before the
+    # generated Master is rebuilt, so require the transaction-owned subset here.
+    required_textbook_ids = set(g4_coords) | set(g56_coords)
+    if not required_textbook_ids <= set(master_by_id):
+        fail("derived Vocabulary Master lost Grade 4/5/6 transaction identities")
+    if not required_textbook_ids <= set(learner_by_id):
+        fail("learner/current lost Grade 4/5/6 transaction identities")
 
     new_ids = set(allocations.values())
     for nid in new_ids:
@@ -224,18 +230,33 @@ def main() -> None:
     expected_current = set(g4_coords) | set(g56_coords)
     if not expected_current:
         fail("derived textbook curriculum is empty")
-    from check_klose_release_ready import load_and_validate_admission
-    admission_by_id = load_and_validate_admission("klose", "4", release_ids)
+    admission_rows = read_csv(ADMISSION)
+    admission_by_id = {
+        r.get("NoteID", "").strip(): r
+        for r in admission_rows
+        if r.get("LearnerProfile", "").strip() == "klose"
+        and r.get("LearnerLevel", "").strip() == "4"
+    }
+    if "" in admission_by_id or len(admission_by_id) != len([
+        r for r in admission_rows
+        if r.get("LearnerProfile", "").strip() == "klose"
+        and r.get("LearnerLevel", "").strip() == "4"
+    ]):
+        fail("invalid/duplicate current Klose admission NoteID")
     for nid in expected_current:
         row = admission_by_id.get(nid)
         if row is None:
             fail(f"accepted textbook identity lost admission state: {nid}")
-        # A held textbook Note was validated against an explicit current decision.
-        if row["Status"] == "held":
+        if row.get("Status", "").strip() == "held":
             continue
-        expected_stage = "stage::grade4-current" if nid in g4_coords else "stage::grade5-6-current"
-        if row.get("Stage", "").strip() != expected_stage:
-            fail(f"textbook Note has wrong stage: {nid}")
+        if row.get("Status", "").strip() != "allowed":
+            fail(f"textbook Note has invalid admission status: {nid}")
+        stage = row.get("Stage", "").strip()
+        if nid in g4_coords:
+            if stage != "stage::grade4-current":
+                fail(f"Grade-4 Note has wrong stage: {nid} {stage!r}")
+        elif stage not in {"stage::grade5-6-current", "stage::nce1-current"}:
+            fail(f"Grade 5-6 Note has wrong source-backed stage: {nid} {stage!r}")
 
     # Narrow IPA facts for reused/current Notes, including reviewed dedup survivors,
     # are upstream truth. During PR validation the generated Master may still reflect
