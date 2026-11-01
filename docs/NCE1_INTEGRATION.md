@@ -1,6 +1,6 @@
 # NCE1 Integration — Klose Learning
 
-状态：IMPLEMENTED（Source / reconciliation / curriculum architecture），Stable Identity 分配与 Learner Presentation 尚未完成，因此尚未进入 Anki 发布。
+状态：Phase A（Source / reconciliation / curriculum architecture）已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`；Stable Identity 分配与 Learner Presentation 属于 Phase B，尚未进入 Anki 发布。
 
 ## 目标
 
@@ -90,7 +90,23 @@ third_party            = 90
 
 同一 Stable Note 如果在多个来源重复出现，取最早 curriculum coordinate；因此 Grade 4 已学词不会在 NCE1 重复造卡，NCE1 已覆盖的词也不会在 Grade 5/6 再造一张学习卡。
 
-## Completion gate
+## Phase A validation
+
+验证基线为本次 NCE1 integration PR 的 main base `461780edf86dc266bd40abee0cfc01d41576d8ec`。
+
+已完成：
+
+- `check_klose_nce1_source.py`：906 条 source occurrence、150 条实物 prefix、Edition delta 与 provenance gate；
+- `prepare_klose_nce1_reconciliation.py`：生成 sense-aware identity candidate queue，不自动批准；
+- `build_klose_learning_admission.py`：课程段 rank 化，并支持 confirmed NCE1 identity 插入 Grade 4 与 Grade 5 之间；
+- 合成回归验证同一 NoteID 同时出现在 NCE1 / Grade 5 时只采用更早 NCE1 coordinate；
+- 完整 `klose_pipeline.py all` 通过；
+- deterministic rebuild：`byte drift=0`；
+- 19 项回归测试全部通过。
+
+独立边界检查确认：Phase A 没有分配新的 Stable NoteID，没有把 NCE1 写入当前 Learning Admission，没有改变现有正式 Vocabulary / Expressions release，也没有改写任何 Anki FSRS / Review History。
+
+## Phase B completion gate
 
 NCE1 真正进入正式 Anki 发布前仍需完成：
 
@@ -102,3 +118,5 @@ NCE1 真正进入正式 Anki 发布前仍需完成：
 6. Learning Admission 重建，确认 NCE1 位于 Grade 4 与 Grade 5 之间；
 7. 完整 `klose_pipeline.py all`、回归和反向检查；
 8. 只对仍为 New 的 Anki cards 按新 LearningOrder Reposition。
+
+当前 checkpoint 明确停在 Phase A：Source 已正式纳入系统治理，Learning Object 尚未发布。
