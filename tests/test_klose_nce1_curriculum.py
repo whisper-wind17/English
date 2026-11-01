@@ -4,8 +4,11 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+import sys
 
-from tools import build_klose_learning_admission as admission
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+import build_klose_learning_admission as admission
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
