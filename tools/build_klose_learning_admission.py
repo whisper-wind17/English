@@ -83,6 +83,7 @@ def current_scope() -> tuple[list[str], set[str], set[str], set[str]]:
     nce_cfg = segments["new_concept_english_1"]
     if nce_cfg.get("SourceEdition") != NCE_SOURCE_EDITION:
         raise SystemExit("NCE1 curriculum SourceEdition drift")
+    nce_active = nce_cfg.get("Status") == "active"
 
     # One Note may recur in later sources. Its earliest curriculum coordinate wins,
     # so a Grade-4 word is not relearned in NCE1 and an NCE1 word is not repeated in Grade 5/6.
@@ -110,7 +111,8 @@ def current_scope() -> tuple[list[str], set[str], set[str], set[str]]:
 
         mn = NCE_RE.match(key)
         if (
-            mn is not None
+            nce_active
+            and mn is not None
             and row.get("SourceID", "").strip() == NCE_SOURCE_ID
             and row.get("SourceEdition", "").strip() == NCE_SOURCE_EDITION
         ):
