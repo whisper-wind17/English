@@ -31,7 +31,7 @@ def main():
                  Tags="source::"+SOURCE_ID+" learner::klose::level::4")
         l = dict.fromkeys(lf, "")
         l.update({k:row[k] for k in ("NoteID", "LearnerProfile", "LearnerLevel", "ExampleSentence", "ExampleTranslation")})
-        l.update(PresentationStatus="nce1-curated-pending-review", PresentationSource="nce1:batch001")
+        l.update(PresentationStatus="nce1-curated-pending-review", PresentationSource=("nce1:batch001" if int(row["Order"])<=150 else "nce1:full-book-reviewed"))
         master.append(m); learner.append(l); mb[nid]=m; lb[nid]=l
     occurrences_path = BASE / "master/source_occurrences.csv"
     occurrences=read(occurrences_path); of=list(occurrences[0])

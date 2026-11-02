@@ -4,12 +4,12 @@
   "candidate_rows": 906,
   "unique_source_surfaces": 865,
   "lanes": {
-    "actual-exact-single-review": 134,
-    "actual-multi-sense-review": 15,
+    "actual-exact-single-review": 132,
+    "actual-multi-sense-review": 17,
     "actual-new-candidate": 1,
-    "baseline-exact-single-review": 540,
-    "baseline-multi-sense-review": 37,
-    "baseline-new-candidate": 179
+    "baseline-exact-single-review": 647,
+    "baseline-multi-sense-review": 105,
+    "baseline-new-candidate": 4
   },
   "xlsx_lexicon_unique_surfaces": 867,
   "xlsx_lexicon_rows": 908,
@@ -17,8 +17,8 @@
   "xlsx_lexicon_missing_unique": [
     "driving licence"
   ],
-  "decision_state": "partially-reviewed-and-allocated",
-  "reviewed_occurrences": 150,
-  "allocated_new_notes": 41,
-  "pending_occurrences": 756
+  "decision_state": "fully-reviewed-and-allocated",
+  "reviewed_occurrences": 906,
+  "allocated_new_notes": 271,
+  "pending_occurrences": 0
 }

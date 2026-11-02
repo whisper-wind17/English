@@ -65,7 +65,7 @@ nce1-o0030|sir,0030,3,3,sir,n.,先生,verified-actual,sir,sɜː(r),sɜːr; sər,
 nce1-o0031|cloakroom,0031,3,3,cloakroom,n.,衣帽存放处,verified-actual,cloakroom,ˈkləʊkruːm,ˈkloʊkruːm; ˈkloʊkrʊm,n. 衣帽间；寄物处；（英）盥洗室,KV003021,衣帽间；衣帽存放处,actual-exact-single-review
 nce1-o0032|suit,0032,4,4,suit,n.,一套衣服,verified-actual,suit,suːt,suːt,"n. 诉讼；恳求；套装，西装；一套外衣
 vt. 适合；使适应
-vi. 合适；相称",KV003022,套装；一套衣服,actual-exact-single-review
+vi. 合适；相称",KV003022 || KV003227,套装；一套衣服 || 适合；适于,actual-multi-sense-review
 nce1-o0033|school,0033,4,4,school,n.,学校,verified-actual,school,skuːl,skuːl,"n. 学校；学院；学派；鱼群
 vt. 教育",KV000129,学校,actual-exact-single-review
 nce1-o0034|teacher,0034,4,4,teacher,n.,老师,verified-actual,teacher,ˈtiːtʃə(r),ˈtiːtʃər,n. 教师；导师,KV000005,老师,actual-exact-single-review
@@ -78,7 +78,7 @@ adj. 好的；优良的；愉快的；虔诚的
 adv. 好",KV001824,好的；不错的,actual-exact-single-review
 nce1-o0039|morning,0039,5,5,morning,n.,早晨,verified-actual,morning,ˈmɔːnɪŋ,ˈmɔːrnɪŋ,n. 早晨；黎明；初期,KV000230,早晨；上午,actual-exact-single-review
 nce1-o0040|miss,0040,5,5,Miss,,小姐,verified-actual,Miss || miss,mɪs,mɪs,"n. 女士，小姐，年轻未婚女子
-vt. 错过，想念，缺（勤）",KV002131 || KV002132,小姐；女士（称谓） || 错过；想念,actual-multi-sense-review
+vt. 错过，想念，缺（勤）",KV002131 || KV002132 || KV003199,小姐；女士（称谓） || 错过；想念 || 错过；没赶上,actual-multi-sense-review
 nce1-o0041|new,0041,5,5,new,adj.,新的,verified-actual,new,njuː,nuː,"adj. 新的，新鲜的；更新的；初见的
 adv. 新近",KV000125,新的,actual-exact-single-review
 nce1-o0042|student,0042,5,5,student,n.,学生,verified-actual,student,ˈstjuːd(ə)nt,ˈstuːdnt,n. 学生；学者,KV002711,学生,actual-exact-single-review
@@ -228,7 +228,7 @@ nce1-o0107|white,0107,11,11,white,adj.,白色的,verified-actual,white,waɪt,wa�
 adj. 白色的；白种的；纯洁的",KV002958,白色；白色的,actual-exact-single-review
 nce1-o0108|catch,0108,11,11,catch,v.,抓住,verified-actual,catch,kætʃ,kætʃ,"n. 捕捉；捕获物；窗钩
 vt. 赶上；抓住；感染；了解
-vi. 赶上；抓住",KV000496,抓住；捕捉,actual-exact-single-review
+vi. 赶上；抓住",KV000496 || KV003198,抓住；捕捉 || 赶上（车、船等）,actual-multi-sense-review
 nce1-o0109|father,0109,12,12,father,n.,父亲,verified-actual,father,ˈfɑːðə(r),ˈfɑːðər,"n. 父亲，爸爸；神父；祖先；前辈
 vt. 发明，创立；当…的父亲",KV000099,爸爸；父亲,actual-exact-single-review
 nce1-o0110|mother,0110,12,12,mother,n.,母亲,verified-actual,mother,ˈmʌðə(r),ˈmʌðər,"n. 母亲；大娘；女修道院院长
@@ -336,12 +336,12 @@ nce1-o0156|mum,0156,19,20,Mum,,,baseline-reconciled,Mum || mum,mʌm,mʌm,"adj. �
 n. 妈妈（口语）；沉默；菊花
 vi. 演哑剧
 int. 别说话",KV002162,妈妈,baseline-exact-single-review
-nce1-o0157|sit down,0157,19,20,sit down,,,baseline-reconciled,sit down,ˈsɪt daʊn,ˈsɪt daʊn,na. 坐下；住定；占有；(坐下来)开始工作(谈判等),,,baseline-new-candidate
+nce1-o0157|sit down,0157,19,20,sit down,,,baseline-reconciled,sit down,ˈsɪt daʊn,ˈsɪt daʊn,na. 坐下；住定；占有；(坐下来)开始工作(谈判等),KV003057,坐下,baseline-exact-single-review
 nce1-o0158|right,0158,19,20,right,,,baseline-reconciled,right,raɪt,raɪt,"n. 正确；右边；正义
 adj. 正确的；直接的；右方的
 vt. 纠正
 adv. 正确地；恰当地；彻底地
-vi. 复正；恢复平稳",,,baseline-new-candidate
+vi. 复正；恢复平稳",KV003058 || KV003073,好；没事的 || 右边；右侧,baseline-multi-sense-review
 nce1-o0159|ice cream,0159,19,20,ice cream,,,baseline-reconciled,ice cream,ˈaɪs kriːm,ˈaɪs kriːm,n. 【食】冰淇淋,,,baseline-new-candidate
 nce1-o0160|big,0160,19,20,big,,,baseline-reconciled,big,bɪɡ,bɪɡ,"adj. 大的；重要的；量大的
 adv. 大量地；顺利；夸大地",KV000119,大的,baseline-exact-single-review
@@ -351,16 +351,16 @@ adv. 小小地；卑鄙地",KV000249,小的,baseline-exact-single-review
 nce1-o0162|open,0162,19,20,open,,,baseline-reconciled,open,ˈəʊpən,ˈoʊpən,"adj. 公开的；敞开的；空旷的；坦率的；营业着的
 vi. 开始；展现
 vt. 公开；打开
-n. 公开；空旷；户外",KV001021,开着的,baseline-exact-single-review
+n. 公开；空旷；户外",KV001021 || KV003079,开着的 || 打开,baseline-multi-sense-review
 nce1-o0163|shut,0163,19,20,shut,,,baseline-reconciled,shut,ʃʌt,ʃʌt,"n. 关闭
 adj. 关闭的；围绕的
 vi. 关上；停止营业
-vt. 关闭；停业；幽禁",,,baseline-new-candidate
+vt. 关闭；停业；幽禁",KV003059 || KV003077,关着的 || 关上,baseline-multi-sense-review
 nce1-o0164|light,0164,19,20,light,,,baseline-reconciled,light,laɪt,laɪt,"n. 光；光线；灯；打火机；领悟；浅色；天窗
 adj. 轻的；浅色的；明亮的；轻松的；容易的；清淡的
 vi. 点着；变亮；着火
 vt. 照亮；点燃；着火
-adv. 轻地；清楚地；轻便地",KV000062 || KV001141,灯 || 照亮,baseline-multi-sense-review
+adv. 轻地；清楚地；轻便地",KV000062 || KV001141 || KV003060,灯 || 照亮 || 轻的；不重的,baseline-multi-sense-review
 nce1-o0165|heavy,0165,19,20,heavy,,,baseline-reconciled,heavy,ˈhevi,ˈhevi,"n. 重物；严肃角色
 adj. 沉重的；繁重的，巨大的；拥挤的；阴沉的
 adv. 大量地；笨重地",KV000964 || KV001895,程度大的；严重的 || 重的；沉重的,baseline-multi-sense-review
@@ -381,23 +381,23 @@ vt. 给；产生；让步；举办；授予",KV001801,给；给予,baseline-exac
 nce1-o0171|one,0171,21,22,one,,,baseline-reconciled,one,wʌn,wʌn,"pron. 一个人；任何人
 adj. 一的；唯一的
 n. 一
-num. 一；一个",KV000025,一；一个,baseline-exact-single-review
+num. 一；一个",KV000025 || KV003061,一；一个 || 一个（代替前面提到的同类事物）,baseline-multi-sense-review
 nce1-o0172|which,0172,21,22,which,,,baseline-reconciled,which,wɪtʃ,wɪtʃ,"adj. 哪一个；哪一些
 pron. 哪/那一个；哪/那一些",KV000836,哪一个；哪一些,baseline-exact-single-review
 nce1-o0173|empty,0173,21,22,empty,,,baseline-reconciled,empty,ˈempti,ˈempti,"n. 空车；空的东西
 adj. 空的；无意义的；无知的；徒劳的
 vt. 使失去；使…成为空的
-vi. 成为空的；流空",,,baseline-new-candidate
+vi. 成为空的；流空",KV003062 || KV003081,空的 || 倒空；清空,baseline-multi-sense-review
 nce1-o0174|full,0174,21,22,full,,,baseline-reconciled,full,fʊl,fʊl,"n. 全部；完整
 adj. 完全的，完整的；满的，充满的；丰富的；完美的；丰满的；详尽的
 vt. 把衣服缝得宽大
-adv. 十分，非常；完全地；整整",KV001775,饱的；吃饱的,baseline-exact-single-review
+adv. 十分，非常；完全地；整整",KV001775 || KV003063,饱的；吃饱的 || 满的；装满的,baseline-multi-sense-review
 nce1-o0175|large,0175,21,22,large,,,baseline-reconciled,large,lɑːdʒ,lɑːrdʒ,"adj. 大的；多数的；广博的
 adv. 大大地；夸大地
 n. 大",KV000877,大型号的,baseline-exact-single-review
 nce1-o0176|little,0176,21,22,little,,,baseline-reconciled,little,ˈlɪt(ə)l,ˈlɪtl,"adj. 小的；很少的；短暂的；小巧可爱的
 adv. 完全不
-n. 少许；没有多少；短时间",KV000947,少许；一点,baseline-exact-single-review
+n. 少许；没有多少；短时间",KV000947 || KV003064,少许；一点 || 小的,baseline-multi-sense-review
 nce1-o0177|sharp,0177,21,22,sharp,,,baseline-reconciled,sharp,ʃɑːp,ʃɑːrp,"n. 尖头；骗子；内行
 adj. 急剧的；锋利的；强烈的；敏捷的；刺耳的
 vt. 磨快；把音调升高
@@ -415,7 +415,7 @@ vt. 拳击；装…入盒中；打耳光
 vi. 拳击",KV000065,盒子；箱子,baseline-exact-single-review
 nce1-o0182|glass,0182,21,22,glass,,,baseline-reconciled,glass,ɡlɑːs,ɡlæs,"n. 玻璃；玻璃制品；镜子
 vt. 反映；给某物加玻璃
-vi. 成玻璃状",KV001806,玻璃；玻璃杯,baseline-exact-single-review
+vi. 成玻璃状",KV001806 || KV003065,玻璃；玻璃杯 || 玻璃杯,baseline-multi-sense-review
 nce1-o0183|cup,0183,21,22,cup,,,baseline-reconciled,cup,kʌp,kʌp,"n. 杯子；奖杯；酒杯
 vt. 使成杯状；为…拔火罐",KV001557,杯子,baseline-exact-single-review
 nce1-o0184|bottle,0184,21,22,bottle,,,baseline-reconciled,bottle,ˈbɒt(ə)l,ˈbɑːtl,"n. 瓶子；一瓶的容量
@@ -423,7 +423,7 @@ vt. 控制；把…装入瓶中
 vi. （街头艺人演出后）收拢钱币",KV001157,瓶子,baseline-exact-single-review
 nce1-o0185|tin,0185,21,22,tin,,,baseline-reconciled,tin,tɪn,tɪn,"n. 锡；罐头，罐；马口铁
 adj. 锡制的
-vt. 涂锡于；给…包马口铁",,,baseline-new-candidate
+vt. 涂锡于；给…包马口铁",KV003066,罐头；金属罐,baseline-exact-single-review
 nce1-o0186|knife,0186,21,22,knife,,,baseline-reconciled,knife,naɪf,naɪf,"n. 刀；匕首
 vt. 用刀切；（口）伤害
 vi. 劈开；划过",KV000397,刀,baseline-exact-single-review
@@ -445,11 +445,11 @@ adj. 桌子的",KV002749,桌子,baseline-exact-single-review
 nce1-o0193|plate,0193,23,24,plate,,,baseline-reconciled,plate,pleɪt,pleɪt,"n. 碟；金属板；金属牌；感光底片
 vt. 电镀；给…装甲",KV002346,盘子；碟子,baseline-exact-single-review
 nce1-o0194|cupboard,0194,23,24,cupboard,,,baseline-reconciled,cupboard,ˈkʌbəd,ˈkʌbərd,n. 碗柜；食橱,KV001558,碗柜；食橱,baseline-exact-single-review
-nce1-o0195|cigarette,0195,23,24,cigarette,,,baseline-reconciled,cigarette,ˌsɪɡəˈret,ˈsɪɡəret,n. 香烟；纸烟,,,baseline-new-candidate
-nce1-o0196|television,0196,23,24,television,,,baseline-reconciled,television,ˈtelɪvɪʒ(ə)n,ˈtelɪvɪʒn,n. 电视，电视机；电视业,,,baseline-new-candidate
+nce1-o0195|cigarette,0195,23,24,cigarette,,,baseline-reconciled,cigarette,ˌsɪɡəˈret,ˈsɪɡəret,n. 香烟；纸烟,KV003067,香烟,baseline-exact-single-review
+nce1-o0196|television,0196,23,24,television,,,baseline-reconciled,television,ˈtelɪvɪʒ(ə)n,ˈtelɪvɪʒn,n. 电视，电视机；电视业,KV003068,电视机,baseline-exact-single-review
 nce1-o0197|floor,0197,23,24,floor,,,baseline-reconciled,floor,flɔː(r),flɔːr,"n. 地板，地面；楼层；基底；议员席
-vt. 铺地板；打倒，击倒；（被困难）难倒",KV000298,楼层；地板,baseline-exact-single-review
-nce1-o0198|dressing table,0198,23,24,dressing table,,,baseline-reconciled,dressing table,ˈdresɪŋ teɪbl,ˈdresɪŋ teɪbl,n. 梳妆台,,,baseline-new-candidate
+vt. 铺地板；打倒，击倒；（被困难）难倒",KV000298 || KV003069,楼层；地板 || 地板；地面,baseline-multi-sense-review
+nce1-o0198|dressing table,0198,23,24,dressing table,,,baseline-reconciled,dressing table,ˈdresɪŋ teɪbl,ˈdresɪŋ teɪbl,n. 梳妆台,KV003070,梳妆台,baseline-exact-single-review
 nce1-o0199|magazine,0199,23,24,magazine,,,baseline-reconciled,magazine,ˌmæɡəˈziːn,ˈmæɡəziːn,n. 杂志；弹药库；胶卷盒,KV001168,杂志,baseline-exact-single-review
 nce1-o0200|bed,0200,23,24,bed,,,baseline-reconciled,bed,bed,bed,"n. 床；基础；河底， 海底
 vt. 使睡觉；安置，嵌入；栽种
@@ -458,22 +458,22 @@ nce1-o0201|newspaper,0201,23,24,newspaper,,,baseline-reconciled,newspaper,ˈnju�
 报社
 旧报纸",KV000848,报纸,baseline-exact-single-review
 nce1-o0202|stereo,0202,23,24,stereo,,,baseline-reconciled,stereo,ˈsteriəʊ,ˈsterioʊ,"n. 立体声；立体声系统；铅版；立体照片
-adj. 立体的；立体声的；立体感觉的",,,baseline-new-candidate
+adj. 立体的；立体声的；立体感觉的",KV003071,立体声音响,baseline-exact-single-review
 nce1-o0203|mrs.,0203,25,26,Mrs.,,,baseline-reconciled,Mrs.,ˈmɪsɪz,ˈmɪsɪz,n. 先生,,,baseline-new-candidate
 nce1-o0204|kitchen,0204,25,26,kitchen,,,baseline-reconciled,kitchen,ˈkɪtʃɪn,ˈkɪtʃɪn,n. 厨房；炊具；炊事人员,KV000341,厨房,baseline-exact-single-review
-nce1-o0205|refrigerator,0205,25,26,refrigerator,,,baseline-reconciled,refrigerator,rɪˈfrɪdʒəreɪtə(r),rɪˈfrɪdʒəreɪtər,n. 冰箱，冷藏库,,,baseline-new-candidate
+nce1-o0205|refrigerator,0205,25,26,refrigerator,,,baseline-reconciled,refrigerator,rɪˈfrɪdʒəreɪtə(r),rɪˈfrɪdʒəreɪtər,n. 冰箱，冷藏库,KV003072,冰箱,baseline-exact-single-review
 nce1-o0206|right,0206,25,26,right,,,baseline-reconciled,right,raɪt,raɪt,"n. 正确；右边；正义
 adj. 正确的；直接的；右方的
 vt. 纠正
 adv. 正确地；恰当地；彻底地
-vi. 复正；恢复平稳",,,baseline-new-candidate
+vi. 复正；恢复平稳",KV003058 || KV003073,好；没事的 || 右边；右侧,baseline-multi-sense-review
 nce1-o0207|electric,0207,25,26,electric,,,baseline-reconciled,electric,ɪˈlektrɪk,ɪˈlektrɪk,"n. 电；电气车辆；带电体
-adj. 电的；电动的；发电的；导电的；令人震惊的",,,baseline-new-candidate
+adj. 电的；电动的；发电的；导电的；令人震惊的",KV003074,用电的；电动的,baseline-exact-single-review
 nce1-o0208|left,0208,25,26,left,,,baseline-reconciled,left,left,left,"adj. 左边的；左派的；剩下的
 adv. 在左面
 n. 左边；左派；激进分子
 v. 离开（leave的过去式）",KV000654 || KV002032,离开（leave的过去式） || 左边；左侧,baseline-multi-sense-review
-nce1-o0209|cooker,0209,25,26,cooker,,,baseline-reconciled,cooker,ˈkʊkə(r),ˈkʊkər,n. 炊具；烹饪用水果；窜改者,,,baseline-new-candidate
+nce1-o0209|cooker,0209,25,26,cooker,,,baseline-reconciled,cooker,ˈkʊkə(r),ˈkʊkər,n. 炊具；烹饪用水果；窜改者,KV003075,炉灶；炊具,baseline-exact-single-review
 nce1-o0210|middle,0210,25,26,middle,,,baseline-reconciled,middle,ˈmɪd(ə)l,ˈmɪd(ə)l,"adj. 中间的，中部的；中级的，中等的
 n. 中间，中央；腰部",KV002123,中间；中部,baseline-exact-single-review
 nce1-o0211|of,0211,25,26,of,,,baseline-reconciled,of,ɒv; əv,ʌv; əv,prep. 关于；属于；…的；由…组成的,KV002228,……的；属于……的,baseline-exact-single-review
@@ -496,7 +496,7 @@ adv. 近；接近
 prep. 靠近；近似于",KV000066,在……附近,baseline-exact-single-review
 nce1-o0218|window,0218,27,28,window,,,baseline-reconciled,window,ˈwɪndəʊ,ˈwɪndoʊ,n. 窗；窗口；窗户,KV000845,窗,baseline-exact-single-review
 nce1-o0219|armchair,0219,27,28,armchair,,,baseline-reconciled,armchair,ˈɑːmtʃeə(r),ˈɑːrmtʃer,"n. 扶手椅，单人沙发
-adj. 不切实际的",,,baseline-new-candidate
+adj. 不切实际的",KV003076,扶手椅,baseline-exact-single-review
 nce1-o0220|door,0220,27,28,door,,,baseline-reconciled,door,dɔː(r),dɔːr,n. 门；家，户；门口；通道,KV000064,门,baseline-exact-single-review
 nce1-o0221|picture,0221,27,28,picture,,,baseline-reconciled,picture,ˈpɪktʃə(r),ˈpɪktʃər,"n. 照片，图画；影片；景色；化身
 vt. 画；想像；描写",KV002330,图片；图画；照片,baseline-exact-single-review
@@ -507,20 +507,20 @@ nce1-o0223|trousers,0223,27,28,trousers,,,baseline-reconciled,trousers,ˈtraʊz�
 nce1-o0224|shut,0224,29,30,shut,,,baseline-reconciled,shut,ʃʌt,ʃʌt,"n. 关闭
 adj. 关闭的；围绕的
 vi. 关上；停止营业
-vt. 关闭；停业；幽禁",,,baseline-new-candidate
+vt. 关闭；停业；幽禁",KV003059 || KV003077,关着的 || 关上,baseline-multi-sense-review
 nce1-o0225|bedroom,0225,29,30,bedroom,,,baseline-reconciled,bedroom,ˈbedruːm,ˈbedruːm; ˈbedrʊm,"n. 卧室
 adj. 两性关系的；城郊住宅区的",KV000336,卧室,baseline-exact-single-review
 nce1-o0226|untidy,0226,29,30,untidy,,,baseline-reconciled,untidy,ʌnˈtaɪdi,ʌnˈtaɪdi,"adj. 不整洁的，凌乱的；懒散的；不干净利落的，不简练的；不适宜的
-v. 使不整洁；使杂乱无章",,,baseline-new-candidate
+v. 使不整洁；使杂乱无章",KV003078,不整齐的；凌乱的,baseline-exact-single-review
 nce1-o0227|must,0227,29,30,must,,,baseline-reconciled,must,mʌst; məst,mʌst; məst,"aux. 必须，一定；可以，应当；很可能
 n. 绝对必要的事物；未发酵葡萄汁",KV002169,必须；一定要,baseline-exact-single-review
 nce1-o0228|open,0228,29,30,open,,,baseline-reconciled,open,ˈəʊpən,ˈoʊpən,"adj. 公开的；敞开的；空旷的；坦率的；营业着的
 vi. 开始；展现
 vt. 公开；打开
-n. 公开；空旷；户外",KV001021,开着的,baseline-exact-single-review
+n. 公开；空旷；户外",KV001021 || KV003079,开着的 || 打开,baseline-multi-sense-review
 nce1-o0229|air,0229,29,30,air,,,baseline-reconciled,air,eə(r),er,"n. 空气，大气；天空；样子；曲调
 vt. 使通风，晾干；夸耀
-vi. 通风",KV001231,空气,baseline-exact-single-review
+vi. 通风",KV001231 || KV003080,空气 || 使通风；换气,baseline-multi-sense-review
 nce1-o0230|put,0230,29,30,put,,,baseline-reconciled,put,pʊt,pʊt,"n. 掷；笨蛋；投击；怪人
 adj. 固定不动的
 vi. 出发；击；航行；发芽
@@ -536,13 +536,13 @@ vi. 扫，打扫；席卷；扫视；袭击",KV000808,扫,baseline-exact-single-
 nce1-o0235|empty,0235,29,30,empty,,,baseline-reconciled,empty,ˈempti,ˈempti,"n. 空车；空的东西
 adj. 空的；无意义的；无知的；徒劳的
 vt. 使失去；使…成为空的
-vi. 成为空的；流空",,,baseline-new-candidate
+vi. 成为空的；流空",KV003062 || KV003081,空的 || 倒空；清空,baseline-multi-sense-review
 nce1-o0236|read,0236,29,30,read,,,baseline-reconciled,read,riːd,riːd,"n. 阅读；读物
 adj. 有学问的
 vi. 读；读起来
 vt. 阅读；读懂，理解",KV000812,阅读,baseline-exact-single-review
 nce1-o0237|sharpen,0237,29,30,sharpen,,,baseline-reconciled,sharpen,ˈʃɑːpən,ˈʃɑːrpən,"vt. 削尖；磨快；使敏捷；加重
-vi. 尖锐；变锋利",,,baseline-new-candidate
+vi. 尖锐；变锋利",KV003082,削尖；使锋利,baseline-exact-single-review
 nce1-o0238|put on,0238,29,30,put on,,,baseline-reconciled,put on,pʊt ɒn,pʊt ɑːn,na. 假话,KV002422,穿上；戴上,baseline-exact-single-review
 nce1-o0239|take off,0239,29,30,take off,,,baseline-reconciled,take off,ˈteɪk ɒf,ˈteɪk ɔːf,v. (飞机)起飞；出去；拿掉；移送,KV002760,脱下；摘下,baseline-exact-single-review
 nce1-o0240|turn on,0240,29,30,turn on,,,baseline-reconciled,turn on,tɜ:n ɒn,tɜːrn ɑːn,na. 转向；对…进行突击,KV002887,打开；开启（电器、灯等）,baseline-exact-single-review
@@ -569,13 +569,13 @@ vi. 长草",KV000135,草,baseline-exact-single-review
 nce1-o0249|after,0249,31,32,after,,,baseline-reconciled,after,ˈɑːftə(r),ˈæftər,"conj. 在……之后
 prep. 在……之后
 adj. 以后的
-adv. 后来，以后",KV000979,在（时间）后,baseline-exact-single-review
+adv. 后来，以后",KV000979 || KV003083,在（时间）后 || 在……后面；跟着,baseline-multi-sense-review
 nce1-o0250|across,0250,31,32,across,,,baseline-reconciled,across,əˈkrɒs,əˈkrɔːs,"prep. 穿过；横穿
 adv. 横过；在对面",KV001220,穿过；横过,baseline-exact-single-review
 nce1-o0251|cat,0251,31,32,cat,,,baseline-reconciled,cat,kæt,kæt,n. 猫，猫科动物,KV000022,猫,baseline-exact-single-review
 nce1-o0252|type,0252,31,32,type,,,baseline-reconciled,type,taɪp,taɪp,"n. 类型，品种；模范；样式
 vt. 打字；测定（血等）类型
-vi. 打字",KV001139,类型；种类,baseline-exact-single-review
+vi. 打字",KV001139 || KV003084,类型；种类 || 打字,baseline-multi-sense-review
 nce1-o0253|letter,0253,31,32,letter,,,baseline-reconciled,letter,ˈletə(r),ˈletər,"n. 信；字母，文字；证书；文学，学问；字面意义
 vt. 写字母于
 vi. 写印刷体字母",KV000986,信,baseline-exact-single-review
@@ -651,7 +651,7 @@ nce1-o0279|sleep,0279,33,34,sleep,,,baseline-reconciled,sleep,sliːp,sliːp,"n. 
 vi. 睡，睡觉",KV000857,睡觉,baseline-exact-single-review
 nce1-o0280|shave,0280,33,34,shave,,,baseline-reconciled,shave,ʃeɪv,ʃeɪv,"vi. 剃须，剃毛
 vt. 剃，削去；修剪；切成薄片；掠
-n. 刮脸，剃胡子；修面；<口>侥幸逃过，幸免；剃刀，刮刀",,,baseline-new-candidate
+n. 刮脸，剃胡子；修面；<口>侥幸逃过，幸免；剃刀，刮刀",KV003085,刮胡子；剃须,baseline-exact-single-review
 nce1-o0281|cry,0281,33,34,cry,,,baseline-reconciled,cry,kraɪ,kraɪ,"n. 叫喊；叫声；口号；呼叫
 vi. 哭；叫；喊
 vt. 叫喊；哭出；大声说",KV000736,哭；哭泣,baseline-exact-single-review
@@ -680,10 +680,10 @@ nce1-o0292|along,0292,35,36,along,,,baseline-reconciled,along,əˈlɒŋ,əˈlɔ�
 adv. 一起；向前；来到",KV001244,沿着；顺着,baseline-exact-single-review
 nce1-o0293|bank,0293,35,36,bank,,,baseline-reconciled,bank,bæŋk,bæŋk,"n. 银行；岸；浅滩；储库
 vt. 将…存入银行；倾斜转弯
-vi. 堆积；倾斜转弯",KV000445,银行,baseline-exact-single-review
+vi. 堆积；倾斜转弯",KV000445 || KV003086,银行 || 河岸,baseline-multi-sense-review
 nce1-o0294|water,0294,35,36,water,,,baseline-reconciled,water,ˈwɔːtə(r),ˈwɔːtər,"n. 水；海水；雨水；海域，大片的水
 vt. 使湿；供以水；给…浇水
-vi. 加水；流泪；流口水",KV000089,水,baseline-exact-single-review
+vi. 加水；流泪；流口水",KV000089 || KV003251,水 || 给……浇水,baseline-multi-sense-review
 nce1-o0295|swim,0295,35,36,swim,,,baseline-reconciled,swim,swɪm,swɪm,"n. 游泳；漂浮；眩晕
 adj. 游泳时穿戴的
 vi. 游泳；漂浮；浸；眩晕
@@ -702,11 +702,11 @@ nce1-o0301|work,0301,37,38,work,,,baseline-reconciled,work,wɜːk,wɜːrk,"n. �
 vt. 使工作；操作；经营；使缓慢前进
 vi. 工作；运作；起作用",KV000859,做（某事）；工作,baseline-exact-single-review
 nce1-o0302|hard,0302,37,38,hard,,,baseline-reconciled,hard,hɑːd,hɑːrd,"adj. 努力的；硬的；困难的；辛苦的；确实的；严厉的；猛烈的；冷酷无情的
-adv. 努力地；困难地；辛苦地；接近地；猛烈地；牢固地",KV000860,努力地；费力地,baseline-exact-single-review
+adv. 努力地；困难地；辛苦地；接近地；猛烈地；牢固地",KV000860 || KV003223,努力地；费力地 || 硬的；坚硬的,baseline-multi-sense-review
 nce1-o0303|make,0303,37,38,make,,,baseline-reconciled,make,meɪk,meɪk,"vt. 使得；进行；布置，准备，整理；制造；认为；获得；形成；安排；引起；构成
 vi. 开始；前进；增大；被制造
 n. 制造；构造；性情",KV001074 || KV003028,（过去式 made）做；使出现 || 品牌；牌子,baseline-multi-sense-review
-nce1-o0304|bookcase,0304,37,38,bookcase,,,baseline-reconciled,bookcase,ˈbʊkkeɪs,ˈbʊkkeɪs,n. [家具] 书柜，书架,,,baseline-new-candidate
+nce1-o0304|bookcase,0304,37,38,bookcase,,,baseline-reconciled,bookcase,ˈbʊkkeɪs,ˈbʊkkeɪs,n. [家具] 书柜，书架,KV003087,书柜；书架,baseline-exact-single-review
 nce1-o0305|hammer,0305,37,38,hammer,,,baseline-reconciled,hammer,ˈhæmə(r),ˈhæmər,"n. 铁锤；链球；[解剖] 锤骨；音锤
 vi. 锤击；敲打；重复
 vt. 锤击；锤打",KV001861,锤子,baseline-exact-single-review
@@ -724,7 +724,7 @@ nce1-o0310|listen,0310,37,38,listen,,,baseline-reconciled,listen,ˈlɪs(ə)n,ˈl
 n. 听，倾听",KV002048,听；倾听,baseline-exact-single-review
 nce1-o0311|dish,0311,37,38,dish,,,baseline-reconciled,dish,dɪʃ,dɪʃ,"n. 盘；餐具；一盘食物；外貌有吸引力的人
 vt. 盛于碟盘中；分发；使某人的希望破灭；说（某人）的闲话
-vi. 成碟状；闲谈",,,baseline-new-candidate
+vi. 成碟状；闲谈",KV003088,盘子；碟子,baseline-exact-single-review
 nce1-o0312|front,0312,39,40,front,,,baseline-reconciled,front,frʌnt,frʌnt,"n. 前面；正面；前线
 adj. 前面的；正面的
 vt. 面对；朝向；对付
@@ -735,7 +735,7 @@ nce1-o0314|careful,0314,39,40,careful,,,baseline-reconciled,careful,ˈkeəf(ə)l
 nce1-o0315|vase,0315,39,40,vase,,,baseline-reconciled,vase,vɑːz,veɪs; veɪz,n. 瓶；花瓶,KV002915,花瓶,baseline-exact-single-review
 nce1-o0316|drop,0316,39,40,drop,,,baseline-reconciled,drop,drɒp,drɑːp,"n. 滴；落下；空投；微量；滴剂
 vt. 滴；使降低；使终止；随口漏出
-vi. 下降；终止",,,baseline-new-candidate
+vi. 下降；终止",KV003089,掉下；使落下,baseline-exact-single-review
 nce1-o0317|flower,0317,39,40,flower,,,baseline-reconciled,flower,ˈflaʊə(r),ˈflaʊər,"n. 花；精华；开花植物
 vt. 使开花；用花装饰
 vi. 成熟，发育；开花；繁荣；旺盛",KV000137,花,baseline-exact-single-review
@@ -765,23 +765,23 @@ nce1-o0326|coffee,0326,41,42,coffee,,,baseline-reconciled,coffee,ˈkɒfi,ˈkɔː
 nce1-o0327|tea,0327,41,42,tea,,,baseline-reconciled,tea,tiː,tiː,"n. 茶叶；茶树；茶点
 vt. 给…沏茶
 vi. 喝茶；进茶点",KV000087,茶,baseline-exact-single-review
-nce1-o0328|tobacco,0328,41,42,tobacco,,,baseline-reconciled,tobacco,təˈbækəʊ,təˈbækoʊ,n. 烟草，烟叶；烟草制品；抽烟,,,baseline-new-candidate
+nce1-o0328|tobacco,0328,41,42,tobacco,,,baseline-reconciled,tobacco,təˈbækəʊ,təˈbækoʊ,n. 烟草，烟叶；烟草制品；抽烟,KV003090,烟草；烟丝,baseline-exact-single-review
 nce1-o0329|bird,0329,41,42,bird,,,baseline-reconciled,bird,bɜːd,bɜːrd,"n. 鸟；家伙；羽毛球
 vt. 向…喝倒彩；起哄
 vi. 猎鸟；观察研究野鸟",KV000019,鸟,baseline-exact-single-review
 nce1-o0330|any,0330,41,42,any,,,baseline-reconciled,any,ˈeni,ˈeni,"adj. 任何的；所有的；丝毫
 pron. 任何；任何一个；若干
-adv. 稍微；少许",KV000881,任何的；任一的,baseline-exact-single-review
+adv. 稍微；少许",KV000881 || KV003091,任何的；任一的 || 一些（常用于疑问句或否定句）,baseline-multi-sense-review
 nce1-o0331|some,0331,41,42,some,,,baseline-reconciled,some,sʌm,sʌm; səm,"adj. 一些；某个；大约；相当多的
 pron. 一些；若干；其中的一部分；（数量不确切时用）有些人
 adv. 非常；相当；<美>稍微",KV002641,一些；有些,baseline-exact-single-review
-nce1-o0332|of course,0332,43,44,of course,,,baseline-reconciled,of course,,,na. 当然,,,baseline-new-candidate
-nce1-o0333|kettle,0333,43,44,kettle,,,baseline-reconciled,kettle,ˈket(ə)l,ˈketl,n. 壶；[化工] 釜；罐；鼓,,,baseline-new-candidate
+nce1-o0332|of course,0332,43,44,of course,,,baseline-reconciled,of course,,,na. 当然,KV003092,当然,baseline-exact-single-review
+nce1-o0333|kettle,0333,43,44,kettle,,,baseline-reconciled,kettle,ˈket(ə)l,ˈketl,n. 壶；[化工] 釜；罐；鼓,KV003093,烧水壶,baseline-exact-single-review
 nce1-o0334|behind,0334,43,44,behind,,,baseline-reconciled,behind,bɪˈhaɪnd,bɪˈhaɪnd,"prep. 落后于；支持；晚于
 n. 屁股
 adv. 在后地；在原处",KV000067,在……后面,baseline-exact-single-review
 nce1-o0335|teapot,0335,43,44,teapot,,,baseline-reconciled,teapot,ˈtiːpɒt,ˈtiːpɑːt,"n. 茶壶
-小题大做",,,baseline-new-candidate
+小题大做",KV003094,茶壶,baseline-exact-single-review
 nce1-o0336|now,0336,43,44,now,,,baseline-reconciled,now,naʊ,naʊ,"adv. 现在；如今；立刻
 adj. 现在的
 n. 现在；目前
@@ -802,9 +802,9 @@ nce1-o0341|minute,0341,45,46,minute,,,baseline-reconciled,minute,ˈmɪnɪt,ˈmɪ
 vt. 将…记录下来
 adj. 微小的，详细的 [maɪˈnjuːt; US -ˈnuːt; maɪˋnut]",KV000867,分钟,baseline-exact-single-review
 nce1-o0342|ask,0342,45,46,ask,,,baseline-reconciled,ask,ɑːsk,æsk,"vt. 问，询问；要求；需要；邀请；讨价
-vi. 问，询问；要求",KV000923,问；询问,baseline-exact-single-review
+vi. 问，询问；要求",KV000923 || KV003095,问；询问 || 请求；要求,baseline-multi-sense-review
 nce1-o0343|handwriting,0343,45,46,handwriting,,,baseline-reconciled,handwriting,ˈhændraɪtɪŋ,ˈhændraɪtɪŋ,"n. 笔迹；书法；书写；手稿
-v. 亲手写（handwrite的ing形式）",,,baseline-new-candidate
+v. 亲手写（handwrite的ing形式）",KV003096,书写；笔迹,baseline-exact-single-review
 nce1-o0344|terrible,0344,45,46,terrible,,,baseline-reconciled,terrible,ˈterəb(ə)l,ˈterəb(ə)l,"adj. 可怕的；很糟的；令人讨厌的
 adv. 很，非常",KV002787,糟糕的；可怕的,baseline-exact-single-review
 nce1-o0345|lift,0345,45,46,lift,,,baseline-reconciled,lift,lɪft,lɪft,"vt. 举起；提升；鼓舞；空运；抄袭
@@ -831,14 +831,14 @@ nce1-o0351|egg,0351,47,48,egg,,,baseline-reconciled,egg,eɡ,eɡ,"n. 蛋；卵子
 vt. 煽动；怂恿",KV000082,鸡蛋；蛋,baseline-exact-single-review
 nce1-o0352|butter,0352,47,48,butter,,,baseline-reconciled,butter,ˈbʌtə(r),ˈbʌtər,"n. 黄油；奶油；奉承话
 vt. 涂黄油于；讨好",KV001402,黄油,baseline-exact-single-review
-nce1-o0353|pure,0353,47,48,pure,,,baseline-reconciled,pure,pjʊə(r),pjʊr,adj. 纯的；纯粹的；纯洁的；清白的；纯理论的,,,baseline-new-candidate
+nce1-o0353|pure,0353,47,48,pure,,,baseline-reconciled,pure,pjʊə(r),pjʊr,adj. 纯的；纯粹的；纯洁的；清白的；纯理论的,KV003097,纯净的；纯的,baseline-exact-single-review
 nce1-o0354|honey,0354,47,48,honey,,,baseline-reconciled,honey,ˈhʌni,ˈhʌni,"n. 蜂蜜；宝贝；甜蜜
 adj. 甘美的；蜂蜜似的
 vt. 对…说甜言蜜语；加蜜使甜
 vi. 奉承；说甜言蜜语",KV001919,蜂蜜,baseline-exact-single-review
 nce1-o0355|ripe,0355,47,48,ripe,,,baseline-reconciled,ripe,raɪp,raɪp,"adj. 熟的，成熟的；时机成熟的
 vt. 搜查；调查
-vi. 进行搜查",,,baseline-new-candidate
+vi. 进行搜查",KV003098,成熟的（果实）,baseline-exact-single-review
 nce1-o0356|banana,0356,47,48,banana,,,baseline-reconciled,banana,bəˈnɑːnə,bəˈnænə,n. 香蕉；喜剧演员；大鹰钩鼻,KV000047,香蕉,baseline-exact-single-review
 nce1-o0357|jam,0357,47,48,jam,,,baseline-reconciled,jam,dʒæm,dʒæm,"n. 果酱；拥挤；困境；扣篮
 vt. 使堵塞；挤进，使塞满；混杂；压碎
@@ -848,44 +848,44 @@ adj. 甜的；悦耳的；芳香的；亲切的
 （俚）酷毙了",KV002736,甜的,baseline-exact-single-review
 nce1-o0359|orange,0359,47,48,orange,,,baseline-reconciled,orange,ˈɒrɪndʒ,ˈɔrɪndʒ,"adj. 橙色的；橘色的
 n. 橙；橙色；桔子",KV000048 || KV003054,橙子；橙色 || 橙色的；橘黄色的,baseline-multi-sense-review
-nce1-o0360|scotch whisky,0360,47,48,Scotch whisky,,,baseline-reconciled,Scotch whisky,,,na. 苏格兰威士忌酒,,,baseline-new-candidate
+nce1-o0360|scotch whisky,0360,47,48,Scotch whisky,,,baseline-reconciled,Scotch whisky,,,na. 苏格兰威士忌酒,KV003099,苏格兰威士忌,baseline-exact-single-review
 nce1-o0361|choice,0361,47,48,choice,,,baseline-reconciled,choice,tʃɔɪs,tʃɔɪs,"n. 选择；选择权；精选品
-adj. 精选的；仔细推敲的",,,baseline-new-candidate
+adj. 精选的；仔细推敲的",KV003100,精选的；上等的,baseline-exact-single-review
 nce1-o0362|apple,0362,47,48,apple,,,baseline-reconciled,apple,ˈæp(ə)l,ˈæpl,n. 苹果，苹果树，苹果似的东西；[美俚]炸弹，手榴弹，（棒球的）球；[美俚]人，家伙。,KV000045,苹果,baseline-exact-single-review
 nce1-o0363|wine,0363,47,48,wine,,,baseline-reconciled,wine,waɪn,waɪn,"n. 酒，葡萄酒；紫红色
 vt. 请…喝酒
-vi. 喝酒",,,baseline-new-candidate
+vi. 喝酒",KV003101,葡萄酒；果酒,baseline-exact-single-review
 nce1-o0364|beer,0364,47,48,beer,,,baseline-reconciled,beer,bɪə(r),bɪr,"n. 啤酒
-vi. 喝啤酒",,,baseline-new-candidate
+vi. 喝啤酒",KV003102,啤酒,baseline-exact-single-review
 nce1-o0365|blackboard,0365,47,48,blackboard,,,baseline-reconciled,blackboard,ˈblækbɔːd,ˈblækbɔːrd,n. 黑板,KV000056,黑板,baseline-exact-single-review
 nce1-o0366|butcher,0366,49,50,butcher,,,baseline-reconciled,butcher,ˈbʊtʃə(r),ˈbʊtʃər,"n. 屠夫
-vt. 屠杀",,,baseline-new-candidate
+vt. 屠杀",KV003103,肉贩；肉店老板,baseline-exact-single-review
 nce1-o0367|meat,0367,49,50,meat,,,baseline-reconciled,meat,miːt,miːt,n. 肉，肉类（食用）,KV000239,肉；肉类,baseline-exact-single-review
 nce1-o0368|beef,0368,49,50,beef,,,baseline-reconciled,beef,biːf,biːf,"n. 牛肉；肌肉；食用牛；牢骚
 vt. 养；加强
 vi. 抱怨，告发；发牢骚",KV000946,牛肉,baseline-exact-single-review
 nce1-o0369|lamb,0369,49,50,lamb,,,baseline-reconciled,lamb,læm,læm,"n. 羔羊，小羊；羔羊肉
 vt. 生小羊，产羔羊
-vi. 生小羊，产羔羊",,,baseline-new-candidate
+vi. 生小羊，产羔羊",KV003104,羊羔肉,baseline-exact-single-review
 nce1-o0370|husband,0370,49,50,husband,,,baseline-reconciled,husband,ˈhʌzbənd,ˈhʌzbənd,"n. 丈夫
-vt. 节约地使用（或管理）",,,baseline-new-candidate
+vt. 节约地使用（或管理）",KV003105,丈夫,baseline-exact-single-review
 nce1-o0371|steak,0371,49,50,steak,,,baseline-reconciled,steak,steɪk,steɪk,n. 牛排；肉排；鱼排,KV002685,牛排；肉排,baseline-exact-single-review
 nce1-o0372|mince,0372,49,50,mince,,,baseline-reconciled,mince,mɪns,mɪns,"vt. 切碎；矫揉做作地说
 vi. 装腔作势；碎步走
-n. 切碎物，肉馅",,,baseline-new-candidate
+n. 切碎物，肉馅",KV003106,肉末；绞肉,baseline-exact-single-review
 nce1-o0373|chicken,0373,49,50,chicken,,,baseline-reconciled,chicken,ˈtʃɪkɪn,ˈtʃɪkɪn,"n. 鸡肉；小鸡；胆小鬼，懦夫
 adj. 鸡肉的；胆怯的；幼小的",KV000081,鸡肉,baseline-exact-single-review
 nce1-o0374|tell,0374,49,50,tell,,,baseline-reconciled,tell,tel,tel,"vt. 告诉，说；辨别；吩咐；断定
 vi. 讲述；告发，泄密；识别",KV000827,讲述；告诉,baseline-exact-single-review
-nce1-o0375|truth,0375,49,50,truth,,,baseline-reconciled,truth,truːθ,truːθ,n. 真理；事实；诚实；实质,,,baseline-new-candidate
+nce1-o0375|truth,0375,49,50,truth,,,baseline-reconciled,truth,truːθ,truːθ,n. 真理；事实；诚实；实质,KV003107,事实；真相,baseline-exact-single-review
 nce1-o0376|either,0376,49,50,either,,,baseline-reconciled,either,ˈaɪðə(r),ˈiːðər,"conj. 也（用于否定句或否定词组后）；根本
 prep. 任何一个
 adj. 两者之中任一的；两者之中每一的
-pron. 任一，两方，随便哪一个；两者中的一个或另一个",KV001658,两者中的任一个,baseline-exact-single-review
+pron. 任一，两方，随便哪一个；两者中的一个或另一个",KV001658 || KV003108,两者中的任一个 || 也（用于否定句）,baseline-multi-sense-review
 nce1-o0377|tomato,0377,49,50,tomato,,,baseline-reconciled,tomato,təˈmɑːtəʊ,təˈmeɪtoʊ,n. 番茄，西红柿,KV000238,西红柿；番茄,baseline-exact-single-review
 nce1-o0378|potato,0378,49,50,potato,,,baseline-reconciled,potato,pəˈteɪtəʊ,pəˈteɪtoʊ,n. [作物] 土豆，[作物] 马铃薯,KV000237,土豆；马铃薯,baseline-exact-single-review
 nce1-o0379|cabbage,0379,49,50,cabbage,,,baseline-reconciled,cabbage,ˈkæbɪdʒ,ˈkæbɪdʒ,n. 卷心菜，甘蓝菜，洋白菜；（俚)脑袋；（非正式、侮辱）植物人（常用于英式英语）；（俚）钱，尤指纸币（常用于美式俚语）,KV001408,卷心菜；洋白菜,baseline-exact-single-review
-nce1-o0380|lettuce,0380,49,50,lettuce,,,baseline-reconciled,lettuce,ˈletɪs,ˈletɪs,n. [园艺] 生菜；莴苣；（美）纸币,,,baseline-new-candidate
+nce1-o0380|lettuce,0380,49,50,lettuce,,,baseline-reconciled,lettuce,ˈletɪs,ˈletɪs,n. [园艺] 生菜；莴苣；（美）纸币,KV003109,生菜；莴苣,baseline-exact-single-review
 nce1-o0381|pea,0381,49,50,pea,,,baseline-reconciled,pea,piː,piː,n. 豌豆,KV002304,豌豆,baseline-exact-single-review
 nce1-o0382|bean,0382,49,50,bean,,,baseline-reconciled,bean,biːn,biːn,"n. 豆；嘴峰；毫无价值的东西
 vt. 击…的头部",KV001321,豆；豆子,baseline-exact-single-review
@@ -895,11 +895,11 @@ nce1-o0385|peach,0385,49,50,peach,,,baseline-reconciled,peach,piːtʃ,piːtʃ,"n
 adj. 桃色的；用桃子制成的
 vt. 告发
 vi. 告密",KV002306,桃；桃子,baseline-exact-single-review
-nce1-o0386|greece,0386,51,52,Greece,,,baseline-reconciled,Greece,ɡriːs,ɡriːs,希腊（欧洲南部国家）,,,baseline-new-candidate
-nce1-o0387|climate,0387,51,52,climate,,,baseline-reconciled,climate,ˈklaɪmət,ˈklaɪmət,n. 气候；风气；思潮；风土,,,baseline-new-candidate
+nce1-o0386|greece,0386,51,52,Greece,,,baseline-reconciled,Greece,ɡriːs,ɡriːs,希腊（欧洲南部国家）,KV003110,希腊,baseline-exact-single-review
+nce1-o0387|climate,0387,51,52,climate,,,baseline-reconciled,climate,ˈklaɪmət,ˈklaɪmət,n. 气候；风气；思潮；风土,KV003111,气候,baseline-exact-single-review
 nce1-o0388|country,0388,51,52,country,,,baseline-reconciled,country,ˈkʌntri,ˈkʌntri,"n. 国家，国土；国民；乡下，农村；乡村；故乡
-adj. 祖国的，故乡的；地方的，乡村的；国家的；粗鲁的；乡村音乐的",KV000518,国家,baseline-exact-single-review
-nce1-o0389|pleasant,0389,51,52,pleasant,,,baseline-reconciled,pleasant,ˈplez(ə)nt,ˈpleznt,adj. 令人愉快的，舒适的；讨人喜欢的，和蔼可亲的,,,baseline-new-candidate
+adj. 祖国的，故乡的；地方的，乡村的；国家的；粗鲁的；乡村音乐的",KV000518 || KV003150,国家 || 乡村；乡下,baseline-multi-sense-review
+nce1-o0389|pleasant,0389,51,52,pleasant,,,baseline-reconciled,pleasant,ˈplez(ə)nt,ˈpleznt,adj. 令人愉快的，舒适的；讨人喜欢的，和蔼可亲的,KV003112,令人愉快的；宜人的,baseline-exact-single-review
 nce1-o0390|weather,0390,51,52,weather,,,baseline-reconciled,weather,ˈweðə(r),ˈweðər,"n. 天气；气象；气候；处境
 vt. 经受住；使风化；侵蚀；使受风吹雨打
 adj. 露天的；迎风的
@@ -927,12 +927,12 @@ adj. 冬天的；越冬的
 vi. 过冬",KV000172,冬天,baseline-exact-single-review
 nce1-o0399|snow,0399,51,52,snow,,,baseline-reconciled,snow,snəʊ,snoʊ,"n. 雪，积雪；下雪
 vt. 使纷纷落下；使变白
-vi. 降雪",KV000392,雪,baseline-exact-single-review
+vi. 降雪",KV000392 || KV003113,雪 || 下雪,baseline-multi-sense-review
 nce1-o0400|january,0400,51,52,January,,,baseline-reconciled,January,ˈdʒænjuəri,ˈdʒænjueri,n. 一月,KV000266,一月,baseline-exact-single-review
 nce1-o0401|february,0401,51,52,February,,,baseline-reconciled,February,ˈfebruəri,ˈfebrueri,n. 二月,KV000267,二月,baseline-exact-single-review
 nce1-o0402|march,0402,51,52,March,,,baseline-reconciled,March,mɑːtʃ,mɑːrtʃ,n. 三月,KV000268,三月,baseline-exact-single-review
 nce1-o0403|april,0403,51,52,April,,,baseline-reconciled,April,ˈeɪprəl,ˈeɪprəl,n. 四月,KV000269,四月,baseline-exact-single-review
-nce1-o0404|may,0404,51,52,May,,,baseline-reconciled,May || may,meɪ,meɪ,aux. 可以，能够；可能，也许；祝，愿；会，能,KV000270 || KV001095,五月 || 也许；可能,baseline-multi-sense-review
+nce1-o0404|may,0404,51,52,May,,,baseline-reconciled,May || may,meɪ,meɪ,aux. 可以，能够；可能，也许；祝，愿；会，能,KV000270 || KV001095 || KV003178,五月 || 也许；可能 || 可以（请求或给予许可）,baseline-multi-sense-review
 nce1-o0405|june,0405,51,52,June,,,baseline-reconciled,June,dʒuːn,dʒuːn,n. 六月；琼（人名，来源于拉丁语，含义是“年轻气盛的六月”）,KV000271,六月,baseline-exact-single-review
 nce1-o0406|july,0406,51,52,July,,,baseline-reconciled,July,dʒʊˈlaɪ,dʒʊˈlaɪ,n. 七月,KV000272,七月,baseline-exact-single-review
 nce1-o0407|august,0407,51,52,August,,,baseline-reconciled,August,ˈɔːɡəst,ˈɔːɡəst,"n. 八月（简写为Aug）
@@ -943,17 +943,17 @@ nce1-o0410|november,0410,51,52,November,,,baseline-reconciled,November,nəʊˈve
 nce1-o0411|december,0411,51,52,December,,,baseline-reconciled,December,dɪˈsembə(r),dɪˈsembər,n. 十二月,KV000277,十二月,baseline-exact-single-review
 nce1-o0412|the u.s.,0412,51,52,the U.S.,,,baseline-reconciled,the U.S.,,,n. 美利坚合众国，美国,KV002808,美国,baseline-exact-single-review
 nce1-o0413|brazil,0413,51,52,Brazil,,,baseline-reconciled,Brazil,brəˈzɪl,brəˈzɪl,n. 巴西（拉丁美洲国家）,KV001373,巴西,baseline-exact-single-review
-nce1-o0414|holland,0414,51,52,Holland,,,baseline-reconciled,Holland,ˈhɒlənd,ˈhɑːlənd,n. 荷兰,,,baseline-new-candidate
+nce1-o0414|holland,0414,51,52,Holland,,,baseline-reconciled,Holland,ˈhɒlənd,ˈhɑːlənd,n. 荷兰,KV003114,荷兰（传统称呼）,baseline-exact-single-review
 nce1-o0415|england,0415,51,52,England,,,baseline-reconciled,England,ˈɪŋɡlənd,ˈɪŋɡlənd,n. 英格兰,KV001666,英格兰,baseline-exact-single-review
 nce1-o0416|france,0416,51,52,France,,,baseline-reconciled,France,frɑːns,fræns,n. 法国；法郎士（姓氏）,KV001766,法国,baseline-exact-single-review
 nce1-o0417|germany,0417,51,52,Germany,,,baseline-reconciled,Germany,ˈdʒɜːməni,ˈdʒɜːrməni,n. 德国,KV001789,德国,baseline-exact-single-review
 nce1-o0418|italy,0418,51,52,Italy,,,baseline-reconciled,Italy,ˈɪtəli,ˈɪtəli,n. 意大利（欧洲南部国家）,KV001976,意大利,baseline-exact-single-review
-nce1-o0419|norway,0419,51,52,Norway,,,baseline-reconciled,Norway,ˈnɔːweɪ,ˈnɔːrweɪ,n. 挪威（北欧国家名）,,,baseline-new-candidate
+nce1-o0419|norway,0419,51,52,Norway,,,baseline-reconciled,Norway,ˈnɔːweɪ,ˈnɔːrweɪ,n. 挪威（北欧国家名）,KV003115,挪威,baseline-exact-single-review
 nce1-o0420|russia,0420,51,52,Russia,,,baseline-reconciled,Russia,ˈrʌʃə,ˈrʌʃə,n. 俄罗斯,KV002496,俄罗斯,baseline-exact-single-review
 nce1-o0421|spain,0421,51,52,Spain,,,baseline-reconciled,Spain,speɪn,speɪn,n. 西班牙,KV000980,西班牙,baseline-exact-single-review
-nce1-o0422|sweden,0422,51,52,Sweden,,,baseline-reconciled,Sweden,ˈswiːd(ə)n,ˈswiːd(ə)n,n. 瑞典（欧洲国家）,,,baseline-new-candidate
+nce1-o0422|sweden,0422,51,52,Sweden,,,baseline-reconciled,Sweden,ˈswiːd(ə)n,ˈswiːd(ə)n,n. 瑞典（欧洲国家）,KV003116,瑞典,baseline-exact-single-review
 nce1-o0423|mild,0423,53,54,mild,,,baseline-reconciled,mild,maɪld,maɪld,"adj. 温和的；轻微的；淡味的；文雅的；不含有害物质的的
-n. （英国的一种）淡味麦芽啤酒",,,baseline-new-candidate
+n. （英国的一种）淡味麦芽啤酒",KV003117,温和的；不冷的,baseline-exact-single-review
 nce1-o0424|always,0424,53,54,always,,,baseline-reconciled,always,ˈɔːlweɪz,ˈɔːlweɪz,adv. 永远，一直；总是；常常,KV000363,总是,baseline-exact-single-review
 nce1-o0425|north,0425,53,54,north,,,baseline-reconciled,north,nɔːθ,nɔːrθ,"n. 北，北方
 adj. 北方的；朝北的
@@ -988,20 +988,20 @@ adv. 提早；在初期",KV000581,早；早地,baseline-exact-single-review
 nce1-o0435|set,0435,53,54,set,,,baseline-reconciled,set,set,set,"n. [数] 集合；一套；布景；[机] 装置
 adj. 固定的；规定的；固执的
 vi. (日,月)落沉；凝固；结果
-vt. 树立；点燃；点缀；",,,baseline-new-candidate
+vt. 树立；点燃；点缀；",KV003118,落下（太阳）,baseline-exact-single-review
 nce1-o0436|late,0436,53,54,late,,,baseline-reconciled,late,leɪt,leɪt,"adj. 晚的；迟的；已故的；最近的
 adv. 晚；迟；最近；在晚期",KV000353,迟到的；晚的,baseline-exact-single-review
 nce1-o0437|interesting,0437,53,54,interesting,,,baseline-reconciled,interesting,ˈɪntrəstɪŋ,ˈɪntrəstɪŋ; ˈɪntrestɪŋ,adj. 有趣的；引起兴趣的，令人关注的,KV000350,有趣的,baseline-exact-single-review
 nce1-o0438|subject,0438,53,54,subject,,,baseline-reconciled,subject,ˈsʌbdʒɪkt; ˈsʌbdʒekt,ˈsʌbdʒɪkt; ˈsʌbdʒekt,"n. 主题；科目；[语] 主语；国民
 adj. 服从的；易患…的；受制于…的
-vt. 使…隶属；使屈从于…",KV000590,学科；科目,baseline-exact-single-review
-nce1-o0439|conversation,0439,53,54,conversation,,,baseline-reconciled,conversation,ˌkɒnvəˈseɪʃ(ə)n,ˌkɑːnvərˈseɪʃn,n. 交谈，会话；社交；交往，交际；会谈；（人与计算机的）人机对话,,,baseline-new-candidate
+vt. 使…隶属；使屈从于…",KV000590 || KV003119,学科；科目 || 话题；谈论的主题,baseline-multi-sense-review
+nce1-o0439|conversation,0439,53,54,conversation,,,baseline-reconciled,conversation,ˌkɒnvəˈseɪʃ(ə)n,ˌkɑːnvərˈseɪʃn,n. 交谈，会话；社交；交往，交际；会谈；（人与计算机的）人机对话,KV003120,谈话；交谈,baseline-exact-single-review
 nce1-o0440|australia,0440,53,54,Australia,,,baseline-reconciled,Australia,ɒˈstreɪliə,ɔːˈstreɪliə,n. 澳大利亚，澳洲,KV000508,澳大利亚,baseline-exact-single-review
 nce1-o0441|australian,0441,53,54,Australian,,,baseline-reconciled,Australian,ɒˈstreɪliən,ɔːˈstreɪliən,"adj. 澳大利亚的，澳大利亚人的
 n. 澳大利亚人",KV001286,澳大利亚的；澳大利亚人,baseline-exact-single-review
-nce1-o0442|austria,0442,53,54,Austria,,,baseline-reconciled,Austria,ˈɒstriə,ˈɔːstriə,n. 奥地利,,,baseline-new-candidate
+nce1-o0442|austria,0442,53,54,Austria,,,baseline-reconciled,Austria,ˈɒstriə,ˈɔːstriə,n. 奥地利,KV003121,奥地利,baseline-exact-single-review
 nce1-o0443|austrian,0443,53,54,Austrian,,,baseline-reconciled,Austrian,ˈɒstriən,ˈɔːstriən,"n. 奥地利人
-adj. 奥地利的；奥地利人的",,,baseline-new-candidate
+adj. 奥地利的；奥地利人的",KV003122,奥地利的；奥地利人的,baseline-exact-single-review
 nce1-o0444|canada,0444,53,54,Canada,,,baseline-reconciled,Canada,ˈkænədə,ˈkænədə,n. 加拿大（北美洲国家）,KV000507,加拿大,baseline-exact-single-review
 nce1-o0445|canadian,0445,53,54,Canadian,,,baseline-reconciled,Canadian,kəˈneɪdiən,kəˈneɪdiən,"n. 加拿大人
 adj. 加拿大（人）的",KV001044,加拿大的,baseline-exact-single-review
@@ -1009,27 +1009,27 @@ nce1-o0446|china,0446,53,54,China,,,baseline-reconciled,China,ˈtʃaɪnə,ˈtʃa
 n. china，瓷器
 adj. 中国的；中国制造的
 adj. china，瓷制的",KV000511,中国,baseline-exact-single-review
-nce1-o0447|finland,0447,53,54,Finland,,,baseline-reconciled,Finland,ˈfɪnlənd,ˈfɪnlənd,n. 芬兰（欧洲）,,,baseline-new-candidate
+nce1-o0447|finland,0447,53,54,Finland,,,baseline-reconciled,Finland,ˈfɪnlənd,ˈfɪnlənd,n. 芬兰（欧洲）,KV003123,芬兰,baseline-exact-single-review
 nce1-o0448|finnish,0448,53,54,Finnish,,,baseline-reconciled,Finnish,ˈfɪnɪʃ,ˈfɪnɪʃ,"n. 芬兰人，芬兰语
-adj. 芬兰的，芬兰语的",,,baseline-new-candidate
+adj. 芬兰的，芬兰语的",KV003124,芬兰的；芬兰人的,baseline-exact-single-review
 nce1-o0449|india,0449,53,54,India,,,baseline-reconciled,India,ˈɪndiə,ˈɪndiə,n. 印度（南亚国家）,KV001954,印度,baseline-exact-single-review
 nce1-o0450|indian,0450,53,54,Indian,,,baseline-reconciled,Indian,ˈɪndiən,ˈɪndiən,"n. 印度人；印第安人；印第安语
-adj. 印度的；印第安人的；印第安语的",,,baseline-new-candidate
+adj. 印度的；印第安人的；印第安语的",KV003125,印度的；印度人的,baseline-exact-single-review
 nce1-o0451|japan,0451,53,54,Japan,,,baseline-reconciled,Japan,dʒəˈpæn,dʒəˈpæn,n. 日本（东亚国家名）,KV001979,日本,baseline-exact-single-review
-nce1-o0452|nigeria,0452,53,54,Nigeria,,,baseline-reconciled,Nigeria,naɪˈdʒɪəriə,naɪˈdʒɪriə,n. 尼日利亚（位于非洲）,,,baseline-new-candidate
+nce1-o0452|nigeria,0452,53,54,Nigeria,,,baseline-reconciled,Nigeria,naɪˈdʒɪəriə,naɪˈdʒɪriə,n. 尼日利亚（位于非洲）,KV003126,尼日利亚,baseline-exact-single-review
 nce1-o0453|nigerian,0453,53,54,Nigerian,,,baseline-reconciled,Nigerian,naɪˈdʒɪəriən,naɪˈdʒɪriən,"n. 尼日利亚人
-adj. 尼日利亚的；尼日利亚人的",,,baseline-new-candidate
+adj. 尼日利亚的；尼日利亚人的",KV003127,尼日利亚的；尼日利亚人的,baseline-exact-single-review
 nce1-o0454|turkey,0454,53,54,Turkey,,,baseline-reconciled,Turkey,ˈtɜːki,ˈtɜːrki,n. 土耳其（横跨欧亚两洲的国家）,KV002883,土耳其,baseline-exact-single-review
 nce1-o0455|turkish,0455,53,54,Turkish,,,baseline-reconciled,Turkish,ˈtɜːkɪʃ,ˈtɜːrkɪʃ,"n. 土耳其语
-adj. 土耳其人的，土耳其语的；土耳其的；突厥诸语言的",,,baseline-new-candidate
-nce1-o0456|korea,0456,53,54,Korea,,,baseline-reconciled,Korea,kəˈriə,kəˈriə,n. 韩国；朝鲜,,,baseline-new-candidate
+adj. 土耳其人的，土耳其语的；土耳其的；突厥诸语言的",KV003128,土耳其的；土耳其人的,baseline-exact-single-review
+nce1-o0456|korea,0456,53,54,Korea,,,baseline-reconciled,Korea,kəˈriə,kəˈriə,n. 韩国；朝鲜,KV003129,韩国（本课语境）,baseline-exact-single-review
 nce1-o0457|polish,0457,53,54,Polish,,,baseline-reconciled,Polish,ˈpəʊlɪʃ,ˈpoʊlɪʃ,"n. 磨光，擦亮；上光剂，擦亮剂；优雅，精良
 vi. 擦亮，变光滑
 vt. 磨光，使发亮
-adj. 波兰的",KV002368,擦亮；擦光,baseline-exact-single-review
-nce1-o0458|poland,0458,53,54,Poland,,,baseline-reconciled,Poland,ˈpəʊlənd,ˈpoʊlənd,n. 波兰（欧洲国家）,,,baseline-new-candidate
+adj. 波兰的",KV002368 || KV003130,擦亮；擦光 || 波兰的；波兰人的,baseline-multi-sense-review
+nce1-o0458|poland,0458,53,54,Poland,,,baseline-reconciled,Poland,ˈpəʊlənd,ˈpoʊlənd,n. 波兰（欧洲国家）,KV003131,波兰,baseline-exact-single-review
 nce1-o0459|thai,0459,53,54,Thai,,,baseline-reconciled,Thai,taɪ,taɪ,"n. 泰国人；泰国语
-adj. 泰国的；泰国人的",,,baseline-new-candidate
+adj. 泰国的；泰国人的",KV003132,泰国的；泰国人的,baseline-exact-single-review
 nce1-o0460|thailand,0460,53,54,Thailand,,,baseline-reconciled,Thailand,ˈtaɪlænd,ˈtaɪlænd,n. 泰国（东南亚国家名）,KV002789,泰国,baseline-exact-single-review
 nce1-o0461|live,0461,55,56,live,,,baseline-reconciled,live,lɪv,lɪv; laɪv,"adj. 活的；生动的；实况转播的；精力充沛的
 vt. 经历；度过
@@ -1061,7 +1061,7 @@ vt. 购物
 vi. 购物；买东西",KV000411,商店；购物,baseline-exact-single-review
 nce1-o0474|moment,0474,57,58,moment,,,baseline-reconciled,moment,ˈməʊmənt,ˈmoʊmənt,n. 片刻，瞬间，时刻；重要，契机,KV002144,片刻；瞬间,baseline-exact-single-review
 nce1-o0475|envelope,0475,59,60,envelope,,,baseline-reconciled,envelope,ˈenvələʊp,ˈenvəloʊp; ˈɑːnvəloʊp,n. 信封，封皮；包膜；[天] 包层；包迹,KV001672,信封,baseline-exact-single-review
-nce1-o0476|writing paper,0476,59,60,writing paper,,,baseline-reconciled,writing paper,,,na. 信纸；书写用纸,,,baseline-new-candidate
+nce1-o0476|writing paper,0476,59,60,writing paper,,,baseline-reconciled,writing paper,,,na. 信纸；书写用纸,KV003133,信纸,baseline-exact-single-review
 nce1-o0477|shop assistant,0477,59,60,shop assistant,,,baseline-reconciled,shop assistant,ˈʃɒp əsɪstənt,ˈʃɑːp əsɪstənt,n. 店员；售货员,KV002570,店员；售货员,baseline-exact-single-review
 nce1-o0478|size,0478,59,60,size,,,baseline-reconciled,size,saɪz,saɪz,"n. 大小；尺寸
 adj. 一定尺寸的
@@ -1069,22 +1069,22 @@ vt. 依大小排列
 vi. 可比拟",KV000878 || KV002597,尺码；号 || 大小；尺寸,baseline-multi-sense-review
 nce1-o0479|pad,0479,59,60,pad,,,baseline-reconciled,pad,pæd,pæd,"n. 衬垫；护具；便笺簿；填补
 vi. 步行；放轻脚步走
-vt. 填补；走",KV002270,护垫；护具,baseline-exact-single-review
+vt. 填补；走",KV002270 || KV003134,护垫；护具 || 便笺簿；信笺本,baseline-multi-sense-review
 nce1-o0480|glue,0480,59,60,glue,,,baseline-reconciled,glue,ɡluː,ɡluː,"n. 胶；各种胶合物
 vt. 粘合；似胶般固着于",KV001809,胶水；胶,baseline-exact-single-review
 nce1-o0481|chalk,0481,59,60,chalk,,,baseline-reconciled,chalk,tʃɔːk,tʃɔːk,"n. 粉笔；白垩；用粉笔划的记号
 adj. 用粉笔写的
 vt. 用粉笔写；用白垩粉擦；记录；规划
-vi. 变成白垩状",,,baseline-new-candidate
+vi. 变成白垩状",KV003135,粉笔,baseline-exact-single-review
 nce1-o0482|change,0482,59,60,change,,,baseline-reconciled,change,tʃeɪndʒ,tʃeɪndʒ,"n. 变化；找回的零钱
 vt. 改变；交换
-vi. 改变；兑换",KV001146,（使）不同；改变,baseline-exact-single-review
+vi. 改变；兑换",KV001146 || KV003136 || KV003237,（使）不同；改变 || 零钱；找回的钱 || 兑换；换成零钱,baseline-multi-sense-review
 nce1-o0483|feel,0483,61,62,feel,,,baseline-reconciled,feel,fiːl,fiːl,"n. 感觉；触摸
 vi. 觉得；摸索
 vt. 感觉；认为；触摸；试探",KV000862,觉得；感到,baseline-exact-single-review
 nce1-o0484|look,0484,61,62,look,,,baseline-reconciled,look,lʊk,lʊk,"vt. 看；期待；注意；面向；看上去像
 vi. 看；看起来；注意；面向
-n. 看；样子；面容",KV000114,看,baseline-exact-single-review
+n. 看；样子；面容",KV000114 || KV003137,看 || 看起来,baseline-multi-sense-review
 nce1-o0485|must,0485,61,62,must,,,baseline-reconciled,must,mʌst; məst,mʌst; məst,"aux. 必须，一定；可以，应当；很可能
 n. 绝对必要的事物；未发酵葡萄汁",KV002169,必须；一定要,baseline-exact-single-review
 nce1-o0486|call,0486,61,62,call,,,baseline-reconciled,call,kɔːl,kɔːl,"n. 电话；呼叫；要求；访问
@@ -1095,7 +1095,7 @@ n. 医生；博士
 vi. 就医；行医",KV000425,医生,baseline-exact-single-review
 nce1-o0488|telephone,0488,61,62,telephone,,,baseline-reconciled,telephone,ˈtelɪfəʊn,ˈtelɪfoʊn,"n. （美）电话；电话机；电话耳机
 vt. 打电话给…
-vi. 打电话",KV002780,电话；电话机,baseline-exact-single-review
+vi. 打电话",KV002780 || KV003157,电话；电话机 || 打电话给,baseline-multi-sense-review
 nce1-o0489|remember,0489,61,62,remember,,,baseline-reconciled,remember,rɪˈmembə(r),rɪˈmembər,"vi. 记得，记起
 vt. 记得；牢记；纪念；代…问好",KV002455,记得；记住,baseline-exact-single-review
 nce1-o0490|mouth,0490,61,62,mouth,,,baseline-reconciled,mouth,maʊθ,maʊθ,"n. 口，嘴；河口
@@ -1112,8 +1112,8 @@ adj. 寒冷的；冷淡的，不热情的；失去知觉的
 adv. 完全地",KV000176 || KV001085,寒冷的 || 感冒,baseline-multi-sense-review
 nce1-o0494|news,0494,61,62,news,,,baseline-reconciled,news,njuːz,nuːz,n. 新闻，消息；新闻报导,KV002189,新闻；消息,baseline-exact-single-review
 nce1-o0495|headache,0495,61,62,headache,,,baseline-reconciled,headache,ˈhedeɪk,ˈhedeɪk,n. 头痛；麻烦；令人头痛之事,KV000586,头痛,baseline-exact-single-review
-nce1-o0496|aspirin,0496,61,62,aspirin,,,baseline-reconciled,aspirin,ˈæsprɪn,ˈæsprɪn,n. 阿司匹林（解热镇痛药）,,,baseline-new-candidate
-nce1-o0497|earache,0497,61,62,earache,,,baseline-reconciled,earache,ˈɪəreɪk,ˈɪreɪk,n. 耳朵痛，耳痛,,,baseline-new-candidate
+nce1-o0496|aspirin,0496,61,62,aspirin,,,baseline-reconciled,aspirin,ˈæsprɪn,ˈæsprɪn,n. 阿司匹林（解热镇痛药）,KV003138,阿司匹林,baseline-exact-single-review
+nce1-o0497|earache,0497,61,62,earache,,,baseline-reconciled,earache,ˈɪəreɪk,ˈɪreɪk,n. 耳朵痛，耳痛,KV003139,耳痛,baseline-exact-single-review
 nce1-o0498|toothache,0498,61,62,toothache,,,baseline-reconciled,toothache,ˈtuːθeɪk,ˈtuːθeɪk,n. [口腔] 牙痛,KV000587,牙痛,baseline-exact-single-review
 nce1-o0499|dentist,0499,61,62,dentist,,,baseline-reconciled,dentist,ˈdentɪst,ˈdentɪst,"n. 牙科医生
 牙医诊所",KV001582,牙医；牙科医生,baseline-exact-single-review
@@ -1122,28 +1122,28 @@ nce1-o0501|medicine,0501,61,62,medicine,,,baseline-reconciled,medicine,ˈmedsn; 
 vt. 用药物治疗；给…用药",KV002105,药；药物,baseline-exact-single-review
 nce1-o0502|temperature,0502,61,62,temperature,,,baseline-reconciled,temperature,ˈtemprətʃə(r),ˈtemprətʃər; ˈtemprətʃʊr,n. 温度；体温；气温；发烧,KV002783,温度；气温,baseline-exact-single-review
 nce1-o0503|flu,0503,61,62,flu,,,baseline-reconciled,flu,fluː,fluː,n. 流感,KV000933,流行性感冒；流感,baseline-exact-single-review
-nce1-o0504|measles,0504,61,62,measles,,,baseline-reconciled,measles,ˈmiːz(ə)lz,ˈmiːz(ə)lz,n. [内科] 麻疹；风疹,,,baseline-new-candidate
-nce1-o0505|mumps,0505,61,62,mumps,,,baseline-reconciled,mumps,mʌmps,mʌmps,n. [内科] 流行性腮腺炎；愠怒；生气,,,baseline-new-candidate
+nce1-o0504|measles,0504,61,62,measles,,,baseline-reconciled,measles,ˈmiːz(ə)lz,ˈmiːz(ə)lz,n. [内科] 麻疹；风疹,KV003140,麻疹,baseline-exact-single-review
+nce1-o0505|mumps,0505,61,62,mumps,,,baseline-reconciled,mumps,mʌmps,mʌmps,n. [内科] 流行性腮腺炎；愠怒；生气,KV003141,腮腺炎,baseline-exact-single-review
 nce1-o0506|better,0506,63,64,better,,,baseline-reconciled,better,ˈbetə(r),ˈbetər,"n. 长辈；较好者；打赌的人（等于bettor）
 adj. 较好的
 vt. 改善；胜过
 adv. 更好的；更多的；较大程度地
-vi. 变得较好",,,baseline-new-candidate
+vi. 变得较好",KV003142,身体好些的（well的比较级）,baseline-exact-single-review
 nce1-o0507|certainly,0507,63,64,certainly,,,baseline-reconciled,certainly,ˈsɜːt(ə)nli,ˈsɜːrtnli,adv. 当然；行（用于回答）；必定,KV001444,当然；肯定地,baseline-exact-single-review
 nce1-o0508|get up,0508,63,64,get up,,,baseline-reconciled,get up,ɡet ʌp,ɡet ʌp,na. 起床；起身；站起来；叫…起床,KV000190,起床,baseline-exact-single-review
 nce1-o0509|yet,0509,63,64,yet,,,baseline-reconciled,yet,jet,jet,"conj. 但是；然而
 adv. 还；但是；已经",KV002998,还；尚,baseline-exact-single-review
 nce1-o0510|rich,0510,63,64,rich,,,baseline-reconciled,rich,rɪtʃ,rɪtʃ,"adj. 富有的；肥沃的；昂贵的
-adj. 油腻的，含有很多脂肪",KV002466,富有的,baseline-exact-single-review
+adj. 油腻的，含有很多脂肪",KV002466 || KV003143,富有的 || 油腻的；味道浓厚的,baseline-multi-sense-review
 nce1-o0511|food,0511,63,64,food,,,baseline-reconciled,food,fuːd,fuːd,n. 食物；养料,KV000893,菜肴；食物,baseline-exact-single-review
 nce1-o0512|remain,0512,63,64,remain,,,baseline-reconciled,remain,rɪˈmeɪn,rɪˈmeɪn,"n. 遗迹；剩余物，残骸
-vi. 保持；依然；留下；剩余；逗留；残存",,,baseline-new-candidate
+vi. 保持；依然；留下；剩余；逗留；残存",KV003144,保持；仍然处于,baseline-exact-single-review
 nce1-o0513|play,0513,63,64,play,,,baseline-reconciled,play,pleɪ,pleɪ,"n. 游戏；比赛；剧本
 vt. 游戏；扮演；演奏；播放；同…比赛
 vi. 演奏；玩耍；上演；参加比赛",KV000813 || KV000985,玩耍 || 戏剧；剧本,baseline-multi-sense-review
 nce1-o0514|match,0514,63,64,match,,,baseline-reconciled,match,mætʃ,mætʃ,"vt. 使比赛；使相配；敌得过，比得上；相配；与…竞争
 vi. 比赛；匹配；相配，相称；相比
-n. 比赛，竞赛；匹配；对手；火柴",,,baseline-new-candidate
+n. 比赛，竞赛；匹配；对手；火柴",KV003145,火柴,baseline-exact-single-review
 nce1-o0515|talk,0515,63,64,talk,,,baseline-reconciled,talk,tɔːk,tɔːk,"n. 谈话；演讲；空谈
 vi. 谈话；说闲话
 vt. 说；谈话；讨论",KV000527,交谈；说话,baseline-exact-single-review
@@ -1155,11 +1155,11 @@ nce1-o0518|so,0518,63,64,so,,,baseline-reconciled,so,səʊ,soʊ,"conj. 所以；
 adv. 如此，这么；确是如此
 pron. 这样",KV000372 || KV002632,所以；因此 || 这么；那么（表示程度）,baseline-multi-sense-review
 nce1-o0519|quickly,0519,63,64,quickly,,,baseline-reconciled,quickly,ˈkwɪkli,ˈkwɪkli,adv. 迅速地；很快地,KV002431,很快地；迅速地,baseline-exact-single-review
-nce1-o0520|lean out of,0520,63,64,lean out of,,,baseline-reconciled,lean out of,,,身体探出；从……探出身；身体深处,,,baseline-new-candidate
+nce1-o0520|lean out of,0520,63,64,lean out of,,,baseline-reconciled,lean out of,,,身体探出；从……探出身；身体深处,KV003146,把身体探出……,baseline-exact-single-review
 nce1-o0521|break,0521,63,64,break,,,baseline-reconciled,break,breɪk,breɪk,"vi. 打破；折断；弄坏；削弱
 vt. （使）破；打破（纪录）；（常指好天气）突变；开始
 vi. （嗓音）突变；突破；破晓；（价格）突然下跌
-n. 破裂；间断；（持续一段时间的状况的）改变；间歇",,,baseline-new-candidate
+n. 破裂；间断；（持续一段时间的状况的）改变；间歇",KV003147,打破；弄坏,baseline-exact-single-review
 nce1-o0522|noise,0522,63,64,noise,,,baseline-reconciled,noise,nɔɪz,nɔɪz,"n. [环境] 噪音；响声；杂音
 vt. 谣传
 vi. 发出声音；大声议论",KV001019,声音；响声；噪音,baseline-exact-single-review
@@ -1175,7 +1175,7 @@ nce1-o0526|hear,0526,65,66,hear,,,baseline-reconciled,hear,hɪə(r),hɪr,"vi. �
 vt. 听到，听；听说；审理",KV000759,听见；听到,baseline-exact-single-review
 nce1-o0527|enjoy,0527,65,66,enjoy,,,baseline-reconciled,enjoy,ɪnˈdʒɔɪ,ɪnˈdʒɔɪ,vt. 欣赏，享受；喜爱；使过得快活,KV000395,喜欢；享受,baseline-exact-single-review
 nce1-o0528|yourself,0528,65,66,yourself,,,baseline-reconciled,yourself,jɔːˈself,jɔːrˈself,pron. 你自己,KV003002,你自己,baseline-exact-single-review
-nce1-o0529|ourselves,0529,65,66,ourselves,,,baseline-reconciled,ourselves,ɑːˈselvz,ɑːrˈselvz,pron. 我们自己；我们亲自,,,baseline-new-candidate
+nce1-o0529|ourselves,0529,65,66,ourselves,,,baseline-reconciled,ourselves,ɑːˈselvz,ɑːrˈselvz,pron. 我们自己；我们亲自,KV003148,我们自己,baseline-exact-single-review
 nce1-o0530|mum,0530,65,66,mum,,,baseline-reconciled,Mum || mum,mʌm,mʌm,"adj. 沉默的
 n. 妈妈（口语）；沉默；菊花
 vi. 演哑剧
@@ -1184,7 +1184,7 @@ nce1-o0531|myself,0531,65,66,myself,,,baseline-reconciled,myself,maɪˈself,maɪ
 nce1-o0532|themselves,0532,65,66,themselves,,,baseline-reconciled,themselves,ðəmˈselvz,ðəmˈselvz,pron. 他们自己；他们亲自,KV002811,他们自己；她们自己；它们自己,baseline-exact-single-review
 nce1-o0533|himself,0533,65,66,himself,,,baseline-reconciled,himself,hɪmˈself,hɪmˈself,pron. 他自己；他亲自，他本人,KV001909,他自己,baseline-exact-single-review
 nce1-o0534|herself,0534,65,66,herself,,,baseline-reconciled,herself,hɜːˈself,hɜːrˈself; hərˈself,pron. 她自己（she的反身代词）；她亲自,KV000898,她自己,baseline-exact-single-review
-nce1-o0535|greengrocer,0535,67,68,greengrocer,,,baseline-reconciled,greengrocer,ˈɡriːnɡrəʊsə(r),ˈɡriːnɡroʊsər,n. 蔬菜水果商；菜贩,,,baseline-new-candidate
+nce1-o0535|greengrocer,0535,67,68,greengrocer,,,baseline-reconciled,greengrocer,ˈɡriːnɡrəʊsə(r),ˈɡriːnɡroʊsər,n. 蔬菜水果商；菜贩,KV003149,蔬果商；蔬菜水果店老板,baseline-exact-single-review
 nce1-o0536|absent,0536,67,68,absent,,,baseline-reconciled,absent,ˈæbsənt,ˈæbsənt,"adj. 缺席的；缺少的；心不在焉的；茫然的
 vt. 使缺席",KV001218,缺席的；不在的,baseline-exact-single-review
 nce1-o0537|monday,0537,67,68,Monday,,,baseline-reconciled,Monday,ˈmʌndeɪ,ˈmʌndeɪ,n. 星期一,KV000201,星期一,baseline-exact-single-review
@@ -1193,7 +1193,7 @@ nce1-o0539|wednesday,0539,67,68,Wednesday,,,baseline-reconciled,Wednesday,ˈwenz
 nce1-o0540|thursday,0540,67,68,Thursday,,,baseline-reconciled,Thursday,ˈθɜːzdeɪ,ˈθɜːrzdeɪ,n. 星期四,KV000204,星期四,baseline-exact-single-review
 nce1-o0541|keep,0541,67,68,keep,,,baseline-reconciled,keep,kiːp,kiːp,"vt. 保持；经营；遵守；饲养
 vi. 保持；继续不断
-n. 保持；生计；生活费",KV001031,保持某种状态,baseline-exact-single-review
+n. 保持；生计；生活费",KV001031 || KV003224,保持某种状态 || 保留；保存,baseline-multi-sense-review
 nce1-o0542|spend,0542,67,68,spend,,,baseline-reconciled,spend,spend,spend,"n. 预算
 vt. 度过，消磨（时光）；花费；浪费；用尽
 vi. 花钱；用尽，耗尽",KV000720,花费；度过,baseline-exact-single-review
@@ -1204,15 +1204,15 @@ nce1-o0544|friday,0544,67,68,Friday,,,baseline-reconciled,Friday,ˈfraɪdeɪ,ˈf
 nce1-o0545|saturday,0545,67,68,Saturday,,,baseline-reconciled,Saturday,ˈsætədeɪ,ˈsætərdeɪ,n. 星期六,KV000206,星期六,baseline-exact-single-review
 nce1-o0546|sunday,0546,67,68,Sunday,,,baseline-reconciled,Sunday,ˈsʌndeɪ,ˈsʌndeɪ,n. 星期日；礼拜日,KV000200,星期日,baseline-exact-single-review
 nce1-o0547|country,0547,67,68,country,,,baseline-reconciled,country,ˈkʌntri,ˈkʌntri,"n. 国家，国土；国民；乡下，农村；乡村；故乡
-adj. 祖国的，故乡的；地方的，乡村的；国家的；粗鲁的；乡村音乐的",KV000518,国家,baseline-exact-single-review
+adj. 祖国的，故乡的；地方的，乡村的；国家的；粗鲁的；乡村音乐的",KV000518 || KV003150,国家 || 乡村；乡下,baseline-multi-sense-review
 nce1-o0548|lucky,0548,67,68,lucky,,,baseline-reconciled,lucky,ˈlʌki,ˈlʌki,adj. 幸运的；侥幸的,KV001103,幸运的,baseline-exact-single-review
 nce1-o0549|church,0549,67,68,church,,,baseline-reconciled,church,tʃɜːtʃ,tʃɜːrtʃ,"n. 教堂；礼拜；教派
 adj. 教会的；礼拜的
 vt. 领…到教堂接受宗教仪式",KV001485,教堂,baseline-exact-single-review
 nce1-o0550|dairy,0550,67,68,dairy,,,baseline-reconciled,dairy,ˈdeəri,ˈderi,"n. 奶制品；乳牛；制酪场；乳品店；牛奶及乳品业
-adj. 乳品的；牛奶的；牛奶制的；产乳的",,,baseline-new-candidate
+adj. 乳品的；牛奶的；牛奶制的；产乳的",KV003151,乳品店,baseline-exact-single-review
 nce1-o0551|baker,0551,67,68,baker,,,baseline-reconciled,baker,ˈbeɪkə(r),ˈbeɪkər,n. 面包师；面包工人；（便携式）烘炉,KV001301,面包师；面包工人,baseline-exact-single-review
-nce1-o0552|grocer,0552,67,68,grocer,,,baseline-reconciled,grocer,ˈɡrəʊsə(r),ˈɡroʊsər,n. 杂货店；食品商,,,baseline-new-candidate
+nce1-o0552|grocer,0552,67,68,grocer,,,baseline-reconciled,grocer,ˈɡrəʊsə(r),ˈɡroʊsər,n. 杂货店；食品商,KV003152,食品杂货商,baseline-exact-single-review
 nce1-o0553|year,0553,69,70,year,,,baseline-reconciled,year,jɪə(r),jɪr,n. 年；年度；历年；年纪；一年的期间；某年级的学生,KV000208,年；岁,baseline-exact-single-review
 nce1-o0554|race,0554,69,70,race,,,baseline-reconciled,race,reɪs,reɪs,"n. 属，种；种族，人种；家庭，门第
 vt. 使参加比赛；和…竞赛；使急走，使全速行进
@@ -1228,10 +1228,10 @@ vt. 使站立；忍受；抵抗",KV002679,站；站立,baseline-exact-single-rev
 nce1-o0558|exciting,0558,69,70,exciting,,,baseline-reconciled,exciting,ɪkˈsaɪtɪŋ,ɪkˈsaɪtɪŋ,"adj. 令人兴奋的；使人激动的
 v. 激动；刺激（excite的ing形式）；唤起",KV001084,令人激动的,baseline-exact-single-review
 nce1-o0559|just,0559,69,70,just,,,baseline-reconciled,just,dʒʌst,dʒʌst,"adv. 只是，仅仅；刚才，刚刚；正好，恰好；实在；刚要
-adj. 公正的，合理的；正直的，正义的；正确的；公平的；应得的",KV000437,只是；仅仅,baseline-exact-single-review
+adj. 公正的，合理的；正直的，正义的；正确的；公平的；应得的",KV000437 || KV003153,只是；仅仅 || 恰好；正好,baseline-multi-sense-review
 nce1-o0560|finish,0560,69,70,finish,,,baseline-reconciled,finish,ˈfɪnɪʃ,ˈfɪnɪʃ,"n. 结束；完美；回味（葡萄酒）
 vt. 完成；结束；用完
-vi. 结束，终止；终结",KV000918,完成；做好,baseline-exact-single-review
+vi. 结束，终止；终结",KV000918 || KV003154,完成；做好 || 终点；结束处,baseline-multi-sense-review
 nce1-o0561|winner,0561,69,70,winner,,,baseline-reconciled,winner,ˈwɪnə(r),ˈwɪnər,n. 胜利者,KV001082,获胜的人（或队）；成功者,baseline-exact-single-review
 nce1-o0562|behind,0562,69,70,behind,,,baseline-reconciled,behind,bɪˈhaɪnd,bɪˈhaɪnd,"prep. 落后于；支持；晚于
 n. 屁股
@@ -1239,18 +1239,18 @@ adv. 在后地；在原处",KV000067,在……后面,baseline-exact-single-revie
 nce1-o0563|way,0563,69,70,way,,,baseline-reconciled,way,weɪ,weɪ,"n. 方法；道路；方向；行业；习惯
 adj. 途中的
 adv. 大大地；远远地",KV000957 || KV002941,方法；手段；途径；方式 || 路；道路；方向,baseline-multi-sense-review
-nce1-o0564|stationer,0564,69,70,stationer,,,baseline-reconciled,stationer,ˈsteɪʃənə(r),ˈsteɪʃənər,n. 文具店；文具商,,,baseline-new-candidate
-nce1-o0565|denmark,0565,69,70,Denmark,,,baseline-reconciled,Denmark,ˈdenmɑːk,ˈdenmɑːrk,n. 丹麦（欧洲国家）,,,baseline-new-candidate
+nce1-o0564|stationer,0564,69,70,stationer,,,baseline-reconciled,stationer,ˈsteɪʃənə(r),ˈsteɪʃənər,n. 文具店；文具商,KV003155,文具商；文具店老板,baseline-exact-single-review
+nce1-o0565|denmark,0565,69,70,Denmark,,,baseline-reconciled,Denmark,ˈdenmɑːk,ˈdenmɑːrk,n. 丹麦（欧洲国家）,KV003156,丹麦,baseline-exact-single-review
 nce1-o0566|awful,0566,71,72,awful,,,baseline-reconciled,awful,ˈɔːf(ə)l,ˈɔːf(ə)l,adj. 可怕的；极坏的；使人敬畏的,KV001291,糟糕的；可怕的,baseline-exact-single-review
 nce1-o0567|telephone,0567,71,72,telephone,,,baseline-reconciled,telephone,ˈtelɪfəʊn,ˈtelɪfoʊn,"n. （美）电话；电话机；电话耳机
 vt. 打电话给…
-vi. 打电话",KV002780,电话；电话机,baseline-exact-single-review
+vi. 打电话",KV002780 || KV003157,电话；电话机 || 打电话给,baseline-multi-sense-review
 nce1-o0568|time,0568,71,72,time,,,baseline-reconciled,time,taɪm,taɪm,"n. 时间；时代；次数；节拍；倍数
 adj. 定时的；定期的；分期的
 vt. 计时；测定…的时间；安排…的速度",KV000188 || KV001134,时间；时刻 || 次；回,baseline-multi-sense-review
 nce1-o0569|answer,0569,71,72,answer,,,baseline-reconciled,answer,ˈɑːnsə(r),ˈænsər,"n. 回答；答案；答辩
 vt. 回答；符合
-vi. 回答；符合",KV000929,答复；回答,baseline-exact-single-review
+vi. 回答；符合",KV000929 || KV003158,答复；回答 || 接听；应答（电话或门铃）,baseline-multi-sense-review
 nce1-o0570|last,0570,71,72,last,,,baseline-reconciled,last,lɑːst,læst,"n. 末尾，最后；上个；鞋楦（做鞋的模型）
 adj. 最后的；最近的，最新的；仅剩的；最不可能…的
 vi. 持续；维持，够用；持久
@@ -1270,7 +1270,7 @@ nce1-o0577|bus stop,0577,73,74,bus stop,,,baseline-reconciled,bus stop,,,n. 公�
 nce1-o0578|smile,0578,73,74,smile,,,baseline-reconciled,smile,smaɪl,smaɪl,"n. 微笑；笑容；喜色
 vt. 微笑着表示
 vi. 微笑",KV002622,微笑；笑容,baseline-exact-single-review
-nce1-o0579|pleasantly,0579,73,74,pleasantly,,,baseline-reconciled,pleasantly,ˈplezntli,ˈplezntli,adv. 愉快地；和蔼地，亲切地；友好地,,,baseline-new-candidate
+nce1-o0579|pleasantly,0579,73,74,pleasantly,,,baseline-reconciled,pleasantly,ˈplezntli,ˈplezntli,adv. 愉快地；和蔼地，亲切地；友好地,KV003159,愉快地；友好地,baseline-exact-single-review
 nce1-o0580|understand,0580,73,74,understand,,,baseline-reconciled,understand,ˌʌndəˈstænd,ˌʌndərˈstænd,"vi. 理解；懂得；熟悉
 vt. 理解；懂；获悉；推断；省略",KV000846,懂；理解,baseline-exact-single-review
 nce1-o0581|speak,0581,73,74,speak,,,baseline-reconciled,speak,spiːk,spiːk,"vi. 说话；演讲；表明；陈述
@@ -1281,16 +1281,16 @@ nce1-o0583|pocket,0583,73,74,pocket,,,baseline-reconciled,pocket,ˈpɒkɪt,ˈpɑ
 adj. 小型的，袖珍的；金钱上的
 vt. 隐藏；忍受；将…放入衣袋
 vi. 形成袋或囊",KV002360,口袋,baseline-exact-single-review
-nce1-o0584|phrasebook,0584,73,74,phrasebook,,,baseline-reconciled,phrasebook,ˈfreizbuk,ˈfreɪzbʊk,n. 常用语手册，短语手册,,,baseline-new-candidate
+nce1-o0584|phrasebook,0584,73,74,phrasebook,,,baseline-reconciled,phrasebook,ˈfreizbuk,ˈfreɪzbʊk,n. 常用语手册，短语手册,KV003160,常用语手册；短语手册,baseline-exact-single-review
 nce1-o0585|phrase,0585,73,74,phrase,,,baseline-reconciled,phrase,freɪz,freɪz,"n. 短语, 习语, 措辞, 乐句
-vt. 措词, 将(乐曲)分成乐句",,,baseline-new-candidate
+vt. 措词, 将(乐曲)分成乐句",KV003161,短语；词组,baseline-exact-single-review
 nce1-o0586|slowly,0586,73,74,slowly,,,baseline-reconciled,slowly,ˈsləʊli,ˈsloʊli,adv. 缓慢地，慢慢地,KV002619,慢慢地；缓慢地,baseline-exact-single-review
-nce1-o0587|hurriedly,0587,73,74,hurriedly,,,baseline-reconciled,hurriedly,ˈhʌrɪdli,ˈhɜːrɪdli,adv. 匆忙地；仓促地,,,baseline-new-candidate
+nce1-o0587|hurriedly,0587,73,74,hurriedly,,,baseline-reconciled,hurriedly,ˈhʌrɪdli,ˈhɜːrɪdli,adv. 匆忙地；仓促地,KV003162,匆忙地,baseline-exact-single-review
 nce1-o0588|cut,0588,73,74,cut,,,baseline-reconciled,cut,kʌt,kʌt,"n. 伤口；切口；削减；（服装等的）式样；削球；切入
 adj. 割下的；雕过的；缩减的
 vt. [机] 切割；削减；缩短；刺痛
 vi. [机] 切割；相交；切牌；停拍；不出席",KV001561 || KV001562,伤口；割伤 || 切；割,baseline-multi-sense-review
-nce1-o0589|thirstily,0589,73,74,thirstily,,,baseline-reconciled,thirstily,ˈθɜːstɪli,ˈθɜːrstɪli,adv. 口渴地；如饥似渴地,,,baseline-new-candidate
+nce1-o0589|thirstily,0589,73,74,thirstily,,,baseline-reconciled,thirstily,ˈθɜːstɪli,ˈθɜːrstɪli,adv. 口渴地；如饥似渴地,KV003163,因口渴而急切地,baseline-exact-single-review
 nce1-o0590|go,0590,73,74,go,,,baseline-reconciled,go,ɡəʊ,ɡoʊ,"n. 去；进行；尝试
 vi. 走；达到；运转；趋于
 vt. 忍受；出产；以…打赌
@@ -1304,12 +1304,12 @@ vt. 购买；获得；贿赂",KV000242,买；购买,baseline-exact-single-review
 nce1-o0594|pair,0594,75,76,pair,,,baseline-reconciled,pair,peə(r),per,"n. 一对，一双，一副
 vt. 把…组成一对",KV000868,一条，一副,baseline-exact-single-review
 nce1-o0595|fashion,0595,75,76,fashion,,,baseline-reconciled,fashion,ˈfæʃ(ə)n,ˈfæʃn,"n. 时尚；时装；样式；时髦人物
-vt. 使用；改变；做成…的形状",,,baseline-new-candidate
-nce1-o0596|uncomfortable,0596,75,76,uncomfortable,,,baseline-reconciled,uncomfortable,ʌnˈkʌmftəb(ə)l,ʌnˈkʌmftəbl; ʌnˈkʌmfərtəbl,adj. 不舒服的；不安的,,,baseline-new-candidate
+vt. 使用；改变；做成…的形状",KV003164,流行式样；时尚,baseline-exact-single-review
+nce1-o0596|uncomfortable,0596,75,76,uncomfortable,,,baseline-reconciled,uncomfortable,ʌnˈkʌmftəb(ə)l,ʌnˈkʌmftəbl; ʌnˈkʌmfərtəbl,adj. 不舒服的；不安的,KV003165,不舒服的,baseline-exact-single-review
 nce1-o0597|wear,0597,75,76,wear,,,baseline-reconciled,wear,weə(r),wer,"n. 衣物；磨损；耐久性
 v. 穿着；用旧；耗损；面露",KV000262,穿；戴,baseline-exact-single-review
-nce1-o0598|appointment,0598,77,78,appointment,,,baseline-reconciled,appointment,əˈpɔɪntmənt,əˈpɔɪntmənt,n. 任命；约定；任命的职位,,,baseline-new-candidate
-nce1-o0599|urgent,0599,77,78,urgent,,,baseline-reconciled,urgent,ˈɜːdʒənt,ˈɜːrdʒənt,adj. 紧急的；急迫的,,,baseline-new-candidate
+nce1-o0598|appointment,0598,77,78,appointment,,,baseline-reconciled,appointment,əˈpɔɪntmənt,əˈpɔɪntmənt,n. 任命；约定；任命的职位,KV003166,预约；约定的会面,baseline-exact-single-review
+nce1-o0599|urgent,0599,77,78,urgent,,,baseline-reconciled,urgent,ˈɜːdʒənt,ˈɜːrdʒənt,adj. 紧急的；急迫的,KV003167,紧急的；急迫的,baseline-exact-single-review
 nce1-o0600|till,0600,77,78,till,,,baseline-reconciled,till,tɪl,tɪl,"prep. 直到
 conj. 直到...为止
 n. [地理][水文] 冰碛；放钱的抽屉；备用现金
@@ -1330,13 +1330,13 @@ vi. 希望；期待；信赖
 vt. 希望；期望",KV000371,希望,baseline-exact-single-review
 nce1-o0606|thing,0606,79,80,thing,,,baseline-reconciled,thing,θɪŋ,θɪŋ,n. 事情；东西；事物；情况,KV000469,东西；事情,baseline-exact-single-review
 nce1-o0607|money,0607,79,80,money,,,baseline-reconciled,money,ˈmʌni,ˈmʌni,n. 钱；货币；财富,KV000454,钱,baseline-exact-single-review
-nce1-o0608|groceries,0608,79,80,groceries,,,baseline-reconciled,groceries,ˈɡrəʊsəriz,ˈɡroʊsəriz,n. 杂货；食品；生活用品,,,baseline-new-candidate
+nce1-o0608|groceries,0608,79,80,groceries,,,baseline-reconciled,groceries,ˈɡrəʊsəriz,ˈɡroʊsəriz,n. 杂货；食品；生活用品,KV003168,食品杂货,baseline-exact-single-review
 nce1-o0609|fruit,0609,79,80,fruit,,,baseline-reconciled,fruit,fruːt,fruːt,"n. 水果；产物
 vt. 使……结果实
 vi. 结果实",KV000235,水果,baseline-exact-single-review
-nce1-o0610|stationery,0610,79,80,stationery,,,baseline-reconciled,stationery,ˈsteɪʃənri,ˈsteɪʃəneri,n. 文具；信纸,,,baseline-new-candidate
-nce1-o0611|newsagent,0611,79,80,newsagent,,,baseline-reconciled,newsagent,ˈnjuːzeɪdʒənt,ˈnuːzeɪdʒənt,n. 报刊经销商,,,baseline-new-candidate
-nce1-o0612|chemist,0612,79,80,chemist,,,baseline-reconciled,chemist,ˈkemɪst,ˈkemɪst,n. 化学家；化学工作者；药剂师；炼金术士,,,baseline-new-candidate
+nce1-o0610|stationery,0610,79,80,stationery,,,baseline-reconciled,stationery,ˈsteɪʃənri,ˈsteɪʃəneri,n. 文具；信纸,KV003169,文具,baseline-exact-single-review
+nce1-o0611|newsagent,0611,79,80,newsagent,,,baseline-reconciled,newsagent,ˈnjuːzeɪdʒənt,ˈnuːzeɪdʒənt,n. 报刊经销商,KV003170,报刊经销商；报刊店老板,baseline-exact-single-review
+nce1-o0612|chemist,0612,79,80,chemist,,,baseline-reconciled,chemist,ˈkemɪst,ˈkemɪst,n. 化学家；化学工作者；药剂师；炼金术士,KV003171,药剂师；药店老板（英式用语）,baseline-exact-single-review
 nce1-o0613|bath,0613,81,82,bath,,,baseline-reconciled,bath,bɑːθ,bæθ,"n. 沐浴；浴室；浴盆
 vt. 洗澡
 vi. 洗澡",KV001310,洗澡；沐浴,baseline-exact-single-review
@@ -1350,7 +1350,7 @@ nce1-o0617|restaurant,0617,81,82,restaurant,,,baseline-reconciled,restaurant,ˈr
 nce1-o0618|roast,0618,81,82,roast,,,baseline-reconciled,roast,rəʊst,roʊst,"n. 烤肉；烘烤
 adj. 烘烤的；烤过的
 vt. 烤，焙；烘，烘烤；暴露于某种热力下以得温暖
-vi. 烤；烘",,,baseline-new-candidate
+vi. 烤；烘",KV003172,烤的,baseline-exact-single-review
 nce1-o0619|breakfast,0619,81,82,breakfast,,,baseline-reconciled,breakfast,ˈbrekfəst,ˈbrekfəst,"n. 早餐；早饭
 vt. 为…供应早餐
 vi. 吃早餐",KV001374,早餐；早饭,baseline-exact-single-review
@@ -1368,7 +1368,7 @@ vi. 挤；包装货物；被包装；群集",KV002268,打包；收拾,baseline-e
 nce1-o0625|suitcase,0625,83,84,suitcase,,,baseline-reconciled,suitcase,ˈsuːtkeɪs,ˈsuːtkeɪs,n. [轻] 手提箱；衣箱,KV002720,手提箱；行李箱,baseline-exact-single-review
 nce1-o0626|leave,0626,83,84,leave,,,baseline-reconciled,leave,liːv,liːv,"vt. 离开；留下；遗忘；委托
 vi. 离开，出发；留下
-n. 许可，同意；休假",KV000457,离开,baseline-exact-single-review
+n. 许可，同意；休假",KV000457 || KV003200,离开 || 遗留；留下,baseline-multi-sense-review
 nce1-o0627|already,0627,83,84,already,,,baseline-reconciled,already,ɔːlˈredi,ɔːlˈredi,adv. 已经，早已；先前,KV001247,已经；早已,baseline-exact-single-review
 nce1-o0628|paris,0628,85,86,Paris,,,baseline-reconciled,Paris,ˈpærɪs,ˈpærɪs,n. 巴黎（法国首都）；帕里斯（特洛伊王子）,KV001061,巴黎,baseline-exact-single-review
 nce1-o0629|cinema,0629,85,86,cinema,,,baseline-reconciled,cinema,ˈsɪnəmə,ˈsɪnəmə,n. 电影；电影院；电影业，电影制作术,KV001486,电影院,baseline-exact-single-review
@@ -1383,29 +1383,29 @@ nce1-o0631|beautiful,0631,85,86,beautiful,,,baseline-reconciled,beautiful,ˈbju�
 nce1-o0632|city,0632,85,86,city,,,baseline-reconciled,city,ˈsɪti,ˈsɪti,"n. 城市，都市
 adj. 城市的；都会的",KV000459,城市,baseline-exact-single-review
 nce1-o0633|never,0633,85,86,never,,,baseline-reconciled,never,ˈnevə(r),ˈnevər,adv. 从未；决不,KV000503,从不；从未,baseline-exact-single-review
-nce1-o0634|ever,0634,85,86,ever,,,baseline-reconciled,ever,ˈevə(r),ˈevər,adv. 永远；曾经；究竟,KV001083,（进行比较时用于加强语气）以往任何时候,baseline-exact-single-review
+nce1-o0634|ever,0634,85,86,ever,,,baseline-reconciled,ever,ˈevə(r),ˈevər,adv. 永远；曾经；究竟,KV001083 || KV003173,（进行比较时用于加强语气）以往任何时候 || 曾经；在任何时候,baseline-multi-sense-review
 nce1-o0635|attendant,0635,87,88,attendant,,,baseline-reconciled,attendant,əˈtendənt,əˈtendənt,"n. 服务员，侍者；随员，陪从
-adj. 伴随的；侍候的",,,baseline-new-candidate
+adj. 伴随的；侍候的",KV003174,服务员；接待人员,baseline-exact-single-review
 nce1-o0636|bring,0636,87,88,bring,,,baseline-reconciled,bring,brɪŋ,brɪŋ,vt. 带来；促使；引起；使某人处于某种情况或境地,KV000757,带来,baseline-exact-single-review
 nce1-o0637|garage,0637,87,88,garage,,,baseline-reconciled,garage,ˈɡærɑːʒ,ɡəˈrɑːʒ; ɡəˈrɑːdʒ,"n. 车库；汽车修理厂；飞机库
-vt. 把……送入车库；把（汽车）开进车库",,,baseline-new-candidate
+vt. 把……送入车库；把（汽车）开进车库",KV003175,车库；汽车修理厂,baseline-exact-single-review
 nce1-o0638|crash,0638,87,88,crash,,,baseline-reconciled,crash,kræʃ,kræʃ,"n. 撞碎；坠毁；破产；轰隆声；睡觉
 vi. 摔碎；坠落；发出隆隆声；(金融企业等)破产
 vt. 打碎；使坠毁、撞坏；擅自闯入",KV001543,碰撞；撞车,baseline-exact-single-review
-nce1-o0639|lamp-post,0639,87,88,lamp-post,,,baseline-reconciled,lamp-post,ˈlæmp pəʊst,ˈlæmp poʊst,灯杆,,,baseline-new-candidate
+nce1-o0639|lamp-post,0639,87,88,lamp-post,,,baseline-reconciled,lamp-post,ˈlæmp pəʊst,ˈlæmp poʊst,灯杆,KV003176,路灯柱,baseline-exact-single-review
 nce1-o0640|repair,0640,87,88,repair,,,baseline-reconciled,repair,rɪˈpeə(r),rɪˈper,"n. 修理，修补；修补部位
 vt. 修理；恢复；补救，纠正
-vi. 修理；修复",,,baseline-new-candidate
+vi. 修理；修复",KV003177,修理；修补,baseline-exact-single-review
 nce1-o0641|try,0641,87,88,try,,,baseline-reconciled,try,traɪ,traɪ,"n. 尝试；努力；试验
 vt. 试图，努力；试验；审判；考验
 vi. 尝试；努力；试验",KV002879,尝试；试着,baseline-exact-single-review
 nce1-o0642|believe,0642,89,90,believe,,,baseline-reconciled,believe,bɪˈliːv,bɪˈliːv,"vi. 信任；料想；笃信宗教
 vt. 相信；认为；信任",KV001328,相信；认为,baseline-exact-single-review
-nce1-o0643|may,0643,89,90,may,,,baseline-reconciled,May || may,meɪ,meɪ,aux. 可以，能够；可能，也许；祝，愿；会，能,KV000270 || KV001095,五月 || 也许；可能,baseline-multi-sense-review
-nce1-o0644|how long,0644,89,90,how long,,,baseline-reconciled,how long,,,conj. 多长时间,,,baseline-new-candidate
+nce1-o0643|may,0643,89,90,may,,,baseline-reconciled,May || may,meɪ,meɪ,aux. 可以，能够；可能，也许；祝，愿；会，能,KV000270 || KV001095 || KV003178,五月 || 也许；可能 || 可以（请求或给予许可）,baseline-multi-sense-review
+nce1-o0644|how long,0644,89,90,how long,,,baseline-reconciled,how long,,,conj. 多长时间,KV003179,多长时间；多久,baseline-exact-single-review
 nce1-o0645|since,0645,89,90,since,,,baseline-reconciled,since,sɪns,sɪns,"conj. 因为；由于；既然；自…以来；自…以后
 prep. 自…以来；自…以后
-adv. 后来",,,baseline-new-candidate
+adv. 后来",KV003180,自从……以来,baseline-exact-single-review
 nce1-o0646|why,0646,89,90,why,,,baseline-reconciled,why,waɪ,waɪ,"int. 哎呀！什么？
 adv. 为什么",KV000552,为什么,baseline-exact-single-review
 nce1-o0647|sell,0647,89,90,sell,,,baseline-reconciled,sell,sel,sel,"n. 销售；失望；推销术
@@ -1414,16 +1414,16 @@ vi. 卖；出售；受欢迎；有销路",KV001109,出售；售卖,baseline-exac
 nce1-o0648|because,0648,89,90,because,,,baseline-reconciled,because,"bɪˈkəz, bɪˈkɒz","bɪˈkəz, bɪˈkɔːz",conj. 因为,KV000737,因为,baseline-exact-single-review
 nce1-o0649|retire,0649,89,90,retire,,,baseline-reconciled,retire,rɪˈtaɪə(r),rɪˈtaɪər,"n. 退休；退隐；退兵信号
 vi. 退休；撤退；退却
-vt. 退休；离开；收回",,,baseline-new-candidate
+vt. 退休；离开；收回",KV003181,退休,baseline-exact-single-review
 nce1-o0650|cost,0650,89,90,cost,,,baseline-reconciled,cost,kɒst,kɔːst,"n. 费用，代价，成本；损失
 vt. 花费；使付出；使花许多钱
-vi. 花费",KV001534,费用；花费,baseline-exact-single-review
+vi. 花费",KV001534 || KV003182,费用；花费 || 需付费；花费（多少钱）,baseline-multi-sense-review
 nce1-o0651|pound,0651,89,90,pound,,,baseline-reconciled,pound,paʊnd,paʊnd,"n. 英镑；重击，重击声；兽栏；拘留所
 vt. 捣烂；敲打；监禁，拘留
 vi. 连续重击，猛击",KV002385,英镑,baseline-exact-single-review
 nce1-o0652|worth,0652,89,90,worth,,,baseline-reconciled,worth,wɜːθ,wɜːrθ,"n. 价值；财产
-adj. 值…的",,,baseline-new-candidate
-nce1-o0653|penny,0653,89,90,penny,,,baseline-reconciled,penny,ˈpeni,ˈpeni,n. （美）分；便士,,,baseline-new-candidate
+adj. 值…的",KV003183,值……的；有……价值的,baseline-exact-single-review
+nce1-o0653|penny,0653,89,90,penny,,,baseline-reconciled,penny,ˈpeni,ˈpeni,n. （美）分；便士,KV003184,便士（单数）,baseline-exact-single-review
 nce1-o0654|still,0654,91,92,still,,,baseline-reconciled,still,stɪl,stɪl,"conj. 仍然；但是；尽管如此
 n. 寂静；剧照；蒸馏室
 adj. 静止的，不动的；寂静的，平静的；不起泡的
@@ -1432,9 +1432,9 @@ vt. 蒸馏；使…静止；使…平静下来
 vi. 静止；平静；蒸馏",KV001018,仍然；依旧；还是,baseline-exact-single-review
 nce1-o0655|move,0655,91,92,move,,,baseline-reconciled,move,muːv,muːv,"n. 移动；步骤；迁居；策略
 vi. 移动；搬家，迁移；离开
-vt. 移动；感动",KV000925,搬家；移动,baseline-exact-single-review
+vt. 移动；感动",KV000925 || KV003185,搬家；移动 || 搬家；迁居,baseline-multi-sense-review
 nce1-o0656|miss,0656,91,92,miss,,,baseline-reconciled,Miss || miss,mɪs,mɪs,"n. 女士，小姐，年轻未婚女子
-vt. 错过，想念，缺（勤）",KV002131 || KV002132,小姐；女士（称谓） || 错过；想念,baseline-multi-sense-review
+vt. 错过，想念，缺（勤）",KV002131 || KV002132 || KV003199,小姐；女士（称谓） || 错过；想念 || 错过；没赶上,baseline-multi-sense-review
 nce1-o0657|neighbour,0657,91,92,neighbour,,,baseline-reconciled,neighbour,ˈneɪbə(r),ˈneɪbər,"n. n. 邻居;同胞；仁慈的人
 vt. 邻接
 vi. 住在邻近；毗邻；友善，和睦
@@ -1442,68 +1442,68 @@ adj. 邻居的；邻近的",KV002180,邻居,baseline-exact-single-review
 nce1-o0658|person,0658,91,92,person,,,baseline-reconciled,person,ˈpɜːs(ə)n,ˈpɜːrsn,n. 人；身体；容貌，外表；人称,KV002316,人；个人,baseline-exact-single-review
 nce1-o0659|people,0659,91,92,people,,,baseline-reconciled,people,ˈpiːp(ə)l,ˈpiːpl,"n. 人；人类；民族；公民
 vt. 居住于；使住满人",KV000435,人们,baseline-exact-single-review
-nce1-o0660|poor,0660,91,92,poor,,,baseline-reconciled,poor,pɔː(r); pʊə(r),pʊr; pɔːr,adj. 贫穷的；可怜的；贫乏的；卑鄙的,KV000370,贫穷的；可怜的,baseline-exact-single-review
+nce1-o0660|poor,0660,91,92,poor,,,baseline-reconciled,poor,pɔː(r); pʊə(r),pʊr; pɔːr,adj. 贫穷的；可怜的；贫乏的；卑鄙的,KV000370 || KV003186,贫穷的；可怜的 || 可怜的；令人同情的,baseline-multi-sense-review
 nce1-o0661|pilot,0661,93,94,pilot,,,baseline-reconciled,pilot,ˈpaɪlət,ˈpaɪlət,"n. 飞行员；领航员
 adj. 试点的
 v. 驾驶；领航；试用",KV002335,飞行员,baseline-exact-single-review
 nce1-o0662|return,0662,93,94,return,,,baseline-reconciled,return,rɪˈtɜːn,rɪˈtɜːrn,"vi. 返回；报答
 adj. 报答的；回程的；返回的
 vt. 返回；报答
-n. 返回；归还；回球",KV002461,返回；回来,baseline-exact-single-review
+n. 返回；归还；回球",KV002461 || KV003194,返回；回来 || 往返票,baseline-multi-sense-review
 nce1-o0663|new york,0663,93,94,New York,,,baseline-reconciled,New York,,,n. 【城】纽约州,KV002188,纽约,baseline-exact-single-review
 nce1-o0664|tokyo,0664,93,94,Tokyo,,,baseline-reconciled,Tokyo,ˈtəʊkiəʊ,ˈtokɪo,n. 东京（日本首都）,KV002842,东京（日本首都）,baseline-exact-single-review
-nce1-o0665|madrid,0665,93,94,Madrid,,,baseline-reconciled,Madrid,məˈdrɪd,məˈdrɪd,n. 马德里（西班牙首都）,,,baseline-new-candidate
+nce1-o0665|madrid,0665,93,94,Madrid,,,baseline-reconciled,Madrid,məˈdrɪd,məˈdrɪd,n. 马德里（西班牙首都）,KV003187,马德里,baseline-exact-single-review
 nce1-o0666|fly,0666,93,94,fly,,,baseline-reconciled,fly,flaɪ,flaɪ,"n. 飞行；苍蝇；两翼昆虫
 adj. 敏捷的
 vi. 飞；驾驶飞机；飘扬
 vt. 飞行；飞越；使飘扬",KV000831 || KV001747,操纵（飞行器等）；飞 || 苍蝇,baseline-multi-sense-review
-nce1-o0667|athens,0667,93,94,Athens,,,baseline-reconciled,Athens,ˈæθənz,ˈæθənz,n. 雅典（希腊首都）,,,baseline-new-candidate
-nce1-o0668|berlin,0668,93,94,Berlin,,,baseline-reconciled,Berlin,bɜːˈlɪn,bɜːrˈlɪn,n. 柏林,,,baseline-new-candidate
-nce1-o0669|bombay,0669,93,94,Bombay,,,baseline-reconciled,Bombay,bɒmˈbeɪ,bɑːmˈbeɪ,n. 孟买,,,baseline-new-candidate
-nce1-o0670|geneva,0670,93,94,Geneva,,,baseline-reconciled,Geneva,dʒɪˈniːvə,dʒəˈniːvə,n. 日内瓦（瑞士西南部城市）,,,baseline-new-candidate
+nce1-o0667|athens,0667,93,94,Athens,,,baseline-reconciled,Athens,ˈæθənz,ˈæθənz,n. 雅典（希腊首都）,KV003188,雅典,baseline-exact-single-review
+nce1-o0668|berlin,0668,93,94,Berlin,,,baseline-reconciled,Berlin,bɜːˈlɪn,bɜːrˈlɪn,n. 柏林,KV003189,柏林,baseline-exact-single-review
+nce1-o0669|bombay,0669,93,94,Bombay,,,baseline-reconciled,Bombay,bɒmˈbeɪ,bɑːmˈbeɪ,n. 孟买,KV003190,孟买（旧称Bombay）,baseline-exact-single-review
+nce1-o0670|geneva,0670,93,94,Geneva,,,baseline-reconciled,Geneva,dʒɪˈniːvə,dʒəˈniːvə,n. 日内瓦（瑞士西南部城市）,KV003191,日内瓦,baseline-exact-single-review
 nce1-o0671|moscow,0671,93,94,Moscow,,,baseline-reconciled,Moscow,ˈmɒskəʊ,ˈmɑːskaʊ,n. 莫斯科（俄罗斯首都）,KV002151,莫斯科,baseline-exact-single-review
 nce1-o0672|rome,0672,93,94,Rome,,,baseline-reconciled,Rome,rəʊm,roʊm,n. 罗马（意大利首都）,KV002483,罗马,baseline-exact-single-review
-nce1-o0673|seoul,0673,93,94,Seoul,,,baseline-reconciled,Seoul,səʊl,ˈsjɜːrʊl,n. 汉城，首尔（韩国首都）,,,baseline-new-candidate
-nce1-o0674|stockholm,0674,93,94,Stockholm,,,baseline-reconciled,Stockholm,ˈstɒkhəʊm,ˈstɔkˌhɔlm,n. 斯德哥尔摩（瑞典首都）,,,baseline-new-candidate
+nce1-o0673|seoul,0673,93,94,Seoul,,,baseline-reconciled,Seoul,səʊl,ˈsjɜːrʊl,n. 汉城，首尔（韩国首都）,KV003192,首尔（旧译汉城）,baseline-exact-single-review
+nce1-o0674|stockholm,0674,93,94,Stockholm,,,baseline-reconciled,Stockholm,ˈstɒkhəʊm,ˈstɔkˌhɔlm,n. 斯德哥尔摩（瑞典首都）,KV003193,斯德哥尔摩,baseline-exact-single-review
 nce1-o0675|sydney,0675,93,94,Sydney,,,baseline-reconciled,Sydney,ˈsɪdni,ˈsɪdni,n. 悉尼（澳大利亚港市）,KV000697,悉尼,baseline-exact-single-review
 nce1-o0676|return,0676,95,96,return,,,baseline-reconciled,return,rɪˈtɜːn,rɪˈtɜːrn,"vi. 返回；报答
 adj. 报答的；回程的；返回的
 vt. 返回；报答
-n. 返回；归还；回球",KV002461,返回；回来,baseline-exact-single-review
+n. 返回；归还；回球",KV002461 || KV003194,返回；回来 || 往返票,baseline-multi-sense-review
 nce1-o0677|train,0677,95,96,train,,,baseline-reconciled,train,treɪn,treɪn,"n. 火车；行列；长队；裙裾
 v. 培养；训练；瞄准",KV000071,火车,baseline-exact-single-review
-nce1-o0678|platform,0678,95,96,platform,,,baseline-reconciled,platform,ˈplætfɔːm,ˈplætfɔːrm,n. 平台；月台，站台；坛；讲台,,,baseline-new-candidate
+nce1-o0678|platform,0678,95,96,platform,,,baseline-reconciled,platform,ˈplætfɔːm,ˈplætfɔːrm,n. 平台；月台，站台；坛；讲台,KV003195,站台,baseline-exact-single-review
 nce1-o0679|plenty,0679,95,96,plenty,,,baseline-reconciled,plenty,ˈplenti,ˈplenti,"n. 丰富，大量；充足
 adj. 足够的，很多的
 adv. 足够",KV002356,大量；充足,baseline-exact-single-review
 nce1-o0680|bar,0680,95,96,bar,,,baseline-reconciled,bar,bɑː(r),bɑːr,"n. 条，棒；酒吧；障碍；法庭
 prep. 除……外
-vt. 禁止；阻拦",KV001307,条；棒；块（食品）,baseline-exact-single-review
+vt. 禁止；阻拦",KV001307 || KV003196,条；棒；块（食品） || 酒吧,baseline-multi-sense-review
 nce1-o0681|station,0681,95,96,station,,,baseline-reconciled,station,ˈsteɪʃ(ə)n,ˈsteɪʃn,"n. 车站；驻地；地位；身份
 vt. 配置；安置；驻扎",KV000467,车站,baseline-exact-single-review
-nce1-o0682|porter,0682,95,96,porter,,,baseline-reconciled,porter,ˈpɔːtə(r),ˈpotər,n. 门房；服务员；行李搬运工；守门人,,,baseline-new-candidate
+nce1-o0682|porter,0682,95,96,porter,,,baseline-reconciled,porter,ˈpɔːtə(r),ˈpotər,n. 门房；服务员；行李搬运工；守门人,KV003197,行李搬运工,baseline-exact-single-review
 nce1-o0683|catch,0683,95,96,catch,,,baseline-reconciled,catch,kætʃ,kætʃ,"n. 捕捉；捕获物；窗钩
 vt. 赶上；抓住；感染；了解
-vi. 赶上；抓住",KV000496,抓住；捕捉,baseline-exact-single-review
+vi. 赶上；抓住",KV000496 || KV003198,抓住；捕捉 || 赶上（车、船等）,baseline-multi-sense-review
 nce1-o0684|miss,0684,95,96,miss,,,baseline-reconciled,Miss || miss,mɪs,mɪs,"n. 女士，小姐，年轻未婚女子
-vt. 错过，想念，缺（勤）",KV002131 || KV002132,小姐；女士（称谓） || 错过；想念,baseline-multi-sense-review
+vt. 错过，想念，缺（勤）",KV002131 || KV002132 || KV003199,小姐；女士（称谓） || 错过；想念 || 错过；没赶上,baseline-multi-sense-review
 nce1-o0685|leave,0685,97,98,leave,,,baseline-reconciled,leave,liːv,liːv,"vt. 离开；留下；遗忘；委托
 vi. 离开，出发；留下
-n. 许可，同意；休假",KV000457,离开,baseline-exact-single-review
-nce1-o0686|describe,0686,97,98,describe,,,baseline-reconciled,describe,dɪˈskraɪb,dɪˈskraɪb,vt. 描述，形容；描绘,,,baseline-new-candidate
+n. 许可，同意；休假",KV000457 || KV003200,离开 || 遗留；留下,baseline-multi-sense-review
+nce1-o0686|describe,0686,97,98,describe,,,baseline-reconciled,describe,dɪˈskraɪb,dɪˈskraɪb,vt. 描述，形容；描绘,KV003201,描述,baseline-exact-single-review
 nce1-o0687|zip,0687,97,98,zip,,,baseline-reconciled,zip,zɪp,zɪp,"n. 拉链; 精力，活力; 尖啸声; 一种程序压缩格式
 vt. 给予…速度; 用拉链拉上或扣上
 vt.& vi. 尖啸而过; （使沿某方向）快速移动",KV003012,拉链,baseline-exact-single-review
 nce1-o0688|label,0688,97,98,label,,,baseline-reconciled,label,ˈleɪb(ə)l,ˈleɪbl,"vt. 标注；贴标签于
-n. 标签；商标；签条",,,baseline-new-candidate
+n. 标签；商标；签条",KV003202,标签,baseline-exact-single-review
 nce1-o0689|handle,0689,97,98,handle,,,baseline-reconciled,handle,ˈhænd(ə)l,ˈhændl,"n. [建] 把手；柄；手感；口实
 vt. 处理；操作；运用；买卖；触摸
-vi. 搬运；易于操纵",,,baseline-new-candidate
+vi. 搬运；易于操纵",KV003203,把手；提手,baseline-exact-single-review
 nce1-o0690|address,0690,97,98,address,,,baseline-reconciled,address,əˈdres,əˈdres; ˈædres,"n. 地址；演讲；致辞；说话的技巧；称呼
 vt. 演说；从事；忙于；写姓名地址；向…致辞；与…说话；提出；处理",KV001223,地址,baseline-exact-single-review
-nce1-o0691|pence,0691,97,98,pence,,,baseline-reconciled,pence,pens,pens,n. 便士（penny的复数）,,,baseline-new-candidate
-nce1-o0692|belong,0692,97,98,belong,,,baseline-reconciled,belong,bɪˈlɒŋ,bɪˈlɔːŋ,vi. 属于，应归入；居住；适宜；应被放置,,,baseline-new-candidate
-nce1-o0693|ow,0693,99,100,ow,,,baseline-reconciled,ow,aʊ,aʊ,int. 哦，哎哟（表示疼痛）,,,baseline-new-candidate
+nce1-o0691|pence,0691,97,98,pence,,,baseline-reconciled,pence,pens,pens,n. 便士（penny的复数）,KV003204,便士（penny的复数，用于金额）,baseline-exact-single-review
+nce1-o0692|belong,0692,97,98,belong,,,baseline-reconciled,belong,bɪˈlɒŋ,bɪˈlɔːŋ,vi. 属于，应归入；居住；适宜；应被放置,KV003205,属于,baseline-exact-single-review
+nce1-o0693|ow,0693,99,100,ow,,,baseline-reconciled,ow,aʊ,aʊ,int. 哦，哎哟（表示疼痛）,KV003206,哎哟（表示疼痛）,baseline-exact-single-review
 nce1-o0694|slip,0694,99,100,slip,,,baseline-reconciled,slip,slɪp,slɪp,"n. 滑，滑倒；片，纸片；错误；下跌；事故
 abbr. 串行线路接口协议，是旧式的协议（Serial Line Interface Protocol）
 adj. 滑动的；有活结的；活络的
@@ -1524,33 +1524,33 @@ nce1-o0698|back,0698,99,100,back,,,baseline-reconciled,back,bæk,bæk,"n. 后面
 adj. 后面的；过去的；拖欠的
 vt. 支持；后退；背书；下赌注
 adv. 以前；向后地；来回地；上溯；回来；回原处
-vi. 后退；背靠；倒退",KV001295,向后；回到原处,baseline-exact-single-review
-nce1-o0699|stand up,0699,99,100,stand up,,,baseline-reconciled,stand up,ˈstænd ʌp,ˈstænd ʌp,na. 站起来；持久；露头角；〔美俚〕背约,,,baseline-new-candidate
+vi. 后退；背靠；倒退",KV001295 || KV003207,向后；回到原处 || 背；后背,baseline-multi-sense-review
+nce1-o0699|stand up,0699,99,100,stand up,,,baseline-reconciled,stand up,ˈstænd ʌp,ˈstænd ʌp,na. 站起来；持久；露头角；〔美俚〕背约,KV003208,站起来；起立,baseline-exact-single-review
 nce1-o0700|help,0700,99,100,help,,,baseline-reconciled,help,help,help,"n. 帮助；补救办法；帮忙者；有益的东西
 vt. 帮助；促进；治疗；补救
 vi. 帮助；有用；招待",KV000225,帮助；帮忙,baseline-exact-single-review
-nce1-o0701|at once,0701,99,100,at once,,,baseline-reconciled,at once,æt wʌns,æt wʌns,na. 立刻；同时,,,baseline-new-candidate
+nce1-o0701|at once,0701,99,100,at once,,,baseline-reconciled,at once,æt wʌns,æt wʌns,na. 立刻；同时,KV003209,立刻；马上,baseline-exact-single-review
 nce1-o0702|sure,0702,99,100,sure,,,baseline-reconciled,sure,ʃʊə(r),ʃʊr,"adj. 确信的；可靠的；必定的
 adv. 当然；的确",KV000075 || KV002731,当然；可以 || 确信的；确定的,baseline-multi-sense-review
 nce1-o0703|x-ray,0703,99,100,X-ray,,,baseline-reconciled,X-ray,ˈeks reɪ,ˈeks reɪ,"n. 伦琴射线；X光；X光照片
 adj. 伦琴线的
 v. 用X线检查[摄影,处理,治疗]",KV002995,X光；X光片,baseline-exact-single-review
 nce1-o0704|licence,0704,99,100,licence,,,baseline-reconciled,licence,ˈlaɪsns,ˈlaɪsns,"n. 许可证，执照；特许
-vt. 特许，许可；发给执照",,,baseline-new-candidate
+vt. 特许，许可；发给执照",KV003210,许可证；执照,baseline-exact-single-review
 nce1-o0705|scotland,0705,101,102,Scotland,,,baseline-reconciled,Scotland,ˈskɒtlənd,ˈskɑːtlənd,n. 苏格兰,KV002528,苏格兰,baseline-exact-single-review
 nce1-o0706|card,0706,101,102,card,,,baseline-reconciled,card,kɑːd,kɑːrd,"n. 卡片；纸牌；明信片
 vt. 记于卡片上",KV000144,卡片；贺卡,baseline-exact-single-review
-nce1-o0707|youth,0707,101,102,youth,,,baseline-reconciled,youth,juːθ,juːθ,n. 青年；青春；年轻；青少年时期,,,baseline-new-candidate
-nce1-o0708|hostel,0708,101,102,hostel,,,baseline-reconciled,hostel,ˈhɒst(ə)l,ˈhɑːstl,n. 旅社，招待所（尤指青年旅社）,,,baseline-new-candidate
-nce1-o0709|association,0709,101,102,association,,,baseline-reconciled,association,əˌsəʊsiˈeɪʃn; əˌsəʊʃiˈeɪʃn,əˌsoʊsiˈeɪʃn; əˌsoʊʃiˈeɪʃn,n. 协会，联盟，社团；联合；联想,,,baseline-new-candidate
+nce1-o0707|youth,0707,101,102,youth,,,baseline-reconciled,youth,juːθ,juːθ,n. 青年；青春；年轻；青少年时期,KV003211,青年；年轻人,baseline-exact-single-review
+nce1-o0708|hostel,0708,101,102,hostel,,,baseline-reconciled,hostel,ˈhɒst(ə)l,ˈhɑːstl,n. 旅社，招待所（尤指青年旅社）,KV003212,青年旅舍；简易旅馆,baseline-exact-single-review
+nce1-o0709|association,0709,101,102,association,,,baseline-reconciled,association,əˌsəʊsiˈeɪʃn; əˌsəʊʃiˈeɪʃn,əˌsoʊsiˈeɪʃn; əˌsoʊʃiˈeɪʃn,n. 协会，联盟，社团；联合；联想,KV003213,协会；社团,baseline-exact-single-review
 nce1-o0710|soon,0710,101,102,soon,,,baseline-reconciled,soon,suːn,suːn,adv. 快；不久，一会儿；立刻；宁愿,KV000264,很快；不久,baseline-exact-single-review
 nce1-o0711|write,0711,101,102,write,,,baseline-reconciled,write,raɪt,raɪt,"vi. 写，写字；写作，作曲；写信
 vt. 写，书写；写信给；著述",KV002994,写；书写,baseline-exact-single-review
-nce1-o0712|exam,0712,103,104,exam,,,baseline-reconciled,exam,ɪɡˈzæm,ɪɡˈzæm,n. 考试；测验,,,baseline-new-candidate
+nce1-o0712|exam,0712,103,104,exam,,,baseline-reconciled,exam,ɪɡˈzæm,ɪɡˈzæm,n. 考试；测验,KV003214,考试,baseline-exact-single-review
 nce1-o0713|pass,0713,103,104,pass,,,baseline-reconciled,pass,pɑːs,pæs,"n. 及格；经过；护照；途径；传球
 vt. 通过；经过；传递
-vi. 经过；传递；变化；终止",KV000888,给；递,baseline-exact-single-review
-nce1-o0714|mathematics,0714,103,104,mathematics,,,baseline-reconciled,mathematics,ˌmæθəˈmætɪks,ˌmæθəˈmætɪks,n. 数学；数学运算,,,baseline-new-candidate
+vi. 经过；传递；变化；终止",KV000888 || KV003215,给；递 || 通过（考试）；及格,baseline-multi-sense-review
+nce1-o0714|mathematics,0714,103,104,mathematics,,,baseline-reconciled,mathematics,ˌmæθəˈmætɪks,ˌmæθəˈmætɪks,n. 数学；数学运算,KV003216,数学,baseline-exact-single-review
 nce1-o0715|question,0715,103,104,question,,,baseline-reconciled,question,ˈkwestʃən,ˈkwestʃən,"n. 问题，疑问；询问；疑问句
 vt. 询问；怀疑；审问
 vi. 询问；怀疑；审问",KV001132,问题,baseline-exact-single-review
@@ -1565,20 +1565,20 @@ int. 够了！",KV000935,足够的；充足的；充分的,baseline-exact-single
 nce1-o0718|paper,0718,103,104,paper,,,baseline-reconciled,paper,ˈpeɪpə(r),ˈpeɪpər,"n. 纸；论文；文件；报纸
 adj. 纸做的
 vt. 用纸糊；用纸包装
-vi. 贴糊墙纸；发交通违章传票",KV000402,纸,baseline-exact-single-review
+vi. 贴糊墙纸；发交通违章传票",KV000402 || KV003217,纸 || 试卷；考卷,baseline-multi-sense-review
 nce1-o0719|fail,0719,103,104,fail,,,baseline-reconciled,fail,feɪl,feɪl,"n. 不及格
 vi. 失败，不及格；破产；缺乏；衰退
-vt. 不及格；使失望；忘记；舍弃",,,baseline-new-candidate
+vt. 不及格；使失望；忘记；舍弃",KV003218,未通过；不及格,baseline-exact-single-review
 nce1-o0720|answer,0720,103,104,answer,,,baseline-reconciled,answer,ˈɑːnsə(r),ˈænsər,"n. 回答；答案；答辩
 vt. 回答；符合
-vi. 回答；符合",KV000929,答复；回答,baseline-exact-single-review
+vi. 回答；符合",KV000929 || KV003158,答复；回答 || 接听；应答（电话或门铃）,baseline-multi-sense-review
 nce1-o0721|mark,0721,103,104,mark,,,baseline-reconciled,mark,mɑːk,mɑːrk,"n. 标志；马克；符号；痕迹；分数
 vi. 作记号
 vt. .标志；做标记于；打分数
 n. . 标志；做标记于；打分数",KV000591,分数；成绩,baseline-exact-single-review
 nce1-o0722|rest,0722,103,104,rest,,,baseline-reconciled,rest,rest,rest,"n. 休息，静止；休息时间；剩余部分；支架
 vt. 使休息，使轻松；把…寄托于
-vi. 休息；静止；依赖；安置",KV000939,休息；放松,baseline-exact-single-review
+vi. 休息；静止；依赖；安置",KV000939 || KV003219,休息；放松 || 其余部分；剩下的人或物,baseline-multi-sense-review
 nce1-o0723|difficult,0723,103,104,difficult,,,baseline-reconciled,difficult,ˈdɪfɪkəlt,ˈdɪfɪkəlt,adj. 困难的；不随和的；执拗的,KV001594,困难的；难的,baseline-exact-single-review
 nce1-o0724|hate,0724,103,104,hate,,,baseline-reconciled,hate,heɪt,heɪt,"n. 憎恨；反感
 vt. 憎恨；厌恶；遗憾
@@ -1586,10 +1586,10 @@ vi. 仇恨",KV001873,讨厌；憎恨,baseline-exact-single-review
 nce1-o0725|low,0725,103,104,low,,,baseline-reconciled,low,ləʊ,loʊ,"adj. 低的，浅的；卑贱的；粗俗的；消沉的
 adv. 低声地；谦卑地，低下地
 n. 低；低价；低点；牛叫声
-vi. 牛叫",,,baseline-new-candidate
+vi. 牛叫",KV003220,低的；矮的,baseline-exact-single-review
 nce1-o0726|cheer,0726,103,104,cheer,,,baseline-reconciled,cheer,tʃɪə(r),tʃɪr,"n. 欢呼；愉快；心情；令人愉快的事
 vt. 欢呼；使高兴；为…加油
-vi. 欢呼；感到高兴",KV001072,欢呼；加油,baseline-exact-single-review
+vi. 欢呼；感到高兴",KV001072 || KV003221,欢呼；加油 || 使振作；使高兴,baseline-multi-sense-review
 nce1-o0727|guy,0727,103,104,guy,,,baseline-reconciled,guy,ɡaɪ,ɡaɪ,"n. 男人，家伙
 vt. 嘲弄，取笑
 vi. 逃跑",KV001857,家伙；人,baseline-exact-single-review
@@ -1610,14 +1610,14 @@ adv. 刚刚，才；最新地",KV001767,新鲜的；清新的,baseline-exact-sin
 nce1-o0734|stale,0734,103,104,stale,,,baseline-reconciled,stale,steɪl,steɪl,"n. 尿
 adj. 陈腐的；不新鲜的
 vt. 使变旧；变得不新鲜
-vi. 变陈旧；撒尿；变得不新鲜",,,baseline-new-candidate
+vi. 变陈旧；撒尿；变得不新鲜",KV003222,不新鲜的（食物）,baseline-exact-single-review
 nce1-o0735|loud,0735,103,104,loud,,,baseline-reconciled,loud,laʊd,laʊd,"adj. 大声的，高声的；不断的；喧吵的
 adv. 大声地，高声地，响亮地",KV000856,说话太大声的；吵闹的,baseline-exact-single-review
 nce1-o0736|high,0736,103,104,high,,,baseline-reconciled,high,haɪ,haɪ,"n. 高水平；天空；由麻醉品引起的快感；高压地带
 adj. 高的；高级的；崇高的；高音调的
 adv. 高；奢侈地",KV001907,高的,baseline-exact-single-review
 nce1-o0737|hard,0737,103,104,hard,,,baseline-reconciled,hard,hɑːd,hɑːrd,"adj. 努力的；硬的；困难的；辛苦的；确实的；严厉的；猛烈的；冷酷无情的
-adv. 努力地；困难地；辛苦地；接近地；猛烈地；牢固地",KV000860,努力地；费力地,baseline-exact-single-review
+adv. 努力地；困难地；辛苦地；接近地；猛烈地；牢固地",KV000860 || KV003223,努力地；费力地 || 硬的；坚硬的,baseline-multi-sense-review
 nce1-o0738|sweet,0738,103,104,sweet,,,baseline-reconciled,sweet,swiːt,swiːt,"n. 糖果；乐趣；芳香；宝贝
 adj. 甜的；悦耳的；芳香的；亲切的
 （俚）酷毙了",KV002736,甜的,baseline-exact-single-review
@@ -1631,7 +1631,7 @@ vi. 发酵；变酸；厌烦",KV002652,酸的；酸味的,baseline-exact-single-
 nce1-o0741|low,0741,103,104,low,,,baseline-reconciled,low,ləʊ,loʊ,"adj. 低的，浅的；卑贱的；粗俗的；消沉的
 adv. 低声地；谦卑地，低下地
 n. 低；低价；低点；牛叫声
-vi. 牛叫",,,baseline-new-candidate
+vi. 牛叫",KV003220,低的；矮的,baseline-exact-single-review
 nce1-o0742|spell,0742,105,106,spell,,,baseline-reconciled,spell,spel,spel,"n. 符咒；一段时间；魅力
 vi. 拼字；轮替
 vt. 拼，拼写；意味着；招致；拼成；迷住；轮值",KV002663,拼写,baseline-exact-single-review
@@ -1649,22 +1649,22 @@ vi. 能达到；被携带；被搬运
 vt. 拿，扛；携带；支持；搬运",KV001430,拿；携带；搬运,baseline-exact-single-review
 nce1-o0748|keep,0748,105,106,keep,,,baseline-reconciled,keep,kiːp,kiːp,"vt. 保持；经营；遵守；饲养
 vi. 保持；继续不断
-n. 保持；生计；生活费",KV001031,保持某种状态,baseline-exact-single-review
+n. 保持；生计；生活费",KV001031 || KV003224,保持某种状态 || 保留；保存,baseline-multi-sense-review
 nce1-o0749|correct,0749,105,106,correct,,,baseline-reconciled,correct,kəˈrekt,kəˈrekt,"adj. 正确的；恰当的；端正的
 vt. 改正；告诫
-vi. 调整；纠正错误",KV001533,正确的；对的,baseline-exact-single-review
-nce1-o0750|madam,0750,107,108,madam,,,baseline-reconciled,madam,ˈmædəm,ˈmædəm,n. 夫人；女士；鸨母,,,baseline-new-candidate
+vi. 调整；纠正错误",KV001533 || KV003225,正确的；对的 || 改正；纠正,baseline-multi-sense-review
+nce1-o0750|madam,0750,107,108,madam,,,baseline-reconciled,madam,ˈmædəm,ˈmædəm,n. 夫人；女士；鸨母,KV003226,女士（礼貌称呼）,baseline-exact-single-review
 nce1-o0751|smart,0751,107,108,smart,,,baseline-reconciled,smart,smɑːt,smɑːrt,adj. 聪明的；巧妙的；敏捷的；厉害的；潇洒的；剧烈的；时髦的,KV000727 || KV003046,聪明的；机灵的 || 整洁漂亮的；时髦的,baseline-multi-sense-review
 nce1-o0752|as well,0752,107,108,as well,,,baseline-reconciled,as well,æz wel,æz wel,na. 也；同样,KV001268,也；还,baseline-exact-single-review
 nce1-o0753|suit,0753,107,108,suit,,,baseline-reconciled,suit,suːt,suːt,"n. 诉讼；恳求；套装，西装；一套外衣
 vt. 适合；使适应
-vi. 合适；相称",KV003022,套装；一套衣服,baseline-exact-single-review
+vi. 合适；相称",KV003022 || KV003227,套装；一套衣服 || 适合；适于,baseline-multi-sense-review
 nce1-o0754|pretty,0754,107,108,pretty,,,baseline-reconciled,pretty,ˈprɪti,ˈprɪti,"n. 有吸引力的事物（尤指饰品）；漂亮的人
 adj. 漂亮的；可爱的；优美的
 adv. 相当地；颇",KV000121,漂亮的,baseline-exact-single-review
 nce1-o0755|idea,0755,109,110,idea,,,baseline-reconciled,idea,aɪˈdɪə,aɪˈdiːə,n. 想法；主意；概念,KV000783,想法；主意,baseline-exact-single-review
 nce1-o0756|a little,0756,109,110,a little,,,baseline-reconciled,a little,,,n. 一点,KV001208,一点；少量,baseline-exact-single-review
-nce1-o0757|teaspoonful,0757,109,110,teaspoonful,,,baseline-reconciled,teaspoonful,ˈtiːspuːnfʊl,ˈtispʊnˌfʊl,n. 一茶匙的量,,,baseline-new-candidate
+nce1-o0757|teaspoonful,0757,109,110,teaspoonful,,,baseline-reconciled,teaspoonful,ˈtiːspuːnfʊl,ˈtispʊnˌfʊl,n. 一茶匙的量,KV003228,一茶匙的量,baseline-exact-single-review
 nce1-o0758|less,0758,109,110,less,,,baseline-reconciled,less,les,les,"adv. 较少地；较小地；更小地
 adj. 较少的；较小的
 prep. 减去
@@ -1676,7 +1676,7 @@ nce1-o0761|instead,0761,109,110,instead,,,baseline-reconciled,instead,ɪnˈsted,
 nce1-o0762|advice,0762,109,110,advice,,,baseline-reconciled,advice,ədˈvaɪs,ədˈvaɪs,n. 建议；忠告；劝告；通知,KV000592,建议,baseline-exact-single-review
 nce1-o0763|most,0763,109,110,most,,,baseline-reconciled,most,məʊst,moʊst,"adv. 最；非常，极其；最多；几乎
 adj. 大部分的，多数的；最多的
-n. 大部分，大多数",KV002152,最多的；大多数的,baseline-exact-single-review
+n. 大部分，大多数",KV002152 || KV003229,最多的；大多数的 || 最多的（many或much的最高级）,baseline-multi-sense-review
 nce1-o0764|least,0764,109,110,least,,,baseline-reconciled,least,liːst,liːst,"adj. 最小的；最少的（little的最高级）
 adv. 最小；最少
 n. 最小；最少",KV002031,最少；最小,baseline-exact-single-review
@@ -1686,31 +1686,31 @@ vt. 打败，胜过
 adv. 最好地",KV000811 || KV000993,最好的 || 最；最高程度地,baseline-multi-sense-review
 nce1-o0766|worse,0766,109,110,worse,,,baseline-reconciled,worse,wɜːs,wɜːrs,"n. 更坏的事；更恶劣的事
 adj. 更坏的；更差的；更恶劣的（bad的比较级）；（病情）更重的（ill的比较级）
-adv. 更糟；更坏；更恶劣地；更坏地",,,baseline-new-candidate
+adv. 更糟；更坏；更恶劣地；更坏地",KV003230,更差的；更糟的（bad的比较级）,baseline-exact-single-review
 nce1-o0767|worst,0767,109,110,worst,,,baseline-reconciled,worst,wɜːst,wɜːrst,"n. 最坏；最坏的时候
 adj. 最差的，最坏的；最不利的；效能最低的
-adv. 最坏地；最不利地",,,baseline-new-candidate
+adv. 最坏地；最不利地",KV003231,最差的；最糟的（bad的最高级）,baseline-exact-single-review
 nce1-o0768|model,0768,111,112,model,,,baseline-reconciled,model,ˈmɒd(ə)l,ˈmɑːdl,"n. 模型；典型；模范；模特儿；样式
 vt. 模拟；塑造；模仿
 vi. 做模型；做模特儿
-adj. 模范的；作模型用的",KV002138,模型,baseline-exact-single-review
-nce1-o0769|afford,0769,111,112,afford,,,baseline-reconciled,afford,əˈfɔːd,əˈfɔːrd,vt. 给予，提供；买得起,,,baseline-new-candidate
+adj. 模范的；作模型用的",KV002138 || KV003232,模型 || 型号；款式,baseline-multi-sense-review
+nce1-o0769|afford,0769,111,112,afford,,,baseline-reconciled,afford,əˈfɔːd,əˈfɔːrd,vt. 给予，提供；买得起,KV003233,买得起；付得起,baseline-exact-single-review
 nce1-o0770|deposit,0770,111,112,deposit,,,baseline-reconciled,deposit,dɪˈpɒzɪt,dɪˈpɑːzɪt,"n. 存款；押金；订金；保证金；沉淀物
 vt. 使沉积；存放
-vi. 沉淀",,,baseline-new-candidate
-nce1-o0771|instalment,0771,111,112,instalment,,,baseline-reconciled,instalment,ɪnˈstɔːlmənt,ɪnˈstɔːlmənt,n. 分期付款；装设；就职,,,baseline-new-candidate
+vi. 沉淀",KV003234,订金；预付款,baseline-exact-single-review
+nce1-o0771|instalment,0771,111,112,instalment,,,baseline-reconciled,instalment,ɪnˈstɔːlmənt,ɪnˈstɔːlmənt,n. 分期付款；装设；就职,KV003235,分期付款中的一期款项,baseline-exact-single-review
 nce1-o0772|price,0772,111,112,price,,,baseline-reconciled,price,praɪs,praɪs,"n. 价格；价值；代价
 vt. 给……定价；问……的价格",KV002399,价格；价钱,baseline-exact-single-review
 nce1-o0773|millionaire,0773,111,112,millionaire,,,baseline-reconciled,millionaire,ˌmɪljəˈneə(r),ˌmɪljəˈner,"n. 百万富翁；大富豪
-adj. 100万以上人口的",,,baseline-new-candidate
+adj. 100万以上人口的",KV003236,百万富翁,baseline-exact-single-review
 nce1-o0774|conductor,0774,113,114,conductor,,,baseline-reconciled,conductor,kənˈdʌktə(r),kənˈdʌktər,n. 导体；售票员；领导者；管理人,KV001524,售票员,baseline-exact-single-review
 nce1-o0775|fare,0775,113,114,fare,,,baseline-reconciled,fare,feə(r),fer,"n. 票价；费用；旅客；食物
 vi. 经营；进展；遭遇；过活",KV001705,票价,baseline-exact-single-review
 nce1-o0776|change,0776,113,114,change,,,baseline-reconciled,change,tʃeɪndʒ,tʃeɪndʒ,"n. 变化；找回的零钱
 vt. 改变；交换
-vi. 改变；兑换",KV001146,（使）不同；改变,baseline-exact-single-review
+vi. 改变；兑换",KV001146 || KV003136 || KV003237,（使）不同；改变 || 零钱；找回的钱 || 兑换；换成零钱,baseline-multi-sense-review
 nce1-o0777|note,0777,113,114,note,,,baseline-reconciled,note,nəʊt,noʊt,"n. 笔记；音符；票据；注解；纸币；便笺；照会；调子
-vt. 注意；记录；注解",KV002215,笔记；便条,baseline-exact-single-review
+vt. 注意；记录；注解",KV002215 || KV003238,笔记；便条 || 纸币；钞票,baseline-multi-sense-review
 nce1-o0778|passenger,0778,113,114,passenger,,,baseline-reconciled,passenger,ˈpæsɪndʒə(r),ˈpæsɪndʒər,n. 旅客；乘客；过路人；碍手碍脚的人,KV002291,乘客；旅客,baseline-exact-single-review
 nce1-o0779|none,0779,113,114,none,,,baseline-reconciled,none,nʌn,nʌn,"pron. 没有人；一个也没有；没有任何东西
 adj. 没有的，一点没有的
@@ -1718,11 +1718,11 @@ adv. 决不，一点也不",KV002205,没有一个；没有任何人或东西,bas
 nce1-o0780|neither,0780,113,114,neither,,,baseline-reconciled,neither,ˈnaɪðə(r),ˈniːðər,"conj. 也不；既不
 adv. 两个都不；既不……也不
 adj. 两者都不的
-pron. 两者都不",KV002181,两者都不,baseline-exact-single-review
+pron. 两者都不",KV002181 || KV003239,两者都不 || 也不,baseline-multi-sense-review
 nce1-o0781|get off,0781,113,114,get off,,,baseline-reconciled,get off,,,na. 下车；脱下(衣服等)；脱(衣)；下(马),KV001791,下车,baseline-exact-single-review
 nce1-o0782|tramp,0782,113,114,tramp,,,baseline-reconciled,tramp,træmp,træmp,"n. 流浪者；沉重的脚步声；徒步旅行
 vi. 流浪；践踏，踩；脚步沉重地行走
-vt. 践踏，踩；走过",,,baseline-new-candidate
+vt. 践踏，踩；走过",KV003240,流浪汉；无固定住处的人,baseline-exact-single-review
 nce1-o0783|except,0783,113,114,except,,,baseline-reconciled,except,ɪkˈsept,ɪkˈsept,"conj. 除了；要不是
 prep. 除…之外
 vt. 不计；把…除外
@@ -1737,7 +1737,7 @@ adj. 安静的；安定的；不动的；温顺的
 vt. 使平息；安慰
 vi. 平静下来",KV000522,安静的；文静的,baseline-exact-single-review
 nce1-o0788|impossible,0788,115,116,impossible,,,baseline-reconciled,impossible,ɪmˈpɒsəb(ə)l,ɪmˈpɑːsəbl,"n. 不可能；不可能的事
-adj. 不可能的；不可能存在的；难以忍受的；不真实的",,,baseline-new-candidate
+adj. 不可能的；不可能存在的；难以忍受的；不真实的",KV003241,不可能的,baseline-exact-single-review
 nce1-o0789|invite,0789,115,116,invite,,,baseline-reconciled,invite,ɪnˈvaɪt,ɪnˈvaɪt,"n. 邀请
 vt. 邀请，招待；招致",KV001970,邀请,baseline-exact-single-review
 nce1-o0790|anything,0790,115,116,anything,,,baseline-reconciled,anything,ˈeniθɪŋ,ˈeniθɪŋ,pron. 任何事,KV001040,任何事物,baseline-exact-single-review
@@ -1749,7 +1749,7 @@ int. 什么也没有",KV001191,没有什么,baseline-exact-single-review
 nce1-o0792|lemonade,0792,115,116,lemonade,,,baseline-reconciled,lemonade,ˌleməˈneɪd,ˌleməˈneɪd,n. 柠檬水,KV002034,柠檬水,baseline-exact-single-review
 nce1-o0793|joke,0793,115,116,joke,,,baseline-reconciled,joke,dʒəʊk,dʒoʊk,"n. 玩笑，笑话；笑柄
 vt. 开…的玩笑
-vi. 开玩笑",KV001990,玩笑；笑话,baseline-exact-single-review
+vi. 开玩笑",KV001990 || KV003242,玩笑；笑话 || 开玩笑,baseline-multi-sense-review
 nce1-o0794|asleep,0794,115,116,asleep,,,baseline-reconciled,asleep,əˈsliːp,əˈsliːp,"adj. 睡着的；麻木的；长眠的
 adv. 熟睡地；进入睡眠状态",KV001269,睡着的,baseline-exact-single-review
 nce1-o0795|glasses,0795,115,116,glasses,,,baseline-reconciled,glasses,ˈɡlɑːsɪz,ˈɡlæsɪz,"n. [轻] 眼镜；玻璃（glass的复数形式）；双筒望远镜
@@ -1762,7 +1762,7 @@ vt. 做作地说，装腔作势地说；喃喃地说出
 vi. 装腔作势说话",KV000014,嘴；口,baseline-exact-single-review
 nce1-o0799|swallow,0799,117,118,swallow,,,baseline-reconciled,swallow,ˈswɒləʊ,ˈswɑːloʊ,"n. 燕子；一次吞咽的量
 vt. 忍受；吞没
-vi. 吞下；咽下",,,baseline-new-candidate
+vi. 吞下；咽下",KV003243,吞下；咽下,baseline-exact-single-review
 nce1-o0800|later,0800,117,118,later,,,baseline-reconciled,later,ˈleɪtə(r),ˈleɪtər,"adv. 后来；稍后；随后
 adj. 更迟的；更后的",KV001079,随后；后来,baseline-exact-single-review
 nce1-o0801|toilet,0801,117,118,toilet,,,baseline-reconciled,toilet,ˈtɔɪlət,ˈtɔɪlət,"n. 厕所，盥洗室；梳妆，打扮
@@ -1783,26 +1783,26 @@ nce1-o0807|dark,0807,119,120,dark,,,baseline-reconciled,dark,dɑːk,dɑːrk,"n. 
 adj. 黑暗的，深色的；模糊的；无知的；忧郁的",KV001572,黑暗的；昏暗的,baseline-exact-single-review
 nce1-o0808|torch,0808,119,120,torch,,,baseline-reconciled,torch,tɔːtʃ,tɔːrtʃ,"n. 火把，火炬；手电筒；启发之物
 vt. 用火炬点燃
-vi. 像火炬一样燃烧",,,baseline-new-candidate
+vi. 像火炬一样燃烧",KV003244,手电筒（英式用语）,baseline-exact-single-review
 nce1-o0809|voice,0809,119,120,voice,,,baseline-reconciled,voice,vɔɪs,vɔɪs,"n. 声音；嗓音；发言权；愿望
 vt. 表达；吐露",KV002924,声音；嗓音,baseline-exact-single-review
 nce1-o0810|parrot,0810,119,120,parrot,,,baseline-reconciled,parrot,ˈpærət,ˈpærət,"n. 鹦鹉；学舌者，应声虫；机械模仿别人的人
 vt. 机械地模仿",KV002287,鹦鹉,baseline-exact-single-review
 nce1-o0811|exercise book,0811,119,120,exercise book,,,baseline-reconciled,exercise book,,,n. 练习本；练习册；作业本,KV000555,练习本,baseline-exact-single-review
-nce1-o0812|customer,0812,121,122,customer,,,baseline-reconciled,customer,ˈkʌstəmə(r),ˈkʌstəmər,n. 顾客；家伙,,,baseline-new-candidate
+nce1-o0812|customer,0812,121,122,customer,,,baseline-reconciled,customer,ˈkʌstəmə(r),ˈkʌstəmər,n. 顾客；家伙,KV003245,顾客,baseline-exact-single-review
 nce1-o0813|forget,0813,121,122,forget,,,baseline-reconciled,forget,fəˈɡet,fərˈɡet,"vi. 忘记
 vt. 忘记；忽略",KV000532,忘记,baseline-exact-single-review
 nce1-o0814|manager,0814,121,122,manager,,,baseline-reconciled,manager,ˈmænɪdʒə(r),ˈmænɪdʒər,n. 经理；管理人员,KV002088,经理；管理人员,baseline-exact-single-review
 nce1-o0815|serve,0815,121,122,serve,,,baseline-reconciled,serve,sɜːv,sɜːrv,"n. 发球，轮到发球
 vi. 服役，服务；适合，足够；发球；招待，侍候
-vt. 招待，供应；为…服务；对…有用；可作…用",,,baseline-new-candidate
+vt. 招待，供应；为…服务；对…有用；可作…用",KV003246,接待；服务,baseline-exact-single-review
 nce1-o0816|counter,0816,121,122,counter,,,baseline-reconciled,counter,ˈkaʊntə(r),ˈkaʊntər,"n. 柜台；对立面；计数器；（某些棋盘游戏的）筹码
 vi. 逆向移动，对着干；反驳
 adj. 相反的
 vt. 反击，还击；反向移动，对着干；反驳，回答
-adv. 反方向地；背道而驰地",,,baseline-new-candidate
+adv. 反方向地；背道而驰地",KV003247,柜台,baseline-exact-single-review
 nce1-o0817|recognize,0817,121,122,recognize,,,baseline-reconciled,recognize,ˈrekəɡnaɪz,ˈrekəɡnaɪz,"vt. 认出，识别；承认
-vi. 确认，承认；具结",,,baseline-new-candidate
+vi. 确认，承认；具结",KV003248,认出；辨认出,baseline-exact-single-review
 nce1-o0818|road,0818,121,122,road,,,baseline-reconciled,road,rəʊd,roʊd,"n. 公路，马路；道路；手段
 adj. （美）巡回的
 vt. （狗）沿臭迹追逐（猎物）",KV002473,路；道路；公路,baseline-exact-single-review
@@ -1815,7 +1815,7 @@ vt. 经过；在…旅行
 vi. 旅行；行进；步行；交往",KV000485,旅行；旅游,baseline-exact-single-review
 nce1-o0822|offer,0822,123,124,offer,,,baseline-reconciled,offer,ˈɒfə(r),ˈɔːfər,"vt. 提供；出价；试图
 n. 提议；出价；意图；录取通知书
-vi. 提议；出现；献祭；求婚",,,baseline-new-candidate
+vi. 提议；出现；献祭；求婚",KV003249,主动提供；给予,baseline-exact-single-review
 nce1-o0823|job,0823,123,124,job,,,baseline-reconciled,job,dʒɒb,dʒɑːb,"n. 工作；职业
 vt. 承包；代客买卖
 vi. 做零工",KV000433,工作；职业,baseline-exact-single-review
@@ -1827,18 +1827,18 @@ nce1-o0825|grow,0825,123,124,grow,,,baseline-reconciled,grow,ɡrəʊ,ɡroʊ,"vi.
 vt. 使生长；种植；扩展",KV001850,生长；成长,baseline-exact-single-review
 nce1-o0826|beard,0826,123,124,beard,,,baseline-reconciled,beard,bɪəd,bɪrd,"n. 胡须；颌毛
 vt. 公然反对；抓…的胡须
-vi. 充当掩护；充当男随员",,,baseline-new-candidate
+vi. 充当掩护；充当男随员",KV003250,胡须；络腮胡子,baseline-exact-single-review
 nce1-o0827|kitten,0827,123,124,kitten,,,baseline-reconciled,kitten,ˈkɪt(ə)n,ˈkɪt(ə)n,"n. 小猫；小动物
 vi. 产小猫",KV001016,小猫,baseline-exact-single-review
 nce1-o0828|water,0828,125,126,water,,,baseline-reconciled,water,ˈwɔːtə(r),ˈwɔːtər,"n. 水；海水；雨水；海域，大片的水
 vt. 使湿；供以水；给…浇水
-vi. 加水；流泪；流口水",KV000089,水,baseline-exact-single-review
-nce1-o0829|terribly,0829,125,126,terribly,,,baseline-reconciled,terribly,ˈterəbli,ˈterəbli,adv. 非常；可怕地；极度地,,,baseline-new-candidate
+vi. 加水；流泪；流口水",KV000089 || KV003251,水 || 给……浇水,baseline-multi-sense-review
+nce1-o0829|terribly,0829,125,126,terribly,,,baseline-reconciled,terribly,ˈterəbli,ˈterəbli,adv. 非常；可怕地；极度地,KV003252,非常；极其,baseline-exact-single-review
 nce1-o0830|dry,0830,125,126,dry,,,baseline-reconciled,dry,draɪ,draɪ,"n. 干涸
 adj. 干的；口渴的；枯燥无味的；禁酒的
 vt. 把…弄干
 vi. 变干",KV001054,干的,baseline-exact-single-review
-nce1-o0831|nuisance,0831,125,126,nuisance,,,baseline-reconciled,nuisance,ˈnjuːsns,ˈnuːsns,n. 讨厌的人；损害；麻烦事；讨厌的东西,,,baseline-new-candidate
+nce1-o0831|nuisance,0831,125,126,nuisance,,,baseline-reconciled,nuisance,ˈnjuːsns,ˈnuːsns,n. 讨厌的人；损害；麻烦事；讨厌的东西,KV003253,讨厌的人或事；麻烦事,baseline-exact-single-review
 nce1-o0832|mean,0832,125,126,mean,,,baseline-reconciled,mean,miːn,miːn,"adj. 平均的；卑鄙的；低劣的；吝啬的
 vt. 意味；想要；意欲
 n. 平均值
@@ -1849,7 +1849,7 @@ vt. 使惊奇；奇袭",KV002733,惊喜；惊讶,baseline-exact-single-review
 nce1-o0834|immediately,0834,125,126,immediately,,,baseline-reconciled,immediately,ɪˈmiːdiətli,ɪˈmiːdiətli,"conj. 一…就
 adv. 立即，立刻；直接地",KV001945,立即；马上,baseline-exact-single-review
 nce1-o0835|famous,0835,127,128,famous,,,baseline-reconciled,famous,ˈfeɪməs,ˈfeɪməs,adj. 著名的；极好的，非常令人满意的,KV000686,著名的,baseline-exact-single-review
-nce1-o0836|actress,0836,127,128,actress,,,baseline-reconciled,actress,ˈæktrəs,ˈæktrəs,n. 女演员,,,baseline-new-candidate
+nce1-o0836|actress,0836,127,128,actress,,,baseline-reconciled,actress,ˈæktrəs,ˈæktrəs,n. 女演员,KV003254,女演员,baseline-exact-single-review
 nce1-o0837|at least,0837,127,128,at least,,,baseline-reconciled,at least,,,na. 至少,KV000785,至少,baseline-exact-single-review
 nce1-o0838|actor,0838,127,128,actor,,,baseline-reconciled,actor,ˈæktə(r),ˈæktər,n. 男演员；行动者；作用物,KV001222,男演员,baseline-exact-single-review
 nce1-o0839|read,0839,127,128,read,,,baseline-reconciled,read,riːd,riːd,"n. 阅读；读物
@@ -1858,25 +1858,25 @@ vi. 读；读起来
 vt. 阅读；读懂，理解",KV000812,阅读,baseline-exact-single-review
 nce1-o0840|wave,0840,129,130,wave,,,baseline-reconciled,wave,weɪv,weɪv,"n. 波动；波浪；高潮；挥手示意；卷曲
 vt. 卷（烫）发；向…挥手示意；使成波浪形
-vi. 波动；起伏；挥手示意；摇动；呈波形",,,baseline-new-candidate
+vi. 波动；起伏；挥手示意；摇动；呈波形",KV003255,挥手；招手,baseline-exact-single-review
 nce1-o0841|track,0841,129,130,track,,,baseline-reconciled,track,træk,træk,"n. 轨道；足迹，踪迹；小道
 vt. 追踪；通过；循路而行；用纤拉
 vi. 追踪；走；留下足迹",KV002860,赛道；轨道,baseline-exact-single-review
-nce1-o0842|mile,0842,129,130,mile,,,baseline-reconciled,mile,maɪl,maɪl,n. 英里；一英里赛跑；较大的距离,,,baseline-new-candidate
+nce1-o0842|mile,0842,129,130,mile,,,baseline-reconciled,mile,maɪl,maɪl,n. 英里；一英里赛跑；较大的距离,KV003256,英里,baseline-exact-single-review
 nce1-o0843|overtake,0843,129,130,overtake,,,baseline-reconciled,overtake,ˌəʊvəˈteɪk,ˌoʊvərˈteɪk,"vt. 赶上；压倒；突然来袭
-vi. 超车",,,baseline-new-candidate
-nce1-o0844|speed limit,0844,129,130,speed limit,,,baseline-reconciled,speed limit,ˈspiːd lɪmɪt,ˈspiːd lɪmɪt,n. （道路的）最高车速限制,,,baseline-new-candidate
+vi. 超车",KV003257,赶上并超过；超车,baseline-exact-single-review
+nce1-o0844|speed limit,0844,129,130,speed limit,,,baseline-reconciled,speed limit,ˈspiːd lɪmɪt,ˈspiːd lɪmɪt,n. （道路的）最高车速限制,KV003258,限速；最高允许速度,baseline-exact-single-review
 nce1-o0845|dream,0845,129,130,dream,,,baseline-reconciled,dream,driːm,driːm,"n. 梦想，愿望；梦
 adj. 梦的；理想的；不切实际的
 vt. 梦想；做梦；想到
-vi. 梦想；做梦，梦见；想到",KV000476 || KV001194,梦想 || 梦,baseline-multi-sense-review
+vi. 梦想；做梦，梦见；想到",KV000476 || KV001194 || KV003259,梦想 || 梦 || 做白日梦；走神,baseline-multi-sense-review
 nce1-o0846|sign,0846,129,130,sign,,,baseline-reconciled,sign,saɪn,saɪn,"n. 迹象；符号；记号；手势；指示牌
 vt. 签署；示意
 vi. 签署；签名",KV002580,标志；标牌；指示牌,baseline-exact-single-review
-nce1-o0847|driving licence,0847,129,130,driving licence,,,baseline-reconciled,,,,,,,baseline-new-candidate
+nce1-o0847|driving licence,0847,129,130,driving licence,,,baseline-reconciled,,,,,KV003260,驾驶执照,baseline-exact-single-review
 nce1-o0848|charge,0848,129,130,charge,,,baseline-reconciled,charge,tʃɑːdʒ,tʃɑːrdʒ,"n. 费用；电荷；掌管；控告；命令；负载
 vt. 使充电；使承担；指责；装载；对…索费；向…冲去
-vi. 充电；控告；索价；向前冲；记在账上",,,baseline-new-candidate
+vi. 充电；控告；索价；向前冲；记在账上",KV003261,指控；控告,baseline-exact-single-review
 nce1-o0849|darling,0849,129,130,darling,,,baseline-reconciled,darling,ˈdɑːlɪŋ,ˈdɑːrlɪŋ,n. 心爱的人；亲爱的,KV001573,亲爱的；心爱的人,baseline-exact-single-review
 nce1-o0850|egypt,0850,131,132,Egypt,,,baseline-reconciled,Egypt,ˈiːdʒɪpt,ˈiːdʒɪpt,n. 埃及（非洲国家）,KV001653,埃及,baseline-exact-single-review
 nce1-o0851|abroad,0851,131,132,abroad,,,baseline-reconciled,abroad,əˈbrɔːd,əˈbrɔːd,"n. 海外；异国
@@ -1886,11 +1886,11 @@ nce1-o0852|worry,0852,131,132,worry,,,baseline-reconciled,worry,ˈwʌri,ˈwɜːr
 vi. 担心；烦恼；撕咬
 vt. 担心；发愁；折磨",KV000967,担心；担忧；发愁,baseline-exact-single-review
 nce1-o0853|reporter,0853,133,134,reporter,,,baseline-reconciled,reporter,rɪˈpɔːtə(r),rɪˈpɔːrtər,n. 记者,KV002458,记者,baseline-exact-single-review
-nce1-o0854|sensational,0854,133,134,sensational,,,baseline-reconciled,sensational,senˈseɪʃən(ə)l,senˈseɪʃən(ə)l,adj. 轰动的；耸人听闻的；非常好的；使人感动的,,,baseline-new-candidate
-nce1-o0855|mink coat,0855,133,134,mink coat,,,baseline-reconciled,mink coat,,,n. 貂皮大衣,,,baseline-new-candidate
+nce1-o0854|sensational,0854,133,134,sensational,,,baseline-reconciled,sensational,senˈseɪʃən(ə)l,senˈseɪʃən(ə)l,adj. 轰动的；耸人听闻的；非常好的；使人感动的,KV003262,轰动的；引起强烈关注的,baseline-exact-single-review
+nce1-o0855|mink coat,0855,133,134,mink coat,,,baseline-reconciled,mink coat,,,n. 貂皮大衣,KV003263,貂皮大衣,baseline-exact-single-review
 nce1-o0856|future,0856,135,136,future,,,baseline-reconciled,future,ˈfjuːtʃə(r),ˈfjuːtʃər,"n. 未来；前途；期货；将来时
 adj. 将来的，未来的",KV001779,未来；将来,baseline-exact-single-review
-nce1-o0857|get married,0857,135,136,get married,,,baseline-reconciled,get married,ɡet ˈmærid,ɡet ˈmærid,na. 结婚,,,baseline-new-candidate
+nce1-o0857|get married,0857,135,136,get married,,,baseline-reconciled,get married,ɡet ˈmærid,ɡet ˈmærid,na. 结婚,KV003264,结婚,baseline-exact-single-review
 nce1-o0858|hotel,0858,135,136,hotel,,,baseline-reconciled,hotel,həʊˈtel,hoʊˈtel,"n. 旅馆，饭店；客栈
 vt. 使…在饭店下榻
 vi. 进行旅馆式办公",KV000461,酒店；旅馆,baseline-exact-single-review
@@ -1902,62 +1902,62 @@ nce1-o0861|football,0861,137,138,football,,,baseline-reconciled,football,ˈfʊtb
 vi. 踢足球；打橄榄球",KV000815,足球运动,baseline-exact-single-review
 nce1-o0862|pool,0862,137,138,pool,,,baseline-reconciled,pool,puːl,puːl,"n. 联营；撞球；水塘；共同资金
 vt. 合伙经营
-vi. 联营，合伙经营",KV002373,游泳池,baseline-exact-single-review
+vi. 联营，合伙经营",KV002373 || KV003265,游泳池 || 足球赛果博彩（本课指the pools）,baseline-multi-sense-review
 nce1-o0863|win,0863,137,138,win,,,baseline-reconciled,win,wɪn,wɪn,"n. 赢；胜利
 vt. 赢得；在…中获胜；劝诱
 vi. 赢；获胜；成功",KV000734,赢；获胜,baseline-exact-single-review
 nce1-o0864|world,0864,137,138,world,,,baseline-reconciled,world,wɜːld,wɜːrld,n. 世界；领域；世俗；全人类；物质生活,KV000955,世界；地球；天下,baseline-exact-single-review
-nce1-o0865|poor,0865,137,138,poor,,,baseline-reconciled,poor,pɔː(r); pʊə(r),pʊr; pɔːr,adj. 贫穷的；可怜的；贫乏的；卑鄙的,KV000370,贫穷的；可怜的,baseline-exact-single-review
-nce1-o0866|depend,0866,137,138,depend,,,baseline-reconciled,depend,dɪˈpend,dɪˈpend,vi. 依赖，依靠；取决于；相信，信赖,,,baseline-new-candidate
+nce1-o0865|poor,0865,137,138,poor,,,baseline-reconciled,poor,pɔː(r); pʊə(r),pʊr; pɔːr,adj. 贫穷的；可怜的；贫乏的；卑鄙的,KV000370 || KV003186,贫穷的；可怜的 || 可怜的；令人同情的,baseline-multi-sense-review
+nce1-o0866|depend,0866,137,138,depend,,,baseline-reconciled,depend,dɪˈpend,dɪˈpend,vi. 依赖，依靠；取决于；相信，信赖,KV003266,依靠；取决于（常接on）,baseline-exact-single-review
 nce1-o0867|extra,0867,139,140,extra,,,baseline-reconciled,extra,ˈekstrə,ˈekstrə,"n. 临时演员；号外；额外的事物；上等产品
 adj. 额外的，另外收费的；特大的
-adv. 特别地，非常；另外",,,baseline-new-candidate
+adv. 特别地，非常；另外",KV003267,额外的；另外的,baseline-exact-single-review
 nce1-o0868|overseas,0868,139,140,overseas,,,baseline-reconciled,overseas,ˌəʊvəˈsiːz,ˌoʊvərˈsiːz,"adv. 在海外，海外
-adj. 海外的，国外的",,,baseline-new-candidate
+adj. 海外的，国外的",KV003268,海外的；国外的,baseline-exact-single-review
 nce1-o0869|engineering,0869,139,140,engineering,,,baseline-reconciled,engineering,ˌendʒɪˈnɪərɪŋ,ˌendʒɪˈnɪrɪŋ,"n. 工程，工程学
-v. 设计；管理（engineer的ing形式）；建造",,,baseline-new-candidate
+v. 设计；管理（engineer的ing形式）；建造",KV003269,工程；工程学,baseline-exact-single-review
 nce1-o0870|company,0870,139,140,company,,,baseline-reconciled,company,ˈkʌmpəni,ˈkʌmpəni,"n. 公司；陪伴，同伴；连队
 vt. 陪伴
 vi. 交往",KV001516,公司,baseline-exact-single-review
 nce1-o0871|line,0871,139,140,line,,,baseline-reconciled,line,laɪn,laɪn,"n. 路线，航线；排；绳
 vt. 排成一行；划线于；以线条标示；使…起皱纹
-vi. 排队；站成一排",,,baseline-new-candidate
+vi. 排队；站成一排",KV003270,线路,baseline-exact-single-review
 nce1-o0872|excited,0872,141,142,excited,,,baseline-reconciled,excited,ɪkˈsaɪtɪd,ɪkˈsaɪtɪd,"v. 激动；唤起（excite的过去分词）
 adj. 兴奋的；激动的；活跃的",KV000732,兴奋的；激动的,baseline-exact-single-review
 nce1-o0873|get on,0873,141,142,get on,,,baseline-reconciled,get on,,,na. 上马；安上；过日子；相投 (with together),KV001792,上车；登上,baseline-exact-single-review
-nce1-o0874|middle-aged,0874,141,142,middle-aged,,,baseline-reconciled,middle-aged,ˌmɪdl ˈeɪdʒd,ˌmɪdl ˈeɪdʒd,adj. 中年的；具有中年人特点的；适合于中年人的,,,baseline-new-candidate
+nce1-o0874|middle-aged,0874,141,142,middle-aged,,,baseline-reconciled,middle-aged,ˌmɪdl ˈeɪdʒd,ˌmɪdl ˈeɪdʒd,adj. 中年的；具有中年人特点的；适合于中年人的,KV003271,中年的,baseline-exact-single-review
 nce1-o0875|opposite,0875,141,142,opposite,,,baseline-reconciled,opposite,ˈɒpəzɪt,ˈɑːpəzɪt,"adj. 相反的；对面的；对立的
 n. 对立面；反义词
 prep. 在…的对面
 adv. 在对面",KV002251,在……对面；对面的,baseline-exact-single-review
-nce1-o0876|curiously,0876,141,142,curiously,,,baseline-reconciled,curiously,ˈkjʊəriəsli,ˈkjʊriəsli,adv. 好奇地,,,baseline-new-candidate
+nce1-o0876|curiously,0876,141,142,curiously,,,baseline-reconciled,curiously,ˈkjʊəriəsli,ˈkjʊriəsli,adv. 好奇地,KV003272,好奇地,baseline-exact-single-review
 nce1-o0877|funny,0877,141,142,funny,,,baseline-reconciled,funny,ˈfʌni,ˈfʌni,"n. 滑稽人物；笑话，有趣的故事；滑稽连环漫画栏；（英）（比赛用）单人双桨小艇
 adj. 有趣的，好笑的，滑稽的；（口）稀奇的，古怪的，奇异的；有病的，不舒服的；狡猾的，欺骗（性）的，可疑的，不光明",KV001777,有趣的；好笑的；滑稽的,baseline-exact-single-review
 nce1-o0878|powder,0878,141,142,powder,,,baseline-reconciled,powder,ˈpaʊdə(r),ˈpaʊdər,"n. 粉；粉末；[化工][军] 火药；尘土
 vt. 使成粉末；撒粉；搽粉于
-vi. 搽粉；变成粉末",,,baseline-new-candidate
+vi. 搽粉；变成粉末",KV003273,香粉；化妆粉,baseline-exact-single-review
 nce1-o0879|compact,0879,141,142,compact,,,baseline-reconciled,compact,kəmˈpækt；ˈkɒmpækt,kəmˈpækt；ˈkɑːmpækt,"n. 合同，契约；小粉盒
 adj. 紧凑的，紧密的；简洁的
-vt. 使简洁；使紧密结合",,,baseline-new-candidate
+vt. 使简洁；使紧密结合",KV003274,带镜的粉盒,baseline-exact-single-review
 nce1-o0880|kindly,0880,141,142,kindly,,,baseline-reconciled,kindly,ˈkaɪndli,ˈkaɪndli,"adv. 亲切地；温和地；仁慈地
-adj. 亲切的；和蔼的；体贴的；爽快的",,,baseline-new-candidate
+adj. 亲切的；和蔼的；体贴的；爽快的",KV003275,亲切地；和蔼地,baseline-exact-single-review
 nce1-o0881|ugly,0881,141,142,ugly,,,baseline-reconciled,ugly,ˈʌɡli,ˈʌɡli,adj. 丑陋的；邪恶的；令人厌恶的,KV002900,丑陋的,baseline-exact-single-review
 nce1-o0882|amused,0882,141,142,amused,,,baseline-reconciled,amused,əˈmjuːzd,əˈmjuːzd,"v. 逗笑（amuse的过去分词）；使欢乐
-adj. 愉快的，顽皮的；被逗乐的",,,baseline-new-candidate
+adj. 愉快的，顽皮的；被逗乐的",KV003276,觉得好笑的；被逗乐的,baseline-exact-single-review
 nce1-o0883|smile,0883,141,142,smile,,,baseline-reconciled,smile,smaɪl,smaɪl,"n. 微笑；笑容；喜色
 vt. 微笑着表示
 vi. 微笑",KV002622,微笑；笑容,baseline-exact-single-review
 nce1-o0884|embarrassed,0884,141,142,embarrassed,,,baseline-reconciled,embarrassed,ɪmˈbærəst,ɪmˈbærəst,"v. 使...困窘；使...局促不安（embarrass的过去分词形式）
-adj. 尴尬的；窘迫的",,,baseline-new-candidate
+adj. 尴尬的；窘迫的",KV003277,尴尬的；窘迫的,baseline-exact-single-review
 nce1-o0885|worried,0885,141,142,worried,,,baseline-reconciled,worried,ˈwʌrid,ˈwɜːrid,adj. 担心的,KV000729,担心的,baseline-exact-single-review
-nce1-o0886|regularly,0886,141,142,regularly,,,baseline-reconciled,regularly,ˈreɡjələli,ˈreɡjələrli,adv. 定期地；有规律地；整齐地；匀称地,,,baseline-new-candidate
+nce1-o0886|regularly,0886,141,142,regularly,,,baseline-reconciled,regularly,ˈreɡjələli,ˈreɡjələrli,adv. 定期地；有规律地；整齐地；匀称地,KV003278,定期地；有规律地,baseline-exact-single-review
 nce1-o0887|surround,0887,143,144,surround,,,baseline-reconciled,surround,səˈraʊnd,səˈraʊnd,"n. 围绕物
 vt. 围绕；包围
-adj. 环绕立体声的",,,baseline-new-candidate
+adj. 环绕立体声的",KV003279,围绕；包围,baseline-exact-single-review
 nce1-o0888|wood,0888,143,144,wood,,,baseline-reconciled,wood,wʊd,wʊd,"n. 木材；木制品；树林
 vt. 植林于；给…添加木柴
-vi. 收集木材",KV002980,木头；木材,baseline-exact-single-review
-nce1-o0889|beauty spot,0889,143,144,beauty spot,,,baseline-reconciled,beauty spot,,,n. 风景点；名胜；美人痣；美人斑,,,baseline-new-candidate
+vi. 收集木材",KV002980 || KV003280,木头；木材 || 树林,baseline-multi-sense-review
+nce1-o0889|beauty spot,0889,143,144,beauty spot,,,baseline-reconciled,beauty spot,,,n. 风景点；名胜；美人痣；美人斑,KV003281,风景优美的地方；景点,baseline-exact-single-review
 nce1-o0890|hundred,0890,143,144,hundred,,,baseline-reconciled,hundred,ˈhʌndrəd,ˈhʌndrəd,"num. 百；百个
 n. 一百；许多
 adj. 一百的；许多的",KV001931,一百；百,baseline-exact-single-review
@@ -1974,10 +1974,10 @@ vt. 整理；收拾；弄整齐",KV000844,整洁的；整齐的；使整洁；�
 nce1-o0895|litter,0895,143,144,litter,,,baseline-reconciled,litter,ˈlɪtə(r),ˈlɪtər,"n. 垃圾；轿，担架；一窝（动物的幼崽）；凌乱
 vt. 乱丢；给…垫褥草；把…弄得乱七八糟
 vi. 产仔；乱扔废弃物",KV002050,垃圾；废弃物,baseline-exact-single-review
-nce1-o0896|litter basket,0896,143,144,litter basket,,,baseline-reconciled,litter basket,,,n. 废纸篓,,,baseline-new-candidate
+nce1-o0896|litter basket,0896,143,144,litter basket,,,baseline-reconciled,litter basket,,,n. 废纸篓,KV003282,垃圾筐；废纸篓,baseline-exact-single-review
 nce1-o0897|place,0897,143,144,place,,,baseline-reconciled,place,pleɪs,pleɪs,"n. 地方；住所；座位
 vt. 放置；任命；寄予
-vi. 名列前茅；取得名次",KV000468,地方,baseline-exact-single-review
+vi. 名列前茅；取得名次",KV000468 || KV003283,地方 || 放置；摆放,baseline-multi-sense-review
 nce1-o0898|throw,0898,143,144,throw,,,baseline-reconciled,throw,θrəʊ,θroʊ,"n. 投掷；冒险
 vt. 投；抛；掷
 vi. 抛；投掷",KV002823,扔；投,baseline-exact-single-review
@@ -1993,7 +1993,7 @@ nce1-o0902|piece,0902,143,144,piece,,,baseline-reconciled,piece,piːs,piːs,"n. 
 vt. 修补；接合；凑合",KV002332,块；片；件,baseline-exact-single-review
 nce1-o0903|tyre,0903,143,144,tyre,,,baseline-reconciled,tyre,ˈtaɪə(r),ˈtaɪər,"n. [橡胶] 轮胎；轮箍
 vt. 装轮胎于",,,baseline-new-candidate
-nce1-o0904|rusty,0904,143,144,rusty,,,baseline-reconciled,rusty,ˈrʌsti,ˈrʌsti,adj. 生锈的，腐蚀的；铁锈色的，锈色的；迟钝的,,,baseline-new-candidate
-nce1-o0905|among,0905,143,144,among,,,baseline-reconciled,among,əˈmʌŋ,əˈmʌŋ,prep. 在…中间；在…之中,,,baseline-new-candidate
+nce1-o0904|rusty,0904,143,144,rusty,,,baseline-reconciled,rusty,ˈrʌsti,ˈrʌsti,adj. 生锈的，腐蚀的；铁锈色的，锈色的；迟钝的,KV003284,生锈的,baseline-exact-single-review
+nce1-o0905|among,0905,143,144,among,,,baseline-reconciled,among,əˈmʌŋ,əˈmʌŋ,prep. 在…中间；在…之中,KV003285,在……中间；在……之中,baseline-exact-single-review
 nce1-o0906|prosecute,0906,143,144,prosecute,,,baseline-reconciled,prosecute,ˈprɒsɪkjuːt,ˈprɑːsɪkjuːt,"vt. 检举；贯彻；从事；依法进行
-vi. 起诉；告发；作检察官",,,baseline-new-candidate
+vi. 起诉；告发；作检察官",KV003286,起诉；依法追诉,baseline-exact-single-review

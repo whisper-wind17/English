@@ -30,7 +30,7 @@ VOCABULARY = [
     "check_third_party_release_committed_state.py",
 ]
 EXPRESSIONS = ["klose_expression_review_state.py", "build_klose_expressions.py"]
-RELEASE = ["check_klose_release_ready.py", "check_klose_expressions_release_ready.py", "check_klose_feedback.py"]
+RELEASE = ["check_klose_nce1_complete.py", "check_klose_release_ready.py", "check_klose_expressions_release_ready.py", "check_klose_feedback.py"]
 
 
 def run(names):
