@@ -1,0 +1,115 @@
+name: NCE1 Reviewed Batch Transaction
+on:
+  push:
+    branches: [klose/nce1-reviewed-batch-20261102]
+    paths: ['.github/workflows/nce1-reviewed-transaction.yml']
+permissions:
+  contents: write
+concurrency:
+  group: nce1-reviewed-batch001
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  KLOSE_BASE_COMMIT: 855955a51e225549a4c7ed30565c280758416be3
+jobs:
+  reviewed-transaction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify sealed payload and materialize reviewed inputs
+        run: |
+          python - <<'PY'
+          import base64, hashlib, json, lzma, subprocess
+          from pathlib import Path
+          encoded=''.join(Path(f'.nce1-transfer-{i}.b64').read_text().strip() for i in range(1,5))
+          packed=base64.b64decode(encoded,validate=True)
+          assert hashlib.sha256(packed).hexdigest()=='24eadd3ba6b031d8a4a2c31bb2c574f0912180a1aea08d53279a0ed02bcf2dff', 'Transfer integrity failure'
+          payload=json.loads(lzma.decompress(packed))
+          subprocess.run(['git','apply','--check','-'],input=payload['patch'],text=True,check=True)
+          subprocess.run(['git','apply','-'],input=payload['patch'],text=True,check=True)
+          for name,text in payload['files'].items():
+              path=Path(name)
+              assert not path.is_absolute() and '..' not in path.parts
+              assert name.startswith(('tools/','tests/','docs/','anki/klose/nce1/'))
+              path.parent.mkdir(parents=True,exist_ok=True)
+              path.write_text(text,encoding='utf-8')
+          # The choices/examples are explicit reviewed input, not an automatic matcher.
+          script=Path('/tmp/nce1-reviewed-curation.py')
+          script.write_text(payload['curation'],encoding='utf-8')
+          subprocess.run(['python',str(script)],check=True)
+          base=Path('anki/klose/nce1')
+          (base/'batch_001.json').write_text(payload['manifest'],encoding='utf-8')
+          (base/'review').mkdir(exist_ok=True)
+          (base/'review/batch_001_approval.csv').write_bytes(lzma.decompress(base64.b64decode(payload['receipt_xz_base64'])))
+          for name,digest in payload['expected'].items():
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==digest, f'Reviewed input drift: {name}'
+          for i in range(1,5):Path(f'.nce1-transfer-{i}.b64').unlink()
+          for name in ('nce1-review-workspace.yml','nce1-reviewed-transaction.yml'):
+              Path('.github/workflows',name).unlink(missing_ok=True)
+          print('Sealed reviewed inputs verified; temporary transfer files removed')
+          PY
+          python tools/apply_nce1_reviewed_batch.py inputs --confirm-reviewed
+      - name: Build without automatically approving content
+        run: python tools/klose_pipeline.py build --report "$RUNNER_TEMP/nce1-build.json"
+      - name: Apply only pre-reviewed content-matching receipts
+        run: python tools/apply_nce1_reviewed_batch.py receipt --confirm-reviewed
+      - name: Complete release, history, and deterministic rebuild gates
+        run: python tools/klose_pipeline.py all --report "$RUNNER_TEMP/nce1-release.json"
+      - name: Regression and adversarial state transitions
+        run: python -m unittest discover -s tests -v
+      - name: Independent before-and-after reconciliation
+        run: |
+          python tools/validate_nce1_batch_transaction.py --baseline "$KLOSE_BASE_COMMIT" --report anki/klose/review/nce1_reconciliation/batch_001_transaction_validation.json
+          python tools/klose_pipeline.py all --report "$RUNNER_TEMP/nce1-final.json"
+      - name: Commit validated plain-text inputs and generated release
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config core.whitespace blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+          git diff --check
+          python - <<'PY'
+          import subprocess
+          allowed=('tools/','tests/','docs/','anki/klose/','.nce1-transfer-','.github/workflows/nce1-review-workspace.yml','.github/workflows/nce1-reviewed-transaction.yml')
+          names=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())|set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          assert all(n=='NEXT.md' or n.startswith(allowed) for n in names), sorted(names)
+          PY
+          git add -A
+          git commit -m 'feat: release reviewed NCE1 lessons 1-17 without duplicating stable notes'
+          git push origin HEAD:refs/heads/klose/nce1-reviewed-batch-20261102
+      - name: Export validated import and audit artifacts
+        run: |
+          mkdir -p /tmp/nce1-batch001
+          cp anki/klose/publish/anki-import.csv /tmp/nce1-batch001/vocabulary-anki-import.csv
+          cp anki/klose/learner/learning_admission.csv /tmp/nce1-batch001/learning_admission.csv
+          cp anki/klose/releases/current.json /tmp/nce1-batch001/release-manifest.json
+          cp anki/klose/review/nce1_reconciliation/batch_001_transaction_validation.json /tmp/nce1-batch001/independent-audit.json
+          cp docs/NCE1_BATCH001_IMPORT.md /tmp/nce1-batch001/import-guide.md
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          def read(p):
+              with open(p,encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          b=Path('anki/klose')
+          master={r['NoteID']:r for r in read(b/'master/vocabulary_master.csv')}
+          learner={r['NoteID']:r for r in read(b/'learner/current.csv')}
+          source={r['CurriculumOrder']:r for r in read(b/'source_reference/new_concept_english_1_staging/vocabulary-smart-2022.csv')}
+          fields=['Lesson','Order','SourceEntry','NoteID','Decision','MeaningPrimary','British','American','PromptHint','ExampleSentence','ExampleTranslation']
+          with open('/tmp/nce1-batch001/reviewed-wordlist.csv','w',encoding='utf-8-sig',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields);w.writeheader()
+              for d in read(b/'nce1/identity_decisions/batch_001.csv'):
+                  n=d['NoteID'];s=source[d['CurriculumOrder']];r={**master[n],**learner[n]}
+                  row={k:r.get(k,'') for k in fields};row.update(Lesson=s['LessonStart'],Order=d['CurriculumOrder'],SourceEntry=d['Entry'],Decision=d['Decision']);w.writerow(row)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nce1-batch001-validated-release
+          path: |
+            /tmp/nce1-batch001/
+            ${{ runner.temp }}/nce1-*.json
+          retention-days: 14
