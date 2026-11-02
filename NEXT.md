@@ -1,49 +1,26 @@
 # NEXT — Klose Learning
 
-更新：2026-11-01。本轮：New Concept English 1 Source / Reconciliation / Curriculum 接入。
+更新：2026-11-02。本轮：NCE1 首批 Lesson 1–17 的真实笔记合入与审核发布。
 
 ## 当前检查点
 
-NCE1 接入 Phase A 已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`，任务文档见 [NCE1 Integration](docs/NCE1_INTEGRATION.md)。
+首批150条有实物照片证据的来源记录完成明确义项核对：109条复用既有稳定身份，41条新增KV003016–KV003056。复用项中108条此前已发布，KV000746 Danish是既有库存首次发布。因此Vocabulary发布2,995条、allowed 2,937、held 58；Expressions仍176条。动态数值和哈希以 `anki/klose/releases/current.json` 为准。
 
-Klose 实际教材已锁定为外研社《新概念英语 1：英语初阶（智慧版）》，`SourceID=new_concept_english_1`，`SourceEdition=2022-smart-isbn-9787521336702`，ISBN `9787521336702`。当前 source reference 共 906 条 occurrence：
+旧3,015个注册身份记录完整保留；四年级前221条顺序保持；14个本批目标留在更早四年级段，136个进入NCE1段。已释放的同义笔记只补来源并调整尚未学习新卡的课程位置，不重新创建卡。
 
-- Lesson 1–17：150 条来自 Klose 实物教材照片，`verified-actual`；
-- Lesson 19–144：756 条基于仓库既有《新概念英语第一册（新版）》数据、旧新版顺序基线、外研社版本说明及抽样核验，显式标记 `baseline-reconciled`；
-- 已知 `South Korean / Italian / Daewoo / Fiat` 等 Edition delta 已单独记录，不把旧版数据冒充智慧版逐页实物事实。
+区别处理：excuse原谅/借口、watch手表/观看、make品牌/制作、well健康/很好地、clean干净/打扫、smart外表/才智及语言/国籍义。Mr.复用Mr。too原有也义例句曾误用太义，本批以原ID修正例句。Japanese和clean的已有核心释义与其原有例句对齐，不改稳定身份字段。
 
-NCE1 source/reconciliation gate 已进入统一 pipeline。课程段顺序已经显式建模为：
+52条变化的呈现已经逐条模型审校，凭据绑定当前内容指纹；不是家长人工确认。普通pipeline不能自动批准。实物来源原始CSV和旧ID/审批/发布历史保留。
 
-```text
-Grade 4 Upper
-→ Grade 4 Lower
-→ New Concept English 1
-→ Grade 5 Upper
-→ Grade 5 Lower
-→ Grade 6 Upper
-→ Grade 6 Lower
-→ Third-party vocabulary
-```
+验证记录：`anki/klose/review/nce1_reconciliation/batch_001_transaction_validation.json`、统一pipeline状态与回归日志。只有完整历史校验、重复构建、独立前后对账、负向测试通过后，本检查点才随事务提交。
 
-同一 Stable Note 在多个来源重复出现时取最早 curriculum coordinate；已进入 Anki Learning/Review 的卡不因新顺序改写 FSRS / Due。
+## 尚未完成的全册工作
 
-Phase A 验证证据：完整 `klose_pipeline.py all` 通过；内置重复重建 `byte drift=0`；19 项回归通过；新增测试验证 NCE1 必须位于 Grade 4 与 Grade 5 之间，并验证 NCE1 与 Grade 5 重复 NoteID 只保留更早 curriculum position。
+本批只完成Lesson 1–17。总906条来源中，其余756条仍未做完目标义项确认，尚未纳入NCE1学习段。不得把首批发布或Build Valid/Release Ready解释为全册完成。
 
-当前正式 Vocabulary / Expressions 发布内容和设备学习状态没有因 Phase A 改变。当前发布数量、allowed/held、LearningOrder、审核分布、artifact SHA-256 和模板指纹仍统一读取 [current.json](anki/klose/releases/current.json)。
+后续先补充教材语境对应的目标词性/义项，再分批进行复用/新增身份、适龄内容和显式审核。不要把通用词典的全部释义当作本课目标，不按拼写直接批量复用。后续阶段继续沿用四年级 → 新概念 → 五六年级 → 第三方顺序；已学卡的调度始终归Anki。
 
-## NCE1 尚未完成的学习层工作
-
-906 条 Source occurrence 不能直接等同于 906 张卡。下一阶段必须完成 sense-aware identity reconciliation：
-
-1. 对 exact-single / multi-sense / new-candidate 逐项确认 target sense；
-2. 相同 learning unit 复用 Stable NoteID；真正新义项才 append 新 NoteID；
-3. 区分 Vocabulary 与可迁移 Expression，不把教材 `New words and expressions` 机械一行一张 Vocabulary Card；
-4. 建立 durable Source Identity / occurrence provenance；
-5. 新 Note 生成 LearnerLevel=4 的 Meaning / IPA / Example / Translation，并走显式 review；
-6. 只有 confirmed identity + review 通过的 NCE1 learning units 才进入 Admission / Release；
-7. 正式发布后，只对仍为 New 的 Anki Cards 按新 LearningOrder Reposition。
-
-在这些 gate 完成前，不把 NCE1 解释为已经进入当前 Anki 学习队列。
+任务文档：`docs/NCE1_INTEGRATION.md`；首批导入：`docs/NCE1_BATCH001_IMPORT.md`。本批未操控Anki设备，尚无本次Desktop/iPad导入凭据。
 
 ## 设备与学习状态
 
@@ -55,7 +32,3 @@ Phase A 验证证据：完整 `klose_pipeline.py all` 通过；内置重复重�
 - 2,864 张未暂停 Vocabulary New Cards 已按当时 LearningOrder 完成 Reposition。
 - iPad 未实际确认同步或抽查，不记为已验收。
 - 学习试点仍为 `awaiting-observation`，没有记录实际学习周、学习效果或成绩。
-
-## 下一步
-
-优先完成 NCE1 identity reconciliation 与 Learner Presentation / Review，达到正式 Learning Admission / Release gate 后再生成新的 Anki 导入包和 New-card Reposition 范围。设备历史确认与学习反馈继续按既有 SOP 保留，不重复执行旧版全量迁移。

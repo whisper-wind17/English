@@ -1,7 +1,7 @@
 ﻿SourceItemKey,CurriculumOrder,LessonStart,LessonEnd,Entry,PartOfSpeech,Meaning,SourceStatus,LexiconWord,British,American,DefinitionRaw,ExactCandidateNoteIDs,ExactCandidateSenses,ResolutionLane
 nce1-o0001|excuse,0001,1,1,excuse,v.,原谅,verified-actual,excuse,ɪkˈskjuːs,ɪkˈskjuːs,"n. 借口；理由
 vt. 原谅；为…申辩；给…免去
-vi. 作为借口；请求宽恕；表示宽恕",KV001684,借口；理由,actual-exact-single-review
+vi. 作为借口；请求宽恕；表示宽恕",KV001684 || KV003016,借口；理由 || 原谅；请原谅,actual-multi-sense-review
 nce1-o0002|me,0002,1,1,me,pron.,我（宾格）,verified-actual,me,miː; mi,miː; mi,"pron. 我（宾格）
 n. 自我；极端自私的人；自我的一部分",KV002101,我（宾格）,actual-exact-single-review
 nce1-o0003|yes,0003,1,1,yes,adv.,是的,verified-actual,yes,jes,jes,"n. 是（表示肯定）
@@ -12,13 +12,13 @@ nce1-o0005|this,0005,1,1,this,pron.,这,verified-actual,this,ðɪs,ðɪs,"adj. �
 pron. 这；这个；这里
 adv. 这样地；这么",KV000015,这；这个,actual-exact-single-review
 nce1-o0006|your,0006,1,1,your,possessive adjective,你的，你们的,verified-actual,your,jɔː(r); jə(r),jʊr; jər,pron. 你的，你们的,KV000098,你的；你们的,actual-exact-single-review
-nce1-o0007|handbag,0007,1,1,handbag,n.,（女用）手提包,verified-actual,handbag,ˈhændbæɡ,ˈhændbæɡ,n. 手提包,,,actual-new-candidate
+nce1-o0007|handbag,0007,1,1,handbag,n.,（女用）手提包,verified-actual,handbag,ˈhændbæɡ,ˈhændbæɡ,n. 手提包,KV003017,手提包,actual-exact-single-review
 nce1-o0008|pardon,0008,1,1,pardon,int.,原谅，请再说一遍,verified-actual,pardon,ˈpɑːd(ə)n,ˈpɑːrd(ə)n,"n. 原谅；赦免；宽恕
-vt. 原谅；赦免；宽恕",,,actual-new-candidate
+vt. 原谅；赦免；宽恕",KV003018,请再说一遍,actual-exact-single-review
 nce1-o0009|it,0009,1,1,it,pron.,它,verified-actual,it,ɪt,ɪt,"abbr. 信息技术information technology
 abbr. 意大利Italy；意大利的Italian",KV000024,它,actual-exact-single-review
 nce1-o0010|thank you,0010,1,1,thank you,,感谢你（们）,verified-actual,thank you,ˈθæŋk juː,ˈθæŋk juː,"int. （表示感激）谢谢你；（接受好意）好；（婉言谢绝）不用了
-n. 感谢；谢意；酬谢；谢辞",,,actual-new-candidate
+n. 感谢；谢意；酬谢；谢辞",KV003019,谢谢你,actual-exact-single-review
 nce1-o0011|very much,0011,1,1,very much,,非常地,verified-actual,very much,ˈveri mʌtʃ,ˈveri mʌtʃ,adv. 非常,KV002917,非常；很,actual-exact-single-review
 nce1-o0012|pen,0012,2,2,pen,n.,钢笔,verified-actual,pen,pen,pen,"n. 钢笔；作家；围栏
 vt. 写；关入栏中",KV000396,钢笔,actual-exact-single-review
@@ -29,7 +29,7 @@ nce1-o0014|book,0014,2,2,book,n.,书,verified-actual,book,bʊk,bʊk,"n. 书籍�
 vt. 预订；登记",KV000001,书；书本,actual-exact-single-review
 nce1-o0015|watch,0015,2,2,watch,n.,手表,verified-actual,watch,wɒtʃ,wɑːtʃ,"n. 手表；监视；守护；值班人
 vt. 观察；注视；看守；警戒
-vi. 观看，注视；守侯，看守",KV000851,看,actual-exact-single-review
+vi. 观看，注视；守侯，看守",KV000851 || KV003020,看 || 手表,actual-multi-sense-review
 nce1-o0016|coat,0016,2,2,coat,n.,上衣，外衣,verified-actual,coat,kəʊt,koʊt,"n. 外套
 vt. 覆盖…的表面",KV000255,外套,actual-exact-single-review
 nce1-o0017|dress,0017,2,2,dress,n.,连衣裙,verified-actual,dress,dres,dres,"n. 连衣裙；女装
@@ -62,10 +62,10 @@ adj. 五的；五个的",KV000029,五；五个,actual-exact-single-review
 nce1-o0029|sorry,0029,3,3,sorry,adj.,对不起的,verified-actual,sorry,ˈsɒri,ˈsɑːri,"adj. 遗憾的；对不起的，抱歉的
 int. 对不起，抱歉（表示委婉的拒绝等）",KV000076,对不起；抱歉,actual-exact-single-review
 nce1-o0030|sir,0030,3,3,sir,n.,先生,verified-actual,sir,sɜː(r),sɜːr; sər,n. 先生；（用于姓名前）爵士；阁下；（中小学生对男教师的称呼）先生；老师,KV002590,先生；老师,actual-exact-single-review
-nce1-o0031|cloakroom,0031,3,3,cloakroom,n.,衣帽存放处,verified-actual,cloakroom,ˈkləʊkruːm,ˈkloʊkruːm; ˈkloʊkrʊm,n. 衣帽间；寄物处；（英）盥洗室,,,actual-new-candidate
+nce1-o0031|cloakroom,0031,3,3,cloakroom,n.,衣帽存放处,verified-actual,cloakroom,ˈkləʊkruːm,ˈkloʊkruːm; ˈkloʊkrʊm,n. 衣帽间；寄物处；（英）盥洗室,KV003021,衣帽间；衣帽存放处,actual-exact-single-review
 nce1-o0032|suit,0032,4,4,suit,n.,一套衣服,verified-actual,suit,suːt,suːt,"n. 诉讼；恳求；套装，西装；一套外衣
 vt. 适合；使适应
-vi. 合适；相称",,,actual-new-candidate
+vi. 合适；相称",KV003022,套装；一套衣服,actual-exact-single-review
 nce1-o0033|school,0033,4,4,school,n.,学校,verified-actual,school,skuːl,skuːl,"n. 学校；学院；学派；鱼群
 vt. 教育",KV000129,学校,actual-exact-single-review
 nce1-o0034|teacher,0034,4,4,teacher,n.,老师,verified-actual,teacher,ˈtiːtʃə(r),ˈtiːtʃər,n. 教师；导师,KV000005,老师,actual-exact-single-review
@@ -83,41 +83,41 @@ nce1-o0041|new,0041,5,5,new,adj.,新的,verified-actual,new,njuː,nuː,"adj. 新
 adv. 新近",KV000125,新的,actual-exact-single-review
 nce1-o0042|student,0042,5,5,student,n.,学生,verified-actual,student,ˈstjuːd(ə)nt,ˈstuːdnt,n. 学生；学者,KV002711,学生,actual-exact-single-review
 nce1-o0043|french,0043,5,5,French,adj.,法国（人）的,verified-actual,French,frentʃ,frentʃ,"n. 法国人；法语
-adj. 法国的；法语的；法国人的",KV000706,法语；法国的,actual-exact-single-review
+adj. 法国的；法语的；法国人的",KV000706 || KV003023,法语；法国的 || 法国的；法国人的,actual-multi-sense-review
 nce1-o0044|german,0044,5,5,German,adj.,德国（人）的,verified-actual,German,ˈdʒɜːmən,ˈdʒɜːrmən,"n. 德语；德国人
-adj. 德国的；德语的，德国人的",,,actual-new-candidate
+adj. 德国的；德语的，德国人的",KV003024,德国的；德国人的,actual-exact-single-review
 nce1-o0045|nice,0045,5,5,nice,adj.,美好的,verified-actual,nice,naɪs,naɪs,adj. 精密的；美好的；细微的；和蔼的,KV000538,友好的；好的,actual-exact-single-review
 nce1-o0046|meet,0046,5,5,meet,v.,结识,verified-actual,meet,miːt,miːt,"vt. 满足；遇见；对付
 vi. 相遇；接触
 n. 集会
 adj. 合适的；适宜的",KV000770,见面；遇见,actual-exact-single-review
 nce1-o0047|japanese,0047,5,5,Japanese,adj.,日本（人）的,verified-actual,Japanese,ˌdʒæpəˈniːz,ˌdʒæpəˈniːz,"n. 日本人；日语
-adj. 日本（人）的；日语的",KV001980,日本的；日本人；日语,actual-exact-single-review
+adj. 日本（人）的；日语的",KV001980 || KV003025,日本的；日本人；日语 || 日本的；日本人的,actual-multi-sense-review
 nce1-o0048|south korean,0048,5,5,South Korean,adj.,韩国（人）的,verified-actual,Korean,kəˈriən,kəˈriːən,"adj. 韩国人的；韩国语的；朝鲜人的；朝鲜语的
-n. 韩国人；韩国语；朝鲜人；朝鲜语",,,actual-new-candidate
+n. 韩国人；韩国语；朝鲜人；朝鲜语",KV003026,韩国的；韩国人的,actual-exact-single-review
 nce1-o0049|chinese,0049,5,5,Chinese,adj.,中国（人）的,verified-actual,Chinese,ˌtʃaɪˈniːz,ˌtʃaɪˈniːz,"n. 中文，汉语；中国人
-adj. 中国的，中国人的；中国话的",KV000282,汉语；中文,actual-exact-single-review
+adj. 中国的，中国人的；中国话的",KV000282 || KV003027,汉语；中文 || 中国的；中国人的,actual-multi-sense-review
 nce1-o0050|too,0050,5,5,too,adv.,也,verified-actual,too,tuː,tuː,adv. 太；也；很；还；非常；过度,KV000148,也,actual-exact-single-review
 nce1-o0051|make,0051,6,6,make,n.,（产品的）牌子，品牌,verified-actual,make,meɪk,meɪk,"vt. 使得；进行；布置，准备，整理；制造；认为；获得；形成；安排；引起；构成
 vi. 开始；前进；增大；被制造
-n. 制造；构造；性情",KV001074,（过去式 made）做；使出现,actual-exact-single-review
+n. 制造；构造；性情",KV001074 || KV003028,（过去式 made）做；使出现 || 品牌；牌子,actual-multi-sense-review
 nce1-o0052|swedish,0052,6,6,Swedish,adj.,瑞典的,verified-actual,Swedish,ˈswiːdɪʃ,ˈswiːdɪʃ,"n. 瑞典语；瑞典人
-adj. 瑞典的；瑞典语的；瑞典人的",,,actual-new-candidate
+adj. 瑞典的；瑞典语的；瑞典人的",KV003029,瑞典的；瑞典人的,actual-exact-single-review
 nce1-o0053|english,0053,6,6,English,adj.,英国的,verified-actual,English,ˈɪŋɡlɪʃ,ˈɪŋɡlɪʃ,"n. 英语；英国人；英文；英格兰人
 adj. 英国人的；英国的；英文的
-vt. 把…译成英语",KV000283,英语,actual-exact-single-review
+vt. 把…译成英语",KV000283 || KV003030,英语 || 英格兰的；英格兰人的,actual-multi-sense-review
 nce1-o0054|american,0054,6,6,American,adj.,美国的,verified-actual,American,əˈmerɪkən,əˈmerɪkən,"n. 美国人，美洲人；美国英语
 adj. 美国的，美洲的；地道美国式的",KV000745,美国的；美国人,actual-exact-single-review
-nce1-o0055|volvo,0055,6,6,Volvo,n.,沃尔沃,verified-actual,Volvo,,,n. 沃尔沃（汽车品牌，总部设在瑞典）,,,actual-new-candidate
-nce1-o0056|peugeot,0056,6,6,Peugeot,n.,标致,verified-actual,Peugeot,,,n. 法国标致（法国汽车公司）,,,actual-new-candidate
-nce1-o0057|mercedes,0057,6,6,Mercedes,n.,梅赛德斯,verified-actual,Mercedes,,,n. 梅赛德斯（公司名）；梅塞德斯（人名）,,,actual-new-candidate
-nce1-o0058|toyota,0058,6,6,Toyota,n.,丰田,verified-actual,Toyota,,,n. 日本丰田汽车（公司名）,,,actual-new-candidate
+nce1-o0055|volvo,0055,6,6,Volvo,n.,沃尔沃,verified-actual,Volvo,,,n. 沃尔沃（汽车品牌，总部设在瑞典）,KV003031,沃尔沃（汽车品牌）,actual-exact-single-review
+nce1-o0056|peugeot,0056,6,6,Peugeot,n.,标致,verified-actual,Peugeot,,,n. 法国标致（法国汽车公司）,KV003032,标致（汽车品牌）,actual-exact-single-review
+nce1-o0057|mercedes,0057,6,6,Mercedes,n.,梅赛德斯,verified-actual,Mercedes,,,n. 梅赛德斯（公司名）；梅塞德斯（人名）,KV003033,梅赛德斯（汽车品牌）,actual-exact-single-review
+nce1-o0058|toyota,0058,6,6,Toyota,n.,丰田,verified-actual,Toyota,,,n. 日本丰田汽车（公司名）,KV003034,丰田（汽车品牌）,actual-exact-single-review
 nce1-o0059|mini,0059,6,6,Mini,n.,迷你,verified-actual,Mini,ˈmɪni,ˈmɪni,"n. 迷你型；微型汽车；超短裙
 adj. 微型的；袖珍的
-abbr. 微型汽车（minicar）；微型计算机（minicomputer）",,,actual-new-candidate
+abbr. 微型汽车（minicar）；微型计算机（minicomputer）",KV003035,迷你（汽车品牌）,actual-exact-single-review
 nce1-o0060|ford,0060,6,6,Ford,n.,福特,verified-actual,Ford,,,"n. 浅滩；Ford：福特汽车公司
 vt. 涉过；徒涉
-vi. 涉水而过",,,actual-new-candidate
+vi. 涉水而过",KV003036,福特（汽车品牌）,actual-exact-single-review
 nce1-o0061|i,0061,7,7,I,pron.,我,verified-actual,I,aɪ,aɪ,"n. 碘元素；英语字母I
 pron. 我",KV000006,我,actual-exact-single-review
 nce1-o0062|am,0062,7,7,am,v.,be动词现在时第一人称单数,verified-actual,am,æm; əm,æm; əm,"abbr. 调幅
@@ -131,7 +131,7 @@ nce1-o0065|what,0065,7,7,what,det. & pron.,什么,verified-actual,what,wɒt,wʌt
 adv. 到什么程度，在哪一方面
 adj. 什么；多么；何等
 int. 什么；多么",KV000023,什么,actual-exact-single-review
-nce1-o0066|nationality,0066,7,7,nationality,n.,国籍,verified-actual,nationality,ˌnæʃəˈnæləti,ˌnæʃəˈnæləti,n. 国籍，国家；民族；部落,,,actual-new-candidate
+nce1-o0066|nationality,0066,7,7,nationality,n.,国籍,verified-actual,nationality,ˌnæʃəˈnæləti,ˌnæʃəˈnæləti,n. 国籍，国家；民族；部落,KV003037,国籍,actual-exact-single-review
 nce1-o0067|italian,0067,7,7,Italian,adj.,意大利（人）的,verified-actual,Italian,ɪˈtæliən,ɪˈtæliən,"n. 意大利人；意大利语
 adj. 意大利的；意大利文化的；意大利语的",KV001975,意大利的,actual-exact-single-review
 nce1-o0068|job,0068,7,7,job,n.,工作,verified-actual,job,dʒɒb,dʒɑːb,"n. 工作；职业
@@ -140,23 +140,23 @@ vi. 做零工",KV000433,工作；职业,actual-exact-single-review
 nce1-o0069|keyboard,0069,7,7,keyboard,n.,电脑键盘,verified-actual,keyboard,ˈkiːbɔːd,ˈkiːbɔːrd,"n. 键盘
 vt. 键入；用键盘式排字机排字
 vi. 用键盘进行操作；作键盘式排字机排字",KV002002,键盘,actual-exact-single-review
-nce1-o0070|operator,0070,7,7,operator,n.,操作人员,verified-actual,operator,ˈɒpəreɪtə(r),ˈɑːpəreɪtər,n. 经营者；操作员；话务员；行家,,,actual-new-candidate
+nce1-o0070|operator,0070,7,7,operator,n.,操作人员,verified-actual,operator,ˈɒpəreɪtə(r),ˈɑːpəreɪtər,n. 经营者；操作员；话务员；行家,KV003038,操作员；操作人员,actual-exact-single-review
 nce1-o0071|engineer,0071,7,7,engineer,n.,工程师,verified-actual,engineer,ˌendʒɪˈnɪə(r),ˌendʒɪˈnɪr,"n. 工程师；工兵；火车司机
 vt. 设计；策划；精明地处理
 vi. 设计；建造",KV001665,工程师,actual-exact-single-review
 nce1-o0072|policeman,0072,8,8,policeman,n.,警察,verified-actual,policeman,pəˈliːsmən,pəˈliːsmən,n. 警察，警员；[分化] 淀帚（橡皮头玻璃搅棒）,KV002365,警察；男警察,actual-exact-single-review
 nce1-o0073|policewoman,0073,8,8,policewoman,n.,女警察,verified-actual,policewoman,pəˈliːswʊmən,pəˈliːswʊmən,n. 女警察；女警官,KV002366,女警察；女警官,actual-exact-single-review
 nce1-o0074|taxi driver,0074,8,8,taxi driver,n.,出租汽车司机,verified-actual,taxi driver,,,n. 计程车司机,KV000428,出租车司机,actual-exact-single-review
-nce1-o0075|air hostess,0075,8,8,air hostess,n.,空中小姐,verified-actual,air hostess,,,n. （客机上的）女乘务员；空中小姐,,,actual-new-candidate
+nce1-o0075|air hostess,0075,8,8,air hostess,n.,空中小姐,verified-actual,air hostess,,,n. （客机上的）女乘务员；空中小姐,KV003039,女乘务员；空中小姐（旧称）,actual-exact-single-review
 nce1-o0076|postman,0076,8,8,postman,n.,邮递员,verified-actual,postman,ˈpəʊstmən,ˈpoʊstmən,n. 邮递员；邮差,KV002384,邮递员；邮差,actual-exact-single-review
 nce1-o0077|nurse,0077,8,8,nurse,n.,护士,verified-actual,nurse,nɜːs,nɜːrs,"vt. 看护，护理；照顾；培养；给…喂奶
 vi. 照料，护理；喂奶；当保姆
 n. 护士；奶妈，保姆",KV000423,护士,actual-exact-single-review
 nce1-o0078|mechanic,0078,8,8,mechanic,n.,机械师,verified-actual,mechanic,məˈkænɪk,məˈkænɪk,"n. 技工，机修工
-adj. 手工的",,,actual-new-candidate
-nce1-o0079|hairdresser,0079,8,8,hairdresser,n.,理发师,verified-actual,hairdresser,ˈheədresə(r),ˈherdresər,n. 美发师,,,actual-new-candidate
-nce1-o0080|housewife,0080,8,8,housewife,n.,家庭妇女,verified-actual,housewife,ˈhaʊswaɪf,ˈhaʊswaɪf,n. 家庭主妇,,,actual-new-candidate
-nce1-o0081|milkman,0081,8,8,milkman,n.,送牛奶的人,verified-actual,milkman,ˈmɪlkmən,ˈmɪlkmən,n. 牛奶商；送奶工人；挤奶员工,,,actual-new-candidate
+adj. 手工的",KV003040,机械师；机修工,actual-exact-single-review
+nce1-o0079|hairdresser,0079,8,8,hairdresser,n.,理发师,verified-actual,hairdresser,ˈheədresə(r),ˈherdresər,n. 美发师,KV003041,理发师,actual-exact-single-review
+nce1-o0080|housewife,0080,8,8,housewife,n.,家庭妇女,verified-actual,housewife,ˈhaʊswaɪf,ˈhaʊswaɪf,n. 家庭主妇,KV003042,家庭主妇,actual-exact-single-review
+nce1-o0081|milkman,0081,8,8,milkman,n.,送牛奶的人,verified-actual,milkman,ˈmɪlkmən,ˈmɪlkmən,n. 牛奶商；送奶工人；挤奶员工,KV003043,送奶工,actual-exact-single-review
 nce1-o0082|hello,0082,9,9,hello,int.,喂（表示问候）,verified-actual,hello,həˈləʊ,həˈləʊ,"n. 表示问候， 惊奇或唤起注意时的用语
 int. 喂；哈罗",KV001898,你好；喂,actual-exact-single-review
 nce1-o0083|hi,0083,9,9,hi,int.,喂，嗨,verified-actual,hi,haɪ,haɪ,int. 嗨！（表示问候或用以唤起注意）,KV001903,嗨；你好,actual-exact-single-review
@@ -168,7 +168,7 @@ adv. 今天；现今",KV000207,今天,actual-exact-single-review
 nce1-o0086|well,0086,9,9,well,adj.,身体好的,verified-actual,well,wel,wel,"n. 井；源泉
 adj. 良好的；健康的；适宜的
 adv. 很好地；充分地；满意地；适当地
-v. 涌出",KV002950,好；很好地,actual-exact-single-review
+v. 涌出",KV002950 || KV003044,好；很好地 || 身体好的；健康的,actual-multi-sense-review
 nce1-o0087|fine,0087,9,9,fine,adj.,美好的,verified-actual,fine,faɪn,faɪn,"n. 罚款
 adj. 好的；优良的；细小的，精美的；健康的；晴朗的
 vt. 罚款；澄清
@@ -202,7 +202,7 @@ nce1-o0097|clean,0097,10,10,clean,adj.,干净的,verified-actual,clean,kliːn,kl
 adj. 清洁的，干净的；清白的
 vt. 使干净
 vi. 打扫，清扫
-adv. 完全地",KV000806,打扫；干净的,actual-exact-single-review
+adv. 完全地",KV000806 || KV003045,打扫；干净的 || 干净的,actual-multi-sense-review
 nce1-o0098|hot,0098,10,10,hot,adj.,热的,verified-actual,hot,hɒt,hɑːt,"adj. 热的；辣的；热情的；激动的；紧迫的
 vt. 增加；给…加温
 adv. 热；紧迫地
@@ -259,7 +259,7 @@ int. 嗨！",KV000394,来,actual-exact-single-review
 nce1-o0120|upstairs,0120,13,13,upstairs,adv.,往楼上,verified-actual,upstairs,ˌʌpˈsteəz,ˌʌpˈsterz,"n. 楼上
 adj. 楼上的
 adv. 在楼上，向楼上；上楼；往楼上",KV002909,楼上；在楼上；上楼,actual-exact-single-review
-nce1-o0121|smart,0121,13,13,smart,adj.,漂亮的，时髦的,verified-actual,smart,smɑːt,smɑːrt,adj. 聪明的；巧妙的；敏捷的；厉害的；潇洒的；剧烈的；时髦的,KV000727,聪明的；机灵的,actual-exact-single-review
+nce1-o0121|smart,0121,13,13,smart,adj.,漂亮的，时髦的,verified-actual,smart,smɑːt,smɑːrt,adj. 聪明的；巧妙的；敏捷的；厉害的；潇洒的；剧烈的；时髦的,KV000727 || KV003046,聪明的；机灵的 || 整洁漂亮的；时髦的,actual-multi-sense-review
 nce1-o0122|hat,0122,13,13,hat,n.,帽子,verified-actual,hat,hæt,hæt,"n. 帽子
 vt. 给……戴上帽子
 vi. 供应帽子；制造帽子",KV000874,帽子,actual-exact-single-review
@@ -269,21 +269,21 @@ pron. 同样的事物或人（通常与the连用）",KV002506,相同的；一样
 nce1-o0124|lovely,0124,13,13,lovely,adj.,可爱的，秀美动人的,verified-actual,lovely,ˈlʌvli,ˈlʌvli,"adj. 可爱的；令人愉快的；爱恋的；秀丽的，优美的
 n. 美女；可爱的东西",KV000553,可爱的；讨人喜欢的,actual-exact-single-review
 nce1-o0125|case,0125,14,14,case,n.,箱子,verified-actual,case,keɪs,keɪs,"n. 情况；实例；箱
-vt. 包围；把…装于容器中",,,actual-new-candidate
+vt. 包围；把…装于容器中",KV003047,箱子；行李箱,actual-exact-single-review
 nce1-o0126|carpet,0126,14,14,carpet,n.,地毯,verified-actual,carpet,ˈkɑːpɪt,ˈkɑːrpɪt,"n. 地毯；地毯状覆盖物
-vt. 在…上铺地毯，把地毯铺在…上；斥责",,,actual-new-candidate
+vt. 在…上铺地毯，把地毯铺在…上；斥责",KV003048,地毯,actual-exact-single-review
 nce1-o0127|dog,0127,14,14,dog,n.,狗,verified-actual,dog,dɒɡ,dɔːɡ,"n. 狗；丑女人；卑鄙的人；(俚)朋友
 vt. 跟踪；尾随",KV000018,狗,actual-exact-single-review
-nce1-o0128|customs,0128,15,15,customs,n.,海关,verified-actual,customs,ˈkʌstəmz,ˈkʌstəmz,n. 海关；风俗（custom的复数）；习惯；关税,,,actual-new-candidate
+nce1-o0128|customs,0128,15,15,customs,n.,海关,verified-actual,customs,ˈkʌstəmz,ˈkʌstəmz,n. 海关；风俗（custom的复数）；习惯；关税,KV003049,海关,actual-exact-single-review
 nce1-o0129|officer,0129,15,15,officer,n.,官员,verified-actual,officer,ˈɒfɪsə(r),ˈɑːfɪsər,"n. 军官，警官；公务员，政府官员；船长
-vt. 指挥",,,actual-new-candidate
+vt. 指挥",KV003050,官员,actual-exact-single-review
 nce1-o0130|girl,0130,15,15,girl,n.,女孩，姑娘,verified-actual,girl,ɡɜːl,ɡɜːrl,"n. 女孩；姑娘，未婚女子；女职员，女演员；（男人的）女朋友
 n. （捷）吉尔",KV000111,女孩,actual-exact-single-review
 nce1-o0131|danish,0131,15,15,Danish,adj.,丹麦（人）的,verified-actual,Danish,ˈdeɪnɪʃ,ˈdeɪnɪʃ,"n. 丹麦语
 adj. 丹麦的；丹麦人的；丹麦语（文）的",KV000746,丹麦的；丹麦语,actual-exact-single-review
 nce1-o0132|friend,0132,15,15,friend,n.,朋友,verified-actual,friend,frend,frend,n. 朋友；助手；赞助者,KV000109,朋友,actual-exact-single-review
 nce1-o0133|norwegian,0133,15,15,Norwegian,adj.,挪威（人）的,verified-actual,Norwegian,nɔːˈwiːdʒən,nɔːrˈwiːdʒən,"adj. 挪威的；挪威语的；挪威人的
-n. 挪威语；挪威人",,,actual-new-candidate
+n. 挪威语；挪威人",KV003051,挪威的；挪威人的,actual-exact-single-review
 nce1-o0134|passport,0134,15,15,passport,n.,护照,verified-actual,passport,ˈpɑːspɔːt,ˈpæspɔːrt,n. 护照，通行证；手段,KV002292,"护照,通行证",actual-exact-single-review
 nce1-o0135|brown,0135,15,15,brown,adj.,棕色的,verified-actual,brown,braʊn,braʊn,"n. 褐色，棕色
 adj. 棕色的，褐色的；太阳晒黑的
@@ -295,10 +295,10 @@ vt. 在旅行参观
 vi. 旅游；观光
 adv. 坐旅游车厢；坐经济舱",KV002851,游客；旅行者,actual-exact-single-review
 nce1-o0137|russian,0137,16,16,Russian,adj.,俄罗斯（人）的,verified-actual,Russian,ˈrʌʃn,ˈrʌʃ(ə)n,"n. 俄语；俄国人
-adj. 俄国的；俄语的",,,actual-new-candidate
+adj. 俄国的；俄语的",KV003052,俄罗斯的；俄罗斯人的,actual-exact-single-review
 nce1-o0138|dutch,0138,16,16,Dutch,adj.,荷兰（人）的,verified-actual,Dutch,dʌtʃ,dʌtʃ,"n. 荷兰人；荷兰语
 adj. 荷兰的；荷兰人的；荷兰语的
-adv. 费用平摊地；各自付账地",,,actual-new-candidate
+adv. 费用平摊地；各自付账地",KV003053,荷兰的；荷兰人的,actual-exact-single-review
 nce1-o0139|these,0139,16,16,these,pron.,这些（this 的复数）,verified-actual,these,ðiːz,ðiːz,"adj. 这些的
 pron. 这些",KV002812,这些,actual-exact-single-review
 nce1-o0140|red,0140,16,16,red,adj.,红色的,verified-actual,red,red,red,"n. 红色，红颜料；赤字
@@ -316,10 +316,10 @@ adj. 黑色的；黑人的；邪恶的
 vt. 使变黑；把鞋油等涂在…上；把（眼眶）打成青肿
 vi. 变黑",KV000039,黑色；黑色的,actual-exact-single-review
 nce1-o0144|orange,0144,16,16,orange,adj.,橘黄色的,verified-actual,orange,ˈɒrɪndʒ,ˈɔrɪndʒ,"adj. 橙色的；橘色的
-n. 橙；橙色；桔子",KV000048,橙子；橙色,actual-exact-single-review
-nce1-o0145|employee,0145,17,17,employee,n.,雇员,verified-actual,employee,ɪmˈplɔɪiː,ɪmˈplɔɪiː,n. 雇员；从业员工,,,actual-new-candidate
+n. 橙；橙色；桔子",KV000048 || KV003054,橙子；橙色 || 橙色的；橘黄色的,actual-multi-sense-review
+nce1-o0145|employee,0145,17,17,employee,n.,雇员,verified-actual,employee,ɪmˈplɔɪiː,ɪmˈplɔɪiː,n. 雇员；从业员工,KV003055,雇员；员工,actual-exact-single-review
 nce1-o0146|hard-working,0146,17,17,hard-working,adj.,勤奋的,verified-actual,hard-working,ˌhɑːd ˈwɜːkɪŋ,ˌhɑːrd ˈwɜːrkɪŋ,adj. 勤勉的；勤奋的；勤劳的,KV000905,工作努力的；辛勤的,actual-exact-single-review
-nce1-o0147|sales rep,0147,17,17,sales rep,n.,推销员,verified-actual,sales rep,,,un. 销售代理人,,,actual-new-candidate
+nce1-o0147|sales rep,0147,17,17,sales rep,n.,推销员,verified-actual,sales rep,,,un. 销售代理人,KV003056,销售代表；推销员,actual-exact-single-review
 nce1-o0148|man,0148,17,17,man,n.,男人,verified-actual,man,mæn,mæn,"n. 人；男人；人类；丈夫；雇工
 vt. 操纵；给…配置人员；使增强勇气；在…就位",KV000112,男人,actual-exact-single-review
 nce1-o0149|office,0149,17,17,office,n.,办公室,verified-actual,office,ˈɒfɪs,ˈɑːfɪs,n. 办公室；政府机关；官职；营业处,KV000614,办公室,actual-exact-single-review
@@ -590,7 +590,7 @@ nce1-o0257|clean,0257,31,32,clean,,,baseline-reconciled,clean,kliːn,kliːn,"n. 
 adj. 清洁的，干净的；清白的
 vt. 使干净
 vi. 打扫，清扫
-adv. 完全地",KV000806,打扫；干净的,baseline-exact-single-review
+adv. 完全地",KV000806 || KV003045,打扫；干净的 || 干净的,baseline-multi-sense-review
 nce1-o0258|tooth,0258,31,32,tooth,,,baseline-reconciled,tooth,tuːθ,tuːθ,"n. 牙齿
 vt. 给……装齿
 vi. 啮合",KV000943,牙；齿,baseline-exact-single-review
@@ -705,7 +705,7 @@ nce1-o0302|hard,0302,37,38,hard,,,baseline-reconciled,hard,hɑːd,hɑːrd,"adj. 
 adv. 努力地；困难地；辛苦地；接近地；猛烈地；牢固地",KV000860,努力地；费力地,baseline-exact-single-review
 nce1-o0303|make,0303,37,38,make,,,baseline-reconciled,make,meɪk,meɪk,"vt. 使得；进行；布置，准备，整理；制造；认为；获得；形成；安排；引起；构成
 vi. 开始；前进；增大；被制造
-n. 制造；构造；性情",KV001074,（过去式 made）做；使出现,baseline-exact-single-review
+n. 制造；构造；性情",KV001074 || KV003028,（过去式 made）做；使出现 || 品牌；牌子,baseline-multi-sense-review
 nce1-o0304|bookcase,0304,37,38,bookcase,,,baseline-reconciled,bookcase,ˈbʊkkeɪs,ˈbʊkkeɪs,n. [家具] 书柜，书架,,,baseline-new-candidate
 nce1-o0305|hammer,0305,37,38,hammer,,,baseline-reconciled,hammer,ˈhæmə(r),ˈhæmər,"n. 铁锤；链球；[解剖] 锤骨；音锤
 vi. 锤击；敲打；重复
@@ -847,7 +847,7 @@ nce1-o0358|sweet,0358,47,48,sweet,,,baseline-reconciled,sweet,swiːt,swiːt,"n. 
 adj. 甜的；悦耳的；芳香的；亲切的
 （俚）酷毙了",KV002736,甜的,baseline-exact-single-review
 nce1-o0359|orange,0359,47,48,orange,,,baseline-reconciled,orange,ˈɒrɪndʒ,ˈɔrɪndʒ,"adj. 橙色的；橘色的
-n. 橙；橙色；桔子",KV000048,橙子；橙色,baseline-exact-single-review
+n. 橙；橙色；桔子",KV000048 || KV003054,橙子；橙色 || 橙色的；橘黄色的,baseline-multi-sense-review
 nce1-o0360|scotch whisky,0360,47,48,Scotch whisky,,,baseline-reconciled,Scotch whisky,,,na. 苏格兰威士忌酒,,,baseline-new-candidate
 nce1-o0361|choice,0361,47,48,choice,,,baseline-reconciled,choice,tʃɔɪs,tʃɔɪs,"n. 选择；选择权；精选品
 adj. 精选的；仔细推敲的",,,baseline-new-candidate
@@ -1654,11 +1654,11 @@ nce1-o0749|correct,0749,105,106,correct,,,baseline-reconciled,correct,kəˈrekt,
 vt. 改正；告诫
 vi. 调整；纠正错误",KV001533,正确的；对的,baseline-exact-single-review
 nce1-o0750|madam,0750,107,108,madam,,,baseline-reconciled,madam,ˈmædəm,ˈmædəm,n. 夫人；女士；鸨母,,,baseline-new-candidate
-nce1-o0751|smart,0751,107,108,smart,,,baseline-reconciled,smart,smɑːt,smɑːrt,adj. 聪明的；巧妙的；敏捷的；厉害的；潇洒的；剧烈的；时髦的,KV000727,聪明的；机灵的,baseline-exact-single-review
+nce1-o0751|smart,0751,107,108,smart,,,baseline-reconciled,smart,smɑːt,smɑːrt,adj. 聪明的；巧妙的；敏捷的；厉害的；潇洒的；剧烈的；时髦的,KV000727 || KV003046,聪明的；机灵的 || 整洁漂亮的；时髦的,baseline-multi-sense-review
 nce1-o0752|as well,0752,107,108,as well,,,baseline-reconciled,as well,æz wel,æz wel,na. 也；同样,KV001268,也；还,baseline-exact-single-review
 nce1-o0753|suit,0753,107,108,suit,,,baseline-reconciled,suit,suːt,suːt,"n. 诉讼；恳求；套装，西装；一套外衣
 vt. 适合；使适应
-vi. 合适；相称",,,baseline-new-candidate
+vi. 合适；相称",KV003022,套装；一套衣服,baseline-exact-single-review
 nce1-o0754|pretty,0754,107,108,pretty,,,baseline-reconciled,pretty,ˈprɪti,ˈprɪti,"n. 有吸引力的事物（尤指饰品）；漂亮的人
 adj. 漂亮的；可爱的；优美的
 adv. 相当地；颇",KV000121,漂亮的,baseline-exact-single-review

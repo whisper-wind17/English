@@ -226,6 +226,9 @@ def main() -> None:
         fail("derived textbook curriculum is empty")
     from check_klose_release_ready import load_and_validate_admission
     admission_by_id = load_and_validate_admission("klose", "4", release_ids)
+    from klose_nce1_state import reviewed_state
+    _, nce_decisions, _ = reviewed_state()
+    nce_ids = {r["NoteID"] for r in nce_decisions.values()}
     for nid in expected_current:
         row = admission_by_id.get(nid)
         if row is None:
@@ -233,7 +236,7 @@ def main() -> None:
         # A held textbook Note was validated against an explicit current decision.
         if row["Status"] == "held":
             continue
-        expected_stage = "stage::grade4-current" if nid in g4_coords else "stage::grade5-6-current"
+        expected_stage = "stage::grade4-current" if nid in g4_coords else ("stage::nce1-current" if nid in nce_ids else "stage::grade5-6-current")
         if row.get("Stage", "").strip() != expected_stage:
             fail(f"textbook Note has wrong stage: {nid}")
 

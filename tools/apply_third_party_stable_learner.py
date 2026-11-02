@@ -66,20 +66,30 @@ def main():
 
     plan=read_csv(PLAN)
     if not plan or len({r['NoteID'] for r in plan})!=len(plan): raise SystemExit('Empty/duplicate admission plan')
+    # Preserve the historical plan as evidence; derive today's positions from current curriculum.
+    from klose_release_curriculum import current_curriculum_ordered_note_ids
+    ordered, states=current_curriculum_ordered_note_ids()
+    positions={nid:f"{i:06d}" for i,nid in enumerate(ordered,1)}
     changed_adm=0; new_adm=0
     for p in plan:
         key=(p['LearnerProfile'].strip(),p['LearnerLevel'].strip(),p['NoteID'].strip())
-        cur=adm_by.get(key)
-        if p['CurrentStatus'].strip()=='allowed':
-            if cur is None or cur.get('Status','').strip()!='allowed': raise SystemExit(f'Planned preserve-existing admission missing/drifted: {key}')
-            if cur.get('LearningOrder','').strip()!=p['ProposedLearningOrder'].strip(): raise SystemExit(f'Existing LearningOrder drift: {key}')
-            continue
-        row={'LearnerProfile':key[0],'LearnerLevel':key[1],'NoteID':key[2],'Stage':'stage::third-party-primary','Status':'allowed',
-             'LearningTag':p['ProposedLearningTag'].strip(),'LearningOrder':p['ProposedLearningOrder'].strip(),'Reason':'resolved-third-party-learner-identity'}
+        cur=adm_by.get(key); nid=key[2]
+        stage,tag=states.get(nid,('stage::library',''))
+        row={'LearnerProfile':key[0],'LearnerLevel':key[1],'NoteID':nid,'Stage':stage,
+             'Status':'allowed' if nid in positions else 'held','LearningTag':tag,
+             'LearningOrder':positions.get(nid,''),'Reason':cur.get('Reason','') if cur and nid in states and stage!='stage::third-party-primary' else 'resolved-third-party-learner-identity'}
         if cur is None:
             admission.append(row); adm_by[key]=row; new_adm+=1
         else:
             cur.update(row); changed_adm+=1
+    # Reindexed current textbook notes not mentioned by the old TP plan must also move.
+    for row in admission:
+        nid=row['NoteID']
+        if nid in positions:
+            stage,tag=states[nid]
+            row.update(Status='allowed',Stage=stage,LearningTag=tag,LearningOrder=positions[nid])
+        else:
+            row.update(Status='held',Stage='stage::library',LearningTag='',LearningOrder='')
 
     master.sort(key=lambda r:int(r['NoteID'][2:]))
     learner.sort(key=lambda r:int(r['NoteID'][2:]))
