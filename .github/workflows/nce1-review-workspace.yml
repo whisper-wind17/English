@@ -1,0 +1,26 @@
+name: NCE1 Review Workspace
+on:
+  push:
+    branches: [klose/nce1-phase-b-20261102]
+    paths: ['.github/workflows/nce1-review-workspace.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Package source and code for isolated review
+        run: |
+          git rev-parse HEAD > /tmp/HEAD.txt
+          tar -czf /tmp/nce1-workspace.tar.gz tools tests docs anki/klose 'anki/人教版一年级起点/master' '8.新概念英语/新概念英语第一册（新版）.xlsx' AGENTS.md NEXT.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nce1-review-workspace
+          path: |
+            /tmp/nce1-workspace.tar.gz
+            /tmp/HEAD.txt
+          retention-days: 7
