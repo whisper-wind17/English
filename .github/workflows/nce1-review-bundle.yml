@@ -1,0 +1,25 @@
+name: NCE1 Review Bundle
+on:
+  push:
+    branches: [klose/nce1-learning-release]
+    paths:
+      - '.github/workflows/nce1-review-bundle.yml'
+permissions:
+  contents: read
+jobs:
+  review-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Package scoped source and validation inputs
+        run: |
+          git rev-parse HEAD > NCE1_REVIEW_HEAD.txt
+          tar -czf "$RUNNER_TEMP/nce1-review-inputs.tar.gz" AGENTS.md NEXT.md docs tools tests anki/klose 'anki/人教版一年级起点/master' '8.新概念英语/新概念英语第一册（新版）.xlsx' NCE1_REVIEW_HEAD.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nce1-review-inputs
+          path: ${{ runner.temp }}/nce1-review-inputs.tar.gz
+          retention-days: 7
