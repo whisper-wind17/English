@@ -51,6 +51,8 @@ jobs:
           for i in range(1,5):Path(f'.nce1-transfer-{i}.b64').unlink()
           for name in ('nce1-review-workspace.yml','nce1-reviewed-transaction.yml'):
               Path('.github/workflows',name).unlink(missing_ok=True)
+          checkpoint=Path('NEXT.md')
+          checkpoint.write_text(checkpoint.read_text(encoding='utf-8').rstrip()+'\n',encoding='utf-8')
           print('Sealed reviewed inputs verified; temporary transfer files removed')
           PY
           python tools/apply_nce1_reviewed_batch.py inputs --confirm-reviewed
