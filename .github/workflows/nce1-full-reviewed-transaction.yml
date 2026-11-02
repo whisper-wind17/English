@@ -1,0 +1,154 @@
+name: NCE1 Full Reviewed Transaction
+on:
+  push:
+    branches: [klose/nce1-full-release-20261102]
+    paths: ['.github/workflows/nce1-full-reviewed-transaction.yml']
+permissions:
+  contents: write
+concurrency:
+  group: nce1-full-reviewed-transaction
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  KLOSE_BASE_COMMIT: cddaa3c93a6cbb330adca882e20f18bbe68b01b9
+jobs:
+  reviewed-full-book:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify sealed reviewed content and reconstruct digest-only columns
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, csv, hashlib, io, json, lzma, subprocess
+          root=Path('.')
+          packed=base64.b64decode(''.join(Path(f'.nce1-full-transfer-{i}.b64').read_text().strip() for i in range(1,8)),validate=True)
+          assert hashlib.sha256(packed).hexdigest()=='aa6caa44c1138db236e4d06c8947d38c4f39b1c9e3103d9cf25e76af29978392', 'Reviewed transport integrity failure'
+          payload=json.loads(lzma.decompress(packed))
+          assert payload['baseline']=='cddaa3c93a6cbb330adca882e20f18bbe68b01b9'
+          assert subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip()==payload['baseline'], 'Concurrent main change requires a new reviewed transaction'
+          def read(p):
+              with (root/p).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          def sf(r):return hashlib.sha256(json.dumps(r,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+          def uf(r):return hashlib.sha256(json.dumps({k:r.get(k,'').strip() for k in ('NoteID','CanonicalWord','SenseLabel','Status')},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+          def write_csv(p,fields,rows):
+              p=root/p;p.parent.mkdir(parents=True,exist_ok=True)
+              with p.open('w',encoding='utf-8-sig',newline='') as f:
+                  w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n');w.writeheader();w.writerows(rows)
+          for name,text in payload['files'].items():
+              p=Path(name)
+              assert not p.is_absolute() and '..' not in p.parts
+              assert name=='NEXT.md' or name.startswith(('tools/','tests/','docs/','anki/klose/nce1/'))
+              p=root/p;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text,encoding='utf-8')
+          sources={r['CurriculumOrder']:r for r in read('anki/klose/source_reference/new_concept_english_1_staging/vocabulary-smart-2022.csv')}
+          name='anki/klose/nce1/source_senses/batch_002.csv';meta=payload['csv_encodings'][name];senses={};rows=[]
+          for values in meta['rows']:
+              row=dict(zip(meta['kept'],values));row['SourceFingerprint']=sf(sources[row['CurriculumOrder']]);ref=payload['reference_records'].get(str(int(row['CurriculumOrder'])),{})
+              row['ReferenceRecordSHA256']=hashlib.sha256(json.dumps(ref,ensure_ascii=False,sort_keys=True).encode()).hexdigest() if ref else ''
+              rows.append(row);senses[row['SourceItemKey']]=row
+          write_csv(name,meta['fields'],rows)
+          registry={r['NoteID']:r for name in ('note_registry.csv','note_registry_extensions.csv') for r in read('anki/klose/master/'+name)}
+          for name in ('batch_001_new_notes.csv','batch_002_new_notes.csv'):
+              registry.update({r['NoteID']:r for r in read('anki/klose/nce1/learner/'+name)})
+          name='anki/klose/nce1/identity_decisions/batch_002.csv';meta=payload['csv_encodings'][name];rows=[]
+          for values in meta['rows']:
+              row=dict(zip(meta['kept'],values));row['SourceFingerprint']=sf(sources[row['CurriculumOrder']]);row['IdentityFingerprint']=uf(registry[row['NoteID']]);row['SourceSenseFingerprint']=sf(senses[row['SourceItemKey']]);rows.append(row)
+          write_csv(name,meta['fields'],rows)
+          for name,digest in payload['expected'].items():
+              actual=hashlib.sha256((root/name).read_bytes()).hexdigest()
+              assert actual==digest,(name,digest,actual)
+          Path('/tmp/nce1-full-sealed-inputs.json').write_text(json.dumps(payload['expected']),encoding='utf-8')
+          for i in range(1,8):Path(f'.nce1-full-transfer-{i}.b64').unlink()
+          for name in ('nce1-full-review-inputs.yml','nce1-public-reference.yml','nce1-full-reviewed-transaction.yml'):
+              Path('.github/workflows',name).unlink(missing_ok=True)
+          print('Verified 25 explicitly reviewed input files; no semantic or approval decisions generated')
+          PY
+          python tools/apply_nce1_full_reviewed_inputs.py --confirm-reviewed
+      - name: Build reviewed content without automatic approval
+        run: python tools/klose_pipeline.py build --baseline "$KLOSE_BASE_COMMIT" --report "$RUNNER_TEMP/nce1-full-build.json"
+      - name: Apply only sealed exact-content model review receipts
+        run: python tools/apply_nce1_full_reviewed_receipts.py --confirm-reviewed
+      - name: Complete release and deterministic rebuild gates
+        run: python tools/klose_pipeline.py all --baseline "$KLOSE_BASE_COMMIT" --report "$RUNNER_TEMP/nce1-full-release.json"
+      - name: All regression and adversarial state checks
+        run: python -m unittest discover -s tests -v
+      - name: Independent full-book historical and semantic reconciliation
+        run: |
+          python tools/validate_nce1_full_transaction.py --baseline "$KLOSE_BASE_COMMIT" --report anki/klose/review/nce1_reconciliation/full_book_transaction_validation.json
+          python tools/klose_pipeline.py all --baseline "$KLOSE_BASE_COMMIT" --report "$RUNNER_TEMP/nce1-full-final.json"
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          expected=json.loads(Path('/tmp/nce1-full-sealed-inputs.json').read_text())
+          for name,digest in expected.items():
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==digest, f'Reviewed input changed: {name}'
+          p=Path('anki/klose/publish/anki-import.csv')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='ff2b4e747c2015dc09aa71165ebc685f5a31b512a4fdba2e39a81df9ef241831', 'Published content differs from the reviewed final snapshot'
+          print('Full-book import fingerprint and all sealed review inputs match')
+          PY
+      - name: Persist validated text inputs and generated release to task branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config core.whitespace blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+          git diff --check
+          git fetch origin main klose/nce1-full-release-20261102
+          test "$(git rev-parse origin/main)" = "$KLOSE_BASE_COMMIT"
+          test "$(git rev-parse origin/klose/nce1-full-release-20261102)" = "$GITHUB_SHA"
+          python - <<'PY'
+          import subprocess
+          allowed=('tools/','tests/','docs/','anki/klose/','.nce1-full-transfer-','.github/workflows/nce1-full-review-inputs.yml','.github/workflows/nce1-public-reference.yml','.github/workflows/nce1-full-reviewed-transaction.yml')
+          names=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())|set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          assert all(n=='NEXT.md' or n.startswith(allowed) for n in names), sorted(names)
+          PY
+          git add -A
+          git commit -m 'feat: complete full-book NCE1 sense-aware integration and reviewed release'
+          git push origin HEAD:refs/heads/klose/nce1-full-release-20261102
+      - name: Export full import package and all-source reviewed wordlist
+        run: |
+          mkdir -p /tmp/klose-nce1-full
+          cp anki/klose/publish/anki-import.csv /tmp/klose-nce1-full/Klose_Vocabulary_NCE1_Full_anki-import.csv
+          cp anki/klose/releases/current.json /tmp/klose-nce1-full/release-manifest.json
+          cp anki/klose/review/nce1_reconciliation/full_book_transaction_validation.json /tmp/klose-nce1-full/independent-audit.json
+          cp docs/NCE1_FULL_BOOK_IMPORT.md /tmp/klose-nce1-full/Klose_NCE1_Full_Import_Guide.md
+          cp docs/NCE1_FULL_BOOK_RELEASE.md /tmp/klose-nce1-full/release-notes.md
+          cp anki/klose/source_reference/new_concept_english_1_staging/vocabulary-smart-2022.csv /tmp/klose-nce1-full/source-vocabulary.csv
+          python - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          def read(p):
+              with open(p,encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          b=Path('anki/klose');out=Path('/tmp/klose-nce1-full')
+          master={r['NoteID']:r for r in read(b/'master/vocabulary_master.csv')}
+          learner={r['NoteID']:r for r in read(b/'learner/current.csv')}
+          admission={r['NoteID']:r for r in read(b/'learner/learning_admission.csv')}
+          source={r['CurriculumOrder']:r for r in read(b/'source_reference/new_concept_english_1_staging/vocabulary-smart-2022.csv')}
+          decisions=sorted([r for p in sorted((b/'nce1/identity_decisions').glob('batch_*.csv')) for r in read(p)],key=lambda r:int(r['CurriculumOrder']))
+          fields=['LessonStart','LessonEnd','Order','SourceEntry','SourceStatus','NoteID','Decision','Word','MeaningPrimary','British','American','PromptHint','ExampleSentence','ExampleTranslation','LearningOrder','LearnerLevel']
+          rows=[]
+          for d in decisions:
+              n=d['NoteID'];s=source[d['CurriculumOrder']];r={**master[n],**learner[n],**admission[n]}
+              row={k:r.get(k,'') for k in fields}
+              row.update(LessonStart=s['LessonStart'],LessonEnd=s['LessonEnd'],Order=d['CurriculumOrder'],SourceEntry=d['Entry'],SourceStatus=s['SourceStatus'],Decision=d['Decision'])
+              rows.append(row)
+          assert len(rows)==906 and len({r['NoteID'] for r in rows})==889
+          for filename,values in [('NCE1_Full_Reviewed_Wordlist.csv',rows),('NCE1_Full_Unique_Learning_Targets.csv',list({r['NoteID']:r for r in reversed(rows)}.values())[::-1])]:
+              with (out/filename).open('w',encoding='utf-8-sig',newline='') as f:
+                  w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n');w.writeheader();w.writerows(values)
+          hashes={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir() if p.is_file()}
+          (out/'SHA256SUMS.json').write_text(json.dumps(hashes,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('Exported full-book 906 occurrence rows / 889 distinct learning targets and 3226-note canonical import')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nce1-full-reviewed-release
+          path: |
+            /tmp/klose-nce1-full/
+            ${{ runner.temp }}/nce1-full-*.json
+          retention-days: 14
