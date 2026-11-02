@@ -1,0 +1,23 @@
+name: NCE1 Lexical Evidence Review
+on:
+  push:
+    branches: [klose/nce1-phase-b-20261102]
+    paths: ['.github/workflows/nce1-evidence-review.yml']
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch referenced vocabulary evidence
+        run: |
+          mkdir -p /tmp/nce1-evidence
+          curl --fail --location --retry 2 --max-time 40 -A 'Mozilla/5.0' 'https://www.newconceptenglish.com/index.php?id=words' -o /tmp/nce1-evidence/words.html
+          curl --fail --location --retry 2 --max-time 40 -A 'Mozilla/5.0' 'https://dokumen.pub/1-9787521336702.html' -o /tmp/nce1-evidence/smart-book.html
+          sha256sum /tmp/nce1-evidence/*.html > /tmp/nce1-evidence/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nce1-lexical-evidence
+          path: /tmp/nce1-evidence/
+          retention-days: 7
