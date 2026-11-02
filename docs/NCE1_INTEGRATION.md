@@ -1,6 +1,6 @@
 # NCE1 Integration — Klose Learning
 
-状态：Phase A已完成；Phase B首批Lesson 1–17已形成109条复用、41条新增身份及审核发布。全册剩余756条尚未完成。详细验证见首批事务报告；设备导入状态独立。
+状态：全册906条来源已完成显式义项映射，889个学习目标；新增续批230个身份并完成模型内容审校。最终发布须通过完整门禁并随验证事务提交；设备导入状态独立。全册记录见 [NCE1_FULL_BOOK_RELEASE.md](NCE1_FULL_BOOK_RELEASE.md)。
 
 ## 目标
 
@@ -134,3 +134,7 @@ NCE1 真正进入正式 Anki 发布前仍需完成：
 校验包括完整pipeline、确定性重建、既有回归、新增反向状态测试、独立旧ID/旧展示/四年级前缀/旧暂停集合/Expressions及模板字节对账。报告在 `anki/klose/review/nce1_reconciliation/batch_001_transaction_validation.json`。
 
 [首批导入说明](NCE1_BATCH001_IMPORT.md)。本批已生成导入内容不代表Anki设备已更新。全册剩余756条维持待核对，不因首批通过而自动准入。
+
+## 全册续批
+
+本次完成此前756条待核对记录，冻结首批不变。详见 [全册处理与验证](NCE1_FULL_BOOK_RELEASE.md)、[全册导入说明](NCE1_FULL_BOOK_IMPORT.md)。上文“剩余756条”等描述仅记录首批历史检查点，不是当前状态。

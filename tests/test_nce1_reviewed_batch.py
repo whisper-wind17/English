@@ -30,12 +30,14 @@ class ReviewedNCE1Batch(unittest.TestCase):
             with patch.object(nce,'BASE',base):
                 yield base
 
-    def test_reviewed_batch_closes_and_unreviewed_suffix_is_not_admitted(self):
+    def test_frozen_first_batch_stays_closed_with_later_batches(self):
         sources, decisions, proposed=nce.reviewed_state()
-        self.assertEqual(len(decisions),150)
-        self.assertEqual(len(proposed),41)
-        self.assertEqual(len(sources)-len(decisions),756)
-        self.assertTrue(all(int(r['CurriculumOrder'])<=150 for r in decisions.values()))
+        first={k:r for k,r in decisions.items() if int(r['CurriculumOrder'])<=150}
+        first_new={n:r for n,r in proposed.items() if int(r['Order'])<=150}
+        self.assertEqual(len(first),150)
+        self.assertEqual(len(first_new),41)
+        self.assertEqual(len({r['NoteID'] for r in first.values()}),150)
+        self.assertEqual({r['NoteID'] for r in first.values() if r['Decision'].startswith('new-')},set(first_new))
 
     def test_semantic_distinction_and_title_variant_are_explicit(self):
         _,decisions,_=nce.reviewed_state()
@@ -58,10 +60,10 @@ class ReviewedNCE1Batch(unittest.TestCase):
             rows=nce.read(p);rows[14]['Meaning']='观看';write(p,rows)
             with self.assertRaises(SystemExit):nce.reviewed_state()
 
-    def test_extra_mapping_cannot_claim_unreviewed_suffix(self):
+    def test_extra_mapping_cannot_claim_an_unreviewed_target(self):
         with self.isolated() as base:
             p=base/'master/source_identity_extensions.csv';rows=nce.read(p)
-            rows.append(dict(SourceID=nce.SOURCE_ID,SourceEdition=nce.EDITION,SourceItemKey='nce1-o0151|matter',NoteID='KV002101',Decision='reuse-existing',Status='confirmed'))
+            rows.append(dict(SourceID=nce.SOURCE_ID,SourceEdition=nce.EDITION,SourceItemKey='nce1-o0907|unreviewed',NoteID='KV002101',Decision='reuse-existing',Status='confirmed'))
             write(p,rows)
             with self.assertRaises(SystemExit):nce.reviewed_state()
 
@@ -73,7 +75,9 @@ class ReviewedNCE1Batch(unittest.TestCase):
         self.assertEqual(ordered[:len(g4)],g4)
         nce_pos=[i for i,n in enumerate(ordered) if states[n][0]=='stage::nce1-current']
         g56_pos=[i for i,n in enumerate(ordered) if states[n][0]=='stage::grade5-6-current']
-        self.assertEqual(len(nce_pos),136)
+        _,reviewed,_=nce.reviewed_state()
+        first_ids={r['NoteID'] for r in reviewed.values() if int(r['CurriculumOrder'])<=150}
+        self.assertEqual(sum(states.get(n,('',''))[0]=='stage::nce1-current' for n in first_ids),136)
         self.assertLess(max(nce_pos),min(g56_pos))
         self.assertEqual(len(ordered),len(set(ordered)))
         self.assertEqual(states['KV002159'][0],'stage::nce1-current')

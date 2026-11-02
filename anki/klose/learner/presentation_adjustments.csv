@@ -1,8 +1,15 @@
-NoteID,Word,MeaningPrimary,ExampleSentence,ExampleTranslation,Reason
+﻿NoteID,Word,MeaningPrimary,ExampleSentence,ExampleTranslation,Reason
 KV000424,,厨师,,,Noun PromptHint and example already target cook as a person; remove verb gloss from learner presentation without changing historical identity.
-KV002132,miss,,,,Use lower-case verb surface; preserve allocated CanonicalWord and Stable ID.
+KV002132,miss,想念,,,Use lower-case verb surface; preserve allocated CanonicalWord and Stable ID.; 旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
 KV000075,,,"""Can you help me?"" ""Sure!""",“你能帮我吗？”“当然可以！”,Align example to the existing response-of-assent target; the previous certainty example belongs to KV002731.
 KV000806,,打扫；清洁,,,核心展示与现有打扫例句一致；干净的形容词义单列；Stable Identity 不改
 KV001980,,日语,,,核心展示与现有学习日语例句一致；日本的形容词义单列；Stable Identity 不改
 KV000148,,,"I like apples, too.",我也喜欢苹果。,纠正也义与太重例句不匹配；保留 too 原 NoteID 与也义
 KV000746,,丹麦的；丹麦人的,,,加入发布；核心释义与现有 Danish writer 形容词例句一致；Stable Identity 不改
+KV001806,,玻璃,,,旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
+KV000298,,楼层,,,旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
+KV001534,,费用,,,旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
+KV000925,,移动；搬动,,,旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
+KV000370,,贫穷的,,,旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
+KV002152,,大多数；大部分,,,旧核心释义混列多个义项；按旧例句的实际目标收窄展示，身份字段和历史来源不变。
+KV000048,,橙子,,,旧例句和新概念水果语境均为橙子；颜色义由既有独立身份承载，收窄旧展示并保留稳定身份。
