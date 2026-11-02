@@ -2,31 +2,37 @@
   "SourceOccurrences": 509,
   "ProvisionalLearningUnits": 504,
   "CandidateClasses": {
-    "exact-multiple": 1,
-    "exact-single": 161,
+    "exact-multiple": 40,
+    "exact-single": 403,
     "morphology-only": 45,
-    "no-exact-match": 296,
+    "no-exact-match": 15,
     "orthographic-variant": 1
   },
-  "ValidDecisionCount": 504,
+  "ValidDecisionCount": 457,
   "DecisionCounts": {
-    "held": 10,
+    "held": 7,
     "morphology-only": 45,
-    "new-stable-identity": 296,
-    "reuse-existing": 153
+    "new-stable-identity": 1,
+    "reuse-existing": 404
   },
   "DecisionBasisCounts": {
-    "model-reviewed-current-evidence": 399,
+    "model-reviewed-current-evidence": 96,
     "policy-deterministic": 45,
-    "policy-deterministic-exact-sense": 55,
-    "premerge-dedup-reviewed": 5
+    "policy-deterministic-exact-sense": 312,
+    "premerge-dedup-reviewed": 4
   },
-  "ProposedNewIdentityGroups": 288,
-  "PendingReview": 0,
-  "NextBatchCount": 0,
-  "NextBatchClasses": {},
-  "StaleDecisionRowsIgnored": 0,
-  "SeededThisRun": {},
+  "ProposedNewIdentityGroups": 1,
+  "PendingReview": 47,
+  "NextBatchCount": 47,
+  "NextBatchClasses": {
+    "exact-multiple": 39,
+    "exact-single": 8
+  },
+  "StaleDecisionRowsIgnored": 307,
+  "SeededThisRun": {
+    "exact-sense-reuse": 258,
+    "morphology-only": 2
+  },
   "StableNoteIDAllocated": false,
   "MasterLearnerReleasePublishMutationAuthorized": false,
   "SourceIdentityPending": false,
