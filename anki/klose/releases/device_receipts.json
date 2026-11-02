@@ -1,9 +1,65 @@
 {
   "schema_version": 1,
   "historical_confirmations": [
-    {"domain": "vocabulary", "rows": 972, "status": "user-confirmed-import-and-sync", "evidence": "NEXT.md at a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb", "artifact_sha256": null},
-    {"domain": "expressions", "rows": 176, "status": "user-confirmed-import-and-sync", "evidence": "NEXT.md at a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb", "artifact_sha256": null}
+    {
+      "domain": "vocabulary",
+      "rows": 972,
+      "status": "user-confirmed-import-and-sync",
+      "evidence": "NEXT.md at a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb",
+      "artifact_sha256": null
+    },
+    {
+      "domain": "expressions",
+      "rows": 176,
+      "status": "user-confirmed-import-and-sync",
+      "evidence": "NEXT.md at a64a4ad0d108da5dc41d2f863a0a205cd9c53bcb",
+      "artifact_sha256": null
+    }
   ],
-  "current_release": {"status": "awaiting-device-import-and-sync", "confirmed_release_id": null, "confirmed_at": null},
+  "current_release": {
+    "status": "desktop-import-and-sync-user-confirmed;ipad-pending",
+    "confirmed_release_id": null,
+    "confirmed_at": null,
+    "desktop": {
+      "status": "user-confirmed-import-and-sync",
+      "reported_release_id": "50dca1d95a9f2c9f307672d2117f0683fe1c84ec2813d7437872aae42bf50e2f",
+      "confirmation_date": "2026-11-02",
+      "reported_import_source": "anki/klose/publish/anki-import.csv",
+      "repository_expected_artifact_sha256": "ff2b4e747c2015dc09aa71165ebc685f5a31b512a4fdba2e39a81df9ef241831",
+      "device_local_sha256_check": "not-provided",
+      "note_type": "Klose Vocabulary",
+      "deck": "Klose-English::Vocabulary",
+      "matching": "first-field NoteID; Existing notes=Update; Match scope=Note Type",
+      "local_user_memo_mapped": false,
+      "import_report": {
+        "notes_in_file": 3226,
+        "new_notes": 273,
+        "updated_existing_notes": 2800,
+        "already_present_notes": 153
+      },
+      "history_spot_check": "one existing Review card retained three historical review entries and visible FSRS memory state / interval after import; full-card audit not claimed",
+      "new_card_spot_check": "one new KV003286 card showed Reviews=0",
+      "learning_admission_spot_check": {
+        "held_blank_learning_order": 49,
+        "unsuspended_new_with_blank_learning_order": 0
+      },
+      "new_card_reposition_spot_check": {
+        "selected_new_unsuspended_cards": 2965,
+        "order": "LearningOrder ascending",
+        "first_learning_order": "000198",
+        "first_new_position": 1,
+        "confirmed_by_screenshot": true
+      },
+      "sync": "user-confirmed successful Desktop Sync to AnkiWeb; no independent cloud verification",
+      "evidence": "2026-11-02 ChatGPT conversation: user screenshots of import mapping/result, old Review Card Info, new Card Info, admission searches, ascending new positions, and explicit '已经同步了' after Desktop→AnkiWeb sync instruction"
+    },
+    "ipad": {
+      "status": "awaiting-user-confirmed-sync-and-spot-check",
+      "confirmed_release_id": null,
+      "confirmed_at": null,
+      "evidence": null
+    },
+    "caution": "Desktop sync confirmation is not an iPad receipt. Do not infer local CSV hash or exhaustive FSRS preservation from sampled screenshots. Do not mark whole-device rollout complete until iPad is actually verified."
+  },
   "rule": "Only a real device receipt may confirm the exact current release_id; equal note counts do not prove equal content. Historical artifact hashes were not recorded and are not inferred."
 }
