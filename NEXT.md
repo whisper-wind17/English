@@ -20,6 +20,8 @@
 
 ## 设备与学习状态
 
-尚无本次全册导入的Desktop/iPad凭据，也没有确认上一首批包是否导入。用户此前确认的设备版本仍为2,953 Vocabulary及176 Expressions，已同步AnkiWeb；不能把仓库发布推定为设备更新。
+2026-11-02 用户已确认 Windows Anki Desktop 将全册正式 `Klose Vocabulary` CSV 导入现有 Collection，并成功执行 Desktop → AnkiWeb Sync。导入结果截图：文件 3,226 条；273 new、2,800 updated、153 already present，旧 2,953 条均按 `NoteID` 匹配（未新建第二套 Note Type），`UserMemo` 未映射。对应仓库 `release_id=50dca1d95a9f2c9f307672d2117f0683fe1c84ec2813d7437872aae42bf50e2f`；仓库预期文件 SHA-256 为 `ff2b4e747c2015dc09aa71165ebc685f5a31b512a4fdba2e39a81df9ef241831`，设备本地未提供独立哈希计算，不声称逐字节验收。
 
-设备实际操作仅按稳定NoteID更新现有类型，UserMemo不映射，只重排仍为New的allowed卡。禁止删除重建或Forget旧卡。学习反馈仍awaiting-observation，不虚构掌握情况。
+完成设备抽查：一张旧 Review 卡保有 3 条历史复习记录以及 FSRS / Interval 信息；一张新卡 Reviews=0；`LearningOrder` 空值 49 张，与 held 数一致，未暂停的 New 卡中空值 0；2965 张未暂停 New 卡经升序 Reposition，`000198` 对应 `New #1`，四年级与新概念交界和出卡配置已由用户检查。**仅为抽样与用户确认，不能推断所有卡均已逐张验收。**
+
+**iPad 仍未收到同步与复习历史抽查的用户确认**，故当前设备 rollout 状态保留为 Desktop 已同步、iPad 待验收；不把整个 release 标为跨设备完成。设备凭据写在 `anki/klose/releases/device_receipts.json`，未修改仓库的学习内容、NoteID、Release、FSRS 或调度数据。Expressions 本次未重新导入，沿用此前已确认的 176 条；学习反馈仍为 `awaiting-observation`。
