@@ -140,6 +140,8 @@ def current_scope() -> tuple[list[str], set[str], set[str], set[str]]:
 
 
 def main() -> None:
+    from klose_nce1_state import reviewed_state
+    reviewed_state()
     for path in (LEGACY_RELEASES, RELEASE_EXTENSIONS, REGISTRY, REGISTRY_EXTENSIONS, SOURCE_IDENTITIES, G56_SCOPE, CURRICULUM):
         if not path.exists():
             raise SystemExit(f"Missing learning-admission input: {path.relative_to(ROOT)}")

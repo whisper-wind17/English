@@ -140,6 +140,10 @@ def main() -> None:
         "xlsx_lexicon_missing_unique": sorted(set(lexicon_missing), key=norm),
         "decision_state": "prepared-not-allocated",
     }
+    from klose_nce1_state import reviewed_state
+    _, reviewed, new_notes = reviewed_state()
+    status.update(decision_state="partially-reviewed-and-allocated", reviewed_occurrences=len(reviewed),
+                  allocated_new_notes=len(new_notes), pending_occurrences=len(source)-len(reviewed))
     STATUS.write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         "NCE1 reconciliation prepared: "

@@ -2,3 +2,7 @@ NoteID,Word,MeaningPrimary,ExampleSentence,ExampleTranslation,Reason
 KV000424,,厨师,,,Noun PromptHint and example already target cook as a person; remove verb gloss from learner presentation without changing historical identity.
 KV002132,miss,,,,Use lower-case verb surface; preserve allocated CanonicalWord and Stable ID.
 KV000075,,,"""Can you help me?"" ""Sure!""",“你能帮我吗？”“当然可以！”,Align example to the existing response-of-assent target; the previous certainty example belongs to KV002731.
+KV000806,,打扫；清洁,,,核心展示与现有打扫例句一致；干净的形容词义单列；Stable Identity 不改
+KV001980,,日语,,,核心展示与现有学习日语例句一致；日本的形容词义单列；Stable Identity 不改
+KV000148,,,"I like apples, too.",我也喜欢苹果。,纠正也义与太重例句不匹配；保留 too 原 NoteID 与也义
+KV000746,,丹麦的；丹麦人的,,,加入发布；核心释义与现有 Danish writer 形容词例句一致；Stable Identity 不改

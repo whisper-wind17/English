@@ -17,6 +17,7 @@ BASE = ROOT / "anki" / "klose"
 SOURCE_IDENTITY_EXTENSIONS = BASE / "master" / "source_identity_extensions.csv"
 G56_SCOPE = BASE / "learner" / "grade5_6_learning_scope.json"
 TP_PLAN = BASE / "third_party_vocabulary" / "learner" / "stable_learning_admission_plan.csv"
+CURRICULUM = BASE / "config/curriculum_segments.json"
 
 GRADE4_STAGE = "stage::grade4-current"
 GRADE4_LEARNING_TAG = "learning::klose::grade4"
@@ -40,7 +41,7 @@ def order6(value: int) -> str:
     return f"{value:06d}"
 
 
-def textbook_curriculum() -> tuple[list[str], dict[str, tuple[str, str]]]:
+def textbook_curriculum(include_nce1=True) -> tuple[list[str], dict[str, tuple[str, str]]]:
     scope = json.loads(G56_SCOPE.read_text(encoding="utf-8"))
     if scope.get("ScopeStatus") != "accepted" or scope.get("StableIdentityAllocationAuthorized") is not True:
         raise SystemExit("Release blocked: Grade 5-6 current learning scope is not accepted")
@@ -48,6 +49,13 @@ def textbook_curriculum() -> tuple[list[str], dict[str, tuple[str, str]]]:
     if accepted_books != {"5上", "5下", "6上", "6下"}:
         raise SystemExit(f"Release blocked: Grade 5-6 current scope is incomplete: {sorted(accepted_books)}")
 
+    ranks={k:int(v["Rank"]) for k,v in json.loads(CURRICULUM.read_text())["Segments"].items()}
+    if not (ranks["grade4"] < ranks["new_concept_english_1"] < ranks["grade5"] < ranks["grade6"] < ranks["third_party"]):
+        raise SystemExit("Release blocked: invalid curriculum segment ranks")
+    authorized=set()
+    if include_nce1:
+        from klose_nce1_state import validated_mapping_tuples
+        authorized=validated_mapping_tuples()
     first_coord: dict[str, tuple[int, int, int, int, int]] = {}
     expected_state: dict[str, tuple[str, str]] = {}
     seen_coordinates: set[tuple[int, int, int, int]] = set()
@@ -62,13 +70,29 @@ def textbook_curriculum() -> tuple[list[str], dict[str, tuple[str, str]]]:
         m4 = GRADE4_KEY_RE.match(key)
         if m4 is not None and row.get("SourceID", "").strip() == "rj_start1" and row.get("SourceEdition", "").strip() == "klose-current":
             semester, unit_text, order_text = m4.groups()
-            coordinate = (4, SEMESTER_RANK[semester], int(unit_text), int(order_text))
+            coordinate = (ranks["grade4"], SEMESTER_RANK[semester], int(unit_text), int(order_text))
             if coordinate in seen_coordinates:
                 raise SystemExit(f"Release blocked: duplicate current curriculum coordinate: {coordinate}")
             seen_coordinates.add(coordinate)
             full_coord = (*coordinate, int(nid[2:]))
-            first_coord[nid] = min(first_coord.get(nid, full_coord), full_coord)
-            expected_state[nid] = (GRADE4_STAGE, GRADE4_LEARNING_TAG)
+            if nid not in first_coord or full_coord < first_coord[nid]:
+                first_coord[nid] = full_coord
+                expected_state[nid] = (GRADE4_STAGE, GRADE4_LEARNING_TAG)
+            continue
+
+        if include_nce1 and row.get("SourceID") == "new_concept_english_1":
+            identity=(row["SourceID"],row["SourceEdition"],key,nid)
+            if identity not in authorized:
+                raise SystemExit(f"Release blocked: unreviewed NCE1 mapping {key}")
+            match=re.fullmatch(r"nce1-o(\d+)\|.+",key)
+            if match is None:raise SystemExit(f"Bad NCE1 coordinate: {key}")
+            coordinate=(ranks["new_concept_english_1"],0,0,int(match.group(1)))
+            if coordinate in seen_coordinates:raise SystemExit(f"Duplicate curriculum coordinate: {coordinate}")
+            seen_coordinates.add(coordinate)
+            full_coord=(*coordinate,int(nid[2:]))
+            if nid not in first_coord or full_coord < first_coord[nid]:
+                first_coord[nid]=full_coord
+                expected_state[nid]=("stage::nce1-current","learning::klose::nce1")
             continue
 
         m56 = G56_KEY_RE.match(key)
@@ -78,13 +102,14 @@ def textbook_curriculum() -> tuple[list[str], dict[str, tuple[str, str]]]:
         book = grade_text + ("上" if semester == "upper" else "下")
         if book not in accepted_books:
             continue
-        coordinate = (int(grade_text), SEMESTER_RANK[semester], int(unit_text), int(order_text))
+        coordinate = (ranks["grade"+grade_text], SEMESTER_RANK[semester], int(unit_text), int(order_text))
         if coordinate in seen_coordinates:
             raise SystemExit(f"Release blocked: duplicate current curriculum coordinate: {coordinate}")
         seen_coordinates.add(coordinate)
         full_coord = (*coordinate, int(nid[2:]))
-        first_coord[nid] = min(first_coord.get(nid, full_coord), full_coord)
-        expected_state.setdefault(nid, (G56_STAGE, G56_LEARNING_TAG))
+        if nid not in first_coord or full_coord < first_coord[nid]:
+            first_coord[nid] = full_coord
+            expected_state[nid] = (G56_STAGE, G56_LEARNING_TAG)
 
     if not first_coord:
         raise SystemExit("Release blocked: current textbook curriculum identity set is empty")
@@ -94,7 +119,8 @@ def textbook_curriculum() -> tuple[list[str], dict[str, tuple[str, str]]]:
 
 def current_curriculum_ordered_note_ids() -> tuple[list[str], dict[str, tuple[str, str]]]:
     base_ordered, expected_state = textbook_curriculum()
-    base_pos = {nid: order6(i) for i, nid in enumerate(base_ordered, start=1)}
+    historical_ordered, historical_state = textbook_curriculum(include_nce1=False)
+    base_pos = {nid: order6(i) for i, nid in enumerate(historical_ordered, start=1)}
 
     plan = read_csv(TP_PLAN)
     if not plan:
@@ -121,7 +147,7 @@ def current_curriculum_ordered_note_ids() -> tuple[list[str], dict[str, tuple[st
             raise SystemExit(f"Release blocked: preserved textbook LearningOrder drift: {nid}")
 
     appended.sort(key=lambda r: (int(r.get("ProposedLearningOrder", "0") or 0), int(r["NoteID"][2:])))
-    expected_appended_orders = [order6(i) for i in range(len(base_ordered) + 1, len(base_ordered) + len(appended) + 1)]
+    expected_appended_orders = [order6(i) for i in range(len(historical_ordered) + 1, len(historical_ordered) + len(appended) + 1)]
     actual_appended_orders = [r.get("ProposedLearningOrder", "").strip() for r in appended]
     if actual_appended_orders != expected_appended_orders:
         raise SystemExit("Release blocked: appended third-party LearningOrder is not exact/continuous after textbook curriculum")
@@ -129,12 +155,13 @@ def current_curriculum_ordered_note_ids() -> tuple[list[str], dict[str, tuple[st
     appended_ids: list[str] = []
     for row in appended:
         nid = row["NoteID"].strip()
-        if nid in expected_state:
-            raise SystemExit(f"Release blocked: appended third-party Note overlaps textbook curriculum: {nid}")
+        if nid in historical_state:
+            raise SystemExit(f"Release blocked: historical third-party append overlaps old textbook curriculum: {nid}")
         if row.get("ProposedLearningTag", "").strip() != TP_LEARNING_TAG:
             raise SystemExit(f"Release blocked: third-party LearningTag drift: {nid}")
-        expected_state[nid] = (TP_STAGE, TP_LEARNING_TAG)
-        appended_ids.append(nid)
+        if nid not in expected_state:
+            expected_state[nid] = (TP_STAGE, TP_LEARNING_TAG)
+            appended_ids.append(nid)
 
     ordered = base_ordered + appended_ids
     if len(ordered) != len(set(ordered)):

@@ -108,7 +108,11 @@ def main():
     if sorted(orders)!=expected_orders: errors.append(f'allowed LearningOrder is not unique/continuous 000001..{len(allowed):06d}')
 
     source_ext=read_csv(K/'master'/'source_identity_extensions.csv')
-    leaked=sorted(new_ids & {r.get('NoteID','').strip() for r in source_ext})
+    from klose_nce1_state import validated_mapping_tuples
+    authorized=validated_mapping_tuples()
+    leaked=sorted({r.get('NoteID','').strip() for r in source_ext
+                  if r.get('NoteID','').strip() in new_ids and
+                  (r.get('SourceID'),r.get('SourceEdition'),r.get('SourceItemKey'),r.get('NoteID')) not in authorized})
     if leaked: errors.append(f'unverified third-party IDs leaked into textbook source map={len(leaked)}')
     released_master={r['NoteID'] for r in master if r.get('Released')=='yes'}
     if released_master!=release_ids: errors.append(f'Master Released set != release registry: master={len(released_master)} registry={len(release_ids)}')

@@ -1,6 +1,6 @@
 # NCE1 Integration — Klose Learning
 
-状态：Phase A（Source / reconciliation / curriculum architecture）已完成 `IMPLEMENTED / VALIDATED / CHECKPOINTED`；Stable Identity 分配与 Learner Presentation 属于 Phase B，尚未进入 Anki 发布。
+状态：Phase A已完成；Phase B首批Lesson 1–17已形成109条复用、41条新增身份及审核发布。全册剩余756条尚未完成。详细验证见首批事务报告；设备导入状态独立。
 
 ## 目标
 
@@ -119,4 +119,18 @@ NCE1 真正进入正式 Anki 发布前仍需完成：
 7. 完整 `klose_pipeline.py all`、回归和反向检查；
 8. 只对仍为 New 的 Anki cards 按新 LearningOrder Reposition。
 
-当前 checkpoint 明确停在 Phase A：Source 已正式纳入系统治理，Learning Object 尚未发布。
+## Phase B / Batch 001
+
+首批来源范围：CurriculumOrder 0001–0150，150条实物照片记录。显式义项决策保存在 `anki/klose/nce1/identity_decisions/batch_001.csv`，绑定SourceFingerprint与IdentityFingerprint。41条新增身份KV003016–KV003056；109条复用，其中Mr.复用Mr，11组同拼写不同学习目标明确分开。
+
+已有Japanese和clean的展示原本混写两义，但例句分别只教授日语和打扫。本批保留Stable Identity和历史Source Fact，明确将原展示收窄至原例句目标，再以新ID教授来源中的形容词义；没有删除旧卡。too原有也义例句不符，按原ID修正并重新审校。
+
+52条变化呈现有显式模型审核凭据，新Note的LearnerLevel仍为4，不把新概念课次或教材来源当作Source Grade。6个旧held词汇准入，其他held目标不变。总发布由2953增至2995；新增41个身份及1个已存在库存身份Danish。实际设备新增数量须以其已有ID为准。
+
+共享发布课程推导已同步支持NCE1；历史第三方计划保留为冻结交易审计输入，当前顺序独立重算。同一目标在第三方和NCE1均出现时只使用更早NCE1位置；四年级出现者仍保留更早四年级位置。第三方来源限制仅放行具有本批明确指纹凭据的真实教材映射，不按SourceID字符串无限放行。
+
+`apply_nce1_reviewed_batch.py`是一次性显式事务工具，不在日常pipeline中运行。身份/来源/发布注册表仅追加，复跑遇到preimage变化拒绝；审核凭据由已完成的模型审校封存，远端只校验当前内容hash后应用，不自动生成审批。
+
+校验包括完整pipeline、确定性重建、既有回归、新增反向状态测试、独立旧ID/旧展示/四年级前缀/旧暂停集合/Expressions及模板字节对账。报告在 `anki/klose/review/nce1_reconciliation/batch_001_transaction_validation.json`。
+
+[首批导入说明](NCE1_BATCH001_IMPORT.md)。本批已生成导入内容不代表Anki设备已更新。全册剩余756条维持待核对，不因首批通过而自动准入。
