@@ -23,3 +23,9 @@
 检查同一词不同目标的提示，例如bank河岸/银行、full满的/饱的；检查ice cream仍使用原ice-cream身份。抽查一张旧Review卡的复习历史仍在。确认没有把全册词表误当导入文件、没有生成第二套重复笔记后，再同步AnkiWeb及其他设备。
 
 3,177是当前允许学习的目标数，**不是设备当前New卡数量**；已有Learning/Review卡仍按原调度出现。Expressions176条和卡片模板未改，本次不需重新导入Expressions。本包未自动操作任何Anki设备。
+
+## 2026-11-02 Desktop 导入验收记录
+
+用户在 Windows Anki Desktop 完成正式 Vocabulary CSV 导入，报告：3,226 in file = 273 newly imported + 2,800 updated + 153 unchanged；已按 `NoteID` 原地更新 `Klose Vocabulary`，`UserMemo` 没有映射。用户先完成 Collection 备份，随后确认了旧 Review 卡复习历史、New 卡 Reviews=0、held 空 LearningOrder 共 49、可用 New 卡 2965 张按 `LearningOrder` 升序重新定位，并确认 Desktop → AnkiWeb Sync 成功。
+
+这属于**用户确认的 Desktop 端导入与同步证据**，不是设备上所有卡片的逐项检查，也没有独立取得本地导入 CSV 的 SHA-256。iPad 尚未报告同步/抽查，因此全端完成状态不能标记为 confirmed。正式设备凭据记录在 `../anki/klose/releases/device_receipts.json`；下一次 iPad 实际验收后再更新对应项。当前内容、审核、发布及 FSRS/Review History 的真源边界不变。
