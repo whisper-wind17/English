@@ -1,0 +1,39 @@
+name: NCE1 Review Workspace
+on:
+  push:
+    branches: [klose/nce1-reviewed-batch-20261102]
+    paths: ['.github/workflows/nce1-review-workspace.yml']
+permissions:
+  contents: read
+jobs:
+  workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Package read-only review inputs
+        run: |
+          python - <<'PY'
+          import csv, json, tarfile
+          from pathlib import Path
+          root=Path('.')
+          paths=['tools','tests','docs','anki/klose','anki/人教版一年级起点/master','AGENTS.md','NEXT.md','8.新概念英语/新概念英语第一册（新版）.xlsx']
+          with tarfile.open('/tmp/nce1-review-inputs.tar.gz','w:gz') as archive:
+              for name in paths:
+                  archive.add(name,arcname=name)
+          def read(p):
+              with open(p,encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
+          master={r['NoteID']:r for r in read('anki/klose/master/vocabulary_master.csv')}
+          candidates=read('anki/klose/review/nce1_reconciliation/identity_candidates.csv')
+          print('REVIEW_PACKET_BEGIN')
+          for r in candidates[:150]:
+              ids=r['ExactCandidateNoteIDs'].split(' || ') if r['ExactCandidateNoteIDs'] else []
+              print(json.dumps({'o':r['CurriculumOrder'],'w':r['Entry'],'p':r['PartOfSpeech'],'m':r['Meaning'],'c':[{k:master[n].get(k,'') for k in ('NoteID','Word','SenseLabel','MeaningPrimary')} for n in ids]},ensure_ascii=False))
+          print('REVIEW_PACKET_END')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nce1-review-inputs
+          path: /tmp/nce1-review-inputs.tar.gz
+          retention-days: 7
