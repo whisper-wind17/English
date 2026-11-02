@@ -1,0 +1,53 @@
+name: NCE1 Source Evidence
+on:
+  push:
+    branches: [klose/nce1-learning-release]
+    paths: ['.github/workflows/nce1-source-evidence.yml']
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Collect public lesson evidence and historical verification objects
+        run: |
+          mkdir -p evidence
+          python - <<'PY'
+          import json, subprocess, urllib.request
+          from pathlib import Path
+          root=Path('evidence')
+          urls={
+            'nce_words.html':'https://www.newconceptenglish.com/index.php?id=words',
+            'smart_text.html':'https://dokumen.pub/1-9787521336702.html',
+            'vocab21.html':'https://zy.21cnjy.com/14353090',
+          }
+          status={}
+          for name,url in urls.items():
+              try:
+                  req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+                  data=urllib.request.urlopen(req,timeout=45).read()
+                  (root/name).write_bytes(data)
+                  status[name]={'url':url,'bytes':len(data)}
+              except Exception as e:
+                  status[name]={'url':url,'error':str(e)}
+          manifest=json.loads(Path('anki/klose/releases/history/2026-09-12-third-party.json').read_text())
+          commit=manifest['commit']; objects={commit}
+          get=lambda arg:subprocess.check_output(['git','rev-parse',arg],text=True).strip()
+          objects.add(get(commit+'^{tree}'))
+          for path in manifest['files']:
+              parts=path.split('/')
+              for n in range(1,len(parts)+1): objects.add(get(commit+':'+ '/'.join(parts[:n])))
+          pack=subprocess.run(['git','pack-objects','--stdout'],input=('\n'.join(sorted(objects))+'\n').encode(),capture_output=True,check=True).stdout
+          (root/'history.pack').write_bytes(pack)
+          (root/'status.json').write_text(json.dumps(status,ensure_ascii=False,indent=2))
+          print(json.dumps(status,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nce1-source-evidence
+          path: evidence/
+          retention-days: 7
